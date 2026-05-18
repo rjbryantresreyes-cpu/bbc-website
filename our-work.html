@@ -1,0 +1,859 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Our Work — Balay ni Bruno &amp; Co.</title>
+  <meta name="description" content="Real implementation work built for real businesses. See how Balay ni Bruno &amp; Co. has shown up, learned the business, and built things that last." />
+  <link rel="canonical" href="https://balaynibruno.co/our-work.html" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Balay ni Bruno &amp; Co." />
+  <meta property="og:title" content="Our Work — Balay ni Bruno &amp; Co." />
+  <meta property="og:description" content="Real implementation work built for real businesses. See how BBC has shown up, learned the business, and built things that last." />
+  <meta property="og:url" content="https://balaynibruno.co/our-work.html" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Lora:ital,wght@0,400;0,500;1,400;1,500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+
+    :root {
+      --deep-blue:   #1F3557;
+      --mid-blue:    #4B6FA5;
+      --warm-blue:   #6D8FC7;
+      --light-blue:  #A8C0DC;
+      --pale-blue:   #DDE8F2;
+
+      --bg-primary:  #F5F1EA;
+      --bg-section:  #EDE8DF;
+      --bg-card:     #FDFAF6;
+      --bg-dark:     #1C2E47;
+      --bg-footer:   #172540;
+
+      --neutral-100: #E8E2D6;
+      --neutral-200: #D5CEC3;
+      --neutral-300: #B8B1A6;
+
+      --text-ink:    #2A3040;
+      --text-body:   #4E5666;
+      --text-muted:  #888FA0;
+      --text-warm:   #F5F1EA;
+
+      --gold:        #B8923E;
+      --gold-pale:   #E6CFA0;
+      --gold-warm:   #D4A84B;
+      --sage:        #4E9E74;
+
+      --font-display:'Playfair Display', Georgia, serif;
+      --font-body:   'Lora', Georgia, serif;
+      --font-ui:     'DM Sans', system-ui, sans-serif;
+
+      --max-width:   1200px;
+      --radius-sm:   8px;
+      --radius:      16px;
+      --radius-lg:   24px;
+      --radius-xl:   32px;
+
+      --shadow-xs:   0 1px 6px  rgba(85,60,35,0.055);
+      --shadow-sm:   0 3px 18px rgba(85,60,35,0.08);
+      --shadow-md:   0 7px 36px rgba(85,60,35,0.11);
+      --shadow-lg:   0 14px 56px rgba(85,60,35,0.14);
+
+      --border-card: 1px solid rgba(85,60,35,0.09);
+      --border-warm: 1px solid rgba(85,60,35,0.12);
+      --border-dark: 1px solid rgba(255,255,255,0.07);
+
+      --s1: 0.5rem;  --s2: 1rem;   --s3: 1.5rem;
+      --s4: 2.5rem;  --s5: 4rem;   --s6: 6rem;  --s7: 9rem;
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-body);
+      color: var(--text-ink);
+      background: var(--bg-primary);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    body::after {
+      content: '';
+      position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23n)' opacity='0.026'/%3E%3C/svg%3E");
+      pointer-events: none; z-index: 9999; mix-blend-mode: multiply;
+    }
+
+    /* ── TYPOGRAPHY ─────────────────────────────────────────── */
+    h1, h2, h3, h4 { font-family: var(--font-display); line-height: 1.22; color: var(--deep-blue); }
+    h1 { font-size: clamp(2.2rem, 4.8vw, 3.6rem); line-height: 1.16; font-weight: 700; }
+    h2 { font-size: clamp(1.7rem, 3vw, 2.6rem); line-height: 1.22; font-weight: 600; }
+    h3 { font-size: clamp(1.05rem, 1.6vw, 1.3rem); font-weight: 600; }
+    h4 { font-size: 0.95rem; font-family: var(--font-ui); font-weight: 700; }
+
+    p { font-family: var(--font-body); font-size: 1rem; line-height: 1.87; color: var(--text-body); }
+    p.lead { font-size: 1.08rem; line-height: 1.9; color: var(--text-ink); }
+    a { text-decoration: none; }
+
+    .eyebrow {
+      display: block;
+      font-family: var(--font-ui);
+      font-size: 0.68rem; font-weight: 600;
+      letter-spacing: 0.17em; text-transform: uppercase;
+      color: var(--warm-blue); margin-bottom: var(--s2);
+    }
+    .eyebrow--gold { color: var(--gold); }
+    .eyebrow--pale { color: rgba(245,241,234,0.5); }
+
+    /* ── LAYOUT ─────────────────────────────────────────────── */
+    .container { max-width: var(--max-width); margin: 0 auto; padding: 0 var(--s4); }
+    .section        { padding: var(--s7) 0; }
+    .section--tight { padding: var(--s5) 0; }
+    .section--warm  { background: var(--bg-section); }
+    .section--card  { background: var(--bg-card); }
+    .section--dark  { background: var(--bg-dark); }
+    .section--cream { background: var(--bg-primary); }
+    .text-center    { text-align: center; }
+
+    .divider-bar {
+      width: 44px; height: 2.5px;
+      background: linear-gradient(90deg, var(--gold), var(--warm-blue));
+      border-radius: 2px; margin: var(--s3) auto; opacity: 0.8;
+    }
+    .divider-bar--left { margin-left: 0; }
+
+    .fade-in { opacity: 0; transform: translateY(22px); transition: opacity 0.65s ease, transform 0.65s ease; }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+    /* ── BUTTONS ─────────────────────────────────────────────── */
+    .btn {
+      display: inline-flex; align-items: center; gap: 0.45rem;
+      padding: 0.88rem 2rem; border-radius: 100px;
+      font-family: var(--font-ui); font-size: 0.86rem; font-weight: 600;
+      letter-spacing: 0.02em; cursor: pointer;
+      transition: all 0.3s ease; border: 1.5px solid transparent;
+      white-space: nowrap;
+    }
+    .btn-primary { background: var(--deep-blue); color: var(--text-warm); }
+    .btn-primary:hover { background: #243f64; transform: translateY(-2px); box-shadow: 0 10px 32px rgba(31,53,87,0.28); }
+    .btn-outline { background: transparent; color: var(--deep-blue); border-color: rgba(75,111,165,0.42); }
+    .btn-outline:hover { background: var(--deep-blue); color: var(--text-warm); border-color: var(--deep-blue); transform: translateY(-2px); }
+    .btn-ghost { background: transparent; color: var(--text-warm); border-color: rgba(245,241,234,0.28); }
+    .btn-ghost:hover { background: rgba(245,241,234,0.08); border-color: rgba(245,241,234,0.55); }
+    .btn-gold { background: var(--gold); color: #fff; font-weight: 700; }
+    .btn-gold:hover { background: var(--gold-warm); transform: translateY(-2px); box-shadow: 0 10px 32px rgba(184,146,62,0.35); }
+    .btn-sm { padding: 0.62rem 1.35rem; font-size: 0.78rem; }
+
+    /* ── HEADER ──────────────────────────────────────────────── */
+    .site-header {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+      background: rgba(245,241,234,0.94);
+      backdrop-filter: blur(20px) saturate(1.2);
+      -webkit-backdrop-filter: blur(20px) saturate(1.2);
+      border-bottom: var(--border-warm);
+      transition: box-shadow 0.3s ease;
+    }
+    .site-header.scrolled { box-shadow: var(--shadow-sm); }
+
+    .header__inner {
+      max-width: var(--max-width); margin: 0 auto; padding: 0 var(--s4);
+      height: 68px; display: flex; align-items: center;
+      justify-content: space-between; gap: var(--s3);
+    }
+    .header__logo { display: flex; flex-direction: column; gap: 3px; }
+    .header__logo-name {
+      font-family: var(--font-display); font-size: 1.05rem; font-weight: 700;
+      color: var(--deep-blue); line-height: 1; letter-spacing: -0.01em;
+    }
+    .header__logo-sub {
+      font-family: var(--font-ui); font-size: 0.54rem; font-weight: 600;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--warm-blue); opacity: 0.8;
+    }
+    .header__nav { display: flex; align-items: center; gap: 1.5rem; list-style: none; }
+    .header__nav a {
+      font-family: var(--font-ui); font-size: 0.78rem; font-weight: 500;
+      color: var(--text-body); transition: color 0.2s;
+      white-space: nowrap;
+    }
+    .header__nav a:hover, .header__nav a.active { color: var(--deep-blue); font-weight: 600; }
+    .header__cta { display: flex; align-items: center; gap: 0.9rem; flex-shrink: 0; }
+
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 8px; }
+    .hamburger span { display: block; width: 20px; height: 2px; background: var(--text-ink); border-radius: 2px; transition: all 0.25s ease; }
+
+    .mobile-menu {
+      display: none; flex-direction: column;
+      background: var(--bg-card); border-top: var(--border-warm);
+      padding: 1rem var(--s4) 1.5rem;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      font-family: var(--font-ui); font-size: 0.9rem; font-weight: 500;
+      color: var(--text-body); padding: 0.7rem 0;
+      border-bottom: var(--border-card); transition: color 0.2s;
+    }
+    .mobile-menu a:hover { color: var(--deep-blue); }
+    .mobile-menu a:last-of-type { border-bottom: none; }
+    .mobile-menu .mobile-cta { margin-top: 1rem; }
+
+    @media (max-width: 1024px) { .header__nav { display: none; } }
+    @media (max-width: 768px) { .header__cta .btn-gold { display: none; } .hamburger { display: flex; } }
+
+    /* ── HERO ────────────────────────────────────────────────── */
+    .page-hero {
+      background: var(--bg-dark);
+      padding: calc(68px + 6rem) 0 6rem;
+      position: relative; overflow: hidden;
+    }
+    .page-hero::before {
+      content: '';
+      position: absolute; top: -100px; right: -100px;
+      width: 600px; height: 600px;
+      background: radial-gradient(ellipse at center, rgba(184,146,62,0.09) 0%, rgba(184,146,62,0.02) 45%, transparent 68%);
+      pointer-events: none;
+    }
+    .page-hero::after {
+      content: '';
+      position: absolute; bottom: -60px; left: -60px;
+      width: 400px; height: 400px;
+      background: radial-gradient(ellipse at center, rgba(109,143,199,0.06) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .page-hero__inner { position: relative; z-index: 1; max-width: 760px; }
+    .page-hero__eyebrow {
+      display: inline-flex; align-items: center; gap: 0.6rem;
+      font-family: var(--font-ui); font-size: 0.68rem; font-weight: 600;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--gold-pale); margin-bottom: 1.6rem;
+    }
+    .page-hero__eyebrow-dot {
+      width: 5px; height: 5px; border-radius: 50%;
+      background: var(--gold); opacity: 0.75; flex-shrink: 0;
+    }
+    .page-hero h1 { color: #fff; margin-bottom: 1.4rem; }
+    .page-hero h1 em { font-style: italic; color: var(--gold-pale); }
+    .page-hero p {
+      font-family: var(--font-body); font-size: 1.06rem;
+      line-height: 1.88; color: rgba(245,241,234,0.68);
+      max-width: 580px;
+    }
+
+    /* ── FILTER TABS ─────────────────────────────────────────── */
+    .filter-tabs {
+      background: var(--bg-primary);
+      padding: 2.5rem 0;
+      border-bottom: var(--border-warm);
+      position: sticky; top: 68px; z-index: 100;
+    }
+    .filter-tabs__inner {
+      display: flex; align-items: center; gap: 0.6rem;
+      flex-wrap: wrap;
+    }
+    .filter-tab {
+      font-family: var(--font-ui); font-size: 0.8rem; font-weight: 500;
+      color: var(--text-body); background: transparent;
+      border: 1.5px solid rgba(85,60,35,0.16);
+      border-radius: 100px; padding: 0.5rem 1.2rem;
+      cursor: pointer; transition: all 0.25s ease;
+      white-space: nowrap;
+    }
+    .filter-tab:hover { border-color: var(--mid-blue); color: var(--deep-blue); }
+    .filter-tab.active {
+      background: var(--deep-blue); color: #fff;
+      border-color: var(--deep-blue);
+    }
+    .filter-tabs__label {
+      font-family: var(--font-ui); font-size: 0.7rem; font-weight: 600;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--text-muted); margin-right: 0.4rem;
+    }
+
+    /* ── WORK GRID ───────────────────────────────────────────── */
+    .work-grid-section { background: var(--bg-section); padding: var(--s7) 0; }
+    .work-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+    }
+    @media (max-width: 960px) { .work-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 580px) { .work-grid { grid-template-columns: 1fr; } }
+
+    .work-card {
+      background: var(--bg-card);
+      border: var(--border-card);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      display: flex; flex-direction: column;
+    }
+    .work-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-md); }
+
+    .work-card__image {
+      aspect-ratio: 16/10;
+      background: var(--bg-section);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 3rem;
+      border-bottom: var(--border-card);
+      position: relative; overflow: hidden;
+    }
+    .work-card__image::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, rgba(31,53,87,0.04) 0%, rgba(184,146,62,0.06) 100%);
+    }
+
+    .work-card__body { padding: 1.75rem; flex: 1; display: flex; flex-direction: column; }
+
+    .work-card__category {
+      display: inline-flex; align-items: center;
+      font-family: var(--font-ui); font-size: 0.65rem; font-weight: 600;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--gold); background: rgba(184,146,62,0.1);
+      border: 1px solid rgba(184,146,62,0.2);
+      border-radius: 100px; padding: 0.3rem 0.85rem;
+      margin-bottom: 1rem;
+    }
+
+    .work-card h3 { color: var(--deep-blue); margin-bottom: 0.75rem; font-size: 1.15rem; }
+
+    .work-card p {
+      font-size: 0.9rem; line-height: 1.8;
+      color: var(--text-body); margin-bottom: 1.25rem;
+      flex: 1;
+    }
+
+    .work-card__team {
+      display: flex; flex-wrap: wrap; gap: 0.45rem; margin-bottom: 1.25rem;
+    }
+    .work-card__badge {
+      font-family: var(--font-ui); font-size: 0.68rem; font-weight: 500;
+      color: var(--mid-blue); background: rgba(75,111,165,0.08);
+      border: 1px solid rgba(75,111,165,0.16);
+      border-radius: 100px; padding: 0.25rem 0.7rem;
+    }
+
+    .work-card__tags {
+      display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1.5rem;
+    }
+    .work-card__tag {
+      font-family: var(--font-ui); font-size: 0.62rem; font-weight: 600;
+      letter-spacing: 0.06em;
+      color: var(--text-muted); background: rgba(85,60,35,0.06);
+      border-radius: 100px; padding: 0.22rem 0.65rem;
+    }
+
+    .work-card__link {
+      font-family: var(--font-ui); font-size: 0.8rem; font-weight: 600;
+      color: var(--mid-blue); display: inline-flex; align-items: center; gap: 0.3rem;
+      transition: color 0.2s, gap 0.2s;
+    }
+    .work-card__link:hover { color: var(--deep-blue); gap: 0.55rem; }
+
+    /* Placeholder card */
+    .work-card--placeholder .work-card__image {
+      background: repeating-linear-gradient(
+        45deg,
+        rgba(85,60,35,0.03) 0px, rgba(85,60,35,0.03) 1px,
+        transparent 1px, transparent 12px
+      );
+    }
+    .work-card--placeholder h3 { color: var(--text-muted); }
+    .work-card--placeholder p { color: var(--text-muted); font-style: italic; }
+
+    /* ── HOW WE DOCUMENT ─────────────────────────────────────── */
+    .approach-section { background: var(--bg-primary); padding: var(--s7) 0; }
+    .approach-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: var(--s6); align-items: center;
+    }
+    @media (max-width: 860px) { .approach-grid { grid-template-columns: 1fr; } }
+
+    .approach-pillars { display: flex; flex-direction: column; gap: 1.25rem; margin-top: 2rem; }
+    .approach-pillar {
+      display: flex; align-items: flex-start; gap: 1rem;
+      padding: 1.25rem 1.4rem;
+      background: var(--bg-card);
+      border: var(--border-card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-xs);
+    }
+    .approach-pillar__icon {
+      font-size: 1.4rem; flex-shrink: 0;
+      width: 44px; height: 44px; border-radius: var(--radius-sm);
+      background: rgba(184,146,62,0.08);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .approach-pillar h4 {
+      font-family: var(--font-ui); font-size: 0.9rem; font-weight: 600;
+      color: var(--deep-blue); margin-bottom: 0.3rem;
+    }
+    .approach-pillar p { font-size: 0.87rem; line-height: 1.7; }
+
+    /* ── WANT TO SEE MORE ────────────────────────────────────── */
+    .more-section {
+      background: var(--bg-section);
+      padding: var(--s5) 0;
+    }
+    .more-card {
+      background: var(--bg-card);
+      border: var(--border-warm);
+      border-radius: var(--radius-xl);
+      padding: 3rem 3.5rem;
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 2rem; box-shadow: var(--shadow-sm);
+    }
+    @media (max-width: 760px) {
+      .more-card { flex-direction: column; text-align: center; padding: 2.5rem 2rem; }
+    }
+    .more-card__copy h2 { font-size: clamp(1.4rem, 2.5vw, 2rem); margin-bottom: 0.75rem; }
+    .more-card__copy p { max-width: 480px; }
+    .more-card__actions { flex-shrink: 0; display: flex; gap: 0.85rem; flex-wrap: wrap; }
+
+    /* ── CTA SECTION ─────────────────────────────────────────── */
+    .cta-section {
+      background: var(--bg-dark);
+      padding: var(--s7) 0;
+      position: relative; overflow: hidden;
+    }
+    .cta-section::before {
+      content: '';
+      position: absolute; top: -80px; right: -80px;
+      width: 500px; height: 500px;
+      background: radial-gradient(ellipse at center, rgba(184,146,62,0.08) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .cta-section__inner { position: relative; z-index: 1; text-align: center; max-width: 640px; margin: 0 auto; }
+    .cta-section h2 { color: #fff; margin-bottom: 1rem; }
+    .cta-section p { color: rgba(245,241,234,0.68); font-size: 1.06rem; line-height: 1.85; margin-bottom: 2.5rem; }
+    .cta-section__actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+    /* ── FOOTER ──────────────────────────────────────────────── */
+    .site-footer {
+      background: var(--bg-footer);
+      padding: var(--s6) 0 var(--s4);
+      border-top: 1px solid rgba(255,255,255,0.04);
+    }
+    .footer__grid {
+      display: grid;
+      grid-template-columns: 1.8fr 1fr 1fr 1.2fr;
+      gap: var(--s4);
+      padding-bottom: var(--s4);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      margin-bottom: var(--s3);
+    }
+    @media (max-width: 900px) { .footer__grid { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 540px)  { .footer__grid { grid-template-columns: 1fr; } }
+
+    .footer__brand-name {
+      font-family: var(--font-display); font-size: 1.05rem; font-weight: 700;
+      color: var(--text-warm); margin-bottom: 0.35rem;
+    }
+    .footer__brand-sub {
+      font-family: var(--font-ui); font-size: 0.58rem; font-weight: 600;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: rgba(245,241,234,0.3); margin-bottom: 1rem;
+    }
+    .footer__brand-desc {
+      font-family: var(--font-body); font-size: 0.85rem;
+      line-height: 1.8; color: rgba(245,241,234,0.42); max-width: 260px;
+    }
+
+    .footer__col-title {
+      font-family: var(--font-ui); font-size: 0.65rem; font-weight: 700;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: rgba(245,241,234,0.28); margin-bottom: 1.1rem;
+    }
+    .footer__links { list-style: none; display: flex; flex-direction: column; gap: 0.65rem; }
+    .footer__links a {
+      font-family: var(--font-ui); font-size: 0.82rem; font-weight: 400;
+      color: rgba(245,241,234,0.52); transition: color 0.2s;
+    }
+    .footer__links a:hover { color: var(--text-warm); }
+
+    .footer__bottom {
+      display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+    .footer__copy {
+      font-family: var(--font-ui); font-size: 0.74rem;
+      color: rgba(245,241,234,0.28);
+    }
+    .footer__copy a { color: rgba(245,241,234,0.42); transition: color 0.2s; }
+    .footer__copy a:hover { color: var(--text-warm); }
+    .footer__tagline {
+      font-family: var(--font-display); font-size: 0.78rem; font-style: italic;
+      color: rgba(245,241,234,0.24);
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- ── HEADER ──────────────────────────────────────────────── -->
+  <header class="site-header" id="site-header">
+    <div class="header__inner">
+      <a href="BBC Home Page.html" class="header__logo">
+        <span class="header__logo-name">Balay ni Bruno &amp; Co.</span>
+        <span class="header__logo-sub">Operational Support Studio</span>
+      </a>
+      <nav>
+        <ul class="header__nav">
+          <li><a href="BBC Home Page.html">Home</a></li>
+          <li><a href="about.html">Our Story</a></li>
+          <li><a href="how-it-works.html">How It Works</a></li>
+          <li><a href="how-we-help.html">How We Help</a></li>
+          <li><a href="our-team.html">Our Team</a></li>
+          <li><a href="our-work.html" class="active">Our Work</a></li>
+          <li><a href="insights.html">Insights</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+      <div class="header__cta">
+        <a href="contact.html" class="btn btn-outline btn-sm">Contact</a>
+        <a href="contact.html#book" class="btn btn-gold btn-sm">Book a Call</a>
+      </div>
+      <button class="hamburger" id="hamburger" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <nav class="mobile-menu" id="mobile-menu">
+      <a href="BBC Home Page.html">Home</a>
+      <a href="about.html">Our Story</a>
+      <a href="how-it-works.html">How It Works</a>
+      <a href="how-we-help.html">How We Help</a>
+      <a href="our-team.html">Our Team</a>
+      <a href="our-work.html" class="active">Our Work</a>
+      <a href="insights.html">Insights</a>
+      <a href="contact.html">Contact</a>
+      <a href="contact.html#book" class="btn btn-gold mobile-cta">Book a Call</a>
+    </nav>
+  </header>
+
+  <!-- ── HERO ────────────────────────────────────────────────── -->
+  <section class="page-hero">
+    <div class="container">
+      <div class="page-hero__inner fade-in">
+        <div class="page-hero__eyebrow">
+          <span class="page-hero__eyebrow-dot"></span>
+          Our Work
+        </div>
+        <h1><em>Work Worth Being Proud Of.</em></h1>
+        <p>These aren't just projects. They're relationships where we showed up, learned the business, and built something that lasts.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FILTER TABS ─────────────────────────────────────────── -->
+  <div class="filter-tabs">
+    <div class="container">
+      <div class="filter-tabs__inner">
+        <span class="filter-tabs__label">Filter by</span>
+        <button class="filter-tab active" data-filter="all">All</button>
+        <button class="filter-tab" data-filter="websites">Websites</button>
+        <button class="filter-tab" data-filter="branding">Branding</button>
+        <button class="filter-tab" data-filter="seo">SEO</button>
+        <button class="filter-tab" data-filter="automation">Automation</button>
+        <button class="filter-tab" data-filter="operations">Operations</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── WORK GRID ───────────────────────────────────────────── -->
+  <section class="work-grid-section">
+    <div class="container">
+      <div class="work-grid">
+
+        <!-- Wooden Woodworks -->
+        <div class="work-card fade-in" data-category="websites branding">
+          <div class="work-card__image">🪵</div>
+          <div class="work-card__body">
+            <span class="work-card__category">Website + Brand Identity</span>
+            <h3>Wooden Woodworks</h3>
+            <p>Built a warm, hand-crafted digital presence reflecting the quality and craft of their woodworking. Full website design, brand identity, and visual system.</p>
+            <div class="work-card__team">
+              <span class="work-card__badge">Krizza · Creative Lead</span>
+              <span class="work-card__badge">Ryan · Development</span>
+            </div>
+            <div class="work-card__tags">
+              <span class="work-card__tag">Website</span>
+              <span class="work-card__tag">Brand</span>
+              <span class="work-card__tag">Design</span>
+            </div>
+            <a href="contact.html" class="work-card__link">View Details →</a>
+          </div>
+        </div>
+
+        <!-- First Class Finishes -->
+        <div class="work-card fade-in" data-category="websites seo">
+          <div class="work-card__image">✨</div>
+          <div class="work-card__body">
+            <span class="work-card__category">Digital Presence + SEO</span>
+            <h3>First Class Finishes</h3>
+            <p>Established their online presence from scratch and built long-term search visibility for their finishing services in their local market.</p>
+            <div class="work-card__team">
+              <span class="work-card__badge">Al · SEO Lead</span>
+              <span class="work-card__badge">Ryan · Web</span>
+            </div>
+            <div class="work-card__tags">
+              <span class="work-card__tag">SEO</span>
+              <span class="work-card__tag">Website</span>
+              <span class="work-card__tag">Local Search</span>
+            </div>
+            <a href="contact.html" class="work-card__link">View Details →</a>
+          </div>
+        </div>
+
+        <!-- Home Vision Studios -->
+        <div class="work-card fade-in" data-category="websites">
+          <div class="work-card__image">🏛️</div>
+          <div class="work-card__body">
+            <span class="work-card__category">Website + Content</span>
+            <h3>Home Vision Studios</h3>
+            <p>Designed and built a portfolio site that showcases their architectural vision work. Clean editorial layout with strong content strategy.</p>
+            <div class="work-card__team">
+              <span class="work-card__badge">Krizza · Creative</span>
+              <span class="work-card__badge">Ryan · Dev</span>
+              <span class="work-card__badge">Al · Content</span>
+            </div>
+            <div class="work-card__tags">
+              <span class="work-card__tag">Website</span>
+              <span class="work-card__tag">Content</span>
+              <span class="work-card__tag">Design</span>
+            </div>
+            <a href="contact.html" class="work-card__link">View Details →</a>
+          </div>
+        </div>
+
+        <!-- Hi-Up Roofing -->
+        <div class="work-card fade-in" data-category="seo websites">
+          <div class="work-card__image">🏠</div>
+          <div class="work-card__body">
+            <span class="work-card__category">Local SEO + Web</span>
+            <h3>Hi-Up Roofing</h3>
+            <p>Built local search presence for a roofing business — optimized their online footprint so the right customers can find them in their market.</p>
+            <div class="work-card__team">
+              <span class="work-card__badge">Al · SEO</span>
+              <span class="work-card__badge">Ryan · Web</span>
+            </div>
+            <div class="work-card__tags">
+              <span class="work-card__tag">SEO</span>
+              <span class="work-card__tag">Local</span>
+              <span class="work-card__tag">Website</span>
+            </div>
+            <a href="contact.html" class="work-card__link">View Details →</a>
+          </div>
+        </div>
+
+        <!-- Sriviere Hair -->
+        <div class="work-card fade-in" data-category="branding">
+          <div class="work-card__image">💇</div>
+          <div class="work-card__body">
+            <span class="work-card__category">Brand + Social Content</span>
+            <h3>Sriviere Hair</h3>
+            <p>Developed a cohesive brand identity and social content strategy for this hair salon — warm, elevated, and on-brand at every touchpoint.</p>
+            <div class="work-card__team">
+              <span class="work-card__badge">Krizza · Brand</span>
+              <span class="work-card__badge">Al · Content Strategy</span>
+            </div>
+            <div class="work-card__tags">
+              <span class="work-card__tag">Brand</span>
+              <span class="work-card__tag">Content</span>
+              <span class="work-card__tag">Creative</span>
+            </div>
+            <a href="contact.html" class="work-card__link">View Details →</a>
+          </div>
+        </div>
+
+        <!-- Placeholder -->
+        <div class="work-card work-card--placeholder fade-in">
+          <div class="work-card__image">🔍</div>
+          <div class="work-card__body">
+            <span class="work-card__category" style="background:rgba(85,60,35,0.06); color:var(--text-muted); border-color:rgba(85,60,35,0.1);">Coming Soon</span>
+            <h3>New Project Coming Soon</h3>
+            <p>We're always working on something worth showing. Check back soon — the next case study is in progress.</p>
+            <div style="margin-top:auto; padding-top:1rem;">
+              <a href="contact.html#book" class="work-card__link">Become a Client →</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── HOW WE DOCUMENT OUR WORK ──────────────────────────── -->
+  <section class="approach-section">
+    <div class="container">
+      <div class="approach-grid">
+        <div class="fade-in">
+          <span class="eyebrow eyebrow--gold">Our Approach</span>
+          <h2>How We Document Our Work</h2>
+          <div class="divider-bar divider-bar--left"></div>
+          <p class="lead" style="margin-bottom:1rem;">Proof of work isn't just screenshots. It's showing you what we built, who built it, and why the decisions we made were right for the client.</p>
+          <p>Every project we take on is documented with intention — not to impress, but to be accountable. When a client asks "what did we get?", we want the answer to be specific, honest, and traceable back to the people who showed up.</p>
+        </div>
+        <div class="fade-in">
+          <div class="approach-pillars">
+            <div class="approach-pillar">
+              <div class="approach-pillar__icon">📸</div>
+              <div>
+                <h4>Before &amp; After Screenshots</h4>
+                <p>We capture the starting point and the result — so the transformation is visible, not just claimed.</p>
+              </div>
+            </div>
+            <div class="approach-pillar">
+              <div class="approach-pillar__icon">📋</div>
+              <div>
+                <h4>Case Study Writeups</h4>
+                <p>For select clients, we document the challenge, the decision process, and the outcome in plain language.</p>
+              </div>
+            </div>
+            <div class="approach-pillar">
+              <div class="approach-pillar__icon">👥</div>
+              <div>
+                <h4>Team Contributions Credited</h4>
+                <p>Every deliverable is tied to a real team member. No anonymous output — just real people doing good work.</p>
+              </div>
+            </div>
+            <div class="approach-pillar">
+              <div class="approach-pillar__icon">🔒</div>
+              <div>
+                <h4>Client Consent, Always</h4>
+                <p>We only publish what clients have approved. Some of our best work stays private out of respect.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── WANT TO SEE MORE ───────────────────────────────────── -->
+  <section class="more-section">
+    <div class="container">
+      <div class="more-card fade-in">
+        <div class="more-card__copy">
+          <span class="eyebrow eyebrow--gold">Deeper Dives Available</span>
+          <h2>Want to See More?</h2>
+          <p>Detailed case studies — with screenshots, strategy notes, and outcome data — are available on request. We're happy to walk through specific work that's relevant to your business and goals.</p>
+        </div>
+        <div class="more-card__actions">
+          <a href="contact.html#book" class="btn btn-primary">Book a Call</a>
+          <a href="contact.html" class="btn btn-outline">Request Case Study</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CTA ───────────────────────────────────────────────── -->
+  <section class="cta-section">
+    <div class="container">
+      <div class="cta-section__inner fade-in">
+        <span class="eyebrow eyebrow--pale">Let's Build Something</span>
+        <h2>Ready to Build Something Worth Showing?</h2>
+        <p>We'd love to learn your business and add your project to this page — done right, with the care it deserves.</p>
+        <div class="cta-section__actions">
+          <a href="contact.html#book" class="btn btn-gold">Book a Call</a>
+          <a href="how-we-help.html" class="btn btn-ghost">See How We Help</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FOOTER ─────────────────────────────────────────────── -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer__grid">
+        <div>
+          <div class="footer__brand-name">Balay ni Bruno &amp; Co.</div>
+          <div class="footer__brand-sub">Operational Support Studio</div>
+          <p class="footer__brand-desc">A family-built team helping business owners grow through real collaboration, thoughtful systems, and long-term care.</p>
+        </div>
+        <div>
+          <div class="footer__col-title">Studio</div>
+          <ul class="footer__links">
+            <li><a href="about.html">Our Story</a></li>
+            <li><a href="our-team.html">Our Team</a></li>
+            <li><a href="how-it-works.html">How It Works</a></li>
+            <li><a href="how-we-help.html">How We Help</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer__col-title">Work</div>
+          <ul class="footer__links">
+            <li><a href="our-work.html">Our Work</a></li>
+            <li><a href="insights.html">Insights</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="contact.html#book">Book a Call</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer__col-title">Get In Touch</div>
+          <ul class="footer__links">
+            <li><a href="mailto:hello@balaynibruno.co">hello@balaynibruno.co</a></li>
+            <li><a href="contact.html#book">Schedule a Discovery Call</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <p class="footer__copy">&copy; 2025 Balay ni Bruno &amp; Co. &middot; <a href="#">Privacy</a></p>
+        <span class="footer__tagline">Built with intention.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Sticky header scroll class
+    const header = document.getElementById('site-header');
+    window.addEventListener('scroll', () => {
+      header.classList.toggle('scrolled', window.scrollY > 20);
+    }, { passive: true });
+
+    // Mobile hamburger
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobile-menu');
+    hamburger.addEventListener('click', () => {
+      mobileMenu.classList.toggle('open');
+    });
+
+    // Fade-in with IntersectionObserver
+    const fadeEls = document.querySelectorAll('.fade-in');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    fadeEls.forEach(el => observer.observe(el));
+
+    // Filter tabs
+    const filterTabs = document.querySelectorAll('.filter-tab');
+    const workCards = document.querySelectorAll('.work-card');
+
+    filterTabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        filterTabs.forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+
+        const filter = tab.dataset.filter;
+        workCards.forEach(card => {
+          if (filter === 'all') {
+            card.style.display = '';
+          } else {
+            const cats = (card.dataset.category || '').split(' ');
+            card.style.display = cats.includes(filter) ? '' : 'none';
+          }
+        });
+      });
+    });
+  </script>
+
+</body>
+</html>

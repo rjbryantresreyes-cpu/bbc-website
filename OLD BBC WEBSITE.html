@@ -1,0 +1,1364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Balay ni Bruno & Co. — Managed Virtual Operations Support</title>
+  <!-- SEO & Open Graph -->
+  <meta name="description" content="BBC provides managed virtual operations support — matched digital specialists, structured workflows, and founder-led setup for marketing, content, websites, AI automation, and more." />
+  <link rel="canonical" href="https://balaynibruno.co/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Balay ni Bruno &amp; Co." />
+  <meta property="og:title" content="Balay ni Bruno &amp; Co. — Managed Virtual Operations Support" />
+  <meta property="og:description" content="BBC provides managed virtual operations support — matched digital specialists, structured workflows, and founder-led setup for marketing, content, websites, and AI automation." />
+  <meta property="og:url" content="https://balaynibruno.co/" />
+  <meta property="og:image" content="https://balaynibruno.co/og-image.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Balay ni Bruno &amp; Co. — Managed Virtual Operations Support" />
+  <meta name="twitter:description" content="BBC provides managed virtual operations support — matched digital specialists, structured workflows, and founder-led setup for marketing, content, websites, and AI automation." />
+  <meta name="twitter:image" content="https://balaynibruno.co/og-image.jpg" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            navy:        '#0B1120',
+            blue:        '#2D5BFF',
+            'off-white': '#F8FAFC',
+            slate:       '#475569',
+            lightgray:   '#D1D5DB',
+          },
+          fontFamily: {
+            sans: ['Montserrat', 'sans-serif'],
+          },
+        },
+      },
+    };
+  </script>
+  <style>
+    /* ── Base ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Montserrat', sans-serif; background: #F8FAFC; color: #0B1120; overflow-x: hidden; }
+
+    /* ── Marquee ── */
+    .marquee-track { display: flex; white-space: nowrap; animation: marquee 30s linear infinite; }
+    @keyframes marquee {
+      0%   { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* ── Fade-in on scroll ── */
+    .fade-in { opacity: 0; transform: translateY(24px); transition: opacity 0.65s ease, transform 0.65s ease; }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+    /* ── Sticky header scroll shadow ── */
+    #site-header { transition: box-shadow 0.3s ease, background 0.3s ease; }
+    #site-header.scrolled { box-shadow: 0 1px 16px rgba(0,0,0,0.09); }
+
+    /* ── Hero illustrated cards ── */
+    .hero-card {
+      position: absolute;
+      border-radius: 16px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.12);
+      padding: 20px 22px;
+    }
+    .hero-card-line {
+      height: 8px;
+      border-radius: 4px;
+      background: rgba(255,255,255,0.13);
+      margin-top: 10px;
+    }
+
+    /* ── Support card hover ── */
+    .support-card { transition: border-color 0.25s ease, transform 0.25s ease; }
+    .support-card:hover { border-color: #2D5BFF !important; transform: translateY(-2px); }
+
+    /* ── Blog card hover ── */
+    .blog-card { transition: transform 0.25s ease, box-shadow 0.25s ease; }
+    .blog-card:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(0,0,0,0.08); }
+
+    /* ── Mobile nav ── */
+    #mobile-nav { display: none; }
+    #mobile-nav.open { display: flex; }
+
+    /* ── Comparison card accent bar ── */
+    .bbc-accent-bar {
+      position: absolute;
+      left: 0; top: 24px; bottom: 24px;
+      width: 4px;
+      background: #2D5BFF;
+      border-radius: 0 4px 4px 0;
+    }
+
+    /* ── Section spacing ── */
+    .section-pad { padding: 100px 0; }
+    @media (max-width: 768px) { .section-pad { padding: 64px 0; } }
+
+    /* ── Hide hero visual on mobile ── */
+    @media (max-width: 640px) { .hero-visual { display: none !important; } }
+
+    /* ── Hamburger transition ── */
+    #hb1, #hb2, #hb3 { transition: transform 0.25s ease, opacity 0.25s ease; }
+
+    /* ── Smooth interactions ── */
+    a, button { transition: opacity 0.2s ease, background 0.2s ease, color 0.2s ease, border-color 0.2s ease; }
+  </style>
+</head>
+<body>
+
+<!-- ════════════════════════════════════════════
+     HEADER
+════════════════════════════════════════════ -->
+<header id="site-header" class="fixed top-0 left-0 right-0 z-50 bg-white border-b border-gray-100">
+  <div class="max-w-7xl mx-auto px-6 flex items-center justify-between h-16">
+
+    <!-- Logo -->
+    <a href="#home" class="flex items-center gap-3 no-underline">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 210" width="36" height="36"
+           style="color:#2D5BFF; flex-shrink:0;" aria-hidden="true">
+        <!-- Chimney -->
+        <rect x="38" y="6" width="13" height="62" rx="2" fill="currentColor"/>
+        <!-- Roof left -->
+        <line x1="100" y1="38" x2="6" y2="90" stroke="currentColor" stroke-width="9" stroke-linecap="round"/>
+        <!-- Roof right -->
+        <line x1="100" y1="38" x2="194" y2="90" stroke="currentColor" stroke-width="9" stroke-linecap="round"/>
+        <!-- Monitor frame -->
+        <rect x="24" y="90" width="152" height="86" rx="6" fill="none" stroke="currentColor" stroke-width="9"/>
+        <!-- BBC text inside monitor -->
+        <text x="100" y="154" text-anchor="middle" font-size="46" font-weight="800"
+              font-family="Georgia,'Times New Roman',serif" fill="currentColor">BBC</text>
+        <!-- Stand neck -->
+        <rect x="91" y="176" width="18" height="18" rx="2" fill="currentColor"/>
+        <!-- Stand base -->
+        <rect x="64" y="194" width="72" height="11" rx="5.5" fill="currentColor"/>
+      </svg>
+      <span class="font-bold" style="color:#0B1120; font-weight:700; font-size:15px; letter-spacing:-0.01em;">
+        Balay ni Bruno &amp; Co.
+      </span>
+    </a>
+
+    <!-- Desktop Nav -->
+    <nav class="hidden lg:flex items-center gap-6">
+      <a href="index.html"     style="color:#2D5BFF; font-weight:700; font-size:14px;">Home</a>
+      <a href="about.html"     style="color:#475569; font-weight:500; font-size:14px;" class="hover:text-navy transition-colors">Our Story</a>
+      <a href="how-it-works.html" style="color:#475569; font-weight:500; font-size:14px;" class="hover:text-navy transition-colors">How It Works</a>
+      <a href="how-we-help.html" style="color:#475569; font-weight:500; font-size:14px;" class="hover:text-navy transition-colors">How We Help</a>
+      <a href="our-team.html"  style="color:#475569; font-weight:500; font-size:14px;" class="hover:text-navy transition-colors">Our Team</a>
+      <a href="our-work.html"  style="color:#475569; font-weight:500; font-size:14px;" class="hover:text-navy transition-colors">Our Work</a>
+      <a href="insights.html"      style="color:#475569; font-weight:500; font-size:14px;" class="hover:text-navy transition-colors">Insights</a>
+      <a href="contact.html"       style="color:#475569; font-weight:500; font-size:14px;" class="hover:text-navy transition-colors">Contact</a>
+    </nav>
+
+    <!-- CTA + Hamburger -->
+    <div class="flex items-center gap-3">
+      <a href="#cta"
+         class="hidden md:inline-flex items-center px-5 py-2 rounded-full text-white font-semibold text-sm"
+         style="background:#2D5BFF; font-weight:600;">
+        Book a Call
+      </a>
+      <button id="hamburger" class="lg:hidden flex flex-col gap-1.5 p-2" aria-label="Toggle navigation menu">
+        <span id="hb1" class="block w-5 h-0.5 bg-gray-700 rounded"></span>
+        <span id="hb2" class="block w-5 h-0.5 bg-gray-700 rounded"></span>
+        <span id="hb3" class="block w-5 h-0.5 bg-gray-700 rounded"></span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile Nav Dropdown -->
+  <div id="mobile-nav" class="lg:hidden flex-col border-t border-gray-100 bg-white px-6 py-4 gap-0.5">
+    <a href="index.html"     class="block py-2.5 text-sm font-bold" style="color:#2D5BFF;">Home</a>
+    <a href="about.html"     class="block py-2.5 text-sm font-medium" style="color:#475569;">Our Story</a>
+    <a href="how-it-works.html" class="block py-2.5 text-sm font-medium" style="color:#475569;">How It Works</a>
+    <a href="how-we-help.html" class="block py-2.5 text-sm font-medium" style="color:#475569;">How We Help</a>
+    <a href="our-team.html"  class="block py-2.5 text-sm font-medium" style="color:#475569;">Our Team</a>
+    <a href="our-work.html"  class="block py-2.5 text-sm font-medium" style="color:#475569;">Our Work</a>
+    <a href="insights.html"      class="block py-2.5 text-sm font-medium" style="color:#475569;">Insights</a>
+    <a href="contact.html"       class="block py-2.5 text-sm font-medium" style="color:#475569;">Contact</a>
+    <a href="#cta"
+       class="block mt-3 text-center px-5 py-2.5 rounded-full text-white font-semibold text-sm"
+       style="background:#2D5BFF;">
+      Book a Call
+    </a>
+  </div>
+</header>
+
+
+<!-- ════════════════════════════════════════════
+     SECTION 1 — HERO
+════════════════════════════════════════════ -->
+<section id="home" style="background:#0B1120; min-height:90vh; padding-top:64px;" class="flex items-center">
+  <div class="max-w-7xl mx-auto px-6 w-full py-20 flex flex-col lg:flex-row items-center gap-12">
+
+    <!-- Left copy -->
+    <div class="w-full lg:w-3/5 fade-in">
+      <span class="inline-block text-xs font-semibold uppercase mb-6"
+            style="color:#2D5BFF; letter-spacing:0.14em;">
+        Managed Virtual Operations Support
+      </span>
+
+      <h1 class="font-bold text-white"
+          style="font-size:clamp(32px,4.5vw,56px); line-height:1.15; font-weight:700;">
+        Reliable Digital Support&nbsp;—<br>
+        Built Around Your Business,<br>
+        Not Just Assigned to It
+      </h1>
+
+      <p class="mt-5"
+         style="color:rgba(255,255,255,0.75); font-size:18px; line-height:1.7; max-width:540px;">
+        BBC helps business owners get organized digital support through matched assistants,
+        founder-led setup, structured workflows, and long-term operational collaboration —
+        so you're never left managing the work alone.
+      </p>
+
+      <div class="flex flex-wrap gap-4 mt-9">
+        <a href="#cta"
+           class="inline-flex items-center px-8 py-4 rounded-full text-white font-bold"
+           style="background:#2D5BFF; font-size:16px; font-weight:700;">
+          Book a Call
+        </a>
+        <a href="#how-it-works"
+           class="inline-flex items-center px-8 py-4 rounded-full font-semibold"
+           style="border:2px solid rgba(255,255,255,0.8); color:white; font-size:16px; font-weight:600; background:transparent;">
+          See How It Works
+        </a>
+      </div>
+
+      <p class="mt-12" style="font-size:13px; color:rgba(255,255,255,0.45);">
+        Serving clients in the US, UK, and internationally
+      </p>
+    </div>
+
+    <!-- Right illustrated card cluster (desktop only) -->
+    <div class="hero-visual w-full lg:w-2/5 flex-shrink-0" style="position:relative; height:360px;">
+
+      <!-- Card 1: Team card (back-left, rotated) -->
+      <div class="hero-card fade-in"
+           style="width:220px; top:10px; left:20px; transform:rotate(-4deg);">
+        <div class="flex items-center gap-2 mb-2">
+          <div class="w-3 h-3 rounded-full" style="background:#2D5BFF;"></div>
+          <span style="color:rgba(255,255,255,0.7); font-size:12px; font-weight:600;">Team Assignment</span>
+        </div>
+        <div class="hero-card-line w-full"></div>
+        <div class="hero-card-line" style="width:70%;"></div>
+        <div class="hero-card-line" style="width:50%;"></div>
+        <div class="flex items-center gap-1.5 mt-4">
+          <div class="w-6 h-6 rounded-full flex items-center justify-center text-white font-bold"
+               style="background:#2D5BFF; font-size:9px;">BB</div>
+          <div class="w-6 h-6 rounded-full flex items-center justify-center text-white font-bold"
+               style="background:rgba(255,255,255,0.15); font-size:9px;">MC</div>
+          <div class="w-6 h-6 rounded-full flex items-center justify-center text-white font-bold"
+               style="background:rgba(255,255,255,0.15); font-size:9px;">WT</div>
+        </div>
+      </div>
+
+      <!-- Card 2: Workflow card (centre, slight tilt) -->
+      <div class="hero-card fade-in"
+           style="width:240px; top:60px; left:90px; transform:rotate(2deg); z-index:2;">
+        <div class="flex items-center gap-2 mb-3">
+          <div class="w-3 h-3 rounded-full" style="background:#2D5BFF;"></div>
+          <span style="color:rgba(255,255,255,0.7); font-size:12px; font-weight:600;">Workflow Setup</span>
+        </div>
+        <div class="flex flex-col gap-2">
+          <div class="flex items-center gap-2">
+            <div class="w-2 h-2 rounded-full" style="background:rgba(45,91,255,0.7);"></div>
+            <div style="flex:1; height:8px; border-radius:4px; background:rgba(255,255,255,0.13);"></div>
+          </div>
+          <div class="flex items-center gap-2">
+            <div class="w-2 h-2 rounded-full" style="background:rgba(45,91,255,0.45);"></div>
+            <div style="width:75%; height:8px; border-radius:4px; background:rgba(255,255,255,0.13);"></div>
+          </div>
+          <div class="flex items-center gap-2">
+            <div class="w-2 h-2 rounded-full" style="background:rgba(45,91,255,0.25);"></div>
+            <div style="width:55%; height:8px; border-radius:4px; background:rgba(255,255,255,0.13);"></div>
+          </div>
+        </div>
+        <div class="flex gap-2 mt-4">
+          <div style="background:rgba(45,91,255,0.25); color:#2D5BFF; font-size:10px; font-weight:600; padding:3px 10px; border-radius:999px;">In Progress</div>
+          <div style="background:rgba(255,255,255,0.07); color:rgba(255,255,255,0.5); font-size:10px; font-weight:500; padding:3px 10px; border-radius:999px;">3 tasks</div>
+        </div>
+      </div>
+
+      <!-- Card 3: Task card (front-right) -->
+      <div class="hero-card fade-in"
+           style="width:200px; top:165px; left:160px; transform:rotate(-1.5deg); z-index:3;">
+        <div class="flex items-center gap-2 mb-3">
+          <div class="w-3 h-3 rounded-full" style="background:#2D5BFF;"></div>
+          <span style="color:rgba(255,255,255,0.7); font-size:12px; font-weight:600;">Tasks This Week</span>
+        </div>
+        <div style="height:8px; border-radius:4px; background:rgba(255,255,255,0.13); width:100%;"></div>
+        <div style="height:8px; border-radius:4px; background:rgba(255,255,255,0.13); width:80%; margin-top:8px;"></div>
+        <div class="flex items-center justify-between mt-3">
+          <span style="font-size:11px; color:rgba(255,255,255,0.4);">Progress</span>
+          <span style="font-size:11px; color:#2D5BFF; font-weight:600;">8 / 12</span>
+        </div>
+        <div style="height:4px; border-radius:999px; background:rgba(255,255,255,0.1); margin-top:6px; overflow:hidden;">
+          <div style="width:66%; height:100%; background:#2D5BFF; border-radius:999px;"></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════
+     SECTION 2 — INDUSTRIES MARQUEE
+════════════════════════════════════════════ -->
+<section style="background:#0B1120; border-top:1px solid rgba(255,255,255,0.08); padding:20px 0; overflow:hidden;">
+  <div class="max-w-7xl mx-auto px-6 flex items-center gap-6">
+    <span class="flex-shrink-0 font-semibold uppercase whitespace-nowrap"
+          style="color:rgba(255,255,255,0.5); font-size:13px; letter-spacing:0.1em;">
+      Industries We Serve:
+    </span>
+    <div style="overflow:hidden; flex:1;">
+      <div class="marquee-track">
+        <span style="color:rgba(255,255,255,0.6); font-size:14px; padding-right:14px;">Real Estate</span><span style="color:rgba(45,91,255,0.5); padding-right:14px;">·</span>
+        <span style="color:rgba(255,255,255,0.6); font-size:14px; padding-right:14px;">E-Commerce</span><span style="color:rgba(45,91,255,0.5); padding-right:14px;">·</span>
+        <span style="color:rgba(255,255,255,0.6); font-size:14px; padding-right:14px;">Construction</span><span style="color:rgba(45,91,255,0.5); padding-right:14px;">·</span>
+        <span style="color:rgba(255,255,255,0.6); font-size:14px; padding-right:14px;">Home Services</span><span style="color:rgba(45,91,255,0.5); padding-right:14px;">·</span>
+        <span style="color:rgba(255,255,255,0.6); font-size:14px; padding-right:14px;">Local Businesses</span><span style="color:rgba(45,91,255,0.5); padding-right:14px;">·</span>
+        <span style="color:rgba(255,255,255,0.6); font-size:14px; padding-right:14px;">Restaurants</span><span style="color:rgba(45,91,255,0.5); padding-right:14px;">·</span>
+        <span style="color:rgba(255,255,255,0.6); font-size:14px; padding-right:14px;">Agencies</span><span style="color:rgba(45,91,255,0.5); padding-right:14px;">·</span>
+        <span style="color:rgba(255,255,255,0.6); font-size:14px; padding-right:14px;">Consultants</span><span style="color:rgba(45,91,255,0.5); padding-right:14px;">·</span>
+        <span style="color:rgba(255,255,255,0.6); font-size:14px; padding-right:14px;">Creators</span><span style="color:rgba(45,91,255,0.5); padding-right:14px;">·</span>
+        <span style="color:rgba(255,255,255,0.6); font-size:14px; padding-right:14px;">Coaches</span><span style="color:rgba(45,91,255,0.5); padding-right:14px;">·</span>
+        <span style="color:rgba(255,255,255,0.6); font-size:14px; padding-right:14px;">Service Businesses</span><span style="color:rgba(45,91,255,0.5); padding-right:14px;">·</span>
+        <span style="color:rgba(255,255,255,0.6); font-size:14px; padding-right:14px;">Hospitality</span><span style="color:rgba(45,91,255,0.5); padding-right:14px;">·</span>
+        <span style="color:rgba(255,255,255,0.6); font-size:14px; padding-right:14px;">Law Firms</span><span style="color:rgba(45,91,255,0.5); padding-right:14px;">·</span>
+        <span style="color:rgba(255,255,255,0.6); font-size:14px; padding-right:28px;">Financial Advisors</span>
+        <!-- Duplicate for seamless loop -->
+        <span style="color:rgba(255,255,255,0.6); font-size:14px; padding-right:14px;">Real Estate</span><span style="color:rgba(45,91,255,0.5); padding-right:14px;">·</span>
+        <span style="color:rgba(255,255,255,0.6); font-size:14px; padding-right:14px;">E-Commerce</span><span style="color:rgba(45,91,255,0.5); padding-right:14px;">·</span>
+        <span style="color:rgba(255,255,255,0.6); font-size:14px; padding-right:14px;">Construction</span><span style="color:rgba(45,91,255,0.5); padding-right:14px;">·</span>
+        <span style="color:rgba(255,255,255,0.6); font-size:14px; padding-right:14px;">Home Services</span><span style="color:rgba(45,91,255,0.5); padding-right:14px;">·</span>
+        <span style="color:rgba(255,255,255,0.6); font-size:14px; padding-right:14px;">Local Businesses</span><span style="color:rgba(45,91,255,0.5); padding-right:14px;">·</span>
+        <span style="color:rgba(255,255,255,0.6); font-size:14px; padding-right:14px;">Restaurants</span><span style="color:rgba(45,91,255,0.5); padding-right:14px;">·</span>
+        <span style="color:rgba(255,255,255,0.6); font-size:14px; padding-right:14px;">Agencies</span><span style="color:rgba(45,91,255,0.5); padding-right:14px;">·</span>
+        <span style="color:rgba(255,255,255,0.6); font-size:14px; padding-right:14px;">Consultants</span><span style="color:rgba(45,91,255,0.5); padding-right:14px;">·</span>
+        <span style="color:rgba(255,255,255,0.6); font-size:14px; padding-right:14px;">Creators</span><span style="color:rgba(45,91,255,0.5); padding-right:14px;">·</span>
+        <span style="color:rgba(255,255,255,0.6); font-size:14px; padding-right:14px;">Coaches</span><span style="color:rgba(45,91,255,0.5); padding-right:14px;">·</span>
+        <span style="color:rgba(255,255,255,0.6); font-size:14px; padding-right:14px;">Service Businesses</span><span style="color:rgba(45,91,255,0.5); padding-right:14px;">·</span>
+        <span style="color:rgba(255,255,255,0.6); font-size:14px; padding-right:14px;">Hospitality</span><span style="color:rgba(45,91,255,0.5); padding-right:14px;">·</span>
+        <span style="color:rgba(255,255,255,0.6); font-size:14px; padding-right:14px;">Law Firms</span><span style="color:rgba(45,91,255,0.5); padding-right:14px;">·</span>
+        <span style="color:rgba(255,255,255,0.6); font-size:14px; padding-right:28px;">Financial Advisors</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════
+     SECTION 3 — ABOUT + VIDEO
+════════════════════════════════════════════ -->
+<section id="about" class="section-pad" style="background:#F8FAFC;">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
+
+      <!-- Video placeholder -->
+      <div class="w-full lg:w-1/2 fade-in">
+        <div class="rounded-2xl flex flex-col items-center justify-center cursor-pointer group"
+             style="background:#0B1120; aspect-ratio:16/9; box-shadow:0 20px 60px rgba(11,17,32,0.18);">
+          <div class="w-16 h-16 rounded-full flex items-center justify-center mb-4"
+               style="background:rgba(255,255,255,0.95); box-shadow:0 4px 20px rgba(0,0,0,0.3); transition:transform 0.2s ease;"
+               onmouseover="this.style.transform='scale(1.08)'" onmouseout="this.style.transform='scale(1)'">
+            <div style="width:0;height:0;border-top:10px solid transparent;border-bottom:10px solid transparent;border-left:18px solid #0B1120;margin-left:4px;"></div>
+          </div>
+          <p style="color:rgba(255,255,255,0.8); font-size:15px; font-weight:500;">
+            Watch: How BBC's Managed Support Works
+          </p>
+        </div>
+      </div>
+
+      <!-- Text content -->
+      <div class="w-full lg:w-1/2 fade-in">
+        <span class="inline-block text-xs font-semibold uppercase mb-4"
+              style="color:#2D5BFF; letter-spacing:0.14em;">About BBC</span>
+
+        <h2 class="font-bold leading-tight mb-5"
+            style="font-size:clamp(26px,3vw,36px); font-weight:700; color:#0B1120; line-height:1.25;">
+          Built Around Trust, Collaboration, and Organized Execution
+        </h2>
+
+        <p style="color:#475569; font-size:16px; line-height:1.75;">
+          Balay ni Bruno &amp; Co. is a systems-oriented support agency built around a close-knit team
+          of trusted collaborators, family members, and skilled assistants helping businesses manage
+          digital operations with more structure and clarity.
+        </p>
+        <p class="mt-4" style="color:#475569; font-size:16px; line-height:1.75;">
+          Unlike traditional VA agencies, BBC stays actively involved during planning, setup, workflow
+          organization, and early execution — so clients receive guidance, support, and long-term
+          operational direction, not just task execution.
+        </p>
+
+        <!-- Three mini value cards -->
+        <div class="flex flex-col sm:flex-row gap-3 mt-8">
+          <div class="flex-1 rounded-xl p-4 border" style="background:white; border-color:#D1D5DB;">
+            <div class="w-2.5 h-2.5 rounded-full mb-2" style="background:#2D5BFF;"></div>
+            <p class="font-bold text-sm mb-1" style="color:#0B1120;">Founder-Led Setup</p>
+            <p class="text-xs" style="color:#475569;">Personally planned and guided.</p>
+          </div>
+          <div class="flex-1 rounded-xl p-4 border" style="background:white; border-color:#D1D5DB;">
+            <div class="w-2.5 h-2.5 rounded-full mb-2" style="background:#2D5BFF;"></div>
+            <p class="font-bold text-sm mb-1" style="color:#0B1120;">Matched Assistant</p>
+            <p class="text-xs" style="color:#475569;">Chosen for your specific needs.</p>
+          </div>
+          <div class="flex-1 rounded-xl p-4 border" style="background:white; border-color:#D1D5DB;">
+            <div class="w-2.5 h-2.5 rounded-full mb-2" style="background:#2D5BFF;"></div>
+            <p class="font-bold text-sm mb-1" style="color:#0B1120;">Long-Term Collaboration</p>
+            <p class="text-xs" style="color:#475569;">Strategy and support that stays.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════
+     SECTION 4 — WHY BBC IS DIFFERENT
+════════════════════════════════════════════ -->
+<section id="difference" class="section-pad" style="background:white;">
+  <div class="max-w-7xl mx-auto px-6">
+
+    <div class="text-center mb-14 fade-in">
+      <span class="inline-block text-xs font-semibold uppercase mb-4"
+            style="color:#2D5BFF; letter-spacing:0.14em;">The Difference</span>
+      <h2 class="font-bold"
+          style="font-size:clamp(28px,3.5vw,40px); font-weight:700; color:#0B1120; line-height:1.2;">
+        Not Just a VA Match —<br>A Managed Support System
+      </h2>
+    </div>
+
+    <div class="flex flex-col md:flex-row gap-8 max-w-4xl mx-auto fade-in">
+
+      <!-- Typical VA Agency -->
+      <div class="flex-1 rounded-2xl border p-10" style="background:#F8FAFC; border-color:#D1D5DB;">
+        <div class="flex items-center gap-3 mb-6">
+          <div class="w-3 h-3 rounded-full" style="background:#D1D5DB;"></div>
+          <span class="font-bold" style="color:#475569; font-size:18px;">Typical VA Agency</span>
+        </div>
+        <ul class="flex flex-col gap-0">
+          <li class="flex items-start gap-3" style="color:#475569; font-size:15px; line-height:2.2;">
+            <span class="flex-shrink-0 font-bold" style="color:#9CA3AF;">—</span>
+            Client signs up and a VA is assigned or interviewed
+          </li>
+          <li class="flex items-start gap-3" style="color:#475569; font-size:15px; line-height:2.2;">
+            <span class="flex-shrink-0 font-bold" style="color:#9CA3AF;">—</span>
+            Client manages all onboarding and setup alone
+          </li>
+          <li class="flex items-start gap-3" style="color:#475569; font-size:15px; line-height:2.2;">
+            <span class="flex-shrink-0 font-bold" style="color:#9CA3AF;">—</span>
+            Little strategic guidance or workflow planning
+          </li>
+          <li class="flex items-start gap-3" style="color:#475569; font-size:15px; line-height:2.2;">
+            <span class="flex-shrink-0 font-bold" style="color:#9CA3AF;">—</span>
+            Founder or leadership not involved after sign-up
+          </li>
+          <li class="flex items-start gap-3" style="color:#475569; font-size:15px; line-height:2.2;">
+            <span class="flex-shrink-0 font-bold" style="color:#9CA3AF;">—</span>
+            Client is responsible for managing VA output
+          </li>
+        </ul>
+      </div>
+
+      <!-- BBC Approach -->
+      <div class="flex-1 rounded-2xl border-2 p-10 relative overflow-hidden"
+           style="background:white; border-color:#2D5BFF;">
+        <div class="bbc-accent-bar"></div>
+        <div class="flex items-center gap-3 mb-6">
+          <div class="w-3 h-3 rounded-full" style="background:#2D5BFF;"></div>
+          <span class="font-bold" style="color:#2D5BFF; font-size:18px;">The BBC Approach</span>
+        </div>
+        <ul class="flex flex-col gap-0">
+          <li class="flex items-start gap-3" style="color:#0B1120; font-size:15px; line-height:2.2;">
+            <span class="flex-shrink-0 font-bold" style="color:#2D5BFF;">✓</span>
+            Founder understands your business before anyone is matched
+          </li>
+          <li class="flex items-start gap-3" style="color:#0B1120; font-size:15px; line-height:2.2;">
+            <span class="flex-shrink-0 font-bold" style="color:#2D5BFF;">✓</span>
+            Assistant selected based on genuine skill and style fit
+          </li>
+          <li class="flex items-start gap-3" style="color:#0B1120; font-size:15px; line-height:2.2;">
+            <span class="flex-shrink-0 font-bold" style="color:#2D5BFF;">✓</span>
+            Setup is planned together — tasks, tools, workflows, priorities
+          </li>
+          <li class="flex items-start gap-3" style="color:#0B1120; font-size:15px; line-height:2.2;">
+            <span class="flex-shrink-0 font-bold" style="color:#2D5BFF;">✓</span>
+            Founder guides early execution and stays involved for strategy
+          </li>
+          <li class="flex items-start gap-3" style="color:#0B1120; font-size:15px; line-height:2.2;">
+            <span class="flex-shrink-0 font-bold" style="color:#2D5BFF;">✓</span>
+            You get an organized support system, not just extra hands
+          </li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════
+     SECTION 5 — HOW IT WORKS
+════════════════════════════════════════════ -->
+<section id="how-it-works" class="section-pad" style="background:#0B1120;">
+  <div class="max-w-7xl mx-auto px-6">
+
+    <div class="text-center mb-16 fade-in">
+      <span class="inline-block text-xs font-semibold uppercase mb-4"
+            style="color:#2D5BFF; letter-spacing:0.14em;">The Process</span>
+      <h2 class="font-bold text-white"
+          style="font-size:clamp(28px,3.5vw,40px); font-weight:700;">
+        How Our Managed Support Works
+      </h2>
+      <p class="mt-4 mx-auto"
+         style="color:rgba(255,255,255,0.6); font-size:17px; max-width:560px; line-height:1.7;">
+        A structured process built around your business — not a generic onboarding flow.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 fade-in">
+
+      <div class="rounded-2xl p-7 flex flex-col items-center text-center"
+           style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1);">
+        <div class="w-10 h-10 rounded-full flex items-center justify-center font-bold text-white text-sm flex-shrink-0"
+             style="background:#2D5BFF;">1</div>
+        <h3 class="font-bold text-white mt-4" style="font-size:16px; font-weight:700;">Book a Call</h3>
+        <p class="mt-2" style="color:rgba(255,255,255,0.6); font-size:14px; line-height:1.7;">
+          We learn about your business, workload, goals, and the kind of support you need.
+          This is a real conversation — not a form.
+        </p>
+      </div>
+
+      <div class="rounded-2xl p-7 flex flex-col items-center text-center"
+           style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1);">
+        <div class="w-10 h-10 rounded-full flex items-center justify-center font-bold text-white text-sm flex-shrink-0"
+             style="background:#2D5BFF;">2</div>
+        <h3 class="font-bold text-white mt-4" style="font-size:16px; font-weight:700;">Match the Right Assistant</h3>
+        <p class="mt-2" style="color:rgba(255,255,255,0.6); font-size:14px; line-height:1.7;">
+          The founder personally selects a team member whose skills, working style, and experience
+          align with your specific needs.
+        </p>
+      </div>
+
+      <div class="rounded-2xl p-7 flex flex-col items-center text-center"
+           style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1);">
+        <div class="w-10 h-10 rounded-full flex items-center justify-center font-bold text-white text-sm flex-shrink-0"
+             style="background:#2D5BFF;">3</div>
+        <h3 class="font-bold text-white mt-4" style="font-size:16px; font-weight:700;">Plan the Setup Together</h3>
+        <p class="mt-2" style="color:rgba(255,255,255,0.6); font-size:14px; line-height:1.7;">
+          The founder, client, and assistant work together to organize tasks, tools, workflows,
+          priorities, and the first operational roadmap.
+        </p>
+      </div>
+
+      <div class="rounded-2xl p-7 flex flex-col items-center text-center"
+           style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1);">
+        <div class="w-10 h-10 rounded-full flex items-center justify-center font-bold text-white text-sm flex-shrink-0"
+             style="background:#2D5BFF;">4</div>
+        <h3 class="font-bold text-white mt-4" style="font-size:16px; font-weight:700;">Build the System</h3>
+        <p class="mt-2" style="color:rgba(255,255,255,0.6); font-size:14px; line-height:1.7;">
+          We set up workflows, marketing tasks, content systems, websites, email processes,
+          automation structures, or operational frameworks.
+        </p>
+      </div>
+
+      <div class="rounded-2xl p-7 flex flex-col items-center text-center"
+           style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1);">
+        <div class="w-10 h-10 rounded-full flex items-center justify-center font-bold text-white text-sm flex-shrink-0"
+             style="background:#2D5BFF;">5</div>
+        <h3 class="font-bold text-white mt-4" style="font-size:16px; font-weight:700;">Ongoing Support + Strategy</h3>
+        <p class="mt-2" style="color:rgba(255,255,255,0.6); font-size:14px; line-height:1.7;">
+          After setup, your assistant handles ongoing work. The founder stays involved for strategy
+          sessions and quarterly planning. You are not left alone.
+        </p>
+      </div>
+
+    </div>
+
+    <p class="text-center mt-12 fade-in"
+       style="font-size:13px; color:rgba(255,255,255,0.4);">
+      BBC stays actively involved throughout — setup, execution, and long-term strategy.
+    </p>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════
+     SECTION 6 — SUPPORT AREAS
+════════════════════════════════════════════ -->
+<section id="support-areas" class="section-pad" style="background:#F8FAFC;">
+  <div class="max-w-7xl mx-auto px-6">
+
+    <div class="text-center mb-4 fade-in">
+      <span class="inline-block text-xs font-semibold uppercase mb-4"
+            style="color:#2D5BFF; letter-spacing:0.14em;">Capabilities</span>
+      <h2 class="font-bold"
+          style="font-size:clamp(28px,3.5vw,40px); font-weight:700; color:#0B1120;">
+        What Our Team Can Help With
+      </h2>
+      <p class="mt-4 mx-auto" style="color:#475569; font-size:17px; max-width:560px; line-height:1.7;">
+        Depending on your business needs, your matched assistant can support you across these areas.
+      </p>
+      <p class="mt-2" style="font-size:13px; color:rgba(71,85,105,0.6);">
+        These are capabilities within your managed support relationship — not separate services.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-14 fade-in">
+
+      <!-- 1 Marketing -->
+      <div class="support-card rounded-2xl p-7 border bg-white" style="border-color:#D1D5DB;">
+        <div class="w-8 h-8 rounded-lg flex items-center justify-center text-white font-bold text-sm" style="background:#2D5BFF;">M</div>
+        <h3 class="font-bold mt-4 mb-4" style="color:#0B1120; font-size:18px; font-weight:700;">Marketing Support</h3>
+        <ul>
+          <li class="flex items-center gap-2 text-sm" style="color:#475569; line-height:2.2;"><span style="color:#2D5BFF; font-weight:700; font-size:16px;">—</span> Social media support</li>
+          <li class="flex items-center gap-2 text-sm" style="color:#475569; line-height:2.2;"><span style="color:#2D5BFF; font-weight:700; font-size:16px;">—</span> Campaign assistance</li>
+          <li class="flex items-center gap-2 text-sm" style="color:#475569; line-height:2.2;"><span style="color:#2D5BFF; font-weight:700; font-size:16px;">—</span> Outreach support</li>
+          <li class="flex items-center gap-2 text-sm" style="color:#475569; line-height:2.2;"><span style="color:#2D5BFF; font-weight:700; font-size:16px;">—</span> Content planning</li>
+          <li class="flex items-center gap-2 text-sm" style="color:#475569; line-height:2.2;"><span style="color:#2D5BFF; font-weight:700; font-size:16px;">—</span> Marketing admin</li>
+        </ul>
+      </div>
+
+      <!-- 2 Websites -->
+      <div class="support-card rounded-2xl p-7 border bg-white" style="border-color:#D1D5DB;">
+        <div class="w-8 h-8 rounded-lg flex items-center justify-center text-white font-bold text-sm" style="background:#2D5BFF;">W</div>
+        <h3 class="font-bold mt-4 mb-4" style="color:#0B1120; font-size:18px; font-weight:700;">Websites &amp; Digital Presence</h3>
+        <ul>
+          <li class="flex items-center gap-2 text-sm" style="color:#475569; line-height:2.2;"><span style="color:#2D5BFF; font-weight:700; font-size:16px;">—</span> WordPress support</li>
+          <li class="flex items-center gap-2 text-sm" style="color:#475569; line-height:2.2;"><span style="color:#2D5BFF; font-weight:700; font-size:16px;">—</span> Shopify support</li>
+          <li class="flex items-center gap-2 text-sm" style="color:#475569; line-height:2.2;"><span style="color:#2D5BFF; font-weight:700; font-size:16px;">—</span> Landing pages</li>
+          <li class="flex items-center gap-2 text-sm" style="color:#475569; line-height:2.2;"><span style="color:#2D5BFF; font-weight:700; font-size:16px;">—</span> Page updates</li>
+          <li class="flex items-center gap-2 text-sm" style="color:#475569; line-height:2.2;"><span style="color:#2D5BFF; font-weight:700; font-size:16px;">—</span> Website maintenance</li>
+        </ul>
+      </div>
+
+      <!-- 3 AI & Automation -->
+      <div class="support-card rounded-2xl p-7 border bg-white" style="border-color:#D1D5DB;">
+        <div class="w-8 h-8 rounded-lg flex items-center justify-center text-white font-bold text-sm" style="background:#2D5BFF;">A</div>
+        <h3 class="font-bold mt-4 mb-4" style="color:#0B1120; font-size:18px; font-weight:700;">AI &amp; Automation Support</h3>
+        <ul>
+          <li class="flex items-center gap-2 text-sm" style="color:#475569; line-height:2.2;"><span style="color:#2D5BFF; font-weight:700; font-size:16px;">—</span> AI-assisted workflows</li>
+          <li class="flex items-center gap-2 text-sm" style="color:#475569; line-height:2.2;"><span style="color:#2D5BFF; font-weight:700; font-size:16px;">—</span> Task automation</li>
+          <li class="flex items-center gap-2 text-sm" style="color:#475569; line-height:2.2;"><span style="color:#2D5BFF; font-weight:700; font-size:16px;">—</span> CRM workflows</li>
+          <li class="flex items-center gap-2 text-sm" style="color:#475569; line-height:2.2;"><span style="color:#2D5BFF; font-weight:700; font-size:16px;">—</span> Client onboarding systems</li>
+          <li class="flex items-center gap-2 text-sm" style="color:#475569; line-height:2.2;"><span style="color:#2D5BFF; font-weight:700; font-size:16px;">—</span> Internal process systems</li>
+        </ul>
+      </div>
+
+      <!-- 4 Content & Creative -->
+      <div class="support-card rounded-2xl p-7 border bg-white" style="border-color:#D1D5DB;">
+        <div class="w-8 h-8 rounded-lg flex items-center justify-center text-white font-bold text-sm" style="background:#2D5BFF;">C</div>
+        <h3 class="font-bold mt-4 mb-4" style="color:#0B1120; font-size:18px; font-weight:700;">Content &amp; Creative Support</h3>
+        <ul>
+          <li class="flex items-center gap-2 text-sm" style="color:#475569; line-height:2.2;"><span style="color:#2D5BFF; font-weight:700; font-size:16px;">—</span> Graphics</li>
+          <li class="flex items-center gap-2 text-sm" style="color:#475569; line-height:2.2;"><span style="color:#2D5BFF; font-weight:700; font-size:16px;">—</span> Short-form videos</li>
+          <li class="flex items-center gap-2 text-sm" style="color:#475569; line-height:2.2;"><span style="color:#2D5BFF; font-weight:700; font-size:16px;">—</span> Captions</li>
+          <li class="flex items-center gap-2 text-sm" style="color:#475569; line-height:2.2;"><span style="color:#2D5BFF; font-weight:700; font-size:16px;">—</span> Content calendars</li>
+          <li class="flex items-center gap-2 text-sm" style="color:#475569; line-height:2.2;"><span style="color:#2D5BFF; font-weight:700; font-size:16px;">—</span> Brand assets</li>
+        </ul>
+      </div>
+
+      <!-- 5 Email & CRM -->
+      <div class="support-card rounded-2xl p-7 border bg-white" style="border-color:#D1D5DB;">
+        <div class="w-8 h-8 rounded-lg flex items-center justify-center text-white font-bold text-sm" style="background:#2D5BFF;">E</div>
+        <h3 class="font-bold mt-4 mb-4" style="color:#0B1120; font-size:18px; font-weight:700;">Email &amp; CRM Support</h3>
+        <ul>
+          <li class="flex items-center gap-2 text-sm" style="color:#475569; line-height:2.2;"><span style="color:#2D5BFF; font-weight:700; font-size:16px;">—</span> Email campaigns</li>
+          <li class="flex items-center gap-2 text-sm" style="color:#475569; line-height:2.2;"><span style="color:#2D5BFF; font-weight:700; font-size:16px;">—</span> Follow-up systems</li>
+          <li class="flex items-center gap-2 text-sm" style="color:#475569; line-height:2.2;"><span style="color:#2D5BFF; font-weight:700; font-size:16px;">—</span> Lead nurture flows</li>
+          <li class="flex items-center gap-2 text-sm" style="color:#475569; line-height:2.2;"><span style="color:#2D5BFF; font-weight:700; font-size:16px;">—</span> Email sequences</li>
+          <li class="flex items-center gap-2 text-sm" style="color:#475569; line-height:2.2;"><span style="color:#2D5BFF; font-weight:700; font-size:16px;">—</span> List organization</li>
+        </ul>
+      </div>
+
+      <!-- 6 SEO -->
+      <div class="support-card rounded-2xl p-7 border bg-white" style="border-color:#D1D5DB;">
+        <div class="w-8 h-8 rounded-lg flex items-center justify-center text-white font-bold text-sm" style="background:#2D5BFF;">S</div>
+        <h3 class="font-bold mt-4 mb-4" style="color:#0B1120; font-size:18px; font-weight:700;">SEO &amp; Visibility</h3>
+        <ul>
+          <li class="flex items-center gap-2 text-sm" style="color:#475569; line-height:2.2;"><span style="color:#2D5BFF; font-weight:700; font-size:16px;">—</span> SEO page structure</li>
+          <li class="flex items-center gap-2 text-sm" style="color:#475569; line-height:2.2;"><span style="color:#2D5BFF; font-weight:700; font-size:16px;">—</span> Blog planning</li>
+          <li class="flex items-center gap-2 text-sm" style="color:#475569; line-height:2.2;"><span style="color:#2D5BFF; font-weight:700; font-size:16px;">—</span> Keyword organization</li>
+          <li class="flex items-center gap-2 text-sm" style="color:#475569; line-height:2.2;"><span style="color:#2D5BFF; font-weight:700; font-size:16px;">—</span> Internal linking</li>
+          <li class="flex items-center gap-2 text-sm" style="color:#475569; line-height:2.2;"><span style="color:#2D5BFF; font-weight:700; font-size:16px;">—</span> Content updates</li>
+        </ul>
+      </div>
+
+      <!-- 7 Operations & Admin (full width on tablet) -->
+      <div class="support-card rounded-2xl p-7 border bg-white sm:col-span-2 lg:col-span-1" style="border-color:#D1D5DB;">
+        <div class="w-8 h-8 rounded-lg flex items-center justify-center text-white font-bold text-sm" style="background:#2D5BFF;">O</div>
+        <h3 class="font-bold mt-4 mb-4" style="color:#0B1120; font-size:18px; font-weight:700;">Operations &amp; Admin Support</h3>
+        <ul>
+          <li class="flex items-center gap-2 text-sm" style="color:#475569; line-height:2.2;"><span style="color:#2D5BFF; font-weight:700; font-size:16px;">—</span> SOPs</li>
+          <li class="flex items-center gap-2 text-sm" style="color:#475569; line-height:2.2;"><span style="color:#2D5BFF; font-weight:700; font-size:16px;">—</span> Task organization</li>
+          <li class="flex items-center gap-2 text-sm" style="color:#475569; line-height:2.2;"><span style="color:#2D5BFF; font-weight:700; font-size:16px;">—</span> File systems</li>
+          <li class="flex items-center gap-2 text-sm" style="color:#475569; line-height:2.2;"><span style="color:#2D5BFF; font-weight:700; font-size:16px;">—</span> Process documentation</li>
+          <li class="flex items-center gap-2 text-sm" style="color:#475569; line-height:2.2;"><span style="color:#2D5BFF; font-weight:700; font-size:16px;">—</span> Project management support</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════
+     SECTION 7 — TEAM
+════════════════════════════════════════════ -->
+<section id="team" class="section-pad" style="background:white;">
+  <div class="max-w-7xl mx-auto px-6">
+
+    <div class="text-center mb-4 fade-in">
+      <span class="inline-block text-xs font-semibold uppercase mb-4"
+            style="color:#2D5BFF; letter-spacing:0.14em;">The Team</span>
+      <h2 class="font-bold"
+          style="font-size:clamp(28px,3.5vw,40px); font-weight:700; color:#0B1120;">
+        Meet the Team Behind the Support
+      </h2>
+      <p class="mt-4 mx-auto" style="color:#475569; font-size:17px; max-width:600px; line-height:1.7;">
+        Behind every client account is a small, coordinated team matched to your needs —
+        built around communication, reliability, and organized execution.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-14 fade-in">
+
+      <!-- Bruno (Founder) -->
+      <div class="rounded-2xl p-7 border text-center" style="background:#F8FAFC; border-color:#D1D5DB;">
+        <div class="rounded-full flex items-center justify-center mx-auto font-bold text-white"
+             style="width:72px; height:72px; background:linear-gradient(135deg,#2D5BFF,#0B1120); font-size:22px; font-weight:700;">BB</div>
+        <p class="mt-4 font-semibold uppercase tracking-widest"
+           style="color:#2D5BFF; font-size:11px; letter-spacing:0.1em;">Founder &amp; Strategy Lead</p>
+        <p class="mt-1 font-bold" style="color:#0B1120; font-size:17px; font-weight:700;">Bruno</p>
+        <p class="mt-3 text-left leading-relaxed"
+           style="color:#475569; font-size:14px; line-height:1.7;">
+          Handles client discovery, assistant matching, workflow planning, and strategic oversight —
+          and stays involved throughout every engagement.
+        </p>
+      </div>
+
+      <!-- Marketing -->
+      <div class="rounded-2xl p-7 border text-center" style="background:#F8FAFC; border-color:#D1D5DB;">
+        <div class="rounded-full flex items-center justify-center mx-auto font-bold text-white"
+             style="width:72px; height:72px; background:linear-gradient(135deg,#2D5BFF,#0B1120); font-size:22px; font-weight:700;">MC</div>
+        <p class="mt-4 font-semibold uppercase tracking-widest"
+           style="color:#2D5BFF; font-size:11px; letter-spacing:0.1em;">Marketing &amp; Content</p>
+        <p class="mt-1 font-bold" style="color:#0B1120; font-size:17px; font-weight:700;">Marketing Assistant</p>
+        <p class="mt-3 text-left leading-relaxed"
+           style="color:#475569; font-size:14px; line-height:1.7;">
+          Manages social media presence, content calendars, campaign tasks, and outreach support
+          so your business stays visible and active.
+        </p>
+      </div>
+
+      <!-- Web Support -->
+      <div class="rounded-2xl p-7 border text-center" style="background:#F8FAFC; border-color:#D1D5DB;">
+        <div class="rounded-full flex items-center justify-center mx-auto font-bold text-white"
+             style="width:72px; height:72px; background:linear-gradient(135deg,#2D5BFF,#0B1120); font-size:22px; font-weight:700;">WT</div>
+        <p class="mt-4 font-semibold uppercase tracking-widest"
+           style="color:#2D5BFF; font-size:11px; letter-spacing:0.1em;">Websites &amp; Tech</p>
+        <p class="mt-1 font-bold" style="color:#0B1120; font-size:17px; font-weight:700;">Web Support Assistant</p>
+        <p class="mt-3 text-left leading-relaxed"
+           style="color:#475569; font-size:14px; line-height:1.7;">
+          Handles WordPress, Shopify, landing pages, page updates, and technical website tasks
+          so your digital presence stays organized.
+        </p>
+      </div>
+
+      <!-- Creative -->
+      <div class="rounded-2xl p-7 border text-center" style="background:#F8FAFC; border-color:#D1D5DB;">
+        <div class="rounded-full flex items-center justify-center mx-auto font-bold text-white"
+             style="width:72px; height:72px; background:linear-gradient(135deg,#2D5BFF,#0B1120); font-size:22px; font-weight:700;">CS</div>
+        <p class="mt-4 font-semibold uppercase tracking-widest"
+           style="color:#2D5BFF; font-size:11px; letter-spacing:0.1em;">Creative Support</p>
+        <p class="mt-1 font-bold" style="color:#0B1120; font-size:17px; font-weight:700;">Creative Assistant</p>
+        <p class="mt-3 text-left leading-relaxed"
+           style="color:#475569; font-size:14px; line-height:1.7;">
+          Produces graphics, short-form video content, brand assets, and visual materials
+          so your content looks professional and consistent.
+        </p>
+      </div>
+
+      <!-- Operations -->
+      <div class="rounded-2xl p-7 border text-center" style="background:#F8FAFC; border-color:#D1D5DB;">
+        <div class="rounded-full flex items-center justify-center mx-auto font-bold text-white"
+             style="width:72px; height:72px; background:linear-gradient(135deg,#2D5BFF,#0B1120); font-size:22px; font-weight:700;">OA</div>
+        <p class="mt-4 font-semibold uppercase tracking-widest"
+           style="color:#2D5BFF; font-size:11px; letter-spacing:0.1em;">Operations &amp; Admin</p>
+        <p class="mt-1 font-bold" style="color:#0B1120; font-size:17px; font-weight:700;">Operations Assistant</p>
+        <p class="mt-3 text-left leading-relaxed"
+           style="color:#475569; font-size:14px; line-height:1.7;">
+          Organizes workflows, documentation, file systems, SOPs, and project tracking
+          so your business runs with more clarity.
+        </p>
+      </div>
+
+      <!-- Automation -->
+      <div class="rounded-2xl p-7 border text-center" style="background:#F8FAFC; border-color:#D1D5DB;">
+        <div class="rounded-full flex items-center justify-center mx-auto font-bold text-white"
+             style="width:72px; height:72px; background:linear-gradient(135deg,#2D5BFF,#0B1120); font-size:22px; font-weight:700;">AI</div>
+        <p class="mt-4 font-semibold uppercase tracking-widest"
+           style="color:#2D5BFF; font-size:11px; letter-spacing:0.1em;">AI &amp; Automation</p>
+        <p class="mt-1 font-bold" style="color:#0B1120; font-size:17px; font-weight:700;">Automation Support</p>
+        <p class="mt-3 text-left leading-relaxed"
+           style="color:#475569; font-size:14px; line-height:1.7;">
+          Builds AI-assisted workflows, automation systems, CRM setups, and process improvements
+          that make the whole team faster.
+        </p>
+      </div>
+
+    </div>
+
+    <div class="text-center mt-12 fade-in">
+      <a href="#"
+         class="inline-flex items-center px-8 py-3 rounded-full font-semibold border-2"
+         style="color:#2D5BFF; border-color:#2D5BFF; font-size:15px; font-weight:600; background:transparent;"
+         onmouseover="this.style.background='#2D5BFF';this.style.color='white';"
+         onmouseout="this.style.background='transparent';this.style.color='#2D5BFF';">
+        View Full Team →
+      </a>
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════
+     SECTION 8 — PROJECTS
+════════════════════════════════════════════ -->
+<section id="projects" class="section-pad" style="background:#0B1120;">
+  <div class="max-w-7xl mx-auto px-6">
+
+    <div class="text-center mb-4 fade-in">
+      <span class="inline-block text-xs font-semibold uppercase mb-4"
+            style="color:#2D5BFF; letter-spacing:0.14em;">Proof of Work</span>
+      <h2 class="font-bold text-white"
+          style="font-size:clamp(24px,3.5vw,40px); font-weight:700;">
+        Work Built Across Digital Support, Websites &amp; Operations
+      </h2>
+      <p class="mt-4 mx-auto"
+         style="color:rgba(255,255,255,0.6); font-size:17px; max-width:520px; line-height:1.7;">
+        A growing collection of websites, systems, creative work, and operational projects.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-14 fade-in">
+
+      <div class="rounded-2xl overflow-hidden" style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1);">
+        <div class="flex items-center justify-center" style="height:180px; background:rgba(255,255,255,0.08);">
+          <span style="color:rgba(255,255,255,0.3); font-size:13px;">Project Preview</span>
+        </div>
+        <div class="p-6">
+          <span class="inline-block text-xs font-semibold uppercase tracking-widest px-2.5 py-1 rounded-full mb-3"
+                style="background:rgba(45,91,255,0.2); color:#2D5BFF; letter-spacing:0.08em;">Websites</span>
+          <h3 class="font-bold text-white" style="font-size:17px; font-weight:700;">Website Builds</h3>
+          <p class="mt-2" style="color:rgba(255,255,255,0.55); font-size:14px; line-height:1.65;">
+            WordPress, Shopify, landing pages, and full website redesigns built for clients across multiple industries.
+          </p>
+        </div>
+      </div>
+
+      <div class="rounded-2xl overflow-hidden" style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1);">
+        <div class="flex items-center justify-center" style="height:180px; background:rgba(255,255,255,0.08);">
+          <span style="color:rgba(255,255,255,0.3); font-size:13px;">Project Preview</span>
+        </div>
+        <div class="p-6">
+          <span class="inline-block text-xs font-semibold uppercase tracking-widest px-2.5 py-1 rounded-full mb-3"
+                style="background:rgba(45,91,255,0.2); color:#2D5BFF; letter-spacing:0.08em;">Marketing</span>
+          <h3 class="font-bold text-white" style="font-size:17px; font-weight:700;">Marketing Support</h3>
+          <p class="mt-2" style="color:rgba(255,255,255,0.55); font-size:14px; line-height:1.65;">
+            Social media systems, content calendars, campaign execution, and outreach support across service-based businesses.
+          </p>
+        </div>
+      </div>
+
+      <div class="rounded-2xl overflow-hidden" style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1);">
+        <div class="flex items-center justify-center" style="height:180px; background:rgba(255,255,255,0.08);">
+          <span style="color:rgba(255,255,255,0.3); font-size:13px;">Project Preview</span>
+        </div>
+        <div class="p-6">
+          <span class="inline-block text-xs font-semibold uppercase tracking-widest px-2.5 py-1 rounded-full mb-3"
+                style="background:rgba(45,91,255,0.2); color:#2D5BFF; letter-spacing:0.08em;">Creative</span>
+          <h3 class="font-bold text-white" style="font-size:17px; font-weight:700;">Creative Assets</h3>
+          <p class="mt-2" style="color:rgba(255,255,255,0.55); font-size:14px; line-height:1.65;">
+            Graphics, short-form videos, brand visuals, and ad creatives developed for client campaigns and brand presence.
+          </p>
+        </div>
+      </div>
+
+      <div class="rounded-2xl overflow-hidden" style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1);">
+        <div class="flex items-center justify-center" style="height:180px; background:rgba(255,255,255,0.08);">
+          <span style="color:rgba(255,255,255,0.3); font-size:13px;">Project Preview</span>
+        </div>
+        <div class="p-6">
+          <span class="inline-block text-xs font-semibold uppercase tracking-widest px-2.5 py-1 rounded-full mb-3"
+                style="background:rgba(45,91,255,0.2); color:#2D5BFF; letter-spacing:0.08em;">Operations</span>
+          <h3 class="font-bold text-white" style="font-size:17px; font-weight:700;">Operations Systems</h3>
+          <p class="mt-2" style="color:rgba(255,255,255,0.55); font-size:14px; line-height:1.65;">
+            SOPs, folder structures, task management systems, and onboarding workflows built for internal business operations.
+          </p>
+        </div>
+      </div>
+
+      <div class="rounded-2xl overflow-hidden" style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1);">
+        <div class="flex items-center justify-center" style="height:180px; background:rgba(255,255,255,0.08);">
+          <span style="color:rgba(255,255,255,0.3); font-size:13px;">Project Preview</span>
+        </div>
+        <div class="p-6">
+          <span class="inline-block text-xs font-semibold uppercase tracking-widest px-2.5 py-1 rounded-full mb-3"
+                style="background:rgba(45,91,255,0.2); color:#2D5BFF; letter-spacing:0.08em;">AI &amp; Automation</span>
+          <h3 class="font-bold text-white" style="font-size:17px; font-weight:700;">AI &amp; Automation</h3>
+          <p class="mt-2" style="color:rgba(255,255,255,0.55); font-size:14px; line-height:1.65;">
+            AI-assisted workflows, CRM automation, client onboarding systems, and internal process improvements.
+          </p>
+        </div>
+      </div>
+
+      <div class="rounded-2xl overflow-hidden" style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1);">
+        <div class="flex items-center justify-center" style="height:180px; background:rgba(255,255,255,0.08);">
+          <span style="color:rgba(255,255,255,0.3); font-size:13px;">Project Preview</span>
+        </div>
+        <div class="p-6">
+          <span class="inline-block text-xs font-semibold uppercase tracking-widest px-2.5 py-1 rounded-full mb-3"
+                style="background:rgba(45,91,255,0.2); color:#2D5BFF; letter-spacing:0.08em;">E-Commerce</span>
+          <h3 class="font-bold text-white" style="font-size:17px; font-weight:700;">E-Commerce Support</h3>
+          <p class="mt-2" style="color:rgba(255,255,255,0.55); font-size:14px; line-height:1.65;">
+            Shopify store builds, product pages, collections, and store organization for e-commerce business owners.
+          </p>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="text-center mt-12 fade-in">
+      <a href="#"
+         class="inline-flex items-center px-8 py-3 rounded-full font-semibold text-white"
+         style="background:#2D5BFF; font-size:15px; font-weight:600;">
+        View More Projects →
+      </a>
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════
+     SECTION 9 — REVIEWS
+════════════════════════════════════════════ -->
+<section id="reviews" class="section-pad" style="background:#F8FAFC;">
+  <div class="max-w-7xl mx-auto px-6">
+
+    <div class="text-center mb-14 fade-in">
+      <span class="inline-block text-xs font-semibold uppercase mb-4"
+            style="color:#2D5BFF; letter-spacing:0.14em;">Client Reviews</span>
+      <h2 class="font-bold"
+          style="font-size:clamp(28px,3.5vw,40px); font-weight:700; color:#0B1120; line-height:1.2;">
+        Clients Should Feel Supported —<br>Not Just Served
+      </h2>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 fade-in">
+
+      <div class="rounded-2xl p-9 border bg-white" style="border-color:#D1D5DB;">
+        <div style="color:#F59E0B; font-size:16px; letter-spacing:3px; margin-bottom:20px;">★★★★★</div>
+        <p class="font-medium italic leading-relaxed"
+           style="color:#0B1120; font-size:17px; line-height:1.75; font-weight:500;">
+          "BBC didn't just assign someone to help — they helped us understand what we needed to build first.
+          The founder was involved from day one."
+        </p>
+        <div class="mt-6">
+          <p class="font-semibold text-sm" style="color:#475569; font-weight:600;">Business Owner</p>
+          <p style="color:rgba(71,85,105,0.6); font-size:13px;">Home Services</p>
+        </div>
+      </div>
+
+      <div class="rounded-2xl p-9 border bg-white" style="border-color:#D1D5DB;">
+        <div style="color:#F59E0B; font-size:16px; letter-spacing:3px; margin-bottom:20px;">★★★★★</div>
+        <p class="font-medium italic leading-relaxed"
+           style="color:#0B1120; font-size:17px; line-height:1.75; font-weight:500;">
+          "The team was organized, responsive, and easy to work with. We finally had a system that made sense
+          for our business."
+        </p>
+        <div class="mt-6">
+          <p class="font-semibold text-sm" style="color:#475569; font-weight:600;">Business Owner</p>
+          <p style="color:rgba(71,85,105,0.6); font-size:13px;">E-Commerce</p>
+        </div>
+      </div>
+
+      <div class="rounded-2xl p-9 border bg-white" style="border-color:#D1D5DB;">
+        <div style="color:#F59E0B; font-size:16px; letter-spacing:3px; margin-bottom:20px;">★★★★★</div>
+        <p class="font-medium italic leading-relaxed"
+           style="color:#0B1120; font-size:17px; line-height:1.75; font-weight:500;">
+          "I was nervous about handing over digital operations, but BBC built everything out clearly and
+          made the whole transition smooth."
+        </p>
+        <div class="mt-6">
+          <p class="font-semibold text-sm" style="color:#475569; font-weight:600;">Business Owner</p>
+          <p style="color:rgba(71,85,105,0.6); font-size:13px;">Real Estate</p>
+        </div>
+      </div>
+
+      <div class="rounded-2xl p-9 border bg-white" style="border-color:#D1D5DB;">
+        <div style="color:#F59E0B; font-size:16px; letter-spacing:3px; margin-bottom:20px;">★★★★★</div>
+        <p class="font-medium italic leading-relaxed"
+           style="color:#0B1120; font-size:17px; line-height:1.75; font-weight:500;">
+          "What surprised me most was how involved the founder stayed after the setup.
+          We still have regular strategy calls."
+        </p>
+        <div class="mt-6">
+          <p class="font-semibold text-sm" style="color:#475569; font-weight:600;">Business Owner</p>
+          <p style="color:rgba(71,85,105,0.6); font-size:13px;">Consulting</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════
+     SECTION 10 — BLOG / INSIGHTS
+════════════════════════════════════════════ -->
+<section id="insights" class="section-pad" style="background:white;">
+  <div class="max-w-7xl mx-auto px-6">
+
+    <div class="text-center mb-4 fade-in">
+      <span class="inline-block text-xs font-semibold uppercase mb-4"
+            style="color:#2D5BFF; letter-spacing:0.14em;">Insights</span>
+      <h2 class="font-bold"
+          style="font-size:clamp(28px,3.5vw,40px); font-weight:700; color:#0B1120;">
+        Insights, Systems &amp; Operational Thinking
+      </h2>
+      <p class="mt-4 mx-auto" style="color:#475569; font-size:17px; max-width:520px; line-height:1.7;">
+        Practical thinking on managed support, business operations, and building systems that scale.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-14 fade-in">
+
+      <div class="blog-card rounded-2xl overflow-hidden border bg-white" style="border-color:#D1D5DB;">
+        <div class="flex items-center justify-center" style="height:200px; background:#0B1120;">
+          <span style="color:rgba(255,255,255,0.2); font-size:13px;">Article Image</span>
+        </div>
+        <div class="p-7">
+          <span class="inline-block text-xs font-semibold uppercase tracking-widest px-2.5 py-1 rounded-full mb-3.5"
+                style="background:rgba(45,91,255,0.08); color:#2D5BFF; letter-spacing:0.08em;">Operations &amp; Support</span>
+          <h3 class="font-bold leading-snug"
+              style="color:#0B1120; font-size:18px; line-height:1.4; font-weight:700;">
+            How Managed VA Support Helps Business Owners Stay Organized
+          </h3>
+          <p class="mt-2.5 leading-relaxed"
+             style="color:#475569; font-size:14px; line-height:1.7;">
+            Why having a managed support system — not just extra help — changes how your business operates.
+          </p>
+          <a href="#" class="block mt-5 font-semibold" style="color:#2D5BFF; font-weight:600; font-size:14px;">Read More →</a>
+        </div>
+      </div>
+
+      <div class="blog-card rounded-2xl overflow-hidden border bg-white" style="border-color:#D1D5DB;">
+        <div class="flex items-center justify-center" style="height:200px; background:#0B1120;">
+          <span style="color:rgba(255,255,255,0.2); font-size:13px;">Article Image</span>
+        </div>
+        <div class="p-7">
+          <span class="inline-block text-xs font-semibold uppercase tracking-widest px-2.5 py-1 rounded-full mb-3.5"
+                style="background:rgba(45,91,255,0.08); color:#2D5BFF; letter-spacing:0.08em;">Strategy</span>
+          <h3 class="font-bold leading-snug"
+              style="color:#0B1120; font-size:18px; line-height:1.4; font-weight:700;">
+            Why Founder-Led Setup Makes Virtual Assistance More Effective
+          </h3>
+          <p class="mt-2.5 leading-relaxed"
+             style="color:#475569; font-size:14px; line-height:1.7;">
+            The difference between being matched and being guided through the process from the very start.
+          </p>
+          <a href="#" class="block mt-5 font-semibold" style="color:#2D5BFF; font-weight:600; font-size:14px;">Read More →</a>
+        </div>
+      </div>
+
+      <div class="blog-card rounded-2xl overflow-hidden border bg-white" style="border-color:#D1D5DB;">
+        <div class="flex items-center justify-center" style="height:200px; background:#0B1120;">
+          <span style="color:rgba(255,255,255,0.2); font-size:13px;">Article Image</span>
+        </div>
+        <div class="p-7">
+          <span class="inline-block text-xs font-semibold uppercase tracking-widest px-2.5 py-1 rounded-full mb-3.5"
+                style="background:rgba(45,91,255,0.08); color:#2D5BFF; letter-spacing:0.08em;">Systems &amp; AI</span>
+          <h3 class="font-bold leading-snug"
+              style="color:#0B1120; font-size:18px; line-height:1.4; font-weight:700;">
+            How SOPs, Workflows &amp; AI Systems Improve Client Support
+          </h3>
+          <p class="mt-2.5 leading-relaxed"
+             style="color:#475569; font-size:14px; line-height:1.7;">
+            How BBC builds operational frameworks that make ongoing support faster and more consistent.
+          </p>
+          <a href="#" class="block mt-5 font-semibold" style="color:#2D5BFF; font-weight:600; font-size:14px;">Read More →</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════
+     SECTION 11 — KNOWLEDGE LIBRARY
+════════════════════════════════════════════ -->
+<section id="library" style="background:#F8FAFC; padding:80px 0;">
+  <div class="max-w-7xl mx-auto px-6">
+
+    <div class="text-center mb-10 fade-in">
+      <span class="inline-block text-xs font-semibold uppercase mb-4"
+            style="color:#2D5BFF; letter-spacing:0.14em;">Internal Knowledge</span>
+      <h2 class="font-bold"
+          style="font-size:clamp(24px,3vw,32px); font-weight:700; color:#0B1120;">
+        A Growing Operational Library Behind the Work
+      </h2>
+      <p class="mt-4 mx-auto"
+         style="color:#475569; font-size:16px; max-width:600px; line-height:1.75;">
+        BBC continues building an internal library of strategies, skills, techniques, workflows, SOPs,
+        AI systems, and reusable operational frameworks — ensuring every client receives consistent,
+        improving support over time.
+      </p>
+    </div>
+
+    <div class="flex flex-col sm:flex-row justify-center gap-6 max-w-2xl mx-auto fade-in">
+
+      <div class="flex-1 rounded-xl p-6 text-center border bg-white" style="border-color:#D1D5DB;">
+        <div class="w-8 h-8 rounded-lg flex items-center justify-center text-white font-bold text-sm mx-auto"
+             style="background:#2D5BFF;">S</div>
+        <p class="font-bold mt-3 mb-1" style="color:#0B1120; font-size:16px; font-weight:700;">Strategy Library</p>
+        <p class="text-xs" style="color:#475569;">Frameworks and approaches.</p>
+      </div>
+
+      <div class="flex-1 rounded-xl p-6 text-center border bg-white" style="border-color:#D1D5DB;">
+        <div class="w-8 h-8 rounded-lg flex items-center justify-center text-white font-bold text-sm mx-auto"
+             style="background:#2D5BFF;">K</div>
+        <p class="font-bold mt-3 mb-1" style="color:#0B1120; font-size:16px; font-weight:700;">Skills Library</p>
+        <p class="text-xs" style="color:#475569;">Capabilities and techniques.</p>
+      </div>
+
+      <div class="flex-1 rounded-xl p-6 text-center border bg-white" style="border-color:#D1D5DB;">
+        <div class="w-8 h-8 rounded-lg flex items-center justify-center text-white font-bold text-sm mx-auto"
+             style="background:#2D5BFF;">O</div>
+        <p class="font-bold mt-3 mb-1" style="color:#0B1120; font-size:16px; font-weight:700;">Operational Systems</p>
+        <p class="text-xs" style="color:#475569;">Workflows and SOPs.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════
+     SECTION 12 — FINAL CTA
+════════════════════════════════════════════ -->
+<section id="cta" class="text-center" style="background:#0B1120; padding:120px 24px;">
+  <div class="max-w-3xl mx-auto fade-in">
+    <h2 class="font-bold text-white mx-auto"
+        style="font-size:clamp(28px,4vw,44px); font-weight:700; line-height:1.2; max-width:700px;">
+      Ready to Get Support That's Built Around Your Business?
+    </h2>
+    <p class="mx-auto mt-5"
+       style="color:rgba(255,255,255,0.65); font-size:18px; max-width:520px; line-height:1.7;">
+      Book a call — we'll learn about your business, identify the support you need,
+      and see if BBC is the right fit.
+    </p>
+    <div class="mt-10">
+      <a href="#"
+         class="inline-flex items-center px-10 py-5 rounded-full text-white font-bold"
+         style="background:#2D5BFF; font-size:18px; font-weight:700;">
+        Book a Call
+      </a>
+    </div>
+    <p class="mt-4" style="font-size:14px; color:rgba(255,255,255,0.35);">
+      No pressure. Just a conversation.
+    </p>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════
+     FOOTER
+════════════════════════════════════════════ -->
+<footer id="contact"
+        style="background:#0B1120; border-top:1px solid rgba(255,255,255,0.08); padding:80px 0 40px;">
+  <div class="max-w-7xl mx-auto px-6">
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12">
+
+      <!-- Col 1: Brand -->
+      <div>
+        <div class="flex items-center gap-3">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 210" width="42" height="42"
+               style="color:white; flex-shrink:0;" aria-hidden="true">
+            <!-- Chimney -->
+            <rect x="38" y="6" width="13" height="62" rx="2" fill="currentColor"/>
+            <!-- Roof left -->
+            <line x1="100" y1="38" x2="6" y2="90" stroke="currentColor" stroke-width="9" stroke-linecap="round"/>
+            <!-- Roof right -->
+            <line x1="100" y1="38" x2="194" y2="90" stroke="currentColor" stroke-width="9" stroke-linecap="round"/>
+            <!-- Monitor frame -->
+            <rect x="24" y="90" width="152" height="86" rx="6" fill="none" stroke="currentColor" stroke-width="9"/>
+            <!-- BBC text inside monitor -->
+            <text x="100" y="154" text-anchor="middle" font-size="46" font-weight="800"
+                  font-family="Georgia,'Times New Roman',serif" fill="currentColor">BBC</text>
+            <!-- Stand neck -->
+            <rect x="91" y="176" width="18" height="18" rx="2" fill="currentColor"/>
+            <!-- Stand base -->
+            <rect x="64" y="194" width="72" height="11" rx="5.5" fill="currentColor"/>
+          </svg>
+          <span class="font-bold text-white" style="font-size:16px; font-weight:700;">Balay ni Bruno &amp; Co.</span>
+        </div>
+        <p class="mt-4 leading-relaxed"
+           style="color:rgba(255,255,255,0.5); font-size:14px; line-height:1.7; max-width:240px;">
+          Managed virtual operations support for business owners who need reliable help with marketing,
+          websites, content, automation, and digital operations.
+        </p>
+        <div class="flex gap-2 mt-5">
+          <div class="w-7 h-7 rounded-md" style="border:1px solid rgba(255,255,255,0.15);"></div>
+          <div class="w-7 h-7 rounded-md" style="border:1px solid rgba(255,255,255,0.15);"></div>
+          <div class="w-7 h-7 rounded-md" style="border:1px solid rgba(255,255,255,0.15);"></div>
+        </div>
+      </div>
+
+      <!-- Col 2: How We Help -->
+      <div>
+        <p class="font-semibold uppercase tracking-widest mb-5"
+           style="color:rgba(255,255,255,0.4); font-size:12px; letter-spacing:0.1em;">How We Help</p>
+        <ul>
+          <li><a href="how-we-help.html#marketing"  class="hover:text-white transition-colors" style="color:rgba(255,255,255,0.65); font-size:14px; line-height:2.2; display:block;">Marketing Support</a></li>
+          <li><a href="how-we-help.html#content"    class="hover:text-white transition-colors" style="color:rgba(255,255,255,0.65); font-size:14px; line-height:2.2; display:block;">Content &amp; Creative</a></li>
+          <li><a href="how-we-help.html#websites"   class="hover:text-white transition-colors" style="color:rgba(255,255,255,0.65); font-size:14px; line-height:2.2; display:block;">Websites &amp; Digital</a></li>
+          <li><a href="how-we-help.html#email"      class="hover:text-white transition-colors" style="color:rgba(255,255,255,0.65); font-size:14px; line-height:2.2; display:block;">Email, CRM &amp; Outreach</a></li>
+          <li><a href="how-we-help.html#automation" class="hover:text-white transition-colors" style="color:rgba(255,255,255,0.65); font-size:14px; line-height:2.2; display:block;">AI &amp; Automation</a></li>
+          <li><a href="how-we-help.html#seo"        class="hover:text-white transition-colors" style="color:rgba(255,255,255,0.65); font-size:14px; line-height:2.2; display:block;">SEO &amp; Visibility</a></li>
+          <li><a href="how-we-help.html#operations" class="hover:text-white transition-colors" style="color:rgba(255,255,255,0.65); font-size:14px; line-height:2.2; display:block;">Operations &amp; Admin</a></li>
+        </ul>
+      </div>
+
+      <!-- Col 3: Company -->
+      <div>
+        <p class="font-semibold uppercase tracking-widest mb-5"
+           style="color:rgba(255,255,255,0.4); font-size:12px; letter-spacing:0.1em;">Company</p>
+        <ul>
+          <li><a href="index.html"         class="hover:text-white transition-colors" style="color:rgba(255,255,255,0.65); font-size:14px; line-height:2.2; display:block;">Home</a></li>
+          <li><a href="about.html"         class="hover:text-white transition-colors" style="color:rgba(255,255,255,0.65); font-size:14px; line-height:2.2; display:block;">Our Story</a></li>
+          <li><a href="how-it-works.html"  class="hover:text-white transition-colors" style="color:rgba(255,255,255,0.65); font-size:14px; line-height:2.2; display:block;">How It Works</a></li>
+          <li><a href="how-we-help.html"   class="hover:text-white transition-colors" style="color:rgba(255,255,255,0.65); font-size:14px; line-height:2.2; display:block;">How We Help</a></li>
+          <li><a href="our-team.html"      class="hover:text-white transition-colors" style="color:rgba(255,255,255,0.65); font-size:14px; line-height:2.2; display:block;">Our Team</a></li>
+          <li><a href="our-work.html"       class="hover:text-white transition-colors" style="color:rgba(255,255,255,0.65); font-size:14px; line-height:2.2; display:block;">Our Work</a></li>
+          <li><a href="#reviews"           class="hover:text-white transition-colors" style="color:rgba(255,255,255,0.65); font-size:14px; line-height:2.2; display:block;">Reviews</a></li>
+          <li><a href="insights.html"          class="hover:text-white transition-colors" style="color:rgba(255,255,255,0.65); font-size:14px; line-height:2.2; display:block;">Insights</a></li>
+          <li><a href="contact.html"           class="hover:text-white transition-colors" style="color:rgba(255,255,255,0.65); font-size:14px; line-height:2.2; display:block;">Contact</a></li>
+        </ul>
+      </div>
+
+      <!-- Col 4: Contact -->
+      <div>
+        <p class="font-semibold uppercase tracking-widest mb-5"
+           style="color:rgba(255,255,255,0.4); font-size:12px; letter-spacing:0.1em;">Contact</p>
+        <p style="color:rgba(255,255,255,0.65); font-size:14px; line-height:2.2;">hello@balaynibruno.com</p>
+        <p style="color:rgba(255,255,255,0.65); font-size:14px; line-height:2.2;">+1 (000) 000-0000</p>
+        <p class="mt-1" style="color:rgba(255,255,255,0.65); font-size:14px; line-height:1.7;">
+          Serving clients in the US, UK, and internationally.
+        </p>
+        <a href="#cta" class="block mt-4 font-semibold" style="color:#2D5BFF; font-size:14px; font-weight:600;">
+          Book a Call →
+        </a>
+      </div>
+
+    </div>
+
+    <!-- Bottom bar -->
+    <div class="flex flex-col sm:flex-row items-center justify-between gap-4"
+         style="border-top:1px solid rgba(255,255,255,0.08); margin-top:60px; padding-top:28px;">
+      <p style="color:rgba(255,255,255,0.35); font-size:13px;">
+        © 2026 Balay ni Bruno &amp; Co. All rights reserved.
+      </p>
+      <p style="color:rgba(255,255,255,0.35); font-size:13px;">
+        <a href="#" class="hover:text-white transition-colors" style="color:rgba(255,255,255,0.35);">Privacy Policy</a>
+        <span style="margin:0 8px;">·</span>
+        <a href="#" class="hover:text-white transition-colors" style="color:rgba(255,255,255,0.35);">Terms of Service</a>
+      </p>
+    </div>
+
+  </div>
+</footer>
+
+
+<!-- ════════════════════════════════════════════
+     JAVASCRIPT
+════════════════════════════════════════════ -->
+<script>
+  // ── Hamburger menu toggle ────────────────────
+  const hamburger = document.getElementById('hamburger');
+  const mobileNav = document.getElementById('mobile-nav');
+  const hb1 = document.getElementById('hb1');
+  const hb2 = document.getElementById('hb2');
+  const hb3 = document.getElementById('hb3');
+
+  hamburger.addEventListener('click', () => {
+    const isOpen = mobileNav.classList.toggle('open');
+    if (isOpen) {
+      hb1.style.transform = 'translateY(8px) rotate(45deg)';
+      hb2.style.opacity   = '0';
+      hb3.style.transform = 'translateY(-8px) rotate(-45deg)';
+    } else {
+      hb1.style.transform = '';
+      hb2.style.opacity   = '';
+      hb3.style.transform = '';
+    }
+  });
+
+  // Close mobile nav on link click
+  mobileNav.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      mobileNav.classList.remove('open');
+      hb1.style.transform = '';
+      hb2.style.opacity   = '';
+      hb3.style.transform = '';
+    });
+  });
+
+  // ── Sticky header: add shadow after 60px scroll ──
+  const siteHeader = document.getElementById('site-header');
+  window.addEventListener('scroll', () => {
+    siteHeader.classList.toggle('scrolled', window.scrollY > 60);
+  }, { passive: true });
+
+  // ── Scroll fade-in via IntersectionObserver ──
+  const fadeEls = document.querySelectorAll('.fade-in');
+  const io = new IntersectionObserver(
+    (entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          io.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }
+  );
+  fadeEls.forEach(el => io.observe(el));
+
+  // ── Smooth scroll for anchor links ──────────
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        const offset = siteHeader.offsetHeight + 8;
+        const top = target.getBoundingClientRect().top + window.scrollY - offset;
+        window.scrollTo({ top, behavior: 'smooth' });
+      }
+    });
+  });
+</script>
+
+</body>
+</html>

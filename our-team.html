@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Our Team — Balay ni Bruno &amp; Co.</title>
+  <meta name="description" content="Meet the people behind Balay ni Bruno &amp; Co. — a small, founder-led team chosen with care, known by name, and committed to growing with every client." />
+  <link rel="canonical" href="https://balaynibruno.co/our-team.html" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Balay ni Bruno &amp; Co." />
+  <meta property="og:title" content="Our Team — Balay ni Bruno &amp; Co." />
+  <meta property="og:description" content="Meet the people behind Balay ni Bruno &amp; Co. — a small, dedicated team chosen with care." />
+  <meta property="og:url" content="https://balaynibruno.co/our-team.html" />
+  <meta property="og:image" content="https://balaynibruno.co/og-image.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Lora:ital,wght@0,400;0,500;1,400;1,500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --deep-blue:   #1F3557;
+      --mid-blue:    #4B6FA5;
+      --warm-blue:   #6D8FC7;
+      --light-blue:  #A8C0DC;
+      --pale-blue:   #DDE8F2;
+      --bg-primary:  #F5F1EA;
+      --bg-section:  #EDE8DF;
+      --bg-card:     #FDFAF6;
+      --bg-card-alt: #FAF6EF;
+      --bg-dark:     #1C2E47;
+      --bg-footer:   #172540;
+      --neutral-100: #E8E2D6;
+      --neutral-200: #D5CEC3;
+      --neutral-300: #B8B1A6;
+      --text-ink:    #2A3040;
+      --text-body:   #4E5666;
+      --text-muted:  #888FA0;
+      --text-warm:   #F5F1EA;
+      --gold:        #B8923E;
+      --gold-pale:   #E6CFA0;
+      --gold-warm:   #D4A84B;
+      --sage:        #4E9E74;
+      --font-display:'Playfair Display', Georgia, serif;
+      --font-body:   'Lora', Georgia, serif;
+      --font-ui:     'DM Sans', system-ui, sans-serif;
+      --max-width:   1200px;
+      --radius-sm:   8px;
+      --radius:      16px;
+      --radius-lg:   24px;
+      --radius-xl:   32px;
+      --shadow-xs:   0 1px 6px  rgba(85,60,35,0.055);
+      --shadow-sm:   0 3px 18px rgba(85,60,35,0.08);
+      --shadow-md:   0 7px 36px rgba(85,60,35,0.11);
+      --shadow-lg:   0 14px 56px rgba(85,60,35,0.14);
+      --border-card: 1px solid rgba(85,60,35,0.09);
+      --border-warm: 1px solid rgba(85,60,35,0.12);
+      --border-dark: 1px solid rgba(255,255,255,0.07);
+      --s1:0.5rem; --s2:1rem; --s3:1.5rem; --s4:2.5rem; --s5:4rem; --s6:6rem; --s7:9rem;
+    }
+
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body {
+      font-family:var(--font-body);
+      color:var(--text-ink);
+      background:var(--bg-primary);
+      line-height:1.6;
+      -webkit-font-smoothing:antialiased;
+      overflow-x:hidden;
+    }
+    body::after {
+      content:'';
+      position:fixed; inset:0;
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23n)' opacity='0.026'/%3E%3C/svg%3E");
+      pointer-events:none; z-index:9999; mix-blend-mode:multiply;
+    }
+
+    h1,h2,h3,h4 { font-family:var(--font-display); line-height:1.22; color:var(--deep-blue); }
+    h1 { font-size:clamp(2.2rem,4.8vw,3.6rem); line-height:1.16; font-weight:700; }
+    h2 { font-size:clamp(1.7rem,3vw,2.6rem); line-height:1.22; font-weight:600; }
+    h3 { font-size:clamp(1.05rem,1.6vw,1.3rem); font-weight:600; }
+    p  { font-family:var(--font-body); font-size:1rem; line-height:1.87; color:var(--text-body); }
+    a  { text-decoration:none; }
+
+    .eyebrow {
+      display:block; font-family:var(--font-ui);
+      font-size:0.68rem; font-weight:600;
+      letter-spacing:0.17em; text-transform:uppercase;
+      color:var(--warm-blue); margin-bottom:var(--s2);
+    }
+    .eyebrow--gold { color:var(--gold); }
+    .eyebrow--pale { color:rgba(245,241,234,0.5); }
+
+    .container { max-width:var(--max-width); margin:0 auto; padding:0 var(--s4); }
+    .text-center { text-align:center; }
+
+    .divider-bar {
+      width:44px; height:2.5px;
+      background:linear-gradient(90deg,var(--gold),var(--warm-blue));
+      border-radius:2px; margin:var(--s3) auto; opacity:0.8;
+    }
+    .divider-bar--left { margin-left:0; }
+
+    .fade-in { opacity:0; transform:translateY(22px); transition:opacity 0.65s ease,transform 0.65s ease; }
+    .fade-in.visible { opacity:1; transform:translateY(0); }
+
+    .btn {
+      display:inline-flex; align-items:center; gap:0.45rem;
+      padding:0.88rem 2rem; border-radius:100px;
+      font-family:var(--font-ui); font-size:0.86rem; font-weight:600;
+      letter-spacing:0.02em; cursor:pointer;
+      transition:all 0.3s ease; border:1.5px solid transparent;
+      white-space:nowrap;
+    }
+    .btn-gold { background:var(--gold); color:#fff; font-weight:700; }
+    .btn-gold:hover { background:var(--gold-warm); transform:translateY(-2px); box-shadow:0 10px 32px rgba(184,146,62,0.35); }
+    .btn-ghost { background:transparent; color:var(--text-warm); border-color:rgba(245,241,234,0.28); }
+    .btn-ghost:hover { background:rgba(245,241,234,0.08); border-color:rgba(245,241,234,0.55); }
+    .btn-outline-dark { background:transparent; color:var(--deep-blue); border-color:rgba(75,111,165,0.42); }
+    .btn-outline-dark:hover { background:var(--deep-blue); color:var(--text-warm); }
+    .btn-sm { padding:0.62rem 1.35rem; font-size:0.78rem; }
+
+    /* ── Header ── */
+    .site-header {
+      position:fixed; top:0; left:0; right:0; z-index:200;
+      background:rgba(245,241,234,0.94);
+      backdrop-filter:blur(20px) saturate(1.2);
+      -webkit-backdrop-filter:blur(20px) saturate(1.2);
+      border-bottom:var(--border-warm);
+      transition:box-shadow 0.3s ease;
+    }
+    .site-header.scrolled { box-shadow:var(--shadow-sm); }
+    .header__inner {
+      max-width:var(--max-width); margin:0 auto; padding:0 var(--s4);
+      height:68px; display:flex; align-items:center;
+      justify-content:space-between; gap:var(--s3);
+    }
+    .header__logo { display:flex; flex-direction:column; gap:3px; }
+    .header__logo-name { font-family:var(--font-display); font-size:1.05rem; font-weight:700; color:var(--deep-blue); line-height:1; letter-spacing:-0.01em; }
+    .header__logo-sub { font-family:var(--font-ui); font-size:0.54rem; font-weight:600; letter-spacing:0.14em; text-transform:uppercase; color:var(--warm-blue); opacity:0.8; }
+    .header__nav { display:flex; align-items:center; gap:1.5rem; list-style:none; }
+    .header__nav a { font-family:var(--font-ui); font-size:0.78rem; font-weight:500; color:var(--text-body); transition:color 0.2s; white-space:nowrap; }
+    .header__nav a:hover,.header__nav a.active { color:var(--deep-blue); font-weight:600; }
+    .header__cta { display:flex; align-items:center; gap:0.9rem; flex-shrink:0; }
+    .hamburger { display:none; flex-direction:column; gap:5px; cursor:pointer; background:none; border:none; padding:8px; }
+    .hamburger span { display:block; width:20px; height:2px; background:var(--text-ink); border-radius:2px; transition:all 0.25s ease; }
+    .mobile-menu { display:none; flex-direction:column; background:var(--bg-card); border-top:var(--border-warm); padding:1rem var(--s4) 1.5rem; }
+    .mobile-menu.open { display:flex; }
+    .mobile-menu a { font-family:var(--font-ui); font-size:0.9rem; font-weight:500; color:var(--text-body); padding:0.7rem 0; border-bottom:var(--border-card); transition:color 0.2s; }
+    .mobile-menu a:hover { color:var(--deep-blue); }
+    .mobile-menu a:last-of-type { border-bottom:none; }
+    .mobile-menu .mobile-cta { margin-top:1rem; }
+    @media (max-width:1024px) { .header__nav { display:none; } }
+    @media (max-width:768px) { .header__cta .btn-ghost { display:none; } .hamburger { display:flex; } }
+
+    /* ════════════════════════════════════════════
+       S1 — HERO  ·  --bg-dark
+    ════════════════════════════════════════════ */
+    .hero {
+      background:var(--bg-dark);
+      padding-top:68px;
+      position:relative; overflow:hidden;
+    }
+    .hero::before {
+      content:'';
+      position:absolute; top:-100px; right:-100px;
+      width:600px; height:600px;
+      background:radial-gradient(ellipse at center, rgba(184,146,62,0.07) 0%, transparent 65%);
+      pointer-events:none;
+    }
+    .hero__inner {
+      max-width:var(--max-width); margin:0 auto;
+      padding:var(--s6) var(--s4);
+      position:relative; z-index:1;
+    }
+    .hero__eyebrow {
+      display:inline-flex; align-items:center; gap:0.6rem;
+      font-family:var(--font-ui); font-size:0.68rem; font-weight:600;
+      letter-spacing:0.18em; text-transform:uppercase;
+      color:var(--gold-pale); margin-bottom:1.8rem;
+    }
+    .hero__eyebrow-dot { width:5px; height:5px; border-radius:50%; background:var(--gold); opacity:0.75; flex-shrink:0; }
+    .hero__title { font-family:var(--font-display); font-size:clamp(2.2rem,4.6vw,3.6rem); font-weight:700; color:#fff; line-height:1.15; margin-bottom:1.6rem; max-width:700px; }
+    .hero__title em { font-style:italic; color:var(--gold-pale); }
+    .hero__body { font-family:var(--font-body); font-size:1.06rem; line-height:1.88; color:rgba(245,241,234,0.68); max-width:580px; margin-bottom:3rem; }
+    .hero__stats {
+      display:inline-flex;
+      border:var(--border-dark);
+      border-radius:var(--radius-lg);
+      overflow:hidden;
+    }
+    .hero__stat {
+      padding:1.4rem 2.4rem;
+      text-align:center;
+      border-right:var(--border-dark);
+    }
+    .hero__stat:last-child { border-right:none; }
+    .hero__stat-num { font-family:var(--font-display); font-size:1.9rem; font-weight:700; color:var(--gold-pale); line-height:1; margin-bottom:0.3rem; }
+    .hero__stat-label { font-family:var(--font-ui); font-size:0.65rem; font-weight:500; color:rgba(245,241,234,0.42); letter-spacing:0.04em; }
+    @media (max-width:560px) { .hero__stats { flex-direction:column; width:100%; } .hero__stat { border-right:none; border-bottom:var(--border-dark); } .hero__stat:last-child { border-bottom:none; } }
+
+    /* ════════════════════════════════════════════
+       S2 — TEAM INTRO  ·  --bg-primary (cream)
+    ════════════════════════════════════════════ */
+    .intro-section { background:var(--bg-primary); padding:var(--s7) 0; }
+    .intro-grid { display:grid; grid-template-columns:1fr 1fr; gap:var(--s5); align-items:center; }
+    @media (max-width:860px) { .intro-grid { grid-template-columns:1fr; } }
+    .intro-copy h2 { margin-bottom:1.1rem; }
+    .intro-copy p  { margin-bottom:1rem; }
+    .intro-pillars { display:flex; flex-direction:column; gap:1rem; }
+    .intro-pillar {
+      display:flex; align-items:flex-start; gap:1rem;
+      padding:1.25rem 1.5rem;
+      background:var(--bg-card); border:var(--border-card);
+      border-radius:var(--radius); box-shadow:var(--shadow-xs);
+    }
+    .intro-pillar-dot {
+      width:8px; height:8px; border-radius:50%;
+      background:var(--gold); flex-shrink:0; margin-top:7px;
+    }
+    .intro-pillar-title { font-family:var(--font-ui); font-size:0.85rem; font-weight:600; color:var(--text-ink); margin-bottom:0.25rem; }
+    .intro-pillar-desc  { font-family:var(--font-body); font-size:0.85rem; line-height:1.7; color:var(--text-body); margin:0; }
+
+    /* ════════════════════════════════════════════
+       S3 — TEAM GRID  ·  --bg-section (deeper cream)
+    ════════════════════════════════════════════ */
+    .team-section { background:var(--bg-section); padding:var(--s7) 0; }
+    .section-header { max-width:680px; margin:0 auto var(--s5); text-align:center; }
+    .section-header h2 { margin-bottom:0.75rem; }
+
+    /* Featured founder card */
+    .team-featured {
+      background:var(--bg-card);
+      border:var(--border-warm);
+      border-radius:var(--radius-xl);
+      padding:var(--s4);
+      box-shadow:var(--shadow-md);
+      display:grid; grid-template-columns:auto 1fr;
+      gap:var(--s3);
+      align-items:center;
+      margin-bottom:var(--s3);
+      position:relative; overflow:hidden;
+      transition:transform 0.25s, box-shadow 0.25s;
+    }
+    .team-featured:hover { transform:translateY(-3px); box-shadow:var(--shadow-lg); }
+    .team-featured::before {
+      content:'';
+      position:absolute; top:-40px; right:-40px;
+      width:200px; height:200px;
+      background:radial-gradient(ellipse at center, rgba(184,146,62,0.07) 0%, transparent 65%);
+      pointer-events:none;
+    }
+    @media (max-width:640px) { .team-featured { grid-template-columns:1fr; } }
+    .team-avatar {
+      width:100px; height:100px; border-radius:50%;
+      display:flex; align-items:center; justify-content:center;
+      flex-shrink:0;
+      font-family:var(--font-display); font-size:2rem; font-weight:700;
+      color:var(--gold-pale);
+      box-shadow:var(--shadow-sm);
+    }
+    .team-avatar--bruno { background:linear-gradient(135deg, var(--deep-blue), var(--bg-dark)); border:3px solid rgba(184,146,62,0.3); }
+    .founder-pill {
+      display:inline-flex; align-items:center; gap:5px;
+      background:rgba(184,146,62,0.1); border:1px solid rgba(184,146,62,0.25);
+      border-radius:999px; padding:3px 12px;
+      font-family:var(--font-ui); font-size:0.62rem; font-weight:700;
+      letter-spacing:0.1em; text-transform:uppercase; color:var(--gold);
+      margin-bottom:0.6rem;
+    }
+    .team-featured-name { font-family:var(--font-display); font-size:1.45rem; font-weight:700; color:var(--deep-blue); margin-bottom:0.2rem; }
+    .team-featured-role { font-family:var(--font-ui); font-size:0.82rem; color:var(--text-muted); margin-bottom:0.85rem; }
+    .team-featured-desc { font-family:var(--font-body); font-size:0.9rem; line-height:1.8; color:var(--text-body); margin-bottom:1.1rem; }
+    .skill-tag {
+      display:inline-block;
+      background:rgba(31,53,87,0.07);
+      color:var(--deep-blue);
+      font-family:var(--font-ui); font-size:0.68rem; font-weight:600;
+      padding:4px 12px; border-radius:999px; margin:3px;
+    }
+
+    /* Team card grid */
+    .team-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:1.5rem; }
+    @media (max-width:700px) { .team-grid { grid-template-columns:1fr; } }
+    .team-card {
+      background:var(--bg-card);
+      border:var(--border-warm);
+      border-radius:var(--radius-lg);
+      padding:2rem;
+      display:flex; flex-direction:column;
+      box-shadow:var(--shadow-xs);
+      transition:transform 0.25s, box-shadow 0.25s;
+    }
+    .team-card:hover { transform:translateY(-3px); box-shadow:var(--shadow-md); }
+    .team-card-top { display:flex; align-items:center; gap:1rem; margin-bottom:1.1rem; }
+    .team-avatar-sm {
+      width:64px; height:64px; border-radius:50%;
+      display:flex; align-items:center; justify-content:center;
+      flex-shrink:0;
+      font-family:var(--font-display); font-size:1.15rem; font-weight:700;
+      color:var(--gold-pale);
+      box-shadow:var(--shadow-xs);
+    }
+    .team-card-name { font-family:var(--font-display); font-size:1.1rem; font-weight:600; color:var(--deep-blue); margin-bottom:0.15rem; }
+    .team-card-role { font-family:var(--font-ui); font-size:0.75rem; color:var(--text-muted); }
+    .team-card-desc { font-family:var(--font-body); font-size:0.875rem; line-height:1.8; color:var(--text-body); margin-bottom:1.1rem; flex:1; }
+    .team-card-skills { margin-bottom:1.1rem; }
+    .view-profile {
+      display:inline-flex; align-items:center; gap:0.4rem;
+      font-family:var(--font-ui); font-size:0.78rem; font-weight:600;
+      color:var(--deep-blue); border:1.5px solid rgba(75,111,165,0.35);
+      border-radius:999px; padding:0.55rem 1.2rem;
+      transition:all 0.25s;
+    }
+    .view-profile:hover { background:var(--deep-blue); color:#fff; border-color:var(--deep-blue); }
+
+    /* ════════════════════════════════════════════
+       S4 — HOW WE MATCH  ·  --bg-dark (contrast)
+    ════════════════════════════════════════════ */
+    .match-section {
+      background:var(--bg-dark);
+      padding:var(--s7) 0;
+      position:relative; overflow:hidden;
+    }
+    .match-section::before {
+      content:'';
+      position:absolute; bottom:-80px; right:-80px;
+      width:500px; height:500px;
+      background:radial-gradient(ellipse at center, rgba(109,143,199,0.06) 0%, transparent 65%);
+      pointer-events:none;
+    }
+    .match-grid { display:grid; grid-template-columns:1fr 1fr; gap:var(--s5); align-items:center; }
+    @media (max-width:880px) { .match-grid { grid-template-columns:1fr; } }
+    .match-copy h2 { color:#fff; margin-bottom:1.1rem; }
+    .match-copy p  { color:rgba(245,241,234,0.68); margin-bottom:1rem; }
+    .match-steps { display:flex; flex-direction:column; gap:1.25rem; }
+    .match-step {
+      display:flex; align-items:flex-start; gap:1.1rem;
+      padding:1.5rem;
+      background:rgba(255,255,255,0.03);
+      border:var(--border-dark);
+      border-radius:var(--radius);
+      transition:background 0.25s;
+    }
+    .match-step:hover { background:rgba(255,255,255,0.055); }
+    .match-num {
+      font-family:var(--font-display); font-size:1.4rem; font-weight:700;
+      color:var(--gold); line-height:1; flex-shrink:0;
+    }
+    .match-step-title { font-family:var(--font-ui); font-size:0.88rem; font-weight:600; color:rgba(245,241,234,0.9); margin-bottom:0.35rem; }
+    .match-step-desc  { font-family:var(--font-body); font-size:0.85rem; line-height:1.75; color:rgba(245,241,234,0.55); margin:0; }
+
+    /* ════════════════════════════════════════════
+       S5 — JOIN THE TEAM  ·  --bg-card (light)
+    ════════════════════════════════════════════ */
+    .join-section { background:var(--bg-card); padding:var(--s6) 0; }
+    .join-inner {
+      max-width:780px; margin:0 auto;
+      background:var(--bg-dark);
+      border-radius:var(--radius-xl);
+      padding:var(--s5) var(--s5);
+      text-align:center;
+      position:relative; overflow:hidden;
+    }
+    .join-inner::before {
+      content:'';
+      position:absolute; top:-60px; left:50%;
+      transform:translateX(-50%);
+      width:400px; height:400px;
+      background:radial-gradient(ellipse at center, rgba(184,146,62,0.07) 0%, transparent 65%);
+      pointer-events:none;
+    }
+    .join-title { font-family:var(--font-display); font-size:clamp(1.5rem,3vw,2rem); font-weight:600; color:#fff; margin-bottom:0.85rem; position:relative; z-index:1; }
+    .join-title em { font-style:italic; color:var(--gold-pale); }
+    .join-desc { font-family:var(--font-body); font-size:0.95rem; line-height:1.85; color:rgba(245,241,234,0.62); max-width:520px; margin:0 auto 2rem; position:relative; z-index:1; }
+    .join-actions { display:flex; flex-wrap:wrap; gap:1rem; justify-content:center; position:relative; z-index:1; }
+
+    /* ── Footer ── */
+    .site-footer { background:var(--bg-footer); border-top:var(--border-dark); padding:var(--s6) 0 var(--s4); }
+    .footer-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:var(--s4); }
+    @media (max-width:900px) { .footer-grid { grid-template-columns:repeat(2,1fr); } }
+    @media (max-width:540px) { .footer-grid { grid-template-columns:1fr; } }
+    .footer-brand-name { font-family:var(--font-display); font-size:1rem; font-weight:700; color:#fff; }
+    .footer-brand-desc { font-family:var(--font-body); font-size:0.82rem; line-height:1.75; color:rgba(245,241,234,0.45); margin-top:0.8rem; max-width:240px; }
+    .footer-col-label { font-family:var(--font-ui); font-size:0.62rem; font-weight:600; letter-spacing:0.14em; text-transform:uppercase; color:rgba(245,241,234,0.32); margin-bottom:1.1rem; }
+    .footer-link { display:block; font-family:var(--font-ui); font-size:0.83rem; color:rgba(245,241,234,0.6); line-height:2.15; transition:color 0.2s; }
+    .footer-link:hover { color:#fff; }
+    .footer-bottom { margin-top:var(--s4); padding-top:1.5rem; border-top:var(--border-dark); display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.75rem; }
+    .footer-copy { font-family:var(--font-ui); font-size:0.75rem; color:rgba(245,241,234,0.28); }
+  </style>
+</head>
+<body>
+
+<!-- ════════════════════════════════════════════
+     HEADER — "Our Team" active
+════════════════════════════════════════════ -->
+<header class="site-header" id="site-header">
+  <div class="header__inner">
+    <a href="index.html" class="header__logo">
+      <span class="header__logo-name">Balay ni Bruno &amp; Co.</span>
+      <span class="header__logo-sub">Operational Support Studio</span>
+    </a>
+    <nav>
+      <ul class="header__nav">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">Our Story</a></li>
+        <li><a href="how-it-works.html">How It Works</a></li>
+        <li><a href="how-we-help.html">How We Help</a></li>
+        <li><a href="our-team.html" class="active">Our Team</a></li>
+        <li><a href="our-work.html">Our Work</a></li>
+        <li><a href="insights.html">Insights</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+    <div class="header__cta">
+      <a href="contact.html" class="btn btn-ghost btn-sm">Start a Conversation</a>
+      <a href="contact.html" class="btn btn-gold btn-sm">Book a Call</a>
+    </div>
+    <button class="hamburger" id="hamburger" aria-label="Open menu">
+      <span id="hb1"></span>
+      <span id="hb2"></span>
+      <span id="hb3"></span>
+    </button>
+  </div>
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="index.html">Home</a>
+    <a href="about.html">Our Story</a>
+    <a href="how-it-works.html">How It Works</a>
+    <a href="how-we-help.html">How We Help</a>
+    <a href="our-team.html" style="color:var(--deep-blue);font-weight:600;">Our Team</a>
+    <a href="our-work.html">Our Work</a>
+    <a href="insights.html">Insights</a>
+    <a href="contact.html">Contact</a>
+    <a href="contact.html" class="btn btn-gold mobile-cta" style="text-align:center;justify-content:center;">Book a Call</a>
+  </div>
+</header>
+
+
+<!-- ════════════════════════════════════════════
+     S1 — HERO  ·  Dark
+════════════════════════════════════════════ -->
+<section class="hero">
+  <div class="hero__inner fade-in">
+
+    <div class="hero__eyebrow">
+      <span class="hero__eyebrow-dot"></span>
+      BBC Team
+    </div>
+
+    <h1 class="hero__title">
+      The People Behind<br>
+      <em>the Support</em>
+    </h1>
+
+    <p class="hero__body">
+      A small, dedicated team who know their clients by name. Not a roster of freelancers —
+      a group of trusted people Bruno trained, invested in, and brought together with a shared
+      commitment to doing good work for the people they support.
+    </p>
+
+    <div class="hero__stats">
+      <div class="hero__stat">
+        <p class="hero__stat-num">5</p>
+        <p class="hero__stat-label">Core Team Members</p>
+      </div>
+      <div class="hero__stat">
+        <p class="hero__stat-num">1</p>
+        <p class="hero__stat-label">Founder-Led System</p>
+      </div>
+      <div class="hero__stat">
+        <p class="hero__stat-num">100%</p>
+        <p class="hero__stat-label">Personally Matched</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════
+     S2 — TEAM INTRO  ·  Cream
+════════════════════════════════════════════ -->
+<section class="intro-section">
+  <div class="container">
+    <div class="intro-grid">
+
+      <div class="intro-copy fade-in">
+        <span class="eyebrow">How We're Different</span>
+        <h2>Every Person Here Was Chosen With Care</h2>
+        <div class="divider-bar divider-bar--left"></div>
+        <p>
+          BBC isn't a platform you log into and pick a VA from. Every person on this team was
+          personally brought in by Bruno — trained, trusted, and aligned with the values that
+          shape how we work. This is a family-built studio, and that shows in everything.
+        </p>
+        <p>
+          You'll notice we're a small team. That's intentional. We'd rather know our clients
+          deeply and do excellent work for a few than spread thin across many. When you work
+          with BBC, you're not getting a random hire. You're getting someone Bruno vouches for.
+        </p>
+      </div>
+
+      <div class="intro-pillars fade-in">
+        <div class="intro-pillar">
+          <div class="intro-pillar-dot"></div>
+          <div>
+            <p class="intro-pillar-title">Personally trained by the founder</p>
+            <p class="intro-pillar-desc">Every BBC team member was brought in through a real relationship — not a job board. Bruno trained each person himself and knows their work from the inside.</p>
+          </div>
+        </div>
+        <div class="intro-pillar">
+          <div class="intro-pillar-dot"></div>
+          <div>
+            <p class="intro-pillar-title">Matched to your specific needs</p>
+            <p class="intro-pillar-desc">Bruno personally decides which team member is right for each client based on the work, the industry, and the relationship. No guesswork. No random pairing.</p>
+          </div>
+        </div>
+        <div class="intro-pillar">
+          <div class="intro-pillar-dot"></div>
+          <div>
+            <p class="intro-pillar-title">Invested in long-term relationships</p>
+            <p class="intro-pillar-desc">The team doesn't rotate in and out. The same people stay with your business as it grows — learning it, understanding it, and building real continuity over time.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════
+     S3 — TEAM GRID  ·  Section (deeper cream)
+════════════════════════════════════════════ -->
+<section class="team-section">
+  <div class="container">
+
+    <div class="section-header fade-in">
+      <span class="eyebrow">Meet the Team</span>
+      <h2>The Five People Behind BBC</h2>
+      <div class="divider-bar"></div>
+      <p>Real people. Real roles. Each one chosen with care and invested in the long game.</p>
+    </div>
+
+    <!-- Featured: Bruno -->
+    <div class="team-featured fade-in">
+      <div class="team-avatar team-avatar--bruno">B</div>
+      <div>
+        <p class="founder-pill">&#9733; Founder &amp; Lead Strategist</p>
+        <p class="team-featured-name">Bruno</p>
+        <p class="team-featured-role">Founder &amp; Lead Strategist — leads every client engagement</p>
+        <p class="team-featured-desc">
+          Bruno is the heart of BBC. Every client relationship starts with him — a real conversation,
+          a personal assessment of what support you need, and a thoughtful decision about who on
+          the team is the right fit. He stays involved through onboarding, setup, and ongoing strategy,
+          making sure the work never drifts from what was promised. He built this studio by training
+          the people around him, and he leads it the same way — with care, with honesty, and with
+          a relationship-first approach that most agencies don't have the patience for.
+        </p>
+        <div style="margin-bottom:1.1rem;">
+          <span class="skill-tag">Lead Strategy</span>
+          <span class="skill-tag">Client Matching</span>
+          <span class="skill-tag">Operations Architecture</span>
+          <span class="skill-tag">Onboarding</span>
+          <span class="skill-tag">AI &amp; Automation</span>
+        </div>
+        <a href="team-member.html?id=bruno" class="view-profile">View Profile &rarr;</a>
+      </div>
+    </div>
+
+    <!-- Grid: remaining 4 -->
+    <div class="team-grid fade-in">
+
+      <!-- Visa -->
+      <div class="team-card">
+        <div class="team-card-top">
+          <div class="team-avatar-sm" style="background:linear-gradient(135deg,#2A4A6E,#1C3250);">V</div>
+          <div>
+            <p class="team-card-name">Visa</p>
+            <p class="team-card-role">Operations &amp; Client Support</p>
+          </div>
+        </div>
+        <p class="team-card-desc">
+          Visa is the person who keeps everything running smoothly behind the scenes. Detail-oriented
+          and genuinely reliable, she handles the operational layer that makes client support feel
+          effortless — project tracking, communication, follow-through. When clients feel taken care of,
+          a lot of that is Visa.
+        </p>
+        <div class="team-card-skills">
+          <span class="skill-tag">Project Management</span>
+          <span class="skill-tag">Client Communication</span>
+          <span class="skill-tag">Operations</span>
+          <span class="skill-tag">Admin Support</span>
+        </div>
+        <a href="team-member.html?id=visa" class="view-profile">View Profile &rarr;</a>
+      </div>
+
+      <!-- Krizza -->
+      <div class="team-card">
+        <div class="team-card-top">
+          <div class="team-avatar-sm" style="background:linear-gradient(135deg,#3A3060,#221D45);">K</div>
+          <div>
+            <p class="team-card-name">Krizza</p>
+            <p class="team-card-role">Brand &amp; Creative Support</p>
+          </div>
+        </div>
+        <p class="team-card-desc">
+          Krizza brings visual ideas to life — with warmth, precision, and a real sense for
+          what a brand is trying to say. From graphics and social content to brand assets and
+          creative systems, she works at the intersection of beauty and function. Her work
+          doesn't just look good. It communicates.
+        </p>
+        <div class="team-card-skills">
+          <span class="skill-tag">Graphic Design</span>
+          <span class="skill-tag">Brand Identity</span>
+          <span class="skill-tag">Social Media Content</span>
+          <span class="skill-tag">Creative Systems</span>
+        </div>
+        <a href="team-member.html?id=krizza" class="view-profile">View Profile &rarr;</a>
+      </div>
+
+      <!-- Ryan -->
+      <div class="team-card">
+        <div class="team-card-top">
+          <div class="team-avatar-sm" style="background:linear-gradient(135deg,#1E3A5F,#162B48);">R</div>
+          <div>
+            <p class="team-card-name">Ryan</p>
+            <p class="team-card-role">Web Development &amp; Tech</p>
+          </div>
+        </div>
+        <p class="team-card-desc">
+          Ryan builds websites that are beautiful, functional, and built to last. He's the one
+          who turns a brand vision into a real web presence — clean code, thoughtful structure,
+          and attention to how real people actually use the sites he builds. When clients need
+          a digital foundation they can grow on, Ryan builds it.
+        </p>
+        <div class="team-card-skills">
+          <span class="skill-tag">Web Development</span>
+          <span class="skill-tag">WordPress</span>
+          <span class="skill-tag">Landing Pages</span>
+          <span class="skill-tag">Tech Setup</span>
+        </div>
+        <a href="team-member.html?id=ryan" class="view-profile">View Profile &rarr;</a>
+      </div>
+
+      <!-- Al -->
+      <div class="team-card">
+        <div class="team-card-top">
+          <div class="team-avatar-sm" style="background:linear-gradient(135deg,#244A3A,#1A3529);">A</div>
+          <div>
+            <p class="team-card-name">Al</p>
+            <p class="team-card-role">SEO &amp; Content Strategy</p>
+          </div>
+        </div>
+        <p class="team-card-desc">
+          Al helps clients get found and communicate clearly with their audience. He thinks
+          about content the way a strategist does — what to say, who it's for, and how it
+          connects to search and visibility. His work is patient, deliberate, and built for
+          the long term rather than quick-fix tactics that fade.
+        </p>
+        <div class="team-card-skills">
+          <span class="skill-tag">SEO Strategy</span>
+          <span class="skill-tag">Content Writing</span>
+          <span class="skill-tag">Keyword Research</span>
+          <span class="skill-tag">Organic Growth</span>
+        </div>
+        <a href="team-member.html?id=al" class="view-profile">View Profile &rarr;</a>
+      </div>
+
+    </div><!-- /team-grid -->
+
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════
+     S4 — HOW WE MATCH  ·  Dark (contrast)
+════════════════════════════════════════════ -->
+<section class="match-section">
+  <div class="container">
+    <div class="match-grid">
+
+      <div class="match-copy fade-in">
+        <span class="eyebrow eyebrow--gold">The Matching Process</span>
+        <h2>Bruno Personally Matches the Right Person to Every Client</h2>
+        <div class="divider-bar divider-bar--left" style="background:linear-gradient(90deg,var(--gold),rgba(184,146,62,0.3));"></div>
+        <p>
+          There's no algorithm here. No platform matching you to whoever is available.
+          Bruno leads the discovery process himself — and makes a deliberate, personal
+          decision about who on the team is the best fit for your business.
+        </p>
+        <p>
+          That decision is based on what you do, how you work, what you need, and which
+          team member's skills and energy align with yours. When it's right, it stays right.
+          Most BBC client-team relationships last for years.
+        </p>
+      </div>
+
+      <div class="match-steps fade-in">
+
+        <div class="match-step">
+          <p class="match-num">01</p>
+          <div>
+            <p class="match-step-title">Discovery Call with Bruno</p>
+            <p class="match-step-desc">Bruno learns your business, your current situation, and exactly what kind of support you need. No forms. No intake bots. A real conversation.</p>
+          </div>
+        </div>
+
+        <div class="match-step">
+          <p class="match-num">02</p>
+          <div>
+            <p class="match-step-title">Thoughtful Team Matching</p>
+            <p class="match-step-desc">Based on what he learns, Bruno identifies which team member — or combination of members — is the right fit for your work and your working style.</p>
+          </div>
+        </div>
+
+        <div class="match-step">
+          <p class="match-num">03</p>
+          <div>
+            <p class="match-step-title">Onboarding &amp; Integration</p>
+            <p class="match-step-desc">The matched team member is introduced, onboarded into your workflow, and set up within the BBC system — with Bruno guiding every step of the setup.</p>
+          </div>
+        </div>
+
+        <div class="match-step">
+          <p class="match-num">04</p>
+          <div>
+            <p class="match-step-title">Ongoing with Bruno Still Involved</p>
+            <p class="match-step-desc">Bruno doesn't disappear after setup. He stays in the loop — reviewing work, checking in on strategy, and making sure the relationship stays strong over time.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════
+     S5 — JOIN THE TEAM  ·  Card (light)
+════════════════════════════════════════════ -->
+<section class="join-section">
+  <div class="container">
+    <div class="join-inner fade-in">
+      <span class="eyebrow eyebrow--pale" style="justify-content:center;display:flex;">Grow With Us</span>
+      <h2 class="join-title">
+        Think You Belong in<br><em>This House?</em>
+      </h2>
+      <p class="join-desc">
+        BBC grows carefully — not by posting job listings, but by building real relationships
+        with people who share our values. If you do exceptional digital work and want to be part
+        of a team that treats its people the way it treats its clients, reach out. Bruno reads every message.
+      </p>
+      <div class="join-actions">
+        <a href="contact.html" class="btn btn-gold">Start a Conversation</a>
+        <a href="about.html" class="btn btn-ghost">Read Our Story</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════
+     FOOTER
+════════════════════════════════════════════ -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <p class="footer-brand-name">Balay ni Bruno &amp; Co.</p>
+        <p class="footer-brand-desc">A family-built operational support studio helping business owners grow through real collaboration, honest systems, and long-term care.</p>
+      </div>
+      <div>
+        <p class="footer-col-label">How We Help</p>
+        <a href="how-we-help.html#marketing" class="footer-link">Marketing Support</a>
+        <a href="how-we-help.html#content" class="footer-link">Content &amp; Creative</a>
+        <a href="how-we-help.html#websites" class="footer-link">Websites &amp; Digital</a>
+        <a href="how-we-help.html#seo" class="footer-link">SEO &amp; Visibility</a>
+        <a href="how-we-help.html#operations" class="footer-link">Operations &amp; Admin</a>
+      </div>
+      <div>
+        <p class="footer-col-label">Company</p>
+        <a href="about.html" class="footer-link">Our Story</a>
+        <a href="how-it-works.html" class="footer-link">How It Works</a>
+        <a href="our-team.html" class="footer-link">Our Team</a>
+        <a href="our-work.html" class="footer-link">Our Work</a>
+        <a href="insights.html" class="footer-link">Insights</a>
+        <a href="contact.html" class="footer-link">Contact</a>
+      </div>
+      <div>
+        <p class="footer-col-label">Contact</p>
+        <p class="footer-link">hello@balaynibruno.com</p>
+        <p class="footer-link">Serving US, UK &amp; international clients</p>
+        <a href="contact.html" class="btn btn-gold btn-sm" style="margin-top:1rem;">Book a Call</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copy">&copy; 2026 Balay ni Bruno &amp; Co. All rights reserved.</p>
+      <p class="footer-copy">
+        <a href="#" style="color:rgba(245,241,234,0.28);transition:color 0.2s;">Privacy Policy</a>
+        <span style="margin:0 8px;">&middot;</span>
+        <a href="#" style="color:rgba(245,241,234,0.28);transition:color 0.2s;">Terms of Service</a>
+      </p>
+    </div>
+  </div>
+</footer>
+
+
+<!-- ════════════════════════════════════════════
+     JAVASCRIPT
+════════════════════════════════════════════ -->
+<script>
+  const header = document.getElementById('site-header');
+  window.addEventListener('scroll', () => {
+    header.classList.toggle('scrolled', window.scrollY > 60);
+  }, { passive: true });
+
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const hb1 = document.getElementById('hb1');
+  const hb2 = document.getElementById('hb2');
+  const hb3 = document.getElementById('hb3');
+  hamburger.addEventListener('click', () => {
+    const open = mobileMenu.classList.toggle('open');
+    if (open) {
+      hb1.style.transform = 'translateY(7px) rotate(45deg)';
+      hb2.style.opacity = '0';
+      hb3.style.transform = 'translateY(-7px) rotate(-45deg)';
+    } else {
+      hb1.style.transform = ''; hb2.style.opacity = ''; hb3.style.transform = '';
+    }
+  });
+  mobileMenu.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      mobileMenu.classList.remove('open');
+      hb1.style.transform = ''; hb2.style.opacity = ''; hb3.style.transform = '';
+    });
+  });
+
+  const fadeEls = document.querySelectorAll('.fade-in');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+  fadeEls.forEach(el => io.observe(el));
+</script>
+
+</body>
+</html>

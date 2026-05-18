@@ -1,0 +1,982 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>How It Works — Balay ni Bruno &amp; Co.</title>
+  <meta name="description" content="A process built around you — not the other way around. Discover how BBC listens first, matches you with the right team, and shows up consistently for the long term." />
+  <link rel="canonical" href="https://balaynibruno.co/how-it-works.html" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Balay ni Bruno &amp; Co." />
+  <meta property="og:title" content="How It Works — Balay ni Bruno &amp; Co." />
+  <meta property="og:description" content="A process built around you — not the other way around. Discover how BBC listens first, matches you with the right team, and shows up consistently for the long term." />
+  <meta property="og:url" content="https://balaynibruno.co/how-it-works.html" />
+  <meta property="og:image" content="https://balaynibruno.co/og-image.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Lora:ital,wght@0,400;0,500;1,400;1,500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ============================================================
+       BBC DESIGN SYSTEM v5.1 — HOW IT WORKS
+       Color flow:
+         S1 Hero       → --bg-dark    (cinematic anchor)
+         S2 Process    → --bg-primary (warm cream breath)
+         S3 Different  → --bg-section (deeper cream warmth)
+         S4 Expect     → --bg-primary (cream again)
+         S5 FAQ        → --bg-section (deeper cream)
+         S6 CTA        → --bg-dark    (closing dark beat)
+    ============================================================ */
+
+    :root {
+      --deep-blue:   #1F3557;
+      --mid-blue:    #4B6FA5;
+      --warm-blue:   #6D8FC7;
+      --light-blue:  #A8C0DC;
+      --pale-blue:   #DDE8F2;
+      --bg-primary:  #F5F1EA;
+      --bg-section:  #EDE8DF;
+      --bg-card:     #FDFAF6;
+      --bg-card-alt: #FAF6EF;
+      --bg-dark:     #1C2E47;
+      --bg-footer:   #172540;
+      --neutral-100: #E8E2D6;
+      --neutral-200: #D5CEC3;
+      --neutral-300: #B8B1A6;
+      --text-ink:    #2A3040;
+      --text-body:   #4E5666;
+      --text-muted:  #888FA0;
+      --text-warm:   #F5F1EA;
+      --gold:        #B8923E;
+      --gold-pale:   #E6CFA0;
+      --gold-warm:   #D4A84B;
+      --sage:        #4E9E74;
+      --font-display:'Playfair Display', Georgia, serif;
+      --font-body:   'Lora', Georgia, serif;
+      --font-ui:     'DM Sans', system-ui, sans-serif;
+      --max-width:   1200px;
+      --radius-sm:   8px;
+      --radius:      16px;
+      --radius-lg:   24px;
+      --radius-xl:   32px;
+      --shadow-xs:   0 1px 6px  rgba(85,60,35,0.055);
+      --shadow-sm:   0 3px 18px rgba(85,60,35,0.08);
+      --shadow-md:   0 7px 36px rgba(85,60,35,0.11);
+      --shadow-lg:   0 14px 56px rgba(85,60,35,0.14);
+      --border-card: 1px solid rgba(85,60,35,0.09);
+      --border-warm: 1px solid rgba(85,60,35,0.12);
+      --border-dark: 1px solid rgba(255,255,255,0.07);
+      --s1: 0.5rem;  --s2: 1rem;   --s3: 1.5rem;
+      --s4: 2.5rem;  --s5: 4rem;   --s6: 6rem;  --s7: 9rem;
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-body);
+      color: var(--text-ink);
+      background: var(--bg-primary);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    body::after {
+      content: '';
+      position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23n)' opacity='0.026'/%3E%3C/svg%3E");
+      pointer-events: none; z-index: 9999; mix-blend-mode: multiply;
+    }
+
+    /* ── TYPOGRAPHY ──────────────────────────────────────────── */
+    h1, h2, h3, h4 { font-family: var(--font-display); line-height: 1.22; color: var(--deep-blue); }
+    h1 { font-size: clamp(2.2rem, 4.8vw, 3.6rem); line-height: 1.16; font-weight: 700; }
+    h2 { font-size: clamp(1.7rem, 3vw, 2.6rem); line-height: 1.22; font-weight: 600; }
+    h3 { font-size: clamp(1.05rem, 1.6vw, 1.3rem); font-weight: 600; }
+    p  { font-family: var(--font-body); font-size: 1rem; line-height: 1.87; color: var(--text-body); }
+    a  { text-decoration: none; }
+
+    .eyebrow {
+      display: block;
+      font-family: var(--font-ui); font-size: 0.68rem; font-weight: 600;
+      letter-spacing: 0.17em; text-transform: uppercase;
+      color: var(--warm-blue); margin-bottom: var(--s2);
+    }
+    .eyebrow--gold { color: var(--gold); }
+    .eyebrow--pale { color: rgba(245,241,234,0.5); }
+
+    /* ── LAYOUT ──────────────────────────────────────────────── */
+    .container { max-width: var(--max-width); margin: 0 auto; padding: 0 var(--s4); }
+    .text-center { text-align: center; }
+
+    .divider-bar {
+      width: 44px; height: 2.5px;
+      background: linear-gradient(90deg, var(--gold), var(--warm-blue));
+      border-radius: 2px; margin: var(--s3) auto; opacity: 0.8;
+    }
+    .divider-bar--left { margin-left: 0; }
+
+    .fade-in {
+      opacity: 0; transform: translateY(22px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
+    }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+    /* ── BUTTONS ──────────────────────────────────────────────── */
+    .btn {
+      display: inline-flex; align-items: center; gap: 0.45rem;
+      padding: 0.88rem 2rem; border-radius: 100px;
+      font-family: var(--font-ui); font-size: 0.86rem; font-weight: 600;
+      letter-spacing: 0.02em; cursor: pointer;
+      transition: all 0.3s ease; border: 1.5px solid transparent;
+      white-space: nowrap;
+    }
+    .btn-outline {
+      background: transparent; color: var(--deep-blue);
+      border-color: rgba(75,111,165,0.42);
+    }
+    .btn-outline:hover {
+      background: var(--deep-blue); color: var(--text-warm);
+      border-color: var(--deep-blue); transform: translateY(-2px);
+    }
+    .btn-ghost {
+      background: transparent; color: var(--text-warm);
+      border-color: rgba(245,241,234,0.28);
+    }
+    .btn-ghost:hover {
+      background: rgba(245,241,234,0.08);
+      border-color: rgba(245,241,234,0.55);
+    }
+    .btn-gold { background: var(--gold); color: #fff; font-weight: 700; }
+    .btn-gold:hover {
+      background: var(--gold-warm); transform: translateY(-2px);
+      box-shadow: 0 10px 32px rgba(184,146,62,0.35);
+    }
+    .btn-sm { padding: 0.62rem 1.35rem; font-size: 0.78rem; }
+
+    /* ── HEADER ───────────────────────────────────────────────── */
+    .site-header {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+      background: rgba(245,241,234,0.94);
+      backdrop-filter: blur(20px) saturate(1.2);
+      -webkit-backdrop-filter: blur(20px) saturate(1.2);
+      border-bottom: var(--border-warm);
+      transition: box-shadow 0.3s ease;
+    }
+    .site-header.scrolled { box-shadow: var(--shadow-sm); }
+
+    .header__inner {
+      max-width: var(--max-width); margin: 0 auto; padding: 0 var(--s4);
+      height: 68px; display: flex; align-items: center;
+      justify-content: space-between; gap: var(--s3);
+    }
+    .header__logo { display: flex; flex-direction: column; gap: 3px; }
+    .header__logo-name {
+      font-family: var(--font-display); font-size: 1.05rem; font-weight: 700;
+      color: var(--deep-blue); line-height: 1; letter-spacing: -0.01em;
+    }
+    .header__logo-sub {
+      font-family: var(--font-ui); font-size: 0.54rem; font-weight: 600;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--warm-blue); opacity: 0.8;
+    }
+    .header__nav { display: flex; align-items: center; gap: 1.5rem; list-style: none; }
+    .header__nav a {
+      font-family: var(--font-ui); font-size: 0.78rem; font-weight: 500;
+      color: var(--text-body); transition: color 0.2s; white-space: nowrap;
+    }
+    .header__nav a:hover,
+    .header__nav a.active { color: var(--deep-blue); font-weight: 600; }
+    .header__cta { display: flex; align-items: center; gap: 0.9rem; flex-shrink: 0; }
+
+    .hamburger {
+      display: none; flex-direction: column; gap: 5px;
+      cursor: pointer; background: none; border: none; padding: 8px;
+    }
+    .hamburger span {
+      display: block; width: 20px; height: 2px;
+      background: var(--text-ink); border-radius: 2px; transition: all 0.25s ease;
+    }
+    .mobile-menu {
+      display: none; flex-direction: column;
+      background: var(--bg-card); border-top: var(--border-warm);
+      padding: 1rem var(--s4) 1.5rem;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      font-family: var(--font-ui); font-size: 0.9rem; font-weight: 500;
+      color: var(--text-body); padding: 0.7rem 0;
+      border-bottom: var(--border-card); transition: color 0.2s;
+    }
+    .mobile-menu a:hover { color: var(--deep-blue); }
+    .mobile-menu a:last-of-type { border-bottom: none; }
+    .mobile-menu .mobile-cta { margin-top: 1rem; }
+
+    @media (max-width: 1024px) { .header__nav { display: none; } }
+    @media (max-width: 768px)  {
+      .header__cta .btn-ghost { display: none; }
+      .hamburger { display: flex; }
+    }
+
+
+    /* ══════════════════════════════════════════════════════════
+       S1 — HERO  ·  --bg-dark  ·  Cinematic anchor
+    ══════════════════════════════════════════════════════════ */
+    .hero {
+      min-height: 72vh; padding-top: 68px;
+      background: var(--bg-dark);
+      display: flex; align-items: center;
+      position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content: ''; position: absolute; top: -120px; right: -120px;
+      width: 700px; height: 700px;
+      background: radial-gradient(ellipse at center,
+        rgba(184,146,62,0.08) 0%, rgba(184,146,62,0.02) 45%, transparent 68%);
+      pointer-events: none;
+    }
+    .hero::after {
+      content: ''; position: absolute; bottom: -80px; left: -80px;
+      width: 480px; height: 480px;
+      background: radial-gradient(ellipse at center,
+        rgba(109,143,199,0.06) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .hero__inner {
+      max-width: 780px; margin: 0 auto;
+      padding: var(--s6) var(--s4);
+      position: relative; z-index: 1; width: 100%;
+    }
+    .hero__eyebrow {
+      display: inline-flex; align-items: center; gap: 0.6rem;
+      font-family: var(--font-ui); font-size: 0.68rem; font-weight: 600;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--gold-pale); margin-bottom: 1.8rem;
+    }
+    .hero__eyebrow-dot {
+      width: 5px; height: 5px; border-radius: 50%;
+      background: var(--gold); opacity: 0.75; flex-shrink: 0;
+    }
+    .hero__title {
+      font-family: var(--font-display);
+      font-size: clamp(2.2rem, 4.6vw, 3.4rem);
+      font-weight: 700; color: #fff; line-height: 1.18; margin-bottom: 1.6rem;
+    }
+    .hero__title em { font-style: italic; color: var(--gold-pale); }
+    .hero__body {
+      font-family: var(--font-body); font-size: 1.08rem;
+      line-height: 1.88; color: rgba(245,241,234,0.65);
+      max-width: 580px; margin-bottom: 2.6rem;
+    }
+    .hero__actions { display: flex; flex-wrap: wrap; gap: 1rem; }
+
+    @media (max-width: 560px) {
+      .hero__actions { flex-direction: column; }
+      .hero__actions .btn { justify-content: center; }
+    }
+
+
+    /* ══════════════════════════════════════════════════════════
+       S2 — THE 5-STEP PROCESS  ·  --bg-primary  ·  Warm cream
+    ══════════════════════════════════════════════════════════ */
+    .process {
+      background: var(--bg-primary); padding: var(--s7) 0;
+      position: relative; overflow: hidden;
+    }
+    .process::before {
+      content: ''; position: absolute; top: -60px; right: -60px;
+      width: 500px; height: 500px;
+      background: radial-gradient(ellipse at center,
+        rgba(184,146,62,0.045) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .process__header {
+      text-align: center; max-width: 620px; margin: 0 auto var(--s6);
+    }
+    .process__header h2 { margin-bottom: 1rem; }
+
+    .process__steps {
+      display: flex; flex-direction: column; gap: 2rem;
+      max-width: 860px; margin: 0 auto;
+    }
+
+    .step-card {
+      display: grid; grid-template-columns: 80px 1fr;
+      gap: 0 2rem; align-items: start;
+      background: var(--bg-card);
+      border: var(--border-card);
+      border-radius: var(--radius-lg);
+      padding: 2.2rem 2.5rem;
+      box-shadow: var(--shadow-sm);
+      transition: box-shadow 0.3s ease, transform 0.3s ease;
+    }
+    .step-card:hover { box-shadow: var(--shadow-md); transform: translateY(-3px); }
+
+    .step-card__number {
+      font-family: var(--font-display); font-size: 3.2rem; font-weight: 700;
+      color: var(--gold-pale); line-height: 1; opacity: 0.65; padding-top: 0.1rem;
+    }
+    .step-card__title {
+      font-family: var(--font-display); font-size: 1.25rem; font-weight: 600;
+      color: var(--deep-blue); margin-bottom: 0.75rem;
+    }
+    .step-card__body {
+      font-family: var(--font-body); font-size: 1rem;
+      line-height: 1.87; color: var(--text-body);
+    }
+    .step-card__tag {
+      display: inline-block; margin-top: 1rem;
+      font-family: var(--font-ui); font-size: 0.65rem; font-weight: 700;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--gold); background: rgba(184,146,62,0.1);
+      padding: 4px 12px; border-radius: 999px;
+    }
+
+    @media (max-width: 640px) {
+      .step-card { grid-template-columns: 1fr; gap: 0.5rem; padding: 1.75rem; }
+      .step-card__number { font-size: 2.2rem; }
+    }
+
+
+    /* ══════════════════════════════════════════════════════════
+       S3 — WHAT MAKES THIS DIFFERENT  ·  --bg-section  ·  Deeper cream
+    ══════════════════════════════════════════════════════════ */
+    .different { background: var(--bg-section); padding: var(--s7) 0; }
+    .different__header {
+      text-align: center; max-width: 600px; margin: 0 auto var(--s5);
+    }
+    .different__header h2 { margin-bottom: 1rem; }
+
+    .different__grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.75rem;
+    }
+    @media (max-width: 1060px) and (min-width: 681px) {
+      .different__grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 680px) { .different__grid { grid-template-columns: 1fr; } }
+
+    .diff-card {
+      background: var(--bg-card); border: var(--border-card);
+      border-radius: var(--radius-lg); padding: 2rem 1.75rem;
+      box-shadow: var(--shadow-xs); position: relative; overflow: hidden;
+    }
+    .diff-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, var(--gold), var(--warm-blue));
+      border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+    }
+    .diff-card__label {
+      font-family: var(--font-ui); font-size: 0.62rem; font-weight: 700;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 0.85rem;
+    }
+    .diff-card__icon { font-size: 1.6rem; margin-bottom: 1rem; }
+    .diff-card__title {
+      font-family: var(--font-display); font-size: 1.05rem; font-weight: 600;
+      color: var(--deep-blue); margin-bottom: 0.6rem;
+    }
+    .diff-card__body {
+      font-family: var(--font-body); font-size: 0.93rem; line-height: 1.8;
+      color: var(--text-body);
+    }
+    .diff-card__compare {
+      margin-top: 1.25rem; padding-top: 1.25rem; border-top: var(--border-card);
+    }
+    .diff-card__compare-label {
+      font-family: var(--font-ui); font-size: 0.6rem; font-weight: 700;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--text-muted); margin-bottom: 0.45rem;
+    }
+    .diff-card__compare-body {
+      font-family: var(--font-body); font-size: 0.88rem; line-height: 1.75;
+      color: var(--text-muted); font-style: italic;
+    }
+
+
+    /* ══════════════════════════════════════════════════════════
+       S4 — WHAT TO EXPECT  ·  --bg-primary  ·  Warm cream
+    ══════════════════════════════════════════════════════════ */
+    .expect { background: var(--bg-primary); padding: var(--s7) 0; }
+    .expect__grid {
+      display: grid; grid-template-columns: 1fr 1.5fr;
+      gap: var(--s6); align-items: start;
+    }
+    @media (max-width: 860px) { .expect__grid { grid-template-columns: 1fr; } }
+
+    .expect__copy h2 { margin-bottom: 1rem; }
+    .expect__copy p  { margin-bottom: 1rem; }
+
+    .expect__list { display: flex; flex-direction: column; gap: 1.1rem; }
+
+    .expect-item {
+      display: flex; align-items: flex-start; gap: 1rem;
+      padding: 1.4rem 1.5rem;
+      background: var(--bg-card); border: var(--border-card);
+      border-radius: var(--radius); box-shadow: var(--shadow-xs);
+    }
+    .expect-item__icon {
+      width: 38px; height: 38px; border-radius: 50%;
+      background: rgba(184,146,62,0.1);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem; flex-shrink: 0; margin-top: 0.05rem;
+    }
+    .expect-item__title {
+      font-family: var(--font-ui); font-size: 0.88rem; font-weight: 600;
+      color: var(--deep-blue); margin-bottom: 0.3rem;
+    }
+    .expect-item__body {
+      font-family: var(--font-body); font-size: 0.9rem; line-height: 1.75;
+      color: var(--text-body);
+    }
+
+
+    /* ══════════════════════════════════════════════════════════
+       S5 — FAQ  ·  --bg-section  ·  Deeper cream
+    ══════════════════════════════════════════════════════════ */
+    .faq { background: var(--bg-section); padding: var(--s7) 0; }
+    .faq__header {
+      text-align: center; max-width: 560px; margin: 0 auto var(--s5);
+    }
+    .faq__header h2 { margin-bottom: 0.75rem; }
+
+    .faq__list { max-width: 760px; margin: 0 auto; }
+
+    .faq-item { border-bottom: var(--border-warm); }
+    .faq-item:first-child { border-top: var(--border-warm); }
+
+    .faq-item__trigger {
+      width: 100%; background: none; border: none; cursor: pointer;
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 1.5rem; padding: 1.4rem 0; text-align: left;
+    }
+    .faq-item__question {
+      font-family: var(--font-display); font-size: 1.05rem; font-weight: 600;
+      color: var(--deep-blue); line-height: 1.35;
+    }
+    .faq-item__icon {
+      width: 28px; height: 28px; border-radius: 50%;
+      background: rgba(184,146,62,0.1);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; font-size: 1.1rem; color: var(--gold);
+      transition: transform 0.3s ease;
+    }
+    .faq-item.open .faq-item__icon { transform: rotate(45deg); }
+    .faq-item__answer { display: none; padding-bottom: 1.4rem; }
+    .faq-item.open .faq-item__answer { display: block; }
+    .faq-item__answer p {
+      font-family: var(--font-body); font-size: 0.97rem; line-height: 1.87;
+      color: var(--text-body);
+    }
+
+
+    /* ══════════════════════════════════════════════════════════
+       S6 — CTA  ·  --bg-dark  ·  Closing dark beat
+    ══════════════════════════════════════════════════════════ */
+    .cta-section {
+      background: var(--bg-dark); padding: var(--s7) 0;
+      position: relative; overflow: hidden;
+    }
+    .cta-section::before {
+      content: ''; position: absolute; top: -100px; right: -100px;
+      width: 500px; height: 500px;
+      background: radial-gradient(ellipse at center,
+        rgba(184,146,62,0.07) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .cta-section__inner {
+      position: relative; z-index: 1;
+      text-align: center; max-width: 600px; margin: 0 auto;
+    }
+    .cta-section h2 { color: #fff; margin-bottom: 1rem; }
+    .cta-section h2 em { font-style: italic; color: var(--gold-pale); }
+    .cta-section p {
+      color: rgba(245,241,234,0.62); margin-bottom: 2.5rem;
+      font-size: 1.05rem; line-height: 1.87;
+    }
+    .cta-section__actions {
+      display: flex; align-items: center; justify-content: center;
+      gap: 1rem; flex-wrap: wrap;
+    }
+
+
+    /* ══════════════════════════════════════════════════════════
+       FOOTER
+    ══════════════════════════════════════════════════════════ */
+    .site-footer {
+      background: var(--bg-footer);
+      border-top: 1px solid rgba(184,146,62,0.15);
+      padding: var(--s6) 0 var(--s4);
+    }
+    .footer__grid {
+      display: grid; grid-template-columns: 1.6fr 1fr 1fr 1fr;
+      gap: var(--s4); margin-bottom: var(--s5);
+    }
+    @media (max-width: 860px) { .footer__grid { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 560px) { .footer__grid { grid-template-columns: 1fr; } }
+
+    .footer__brand-name {
+      font-family: var(--font-display); font-size: 1.1rem; font-weight: 700;
+      color: var(--text-warm); margin-bottom: 0.4rem;
+    }
+    .footer__brand-tagline {
+      font-family: var(--font-ui); font-size: 0.65rem; font-weight: 600;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: rgba(245,241,234,0.35); margin-bottom: 1rem;
+    }
+    .footer__brand-body {
+      font-family: var(--font-body); font-size: 0.88rem; line-height: 1.8;
+      color: rgba(245,241,234,0.45); max-width: 280px;
+    }
+    .footer__col-title {
+      font-family: var(--font-ui); font-size: 0.65rem; font-weight: 700;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: rgba(245,241,234,0.3); margin-bottom: 1.1rem;
+    }
+    .footer__col-links { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
+    .footer__col-links a {
+      font-family: var(--font-ui); font-size: 0.83rem;
+      color: rgba(245,241,234,0.52); transition: color 0.2s;
+    }
+    .footer__col-links a:hover { color: var(--text-warm); }
+    .footer__bottom {
+      border-top: 1px solid rgba(255,255,255,0.05); padding-top: var(--s3);
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 1rem;
+    }
+    .footer__copy {
+      font-family: var(--font-ui); font-size: 0.75rem;
+      color: rgba(245,241,234,0.28);
+    }
+    .footer__tagline-bottom {
+      font-family: var(--font-display); font-size: 0.8rem; font-style: italic;
+      color: rgba(245,241,234,0.22);
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <!-- ── HEADER ──────────────────────────────────────────────────── -->
+  <header class="site-header" id="siteHeader">
+    <div class="header__inner">
+      <a href="BBC Home Page.html" class="header__logo">
+        <span class="header__logo-name">Balay ni Bruno &amp; Co.</span>
+        <span class="header__logo-sub">Operational Support Studio</span>
+      </a>
+
+      <nav aria-label="Main navigation">
+        <ul class="header__nav">
+          <li><a href="BBC Home Page.html">Home</a></li>
+          <li><a href="our-story.html">Our Story</a></li>
+          <li><a href="how-it-works.html" class="active">How It Works</a></li>
+          <li><a href="how-we-help.html">How We Help</a></li>
+          <li><a href="our-team.html">Our Team</a></li>
+          <li><a href="our-work.html">Our Work</a></li>
+          <li><a href="insights.html">Insights</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+
+      <div class="header__cta">
+        <a href="contact.html" class="btn btn-ghost btn-sm">Start a Conversation</a>
+        <a href="contact.html#book" class="btn btn-gold btn-sm">Book a Call</a>
+        <button class="hamburger" id="hamburgerBtn" aria-label="Open menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+    <nav class="mobile-menu" id="mobileMenu" aria-label="Mobile navigation">
+      <a href="BBC Home Page.html">Home</a>
+      <a href="our-story.html">Our Story</a>
+      <a href="how-it-works.html" class="active">How It Works</a>
+      <a href="how-we-help.html">How We Help</a>
+      <a href="our-team.html">Our Team</a>
+      <a href="our-work.html">Our Work</a>
+      <a href="insights.html">Insights</a>
+      <a href="contact.html">Contact</a>
+      <div class="mobile-cta">
+        <a href="contact.html#book" class="btn btn-gold" style="width:100%;justify-content:center;">Book a Call</a>
+      </div>
+    </nav>
+  </header>
+
+
+  <!-- ══════════════════════════════════════════════════════════════
+       S1 — HERO  ·  Dark cinematic anchor
+  ══════════════════════════════════════════════════════════════ -->
+  <section class="hero">
+    <div class="hero__inner">
+      <div class="hero__eyebrow fade-in">
+        <span class="hero__eyebrow-dot"></span>
+        How It Works
+      </div>
+      <h1 class="hero__title fade-in" style="transition-delay:0.1s">
+        A Process Built Around You,<br>
+        <em>Not the Other Way Around.</em>
+      </h1>
+      <p class="hero__body fade-in" style="transition-delay:0.2s">
+        Every engagement starts with listening. We take time to understand your world before we suggest a single solution — because real support begins with genuinely knowing where you are and where you want to go.
+      </p>
+      <div class="hero__actions fade-in" style="transition-delay:0.3s">
+        <a href="contact.html#book" class="btn btn-gold">Book a Discovery Call</a>
+        <a href="how-we-help.html" class="btn btn-ghost">See How We Help</a>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════════════════════════════
+       S2 — 5-STEP PROCESS  ·  Warm cream
+  ══════════════════════════════════════════════════════════════ -->
+  <section class="process">
+    <div class="container">
+      <div class="process__header fade-in">
+        <span class="eyebrow">The Process</span>
+        <h2>Five Steps. One Guiding Principle.</h2>
+        <div class="divider-bar"></div>
+        <p>We've designed every stage to feel collaborative, not complicated. Here's exactly what working with BBC looks like — from the very first conversation.</p>
+      </div>
+
+      <div class="process__steps">
+
+        <div class="step-card fade-in">
+          <div class="step-card__number">01</div>
+          <div>
+            <h3 class="step-card__title">Discovery Call</h3>
+            <p class="step-card__body">We start with a real conversation. Bruno personally joins every discovery call to understand where you are, where you want to go, and what kind of support would actually make a difference. No scripts, no sales pitch — just an honest conversation about your business and what you actually need.</p>
+            <span class="step-card__tag">Personal &middot; No Pressure</span>
+          </div>
+        </div>
+
+        <div class="step-card fade-in">
+          <div class="step-card__number">02</div>
+          <div>
+            <h3 class="step-card__title">Understanding Your World</h3>
+            <p class="step-card__body">Before we build anything, we learn. Your tools, your team, your goals, your frustrations. We take time to understand the full picture — not just the surface ask, but the context behind it. This is where most providers skip ahead. We don't. We'd rather take an extra week to understand your business than spend three months building the wrong thing.</p>
+            <span class="step-card__tag">Deep Listening &middot; Full Context</span>
+          </div>
+        </div>
+
+        <div class="step-card fade-in">
+          <div class="step-card__number">03</div>
+          <div>
+            <h3 class="step-card__title">The Right Match</h3>
+            <p class="step-card__body">Based on your needs, Bruno matches you with the right team member or members. Not whoever is available — the right fit for your business and your personality. We believe the quality of a working relationship directly affects the quality of the work, so we take this step seriously and never rush it.</p>
+            <span class="step-card__tag">Intentional Matching &middot; Not Random</span>
+          </div>
+        </div>
+
+        <div class="step-card fade-in">
+          <div class="step-card__number">04</div>
+          <div>
+            <h3 class="step-card__title">Systems &amp; Setup</h3>
+            <p class="step-card__body">We set up the workflows, documentation, and communication systems that keep everything organized and nothing slipping through the cracks. From onboarding documents to recurring task flows — we build a clear structure that works for how you actually operate, not how a template says you should.</p>
+            <span class="step-card__tag">Organized &middot; Nothing Lost</span>
+          </div>
+        </div>
+
+        <div class="step-card fade-in">
+          <div class="step-card__number">05</div>
+          <div>
+            <h3 class="step-card__title">Active Ongoing Support</h3>
+            <p class="step-card__body">We show up consistently. Regular check-ins, clear updates, and a team that's genuinely invested in your success — not just completing tasks. We grow with you, adapt as your needs change, and remain a steady presence in your business for the long term. This is where most of the real work — and the real relationship — happens.</p>
+            <span class="step-card__tag">Consistent &middot; Long-Term Thinking</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════════════════════════════
+       S3 — WHAT MAKES THIS DIFFERENT  ·  Deeper cream
+  ══════════════════════════════════════════════════════════════ -->
+  <section class="different">
+    <div class="container">
+      <div class="different__header fade-in">
+        <span class="eyebrow">The BBC Difference</span>
+        <h2>What Sets Our Process Apart</h2>
+        <div class="divider-bar"></div>
+        <p>There's a reason clients describe working with BBC as different. Here's exactly what that means in practice — not in theory.</p>
+      </div>
+
+      <div class="different__grid">
+
+        <div class="diff-card fade-in">
+          <div class="diff-card__label">At BBC</div>
+          <div class="diff-card__icon">🤝</div>
+          <div class="diff-card__title">Bruno on every discovery call</div>
+          <div class="diff-card__body">The founder is personally present from the very first conversation. You're not handed off to a sales rep or junior coordinator — you speak directly with the person leading your engagement, from day one.</div>
+          <div class="diff-card__compare">
+            <div class="diff-card__compare-label">Typical providers</div>
+            <div class="diff-card__compare-body">A generic intake form, then a call with an account manager you'll never speak to again.</div>
+          </div>
+        </div>
+
+        <div class="diff-card fade-in">
+          <div class="diff-card__label">At BBC</div>
+          <div class="diff-card__icon">🎯</div>
+          <div class="diff-card__title">Intentional team matching</div>
+          <div class="diff-card__body">We take time to understand your working style, communication preferences, and personality before introducing you to a team member. The match is deliberate — we think about chemistry, not just capability.</div>
+          <div class="diff-card__compare">
+            <div class="diff-card__compare-label">Typical providers</div>
+            <div class="diff-card__compare-body">You get whoever is available in the roster. Personality fit is rarely considered.</div>
+          </div>
+        </div>
+
+        <div class="diff-card fade-in">
+          <div class="diff-card__label">At BBC</div>
+          <div class="diff-card__icon">📋</div>
+          <div class="diff-card__title">Systems built for longevity</div>
+          <div class="diff-card__body">We don't just complete tasks — we build the underlying structure that makes your operations sustainable. SOPs, workflows, and documentation that outlast any single project or engagement.</div>
+          <div class="diff-card__compare">
+            <div class="diff-card__compare-label">Typical providers</div>
+            <div class="diff-card__compare-body">Task-based execution with no documentation. When the engagement ends, the knowledge walks out with it.</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════════════════════════════
+       S4 — WHAT TO EXPECT  ·  Warm cream
+  ══════════════════════════════════════════════════════════════ -->
+  <section class="expect">
+    <div class="container">
+      <div class="expect__grid">
+
+        <div class="expect__copy fade-in">
+          <span class="eyebrow">Practical Expectations</span>
+          <h2>What Working With Us Actually Looks Like</h2>
+          <div class="divider-bar divider-bar--left"></div>
+          <p>We believe transparency builds trust. So here's a clear picture of what to expect when you work with BBC — the day-to-day reality of our collaboration, not just the highlights.</p>
+          <p>You'll always know who's working on your account, what they're working on, and how to reach them. No mystery, no guesswork, no silence.</p>
+        </div>
+
+        <div class="expect__list">
+
+          <div class="expect-item fade-in">
+            <div class="expect-item__icon">⏱️</div>
+            <div>
+              <div class="expect-item__title">Response Times</div>
+              <div class="expect-item__body">Same-day responses for standard requests during agreed working hours. Urgent items are flagged and handled accordingly. You'll never be left wondering what's happening.</div>
+            </div>
+          </div>
+
+          <div class="expect-item fade-in">
+            <div class="expect-item__icon">💬</div>
+            <div>
+              <div class="expect-item__title">Communication Style</div>
+              <div class="expect-item__body">Clear, direct, and warm. We communicate in plain language — no jargon, no fluff. Updates are proactive, not reactive. You won't have to chase us down for information.</div>
+            </div>
+          </div>
+
+          <div class="expect-item fade-in">
+            <div class="expect-item__icon">🔄</div>
+            <div>
+              <div class="expect-item__title">Regular Check-Ins</div>
+              <div class="expect-item__body">We schedule regular syncs based on your preferred cadence — weekly, biweekly, or monthly. These aren't status updates — they're real working conversations about what's next and what's changed.</div>
+            </div>
+          </div>
+
+          <div class="expect-item fade-in">
+            <div class="expect-item__icon">📂</div>
+            <div>
+              <div class="expect-item__title">Handoffs &amp; Documentation</div>
+              <div class="expect-item__body">Every handoff is documented. Whether it's a new team member joining, a project wrapping, or a process being handed back to you — nothing gets lost in translation.</div>
+            </div>
+          </div>
+
+          <div class="expect-item fade-in">
+            <div class="expect-item__icon">🌱</div>
+            <div>
+              <div class="expect-item__title">Growing Together</div>
+              <div class="expect-item__body">We're not here for a project and out. Our goal is to be a long-term partner — one that adapts as your business grows and evolves alongside you.</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════════════════════════════
+       S5 — FAQ  ·  Deeper cream
+  ══════════════════════════════════════════════════════════════ -->
+  <section class="faq">
+    <div class="container">
+      <div class="faq__header fade-in">
+        <span class="eyebrow">Common Questions</span>
+        <h2>Things People Ask Before They Start</h2>
+        <div class="divider-bar"></div>
+      </div>
+
+      <div class="faq__list fade-in">
+
+        <div class="faq-item">
+          <button class="faq-item__trigger" aria-expanded="false">
+            <span class="faq-item__question">How long does the onboarding process take?</span>
+            <span class="faq-item__icon" aria-hidden="true">+</span>
+          </button>
+          <div class="faq-item__answer">
+            <p>It depends on the scope of your engagement. A focused support arrangement can be up and running within a week of your discovery call. Larger system builds or multi-area engagements typically take two to three weeks to properly set up. We always communicate timelines clearly from the start — no surprises.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-item__trigger" aria-expanded="false">
+            <span class="faq-item__question">Will I always work with the same person?</span>
+            <span class="faq-item__icon" aria-hidden="true">+</span>
+          </button>
+          <div class="faq-item__answer">
+            <p>Yes — for your primary point of contact, consistency is important to us. You'll be matched with a dedicated team member who gets to know your business deeply. Bruno remains available throughout all engagements for strategic conversations and relationship oversight.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-item__trigger" aria-expanded="false">
+            <span class="faq-item__question">What if my needs change after we start?</span>
+            <span class="faq-item__icon" aria-hidden="true">+</span>
+          </button>
+          <div class="faq-item__answer">
+            <p>That's completely normal — and something we plan for. We build flexibility into every engagement. If you need more support in one area or want to shift focus, we have a conversation about it, adjust the scope, and make it work. We're not locked into rigid contracts that don't allow for growth.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-item__trigger" aria-expanded="false">
+            <span class="faq-item__question">Do you work with clients in different time zones?</span>
+            <span class="faq-item__icon" aria-hidden="true">+</span>
+          </button>
+          <div class="faq-item__answer">
+            <p>Yes. Our team is distributed and experienced working across time zones. During onboarding, we align on overlapping working hours and set clear communication expectations so nothing falls through the cracks because of geography.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-item__trigger" aria-expanded="false">
+            <span class="faq-item__question">How is BBC different from hiring a VA or VA agency?</span>
+            <span class="faq-item__icon" aria-hidden="true">+</span>
+          </button>
+          <div class="faq-item__answer">
+            <p>A VA agency provides available capacity. BBC provides a matched, invested partner. We don't roster-fill — we deliberately match the right person to your business and personality. Bruno is personally involved in every client relationship. And we don't just do tasks — we build the systems, documentation, and workflows that make your business operate better long-term.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════════════════════════════
+       S6 — CTA  ·  Dark closing beat
+  ══════════════════════════════════════════════════════════════ -->
+  <section class="cta-section">
+    <div class="container">
+      <div class="cta-section__inner fade-in">
+        <span class="eyebrow eyebrow--gold">Ready When You Are</span>
+        <h2>Ready to Start? <em>Let's Talk.</em></h2>
+        <p>The first conversation is always a real one. No commitments, no pitch — just Bruno and you, talking through what would actually make a difference in your business right now.</p>
+        <div class="cta-section__actions">
+          <a href="contact.html" class="btn btn-ghost">Start a Conversation</a>
+          <a href="contact.html#book" class="btn btn-gold">Book a Call</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════════════════════════════
+       FOOTER
+  ══════════════════════════════════════════════════════════════ -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer__grid">
+        <div>
+          <div class="footer__brand-name">Balay ni Bruno &amp; Co.</div>
+          <div class="footer__brand-tagline">Operational Support Studio</div>
+          <p class="footer__brand-body">A family-built studio helping business owners grow through real collaboration, thoughtful systems, and long-term care.</p>
+        </div>
+        <div>
+          <div class="footer__col-title">Pages</div>
+          <ul class="footer__col-links">
+            <li><a href="BBC Home Page.html">Home</a></li>
+            <li><a href="our-story.html">Our Story</a></li>
+            <li><a href="how-it-works.html">How It Works</a></li>
+            <li><a href="how-we-help.html">How We Help</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer__col-title">More</div>
+          <ul class="footer__col-links">
+            <li><a href="our-team.html">Our Team</a></li>
+            <li><a href="our-work.html">Our Work</a></li>
+            <li><a href="insights.html">Insights</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer__col-title">Connect</div>
+          <ul class="footer__col-links">
+            <li><a href="contact.html#book">Book a Call</a></li>
+            <li><a href="mailto:hello@balaynibruno.com">hello@balaynibruno.com</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <span class="footer__copy">&copy; 2025 Balay ni Bruno &amp; Co. All rights reserved.</span>
+        <span class="footer__tagline-bottom">"Balay" means home in Visayan — and that's exactly what we're building.</span>
+      </div>
+    </div>
+  </footer>
+
+
+  <script>
+    // Sticky header scroll class
+    const header = document.getElementById('siteHeader');
+    window.addEventListener('scroll', () => {
+      header.classList.toggle('scrolled', window.scrollY > 20);
+    }, { passive: true });
+
+    // Hamburger menu toggle
+    const hamburger = document.getElementById('hamburgerBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    hamburger.addEventListener('click', () => {
+      mobileMenu.classList.toggle('open');
+    });
+
+    // Fade-in with IntersectionObserver
+    const fadeEls = document.querySelectorAll('.fade-in');
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
+      });
+    }, { threshold: 0.12 });
+    fadeEls.forEach(el => io.observe(el));
+
+    // FAQ accordion
+    document.querySelectorAll('.faq-item').forEach(item => {
+      item.querySelector('.faq-item__trigger').addEventListener('click', () => {
+        const open = item.classList.contains('open');
+        document.querySelectorAll('.faq-item').forEach(i => {
+          i.classList.remove('open');
+          i.querySelector('.faq-item__trigger').setAttribute('aria-expanded', 'false');
+        });
+        if (!open) {
+          item.classList.add('open');
+          item.querySelector('.faq-item__trigger').setAttribute('aria-expanded', 'true');
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>

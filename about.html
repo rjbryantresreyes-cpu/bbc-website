@@ -1,0 +1,928 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Our Story — Balay ni Bruno &amp; Co.</title>
+  <meta name="description" content="The story behind Balay ni Bruno &amp; Co. — built on real work, grown through real relationships, and rooted in the meaning of Balay: home." />
+  <link rel="canonical" href="https://balaynibruno.co/about.html" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Balay ni Bruno &amp; Co." />
+  <meta property="og:title" content="Our Story — Balay ni Bruno &amp; Co." />
+  <meta property="og:description" content="The story behind Balay ni Bruno &amp; Co. — built on real work, grown through real relationships." />
+  <meta property="og:url" content="https://balaynibruno.co/about.html" />
+  <meta property="og:image" content="https://balaynibruno.co/og-image.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Lora:ital,wght@0,400;0,500;1,400;1,500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --deep-blue:   #1F3557;
+      --mid-blue:    #4B6FA5;
+      --warm-blue:   #6D8FC7;
+      --light-blue:  #A8C0DC;
+      --pale-blue:   #DDE8F2;
+      --bg-primary:  #F5F1EA;
+      --bg-section:  #EDE8DF;
+      --bg-card:     #FDFAF6;
+      --bg-card-alt: #FAF6EF;
+      --bg-dark:     #1C2E47;
+      --bg-footer:   #172540;
+      --neutral-100: #E8E2D6;
+      --neutral-200: #D5CEC3;
+      --neutral-300: #B8B1A6;
+      --text-ink:    #2A3040;
+      --text-body:   #4E5666;
+      --text-muted:  #888FA0;
+      --text-warm:   #F5F1EA;
+      --gold:        #B8923E;
+      --gold-pale:   #E6CFA0;
+      --gold-warm:   #D4A84B;
+      --sage:        #4E9E74;
+      --font-display:'Playfair Display', Georgia, serif;
+      --font-body:   'Lora', Georgia, serif;
+      --font-ui:     'DM Sans', system-ui, sans-serif;
+      --max-width:   1200px;
+      --radius-sm:   8px;
+      --radius:      16px;
+      --radius-lg:   24px;
+      --radius-xl:   32px;
+      --shadow-xs:   0 1px 6px  rgba(85,60,35,0.055);
+      --shadow-sm:   0 3px 18px rgba(85,60,35,0.08);
+      --shadow-md:   0 7px 36px rgba(85,60,35,0.11);
+      --shadow-lg:   0 14px 56px rgba(85,60,35,0.14);
+      --border-card: 1px solid rgba(85,60,35,0.09);
+      --border-warm: 1px solid rgba(85,60,35,0.12);
+      --border-dark: 1px solid rgba(255,255,255,0.07);
+      --s1:0.5rem; --s2:1rem; --s3:1.5rem; --s4:2.5rem; --s5:4rem; --s6:6rem; --s7:9rem;
+    }
+
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body {
+      font-family: var(--font-body);
+      color: var(--text-ink);
+      background: var(--bg-primary);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+    body::after {
+      content:'';
+      position:fixed; inset:0;
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23n)' opacity='0.026'/%3E%3C/svg%3E");
+      pointer-events:none; z-index:9999; mix-blend-mode:multiply;
+    }
+
+    /* ── Typography ── */
+    h1,h2,h3,h4 { font-family:var(--font-display); line-height:1.22; color:var(--deep-blue); }
+    h1 { font-size:clamp(2.2rem,4.8vw,3.6rem); line-height:1.16; font-weight:700; }
+    h2 { font-size:clamp(1.7rem,3vw,2.6rem); line-height:1.22; font-weight:600; }
+    h3 { font-size:clamp(1.05rem,1.6vw,1.3rem); font-weight:600; }
+    p  { font-family:var(--font-body); font-size:1rem; line-height:1.87; color:var(--text-body); }
+    p.lead { font-size:1.08rem; line-height:1.9; color:var(--text-ink); }
+    a  { text-decoration:none; }
+
+    .eyebrow {
+      display:block; font-family:var(--font-ui);
+      font-size:0.68rem; font-weight:600;
+      letter-spacing:0.17em; text-transform:uppercase;
+      color:var(--warm-blue); margin-bottom:var(--s2);
+    }
+    .eyebrow--gold { color:var(--gold); }
+    .eyebrow--pale { color:rgba(245,241,234,0.5); }
+
+    /* ── Layout ── */
+    .container { max-width:var(--max-width); margin:0 auto; padding:0 var(--s4); }
+    .section        { padding:var(--s7) 0; }
+    .section--tight { padding:var(--s5) 0; }
+    .section--warm  { background:var(--bg-section); }
+    .section--card  { background:var(--bg-card); }
+    .section--dark  { background:var(--bg-dark); }
+    .section--cream { background:var(--bg-primary); }
+    .section--footer{ background:var(--bg-footer); }
+    .text-center    { text-align:center; }
+
+    .divider-bar {
+      width:44px; height:2.5px;
+      background:linear-gradient(90deg,var(--gold),var(--warm-blue));
+      border-radius:2px; margin:var(--s3) auto; opacity:0.8;
+    }
+    .divider-bar--left { margin-left:0; }
+
+    .fade-in { opacity:0; transform:translateY(22px); transition:opacity 0.65s ease, transform 0.65s ease; }
+    .fade-in.visible { opacity:1; transform:translateY(0); }
+
+    /* ── Buttons ── */
+    .btn {
+      display:inline-flex; align-items:center; gap:0.45rem;
+      padding:0.88rem 2rem; border-radius:100px;
+      font-family:var(--font-ui); font-size:0.86rem; font-weight:600;
+      letter-spacing:0.02em; cursor:pointer;
+      transition:all 0.3s ease; border:1.5px solid transparent;
+      white-space:nowrap;
+    }
+    .btn-primary { background:var(--deep-blue); color:var(--text-warm); }
+    .btn-primary:hover { background:#243f64; transform:translateY(-2px); box-shadow:0 10px 32px rgba(31,53,87,0.28); }
+    .btn-ghost { background:transparent; color:var(--text-warm); border-color:rgba(245,241,234,0.28); }
+    .btn-ghost:hover { background:rgba(245,241,234,0.08); border-color:rgba(245,241,234,0.55); }
+    .btn-gold { background:var(--gold); color:#fff; font-weight:700; }
+    .btn-gold:hover { background:var(--gold-warm); transform:translateY(-2px); box-shadow:0 10px 32px rgba(184,146,62,0.35); }
+    .btn-outline { background:transparent; color:var(--deep-blue); border-color:rgba(75,111,165,0.42); }
+    .btn-outline:hover { background:var(--deep-blue); color:var(--text-warm); }
+    .btn-sm { padding:0.62rem 1.35rem; font-size:0.78rem; }
+
+    /* ── Header ── */
+    .site-header {
+      position:fixed; top:0; left:0; right:0; z-index:200;
+      background:rgba(245,241,234,0.94);
+      backdrop-filter:blur(20px) saturate(1.2);
+      -webkit-backdrop-filter:blur(20px) saturate(1.2);
+      border-bottom:var(--border-warm);
+      transition:box-shadow 0.3s ease;
+    }
+    .site-header.scrolled { box-shadow:var(--shadow-sm); }
+    .header__inner {
+      max-width:var(--max-width); margin:0 auto; padding:0 var(--s4);
+      height:68px; display:flex; align-items:center;
+      justify-content:space-between; gap:var(--s3);
+    }
+    .header__logo { display:flex; flex-direction:column; gap:3px; }
+    .header__logo-name {
+      font-family:var(--font-display); font-size:1.05rem; font-weight:700;
+      color:var(--deep-blue); line-height:1; letter-spacing:-0.01em;
+    }
+    .header__logo-sub {
+      font-family:var(--font-ui); font-size:0.54rem; font-weight:600;
+      letter-spacing:0.14em; text-transform:uppercase;
+      color:var(--warm-blue); opacity:0.8;
+    }
+    .header__nav { display:flex; align-items:center; gap:1.5rem; list-style:none; }
+    .header__nav a {
+      font-family:var(--font-ui); font-size:0.78rem; font-weight:500;
+      color:var(--text-body); transition:color 0.2s; white-space:nowrap;
+    }
+    .header__nav a:hover, .header__nav a.active { color:var(--deep-blue); font-weight:600; }
+    .header__cta { display:flex; align-items:center; gap:0.9rem; flex-shrink:0; }
+    .hamburger { display:none; flex-direction:column; gap:5px; cursor:pointer; background:none; border:none; padding:8px; }
+    .hamburger span { display:block; width:20px; height:2px; background:var(--text-ink); border-radius:2px; transition:all 0.25s ease; }
+    .mobile-menu { display:none; flex-direction:column; background:var(--bg-card); border-top:var(--border-warm); padding:1rem var(--s4) 1.5rem; }
+    .mobile-menu.open { display:flex; }
+    .mobile-menu a { font-family:var(--font-ui); font-size:0.9rem; font-weight:500; color:var(--text-body); padding:0.7rem 0; border-bottom:var(--border-card); transition:color 0.2s; }
+    .mobile-menu a:hover { color:var(--deep-blue); }
+    .mobile-menu a:last-of-type { border-bottom:none; }
+    .mobile-menu .mobile-cta { margin-top:1rem; }
+    @media (max-width:1024px) { .header__nav { display:none; } }
+    @media (max-width:768px) { .header__cta .btn-ghost { display:none; } .hamburger { display:flex; } }
+
+    /* ════════════════════════════════════════════
+       S1 — HERO  ·  --bg-dark
+    ════════════════════════════════════════════ */
+    .hero {
+      background:var(--bg-dark);
+      padding-top:68px;
+      padding-bottom:var(--s6);
+      text-align:center;
+      position:relative;
+      overflow:hidden;
+    }
+    .hero::before {
+      content:'';
+      position:absolute; top:-100px; right:-120px;
+      width:600px; height:600px;
+      background:radial-gradient(ellipse at center, rgba(184,146,62,0.07) 0%, transparent 65%);
+      pointer-events:none;
+    }
+    .hero::after {
+      content:'';
+      position:absolute; bottom:-60px; left:-80px;
+      width:400px; height:400px;
+      background:radial-gradient(ellipse at center, rgba(109,143,199,0.05) 0%, transparent 65%);
+      pointer-events:none;
+    }
+    .hero__inner {
+      max-width:800px; margin:0 auto;
+      padding:var(--s6) var(--s4) var(--s5);
+      position:relative; z-index:1;
+    }
+    .hero__eyebrow {
+      display:inline-flex; align-items:center; gap:0.6rem;
+      font-family:var(--font-ui); font-size:0.68rem; font-weight:600;
+      letter-spacing:0.18em; text-transform:uppercase;
+      color:var(--gold-pale); margin-bottom:1.8rem;
+    }
+    .hero__eyebrow-dot { width:5px; height:5px; border-radius:50%; background:var(--gold); opacity:0.75; flex-shrink:0; }
+    .hero__title { font-family:var(--font-display); font-size:clamp(2.2rem,4.6vw,3.6rem); font-weight:700; color:#fff; line-height:1.15; margin-bottom:1.6rem; }
+    .hero__title em { font-style:italic; color:var(--gold-pale); }
+    .hero__body { font-family:var(--font-body); font-size:1.06rem; line-height:1.88; color:rgba(245,241,234,0.68); max-width:560px; margin:0 auto 2.6rem; }
+    .hero__actions { display:flex; flex-wrap:wrap; gap:1rem; justify-content:center; }
+
+    /* ════════════════════════════════════════════
+       S2 — BALAY MEANING  ·  --bg-primary (cream breath)
+    ════════════════════════════════════════════ */
+    .balay-section {
+      background:var(--bg-primary);
+      padding:var(--s7) 0;
+      position:relative; overflow:hidden;
+    }
+    .balay-section::before {
+      content:'';
+      position:absolute; top:-60px; right:-80px;
+      width:500px; height:500px;
+      background:radial-gradient(ellipse at center, rgba(184,146,62,0.05) 0%, transparent 65%);
+      pointer-events:none;
+    }
+    .balay-grid {
+      display:grid; grid-template-columns:1fr 1fr;
+      gap:var(--s6); align-items:center;
+    }
+    @media (max-width:880px) { .balay-grid { grid-template-columns:1fr; } }
+    .balay-word-card {
+      background:var(--bg-card);
+      border:var(--border-warm);
+      border-radius:var(--radius-xl);
+      padding:var(--s5) var(--s4);
+      text-align:center;
+      box-shadow:var(--shadow-md);
+      position:relative; overflow:hidden;
+    }
+    .balay-word-card::before {
+      content:'';
+      position:absolute; top:-40px; right:-40px;
+      width:200px; height:200px;
+      background:radial-gradient(ellipse at center, rgba(184,146,62,0.08) 0%, transparent 65%);
+      pointer-events:none;
+    }
+    .balay-word {
+      font-family:var(--font-display);
+      font-size:clamp(3rem,8vw,5.5rem);
+      font-weight:700; font-style:italic;
+      color:var(--deep-blue); line-height:1;
+      margin-bottom:0.5rem;
+    }
+    .balay-translation {
+      font-family:var(--font-ui); font-size:0.72rem; font-weight:600;
+      letter-spacing:0.18em; text-transform:uppercase;
+      color:var(--gold); margin-bottom:1.5rem;
+    }
+    .balay-definition {
+      font-family:var(--font-body); font-size:1rem; line-height:1.8;
+      color:var(--text-body); max-width:320px; margin:0 auto;
+    }
+    .balay-copy h2 { margin-bottom:1.25rem; }
+    .balay-copy p  { margin-bottom:1.15rem; }
+    .balay-quote {
+      margin:2rem 0;
+      padding:1.6rem 1.75rem;
+      border-left:3px solid var(--gold);
+      background:rgba(184,146,62,0.05);
+      border-radius:0 var(--radius) var(--radius) 0;
+    }
+    .balay-quote p {
+      font-family:var(--font-display);
+      font-size:1.1rem; font-style:italic;
+      color:var(--deep-blue); line-height:1.65;
+      margin-bottom:0;
+    }
+
+    /* ════════════════════════════════════════════
+       S3 — FOUNDER STORY  ·  --bg-section (deeper cream)
+    ════════════════════════════════════════════ */
+    .founder-section {
+      background:var(--bg-section);
+      padding:var(--s7) 0;
+    }
+    .founder-grid {
+      display:grid; grid-template-columns:2fr 3fr;
+      gap:var(--s5); align-items:start;
+    }
+    @media (max-width:900px) { .founder-grid { grid-template-columns:1fr; } }
+    .founder-photo {
+      background:var(--bg-card);
+      border:var(--border-warm);
+      border-radius:var(--radius-lg);
+      aspect-ratio:3/4;
+      display:flex; flex-direction:column;
+      align-items:center; justify-content:center;
+      box-shadow:var(--shadow-md);
+      position:relative; overflow:hidden;
+    }
+    .founder-photo::before {
+      content:'';
+      position:absolute; inset:0;
+      background:radial-gradient(ellipse at 40% 40%, rgba(184,146,62,0.07) 0%, transparent 60%);
+    }
+    .founder-initials {
+      font-family:var(--font-display); font-size:3rem; font-weight:700;
+      color:var(--deep-blue); opacity:0.25; margin-bottom:0.5rem;
+    }
+    .founder-photo-label {
+      font-family:var(--font-ui); font-size:0.62rem; font-weight:600;
+      letter-spacing:0.14em; text-transform:uppercase;
+      color:var(--text-muted);
+    }
+    .founder-signature {
+      display:flex; align-items:center; gap:1rem; margin-top:2rem;
+      padding:1.25rem 1.5rem;
+      background:var(--bg-card); border:var(--border-card);
+      border-radius:var(--radius); box-shadow:var(--shadow-xs);
+    }
+    .founder-avatar {
+      width:52px; height:52px; border-radius:50%;
+      background:linear-gradient(135deg, var(--deep-blue), var(--bg-dark));
+      display:flex; align-items:center; justify-content:center;
+      flex-shrink:0;
+      font-family:var(--font-display); font-size:1rem; font-weight:700;
+      color:var(--gold-pale);
+    }
+    .founder-sig-name { font-family:var(--font-body); font-size:0.95rem; font-weight:500; color:var(--text-ink); }
+    .founder-sig-title { font-family:var(--font-ui); font-size:0.72rem; color:var(--text-muted); margin-top:2px; }
+    .founder-copy h2 { margin-bottom:1.25rem; }
+    .founder-copy p  { margin-bottom:1.15rem; }
+
+    /* ════════════════════════════════════════════
+       S4 — TIMELINE  ·  --bg-dark (contrast moment)
+    ════════════════════════════════════════════ */
+    .timeline-section {
+      background:var(--bg-dark);
+      padding:var(--s7) 0;
+      position:relative; overflow:hidden;
+    }
+    .timeline-section::before {
+      content:'';
+      position:absolute; top:-80px; left:-80px;
+      width:480px; height:480px;
+      background:radial-gradient(ellipse at center, rgba(184,146,62,0.06) 0%, transparent 65%);
+      pointer-events:none;
+    }
+    .timeline-track {
+      position:relative;
+      max-width:900px;
+      margin:var(--s5) auto 0;
+      padding-left:3rem;
+    }
+    .timeline-track::before {
+      content:'';
+      position:absolute; left:0; top:0; bottom:0;
+      width:2px;
+      background:linear-gradient(to bottom, rgba(184,146,62,0.6), rgba(184,146,62,0.1));
+    }
+    .timeline-item {
+      position:relative;
+      margin-bottom:var(--s4);
+      padding:1.75rem 2rem;
+      background:rgba(255,255,255,0.03);
+      border:var(--border-dark);
+      border-radius:var(--radius-lg);
+      transition:background 0.25s;
+    }
+    .timeline-item:hover { background:rgba(255,255,255,0.05); }
+    .timeline-item:last-child { margin-bottom:0; }
+    .timeline-dot {
+      position:absolute; left:-3.6rem; top:1.75rem;
+      width:14px; height:14px; border-radius:50%;
+      background:var(--gold);
+      box-shadow:0 0 10px rgba(184,146,62,0.5);
+      border:3px solid var(--bg-dark);
+    }
+    .timeline-era {
+      font-family:var(--font-ui); font-size:0.62rem; font-weight:700;
+      letter-spacing:0.16em; text-transform:uppercase;
+      color:var(--gold); margin-bottom:0.6rem;
+    }
+    .timeline-title {
+      font-family:var(--font-display); font-size:1.2rem; font-weight:600;
+      color:#fff; margin-bottom:0.6rem; line-height:1.3;
+    }
+    .timeline-body { font-family:var(--font-body); font-size:0.92rem; line-height:1.8; color:rgba(245,241,234,0.6); margin:0; }
+    @media (max-width:640px) {
+      .timeline-track { padding-left:2rem; }
+      .timeline-dot { left:-2.6rem; }
+      .timeline-item { padding:1.25rem 1.25rem; }
+    }
+
+    /* ════════════════════════════════════════════
+       S5 — VALUES  ·  --bg-card (fresh white warmth)
+    ════════════════════════════════════════════ */
+    .values-section { background:var(--bg-card); padding:var(--s7) 0; }
+    .values-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:1.5rem; margin-top:var(--s4); }
+    @media (max-width:700px) { .values-grid { grid-template-columns:1fr; } }
+    .value-card {
+      background:var(--bg-primary);
+      border:var(--border-warm);
+      border-radius:var(--radius-lg);
+      padding:2rem;
+      transition:transform 0.25s, box-shadow 0.25s;
+    }
+    .value-card:hover { transform:translateY(-3px); box-shadow:var(--shadow-md); }
+    .value-icon {
+      width:44px; height:44px; border-radius:var(--radius-sm);
+      background:rgba(31,53,87,0.07);
+      display:flex; align-items:center; justify-content:center;
+      margin-bottom:1.1rem;
+      font-family:var(--font-ui); font-size:0.75rem; font-weight:700;
+      color:var(--deep-blue);
+    }
+    .value-title { font-family:var(--font-display); font-size:1.1rem; font-weight:600; color:var(--deep-blue); margin-bottom:0.65rem; }
+    .value-desc  { font-family:var(--font-body); font-size:0.9rem; line-height:1.8; color:var(--text-body); margin:0; }
+
+    /* ════════════════════════════════════════════
+       S6 — FINAL CTA  ·  --bg-dark
+    ════════════════════════════════════════════ */
+    .cta-section {
+      background:var(--bg-dark);
+      padding:var(--s7) 0;
+      text-align:center;
+      position:relative; overflow:hidden;
+    }
+    .cta-section::before {
+      content:'';
+      position:absolute; top:-80px; right:-80px;
+      width:500px; height:500px;
+      background:radial-gradient(ellipse at center, rgba(184,146,62,0.07) 0%, transparent 65%);
+      pointer-events:none;
+    }
+    .cta-title { font-family:var(--font-display); font-size:clamp(1.8rem,3.5vw,2.8rem); font-weight:700; color:#fff; line-height:1.2; margin-bottom:1.25rem; }
+    .cta-title em { font-style:italic; color:var(--gold-pale); }
+    .cta-body { font-family:var(--font-body); font-size:1.05rem; line-height:1.85; color:rgba(245,241,234,0.62); max-width:520px; margin:0 auto 2.5rem; }
+    .cta-actions { display:flex; flex-wrap:wrap; gap:1rem; justify-content:center; }
+    .cta-note { font-family:var(--font-ui); font-size:0.75rem; color:rgba(245,241,234,0.28); margin-top:1.25rem; }
+
+    /* ── Footer ── */
+    .site-footer {
+      background:var(--bg-footer);
+      border-top:var(--border-dark);
+      padding:var(--s6) 0 var(--s4);
+    }
+    .footer-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:var(--s4); }
+    @media (max-width:900px) { .footer-grid { grid-template-columns:repeat(2,1fr); } }
+    @media (max-width:540px) { .footer-grid { grid-template-columns:1fr; } }
+    .footer-brand-name { font-family:var(--font-display); font-size:1rem; font-weight:700; color:#fff; }
+    .footer-brand-desc { font-family:var(--font-body); font-size:0.82rem; line-height:1.75; color:rgba(245,241,234,0.45); margin-top:0.8rem; max-width:240px; }
+    .footer-col-label { font-family:var(--font-ui); font-size:0.62rem; font-weight:600; letter-spacing:0.14em; text-transform:uppercase; color:rgba(245,241,234,0.32); margin-bottom:1.1rem; }
+    .footer-link { display:block; font-family:var(--font-ui); font-size:0.83rem; color:rgba(245,241,234,0.6); line-height:2.15; transition:color 0.2s; }
+    .footer-link:hover { color:#fff; }
+    .footer-bottom { margin-top:var(--s4); padding-top:1.5rem; border-top:var(--border-dark); display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.75rem; }
+    .footer-copy { font-family:var(--font-ui); font-size:0.75rem; color:rgba(245,241,234,0.28); }
+
+    /* Misc */
+    .section-header { max-width:680px; margin:0 auto var(--s5); text-align:center; }
+    .section-header h2 { margin-bottom:0.75rem; }
+    .section-header p { color:var(--text-body); }
+  </style>
+</head>
+<body>
+
+<!-- ════════════════════════════════════════════
+     HEADER — "Our Story" active
+════════════════════════════════════════════ -->
+<header class="site-header" id="site-header">
+  <div class="header__inner">
+    <a href="index.html" class="header__logo">
+      <span class="header__logo-name">Balay ni Bruno &amp; Co.</span>
+      <span class="header__logo-sub">Operational Support Studio</span>
+    </a>
+    <nav>
+      <ul class="header__nav">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html" class="active">Our Story</a></li>
+        <li><a href="how-it-works.html">How It Works</a></li>
+        <li><a href="how-we-help.html">How We Help</a></li>
+        <li><a href="our-team.html">Our Team</a></li>
+        <li><a href="our-work.html">Our Work</a></li>
+        <li><a href="insights.html">Insights</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+    <div class="header__cta">
+      <a href="contact.html" class="btn btn-ghost btn-sm">Start a Conversation</a>
+      <a href="contact.html" class="btn btn-gold btn-sm">Book a Call</a>
+    </div>
+    <button class="hamburger" id="hamburger" aria-label="Open menu">
+      <span id="hb1"></span>
+      <span id="hb2"></span>
+      <span id="hb3"></span>
+    </button>
+  </div>
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="index.html">Home</a>
+    <a href="about.html" style="color:var(--deep-blue);font-weight:600;">Our Story</a>
+    <a href="how-it-works.html">How It Works</a>
+    <a href="how-we-help.html">How We Help</a>
+    <a href="our-team.html">Our Team</a>
+    <a href="our-work.html">Our Work</a>
+    <a href="insights.html">Insights</a>
+    <a href="contact.html">Contact</a>
+    <a href="contact.html" class="btn btn-gold mobile-cta" style="text-align:center;justify-content:center;">Book a Call</a>
+  </div>
+</header>
+
+
+<!-- ════════════════════════════════════════════
+     S1 — HERO  ·  Dark
+════════════════════════════════════════════ -->
+<section class="hero">
+  <div class="hero__inner fade-in">
+
+    <div class="hero__eyebrow">
+      <span class="hero__eyebrow-dot"></span>
+      Our Story
+    </div>
+
+    <h1 class="hero__title">
+      Built on Real Work.<br>
+      <em>Grown Through Real Relationships.</em>
+    </h1>
+
+    <p class="hero__body">
+      Bruno didn't start with a business plan. He started with a decision — to work remotely,
+      be present for his family, and build something meaningful with the people he trusted most.
+      What began as one person doing digital work became a studio rooted in care.
+    </p>
+
+    <div class="hero__actions">
+      <a href="#founder" class="btn btn-gold">Read the Story</a>
+      <a href="our-team.html" class="btn btn-ghost">Meet the Team</a>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════
+     S2 — BALAY MEANING  ·  Cream (the breath)
+════════════════════════════════════════════ -->
+<section class="balay-section">
+  <div class="container">
+    <div class="balay-grid">
+
+      <div class="balay-word-card fade-in">
+        <p class="balay-word">Balay</p>
+        <p class="balay-translation">Visayan · noun · /ba-lai/</p>
+        <p class="balay-definition">
+          In the Visayan language of the Philippines, <em>Balay</em> means <strong>home</strong> —
+          not just the structure, but the warmth, the care, the people inside it.
+        </p>
+      </div>
+
+      <div class="balay-copy fade-in">
+        <span class="eyebrow eyebrow--gold">The Name Behind the Studio</span>
+        <h2>Why We Called It <em>Home</em></h2>
+        <div class="divider-bar divider-bar--left"></div>
+
+        <p>
+          When Bruno named this studio, he wasn't thinking about branding. He was thinking
+          about the kind of place he wanted to build — one where clients felt cared for,
+          where the team felt invested, and where the work felt like it meant something.
+        </p>
+
+        <div class="balay-quote">
+          <p>
+            "We don't treat clients like accounts. We treat them like guests in our home —
+            you come in, we take care of you, and we don't let you leave without knowing
+            you're in good hands."
+          </p>
+        </div>
+
+        <p>
+          That idea — home as the emotional anchor — shapes everything at BBC.
+          The way we onboard. The way we communicate. The way we stay involved long after
+          the initial setup is done. You're not hiring a service. You're joining a house.
+        </p>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════
+     S3 — FOUNDER STORY  ·  Section (deeper cream)
+════════════════════════════════════════════ -->
+<section class="founder-section" id="founder">
+  <div class="container">
+    <div class="founder-grid">
+
+      <!-- Left: founder visual -->
+      <div class="fade-in">
+        <div class="founder-photo">
+          <div class="founder-initials">B</div>
+          <p class="founder-photo-label">Bruno — Founder</p>
+        </div>
+        <div class="founder-signature">
+          <div class="founder-avatar">RJ</div>
+          <div>
+            <p class="founder-sig-name">RJ Bryan B. Tres Reyes</p>
+            <p class="founder-sig-title">Founder &amp; Lead Strategist, Balay ni Bruno &amp; Co.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: story copy -->
+      <div class="founder-copy fade-in">
+        <span class="eyebrow">From the Founder</span>
+        <h2>How a Family Decision Became a Studio Built on Trust</h2>
+        <div class="divider-bar divider-bar--left"></div>
+
+        <p>
+          Before BBC, I was working in the call center industry in the Philippines.
+          When the pandemic hit, I made a decision that changed everything — I wanted
+          to work from home so I could be present for my family. So I became a virtual
+          assistant. I learned, I worked hard, and I built my skills one client at a time.
+        </p>
+
+        <p>
+          As the work grew, the people closest to me wanted in. Friends. Cousins. Colleagues
+          I had watched work with integrity for years. I didn't hire from a job board —
+          I trained the people I already trusted, people I had watched grow, people whose
+          character I already knew.
+        </p>
+
+        <p>
+          When client work expanded, I brought those people alongside me. Not cold hires.
+          Not matched strangers. Real people who had proven themselves to me personally —
+          working together the way family does, with honesty and accountability built in
+          from the start.
+        </p>
+
+        <p>
+          BBC was also born from something deeper: a belief that our skills and our work
+          should create real opportunities — for us, for our families, and for every client
+          who puts their trust in us. That's not a company value posted on a wall.
+          It's the reason we show up every day.
+        </p>
+
+        <p>
+          Welcome to Balay ni Bruno — the house we built together.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════
+     S4 — HOW THE TEAM GREW  ·  Dark (contrast)
+════════════════════════════════════════════ -->
+<section class="timeline-section">
+  <div class="container">
+    <div class="section-header fade-in" style="text-align:center;">
+      <span class="eyebrow eyebrow--pale">The Journey</span>
+      <h2 style="color:#fff;">How BBC Grew from Solo to Studio</h2>
+      <div class="divider-bar"></div>
+      <p style="color:rgba(245,241,234,0.55);">
+        Not a funding round or a rebrand — just a founder who kept doing real work
+        and brought the right people in at the right time.
+      </p>
+    </div>
+
+    <div class="timeline-track fade-in">
+
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <p class="timeline-era">Where It Started</p>
+        <h3 class="timeline-title">One Person, One Decision</h3>
+        <p class="timeline-body">
+          Bruno went remote during the pandemic, built his VA skills from scratch, and started
+          landing real clients in the US. Every engagement taught him something about what
+          business owners actually needed — not just tasks, but real operational support.
+        </p>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <p class="timeline-era">When the Team Formed</p>
+        <h3 class="timeline-title">Trusted People, One at a Time</h3>
+        <p class="timeline-body">
+          As work grew, Bruno trained the people closest to him — friends, family members,
+          trusted colleagues — rather than hiring cold from a platform. Each person was
+          chosen for their character first, then their skills. No cold matching. No guesswork.
+        </p>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <p class="timeline-era">When It Became a Studio</p>
+        <h3 class="timeline-title">Balay ni Bruno &amp; Co. Takes Shape</h3>
+        <p class="timeline-body">
+          What had been one person doing digital work became a coordinated team — with
+          a name, a structure, a set of values, and a clear identity. BBC was born not from
+          a pitch deck, but from the natural growth of real work done with real people.
+        </p>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <p class="timeline-era">Where We Are Now</p>
+        <h3 class="timeline-title">A Small Team, Deeply Invested</h3>
+        <p class="timeline-body">
+          Today BBC is a founder-led operational support studio — Bruno, Visa, Krizza,
+          Ryan, Al, and the collaborators around them. Small by design. Every client is
+          known by name. Every engagement is led by Bruno personally. The work keeps growing
+          because the relationships do too.
+        </p>
+      </div>
+
+      <div class="timeline-item" style="border-color:rgba(184,146,62,0.2);">
+        <div class="timeline-dot" style="background:rgba(184,146,62,0.4);"></div>
+        <p class="timeline-era">Looking Ahead</p>
+        <h3 class="timeline-title">Built to Grow With You</h3>
+        <p class="timeline-body">
+          BBC isn't finished. As our clients grow, we grow alongside them. New team members
+          are added with the same care as the first — trained, trusted, aligned. The house
+          gets bigger without losing what made it home.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════
+     S5 — CORE VALUES  ·  Card (fresh warmth)
+════════════════════════════════════════════ -->
+<section class="values-section">
+  <div class="container">
+    <div class="section-header fade-in">
+      <span class="eyebrow">What We Stand For</span>
+      <h2>The Values Behind Every Engagement</h2>
+      <div class="divider-bar"></div>
+      <p>These aren't written on a wall. They're built into the way we work.</p>
+    </div>
+
+    <div class="values-grid fade-in">
+
+      <div class="value-card">
+        <div class="value-icon">01</div>
+        <p class="value-title">People-First</p>
+        <p class="value-desc">
+          Systems exist to serve people — not the other way around. Every workflow we
+          build, every process we design, starts with the human on the other end of it.
+          Clients are not accounts. They're people we take responsibility for.
+        </p>
+      </div>
+
+      <div class="value-card">
+        <div class="value-icon">02</div>
+        <p class="value-title">Honest Always</p>
+        <p class="value-desc">
+          We tell you what's working and what isn't. We don't oversell, overpromise,
+          or disappear when things get complicated. Honest communication is the foundation
+          of every relationship we build — with clients and within the team.
+        </p>
+      </div>
+
+      <div class="value-card">
+        <div class="value-icon">03</div>
+        <p class="value-title">Built to Last</p>
+        <p class="value-desc">
+          We don't optimize for the quick win. We build systems, structures, and
+          relationships that hold up over time. Most BBC clients stay for years.
+          That's not an accident — it's what happens when support is designed to grow.
+        </p>
+      </div>
+
+      <div class="value-card">
+        <div class="value-icon">04</div>
+        <p class="value-title">Family Business</p>
+        <p class="value-desc">
+          The name says it — this is a house we built. Bruno trained the people around him,
+          invested in them personally, and brought them into something that creates real
+          opportunity. That spirit extends to every client who becomes part of it.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════
+     S6 — FINAL CTA  ·  Dark
+════════════════════════════════════════════ -->
+<section class="cta-section">
+  <div class="container">
+    <div class="fade-in">
+      <span class="eyebrow eyebrow--pale">Ready When You Are</span>
+      <h2 class="cta-title">
+        Ready to Feel What<br><em>Real Support Feels Like?</em>
+      </h2>
+      <p class="cta-body">
+        Book a call with Bruno. We'll talk about your business, what you're dealing with,
+        and whether BBC is the right fit. No pitch. No pressure. Just an honest conversation.
+      </p>
+      <div class="cta-actions">
+        <a href="contact.html" class="btn btn-gold">Book a Call</a>
+        <a href="our-team.html" class="btn btn-ghost">Meet the Team</a>
+      </div>
+      <p class="cta-note">No obligation. Just a real conversation.</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════
+     FOOTER
+════════════════════════════════════════════ -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+
+      <div>
+        <p class="footer-brand-name">Balay ni Bruno &amp; Co.</p>
+        <p class="footer-brand-desc">
+          A family-built operational support studio helping business owners grow through
+          real collaboration, honest systems, and long-term care.
+        </p>
+      </div>
+
+      <div>
+        <p class="footer-col-label">How We Help</p>
+        <a href="how-we-help.html#marketing" class="footer-link">Marketing Support</a>
+        <a href="how-we-help.html#content" class="footer-link">Content &amp; Creative</a>
+        <a href="how-we-help.html#websites" class="footer-link">Websites &amp; Digital</a>
+        <a href="how-we-help.html#seo" class="footer-link">SEO &amp; Visibility</a>
+        <a href="how-we-help.html#operations" class="footer-link">Operations &amp; Admin</a>
+      </div>
+
+      <div>
+        <p class="footer-col-label">Company</p>
+        <a href="about.html" class="footer-link">Our Story</a>
+        <a href="how-it-works.html" class="footer-link">How It Works</a>
+        <a href="our-team.html" class="footer-link">Our Team</a>
+        <a href="our-work.html" class="footer-link">Our Work</a>
+        <a href="insights.html" class="footer-link">Insights</a>
+        <a href="contact.html" class="footer-link">Contact</a>
+      </div>
+
+      <div>
+        <p class="footer-col-label">Contact</p>
+        <p class="footer-link">hello@balaynibruno.com</p>
+        <p class="footer-link">Serving US, UK &amp; international clients</p>
+        <a href="contact.html" class="btn btn-gold btn-sm" style="margin-top:1rem;">Book a Call</a>
+      </div>
+
+    </div>
+
+    <div class="footer-bottom">
+      <p class="footer-copy">&copy; 2026 Balay ni Bruno &amp; Co. All rights reserved.</p>
+      <p class="footer-copy">
+        <a href="#" style="color:rgba(245,241,234,0.28); transition:color 0.2s;">Privacy Policy</a>
+        <span style="margin:0 8px;">&middot;</span>
+        <a href="#" style="color:rgba(245,241,234,0.28); transition:color 0.2s;">Terms of Service</a>
+      </p>
+    </div>
+  </div>
+</footer>
+
+
+<!-- ════════════════════════════════════════════
+     JAVASCRIPT
+════════════════════════════════════════════ -->
+<script>
+  // Sticky header
+  const header = document.getElementById('site-header');
+  window.addEventListener('scroll', () => {
+    header.classList.toggle('scrolled', window.scrollY > 60);
+  }, { passive: true });
+
+  // Hamburger
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const hb1 = document.getElementById('hb1');
+  const hb2 = document.getElementById('hb2');
+  const hb3 = document.getElementById('hb3');
+  hamburger.addEventListener('click', () => {
+    const open = mobileMenu.classList.toggle('open');
+    if (open) {
+      hb1.style.transform = 'translateY(7px) rotate(45deg)';
+      hb2.style.opacity = '0';
+      hb3.style.transform = 'translateY(-7px) rotate(-45deg)';
+    } else {
+      hb1.style.transform = ''; hb2.style.opacity = ''; hb3.style.transform = '';
+    }
+  });
+  mobileMenu.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      mobileMenu.classList.remove('open');
+      hb1.style.transform = ''; hb2.style.opacity = ''; hb3.style.transform = '';
+    });
+  });
+
+  // Fade-in on scroll
+  const fadeEls = document.querySelectorAll('.fade-in');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+  fadeEls.forEach(el => io.observe(el));
+</script>
+
+</body>
+</html>

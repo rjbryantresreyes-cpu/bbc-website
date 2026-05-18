@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Page Not Found — Balay ni Bruno &amp; Co.</title>
+  <meta name="robots" content="noindex, follow" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Lora:ital,wght@0,400;0,500;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --deep-blue:  #1F3557;
+      --mid-blue:   #4B6FA5;
+      --warm-blue:  #6D8FC7;
+      --bg-primary: #F5F1EA;
+      --bg-card:    #FDFAF6;
+      --bg-dark:    #1C2E47;
+      --bg-footer:  #172540;
+      --text-ink:   #2A3040;
+      --text-body:  #4E5666;
+      --text-muted: #888FA0;
+      --text-warm:  #F5F1EA;
+      --gold:       #B8923E;
+      --gold-pale:  #E6CFA0;
+      --neutral-100:#E8E2D6;
+      --font-display:'Playfair Display', Georgia, serif;
+      --font-body:  'Lora', Georgia, serif;
+      --font-ui:    'DM Sans', system-ui, sans-serif;
+      --max-width:  1200px;
+      --radius:     16px;
+      --radius-lg:  24px;
+      --shadow-sm:  0 3px 18px rgba(85,60,35,0.08);
+      --shadow-md:  0 7px 36px rgba(85,60,35,0.11);
+      --border-card:1px solid rgba(85,60,35,0.09);
+      --border-dark:1px solid rgba(255,255,255,0.07);
+      --s2: 1rem; --s3: 1.5rem; --s4: 2.5rem; --s5: 4rem;
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--bg-dark);
+      color: var(--text-warm);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Warm paper texture */
+    body::after {
+      content: '';
+      position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23n)' opacity='0.026'/%3E%3C/svg%3E");
+      pointer-events: none; z-index: 9999; mix-blend-mode: multiply;
+    }
+
+    a { text-decoration: none; }
+
+    /* ── HEADER ────────────────────────────────────── */
+    .site-header {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+      background: rgba(245,241,234,0.94);
+      backdrop-filter: blur(20px) saturate(1.2);
+      -webkit-backdrop-filter: blur(20px) saturate(1.2);
+      border-bottom: 1px solid rgba(85,60,35,0.12);
+      transition: box-shadow 0.3s ease;
+    }
+    .site-header.scrolled { box-shadow: 0 3px 18px rgba(85,60,35,0.08); }
+
+    .header__inner {
+      max-width: var(--max-width); margin: 0 auto; padding: 0 var(--s4);
+      height: 68px; display: flex; align-items: center;
+      justify-content: space-between; gap: var(--s3);
+    }
+    .header__logo { display: flex; flex-direction: column; gap: 3px; }
+    .header__logo-name {
+      font-family: var(--font-display); font-size: 1.05rem; font-weight: 700;
+      color: var(--deep-blue); line-height: 1; letter-spacing: -0.01em;
+    }
+    .header__logo-sub {
+      font-family: var(--font-ui); font-size: 0.54rem; font-weight: 600;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--warm-blue); opacity: 0.8;
+    }
+    .header__nav { display: flex; align-items: center; gap: 1.5rem; list-style: none; }
+    .header__nav a {
+      font-family: var(--font-ui); font-size: 0.78rem; font-weight: 500;
+      color: var(--text-body); transition: color 0.2s; white-space: nowrap;
+    }
+    .header__nav a:hover { color: var(--deep-blue); font-weight: 600; }
+    .header__cta { display: flex; align-items: center; gap: 0.9rem; flex-shrink: 0; }
+
+    .btn {
+      display: inline-flex; align-items: center; gap: 0.45rem;
+      padding: 0.88rem 2rem; border-radius: 100px;
+      font-family: var(--font-ui); font-size: 0.86rem; font-weight: 600;
+      letter-spacing: 0.02em; cursor: pointer;
+      transition: all 0.3s ease; border: 1.5px solid transparent;
+      white-space: nowrap;
+    }
+    .btn-outline {
+      background: transparent; color: var(--deep-blue);
+      border-color: rgba(75,111,165,0.42);
+    }
+    .btn-outline:hover { background: var(--deep-blue); color: var(--text-warm); transform: translateY(-2px); }
+    .btn-gold { background: var(--gold); color: #fff; font-weight: 700; }
+    .btn-gold:hover { background: #D4A84B; transform: translateY(-2px); box-shadow: 0 10px 32px rgba(184,146,62,0.35); }
+    .btn-sm { padding: 0.62rem 1.35rem; font-size: 0.78rem; }
+
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 8px; }
+    .hamburger span { display: block; width: 20px; height: 2px; background: var(--text-ink); border-radius: 2px; }
+
+    .mobile-menu {
+      display: none; flex-direction: column;
+      background: var(--bg-card); border-top: 1px solid rgba(85,60,35,0.12);
+      padding: 1rem var(--s4) 1.5rem;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      font-family: var(--font-ui); font-size: 0.9rem; font-weight: 500;
+      color: var(--text-body); padding: 0.7rem 0;
+      border-bottom: 1px solid rgba(85,60,35,0.09); white-space: nowrap;
+    }
+    .mobile-menu a:last-of-type { border-bottom: none; }
+    .mobile-menu .mobile-cta { margin-top: 1rem; }
+
+    @media (max-width: 1024px) { .header__nav { display: none; } }
+    @media (max-width: 768px) { .header__cta .btn-gold { display: none; } .hamburger { display: flex; } }
+
+    /* ── 404 MAIN ───────────────────────────────────── */
+    .not-found {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: calc(68px + 5rem) var(--s4) var(--s5);
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Warm ambient glows */
+    .not-found::before {
+      content: '';
+      position: absolute; top: 0; right: -60px;
+      width: 560px; height: 560px;
+      background: radial-gradient(ellipse at center,
+        rgba(184,146,62,0.07) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .not-found::after {
+      content: '';
+      position: absolute; bottom: -40px; left: -60px;
+      width: 400px; height: 400px;
+      background: radial-gradient(ellipse at center,
+        rgba(109,143,199,0.06) 0%, transparent 62%);
+      pointer-events: none;
+    }
+
+    .not-found__inner {
+      max-width: 600px;
+      text-align: center;
+      position: relative; z-index: 1;
+    }
+
+    .not-found__num {
+      font-family: var(--font-display);
+      font-size: clamp(6rem, 18vw, 10rem);
+      font-weight: 700;
+      font-style: italic;
+      color: var(--gold-pale);
+      line-height: 1;
+      opacity: 0.35;
+      margin-bottom: 0.25rem;
+      letter-spacing: -0.03em;
+    }
+
+    .not-found__eyebrow {
+      font-family: var(--font-ui);
+      font-size: 0.68rem; font-weight: 600;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.25rem;
+      display: block;
+    }
+
+    .not-found__title {
+      font-family: var(--font-display);
+      font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+      font-weight: 700;
+      color: #fff;
+      line-height: 1.2;
+      margin-bottom: 1.1rem;
+    }
+    .not-found__title em { font-style: italic; color: var(--gold-pale); }
+
+    .not-found__body {
+      font-family: var(--font-body);
+      font-size: 1rem; line-height: 1.85;
+      color: rgba(245,241,234,0.62);
+      max-width: 440px;
+      margin: 0 auto 2.5rem;
+    }
+
+    /* Nav card grid */
+    .not-found__links {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.85rem;
+      margin-bottom: 2.5rem;
+    }
+    @media (max-width: 480px) { .not-found__links { grid-template-columns: 1fr; } }
+
+    .not-found__link-card {
+      background: rgba(245,230,200,0.04);
+      border: 1px solid rgba(245,230,200,0.09);
+      border-radius: var(--radius);
+      padding: 1.1rem 1.3rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      transition: background 0.25s ease;
+      color: rgba(245,241,234,0.82);
+    }
+    .not-found__link-card:hover {
+      background: rgba(245,230,200,0.08);
+      color: #fff;
+    }
+    .not-found__link-icon {
+      font-size: 1.1rem; flex-shrink: 0; opacity: 0.8;
+    }
+    .not-found__link-label {
+      font-family: var(--font-ui);
+      font-size: 0.84rem; font-weight: 600;
+      color: inherit;
+    }
+    .not-found__link-sub {
+      font-family: var(--font-body);
+      font-size: 0.72rem;
+      color: rgba(245,241,234,0.4);
+      display: block;
+      margin-top: 2px;
+    }
+
+    .not-found__email {
+      font-family: var(--font-ui);
+      font-size: 0.76rem;
+      color: rgba(245,241,234,0.3);
+      letter-spacing: 0.04em;
+    }
+    .not-found__email a {
+      color: var(--gold-pale);
+      transition: color 0.2s;
+    }
+    .not-found__email a:hover { color: #fff; }
+
+    /* ── FOOTER ─────────────────────────────────────── */
+    .footer {
+      background: var(--bg-footer);
+      border-top: 1px solid rgba(255,255,255,0.07);
+      padding: 1.5rem var(--s4);
+    }
+    .footer__bottom {
+      max-width: var(--max-width); margin: 0 auto;
+      display: flex; align-items: center;
+      justify-content: space-between; gap: 1rem; flex-wrap: wrap;
+    }
+    .footer__copyright {
+      font-family: var(--font-ui); font-size: 0.72rem;
+      color: rgba(245,241,234,0.28);
+    }
+    .footer__legal { display: flex; gap: 1.25rem; }
+    .footer__legal a {
+      font-family: var(--font-ui); font-size: 0.72rem;
+      color: rgba(245,241,234,0.28); transition: color 0.2s;
+    }
+    .footer__legal a:hover { color: rgba(245,241,234,0.6); }
+
+  </style>
+</head>
+<body>
+
+  <!-- ── HEADER ───────────────────────────────────── -->
+  <header class="site-header" id="siteHeader">
+    <div class="header__inner">
+      <a href="index.html" class="header__logo">
+        <span class="header__logo-name">Balay ni Bruno &amp; Co.</span>
+        <span class="header__logo-sub">Operational Support Studio</span>
+      </a>
+      <nav>
+        <ul class="header__nav">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">Our Story</a></li>
+          <li><a href="how-it-works.html">How It Works</a></li>
+          <li><a href="how-we-help.html">How We Help</a></li>
+          <li><a href="our-team.html">Our Team</a></li>
+          <li><a href="our-work.html">Our Work</a></li>
+          <li><a href="insights.html">Insights</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+      <div class="header__cta">
+        <a href="contact.html" class="btn btn-outline btn-sm">Start a Conversation</a>
+        <a href="portfolio-form.html" class="btn btn-gold btn-sm">Book a Call</a>
+        <button class="hamburger" id="hamburger" aria-label="Open menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+    <nav class="mobile-menu" id="mobileMenu">
+      <a href="index.html">Home</a>
+      <a href="about.html">Our Story</a>
+      <a href="how-it-works.html">How It Works</a>
+      <a href="how-we-help.html">How We Help</a>
+      <a href="our-team.html">Our Team</a>
+      <a href="our-work.html">Our Work</a>
+      <a href="insights.html">Insights</a>
+      <a href="contact.html">Contact</a>
+      <a href="portfolio-form.html" class="btn btn-gold mobile-cta">Book a Call</a>
+    </nav>
+  </header>
+
+
+  <!-- ── 404 CONTENT ──────────────────────────────── -->
+  <main class="not-found">
+    <div class="not-found__inner">
+
+      <div class="not-found__num">404</div>
+      <span class="not-found__eyebrow">Page Not Found</span>
+
+      <h1 class="not-found__title">
+        We Can't Find That Page,<br>
+        But <em>We're Still Here.</em>
+      </h1>
+
+      <p class="not-found__body">
+        The page you're looking for may have moved or doesn't exist. That happens. Let's get you somewhere useful — or just reach out and we'll help directly.
+      </p>
+
+      <div class="not-found__links">
+        <a href="index.html" class="not-found__link-card">
+          <span class="not-found__link-icon">🏡</span>
+          <div>
+            <div class="not-found__link-label">Go Home</div>
+            <span class="not-found__link-sub">Back to the beginning</span>
+          </div>
+        </a>
+        <a href="about.html" class="not-found__link-card">
+          <span class="not-found__link-icon">📖</span>
+          <div>
+            <div class="not-found__link-label">Our Story</div>
+            <span class="not-found__link-sub">Who we are &amp; why we built this</span>
+          </div>
+        </a>
+        <a href="how-it-works.html" class="not-found__link-card">
+          <span class="not-found__link-icon">⚙️</span>
+          <div>
+            <div class="not-found__link-label">How We Work</div>
+            <span class="not-found__link-sub">The process, step by step</span>
+          </div>
+        </a>
+        <a href="contact.html" class="not-found__link-card">
+          <span class="not-found__link-icon">💬</span>
+          <div>
+            <div class="not-found__link-label">Contact Us</div>
+            <span class="not-found__link-sub">We're real people — just reach out</span>
+          </div>
+        </a>
+      </div>
+
+      <p class="not-found__email">
+        Or email us directly &rarr; <a href="mailto:hello@balaynibruno.com">hello@balaynibruno.com</a>
+      </p>
+
+    </div>
+  </main>
+
+
+  <!-- ── FOOTER ───────────────────────────────────── -->
+  <footer class="footer">
+    <div class="footer__bottom">
+      <div class="footer__copyright">&copy; 2026 Balay ni Bruno &amp; Co. All rights reserved.</div>
+      <div class="footer__legal">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+      </div>
+    </div>
+  </footer>
+
+
+  <script>
+    const header = document.getElementById('siteHeader');
+    window.addEventListener('scroll', () => {
+      header.classList.toggle('scrolled', window.scrollY > 12);
+    }, { passive: true });
+
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+    hamburger.addEventListener('click', () => mobileMenu.classList.toggle('open'));
+  </script>
+
+</body>
+</html>
