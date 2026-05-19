@@ -4,1125 +4,1018 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Insights — Balay ni Bruno &amp; Co.</title>
-  <!-- SEO & Open Graph -->
-  <meta name="description" content="BBC Insights — case studies, strategy breakdowns, AI workflow guides, operational systems, and business growth content from the Balay ni Bruno &amp; Co. team." />
+  <meta name="description" content="Strategy, systems, and proof of work — real case studies, AI workflows, and operational frameworks from the BBC team." />
   <link rel="canonical" href="https://balaynibruno.co/insights.html" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Balay ni Bruno &amp; Co." />
   <meta property="og:title" content="Insights — Balay ni Bruno &amp; Co." />
-  <meta property="og:description" content="Case studies, strategy breakdowns, AI workflow guides, operational systems, and business growth content from the BBC team." />
+  <meta property="og:description" content="Strategy, systems, and proof of work — real case studies, AI workflows, and operational frameworks from the BBC team." />
   <meta property="og:url" content="https://balaynibruno.co/insights.html" />
   <meta property="og:image" content="https://balaynibruno.co/og-image.jpg" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Insights — Balay ni Bruno &amp; Co." />
-  <meta name="twitter:description" content="Case studies, strategy breakdowns, AI workflow guides, and business growth content from the BBC team." />
-  <meta name="twitter:image" content="https://balaynibruno.co/og-image.jpg" />
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            navy:        '#0B1120',
-            blue:        '#2D5BFF',
-            'off-white': '#F8FAFC',
-            slate:       '#475569',
-            lightgray:   '#D1D5DB',
-          },
-          fontFamily: { sans: ['Montserrat', 'sans-serif'] },
-        },
-      },
-    };
-  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Lora:ital,wght@0,400;0,500;1,400;1,500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
   <style>
-    /* ── Base ── */
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
-    body { font-family: 'Montserrat', sans-serif; background: #F8FAFC; color: #0B1120; overflow-x: hidden; }
+    :root {
+      --deep-blue:   #1F3557;
+      --mid-blue:    #4B6FA5;
+      --warm-blue:   #6D8FC7;
+      --light-blue:  #A8C0DC;
+      --pale-blue:   #DDE8F2;
+      --bg-primary:  #F5F1EA;
+      --bg-section:  #EDE8DF;
+      --bg-card:     #FDFAF6;
+      --bg-card-alt: #FAF6EF;
+      --bg-dark:     #1C2E47;
+      --bg-footer:   #172540;
+      --neutral-100: #E8E2D6;
+      --neutral-200: #D5CEC3;
+      --neutral-300: #B8B1A6;
+      --text-ink:    #2A3040;
+      --text-body:   #4E5666;
+      --text-muted:  #888FA0;
+      --text-warm:   #F5F1EA;
+      --gold:        #B8923E;
+      --gold-pale:   #E6CFA0;
+      --gold-warm:   #D4A84B;
+      --sage:        #4E9E74;
+      --font-display:'Playfair Display', Georgia, serif;
+      --font-body:   'Lora', Georgia, serif;
+      --font-ui:     'DM Sans', system-ui, sans-serif;
+      --max-width:   1200px;
+      --radius-sm:   8px;
+      --radius:      16px;
+      --radius-lg:   24px;
+      --radius-xl:   32px;
+      --shadow-xs:   0 1px 6px  rgba(85,60,35,0.055);
+      --shadow-sm:   0 3px 18px rgba(85,60,35,0.08);
+      --shadow-md:   0 7px 36px rgba(85,60,35,0.11);
+      --shadow-lg:   0 14px 56px rgba(85,60,35,0.14);
+      --border-card: 1px solid rgba(85,60,35,0.09);
+      --border-warm: 1px solid rgba(85,60,35,0.12);
+      --border-dark: 1px solid rgba(255,255,255,0.07);
+      --s1:0.5rem; --s2:1rem; --s3:1.5rem; --s4:2.5rem; --s5:4rem; --s6:6rem; --s7:9rem;
+    }
 
-    /* ── Fade-in on scroll ── */
-    .fade-in { opacity: 0; transform: translateY(24px); transition: opacity 0.65s ease, transform 0.65s ease; }
-    .fade-in.visible { opacity: 1; transform: translateY(0); }
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body {
+      font-family: var(--font-body);
+      color: var(--text-ink);
+      background: var(--bg-primary);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+    body::after {
+      content:'';
+      position:fixed; inset:0;
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23n)' opacity='0.026'/%3E%3C/svg%3E");
+      pointer-events:none; z-index:9999; mix-blend-mode:multiply;
+    }
 
-    /* ── Sticky header shadow ── */
-    #site-header { transition: box-shadow 0.3s ease; }
-    #site-header.scrolled { box-shadow: 0 1px 16px rgba(0,0,0,0.09); }
+    /* ── Typography ── */
+    h1,h2,h3,h4 { font-family:var(--font-display); line-height:1.22; color:var(--deep-blue); }
+    h1 { font-size:clamp(2.2rem,4.8vw,3.6rem); line-height:1.16; font-weight:700; }
+    h2 { font-size:clamp(1.7rem,3vw,2.6rem); line-height:1.22; font-weight:600; }
+    h3 { font-size:clamp(1.05rem,1.6vw,1.3rem); font-weight:600; }
+    p  { font-family:var(--font-body); font-size:1rem; line-height:1.87; color:var(--text-body); }
+    p.lead { font-size:1.08rem; line-height:1.9; color:var(--text-ink); }
+    a  { text-decoration:none; }
 
-    /* ── Mobile nav ── */
-    #mobile-nav { display: none; }
-    #mobile-nav.open { display: flex; }
-    #hb1, #hb2, #hb3 { transition: transform 0.25s ease, opacity 0.25s ease; }
+    .eyebrow {
+      display:block; font-family:var(--font-ui);
+      font-size:0.68rem; font-weight:600;
+      letter-spacing:0.17em; text-transform:uppercase;
+      color:var(--warm-blue); margin-bottom:var(--s2);
+    }
+    .eyebrow--gold { color:var(--gold); }
+    .eyebrow--pale { color:rgba(245,241,234,0.5); }
 
-    /* ── Section spacing ── */
-    .section-pad { padding: 100px 0; }
-    @media (max-width: 768px) { .section-pad { padding: 64px 0; } }
+    /* ── Layout ── */
+    .container { max-width:var(--max-width); margin:0 auto; padding:0 var(--s4); }
+    .section        { padding:var(--s7) 0; }
+    .section--tight { padding:var(--s5) 0; }
+    .section--warm  { background:var(--bg-section); }
+    .section--card  { background:var(--bg-card); }
+    .section--dark  { background:var(--bg-dark); }
+    .section--cream { background:var(--bg-primary); }
+    .section--footer{ background:var(--bg-footer); }
+    .text-center    { text-align:center; }
 
-    /* ── Smooth interactions ── */
-    a, button { transition: opacity 0.2s ease, background 0.2s ease, color 0.2s ease, border-color 0.2s ease; }
+    .divider-bar {
+      width:44px; height:2.5px;
+      background:linear-gradient(90deg,var(--gold),var(--warm-blue));
+      border-radius:2px; margin:var(--s3) auto; opacity:0.8;
+    }
+    .divider-bar--left { margin-left:0; }
+
+    .fade-in { opacity:0; transform:translateY(22px); transition:opacity 0.65s ease, transform 0.65s ease; }
+    .fade-in.visible { opacity:1; transform:translateY(0); }
+
+    /* ── Buttons ── */
+    .btn {
+      display:inline-flex; align-items:center; gap:0.45rem;
+      padding:0.88rem 2rem; border-radius:100px;
+      font-family:var(--font-ui); font-size:0.86rem; font-weight:600;
+      letter-spacing:0.02em; cursor:pointer;
+      transition:all 0.3s ease; border:1.5px solid transparent;
+      white-space:nowrap;
+    }
+    .btn-primary { background:var(--deep-blue); color:var(--text-warm); }
+    .btn-primary:hover { background:#243f64; transform:translateY(-2px); box-shadow:0 10px 32px rgba(31,53,87,0.28); }
+    .btn-ghost { background:transparent; color:var(--text-warm); border-color:rgba(245,241,234,0.28); }
+    .btn-ghost:hover { background:rgba(245,241,234,0.08); border-color:rgba(245,241,234,0.55); }
+    .btn-gold { background:var(--gold); color:#fff; font-weight:700; }
+    .btn-gold:hover { background:var(--gold-warm); transform:translateY(-2px); box-shadow:0 10px 32px rgba(184,146,62,0.35); }
+    .btn-outline { background:transparent; color:var(--deep-blue); border-color:rgba(75,111,165,0.42); }
+    .btn-outline:hover { background:var(--deep-blue); color:var(--text-warm); }
+    .btn-sm { padding:0.62rem 1.35rem; font-size:0.78rem; }
+
+    /* ── Header ── */
+    .site-header {
+      position:fixed; top:0; left:0; right:0; z-index:200;
+      background:rgba(245,241,234,0.94);
+      backdrop-filter:blur(20px) saturate(1.2);
+      -webkit-backdrop-filter:blur(20px) saturate(1.2);
+      border-bottom:var(--border-warm);
+      transition:box-shadow 0.3s ease;
+    }
+    .site-header.scrolled { box-shadow:var(--shadow-sm); }
+    .header__inner {
+      max-width:var(--max-width); margin:0 auto; padding:0 var(--s4);
+      height:68px; display:flex; align-items:center;
+      justify-content:space-between; gap:var(--s3);
+    }
+    .header__logo { display:flex; flex-direction:row; align-items:center; gap:0.6rem; }
+    .header__logo-name {
+      font-family:var(--font-display); font-size:1.05rem; font-weight:700;
+      color:var(--deep-blue); line-height:1; letter-spacing:-0.01em;
+    }
+    .header__nav { display:flex; align-items:center; gap:1.5rem; list-style:none; }
+    .header__nav a {
+      font-family:var(--font-ui); font-size:0.78rem; font-weight:500;
+      color:var(--text-body); transition:color 0.2s; white-space:nowrap;
+    }
+    .header__nav a:hover, .header__nav a.active { color:var(--deep-blue); font-weight:600; }
+    .header__cta { display:flex; align-items:center; gap:0.9rem; flex-shrink:0; }
+    .hamburger { display:none; flex-direction:column; gap:5px; cursor:pointer; background:none; border:none; padding:8px; }
+    .hamburger span { display:block; width:20px; height:2px; background:var(--text-ink); border-radius:2px; transition:all 0.25s ease; }
+    .mobile-menu { display:none; flex-direction:column; background:var(--bg-card); border-top:var(--border-warm); padding:1rem var(--s4) 1.5rem; }
+    .mobile-menu.open { display:flex; }
+    .mobile-menu a { font-family:var(--font-ui); font-size:0.9rem; font-weight:500; color:var(--text-body); padding:0.7rem 0; border-bottom:var(--border-card); transition:color 0.2s; }
+    .mobile-menu a:hover { color:var(--deep-blue); }
+    .mobile-menu a:last-of-type { border-bottom:none; }
+    .mobile-menu .mobile-cta { margin-top:1rem; }
+    @media (max-width:1024px) { .header__nav { display:none; } }
+    @media (max-width:768px) { .header__cta .btn-ghost { display:none; } .hamburger { display:flex; } }
 
     /* ════════════════════════════════════════════
-       STICKY FILTER BAR
+       S1 — HERO  ·  --bg-dark
     ════════════════════════════════════════════ */
-    #filter-bar {
-      position: sticky;
-      top: 64px;
-      z-index: 40;
-      background: white;
-      border-bottom: 1px solid #E2E8F0;
+    .hero {
+      background:var(--bg-dark);
+      padding-top:68px;
+      padding-bottom:var(--s6);
+      text-align:center;
+      position:relative;
+      overflow:hidden;
     }
-    #filter-bar.scrolled-past { box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+    .hero::before {
+      content:'';
+      position:absolute; top:-100px; right:-120px;
+      width:600px; height:600px;
+      background:radial-gradient(ellipse at center, rgba(184,146,62,0.07) 0%, transparent 65%);
+      pointer-events:none;
+    }
+    .hero::after {
+      content:'';
+      position:absolute; bottom:-60px; left:-80px;
+      width:400px; height:400px;
+      background:radial-gradient(ellipse at center, rgba(109,143,199,0.05) 0%, transparent 65%);
+      pointer-events:none;
+    }
+    .hero__inner {
+      max-width:800px; margin:0 auto;
+      padding:var(--s6) var(--s4) var(--s5);
+      position:relative; z-index:1;
+    }
+    .hero__eyebrow {
+      display:inline-flex; align-items:center; gap:0.6rem;
+      font-family:var(--font-ui); font-size:0.68rem; font-weight:600;
+      letter-spacing:0.18em; text-transform:uppercase;
+      color:var(--gold-pale); margin-bottom:1.8rem;
+    }
+    .hero__eyebrow-dot { width:5px; height:5px; border-radius:50%; background:var(--gold); opacity:0.75; flex-shrink:0; }
+    .hero__title { font-family:var(--font-display); font-size:clamp(2.2rem,4.6vw,3.6rem); font-weight:700; color:#fff; line-height:1.15; margin-bottom:1.6rem; }
+    .hero__title em { font-style:italic; color:var(--gold-pale); }
+    .hero__body { font-family:var(--font-body); font-size:1.06rem; line-height:1.88; color:rgba(245,241,234,0.68); max-width:600px; margin:0 auto 2.6rem; }
+    .hero__actions { display:flex; flex-wrap:wrap; gap:1rem; justify-content:center; }
 
-    /* Filter pills */
-    .filter-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 8px 16px;
-      border-radius: 9999px;
-      border: 1.5px solid #E2E8F0;
-      background: transparent;
-      color: #475569;
-      font-size: 13px;
-      font-weight: 600;
-      cursor: pointer;
-      white-space: nowrap;
-      font-family: 'Montserrat', sans-serif;
+    /* Hero stats row */
+    .hero-stats {
+      display:flex; flex-wrap:wrap; gap:2.5rem; justify-content:center;
+      margin-top:var(--s4);
     }
-    .filter-pill:hover { border-color: #2D5BFF; color: #2D5BFF; }
-    .filter-pill.active {
-      background: #0B1120;
-      border-color: #0B1120;
-      color: white;
+    .hero-stat { text-align:center; }
+    .hero-stat__num {
+      font-family:var(--font-ui); font-size:2.2rem; font-weight:600;
+      color:var(--gold-pale); line-height:1; display:block;
     }
-
-    /* Search input */
-    .search-wrap {
-      position: relative;
-      flex: 1;
-      min-width: 180px;
-      max-width: 320px;
+    .hero-stat__label {
+      font-family:var(--font-ui); font-size:0.72rem; font-weight:500;
+      letter-spacing:0.08em; text-transform:uppercase;
+      color:rgba(245,241,234,0.45); margin-top:0.4rem; display:block;
     }
-    .search-wrap svg {
-      position: absolute;
-      left: 14px;
-      top: 50%;
-      transform: translateY(-50%);
-      color: #9CA3AF;
-      pointer-events: none;
-    }
-    #search-input {
-      width: 100%;
-      padding: 10px 16px 10px 40px;
-      border: 1.5px solid #E2E8F0;
-      border-radius: 9999px;
-      font-size: 13px;
-      font-family: 'Montserrat', sans-serif;
-      color: #0B1120;
-      background: #F8FAFC;
-      outline: none;
-    }
-    #search-input:focus { border-color: #2D5BFF; background: white; }
-    #search-input::placeholder { color: #9CA3AF; }
-
-    /* Pills scroll area */
-    .pills-scroll {
-      display: flex;
-      gap: 8px;
-      overflow-x: auto;
-      scrollbar-width: none;
-      padding: 14px 0;
-    }
-    .pills-scroll::-webkit-scrollbar { display: none; }
 
     /* ════════════════════════════════════════════
-       FEATURED CARD (large, top spotlight)
+       S2 — FEATURED ARTICLE  ·  --bg-primary (cream)
     ════════════════════════════════════════════ */
+    .featured-section {
+      background:var(--bg-primary);
+      padding:var(--s7) 0;
+      position:relative; overflow:hidden;
+    }
+    .featured-section::before {
+      content:'';
+      position:absolute; top:-60px; right:-80px;
+      width:500px; height:500px;
+      background:radial-gradient(ellipse at center, rgba(184,146,62,0.05) 0%, transparent 65%);
+      pointer-events:none;
+    }
+    .featured-label {
+      font-family:var(--font-ui); font-size:0.62rem; font-weight:600;
+      letter-spacing:0.14em; text-transform:uppercase;
+      color:var(--text-muted); margin-bottom:var(--s3);
+    }
     .featured-card {
-      background: white;
-      border: 1px solid #D1D5DB;
-      border-radius: 24px;
-      overflow: hidden;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      min-height: 360px;
-      transition: border-color 0.25s ease, box-shadow 0.25s ease;
+      background:var(--bg-card);
+      border:var(--border-warm);
+      border-radius:var(--radius-xl);
+      padding:2.5rem;
+      box-shadow:var(--shadow-md);
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:var(--s4);
+      align-items:center;
     }
-    .featured-card:hover {
-      border-color: #2D5BFF;
-      box-shadow: 0 16px 48px rgba(45,91,255,0.1);
-    }
-    @media (max-width: 768px) {
-      .featured-card { grid-template-columns: 1fr; }
-    }
+    @media (max-width:860px) { .featured-card { grid-template-columns:1fr; } }
     .featured-img {
-      background: linear-gradient(135deg, #0B1120 0%, #1a2f5e 50%, #2D5BFF 100%);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 260px;
-      position: relative;
+      background:var(--bg-dark);
+      border-radius:var(--radius-lg);
+      aspect-ratio:16/9;
+      display:flex; align-items:center; justify-content:center;
+      position:relative; overflow:hidden;
+    }
+    .featured-img::before {
+      content:'';
+      position:absolute; inset:0;
+      background:radial-gradient(ellipse at 50% 40%, rgba(184,146,62,0.18) 0%, transparent 65%);
     }
     .featured-img-label {
-      border: 1.5px solid rgba(255,255,255,0.15);
-      border-radius: 12px;
-      padding: 18px 28px;
-      color: rgba(255,255,255,0.3);
-      font-size: 13px;
-      font-weight: 600;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
+      font-family:var(--font-ui); font-size:0.62rem; font-weight:700;
+      letter-spacing:0.18em; text-transform:uppercase;
+      color:var(--gold); border:1px solid rgba(184,146,62,0.4);
+      padding:0.35rem 0.85rem; border-radius:100px;
+      position:relative; z-index:1;
     }
-    .featured-content {
-      padding: 40px 40px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
+    .featured-body { display:flex; flex-direction:column; gap:1rem; }
+    .featured-tag {
+      display:inline-flex; align-items:center;
+      font-family:var(--font-ui); font-size:0.62rem; font-weight:700;
+      letter-spacing:0.14em; text-transform:uppercase;
+      background:var(--deep-blue); color:var(--gold-pale);
+      padding:0.3rem 0.85rem; border-radius:100px;
+      width:fit-content;
     }
-    @media (max-width: 640px) { .featured-content { padding: 28px 24px; } }
+    .featured-title {
+      font-family:var(--font-display);
+      font-size:1.6rem; font-weight:600;
+      color:var(--deep-blue); line-height:1.28;
+    }
+    .featured-desc {
+      font-family:var(--font-body); font-size:0.95rem; line-height:1.85;
+      color:var(--text-body);
+    }
+    .featured-meta {
+      font-family:var(--font-ui); font-size:0.72rem;
+      color:var(--text-muted); letter-spacing:0.02em;
+    }
 
     /* ════════════════════════════════════════════
-       INSIGHT CARD (grid)
+       S3 — ARTICLE GRID  ·  --bg-section (deeper cream)
     ════════════════════════════════════════════ */
-    .insight-card {
-      background: white;
-      border: 1px solid #D1D5DB;
-      border-radius: 20px;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+    .grid-section {
+      background:var(--bg-section);
+      padding:var(--s7) 0;
     }
-    .insight-card:hover {
-      border-color: #2D5BFF;
-      transform: translateY(-3px);
-      box-shadow: 0 12px 40px rgba(45,91,255,0.1);
-    }
-    .card-img {
-      height: 180px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      position: relative;
-    }
-    .card-img-label {
-      border: 1.5px solid rgba(255,255,255,0.12);
-      border-radius: 10px;
-      padding: 10px 18px;
-      color: rgba(255,255,255,0.2);
-      font-size: 11px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-    }
-    .card-body {
-      padding: 22px 22px 20px;
-      display: flex;
-      flex-direction: column;
-      flex: 1;
-    }
-    .card-meta {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      margin-bottom: 10px;
-    }
-    .card-cat {
-      display: inline-block;
-      font-size: 10px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      padding: 3px 10px;
-      border-radius: 9999px;
-    }
-    .card-date {
-      color: #9CA3AF;
-      font-size: 12px;
-    }
-    .card-title {
-      color: #0B1120;
-      font-weight: 700;
-      font-size: 15px;
-      line-height: 1.4;
-      margin-bottom: 8px;
-    }
-    .card-excerpt {
-      color: #475569;
-      font-size: 13px;
-      line-height: 1.7;
-      flex: 1;
-      margin-bottom: 16px;
-    }
-    .card-footer {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      border-top: 1px solid #F1F5F9;
-      padding-top: 14px;
-    }
-    .read-time {
-      color: #9CA3AF;
-      font-size: 12px;
-      font-weight: 500;
-    }
-    .read-more {
-      color: #2D5BFF;
-      font-size: 13px;
-      font-weight: 700;
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-    }
-    .read-more:hover { opacity: 0.75; }
 
-    /* Category color system */
-    .cat-case-study    { background: rgba(45,91,255,0.1); color: #2D5BFF; }
-    .cat-marketing     { background: rgba(16,185,129,0.1); color: #059669; }
-    .cat-ai            { background: rgba(139,92,246,0.1); color: #7C3AED; }
-    .cat-operations    { background: rgba(245,158,11,0.1); color: #D97706; }
-    .cat-websites      { background: rgba(14,165,233,0.1); color: #0284C7; }
-    .cat-seo           { background: rgba(34,197,94,0.1); color: #16A34A; }
-    .cat-growth        { background: rgba(239,68,68,0.1); color: #DC2626; }
-    .cat-team          { background: rgba(71,85,105,0.1); color: #475569; }
-    .cat-branding      { background: rgba(236,72,153,0.1); color: #DB2777; }
-    .cat-social        { background: rgba(249,115,22,0.1); color: #EA580C; }
+    /* Search + count bar */
+    .grid-topbar {
+      display:flex; align-items:center; gap:1.25rem;
+      margin-bottom:1.5rem;
+      flex-wrap:wrap;
+    }
+    .grid-search {
+      flex:1; min-width:200px;
+      font-family:var(--font-ui); font-size:0.84rem;
+      color:var(--text-body);
+      background:var(--bg-card);
+      border:var(--border-warm);
+      border-radius:100px;
+      padding:0.7rem 1.35rem;
+      outline:none;
+      transition:box-shadow 0.2s, border-color 0.2s;
+    }
+    .grid-search::placeholder { color:var(--text-muted); }
+    .grid-search:focus { border-color:rgba(184,146,62,0.4); box-shadow:0 0 0 3px rgba(184,146,62,0.08); }
+    .grid-count {
+      font-family:var(--font-ui); font-size:0.78rem;
+      color:var(--text-muted); white-space:nowrap; flex-shrink:0;
+    }
 
-    /* Card image gradient by category */
-    .img-case-study  { background: linear-gradient(135deg, #0B1120 0%, #1a2f5e 100%); }
-    .img-marketing   { background: linear-gradient(135deg, #064e3b 0%, #065f46 100%); }
-    .img-ai          { background: linear-gradient(135deg, #1e1b4b 0%, #3730a3 100%); }
-    .img-operations  { background: linear-gradient(135deg, #451a03 0%, #78350f 100%); }
-    .img-websites    { background: linear-gradient(135deg, #0c4a6e 0%, #075985 100%); }
-    .img-seo         { background: linear-gradient(135deg, #052e16 0%, #166534 100%); }
-    .img-growth      { background: linear-gradient(135deg, #450a0a 0%, #991b1b 100%); }
-    .img-team        { background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); }
-    .img-branding    { background: linear-gradient(135deg, #4a044e 0%, #86198f 100%); }
-    .img-social      { background: linear-gradient(135deg, #431407 0%, #9a3412 100%); }
+    /* Filter pills */
+    .filter-pills {
+      display:flex; flex-wrap:wrap; gap:0.5rem;
+      margin-bottom:var(--s4);
+    }
+    .filter-pill {
+      font-family:var(--font-ui); font-size:0.72rem; font-weight:500;
+      color:var(--text-body);
+      background:var(--bg-card);
+      border:var(--border-warm);
+      border-radius:100px;
+      padding:0.38rem 1rem;
+      cursor:pointer;
+      transition:all 0.2s;
+      white-space:nowrap;
+    }
+    .filter-pill:hover { border-color:rgba(184,146,62,0.4); color:var(--deep-blue); }
+    .filter-pill--active {
+      background:var(--gold); color:#fff; border-color:var(--gold); font-weight:600;
+    }
 
-    /* Empty state */
-    #empty-state { display: none; text-align: center; padding: 60px 24px; }
-    #empty-state.visible { display: block; }
+    /* Article grid */
+    .article-grid {
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:1.5rem;
+    }
+    @media (max-width:900px) { .article-grid { grid-template-columns:repeat(2,1fr); } }
+    @media (max-width:560px) { .article-grid { grid-template-columns:1fr; } }
+
+    /* Article card */
+    .article-card {
+      background:var(--bg-card);
+      border:var(--border-warm);
+      border-radius:var(--radius-lg);
+      overflow:hidden;
+      box-shadow:var(--shadow-xs);
+      transition:transform 0.25s, box-shadow 0.25s;
+      display:flex; flex-direction:column;
+    }
+    .article-card:hover { transform:translateY(-4px); box-shadow:var(--shadow-md); }
+    .article-card__img {
+      aspect-ratio:16/9;
+      position:relative;
+      display:flex; align-items:flex-start;
+      padding:0.85rem;
+    }
+    .article-card__cat-pill {
+      font-family:var(--font-ui); font-size:0.6rem; font-weight:700;
+      letter-spacing:0.13em; text-transform:uppercase;
+      background:rgba(0,0,0,0.32); color:#fff;
+      padding:0.28rem 0.7rem; border-radius:100px;
+      backdrop-filter:blur(4px);
+    }
+    .article-card__body {
+      padding:1.5rem; display:flex; flex-direction:column; gap:0.55rem; flex:1;
+    }
+    .article-card__meta {
+      font-family:var(--font-ui); font-size:0.66rem;
+      color:var(--text-muted); letter-spacing:0.04em;
+    }
+    .article-card__title {
+      font-family:var(--font-display); font-size:1rem; font-weight:600;
+      color:var(--deep-blue); line-height:1.38;
+      display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;
+    }
+    .article-card__teaser {
+      font-family:var(--font-body); font-size:0.84rem; line-height:1.7;
+      color:var(--text-body);
+      display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;
+      flex:1;
+    }
+    .article-card__link {
+      font-family:var(--font-ui); font-size:0.76rem; font-weight:500;
+      color:var(--deep-blue); margin-top:0.35rem;
+      transition:color 0.2s;
+    }
+    .article-card__link:hover { color:var(--gold); }
 
     /* ════════════════════════════════════════════
-       NEWSLETTER SECTION
+       S4 — CATEGORIES  ·  --bg-dark
     ════════════════════════════════════════════ */
+    .categories-section {
+      background:var(--bg-dark);
+      padding:var(--s7) 0;
+      position:relative; overflow:hidden;
+    }
+    .categories-section::before {
+      content:'';
+      position:absolute; top:-80px; left:-80px;
+      width:480px; height:480px;
+      background:radial-gradient(ellipse at center, rgba(184,146,62,0.06) 0%, transparent 65%);
+      pointer-events:none;
+    }
+    .cat-grid {
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:1.25rem;
+      margin-top:var(--s4);
+    }
+    @media (max-width:900px) { .cat-grid { grid-template-columns:repeat(2,1fr); } }
+    .cat-card {
+      background:rgba(255,255,255,0.04);
+      border:var(--border-dark);
+      border-radius:var(--radius-lg);
+      padding:1.5rem;
+      text-align:center;
+      transition:background 0.25s, transform 0.25s;
+      cursor:default;
+    }
+    .cat-card:hover { background:rgba(255,255,255,0.07); transform:translateY(-3px); }
+    .cat-card__icon { font-size:1.6rem; display:block; margin-bottom:0.75rem; }
+    .cat-card__name {
+      font-family:var(--font-ui); font-size:0.9rem; font-weight:600;
+      color:#fff; display:block; margin-bottom:0.35rem;
+    }
+    .cat-card__count {
+      font-family:var(--font-ui); font-size:0.68rem;
+      color:rgba(230,207,160,0.5);
+    }
+
+    /* ════════════════════════════════════════════
+       S5 — NEWSLETTER  ·  --bg-primary (cream)
+    ════════════════════════════════════════════ */
+    .newsletter-section {
+      background:var(--bg-primary);
+      padding:var(--s7) 0;
+      text-align:center;
+      position:relative; overflow:hidden;
+    }
+    .newsletter-section::before {
+      content:'';
+      position:absolute; top:-60px; right:-60px;
+      width:440px; height:440px;
+      background:radial-gradient(ellipse at center, rgba(184,146,62,0.05) 0%, transparent 65%);
+      pointer-events:none;
+    }
+    .newsletter-heading {
+      font-family:var(--font-display); font-size:clamp(1.5rem,2.8vw,2.2rem); font-weight:600;
+      color:var(--deep-blue); line-height:1.3; margin-bottom:1rem;
+      max-width:640px; margin-left:auto; margin-right:auto;
+    }
+    .newsletter-form {
+      display:flex; gap:0.75rem; justify-content:center; flex-wrap:wrap;
+      margin:var(--s4) auto 1.25rem;
+      max-width:500px;
+    }
     .newsletter-input {
-      flex: 1;
-      padding: 14px 20px;
-      border: 1.5px solid rgba(255,255,255,0.15);
-      border-radius: 9999px;
-      background: rgba(255,255,255,0.05);
-      color: white;
-      font-size: 14px;
-      font-family: 'Montserrat', sans-serif;
-      outline: none;
-      min-width: 0;
+      flex:1; min-width:220px;
+      font-family:var(--font-ui); font-size:0.86rem;
+      color:var(--text-body);
+      background:var(--bg-card);
+      border:var(--border-warm);
+      border-radius:100px;
+      padding:0.82rem 1.4rem;
+      outline:none;
+      transition:box-shadow 0.2s, border-color 0.2s;
     }
-    .newsletter-input::placeholder { color: rgba(255,255,255,0.35); }
-    .newsletter-input:focus { border-color: rgba(45,91,255,0.6); background: rgba(255,255,255,0.08); }
+    .newsletter-input::placeholder { color:var(--text-muted); }
+    .newsletter-input:focus { border-color:rgba(184,146,62,0.4); box-shadow:0 0 0 3px rgba(184,146,62,0.08); }
+    .newsletter-note {
+      font-family:var(--font-ui); font-size:0.74rem;
+      color:var(--text-muted);
+      max-width:420px; margin:0 auto;
+    }
 
     /* ════════════════════════════════════════════
-       STATS ROW
+       S6 — CTA  ·  --bg-dark
     ════════════════════════════════════════════ */
-    .stat-chip {
-      text-align: center;
-      padding: 0 28px;
-      border-right: 1px solid rgba(255,255,255,0.08);
+    .cta-section {
+      background:var(--bg-dark);
+      padding:var(--s7) 0;
+      text-align:center;
+      position:relative; overflow:hidden;
     }
-    .stat-chip:last-child { border-right: none; }
-    @media (max-width: 640px) {
-      .stat-chip { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.08); padding: 16px 0; }
-      .stat-chip:last-child { border-bottom: none; }
+    .cta-section::before {
+      content:'';
+      position:absolute; top:-80px; right:-80px;
+      width:500px; height:500px;
+      background:radial-gradient(ellipse at center, rgba(184,146,62,0.07) 0%, transparent 65%);
+      pointer-events:none;
     }
+    .cta-title { font-family:var(--font-display); font-size:clamp(1.8rem,3.5vw,2.8rem); font-weight:700; color:#fff; line-height:1.2; margin-bottom:1.25rem; }
+    .cta-title em { font-style:italic; color:var(--gold-pale); }
+    .cta-body { font-family:var(--font-body); font-size:1.05rem; line-height:1.85; color:rgba(245,241,234,0.62); max-width:520px; margin:0 auto 2.5rem; }
+    .cta-actions { display:flex; flex-wrap:wrap; gap:1rem; justify-content:center; }
+    .cta-note { font-family:var(--font-ui); font-size:0.75rem; color:rgba(245,241,234,0.28); margin-top:1.25rem; }
+
+    /* ── Footer ── */
+    .site-footer {
+      background:var(--bg-footer);
+      border-top:var(--border-dark);
+      padding:var(--s6) 0 var(--s4);
+    }
+    .footer-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:var(--s4); }
+    @media (max-width:900px) { .footer-grid { grid-template-columns:repeat(2,1fr); } }
+    @media (max-width:540px) { .footer-grid { grid-template-columns:1fr; } }
+    .footer-brand-name { font-family:var(--font-display); font-size:1rem; font-weight:700; color:#fff; }
+    .footer-brand-desc { font-family:var(--font-body); font-size:0.82rem; line-height:1.75; color:rgba(245,241,234,0.45); margin-top:0.8rem; max-width:240px; }
+    .footer-col-label { font-family:var(--font-ui); font-size:0.62rem; font-weight:600; letter-spacing:0.14em; text-transform:uppercase; color:rgba(245,241,234,0.32); margin-bottom:1.1rem; }
+    .footer-link { display:block; font-family:var(--font-ui); font-size:0.83rem; color:rgba(245,241,234,0.6); line-height:2.15; transition:color 0.2s; }
+    .footer-link:hover { color:#fff; }
+    .footer-bottom { margin-top:var(--s4); padding-top:1.5rem; border-top:var(--border-dark); display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.75rem; }
+    .footer-copy { font-family:var(--font-ui); font-size:0.75rem; color:rgba(245,241,234,0.28); }
+
+    /* Misc */
+    .section-header { max-width:680px; margin:0 auto var(--s5); text-align:center; }
+    .section-header h2 { margin-bottom:0.75rem; }
+    .section-header p { color:var(--text-body); }
   </style>
 </head>
 <body>
 
 <!-- ════════════════════════════════════════════
-     SHARED HEADER — "Insights" active
+     HEADER — "Insights" active
 ════════════════════════════════════════════ -->
-<header id="site-header" class="fixed top-0 left-0 right-0 z-50 bg-white border-b border-gray-100">
-  <div class="max-w-7xl mx-auto px-6 flex items-center justify-between h-16">
-
-    <a href="index.html" class="flex items-center gap-3">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 210" width="36" height="36"
-           style="color:#2D5BFF; flex-shrink:0;" aria-hidden="true">
-        <rect x="38" y="6" width="13" height="62" rx="2" fill="currentColor"/>
-        <line x1="100" y1="38" x2="6" y2="90" stroke="currentColor" stroke-width="9" stroke-linecap="round"/>
-        <line x1="100" y1="38" x2="194" y2="90" stroke="currentColor" stroke-width="9" stroke-linecap="round"/>
-        <rect x="24" y="90" width="152" height="86" rx="6" fill="none" stroke="currentColor" stroke-width="9"/>
-        <text x="100" y="154" text-anchor="middle" font-size="46" font-weight="800"
-              font-family="Georgia,'Times New Roman',serif" fill="currentColor">BBC</text>
-        <rect x="91" y="176" width="18" height="18" rx="2" fill="currentColor"/>
-        <rect x="64" y="194" width="72" height="11" rx="5.5" fill="currentColor"/>
-      </svg>
-      <span class="font-bold" style="color:#0B1120; font-weight:700; font-size:15px; letter-spacing:-0.01em;">
-        Balay ni Bruno &amp; Co.
-      </span>
+<header class="site-header" id="site-header">
+  <div class="header__inner">
+    <a href="index.html" class="header__logo">
+      <img src="bbc-logo.png" alt="Balay ni Bruno &amp; Co." style="height:42px; width:auto; display:block;">
+      <span class="header__logo-name">Balay ni Bruno &amp; Co.</span>
     </a>
-
-    <!-- Desktop Nav -->
-    <nav class="hidden lg:flex items-center gap-6">
-      <a href="index.html"          style="color:#475569; font-weight:500; font-size:14px;" class="hover:text-navy transition-colors">Home</a>
-      <a href="about.html"          style="color:#475569; font-weight:500; font-size:14px;" class="hover:text-navy transition-colors">Our Story</a>
-      <a href="how-it-works.html"   style="color:#475569; font-weight:500; font-size:14px;" class="hover:text-navy transition-colors">How It Works</a>
-      <a href="how-we-help.html"    style="color:#475569; font-weight:500; font-size:14px;" class="hover:text-navy transition-colors">How We Help</a>
-      <a href="our-team.html"       style="color:#475569; font-weight:500; font-size:14px;" class="hover:text-navy transition-colors">Our Team</a>
-      <a href="our-work.html"       style="color:#475569; font-weight:500; font-size:14px;" class="hover:text-navy transition-colors">Our Work</a>
-      <a href="insights.html"       style="color:#2D5BFF; font-weight:700; font-size:14px;" aria-current="page">Insights</a>
-      <a href="contact.html"  style="color:#475569; font-weight:500; font-size:14px;" class="hover:text-navy transition-colors">Contact</a>
+    <nav>
+      <ul class="header__nav">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">Our Story</a></li>
+        <li><a href="how-it-works.html">How It Works</a></li>
+        <li><a href="how-we-help.html">How We Help</a></li>
+        <li><a href="our-team.html">Our Team</a></li>
+        <li><a href="our-work.html">Our Work</a></li>
+        <li><a href="insights.html" class="active">Insights</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
     </nav>
-
-    <div class="flex items-center gap-3">
-      <a href="contact.html"
-         class="hidden md:inline-flex items-center px-5 py-2 rounded-full text-white font-semibold text-sm"
-         style="background:#2D5BFF; font-weight:600;">
-        Book a Call
-      </a>
-      <button id="hamburger" class="lg:hidden flex flex-col gap-1.5 p-2" aria-label="Toggle navigation menu">
-        <span id="hb1" class="block w-5 h-0.5 bg-gray-700 rounded"></span>
-        <span id="hb2" class="block w-5 h-0.5 bg-gray-700 rounded"></span>
-        <span id="hb3" class="block w-5 h-0.5 bg-gray-700 rounded"></span>
-      </button>
+    <div class="header__cta">
+      <a href="contact.html" class="btn btn-ghost btn-sm">Start a Conversation</a>
+      <a href="contact.html" class="btn btn-gold btn-sm">Book a Call</a>
     </div>
+    <button class="hamburger" id="hamburger" aria-label="Open menu">
+      <span id="hb1"></span>
+      <span id="hb2"></span>
+      <span id="hb3"></span>
+    </button>
   </div>
-
-  <!-- Mobile Nav Dropdown -->
-  <div id="mobile-nav" class="lg:hidden flex-col border-t border-gray-100 bg-white px-6 py-4 gap-0.5">
-    <a href="index.html"          class="block py-2.5 text-sm font-medium" style="color:#475569;">Home</a>
-    <a href="about.html"          class="block py-2.5 text-sm font-medium" style="color:#475569;">Our Story</a>
-    <a href="how-it-works.html"   class="block py-2.5 text-sm font-medium" style="color:#475569;">How It Works</a>
-    <a href="how-we-help.html"    class="block py-2.5 text-sm font-medium" style="color:#475569;">How We Help</a>
-    <a href="our-team.html"       class="block py-2.5 text-sm font-medium" style="color:#475569;">Our Team</a>
-    <a href="our-work.html"       class="block py-2.5 text-sm font-medium" style="color:#475569;">Our Work</a>
-    <a href="insights.html"       class="block py-2.5 text-sm font-bold"   style="color:#2D5BFF;">Insights</a>
-    <a href="contact.html"  class="block py-2.5 text-sm font-medium" style="color:#475569;">Contact</a>
-    <a href="contact.html"
-       class="block mt-3 text-center px-5 py-2.5 rounded-full text-white font-semibold text-sm"
-       style="background:#2D5BFF;">
-      Book a Call
-    </a>
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="index.html">Home</a>
+    <a href="about.html">Our Story</a>
+    <a href="how-it-works.html">How It Works</a>
+    <a href="how-we-help.html">How We Help</a>
+    <a href="our-team.html">Our Team</a>
+    <a href="our-work.html">Our Work</a>
+    <a href="insights.html" style="color:var(--deep-blue);font-weight:600;">Insights</a>
+    <a href="contact.html">Contact</a>
+    <a href="contact.html" class="btn btn-gold mobile-cta" style="text-align:center;justify-content:center;">Book a Call</a>
   </div>
 </header>
 
 
 <!-- ════════════════════════════════════════════
-     SECTION 1 — HERO
+     S1 — HERO  ·  Dark
 ════════════════════════════════════════════ -->
-<section style="background:#0B1120; padding-top:64px; padding-bottom:80px;">
-  <div class="max-w-7xl mx-auto px-6 pt-14 fade-in">
+<section class="hero">
+  <div class="hero__inner fade-in">
 
-    <span class="inline-block text-xs font-semibold uppercase mb-5"
-          style="color:#2D5BFF; letter-spacing:0.14em;">
+    <div class="hero__eyebrow">
+      <span class="hero__eyebrow-dot"></span>
       BBC Insights
-    </span>
-
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-end">
-      <div>
-        <h1 class="font-bold text-white"
-            style="font-size:clamp(32px,4.5vw,54px); line-height:1.12; font-weight:700;">
-          Strategy. Systems.<br>Proof of Work.
-        </h1>
-        <p class="mt-5" style="color:rgba(255,255,255,0.65); font-size:17px; line-height:1.8; max-width:520px;">
-          This is where BBC documents what works — real case studies from client engagements,
-          operational systems we've built, AI workflows we've implemented, and strategy
-          frameworks we use every day.
-        </p>
-        <p class="mt-3" style="color:rgba(255,255,255,0.4); font-size:15px; line-height:1.75; max-width:480px;">
-          Not theory. Not generic advice. Actual documented intelligence from running
-          a multi-specialist digital operations agency.
-        </p>
-      </div>
-
-      <!-- Stats -->
-      <div class="flex flex-wrap gap-0"
-           style="border:1px solid rgba(255,255,255,0.08); border-radius:16px; overflow:hidden; align-self:flex-end;">
-        <div class="stat-chip" style="padding:24px 28px;">
-          <p class="font-bold text-white" style="font-size:28px; font-weight:700;">12+</p>
-          <p style="color:rgba(255,255,255,0.4); font-size:12px; margin-top:4px;">Content Categories</p>
-        </div>
-        <div class="stat-chip" style="padding:24px 28px;">
-          <p class="font-bold text-white" style="font-size:28px; font-weight:700;">7</p>
-          <p style="color:rgba(255,255,255,0.4); font-size:12px; margin-top:4px;">Service Areas Covered</p>
-        </div>
-        <div class="stat-chip" style="padding:24px 28px;">
-          <p class="font-bold text-white" style="font-size:28px; font-weight:700;">∞</p>
-          <p style="color:rgba(255,255,255,0.4); font-size:12px; margin-top:4px;">Growing Library</p>
-        </div>
-      </div>
     </div>
 
-    <!-- Category preview chips -->
-    <div class="flex flex-wrap gap-2 mt-10">
-      <span style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.08); border-radius:9999px; padding:6px 16px; color:rgba(255,255,255,0.5); font-size:12px; font-weight:600;">Case Studies</span>
-      <span style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.08); border-radius:9999px; padding:6px 16px; color:rgba(255,255,255,0.5); font-size:12px; font-weight:600;">AI &amp; Automation</span>
-      <span style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.08); border-radius:9999px; padding:6px 16px; color:rgba(255,255,255,0.5); font-size:12px; font-weight:600;">Operations</span>
-      <span style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.08); border-radius:9999px; padding:6px 16px; color:rgba(255,255,255,0.5); font-size:12px; font-weight:600;">Marketing</span>
-      <span style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.08); border-radius:9999px; padding:6px 16px; color:rgba(255,255,255,0.5); font-size:12px; font-weight:600;">Websites</span>
-      <span style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.08); border-radius:9999px; padding:6px 16px; color:rgba(255,255,255,0.5); font-size:12px; font-weight:600;">SEO</span>
-      <span style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.08); border-radius:9999px; padding:6px 16px; color:rgba(255,255,255,0.5); font-size:12px; font-weight:600;">Business Growth</span>
-      <span style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.08); border-radius:9999px; padding:6px 16px; color:rgba(255,255,255,0.5); font-size:12px; font-weight:600;">Branding</span>
-      <span style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.08); border-radius:9999px; padding:6px 16px; color:rgba(255,255,255,0.5); font-size:12px; font-weight:600;">Team Insights</span>
-    </div>
+    <h1 class="hero__title">
+      Strategy. Systems. <em>Proof of Work.</em>
+    </h1>
 
-  </div>
-</section>
-
-
-<!-- ════════════════════════════════════════════
-     SECTION 2 — FEATURED INSIGHT
-════════════════════════════════════════════ -->
-<section style="background:#F8FAFC; padding:60px 0 0;">
-  <div class="max-w-7xl mx-auto px-6">
-
-    <div class="flex items-center justify-between mb-8 fade-in">
-      <div>
-        <span class="inline-block text-xs font-semibold uppercase mb-2"
-              style="color:#2D5BFF; letter-spacing:0.14em;">Featured</span>
-        <h2 class="font-bold" style="font-size:22px; font-weight:700; color:#0B1120;">Latest Deep Dive</h2>
-      </div>
-      <!-- Future: link to full featured post -->
-    </div>
-
-    <!-- Featured card — 2-col on desktop, stacked on mobile -->
-    <div class="featured-card fade-in" data-category="case-studies">
-
-      <!-- Left: image area -->
-      <div class="featured-img img-case-study">
-        <!-- FUTURE: replace with <img src="..." alt="..."> -->
-        <div class="featured-img-label">Case Study</div>
-        <!-- Featured badge -->
-        <div style="position:absolute; top:20px; left:20px; background:#2D5BFF; color:white; font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.1em; padding:5px 14px; border-radius:9999px;">
-          ★ Featured
-        </div>
-      </div>
-
-      <!-- Right: content area -->
-      <div class="featured-content">
-        <div style="display:flex; align-items:center; gap:10px; margin-bottom:14px;">
-          <span class="card-cat cat-case-study">Case Study</span>
-          <span class="card-date">May 2026 · 8 min read</span>
-        </div>
-        <h3 style="font-size:clamp(18px,2.5vw,26px); font-weight:700; color:#0B1120; line-height:1.3; margin-bottom:14px;">
-          How We Built an Automated Content System for a Real Estate Client — From Chaos to Consistent Output
-        </h3>
-        <p style="color:#475569; font-size:15px; line-height:1.8; margin-bottom:24px;">
-          A real estate agency was producing content inconsistently — no calendar, no system,
-          no brand voice. Here's the exact workflow we built: content planning, AI-assisted
-          drafting, design production, scheduling, and reporting — all in one coordinated system.
-        </p>
-        <div style="display:flex; align-items:center; gap:16px; flex-wrap:wrap;">
-          <a href="#" style="display:inline-flex; align-items:center; gap:6px; background:#2D5BFF; color:white; padding:12px 24px; border-radius:9999px; font-size:14px; font-weight:700; text-decoration:none;">
-            Read Case Study
-            <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
-            </svg>
-          </a>
-          <span style="color:#9CA3AF; font-size:13px;">Real Estate · Content System · AI Workflow</span>
-        </div>
-      </div>
-
-    </div>
-
-  </div>
-</section>
-
-
-<!-- ════════════════════════════════════════════
-     SECTION 3 — FILTER BAR + CONTENT GRID
-════════════════════════════════════════════ -->
-<section style="background:#F8FAFC; padding-bottom:100px;">
-  <div class="max-w-7xl mx-auto px-6">
-
-    <!-- Filter Bar -->
-    <div id="filter-bar-wrap" style="padding-top:48px;">
-      <div id="filter-bar" style="background:#F8FAFC; padding:0 0 0; border-bottom:none; position:relative; top:auto; z-index:auto;">
-        <div style="display:flex; flex-direction:column; gap:12px; padding-bottom:32px;">
-
-          <!-- Search + count -->
-          <div style="display:flex; align-items:center; gap:16px; flex-wrap:wrap;">
-            <div class="search-wrap">
-              <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                <circle cx="11" cy="11" r="8"/><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.35-4.35"/>
-              </svg>
-              <input type="text" id="search-input" placeholder="Search insights..." autocomplete="off" />
-            </div>
-            <span id="results-count" style="color:#9CA3AF; font-size:13px; font-weight:500;">
-              Showing all 12 insights
-            </span>
-          </div>
-
-          <!-- Category pills -->
-          <div class="pills-scroll">
-            <button class="filter-pill active" data-category="all">All Insights</button>
-            <button class="filter-pill" data-category="case-studies">Case Studies</button>
-            <button class="filter-pill" data-category="marketing">Marketing</button>
-            <button class="filter-pill" data-category="ai">AI &amp; Automation</button>
-            <button class="filter-pill" data-category="operations">Operations</button>
-            <button class="filter-pill" data-category="websites">Websites</button>
-            <button class="filter-pill" data-category="seo">SEO</button>
-            <button class="filter-pill" data-category="growth">Business Growth</button>
-            <button class="filter-pill" data-category="branding">Branding</button>
-            <button class="filter-pill" data-category="social">Social Media</button>
-            <button class="filter-pill" data-category="team">Team Insights</button>
-          </div>
-
-        </div>
-      </div>
-    </div>
-
-    <!-- ── Content Grid ── -->
-    <!--
-      ARCHITECTURE NOTE:
-      Each card has data-category and data-title attributes for client-side filtering.
-      When integrating a CMS (WordPress, Contentful, Sanity, etc.):
-      - Replace this static HTML with a template loop
-      - Keep the same .insight-card class structure
-      - Keep data-category attributes — the filter JS will still work
-      - Future: replace JS filter with URL params + server-side filtering for SEO
-    -->
-    <div id="insights-grid"
-         class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
-
-      <!-- ── CARD 1: Case Study ── -->
-      <article class="insight-card fade-in"
-               data-category="case-studies"
-               data-title="automated content system real estate client chaos consistent output">
-        <div class="card-img img-case-study">
-          <!-- FUTURE: <img src="..." alt="..." style="width:100%;height:100%;object-fit:cover;"> -->
-          <div class="card-img-label">Case Study</div>
-        </div>
-        <div class="card-body">
-          <div class="card-meta">
-            <span class="card-cat cat-case-study">Case Study</span>
-            <span class="card-date">May 15, 2026</span>
-          </div>
-          <h3 class="card-title">How We Built an Automated Content System for a Real Estate Client</h3>
-          <p class="card-excerpt">From no calendar and no brand voice to a fully automated content production system in 6 weeks. Here's what we built and how it runs.</p>
-          <div class="card-footer">
-            <span class="read-time">8 min read</span>
-            <a href="#" class="read-more">Read More <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg></a>
-          </div>
-        </div>
-      </article>
-
-      <!-- ── CARD 2: AI & Automation ── -->
-      <article class="insight-card fade-in"
-               data-category="ai"
-               data-title="5 ai tools bbc client workflow automation">
-        <div class="card-img img-ai">
-          <div class="card-img-label">AI &amp; Automation</div>
-        </div>
-        <div class="card-body">
-          <div class="card-meta">
-            <span class="card-cat cat-ai">AI &amp; Automation</span>
-            <span class="card-date">May 12, 2026</span>
-          </div>
-          <h3 class="card-title">The 5 AI Tools We Use in Every BBC Client Workflow</h3>
-          <p class="card-excerpt">We've tested dozens of AI tools. These 5 consistently make the biggest difference in output quality, speed, and consistency across every client engagement.</p>
-          <div class="card-footer">
-            <span class="read-time">5 min read</span>
-            <a href="#" class="read-more">Read More <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg></a>
-          </div>
-        </div>
-      </article>
-
-      <!-- ── CARD 3: Operations ── -->
-      <article class="insight-card fade-in"
-               data-category="operations"
-               data-title="bbc client onboarding system full breakdown process">
-        <div class="card-img img-operations">
-          <div class="card-img-label">Operations</div>
-        </div>
-        <div class="card-body">
-          <div class="card-meta">
-            <span class="card-cat cat-operations">Operations</span>
-            <span class="card-date">May 10, 2026</span>
-          </div>
-          <h3 class="card-title">Inside BBC's Client Onboarding System: A Full Breakdown</h3>
-          <p class="card-excerpt">The exact 6-stage process we use from first call to fully operational team. Every step, every document, every tool — documented for the first time.</p>
-          <div class="card-footer">
-            <span class="read-time">7 min read</span>
-            <a href="#" class="read-more">Read More <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg></a>
-          </div>
-        </div>
-      </article>
-
-      <!-- ── CARD 4: Marketing ── -->
-      <article class="insight-card fade-in"
-               data-category="marketing"
-               data-title="content strategy fails without distribution plan marketing">
-        <div class="card-img img-marketing">
-          <div class="card-img-label">Marketing</div>
-        </div>
-        <div class="card-body">
-          <div class="card-meta">
-            <span class="card-cat cat-marketing">Marketing</span>
-            <span class="card-date">May 8, 2026</span>
-          </div>
-          <h3 class="card-title">Why Content Strategy Fails Without a Distribution Plan</h3>
-          <p class="card-excerpt">Most businesses spend 80% of their time creating content and 20% distributing it. The businesses that grow flip that ratio. Here's the framework we teach every client.</p>
-          <div class="card-footer">
-            <span class="read-time">4 min read</span>
-            <a href="#" class="read-more">Read More <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg></a>
-          </div>
-        </div>
-      </article>
-
-      <!-- ── CARD 5: Websites ── -->
-      <article class="insight-card fade-in"
-               data-category="websites"
-               data-title="7 stage website build process explained bbc">
-        <div class="card-img img-websites">
-          <div class="card-img-label">Websites</div>
-        </div>
-        <div class="card-body">
-          <div class="card-meta">
-            <span class="card-cat cat-websites">Websites</span>
-            <span class="card-date">May 5, 2026</span>
-          </div>
-          <h3 class="card-title">Our 7-Stage Website Build Process Explained</h3>
-          <p class="card-excerpt">From client brief to live launch — the exact process BBC uses to deliver every website build, including the QA stages most agencies skip entirely.</p>
-          <div class="card-footer">
-            <span class="read-time">6 min read</span>
-            <a href="#" class="read-more">Read More <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg></a>
-          </div>
-        </div>
-      </article>
-
-      <!-- ── CARD 6: Case Study ── -->
-      <article class="insight-card fade-in"
-               data-category="case-studies"
-               data-title="social media growth fitness coach 5k followers 90 days">
-        <div class="card-img img-case-study">
-          <div class="card-img-label">Case Study</div>
-        </div>
-        <div class="card-body">
-          <div class="card-meta">
-            <span class="card-cat cat-case-study">Case Study</span>
-            <span class="card-date">May 2, 2026</span>
-          </div>
-          <h3 class="card-title">Social Media Growth for a Fitness Coach: 0 to 5K Followers in 90 Days</h3>
-          <p class="card-excerpt">No paid ads. No viral moments. Just a documented content system, consistent posting, and strategic engagement. Here's every step of the 90-day plan.</p>
-          <div class="card-footer">
-            <span class="read-time">9 min read</span>
-            <a href="#" class="read-more">Read More <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg></a>
-          </div>
-        </div>
-      </article>
-
-      <!-- ── CARD 7: Business Growth ── -->
-      <article class="insight-card fade-in"
-               data-category="growth"
-               data-title="why va relationships break down bbc fixes managed">
-        <div class="card-img img-growth">
-          <div class="card-img-label">Business Growth</div>
-        </div>
-        <div class="card-body">
-          <div class="card-meta">
-            <span class="card-cat cat-growth">Business Growth</span>
-            <span class="card-date">Apr 28, 2026</span>
-          </div>
-          <h3 class="card-title">Why Most VA Relationships Break Down (And How BBC Fixes It)</h3>
-          <p class="card-excerpt">After working with dozens of businesses who've burned through VA hires, we've identified the 4 root causes — and built our entire model to solve them before they happen.</p>
-          <div class="card-footer">
-            <span class="read-time">5 min read</span>
-            <a href="#" class="read-more">Read More <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg></a>
-          </div>
-        </div>
-      </article>
-
-      <!-- ── CARD 8: AI & Automation ── -->
-      <article class="insight-card fade-in"
-               data-category="ai"
-               data-title="ai powered reporting system make chatgpt automation workflow">
-        <div class="card-img img-ai">
-          <div class="card-img-label">AI &amp; Automation</div>
-        </div>
-        <div class="card-body">
-          <div class="card-meta">
-            <span class="card-cat cat-ai">AI &amp; Automation</span>
-            <span class="card-date">Apr 24, 2026</span>
-          </div>
-          <h3 class="card-title">Building an AI-Powered Client Reporting System with Make and ChatGPT</h3>
-          <p class="card-excerpt">We built an automated reporting system that pulls data, generates summaries, formats them, and sends client-ready reports — without manual effort. Here's the full build.</p>
-          <div class="card-footer">
-            <span class="read-time">10 min read</span>
-            <a href="#" class="read-more">Read More <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg></a>
-          </div>
-        </div>
-      </article>
-
-      <!-- ── CARD 9: SEO ── -->
-      <article class="insight-card fade-in"
-               data-category="seo"
-               data-title="seo foundation small business before running ads organic">
-        <div class="card-img img-seo">
-          <div class="card-img-label">SEO</div>
-        </div>
-        <div class="card-body">
-          <div class="card-meta">
-            <span class="card-cat cat-seo">SEO</span>
-            <span class="card-date">Apr 20, 2026</span>
-          </div>
-          <h3 class="card-title">The SEO Foundation Every Small Business Needs Before Running Ads</h3>
-          <p class="card-excerpt">Running ads to a site that isn't SEO-ready is burning money. These are the 8 things we fix on every client website before any paid traffic goes near it.</p>
-          <div class="card-footer">
-            <span class="read-time">6 min read</span>
-            <a href="#" class="read-more">Read More <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg></a>
-          </div>
-        </div>
-      </article>
-
-      <!-- ── CARD 10: Operations ── -->
-      <article class="insight-card fade-in"
-               data-category="operations"
-               data-title="weekly client reporting structured 11 team members bbc">
-        <div class="card-img img-operations">
-          <div class="card-img-label">Operations</div>
-        </div>
-        <div class="card-body">
-          <div class="card-meta">
-            <span class="card-cat cat-operations">Operations</span>
-            <span class="card-date">Apr 15, 2026</span>
-          </div>
-          <h3 class="card-title">How We Structure Weekly Client Reporting Across an 11-Person Team</h3>
-          <p class="card-excerpt">Coordinating reporting across multiple specialists, clients, and service categories without dropping anything. The exact BBC reporting system explained.</p>
-          <div class="card-footer">
-            <span class="read-time">7 min read</span>
-            <a href="#" class="read-more">Read More <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg></a>
-          </div>
-        </div>
-      </article>
-
-      <!-- ── CARD 11: Business Growth ── -->
-      <article class="insight-card fade-in"
-               data-category="growth"
-               data-title="7 signs business ready managed va team digital support">
-        <div class="card-img img-growth">
-          <div class="card-img-label">Business Growth</div>
-        </div>
-        <div class="card-body">
-          <div class="card-meta">
-            <span class="card-cat cat-growth">Business Growth</span>
-            <span class="card-date">Apr 10, 2026</span>
-          </div>
-          <h3 class="card-title">7 Signs Your Business Is Ready for a Managed VA Team</h3>
-          <p class="card-excerpt">Not every business is at the right stage for a managed team. Here are the 7 signals we look for in every discovery call — and what they mean for your growth trajectory.</p>
-          <div class="card-footer">
-            <span class="read-time">4 min read</span>
-            <a href="#" class="read-more">Read More <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg></a>
-          </div>
-        </div>
-      </article>
-
-      <!-- ── CARD 12: Team Insights ── -->
-      <article class="insight-card fade-in"
-               data-category="team"
-               data-title="what makes good va partnership 7 lessons learned team">
-        <div class="card-img img-team">
-          <div class="card-img-label">Team Insights</div>
-        </div>
-        <div class="card-body">
-          <div class="card-meta">
-            <span class="card-cat cat-team">Team Insights</span>
-            <span class="card-date">Apr 5, 2026</span>
-          </div>
-          <h3 class="card-title">What Makes a Great VA Partnership? 7 Things We've Learned Running a Team</h3>
-          <p class="card-excerpt">From the inside: what the BBC team has observed makes client partnerships thrive or stall — and the operational decisions that separate long-term relationships from short ones.</p>
-          <div class="card-footer">
-            <span class="read-time">5 min read</span>
-            <a href="#" class="read-more">Read More <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg></a>
-          </div>
-        </div>
-      </article>
-
-    </div><!-- /insights-grid -->
-
-    <!-- Empty state (shown when filter + search return zero results) -->
-    <div id="empty-state">
-      <svg width="48" height="48" fill="none" viewBox="0 0 24 24" stroke="#D1D5DB" stroke-width="1.5" style="margin:0 auto 16px;">
-        <circle cx="11" cy="11" r="8"/><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.35-4.35"/>
-      </svg>
-      <p style="color:#0B1120; font-weight:600; font-size:16px; margin-bottom:8px;">No insights found</p>
-      <p style="color:#9CA3AF; font-size:14px;">Try a different search term or category.</p>
-      <button id="reset-filter"
-              style="margin-top:20px; padding:10px 24px; border-radius:9999px; border:1.5px solid #2D5BFF; color:#2D5BFF; font-size:14px; font-weight:600; cursor:pointer; background:transparent; font-family:'Montserrat',sans-serif;">
-        Show All Insights
-      </button>
-    </div>
-
-  </div>
-</section>
-
-
-<!-- ════════════════════════════════════════════
-     SECTION 4 — NEWSLETTER / STAY UPDATED
-     ARCHITECTURE: Wire to email platform (Mailchimp,
-     ConvertKit, etc.) or Google Sheets via Apps Script.
-     Currently structure-only — not connected.
-════════════════════════════════════════════ -->
-<section style="background:#0B1120;" class="section-pad">
-  <div class="max-w-2xl mx-auto px-6 text-center fade-in">
-
-    <span class="inline-block text-xs font-semibold uppercase mb-4"
-          style="color:#2D5BFF; letter-spacing:0.14em;">Stay Updated</span>
-    <h2 class="font-bold text-white" style="font-size:clamp(24px,3.5vw,36px); font-weight:700; line-height:1.2; margin-bottom:14px;">
-      New Insights. Every Week.
-    </h2>
-    <p style="color:rgba(255,255,255,0.55); font-size:16px; line-height:1.75; margin-bottom:36px;">
-      Case studies, strategy breakdowns, and operational intelligence from the BBC team —
-      delivered directly to your inbox.
+    <p class="hero__body">
+      This is where BBC documents what works — real case studies from client engagements, operational systems we've built, AI workflows we've implemented, and strategy frameworks we use every day.
     </p>
 
-    <!-- Email capture form — FUTURE: connect to email platform -->
-    <form id="newsletter-form"
-          style="display:flex; gap:10px; flex-wrap:wrap; justify-content:center;"
-          onsubmit="handleNewsletter(event)">
-      <input type="email"
-             id="newsletter-email"
-             placeholder="Your email address"
-             class="newsletter-input"
-             style="max-width:320px;"
-             required />
-      <button type="submit"
-              style="padding:14px 28px; border-radius:9999px; background:#2D5BFF; color:white; font-size:14px; font-weight:700; cursor:pointer; border:none; font-family:'Montserrat',sans-serif; white-space:nowrap;">
-        Notify Me
-      </button>
-    </form>
-
-    <!-- Success state (hidden by default) -->
-    <div id="newsletter-success" style="display:none; margin-top:20px;">
-      <p style="color:#4ADE80; font-size:15px; font-weight:600;">
-        ✓ You're on the list. We'll be in touch.
-      </p>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <span class="hero-stat__num">12+</span>
+        <span class="hero-stat__label">Content Categories</span>
+      </div>
+      <div class="hero-stat">
+        <span class="hero-stat__num">7</span>
+        <span class="hero-stat__label">Areas Covered</span>
+      </div>
+      <div class="hero-stat">
+        <span class="hero-stat__num">40+</span>
+        <span class="hero-stat__label">Growing Library</span>
+      </div>
     </div>
-
-    <p style="color:rgba(255,255,255,0.2); font-size:12px; margin-top:16px;">
-      No spam. Unsubscribe anytime.
-      <!-- FUTURE: add privacy policy link -->
-    </p>
 
   </div>
 </section>
 
 
 <!-- ════════════════════════════════════════════
-     SECTION 5 — CATEGORY DIRECTORY
+     S2 — FEATURED ARTICLE  ·  Cream
 ════════════════════════════════════════════ -->
-<section style="background:white;" class="section-pad">
-  <div class="max-w-7xl mx-auto px-6">
+<section class="featured-section">
+  <div class="container">
 
-    <div class="text-center mb-12 fade-in">
-      <span class="inline-block text-xs font-semibold uppercase mb-4"
-            style="color:#2D5BFF; letter-spacing:0.14em;">Content Library</span>
-      <h2 class="font-bold" style="font-size:clamp(24px,3vw,36px); font-weight:700; color:#0B1120;">
-        Browse by Category
+    <div class="fade-in" style="margin-bottom:var(--s3);">
+      <span class="eyebrow eyebrow--gold">Featured</span>
+      <p class="featured-label">Latest Deep Dive</p>
+    </div>
+
+    <div class="featured-card fade-in">
+
+      <!-- Left: image placeholder -->
+      <div class="featured-img">
+        <span class="featured-img-label">Case Study</span>
+      </div>
+
+      <!-- Right: content -->
+      <div class="featured-body">
+        <span class="featured-tag">Case Study</span>
+        <h2 class="featured-title">How We Built an Automated Content System for a Real Estate Client — From Chaos to Consistent Output</h2>
+        <p class="featured-desc">
+          A real estate agency was producing content inconsistently — no calendar, no system, no brand voice. Here's the exact workflow we built: content planning, AI-assisted drafting, design production, scheduling, and reporting — all in one coordinated system.
+        </p>
+        <p class="featured-meta">8 min read &middot; Content Systems &middot; Operations</p>
+        <div>
+          <a href="#" class="btn btn-gold btn-sm">Read Case Study &rarr;</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════
+     S3 — ARTICLE GRID  ·  Deeper Cream
+════════════════════════════════════════════ -->
+<section class="grid-section">
+  <div class="container">
+
+    <!-- Search + count -->
+    <div class="grid-topbar fade-in">
+      <input class="grid-search" type="text" placeholder="Search insights..." />
+      <span class="grid-count">Showing all 12 insights</span>
+    </div>
+
+    <!-- Filter pills -->
+    <div class="filter-pills fade-in">
+      <span class="filter-pill filter-pill--active">All Insights</span>
+      <span class="filter-pill">Case Studies</span>
+      <span class="filter-pill">AI &amp; Automation</span>
+      <span class="filter-pill">Operations</span>
+      <span class="filter-pill">Marketing</span>
+      <span class="filter-pill">Websites</span>
+      <span class="filter-pill">SEO</span>
+      <span class="filter-pill">Business Growth</span>
+      <span class="filter-pill">Branding</span>
+      <span class="filter-pill">Social Media</span>
+      <span class="filter-pill">Team</span>
+    </div>
+
+    <!-- Article grid -->
+    <div class="article-grid fade-in">
+
+      <!-- Card 1 -->
+      <article class="article-card">
+        <div class="article-card__img" style="background:#1C2E47;">
+          <span class="article-card__cat-pill">Case Study</span>
+        </div>
+        <div class="article-card__body">
+          <p class="article-card__meta">Case Study &middot; May 2026</p>
+          <h3 class="article-card__title">How We Built an Automated Content System for a Real Estate Client</h3>
+          <p class="article-card__teaser">From no calendar to a full content production machine — the exact workflow we used.</p>
+          <a href="#" class="article-card__link">Read More &rarr;</a>
+        </div>
+      </article>
+
+      <!-- Card 2 -->
+      <article class="article-card">
+        <div class="article-card__img" style="background:linear-gradient(135deg,#1F3557,#2d4a73);">
+          <span class="article-card__cat-pill">AI &amp; Automation</span>
+        </div>
+        <div class="article-card__body">
+          <p class="article-card__meta">AI &amp; Automation &middot; Apr 2026</p>
+          <h3 class="article-card__title">The 3 AI Tools We Use in Every BBC Client Workflow</h3>
+          <p class="article-card__teaser">Not every AI tool is worth your time. Here are the three we actually kept.</p>
+          <a href="#" class="article-card__link">Read More &rarr;</a>
+        </div>
+      </article>
+
+      <!-- Card 3 -->
+      <article class="article-card">
+        <div class="article-card__img" style="background:linear-gradient(135deg,#B8923E,#a07830);">
+          <span class="article-card__cat-pill">Operations</span>
+        </div>
+        <div class="article-card__body">
+          <p class="article-card__meta">Operations &middot; Apr 2026</p>
+          <h3 class="article-card__title">Inside BBC's Client Onboarding System: A Full Breakdown</h3>
+          <p class="article-card__teaser">The 9-step process that makes every new client feel like they've been with us for years.</p>
+          <a href="#" class="article-card__link">Read More &rarr;</a>
+        </div>
+      </article>
+
+      <!-- Card 4 -->
+      <article class="article-card">
+        <div class="article-card__img" style="background:linear-gradient(135deg,#4B6FA5,#3a5987);">
+          <span class="article-card__cat-pill">Marketing</span>
+        </div>
+        <div class="article-card__body">
+          <p class="article-card__meta">Marketing &middot; Mar 2026</p>
+          <h3 class="article-card__title">Why Content Strategy Fails Without a Distribution Plan</h3>
+          <p class="article-card__teaser">Creating content is only 30% of the job. Here's what the other 70% looks like.</p>
+          <a href="#" class="article-card__link">Read More &rarr;</a>
+        </div>
+      </article>
+
+      <!-- Card 5 -->
+      <article class="article-card">
+        <div class="article-card__img" style="background:linear-gradient(135deg,#1C2E47,#2a3f5e);">
+          <span class="article-card__cat-pill">Branding</span>
+        </div>
+        <div class="article-card__body">
+          <p class="article-card__meta">Branding &middot; Mar 2026</p>
+          <h3 class="article-card__title">Our 7-Stage Website Build Process Explained</h3>
+          <p class="article-card__teaser">From first discovery call to final launch — how BBC builds websites with zero chaos.</p>
+          <a href="#" class="article-card__link">Read More &rarr;</a>
+        </div>
+      </article>
+
+      <!-- Card 6 -->
+      <article class="article-card">
+        <div class="article-card__img" style="background:linear-gradient(135deg,#4E9E74,#3a7d5a);">
+          <span class="article-card__cat-pill">Social Media</span>
+        </div>
+        <div class="article-card__body">
+          <p class="article-card__meta">Social Media &middot; Feb 2026</p>
+          <h3 class="article-card__title">Social Media Growth for a Fitness Coach: 0 to 5k Followers in 90 Days</h3>
+          <p class="article-card__teaser">A documented, repeatable system for organic growth that actually works.</p>
+          <a href="#" class="article-card__link">Read More &rarr;</a>
+        </div>
+      </article>
+
+      <!-- Card 7 -->
+      <article class="article-card">
+        <div class="article-card__img" style="background:linear-gradient(135deg,#D4A84B,#b8893a);">
+          <span class="article-card__cat-pill">Business Growth</span>
+        </div>
+        <div class="article-card__body">
+          <p class="article-card__meta">Business Growth &middot; Feb 2026</p>
+          <h3 class="article-card__title">Why Most VA Relationships Break Down After 3 Months (And How to Fix It)</h3>
+          <p class="article-card__teaser">It's almost never about the VA. Here's what breaks most remote working relationships.</p>
+          <a href="#" class="article-card__link">Read More &rarr;</a>
+        </div>
+      </article>
+
+      <!-- Card 8 -->
+      <article class="article-card">
+        <div class="article-card__img" style="background:linear-gradient(135deg,#1F3557,#4B6FA5);">
+          <span class="article-card__cat-pill">AI &amp; Automation</span>
+        </div>
+        <div class="article-card__body">
+          <p class="article-card__meta">AI &amp; Automation &middot; Jan 2026</p>
+          <h3 class="article-card__title">Building an AI-Powered Client Reporting System with Make and ChatGPT</h3>
+          <p class="article-card__teaser">Auto-generated, branded client reports delivered every Monday morning.</p>
+          <a href="#" class="article-card__link">Read More &rarr;</a>
+        </div>
+      </article>
+
+      <!-- Card 9 -->
+      <article class="article-card">
+        <div class="article-card__img" style="background:linear-gradient(135deg,#1C2E47,#B8923E);">
+          <span class="article-card__cat-pill">SEO</span>
+        </div>
+        <div class="article-card__body">
+          <p class="article-card__meta">SEO &middot; Jan 2026</p>
+          <h3 class="article-card__title">The SEO Foundation Every Small Business Needs Before Running Ads</h3>
+          <p class="article-card__teaser">You're not ready for paid ads until these 7 things are in place.</p>
+          <a href="#" class="article-card__link">Read More &rarr;</a>
+        </div>
+      </article>
+
+      <!-- Card 10 -->
+      <article class="article-card">
+        <div class="article-card__img" style="background:linear-gradient(135deg,#4B6FA5,#1C2E47);">
+          <span class="article-card__cat-pill">Operations</span>
+        </div>
+        <div class="article-card__body">
+          <p class="article-card__meta">Operations &middot; Dec 2025</p>
+          <h3 class="article-card__title">How We Structure Weekly Client Reporting on a 5-Person Team</h3>
+          <p class="article-card__teaser">The exact format we use to keep clients informed and boundaries intact.</p>
+          <a href="#" class="article-card__link">Read More &rarr;</a>
+        </div>
+      </article>
+
+      <!-- Card 11 -->
+      <article class="article-card">
+        <div class="article-card__img" style="background:linear-gradient(135deg,#D4A84B,#1F3557);">
+          <span class="article-card__cat-pill">Business Growth</span>
+        </div>
+        <div class="article-card__body">
+          <p class="article-card__meta">Business Growth &middot; Dec 2025</p>
+          <h3 class="article-card__title">7 Signs Your Business Is Ready for a Managed VA Team</h3>
+          <p class="article-card__teaser">If 3 or more of these apply, you're leaving capacity on the table.</p>
+          <a href="#" class="article-card__link">Read More &rarr;</a>
+        </div>
+      </article>
+
+      <!-- Card 12 -->
+      <article class="article-card">
+        <div class="article-card__img" style="background:linear-gradient(135deg,#1C2E47,#4E9E74);">
+          <span class="article-card__cat-pill">Team Insights</span>
+        </div>
+        <div class="article-card__body">
+          <p class="article-card__meta">Team Insights &middot; Nov 2025</p>
+          <h3 class="article-card__title">What Makes a Great VA Partnership? 7 Things We've Learned Running a Team</h3>
+          <p class="article-card__teaser">Lessons from 3+ years of building BBC — what we'd tell every business owner.</p>
+          <a href="#" class="article-card__link">Read More &rarr;</a>
+        </div>
+      </article>
+
+    </div><!-- /article-grid -->
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════
+     S4 — CATEGORIES  ·  Dark
+════════════════════════════════════════════ -->
+<section class="categories-section">
+  <div class="container">
+    <div class="section-header fade-in">
+      <span class="eyebrow eyebrow--pale">Browse by Topic</span>
+      <h2 style="color:#fff;">Find What's Most Useful to <em style="font-style:italic;color:var(--gold-pale);">You.</em></h2>
+      <div class="divider-bar"></div>
+    </div>
+
+    <div class="cat-grid fade-in">
+
+      <div class="cat-card">
+        <span class="cat-card__icon">&#x1F4CB;</span>
+        <span class="cat-card__name">Case Studies</span>
+        <span class="cat-card__count">8 articles</span>
+      </div>
+
+      <div class="cat-card">
+        <span class="cat-card__icon">&#x1F916;</span>
+        <span class="cat-card__name">AI &amp; Automation</span>
+        <span class="cat-card__count">6 articles</span>
+      </div>
+
+      <div class="cat-card">
+        <span class="cat-card__icon">&#x2699;&#xFE0F;</span>
+        <span class="cat-card__name">Operations</span>
+        <span class="cat-card__count">9 articles</span>
+      </div>
+
+      <div class="cat-card">
+        <span class="cat-card__icon">&#x1F4E3;</span>
+        <span class="cat-card__name">Marketing</span>
+        <span class="cat-card__count">5 articles</span>
+      </div>
+
+      <div class="cat-card">
+        <span class="cat-card__icon">&#x1F310;</span>
+        <span class="cat-card__name">Websites</span>
+        <span class="cat-card__count">4 articles</span>
+      </div>
+
+      <div class="cat-card">
+        <span class="cat-card__icon">&#x1F50D;</span>
+        <span class="cat-card__name">SEO</span>
+        <span class="cat-card__count">5 articles</span>
+      </div>
+
+      <div class="cat-card">
+        <span class="cat-card__icon">&#x1F4C8;</span>
+        <span class="cat-card__name">Business Growth</span>
+        <span class="cat-card__count">7 articles</span>
+      </div>
+
+      <div class="cat-card">
+        <span class="cat-card__icon">&#x1F465;</span>
+        <span class="cat-card__name">Team Insights</span>
+        <span class="cat-card__count">3 articles</span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════
+     S5 — NEWSLETTER  ·  Cream
+════════════════════════════════════════════ -->
+<section class="newsletter-section">
+  <div class="container">
+    <div class="fade-in">
+      <span class="eyebrow eyebrow--gold">New Insights. Every Week.</span>
+      <p class="newsletter-heading">Case studies, strategy breakdowns, and operational intelligence from the BBC team — delivered directly to your inbox.</p>
+      <form class="newsletter-form" onsubmit="return false;">
+        <input class="newsletter-input" type="email" placeholder="Your email address" />
+        <button type="submit" class="btn btn-gold">Notify Me</button>
+      </form>
+      <p class="newsletter-note">Zero spam. Unsubscribe anytime. We write this ourselves — no AI newsletter fluff.</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════
+     S6 — CTA  ·  Dark
+════════════════════════════════════════════ -->
+<section class="cta-section">
+  <div class="container">
+    <div class="fade-in">
+      <span class="eyebrow eyebrow--pale">Ready to Do More, Build More</span>
+      <h2 class="cta-title">
+        See These Systems Working <em>Inside Your Business.</em>
       </h2>
-    </div>
-
-    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 fade-in">
-
-      <!-- Each category card is a filter shortcut -->
-      <button onclick="activateFilter('case-studies')"
-              class="category-dir-card" style="background:#F8FAFC; border:1px solid #D1D5DB; border-radius:16px; padding:24px 20px; text-align:left; cursor:pointer; transition:all 0.25s ease; font-family:'Montserrat',sans-serif;">
-        <div style="width:36px; height:36px; background:rgba(45,91,255,0.1); border-radius:8px; display:flex; align-items:center; justify-content:center; margin-bottom:12px;">
-          <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="#2D5BFF" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
-        </div>
-        <p style="font-weight:700; color:#0B1120; font-size:14px;">Case Studies</p>
-        <p style="color:#9CA3AF; font-size:12px; margin-top:4px;">Real client results</p>
-      </button>
-
-      <button onclick="activateFilter('ai')"
-              class="category-dir-card" style="background:#F8FAFC; border:1px solid #D1D5DB; border-radius:16px; padding:24px 20px; text-align:left; cursor:pointer; transition:all 0.25s ease; font-family:'Montserrat',sans-serif;">
-        <div style="width:36px; height:36px; background:rgba(139,92,246,0.1); border-radius:8px; display:flex; align-items:center; justify-content:center; margin-bottom:12px;">
-          <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="#7C3AED" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
-        </div>
-        <p style="font-weight:700; color:#0B1120; font-size:14px;">AI &amp; Automation</p>
-        <p style="color:#9CA3AF; font-size:12px; margin-top:4px;">Tools &amp; workflows</p>
-      </button>
-
-      <button onclick="activateFilter('operations')"
-              class="category-dir-card" style="background:#F8FAFC; border:1px solid #D1D5DB; border-radius:16px; padding:24px 20px; text-align:left; cursor:pointer; transition:all 0.25s ease; font-family:'Montserrat',sans-serif;">
-        <div style="width:36px; height:36px; background:rgba(245,158,11,0.1); border-radius:8px; display:flex; align-items:center; justify-content:center; margin-bottom:12px;">
-          <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="#D97706" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg>
-        </div>
-        <p style="font-weight:700; color:#0B1120; font-size:14px;">Operations</p>
-        <p style="color:#9CA3AF; font-size:12px; margin-top:4px;">Systems &amp; processes</p>
-      </button>
-
-      <button onclick="activateFilter('marketing')"
-              class="category-dir-card" style="background:#F8FAFC; border:1px solid #D1D5DB; border-radius:16px; padding:24px 20px; text-align:left; cursor:pointer; transition:all 0.25s ease; font-family:'Montserrat',sans-serif;">
-        <div style="width:36px; height:36px; background:rgba(16,185,129,0.1); border-radius:8px; display:flex; align-items:center; justify-content:center; margin-bottom:12px;">
-          <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="#059669" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z"/></svg>
-        </div>
-        <p style="font-weight:700; color:#0B1120; font-size:14px;">Marketing</p>
-        <p style="color:#9CA3AF; font-size:12px; margin-top:4px;">Strategy &amp; campaigns</p>
-      </button>
-
-      <button onclick="activateFilter('websites')"
-              class="category-dir-card" style="background:#F8FAFC; border:1px solid #D1D5DB; border-radius:16px; padding:24px 20px; text-align:left; cursor:pointer; transition:all 0.25s ease; font-family:'Montserrat',sans-serif;">
-        <div style="width:36px; height:36px; background:rgba(14,165,233,0.1); border-radius:8px; display:flex; align-items:center; justify-content:center; margin-bottom:12px;">
-          <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="#0284C7" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"/></svg>
-        </div>
-        <p style="font-weight:700; color:#0B1120; font-size:14px;">Websites</p>
-        <p style="color:#9CA3AF; font-size:12px; margin-top:4px;">Builds &amp; projects</p>
-      </button>
-
-      <button onclick="activateFilter('seo')"
-              class="category-dir-card" style="background:#F8FAFC; border:1px solid #D1D5DB; border-radius:16px; padding:24px 20px; text-align:left; cursor:pointer; transition:all 0.25s ease; font-family:'Montserrat',sans-serif;">
-        <div style="width:36px; height:36px; background:rgba(34,197,94,0.1); border-radius:8px; display:flex; align-items:center; justify-content:center; margin-bottom:12px;">
-          <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="#16A34A" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M7 20l4-16m2 16l4-16M6 9h14M4 15h14"/></svg>
-        </div>
-        <p style="font-weight:700; color:#0B1120; font-size:14px;">SEO</p>
-        <p style="color:#9CA3AF; font-size:12px; margin-top:4px;">Rankings &amp; traffic</p>
-      </button>
-
-      <button onclick="activateFilter('growth')"
-              class="category-dir-card" style="background:#F8FAFC; border:1px solid #D1D5DB; border-radius:16px; padding:24px 20px; text-align:left; cursor:pointer; transition:all 0.25s ease; font-family:'Montserrat',sans-serif;">
-        <div style="width:36px; height:36px; background:rgba(239,68,68,0.1); border-radius:8px; display:flex; align-items:center; justify-content:center; margin-bottom:12px;">
-          <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="#DC2626" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/></svg>
-        </div>
-        <p style="font-weight:700; color:#0B1120; font-size:14px;">Business Growth</p>
-        <p style="color:#9CA3AF; font-size:12px; margin-top:4px;">Scale &amp; strategy</p>
-      </button>
-
-      <button onclick="activateFilter('team')"
-              class="category-dir-card" style="background:#F8FAFC; border:1px solid #D1D5DB; border-radius:16px; padding:24px 20px; text-align:left; cursor:pointer; transition:all 0.25s ease; font-family:'Montserrat',sans-serif;">
-        <div style="width:36px; height:36px; background:rgba(71,85,105,0.1); border-radius:8px; display:flex; align-items:center; justify-content:center; margin-bottom:12px;">
-          <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="#475569" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0"/></svg>
-        </div>
-        <p style="font-weight:700; color:#0B1120; font-size:14px;">Team Insights</p>
-        <p style="color:#9CA3AF; font-size:12px; margin-top:4px;">Inside the BBC team</p>
-      </button>
-
-    </div>
-
-  </div>
-</section>
-
-
-<!-- ════════════════════════════════════════════
-     SECTION 6 — CTA
-════════════════════════════════════════════ -->
-<section style="background:#F8FAFC;" class="section-pad">
-  <div class="max-w-3xl mx-auto px-6 text-center fade-in">
-    <span class="inline-block text-xs font-semibold uppercase mb-4"
-          style="color:#2D5BFF; letter-spacing:0.14em;">Ready to Work With Us</span>
-    <h2 class="font-bold" style="font-size:clamp(26px,3.5vw,40px); font-weight:700; color:#0B1120; line-height:1.2; margin-bottom:14px;">
-      See These Systems Working<br>Inside Your Business
-    </h2>
-    <p style="color:#475569; font-size:17px; line-height:1.75; margin-bottom:40px; max-width:500px; margin-left:auto; margin-right:auto;">
-      The strategies and systems documented here are the same ones BBC uses with every client.
-      Book a call to talk through what your business needs most.
-    </p>
-    <div class="flex flex-wrap justify-center gap-4">
-      <a href="contact.html"
-         style="display:inline-flex; align-items:center; gap:6px; padding:16px 32px; border-radius:9999px; background:#2D5BFF; color:white; font-size:15px; font-weight:700; text-decoration:none;">
-        Book a Call
-      </a>
-      <a href="how-we-help.html"
-         style="display:inline-flex; align-items:center; gap:6px; padding:16px 32px; border-radius:9999px; border:2px solid #0B1120; color:#0B1120; font-size:15px; font-weight:600; text-decoration:none;">
-        How We Help
-      </a>
-      <a href="our-team.html"
-         style="display:inline-flex; align-items:center; gap:6px; padding:16px 32px; border-radius:9999px; border:2px solid #D1D5DB; color:#475569; font-size:15px; font-weight:600; text-decoration:none;">
-        Meet the Team
-      </a>
-    </div>
-  </div>
-</section>
-
-
-<!-- ════════════════════════════════════════════
-     SHARED FOOTER
-════════════════════════════════════════════ -->
-<footer style="background:#0B1120; border-top:1px solid rgba(255,255,255,0.08); padding:80px 0 40px;">
-  <div class="max-w-7xl mx-auto px-6">
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12">
-
-      <div>
-        <div class="flex items-center gap-3">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 210" width="42" height="42"
-               style="color:white; flex-shrink:0;" aria-hidden="true">
-            <rect x="38" y="6" width="13" height="62" rx="2" fill="currentColor"/>
-            <line x1="100" y1="38" x2="6" y2="90" stroke="currentColor" stroke-width="9" stroke-linecap="round"/>
-            <line x1="100" y1="38" x2="194" y2="90" stroke="currentColor" stroke-width="9" stroke-linecap="round"/>
-            <rect x="24" y="90" width="152" height="86" rx="6" fill="none" stroke="currentColor" stroke-width="9"/>
-            <text x="100" y="154" text-anchor="middle" font-size="46" font-weight="800"
-                  font-family="Georgia,'Times New Roman',serif" fill="currentColor">BBC</text>
-            <rect x="91" y="176" width="18" height="18" rx="2" fill="currentColor"/>
-            <rect x="64" y="194" width="72" height="11" rx="5.5" fill="currentColor"/>
-          </svg>
-          <span class="font-bold text-white" style="font-size:16px; font-weight:700;">Balay ni Bruno &amp; Co.</span>
-        </div>
-        <p class="mt-4" style="color:rgba(255,255,255,0.5); font-size:14px; line-height:1.7; max-width:240px;">
-          Managed virtual operations support for business owners who need reliable digital help.
-        </p>
-        <div class="flex gap-2 mt-5">
-          <div class="w-7 h-7 rounded-md" style="border:1px solid rgba(255,255,255,0.15);"></div>
-          <div class="w-7 h-7 rounded-md" style="border:1px solid rgba(255,255,255,0.15);"></div>
-          <div class="w-7 h-7 rounded-md" style="border:1px solid rgba(255,255,255,0.15);"></div>
-        </div>
-      </div>
-
-      <div>
-        <p class="font-semibold uppercase tracking-widest mb-5"
-           style="color:rgba(255,255,255,0.4); font-size:12px; letter-spacing:0.1em;">How We Help</p>
-        <ul>
-          <li><a href="how-we-help.html#marketing"  class="hover:text-white transition-colors" style="color:rgba(255,255,255,0.65); font-size:14px; line-height:2.2; display:block;">Marketing Support</a></li>
-          <li><a href="how-we-help.html#content"    class="hover:text-white transition-colors" style="color:rgba(255,255,255,0.65); font-size:14px; line-height:2.2; display:block;">Content &amp; Creative</a></li>
-          <li><a href="how-we-help.html#websites"   class="hover:text-white transition-colors" style="color:rgba(255,255,255,0.65); font-size:14px; line-height:2.2; display:block;">Websites &amp; Digital</a></li>
-          <li><a href="how-we-help.html#automation" class="hover:text-white transition-colors" style="color:rgba(255,255,255,0.65); font-size:14px; line-height:2.2; display:block;">AI &amp; Automation</a></li>
-          <li><a href="how-we-help.html#seo"        class="hover:text-white transition-colors" style="color:rgba(255,255,255,0.65); font-size:14px; line-height:2.2; display:block;">SEO &amp; Visibility</a></li>
-          <li><a href="how-we-help.html#operations" class="hover:text-white transition-colors" style="color:rgba(255,255,255,0.65); font-size:14px; line-height:2.2; display:block;">Operations &amp; Admin</a></li>
-        </ul>
-      </div>
-
-      <div>
-        <p class="font-semibold uppercase tracking-widest mb-5"
-           style="color:rgba(255,255,255,0.4); font-size:12px; letter-spacing:0.1em;">Company</p>
-        <ul>
-          <li><a href="about.html"        class="hover:text-white transition-colors" style="color:rgba(255,255,255,0.65); font-size:14px; line-height:2.2; display:block;">Our Story</a></li>
-          <li><a href="how-it-works.html" class="hover:text-white transition-colors" style="color:rgba(255,255,255,0.65); font-size:14px; line-height:2.2; display:block;">How It Works</a></li>
-          <li><a href="our-team.html"     class="hover:text-white transition-colors" style="color:rgba(255,255,255,0.65); font-size:14px; line-height:2.2; display:block;">Our Team</a></li>
-          <li><a href="our-work.html"     class="hover:text-white transition-colors" style="color:rgba(255,255,255,0.65); font-size:14px; line-height:2.2; display:block;">Our Work</a></li>
-          <li><a href="insights.html"     class="hover:text-white transition-colors" style="color:rgba(255,255,255,0.65); font-size:14px; line-height:2.2; display:block;">Insights</a></li>
-          <li><a href="contact.html" class="hover:text-white transition-colors" style="color:rgba(255,255,255,0.65); font-size:14px; line-height:2.2; display:block;">Contact</a></li>
-        </ul>
-      </div>
-
-      <div>
-        <p class="font-semibold uppercase tracking-widest mb-5"
-           style="color:rgba(255,255,255,0.4); font-size:12px; letter-spacing:0.1em;">Contact</p>
-        <p style="color:rgba(255,255,255,0.65); font-size:14px; line-height:2.2;">hello@balaynibruno.com</p>
-        <p style="color:rgba(255,255,255,0.65); font-size:14px; line-height:2.2;">+1 (000) 000-0000</p>
-        <p class="mt-1" style="color:rgba(255,255,255,0.65); font-size:14px; line-height:1.7;">
-          Serving clients in the US, UK, and internationally.
-        </p>
-        <a href="contact.html" class="block mt-4 font-semibold"
-           style="color:#2D5BFF; font-size:14px; font-weight:600;">
-          Book a Call →
-        </a>
-      </div>
-
-    </div>
-
-    <div class="flex flex-col sm:flex-row items-center justify-between gap-4"
-         style="border-top:1px solid rgba(255,255,255,0.08); margin-top:60px; padding-top:28px;">
-      <p style="color:rgba(255,255,255,0.35); font-size:13px;">
-        &copy; 2026 Balay ni Bruno &amp; Co. All rights reserved.
+      <p class="cta-body">
+        The strategies and systems you've read about here are the same ones BBC uses with every client. Book a call to talk through what your business needs most.
       </p>
-      <p style="color:rgba(255,255,255,0.35); font-size:13px;">
-        <a href="#" class="hover:text-white transition-colors" style="color:rgba(255,255,255,0.35);">Privacy Policy</a>
-        <span style="margin:0 8px;">·</span>
-        <a href="#" class="hover:text-white transition-colors" style="color:rgba(255,255,255,0.35);">Terms of Service</a>
+      <div class="cta-actions">
+        <a href="contact.html" class="btn btn-gold">Book a Call</a>
+        <a href="how-we-help.html" class="btn btn-ghost">How We Help</a>
+        <a href="our-team.html" class="btn btn-ghost">Meet the Team</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════
+     FOOTER
+════════════════════════════════════════════ -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+
+      <div>
+        <p class="footer-brand-name">Balay ni Bruno &amp; Co.</p>
+        <p class="footer-brand-desc">
+          A family-built operational support studio helping business owners grow through
+          real collaboration, honest systems, and long-term care.
+        </p>
+      </div>
+
+      <div>
+        <p class="footer-col-label">How We Help</p>
+        <a href="how-we-help.html#marketing" class="footer-link">Marketing Support</a>
+        <a href="how-we-help.html#content" class="footer-link">Content &amp; Creative</a>
+        <a href="how-we-help.html#websites" class="footer-link">Websites &amp; Digital</a>
+        <a href="how-we-help.html#seo" class="footer-link">SEO &amp; Visibility</a>
+        <a href="how-we-help.html#operations" class="footer-link">Operations &amp; Admin</a>
+      </div>
+
+      <div>
+        <p class="footer-col-label">Company</p>
+        <a href="about.html" class="footer-link">Our Story</a>
+        <a href="how-it-works.html" class="footer-link">How It Works</a>
+        <a href="our-team.html" class="footer-link">Our Team</a>
+        <a href="our-work.html" class="footer-link">Our Work</a>
+        <a href="insights.html" class="footer-link">Insights</a>
+        <a href="contact.html" class="footer-link">Contact</a>
+      </div>
+
+      <div>
+        <p class="footer-col-label">Contact</p>
+        <p class="footer-link">hello@balaynibruno.com</p>
+        <p class="footer-link">Serving US, UK &amp; international clients</p>
+        <a href="contact.html" class="btn btn-gold btn-sm" style="margin-top:1rem;">Book a Call</a>
+      </div>
+
+    </div>
+
+    <div class="footer-bottom">
+      <p class="footer-copy">&copy; 2026 Balay ni Bruno &amp; Co. All rights reserved.</p>
+      <p class="footer-copy">
+        <a href="#" style="color:rgba(245,241,234,0.28); transition:color 0.2s;">Privacy Policy</a>
+        <span style="margin:0 8px;">&middot;</span>
+        <a href="#" style="color:rgba(245,241,234,0.28); transition:color 0.2s;">Terms of Service</a>
       </p>
     </div>
   </div>
@@ -1133,182 +1026,43 @@
      JAVASCRIPT
 ════════════════════════════════════════════ -->
 <script>
-/* ─────────────────────────────────────────────
-   HAMBURGER MENU
-───────────────────────────────────────────── */
-const hamburger = document.getElementById('hamburger');
-const mobileNav = document.getElementById('mobile-nav');
-const hb1 = document.getElementById('hb1');
-const hb2 = document.getElementById('hb2');
-const hb3 = document.getElementById('hb3');
+  // Sticky header
+  const header = document.getElementById('site-header');
+  window.addEventListener('scroll', () => {
+    header.classList.toggle('scrolled', window.scrollY > 60);
+  }, { passive: true });
 
-hamburger.addEventListener('click', () => {
-  const isOpen = mobileNav.classList.toggle('open');
-  if (isOpen) {
-    hb1.style.transform = 'translateY(8px) rotate(45deg)';
-    hb2.style.opacity   = '0';
-    hb3.style.transform = 'translateY(-8px) rotate(-45deg)';
-  } else {
-    hb1.style.transform = '';
-    hb2.style.opacity   = '';
-    hb3.style.transform = '';
-  }
-});
-mobileNav.querySelectorAll('a').forEach(link => {
-  link.addEventListener('click', () => {
-    mobileNav.classList.remove('open');
-    hb1.style.transform = '';
-    hb2.style.opacity   = '';
-    hb3.style.transform = '';
+  // Hamburger
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const hb1 = document.getElementById('hb1');
+  const hb2 = document.getElementById('hb2');
+  const hb3 = document.getElementById('hb3');
+  hamburger.addEventListener('click', () => {
+    const open = mobileMenu.classList.toggle('open');
+    if (open) {
+      hb1.style.transform = 'translateY(7px) rotate(45deg)';
+      hb2.style.opacity = '0';
+      hb3.style.transform = 'translateY(-7px) rotate(-45deg)';
+    } else {
+      hb1.style.transform = ''; hb2.style.opacity = ''; hb3.style.transform = '';
+    }
   });
-});
-
-/* ─────────────────────────────────────────────
-   STICKY HEADER SHADOW
-───────────────────────────────────────────── */
-const siteHeader = document.getElementById('site-header');
-window.addEventListener('scroll', () => {
-  siteHeader.classList.toggle('scrolled', window.scrollY > 60);
-}, { passive: true });
-
-/* ─────────────────────────────────────────────
-   SCROLL FADE-IN
-───────────────────────────────────────────── */
-const fadeEls = document.querySelectorAll('.fade-in');
-const io = new IntersectionObserver(
-  entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-        io.unobserve(entry.target);
-      }
+  mobileMenu.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      mobileMenu.classList.remove('open');
+      hb1.style.transform = ''; hb2.style.opacity = ''; hb3.style.transform = '';
     });
-  },
-  { threshold: 0.06, rootMargin: '0px 0px -40px 0px' }
-);
-fadeEls.forEach(el => io.observe(el));
-
-/* ─────────────────────────────────────────────
-   CATEGORY FILTER + SEARCH
-   Architecture: vanilla JS show/hide on static HTML.
-   Future CMS upgrade path:
-   - Replace static cards with server-rendered template
-   - Replace JS filter with URL params (?category=ai)
-   - Handle filtering server-side for SEO
-   - Keep data-category attributes on cards —
-     client-side filter JS remains compatible
-───────────────────────────────────────────── */
-const pills      = document.querySelectorAll('.filter-pill');
-const cards      = document.querySelectorAll('.insight-card');
-const searchEl   = document.getElementById('search-input');
-const emptyState = document.getElementById('empty-state');
-const resetBtn   = document.getElementById('reset-filter');
-const countEl    = document.getElementById('results-count');
-
-let activeCategory = 'all';
-let searchQuery    = '';
-
-function updateGrid() {
-  let visible = 0;
-
-  cards.forEach(card => {
-    const cat     = card.dataset.category;
-    const title   = card.dataset.title || '';
-    const catMatch   = activeCategory === 'all' || cat === activeCategory;
-    const searchMatch = searchQuery === '' || title.includes(searchQuery);
-    const show = catMatch && searchMatch;
-
-    card.style.display = show ? 'flex' : 'none';
-    if (show) visible++;
   });
 
-  // Empty state
-  emptyState.classList.toggle('visible', visible === 0);
-
-  // Results count
-  const total = cards.length;
-  if (activeCategory === 'all' && searchQuery === '') {
-    countEl.textContent = `Showing all ${total} insights`;
-  } else {
-    countEl.textContent = `${visible} of ${total} insights`;
-  }
-}
-
-// Pill click
-pills.forEach(pill => {
-  pill.addEventListener('click', () => {
-    activeCategory = pill.dataset.category;
-    pills.forEach(p => p.classList.remove('active'));
-    pill.classList.add('active');
-    updateGrid();
-    // Scroll to grid
-    document.getElementById('insights-grid').scrollIntoView({ behavior: 'smooth', block: 'start' });
-  });
-});
-
-// Search
-searchEl.addEventListener('input', () => {
-  searchQuery = searchEl.value.toLowerCase().trim();
-  updateGrid();
-});
-
-// Reset button (empty state)
-resetBtn.addEventListener('click', () => {
-  activeCategory = 'all';
-  searchQuery    = '';
-  searchEl.value = '';
-  pills.forEach(p => p.classList.remove('active'));
-  pills[0].classList.add('active');
-  updateGrid();
-});
-
-/* Category directory cards (bottom section) */
-function activateFilter(category) {
-  activeCategory = category;
-  searchQuery    = '';
-  searchEl.value = '';
-  pills.forEach(p => {
-    p.classList.toggle('active', p.dataset.category === category);
-  });
-  updateGrid();
-  document.getElementById('insights-grid').scrollIntoView({ behavior: 'smooth', block: 'start' });
-}
-
-/* Category dir card hover */
-document.querySelectorAll('.category-dir-card').forEach(card => {
-  card.addEventListener('mouseenter', () => {
-    card.style.borderColor = '#2D5BFF';
-    card.style.transform   = 'translateY(-2px)';
-    card.style.background  = 'white';
-  });
-  card.addEventListener('mouseleave', () => {
-    card.style.borderColor = '#D1D5DB';
-    card.style.transform   = '';
-    card.style.background  = '#F8FAFC';
-  });
-});
-
-/* ─────────────────────────────────────────────
-   NEWSLETTER FORM
-   FUTURE: Replace with real email platform integration
-   Options: Mailchimp API, ConvertKit, Google Sheets
-   via Apps Script, or a backend endpoint.
-───────────────────────────────────────────── */
-function handleNewsletter(e) {
-  e.preventDefault();
-  const email = document.getElementById('newsletter-email').value;
-  if (!email) return;
-
-  // FUTURE: POST to email platform API here
-  // fetch('/api/newsletter', { method:'POST', body: JSON.stringify({email}) })
-
-  // For now: show success state
-  document.getElementById('newsletter-form').style.display = 'none';
-  document.getElementById('newsletter-success').style.display = 'block';
-
-  console.log('[BBC Insights] Newsletter signup:', email);
-  // FUTURE: remove console.log and wire to real endpoint
-}
+  // Fade-in on scroll
+  const fadeEls = document.querySelectorAll('.fade-in');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+  fadeEls.forEach(el => io.observe(el));
 </script>
 
 </body>
