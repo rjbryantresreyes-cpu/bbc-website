@@ -1,377 +1,558 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>NPC Portfolio Submission — Balay ni Bruno &amp; Co.</title>
-  <!-- Internal form: not indexed by search engines -->
   <meta name="robots" content="noindex, nofollow" />
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            navy:        '#0B1120',
-            blue:        '#2D5BFF',
-            'off-white': '#F8FAFC',
-            slate:       '#475569',
-            lightgray:   '#D1D5DB',
-          },
-          fontFamily: { sans: ['Montserrat', 'sans-serif'] },
-        }
-      }
-    }
-  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Lora:ital,wght@0,400;0,500;1,400;1,500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
   <style>
-    *, *::before, *::after { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    body { font-family: 'Montserrat', sans-serif; margin: 0; padding: 0; background: #F8FAFC; color: #0B1120; }
+    :root {
+      --deep-blue:   #1F3557;
+      --mid-blue:    #4B6FA5;
+      --warm-blue:   #6D8FC7;
+      --light-blue:  #A8C0DC;
+      --pale-blue:   #DDE8F2;
+      --bg-primary:  #F5F1EA;
+      --bg-section:  #EDE8DF;
+      --bg-card:     #FDFAF6;
+      --bg-card-alt: #FAF6EF;
+      --bg-dark:     #1C2E47;
+      --bg-footer:   #172540;
+      --neutral-100: #E8E2D6;
+      --neutral-200: #D5CEC3;
+      --neutral-300: #B8B1A6;
+      --text-ink:    #2A3040;
+      --text-body:   #4E5666;
+      --text-muted:  #888FA0;
+      --text-warm:   #F5F1EA;
+      --gold:        #B8923E;
+      --gold-pale:   #E6CFA0;
+      --gold-warm:   #D4A84B;
+      --sage:        #4E9E74;
+      --font-display:'Playfair Display', Georgia, serif;
+      --font-body:   'Lora', Georgia, serif;
+      --font-ui:     'DM Sans', system-ui, sans-serif;
+      --max-width:   1100px;
+      --radius-sm:   8px;
+      --radius:      16px;
+      --radius-lg:   24px;
+      --radius-xl:   32px;
+      --shadow-xs:   0 1px 6px  rgba(85,60,35,0.055);
+      --shadow-sm:   0 3px 18px rgba(85,60,35,0.08);
+      --shadow-md:   0 7px 36px rgba(85,60,35,0.11);
+      --shadow-lg:   0 14px 56px rgba(85,60,35,0.14);
+      --border-card: 1px solid rgba(85,60,35,0.09);
+      --border-warm: 1px solid rgba(85,60,35,0.12);
+      --border-dark: 1px solid rgba(255,255,255,0.07);
+      --s1:.5rem; --s2:1rem; --s3:1.5rem; --s4:2.5rem; --s5:4rem; --s6:6rem; --s7:9rem;
+    }
 
-    /* ── Header ── */
-    #site-header { transition: box-shadow 0.2s ease; }
-    #site-header.scrolled { box-shadow: 0 2px 24px rgba(11,17,32,0.10); }
-    #mobile-nav { display: none; }
-    #mobile-nav.open { display: flex; }
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body {
+      font-family:var(--font-body);
+      color:var(--text-ink);
+      background:var(--bg-primary);
+      line-height:1.6;
+      -webkit-font-smoothing:antialiased;
+      overflow-x:hidden;
+    }
+    body::after {
+      content:'';
+      position:fixed; inset:0;
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23n)' opacity='0.026'/%3E%3C/svg%3E");
+      pointer-events:none; z-index:9999; mix-blend-mode:multiply;
+    }
 
-    /* ── Sticky progress bar ── */
+    h1,h2,h3,h4 { font-family:var(--font-display); line-height:1.22; color:var(--deep-blue); }
+    h1 { font-size:clamp(2rem,4.5vw,3.4rem); font-weight:700; }
+    h2 { font-size:clamp(1.5rem,2.6vw,2.2rem); font-weight:600; }
+    h3 { font-size:clamp(1rem,1.5vw,1.2rem); font-weight:600; }
+    p  { font-family:var(--font-body); font-size:1rem; line-height:1.87; color:var(--text-body); }
+    a  { text-decoration:none; }
+
+    .eyebrow {
+      display:inline-block; font-family:var(--font-ui);
+      font-size:0.68rem; font-weight:600;
+      letter-spacing:0.17em; text-transform:uppercase;
+      color:var(--warm-blue); margin-bottom:var(--s2);
+    }
+    .eyebrow--gold { color:var(--gold-pale); }
+
+    .container { max-width:var(--max-width); margin:0 auto; padding:0 var(--s4); }
+    @media (max-width:640px) { .container { padding:0 var(--s2); } }
+
+    .fade-in { opacity:0; transform:translateY(22px); transition:opacity 0.65s ease, transform 0.65s ease; }
+    .fade-in.visible { opacity:1; transform:translateY(0); }
+
+    /* ── Divider ── */
+    .divider-bar {
+      width:44px; height:2.5px;
+      background:linear-gradient(90deg,var(--gold),var(--warm-blue));
+      border-radius:2px; margin:var(--s2) 0 var(--s3); opacity:0.8;
+    }
+
+    /* ── Buttons ── */
+    .btn {
+      display:inline-flex; align-items:center; gap:0.5rem;
+      padding:0.88rem 2.2rem; border-radius:100px;
+      font-family:var(--font-ui); font-size:0.86rem; font-weight:600;
+      letter-spacing:0.02em; cursor:pointer;
+      transition:all 0.3s ease; border:1.5px solid transparent;
+      white-space:nowrap;
+    }
+    .btn-primary { background:var(--deep-blue); color:var(--text-warm); }
+    .btn-primary:hover { background:#243f64; transform:translateY(-2px); box-shadow:0 10px 32px rgba(31,53,87,0.28); }
+    .btn-gold { background:var(--gold); color:#fff; font-weight:700; }
+    .btn-gold:hover { background:var(--gold-warm); transform:translateY(-2px); box-shadow:0 10px 32px rgba(184,146,62,0.35); }
+    .btn-ghost { background:transparent; color:var(--text-warm); border-color:rgba(245,241,234,0.28); }
+    .btn-ghost:hover { background:rgba(245,241,234,0.08); border-color:rgba(245,241,234,0.55); }
+    .btn-outline { background:transparent; color:var(--deep-blue); border-color:rgba(75,111,165,0.42); }
+    .btn-outline:hover { background:var(--deep-blue); color:var(--text-warm); }
+    .btn-sm { padding:0.62rem 1.35rem; font-size:0.78rem; }
+    .btn:disabled { opacity:0.55; cursor:not-allowed; transform:none !important; }
+
+    /* ══════════════════════════════════════════
+       HEADER
+    ══════════════════════════════════════════ */
+    .site-header {
+      position:fixed; top:0; left:0; right:0; z-index:200;
+      background:rgba(245,241,234,0.94);
+      backdrop-filter:blur(20px) saturate(1.2);
+      -webkit-backdrop-filter:blur(20px) saturate(1.2);
+      border-bottom:var(--border-warm);
+      transition:box-shadow 0.3s ease;
+    }
+    .site-header.scrolled { box-shadow:var(--shadow-sm); }
+    .header__inner {
+      max-width:var(--max-width); margin:0 auto; padding:0 var(--s4);
+      height:68px; display:flex; align-items:center;
+      justify-content:space-between; gap:var(--s3);
+    }
+    .header__logo { display:flex; flex-direction:row; align-items:center; gap:0.6rem; }
+    .header__logo-name {
+      font-family:var(--font-display); font-size:1.05rem; font-weight:700;
+      color:var(--deep-blue); line-height:1; letter-spacing:-0.01em;
+    }
+    .header__nav { display:flex; align-items:center; gap:1.5rem; list-style:none; }
+    .header__nav a {
+      font-family:var(--font-ui); font-size:0.78rem; font-weight:500;
+      color:var(--text-body); transition:color 0.2s; white-space:nowrap;
+    }
+    .header__nav a:hover { color:var(--deep-blue); font-weight:600; }
+    .header__cta { display:flex; align-items:center; gap:0.9rem; flex-shrink:0; }
+    .hamburger { display:none; flex-direction:column; gap:5px; cursor:pointer; background:none; border:none; padding:8px; }
+    .hamburger span { display:block; width:20px; height:2px; background:var(--text-ink); border-radius:2px; transition:all 0.25s ease; }
+    .mobile-menu { display:none; flex-direction:column; background:var(--bg-card); border-top:var(--border-warm); padding:1rem var(--s4) 1.5rem; }
+    .mobile-menu.open { display:flex; }
+    .mobile-menu a { font-family:var(--font-ui); font-size:0.9rem; font-weight:500; color:var(--text-body); padding:0.7rem 0; border-bottom:var(--border-card); transition:color 0.2s; }
+    .mobile-menu a:hover { color:var(--deep-blue); }
+    .mobile-menu .mobile-cta { margin-top:1rem; }
+    @media (max-width:1024px) { .header__nav { display:none; } }
+    @media (max-width:768px) { .header__cta .btn-ghost { display:none; } .hamburger { display:flex; } }
+
+    /* ══════════════════════════════════════════
+       HERO  —  dark
+    ══════════════════════════════════════════ */
+    .hero {
+      background:var(--bg-dark);
+      padding-top:68px;
+      position:relative; overflow:hidden;
+    }
+    .hero::before {
+      content:'';
+      position:absolute; top:-80px; right:-100px;
+      width:600px; height:600px;
+      background:radial-gradient(ellipse at center, rgba(184,146,62,0.07) 0%, transparent 65%);
+      pointer-events:none;
+    }
+    .hero__inner {
+      max-width:780px; margin:0 auto;
+      padding:var(--s6) var(--s4) var(--s5);
+      text-align:center; position:relative; z-index:1;
+    }
+    .hero__eyebrow {
+      display:inline-flex; align-items:center; gap:0.6rem;
+      font-family:var(--font-ui); font-size:0.68rem; font-weight:600;
+      letter-spacing:0.18em; text-transform:uppercase;
+      color:var(--gold-pale); margin-bottom:1.8rem;
+    }
+    .hero__eyebrow-dot { width:5px; height:5px; border-radius:50%; background:var(--gold); opacity:0.75; flex-shrink:0; }
+    .hero__title { color:#fff; margin-bottom:1.4rem; }
+    .hero__title em { font-style:italic; color:var(--gold-pale); }
+    .hero__body { font-family:var(--font-body); font-size:1.05rem; line-height:1.88; color:rgba(245,241,234,0.65); max-width:540px; margin:0 auto 2.8rem; }
+
+    .hero__stats {
+      display:flex; flex-wrap:wrap; gap:0 var(--s4);
+      justify-content:center; align-items:center;
+      margin-bottom:var(--s4);
+    }
+    .hero__stat { text-align:center; padding:0 var(--s2); }
+    .hero__stat-num { font-family:var(--font-display); font-size:2rem; font-weight:700; color:#fff; line-height:1; }
+    .hero__stat-label { font-family:var(--font-ui); font-size:0.64rem; font-weight:600; letter-spacing:0.14em; text-transform:uppercase; color:rgba(245,241,234,0.4); margin-top:0.3rem; }
+    .hero__stat-divider { width:1px; height:48px; background:rgba(255,255,255,0.1); flex-shrink:0; }
+    @media (max-width:500px) { .hero__stat-divider { display:none; } }
+
+    .hero__notice {
+      max-width:540px; margin:0 auto;
+      background:rgba(184,146,62,0.1);
+      border:1px solid rgba(184,146,62,0.22);
+      border-radius:var(--radius);
+      padding:1.25rem 1.5rem;
+      text-align:left;
+    }
+    .hero__notice p {
+      font-family:var(--font-ui); font-size:0.86rem; line-height:1.7;
+      color:rgba(245,241,234,0.78); margin:0;
+    }
+    .hero__notice strong { color:var(--gold-pale); }
+
+    /* ══════════════════════════════════════════
+       PROGRESS BAR
+    ══════════════════════════════════════════ */
     #progress-bar {
-      position: sticky;
-      top: 64px;
-      z-index: 40;
-      background: white;
-      border-bottom: 1px solid #D1D5DB;
-      padding: 0 24px;
+      position:sticky;
+      top:68px;
+      z-index:100;
+      background:var(--bg-card);
+      border-bottom:var(--border-warm);
+      box-shadow:var(--shadow-xs);
     }
     #progress-inner {
-      display: flex;
-      align-items: center;
-      max-width: 860px;
-      margin: 0 auto;
-      overflow-x: auto;
-      scrollbar-width: none;
-      gap: 0;
+      display:flex; align-items:stretch;
+      max-width:var(--max-width); margin:0 auto; padding:0 var(--s4);
+      overflow-x:auto; scrollbar-width:none; gap:0;
     }
-    #progress-inner::-webkit-scrollbar { display: none; }
+    #progress-inner::-webkit-scrollbar { display:none; }
     .prog-step {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      flex: 1;
-      min-width: 80px;
-      padding: 14px 8px;
-      cursor: pointer;
-      position: relative;
-      border-bottom: 3px solid transparent;
-      transition: border-color 0.2s ease;
+      display:flex; flex-direction:column; align-items:center;
+      flex:1; min-width:80px;
+      padding:1rem 0.75rem;
+      cursor:pointer; position:relative;
+      border-bottom:2.5px solid transparent;
+      transition:border-color 0.25s ease;
     }
-    .prog-step.active { border-bottom-color: #2D5BFF; }
+    .prog-step.active { border-bottom-color:var(--gold); }
     .prog-step-num {
-      width: 28px; height: 28px;
-      border-radius: 50%;
-      border: 2px solid #D1D5DB;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 12px; font-weight: 700;
-      color: #94a3b8;
-      transition: background 0.2s, border-color 0.2s, color 0.2s;
+      width:28px; height:28px; border-radius:50%;
+      border:2px solid var(--neutral-200);
+      display:flex; align-items:center; justify-content:center;
+      font-family:var(--font-ui); font-size:0.72rem; font-weight:700;
+      color:var(--text-muted);
+      transition:background 0.22s, border-color 0.22s, color 0.22s;
     }
-    .prog-step.active   .prog-step-num { background: #2D5BFF; border-color: #2D5BFF; color: white; }
-    .prog-step.done     .prog-step-num { background: #2D5BFF; border-color: #2D5BFF; color: white; }
+    .prog-step.active .prog-step-num { background:var(--gold); border-color:var(--gold); color:#fff; }
+    .prog-step.done  .prog-step-num  { background:var(--deep-blue); border-color:var(--deep-blue); color:#fff; }
     .prog-step-label {
-      font-size: 10px; font-weight: 600; color: #94a3b8;
-      text-align: center; margin-top: 5px; line-height: 1.3;
-      white-space: nowrap;
-      transition: color 0.2s;
+      font-family:var(--font-ui); font-size:0.62rem; font-weight:600;
+      color:var(--text-muted); text-align:center; margin-top:0.4rem;
+      letter-spacing:0.04em; white-space:nowrap;
+      transition:color 0.22s;
     }
-    .prog-step.active .prog-step-label,
-    .prog-step.done   .prog-step-label { color: #2D5BFF; }
+    .prog-step.active .prog-step-label { color:var(--gold); }
+    .prog-step.done   .prog-step-label { color:var(--deep-blue); }
 
-    /* ── Form section wrappers ── */
-    .form-section { padding: 72px 24px; scroll-margin-top: 140px; }
-    .form-inner { max-width: 860px; margin: 0 auto; }
+    /* ══════════════════════════════════════════
+       FORM SECTIONS
+    ══════════════════════════════════════════ */
+    .form-section { padding:var(--s7) 0; scroll-margin-top:140px; }
+    .form-section--card  { background:var(--bg-card); }
+    .form-section--cream { background:var(--bg-primary); }
+    .form-section--warm  { background:var(--bg-section); }
 
-    /* ── Section header ── */
-    .section-eyebrow {
-      display: inline-block;
-      font-size: 11px; font-weight: 700; text-transform: uppercase;
-      letter-spacing: 0.14em; color: #2D5BFF;
-      margin-bottom: 8px;
-    }
+    .form-inner { max-width:860px; margin:0 auto; padding:0 var(--s4); }
+    @media (max-width:640px) { .form-inner { padding:0 var(--s2); } }
+
+    /* Section header */
     .section-num {
-      display: inline-flex; align-items: center; justify-content: center;
-      width: 36px; height: 36px; border-radius: 50%;
-      background: rgba(45,91,255,0.1); color: #2D5BFF;
-      font-size: 14px; font-weight: 700;
-      margin-bottom: 16px;
+      display:inline-flex; align-items:center; justify-content:center;
+      width:36px; height:36px; border-radius:50%;
+      background:rgba(31,53,87,0.08); color:var(--deep-blue);
+      font-family:var(--font-ui); font-size:0.8rem; font-weight:700;
+      margin-bottom:1rem;
     }
-    .section-title {
-      font-size: clamp(22px, 3vw, 30px);
-      font-weight: 700; color: #0B1120;
-      line-height: 1.3; margin: 0 0 6px;
+    .section-eyebrow {
+      font-family:var(--font-ui); font-size:0.68rem; font-weight:600;
+      letter-spacing:0.17em; text-transform:uppercase;
+      color:var(--warm-blue); display:block; margin-bottom:0.6rem;
     }
-    .section-desc {
-      font-size: 15px; color: #475569;
-      line-height: 1.7; margin: 0 0 40px;
-      max-width: 600px;
-    }
+    .section-title { margin-bottom:0.5rem; }
+    .section-desc { font-family:var(--font-body); font-size:0.98rem; line-height:1.8; color:var(--text-body); margin-bottom:var(--s4); max-width:600px; }
 
-    /* ── Field groups ── */
-    .field-group { margin-bottom: 28px; }
-    .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-    @media (max-width: 640px) { .field-row { grid-template-columns: 1fr; } }
+    /* Fields */
+    .field-group { margin-bottom:1.75rem; }
+    .field-row { display:grid; grid-template-columns:1fr 1fr; gap:1.25rem; }
+    @media (max-width:620px) { .field-row { grid-template-columns:1fr; } }
 
-    /* ── Labels ── */
     label.field-label {
-      display: block;
-      font-size: 13px; font-weight: 700; color: #0B1120;
-      margin-bottom: 7px;
+      display:block; font-family:var(--font-ui);
+      font-size:0.8rem; font-weight:600; color:var(--text-ink);
+      margin-bottom:0.5rem; letter-spacing:0.01em;
     }
-    label.field-label span.req { color: #2D5BFF; margin-left: 2px; }
-    .field-hint {
-      font-size: 12px; color: #94a3b8; font-weight: 500;
-      margin-top: 5px; line-height: 1.5;
-    }
+    label.field-label .req { color:var(--gold); margin-left:2px; }
+    .field-hint { font-family:var(--font-ui); font-size:0.76rem; color:var(--text-muted); margin-top:0.4rem; line-height:1.55; }
 
-    /* ── Inputs ── */
     input[type="text"],
     input[type="email"],
     input[type="url"],
     select,
     textarea {
-      width: 100%;
-      border: 1px solid #D1D5DB;
-      border-radius: 10px;
-      padding: 12px 16px;
-      font-family: 'Montserrat', sans-serif;
-      font-size: 14px;
-      color: #0B1120;
-      background: white;
-      outline: none;
-      transition: border-color 0.18s ease, box-shadow 0.18s ease;
-      resize: vertical;
+      width:100%;
+      border:var(--border-warm);
+      border-radius:var(--radius-sm);
+      padding:0.75rem 1rem;
+      font-family:var(--font-body);
+      font-size:0.93rem;
+      color:var(--text-ink);
+      background:var(--bg-card);
+      outline:none;
+      transition:border-color 0.2s ease, box-shadow 0.2s ease;
+      resize:vertical;
     }
     input[type="text"]:focus,
     input[type="email"]:focus,
     input[type="url"]:focus,
     select:focus,
     textarea:focus {
-      border-color: #2D5BFF;
-      box-shadow: 0 0 0 3px rgba(45,91,255,0.1);
+      border-color:var(--mid-blue);
+      box-shadow:0 0 0 3px rgba(75,111,165,0.12);
     }
     input.error, select.error, textarea.error {
-      border-color: #ef4444;
-      box-shadow: 0 0 0 3px rgba(239,68,68,0.1);
+      border-color:#c0392b;
+      box-shadow:0 0 0 3px rgba(192,57,43,0.09);
     }
     .error-msg {
-      display: none;
-      font-size: 12px; color: #ef4444; font-weight: 600;
-      margin-top: 5px;
+      display:none;
+      font-family:var(--font-ui); font-size:0.76rem; color:#c0392b; font-weight:600;
+      margin-top:0.4rem;
     }
-    .error-msg.show { display: block; }
+    .error-msg.show { display:block; }
 
-    /* ── Checkbox group ── */
+    .field-divider {
+      border:none; border-top:var(--border-warm);
+      margin:2.5rem 0;
+    }
+
+    /* Checkbox grid */
     .checkbox-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-      gap: 10px;
+      display:grid;
+      grid-template-columns:repeat(auto-fill, minmax(200px, 1fr));
+      gap:0.6rem;
     }
     .checkbox-item {
-      display: flex; align-items: center; gap: 10px;
-      background: white; border: 1px solid #D1D5DB;
-      border-radius: 8px; padding: 10px 14px;
-      cursor: pointer;
-      transition: border-color 0.15s ease, background 0.15s ease;
-      font-size: 13px; font-weight: 500; color: #0B1120;
-      user-select: none;
+      display:flex; align-items:center; gap:0.7rem;
+      background:var(--bg-card); border:var(--border-card);
+      border-radius:var(--radius-sm); padding:0.65rem 1rem;
+      cursor:pointer;
+      transition:border-color 0.15s ease, background 0.15s ease, box-shadow 0.15s ease;
+      font-family:var(--font-ui); font-size:0.82rem; font-weight:500; color:var(--text-body);
+      user-select:none;
     }
-    .checkbox-item:hover { border-color: #2D5BFF; background: rgba(45,91,255,0.02); }
-    .checkbox-item input[type="checkbox"] { display: none; }
+    .checkbox-item:hover { border-color:var(--mid-blue); background:rgba(75,111,165,0.04); }
+    .checkbox-item input[type="checkbox"] { display:none; }
     .checkbox-item .check-box {
-      width: 18px; height: 18px; border-radius: 4px;
-      border: 2px solid #D1D5DB; flex-shrink: 0;
-      display: flex; align-items: center; justify-content: center;
-      transition: background 0.15s, border-color 0.15s;
+      width:18px; height:18px; border-radius:4px;
+      border:2px solid var(--neutral-200); flex-shrink:0;
+      display:flex; align-items:center; justify-content:center;
+      transition:background 0.15s, border-color 0.15s;
     }
-    .checkbox-item.checked { border-color: #2D5BFF; background: rgba(45,91,255,0.04); }
-    .checkbox-item.checked .check-box { background: #2D5BFF; border-color: #2D5BFF; }
+    .checkbox-item.checked { border-color:var(--gold); background:rgba(184,146,62,0.05); }
+    .checkbox-item.checked .check-box { background:var(--gold); border-color:var(--gold); }
     .checkbox-item .check-box::after {
-      content: '';
-      width: 5px; height: 9px;
-      border: 2px solid white;
-      border-top: none; border-left: none;
-      transform: rotate(45deg) translateY(-1px);
-      opacity: 0;
-      transition: opacity 0.15s;
+      content:'';
+      width:5px; height:9px;
+      border:2px solid white;
+      border-top:none; border-left:none;
+      transform:rotate(45deg) translateY(-1px);
+      opacity:0; transition:opacity 0.15s;
     }
-    .checkbox-item.checked .check-box::after { opacity: 1; }
+    .checkbox-item.checked .check-box::after { opacity:1; }
 
-    /* ── Portfolio pair ── */
+    /* Portfolio pairs */
     .portfolio-pair {
-      background: white;
-      border: 1px solid #D1D5DB;
-      border-radius: 14px;
-      padding: 24px;
-      margin-bottom: 16px;
+      background:var(--bg-card-alt);
+      border:var(--border-card);
+      border-radius:var(--radius-lg);
+      padding:1.5rem;
+      margin-bottom:1rem;
+      box-shadow:var(--shadow-xs);
+      transition:box-shadow 0.2s ease;
     }
+    .portfolio-pair:hover { box-shadow:var(--shadow-sm); }
     .portfolio-pair-header {
-      display: flex; align-items: center; gap-12px;
-      margin-bottom: 18px;
+      display:flex; align-items:center; gap:0.6rem;
+      margin-bottom:1.25rem;
     }
     .portfolio-pair-label {
-      font-size: 14px; font-weight: 700; color: #0B1120;
+      font-family:var(--font-display); font-size:1rem; font-weight:600; color:var(--deep-blue);
     }
     .portfolio-pair-badge {
-      display: inline-flex; align-items: center;
-      background: rgba(45,91,255,0.08); color: #2D5BFF;
-      font-size: 11px; font-weight: 600; text-transform: uppercase;
-      letter-spacing: 0.08em; padding: 3px 10px;
-      border-radius: 9999px; margin-left: 10px;
+      display:inline-flex; align-items:center;
+      background:rgba(31,53,87,0.07); color:var(--mid-blue);
+      font-family:var(--font-ui); font-size:0.62rem; font-weight:600;
+      text-transform:uppercase; letter-spacing:0.1em;
+      padding:3px 10px; border-radius:100px;
     }
 
-    /* ── Divider ── */
-    .field-divider {
-      border: none; border-top: 1px solid #D1D5DB;
-      margin: 36px 0;
+    /* ══════════════════════════════════════════
+       SUBMIT SECTION  —  dark
+    ══════════════════════════════════════════ */
+    .submit-section {
+      background:var(--bg-dark);
+      padding:var(--s6) var(--s4);
+      position:relative; overflow:hidden;
+    }
+    .submit-section::before {
+      content:'';
+      position:absolute; top:-80px; left:-80px;
+      width:500px; height:500px;
+      background:radial-gradient(ellipse at center, rgba(184,146,62,0.06) 0%, transparent 65%);
+      pointer-events:none;
+    }
+    .submit-inner { max-width:680px; margin:0 auto; text-align:center; position:relative; z-index:1; }
+
+    #validation-banner {
+      display:none;
+      background:rgba(192,57,43,0.12);
+      border:1px solid rgba(192,57,43,0.28);
+      border-radius:var(--radius);
+      padding:1.1rem 1.5rem;
+      margin-bottom:2rem; text-align:left;
+    }
+    #validation-banner p {
+      font-family:var(--font-ui); font-size:0.86rem; font-weight:600;
+      color:#f5a5a5; margin-bottom:0.5rem;
+    }
+    #validation-list {
+      font-family:var(--font-ui); font-size:0.82rem;
+      color:rgba(245,165,165,0.8);
+      padding-left:1.2rem; line-height:1.9;
     }
 
-    /* ── Submit section ── */
-    #submit-section { padding: 80px 24px; background: #0B1120; }
-    #submit-inner { max-width: 860px; margin: 0 auto; }
+    #success-state { display:none; }
+    #form-state    { display:block; }
 
-    /* ── Submit button ── */
-    #submit-btn {
-      display: inline-flex; align-items: center; justify-content: center; gap: 10px;
-      background: #2D5BFF; color: white;
-      font-family: 'Montserrat', sans-serif;
-      font-size: 17px; font-weight: 700;
-      padding: 18px 48px; border-radius: 9999px;
-      border: none; cursor: pointer;
-      transition: opacity 0.2s, transform 0.2s;
-      min-width: 240px;
+    .success-icon {
+      width:72px; height:72px; border-radius:50%;
+      background:rgba(78,158,116,0.15);
+      border:2px solid rgba(78,158,116,0.35);
+      display:flex; align-items:center; justify-content:center;
+      margin:0 auto 1.75rem;
     }
-    #submit-btn:hover { opacity: 0.9; transform: translateY(-1px); }
-    #submit-btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
 
-    /* ── Spinner ── */
+    /* Spinner */
     .spinner {
-      width: 20px; height: 20px;
-      border: 2px solid rgba(255,255,255,0.3);
-      border-top-color: white;
-      border-radius: 50%;
-      animation: spin 0.7s linear infinite;
-      display: none;
+      width:18px; height:18px;
+      border:2px solid rgba(255,255,255,0.3);
+      border-top-color:white; border-radius:50%;
+      animation:spin 0.7s linear infinite;
+      display:none;
     }
-    @keyframes spin { to { transform: rotate(360deg); } }
+    @keyframes spin { to { transform:rotate(360deg); } }
 
-    /* ── Success state ── */
-    #success-state { display: none; }
-    #form-state    { display: block; }
-
-    /* ── Fade-in ── */
-    .fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.55s ease, transform 0.55s ease; }
-    .fade-in.visible { opacity: 1; transform: none; }
+    /* ══════════════════════════════════════════
+       FOOTER
+    ══════════════════════════════════════════ */
+    .site-footer {
+      background:var(--bg-footer);
+      border-top:var(--border-dark);
+      padding:var(--s5) 0 var(--s4);
+    }
+    .footer__inner {
+      max-width:var(--max-width); margin:0 auto; padding:0 var(--s4);
+      display:flex; flex-wrap:wrap; align-items:center;
+      justify-content:space-between; gap:1rem;
+    }
+    .footer__brand { display:flex; align-items:center; gap:0.75rem; }
+    .footer__brand-name { font-family:var(--font-ui); font-size:0.88rem; font-weight:600; color:rgba(245,241,234,0.65); }
+    .footer__copy { font-family:var(--font-ui); font-size:0.78rem; color:rgba(245,241,234,0.28); }
   </style>
 </head>
 <body>
 
 
-<!-- ════════════════════════════════════════════
+<!-- ══════════════════════════════════════════
      HEADER
-════════════════════════════════════════════ -->
-<header id="site-header" class="fixed top-0 left-0 right-0 z-50 bg-white border-b border-gray-100">
-  <div class="max-w-7xl mx-auto px-6 flex items-center justify-between h-16">
-
-    <a href="index.html" class="flex items-center gap-3 no-underline">
-      <img src="bbc-logo.png" alt="Balay ni Bruno &amp; Co." style="height:42px; width:auto; display:block;">
-      <span class="font-bold" style="color:#0B1120; font-weight:700; font-size:15px; letter-spacing:-0.01em;">
-        Balay ni Bruno &amp; Co.
-      </span>
+══════════════════════════════════════════ -->
+<header class="site-header" id="site-header">
+  <div class="header__inner">
+    <a href="index.html" class="header__logo">
+      <img src="bbc-logo.png" alt="Balay ni Bruno &amp; Co." style="height:42px;width:auto;display:block;">
+      <span class="header__logo-name">Balay ni Bruno &amp; Co.</span>
     </a>
-
-    <nav class="hidden lg:flex items-center gap-6">
-      <a href="index.html"        style="color:#475569; font-weight:500; font-size:14px;" class="hover:text-navy transition-colors">Home</a>
-      <a href="about.html"        style="color:#475569; font-weight:500; font-size:14px;" class="hover:text-navy transition-colors">Our Story</a>
-      <a href="how-it-works.html" style="color:#475569; font-weight:500; font-size:14px;" class="hover:text-navy transition-colors">How It Works</a>
-      <a href="how-we-help.html"  style="color:#475569; font-weight:500; font-size:14px;" class="hover:text-navy transition-colors">How We Help</a>
-      <a href="our-work.html"     style="color:#475569; font-weight:500; font-size:14px;" class="hover:text-navy transition-colors">Our Work</a>
-      <a href="contact.html" style="color:#475569; font-weight:500; font-size:14px;" class="hover:text-navy transition-colors">Contact</a>
+    <nav>
+      <ul class="header__nav">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">Our Story</a></li>
+        <li><a href="how-it-works.html">How It Works</a></li>
+        <li><a href="how-we-help.html">How We Help</a></li>
+        <li><a href="our-work.html">Our Work</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
     </nav>
-
-    <div class="flex items-center gap-3">
-      <a href="contact.html"
-         class="hidden md:inline-flex items-center px-5 py-2 rounded-full text-white font-semibold text-sm"
-         style="background:#2D5BFF; font-weight:600;">
-        Book a Call
-      </a>
-      <button id="hamburger" class="lg:hidden flex flex-col gap-1.5 p-2" aria-label="Toggle menu">
-        <span id="hb1" class="block w-5 h-0.5 bg-gray-700 rounded"></span>
-        <span id="hb2" class="block w-5 h-0.5 bg-gray-700 rounded"></span>
-        <span id="hb3" class="block w-5 h-0.5 bg-gray-700 rounded"></span>
+    <div class="header__cta">
+      <a href="contact.html" class="btn btn-primary btn-sm">Book a Call</a>
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+        <span id="hb1"></span><span id="hb2"></span><span id="hb3"></span>
       </button>
     </div>
   </div>
-
-  <div id="mobile-nav" class="lg:hidden flex-col border-t border-gray-100 bg-white px-6 py-4 gap-0.5">
-    <a href="index.html"         class="block py-2.5 text-sm font-medium" style="color:#475569;">Home</a>
-    <a href="about.html"         class="block py-2.5 text-sm font-medium" style="color:#475569;">Our Story</a>
-    <a href="how-it-works.html"  class="block py-2.5 text-sm font-medium" style="color:#475569;">How It Works</a>
-    <a href="how-we-help.html"   class="block py-2.5 text-sm font-medium" style="color:#475569;">How We Help</a>
-    <a href="our-work.html"      class="block py-2.5 text-sm font-medium" style="color:#475569;">Our Work</a>
-    <a href="contact.html" class="block py-2.5 text-sm font-medium" style="color:#475569;">Contact</a>
-    <a href="contact.html"
-       class="block mt-3 text-center px-5 py-2.5 rounded-full text-white font-semibold text-sm"
-       style="background:#2D5BFF;">Book a Call</a>
-  </div>
+  <nav class="mobile-menu" id="mobile-menu">
+    <a href="index.html">Home</a>
+    <a href="about.html">Our Story</a>
+    <a href="how-it-works.html">How It Works</a>
+    <a href="how-we-help.html">How We Help</a>
+    <a href="our-work.html">Our Work</a>
+    <a href="contact.html">Contact</a>
+    <a href="contact.html" class="btn btn-primary btn-sm mobile-cta" style="text-align:center;">Book a Call</a>
+  </nav>
 </header>
 
 
-<!-- ════════════════════════════════════════════
+<!-- ══════════════════════════════════════════
      HERO
-════════════════════════════════════════════ -->
-<section style="background:#0B1120; padding:calc(100px + 64px) 24px 80px; text-align:center;">
-  <div class="max-w-3xl mx-auto fade-in">
+══════════════════════════════════════════ -->
+<section class="hero">
+  <div class="hero__inner fade-in">
 
-    <span class="inline-block font-semibold uppercase mb-5"
-          style="color:#2D5BFF; font-size:11px; letter-spacing:0.18em; font-weight:700;">
+    <div class="hero__eyebrow">
+      <span class="hero__eyebrow-dot"></span>
       NPC Portfolio System
-    </span>
+      <span class="hero__eyebrow-dot"></span>
+    </div>
 
-    <h1 class="font-bold text-white"
-        style="font-size:clamp(28px,4.5vw,48px); line-height:1.2; font-weight:700;">
-      Submit Your Portfolio
-    </h1>
+    <h1 class="hero__title">Submit Your <em>Portfolio</em></h1>
 
-    <p class="mx-auto mt-5"
-       style="color:rgba(255,255,255,0.6); font-size:17px; line-height:1.8; max-width:560px;">
+    <p class="hero__body">
       This form collects your work samples, service experience, strategies, and results
       so RJ can review your portfolio and activate your BBC profile.
     </p>
 
-    <div class="flex flex-wrap items-center justify-center gap-6 mt-10">
-      <div style="text-align:center;">
-        <p style="color:white; font-size:24px; font-weight:700;">6</p>
-        <p style="color:rgba(255,255,255,0.5); font-size:12px; font-weight:600; text-transform:uppercase; letter-spacing:0.1em;">Sections</p>
+    <div class="hero__stats">
+      <div class="hero__stat">
+        <div class="hero__stat-num">6</div>
+        <div class="hero__stat-label">Sections</div>
       </div>
-      <div style="width:1px; height:40px; background:rgba(255,255,255,0.15);"></div>
-      <div style="text-align:center;">
-        <p style="color:white; font-size:24px; font-weight:700;">~15</p>
-        <p style="color:rgba(255,255,255,0.5); font-size:12px; font-weight:600; text-transform:uppercase; letter-spacing:0.1em;">Minutes</p>
+      <div class="hero__stat-divider"></div>
+      <div class="hero__stat">
+        <div class="hero__stat-num">~15</div>
+        <div class="hero__stat-label">Minutes</div>
       </div>
-      <div style="width:1px; height:40px; background:rgba(255,255,255,0.15);"></div>
-      <div style="text-align:center;">
-        <p style="color:white; font-size:24px; font-weight:700;">1×</p>
-        <p style="color:rgba(255,255,255,0.5); font-size:12px; font-weight:600; text-transform:uppercase; letter-spacing:0.1em;">Submission</p>
+      <div class="hero__stat-divider"></div>
+      <div class="hero__stat">
+        <div class="hero__stat-num">1×</div>
+        <div class="hero__stat-label">Submission</div>
       </div>
     </div>
 
-    <!-- Notice -->
-    <div class="mx-auto mt-10 text-left" style="background:rgba(45,91,255,0.12); border:1px solid rgba(45,91,255,0.25); border-radius:14px; padding:20px 24px; max-width:560px;">
-      <p style="color:rgba(255,255,255,0.85); font-size:14px; line-height:1.7;">
-        <strong style="color:#2D5BFF;">Before you start:</strong> Prepare your Google Drive folder link
+    <div class="hero__notice">
+      <p>
+        <strong>Before you start:</strong> Prepare your Google Drive folder link
         with your portfolio files. Fill in as much detail as possible — the more you share,
         the stronger your profile will be.
       </p>
@@ -381,9 +562,9 @@
 </section>
 
 
-<!-- ════════════════════════════════════════════
+<!-- ══════════════════════════════════════════
      PROGRESS BAR
-════════════════════════════════════════════ -->
+══════════════════════════════════════════ -->
 <div id="progress-bar">
   <div id="progress-inner">
     <div class="prog-step active" data-section="s1" onclick="scrollToSection('s1')">
@@ -414,17 +595,19 @@
 </div>
 
 
-<!-- ════════════════════════════════════════════
+<!-- ══════════════════════════════════════════
      FORM
-════════════════════════════════════════════ -->
+══════════════════════════════════════════ -->
 <form id="portfolio-form" novalidate>
 
-  <!-- ── SECTION 1 — YOUR INFORMATION ── -->
-  <section id="s1" class="form-section fade-in" style="background:#F8FAFC;">
+
+  <!-- ── SECTION 1 — YOUR INFORMATION  · cream ── -->
+  <section id="s1" class="form-section form-section--cream fade-in">
     <div class="form-inner">
       <div class="section-num">1</div>
-      <p class="section-eyebrow">Section 1</p>
+      <span class="section-eyebrow">Section 1</span>
       <h2 class="section-title">Your Information</h2>
+      <div class="divider-bar"></div>
       <p class="section-desc">Tell us who you are, what you do, and the tools you work with.</p>
 
       <div class="field-row">
@@ -478,7 +661,7 @@
 
       <div class="field-group">
         <label class="field-label">Secondary Categories</label>
-        <p class="field-hint" style="margin-bottom:12px;">Select all additional skills you can offer clients.</p>
+        <p class="field-hint" style="margin-bottom:0.75rem;">Select all additional skills you can offer clients.</p>
         <div class="checkbox-grid" id="secondaryCats-grid">
           <label class="checkbox-item"><input type="checkbox" value="Graphic Design"><span class="check-box"></span>Graphic Design</label>
           <label class="checkbox-item"><input type="checkbox" value="Video Editing"><span class="check-box"></span>Video Editing</label>
@@ -514,12 +697,13 @@
   </section>
 
 
-  <!-- ── SECTION 2 — SERVICE EXPERIENCE ── -->
-  <section id="s2" class="form-section fade-in" style="background:white;">
+  <!-- ── SECTION 2 — SERVICE EXPERIENCE  · card ── -->
+  <section id="s2" class="form-section form-section--card fade-in">
     <div class="form-inner">
       <div class="section-num">2</div>
-      <p class="section-eyebrow">Section 2</p>
+      <span class="section-eyebrow">Section 2</span>
       <h2 class="section-title">Service Experience</h2>
+      <div class="divider-bar"></div>
       <p class="section-desc">Describe the services you've provided, the clients you've worked with, and the systems you've managed.</p>
 
       <div class="field-group">
@@ -565,27 +749,26 @@
   </section>
 
 
-  <!-- ── SECTION 3 — PORTFOLIO EXAMPLES ── -->
-  <section id="s3" class="form-section fade-in" style="background:#F8FAFC;">
+  <!-- ── SECTION 3 — PORTFOLIO EXAMPLES  · warm ── -->
+  <section id="s3" class="form-section form-section--warm fade-in">
     <div class="form-inner">
       <div class="section-num">3</div>
-      <p class="section-eyebrow">Section 3</p>
+      <span class="section-eyebrow">Section 3</span>
       <h2 class="section-title">Portfolio Examples</h2>
+      <div class="divider-bar"></div>
       <p class="section-desc">
         For each service area you offer, describe your best work and paste links to samples.
         Skip any categories that don't apply to you. Use Google Drive, Behance, Canva, YouTube, or any public link.
       </p>
 
-      <!-- Graphic Design -->
       <div class="portfolio-pair">
         <div class="portfolio-pair-header">
           <span class="portfolio-pair-label">Graphic Design</span>
           <span class="portfolio-pair-badge">Visual Work</span>
         </div>
-        <div class="field-group" style="margin-bottom:16px;">
+        <div class="field-group" style="margin-bottom:1rem;">
           <label class="field-label" for="gdDescription">Description</label>
-          <textarea id="gdDescription" name="gdDescription" rows="3"
-                    placeholder="What graphic design work have you done? Describe styles, types of deliverables, and what clients said..."></textarea>
+          <textarea id="gdDescription" name="gdDescription" rows="3" placeholder="What graphic design work have you done? Describe styles, types of deliverables, and what clients said..."></textarea>
         </div>
         <div class="field-group" style="margin-bottom:0;">
           <label class="field-label" for="gdLinks">Links to Samples</label>
@@ -594,16 +777,14 @@
         </div>
       </div>
 
-      <!-- Video Editing -->
       <div class="portfolio-pair">
         <div class="portfolio-pair-header">
           <span class="portfolio-pair-label">Video Editing</span>
           <span class="portfolio-pair-badge">Video Work</span>
         </div>
-        <div class="field-group" style="margin-bottom:16px;">
+        <div class="field-group" style="margin-bottom:1rem;">
           <label class="field-label" for="vidDescription">Description</label>
-          <textarea id="vidDescription" name="vidDescription" rows="3"
-                    placeholder="What video editing work have you done? Short-form, long-form, Reels, TikToks, YouTube? Describe your style..."></textarea>
+          <textarea id="vidDescription" name="vidDescription" rows="3" placeholder="What video editing work have you done? Short-form, long-form, Reels, TikToks, YouTube? Describe your style..."></textarea>
         </div>
         <div class="field-group" style="margin-bottom:0;">
           <label class="field-label" for="vidLinks">Links to Samples</label>
@@ -611,16 +792,14 @@
         </div>
       </div>
 
-      <!-- Website / Landing Page -->
       <div class="portfolio-pair">
         <div class="portfolio-pair-header">
           <span class="portfolio-pair-label">Website / Landing Page</span>
           <span class="portfolio-pair-badge">Web Work</span>
         </div>
-        <div class="field-group" style="margin-bottom:16px;">
+        <div class="field-group" style="margin-bottom:1rem;">
           <label class="field-label" for="webDescription">Description</label>
-          <textarea id="webDescription" name="webDescription" rows="3"
-                    placeholder="What websites or landing pages have you built or managed? Which platforms? What was the purpose?"></textarea>
+          <textarea id="webDescription" name="webDescription" rows="3" placeholder="What websites or landing pages have you built or managed? Which platforms? What was the purpose?"></textarea>
         </div>
         <div class="field-group" style="margin-bottom:0;">
           <label class="field-label" for="webLinks">Links to Live Sites or Screenshots</label>
@@ -628,16 +807,14 @@
         </div>
       </div>
 
-      <!-- Social Media -->
       <div class="portfolio-pair">
         <div class="portfolio-pair-header">
           <span class="portfolio-pair-label">Social Media</span>
           <span class="portfolio-pair-badge">Content Work</span>
         </div>
-        <div class="field-group" style="margin-bottom:16px;">
+        <div class="field-group" style="margin-bottom:1rem;">
           <label class="field-label" for="smDescription">Description</label>
-          <textarea id="smDescription" name="smDescription" rows="3"
-                    placeholder="Which platforms? What content types? Did you manage posting, strategy, engagement, or all three?"></textarea>
+          <textarea id="smDescription" name="smDescription" rows="3" placeholder="Which platforms? What content types? Did you manage posting, strategy, engagement, or all three?"></textarea>
         </div>
         <div class="field-group" style="margin-bottom:0;">
           <label class="field-label" for="smLinks">Links to Profiles or Content Samples</label>
@@ -645,16 +822,14 @@
         </div>
       </div>
 
-      <!-- Email Marketing -->
       <div class="portfolio-pair">
         <div class="portfolio-pair-header">
           <span class="portfolio-pair-label">Email Marketing</span>
           <span class="portfolio-pair-badge">Email Work</span>
         </div>
-        <div class="field-group" style="margin-bottom:16px;">
+        <div class="field-group" style="margin-bottom:1rem;">
           <label class="field-label" for="emDescription">Description</label>
-          <textarea id="emDescription" name="emDescription" rows="3"
-                    placeholder="Which email platforms? Campaigns, automations, newsletters, sequences? What results did you get?"></textarea>
+          <textarea id="emDescription" name="emDescription" rows="3" placeholder="Which email platforms? Campaigns, automations, newsletters, sequences? What results did you get?"></textarea>
         </div>
         <div class="field-group" style="margin-bottom:0;">
           <label class="field-label" for="emLinks">Links to Email Samples or Screenshots</label>
@@ -662,16 +837,14 @@
         </div>
       </div>
 
-      <!-- SEO / Content -->
       <div class="portfolio-pair">
         <div class="portfolio-pair-header">
           <span class="portfolio-pair-label">SEO / Content Writing</span>
           <span class="portfolio-pair-badge">SEO Work</span>
         </div>
-        <div class="field-group" style="margin-bottom:16px;">
+        <div class="field-group" style="margin-bottom:1rem;">
           <label class="field-label" for="seoDescription">Description</label>
-          <textarea id="seoDescription" name="seoDescription" rows="3"
-                    placeholder="On-page SEO, blog writing, keyword research, local SEO? What ranking improvements or traffic results have you achieved?"></textarea>
+          <textarea id="seoDescription" name="seoDescription" rows="3" placeholder="On-page SEO, blog writing, keyword research, local SEO? What ranking improvements or traffic results have you achieved?"></textarea>
         </div>
         <div class="field-group" style="margin-bottom:0;">
           <label class="field-label" for="seoLinks">Links to Published Content or SEO Reports</label>
@@ -679,16 +852,14 @@
         </div>
       </div>
 
-      <!-- Automation / AI -->
       <div class="portfolio-pair">
         <div class="portfolio-pair-header">
           <span class="portfolio-pair-label">Automation / AI</span>
           <span class="portfolio-pair-badge">Systems Work</span>
         </div>
-        <div class="field-group" style="margin-bottom:16px;">
+        <div class="field-group" style="margin-bottom:1rem;">
           <label class="field-label" for="autoDescription">Description</label>
-          <textarea id="autoDescription" name="autoDescription" rows="3"
-                    placeholder="What automations or AI workflows have you built? Which tools did you use (Make, Zapier, ChatGPT, etc.)?"></textarea>
+          <textarea id="autoDescription" name="autoDescription" rows="3" placeholder="What automations or AI workflows have you built? Which tools did you use (Make, Zapier, ChatGPT, etc.)?"></textarea>
         </div>
         <div class="field-group" style="margin-bottom:0;">
           <label class="field-label" for="autoLinks">Links to Workflow Screenshots or Demos</label>
@@ -696,16 +867,14 @@
         </div>
       </div>
 
-      <!-- Branding -->
       <div class="portfolio-pair">
         <div class="portfolio-pair-header">
           <span class="portfolio-pair-label">Branding</span>
           <span class="portfolio-pair-badge">Brand Work</span>
         </div>
-        <div class="field-group" style="margin-bottom:16px;">
+        <div class="field-group" style="margin-bottom:1rem;">
           <label class="field-label" for="brandDescription">Description</label>
-          <textarea id="brandDescription" name="brandDescription" rows="3"
-                    placeholder="Logo design, brand guides, color systems, typography, brand kits? Describe your branding process and the clients you've branded."></textarea>
+          <textarea id="brandDescription" name="brandDescription" rows="3" placeholder="Logo design, brand guides, color systems, typography, brand kits? Describe your branding process and the clients you've branded."></textarea>
         </div>
         <div class="field-group" style="margin-bottom:0;">
           <label class="field-label" for="brandLinks">Links to Brand Work Samples</label>
@@ -713,16 +882,14 @@
         </div>
       </div>
 
-      <!-- Other Work -->
       <div class="portfolio-pair">
         <div class="portfolio-pair-header">
           <span class="portfolio-pair-label">Other Work</span>
           <span class="portfolio-pair-badge">Additional</span>
         </div>
-        <div class="field-group" style="margin-bottom:16px;">
+        <div class="field-group" style="margin-bottom:1rem;">
           <label class="field-label" for="otherDescription">Description</label>
-          <textarea id="otherDescription" name="otherDescription" rows="3"
-                    placeholder="Any other work that doesn't fit the categories above? Admin, research, data entry, project management, CRM, presentations..."></textarea>
+          <textarea id="otherDescription" name="otherDescription" rows="3" placeholder="Any other work that doesn't fit the categories above? Admin, research, data entry, project management, CRM, presentations..."></textarea>
         </div>
         <div class="field-group" style="margin-bottom:0;">
           <label class="field-label" for="otherLinks">Links to Other Work Samples</label>
@@ -734,81 +901,74 @@
   </section>
 
 
-  <!-- ── SECTION 4 — STRATEGIES ── -->
-  <section id="s4" class="form-section fade-in" style="background:white;">
+  <!-- ── SECTION 4 — STRATEGIES  · cream ── -->
+  <section id="s4" class="form-section form-section--cream fade-in">
     <div class="form-inner">
       <div class="section-num">4</div>
-      <p class="section-eyebrow">Section 4</p>
+      <span class="section-eyebrow">Section 4</span>
       <h2 class="section-title">Strategies You Know</h2>
+      <div class="divider-bar"></div>
       <p class="section-desc">Share the strategic frameworks, approaches, and methodologies behind your work — not just the tasks, but how you think.</p>
 
       <div class="field-group">
         <label class="field-label" for="contentStrategy">Content Strategy</label>
-        <textarea id="contentStrategy" name="contentStrategy" rows="3"
-                  placeholder="How do you approach content planning and strategy for clients? What frameworks or processes do you follow?"></textarea>
+        <textarea id="contentStrategy" name="contentStrategy" rows="3" placeholder="How do you approach content planning and strategy for clients? What frameworks or processes do you follow?"></textarea>
       </div>
 
       <div class="field-row">
         <div class="field-group">
           <label class="field-label" for="growthStrategy">Social Media Growth Strategy</label>
-          <textarea id="growthStrategy" name="growthStrategy" rows="3"
-                    placeholder="How have you grown accounts? What tactics work for engagement and follower growth?"></textarea>
+          <textarea id="growthStrategy" name="growthStrategy" rows="3" placeholder="How have you grown accounts? What tactics work for engagement and follower growth?"></textarea>
         </div>
         <div class="field-group">
           <label class="field-label" for="leadGenStrategy">Lead Generation Strategy</label>
-          <textarea id="leadGenStrategy" name="leadGenStrategy" rows="3"
-                    placeholder="How do you help clients attract and capture new leads online?"></textarea>
+          <textarea id="leadGenStrategy" name="leadGenStrategy" rows="3" placeholder="How do you help clients attract and capture new leads online?"></textarea>
         </div>
       </div>
 
       <div class="field-row">
         <div class="field-group">
           <label class="field-label" for="funnelStrategy">Funnel / Conversion Strategy</label>
-          <textarea id="funnelStrategy" name="funnelStrategy" rows="3"
-                    placeholder="Have you built or managed sales funnels, lead capture systems, or conversion optimization?"></textarea>
+          <textarea id="funnelStrategy" name="funnelStrategy" rows="3" placeholder="Have you built or managed sales funnels, lead capture systems, or conversion optimization?"></textarea>
         </div>
         <div class="field-group">
           <label class="field-label" for="aiStrategy">AI / Automation Strategy</label>
-          <textarea id="aiStrategy" name="aiStrategy" rows="3"
-                    placeholder="How do you use AI tools strategically to improve client workflows or content quality?"></textarea>
+          <textarea id="aiStrategy" name="aiStrategy" rows="3" placeholder="How do you use AI tools strategically to improve client workflows or content quality?"></textarea>
         </div>
       </div>
 
       <div class="field-row">
         <div class="field-group">
           <label class="field-label" for="seoStrategy">SEO Strategy</label>
-          <textarea id="seoStrategy" name="seoStrategy" rows="3"
-                    placeholder="What is your approach to improving a client's search rankings and organic traffic?"></textarea>
+          <textarea id="seoStrategy" name="seoStrategy" rows="3" placeholder="What is your approach to improving a client's search rankings and organic traffic?"></textarea>
         </div>
         <div class="field-group">
           <label class="field-label" for="emailStrategy">Email Marketing Strategy</label>
-          <textarea id="emailStrategy" name="emailStrategy" rows="3"
-                    placeholder="How do you approach building, nurturing, and converting email lists?"></textarea>
+          <textarea id="emailStrategy" name="emailStrategy" rows="3" placeholder="How do you approach building, nurturing, and converting email lists?"></textarea>
         </div>
       </div>
 
       <div class="field-group">
         <label class="field-label" for="otherStrategy">Other Strategies or Approaches</label>
-        <textarea id="otherStrategy" name="otherStrategy" rows="3"
-                  placeholder="Any other strategic thinking, frameworks, or approaches you bring to your work?"></textarea>
+        <textarea id="otherStrategy" name="otherStrategy" rows="3" placeholder="Any other strategic thinking, frameworks, or approaches you bring to your work?"></textarea>
       </div>
 
       <div class="field-group">
         <label class="field-label" for="strategyLinks">Strategy Documents / Frameworks / Links</label>
-        <input type="text" id="strategyLinks" name="strategyLinks"
-               placeholder="Paste links to any strategy documents, frameworks, or proposals you've created." />
+        <input type="text" id="strategyLinks" name="strategyLinks" placeholder="Paste links to any strategy documents, frameworks, or proposals you've created." />
         <p class="field-hint">Google Drive links, Notion pages, PDFs — anything that shows how you think strategically.</p>
       </div>
     </div>
   </section>
 
 
-  <!-- ── SECTION 5 — RESULTS & PROOF ── -->
-  <section id="s5" class="form-section fade-in" style="background:#F8FAFC;">
+  <!-- ── SECTION 5 — RESULTS & PROOF  · card ── -->
+  <section id="s5" class="form-section form-section--card fade-in">
     <div class="form-inner">
       <div class="section-num">5</div>
-      <p class="section-eyebrow">Section 5</p>
+      <span class="section-eyebrow">Section 5</span>
       <h2 class="section-title">Results &amp; Proof</h2>
+      <div class="divider-bar"></div>
       <p class="section-desc">Share the outcomes, wins, and impact of your work. Numbers matter — even rough estimates help tell your story.</p>
 
       <div class="field-group">
@@ -821,46 +981,42 @@
       <div class="field-row">
         <div class="field-group">
           <label class="field-label" for="metrics">Metrics &amp; Numbers</label>
-          <textarea id="metrics" name="metrics" rows="3"
-                    placeholder="e.g. Grew Instagram from 800 to 3,200 followers in 60 days. Increased email open rate from 18% to 34%. Delivered 40 graphics per month consistently."></textarea>
+          <textarea id="metrics" name="metrics" rows="3" placeholder="e.g. Grew Instagram from 800 to 3,200 followers in 60 days. Increased email open rate from 18% to 34%. Delivered 40 graphics per month consistently."></textarea>
           <p class="field-hint">Approximate numbers are fine — the point is to show measurable impact.</p>
         </div>
         <div class="field-group">
           <label class="field-label" for="beforeAfter">Before &amp; After Examples</label>
-          <textarea id="beforeAfter" name="beforeAfter" rows="3"
-                    placeholder="Describe situations where you took something from a poor state to a better one — a messy Drive, an inactive page, an unoptimized website..."></textarea>
+          <textarea id="beforeAfter" name="beforeAfter" rows="3" placeholder="Describe situations where you took something from a poor state to a better one — a messy Drive, an inactive page, an unoptimized website..."></textarea>
         </div>
       </div>
 
       <div class="field-group">
         <label class="field-label" for="clientFeedback">Client Feedback or Testimonials</label>
-        <textarea id="clientFeedback" name="clientFeedback" rows="4"
-                  placeholder='Paste any positive feedback, reviews, or testimonials from clients. Direct quotes are great. e.g. "She completely transformed our social media in just 2 months..."'></textarea>
+        <textarea id="clientFeedback" name="clientFeedback" rows="4" placeholder='Paste any positive feedback, reviews, or testimonials from clients. Direct quotes are great. e.g. "She completely transformed our social media in just 2 months..."'></textarea>
       </div>
 
       <div class="field-row">
         <div class="field-group">
           <label class="field-label" for="analyticsLinks">Analytics &amp; Proof Links</label>
-          <input type="text" id="analyticsLinks" name="analyticsLinks"
-                 placeholder="Screenshots of analytics, GA4 reports, engagement stats..." />
+          <input type="text" id="analyticsLinks" name="analyticsLinks" placeholder="Screenshots of analytics, GA4 reports, engagement stats..." />
           <p class="field-hint">Google Drive links to screenshots or reports.</p>
         </div>
         <div class="field-group">
           <label class="field-label" for="notableProjects">Notable Projects or Case Studies</label>
-          <textarea id="notableProjects" name="notableProjects" rows="3"
-                    placeholder="Are there any standout projects you're especially proud of? Give us a brief overview of each."></textarea>
+          <textarea id="notableProjects" name="notableProjects" rows="3" placeholder="Are there any standout projects you're especially proud of? Give us a brief overview of each."></textarea>
         </div>
       </div>
     </div>
   </section>
 
 
-  <!-- ── SECTION 6 — AI WORK ── -->
-  <section id="s6" class="form-section fade-in" style="background:white;">
+  <!-- ── SECTION 6 — AI WORK  · warm ── -->
+  <section id="s6" class="form-section form-section--warm fade-in">
     <div class="form-inner">
       <div class="section-num">6</div>
-      <p class="section-eyebrow">Section 6</p>
+      <span class="section-eyebrow">Section 6</span>
       <h2 class="section-title">AI Work</h2>
+      <div class="divider-bar"></div>
       <p class="section-desc">BBC is an AI-powered agency. Share how you currently use AI in your work and any AI systems or workflows you've built.</p>
 
       <div class="field-row">
@@ -872,21 +1028,18 @@
         </div>
         <div class="field-group">
           <label class="field-label" for="aiWorkDescription">How You Use AI in Your Work</label>
-          <textarea id="aiWorkDescription" name="aiWorkDescription" rows="3"
-                    placeholder="How do AI tools improve your output, speed, or quality? Give specific examples of your AI-assisted workflow."></textarea>
+          <textarea id="aiWorkDescription" name="aiWorkDescription" rows="3" placeholder="How do AI tools improve your output, speed, or quality? Give specific examples of your AI-assisted workflow."></textarea>
         </div>
       </div>
 
       <div class="field-group">
         <label class="field-label" for="aiSystemsBuilt">AI Systems or Workflows You Have Built</label>
-        <textarea id="aiSystemsBuilt" name="aiSystemsBuilt" rows="3"
-                  placeholder="Have you built any AI-powered systems or automations for yourself or a client? Describe them briefly."></textarea>
+        <textarea id="aiSystemsBuilt" name="aiSystemsBuilt" rows="3" placeholder="Have you built any AI-powered systems or automations for yourself or a client? Describe them briefly."></textarea>
       </div>
 
       <div class="field-group">
         <label class="field-label" for="aiExamplesLinks">AI Work Examples &amp; Links</label>
-        <input type="text" id="aiExamplesLinks" name="aiExamplesLinks"
-               placeholder="https://drive.google.com/... — screenshots, demos, or videos of your AI work" />
+        <input type="text" id="aiExamplesLinks" name="aiExamplesLinks" placeholder="https://drive.google.com/... — screenshots, demos, or videos of your AI work" />
         <p class="field-hint">Show us your AI-generated outputs, prompts, workflows, or results.</p>
       </div>
 
@@ -894,8 +1047,7 @@
 
       <div class="field-group">
         <label class="field-label" for="mainDriveFolder">Your Main Google Drive Portfolio Folder <span class="req">*</span></label>
-        <input type="url" id="mainDriveFolder" name="mainDriveFolder"
-               placeholder="https://drive.google.com/drive/folders/..." required />
+        <input type="url" id="mainDriveFolder" name="mainDriveFolder" placeholder="https://drive.google.com/drive/folders/..." required />
         <p class="field-hint">
           Share your main portfolio folder with <strong>rj@balaynibruno.co</strong> (viewer access) before submitting.
           This is where RJ will review all your work files.
@@ -905,141 +1057,123 @@
 
       <div class="field-group">
         <label class="field-label" for="anythingElse">Anything Else You Want RJ to Know</label>
-        <textarea id="anythingElse" name="anythingElse" rows="4"
-                  placeholder="Is there anything about your work, your availability, your goals with BBC, or your background that would be helpful to share?"></textarea>
+        <textarea id="anythingElse" name="anythingElse" rows="4" placeholder="Is there anything about your work, your availability, your goals with BBC, or your background that would be helpful to share?"></textarea>
       </div>
     </div>
   </section>
 
 
   <!-- ── SUBMIT SECTION ── -->
-  <section id="submit-section">
-    <div id="submit-inner">
+  <section class="submit-section">
+    <div class="submit-inner">
 
-      <!-- Form state -->
-      <div id="form-state" class="text-center fade-in">
-        <h2 class="font-bold text-white mb-3" style="font-size:clamp(24px,3vw,36px); font-weight:700;">
-          Ready to Submit?
-        </h2>
-        <p style="color:rgba(255,255,255,0.6); font-size:16px; max-width:520px; margin:0 auto 12px; line-height:1.7;">
+      <div id="form-state" class="fade-in">
+        <span class="eyebrow eyebrow--gold">Ready to Submit</span>
+        <h2 style="color:#fff; margin-bottom:1rem;">One last step</h2>
+        <p style="color:rgba(245,241,234,0.6); font-size:1rem; max-width:480px; margin:0 auto 0.75rem; line-height:1.8;">
           Review your answers above before submitting. Once submitted, RJ will receive a
           notification and review your portfolio.
         </p>
-        <p style="color:rgba(255,255,255,0.4); font-size:13px; margin-bottom:36px;">
+        <p style="color:rgba(245,241,234,0.35); font-family:var(--font-ui); font-size:0.82rem; margin-bottom:2.5rem;">
           Make sure you've shared your Google Drive folder with rj@balaynibruno.co before submitting.
         </p>
 
-        <!-- Validation error banner -->
-        <div id="validation-banner" style="display:none; background:rgba(239,68,68,0.12); border:1px solid rgba(239,68,68,0.3);
-             border-radius:12px; padding:16px 24px; max-width:520px; margin:0 auto 28px; text-align:left;">
-          <p style="color:#fca5a5; font-size:14px; font-weight:600; margin-bottom:6px;">Please fix the following before submitting:</p>
-          <ul id="validation-list" style="color:rgba(252,165,165,0.8); font-size:13px; padding-left:18px; line-height:1.8;"></ul>
+        <div id="validation-banner">
+          <p>Please fix the following before submitting:</p>
+          <ul id="validation-list"></ul>
         </div>
 
-        <button id="submit-btn" type="submit">
+        <button id="submit-btn" class="btn btn-gold" type="submit" style="font-size:1rem; padding:1rem 2.8rem;">
           <span id="btn-text">Submit Portfolio</span>
           <span class="spinner" id="btn-spinner"></span>
         </button>
-        <p class="mt-5" style="font-size:13px; color:rgba(255,255,255,0.3);">
+
+        <p style="font-family:var(--font-ui); font-size:0.78rem; color:rgba(245,241,234,0.28); margin-top:1.25rem;">
           Your submission is saved privately and reviewed only by RJ.
         </p>
       </div>
 
-      <!-- Success state -->
-      <div id="success-state" class="text-center">
-        <div style="width:72px; height:72px; border-radius:50%; background:rgba(34,197,94,0.15);
-                    border:2px solid rgba(34,197,94,0.4); display:flex; align-items:center;
-                    justify-content:center; margin:0 auto 24px;">
-          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#22c55e"
-               stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <div id="success-state">
+        <div class="success-icon">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#4E9E74" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
             <polyline points="20 6 9 17 4 12"/>
           </svg>
         </div>
-        <h2 class="font-bold text-white mb-3" style="font-size:clamp(24px,3vw,36px); font-weight:700;">
-          Portfolio Submitted!
-        </h2>
-        <p style="color:rgba(255,255,255,0.6); font-size:17px; max-width:500px; margin:0 auto 8px; line-height:1.7;">
+        <h2 style="color:#fff; margin-bottom:1rem;">Portfolio Submitted!</h2>
+        <p style="color:rgba(245,241,234,0.65); font-size:1.05rem; max-width:480px; margin:0 auto 0.75rem; line-height:1.8;">
           Thank you. RJ has been notified and will review your submission.
         </p>
-        <p style="color:rgba(255,255,255,0.4); font-size:14px; margin-bottom:40px;">
+        <p style="color:rgba(245,241,234,0.35); font-family:var(--font-ui); font-size:0.86rem; margin-bottom:2.5rem;">
           You'll hear back once your profile has been reviewed.
         </p>
-        <a href="index.html"
-           class="inline-flex items-center px-8 py-4 rounded-full text-white font-bold"
-           style="background:#2D5BFF; font-size:16px; font-weight:700;">
-          Back to BBC Website
-        </a>
+        <a href="index.html" class="btn btn-gold" style="font-size:0.95rem;">Back to BBC Website</a>
       </div>
 
     </div>
   </section>
 
-</form><!-- /#portfolio-form -->
+
+</form>
 
 
-<!-- ════════════════════════════════════════════
+<!-- ══════════════════════════════════════════
      FOOTER
-════════════════════════════════════════════ -->
-<footer style="background:#0B1120; border-top:1px solid rgba(255,255,255,0.08); padding:60px 0 32px;">
-  <div class="max-w-7xl mx-auto px-6">
-    <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
-      <div class="flex items-center gap-3">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 210" width="32" height="32"
-             style="color:white; flex-shrink:0;" aria-hidden="true">
-          <rect x="38" y="6" width="13" height="62" rx="2" fill="currentColor"/>
-          <line x1="100" y1="38" x2="6" y2="90" stroke="currentColor" stroke-width="9" stroke-linecap="round"/>
-          <line x1="100" y1="38" x2="194" y2="90" stroke="currentColor" stroke-width="9" stroke-linecap="round"/>
-          <rect x="24" y="90" width="152" height="86" rx="6" fill="none" stroke="currentColor" stroke-width="9"/>
-          <text x="100" y="154" text-anchor="middle" font-size="46" font-weight="800"
-                font-family="Georgia,'Times New Roman',serif" fill="currentColor">BBC</text>
-          <rect x="91" y="176" width="18" height="18" rx="2" fill="currentColor"/>
-          <rect x="64" y="194" width="72" height="11" rx="5.5" fill="currentColor"/>
-        </svg>
-        <span style="color:rgba(255,255,255,0.7); font-size:14px; font-weight:600;">Balay ni Bruno &amp; Co.</span>
-      </div>
-      <p style="color:rgba(255,255,255,0.35); font-size:13px;">
-        &copy; 2026 Balay ni Bruno &amp; Co. All rights reserved.
-      </p>
+══════════════════════════════════════════ -->
+<footer class="site-footer">
+  <div class="footer__inner">
+    <div class="footer__brand">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 210" width="30" height="30"
+           style="color:rgba(245,241,234,0.5); flex-shrink:0;" aria-hidden="true">
+        <rect x="38" y="6" width="13" height="62" rx="2" fill="currentColor"/>
+        <line x1="100" y1="38" x2="6" y2="90" stroke="currentColor" stroke-width="9" stroke-linecap="round"/>
+        <line x1="100" y1="38" x2="194" y2="90" stroke="currentColor" stroke-width="9" stroke-linecap="round"/>
+        <rect x="24" y="90" width="152" height="86" rx="6" fill="none" stroke="currentColor" stroke-width="9"/>
+        <text x="100" y="154" text-anchor="middle" font-size="46" font-weight="800"
+              font-family="Georgia,'Times New Roman',serif" fill="currentColor">BBC</text>
+        <rect x="91" y="176" width="18" height="18" rx="2" fill="currentColor"/>
+        <rect x="64" y="194" width="72" height="11" rx="5.5" fill="currentColor"/>
+      </svg>
+      <span class="footer__brand-name">Balay ni Bruno &amp; Co.</span>
     </div>
+    <p class="footer__copy">&copy; 2026 Balay ni Bruno &amp; Co. All rights reserved.</p>
   </div>
 </footer>
 
 
-<!-- ════════════════════════════════════════════
+<!-- ══════════════════════════════════════════
      JAVASCRIPT
-════════════════════════════════════════════ -->
+══════════════════════════════════════════ -->
 <script>
-// ── Replace this URL after deploying FormReceiver.gs as a Web App ──────────
 const SUBMIT_URL = 'https://script.google.com/macros/s/AKfycbwMkoW-f9OlSSZSILu5PeP3-5w4JWi69iNZEek5mscDVNheE1_rAj67HmIyT-EV6CxY/exec';
 
-// ── Sticky header shadow ─────────────────────────────────────────────────
-const header = document.getElementById('site-header');
+// ── Sticky header shadow ───────────────────────────────
+const siteHeader = document.getElementById('site-header');
 window.addEventListener('scroll', () => {
-  header.classList.toggle('scrolled', window.scrollY > 60);
-}, { passive: true });
+  siteHeader.classList.toggle('scrolled', window.scrollY > 60);
+}, { passive:true });
 
-// ── Hamburger ────────────────────────────────────────────────────────────
-const hamburger = document.getElementById('hamburger');
-const mobileNav = document.getElementById('mobile-nav');
+// ── Hamburger ──────────────────────────────────────────
+const hamburger  = document.getElementById('hamburger');
+const mobileMenu = document.getElementById('mobile-menu');
 const hb1 = document.getElementById('hb1');
 const hb2 = document.getElementById('hb2');
 const hb3 = document.getElementById('hb3');
 hamburger.addEventListener('click', () => {
-  const open = mobileNav.classList.toggle('open');
-  hb1.style.transform = open ? 'translateY(8px) rotate(45deg)' : '';
+  const open = mobileMenu.classList.toggle('open');
+  hb1.style.transform = open ? 'translateY(7px) rotate(45deg)' : '';
   hb2.style.opacity   = open ? '0' : '';
-  hb3.style.transform = open ? 'translateY(-8px) rotate(-45deg)' : '';
+  hb3.style.transform = open ? 'translateY(-7px) rotate(-45deg)' : '';
 });
 
-// ── Scroll fade-in ───────────────────────────────────────────────────────
+// ── Scroll fade-in ─────────────────────────────────────
 const fadeObs = new IntersectionObserver(entries => {
   entries.forEach(e => {
     if (e.isIntersecting) { e.target.classList.add('visible'); fadeObs.unobserve(e.target); }
   });
-}, { threshold: 0.06 });
+}, { threshold:0.06 });
 document.querySelectorAll('.fade-in').forEach(el => fadeObs.observe(el));
 
-// ── Custom checkboxes ────────────────────────────────────────────────────
+// ── Custom checkboxes ──────────────────────────────────
 document.querySelectorAll('.checkbox-item').forEach(item => {
   item.addEventListener('click', () => {
     const cb = item.querySelector('input[type="checkbox"]');
@@ -1048,51 +1182,51 @@ document.querySelectorAll('.checkbox-item').forEach(item => {
   });
 });
 
-// ── Progress bar — highlight active section ──────────────────────────────
-const sections   = ['s1','s2','s3','s4','s5','s6'];
-const progSteps  = document.querySelectorAll('.prog-step');
+// ── Progress bar ───────────────────────────────────────
+const sections  = ['s1','s2','s3','s4','s5','s6'];
+const progSteps = document.querySelectorAll('.prog-step');
 
 function updateProgress() {
-  const scrollY = window.scrollY + 160;
+  const scrollY = window.scrollY + 180;
   let active = 0;
   sections.forEach((id, i) => {
     const el = document.getElementById(id);
     if (el && el.offsetTop <= scrollY) active = i;
   });
   progSteps.forEach((step, i) => {
-    step.classList.remove('active', 'done');
-    if (i < active) step.classList.add('done');
+    step.classList.remove('active','done');
+    if (i < active)  step.classList.add('done');
     if (i === active) step.classList.add('active');
   });
 }
-window.addEventListener('scroll', updateProgress, { passive: true });
+window.addEventListener('scroll', updateProgress, { passive:true });
 updateProgress();
 
-// ── Scroll to section ────────────────────────────────────────────────────
+// ── Scroll to section ──────────────────────────────────
 function scrollToSection(id) {
   const el = document.getElementById(id);
   if (!el) return;
-  const offset = 64 + document.getElementById('progress-bar').offsetHeight + 16;
-  window.scrollTo({ top: el.offsetTop - offset, behavior: 'smooth' });
+  const offset = 68 + document.getElementById('progress-bar').offsetHeight + 20;
+  window.scrollTo({ top: el.offsetTop - offset, behavior:'smooth' });
 }
 
-// ── Required field validation ────────────────────────────────────────────
-const required = [
-  { id: 'fullName',         errId: 'err-fullName',         label: 'Full Name' },
-  { id: 'position',         errId: 'err-position',         label: 'Position / Role' },
-  { id: 'mainCategory',     errId: 'err-mainCategory',     label: 'Main Service Category' },
-  { id: 'yearsExperience',  errId: 'err-yearsExperience',  label: 'Years of Experience' },
-  { id: 'shortBio',         errId: 'err-shortBio',         label: 'Short Bio' },
-  { id: 'toolsUsed',        errId: 'err-toolsUsed',        label: 'Tools Used' },
-  { id: 'servicesProvided', errId: 'err-servicesProvided', label: 'Services Provided' },
-  { id: 'bestResult',       errId: 'err-bestResult',       label: 'Best Result' },
-  { id: 'aiToolsUsed',      errId: 'err-aiToolsUsed',      label: 'AI Tools Used' },
-  { id: 'mainDriveFolder',  errId: 'err-mainDriveFolder',  label: 'Google Drive Folder Link' },
+// ── Validation ─────────────────────────────────────────
+const requiredFields = [
+  { id:'fullName',         errId:'err-fullName',         label:'Full Name' },
+  { id:'position',         errId:'err-position',         label:'Position / Role' },
+  { id:'mainCategory',     errId:'err-mainCategory',     label:'Main Service Category' },
+  { id:'yearsExperience',  errId:'err-yearsExperience',  label:'Years of Experience' },
+  { id:'shortBio',         errId:'err-shortBio',         label:'Short Bio' },
+  { id:'toolsUsed',        errId:'err-toolsUsed',        label:'Tools Used' },
+  { id:'servicesProvided', errId:'err-servicesProvided', label:'Services Provided' },
+  { id:'bestResult',       errId:'err-bestResult',       label:'Best Result' },
+  { id:'aiToolsUsed',      errId:'err-aiToolsUsed',      label:'AI Tools Used' },
+  { id:'mainDriveFolder',  errId:'err-mainDriveFolder',  label:'Google Drive Folder Link' },
 ];
 
 function validateForm() {
   const errors = [];
-  required.forEach(({ id, errId, label }) => {
+  requiredFields.forEach(({ id, errId, label }) => {
     const el  = document.getElementById(id);
     const err = document.getElementById(errId);
     const val = el ? el.value.trim() : '';
@@ -1105,7 +1239,7 @@ function validateForm() {
       err && err.classList.remove('show');
     }
   });
-  // Drive URL basic check
+  // Drive URL check
   const driveEl  = document.getElementById('mainDriveFolder');
   const driveErr = document.getElementById('err-mainDriveFolder');
   if (driveEl && driveEl.value.trim() && !driveEl.value.includes('drive.google.com')) {
@@ -1116,8 +1250,7 @@ function validateForm() {
   return errors;
 }
 
-// Clear error on input
-required.forEach(({ id, errId }) => {
+requiredFields.forEach(({ id, errId }) => {
   const el = document.getElementById(id);
   if (!el) return;
   el.addEventListener('input', () => {
@@ -1128,7 +1261,7 @@ required.forEach(({ id, errId }) => {
   });
 });
 
-// ── Form submit ──────────────────────────────────────────────────────────
+// ── Form submit ────────────────────────────────────────
 document.getElementById('portfolio-form').addEventListener('submit', async (e) => {
   e.preventDefault();
 
@@ -1139,104 +1272,98 @@ document.getElementById('portfolio-form').addEventListener('submit', async (e) =
     const list   = document.getElementById('validation-list');
     list.innerHTML = errors.map(err => `<li>${err}</li>`).join('');
     banner.style.display = 'block';
-    // Scroll to first error field
     const firstErr = document.querySelector('.error');
     if (firstErr) {
-      const offset = 64 + document.getElementById('progress-bar').offsetHeight + 32;
-      window.scrollTo({ top: firstErr.offsetTop - offset, behavior: 'smooth' });
+      const offset = 68 + document.getElementById('progress-bar').offsetHeight + 40;
+      window.scrollTo({ top: firstErr.offsetTop - offset, behavior:'smooth' });
     }
     return;
   }
 
   document.getElementById('validation-banner').style.display = 'none';
 
-  // Collect secondary categories
   const secondaryCats = Array.from(
     document.querySelectorAll('#secondaryCats-grid input[type="checkbox"]:checked')
   ).map(cb => cb.value).join(', ');
 
   const payload = {
-    submittedAt:       new Date().toISOString(),
-    fullName:          document.getElementById('fullName').value.trim(),
-    position:          document.getElementById('position').value.trim(),
-    mainCategory:      document.getElementById('mainCategory').value,
+    submittedAt:        new Date().toISOString(),
+    fullName:           document.getElementById('fullName').value.trim(),
+    position:           document.getElementById('position').value.trim(),
+    mainCategory:       document.getElementById('mainCategory').value,
     secondaryCats,
-    yearsExperience:   document.getElementById('yearsExperience').value,
-    shortBio:          document.getElementById('shortBio').value.trim(),
-    toolsUsed:         document.getElementById('toolsUsed').value.trim(),
-    servicesProvided:  document.getElementById('servicesProvided').value.trim(),
-    clientTypes:       document.getElementById('clientTypes').value.trim(),
-    industries:        document.getElementById('industries').value.trim(),
-    tasksHandled:      document.getElementById('tasksHandled').value.trim(),
-    workflows:         document.getElementById('workflows').value.trim(),
-    systemsImplemented:document.getElementById('systemsImplemented').value.trim(),
-    gdDescription:     document.getElementById('gdDescription').value.trim(),
-    gdLinks:           document.getElementById('gdLinks').value.trim(),
-    vidDescription:    document.getElementById('vidDescription').value.trim(),
-    vidLinks:          document.getElementById('vidLinks').value.trim(),
-    webDescription:    document.getElementById('webDescription').value.trim(),
-    webLinks:          document.getElementById('webLinks').value.trim(),
-    smDescription:     document.getElementById('smDescription').value.trim(),
-    smLinks:           document.getElementById('smLinks').value.trim(),
-    emDescription:     document.getElementById('emDescription').value.trim(),
-    emLinks:           document.getElementById('emLinks').value.trim(),
-    seoDescription:    document.getElementById('seoDescription').value.trim(),
-    seoLinks:          document.getElementById('seoLinks').value.trim(),
-    autoDescription:   document.getElementById('autoDescription').value.trim(),
-    autoLinks:         document.getElementById('autoLinks').value.trim(),
-    brandDescription:  document.getElementById('brandDescription').value.trim(),
-    brandLinks:        document.getElementById('brandLinks').value.trim(),
-    otherDescription:  document.getElementById('otherDescription').value.trim(),
-    otherLinks:        document.getElementById('otherLinks').value.trim(),
-    contentStrategy:   document.getElementById('contentStrategy').value.trim(),
-    growthStrategy:    document.getElementById('growthStrategy').value.trim(),
-    leadGenStrategy:   document.getElementById('leadGenStrategy').value.trim(),
-    funnelStrategy:    document.getElementById('funnelStrategy').value.trim(),
-    aiStrategy:        document.getElementById('aiStrategy').value.trim(),
-    seoStrategy:       document.getElementById('seoStrategy').value.trim(),
-    emailStrategy:     document.getElementById('emailStrategy').value.trim(),
-    otherStrategy:     document.getElementById('otherStrategy').value.trim(),
-    strategyLinks:     document.getElementById('strategyLinks').value.trim(),
-    bestResult:        document.getElementById('bestResult').value.trim(),
-    metrics:           document.getElementById('metrics').value.trim(),
-    beforeAfter:       document.getElementById('beforeAfter').value.trim(),
-    clientFeedback:    document.getElementById('clientFeedback').value.trim(),
-    analyticsLinks:    document.getElementById('analyticsLinks').value.trim(),
-    notableProjects:   document.getElementById('notableProjects').value.trim(),
-    aiToolsUsed:       document.getElementById('aiToolsUsed').value.trim(),
-    aiWorkDescription: document.getElementById('aiWorkDescription').value.trim(),
-    aiExamplesLinks:   document.getElementById('aiExamplesLinks').value.trim(),
-    aiSystemsBuilt:    document.getElementById('aiSystemsBuilt').value.trim(),
-    mainDriveFolder:   document.getElementById('mainDriveFolder').value.trim(),
-    anythingElse:      document.getElementById('anythingElse').value.trim(),
-    formVersion:       '1.0',
+    yearsExperience:    document.getElementById('yearsExperience').value,
+    shortBio:           document.getElementById('shortBio').value.trim(),
+    toolsUsed:          document.getElementById('toolsUsed').value.trim(),
+    servicesProvided:   document.getElementById('servicesProvided').value.trim(),
+    clientTypes:        document.getElementById('clientTypes').value.trim(),
+    industries:         document.getElementById('industries').value.trim(),
+    tasksHandled:       document.getElementById('tasksHandled').value.trim(),
+    workflows:          document.getElementById('workflows').value.trim(),
+    systemsImplemented: document.getElementById('systemsImplemented').value.trim(),
+    gdDescription:      document.getElementById('gdDescription').value.trim(),
+    gdLinks:            document.getElementById('gdLinks').value.trim(),
+    vidDescription:     document.getElementById('vidDescription').value.trim(),
+    vidLinks:           document.getElementById('vidLinks').value.trim(),
+    webDescription:     document.getElementById('webDescription').value.trim(),
+    webLinks:           document.getElementById('webLinks').value.trim(),
+    smDescription:      document.getElementById('smDescription').value.trim(),
+    smLinks:            document.getElementById('smLinks').value.trim(),
+    emDescription:      document.getElementById('emDescription').value.trim(),
+    emLinks:            document.getElementById('emLinks').value.trim(),
+    seoDescription:     document.getElementById('seoDescription').value.trim(),
+    seoLinks:           document.getElementById('seoLinks').value.trim(),
+    autoDescription:    document.getElementById('autoDescription').value.trim(),
+    autoLinks:          document.getElementById('autoLinks').value.trim(),
+    brandDescription:   document.getElementById('brandDescription').value.trim(),
+    brandLinks:         document.getElementById('brandLinks').value.trim(),
+    otherDescription:   document.getElementById('otherDescription').value.trim(),
+    otherLinks:         document.getElementById('otherLinks').value.trim(),
+    contentStrategy:    document.getElementById('contentStrategy').value.trim(),
+    growthStrategy:     document.getElementById('growthStrategy').value.trim(),
+    leadGenStrategy:    document.getElementById('leadGenStrategy').value.trim(),
+    funnelStrategy:     document.getElementById('funnelStrategy').value.trim(),
+    aiStrategy:         document.getElementById('aiStrategy').value.trim(),
+    seoStrategy:        document.getElementById('seoStrategy').value.trim(),
+    emailStrategy:      document.getElementById('emailStrategy').value.trim(),
+    otherStrategy:      document.getElementById('otherStrategy').value.trim(),
+    strategyLinks:      document.getElementById('strategyLinks').value.trim(),
+    bestResult:         document.getElementById('bestResult').value.trim(),
+    metrics:            document.getElementById('metrics').value.trim(),
+    beforeAfter:        document.getElementById('beforeAfter').value.trim(),
+    clientFeedback:     document.getElementById('clientFeedback').value.trim(),
+    analyticsLinks:     document.getElementById('analyticsLinks').value.trim(),
+    notableProjects:    document.getElementById('notableProjects').value.trim(),
+    aiToolsUsed:        document.getElementById('aiToolsUsed').value.trim(),
+    aiWorkDescription:  document.getElementById('aiWorkDescription').value.trim(),
+    aiExamplesLinks:    document.getElementById('aiExamplesLinks').value.trim(),
+    aiSystemsBuilt:     document.getElementById('aiSystemsBuilt').value.trim(),
+    mainDriveFolder:    document.getElementById('mainDriveFolder').value.trim(),
+    anythingElse:       document.getElementById('anythingElse').value.trim(),
+    formVersion:        '2.0',
   };
 
-  // Loading state
   const btn     = document.getElementById('submit-btn');
   const btnText = document.getElementById('btn-text');
   const spinner = document.getElementById('btn-spinner');
-  btn.disabled         = true;
-  btnText.textContent  = 'Submitting…';
-  spinner.style.display = 'block';
+  btn.disabled          = true;
+  btnText.textContent   = 'Submitting…';
+  spinner.style.display = 'inline-block';
 
   try {
-    const res  = await fetch(SUBMIT_URL, {
-      method: 'POST',
-      body:   JSON.stringify(payload),
-    });
+    const res  = await fetch(SUBMIT_URL, { method:'POST', body:JSON.stringify(payload) });
     const json = await res.json();
 
     if (json.success) {
       document.getElementById('form-state').style.display    = 'none';
       document.getElementById('success-state').style.display = 'block';
-      window.scrollTo({ top: document.getElementById('submit-section').offsetTop - 64, behavior: 'smooth' });
+      window.scrollTo({ top: document.querySelector('.submit-section').offsetTop - 68, behavior:'smooth' });
     } else {
       throw new Error(json.error || 'Unknown error');
     }
   } catch (err) {
-    btn.disabled         = false;
-    btnText.textContent  = 'Submit Portfolio';
+    btn.disabled          = false;
+    btnText.textContent   = 'Submit Portfolio';
     spinner.style.display = 'none';
     alert('Submission failed. Please check your internet connection and try again.\n\nIf the problem continues, contact RJ directly.\n\nError: ' + err.message);
   }
