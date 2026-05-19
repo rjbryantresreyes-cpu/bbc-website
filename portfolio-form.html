@@ -1021,10 +1021,10 @@
 
       <div class="field-row">
         <div class="field-group">
-          <label class="field-label" for="aiToolsUsed">AI Tools You Use <span class="req">*</span></label>
+          <label class="field-label" for="aiToolsUsed">AI Tools You Use</label>
           <textarea id="aiToolsUsed" name="aiToolsUsed" rows="3"
-                    placeholder="e.g. ChatGPT, Claude, Midjourney, Runway, ElevenLabs, Make, Zapier AI, Canva AI, Otter.ai..." required></textarea>
-          <p class="error-msg" id="err-aiToolsUsed">Please list the AI tools you use.</p>
+                    placeholder="e.g. ChatGPT, Claude, Midjourney, Runway, ElevenLabs, Make, Zapier AI, Canva AI, Otter.ai..."></textarea>
+          <p class="field-hint">Optional — list any AI tools you use, even basic ones like ChatGPT.</p>
         </div>
         <div class="field-group">
           <label class="field-label" for="aiWorkDescription">How You Use AI in Your Work</label>
@@ -1223,7 +1223,6 @@ const requiredFields = [
   { id:'toolsUsed',        errId:'err-toolsUsed',        label:'Tools Used' },
   { id:'servicesProvided', errId:'err-servicesProvided', label:'Services Provided' },
   { id:'bestResult',       errId:'err-bestResult',       label:'Best Result' },
-  { id:'aiToolsUsed',      errId:'err-aiToolsUsed',      label:'AI Tools Used' },
   { id:'mainDriveFolder',  errId:'err-mainDriveFolder',  label:'Google Drive Folder Link' },
 ];
 
