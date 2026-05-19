@@ -260,6 +260,14 @@
     .badge--client { background:rgba(184,146,62,0.1); color:var(--gold); }
     .badge--internal { background:rgba(78,158,116,0.1); color:var(--sage); }
     .badge--coming { background:rgba(136,143,160,0.1); color:var(--text-muted); }
+    .badge--live   { background:rgba(78,158,116,0.12); color:var(--sage); }
+
+    .resource-card--live { text-decoration:none; cursor:pointer; color:inherit; display:flex; }
+    .resource-card--live:hover { color:inherit; }
+    .resource-card__icon--active {
+      background:rgba(78,158,116,0.12);
+      color:var(--sage);
+    }
 
     .resource-card__title {
       font-family:var(--font-display); font-size:1.1rem; font-weight:600;
@@ -470,25 +478,25 @@
 
     <div class="resources-grid fade-in">
 
-      <!-- Client Onboarding — Coming Soon -->
-      <div class="resource-card resource-card--coming">
+      <!-- Client Onboarding — Live -->
+      <a class="resource-card resource-card--live" href="client-onboarding.html">
         <div class="resource-card__header">
-          <div class="resource-card__icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#888FA0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <div class="resource-card__icon resource-card__icon--active">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
             </svg>
           </div>
           <div class="resource-card__meta">
-            <div class="resource-card__badge badge--coming">Coming Soon</div>
+            <div class="resource-card__badge badge--live">Live</div>
             <div class="resource-card__title">Client Onboarding Form</div>
           </div>
         </div>
         <p class="resource-card__desc">New BBC clients complete this form to share their brand assets, goals, access credentials, and expectations before kickoff. Feeds directly into your BBC client folder.</p>
         <div class="resource-card__footer">
           <span class="resource-card__who">👤 For: New BBC Clients</span>
-          <span class="btn btn-outline btn-sm" style="opacity:0.5;cursor:not-allowed;">Coming Soon</span>
+          <span class="btn btn-primary btn-sm">Open Form →</span>
         </div>
-      </div>
+      </a>
 
       <!-- Project Request — Coming Soon -->
       <div class="resource-card resource-card--coming">
