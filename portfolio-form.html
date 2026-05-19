@@ -1049,8 +1049,11 @@
         <label class="field-label" for="mainDriveFolder">Your Main Google Drive Portfolio Folder <span class="req">*</span></label>
         <input type="url" id="mainDriveFolder" name="mainDriveFolder" placeholder="https://drive.google.com/drive/folders/..." required />
         <p class="field-hint">
-          Share your main portfolio folder with <strong>rj@balaynibruno.co</strong> (viewer access) before submitting.
-          This is where RJ will review all your work files.
+          <strong>Before submitting:</strong> Organize all your work into <strong>one main folder</strong> with subfolders inside it — e.g.:
+          📁 [Your Name] — BBC Portfolio → 📁 Graphic Design, 📁 Video Editing, 📁 Social Media, 📁 Results, etc.
+          Then share that <strong>one top-level folder</strong> with <strong>rj@balaynibruno.co</strong> (viewer access)
+          and paste the link here. Do <strong>not</strong> paste multiple links — one folder link only.
+          Everything inside your folder (including subfolders) will be copied automatically.
         </p>
         <p class="error-msg" id="err-mainDriveFolder">Please paste your Google Drive folder link.</p>
       </div>
@@ -1144,7 +1147,7 @@
      JAVASCRIPT
 ══════════════════════════════════════════ -->
 <script>
-const SUBMIT_URL = 'https://script.google.com/macros/s/AKfycbwMkoW-f9OlSSZSILu5PeP3-5w4JWi69iNZEek5mscDVNheE1_rAj67HmIyT-EV6CxY/exec';
+const SUBMIT_URL = 'https://script.google.com/macros/s/AKfycbxzhsrfpKNwhPicRMQUzYQoKNQTbSy4qs8q4xeZvQ3Mtd_vgAuwRwSoC517N3M-bliN/exec';
 
 // ── Sticky header shadow ───────────────────────────────
 const siteHeader = document.getElementById('site-header');

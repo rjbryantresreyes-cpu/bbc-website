@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Forms &amp; Resources — Balay ni Bruno &amp; Co.</title>
+  <meta name="description" content="Access all BBC forms, submission portals, and team resources in one place." />
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Lora:ital,wght@0,400;0,500;1,400;1,500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --deep-blue:   #1F3557;
+      --mid-blue:    #4B6FA5;
+      --warm-blue:   #6D8FC7;
+      --light-blue:  #A8C0DC;
+      --pale-blue:   #DDE8F2;
+      --bg-primary:  #F5F1EA;
+      --bg-section:  #EDE8DF;
+      --bg-card:     #FDFAF6;
+      --bg-card-alt: #FAF6EF;
+      --bg-dark:     #1C2E47;
+      --bg-footer:   #172540;
+      --neutral-100: #E8E2D6;
+      --neutral-200: #D5CEC3;
+      --neutral-300: #B8B1A6;
+      --text-ink:    #2A3040;
+      --text-body:   #4E5666;
+      --text-muted:  #888FA0;
+      --text-warm:   #F5F1EA;
+      --gold:        #B8923E;
+      --gold-pale:   #E6CFA0;
+      --gold-warm:   #D4A84B;
+      --sage:        #4E9E74;
+      --font-display:'Playfair Display', Georgia, serif;
+      --font-body:   'Lora', Georgia, serif;
+      --font-ui:     'DM Sans', system-ui, sans-serif;
+      --max-width:   1100px;
+      --radius-sm:   8px;
+      --radius:      16px;
+      --radius-lg:   24px;
+      --radius-xl:   32px;
+      --shadow-xs:   0 1px 6px  rgba(85,60,35,0.055);
+      --shadow-sm:   0 3px 18px rgba(85,60,35,0.08);
+      --shadow-md:   0 7px 36px rgba(85,60,35,0.11);
+      --shadow-lg:   0 14px 56px rgba(85,60,35,0.14);
+      --border-card: 1px solid rgba(85,60,35,0.09);
+      --border-warm: 1px solid rgba(85,60,35,0.12);
+      --border-dark: 1px solid rgba(255,255,255,0.07);
+      --s1:.5rem; --s2:1rem; --s3:1.5rem; --s4:2.5rem; --s5:4rem; --s6:6rem; --s7:9rem;
+    }
+
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body {
+      font-family:var(--font-body);
+      color:var(--text-ink);
+      background:var(--bg-primary);
+      line-height:1.6;
+      -webkit-font-smoothing:antialiased;
+      overflow-x:hidden;
+    }
+    body::after {
+      content:'';
+      position:fixed; inset:0;
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23n)' opacity='0.026'/%3E%3C/svg%3E");
+      pointer-events:none; z-index:9999; mix-blend-mode:multiply;
+    }
+
+    h1,h2,h3,h4 { font-family:var(--font-display); line-height:1.22; color:var(--deep-blue); }
+    h1 { font-size:clamp(2rem,4.5vw,3.2rem); font-weight:700; }
+    h2 { font-size:clamp(1.5rem,2.6vw,2.2rem); font-weight:600; }
+    h3 { font-size:clamp(1rem,1.5vw,1.2rem); font-weight:600; }
+    p  { font-family:var(--font-body); font-size:1rem; line-height:1.87; color:var(--text-body); }
+    a  { text-decoration:none; }
+
+    .eyebrow {
+      display:inline-block; font-family:var(--font-ui);
+      font-size:0.68rem; font-weight:600;
+      letter-spacing:0.17em; text-transform:uppercase;
+      color:var(--warm-blue); margin-bottom:var(--s2);
+    }
+    .eyebrow--gold { color:var(--gold-pale); }
+
+    .container { max-width:var(--max-width); margin:0 auto; padding:0 var(--s4); }
+    @media (max-width:640px) { .container { padding:0 var(--s2); } }
+
+    .fade-in { opacity:0; transform:translateY(22px); transition:opacity 0.65s ease, transform 0.65s ease; }
+    .fade-in.visible { opacity:1; transform:translateY(0); }
+
+    .divider-bar {
+      width:44px; height:2.5px;
+      background:linear-gradient(90deg,var(--gold),var(--warm-blue));
+      border-radius:2px; margin:var(--s2) 0 var(--s3); opacity:0.8;
+    }
+
+    /* ── Buttons ── */
+    .btn {
+      display:inline-flex; align-items:center; gap:0.5rem;
+      padding:0.88rem 2.2rem; border-radius:100px;
+      font-family:var(--font-ui); font-size:0.86rem; font-weight:600;
+      letter-spacing:0.02em; cursor:pointer;
+      transition:all 0.3s ease; border:1.5px solid transparent;
+      white-space:nowrap;
+    }
+    .btn-primary { background:var(--deep-blue); color:var(--text-warm); }
+    .btn-primary:hover { background:#243f64; transform:translateY(-2px); box-shadow:0 10px 32px rgba(31,53,87,0.28); }
+    .btn-gold { background:var(--gold); color:#fff; font-weight:700; }
+    .btn-gold:hover { background:var(--gold-warm); transform:translateY(-2px); box-shadow:0 10px 32px rgba(184,146,62,0.35); }
+    .btn-ghost { background:transparent; color:var(--text-warm); border-color:rgba(245,241,234,0.28); }
+    .btn-ghost:hover { background:rgba(245,241,234,0.08); border-color:rgba(245,241,234,0.55); }
+    .btn-outline { background:transparent; color:var(--deep-blue); border-color:rgba(75,111,165,0.42); }
+    .btn-outline:hover { background:var(--deep-blue); color:var(--text-warm); }
+    .btn-sm { padding:0.62rem 1.35rem; font-size:0.78rem; }
+
+    /* ── Header ── */
+    .site-header {
+      position:fixed; top:0; left:0; right:0; z-index:200;
+      background:rgba(245,241,234,0.94);
+      backdrop-filter:blur(20px) saturate(1.2);
+      -webkit-backdrop-filter:blur(20px) saturate(1.2);
+      border-bottom:var(--border-warm);
+      transition:box-shadow 0.3s ease;
+    }
+    .site-header.scrolled { box-shadow:var(--shadow-sm); }
+    .header__inner {
+      max-width:var(--max-width); margin:0 auto; padding:0 var(--s4);
+      height:68px; display:flex; align-items:center;
+      justify-content:space-between; gap:var(--s3);
+    }
+    .header__logo { display:flex; align-items:center; gap:0.6rem; }
+    .header__logo-name {
+      font-family:var(--font-display); font-size:1.05rem; font-weight:700;
+      color:var(--deep-blue); line-height:1; letter-spacing:-0.01em;
+    }
+    .header__nav { display:flex; align-items:center; gap:1.5rem; list-style:none; }
+    .header__nav a {
+      font-family:var(--font-ui); font-size:0.78rem; font-weight:500;
+      color:var(--text-body); transition:color 0.2s; white-space:nowrap;
+    }
+    .header__nav a:hover { color:var(--deep-blue); font-weight:600; }
+    .header__nav a.active { color:var(--deep-blue); font-weight:700; }
+    .header__cta { display:flex; align-items:center; gap:0.9rem; flex-shrink:0; }
+    .hamburger { display:none; flex-direction:column; gap:5px; cursor:pointer; background:none; border:none; padding:8px; }
+    .hamburger span { display:block; width:20px; height:2px; background:var(--text-ink); border-radius:2px; transition:all 0.25s ease; }
+    .mobile-menu { display:none; flex-direction:column; background:var(--bg-card); border-top:var(--border-warm); padding:1rem var(--s4) 1.5rem; }
+    .mobile-menu.open { display:flex; }
+    .mobile-menu a { font-family:var(--font-ui); font-size:0.9rem; font-weight:500; color:var(--text-body); padding:0.7rem 0; border-bottom:var(--border-card); transition:color 0.2s; }
+    .mobile-menu a:hover { color:var(--deep-blue); }
+    .mobile-menu .mobile-cta { margin-top:1rem; }
+    @media (max-width:1024px) { .header__nav { display:none; } }
+    @media (max-width:768px) { .header__cta .btn-ghost { display:none; } .hamburger { display:flex; } }
+
+    /* ── Hero ── */
+    .hero {
+      background:var(--bg-dark);
+      padding-top:68px;
+      position:relative; overflow:hidden;
+    }
+    .hero::before {
+      content:'';
+      position:absolute; top:-80px; right:-100px;
+      width:600px; height:600px;
+      background:radial-gradient(ellipse at center, rgba(184,146,62,0.07) 0%, transparent 65%);
+      pointer-events:none;
+    }
+    .hero__inner {
+      max-width:720px; margin:0 auto;
+      padding:var(--s6) var(--s4) var(--s5);
+      text-align:center; position:relative; z-index:1;
+    }
+    .hero__eyebrow {
+      display:inline-flex; align-items:center; gap:0.6rem;
+      font-family:var(--font-ui); font-size:0.68rem; font-weight:600;
+      letter-spacing:0.18em; text-transform:uppercase;
+      color:var(--gold-pale); margin-bottom:1.8rem;
+    }
+    .hero__eyebrow-dot { width:5px; height:5px; border-radius:50%; background:var(--gold); opacity:0.75; flex-shrink:0; }
+    .hero__title { color:#fff; margin-bottom:1.2rem; }
+    .hero__title em { font-style:italic; color:var(--gold-pale); }
+    .hero__body { font-family:var(--font-body); font-size:1.05rem; line-height:1.88; color:rgba(245,241,234,0.6); max-width:520px; margin:0 auto; }
+
+    /* ── Section ── */
+    .section { padding:var(--s7) 0; }
+    .section--warm { background:var(--bg-section); }
+    .section--card { background:var(--bg-card); }
+    .section--dark { background:var(--bg-dark); position:relative; overflow:hidden; }
+    .section--dark::before {
+      content:''; position:absolute; top:-60px; left:-60px;
+      width:500px; height:500px;
+      background:radial-gradient(ellipse, rgba(184,146,62,0.06) 0%, transparent 65%);
+      pointer-events:none;
+    }
+
+    /* ── Category label ── */
+    .category-label {
+      font-family:var(--font-ui); font-size:0.64rem; font-weight:700;
+      letter-spacing:0.16em; text-transform:uppercase;
+      color:var(--warm-blue); margin-bottom:var(--s3);
+      display:flex; align-items:center; gap:0.6rem;
+    }
+    .category-label::after {
+      content:''; flex:1; height:1px;
+      background:linear-gradient(90deg, rgba(109,143,199,0.3), transparent);
+    }
+
+    /* ── Resource Cards ── */
+    .resources-grid {
+      display:grid;
+      grid-template-columns:repeat(auto-fill, minmax(320px, 1fr));
+      gap:1.5rem;
+    }
+    @media (max-width:700px) { .resources-grid { grid-template-columns:1fr; } }
+
+    .resource-card {
+      background:var(--bg-card);
+      border:var(--border-card);
+      border-radius:var(--radius-lg);
+      padding:2rem;
+      box-shadow:var(--shadow-xs);
+      transition:box-shadow 0.25s ease, transform 0.25s ease, border-color 0.25s ease;
+      display:flex; flex-direction:column; gap:1.25rem;
+      position:relative; overflow:hidden;
+    }
+    .resource-card::before {
+      content:'';
+      position:absolute; top:0; left:0; right:0;
+      height:3px;
+      background:linear-gradient(90deg, var(--gold), var(--warm-blue));
+      opacity:0;
+      transition:opacity 0.25s ease;
+    }
+    .resource-card:hover {
+      box-shadow:var(--shadow-md);
+      transform:translateY(-4px);
+      border-color:rgba(184,146,62,0.2);
+    }
+    .resource-card:hover::before { opacity:1; }
+
+    .resource-card__icon {
+      width:48px; height:48px; border-radius:var(--radius-sm);
+      background:rgba(31,53,87,0.07);
+      display:flex; align-items:center; justify-content:center;
+      flex-shrink:0;
+    }
+    .resource-card__header { display:flex; align-items:flex-start; gap:1rem; }
+    .resource-card__meta { flex:1; }
+
+    .resource-card__badge {
+      display:inline-flex; align-items:center;
+      font-family:var(--font-ui); font-size:0.6rem; font-weight:700;
+      letter-spacing:0.12em; text-transform:uppercase;
+      padding:3px 10px; border-radius:100px;
+      margin-bottom:0.5rem;
+    }
+    .badge--team { background:rgba(31,53,87,0.08); color:var(--mid-blue); }
+    .badge--client { background:rgba(184,146,62,0.1); color:var(--gold); }
+    .badge--internal { background:rgba(78,158,116,0.1); color:var(--sage); }
+    .badge--coming { background:rgba(136,143,160,0.1); color:var(--text-muted); }
+
+    .resource-card__title {
+      font-family:var(--font-display); font-size:1.1rem; font-weight:600;
+      color:var(--deep-blue); margin-bottom:0.4rem; line-height:1.3;
+    }
+    .resource-card__desc {
+      font-family:var(--font-body); font-size:0.9rem; line-height:1.75;
+      color:var(--text-body);
+    }
+    .resource-card__footer {
+      display:flex; align-items:center; justify-content:space-between;
+      margin-top:auto; padding-top:1rem;
+      border-top:var(--border-card);
+    }
+    .resource-card__who {
+      font-family:var(--font-ui); font-size:0.72rem; font-weight:500;
+      color:var(--text-muted);
+    }
+    .resource-card--coming { opacity:0.6; pointer-events:none; }
+    .resource-card--coming .resource-card__title { color:var(--text-muted); }
+
+    /* ── CTA Section ── */
+    .cta-inner { max-width:600px; margin:0 auto; text-align:center; position:relative; z-index:1; }
+
+    /* ── Footer ── */
+    .footer { background:var(--bg-footer); border-top:var(--border-dark); padding:var(--s6) 0 var(--s4); }
+    .footer__grid {
+      max-width:var(--max-width); margin:0 auto; padding:0 var(--s4);
+      display:grid; grid-template-columns:2fr 1fr 1fr 1fr; gap:var(--s5);
+      margin-bottom:var(--s5);
+    }
+    @media (max-width:900px) { .footer__grid { grid-template-columns:1fr 1fr; gap:var(--s4); } }
+    @media (max-width:540px) { .footer__grid { grid-template-columns:1fr; gap:var(--s3); } }
+    .footer__brand-name { font-family:var(--font-display); font-size:1.1rem; font-weight:700; color:rgba(245,241,234,0.88); margin-bottom:0.35rem; }
+    .footer__brand-sub  { font-family:var(--font-ui); font-size:0.58rem; font-weight:600; letter-spacing:0.14em; text-transform:uppercase; color:var(--warm-blue); opacity:0.7; margin-bottom:1rem; }
+    .footer__brand-copy { font-family:var(--font-body); font-size:0.86rem; line-height:1.78; color:rgba(245,241,234,0.45); }
+    .footer__col-label  { font-family:var(--font-ui); font-size:0.64rem; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:rgba(245,241,234,0.35); margin-bottom:1rem; }
+    .footer__links { list-style:none; display:flex; flex-direction:column; gap:0.55rem; }
+    .footer__links a { font-family:var(--font-ui); font-size:0.84rem; color:rgba(245,241,234,0.5); transition:color 0.2s; }
+    .footer__links a:hover { color:rgba(245,241,234,0.85); }
+    .footer__bottom {
+      max-width:var(--max-width); margin:0 auto; padding:var(--s3) var(--s4) 0;
+      border-top:var(--border-dark);
+      display:flex; align-items:center; justify-content:space-between; gap:1rem; flex-wrap:wrap;
+    }
+    .footer__copyright { font-family:var(--font-ui); font-size:0.72rem; color:rgba(245,241,234,0.28); }
+    .footer__legal { display:flex; gap:1.25rem; }
+    .footer__legal a { font-family:var(--font-ui); font-size:0.72rem; color:rgba(245,241,234,0.28); transition:color 0.2s; }
+    .footer__legal a:hover { color:rgba(245,241,234,0.6); }
+  </style>
+</head>
+<body>
+
+
+<!-- ══════════════════════════════════════════
+     HEADER
+══════════════════════════════════════════ -->
+<header class="site-header" id="site-header">
+  <div class="header__inner">
+    <a href="index.html" class="header__logo">
+      <img src="bbc-logo.png" alt="Balay ni Bruno &amp; Co." style="height:42px;width:auto;display:block;">
+      <span class="header__logo-name">Balay ni Bruno &amp; Co.</span>
+    </a>
+    <nav>
+      <ul class="header__nav">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">Our Story</a></li>
+        <li><a href="how-it-works.html">How It Works</a></li>
+        <li><a href="how-we-help.html">How We Help</a></li>
+        <li><a href="our-work.html">Our Work</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+    <div class="header__cta">
+      <a href="contact.html" class="btn btn-primary btn-sm">Book a Call</a>
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+        <span id="hb1"></span><span id="hb2"></span><span id="hb3"></span>
+      </button>
+    </div>
+  </div>
+  <nav class="mobile-menu" id="mobile-menu">
+    <a href="index.html">Home</a>
+    <a href="about.html">Our Story</a>
+    <a href="how-it-works.html">How It Works</a>
+    <a href="how-we-help.html">How We Help</a>
+    <a href="our-work.html">Our Work</a>
+    <a href="contact.html">Contact</a>
+    <a href="contact.html" class="btn btn-primary btn-sm mobile-cta" style="text-align:center;">Book a Call</a>
+  </nav>
+</header>
+
+
+<!-- ══════════════════════════════════════════
+     HERO
+══════════════════════════════════════════ -->
+<section class="hero">
+  <div class="hero__inner fade-in">
+    <div class="hero__eyebrow">
+      <span class="hero__eyebrow-dot"></span>
+      BBC Resources
+      <span class="hero__eyebrow-dot"></span>
+    </div>
+    <h1 class="hero__title">Forms &amp; <em>Resources</em></h1>
+    <p class="hero__body">
+      Everything in one place — submission forms, onboarding links, and team resources
+      for BBC clients, team members, and partners.
+    </p>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════
+     TEAM RESOURCES
+══════════════════════════════════════════ -->
+<section class="section" style="background:var(--bg-primary);">
+  <div class="container">
+
+    <div class="fade-in" style="margin-bottom:var(--s5);">
+      <span class="eyebrow">For Team Members</span>
+      <h2>Team Submissions</h2>
+      <div class="divider-bar"></div>
+      <p style="max-width:560px;">Forms and portals for BBC team members — VAs, handlers, and NPCs. Use these to submit your work, update your profile, and access internal resources.</p>
+    </div>
+
+    <div class="category-label fade-in">VA Onboarding</div>
+
+    <div class="resources-grid fade-in">
+
+      <!-- Portfolio Submission Form -->
+      <div class="resource-card">
+        <div class="resource-card__header">
+          <div class="resource-card__icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1F3557" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/>
+            </svg>
+          </div>
+          <div class="resource-card__meta">
+            <div class="resource-card__badge badge--team">Team Form</div>
+            <div class="resource-card__title">NPC Portfolio Submission</div>
+          </div>
+        </div>
+        <p class="resource-card__desc">Submit your portfolio, service experience, AI work samples, and strategies for RJ to review. Required to activate your full BBC profile. Takes approximately 15 minutes.</p>
+        <div class="resource-card__footer">
+          <span class="resource-card__who">👤 For: All BBC VAs & NPCs</span>
+          <a href="portfolio-form.html" class="btn btn-primary btn-sm">Open Form →</a>
+        </div>
+      </div>
+
+      <!-- Weekly Update Form — Coming Soon -->
+      <div class="resource-card resource-card--coming">
+        <div class="resource-card__header">
+          <div class="resource-card__icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#888FA0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
+            </svg>
+          </div>
+          <div class="resource-card__meta">
+            <div class="resource-card__badge badge--coming">Coming Soon</div>
+            <div class="resource-card__title">Weekly Progress Update</div>
+          </div>
+        </div>
+        <p class="resource-card__desc">Submit your weekly tasks completed, hours logged, and blockers for RJ's review. Keeps the team accountable and your record updated automatically.</p>
+        <div class="resource-card__footer">
+          <span class="resource-card__who">👤 For: Active BBC Team Members</span>
+          <span class="btn btn-outline btn-sm" style="opacity:0.5;cursor:not-allowed;">Coming Soon</span>
+        </div>
+      </div>
+
+      <!-- Time Log — Coming Soon -->
+      <div class="resource-card resource-card--coming">
+        <div class="resource-card__header">
+          <div class="resource-card__icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#888FA0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+            </svg>
+          </div>
+          <div class="resource-card__meta">
+            <div class="resource-card__badge badge--coming">Coming Soon</div>
+            <div class="resource-card__title">Time Log Submission</div>
+          </div>
+        </div>
+        <p class="resource-card__desc">Log your weekly hours per client for accurate tracking and billing. Links directly to BBC's capacity management system.</p>
+        <div class="resource-card__footer">
+          <span class="resource-card__who">👤 For: Active BBC Team Members</span>
+          <span class="btn btn-outline btn-sm" style="opacity:0.5;cursor:not-allowed;">Coming Soon</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════
+     CLIENT RESOURCES
+══════════════════════════════════════════ -->
+<section class="section section--warm">
+  <div class="container">
+
+    <div class="fade-in" style="margin-bottom:var(--s5);">
+      <span class="eyebrow">For Clients</span>
+      <h2>Client Forms</h2>
+      <div class="divider-bar"></div>
+      <p style="max-width:560px;">Forms and resources for BBC clients — onboarding documents, project requests, and feedback submissions. Reach out to your BBC handler if you're unsure which form to use.</p>
+    </div>
+
+    <div class="category-label fade-in">Onboarding & Projects</div>
+
+    <div class="resources-grid fade-in">
+
+      <!-- Client Onboarding — Coming Soon -->
+      <div class="resource-card resource-card--coming">
+        <div class="resource-card__header">
+          <div class="resource-card__icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#888FA0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+            </svg>
+          </div>
+          <div class="resource-card__meta">
+            <div class="resource-card__badge badge--coming">Coming Soon</div>
+            <div class="resource-card__title">Client Onboarding Form</div>
+          </div>
+        </div>
+        <p class="resource-card__desc">New BBC clients complete this form to share their brand assets, goals, access credentials, and expectations before kickoff. Feeds directly into your BBC client folder.</p>
+        <div class="resource-card__footer">
+          <span class="resource-card__who">👤 For: New BBC Clients</span>
+          <span class="btn btn-outline btn-sm" style="opacity:0.5;cursor:not-allowed;">Coming Soon</span>
+        </div>
+      </div>
+
+      <!-- Project Request — Coming Soon -->
+      <div class="resource-card resource-card--coming">
+        <div class="resource-card__header">
+          <div class="resource-card__icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#888FA0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
+            </svg>
+          </div>
+          <div class="resource-card__meta">
+            <div class="resource-card__badge badge--coming">Coming Soon</div>
+            <div class="resource-card__title">Project / Task Request</div>
+          </div>
+        </div>
+        <p class="resource-card__desc">Submit a new project or one-off task request to your BBC handler. Includes priority level, deadline, attachments, and context — so nothing gets lost in chat.</p>
+        <div class="resource-card__footer">
+          <span class="resource-card__who">👤 For: Active BBC Clients</span>
+          <span class="btn btn-outline btn-sm" style="opacity:0.5;cursor:not-allowed;">Coming Soon</span>
+        </div>
+      </div>
+
+      <!-- Feedback Form — Coming Soon -->
+      <div class="resource-card resource-card--coming">
+        <div class="resource-card__header">
+          <div class="resource-card__icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#888FA0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+            </svg>
+          </div>
+          <div class="resource-card__meta">
+            <div class="resource-card__badge badge--coming">Coming Soon</div>
+            <div class="resource-card__title">Monthly Feedback Form</div>
+          </div>
+        </div>
+        <p class="resource-card__desc">Share your feedback on BBC's performance this month — quality of work, communication, and overall satisfaction. Helps us keep improving the partnership.</p>
+        <div class="resource-card__footer">
+          <span class="resource-card__who">👤 For: Active BBC Clients</span>
+          <span class="btn btn-outline btn-sm" style="opacity:0.5;cursor:not-allowed;">Coming Soon</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════
+     GENERAL RESOURCES
+══════════════════════════════════════════ -->
+<section class="section section--card">
+  <div class="container">
+
+    <div class="fade-in" style="margin-bottom:var(--s5);">
+      <span class="eyebrow">General</span>
+      <h2>Get in Touch</h2>
+      <div class="divider-bar"></div>
+      <p style="max-width:560px;">Not sure where to start? These links will get you to the right place.</p>
+    </div>
+
+    <div class="resources-grid fade-in">
+
+      <!-- Book a Call -->
+      <div class="resource-card">
+        <div class="resource-card__header">
+          <div class="resource-card__icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1F3557" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
+            </svg>
+          </div>
+          <div class="resource-card__meta">
+            <div class="resource-card__badge badge--client">Prospective Clients</div>
+            <div class="resource-card__title">Book a Discovery Call</div>
+          </div>
+        </div>
+        <p class="resource-card__desc">Ready to explore working with BBC? Book a call with RJ to discuss your goals, current challenges, and how BBC can support your business.</p>
+        <div class="resource-card__footer">
+          <span class="resource-card__who">👤 For: Prospective Clients</span>
+          <a href="contact.html" class="btn btn-gold btn-sm">Book a Call →</a>
+        </div>
+      </div>
+
+      <!-- Contact -->
+      <div class="resource-card">
+        <div class="resource-card__header">
+          <div class="resource-card__icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1F3557" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/>
+            </svg>
+          </div>
+          <div class="resource-card__meta">
+            <div class="resource-card__badge badge--internal">General</div>
+            <div class="resource-card__title">Send a Message</div>
+          </div>
+        </div>
+        <p class="resource-card__desc">Have a question that doesn't fit a form? Reach out directly. We respond within one business day and will point you to the right resource.</p>
+        <div class="resource-card__footer">
+          <span class="resource-card__who">👤 For: Anyone</span>
+          <a href="contact.html" class="btn btn-primary btn-sm">Contact Us →</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════
+     FOOTER
+══════════════════════════════════════════ -->
+<footer class="footer">
+  <div class="footer__grid">
+    <div>
+      <div class="footer__brand-name">Balay ni Bruno &amp; Co.</div>
+      <div class="footer__brand-sub">Operational Support Studio</div>
+      <p class="footer__brand-copy">A family-built, founder-led studio helping business owners grow through real collaboration, organized systems, and long-term operational care. Balay means home — and that's how we treat every client.</p>
+    </div>
+    <div>
+      <div class="footer__col-label">Navigate</div>
+      <ul class="footer__links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">Our Story</a></li>
+        <li><a href="how-it-works.html">How It Works</a></li>
+        <li><a href="our-team.html">Our Team</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer__col-label">Work With Us</div>
+      <ul class="footer__links">
+        <li><a href="how-we-help.html">How We Help</a></li>
+        <li><a href="our-work.html">Our Work</a></li>
+        <li><a href="contact.html">Book a Call</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer__col-label">Resources</div>
+      <ul class="footer__links">
+        <li><a href="insights.html">Insights</a></li>
+        <li><a href="resources.html" style="color:rgba(245,241,234,0.85);">Forms &amp; Resources</a></li>
+        <li><a href="insights.html#newsletter">Newsletter</a></li>
+        <li><a href="contact.html">Start a Conversation</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer__bottom">
+    <div class="footer__copyright">&copy; 2026 Balay ni Bruno &amp; Co. All rights reserved.</div>
+    <div class="footer__legal">
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms of Service</a>
+    </div>
+  </div>
+</footer>
+
+
+<!-- ══════════════════════════════════════════
+     JAVASCRIPT
+══════════════════════════════════════════ -->
+<script>
+  // Sticky header
+  const header = document.getElementById('site-header');
+  window.addEventListener('scroll', () => {
+    header.classList.toggle('scrolled', window.scrollY > 12);
+  }, { passive: true });
+
+  // Hamburger
+  const hamburger  = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const hb1 = document.getElementById('hb1');
+  const hb2 = document.getElementById('hb2');
+  const hb3 = document.getElementById('hb3');
+  hamburger.addEventListener('click', () => {
+    const open = mobileMenu.classList.toggle('open');
+    hb1.style.transform = open ? 'translateY(7px) rotate(45deg)' : '';
+    hb2.style.opacity   = open ? '0' : '';
+    hb3.style.transform = open ? 'translateY(-7px) rotate(-45deg)' : '';
+  });
+
+  // Fade-in on scroll
+  const fadeObs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); fadeObs.unobserve(e.target); }
+    });
+  }, { threshold: 0.06 });
+  document.querySelectorAll('.fade-in').forEach(el => fadeObs.observe(el));
+</script>
+
+</body>
+</html>
