@@ -1,0 +1,1237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kenz Lloyd D. Villaflores — Social Media Manager &amp; AI Operations Support · BBC</title>
+  <meta name="description" content="Kenz Lloyd D. Villaflores is a Social Media Manager and AI Operations Support Specialist at Balay ni Bruno & Co. — 3 years across real estate, e-commerce, and digital startups." />
+  <meta name="robots" content="noindex, follow" />
+  <link rel="canonical" href="https://balaynibruno.co/kenz.html" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Lora:ital,wght@0,400;0,500;1,400;1,500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --deep-blue:   #1F3557;
+      --mid-blue:    #4B6FA5;
+      --warm-blue:   #6D8FC7;
+      --light-blue:  #A8C0DC;
+      --pale-blue:   #DDE8F2;
+      --bg-primary:  #F5F1EA;
+      --bg-section:  #EDE8DF;
+      --bg-card:     #FDFAF6;
+      --bg-card-alt: #FAF6EF;
+      --bg-dark:     #1C2E47;
+      --bg-footer:   #172540;
+      --neutral-100: #E8E2D6;
+      --neutral-200: #D5CEC3;
+      --neutral-300: #B8B1A6;
+      --text-ink:    #2A3040;
+      --text-body:   #4E5666;
+      --text-muted:  #888FA0;
+      --text-warm:   #F5F1EA;
+      --gold:        #B8923E;
+      --gold-pale:   #E6CFA0;
+      --gold-warm:   #D4A84B;
+      --sage:        #4E9E74;
+      --font-display:'Playfair Display', Georgia, serif;
+      --font-body:   'Lora', Georgia, serif;
+      --font-ui:     'DM Sans', system-ui, sans-serif;
+      --max-width:   1200px;
+      --radius-sm:   8px;
+      --radius:      16px;
+      --radius-lg:   24px;
+      --radius-xl:   32px;
+      --shadow-xs:   0 1px 6px  rgba(85,60,35,0.055);
+      --shadow-sm:   0 3px 18px rgba(85,60,35,0.08);
+      --shadow-md:   0 7px 36px rgba(85,60,35,0.11);
+      --shadow-lg:   0 14px 56px rgba(85,60,35,0.14);
+      --border-card: 1px solid rgba(85,60,35,0.09);
+      --border-warm: 1px solid rgba(85,60,35,0.12);
+      --border-dark: 1px solid rgba(255,255,255,0.07);
+      --s1:0.5rem; --s2:1rem; --s3:1.5rem; --s4:2.5rem; --s5:4rem; --s6:6rem; --s7:9rem;
+    }
+
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body {
+      font-family:var(--font-body);
+      color:var(--text-ink);
+      background:var(--bg-primary);
+      line-height:1.6;
+      -webkit-font-smoothing:antialiased;
+      overflow-x:hidden;
+    }
+    body::after {
+      content:'';
+      position:fixed; inset:0;
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23n)' opacity='0.026'/%3E%3C/svg%3E");
+      pointer-events:none; z-index:9999; mix-blend-mode:multiply;
+    }
+
+    h1,h2,h3,h4 { font-family:var(--font-display); line-height:1.22; color:var(--deep-blue); }
+    h1 { font-size:clamp(2.2rem,4.8vw,3.6rem); line-height:1.16; font-weight:700; }
+    h2 { font-size:clamp(1.7rem,3vw,2.6rem); line-height:1.22; font-weight:600; }
+    h3 { font-size:clamp(1rem,1.5vw,1.25rem); font-weight:600; }
+    p  { font-family:var(--font-body); font-size:1rem; line-height:1.87; color:var(--text-body); }
+    a  { text-decoration:none; }
+
+    .eyebrow {
+      display:block; font-family:var(--font-ui);
+      font-size:0.68rem; font-weight:600;
+      letter-spacing:0.17em; text-transform:uppercase;
+      color:var(--warm-blue); margin-bottom:var(--s2);
+    }
+    .eyebrow--gold { color:var(--gold); }
+    .eyebrow--pale { color:rgba(245,241,234,0.5); }
+    .container { max-width:var(--max-width); margin:0 auto; padding:0 var(--s4); }
+    .divider-bar {
+      width:44px; height:2.5px;
+      background:linear-gradient(90deg,var(--gold),var(--warm-blue));
+      border-radius:2px; margin:var(--s3) auto; opacity:0.8;
+    }
+    .divider-bar--left { margin-left:0; }
+    .fade-in { opacity:0; transform:translateY(22px); transition:opacity 0.65s ease,transform 0.65s ease; }
+    .fade-in.visible { opacity:1; transform:translateY(0); }
+
+    .btn {
+      display:inline-flex; align-items:center; gap:0.45rem;
+      padding:0.88rem 2rem; border-radius:100px;
+      font-family:var(--font-ui); font-size:0.86rem; font-weight:600;
+      letter-spacing:0.02em; cursor:pointer;
+      transition:all 0.3s ease; border:1.5px solid transparent;
+      white-space:nowrap;
+    }
+    .btn-gold { background:var(--gold); color:#fff; font-weight:700; }
+    .btn-gold:hover { background:var(--gold-warm); transform:translateY(-2px); box-shadow:0 10px 32px rgba(184,146,62,0.35); }
+    .btn-ghost { background:transparent; color:var(--text-warm); border-color:rgba(245,241,234,0.28); }
+    .btn-ghost:hover { background:rgba(245,241,234,0.08); border-color:rgba(245,241,234,0.55); }
+    .btn-sm { padding:0.62rem 1.35rem; font-size:0.78rem; }
+
+    /* ── Header ── */
+    .site-header {
+      position:fixed; top:0; left:0; right:0; z-index:200;
+      background:rgba(245,241,234,0.94);
+      backdrop-filter:blur(20px) saturate(1.2);
+      -webkit-backdrop-filter:blur(20px) saturate(1.2);
+      border-bottom:var(--border-warm);
+      transition:box-shadow 0.3s ease;
+    }
+    .site-header.scrolled { box-shadow:var(--shadow-sm); }
+    .header__inner {
+      max-width:var(--max-width); margin:0 auto; padding:0 var(--s4);
+      height:68px; display:flex; align-items:center;
+      justify-content:space-between; gap:var(--s3);
+    }
+    .header__logo { display:flex; flex-direction:row; align-items:center; gap:0.6rem; }
+    .header__logo-name { font-family:var(--font-display); font-size:1.05rem; font-weight:700; color:var(--deep-blue); line-height:1; }
+    .header__nav { display:flex; align-items:center; gap:1.5rem; list-style:none; }
+    .header__nav a { font-family:var(--font-ui); font-size:0.78rem; font-weight:500; color:var(--text-body); transition:color 0.2s; white-space:nowrap; }
+    .header__nav a:hover,.header__nav a.active { color:var(--deep-blue); font-weight:600; }
+    .header__cta { display:flex; align-items:center; gap:0.9rem; flex-shrink:0; }
+    .hamburger { display:none; flex-direction:column; gap:5px; cursor:pointer; background:none; border:none; padding:8px; }
+    .hamburger span { display:block; width:20px; height:2px; background:var(--text-ink); border-radius:2px; transition:all 0.25s ease; }
+    .mobile-menu { display:none; flex-direction:column; background:var(--bg-card); border-top:var(--border-warm); padding:1rem var(--s4) 1.5rem; }
+    .mobile-menu.open { display:flex; }
+    .mobile-menu a { font-family:var(--font-ui); font-size:0.9rem; font-weight:500; color:var(--text-body); padding:0.7rem 0; border-bottom:var(--border-card); transition:color 0.2s; }
+    .mobile-menu a:hover { color:var(--deep-blue); }
+    .mobile-menu a:last-of-type { border-bottom:none; }
+    .mobile-menu .mobile-cta { margin-top:1rem; }
+    @media (max-width:1024px) { .header__nav { display:none; } }
+    @media (max-width:768px) { .header__cta .btn-ghost { display:none; } .hamburger { display:flex; } }
+
+    /* ── Profile Hero ── */
+    .profile-hero {
+      background:var(--bg-dark);
+      padding-top:68px;
+      position:relative; overflow:hidden;
+    }
+    .profile-hero::before {
+      content:'';
+      position:absolute; top:-80px; right:-80px;
+      width:500px; height:500px;
+      background:radial-gradient(ellipse at center, rgba(184,146,62,0.08) 0%, transparent 65%);
+      pointer-events:none;
+    }
+    .profile-hero__inner {
+      max-width:var(--max-width); margin:0 auto;
+      padding:var(--s5) var(--s4);
+      position:relative; z-index:1;
+    }
+    .profile-hero__back {
+      display:inline-flex; align-items:center; gap:0.5rem;
+      font-family:var(--font-ui); font-size:0.76rem; font-weight:500;
+      color:rgba(245,241,234,0.42); margin-bottom:2.5rem;
+      transition:color 0.2s;
+    }
+    .profile-hero__back:hover { color:rgba(245,241,234,0.85); }
+    .profile-hero__top { display:flex; align-items:center; gap:2rem; margin-bottom:2.5rem; flex-wrap:wrap; }
+    .profile-avatar {
+      width:96px; height:96px; border-radius:50%;
+      display:flex; align-items:center; justify-content:center;
+      font-family:var(--font-display); font-size:1.4rem; font-weight:700;
+      color:var(--gold-pale);
+      background:linear-gradient(135deg,#3D2A5A,#2A1D40);
+      border:3px solid rgba(184,146,62,0.28);
+      flex-shrink:0; box-shadow:var(--shadow-md);
+    }
+    .profile-hero__name { font-family:var(--font-display); font-size:clamp(1.8rem,3.5vw,2.8rem); font-weight:700; color:#fff; margin-bottom:0.4rem; line-height:1.15; }
+    .profile-hero__role { font-family:var(--font-body); font-size:1.05rem; color:rgba(245,241,234,0.65); margin-bottom:1rem; }
+    .profile-pills { display:flex; flex-wrap:wrap; gap:0.5rem; }
+    .profile-pill {
+      display:inline-flex; align-items:center;
+      font-family:var(--font-ui); font-size:0.7rem; font-weight:600;
+      padding:0.3rem 0.9rem; border-radius:999px;
+      background:rgba(184,146,62,0.12); color:var(--gold-pale);
+      border:1px solid rgba(184,146,62,0.25);
+    }
+    .profile-hero__stats {
+      display:grid; grid-template-columns:repeat(4,1fr);
+      gap:1px; border:var(--border-dark); border-radius:var(--radius);
+      overflow:hidden; background:rgba(255,255,255,0.05);
+    }
+    @media (max-width:640px) { .profile-hero__stats { grid-template-columns:repeat(2,1fr); } }
+    .profile-stat {
+      padding:1.25rem 1.5rem;
+      background:rgba(255,255,255,0.03);
+      text-align:center;
+    }
+    .profile-stat-num { font-family:var(--font-display); font-size:1.75rem; font-weight:700; color:var(--gold-pale); line-height:1; margin-bottom:0.3rem; }
+    .profile-stat-label { font-family:var(--font-ui); font-size:0.62rem; font-weight:500; color:rgba(245,241,234,0.38); letter-spacing:0.04em; }
+
+    /* ── Sticky Section Nav ── */
+    .section-nav {
+      position:sticky; top:68px; z-index:100;
+      background:var(--bg-card);
+      border-bottom:var(--border-warm);
+      overflow-x:auto; scrollbar-width:none;
+    }
+    .section-nav::-webkit-scrollbar { display:none; }
+    .section-nav__inner {
+      max-width:var(--max-width); margin:0 auto; padding:0 var(--s4);
+      display:flex; align-items:center;
+    }
+    .sec-tab {
+      display:inline-flex; align-items:center;
+      padding:1.1rem 1.4rem;
+      font-family:var(--font-ui); font-size:0.78rem; font-weight:500;
+      color:var(--text-muted); white-space:nowrap;
+      border-bottom:2px solid transparent;
+      transition:color 0.2s, border-color 0.2s;
+    }
+    .sec-tab:hover { color:var(--deep-blue); }
+    .sec-tab.active { color:var(--deep-blue); font-weight:600; border-bottom-color:var(--gold); }
+
+    /* ── Sections ── */
+    .profile-section { padding:var(--s6) 0; }
+    .profile-section--warm  { background:var(--bg-section); }
+    .profile-section--card  { background:var(--bg-card); }
+    .profile-section--cream { background:var(--bg-primary); }
+    .profile-section--dark  { background:var(--bg-dark); }
+
+    /* ── About ── */
+    .about-grid { display:grid; grid-template-columns:1fr 340px; gap:var(--s5); align-items:start; }
+    @media (max-width:900px) { .about-grid { grid-template-columns:1fr; } }
+    .about-bio p { margin-bottom:1.1rem; }
+    .about-bio p:last-child { margin-bottom:0; }
+
+    .info-card {
+      background:var(--bg-card);
+      border:var(--border-warm);
+      border-radius:var(--radius-lg);
+      padding:1.75rem;
+      box-shadow:var(--shadow-xs);
+    }
+    .info-row { padding-bottom:1rem; margin-bottom:1rem; border-bottom:var(--border-card); }
+    .info-row:last-child { padding-bottom:0; margin-bottom:0; border-bottom:none; }
+    .info-label {
+      font-family:var(--font-ui); font-size:0.62rem; font-weight:700;
+      letter-spacing:0.12em; text-transform:uppercase;
+      color:var(--text-muted); margin-bottom:0.4rem;
+    }
+    .info-value { font-family:var(--font-ui); font-size:0.88rem; font-weight:600; color:var(--text-ink); line-height:1.5; }
+
+    .skill-tag {
+      display:inline-block;
+      background:rgba(31,53,87,0.07);
+      color:var(--deep-blue);
+      font-family:var(--font-ui); font-size:0.68rem; font-weight:600;
+      padding:4px 12px; border-radius:999px; margin:3px;
+    }
+    .skill-tag--gold { background:rgba(184,146,62,0.1); color:var(--gold); border:1px solid rgba(184,146,62,0.2); }
+    .skill-tag--sage { background:rgba(78,158,116,0.1); color:var(--sage); border:1px solid rgba(78,158,116,0.2); }
+
+    /* ── Filter bar ── */
+    .filter-bar { display:flex; flex-wrap:wrap; gap:0.5rem; margin-bottom:2.5rem; align-items:center; }
+    .filter-bar__label { font-family:var(--font-ui); font-size:0.68rem; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:var(--text-muted); margin-right:0.25rem; }
+    .filter-btn {
+      font-family:var(--font-ui); font-size:0.78rem; font-weight:500;
+      color:var(--text-body); background:transparent;
+      border:1.5px solid rgba(85,60,35,0.16);
+      border-radius:100px; padding:0.45rem 1.1rem;
+      cursor:pointer; transition:all 0.22s ease; white-space:nowrap;
+    }
+    .filter-btn:hover { border-color:var(--mid-blue); color:var(--deep-blue); }
+    .filter-btn.active { background:var(--deep-blue); color:#fff; border-color:var(--deep-blue); }
+    .filter-divider { width:1px; height:24px; background:var(--neutral-200); margin:0 0.25rem; flex-shrink:0; }
+
+    /* ── Work entry cards ── */
+    .work-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:1.5rem; }
+    @media (max-width:720px) { .work-grid { grid-template-columns:1fr; } }
+    .work-entry {
+      background:var(--bg-card); border:var(--border-card);
+      border-radius:var(--radius-lg); padding:1.75rem;
+      box-shadow:var(--shadow-xs);
+      transition:transform 0.25s, box-shadow 0.25s;
+      display:flex; flex-direction:column;
+    }
+    .work-entry:hover { transform:translateY(-3px); box-shadow:var(--shadow-md); }
+    .work-entry.hidden { display:none !important; }
+    .work-entry__company {
+      display:inline-flex; align-items:center; gap:0.4rem;
+      font-family:var(--font-ui); font-size:0.65rem; font-weight:700;
+      letter-spacing:0.1em; text-transform:uppercase;
+      color:var(--gold); background:rgba(184,146,62,0.1);
+      border:1px solid rgba(184,146,62,0.2);
+      border-radius:100px; padding:0.28rem 0.8rem; margin-bottom:0.9rem;
+    }
+    .work-entry h3 { font-size:1rem; color:var(--deep-blue); margin-bottom:0.6rem; font-weight:600; }
+    .work-entry p { font-size:0.875rem; line-height:1.8; color:var(--text-body); margin-bottom:1rem; flex:1; }
+    .work-entry__tasks { margin-bottom:1rem; }
+    .work-entry__task-item {
+      display:flex; align-items:flex-start; gap:0.6rem;
+      padding:0.4rem 0; border-bottom:1px solid rgba(85,60,35,0.05);
+      font-family:var(--font-ui); font-size:0.8rem; color:var(--text-body);
+    }
+    .work-entry__task-item:last-child { border-bottom:none; }
+    .work-entry__task-dot { width:5px; height:5px; border-radius:50%; background:var(--gold); flex-shrink:0; margin-top:7px; }
+    .work-entry__tags { display:flex; flex-wrap:wrap; gap:0.35rem; }
+    .work-entry__tag {
+      font-family:var(--font-ui); font-size:0.62rem; font-weight:600;
+      letter-spacing:0.06em; color:var(--text-muted);
+      background:rgba(85,60,35,0.06); border-radius:100px; padding:0.2rem 0.6rem;
+    }
+    .work-entry__tag--blue { color:var(--mid-blue); background:rgba(75,111,165,0.08); border:1px solid rgba(75,111,165,0.14); }
+
+    /* ── Services ── */
+    .services-grid { display:grid; grid-template-columns:1fr 1fr; gap:2rem; }
+    @media (max-width:860px) { .services-grid { grid-template-columns:1fr; } }
+    .services-list-card { background:var(--bg-section); border:var(--border-card); border-radius:var(--radius-lg); padding:2rem; }
+    .service-item { display:flex; align-items:flex-start; gap:0.9rem; padding:0.95rem 0; border-bottom:1px solid rgba(85,60,35,0.06); }
+    .service-item:last-child { border-bottom:none; }
+    .service-item__icon { width:36px; height:36px; border-radius:var(--radius-sm); background:rgba(184,146,62,0.1); display:flex; align-items:center; justify-content:center; font-size:1rem; flex-shrink:0; }
+    .service-item__name { font-family:var(--font-ui); font-size:0.88rem; font-weight:600; color:var(--text-ink); margin-bottom:0.2rem; }
+    .service-item__desc { font-family:var(--font-body); font-size:0.82rem; line-height:1.7; color:var(--text-body); margin:0; }
+    .tools-card { background:var(--bg-section); border:var(--border-card); border-radius:var(--radius-lg); padding:2rem; display:flex; flex-direction:column; gap:1.75rem; }
+    .tools-group__title { font-family:var(--font-ui); font-size:0.82rem; font-weight:700; color:var(--text-ink); margin-bottom:0.75rem; padding-bottom:0.5rem; border-bottom:var(--border-card); }
+
+    /* ── Strategy cards ── */
+    .strategy-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1.5rem; }
+    @media (max-width:860px) { .strategy-grid { grid-template-columns:repeat(2,1fr); } }
+    @media (max-width:560px) { .strategy-grid { grid-template-columns:1fr; } }
+    .strategy-card { background:var(--bg-card); border:var(--border-warm); border-radius:var(--radius-lg); padding:1.75rem; box-shadow:var(--shadow-xs); transition:transform 0.25s, box-shadow 0.25s; }
+    .strategy-card:hover { transform:translateY(-3px); box-shadow:var(--shadow-md); }
+    .strategy-card__num { font-family:var(--font-display); font-size:1.6rem; font-weight:700; color:var(--gold); opacity:0.6; line-height:1; margin-bottom:0.9rem; }
+    .strategy-card h3 { font-size:0.95rem; color:var(--deep-blue); margin-bottom:0.6rem; }
+    .strategy-card p { font-size:0.85rem; line-height:1.8; margin:0; }
+
+    /* ── AI tools ── */
+    .ai-tool-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1.25rem; }
+    @media (max-width:860px) { .ai-tool-grid { grid-template-columns:repeat(2,1fr); } }
+    @media (max-width:520px) { .ai-tool-grid { grid-template-columns:1fr; } }
+    .ai-tool-card { background:var(--bg-card); border:var(--border-card); border-radius:var(--radius); padding:1.4rem; box-shadow:var(--shadow-xs); }
+    .ai-tool-card__emoji { font-size:1.6rem; margin-bottom:0.65rem; display:block; }
+    .ai-tool-card__name { font-family:var(--font-ui); font-size:0.9rem; font-weight:700; color:var(--deep-blue); margin-bottom:0.35rem; }
+    .ai-tool-card__desc { font-family:var(--font-body); font-size:0.8rem; line-height:1.75; color:var(--text-body); margin:0; }
+    .ai-tool-card--highlight { background:var(--deep-blue); border-color:var(--deep-blue); }
+    .ai-tool-card--highlight .ai-tool-card__name { color:#fff; }
+    .ai-tool-card--highlight .ai-tool-card__desc { color:rgba(245,241,234,0.65); }
+
+    /* ── Results ── */
+    .results-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:1.5rem; }
+    @media (max-width:720px) { .results-grid { grid-template-columns:repeat(2,1fr); } }
+    .result-card { background:var(--bg-card); border:var(--border-warm); border-radius:var(--radius-lg); padding:1.75rem; text-align:center; box-shadow:var(--shadow-xs); }
+    .result-card__num { font-family:var(--font-display); font-size:2.2rem; font-weight:700; color:var(--gold); margin-bottom:0.3rem; }
+    .result-card__label { font-family:var(--font-ui); font-size:0.78rem; font-weight:500; color:var(--text-body); }
+
+    /* ── CTA & Footer ── */
+    .profile-cta { background:var(--bg-dark); padding:var(--s6) 0; position:relative; overflow:hidden; }
+    .profile-cta::before { content:''; position:absolute; top:-60px; right:-60px; width:400px; height:400px; background:radial-gradient(ellipse at center, rgba(184,146,62,0.07) 0%, transparent 65%); pointer-events:none; }
+    .profile-cta__inner { max-width:640px; margin:0 auto; text-align:center; position:relative; z-index:1; }
+    .profile-cta h2 { color:#fff; margin-bottom:0.85rem; }
+    .profile-cta p { color:rgba(245,241,234,0.62); font-size:1rem; line-height:1.85; margin-bottom:2.5rem; }
+    .profile-cta__actions { display:flex; flex-wrap:wrap; gap:1rem; justify-content:center; }
+    .site-footer { background:var(--bg-footer); border-top:var(--border-dark); padding:var(--s6) 0 var(--s4); }
+    .footer-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:var(--s4); }
+    @media (max-width:900px) { .footer-grid { grid-template-columns:repeat(2,1fr); } }
+    @media (max-width:540px) { .footer-grid { grid-template-columns:1fr; } }
+    .footer-brand-name { font-family:var(--font-display); font-size:1rem; font-weight:700; color:#fff; }
+    .footer-brand-desc { font-family:var(--font-body); font-size:0.82rem; line-height:1.75; color:rgba(245,241,234,0.45); margin-top:0.8rem; max-width:240px; }
+    .footer-col-label { font-family:var(--font-ui); font-size:0.62rem; font-weight:600; letter-spacing:0.14em; text-transform:uppercase; color:rgba(245,241,234,0.32); margin-bottom:1.1rem; }
+    .footer-link { display:block; font-family:var(--font-ui); font-size:0.83rem; color:rgba(245,241,234,0.6); line-height:2.15; transition:color 0.2s; }
+    .footer-link:hover { color:#fff; }
+    .footer-bottom { margin-top:var(--s4); padding-top:1.5rem; border-top:var(--border-dark); display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.75rem; }
+    .footer-copy { font-family:var(--font-ui); font-size:0.75rem; color:rgba(245,241,234,0.28); }
+
+    .no-results { grid-column:1/-1; text-align:center; padding:3rem 2rem; background:var(--bg-card); border:var(--border-card); border-radius:var(--radius-lg); font-family:var(--font-ui); font-size:0.88rem; color:var(--text-muted); display:none; }
+    .no-results.visible { display:block; }
+  </style>
+</head>
+<body>
+
+<!-- ── HEADER ── -->
+<header class="site-header" id="site-header">
+  <div class="header__inner">
+    <a href="index.html" class="header__logo">
+      <img src="bbc-logo.png" alt="Balay ni Bruno &amp; Co." style="height:42px;width:auto;display:block;">
+      <span class="header__logo-name">Balay ni Bruno &amp; Co.</span>
+    </a>
+    <nav>
+      <ul class="header__nav">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">Our Story</a></li>
+        <li><a href="how-it-works.html">How It Works</a></li>
+        <li><a href="how-we-help.html">How We Help</a></li>
+        <li><a href="our-team.html" class="active">Our Team</a></li>
+        <li><a href="our-work.html">Our Work</a></li>
+        <li><a href="insights.html">Insights</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+    <div class="header__cta">
+      <a href="contact.html" class="btn btn-ghost btn-sm">Start a Conversation</a>
+      <a href="https://calendly.com/rj-balaynibruno/bbc-strategy-call" target="_blank" rel="noopener noreferrer" class="btn btn-gold btn-sm">Book a Call</a>
+    </div>
+    <button class="hamburger" id="hamburger" aria-label="Open menu">
+      <span id="hb1"></span><span id="hb2"></span><span id="hb3"></span>
+    </button>
+  </div>
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="index.html">Home</a>
+    <a href="about.html">Our Story</a>
+    <a href="how-it-works.html">How It Works</a>
+    <a href="how-we-help.html">How We Help</a>
+    <a href="our-team.html" style="color:var(--deep-blue);font-weight:600;">Our Team</a>
+    <a href="our-work.html">Our Work</a>
+    <a href="insights.html">Insights</a>
+    <a href="contact.html">Contact</a>
+    <a href="https://calendly.com/rj-balaynibruno/bbc-strategy-call" target="_blank" rel="noopener noreferrer" class="btn btn-gold mobile-cta" style="text-align:center;justify-content:center;">Book a Call</a>
+  </div>
+</header>
+
+
+<!-- ── PROFILE HERO ── -->
+<section class="profile-hero">
+  <div class="profile-hero__inner fade-in">
+
+    <a href="our-team.html" class="profile-hero__back">← Back to Our Team</a>
+
+    <div class="profile-hero__top">
+      <div class="profile-avatar">KL</div>
+      <div>
+        <h1 class="profile-hero__name">Kenz Lloyd D. Villaflores</h1>
+        <p class="profile-hero__role">Social Media Manager &amp; AI Operations Support Specialist</p>
+        <div class="profile-pills">
+          <span class="profile-pill">Social Media Management</span>
+          <span class="profile-pill">Lead Generation</span>
+          <span class="profile-pill">Business Operations</span>
+          <span class="profile-pill">3 Years Experience</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="profile-hero__stats">
+      <div class="profile-stat">
+        <p class="profile-stat-num">3</p>
+        <p class="profile-stat-label">Years Experience</p>
+      </div>
+      <div class="profile-stat">
+        <p class="profile-stat-num">5</p>
+        <p class="profile-stat-label">Client Companies</p>
+      </div>
+      <div class="profile-stat">
+        <p class="profile-stat-num">10</p>
+        <p class="profile-stat-label">Services Offered</p>
+      </div>
+      <div class="profile-stat">
+        <p class="profile-stat-num">100K+</p>
+        <p class="profile-stat-label">Followers Supported</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ── STICKY NAV ── -->
+<nav class="section-nav" id="section-nav">
+  <div class="section-nav__inner">
+    <a href="#sec-about"      class="sec-tab active">About</a>
+    <a href="#sec-companies"  class="sec-tab">Companies &amp; Work</a>
+    <a href="#sec-services"   class="sec-tab">Services &amp; Skills</a>
+    <a href="#sec-strategies" class="sec-tab">Strategies</a>
+    <a href="#sec-ai"         class="sec-tab">Tools &amp; Systems</a>
+    <a href="#sec-results"    class="sec-tab">Results</a>
+  </div>
+</nav>
+
+
+<!-- ── ABOUT ── -->
+<section id="sec-about" class="profile-section profile-section--cream">
+  <div class="container">
+    <div class="about-grid">
+
+      <div class="fade-in">
+        <span class="eyebrow">About Kenz</span>
+        <h2>Background &amp; Expertise</h2>
+        <div class="divider-bar divider-bar--left"></div>
+        <div class="about-bio">
+          <p>
+            Kenz Lloyd D. Villaflores is a Social Media Manager and AI Operations Support Specialist
+            with three years of experience across real estate, e-commerce, and digital startup environments.
+            He's managed social media for brands with 100K+ followers and supported content operations
+            that have contributed to companies with 3M+ YouTube views — bringing the same level of
+            organization and commitment to every client he works with.
+          </p>
+          <p>
+            Kenz's work lives at the intersection of content and operations. He builds and maintains
+            content calendar systems in Google Sheets, runs targeted lead generation through Apollo and
+            Instant Data Scraper, manages CRM pipelines, and handles the operational workflows that keep
+            business backends clean and accountable. He's comfortable inside Shopify for e-commerce
+            operations, and equally at home managing social channels, writing AI-assisted captions, and
+            tracking deliverables across multiple clients.
+          </p>
+          <p>
+            At BBC, Kenz supports clients who need someone to own their social presence and operational
+            layer — a reliable hands-on partner who keeps things moving, tracks what matters, and brings
+            systematic thinking to every task he takes on.
+          </p>
+        </div>
+
+        <div style="margin-top:2rem;">
+          <p style="font-family:var(--font-ui); font-size:0.78rem; font-weight:700; text-transform:uppercase; letter-spacing:0.1em; color:var(--text-muted); margin-bottom:0.9rem;">Core Skills</p>
+          <div>
+            <span class="skill-tag--gold skill-tag">Social Media Management</span>
+            <span class="skill-tag--gold skill-tag">Lead Generation</span>
+            <span class="skill-tag--gold skill-tag">Business Acquisition Research</span>
+            <span class="skill-tag">Content Posting &amp; Scheduling</span>
+            <span class="skill-tag">Workflow Organization</span>
+            <span class="skill-tag">CRM Support</span>
+            <span class="skill-tag">Graphic Design Support</span>
+            <span class="skill-tag">Video Editing Support</span>
+            <span class="skill-tag">Real Estate Marketing</span>
+            <span class="skill-tag">E-Commerce Operations</span>
+            <span class="skill-tag--sage skill-tag">AI-Assisted Content Creation</span>
+            <span class="skill-tag--sage skill-tag">Google Sheets Tracking Systems</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="fade-in">
+        <div class="info-card" style="margin-bottom:1.25rem;">
+          <div class="info-row">
+            <p class="info-label">Position</p>
+            <p class="info-value">Social Media Manager &amp; AI Operations Support Specialist</p>
+          </div>
+          <div class="info-row">
+            <p class="info-label">Primary Category</p>
+            <p class="info-value">Social Media · Business Operations</p>
+          </div>
+          <div class="info-row">
+            <p class="info-label">Client Industries</p>
+            <p class="info-value">Real Estate · E-Commerce · Digital Startups · AI Companies</p>
+          </div>
+          <div class="info-row">
+            <p class="info-label">Experience</p>
+            <p class="info-value">3 Years · Multi-Industry</p>
+          </div>
+          <div class="info-row">
+            <p class="info-label">Languages</p>
+            <p class="info-value">English · Filipino</p>
+          </div>
+        </div>
+
+        <div class="info-card">
+          <div class="info-row">
+            <p class="info-label">Companies Worked With</p>
+            <p class="info-value" style="line-height:2;">
+              Cavalry Realty Group<br>
+              Top Producer Investment Capital<br>
+              Crown Limited Supply<br>
+              All Ryze Operations<br>
+              DuDilagent AI
+            </p>
+          </div>
+          <div class="info-row">
+            <p class="info-label">Notable Reach</p>
+            <p class="info-value">100K+ Followers · 3M+ YouTube Views Supported</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ── COMPANIES & WORK ── -->
+<section id="sec-companies" class="profile-section profile-section--warm">
+  <div class="container">
+
+    <div class="fade-in" style="margin-bottom:2.5rem;">
+      <span class="eyebrow">Portfolio Work</span>
+      <h2>Companies &amp; Work Delivered</h2>
+      <div class="divider-bar divider-bar--left"></div>
+      <p style="max-width:640px;">Filter by company or by task type to see exactly what Kenz delivered for each client.</p>
+    </div>
+
+    <!-- Filter bar -->
+    <div class="filter-bar fade-in">
+      <span class="filter-bar__label">Company</span>
+      <button class="filter-btn active" data-company="all">All</button>
+      <button class="filter-btn" data-company="cavalry">Cavalry Realty</button>
+      <button class="filter-btn" data-company="tpic">TPIC</button>
+      <button class="filter-btn" data-company="crown">Crown Supply</button>
+      <button class="filter-btn" data-company="allryze">All Ryze</button>
+      <button class="filter-btn" data-company="dudilagent">DuDilagent AI</button>
+      <span class="filter-divider"></span>
+      <span class="filter-bar__label">Task</span>
+      <button class="filter-btn active" data-task="all">All Tasks</button>
+      <button class="filter-btn" data-task="social">Social Media</button>
+      <button class="filter-btn" data-task="lead-gen">Lead Gen</button>
+      <button class="filter-btn" data-task="operations">Operations</button>
+      <button class="filter-btn" data-task="research">Research</button>
+      <button class="filter-btn" data-task="content">Content</button>
+    </div>
+
+    <div class="work-grid fade-in" id="work-grid">
+
+      <!-- Cavalry Realty Group -->
+      <div class="work-entry" data-company="cavalry" data-task="social content">
+        <span class="work-entry__company">Cavalry Realty Group</span>
+        <h3>Social Media Management</h3>
+        <p>Managed Cavalry Realty Group's social media presence for real estate agent Tre Serrano — keeping platforms active, content consistent, and the brand visible to their target buyer/seller audience.</p>
+        <div class="work-entry__tasks">
+          <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>Full account management across Instagram and Facebook</div>
+          <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>Content calendar planning and weekly publishing schedule</div>
+          <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>AI-assisted caption writing and copy (ChatGPT)</div>
+          <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>Graphic design support for listing and brand posts (Canva)</div>
+          <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>Meta Business Suite scheduling and publishing</div>
+        </div>
+        <div class="work-entry__tags">
+          <span class="work-entry__tag work-entry__tag--blue">Social Media</span>
+          <span class="work-entry__tag">Real Estate</span>
+          <span class="work-entry__tag">Content Calendar</span>
+          <span class="work-entry__tag">Canva</span>
+        </div>
+      </div>
+
+      <div class="work-entry" data-company="cavalry" data-task="lead-gen operations">
+        <span class="work-entry__company">Cavalry Realty Group</span>
+        <h3>Lead Generation &amp; CRM Support</h3>
+        <p>Supported Cavalry Realty Group's outreach pipeline with lead generation research and CRM maintenance — building prospect lists and keeping the sales pipeline organized for agent Tre Serrano.</p>
+        <div class="work-entry__tasks">
+          <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>Prospect research using Apollo and Instant Data Scraper</div>
+          <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>Targeted lead list building for buyer/seller outreach</div>
+          <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>CRM pipeline maintenance and contact management</div>
+          <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>Google Sheets tracking for lead status and follow-up</div>
+        </div>
+        <div class="work-entry__tags">
+          <span class="work-entry__tag work-entry__tag--blue">Lead Generation</span>
+          <span class="work-entry__tag">Apollo</span>
+          <span class="work-entry__tag">CRM</span>
+          <span class="work-entry__tag">Google Sheets</span>
+        </div>
+      </div>
+
+      <!-- TPIC -->
+      <div class="work-entry" data-company="tpic" data-task="social content">
+        <span class="work-entry__company">Top Producer Investment Capital</span>
+        <h3>Social Media &amp; Branding Support</h3>
+        <p>Managed social media operations for TPIC (Ryan Tanel) — a real estate investment company. Kenz handled platform content, scheduling, and brand consistency to maintain a professional online presence.</p>
+        <div class="work-entry__tasks">
+          <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>Social media management across platforms</div>
+          <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>Content scheduling and platform-specific posting</div>
+          <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>AI-assisted caption and post copy writing</div>
+          <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>Brand consistency across visual and written content</div>
+        </div>
+        <div class="work-entry__tags">
+          <span class="work-entry__tag work-entry__tag--blue">Social Media</span>
+          <span class="work-entry__tag">Real Estate Investment</span>
+          <span class="work-entry__tag">Content Scheduling</span>
+          <span class="work-entry__tag">Branding</span>
+        </div>
+      </div>
+
+      <div class="work-entry" data-company="tpic" data-task="research operations">
+        <span class="work-entry__company">Top Producer Investment Capital</span>
+        <h3>Business Research &amp; Workflow Tracking</h3>
+        <p>Supported TPIC's operational layer with business research and Google Sheets-based workflow tracking — keeping deliverables organized and the team's pipeline documented and accountable.</p>
+        <div class="work-entry__tasks">
+          <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>Market and business research for investment targets</div>
+          <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>Google Sheets workflow tracking and project management</div>
+          <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>Deliverable tracking and status documentation</div>
+          <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>Operational support and task coordination</div>
+        </div>
+        <div class="work-entry__tags">
+          <span class="work-entry__tag work-entry__tag--blue">Business Research</span>
+          <span class="work-entry__tag">Google Sheets</span>
+          <span class="work-entry__tag">Workflow Tracking</span>
+          <span class="work-entry__tag">Operations</span>
+        </div>
+      </div>
+
+      <!-- Crown Limited Supply -->
+      <div class="work-entry" data-company="crown" data-task="operations social content">
+        <span class="work-entry__company">Crown Limited Supply</span>
+        <h3>E-Commerce Operations &amp; Social Media</h3>
+        <p>Delivered e-commerce operations support and social media management for Crown Limited Supply — handling Shopify backend maintenance, content posting, and the day-to-day operational layer.</p>
+        <div class="work-entry__tasks">
+          <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>Shopify platform support — product updates, listings, basic ops</div>
+          <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>Social media management and content posting</div>
+          <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>Content calendar planning and scheduling</div>
+          <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>CRM support and customer contact management</div>
+          <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>Graphic design support for product and promotional content</div>
+        </div>
+        <div class="work-entry__tags">
+          <span class="work-entry__tag work-entry__tag--blue">E-Commerce</span>
+          <span class="work-entry__tag">Shopify</span>
+          <span class="work-entry__tag">Social Media</span>
+          <span class="work-entry__tag">CRM</span>
+          <span class="work-entry__tag">Operations</span>
+        </div>
+      </div>
+
+      <div class="work-entry" data-company="crown" data-task="operations">
+        <span class="work-entry__company">Crown Limited Supply</span>
+        <h3>Workflow Organization &amp; Tracking</h3>
+        <p>Built and maintained workflow tracking systems for Crown Limited Supply's operational backend — using Google Sheets to document processes, track deliverables, and keep the team's operations organized.</p>
+        <div class="work-entry__tasks">
+          <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>Google Sheets-based operational tracking system</div>
+          <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>Process documentation and workflow mapping</div>
+          <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>Deliverable status tracking and team accountability</div>
+          <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>Inventory and logistics support documentation</div>
+        </div>
+        <div class="work-entry__tags">
+          <span class="work-entry__tag work-entry__tag--blue">Workflow Systems</span>
+          <span class="work-entry__tag">Google Sheets</span>
+          <span class="work-entry__tag">Operations</span>
+          <span class="work-entry__tag">Process Documentation</span>
+        </div>
+      </div>
+
+      <!-- All Ryze Operations -->
+      <div class="work-entry" data-company="allryze" data-task="operations content social">
+        <span class="work-entry__company">All Ryze Operations</span>
+        <h3>Digital Operations &amp; Content Management</h3>
+        <p>Provided comprehensive digital operations support for All Ryze Operations — managing the workflow infrastructure, content scheduling, and operational tracking that keeps the business backend organized.</p>
+        <div class="work-entry__tasks">
+          <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>Digital operations management and workflow organization</div>
+          <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>Content scheduling and social media management</div>
+          <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>Google Sheets tracking systems for deliverables and tasks</div>
+          <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>Process documentation and operational accountability</div>
+          <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>AI-assisted content creation and caption writing</div>
+        </div>
+        <div class="work-entry__tags">
+          <span class="work-entry__tag work-entry__tag--blue">Operations</span>
+          <span class="work-entry__tag">Social Media</span>
+          <span class="work-entry__tag">Workflow Systems</span>
+          <span class="work-entry__tag">Content Scheduling</span>
+        </div>
+      </div>
+
+      <!-- DuDilagent AI -->
+      <div class="work-entry" data-company="dudilagent" data-task="lead-gen research">
+        <span class="work-entry__company">DuDilagent AI</span>
+        <h3>Business Acquisition Research &amp; Lead Generation</h3>
+        <p>Powered DuDilagent AI's business development pipeline with targeted research and lead generation — building prospect lists, researching acquisition targets, and fueling outreach for Humphry's team.</p>
+        <div class="work-entry__tasks">
+          <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>Apollo-based prospect research and list building</div>
+          <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>Instant Data Scraper for targeted lead scraping</div>
+          <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>Business acquisition target identification and research</div>
+          <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>Prospect pipeline documentation in Google Sheets</div>
+          <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>Competitive and market research for outreach strategy</div>
+        </div>
+        <div class="work-entry__tags">
+          <span class="work-entry__tag work-entry__tag--blue">Lead Generation</span>
+          <span class="work-entry__tag">Apollo</span>
+          <span class="work-entry__tag">Business Research</span>
+          <span class="work-entry__tag">Instant Data Scraper</span>
+          <span class="work-entry__tag">AI/Tech</span>
+        </div>
+      </div>
+
+      <div class="work-entry" data-company="dudilagent" data-task="operations research">
+        <span class="work-entry__company">DuDilagent AI</span>
+        <h3>AI Workflow Support &amp; Operations</h3>
+        <p>Supported DuDilagent AI's workflow and operational infrastructure — contributing to the AI-focused systems and processes that the company uses internally and develops for its clients.</p>
+        <div class="work-entry__tasks">
+          <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>AI workflow support and process contribution</div>
+          <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>Operational tracking and documentation</div>
+          <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>Research pipeline maintenance and data organization</div>
+          <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>CRM support for client and prospect management</div>
+        </div>
+        <div class="work-entry__tags">
+          <span class="work-entry__tag work-entry__tag--blue">AI Workflow</span>
+          <span class="work-entry__tag">Operations</span>
+          <span class="work-entry__tag">CRM</span>
+          <span class="work-entry__tag">Process Support</span>
+        </div>
+      </div>
+
+    </div><!-- /work-grid -->
+    <div class="no-results" id="no-results">No work entries match the selected filters.</div>
+
+  </div>
+</section>
+
+
+<!-- ── SERVICES & SKILLS ── -->
+<section id="sec-services" class="profile-section profile-section--card">
+  <div class="container">
+
+    <div class="fade-in" style="margin-bottom:2.5rem;">
+      <span class="eyebrow">Services &amp; Skills</span>
+      <h2>Full Service Breakdown</h2>
+      <div class="divider-bar divider-bar--left"></div>
+    </div>
+
+    <div class="services-grid fade-in">
+
+      <div class="services-list-card">
+        <p style="font-family:var(--font-ui); font-size:0.85rem; font-weight:700; color:var(--text-ink); margin-bottom:1.25rem; padding-bottom:0.75rem; border-bottom:var(--border-card);">Services Provided</p>
+
+        <div class="service-item">
+          <div class="service-item__icon">📱</div>
+          <div>
+            <p class="service-item__name">Social Media Management</p>
+            <p class="service-item__desc">End-to-end account management — content calendar, scheduling, publishing, and brand consistency across platforms for 5 diverse clients.</p>
+          </div>
+        </div>
+        <div class="service-item">
+          <div class="service-item__icon">📅</div>
+          <div>
+            <p class="service-item__name">Content Posting &amp; Scheduling</p>
+            <p class="service-item__desc">Planned content pipelines, platform-optimized scheduling via Meta Business Suite, and consistent publishing cadence.</p>
+          </div>
+        </div>
+        <div class="service-item">
+          <div class="service-item__icon">🎯</div>
+          <div>
+            <p class="service-item__name">Lead Generation</p>
+            <p class="service-item__desc">Prospect research and list building using Apollo, Instant Data Scraper, and manual methods — targeted to each client's specific market.</p>
+          </div>
+        </div>
+        <div class="service-item">
+          <div class="service-item__icon">🔍</div>
+          <div>
+            <p class="service-item__name">Business Acquisition Research</p>
+            <p class="service-item__desc">Market research, competitor analysis, and target identification for business development — particularly in real estate and AI verticals.</p>
+          </div>
+        </div>
+        <div class="service-item">
+          <div class="service-item__icon">🗂️</div>
+          <div>
+            <p class="service-item__name">CRM Support</p>
+            <p class="service-item__desc">Pipeline maintenance, contact management, and relationship tracking — keeping client databases organized and follow-up consistent.</p>
+          </div>
+        </div>
+        <div class="service-item">
+          <div class="service-item__icon">⚙️</div>
+          <div>
+            <p class="service-item__name">Workflow Organization &amp; Tracking</p>
+            <p class="service-item__desc">Custom Google Sheets tracking systems for deliverables, content schedules, leads, and operational tasks — built for clarity and accountability.</p>
+          </div>
+        </div>
+        <div class="service-item">
+          <div class="service-item__icon">🛒</div>
+          <div>
+            <p class="service-item__name">E-Commerce Operations (Shopify)</p>
+            <p class="service-item__desc">Product listing support, order management assistance, and platform maintenance for Shopify-based stores.</p>
+          </div>
+        </div>
+        <div class="service-item">
+          <div class="service-item__icon">🏡</div>
+          <div>
+            <p class="service-item__name">Real Estate Marketing Support</p>
+            <p class="service-item__desc">Listing content, agent branding support, property social content, and lead generation tailored to real estate clients.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="tools-card">
+        <div>
+          <p class="tools-group__title">AI &amp; Research Tools</p>
+          <div>
+            <span class="skill-tag--gold skill-tag">ChatGPT</span>
+            <span class="skill-tag--gold skill-tag">Apollo</span>
+            <span class="skill-tag--gold skill-tag">Instant Data Scraper</span>
+          </div>
+        </div>
+        <div>
+          <p class="tools-group__title">Creative Tools</p>
+          <div>
+            <span class="skill-tag">Canva</span>
+            <span class="skill-tag">CapCut</span>
+          </div>
+        </div>
+        <div>
+          <p class="tools-group__title">Operations &amp; Productivity</p>
+          <div>
+            <span class="skill-tag">Google Sheets</span>
+            <span class="skill-tag">Google Drive</span>
+            <span class="skill-tag">Google Workspace</span>
+            <span class="skill-tag">Workflow Tracking Systems</span>
+          </div>
+        </div>
+        <div>
+          <p class="tools-group__title">Platforms</p>
+          <div>
+            <span class="skill-tag">Meta Business Suite</span>
+            <span class="skill-tag">Shopify</span>
+            <span class="skill-tag">CRM Systems</span>
+          </div>
+        </div>
+        <div>
+          <p class="tools-group__title">Industries Served</p>
+          <div>
+            <span class="skill-tag--sage skill-tag">Real Estate</span>
+            <span class="skill-tag--sage skill-tag">Real Estate Investment</span>
+            <span class="skill-tag--sage skill-tag">E-Commerce</span>
+            <span class="skill-tag--sage skill-tag">Digital Operations</span>
+            <span class="skill-tag--sage skill-tag">AI &amp; Technology</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ── STRATEGIES ── -->
+<section id="sec-strategies" class="profile-section profile-section--cream">
+  <div class="container">
+
+    <div class="fade-in" style="margin-bottom:2.5rem;">
+      <span class="eyebrow">Approach &amp; Strategy</span>
+      <h2>How Kenz Works</h2>
+      <div class="divider-bar divider-bar--left"></div>
+      <p style="max-width:600px;">The strategic frameworks, operational systems, and content philosophies behind Kenz's work.</p>
+    </div>
+
+    <div class="strategy-grid fade-in">
+
+      <div class="strategy-card">
+        <p class="strategy-card__num">01</p>
+        <h3>Content Calendar System</h3>
+        <p>Kenz builds content calendar systems in Google Sheets that plan weeks of content in advance — mapping posts by platform, date, format, and goal. This keeps publishing consistent and removes the reactive "what do we post today?" problem.</p>
+      </div>
+
+      <div class="strategy-card">
+        <p class="strategy-card__num">02</p>
+        <h3>Lead Generation Pipeline</h3>
+        <p>Uses Apollo for targeted prospect research and Instant Data Scraper for volume list building — then organizes leads into structured Google Sheets pipelines with status, source, and follow-up tracking built in from day one.</p>
+      </div>
+
+      <div class="strategy-card">
+        <p class="strategy-card__num">03</p>
+        <h3>Google Sheets Operational Tracking</h3>
+        <p>Custom tracking systems built in Google Sheets for every client engagement — deliverable logs, content schedules, lead databases, and operational task lists. Everything documented, nothing assumed, all accountable.</p>
+      </div>
+
+      <div class="strategy-card">
+        <p class="strategy-card__num">04</p>
+        <h3>AI-Assisted Caption Writing</h3>
+        <p>Uses ChatGPT to draft, refine, and batch social media captions that match each brand's voice and audience. Copy is always reviewed and adapted — AI accelerates output, human judgment controls quality.</p>
+      </div>
+
+      <div class="strategy-card">
+        <p class="strategy-card__num">05</p>
+        <h3>Platform-Specific Social Strategy</h3>
+        <p>Adapts content format, tone, posting cadence, and call-to-action to each platform's specific audience behavior — Instagram, Facebook, LinkedIn, and YouTube require different approaches, and Kenz applies each one deliberately.</p>
+      </div>
+
+      <div class="strategy-card">
+        <p class="strategy-card__num">06</p>
+        <h3>Organized Operational Mindset</h3>
+        <p>Every task gets tracked. Every deliverable gets documented. Kenz approaches client work like an operations manager — systematically, with clear processes, consistent follow-through, and full visibility into what's done and what's next.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ── TOOLS & SYSTEMS ── -->
+<section id="sec-ai" class="profile-section profile-section--warm">
+  <div class="container">
+
+    <div class="fade-in" style="margin-bottom:2.5rem;">
+      <span class="eyebrow">Tools &amp; Systems</span>
+      <h2>Full Tool Stack &amp; Systems</h2>
+      <div class="divider-bar divider-bar--left"></div>
+      <p style="max-width:600px;">Kenz's tool stack is built around research, organization, and content — each tool serves a specific function in the way he manages clients and delivers work.</p>
+    </div>
+
+    <div class="ai-tool-grid fade-in">
+
+      <div class="ai-tool-card ai-tool-card--highlight">
+        <span class="ai-tool-card__emoji">🎯</span>
+        <p class="ai-tool-card__name">Apollo — Lead Research</p>
+        <p class="ai-tool-card__desc">Primary tool for B2B prospect research — used to find decision-makers, build targeted lead lists, and support outreach pipelines for real estate and business acquisition clients.</p>
+      </div>
+
+      <div class="ai-tool-card ai-tool-card--highlight">
+        <span class="ai-tool-card__emoji">🔬</span>
+        <p class="ai-tool-card__name">Instant Data Scraper</p>
+        <p class="ai-tool-card__desc">Used alongside Apollo for volume lead scraping — pulling contact data, business listings, and prospect information from web sources to fuel targeted outreach campaigns.</p>
+      </div>
+
+      <div class="ai-tool-card ai-tool-card--highlight">
+        <span class="ai-tool-card__emoji">📊</span>
+        <p class="ai-tool-card__name">Google Sheets — Operations Hub</p>
+        <p class="ai-tool-card__desc">Kenz's primary operational tool — used for lead tracking, content calendars, deliverable logs, workflow documentation, and client reporting across every engagement.</p>
+      </div>
+
+      <div class="ai-tool-card">
+        <span class="ai-tool-card__emoji">🧠</span>
+        <p class="ai-tool-card__name">ChatGPT — Content &amp; Copy</p>
+        <p class="ai-tool-card__desc">Used for AI-assisted caption writing, content ideation, and copy drafting. Kenz uses ChatGPT to accelerate content production without sacrificing the brand's voice.</p>
+      </div>
+
+      <div class="ai-tool-card">
+        <span class="ai-tool-card__emoji">🎨</span>
+        <p class="ai-tool-card__name">Canva — Design Support</p>
+        <p class="ai-tool-card__desc">Graphic design support for social media graphics, branded templates, and promotional materials — keeping visual content consistent and on-brand for each client.</p>
+      </div>
+
+      <div class="ai-tool-card">
+        <span class="ai-tool-card__emoji">🛒</span>
+        <p class="ai-tool-card__name">Shopify — E-Commerce Ops</p>
+        <p class="ai-tool-card__desc">Used for e-commerce operations support — product listings, backend management, and operational tasks for Crown Limited Supply's online store.</p>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ── RESULTS ── -->
+<section id="sec-results" class="profile-section profile-section--card">
+  <div class="container">
+
+    <div class="fade-in" style="margin-bottom:2.5rem;">
+      <span class="eyebrow">Results &amp; Proof</span>
+      <h2>Documented Outcomes</h2>
+      <div class="divider-bar divider-bar--left"></div>
+    </div>
+
+    <div class="results-grid fade-in">
+      <div class="result-card">
+        <p class="result-card__num">5</p>
+        <p class="result-card__label">Client companies across 4 different industries</p>
+      </div>
+      <div class="result-card">
+        <p class="result-card__num">100K+</p>
+        <p class="result-card__label">Social media followers on brands Kenz has supported</p>
+      </div>
+      <div class="result-card">
+        <p class="result-card__num">3M+</p>
+        <p class="result-card__label">YouTube views on platforms he has contributed to</p>
+      </div>
+      <div class="result-card">
+        <p class="result-card__num">3 yrs</p>
+        <p class="result-card__label">Consistent experience in social media and operations</p>
+      </div>
+    </div>
+
+    <div class="fade-in" style="margin-top:2rem; display:grid; grid-template-columns:1fr 1fr; gap:1.5rem;">
+      <div class="info-card">
+        <p class="info-label" style="margin-bottom:0.75rem;">What Kenz Delivers</p>
+        <div class="work-entry__tasks">
+          <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>Consistent social media presence managed systematically, not reactively</div>
+          <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>Lead generation pipelines that produce organized, actionable prospect lists</div>
+          <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>Google Sheets tracking systems that make operations visible and accountable</div>
+          <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>E-commerce backend operations that run cleanly without owner involvement</div>
+          <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>Business acquisition research that gives teams real data to work from</div>
+        </div>
+      </div>
+      <div class="info-card">
+        <p class="info-label" style="margin-bottom:0.75rem;">Best Fit Clients</p>
+        <p style="font-size:0.88rem; color:var(--text-body); line-height:1.8; margin-bottom:1rem;">
+          Real estate agents and investment firms who need consistent social presence and research support. E-commerce brands who need operations managed without being micromanaged. Startups and digital companies who need someone to own the workflow and keep things organized.
+        </p>
+        <p class="info-label" style="margin-bottom:0.75rem;">Industries</p>
+        <div>
+          <span class="skill-tag--sage skill-tag">Real Estate</span>
+          <span class="skill-tag--sage skill-tag">Real Estate Investment</span>
+          <span class="skill-tag--sage skill-tag">E-Commerce</span>
+          <span class="skill-tag--sage skill-tag">Digital Operations</span>
+          <span class="skill-tag--sage skill-tag">AI &amp; Technology</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ── CTA ── -->
+<section class="profile-cta">
+  <div class="profile-cta__inner fade-in">
+    <span class="eyebrow eyebrow--pale" style="display:flex;justify-content:center;">Work With Kenz</span>
+    <h2>Want Kenz on Your Team?</h2>
+    <p>
+      Book a call with RJ to discuss whether Kenz is the right fit for your business.
+      BBC matches every client personally — the goal is always the right person for the right role.
+    </p>
+    <div class="profile-cta__actions">
+      <a href="https://calendly.com/rj-balaynibruno/bbc-strategy-call" target="_blank" rel="noopener noreferrer" class="btn btn-gold">Book a Call</a>
+      <a href="our-team.html" class="btn btn-ghost">← View All Team Members</a>
+    </div>
+  </div>
+</section>
+
+
+<!-- ── FOOTER ── -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <p class="footer-brand-name">Balay ni Bruno &amp; Co.</p>
+        <p class="footer-brand-desc">A family-built operational support studio helping business owners grow through real collaboration, honest systems, and long-term care.</p>
+      </div>
+      <div>
+        <p class="footer-col-label">How We Help</p>
+        <a href="how-we-help.html#marketing"  class="footer-link">Marketing Support</a>
+        <a href="how-we-help.html#content"    class="footer-link">Content &amp; Creative</a>
+        <a href="how-we-help.html#websites"   class="footer-link">Websites &amp; Digital</a>
+        <a href="how-we-help.html#seo"        class="footer-link">SEO &amp; Visibility</a>
+        <a href="how-we-help.html#operations" class="footer-link">Operations &amp; Admin</a>
+      </div>
+      <div>
+        <p class="footer-col-label">Company</p>
+        <a href="about.html"        class="footer-link">Our Story</a>
+        <a href="how-it-works.html" class="footer-link">How It Works</a>
+        <a href="our-team.html"     class="footer-link">Our Team</a>
+        <a href="our-work.html"     class="footer-link">Our Work</a>
+        <a href="insights.html"     class="footer-link">Insights</a>
+        <a href="contact.html"      class="footer-link">Contact</a>
+      </div>
+      <div>
+        <p class="footer-col-label">Contact</p>
+        <p class="footer-link">hello@balaynibruno.com</p>
+        <a href="https://calendly.com/rj-balaynibruno/bbc-strategy-call" target="_blank" rel="noopener noreferrer" class="btn btn-gold btn-sm" style="margin-top:1rem;">Book a Call</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copy">&copy; 2026 Balay ni Bruno &amp; Co. All rights reserved.</p>
+      <p class="footer-copy">
+        <a href="#" style="color:rgba(245,241,234,0.28);transition:color 0.2s;">Privacy Policy</a>
+        <span style="margin:0 8px;">&middot;</span>
+        <a href="#" style="color:rgba(245,241,234,0.28);transition:color 0.2s;">Terms of Service</a>
+      </p>
+    </div>
+  </div>
+</footer>
+
+
+<!-- ── JAVASCRIPT ── -->
+<script>
+  const header = document.getElementById('site-header');
+  window.addEventListener('scroll', () => {
+    header.classList.toggle('scrolled', window.scrollY > 60);
+  }, { passive: true });
+
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const hb1 = document.getElementById('hb1');
+  const hb2 = document.getElementById('hb2');
+  const hb3 = document.getElementById('hb3');
+  hamburger.addEventListener('click', () => {
+    const open = mobileMenu.classList.toggle('open');
+    if (open) {
+      hb1.style.transform = 'translateY(7px) rotate(45deg)';
+      hb2.style.opacity = '0';
+      hb3.style.transform = 'translateY(-7px) rotate(-45deg)';
+    } else {
+      hb1.style.transform = ''; hb2.style.opacity = ''; hb3.style.transform = '';
+    }
+  });
+  mobileMenu.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      mobileMenu.classList.remove('open');
+      hb1.style.transform = ''; hb2.style.opacity = ''; hb3.style.transform = '';
+    });
+  });
+
+  const fadeEls = document.querySelectorAll('.fade-in');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.07, rootMargin: '0px 0px -40px 0px' });
+  fadeEls.forEach(el => io.observe(el));
+
+  const secTabs = document.querySelectorAll('.sec-tab');
+  const sections = document.querySelectorAll('section[id^="sec-"]');
+  const secObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.id;
+        secTabs.forEach(tab => {
+          tab.classList.toggle('active', tab.getAttribute('href') === '#' + id);
+        });
+      }
+    });
+  }, { rootMargin: '-30% 0px -60% 0px', threshold: 0 });
+  sections.forEach(s => secObserver.observe(s));
+
+  // Filter system
+  let activeCompany = 'all';
+  let activeTask    = 'all';
+
+  const companyBtns = document.querySelectorAll('[data-company]');
+  const taskBtns    = document.querySelectorAll('[data-task]');
+  const entries     = document.querySelectorAll('.work-entry');
+  const noResults   = document.getElementById('no-results');
+
+  function applyFilters() {
+    let visible = 0;
+    entries.forEach(entry => {
+      const company  = entry.dataset.company;
+      const tasks    = (entry.dataset.task || '').split(' ');
+      const companyMatch = activeCompany === 'all' || company === activeCompany;
+      const taskMatch    = activeTask    === 'all' || tasks.includes(activeTask);
+      const show = companyMatch && taskMatch;
+      entry.classList.toggle('hidden', !show);
+      if (show) visible++;
+    });
+    noResults.classList.toggle('visible', visible === 0);
+  }
+
+  companyBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      activeCompany = btn.dataset.company;
+      companyBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      applyFilters();
+    });
+  });
+
+  taskBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      activeTask = btn.dataset.task;
+      taskBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      applyFilters();
+    });
+  });
+</script>
+
+</body>
+</html>
