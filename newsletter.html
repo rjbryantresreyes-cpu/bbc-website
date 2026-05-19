@@ -1,0 +1,987 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BBC Insider — Newsletter &amp; Free Resources</title>
+  <meta name="description" content="Join the BBC Insider list. Get strategy breakdowns, AI prompts, and free resources delivered straight to your inbox." />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Lora:ital,wght@0,400;0,500;1,400;1,500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --deep-blue:   #1F3557;
+      --mid-blue:    #4B6FA5;
+      --warm-blue:   #6D8FC7;
+      --light-blue:  #A8C0DC;
+      --pale-blue:   #DDE8F2;
+      --bg-primary:  #F5F1EA;
+      --bg-section:  #EDE8DF;
+      --bg-card:     #FDFAF6;
+      --bg-card-alt: #FAF6EF;
+      --bg-dark:     #1C2E47;
+      --bg-footer:   #172540;
+      --neutral-100: #E8E2D6;
+      --neutral-200: #D5CEC3;
+      --neutral-300: #B8B1A6;
+      --text-ink:    #2A3040;
+      --text-body:   #4E5666;
+      --text-muted:  #888FA0;
+      --text-warm:   #F5F1EA;
+      --gold:        #B8923E;
+      --gold-pale:   #E6CFA0;
+      --gold-warm:   #D4A84B;
+      --sage:        #4E9E74;
+      --font-display:'Playfair Display', Georgia, serif;
+      --font-body:   'Lora', Georgia, serif;
+      --font-ui:     'DM Sans', system-ui, sans-serif;
+      --max-width:   1100px;
+      --radius-sm:   8px;
+      --radius:      16px;
+      --radius-lg:   24px;
+      --radius-xl:   32px;
+      --shadow-xs:   0 1px 6px  rgba(85,60,35,0.055);
+      --shadow-sm:   0 3px 18px rgba(85,60,35,0.08);
+      --shadow-md:   0 7px 36px rgba(85,60,35,0.11);
+      --shadow-lg:   0 14px 56px rgba(85,60,35,0.14);
+      --border-card: 1px solid rgba(85,60,35,0.09);
+      --border-warm: 1px solid rgba(85,60,35,0.12);
+      --border-dark: 1px solid rgba(255,255,255,0.07);
+      --s1:.5rem; --s2:1rem; --s3:1.5rem; --s4:2.5rem; --s5:4rem; --s6:6rem; --s7:9rem;
+    }
+
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body {
+      font-family:var(--font-body);
+      color:var(--text-ink);
+      background:var(--bg-primary);
+      line-height:1.6;
+      -webkit-font-smoothing:antialiased;
+      overflow-x:hidden;
+    }
+    body::after {
+      content:'';
+      position:fixed; inset:0;
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23n)' opacity='0.026'/%3E%3C/svg%3E");
+      pointer-events:none; z-index:9999; mix-blend-mode:multiply;
+    }
+
+    h1,h2,h3,h4 { font-family:var(--font-display); line-height:1.22; color:var(--deep-blue); }
+    h1 { font-size:clamp(2.2rem,5vw,3.8rem); font-weight:700; }
+    h2 { font-size:clamp(1.5rem,2.6vw,2.2rem); font-weight:600; }
+    h3 { font-size:clamp(1rem,1.5vw,1.2rem); font-weight:600; }
+    p  { font-family:var(--font-body); font-size:1rem; line-height:1.87; color:var(--text-body); }
+    a  { text-decoration:none; }
+
+    .eyebrow {
+      display:inline-block; font-family:var(--font-ui);
+      font-size:0.68rem; font-weight:600;
+      letter-spacing:0.17em; text-transform:uppercase;
+      color:var(--warm-blue); margin-bottom:var(--s2);
+    }
+    .eyebrow--gold { color:var(--gold-pale); }
+
+    .container { max-width:var(--max-width); margin:0 auto; padding:0 var(--s4); }
+    @media (max-width:640px) { .container { padding:0 var(--s2); } }
+
+    .fade-in { opacity:0; transform:translateY(22px); transition:opacity 0.65s ease, transform 0.65s ease; }
+    .fade-in.visible { opacity:1; transform:translateY(0); }
+
+    .divider-bar {
+      width:44px; height:2.5px;
+      background:linear-gradient(90deg,var(--gold),var(--warm-blue));
+      border-radius:2px; margin:var(--s2) 0 var(--s3); opacity:0.8;
+    }
+    .divider-bar--center { margin-left:auto; margin-right:auto; }
+
+    /* ── Buttons ── */
+    .btn {
+      display:inline-flex; align-items:center; gap:0.5rem;
+      padding:0.88rem 2.2rem; border-radius:100px;
+      font-family:var(--font-ui); font-size:0.86rem; font-weight:600;
+      letter-spacing:0.02em; cursor:pointer;
+      transition:all 0.3s ease; border:1.5px solid transparent;
+      white-space:nowrap;
+    }
+    .btn-primary { background:var(--deep-blue); color:var(--text-warm); }
+    .btn-primary:hover { background:#243f64; transform:translateY(-2px); box-shadow:0 10px 32px rgba(31,53,87,0.28); }
+    .btn-gold { background:var(--gold); color:#fff; font-weight:700; }
+    .btn-gold:hover { background:var(--gold-warm); transform:translateY(-2px); box-shadow:0 10px 32px rgba(184,146,62,0.35); }
+    .btn-ghost { background:transparent; color:var(--text-warm); border-color:rgba(245,241,234,0.28); }
+    .btn-ghost:hover { background:rgba(245,241,234,0.08); border-color:rgba(245,241,234,0.55); }
+    .btn-outline { background:transparent; color:var(--deep-blue); border-color:rgba(75,111,165,0.42); }
+    .btn-outline:hover { background:var(--deep-blue); color:var(--text-warm); }
+    .btn-sm { padding:0.62rem 1.35rem; font-size:0.78rem; }
+    .btn:disabled { opacity:0.55; cursor:not-allowed; transform:none !important; }
+
+    /* ══════════════════════════════════════════
+       HEADER
+    ══════════════════════════════════════════ */
+    .site-header {
+      position:fixed; top:0; left:0; right:0; z-index:200;
+      background:rgba(245,241,234,0.94);
+      backdrop-filter:blur(20px) saturate(1.2);
+      -webkit-backdrop-filter:blur(20px) saturate(1.2);
+      border-bottom:var(--border-warm);
+      transition:box-shadow 0.3s ease;
+    }
+    .site-header.scrolled { box-shadow:var(--shadow-sm); }
+    .header__inner {
+      max-width:var(--max-width); margin:0 auto; padding:0 var(--s4);
+      height:68px; display:flex; align-items:center;
+      justify-content:space-between; gap:var(--s3);
+    }
+    .header__logo { display:flex; flex-direction:row; align-items:center; gap:0.6rem; }
+    .header__logo-name {
+      font-family:var(--font-display); font-size:1.05rem; font-weight:700;
+      color:var(--deep-blue); line-height:1; letter-spacing:-0.01em;
+    }
+    .header__nav { display:flex; align-items:center; gap:1.5rem; list-style:none; }
+    .header__nav a {
+      font-family:var(--font-ui); font-size:0.78rem; font-weight:500;
+      color:var(--text-body); transition:color 0.2s; white-space:nowrap;
+    }
+    .header__nav a:hover { color:var(--deep-blue); font-weight:600; }
+    .header__cta { display:flex; align-items:center; gap:0.9rem; flex-shrink:0; }
+    .hamburger { display:none; flex-direction:column; gap:5px; cursor:pointer; background:none; border:none; padding:8px; }
+    .hamburger span { display:block; width:20px; height:2px; background:var(--text-ink); border-radius:2px; transition:all 0.25s ease; }
+    .mobile-menu { display:none; flex-direction:column; background:var(--bg-card); border-top:var(--border-warm); padding:1rem var(--s4) 1.5rem; }
+    .mobile-menu.open { display:flex; }
+    .mobile-menu a { font-family:var(--font-ui); font-size:0.9rem; font-weight:500; color:var(--text-body); padding:0.7rem 0; border-bottom:var(--border-card); transition:color 0.2s; }
+    .mobile-menu a:hover { color:var(--deep-blue); }
+    .mobile-menu .mobile-cta { margin-top:1rem; }
+    @media (max-width:1024px) { .header__nav { display:none; } }
+    @media (max-width:768px) { .header__cta .btn-ghost { display:none; } .hamburger { display:flex; } }
+
+    /* ══════════════════════════════════════════
+       HERO  —  dark
+    ══════════════════════════════════════════ */
+    .hero {
+      background:var(--bg-dark);
+      padding-top:68px;
+      position:relative; overflow:hidden;
+    }
+    .hero::before {
+      content:'';
+      position:absolute; top:-100px; right:-120px;
+      width:700px; height:700px;
+      background:radial-gradient(ellipse at center, rgba(184,146,62,0.07) 0%, transparent 65%);
+      pointer-events:none;
+    }
+    .hero::after {
+      content:'';
+      position:absolute; bottom:-80px; left:-80px;
+      width:500px; height:500px;
+      background:radial-gradient(ellipse at center, rgba(75,111,165,0.06) 0%, transparent 65%);
+      pointer-events:none;
+    }
+    .hero__inner {
+      max-width:720px; margin:0 auto;
+      padding:var(--s6) var(--s4) var(--s5);
+      text-align:center; position:relative; z-index:1;
+    }
+    .hero__eyebrow {
+      display:inline-flex; align-items:center; gap:0.6rem;
+      font-family:var(--font-ui); font-size:0.68rem; font-weight:600;
+      letter-spacing:0.18em; text-transform:uppercase;
+      color:var(--gold-pale); margin-bottom:1.8rem;
+    }
+    .hero__eyebrow-dot { width:5px; height:5px; border-radius:50%; background:var(--gold); opacity:0.75; flex-shrink:0; }
+    .hero__title { color:#fff; margin-bottom:1.4rem; }
+    .hero__title em { font-style:italic; color:var(--gold-pale); }
+    .hero__body {
+      font-family:var(--font-body); font-size:1.08rem; line-height:1.88;
+      color:rgba(245,241,234,0.62); max-width:520px; margin:0 auto 2.8rem;
+    }
+
+    /* ── Email form ── */
+    .hero__form {
+      display:flex; gap:0.65rem; justify-content:center;
+      flex-wrap:wrap; max-width:480px; margin:0 auto 1.5rem;
+    }
+    .hero__email-input {
+      flex:1; min-width:220px;
+      font-family:var(--font-ui); font-size:0.88rem;
+      color:var(--text-ink);
+      background:rgba(245,241,234,0.97);
+      border:none;
+      border-radius:100px;
+      padding:0.88rem 1.5rem;
+      outline:none;
+      transition:box-shadow 0.2s;
+    }
+    .hero__email-input::placeholder { color:var(--text-muted); }
+    .hero__email-input:focus { box-shadow:0 0 0 3px rgba(184,146,62,0.3); }
+    .hero__email-input.error { box-shadow:0 0 0 3px rgba(192,57,43,0.3); }
+
+    .hero__form-note {
+      font-family:var(--font-ui); font-size:0.74rem;
+      color:rgba(245,241,234,0.3); margin-bottom:0;
+    }
+
+    /* ── Success state ── */
+    .hero__success {
+      display:none;
+      background:rgba(78,158,116,0.12);
+      border:1px solid rgba(78,158,116,0.3);
+      border-radius:var(--radius);
+      padding:1.25rem 2rem;
+      max-width:480px; margin:0 auto;
+    }
+    .hero__success p {
+      font-family:var(--font-ui); font-size:0.92rem; font-weight:500;
+      color:rgba(245,241,234,0.85); margin:0;
+    }
+
+    /* ── Perks row ── */
+    .hero__perks {
+      display:flex; flex-wrap:wrap; gap:0.6rem;
+      justify-content:center; margin-bottom:var(--s4);
+    }
+    .hero__perk {
+      display:inline-flex; align-items:center; gap:0.4rem;
+      font-family:var(--font-ui); font-size:0.72rem; font-weight:500;
+      color:rgba(245,241,234,0.5);
+      background:rgba(255,255,255,0.05);
+      border:1px solid rgba(255,255,255,0.08);
+      border-radius:100px;
+      padding:0.35rem 0.9rem;
+    }
+    .hero__perk-dot { width:5px; height:5px; border-radius:50%; background:var(--gold); opacity:0.6; flex-shrink:0; }
+
+    /* ══════════════════════════════════════════
+       WHAT YOU GET — cream
+    ══════════════════════════════════════════ */
+    .what-section {
+      background:var(--bg-primary);
+      padding:var(--s7) 0;
+    }
+    .what-inner {
+      max-width:var(--max-width); margin:0 auto; padding:0 var(--s4);
+      text-align:center;
+    }
+    .what-grid {
+      display:grid;
+      grid-template-columns:repeat(auto-fit, minmax(240px, 1fr));
+      gap:1.5rem;
+      margin-top:var(--s4);
+    }
+    .what-card {
+      background:var(--bg-card);
+      border:var(--border-card);
+      border-radius:var(--radius-lg);
+      padding:2rem 1.75rem;
+      text-align:left;
+      box-shadow:var(--shadow-xs);
+      transition:box-shadow 0.25s, transform 0.25s;
+      position:relative; overflow:hidden;
+    }
+    .what-card::before {
+      content:'';
+      position:absolute; top:0; left:0; right:0; height:3px;
+      background:linear-gradient(90deg, var(--gold), var(--warm-blue));
+      opacity:0; transition:opacity 0.25s;
+    }
+    .what-card:hover { box-shadow:var(--shadow-md); transform:translateY(-4px); }
+    .what-card:hover::before { opacity:1; }
+    .what-card__icon {
+      width:48px; height:48px; border-radius:var(--radius-sm);
+      background:rgba(31,53,87,0.07);
+      display:flex; align-items:center; justify-content:center;
+      margin-bottom:1.25rem;
+    }
+    .what-card__title {
+      font-family:var(--font-display); font-size:1.05rem; font-weight:600;
+      color:var(--deep-blue); margin-bottom:0.6rem;
+    }
+    .what-card__desc {
+      font-family:var(--font-body); font-size:0.88rem; line-height:1.75;
+      color:var(--text-body);
+    }
+    .what-card__tag {
+      display:inline-flex; margin-top:1rem;
+      font-family:var(--font-ui); font-size:0.62rem; font-weight:700;
+      letter-spacing:0.1em; text-transform:uppercase;
+      color:var(--gold); background:rgba(184,146,62,0.1);
+      border-radius:100px; padding:3px 10px;
+    }
+
+    /* ══════════════════════════════════════════
+       FREE RESOURCES — card bg
+    ══════════════════════════════════════════ */
+    .resources-section {
+      background:var(--bg-section);
+      padding:var(--s7) 0;
+    }
+    .resources-inner {
+      max-width:var(--max-width); margin:0 auto; padding:0 var(--s4);
+    }
+    .resources-header { text-align:center; margin-bottom:var(--s4); }
+
+    .resources-grid {
+      display:grid;
+      grid-template-columns:repeat(auto-fill, minmax(280px, 1fr));
+      gap:1.5rem;
+    }
+
+    /* Live resource card */
+    .res-card {
+      background:var(--bg-card);
+      border:var(--border-card);
+      border-radius:var(--radius-lg);
+      padding:1.75rem;
+      display:flex; flex-direction:column; gap:1rem;
+      box-shadow:var(--shadow-xs);
+      transition:box-shadow 0.25s, transform 0.25s, border-color 0.25s;
+      position:relative; overflow:hidden;
+    }
+    .res-card::before {
+      content:'';
+      position:absolute; top:0; left:0; right:0; height:3px;
+      background:linear-gradient(90deg, var(--gold), var(--warm-blue));
+      opacity:0; transition:opacity 0.25s;
+    }
+    .res-card:hover { box-shadow:var(--shadow-md); transform:translateY(-4px); border-color:rgba(184,146,62,0.18); }
+    .res-card:hover::before { opacity:1; }
+
+    /* Coming soon resource card */
+    .res-card--coming {
+      opacity:0.55;
+      background:var(--bg-card-alt);
+    }
+    .res-card--coming:hover { transform:none; box-shadow:var(--shadow-xs); border-color:inherit; }
+    .res-card--coming::before { display:none; }
+
+    .res-card__top { display:flex; align-items:flex-start; justify-content:space-between; gap:0.75rem; }
+    .res-card__icon {
+      width:44px; height:44px; border-radius:var(--radius-sm);
+      background:rgba(31,53,87,0.07);
+      display:flex; align-items:center; justify-content:center;
+      flex-shrink:0;
+    }
+    .res-card__icon--gold { background:rgba(184,146,62,0.1); color:var(--gold); }
+    .res-card__icon--blue { background:rgba(31,53,87,0.08); color:var(--mid-blue); }
+    .res-card__icon--sage { background:rgba(78,158,116,0.1); color:var(--sage); }
+
+    .res-card__badge {
+      font-family:var(--font-ui); font-size:0.58rem; font-weight:700;
+      letter-spacing:0.1em; text-transform:uppercase;
+      padding:3px 10px; border-radius:100px;
+      flex-shrink:0;
+    }
+    .badge--free    { background:rgba(78,158,116,0.1); color:var(--sage); }
+    .badge--soon    { background:rgba(136,143,160,0.1); color:var(--text-muted); }
+    .badge--premium { background:rgba(184,146,62,0.12); color:var(--gold); }
+
+    .res-card__title {
+      font-family:var(--font-display); font-size:1rem; font-weight:600;
+      color:var(--deep-blue); line-height:1.3;
+    }
+    .res-card__desc {
+      font-family:var(--font-body); font-size:0.86rem; line-height:1.75;
+      color:var(--text-body); flex:1;
+    }
+    .res-card__meta {
+      display:flex; align-items:center; justify-content:space-between;
+      padding-top:1rem; border-top:var(--border-card);
+      font-family:var(--font-ui); font-size:0.72rem; color:var(--text-muted);
+    }
+    .res-card__unlock {
+      display:inline-flex; align-items:center; gap:0.4rem;
+      font-family:var(--font-ui); font-size:0.76rem; font-weight:600;
+      color:var(--gold);
+    }
+    .res-card__unlock svg { flex-shrink:0; }
+
+    /* Email gate modal */
+    .res-card__gate {
+      display:none;
+      margin-top:0.75rem;
+      padding-top:0.75rem;
+      border-top:var(--border-card);
+    }
+    .res-card__gate.open { display:block; }
+    .res-card__gate-form {
+      display:flex; gap:0.5rem; flex-wrap:wrap;
+    }
+    .res-card__gate-input {
+      flex:1; min-width:160px;
+      font-family:var(--font-ui); font-size:0.82rem;
+      color:var(--text-ink);
+      background:var(--bg-primary);
+      border:var(--border-warm);
+      border-radius:100px;
+      padding:0.6rem 1rem;
+      outline:none;
+      transition:border-color 0.2s, box-shadow 0.2s;
+    }
+    .res-card__gate-input:focus { border-color:var(--mid-blue); box-shadow:0 0 0 3px rgba(75,111,165,0.1); }
+    .res-card__gate-note {
+      font-family:var(--font-ui); font-size:0.7rem; color:var(--text-muted);
+      margin-top:0.5rem;
+    }
+
+    /* ══════════════════════════════════════════
+       SOCIAL PROOF — dark
+    ══════════════════════════════════════════ */
+    .proof-section {
+      background:var(--bg-dark);
+      padding:var(--s5) 0;
+      position:relative; overflow:hidden;
+    }
+    .proof-section::before {
+      content:'';
+      position:absolute; top:-60px; right:-60px;
+      width:440px; height:440px;
+      background:radial-gradient(ellipse at center, rgba(184,146,62,0.05) 0%, transparent 65%);
+      pointer-events:none;
+    }
+    .proof-inner {
+      max-width:var(--max-width); margin:0 auto; padding:0 var(--s4);
+      display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr));
+      gap:2rem; position:relative; z-index:1;
+      text-align:center;
+    }
+    .proof-stat-num {
+      font-family:var(--font-display); font-size:2.5rem; font-weight:700;
+      color:#fff; line-height:1;
+    }
+    .proof-stat-label {
+      font-family:var(--font-ui); font-size:0.7rem; font-weight:600;
+      letter-spacing:0.12em; text-transform:uppercase;
+      color:rgba(245,241,234,0.35); margin-top:0.4rem;
+    }
+
+    /* ══════════════════════════════════════════
+       FOOTER
+    ══════════════════════════════════════════ */
+    .site-footer {
+      background:var(--bg-footer);
+      border-top:var(--border-dark);
+      padding:var(--s5) 0 var(--s4);
+    }
+    .footer__inner {
+      max-width:var(--max-width); margin:0 auto; padding:0 var(--s4);
+      display:grid; grid-template-columns:2fr 1fr 1fr 1fr;
+      gap:var(--s4);
+    }
+    @media (max-width:860px) { .footer__inner { grid-template-columns:1fr 1fr; } }
+    @media (max-width:500px) { .footer__inner { grid-template-columns:1fr; } }
+
+    .footer__brand { }
+    .footer__logo-row { display:flex; align-items:center; gap:0.75rem; margin-bottom:1rem; }
+    .footer__brand-name { font-family:var(--font-ui); font-size:0.92rem; font-weight:700; color:rgba(245,241,234,0.75); }
+    .footer__tagline { font-family:var(--font-body); font-size:0.84rem; line-height:1.7; color:rgba(245,241,234,0.35); max-width:220px; }
+    .footer__col-label { font-family:var(--font-ui); font-size:0.62rem; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:rgba(245,241,234,0.28); margin-bottom:1.1rem; }
+    .footer__links { list-style:none; display:flex; flex-direction:column; gap:0.6rem; }
+    .footer__links a { font-family:var(--font-ui); font-size:0.82rem; font-weight:400; color:rgba(245,241,234,0.5); transition:color 0.2s; }
+    .footer__links a:hover { color:rgba(245,241,234,0.85); }
+    .footer__bottom {
+      max-width:var(--max-width); margin:var(--s4) auto 0; padding:var(--s3) var(--s4) 0;
+      border-top:var(--border-dark);
+      display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:1rem;
+    }
+    .footer__copy { font-family:var(--font-ui); font-size:0.78rem; color:rgba(245,241,234,0.22); }
+    .footer__copy-links { display:flex; gap:1.5rem; }
+    .footer__copy-links a { font-family:var(--font-ui); font-size:0.76rem; color:rgba(245,241,234,0.28); transition:color 0.2s; }
+    .footer__copy-links a:hover { color:rgba(245,241,234,0.6); }
+
+    @keyframes spin { to { transform:rotate(360deg); } }
+  </style>
+</head>
+<body>
+
+
+<!-- ══════════════════════════════════════════
+     HEADER
+══════════════════════════════════════════ -->
+<header class="site-header" id="site-header">
+  <div class="header__inner">
+    <a href="index.html" class="header__logo">
+      <img src="bbc-logo.png" alt="Balay ni Bruno &amp; Co." style="height:42px;width:auto;display:block;">
+      <span class="header__logo-name">Balay ni Bruno &amp; Co.</span>
+    </a>
+    <nav>
+      <ul class="header__nav">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">Our Story</a></li>
+        <li><a href="how-it-works.html">How It Works</a></li>
+        <li><a href="how-we-help.html">How We Help</a></li>
+        <li><a href="our-work.html">Our Work</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+    <div class="header__cta">
+      <a href="contact.html" class="btn btn-primary btn-sm">Book a Call</a>
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+        <span id="hb1"></span><span id="hb2"></span><span id="hb3"></span>
+      </button>
+    </div>
+  </div>
+  <nav class="mobile-menu" id="mobile-menu">
+    <a href="index.html">Home</a>
+    <a href="about.html">Our Story</a>
+    <a href="how-it-works.html">How It Works</a>
+    <a href="how-we-help.html">How We Help</a>
+    <a href="our-work.html">Our Work</a>
+    <a href="contact.html">Contact</a>
+    <a href="contact.html" class="btn btn-primary btn-sm mobile-cta" style="text-align:center;">Book a Call</a>
+  </nav>
+</header>
+
+
+<!-- ══════════════════════════════════════════
+     HERO — email capture
+══════════════════════════════════════════ -->
+<section class="hero">
+  <div class="hero__inner fade-in">
+
+    <div class="hero__eyebrow">
+      <span class="hero__eyebrow-dot"></span>
+      BBC Insider
+      <span class="hero__eyebrow-dot"></span>
+    </div>
+
+    <h1 class="hero__title">Real tactics. <em>Free resources.</em><br>No fluff.</h1>
+
+    <p class="hero__body">
+      Join the BBC Insider list — strategy breakdowns, AI prompts, automation templates,
+      and free tools built by the BBC team. Drop your email and we'll handle the rest.
+    </p>
+
+    <div class="hero__perks">
+      <span class="hero__perk"><span class="hero__perk-dot"></span>AI Prompts</span>
+      <span class="hero__perk"><span class="hero__perk-dot"></span>Automation Templates</span>
+      <span class="hero__perk"><span class="hero__perk-dot"></span>Strategy Breakdowns</span>
+      <span class="hero__perk"><span class="hero__perk-dot"></span>Free Downloads</span>
+      <span class="hero__perk"><span class="hero__perk-dot"></span>BBC Tools &amp; APIs</span>
+    </div>
+
+    <div id="hero-form-wrap">
+      <form class="hero__form" id="hero-subscribe-form" novalidate>
+        <input class="hero__email-input" id="hero-email" type="email" placeholder="Your email address" />
+        <button type="submit" class="btn btn-gold">
+          <span id="hero-btn-text">Join the List</span>
+          <span id="hero-spinner" style="width:16px;height:16px;border:2px solid rgba(255,255,255,0.3);border-top-color:white;border-radius:50%;animation:spin 0.7s linear infinite;display:none;"></span>
+        </button>
+      </form>
+      <p class="hero__form-note">Zero spam. No fluff. Unsubscribe anytime.</p>
+    </div>
+
+    <div class="hero__success" id="hero-success">
+      <p>✓ &nbsp;You're in! Check your inbox — we'll be in touch soon.</p>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════
+     WHAT YOU GET
+══════════════════════════════════════════ -->
+<section class="what-section">
+  <div class="what-inner">
+    <div class="fade-in">
+      <span class="eyebrow">What You Get</span>
+      <h2>Built by the people<br>running real businesses</h2>
+      <div class="divider-bar divider-bar--center"></div>
+      <p style="max-width:540px; margin:0 auto; color:var(--text-body);">
+        Every resource in the BBC Insider library is something we actually use — built inside a real operational studio, tested on real clients, and refined until it works.
+      </p>
+    </div>
+
+    <div class="what-grid fade-in">
+
+      <div class="what-card">
+        <div class="what-card__icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--deep-blue)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2a10 10 0 1 0 10 10"/><path d="M12 6v6l4 2"/><path d="M18 2v4"/><path d="M20 4h-4"/>
+          </svg>
+        </div>
+        <div class="what-card__title">AI Prompt Packs</div>
+        <p class="what-card__desc">Copy-paste prompts for content writing, client communication, strategy building, and more — tested inside BBC workflows.</p>
+        <span class="what-card__tag">Prompts</span>
+      </div>
+
+      <div class="what-card">
+        <div class="what-card__icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--deep-blue)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8"/><path d="M12 17v4"/>
+          </svg>
+        </div>
+        <div class="what-card__title">Automation Templates</div>
+        <p class="what-card__desc">Pre-built Make and Zapier templates for common workflows — lead capture, client onboarding, content scheduling, and notifications.</p>
+        <span class="what-card__tag">Templates</span>
+      </div>
+
+      <div class="what-card">
+        <div class="what-card__icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--deep-blue)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/>
+          </svg>
+        </div>
+        <div class="what-card__title">Strategy Breakdowns</div>
+        <p class="what-card__desc">How BBC builds systems, runs clients, and scales operations — documented and explained so you can apply it to your own business.</p>
+        <span class="what-card__tag">Insights</span>
+      </div>
+
+      <div class="what-card">
+        <div class="what-card__icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--deep-blue)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/>
+          </svg>
+        </div>
+        <div class="what-card__title">Scripts &amp; APIs</div>
+        <p class="what-card__desc">Google Apps Scripts, custom code snippets, and API integrations built by BBC — get the file sent straight to your inbox when you request it.</p>
+        <span class="what-card__tag">Code</span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════
+     PROOF STRIP
+══════════════════════════════════════════ -->
+<section class="proof-section">
+  <div class="proof-inner fade-in">
+    <div>
+      <div class="proof-stat-num">100%</div>
+      <div class="proof-stat-label">Free Resources</div>
+    </div>
+    <div>
+      <div class="proof-stat-num">0</div>
+      <div class="proof-stat-label">Spam Emails</div>
+    </div>
+    <div>
+      <div class="proof-stat-num">Real</div>
+      <div class="proof-stat-label">Tested Workflows</div>
+    </div>
+    <div>
+      <div class="proof-stat-num">BBC</div>
+      <div class="proof-stat-label">Built In-House</div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════
+     FREE RESOURCES LIBRARY
+══════════════════════════════════════════ -->
+<section class="resources-section" id="resources">
+  <div class="resources-inner">
+    <div class="resources-header fade-in">
+      <span class="eyebrow">Free Resource Library</span>
+      <h2>Download anything.<br>Just leave your email.</h2>
+      <div class="divider-bar divider-bar--center"></div>
+      <p style="max-width:520px; margin:0 auto; color:var(--text-body);">
+        Every resource here is free. Click "Get this →" and we'll send it straight to your inbox. No credit card, no catch.
+      </p>
+    </div>
+
+    <div class="resources-grid fade-in">
+
+      <!-- COMING SOON cards — replace with live ones as resources are built -->
+
+      <div class="res-card res-card--coming">
+        <div class="res-card__top">
+          <div class="res-card__icon res-card__icon--gold">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 2a10 10 0 1 0 10 10"/><path d="M12 6v6l4 2"/><path d="M18 2v4"/><path d="M20 4h-4"/>
+            </svg>
+          </div>
+          <span class="res-card__badge badge--soon">Coming Soon</span>
+        </div>
+        <div class="res-card__title">BBC Content Writing Prompt Pack</div>
+        <p class="res-card__desc">50 copy-paste prompts for social media captions, email subject lines, product descriptions, and blog intros. Built for Filipino-owned brands.</p>
+        <div class="res-card__meta">
+          <span>📄 PDF · 50 prompts</span>
+          <span class="res-card__unlock" style="color:var(--text-muted);">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            Coming Soon
+          </span>
+        </div>
+      </div>
+
+      <div class="res-card res-card--coming">
+        <div class="res-card__top">
+          <div class="res-card__icon res-card__icon--blue">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8"/><path d="M12 17v4"/>
+            </svg>
+          </div>
+          <span class="res-card__badge badge--soon">Coming Soon</span>
+        </div>
+        <div class="res-card__title">Client Onboarding Automation (Make Template)</div>
+        <p class="res-card__desc">A pre-built Make scenario that auto-creates client folders, sends a welcome email, and logs the new client in your tracking sheet — when a form is submitted.</p>
+        <div class="res-card__meta">
+          <span>⚙️ Make Blueprint</span>
+          <span class="res-card__unlock" style="color:var(--text-muted);">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            Coming Soon
+          </span>
+        </div>
+      </div>
+
+      <div class="res-card res-card--coming">
+        <div class="res-card__top">
+          <div class="res-card__icon res-card__icon--sage">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/>
+            </svg>
+          </div>
+          <span class="res-card__badge badge--soon">Coming Soon</span>
+        </div>
+        <div class="res-card__title">BBC Portfolio Ingestion Script (Apps Script)</div>
+        <p class="res-card__desc">The Google Apps Script that powers BBC's VA portfolio system — auto-logs submissions to Google Sheets, creates Drive folders, copies files, and sends notifications.</p>
+        <div class="res-card__meta">
+          <span>📜 Google Apps Script (.gs)</span>
+          <span class="res-card__unlock" style="color:var(--text-muted);">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            Coming Soon
+          </span>
+        </div>
+      </div>
+
+      <div class="res-card res-card--coming">
+        <div class="res-card__top">
+          <div class="res-card__icon res-card__icon--gold">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/>
+            </svg>
+          </div>
+          <span class="res-card__badge badge--soon">Coming Soon</span>
+        </div>
+        <div class="res-card__title">BBC Brand Build SOP (Client-Ready)</div>
+        <p class="res-card__desc">The exact SOP BBC follows when building a brand from scratch — discovery, moodboarding, color system, typography, logo, and brand guide delivery.</p>
+        <div class="res-card__meta">
+          <span>📄 Google Doc · SOP</span>
+          <span class="res-card__unlock" style="color:var(--text-muted);">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            Coming Soon
+          </span>
+        </div>
+      </div>
+
+      <div class="res-card res-card--coming">
+        <div class="res-card__top">
+          <div class="res-card__icon res-card__icon--blue">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"/><path d="M8.56 2.75c4.37 6.03 6.02 9.42 8.03 17.72m2.54-15.38c-3.72 4.35-8.94 5.66-16.88 5.85m19.5 1.9c-3.5-.93-6.63-.82-8.94 0-2.58.92-5.01 2.86-7.44 6.32"/>
+            </svg>
+          </div>
+          <span class="res-card__badge badge--soon">Coming Soon</span>
+        </div>
+        <div class="res-card__title">Social Media Content Calendar Template</div>
+        <p class="res-card__desc">A Notion + Google Sheets content calendar BBC uses to manage client content — monthly view, content pillars, post types, approval status, and scheduling.</p>
+        <div class="res-card__meta">
+          <span>📊 Notion + Sheets</span>
+          <span class="res-card__unlock" style="color:var(--text-muted);">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            Coming Soon
+          </span>
+        </div>
+      </div>
+
+      <div class="res-card res-card--coming">
+        <div class="res-card__top">
+          <div class="res-card__icon res-card__icon--sage">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+            </svg>
+          </div>
+          <span class="res-card__badge badge--soon">Coming Soon</span>
+        </div>
+        <div class="res-card__title">AI Client Brief Generator (Prompt)</div>
+        <p class="res-card__desc">A structured ChatGPT / Claude prompt that turns a messy client conversation into a clean, formatted brief — ready to share with your team in under 2 minutes.</p>
+        <div class="res-card__meta">
+          <span>💬 Prompt · 1 file</span>
+          <span class="res-card__unlock" style="color:var(--text-muted);">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            Coming Soon
+          </span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Join CTA under resources -->
+    <div style="text-align:center; margin-top:var(--s4);" class="fade-in">
+      <p style="font-family:var(--font-ui); font-size:0.88rem; color:var(--text-muted); margin-bottom:1.25rem;">
+        New resources drop regularly. Join the list to get notified first.
+      </p>
+      <a href="#" onclick="document.getElementById('hero-email').focus(); window.scrollTo({top:0,behavior:'smooth'}); return false;" class="btn btn-primary">
+        Get Notified When They Drop
+      </a>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════
+     FOOTER
+══════════════════════════════════════════ -->
+<footer class="site-footer">
+  <div class="footer__inner">
+    <div class="footer__brand">
+      <div class="footer__logo-row">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 210" width="32" height="32"
+             style="color:rgba(245,241,234,0.5); flex-shrink:0;" aria-hidden="true">
+          <rect x="38" y="6" width="13" height="62" rx="2" fill="currentColor"/>
+          <line x1="100" y1="38" x2="6" y2="90" stroke="currentColor" stroke-width="9" stroke-linecap="round"/>
+          <line x1="100" y1="38" x2="194" y2="90" stroke="currentColor" stroke-width="9" stroke-linecap="round"/>
+          <rect x="24" y="90" width="152" height="86" rx="6" fill="none" stroke="currentColor" stroke-width="9"/>
+          <text x="100" y="154" text-anchor="middle" font-size="46" font-weight="800"
+                font-family="Georgia,'Times New Roman',serif" fill="currentColor">BBC</text>
+          <rect x="91" y="176" width="18" height="18" rx="2" fill="currentColor"/>
+          <rect x="64" y="194" width="72" height="11" rx="5.5" fill="currentColor"/>
+        </svg>
+        <span class="footer__brand-name">Balay ni Bruno &amp; Co.</span>
+      </div>
+      <p class="footer__tagline">A family-built operational support studio helping businesses grow with clarity and systems.</p>
+    </div>
+
+    <div>
+      <div class="footer__col-label">Company</div>
+      <ul class="footer__links">
+        <li><a href="about.html">Our Story</a></li>
+        <li><a href="how-it-works.html">How It Works</a></li>
+        <li><a href="our-work.html">Our Work</a></li>
+        <li><a href="insights.html">Insights</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="footer__col-label">Services</div>
+      <ul class="footer__links">
+        <li><a href="how-we-help.html">How We Help</a></li>
+        <li><a href="contact.html">Book a Call</a></li>
+        <li><a href="resources.html">Forms &amp; Resources</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="footer__col-label">Connect</div>
+      <ul class="footer__links">
+        <li><a href="contact.html">Contact Us</a></li>
+        <li><a href="newsletter.html">Newsletter</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer__bottom">
+    <p class="footer__copy">&copy; 2026 Balay ni Bruno &amp; Co. All rights reserved.</p>
+  </div>
+</footer>
+
+
+<!-- ══════════════════════════════════════════
+     JAVASCRIPT
+══════════════════════════════════════════ -->
+<script>
+// TODO: Replace with live newsletter Apps Script URL when deployed
+const NEWSLETTER_URL = 'https://script.google.com/macros/s/PLACEHOLDER_NEWSLETTER/exec';
+
+// ── Sticky header ──────────────────────────────────────
+const siteHeader = document.getElementById('site-header');
+window.addEventListener('scroll', () => {
+  siteHeader.classList.toggle('scrolled', window.scrollY > 60);
+}, { passive:true });
+
+// ── Hamburger ──────────────────────────────────────────
+const hamburger  = document.getElementById('hamburger');
+const mobileMenu = document.getElementById('mobile-menu');
+const hb1 = document.getElementById('hb1');
+const hb2 = document.getElementById('hb2');
+const hb3 = document.getElementById('hb3');
+hamburger.addEventListener('click', () => {
+  const open = mobileMenu.classList.toggle('open');
+  hb1.style.transform = open ? 'translateY(7px) rotate(45deg)' : '';
+  hb2.style.opacity   = open ? '0' : '';
+  hb3.style.transform = open ? 'translateY(-7px) rotate(-45deg)' : '';
+});
+
+// ── Scroll fade-in ─────────────────────────────────────
+const fadeObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('visible'); fadeObs.unobserve(e.target); }
+  });
+}, { threshold:0.06 });
+document.querySelectorAll('.fade-in').forEach(el => fadeObs.observe(el));
+
+// ── Hero subscribe form ────────────────────────────────
+document.getElementById('hero-subscribe-form').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const emailEl  = document.getElementById('hero-email');
+  const btnText  = document.getElementById('hero-btn-text');
+  const spinner  = document.getElementById('hero-spinner');
+  const successEl = document.getElementById('hero-success');
+  const formWrap  = document.getElementById('hero-form-wrap');
+  const email = emailEl.value.trim();
+
+  if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    emailEl.classList.add('error');
+    emailEl.focus();
+    return;
+  }
+  emailEl.classList.remove('error');
+
+  const submitBtn = e.target.querySelector('button[type="submit"]');
+  submitBtn.disabled = true;
+  btnText.textContent = 'Joining…';
+  spinner.style.display = 'inline-block';
+
+  try {
+    await fetch(NEWSLETTER_URL, {
+      method:'POST',
+      body: JSON.stringify({ email, source: 'newsletter-hero', submittedAt: new Date().toISOString() })
+    });
+  } catch (_) { /* silent — show success regardless */ }
+
+  formWrap.style.display = 'none';
+  successEl.style.display = 'block';
+});
+
+// ── Resource gate forms (future use) ──────────────────
+document.querySelectorAll('[data-resource-id]').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const gate = document.getElementById('gate-' + btn.dataset.resourceId);
+    if (gate) gate.classList.toggle('open');
+  });
+});
+
+document.querySelectorAll('.res-card__gate-form').forEach(form => {
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const input     = form.querySelector('.res-card__gate-input');
+    const resourceId = form.dataset.resourceId;
+    const email = input.value.trim();
+
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      input.style.borderColor = '#c0392b';
+      input.focus();
+      return;
+    }
+
+    const submitBtn = form.querySelector('button');
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Sending…';
+
+    try {
+      await fetch(NEWSLETTER_URL, {
+        method:'POST',
+        body: JSON.stringify({ email, source: 'resource-gate', resourceId, submittedAt: new Date().toISOString() })
+      });
+    } catch (_) {}
+
+    form.innerHTML = '<p style="font-family:var(--font-ui);font-size:0.8rem;color:var(--sage);font-weight:600;">✓ Check your inbox — the file is on its way!</p>';
+  });
+});
+</script>
+
+
+</body>
+</html>
