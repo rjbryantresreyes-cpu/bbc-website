@@ -4,12 +4,12 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>AI Family | Balay ni Bruno &amp; Co.</title>
-  <meta name="description" content="Meet the BBC AI Family — a growing team of custom AI agents built to run Balay ni Bruno &amp; Co. and built for clients who want the same." />
+  <meta name="description" content="The BBC AI Family — six custom agents, each built to solve a real problem. Meet them, learn why they exist, and see what comes next." />
   <link rel="canonical" href="https://balaynibruno.co/ai-family.html" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Balay ni Bruno &amp; Co." />
   <meta property="og:title" content="AI Family | Balay ni Bruno &amp; Co." />
-  <meta property="og:description" content="A growing team of custom AI agents — each one trained on a specific job. Meet the family." />
+  <meta property="og:description" content="Six AI agents, each built for a specific reason. Learn the story behind every one." />
   <meta property="og:url" content="https://balaynibruno.co/ai-family.html" />
   <meta property="og:image" content="https://balaynibruno.co/bbc-logo.png" />
   <meta name="twitter:card" content="summary_large_image" />
@@ -57,7 +57,6 @@
       --border-card: 1px solid rgba(85,60,35,0.09);
       --border-warm: 1px solid rgba(85,60,35,0.12);
       --border-dark: 1px solid rgba(255,255,255,0.07);
-      --s1:0.5rem; --s2:1rem; --s3:1.5rem; --s4:2.5rem; --s5:4rem; --s6:6rem; --s7:9rem;
     }
 
     *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
@@ -88,18 +87,18 @@
       display:block; font-family:var(--font-ui);
       font-size:0.68rem; font-weight:600;
       letter-spacing:0.17em; text-transform:uppercase;
-      color:var(--warm-blue); margin-bottom:var(--s2);
+      color:var(--warm-blue); margin-bottom:1rem;
     }
     .eyebrow--gold { color:var(--gold); }
     .eyebrow--pale { color:rgba(245,241,234,0.5); }
 
-    .container { max-width:var(--max-width); margin:0 auto; padding:0 var(--s4); }
+    .container { max-width:var(--max-width); margin:0 auto; padding:0 2.5rem; }
     .text-center { text-align:center; }
 
     .divider-bar {
       width:44px; height:2.5px;
       background:linear-gradient(90deg,var(--gold),var(--warm-blue));
-      border-radius:2px; margin:var(--s3) auto; opacity:0.8;
+      border-radius:2px; margin:1.5rem auto; opacity:0.8;
     }
 
     .fade-in { opacity:0; transform:translateY(22px); transition:opacity 0.65s ease,transform 0.65s ease; }
@@ -132,9 +131,9 @@
     }
     .site-header.scrolled { box-shadow:var(--shadow-sm); }
     .header__inner {
-      max-width:var(--max-width); margin:0 auto; padding:0 var(--s4);
+      max-width:var(--max-width); margin:0 auto; padding:0 2.5rem;
       height:68px; display:flex; align-items:center;
-      justify-content:space-between; gap:var(--s3);
+      justify-content:space-between; gap:1.5rem;
     }
     .header__logo { display:flex; flex-direction:row; align-items:center; gap:0.6rem; }
     .header__logo-name { font-family:var(--font-display); font-size:1.05rem; font-weight:700; color:var(--deep-blue); line-height:1; letter-spacing:-0.01em; }
@@ -144,7 +143,7 @@
     .header__cta { display:flex; align-items:center; gap:0.9rem; flex-shrink:0; }
     .hamburger { display:none; flex-direction:column; gap:5px; cursor:pointer; background:none; border:none; padding:8px; }
     .hamburger span { display:block; width:20px; height:2px; background:var(--text-ink); border-radius:2px; transition:all 0.25s ease; }
-    .mobile-menu { display:none; flex-direction:column; background:var(--bg-card); border-top:var(--border-warm); padding:1rem var(--s4) 1.5rem; }
+    .mobile-menu { display:none; flex-direction:column; background:var(--bg-card); border-top:var(--border-warm); padding:1rem 2.5rem 1.5rem; }
     .mobile-menu.open { display:flex; }
     .mobile-menu a { font-family:var(--font-ui); font-size:0.9rem; font-weight:500; color:var(--text-body); padding:0.7rem 0; border-bottom:var(--border-card); transition:color 0.2s; }
     .mobile-menu a:hover { color:var(--deep-blue); }
@@ -153,7 +152,7 @@
     @media (max-width:1024px) { .header__nav { display:none; } }
     @media (max-width:768px) { .header__cta .btn-ghost { display:none; } .hamburger { display:flex; } }
 
-    /* ── Hero ── */
+    /* ── HERO ── */
     .hero {
       background:var(--bg-dark);
       padding-top:68px;
@@ -162,15 +161,25 @@
     .hero::before {
       content:'';
       position:absolute; top:-100px; right:-100px;
-      width:600px; height:600px;
+      width:700px; height:700px;
       background:radial-gradient(ellipse at center, rgba(184,146,62,0.07) 0%, transparent 65%);
+      pointer-events:none;
+    }
+    .hero::after {
+      content:'';
+      position:absolute; bottom:-60px; left:-60px;
+      width:400px; height:400px;
+      background:radial-gradient(ellipse at center, rgba(109,143,199,0.06) 0%, transparent 65%);
       pointer-events:none;
     }
     .hero__inner {
       max-width:var(--max-width); margin:0 auto;
-      padding:var(--s6) var(--s4);
+      padding:5rem 2.5rem 6rem;
       position:relative; z-index:1;
+      display:grid; grid-template-columns:1fr 1fr; gap:4rem; align-items:center;
     }
+    @media (max-width:860px) { .hero__inner { grid-template-columns:1fr; gap:2.5rem; padding:4rem 2.5rem; } }
+
     .hero__eyebrow {
       display:inline-flex; align-items:center; gap:0.6rem;
       font-family:var(--font-ui); font-size:0.68rem; font-weight:600;
@@ -178,115 +187,268 @@
       color:var(--gold-pale); margin-bottom:1.8rem;
     }
     .hero__eyebrow-dot { width:5px; height:5px; border-radius:50%; background:var(--gold); opacity:0.75; flex-shrink:0; }
-    .hero__title { font-family:var(--font-display); font-size:clamp(2.2rem,4.6vw,3.6rem); font-weight:700; color:#fff; line-height:1.15; margin-bottom:1.6rem; max-width:750px; }
+    .hero__title { font-family:var(--font-display); font-size:clamp(2.2rem,4.6vw,3.8rem); font-weight:700; color:#fff; line-height:1.12; margin-bottom:1.6rem; }
     .hero__title em { font-style:italic; color:var(--gold-pale); }
-    .hero__body { font-family:var(--font-body); font-size:1.06rem; line-height:1.88; color:rgba(245,241,234,0.68); max-width:600px; margin-bottom:3rem; }
-    .hero__badges { display:flex; flex-wrap:wrap; gap:0.75rem; }
+    .hero__body { font-family:var(--font-body); font-size:1.06rem; line-height:1.88; color:rgba(245,241,234,0.68); margin-bottom:2.5rem; }
+    .hero__badges { display:flex; flex-direction:column; gap:0.6rem; }
     .hero__badge {
-      display:inline-flex; align-items:center; gap:0.5rem;
-      background:rgba(255,255,255,0.05); border:var(--border-dark);
-      border-radius:999px; padding:0.5rem 1.1rem;
-      font-family:var(--font-ui); font-size:0.72rem; font-weight:500;
+      display:inline-flex; align-items:center; gap:0.6rem;
+      font-family:var(--font-ui); font-size:0.75rem; font-weight:500;
       color:rgba(245,241,234,0.65);
     }
-    .hero__badge-dot { width:6px; height:6px; border-radius:50%; flex-shrink:0; }
+    .hero__badge-dot { width:7px; height:7px; border-radius:50%; flex-shrink:0; }
     .hero__badge-dot--active { background:var(--sage); }
     .hero__badge-dot--dev    { background:var(--gold); }
     .hero__badge-dot--concept{ background:var(--text-muted); }
 
-    /* ── Filter tabs ── */
-    .filter-section { background:var(--bg-primary); padding:var(--s4) 0 0; }
-    .filter-tabs {
-      display:flex; gap:0.5rem; flex-wrap:wrap;
-      margin-bottom:var(--s4);
+    /* Hero right: mini family preview */
+    .hero__family-preview {
+      display:flex; flex-direction:column; gap:0.75rem;
     }
-    .filter-tab {
-      padding:0.55rem 1.4rem; border-radius:999px;
-      font-family:var(--font-ui); font-size:0.78rem; font-weight:500;
-      cursor:pointer; transition:all 0.22s;
-      background:transparent; border:var(--border-warm);
-      color:var(--text-body);
+    .hero__preview-label {
+      font-family:var(--font-ui); font-size:0.65rem; font-weight:600;
+      letter-spacing:0.14em; text-transform:uppercase;
+      color:rgba(245,241,234,0.30); margin-bottom:0.5rem;
     }
-    .filter-tab:hover { border-color:var(--mid-blue); color:var(--deep-blue); }
-    .filter-tab.active { background:var(--deep-blue); color:#fff; border-color:var(--deep-blue); font-weight:600; }
+    .hero__mini-card {
+      display:flex; align-items:center; gap:0.9rem;
+      background:rgba(255,255,255,0.04); border:var(--border-dark);
+      border-radius:12px; padding:0.85rem 1.1rem;
+      transition:background 0.2s, border-color 0.2s;
+      cursor:pointer; text-decoration:none;
+    }
+    .hero__mini-card:hover { background:rgba(255,255,255,0.07); border-color:rgba(184,146,62,0.3); }
+    .hero__mini-avatar {
+      width:36px; height:36px; border-radius:50%;
+      display:flex; align-items:center; justify-content:center;
+      font-family:var(--font-display); font-size:0.8rem; font-weight:700;
+      color:var(--gold-pale); flex-shrink:0;
+    }
+    .hero__mini-name { font-family:var(--font-ui); font-size:0.82rem; font-weight:600; color:rgba(245,241,234,0.88); }
+    .hero__mini-role { font-family:var(--font-ui); font-size:0.68rem; color:rgba(245,241,234,0.40); margin-top:1px; }
+    .hero__mini-gen {
+      margin-left:auto; font-family:var(--font-ui); font-size:0.6rem; font-weight:700;
+      letter-spacing:0.08em; color:rgba(184,146,62,0.55);
+    }
 
-    /* ── AI Family grid ── */
-    .family-section { background:var(--bg-primary); padding:0 0 var(--s7); }
-    .ai-grid {
-      display:grid;
-      grid-template-columns:repeat(3,1fr);
-      gap:1.5rem;
+    /* ── ORIGIN INTRO ── */
+    .origin-intro {
+      background:var(--bg-primary);
+      padding:6rem 0 5rem;
+      position:relative;
     }
-    @media (max-width:960px) { .ai-grid { grid-template-columns:repeat(2,1fr); } }
-    @media (max-width:600px) { .ai-grid { grid-template-columns:1fr; } }
+    .origin-intro__grid {
+      display:grid; grid-template-columns:1fr 1fr; gap:5rem; align-items:start;
+    }
+    @media (max-width:860px) { .origin-intro__grid { grid-template-columns:1fr; gap:3rem; } }
 
-    .ai-card {
-      background:var(--bg-card);
-      border:var(--border-warm);
-      border-radius:var(--radius-lg);
-      padding:2rem;
-      display:flex; flex-direction:column;
-      box-shadow:var(--shadow-xs);
-      transition:transform 0.25s, box-shadow 0.25s;
+    .origin-intro__pull {
+      font-family:var(--font-display); font-size:clamp(1.4rem,2.5vw,2rem);
+      font-weight:600; color:var(--deep-blue); line-height:1.4;
+      font-style:italic; padding-left:1.5rem;
+      border-left:3px solid var(--gold); opacity:0.85;
+    }
+    .origin-intro__stat {
+      display:flex; flex-direction:column; gap:0.25rem;
+      padding:1.5rem 0; border-bottom:var(--border-warm);
+    }
+    .origin-intro__stat:first-child { border-top:var(--border-warm); }
+    .origin-intro__stat-num {
+      font-family:var(--font-display); font-size:2.2rem; font-weight:700; color:var(--gold);
+    }
+    .origin-intro__stat-label {
+      font-family:var(--font-ui); font-size:0.78rem; color:var(--text-muted); font-weight:500;
+    }
+
+    /* ── FAMILY TREE ── */
+    .tree-section {
+      background:var(--bg-dark);
+      padding:6rem 0;
       position:relative; overflow:hidden;
     }
-    .ai-card:hover { transform:translateY(-4px); box-shadow:var(--shadow-md); }
-    .ai-card--featured {
-      grid-column: span 1;
-      border-color:rgba(184,146,62,0.25);
-      box-shadow:var(--shadow-sm);
+    .tree-section::before {
+      content:'';
+      position:absolute; top:0; left:0; right:0; bottom:0;
+      background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.018'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+      pointer-events:none;
     }
 
-    .ai-card-top { display:flex; align-items:center; gap:1.1rem; margin-bottom:1.25rem; }
-    .ai-avatar {
-      width:64px; height:64px; border-radius:50%;
+    .tree-section__header { text-align:center; margin-bottom:4rem; position:relative; z-index:2; }
+    .tree-section__header h2 { color:#fff; margin-bottom:1rem; }
+    .tree-section__header p { color:rgba(245,241,234,0.60); max-width:520px; margin:0 auto; font-size:0.95rem; }
+
+    /* The actual tree */
+    .family-tree {
+      max-width:780px; margin:0 auto;
+      position:relative; z-index:2;
+    }
+
+    /* Generation row */
+    .tree-gen { margin-bottom:0; }
+    .tree-gen-label {
+      font-family:var(--font-ui); font-size:0.6rem; font-weight:700;
+      letter-spacing:0.15em; text-transform:uppercase;
+      color:rgba(184,146,62,0.45); text-align:center;
+      margin-bottom:0.75rem;
+    }
+    .tree-gen-nodes {
+      display:flex; justify-content:center; gap:2rem; flex-wrap:wrap;
+    }
+
+    /* Node */
+    .tree-node {
+      display:flex; flex-direction:column; align-items:center;
+      cursor:pointer; text-decoration:none;
+    }
+    .tree-node-card {
+      background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.10);
+      border-radius:14px; padding:1rem 1.25rem; text-align:center;
+      transition:all 0.25s; min-width:120px;
+      position:relative; overflow:hidden;
+    }
+    .tree-node-card::before {
+      content:''; position:absolute; inset:0;
+      background:linear-gradient(135deg, rgba(255,255,255,0.03) 0%, transparent 100%);
+    }
+    .tree-node:hover .tree-node-card {
+      background:rgba(255,255,255,0.09);
+      border-color:rgba(184,146,62,0.40);
+      transform:translateY(-3px);
+      box-shadow:0 12px 32px rgba(0,0,0,0.25);
+    }
+    .tree-node-card--founder {
+      background:linear-gradient(135deg, rgba(184,146,62,0.18), rgba(184,146,62,0.08));
+      border-color:rgba(184,146,62,0.50);
+      min-width:160px; padding:1.25rem 1.5rem;
+    }
+    .tree-node-avatar {
+      width:44px; height:44px; border-radius:50%;
       display:flex; align-items:center; justify-content:center;
-      flex-shrink:0;
-      font-family:var(--font-display); font-size:1.3rem; font-weight:700;
-      color:var(--gold-pale);
-      box-shadow:var(--shadow-sm);
+      font-family:var(--font-display); font-size:1rem; font-weight:700;
+      color:var(--gold-pale); margin:0 auto 0.6rem;
     }
-    .ai-card-meta { flex:1; min-width:0; }
-    .ai-card-name { font-family:var(--font-display); font-size:1.15rem; font-weight:700; color:var(--deep-blue); margin-bottom:0.1rem; }
-    .ai-card-role { font-family:var(--font-ui); font-size:0.73rem; color:var(--text-muted); }
+    .tree-node-avatar--founder { width:56px; height:56px; font-size:1.2rem; }
+    .tree-node-name {
+      font-family:var(--font-display); font-size:0.95rem; font-weight:700;
+      color:rgba(245,241,234,0.95); margin-bottom:2px;
+    }
+    .tree-node-name--founder { font-size:1.1rem; color:var(--gold-pale); }
+    .tree-node-role {
+      font-family:var(--font-ui); font-size:0.6rem; color:rgba(245,241,234,0.40);
+      letter-spacing:0.06em; font-weight:500;
+    }
+    .tree-node-gen {
+      font-family:var(--font-ui); font-size:0.58rem; font-weight:700;
+      color:rgba(184,146,62,0.6); letter-spacing:0.1em;
+      margin-top:4px;
+    }
+    .tree-status-dot {
+      width:6px; height:6px; border-radius:50%; margin:6px auto 0;
+    }
+    .tree-status-dot--active { background:var(--sage); }
+    .tree-status-dot--dev    { background:var(--gold); opacity:0.7; }
+    .tree-status-dot--concept{ background:var(--text-muted); opacity:0.5; }
 
-    .status-badge {
-      display:inline-flex; align-items:center; gap:5px;
-      border-radius:999px; padding:3px 10px;
+    /* Connector lines */
+    .tree-connector {
+      display:flex; flex-direction:column; align-items:center;
+      position:relative;
+    }
+    .tree-connector-vline {
+      width:2px; height:28px;
+      background:linear-gradient(to bottom, rgba(184,146,62,0.35), rgba(184,146,62,0.15));
+    }
+    .tree-connector-hline {
+      height:2px;
+      background:linear-gradient(to right, rgba(184,146,62,0.15), rgba(184,146,62,0.35), rgba(184,146,62,0.15));
+    }
+
+    /* Forked connector: 1 → 2 nodes */
+    .tree-fork {
+      display:flex; flex-direction:column; align-items:center;
+    }
+    .tree-fork-top { width:2px; height:24px; background:rgba(184,146,62,0.3); }
+    .tree-fork-row {
+      display:flex; align-items:flex-start;
+    }
+    .tree-fork-bar {
+      height:2px; background:rgba(184,146,62,0.25);
+      align-self:flex-start;
+    }
+    .tree-fork-down {
+      width:2px; height:24px; background:rgba(184,146,62,0.25);
+    }
+
+    /* Convergence connector: many → 1 */
+    .tree-converge {
+      display:flex; flex-direction:column; align-items:center;
+    }
+
+    /* Spark labels (what triggered this AI) */
+    .spark-label {
+      font-family:var(--font-ui); font-size:0.62rem; font-weight:500;
+      color:rgba(184,146,62,0.55); letter-spacing:0.06em;
+      text-align:center; padding:0 1rem; line-height:1.4;
+    }
+
+    /* ── ORIGIN STORIES ── */
+    .stories-section {
+      background:var(--bg-primary);
+      padding:7rem 0;
+    }
+    .stories-section__header { text-align:center; margin-bottom:5rem; }
+
+    .story {
+      display:grid; grid-template-columns:1fr 1fr; gap:5rem;
+      align-items:start; margin-bottom:6rem;
+      padding-bottom:6rem; border-bottom:var(--border-warm);
+    }
+    .story:last-child { margin-bottom:0; padding-bottom:0; border-bottom:none; }
+    .story--reversed { direction:rtl; }
+    .story--reversed > * { direction:ltr; }
+    @media (max-width:860px) {
+      .story { grid-template-columns:1fr; gap:2.5rem; direction:ltr; }
+      .story--reversed > * { direction:ltr; }
+    }
+
+    .story__left { }
+    .story__gen-tag {
+      display:inline-flex; align-items:center; gap:0.5rem;
       font-family:var(--font-ui); font-size:0.62rem; font-weight:700;
-      letter-spacing:0.06em; text-transform:uppercase;
-      margin-bottom:0.85rem; width:fit-content;
+      letter-spacing:0.14em; text-transform:uppercase;
+      color:var(--gold); margin-bottom:1.25rem;
+      background:rgba(184,146,62,0.10); border:1px solid rgba(184,146,62,0.2);
+      border-radius:999px; padding:0.35rem 0.9rem;
     }
-    .status-badge-dot { width:5px; height:5px; border-radius:50%; }
-    .status--active    { background:rgba(78,158,116,0.1);  color:var(--sage); border:1px solid rgba(78,158,116,0.2); }
-    .status--active .status-badge-dot    { background:var(--sage); }
-    .status--development { background:rgba(184,146,62,0.1); color:var(--gold); border:1px solid rgba(184,146,62,0.22); }
-    .status--development .status-badge-dot { background:var(--gold); }
-    .status--concept   { background:rgba(136,143,160,0.1); color:var(--text-muted); border:1px solid rgba(136,143,160,0.2); }
-    .status--concept .status-badge-dot   { background:var(--text-muted); }
-
-    .availability-badge {
-      display:inline-flex; align-items:center; gap:4px;
-      border-radius:999px; padding:2px 9px;
-      font-family:var(--font-ui); font-size:0.6rem; font-weight:600;
-      letter-spacing:0.06em; text-transform:uppercase;
-      margin-left:0.4rem;
+    .story__ai-identity {
+      display:flex; align-items:center; gap:1rem; margin-bottom:1.5rem;
     }
-    .avail--client   { background:rgba(31,53,87,0.08);  color:var(--deep-blue); border:1px solid rgba(31,53,87,0.15); }
-    .avail--internal { background:rgba(109,143,199,0.1); color:var(--mid-blue);  border:1px solid rgba(109,143,199,0.2); }
+    .story__avatar {
+      width:60px; height:60px; border-radius:50%;
+      display:flex; align-items:center; justify-content:center;
+      font-family:var(--font-display); font-size:1.2rem; font-weight:700;
+      color:var(--gold-pale); flex-shrink:0;
+    }
+    .story__ai-name { font-family:var(--font-display); font-size:1.6rem; font-weight:700; color:var(--deep-blue); }
+    .story__ai-role { font-family:var(--font-ui); font-size:0.75rem; color:var(--text-muted); margin-top:2px; letter-spacing:0.04em; }
 
-    .ai-card-tagline { font-family:var(--font-display); font-size:0.95rem; font-style:italic; color:var(--deep-blue); margin-bottom:0.75rem; line-height:1.5; }
-    .ai-card-desc { font-family:var(--font-body); font-size:0.87rem; line-height:1.82; color:var(--text-body); margin-bottom:1.25rem; flex:1; }
+    .story__badges { display:flex; gap:0.5rem; flex-wrap:wrap; margin-bottom:1.5rem; }
+    .story__tagline {
+      font-family:var(--font-display); font-size:1.05rem; font-style:italic;
+      color:var(--deep-blue); margin-bottom:1.25rem; line-height:1.5; opacity:0.85;
+    }
+    .story__desc { font-size:0.95rem; line-height:1.88; margin-bottom:1.5rem; }
 
-    .use-cases { display:flex; flex-wrap:wrap; gap:0.4rem; margin-bottom:1.25rem; }
+    /* Use case tags */
+    .use-cases { display:flex; flex-wrap:wrap; gap:0.4rem; margin-bottom:1.5rem; }
     .use-case-tag {
       display:inline-block;
-      background:rgba(31,53,87,0.06);
-      color:var(--deep-blue);
+      background:rgba(31,53,87,0.06); color:var(--deep-blue);
       font-family:var(--font-ui); font-size:0.65rem; font-weight:600;
       padding:3px 10px; border-radius:999px;
     }
 
+    /* Meet btn */
     .meet-btn {
       display:inline-flex; align-items:center; gap:0.4rem;
       font-family:var(--font-ui); font-size:0.78rem; font-weight:600;
@@ -295,15 +457,148 @@
       transition:all 0.25s; width:fit-content;
     }
     .meet-btn:hover { background:var(--deep-blue); color:#fff; border-color:var(--deep-blue); }
-    .meet-btn--disabled {
-      color:var(--text-muted); border-color:var(--neutral-200);
-      pointer-events:none; cursor:default;
+    .meet-btn--disabled { color:var(--text-muted); border-color:var(--neutral-200); pointer-events:none; }
+
+    /* Right side: story panels */
+    .story__right { display:flex; flex-direction:column; gap:1rem; }
+
+    .story-panel {
+      background:var(--bg-card); border:var(--border-warm); border-radius:var(--radius);
+      padding:1.5rem 1.75rem; box-shadow:var(--shadow-xs);
+    }
+    .story-panel__label {
+      font-family:var(--font-ui); font-size:0.62rem; font-weight:700;
+      letter-spacing:0.13em; text-transform:uppercase;
+      color:var(--warm-blue); margin-bottom:0.6rem;
+    }
+    .story-panel__label--problem { color:#b04040; }
+    .story-panel__label--spark   { color:var(--gold); }
+    .story-panel__label--impact  { color:var(--sage); }
+    .story-panel__text {
+      font-family:var(--font-body); font-size:0.88rem; line-height:1.82; color:var(--text-body);
+      margin:0;
     }
 
-    /* ── What We Build section ── */
+    /* Capabilities accordion */
+    .capabilities-toggle {
+      background:none; border:var(--border-warm); border-radius:var(--radius-sm);
+      padding:0.75rem 1.1rem; cursor:pointer; width:100%;
+      display:flex; align-items:center; justify-content:space-between;
+      font-family:var(--font-ui); font-size:0.78rem; font-weight:600; color:var(--text-body);
+      transition:all 0.2s;
+    }
+    .capabilities-toggle:hover { border-color:var(--mid-blue); color:var(--deep-blue); background:rgba(31,53,87,0.03); }
+    .cap-icon { transition:transform 0.3s; font-size:1.1rem; color:var(--mid-blue); }
+    .cap-icon.open { transform:rotate(45deg); }
+    .capabilities-list {
+      max-height:0; overflow:hidden;
+      transition:max-height 0.4s ease;
+    }
+    .capabilities-list.open { max-height:400px; }
+    .capabilities-list-inner {
+      padding:1rem 1.1rem 0.5rem;
+      display:flex; flex-direction:column; gap:0.5rem;
+    }
+    .cap-item {
+      display:flex; gap:0.6rem; align-items:flex-start;
+      font-family:var(--font-body); font-size:0.83rem; line-height:1.6; color:var(--text-body);
+    }
+    .cap-item::before {
+      content:'→'; color:var(--gold); font-size:0.75rem; flex-shrink:0; margin-top:2px;
+    }
+
+    /* Status badges */
+    .status-badge {
+      display:inline-flex; align-items:center; gap:5px;
+      border-radius:999px; padding:3px 10px;
+      font-family:var(--font-ui); font-size:0.62rem; font-weight:700;
+      letter-spacing:0.06em; text-transform:uppercase; width:fit-content;
+    }
+    .status-badge-dot { width:5px; height:5px; border-radius:50%; }
+    .status--active    { background:rgba(78,158,116,0.1);  color:var(--sage); border:1px solid rgba(78,158,116,0.2); }
+    .status--active .status-badge-dot { background:var(--sage); }
+    .status--development { background:rgba(184,146,62,0.1); color:var(--gold); border:1px solid rgba(184,146,62,0.22); }
+    .status--development .status-badge-dot { background:var(--gold); }
+    .status--concept { background:rgba(136,143,160,0.1); color:var(--text-muted); border:1px solid rgba(136,143,160,0.2); }
+    .status--concept .status-badge-dot { background:var(--text-muted); }
+    .availability-badge {
+      display:inline-flex; align-items:center; gap:4px;
+      border-radius:999px; padding:3px 10px;
+      font-family:var(--font-ui); font-size:0.62rem; font-weight:600;
+      letter-spacing:0.06em; text-transform:uppercase;
+    }
+    .avail--client   { background:rgba(31,53,87,0.08);  color:var(--deep-blue); border:1px solid rgba(31,53,87,0.15); }
+    .avail--internal { background:rgba(109,143,199,0.1); color:var(--mid-blue);  border:1px solid rgba(109,143,199,0.2); }
+
+    /* ── ROADMAP ── */
+    .roadmap-section {
+      background:var(--bg-section);
+      padding:6rem 0;
+    }
+    .roadmap-section__header { text-align:center; margin-bottom:4rem; }
+
+    .roadmap-grid {
+      display:grid; grid-template-columns:1fr 1fr; gap:3rem;
+    }
+    @media (max-width:760px) { .roadmap-grid { grid-template-columns:1fr; } }
+
+    .roadmap-col-label {
+      font-family:var(--font-ui); font-size:0.65rem; font-weight:700;
+      letter-spacing:0.14em; text-transform:uppercase;
+      color:var(--text-muted); margin-bottom:1.5rem; padding-bottom:0.75rem;
+      border-bottom:var(--border-warm);
+    }
+    .roadmap-item {
+      display:flex; gap:1rem; align-items:flex-start;
+      padding:1.1rem 0; border-bottom:var(--border-warm);
+    }
+    .roadmap-item:last-child { border-bottom:none; }
+    .roadmap-dot {
+      width:10px; height:10px; border-radius:50%; flex-shrink:0; margin-top:5px;
+    }
+    .roadmap-dot--next { background:var(--gold); opacity:0.7; }
+    .roadmap-dot--soon { background:var(--mid-blue); opacity:0.5; }
+    .roadmap-dot--concept { background:var(--neutral-300); }
+    .roadmap-item-name {
+      font-family:var(--font-display); font-size:0.95rem; font-weight:600;
+      color:var(--deep-blue); margin-bottom:2px;
+    }
+    .roadmap-item-desc {
+      font-family:var(--font-body); font-size:0.82rem; line-height:1.7; color:var(--text-muted);
+      margin:0;
+    }
+
+    /* Client family placeholder */
+    .client-family-card {
+      background:var(--bg-card); border:2px dashed var(--neutral-200);
+      border-radius:var(--radius-lg); padding:2rem;
+      text-align:center;
+    }
+    .client-family-card h4 {
+      font-family:var(--font-display); font-size:1.1rem; color:var(--deep-blue);
+      margin-bottom:0.5rem;
+    }
+    .client-family-card p {
+      font-size:0.85rem; color:var(--text-muted); margin-bottom:1.25rem;
+    }
+    .client-family-placeholder {
+      display:flex; flex-direction:column; gap:0.5rem; margin-bottom:1.5rem;
+    }
+    .client-placeholder-row {
+      display:flex; gap:0.5rem; justify-content:center;
+    }
+    .client-placeholder-node {
+      width:44px; height:44px; border-radius:50%;
+      background:var(--bg-section); border:2px dashed var(--neutral-200);
+      display:flex; align-items:center; justify-content:center;
+      font-family:var(--font-ui); font-size:0.55rem; font-weight:600;
+      color:var(--neutral-300); letter-spacing:0.06em;
+    }
+
+    /* ── BUILD SECTION ── */
     .build-section {
       background:var(--bg-dark);
-      padding:var(--s7) 0;
+      padding:7rem 0;
       position:relative; overflow:hidden;
     }
     .build-section::before {
@@ -313,7 +608,7 @@
       background:radial-gradient(ellipse at center, rgba(109,143,199,0.06) 0%, transparent 65%);
       pointer-events:none;
     }
-    .build-grid { display:grid; grid-template-columns:1fr 1fr; gap:var(--s5); align-items:center; }
+    .build-grid { display:grid; grid-template-columns:1fr 1fr; gap:4rem; align-items:center; }
     @media (max-width:860px) { .build-grid { grid-template-columns:1fr; } }
     .build-copy h2 { color:#fff; margin-bottom:1.1rem; }
     .build-copy p  { color:rgba(245,241,234,0.68); margin-bottom:1rem; }
@@ -321,9 +616,7 @@
     .build-step {
       display:flex; align-items:flex-start; gap:1rem;
       padding:1.25rem 1.5rem;
-      background:rgba(255,255,255,0.03);
-      border:var(--border-dark);
-      border-radius:var(--radius);
+      background:rgba(255,255,255,0.03); border:var(--border-dark); border-radius:var(--radius);
     }
     .build-step-num {
       width:32px; height:32px; border-radius:50%;
@@ -336,39 +629,30 @@
     .build-step-desc  { font-family:var(--font-body); font-size:0.82rem; line-height:1.7; color:rgba(245,241,234,0.55); margin:0; }
 
     /* ── CTA ── */
-    .cta-section {
-      background:var(--bg-section);
-      padding:var(--s7) 0;
-      text-align:center;
-    }
+    .cta-section { background:var(--bg-section); padding:7rem 0; text-align:center; }
     .cta-section h2 { margin-bottom:1rem; }
     .cta-section p  { max-width:520px; margin:0 auto 2.5rem; }
     .cta-btns { display:flex; gap:1rem; justify-content:center; flex-wrap:wrap; }
 
     /* ── Footer ── */
-    .site-footer {
-      background:var(--bg-footer);
-      padding:var(--s5) 0 var(--s4);
-      border-top:var(--border-dark);
-    }
-    .footer__grid {
-      display:grid; grid-template-columns:2fr 1fr 1fr;
-      gap:var(--s5); margin-bottom:var(--s5);
-    }
-    @media (max-width:768px) { .footer__grid { grid-template-columns:1fr; gap:var(--s3); } }
+    .site-footer { background:var(--bg-footer); padding:4rem 0 2.5rem; border-top:var(--border-dark); }
+    .footer__grid { display:grid; grid-template-columns:2fr 1fr 1fr; gap:4rem; margin-bottom:4rem; }
+    @media (max-width:768px) { .footer__grid { grid-template-columns:1fr; gap:2rem; } }
     .footer__brand-name { font-family:var(--font-display); font-size:1.1rem; font-weight:700; color:var(--text-warm); margin-bottom:0.6rem; }
     .footer__brand-desc { font-family:var(--font-body); font-size:0.84rem; line-height:1.8; color:rgba(245,241,234,0.45); max-width:280px; margin:0; }
     .footer__col-title { font-family:var(--font-ui); font-size:0.65rem; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:rgba(245,241,234,0.35); margin-bottom:1rem; }
     .footer__links { display:flex; flex-direction:column; gap:0.55rem; list-style:none; }
     .footer__links a { font-family:var(--font-ui); font-size:0.82rem; color:rgba(245,241,234,0.5); transition:color 0.2s; }
     .footer__links a:hover { color:var(--text-warm); }
-    .footer__bottom { display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.5rem; padding-top:var(--s3); border-top:var(--border-dark); }
+    .footer__bottom { display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.5rem; padding-top:1.5rem; border-top:var(--border-dark); }
     .footer__copy { font-family:var(--font-ui); font-size:0.73rem; color:rgba(245,241,234,0.3); }
   </style>
 </head>
 <body>
 
-  <!-- ── HEADER ── -->
+  <!-- ══════════════════════════════════════
+       HEADER
+  ══════════════════════════════════════ -->
   <header class="site-header" id="siteHeader">
     <div class="header__inner">
       <a href="index.html" class="header__logo">
@@ -401,42 +685,671 @@
     </nav>
   </header>
 
-  <!-- ── HERO ── -->
+
+  <!-- ══════════════════════════════════════
+       HERO
+  ══════════════════════════════════════ -->
   <section class="hero">
     <div class="hero__inner">
-      <div class="hero__eyebrow">
-        <span class="hero__eyebrow-dot"></span>
-        Balay ni Bruno &amp; Co. — AI Family
+      <div class="hero__left">
+        <div class="hero__eyebrow">
+          <span class="hero__eyebrow-dot"></span>
+          Balay ni Bruno &amp; Co. — AI Family
+        </div>
+        <h1 class="hero__title">
+          Not just tools.<br/><em>A family built one problem at a time.</em>
+        </h1>
+        <p class="hero__body">
+          Every AI in this family exists because something was broken. A bottleneck. A gap. A task that was slowing the studio down. We did not build these because AI was trending. We built them because we needed them.
+        </p>
+        <div class="hero__badges">
+          <div class="hero__badge"><span class="hero__badge-dot hero__badge-dot--active"></span>Active — live and in use</div>
+          <div class="hero__badge"><span class="hero__badge-dot hero__badge-dot--dev"></span>In Development — being built</div>
+          <div class="hero__badge"><span class="hero__badge-dot hero__badge-dot--concept"></span>Concept — on the roadmap</div>
+        </div>
       </div>
-      <h1 class="hero__title">
-        Meet the AI team that <em>runs the house.</em>
-      </h1>
-      <p class="hero__body">
-        Every AI in this family was built for a specific job. They know Balay ni Bruno &amp; Co. the way a long-term team member would — the clients, the voice, the systems, the standards. And the same family we built for ourselves, we build for our clients.
-      </p>
-      <div class="hero__badges">
-        <span class="hero__badge"><span class="hero__badge-dot hero__badge-dot--active"></span>Active — live and in use</span>
-        <span class="hero__badge"><span class="hero__badge-dot hero__badge-dot--dev"></span>In Development — being built</span>
-        <span class="hero__badge"><span class="hero__badge-dot hero__badge-dot--concept"></span>Concept — on the roadmap</span>
+      <div class="hero__right">
+        <div class="hero__preview-label">Meet the family</div>
+        <div class="hero__family-preview">
+          <a href="#story-brunz" class="hero__mini-card">
+            <div class="hero__mini-avatar" style="background:linear-gradient(135deg,#1F3557,#172540);">B</div>
+            <div><div class="hero__mini-name">Brunz</div><div class="hero__mini-role">Business Brain AI</div></div>
+            <div class="hero__mini-gen">GEN 1</div>
+          </a>
+          <a href="#story-webby" class="hero__mini-card">
+            <div class="hero__mini-avatar" style="background:linear-gradient(135deg,#4B6FA5,#2A4A7F);">W</div>
+            <div><div class="hero__mini-name">Webby</div><div class="hero__mini-role">Website Brain AI</div></div>
+            <div class="hero__mini-gen">GEN 2</div>
+          </a>
+          <a href="#story-boogy" class="hero__mini-card">
+            <div class="hero__mini-avatar" style="background:linear-gradient(135deg,#2E6B4F,#1A4A35);">Bo</div>
+            <div><div class="hero__mini-name">Boogy</div><div class="hero__mini-role">Blog &amp; Content AI</div></div>
+            <div class="hero__mini-gen">GEN 3</div>
+          </a>
+          <a href="#story-mai" class="hero__mini-card">
+            <div class="hero__mini-avatar" style="background:linear-gradient(135deg,#5B3E8C,#3D2760);">M</div>
+            <div><div class="hero__mini-name">Mai</div><div class="hero__mini-role">Marketing Brain AI</div></div>
+            <div class="hero__mini-gen">GEN 3</div>
+          </a>
+          <a href="#story-kriz" class="hero__mini-card">
+            <div class="hero__mini-avatar" style="background:linear-gradient(135deg,#8C3E3E,#602828);">K</div>
+            <div><div class="hero__mini-name">Kriz</div><div class="hero__mini-role">Personal VA AI</div></div>
+            <div class="hero__mini-gen">GEN 4</div>
+          </a>
+          <a href="#story-casey" class="hero__mini-card">
+            <div class="hero__mini-avatar" style="background:linear-gradient(135deg,#5C4A2A,#3D3020);">C</div>
+            <div><div class="hero__mini-name">Casey</div><div class="hero__mini-role">Case Study AI</div></div>
+            <div class="hero__mini-gen">GEN 5</div>
+          </a>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- ── FILTER + AI GRID ── -->
-  <section class="filter-section family-section">
+
+  <!-- ══════════════════════════════════════
+       ORIGIN INTRO
+  ══════════════════════════════════════ -->
+  <section class="origin-intro">
     <div class="container">
-      <div class="filter-tabs" id="filterTabs">
-        <button class="filter-tab active" data-filter="all">All Members</button>
-        <button class="filter-tab" data-filter="active">Active</button>
-        <button class="filter-tab" data-filter="development">In Development</button>
-        <button class="filter-tab" data-filter="client">Available to Clients</button>
-        <button class="filter-tab" data-filter="internal">Internal Only</button>
+      <div class="origin-intro__grid">
+        <div class="fade-in">
+          <span class="eyebrow eyebrow--gold">Where it began</span>
+          <h2 style="margin-bottom:1.5rem;">It started with one question Bruno could not stop answering.</h2>
+          <p style="margin-bottom:1.25rem;">
+            Every new team member needed the same orientation. Every proposal needed the same context. Every client email had the same building blocks. The studio's voice, pricing, process, standards — all of it lived inside one person's head, and that person was becoming a bottleneck in his own business.
+          </p>
+          <p style="margin-bottom:1.25rem;">
+            So instead of hiring another person to remember everything, Bruno built one. That was Brunz. And once Brunz existed, it became obvious what needed to come next. Then next. Then next.
+          </p>
+          <p>
+            This page is the story of that chain. Six AI agents, six problems that needed solving, six reasons why this family exists.
+          </p>
+        </div>
+        <div class="fade-in">
+          <p class="origin-intro__pull" style="margin-bottom:3rem;">
+            "We did not build AI because it was the smart thing to do. We built it because we were drowning in repetition."
+          </p>
+          <div class="origin-intro__stat">
+            <div class="origin-intro__stat-num">6</div>
+            <div class="origin-intro__stat-label">AI agents built and in use at Balay ni Bruno &amp; Co.</div>
+          </div>
+          <div class="origin-intro__stat">
+            <div class="origin-intro__stat-num">5</div>
+            <div class="origin-intro__stat-label">Distinct generations — each one built because the last one revealed a new gap</div>
+          </div>
+          <div class="origin-intro__stat">
+            <div class="origin-intro__stat-num">1</div>
+            <div class="origin-intro__stat-label">Original problem: Bruno was the bottleneck in his own studio</div>
+          </div>
+        </div>
       </div>
-      <div class="ai-grid" id="aiGrid"></div>
     </div>
   </section>
 
-  <!-- ── WHAT WE BUILD ── -->
+
+  <!-- ══════════════════════════════════════
+       FAMILY TREE
+  ══════════════════════════════════════ -->
+  <section class="tree-section" id="family-tree">
+    <div class="tree-section__header">
+      <span class="eyebrow eyebrow--gold">The Family Tree</span>
+      <h2 style="color:#fff;">How they connect</h2>
+      <p>Each AI built on the knowledge of the one before it. This is the order. This is the logic.</p>
+    </div>
+
+    <div class="family-tree fade-in">
+
+      <!-- GEN 1: BRUNZ -->
+      <div class="tree-gen">
+        <div class="tree-gen-label">Generation 1 — The Foundation</div>
+        <div class="tree-gen-nodes">
+          <a href="#story-brunz" class="tree-node">
+            <div class="tree-node-card tree-node-card--founder">
+              <div class="tree-node-avatar tree-node-avatar--founder" style="background:linear-gradient(135deg,#1F3557,#172540);">B</div>
+              <div class="tree-node-name tree-node-name--founder">Brunz</div>
+              <div class="tree-node-role">Business Brain AI</div>
+              <div class="tree-node-gen">GEN 1 · THE FATHER</div>
+              <div class="tree-status-dot tree-status-dot--active" style="margin-top:8px;"></div>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <!-- Connector: 1 → 3 -->
+      <div style="display:flex; flex-direction:column; align-items:center; padding:4px 0;">
+        <div class="tree-connector-vline"></div>
+        <div style="width:380px; max-width:90vw; display:flex; align-items:flex-start; justify-content:space-between; position:relative;">
+          <div class="tree-connector-hline" style="position:absolute; top:0; left:15%; right:15%; height:2px; background:rgba(184,146,62,0.22);"></div>
+          <div class="tree-fork-down" style="margin-left:15%;"></div>
+          <div class="tree-fork-down"></div>
+          <div class="tree-fork-down" style="margin-right:15%;"></div>
+        </div>
+      </div>
+
+      <!-- GEN 2: WEBBY + KRIZ (+ future spacer) -->
+      <div class="tree-gen">
+        <div class="tree-gen-label">Generation 2 — First Branches</div>
+        <div class="tree-gen-nodes" style="gap:3rem;">
+          <a href="#story-webby" class="tree-node">
+            <div class="tree-node-card">
+              <div class="tree-node-avatar" style="background:linear-gradient(135deg,#4B6FA5,#2A4A7F);">W</div>
+              <div class="tree-node-name">Webby</div>
+              <div class="tree-node-role">Website Brain AI</div>
+              <div class="tree-node-gen">GEN 2</div>
+              <div class="tree-status-dot tree-status-dot--active"></div>
+            </div>
+            <div class="spark-label" style="margin-top:6px;">Sparked by Brunz's<br/>brand knowledge</div>
+          </a>
+          <a href="#story-kriz" class="tree-node">
+            <div class="tree-node-card" style="border-color:rgba(140,62,62,0.3);">
+              <div class="tree-node-avatar" style="background:linear-gradient(135deg,#8C3E3E,#602828);">K</div>
+              <div class="tree-node-name">Kriz</div>
+              <div class="tree-node-role">Personal VA AI</div>
+              <div class="tree-node-gen">GEN 2</div>
+              <div class="tree-status-dot tree-status-dot--dev"></div>
+            </div>
+            <div class="spark-label" style="margin-top:6px;">Sparked by the gap<br/>between Brunz and Bruno</div>
+          </a>
+        </div>
+      </div>
+
+      <!-- Connector: Webby → 2 children -->
+      <div style="display:flex; justify-content:center;">
+        <div style="display:flex; flex-direction:column; align-items:center; margin-right:160px;">
+          <div class="tree-connector-vline"></div>
+          <div style="width:200px; position:relative; height:2px; background:rgba(184,146,62,0.2);"></div>
+          <div style="width:200px; display:flex; justify-content:space-between;">
+            <div class="tree-fork-down"></div>
+            <div class="tree-fork-down"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- GEN 3: BOOGY + MAI -->
+      <div class="tree-gen" style="margin-left:0;">
+        <div class="tree-gen-label">Generation 3 — The Voice Layer</div>
+        <div class="tree-gen-nodes" style="gap:3rem; justify-content:flex-start; padding-left:0; justify-content:center; margin-right:100px;">
+          <a href="#story-boogy" class="tree-node">
+            <div class="tree-node-card" style="border-color:rgba(78,158,116,0.3);">
+              <div class="tree-node-avatar" style="background:linear-gradient(135deg,#2E6B4F,#1A4A35);">Bo</div>
+              <div class="tree-node-name">Boogy</div>
+              <div class="tree-node-role">Blog &amp; Content AI</div>
+              <div class="tree-node-gen">GEN 3</div>
+              <div class="tree-status-dot tree-status-dot--active"></div>
+            </div>
+            <div class="spark-label" style="margin-top:6px;">Webby's site structure<br/>+ Brunz's voice</div>
+          </a>
+          <a href="#story-mai" class="tree-node">
+            <div class="tree-node-card" style="border-color:rgba(91,62,140,0.3);">
+              <div class="tree-node-avatar" style="background:linear-gradient(135deg,#5B3E8C,#3D2760);">M</div>
+              <div class="tree-node-name">Mai</div>
+              <div class="tree-node-role">Marketing Brain AI</div>
+              <div class="tree-node-gen">GEN 3</div>
+              <div class="tree-status-dot tree-status-dot--dev"></div>
+            </div>
+            <div class="spark-label" style="margin-top:6px;">Brunz's strategy<br/>+ Boogy's rhythm</div>
+          </a>
+        </div>
+      </div>
+
+      <!-- Connector: convergence → Casey -->
+      <div style="display:flex; flex-direction:column; align-items:center; padding:4px 0;">
+        <div style="width:300px; max-width:90vw; position:relative; height:2px; background:rgba(184,146,62,0.15);"></div>
+        <div class="tree-connector-vline"></div>
+        <div class="spark-label" style="max-width:200px; margin-bottom:6px;">When enough wins accumulated,<br/>someone had to tell the stories</div>
+      </div>
+
+      <!-- GEN 5: CASEY -->
+      <div class="tree-gen">
+        <div class="tree-gen-label">Generation 5 — The Storyteller</div>
+        <div class="tree-gen-nodes">
+          <a href="#story-casey" class="tree-node">
+            <div class="tree-node-card" style="border-color:rgba(184,146,62,0.2); background:rgba(184,146,62,0.05);">
+              <div class="tree-node-avatar" style="background:linear-gradient(135deg,#5C4A2A,#3D3020);">C</div>
+              <div class="tree-node-name">Casey</div>
+              <div class="tree-node-role">Case Study AI</div>
+              <div class="tree-node-gen">GEN 5 · FED BY ALL</div>
+              <div class="tree-status-dot tree-status-dot--concept"></div>
+            </div>
+          </a>
+        </div>
+      </div>
+
+    </div><!-- /family-tree -->
+  </section>
+
+
+  <!-- ══════════════════════════════════════
+       ORIGIN STORIES
+  ══════════════════════════════════════ -->
+  <section class="stories-section">
+    <div class="container">
+      <div class="stories-section__header fade-in">
+        <span class="eyebrow eyebrow--gold">The Origin Stories</span>
+        <h2>Why each one exists</h2>
+        <div class="divider-bar"></div>
+        <p style="max-width:500px; margin:0 auto; font-size:0.95rem;">
+          Every name in this family has a reason behind it. Not a feature list. A real problem that Bruno and the team were living with, and a decision to build something instead of just working around it.
+        </p>
+      </div>
+
+      <!-- ── BRUNZ ── -->
+      <div class="story fade-in" id="story-brunz">
+        <div class="story__left">
+          <div class="story__gen-tag">Generation 1 · The Father</div>
+          <div class="story__ai-identity">
+            <div class="story__avatar" style="background:linear-gradient(135deg,#1F3557,#172540);">B</div>
+            <div>
+              <div class="story__ai-name">Brunz</div>
+              <div class="story__ai-role">Business Brain AI</div>
+            </div>
+          </div>
+          <div class="story__badges">
+            <span class="status-badge status--active"><span class="status-badge-dot"></span>Active</span>
+            <span class="availability-badge avail--client">Available to Clients</span>
+          </div>
+          <p class="story__tagline">"Already knows your entire operation."</p>
+          <p class="story__desc">
+            Brunz is the head of the AI family. He carries the full context of the business — the team, the clients, the pricing, the voice, the standards. Open him and you are not starting from scratch. You are starting with everything Balay ni Bruno &amp; Co. already knows.
+          </p>
+          <div class="use-cases">
+            <span class="use-case-tag">Client emails &amp; proposals</span>
+            <span class="use-case-tag">Business strategy</span>
+            <span class="use-case-tag">Team SOPs</span>
+            <span class="use-case-tag">Onboarding staff</span>
+            <span class="use-case-tag">Operational decisions</span>
+          </div>
+          <button class="capabilities-toggle" onclick="toggleCap('cap-brunz')">
+            View full capabilities <span class="cap-icon" id="icon-cap-brunz">+</span>
+          </button>
+          <div class="capabilities-list" id="cap-brunz">
+            <div class="capabilities-list-inner">
+              <div class="cap-item">Drafts client proposals with the correct pricing, scope, and BBC voice</div>
+              <div class="cap-item">Answers team questions about services, process, and positioning</div>
+              <div class="cap-item">Writes onboarding documents for new team members</div>
+              <div class="cap-item">Generates operational SOPs from brief descriptions</div>
+              <div class="cap-item">Provides decision support for business strategy questions</div>
+            </div>
+          </div>
+          <a href="brunz.html" class="meet-btn" style="margin-top:1.25rem;">Meet Brunz <span>→</span></a>
+        </div>
+        <div class="story__right">
+          <div class="story-panel">
+            <div class="story-panel__label story-panel__label--problem">The Problem</div>
+            <p class="story-panel__text">Bruno was the bottleneck. Every new team member needed the same orientation. Every proposal needed the same context. The studio's voice, pricing, services, and standards all lived inside one person's head. If Bruno was unavailable, the work slowed down. If Bruno was busy, things waited.</p>
+          </div>
+          <div class="story-panel">
+            <div class="story-panel__label story-panel__label--spark">Why Brunz Was Built</div>
+            <p class="story-panel__text">To get Bruno out of Bruno's head. Instead of hiring another person to remember everything, the answer was to build something that already knew everything. Brunz was the first because you cannot build anything else on top of a foundation that does not exist yet.</p>
+          </div>
+          <div class="story-panel">
+            <div class="story-panel__label story-panel__label--impact">What Changed</div>
+            <p class="story-panel__text">The team could move without waiting for Bruno's input. Context was always available. Proposals were faster. Onboarding got shorter. And for the first time, the studio's voice lived somewhere outside a single person's memory.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── WEBBY ── -->
+      <div class="story story--reversed fade-in" id="story-webby">
+        <div class="story__left">
+          <div class="story__gen-tag">Generation 2 · The Architect</div>
+          <div class="story__ai-identity">
+            <div class="story__avatar" style="background:linear-gradient(135deg,#4B6FA5,#2A4A7F);">W</div>
+            <div>
+              <div class="story__ai-name">Webby</div>
+              <div class="story__ai-role">Website Brain AI</div>
+            </div>
+          </div>
+          <div class="story__badges">
+            <span class="status-badge status--active"><span class="status-badge-dot"></span>Active</span>
+            <span class="availability-badge avail--client">Available to Clients</span>
+          </div>
+          <p class="story__tagline">"Knows every pixel of your site."</p>
+          <p class="story__desc">
+            Webby knows the tech stack, the design system, the colors, the fonts, the copy voice, and every page on the site. When the website needs to change, Webby knows exactly how it should look and sound. No guessing. No inconsistency.
+          </p>
+          <div class="use-cases">
+            <span class="use-case-tag">Website copy</span>
+            <span class="use-case-tag">SEO meta tags</span>
+            <span class="use-case-tag">Developer briefs</span>
+            <span class="use-case-tag">Design consistency</span>
+            <span class="use-case-tag">Pre-launch checks</span>
+          </div>
+          <button class="capabilities-toggle" onclick="toggleCap('cap-webby')">
+            View full capabilities <span class="cap-icon" id="icon-cap-webby">+</span>
+          </button>
+          <div class="capabilities-list" id="cap-webby">
+            <div class="capabilities-list-inner">
+              <div class="cap-item">Writes and reviews all website copy in the correct brand voice</div>
+              <div class="cap-item">Generates SEO-optimized meta titles and descriptions per page</div>
+              <div class="cap-item">Creates developer briefs for design changes with exact specs</div>
+              <div class="cap-item">Checks new content against the existing tone and visual rules</div>
+              <div class="cap-item">Audits pages for consistency before any launch or update</div>
+            </div>
+          </div>
+          <a href="webby.html" class="meet-btn" style="margin-top:1.25rem;">Meet Webby <span>→</span></a>
+        </div>
+        <div class="story__right">
+          <div class="story-panel">
+            <div class="story-panel__label story-panel__label--problem">The Problem</div>
+            <p class="story-panel__text">The website was being touched by different people with different ideas of what it should say. Pages had inconsistent voice. Updates broke the design tone. Every change needed Bruno to review before it went live — which created another queue, another wait, another bottleneck in a different place.</p>
+          </div>
+          <div class="story-panel">
+            <div class="story-panel__label story-panel__label--spark">Why Webby Was Built</div>
+            <p class="story-panel__text">Brunz already carried the brand knowledge. Webby was built to apply that knowledge specifically to the web layer — every technical rule, every design decision, every copy pattern. Now any team member can update the site without guessing how it should sound or look.</p>
+          </div>
+          <div class="story-panel">
+            <div class="story-panel__label story-panel__label--impact">What Changed</div>
+            <p class="story-panel__text">Website updates stopped needing a final Bruno review for voice or design. The site felt consistent regardless of who made the change. And when new pages needed to be built, Webby already knew the blueprint.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── BOOGY ── -->
+      <div class="story fade-in" id="story-boogy">
+        <div class="story__left">
+          <div class="story__gen-tag">Generation 3 · The Writer</div>
+          <div class="story__ai-identity">
+            <div class="story__avatar" style="background:linear-gradient(135deg,#2E6B4F,#1A4A35);">Bo</div>
+            <div>
+              <div class="story__ai-name">Boogy</div>
+              <div class="story__ai-role">Blog &amp; Content AI</div>
+            </div>
+          </div>
+          <div class="story__badges">
+            <span class="status-badge status--active"><span class="status-badge-dot"></span>Active</span>
+            <span class="availability-badge avail--internal">Internal Only</span>
+          </div>
+          <p class="story__tagline">"Long-form content that sounds like you."</p>
+          <p class="story__desc">
+            Boogy writes blog posts, thought leadership pieces, and long-form content in the BBC voice. He knows the content pillars, the SEO framework, and the internal link structure of the site. He does not just write — he writes with purpose inside a system.
+          </p>
+          <div class="use-cases">
+            <span class="use-case-tag">Blog posts</span>
+            <span class="use-case-tag">Thought leadership</span>
+            <span class="use-case-tag">SEO content</span>
+            <span class="use-case-tag">Long-form writing</span>
+            <span class="use-case-tag">Content research</span>
+          </div>
+          <button class="capabilities-toggle" onclick="toggleCap('cap-boogy')">
+            View full capabilities <span class="cap-icon" id="icon-cap-boogy">+</span>
+          </button>
+          <div class="capabilities-list" id="cap-boogy">
+            <div class="capabilities-list-inner">
+              <div class="cap-item">Writes full blog posts anchored in the BBC content pillars</div>
+              <div class="cap-item">Structures posts with internal links pointing to the right pages</div>
+              <div class="cap-item">Researches topics and pulls relevant angles before writing</div>
+              <div class="cap-item">Adapts tone from thought leadership to practical how-tos</div>
+              <div class="cap-item">Drafts outlines for review before committing to a full post</div>
+            </div>
+          </div>
+          <span class="meet-btn meet-btn--disabled" style="margin-top:1.25rem;">Coming Soon</span>
+        </div>
+        <div class="story__right">
+          <div class="story-panel">
+            <div class="story-panel__label story-panel__label--problem">The Problem</div>
+            <p class="story-panel__text">Long-form content was a constant bottleneck. Blog posts took days to write. The SEO framework and content pillars existed on paper but were not being executed consistently. The site's organic potential was sitting untouched because no one had the time or energy to write at the volume needed.</p>
+          </div>
+          <div class="story-panel">
+            <div class="story-panel__label story-panel__label--spark">Why Boogy Was Built</div>
+            <p class="story-panel__text">By the time Webby existed, the site structure was documented. Brunz had the brand voice locked. Boogy was built at the intersection — an AI that could produce long-form content that served both the SEO map (Webby's domain) and the brand voice (Brunz's domain) at the same time.</p>
+          </div>
+          <div class="story-panel">
+            <div class="story-panel__label story-panel__label--impact">What Changed</div>
+            <p class="story-panel__text">Content output increased without sacrificing quality or brand consistency. Blog posts that once took a week to draft now take a day. The internal link structure is followed automatically. The site grows without the team having to slow down for writing sprints.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── MAI ── -->
+      <div class="story story--reversed fade-in" id="story-mai">
+        <div class="story__left">
+          <div class="story__gen-tag">Generation 3 · The Marketer</div>
+          <div class="story__ai-identity">
+            <div class="story__avatar" style="background:linear-gradient(135deg,#5B3E8C,#3D2760);">M</div>
+            <div>
+              <div class="story__ai-name">Mai</div>
+              <div class="story__ai-role">Marketing Brain AI</div>
+            </div>
+          </div>
+          <div class="story__badges">
+            <span class="status-badge status--development"><span class="status-badge-dot"></span>In Development</span>
+            <span class="availability-badge avail--client">Available to Clients</span>
+          </div>
+          <p class="story__tagline">"Your content, your voice, your strategy."</p>
+          <p class="story__desc">
+            Mai handles the content and marketing layer. Social captions, email campaigns, content calendars, brand storytelling — all in the business voice, all rooted in the strategy Brunz already knows. She does not invent the direction. She executes it consistently.
+          </p>
+          <div class="use-cases">
+            <span class="use-case-tag">Social media content</span>
+            <span class="use-case-tag">Email campaigns</span>
+            <span class="use-case-tag">Content calendars</span>
+            <span class="use-case-tag">Brand storytelling</span>
+            <span class="use-case-tag">Campaign strategy</span>
+          </div>
+          <button class="capabilities-toggle" onclick="toggleCap('cap-mai')">
+            View full capabilities <span class="cap-icon" id="icon-cap-mai">+</span>
+          </button>
+          <div class="capabilities-list" id="cap-mai">
+            <div class="capabilities-list-inner">
+              <div class="cap-item">Builds monthly content calendars from themes and business goals</div>
+              <div class="cap-item">Writes social captions across platforms in the correct brand tone</div>
+              <div class="cap-item">Drafts email campaigns from subject line through to CTA</div>
+              <div class="cap-item">Repurposes Boogy's long-form posts into short-form social assets</div>
+              <div class="cap-item">Structures campaign strategies aligned with Brunz's business priorities</div>
+            </div>
+          </div>
+          <span class="meet-btn meet-btn--disabled" style="margin-top:1.25rem;">Coming Soon</span>
+        </div>
+        <div class="story__right">
+          <div class="story-panel">
+            <div class="story-panel__label story-panel__label--problem">The Problem</div>
+            <p class="story-panel__text">Social content was inconsistent. Email campaigns were one-offs that happened when someone had time. Marketing output had no system — it was reactive. The strategy was clear in Brunz's head but the execution was scattered across too many people with too little time.</p>
+          </div>
+          <div class="story-panel">
+            <div class="story-panel__label story-panel__label--spark">Why Mai Was Built</div>
+            <p class="story-panel__text">Brunz had the strategy. Boogy had the long-form content rhythm. Mai was built to own the short-form layer — captions, emails, campaigns — all tied to the same brand voice without needing Bruno to write any of it. She is Brunz's strategy, expressed in the formats that reach people every day.</p>
+          </div>
+          <div class="story-panel">
+            <div class="story-panel__label story-panel__label--impact">What Changed</div>
+            <p class="story-panel__text">Content calendars are now structured, not improvised. Captions feel on-brand without Bruno writing them. Campaigns have a consistent strategic thread that connects back to the goals Brunz already holds. Marketing stopped being a bottleneck and started being a system.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── KRIZ ── -->
+      <div class="story fade-in" id="story-kriz">
+        <div class="story__left">
+          <div class="story__gen-tag">Generation 4 · The Personal Layer</div>
+          <div class="story__ai-identity">
+            <div class="story__avatar" style="background:linear-gradient(135deg,#8C3E3E,#602828);">K</div>
+            <div>
+              <div class="story__ai-name">Kriz</div>
+              <div class="story__ai-role">Personal VA AI</div>
+            </div>
+          </div>
+          <div class="story__badges">
+            <span class="status-badge status--development"><span class="status-badge-dot"></span>In Development</span>
+            <span class="availability-badge avail--internal">Internal Only</span>
+          </div>
+          <p class="story__tagline">"Bruno's personal operational assistant."</p>
+          <p class="story__desc">
+            Kriz handles the personal layer — Bruno's calendar, priorities, follow-ups, and daily decisions. Built to think the way Bruno thinks and act the way Bruno would act. Not the business. Not the clients. Just Bruno.
+          </p>
+          <div class="use-cases">
+            <span class="use-case-tag">Daily priorities</span>
+            <span class="use-case-tag">Follow-up drafts</span>
+            <span class="use-case-tag">Decision support</span>
+            <span class="use-case-tag">Calendar context</span>
+            <span class="use-case-tag">Personal ops</span>
+          </div>
+          <button class="capabilities-toggle" onclick="toggleCap('cap-kriz')">
+            View full capabilities <span class="cap-icon" id="icon-cap-kriz">+</span>
+          </button>
+          <div class="capabilities-list" id="cap-kriz">
+            <div class="capabilities-list-inner">
+              <div class="cap-item">Structures Bruno's daily priorities and morning decision queue</div>
+              <div class="cap-item">Drafts personal follow-up messages in Bruno's voice</div>
+              <div class="cap-item">Provides decision support for personal (not business) questions</div>
+              <div class="cap-item">Maintains calendar context and flags conflicts</div>
+              <div class="cap-item">Handles personal administrative tasks that do not belong in Brunz</div>
+            </div>
+          </div>
+          <span class="meet-btn meet-btn--disabled" style="margin-top:1.25rem;">Coming Soon</span>
+        </div>
+        <div class="story__right">
+          <div class="story-panel">
+            <div class="story-panel__label story-panel__label--problem">The Problem</div>
+            <p class="story-panel__text">Bruno's personal ops were leaking into studio ops. Calendar conflicts were slipping through. Personal follow-ups were mixing with client emails. The distinction between "Bruno the person" and "Bruno the founder" was not being maintained, and it was creating noise in both directions.</p>
+          </div>
+          <div class="story-panel">
+            <div class="story-panel__label story-panel__label--spark">Why Kriz Was Built</div>
+            <p class="story-panel__text">The moment Brunz existed as a business AI, the need for a personal-level AI became obvious. Kriz was built to be the separator. Not the business. Not the studio. Just the person who runs it. Kriz holds the personal context that Brunz was never meant to carry.</p>
+          </div>
+          <div class="story-panel">
+            <div class="story-panel__label story-panel__label--impact">What Changed</div>
+            <p class="story-panel__text">Bruno's personal layer became organized. Daily priorities became clearer. The line between business and personal stopped blurring. And Brunz became a cleaner, more focused tool because it no longer had to carry everything.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── CASEY ── -->
+      <div class="story story--reversed fade-in" id="story-casey">
+        <div class="story__left">
+          <div class="story__gen-tag">Generation 5 · The Storyteller</div>
+          <div class="story__ai-identity">
+            <div class="story__avatar" style="background:linear-gradient(135deg,#5C4A2A,#3D3020);">C</div>
+            <div>
+              <div class="story__ai-name">Casey</div>
+              <div class="story__ai-role">Case Study AI</div>
+            </div>
+          </div>
+          <div class="story__badges">
+            <span class="status-badge status--concept"><span class="status-badge-dot"></span>Concept</span>
+            <span class="availability-badge avail--internal">Internal Only</span>
+          </div>
+          <p class="story__tagline">"Turns client wins into compelling stories."</p>
+          <p class="story__desc">
+            Casey takes raw project notes and client outcomes and turns them into structured, publishable case studies — in the BBC voice, formatted for the website, optimized for credibility. She does not invent the win. She makes sure it gets told.
+          </p>
+          <div class="use-cases">
+            <span class="use-case-tag">Case study writing</span>
+            <span class="use-case-tag">Project documentation</span>
+            <span class="use-case-tag">Client win stories</span>
+            <span class="use-case-tag">Portfolio content</span>
+            <span class="use-case-tag">Outcome framing</span>
+          </div>
+          <button class="capabilities-toggle" onclick="toggleCap('cap-casey')">
+            View full capabilities <span class="cap-icon" id="icon-cap-casey">+</span>
+          </button>
+          <div class="capabilities-list" id="cap-casey">
+            <div class="capabilities-list-inner">
+              <div class="cap-item">Converts raw project notes into structured case study drafts</div>
+              <div class="cap-item">Frames client outcomes in terms of business impact, not just deliverables</div>
+              <div class="cap-item">Writes in the BBC voice so case studies feel like they belong on the site</div>
+              <div class="cap-item">Suggests portfolio categories and tags for each case study</div>
+              <div class="cap-item">Generates short-form versions for use in proposals and emails</div>
+            </div>
+          </div>
+          <span class="meet-btn meet-btn--disabled" style="margin-top:1.25rem;">Coming Soon</span>
+        </div>
+        <div class="story__right">
+          <div class="story-panel">
+            <div class="story-panel__label story-panel__label--problem">The Problem</div>
+            <p class="story-panel__text">Client wins were accumulating but no one was capturing them. Project notes existed in scattered files. Outcomes were real. But turning those raw notes into polished, publishable case studies required a writing sprint that nobody had time for — so the stories were just not being told.</p>
+          </div>
+          <div class="story-panel">
+            <div class="story-panel__label story-panel__label--spark">Why Casey Was Built</div>
+            <p class="story-panel__text">By the time Casey was conceived, every other part of the system was running. Brunz held the business context. Webby held the site structure. Boogy and Mai held the content voice. Casey was the final piece — an AI that could take everything everyone else helped build and turn it into credibility for the studio.</p>
+          </div>
+          <div class="story-panel">
+            <div class="story-panel__label story-panel__label--impact">What Changed</div>
+            <p class="story-panel__text">Case studies that used to take days can now be drafted in hours. Every client win has a chance to become a story. The portfolio grows without creating extra work. And the studio's credibility gets documented as the work happens, not months later when the details are already fuzzy.</p>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /container -->
+  </section>
+
+
+  <!-- ══════════════════════════════════════
+       ROADMAP
+  ══════════════════════════════════════ -->
+  <section class="roadmap-section">
+    <div class="container">
+      <div class="roadmap-section__header fade-in">
+        <span class="eyebrow eyebrow--gold">What Comes Next</span>
+        <h2>The family is not finished.</h2>
+        <div class="divider-bar"></div>
+        <p style="max-width:500px; margin:0 auto; font-size:0.95rem;">
+          Every AI on this roadmap exists because a problem already exists. We are building them in the order the studio needs them, not in the order they sound impressive.
+        </p>
+      </div>
+
+      <div class="roadmap-grid">
+        <!-- BBC roadmap -->
+        <div class="fade-in">
+          <div class="roadmap-col-label">BBC's Next AI Additions</div>
+          <div class="roadmap-item">
+            <div class="roadmap-dot roadmap-dot--next"></div>
+            <div>
+              <div class="roadmap-item-name">Intake (Lead Qualifier AI)</div>
+              <p class="roadmap-item-desc">Handles the first pass on inbound leads — qualifies the fit, drafts a tailored response, and routes the conversation to the right team member.</p>
+            </div>
+          </div>
+          <div class="roadmap-item">
+            <div class="roadmap-dot roadmap-dot--next"></div>
+            <div>
+              <div class="roadmap-item-name">Rex (Ops Tracker AI)</div>
+              <p class="roadmap-item-desc">Monitors active projects, flags delays, and keeps the internal status of deliverables visible without requiring manual updates from the team.</p>
+            </div>
+          </div>
+          <div class="roadmap-item">
+            <div class="roadmap-dot roadmap-dot--soon"></div>
+            <div>
+              <div class="roadmap-item-name">Nova (Proposal AI)</div>
+              <p class="roadmap-item-desc">Takes a client brief and generates a fully structured proposal — scope, pricing, timeline, and deliverables — in the BBC format.</p>
+            </div>
+          </div>
+          <div class="roadmap-item">
+            <div class="roadmap-dot roadmap-dot--concept"></div>
+            <div>
+              <div class="roadmap-item-name">Echo (Follow-up AI)</div>
+              <p class="roadmap-item-desc">Manages post-project follow-up sequences, check-ins, and relationship maintenance so no client relationship goes cold by accident.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Client family placeholder -->
+        <div class="fade-in">
+          <div class="roadmap-col-label">Client AI Families — Coming Soon</div>
+          <div class="client-family-card">
+            <div class="client-family-placeholder">
+              <div class="client-placeholder-row">
+                <div class="client-placeholder-node">CEO</div>
+              </div>
+              <div style="width:2px; height:16px; background:var(--neutral-200); margin:0 auto;"></div>
+              <div class="client-placeholder-row">
+                <div class="client-placeholder-node">MKT</div>
+                <div class="client-placeholder-node">OPS</div>
+                <div class="client-placeholder-node">CS</div>
+              </div>
+            </div>
+            <h4>Your Business's AI Family</h4>
+            <p>The same way we built a family for Balay ni Bruno &amp; Co., we build one for your business. Each AI named, trained, and connected to the others. Yours to use forever.</p>
+            <a href="contact.html" class="btn btn-outline-dark btn-sm">Let's Build Yours</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════
+       BUILD SECTION
+  ══════════════════════════════════════ -->
   <section class="build-section">
     <div class="container">
       <div class="build-grid">
@@ -481,7 +1394,10 @@
     </div>
   </section>
 
-  <!-- ── CTA ── -->
+
+  <!-- ══════════════════════════════════════
+       CTA
+  ══════════════════════════════════════ -->
   <section class="cta-section">
     <div class="container fade-in">
       <span class="eyebrow">Ready to build yours?</span>
@@ -494,7 +1410,10 @@
     </div>
   </section>
 
-  <!-- ── FOOTER ── -->
+
+  <!-- ══════════════════════════════════════
+       FOOTER
+  ══════════════════════════════════════ -->
   <footer class="site-footer">
     <div class="container">
       <div class="footer__grid">
@@ -529,179 +1448,8 @@
     </div>
   </footer>
 
+
   <script>
-    /* ════════════════════════════════════════════
-       AI FAMILY DATA
-       To add a new AI: add one object to aiData,
-       create their [id].html page from the template,
-       git push → live in 60 seconds.
-    ════════════════════════════════════════════ */
-    const aiData = [
-      {
-        id: 'brunz',
-        name: 'Brunz',
-        role: 'Business Brain AI',
-        tagline: 'Already knows your entire operation.',
-        description: 'Brunz is the head of the BBC AI Family. He knows the team, the clients, the services, the pricing, and the voice. Open him and you are not starting from scratch — you are starting from context.',
-        useCases: ['Client emails & proposals', 'Business strategy', 'Team SOPs', 'Onboarding staff', 'Operational decisions'],
-        status: 'active',
-        availability: 'client',
-        avatar: 'B',
-        gradient: 'linear-gradient(135deg, #1F3557, #172540)',
-        border: 'rgba(184,146,62,0.35)',
-        page: 'brunz.html'
-      },
-      {
-        id: 'webby',
-        name: 'Webby',
-        role: 'Website Brain AI',
-        tagline: 'Knows every pixel of your site.',
-        description: 'Webby knows the tech stack, the design system, the colors, the fonts, the copy voice, and every page on the site. When the website needs to change, Webby knows exactly how it should look and sound.',
-        useCases: ['Website copy', 'SEO meta tags', 'Developer briefs', 'Design consistency', 'Pre-launch checks'],
-        status: 'active',
-        availability: 'client',
-        avatar: 'W',
-        gradient: 'linear-gradient(135deg, #4B6FA5, #2A4A7F)',
-        border: 'rgba(109,143,199,0.35)',
-        page: 'webby.html'
-      },
-      {
-        id: 'mai',
-        name: 'Mai',
-        role: 'Marketing Brain AI',
-        tagline: 'Your content, your voice, your strategy.',
-        description: 'Mai handles the content and marketing layer. Social captions, email campaigns, content calendars, brand storytelling — all in the business voice, all rooted in the strategy Brunz already knows.',
-        useCases: ['Social media content', 'Email campaigns', 'Content calendars', 'Brand storytelling', 'Campaign strategy'],
-        status: 'development',
-        availability: 'client',
-        avatar: 'M',
-        gradient: 'linear-gradient(135deg, #5B3E8C, #3D2760)',
-        border: 'rgba(91,62,140,0.3)',
-        page: null
-      },
-      {
-        id: 'boogy',
-        name: 'Boogy',
-        role: 'Blog & Content AI',
-        tagline: 'Long-form content that sounds like you.',
-        description: 'Boogy writes blog posts, thought leadership pieces, and long-form content in the BBC voice. He knows the content pillars, the SEO framework, and the internal link structure of the site.',
-        useCases: ['Blog posts', 'Thought leadership', 'SEO content', 'Long-form writing', 'Content research'],
-        status: 'active',
-        availability: 'internal',
-        avatar: 'Bo',
-        gradient: 'linear-gradient(135deg, #2E6B4F, #1A4A35)',
-        border: 'rgba(78,158,116,0.3)',
-        page: null
-      },
-      {
-        id: 'kriz',
-        name: 'Kriz',
-        role: 'Personal VA AI',
-        tagline: 'Bruno\'s personal operational assistant.',
-        description: 'Kriz handles the personal layer — Bruno\'s calendar, priorities, follow-ups, and daily decisions. Built to think the way Bruno thinks and act the way Bruno would act.',
-        useCases: ['Daily priorities', 'Follow-up drafts', 'Decision support', 'Calendar context', 'Personal ops'],
-        status: 'development',
-        availability: 'internal',
-        avatar: 'K',
-        gradient: 'linear-gradient(135deg, #8C3E3E, #602828)',
-        border: 'rgba(140,62,62,0.3)',
-        page: null
-      },
-      {
-        id: 'casey',
-        name: 'Casey',
-        role: 'Case Study AI',
-        tagline: 'Turns client wins into compelling stories.',
-        description: 'Casey takes raw project notes and client outcomes and turns them into structured, publishable case studies — in the BBC voice, formatted for the website, optimized for credibility.',
-        useCases: ['Case study writing', 'Project documentation', 'Client win stories', 'Portfolio content', 'Outcome framing'],
-        status: 'concept',
-        availability: 'internal',
-        avatar: 'C',
-        gradient: 'linear-gradient(135deg, #5C4A2A, #3D3020)',
-        border: 'rgba(184,146,62,0.2)',
-        page: null
-      }
-    ];
-
-    /* ════════════════════════════════════════════
-       RENDER FUNCTION
-    ════════════════════════════════════════════ */
-    function renderAIFamily(filter = 'all') {
-      const grid = document.getElementById('aiGrid');
-      const filtered = aiData.filter(ai => {
-        if (filter === 'all') return true;
-        if (filter === 'active') return ai.status === 'active';
-        if (filter === 'development') return ai.status === 'development';
-        if (filter === 'client') return ai.availability === 'client';
-        if (filter === 'internal') return ai.availability === 'internal';
-        return true;
-      });
-
-      if (filtered.length === 0) {
-        grid.innerHTML = '<p style="color:var(--text-muted);font-family:var(--font-ui);font-size:0.85rem;grid-column:1/-1;padding:2rem 0;">No AI family members match this filter yet.</p>';
-        return;
-      }
-
-      grid.innerHTML = filtered.map(ai => {
-        const statusLabel = { active: 'Active', development: 'In Development', concept: 'Concept' }[ai.status];
-        const availLabel  = { client: 'Available to Clients', internal: 'Internal Only' }[ai.availability];
-        const useCaseTags = ai.useCases.map(u => `<span class="use-case-tag">${u}</span>`).join('');
-        const meetBtn = ai.page
-          ? `<a href="${ai.page}" class="meet-btn">Meet ${ai.name} <span>→</span></a>`
-          : `<span class="meet-btn meet-btn--disabled">Coming Soon</span>`;
-
-        return `
-          <div class="ai-card fade-in" data-status="${ai.status}" data-availability="${ai.availability}">
-            <div class="ai-card-top">
-              <div class="ai-avatar" style="background:${ai.gradient};border:2px solid ${ai.border};">${ai.avatar}</div>
-              <div class="ai-card-meta">
-                <div class="ai-card-name">${ai.name}</div>
-                <div class="ai-card-role">${ai.role}</div>
-              </div>
-            </div>
-            <div>
-              <span class="status-badge status--${ai.status}">
-                <span class="status-badge-dot"></span>${statusLabel}
-              </span>
-              <span class="availability-badge avail--${ai.availability}">${availLabel}</span>
-            </div>
-            <div class="ai-card-tagline">"${ai.tagline}"</div>
-            <p class="ai-card-desc">${ai.description}</p>
-            <div class="use-cases">${useCaseTags}</div>
-            ${meetBtn}
-          </div>`;
-      }).join('');
-
-      // Trigger fade-in
-      requestAnimationFrame(() => {
-        grid.querySelectorAll('.fade-in').forEach((el, i) => {
-          setTimeout(() => el.classList.add('visible'), i * 80);
-        });
-      });
-    }
-
-    /* ════════════════════════════════════════════
-       FILTER TABS
-    ════════════════════════════════════════════ */
-    document.getElementById('filterTabs').addEventListener('click', e => {
-      const tab = e.target.closest('.filter-tab');
-      if (!tab) return;
-      document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
-      tab.classList.add('active');
-      renderAIFamily(tab.dataset.filter);
-    });
-
-    /* ════════════════════════════════════════════
-       INIT
-    ════════════════════════════════════════════ */
-    renderAIFamily('all');
-
-    // Scroll fade-in observer
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
-    }, { threshold: 0.1 });
-    document.querySelectorAll('.fade-in:not(.ai-card)').forEach(el => observer.observe(el));
-
     // Header scroll
     window.addEventListener('scroll', () => {
       document.getElementById('siteHeader').classList.toggle('scrolled', window.scrollY > 20);
@@ -711,6 +1459,23 @@
     document.getElementById('hamburger').addEventListener('click', () => {
       document.getElementById('mobileMenu').classList.toggle('open');
     });
+
+    // Scroll fade-in
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
+      });
+    }, { threshold: 0.07 });
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+    // Capability accordions
+    function toggleCap(id) {
+      const panel = document.getElementById(id);
+      const icon  = document.getElementById('icon-' + id);
+      const isOpen = panel.classList.toggle('open');
+      icon.classList.toggle('open', isOpen);
+      icon.textContent = isOpen ? '×' : '+';
+    }
   </script>
 </body>
 </html>
