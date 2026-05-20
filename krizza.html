@@ -317,94 +317,17 @@
       <p>Select a client to explore deliverables, services, and operational contributions.</p>
     </div>
 
-    <!-- PIS v2.0: Client Filter Bar -->
-    <div class="pis-client-bar fade-in">
-      <button class="pis-client-btn active" data-client="all">All Clients</button>
-      <button class="pis-client-btn" data-client="ww">Wooden Woodworks</button>
+    <!-- PIS v3.0: Sidebar Client Panel -->
+    <div class="pis-layout fade-in">
+      <aside class="pis-client-panel">
+        <p class="pis-panel-title">Filter by Client</p>
+        <button class="pis-client-btn active" data-client="ww">
+          <strong>Wooden Woodworks</strong>
+          <span>Social media, CRM, content, outreach</span>
+        </button>
+      </aside>
+      <div class="pis-work-area" id="pisWorkArea"></div>
     </div>
-
-    <!-- Client Intelligence Cards -->
-    <div class="client-intel fade-in" data-client="ww" id="intel-ww">
-      <span class="client-intel__label">Client Overview</span>
-      <h3 class="client-intel__name">Wooden Woodworks</h3>
-      <p class="client-intel__role">Social Media Manager &amp; CRM Lead</p>
-      <div class="client-intel__chips">
-        <span class="intel-chip">Social Media</span>
-        <span class="intel-chip">HubSpot CRM</span>
-        <span class="intel-chip">Operations</span>
-        <span class="intel-chip">Builder Outreach</span>
-        <span class="intel-chip intel-chip--gold">HubSpot</span>
-      </div>
-      <p class="client-intel__desc">Full social media and CRM management for a craft woodworking brand, building audience presence, managing client relationships through HubSpot, and running builder outreach to grow trade partnerships.</p>
-      <div class="client-intel__stats">
-        <div><p class="intel-stat__val">4</p><p class="intel-stat__label">Services Delivered</p></div>
-        <div><p class="intel-stat__val">HubSpot</p><p class="intel-stat__label">Primary Tool</p></div>
-      </div>
-    </div>
-
-    <!-- Client Block: Wooden Woodworks -->
-    <div class="client-block fade-in" data-client="ww" id="block-ww">
-      <div class="company-banner">
-        <div>
-          <p class="company-banner__name">Wooden Woodworks</p>
-          <p class="company-banner__meta">Social Media · CRM · Operations · Outreach</p>
-        </div>
-        <a href="https://woodenwoodworksllc.com" target="_blank" rel="noopener noreferrer" class="company-banner__link">woodenwoodworksllc.com ↗</a>
-      </div>
-      <div class="site-preview">
-        <div class="site-preview__chrome">
-          <span class="c-dot" style="background:#FF5F57;"></span>
-          <span class="c-dot" style="background:#FEBC2E;"></span>
-          <span class="c-dot" style="background:#28C840;"></span>
-          <span class="site-preview__url">woodenwoodworksllc.com</span>
-        </div>
-        <img src="https://image.thum.io/get/width/900/crop/560/noanimate/https://woodenwoodworksllc.com" alt="Wooden Woodworks website preview" class="site-preview__frame" loading="lazy" />
-      </div>
-      <div class="cat-nav">
-        <button class="cat-btn active" data-cat="all">All Work</button>
-        <button class="cat-btn" data-cat="social">Social Media</button>
-        <button class="cat-btn" data-cat="crm">CRM</button>
-        <button class="cat-btn" data-cat="operations">Operations</button>
-        <button class="cat-btn" data-cat="content">Content</button>
-      </div>
-      <div class="work-grid">
-        <div class="work-entry" data-client="ww" data-cat="social content">
-          <p class="work-entry__company">Wooden Woodworks</p>
-          <h3 class="work-entry__title">Social Media Management &amp; Content Strategy</h3>
-          <p class="work-entry__desc">Manages the full social media presence for Wooden Woodworks, creating content, writing captions, scheduling posts, and maintaining a consistent brand voice across platforms. Develops and executes the content calendar, ensuring the brand stays active, visually cohesive, and audience-aligned.</p>
-          <div class="work-entry__tags"><span class="work-tag">Social Media</span><span class="work-tag">Content Creation</span><span class="work-tag">Scheduling</span><span class="work-tag">Brand Voice</span></div>
-        </div>
-        <div class="work-entry" data-client="ww" data-cat="crm operations">
-          <p class="work-entry__company">Wooden Woodworks</p>
-          <h3 class="work-entry__title">CRM Management &amp; Client Relations</h3>
-          <p class="work-entry__desc">Manages the CRM system for Wooden Woodworks through HubSpot, tracking client contacts, maintaining communication records, and keeping the client relationship pipeline organized. Ensures follow-ups happen on time and no relationship falls through the cracks.</p>
-          <div class="work-entry__tags"><span class="work-tag">HubSpot CRM</span><span class="work-tag">Client Management</span><span class="work-tag">Follow-Up Systems</span></div>
-        </div>
-        <div class="work-entry" data-client="ww" data-cat="operations">
-          <p class="work-entry__company">Wooden Woodworks</p>
-          <h3 class="work-entry__title">Builder Outreach &amp; Operations Support</h3>
-          <p class="work-entry__desc">Handles builder outreach for Wooden Woodworks, identifying and reaching out to contractors, builders, and trade partners to support business development. Also manages operational workflows behind the scenes, keeping day-to-day business functions organized and running efficiently.</p>
-          <div class="work-entry__tags"><span class="work-tag">Builder Outreach</span><span class="work-tag">Business Development</span><span class="work-tag">Operations</span></div>
-        </div>
-        <div class="work-entry" data-client="ww" data-cat="content social">
-          <p class="work-entry__company">Wooden Woodworks</p>
-          <h3 class="work-entry__title">Brand Consistency &amp; Creative Production</h3>
-          <p class="work-entry__desc">Ensures every piece of content produced for Wooden Woodworks reflects their brand identity, warm, craft-focused, and quality-driven. Maintains visual and tonal consistency across all social media content, making the brand recognizable and trustworthy at every touchpoint.</p>
-          <div class="work-entry__tags"><span class="work-tag">Brand Identity</span><span class="work-tag">Creative Production</span><span class="work-tag">Visual Consistency</span></div>
-        </div>
-      </div>
-      <div class="media-row">
-        <a href="contact.html" class="media-card">
-          <span class="media-card__icon">📁</span>
-          <div>
-            <p class="media-card__title">Request Portfolio Access</p>
-            <p class="media-card__desc">Graphics, content, and campaign samples available on request.</p>
-          </div>
-        </a>
-      </div>
-    </div>
-
-    <div class="no-results" id="no-results"><p style="color:var(--text-muted);font-family:var(--font-ui);">No work entries match this filter.</p></div>
   </div>
 </section>
 
@@ -500,9 +423,7 @@ function pisRender(clientKey){
   }
   build();
 }
-document.querySelectorAll('.pis-client-btn').forEach(btn=>btn.addEventListener('click',()=>{document.querySelectorAll('.pis-client-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');pisRender(btn.dataset.client);}));pisRender('ww');}));
-document.querySelectorAll('.cat-btn').forEach(btn=>btn.addEventListener('click',()=>{const clientId=btn.closest('.client-block').dataset.client;btn.closest('.cat-nav').querySelectorAll('.cat-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');clientCats[clientId]=btn.dataset.cat;render();}));
-render();
+document.querySelectorAll('.pis-client-btn').forEach(btn=>btn.addEventListener('click',()=>{document.querySelectorAll('.pis-client-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');pisRender(btn.dataset.client);}));pisRender('ww');
 </script>
 </body>
 </html>

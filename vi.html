@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -385,139 +385,18 @@
       <p>Filter by company or task type to see exactly what Vi delivered for each client.</p>
     </div>
 
-    <!-- PIS v2.0 Client Bar -->
-    <div class="pis-client-bar fade-in">
-      <button class="pis-client-btn active" data-client="all">All Clients</button>
-      <button class="pis-client-btn" data-client="src">S. Riviere Hair Collection</button>
-      <button class="pis-client-btn" data-client="ajbf">AJ Battle Foundation</button>
+<div class="pis-layout fade-in">
+      <aside class="pis-client-panel">
+        <p class="pis-panel-title">Filter by Client</p>
+        <button class="pis-client-btn active" data-client="src"><strong>S. Riviere Hair Collection</strong><span>Social media, content, design</span></button>
+        <button class="pis-client-btn" data-client="ajbf"><strong>AJ Battle Foundation</strong><span>Social media, content, nonprofit</span></button>
+      </aside>
+      <div class="pis-work-area" id="pisWorkArea"></div>
     </div>
-
-    <!-- Client Intel Cards -->
-    <div class="client-intel" data-client="src">
-      <span class="client-intel__label">Client Intelligence</span>
-      <p class="client-intel__name">S. Riviere Hair Collection</p>
-      <p class="client-intel__role">E-Commerce Manager &amp; Social Media Specialist</p>
-      <div class="client-intel__chips">
-        <span class="intel-chip">Shopify</span>
-        <span class="intel-chip">AI Content</span>
-        <span class="intel-chip">Email Marketing</span>
-        <span class="intel-chip">SEO</span>
-        <span class="intel-chip">Social Media</span>
-        <span class="intel-chip intel-chip--gold">Shopify + Yotpo</span>
-      </div>
-      <p class="client-intel__desc">Vi serves as BBC Handler for S. Riviere Hair Collection, managing the full Shopify build, AI-assisted product imagery, social media content, email marketing flows via Yotpo, and SEO content writing end-to-end.</p>
-      <div class="client-intel__stats">
-        <div><p class="intel-stat__val">5</p><p class="intel-stat__label">Services</p></div>
-        <div><p class="intel-stat__val">Shopify + Yotpo</p><p class="intel-stat__label">Primary Systems</p></div>
-        <div><p class="intel-stat__val">Instagram + TikTok</p><p class="intel-stat__label">Platforms</p></div>
-      </div>
-    </div>
-    <div class="client-intel" data-client="ajbf">
-      <span class="client-intel__label">Client Intelligence</span>
-      <p class="client-intel__name">AJ Battle Foundation</p>
-      <p class="client-intel__role">Social Media Content Specialist</p>
-      <div class="client-intel__chips">
-        <span class="intel-chip">Social Media</span>
-        <span class="intel-chip">Content Creation</span>
-        <span class="intel-chip">Community</span>
-        <span class="intel-chip intel-chip--gold">Foundation Brand</span>
-      </div>
-      <p class="client-intel__desc">Vi manages social media content and presence for the AJ Battle Foundation across Instagram, Facebook, TikTok, and YouTube, maintaining brand storytelling for both the nonprofit and real estate ecosystems.</p>
-      <div class="client-intel__stats">
-        <div><p class="intel-stat__val">1</p><p class="intel-stat__label">Service</p></div>
-        <div><p class="intel-stat__val">Foundation Brand</p><p class="intel-stat__label">Scope</p></div>
-      </div>
-    </div>
-
-    <!-- ═══ CLIENT: S. Riviere Hair Collection ═══ -->
-    <div class="client-block fade-in" id="block-src" data-client="src">
-      <div class="company-banner">
-        <div>
-          <p class="company-banner__name">S. Riviere Hair Collection</p>
-          <p class="company-banner__meta">Beauty &amp; E-Commerce · Shopify Store</p>
-        </div>
-      </div>
-      <div class="cat-nav">
-        <button class="cat-btn active" data-cat="all">All Work</button>
-        <button class="cat-btn" data-cat="shopify">Shopify</button>
-        <button class="cat-btn" data-cat="social">Social Media</button>
-        <button class="cat-btn" data-cat="email">Email</button>
-        <button class="cat-btn" data-cat="seo">SEO</button>
-        <button class="cat-btn" data-cat="ai">AI Content</button>
-      </div>
-      <div class="work-grid">
-        <div class="work-entry" data-client="src" data-cat="shopify design">
-          <p class="work-entry__company">S. Riviere Hair Collection</p>
-          <h3 class="work-entry__title">Shopify Website Build &amp; Product Pages</h3>
-          <p class="work-entry__desc">Built and manages the full Shopify website for S. Riviere Hair Collection, product page creation, theme editing, product taxonomy, naming conventions, and e-commerce infrastructure. Responsible for making the storefront visually on-brand and optimized for conversion.</p>
-          <div class="work-entry__tags"><span class="work-tag">Shopify</span><span class="work-tag">Product Pages</span><span class="work-tag">E-Commerce</span><span class="work-tag">Theme Editing</span></div>
-        </div>
-        <div class="work-entry" data-client="src" data-cat="social ai">
-          <p class="work-entry__company">S. Riviere Hair Collection</p>
-          <h3 class="work-entry__title">Social Media Content &amp; AI-Assisted Imagery</h3>
-          <p class="work-entry__desc">Creates and manages social media content for S. Riviere across Instagram and TikTok, using Midjourney and DALL-E for AI-generated product imagery, Canva for branded templates, and Claude for copy strategy. Maintains a consistent content calendar that keeps the brand active and aesthetically cohesive.</p>
-          <div class="work-entry__tags"><span class="work-tag">Instagram</span><span class="work-tag">TikTok</span><span class="work-tag">AI Imagery</span><span class="work-tag">Content Calendar</span></div>
-        </div>
-        <div class="work-entry" data-client="src" data-cat="email seo">
-          <p class="work-entry__company">S. Riviere Hair Collection</p>
-          <h3 class="work-entry__title">Email Marketing &amp; SEO Content</h3>
-          <p class="work-entry__desc">Manages email marketing flows through Yotpo, including welcome sequences, promotional campaigns, loyalty program communications, and review request flows. Also handles SEO content writing for product descriptions and blog posts to build organic visibility in search.</p>
-          <div class="work-entry__tags"><span class="work-tag">Yotpo</span><span class="work-tag">Email Flows</span><span class="work-tag">SEO Writing</span><span class="work-tag">Loyalty Program</span></div>
-        </div>
-      </div>
-      <div class="media-row" style="grid-template-columns:1fr;">
-        <div class="media-card">
-          <div class="media-card__top"><span class="media-card__icon">🛍️</span><p class="media-card__title">Shopify &amp; E-Commerce Portfolio</p></div>
-          <p class="media-card__desc">Full Shopify build, product pages, social content, and email marketing assets created for S. Riviere Hair Collection. Portfolio available on request.</p>
-          <a href="contact.html" class="media-toggle">Request Portfolio Access ↗</a>
-        </div>
-      </div>
-    </div>
-
-    <!-- ═══ CLIENT: AJ Battle Foundation ═══ -->
-    <div class="client-block fade-in" id="block-ajbf" data-client="ajbf">
-      <div class="company-banner">
-        <div>
-          <p class="company-banner__name">AJ Battle Foundation</p>
-          <p class="company-banner__meta">Nonprofit &amp; Real Estate Ecosystem</p>
-        </div>
-        <a href="https://www.theajbattlefoundation.org/" target="_blank" rel="noopener noreferrer" class="company-banner__link">Visit Site ↗</a>
-      </div>
-      <div class="site-preview">
-        <div class="site-preview__chrome">
-          <span class="c-dot"></span><span class="c-dot"></span><span class="c-dot"></span>
-          <span class="site-preview__url">theajbattlefoundation.org</span>
-        </div>
-        <a href="https://www.theajbattlefoundation.org/" target="_blank" rel="noopener noreferrer" class="site-preview__frame">
-          <img src="https://image.thum.io/get/width/900/crop/560/noanimate/https://www.theajbattlefoundation.org/" alt="AJ Battle Foundation website preview" loading="lazy" />
-        </a>
-      </div>
-      <div class="cat-nav">
-        <button class="cat-btn active" data-cat="all">All Work</button>
-        <button class="cat-btn" data-cat="social">Social Media</button>
-        <button class="cat-btn" data-cat="content">Content</button>
-      </div>
-      <div class="work-grid">
-        <div class="work-entry" data-client="ajbf" data-cat="social content">
-          <p class="work-entry__company">AJ Battle Foundation</p>
-          <h3 class="work-entry__title">Social Media &amp; Content Management</h3>
-          <p class="work-entry__desc">Manages social media content and presence for the AJ Battle Foundation across Instagram, Facebook, TikTok, and YouTube. Creates reels, edits video content, maintains content calendars, and ensures consistent brand storytelling for both the nonprofit arm and the real estate business ecosystem.</p>
-          <div class="work-entry__tags"><span class="work-tag">Instagram</span><span class="work-tag">TikTok</span><span class="work-tag">YouTube</span><span class="work-tag">Video Editing</span><span class="work-tag">Reels</span></div>
-        </div>
-      </div>
-      <div class="media-row" style="grid-template-columns:1fr;">
-        <div class="media-card">
-          <div class="media-card__top"><span class="media-card__icon">🏆</span><p class="media-card__title">Social Media &amp; Content Portfolio</p></div>
-          <p class="media-card__desc">Social media content, video reels, and brand storytelling assets created for the AJ Battle Foundation. Portfolio available on request.</p>
-          <a href="contact.html" class="media-toggle">Request Portfolio Access ↗</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="no-results" id="no-results"><p style="color:var(--text-muted);font-family:var(--font-ui);">No entries match this filter. Try adjusting your selection.</p></div>
 
   </div>
 </section>
+
 
 <section class="profile-section" id="services">
   <div class="container">
@@ -624,9 +503,7 @@ function pisRender(clientKey){
   }
   build();
 }
-document.querySelectorAll('.pis-client-btn').forEach(btn=>btn.addEventListener('click',()=>{document.querySelectorAll('.pis-client-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');pisRender(btn.dataset.client);}));pisRender('src');}));
-document.querySelectorAll('.cat-btn').forEach(btn=>btn.addEventListener('click',()=>{const clientId=btn.closest('.client-block').dataset.client;btn.closest('.cat-nav').querySelectorAll('.cat-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');clientCats[clientId]=btn.dataset.cat;render();}));
-render();
+document.querySelectorAll('.pis-client-btn').forEach(btn=>btn.addEventListener('click',()=>{document.querySelectorAll('.pis-client-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');pisRender(btn.dataset.client);}));pisRender('src');
 </script>
 </body>
 </html>

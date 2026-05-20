@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -315,145 +315,21 @@
 <section class="profile-section profile-section--alt" id="work">
   <div class="container">
     <div class="section-header fade-in"><span class="eyebrow">Work Portfolio</span><h2>Projects &amp; Contributions</h2><div class="divider-bar"></div></div>
-    <!-- PIS v2.0 Client Bar -->
-    <div class="pis-client-bar fade-in">
-      <button class="pis-client-btn active" data-client="all">All Clients</button>
-      <button class="pis-client-btn" data-client="hvs">Home Vision Studio</button>
-      <button class="pis-client-btn" data-client="ajbf">AJ Battle Foundation</button>
+    <!-- PIS v3.0: Sidebar Client Panel -->
+    <div class="pis-layout fade-in">
+      <aside class="pis-client-panel">
+        <p class="pis-panel-title">Filter by Client</p>
+        <button class="pis-client-btn active" data-client="hvs">
+          <strong>Home Vision Studio</strong>
+          <span>Shopify, social media, email marketing</span>
+        </button>
+        <button class="pis-client-btn" data-client="ajbf">
+          <strong>AJ Battle Foundation</strong>
+          <span>Graphic design, brand visuals, operations</span>
+        </button>
+      </aside>
+      <div class="pis-work-area" id="pisWorkArea"></div>
     </div>
-    <!-- Client Intel Cards -->
-    <div class="client-intel" data-client="hvs">
-      <span class="client-intel__label">Client Intelligence</span>
-      <p class="client-intel__name">Home Vision Studio</p>
-      <p class="client-intel__role">Shopify Developer &amp; Social Media Manager</p>
-      <div class="client-intel__chips">
-        <span class="intel-chip">Shopify</span>
-        <span class="intel-chip">Social Media</span>
-        <span class="intel-chip">Email Marketing</span>
-        <span class="intel-chip">Brand Design</span>
-        <span class="intel-chip intel-chip--gold">Shopify</span>
-      </div>
-      <p class="client-intel__desc">Al serves as BBC Handler for Home Vision Studio, managing their full Shopify website, design center, social media presence, and email marketing pipeline end-to-end.</p>
-      <div class="client-intel__stats">
-        <div><p class="intel-stat__val">2</p><p class="intel-stat__label">Services</p></div>
-        <div><p class="intel-stat__val">Shopify Platform</p><p class="intel-stat__label">Primary System</p></div>
-      </div>
-    </div>
-    <div class="client-intel" data-client="ajbf">
-      <span class="client-intel__label">Client Intelligence</span>
-      <p class="client-intel__name">AJ Battle Foundation</p>
-      <p class="client-intel__role">Graphic Designer &amp; Operations Support</p>
-      <div class="client-intel__chips">
-        <span class="intel-chip">Graphic Design</span>
-        <span class="intel-chip">Operations</span>
-        <span class="intel-chip">Nonprofit</span>
-        <span class="intel-chip">Brand Visual</span>
-        <span class="intel-chip intel-chip--gold">Dual Ecosystem</span>
-      </div>
-      <p class="client-intel__desc">Provides design and operational support across both the AJ Battle Foundation nonprofit and its connected real estate business, maintaining brand consistency and visual cohesion across every channel.</p>
-      <div class="client-intel__stats">
-        <div><p class="intel-stat__val">2</p><p class="intel-stat__label">Services</p></div>
-        <div><p class="intel-stat__val">Dual Ecosystem</p><p class="intel-stat__label">Scope</p></div>
-      </div>
-    </div>
-    <!-- ── Home Vision Studio ── -->
-    <div class="client-block fade-in" id="block-hvs" data-client="hvs">
-      <div class="company-banner">
-        <div>
-          <p class="company-banner__name">Home Vision Studio</p>
-          <p class="company-banner__meta">Shopify · Social Media · Email Marketing</p>
-        </div>
-        <a href="https://homevisionstudio.com" target="_blank" rel="noopener noreferrer" class="company-banner__link">homevisionstudio.com ↗</a>
-      </div>
-      <div class="site-preview">
-        <div class="site-preview__chrome">
-          <span class="c-dot" style="background:#FF5F57;"></span>
-          <span class="c-dot" style="background:#FEBC2E;"></span>
-          <span class="c-dot" style="background:#28C840;"></span>
-          <span class="site-preview__url">homevisionstudio.com</span>
-        </div>
-        <img src="https://image.thum.io/get/width/900/crop/560/noanimate/https://homevisionstudio.com" alt="Home Vision Studio website preview" class="site-preview__frame" loading="lazy" />
-      </div>
-      <div class="cat-nav">
-        <button class="cat-btn active" data-cat="all">All Work</button>
-        <button class="cat-btn" data-cat="shopify">Shopify</button>
-        <button class="cat-btn" data-cat="social">Social Media</button>
-        <button class="cat-btn" data-cat="email">Email</button>
-      </div>
-      <div class="work-grid">
-        <div class="work-entry" data-client="hvs" data-cat="shopify design">
-          <p class="work-entry__company">Home Vision Studio</p>
-          <h3 class="work-entry__title">Shopify Website &amp; Design Center</h3>
-          <p class="work-entry__desc">Builds and manages the Shopify website for Home Vision Studio, handling product organization, collection structure, theme management, and the visual design center. Ensures the storefront accurately represents the brand's architectural and design aesthetic while remaining clean, functional, and conversion-ready.</p>
-          <div class="work-entry__tags"><span class="work-tag">Shopify</span><span class="work-tag">Product Organization</span><span class="work-tag">Design Center</span><span class="work-tag">Theme Management</span></div>
-        </div>
-        <div class="work-entry" data-client="hvs" data-cat="social email">
-          <p class="work-entry__company">Home Vision Studio</p>
-          <h3 class="work-entry__title">Social Media &amp; Email Marketing</h3>
-          <p class="work-entry__desc">Manages social media content and email marketing for Home Vision Studio, creating on-brand visuals and copy, maintaining a consistent posting schedule, and developing email campaigns that keep the audience engaged and drive traffic back to the website and studio.</p>
-          <div class="work-entry__tags"><span class="work-tag">Social Media</span><span class="work-tag">Email Marketing</span><span class="work-tag">Content Creation</span><span class="work-tag">Brand Consistency</span></div>
-        </div>
-      </div>
-      <div class="media-row">
-        <a href="contact.html" class="media-card">
-          <span class="media-card__icon">📁</span>
-          <div>
-            <p class="media-card__title">Request Portfolio Access</p>
-            <p class="media-card__desc">Shopify screenshots, social content, and email samples available on request.</p>
-          </div>
-        </a>
-      </div>
-    </div>
-
-    <!-- ── AJ Battle Foundation ── -->
-    <div class="client-block fade-in" id="block-ajbf" data-client="ajbf">
-      <div class="company-banner">
-        <div>
-          <p class="company-banner__name">AJ Battle Foundation</p>
-          <p class="company-banner__meta">Graphic Design · Operations Support · Brand Visual System</p>
-        </div>
-        <a href="https://www.theajbattlefoundation.org" target="_blank" rel="noopener noreferrer" class="company-banner__link">theajbattlefoundation.org ↗</a>
-      </div>
-      <div class="site-preview">
-        <div class="site-preview__chrome">
-          <span class="c-dot" style="background:#FF5F57;"></span>
-          <span class="c-dot" style="background:#FEBC2E;"></span>
-          <span class="c-dot" style="background:#28C840;"></span>
-          <span class="site-preview__url">theajbattlefoundation.org</span>
-        </div>
-        <img src="https://image.thum.io/get/width/900/crop/560/noanimate/https://www.theajbattlefoundation.org" alt="AJ Battle Foundation website preview" class="site-preview__frame" loading="lazy" />
-      </div>
-      <div class="cat-nav">
-        <button class="cat-btn active" data-cat="all">All Work</button>
-        <button class="cat-btn" data-cat="design">Graphic Design</button>
-        <button class="cat-btn" data-cat="operations">Operations</button>
-        <button class="cat-btn" data-cat="social">Social Media</button>
-      </div>
-      <div class="work-grid">
-        <div class="work-entry" data-client="ajbf" data-cat="design operations">
-          <p class="work-entry__company">AJ Battle Foundation</p>
-          <h3 class="work-entry__title">Graphic Design &amp; Operations Support</h3>
-          <p class="work-entry__desc">Provides graphic design and operational support for the AJ Battle Foundation, creating branded visual assets for social media, events, and campaigns, while also supporting the operational layer that keeps both the nonprofit and real estate business ecosystems running smoothly behind the scenes.</p>
-          <div class="work-entry__tags"><span class="work-tag">Graphic Design</span><span class="work-tag">Visual Assets</span><span class="work-tag">Operations Support</span><span class="work-tag">Nonprofit</span></div>
-        </div>
-        <div class="work-entry" data-client="ajbf" data-cat="design social">
-          <p class="work-entry__company">AJ Battle Foundation</p>
-          <h3 class="work-entry__title">Brand Visual System &amp; Creative Assets</h3>
-          <p class="work-entry__desc">Maintains visual brand consistency across both AJ Battle Foundation ecosystems, the youth empowerment nonprofit and the real estate business. Creates graphics, promotional materials, social content assets, and landing page designs that keep both brands looking polished and cohesive across every channel.</p>
-          <div class="work-entry__tags"><span class="work-tag">Brand Design</span><span class="work-tag">Landing Pages</span><span class="work-tag">Social Graphics</span><span class="work-tag">Real Estate</span></div>
-        </div>
-      </div>
-      <div class="media-row">
-        <a href="contact.html" class="media-card">
-          <span class="media-card__icon">📁</span>
-          <div>
-            <p class="media-card__title">Request Portfolio Access</p>
-            <p class="media-card__desc">Design samples, event graphics, and social content available on request.</p>
-          </div>
-        </a>
-      </div>
-    </div>
-    <div class="no-results" id="no-results"><p style="color:var(--text-muted);font-family:var(--font-ui);">No entries match. Try adjusting your filter.</p></div>
   </div>
 </section>
 
@@ -552,8 +428,6 @@ function pisRender(clientKey){
   build();
 }
 document.querySelectorAll('.pis-client-btn').forEach(btn=>btn.addEventListener('click',()=>{document.querySelectorAll('.pis-client-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');pisRender(btn.dataset.client);}));pisRender('hvs');}));
-document.querySelectorAll('.cat-btn').forEach(btn=>btn.addEventListener('click',()=>{const clientId=btn.closest('.client-block').dataset.client;btn.closest('.cat-nav').querySelectorAll('.cat-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');clientCats[clientId]=btn.dataset.cat;render();}));
-render();
 </script>
 </body>
 </html>

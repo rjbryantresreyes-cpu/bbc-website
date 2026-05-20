@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -624,107 +624,17 @@
       <p>Content created, systems built, and platforms managed across Daryl's BBC work.</p>
     </div>
 
-    <!-- PIS v2.0 Client Bar -->
-    <div class="pis-client-bar fade-in">
-      <button class="pis-client-btn active" data-client="all">All Clients</button>
-      <button class="pis-client-btn" data-client="allryze">All Ryze</button>
-    </div>
-
-    <!-- Client Intel Card -->
-    <div class="client-intel" data-client="allryze">
-      <span class="client-intel__label">Client Intelligence</span>
-      <p class="client-intel__name">All Ryze</p>
-      <p class="client-intel__role">Audience Engagement Specialist &amp; Content Creator</p>
-      <div class="client-intel__chips">
-        <span class="intel-chip">Audience Engagement</span>
-        <span class="intel-chip">Multi-Platform</span>
-        <span class="intel-chip">Operations</span>
-        <span class="intel-chip">Content Creation</span>
-        <span class="intel-chip intel-chip--gold">Multi-Platform</span>
-      </div>
-      <p class="client-intel__desc">Daryl supports All Ryze, a digital audience engagement and growth management agency, handling outreach, engagement workflows, operational support, and content creation across multiple platforms under BBC's operations management system.</p>
-      <div class="client-intel__stats">
-        <div><p class="intel-stat__val">4</p><p class="intel-stat__label">Services</p></div>
-        <div><p class="intel-stat__val">Multi-Platform</p><p class="intel-stat__label">Scope</p></div>
-      </div>
-    </div>
-
-    <!-- ── All Ryze ── -->
-    <div class="client-block fade-in" id="block-allryze" data-client="allryze">
-      <div class="company-banner">
-        <div>
-          <p class="company-banner__name">All Ryze</p>
-          <p class="company-banner__meta">Engagement · Outreach · Operations · Content</p>
-        </div>
-        <span class="company-banner__meta" style="color:rgba(245,241,234,0.35);">Digital Audience Engagement &amp; Growth Management</span>
-      </div>
-      <div class="cat-nav">
-        <button class="cat-btn active" data-cat="all">All Work</button>
-        <button class="cat-btn" data-cat="engagement">Engagement</button>
-        <button class="cat-btn" data-cat="outreach">Outreach</button>
-        <button class="cat-btn" data-cat="operations">Operations</button>
-        <button class="cat-btn" data-cat="content">Content</button>
-      </div>
-      <div class="work-grid">
-        <div class="work-entry" data-client="allryze" data-cat="engagement content">
-          <p class="work-entry__company">All Ryze Operations</p>
-          <h3 class="work-entry__title">Audience Engagement &amp; Communication</h3>
-          <p class="work-entry__desc">Managed high-volume conversational engagement across multiple platforms, building real, personalized connections with audience members. Focused on retention-based communication that keeps relationships warm, drives repeat interaction, and maintains consistent presence across accounts.</p>
-          <div class="work-entry__tags">
-            <span class="work-tag">Audience Engagement</span>
-            <span class="work-tag">Conversational Workflows</span>
-            <span class="work-tag">Retention Communication</span>
-          </div>
-        </div>
-        <div class="work-entry" data-client="allryze" data-cat="outreach social">
-          <p class="work-entry__company">All Ryze Operations</p>
-          <h3 class="work-entry__title">Multi-Platform Outreach Campaigns</h3>
-          <p class="work-entry__desc">Executed outreach campaigns across social media platforms, identifying target audiences, initiating conversations, and driving new engagement through community participation. Maintained compliance with platform guidelines while sustaining high outreach volume and response quality.</p>
-          <div class="work-entry__tags">
-            <span class="work-tag">Social Outreach</span>
-            <span class="work-tag">Community Engagement</span>
-            <span class="work-tag">Traffic Generation</span>
-          </div>
-        </div>
-        <div class="work-entry" data-client="allryze" data-cat="operations content">
-          <p class="work-entry__company">All Ryze Operations</p>
-          <h3 class="work-entry__title">Operational Workflow Support</h3>
-          <p class="work-entry__desc">Supported day-to-day operational workflows under Ryan Bernaldez's team management, following SOPs, tracking engagement performance, and maintaining accountability across shift responsibilities. Contributed to the smooth execution of BBC's operations management system for the client.</p>
-          <div class="work-entry__tags">
-            <span class="work-tag">Operations</span>
-            <span class="work-tag">SOP Adherence</span>
-            <span class="work-tag">Performance Tracking</span>
-          </div>
-        </div>
-        <div class="work-entry" data-client="allryze" data-cat="content social">
-          <p class="work-entry__company">BBC Portfolio, Creative Work</p>
-          <h3 class="work-entry__title">Content Creation &amp; Creative Execution</h3>
-          <p class="work-entry__desc">Brings graphic design, video editing, and content writing capabilities to BBC's client support work. Creates platform-ready visuals, edits short-form video, produces email marketing content, and supports branding initiatives, a full creative toolkit applied wherever client projects require it.</p>
-          <div class="work-entry__tags">
-            <span class="work-tag">Graphic Design</span>
-            <span class="work-tag">Video Editing</span>
-            <span class="work-tag">Email Marketing</span>
-            <span class="work-tag">Branding</span>
-          </div>
-        </div>
-      </div>
-      <div class="media-row">
-        <a href="contact.html" class="media-card">
-          <span class="media-card__icon">📁</span>
-          <div>
-            <p class="media-card__title">Request Portfolio Access</p>
-            <p class="media-card__desc">Content samples and creative work available on request.</p>
-          </div>
-        </a>
-      </div>
-    </div>
-
-    <div class="no-results" id="no-results">
-      <p>No work entries match this filter combination. Try adjusting your selection.</p>
+<div class="pis-layout fade-in">
+      <aside class="pis-client-panel">
+        <p class="pis-panel-title">Filter by Client</p>
+        <button class="pis-client-btn active" data-client="allryze"><strong>All Ryze</strong><span>Content, video, outreach, design</span></button>
+      </aside>
+      <div class="pis-work-area" id="pisWorkArea"></div>
     </div>
 
   </div>
 </section>
+
 
 
 <!-- ════ S3, SERVICES & SKILLS ════ -->
@@ -1010,9 +920,7 @@ function pisRender(clientKey){
   }
   build();
 }
-document.querySelectorAll('.pis-client-btn').forEach(btn=>btn.addEventListener('click',()=>{document.querySelectorAll('.pis-client-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');pisRender(btn.dataset.client);}));pisRender('allryze');}));
-document.querySelectorAll('.cat-btn').forEach(btn=>btn.addEventListener('click',()=>{const clientId=btn.closest('.client-block').dataset.client;btn.closest('.cat-nav').querySelectorAll('.cat-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');clientCats[clientId]=btn.dataset.cat;render();}));
-render();
+document.querySelectorAll('.pis-client-btn').forEach(btn=>btn.addEventListener('click',()=>{document.querySelectorAll('.pis-client-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');pisRender(btn.dataset.client);}));pisRender('allryze');
 </script>
 
 </body>
