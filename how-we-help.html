@@ -1,1269 +1,777 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>How We Help — Balay ni Bruno &amp; Co.</title>
-
-  <!-- Tailwind CSS CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            navy:        '#0B1120',
-            blue:        '#2D5BFF',
-            'off-white': '#F8FAFC',
-            slate:       '#475569',
-            lightgray:   '#D1D5DB',
-          },
-          fontFamily: {
-            sans: ['Montserrat', 'sans-serif'],
-          },
-        }
-      }
-    }
-  </script>
-
-  <!-- Google Fonts -->
+  <title>How We Help | Balay ni Bruno &amp; Co.</title>
+  <meta name="description" content="Seven areas of integrated support, website, SEO, AI, brand, content, email, and operations. BBC extends your team with real people, not a ticket system." />
+  <link rel="canonical" href="https://balaynibruno.co/how-we-help.html" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Balay ni Bruno &amp; Co." />
+  <meta property="og:title" content="How We Help, Balay ni Bruno &amp; Co." />
+  <meta property="og:description" content="Seven areas of integrated support, website, SEO, AI, brand, content, email, and operations. BBC extends your team with real people, not a ticket system." />
+  <meta property="og:url" content="https://balaynibruno.co/how-we-help.html" />
+  <meta property="og:image" content="https://balaynibruno.co/bbc-logo.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Lora:ital,wght@0,400;0,500;1,400;1,500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
 
   <style>
-    *, *::before, *::after { box-sizing: border-box; }
-    body { font-family: 'Montserrat', sans-serif; margin: 0; padding: 0; }
-
-    /* ── Sticky header shadow ── */
-    #site-header { transition: box-shadow 0.2s ease; }
-    #site-header.scrolled { box-shadow: 0 2px 24px rgba(11,17,32,0.10); }
-
-    /* ── Mobile nav ── */
-    #mobile-nav { display: none; }
-    #mobile-nav.open { display: flex; }
-
-    /* ── Scroll fade-in ── */
-    .fade-in { opacity: 0; transform: translateY(24px); transition: opacity 0.55s ease, transform 0.55s ease; }
-    .fade-in.visible { opacity: 1; transform: none; }
-
-    /* ── Category nav strip (sticky below header) ── */
-    #cat-nav {
-      position: sticky;
-      top: 64px; /* matches header height */
-      z-index: 40;
-      background: white;
-      border-bottom: 1px solid #D1D5DB;
-      height: 56px;
-      display: flex;
-      align-items: center;
-      overflow-x: auto;
-      -webkit-overflow-scrolling: touch;
-      scrollbar-width: none;
-    }
-    #cat-nav::-webkit-scrollbar { display: none; }
-    #cat-nav-inner {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      padding: 0 24px;
-      margin: 0 auto;
-      max-width: 1200px;
-      width: 100%;
-    }
-    .cat-pill {
-      display: inline-flex;
-      align-items: center;
-      padding: 8px 20px;
-      border-radius: 9999px;
-      border: 1px solid #D1D5DB;
-      background: #F8FAFC;
-      color: #0B1120;
-      font-size: 13px;
-      font-weight: 600;
-      white-space: nowrap;
-      text-decoration: none;
-      transition: background 0.18s ease, color 0.18s ease, border-color 0.18s ease;
-      cursor: pointer;
-    }
-    .cat-pill:hover,
-    .cat-pill.active {
-      background: #2D5BFF;
-      color: white;
-      border-color: #2D5BFF;
+    :root {
+      --deep-blue:   #1F3557;
+      --mid-blue:    #4B6FA5;
+      --warm-blue:   #6D8FC7;
+      --light-blue:  #A8C0DC;
+      --pale-blue:   #DDE8F2;
+      --bg-primary:  #F5F1EA;
+      --bg-section:  #EDE8DF;
+      --bg-card:     #FDFAF6;
+      --bg-card-alt: #FAF6EF;
+      --bg-dark:     #1C2E47;
+      --bg-footer:   #172540;
+      --neutral-100: #E8E2D6;
+      --neutral-200: #D5CEC3;
+      --neutral-300: #B8B1A6;
+      --text-ink:    #2A3040;
+      --text-body:   #4E5666;
+      --text-muted:  #888FA0;
+      --text-warm:   #F5F1EA;
+      --gold:        #B8923E;
+      --gold-pale:   #E6CFA0;
+      --gold-warm:   #D4A84B;
+      --sage:        #4E9E74;
+      --font-display:'Playfair Display', Georgia, serif;
+      --font-body:   'Lora', Georgia, serif;
+      --font-ui:     'DM Sans', system-ui, sans-serif;
+      --max-width:   1200px;
+      --radius-sm:   8px;
+      --radius:      16px;
+      --radius-lg:   24px;
+      --radius-xl:   32px;
+      --shadow-xs:   0 1px 6px  rgba(85,60,35,0.055);
+      --shadow-sm:   0 3px 18px rgba(85,60,35,0.08);
+      --shadow-md:   0 7px 36px rgba(85,60,35,0.11);
+      --shadow-lg:   0 14px 56px rgba(85,60,35,0.14);
+      --border-card: 1px solid rgba(85,60,35,0.09);
+      --border-warm: 1px solid rgba(85,60,35,0.12);
+      --border-dark: 1px solid rgba(255,255,255,0.07);
+      --s1:0.5rem; --s2:1rem; --s3:1.5rem; --s4:2.5rem; --s5:4rem; --s6:6rem; --s7:9rem;
     }
 
-    /* ── Service section shared layout ── */
-    .service-section { padding: 100px 24px; }
-    .service-section-inner {
-      max-width: 1200px;
-      margin: 0 auto;
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body {
+      font-family: var(--font-body);
+      color: var(--text-ink);
+      background: var(--bg-primary);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
     }
-    .service-header { text-align: center; margin-bottom: 64px; }
-
-    .service-body {
-      display: flex;
-      align-items: flex-start;
-      gap: 64px;
-    }
-    .service-list { flex: 55; }
-    .service-portfolio { flex: 45; }
-
-    .service-item { margin-bottom: 22px; display: flex; gap: 12px; }
-    .service-dash { color: #2D5BFF; font-weight: 700; font-size: 16px; flex-shrink: 0; margin-top: 1px; }
-    .service-name { color: #0B1120; font-weight: 700; font-size: 16px; line-height: 1.4; }
-    .service-desc { color: #475569; font-size: 14px; line-height: 1.7; margin-top: 4px; }
-
-    /* Portfolio grid */
-    .portfolio-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-    }
-    .portfolio-card {
-      background: linear-gradient(135deg, rgba(45,91,255,0.06), rgba(11,17,32,0.04));
-      border: 1px solid #D1D5DB;
-      border-radius: 12px;
-      height: 160px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      transition: border-color 0.2s ease, transform 0.2s ease;
-      cursor: default;
-    }
-    .portfolio-card:hover {
-      border-color: #2D5BFF;
-      transform: scale(1.02);
-    }
-    .portfolio-card-label {
-      color: #2D5BFF;
-      font-size: 11px;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-    }
-    .portfolio-card-text {
-      color: rgba(71,85,105,0.4);
-      font-size: 13px;
-      font-weight: 500;
+    body::after {
+      content:'';
+      position:fixed; inset:0;
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23n)' opacity='0.026'/%3E%3C/svg%3E");
+      pointer-events:none; z-index:9999; mix-blend-mode:multiply;
     }
 
-    /* CTA strip */
-    .section-cta {
-      text-align: center;
-      margin-top: 56px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-    .section-cta-text { color: #475569; font-size: 16px; }
-    .section-cta-link {
-      color: #2D5BFF;
-      font-weight: 700;
-      font-size: 16px;
-      text-decoration: none;
-    }
-    .section-cta-link:hover { text-decoration: underline; }
+    /* ── Typography ── */
+    h1,h2,h3,h4 { font-family:var(--font-display); line-height:1.22; color:var(--deep-blue); }
+    h1 { font-size:clamp(2.2rem,4.8vw,3.6rem); line-height:1.16; font-weight:700; }
+    h2 { font-size:clamp(1.7rem,3vw,2.6rem); line-height:1.22; font-weight:600; }
+    h3 { font-size:clamp(1.05rem,1.6vw,1.3rem); font-weight:600; }
+    p  { font-family:var(--font-body); font-size:1rem; line-height:1.87; color:var(--text-body); }
+    p.lead { font-size:1.08rem; line-height:1.9; color:var(--text-ink); }
+    a  { text-decoration:none; }
 
-    /* Industry cards */
-    .industry-card {
-      background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(255,255,255,0.1);
-      border-radius: 20px;
-      padding: 24px 20px;
-      transition: border-color 0.2s ease, transform 0.2s ease;
+    .eyebrow {
+      display:block; font-family:var(--font-ui);
+      font-size:0.68rem; font-weight:600;
+      letter-spacing:0.17em; text-transform:uppercase;
+      color:var(--warm-blue); margin-bottom:var(--s2);
     }
-    .industry-card:hover {
-      border-color: #2D5BFF;
-      transform: translateY(-2px);
+    .eyebrow--gold { color:var(--gold); }
+    .eyebrow--pale { color:rgba(245,241,234,0.5); }
+
+    /* ── Layout ── */
+    .container { max-width:var(--max-width); margin:0 auto; padding:0 var(--s4); }
+    .section        { padding:var(--s7) 0; }
+    .section--tight { padding:var(--s5) 0; }
+    .section--warm  { background:var(--bg-section); }
+    .section--card  { background:var(--bg-card); }
+    .section--dark  { background:var(--bg-dark); }
+    .section--cream { background:var(--bg-primary); }
+    .section--footer{ background:var(--bg-footer); }
+    .text-center    { text-align:center; }
+
+    .divider-bar {
+      width:44px; height:2.5px;
+      background:linear-gradient(90deg,var(--gold),var(--warm-blue));
+      border-radius:2px; margin:var(--s3) auto; opacity:0.8;
     }
-    .industry-icon {
-      width: 40px;
-      height: 40px;
-      background: rgba(45,91,255,0.2);
-      border-radius: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: white;
-      font-weight: 700;
-      font-size: 13px;
+    .divider-bar--left { margin-left:0; }
+
+    .fade-in { opacity:0; transform:translateY(22px); transition:opacity 0.65s ease, transform 0.65s ease; }
+    .fade-in.visible { opacity:1; transform:translateY(0); }
+
+    /* ── Buttons ── */
+    .btn {
+      display:inline-flex; align-items:center; gap:0.45rem;
+      padding:0.88rem 2rem; border-radius:100px;
+      font-family:var(--font-ui); font-size:0.86rem; font-weight:600;
+      letter-spacing:0.02em; cursor:pointer;
+      transition:all 0.3s ease; border:1.5px solid transparent;
+      white-space:nowrap;
+    }
+    .btn-primary { background:var(--deep-blue); color:var(--text-warm); }
+    .btn-primary:hover { background:#243f64; transform:translateY(-2px); box-shadow:0 10px 32px rgba(31,53,87,0.28); }
+    .btn-ghost { background:transparent; color:var(--text-warm); border-color:rgba(245,241,234,0.28); }
+    .btn-ghost:hover { background:rgba(245,241,234,0.08); border-color:rgba(245,241,234,0.55); }
+    .btn-gold { background:var(--gold); color:#fff; font-weight:700; }
+    .btn-gold:hover { background:var(--gold-warm); transform:translateY(-2px); box-shadow:0 10px 32px rgba(184,146,62,0.35); }
+    .btn-outline { background:transparent; color:var(--deep-blue); border-color:rgba(75,111,165,0.42); }
+    .btn-outline:hover { background:var(--deep-blue); color:var(--text-warm); }
+    .btn-sm { padding:0.62rem 1.35rem; font-size:0.78rem; }
+
+    /* ── Header ── */
+    .site-header {
+      position:fixed; top:0; left:0; right:0; z-index:200;
+      background:rgba(245,241,234,0.94);
+      backdrop-filter:blur(20px) saturate(1.2);
+      -webkit-backdrop-filter:blur(20px) saturate(1.2);
+      border-bottom:var(--border-warm);
+      transition:box-shadow 0.3s ease;
+    }
+    .site-header.scrolled { box-shadow:var(--shadow-sm); }
+    .header__inner {
+      max-width:var(--max-width); margin:0 auto; padding:0 var(--s4);
+      height:68px; display:flex; align-items:center;
+      justify-content:space-between; gap:var(--s3);
+    }
+    .header__logo { display:flex; flex-direction:row; align-items:center; gap:0.6rem; }
+    .header__logo-name {
+      font-family:var(--font-display); font-size:1.05rem; font-weight:700;
+      color:var(--deep-blue); line-height:1; letter-spacing:-0.01em;
+    }
+    .header__nav { display:flex; align-items:center; gap:1.5rem; list-style:none; }
+    .header__nav a {
+      font-family:var(--font-ui); font-size:0.78rem; font-weight:500;
+      color:var(--text-body); transition:color 0.2s; white-space:nowrap;
+    }
+    .header__nav a:hover, .header__nav a.active { color:var(--deep-blue); font-weight:600; }
+    .header__cta { display:flex; align-items:center; gap:0.9rem; flex-shrink:0; }
+    .hamburger { display:none; flex-direction:column; gap:5px; cursor:pointer; background:none; border:none; padding:8px; }
+    .hamburger span { display:block; width:20px; height:2px; background:var(--text-ink); border-radius:2px; transition:all 0.25s ease; }
+    .mobile-menu { display:none; flex-direction:column; background:var(--bg-card); border-top:var(--border-warm); padding:1rem var(--s4) 1.5rem; }
+    .mobile-menu.open { display:flex; }
+    .mobile-menu a { font-family:var(--font-ui); font-size:0.9rem; font-weight:500; color:var(--text-body); padding:0.7rem 0; border-bottom:var(--border-card); transition:color 0.2s; }
+    .mobile-menu a:hover { color:var(--deep-blue); }
+    .mobile-menu a:last-of-type { border-bottom:none; }
+    .mobile-menu .mobile-cta { margin-top:1rem; }
+    @media (max-width:1024px) { .header__nav { display:none; } }
+    @media (max-width:768px) { .header__cta .btn-ghost { display:none; } .hamburger { display:flex; } }
+
+    /* ════════════════════════════════════════════
+       S1, HERO  ·  --bg-dark
+    ════════════════════════════════════════════ */
+    .hero {
+      background:var(--bg-dark);
+      padding-top:68px;
+      padding-bottom:var(--s6);
+      text-align:center;
+      position:relative;
+      overflow:hidden;
+    }
+    .hero::before {
+      content:'';
+      position:absolute; top:-100px; right:-120px;
+      width:600px; height:600px;
+      background:radial-gradient(ellipse at center, rgba(184,146,62,0.07) 0%, transparent 65%);
+      pointer-events:none;
+    }
+    .hero::after {
+      content:'';
+      position:absolute; bottom:-60px; left:-80px;
+      width:400px; height:400px;
+      background:radial-gradient(ellipse at center, rgba(109,143,199,0.05) 0%, transparent 65%);
+      pointer-events:none;
+    }
+    .hero__inner {
+      max-width:800px; margin:0 auto;
+      padding:var(--s6) var(--s4) var(--s5);
+      position:relative; z-index:1;
+    }
+    .hero__eyebrow {
+      display:inline-flex; align-items:center; gap:0.6rem;
+      font-family:var(--font-ui); font-size:0.68rem; font-weight:600;
+      letter-spacing:0.18em; text-transform:uppercase;
+      color:var(--gold-pale); margin-bottom:1.8rem;
+    }
+    .hero__eyebrow-dot { width:5px; height:5px; border-radius:50%; background:var(--gold); opacity:0.75; flex-shrink:0; }
+    .hero__title { font-family:var(--font-display); font-size:clamp(2.2rem,4.6vw,3.6rem); font-weight:700; color:#fff; line-height:1.15; margin-bottom:1.6rem; }
+    .hero__title em { font-style:italic; color:var(--gold-pale); }
+    .hero__body { font-family:var(--font-body); font-size:1.06rem; line-height:1.88; color:rgba(245,241,234,0.68); max-width:560px; margin:0 auto 2.6rem; }
+    .hero__actions { display:flex; flex-wrap:wrap; gap:1rem; justify-content:center; }
+
+    /* ════════════════════════════════════════════
+       S2, INTRO  ·  --bg-primary (cream)
+    ════════════════════════════════════════════ */
+    .intro-section {
+      background:var(--bg-primary);
+      padding:var(--s7) 0;
+      position:relative; overflow:hidden;
+    }
+    .intro-section::before {
+      content:'';
+      position:absolute; top:-60px; right:-80px;
+      width:500px; height:500px;
+      background:radial-gradient(ellipse at center, rgba(184,146,62,0.05) 0%, transparent 65%);
+      pointer-events:none;
+    }
+    .intro-inner {
+      max-width:780px; margin:0 auto;
+    }
+    .intro-inner h2 { margin-bottom:1.25rem; }
+    .intro-inner p  { margin-bottom:1.15rem; }
+    .intro-quote {
+      margin:2rem 0;
+      padding:1.6rem 1.75rem;
+      border-left:3px solid var(--gold);
+      background:rgba(184,146,62,0.05);
+      border-radius:0 var(--radius) var(--radius) 0;
+    }
+    .intro-quote p {
+      font-family:var(--font-display);
+      font-size:1.1rem; font-style:italic;
+      color:var(--deep-blue); line-height:1.65;
+      margin-bottom:0;
     }
 
-    /* ── Responsive ── */
-    @media (max-width: 768px) {
-      .service-body { flex-direction: column; gap: 40px; }
-      .service-list { width: 100%; }
-      .service-portfolio { width: 100%; }
-      .portfolio-grid { grid-template-columns: 1fr 1fr; }
+    /* ════════════════════════════════════════════
+       S3, SERVICE AREAS GRID  ·  --bg-section (deeper cream)
+    ════════════════════════════════════════════ */
+    .areas-section {
+      background:var(--bg-section);
+      padding:var(--s7) 0;
     }
-    @media (max-width: 480px) {
-      .portfolio-grid { grid-template-columns: 1fr; }
-      .portfolio-card { height: 120px; }
+    .areas-grid {
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:1.5rem;
+      margin-top:var(--s4);
     }
+    @media (max-width:960px) { .areas-grid { grid-template-columns:repeat(2,1fr); } }
+    @media (max-width:580px) { .areas-grid { grid-template-columns:1fr; } }
+    .area-card {
+      background:var(--bg-card);
+      border:var(--border-warm);
+      border-radius:var(--radius-lg);
+      padding:2rem;
+      box-shadow:var(--shadow-sm);
+      transition:transform 0.25s, box-shadow 0.25s;
+    }
+    .area-card:hover { transform:translateY(-4px); box-shadow:var(--shadow-md); }
+    .area-card__icon {
+      font-size:1.75rem;
+      margin-bottom:0.9rem;
+      display:block;
+    }
+    .area-card__name {
+      font-family:var(--font-display);
+      font-size:1.1rem; font-weight:600;
+      color:var(--deep-blue);
+      margin-bottom:0.45rem;
+    }
+    .area-card__tag {
+      display:inline-block;
+      font-family:var(--font-ui);
+      font-size:0.62rem; font-weight:600;
+      letter-spacing:0.12em; text-transform:uppercase;
+      color:var(--gold);
+      margin-bottom:0.9rem;
+    }
+    .area-card__desc {
+      font-family:var(--font-body);
+      font-size:0.9rem; line-height:1.8;
+      color:var(--text-body);
+      margin:0;
+    }
+
+    /* ════════════════════════════════════════════
+       S4, HOW WE WORK  ·  --bg-dark
+    ════════════════════════════════════════════ */
+    .approach-section {
+      background:var(--bg-dark);
+      padding:var(--s7) 0;
+      position:relative; overflow:hidden;
+    }
+    .approach-section::before {
+      content:'';
+      position:absolute; top:-80px; left:-80px;
+      width:480px; height:480px;
+      background:radial-gradient(ellipse at center, rgba(184,146,62,0.06) 0%, transparent 65%);
+      pointer-events:none;
+    }
+    .approach-lead {
+      max-width:680px; margin:0 auto var(--s5);
+      text-align:center;
+    }
+    .approach-lead p {
+      color:rgba(245,241,234,0.62);
+      font-size:1.02rem; line-height:1.88;
+      margin:0;
+    }
+    .approach-features {
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:1.5rem;
+      margin-top:var(--s4);
+    }
+    @media (max-width:780px) { .approach-features { grid-template-columns:1fr; } }
+    .feature-card {
+      background:rgba(255,255,255,0.04);
+      border:var(--border-dark);
+      border-radius:var(--radius-lg);
+      padding:1.75rem 1.5rem;
+      transition:background 0.25s;
+    }
+    .feature-card:hover { background:rgba(255,255,255,0.07); }
+    .feature-card__icon {
+      font-size:1.5rem;
+      display:block;
+      margin-bottom:0.8rem;
+    }
+    .feature-card__title {
+      font-family:var(--font-display);
+      font-size:1.05rem; font-weight:600;
+      color:#fff; margin-bottom:0.6rem;
+    }
+    .feature-card__desc {
+      font-family:var(--font-body);
+      font-size:0.88rem; line-height:1.8;
+      color:rgba(245,241,234,0.55);
+      margin:0;
+    }
+
+    /* ════════════════════════════════════════════
+       S5, WHAT YOU GET  ·  --bg-primary (cream)
+    ════════════════════════════════════════════ */
+    .gets-section {
+      background:var(--bg-primary);
+      padding:var(--s7) 0;
+    }
+    .gets-grid {
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:1.5rem;
+      margin-top:var(--s4);
+    }
+    @media (max-width:700px) { .gets-grid { grid-template-columns:1fr; } }
+    .get-card {
+      background:var(--bg-card);
+      border:var(--border-warm);
+      border-radius:var(--radius-lg);
+      padding:2rem;
+      transition:transform 0.25s, box-shadow 0.25s;
+    }
+    .get-card:hover { transform:translateY(-3px); box-shadow:var(--shadow-md); }
+    .get-card__icon {
+      font-size:1.5rem;
+      display:block;
+      margin-bottom:0.8rem;
+    }
+    .get-card__title {
+      font-family:var(--font-display);
+      font-size:1.05rem; font-weight:600;
+      color:var(--deep-blue); margin-bottom:0.55rem;
+    }
+    .get-card__desc {
+      font-family:var(--font-body);
+      font-size:0.9rem; line-height:1.8;
+      color:var(--text-body); margin:0;
+    }
+
+    /* ════════════════════════════════════════════
+       S6, CTA  ·  --bg-dark
+    ════════════════════════════════════════════ */
+    .cta-section {
+      background:var(--bg-dark);
+      padding:var(--s7) 0;
+      text-align:center;
+      position:relative; overflow:hidden;
+    }
+    .cta-section::before {
+      content:'';
+      position:absolute; top:-80px; right:-80px;
+      width:500px; height:500px;
+      background:radial-gradient(ellipse at center, rgba(184,146,62,0.07) 0%, transparent 65%);
+      pointer-events:none;
+    }
+    .cta-title { font-family:var(--font-display); font-size:clamp(1.8rem,3.5vw,2.8rem); font-weight:700; color:#fff; line-height:1.2; margin-bottom:1.25rem; }
+    .cta-title em { font-style:italic; color:var(--gold-pale); }
+    .cta-body { font-family:var(--font-body); font-size:1.05rem; line-height:1.85; color:rgba(245,241,234,0.62); max-width:520px; margin:0 auto 2.5rem; }
+    .cta-actions { display:flex; flex-wrap:wrap; gap:1rem; justify-content:center; }
+    .cta-note { font-family:var(--font-ui); font-size:0.75rem; color:rgba(245,241,234,0.28); margin-top:1.25rem; }
+
+    /* ── Footer ── */
+    .site-footer {
+      background:var(--bg-footer);
+      border-top:var(--border-dark);
+      padding:var(--s6) 0 var(--s4);
+    }
+    .footer-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:var(--s4); }
+    @media (max-width:900px) { .footer-grid { grid-template-columns:repeat(2,1fr); } }
+    @media (max-width:540px) { .footer-grid { grid-template-columns:1fr; } }
+    .footer-brand-name { font-family:var(--font-display); font-size:1rem; font-weight:700; color:#fff; }
+    .footer-brand-desc { font-family:var(--font-body); font-size:0.82rem; line-height:1.75; color:rgba(245,241,234,0.45); margin-top:0.8rem; max-width:240px; }
+    .footer-col-label { font-family:var(--font-ui); font-size:0.62rem; font-weight:600; letter-spacing:0.14em; text-transform:uppercase; color:rgba(245,241,234,0.32); margin-bottom:1.1rem; }
+    .footer-link { display:block; font-family:var(--font-ui); font-size:0.83rem; color:rgba(245,241,234,0.6); line-height:2.15; transition:color 0.2s; }
+    .footer-link:hover { color:#fff; }
+    .footer-bottom { margin-top:var(--s4); padding-top:1.5rem; border-top:var(--border-dark); display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.75rem; }
+    .footer-copy { font-family:var(--font-ui); font-size:0.75rem; color:rgba(245,241,234,0.28); }
+
+    /* Misc */
+    .section-header { max-width:680px; margin:0 auto var(--s5); text-align:center; }
+    .section-header h2 { margin-bottom:0.75rem; }
+    .section-header p { color:var(--text-body); }
+      .header__cta .btn-ghost { color:var(--deep-blue); border-color:rgba(31,53,87,0.22); }
+    .header__cta .btn-ghost:hover { background:rgba(31,53,87,0.06); border-color:rgba(31,53,87,0.38); color:var(--deep-blue); }
   </style>
 </head>
-<body class="bg-white text-navy">
-
+<body>
 
 <!-- ════════════════════════════════════════════
-     HEADER
+     HEADER, "How We Help" active
 ════════════════════════════════════════════ -->
-<header id="site-header" class="fixed top-0 left-0 right-0 z-50 bg-white border-b border-gray-100">
-  <div class="max-w-7xl mx-auto px-6 flex items-center justify-between h-16">
-
-    <!-- Logo -->
-    <a href="index.html" class="flex items-center gap-3 no-underline">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 210" width="36" height="36"
-           style="color:#2D5BFF; flex-shrink:0;" aria-hidden="true">
-        <rect x="38" y="6" width="13" height="62" rx="2" fill="currentColor"/>
-        <line x1="100" y1="38" x2="6" y2="90" stroke="currentColor" stroke-width="9" stroke-linecap="round"/>
-        <line x1="100" y1="38" x2="194" y2="90" stroke="currentColor" stroke-width="9" stroke-linecap="round"/>
-        <rect x="24" y="90" width="152" height="86" rx="6" fill="none" stroke="currentColor" stroke-width="9"/>
-        <text x="100" y="154" text-anchor="middle" font-size="46" font-weight="800"
-              font-family="Georgia,'Times New Roman',serif" fill="currentColor">BBC</text>
-        <rect x="91" y="176" width="18" height="18" rx="2" fill="currentColor"/>
-        <rect x="64" y="194" width="72" height="11" rx="5.5" fill="currentColor"/>
-      </svg>
-      <span class="font-bold" style="color:#0B1120; font-weight:700; font-size:15px; letter-spacing:-0.01em;">
-        Balay ni Bruno &amp; Co.
-      </span>
+<header class="site-header" id="site-header">
+  <div class="header__inner">
+    <a href="index.html" class="header__logo">
+      <img src="bbc-logo.png" alt="Balay ni Bruno &amp; Co." style="height:42px; width:auto; display:block;">
+      <span class="header__logo-name">Balay ni Bruno &amp; Co.</span>
     </a>
-
-    <!-- Desktop Nav -->
-    <nav class="hidden lg:flex items-center gap-6">
-      <a href="index.html"              style="color:#475569; font-weight:500; font-size:14px;" class="hover:text-navy transition-colors">Home</a>
-      <a href="about.html"              style="color:#475569; font-weight:500; font-size:14px;" class="hover:text-navy transition-colors">Our Story</a>
-      <a href="how-it-works.html"       style="color:#475569; font-weight:500; font-size:14px;" class="hover:text-navy transition-colors">How It Works</a>
-      <a href="how-we-help.html"        style="color:#2D5BFF; font-weight:700; font-size:14px;" aria-current="page">How We Help</a>
-      <a href="index.html#team"         style="color:#475569; font-weight:500; font-size:14px;" class="hover:text-navy transition-colors">Team</a>
-      <a href="our-work.html"           style="color:#475569; font-weight:500; font-size:14px;" class="hover:text-navy transition-colors">Our Work</a>
-      <a href="ai-agents.html"          style="color:#475569; font-weight:500; font-size:14px;" class="hover:text-navy transition-colors">AI Agents</a>
-      <a href="index.html#insights"     style="color:#475569; font-weight:500; font-size:14px;" class="hover:text-navy transition-colors">Insights</a>
-      <a href="index.html#contact"      style="color:#475569; font-weight:500; font-size:14px;" class="hover:text-navy transition-colors">Contact</a>
+    <nav>
+      <ul class="header__nav">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">Our Story</a></li>
+        <li><a href="how-it-works.html">How It Works</a></li>
+        <li><a href="how-we-help.html" class="active">How We Help</a></li>
+        <li><a href="our-team.html">Our Team</a></li>
+        <li><a href="our-work.html">Our Work</a></li>
+        <li><a href="insights.html">Insights</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
     </nav>
-
-    <!-- CTA + Hamburger -->
-    <div class="flex items-center gap-3">
-      <a href="index.html#contact"
-         class="hidden md:inline-flex items-center px-5 py-2 rounded-full text-white font-semibold text-sm"
-         style="background:#2D5BFF; font-weight:600;">
-        Book a Call
-      </a>
-      <button id="hamburger" class="lg:hidden flex flex-col gap-1.5 p-2" aria-label="Toggle navigation menu">
-        <span id="hb1" class="block w-5 h-0.5 bg-gray-700 rounded"></span>
-        <span id="hb2" class="block w-5 h-0.5 bg-gray-700 rounded"></span>
-        <span id="hb3" class="block w-5 h-0.5 bg-gray-700 rounded"></span>
-      </button>
+    <div class="header__cta">
+      <a href="contact.html" class="btn btn-ghost btn-sm">Start a Conversation</a>
+      <a href="https://calendly.com/rj-balaynibruno/bbc-strategy-call" target="_blank" rel="noopener noreferrer" class="btn btn-gold btn-sm">Book a Call</a>
     </div>
+    <button class="hamburger" id="hamburger" aria-label="Open menu">
+      <span id="hb1"></span>
+      <span id="hb2"></span>
+      <span id="hb3"></span>
+    </button>
   </div>
-
-  <!-- Mobile Nav Dropdown -->
-  <div id="mobile-nav" class="lg:hidden flex-col border-t border-gray-100 bg-white px-6 py-4 gap-0.5">
-    <a href="index.html"               class="block py-2.5 text-sm font-medium" style="color:#475569;">Home</a>
-    <a href="about.html"               class="block py-2.5 text-sm font-medium" style="color:#475569;">Our Story</a>
-    <a href="how-it-works.html"        class="block py-2.5 text-sm font-medium" style="color:#475569;">How It Works</a>
-    <a href="how-we-help.html"         class="block py-2.5 text-sm font-bold"   style="color:#2D5BFF;">How We Help</a>
-    <a href="index.html#team"          class="block py-2.5 text-sm font-medium" style="color:#475569;">Team</a>
-    <a href="our-work.html"            class="block py-2.5 text-sm font-medium" style="color:#475569;">Our Work</a>
-    <a href="ai-agents.html"           class="block py-2.5 text-sm font-medium" style="color:#475569;">AI Agents</a>
-    <a href="index.html#insights"      class="block py-2.5 text-sm font-medium" style="color:#475569;">Insights</a>
-    <a href="index.html#contact"       class="block py-2.5 text-sm font-medium" style="color:#475569;">Contact</a>
-    <a href="index.html#contact"
-       class="block mt-3 text-center px-5 py-2.5 rounded-full text-white font-semibold text-sm"
-       style="background:#2D5BFF;">
-      Book a Call
-    </a>
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="index.html">Home</a>
+    <a href="about.html">Our Story</a>
+    <a href="how-it-works.html">How It Works</a>
+    <a href="how-we-help.html" style="color:var(--deep-blue);font-weight:600;">How We Help</a>
+    <a href="our-team.html">Our Team</a>
+    <a href="our-work.html">Our Work</a>
+    <a href="insights.html">Insights</a>
+    <a href="contact.html">Contact</a>
+    <a href="https://calendly.com/rj-balaynibruno/bbc-strategy-call" target="_blank" rel="noopener noreferrer" class="btn btn-gold mobile-cta" style="text-align:center;justify-content:center;">Book a Call</a>
   </div>
 </header>
 
 
 <!-- ════════════════════════════════════════════
-     SECTION 1 — PAGE HERO
+     S1, HERO  ·  Dark
 ════════════════════════════════════════════ -->
-<section style="background:#0B1120; padding:calc(120px + 64px) 24px 80px; text-align:center;">
-  <div class="max-w-3xl mx-auto fade-in">
+<section class="hero">
+  <div class="hero__inner fade-in">
 
-    <span class="inline-block font-semibold uppercase mb-5"
-          style="color:#2D5BFF; font-size:12px; letter-spacing:0.14em; font-weight:600;">
-      What Our Team Can Help With
-    </span>
+    <div class="hero__eyebrow">
+      <span class="hero__eyebrow-dot"></span>
+      BBC Support Areas
+    </div>
 
-    <h1 class="font-bold text-white"
-        style="font-size:clamp(30px,4.5vw,48px); line-height:1.2; font-weight:700;">
-      Everything Your Business<br>
-      Needs to Grow and<br>
-      Operate With Clarity
+    <h1 class="hero__title">
+      The Ways We <em>Show Up</em><br>for Your Business.
     </h1>
 
-    <p class="mx-auto mt-5"
-       style="color:rgba(255,255,255,0.6); font-size:18px; line-height:1.75; max-width:560px;">
-      BBC's team supports business owners across seven key areas — from marketing
-      and websites to operations, automation, and everything in between. Your matched
-      assistant handles the work. The founder stays involved for strategy.
+    <p class="hero__body">
+      We don't have packages. We have people. Each area of support at BBC is a living,
+      breathing practice led by a real team member who knows your business, not a ticket system.
     </p>
 
-    <div class="mt-10">
-      <a href="index.html#contact"
-         class="inline-flex items-center px-8 py-4 rounded-full text-white font-bold"
-         style="background:#2D5BFF; font-size:16px; font-weight:700;">
-        Book a Call
-      </a>
+    <div class="hero__actions">
+      <a href="#areas" class="btn btn-gold">See What We Do</a>
+      <a href="https://calendly.com/rj-balaynibruno/bbc-strategy-call" target="_blank" rel="noopener noreferrer" class="btn btn-ghost">Book a Call</a>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════
+     S2, INTRO  ·  Cream
+════════════════════════════════════════════ -->
+<section class="intro-section">
+  <div class="container">
+    <div class="intro-inner fade-in">
+      <span class="eyebrow eyebrow--gold">How We Think About Support</span>
+      <h2>We Don't Sell Services. We Extend Your Team.</h2>
+      <div class="divider-bar divider-bar--left"></div>
+
+      <p>
+        BBC is not an à la carte agency where you pick services off a menu and get handed off to
+        a specialist you've never spoken to. When you work with us, you get a cross-functional team
+        that learns your business, how you communicate, what you're building toward, and where
+        the friction lives day to day.
+      </p>
+
+      <p>
+        Every area of support we offer is connected. The person leading your SEO talks to the
+        person building your content. The brand decisions inform the web design. The automations
+        are built around how your team actually operates. That integration doesn't happen by
+        accident, it happens because we work together, not in separate silos.
+      </p>
+
+      <div class="intro-quote">
+        <p>
+          "The best support isn't transactional. It's relational. We learn your business,
+          we show up consistently, and we stay."
+        </p>
+      </div>
     </div>
   </div>
 </section>
 
 
 <!-- ════════════════════════════════════════════
-     SECTION 2 — CATEGORY NAVIGATION STRIP
+     S3, SERVICE AREAS GRID  ·  Deeper Cream
 ════════════════════════════════════════════ -->
-<nav id="cat-nav" aria-label="Service categories">
-  <div id="cat-nav-inner">
-    <a href="#marketing"  class="cat-pill" data-section="marketing">Marketing</a>
-    <a href="#content"    class="cat-pill" data-section="content">Content &amp; Creative</a>
-    <a href="#websites"   class="cat-pill" data-section="websites">Websites &amp; Digital</a>
-    <a href="#email"      class="cat-pill" data-section="email">Email, CRM &amp; Outreach</a>
-    <a href="#automation" class="cat-pill" data-section="automation">AI &amp; Automation</a>
-    <a href="#seo"        class="cat-pill" data-section="seo">SEO &amp; Visibility</a>
-    <a href="#operations" class="cat-pill" data-section="operations">Operations &amp; Admin</a>
+<section class="areas-section" id="areas">
+  <div class="container">
+    <div class="section-header fade-in">
+      <span class="eyebrow">Where BBC Shows Up</span>
+      <h2>Seven Areas. One Integrated Team.</h2>
+      <div class="divider-bar"></div>
+      <p>Each support area is a real practice, led by a real person, not a job title on a scope of work.</p>
+    </div>
+
+    <div class="areas-grid">
+
+      <div class="area-card fade-in">
+        <span class="area-card__icon">🌐</span>
+        <p class="area-card__name">Website &amp; Digital Presence</p>
+        <span class="area-card__tag">Web &amp; Design</span>
+        <p class="area-card__desc">
+          Your website is your storefront, your pitch deck, and your first impression, all at once.
+          We build, maintain, and improve websites that actually convert, using fast, clean code
+          and real editorial craft.
+        </p>
+      </div>
+
+      <div class="area-card fade-in">
+        <span class="area-card__icon">🔍</span>
+        <p class="area-card__name">SEO &amp; Organic Growth</p>
+        <span class="area-card__tag">Search &amp; Content</span>
+        <p class="area-card__desc">
+          We help the right people find you, not through paid ads, but through content and search
+          strategy that compounds over time. Al leads this area with a long-game, editorial-first approach.
+        </p>
+      </div>
+
+      <div class="area-card fade-in">
+        <span class="area-card__icon">🤖</span>
+        <p class="area-card__name">AI &amp; Automation</p>
+        <span class="area-card__tag">Systems &amp; Efficiency</span>
+        <p class="area-card__desc">
+          We identify repetitive work in your business and build systems to handle it. From AI-assisted
+          content workflows to CRM automations, we make your ops smarter so your team can focus on
+          what matters.
+        </p>
+      </div>
+
+      <div class="area-card fade-in">
+        <span class="area-card__icon">🎨</span>
+        <p class="area-card__name">Brand &amp; Creative</p>
+        <span class="area-card__tag">Design &amp; Identity</span>
+        <p class="area-card__desc">
+          Your brand is more than a logo, it's how you show up across every touchpoint. Krizza leads
+          brand and creative work at BBC, bringing warmth, intention, and precision to every visual decision.
+        </p>
+      </div>
+
+      <div class="area-card fade-in">
+        <span class="area-card__icon">✍️</span>
+        <p class="area-card__name">Content &amp; Copywriting</p>
+        <span class="area-card__tag">Voice &amp; Messaging</span>
+        <p class="area-card__desc">
+          Words that sound like you, not a template. We write copy, captions, emails, and articles
+          that carry your voice, consistent, clear, and built for real people.
+        </p>
+      </div>
+
+      <div class="area-card fade-in">
+        <span class="area-card__icon">📧</span>
+        <p class="area-card__name">Email &amp; CRM</p>
+        <span class="area-card__tag">Relationships at Scale</span>
+        <p class="area-card__desc">
+          Your email list is your most valuable asset. We build sequences, campaigns, and CRM systems
+          that keep relationships warm and conversions moving, without the spammy-agency feel.
+        </p>
+      </div>
+
+      <div class="area-card fade-in">
+        <span class="area-card__icon">⚙️</span>
+        <p class="area-card__name">Operations &amp; Admin</p>
+        <span class="area-card__tag">Back-Office Support</span>
+        <p class="area-card__desc">
+          The behind-the-scenes work that keeps everything running. Visa leads operations at BBC —
+          scheduling, SOP documentation, inbox management, reporting, and the systems that make
+          your business breathable.
+        </p>
+      </div>
+
+    </div>
   </div>
-</nav>
+</section>
 
 
 <!-- ════════════════════════════════════════════
-     SECTION 3 — MARKETING SUPPORT
+     S4, HOW WE WORK TOGETHER  ·  Dark
 ════════════════════════════════════════════ -->
-<section id="marketing" class="service-section" style="background:#F8FAFC;">
-  <div class="service-section-inner">
+<section class="approach-section">
+  <div class="container">
+    <div class="section-header fade-in" style="text-align:center;">
+      <span class="eyebrow eyebrow--pale">The BBC Approach</span>
+      <h2 style="color:#fff;">These Areas Don't Work in Silos. <em style="font-style:italic;color:var(--gold-pale);">Neither Do We.</em></h2>
+      <div class="divider-bar"></div>
+    </div>
 
-    <!-- Section header -->
-    <div class="service-header fade-in">
-      <span class="inline-block font-semibold uppercase mb-4"
-            style="color:#2D5BFF; font-size:12px; letter-spacing:0.14em; font-weight:600;">
-        Marketing Support
-      </span>
-      <h2 style="color:#0B1120; font-size:clamp(26px,3vw,40px); font-weight:700; line-height:1.2; margin:0;">
-        Grow Your Audience and<br>Stay Consistently Visible
-      </h2>
-      <p class="mx-auto mt-4"
-         style="color:#475569; font-size:17px; max-width:560px; line-height:1.75;">
-        BBC's marketing support helps business owners stay active, reach the right audience,
-        and run campaigns without doing it all themselves.
+    <div class="approach-lead fade-in">
+      <p>
+        The team at BBC collaborates across every area of support. Your SEO informs your content.
+        Your brand guides your web presence. Your automations support your email. None of it exists
+        in isolation, because your business doesn't either. We work connected by default, so the
+        left hand always knows what the right hand is doing.
       </p>
     </div>
 
-    <!-- Body -->
-    <div class="service-body fade-in">
+    <div class="approach-features fade-in">
 
-      <!-- Services list -->
-      <div class="service-list">
-        <div class="service-item">
-          <span class="service-dash">—</span>
-          <div>
-            <p class="service-name">Social Media Management &amp; Scheduling</p>
-            <p class="service-desc">Plan, create, and schedule social media content across platforms so your business stays consistent and active online.</p>
-          </div>
-        </div>
-        <div class="service-item">
-          <span class="service-dash">—</span>
-          <div>
-            <p class="service-name">Campaign Planning &amp; Assistance</p>
-            <p class="service-desc">Build and execute marketing campaigns from strategy to launch — promotions, product launches, seasonal campaigns, and more.</p>
-          </div>
-        </div>
-        <div class="service-item">
-          <span class="service-dash">—</span>
-          <div>
-            <p class="service-name">Outreach &amp; Lead Generation Support</p>
-            <p class="service-desc">Reach out to potential clients, partners, and collaborators through organized outreach strategies and follow-up systems.</p>
-          </div>
-        </div>
-        <div class="service-item">
-          <span class="service-dash">—</span>
-          <div>
-            <p class="service-name">Audience Engagement</p>
-            <p class="service-desc">Respond to comments, messages, and interactions to keep your audience engaged and your brand present.</p>
-          </div>
-        </div>
-        <div class="service-item">
-          <span class="service-dash">—</span>
-          <div>
-            <p class="service-name">Marketing Research &amp; Competitor Analysis</p>
-            <p class="service-desc">Research your market, track competitors, and identify opportunities to position your business more effectively.</p>
-          </div>
-        </div>
-        <div class="service-item">
-          <span class="service-dash">—</span>
-          <div>
-            <p class="service-name">Paid Ads Support</p>
-            <p class="service-desc">Assist with setting up, monitoring, and reporting on paid advertising campaigns across Meta, Google, and other platforms.</p>
-          </div>
-        </div>
-        <div class="service-item">
-          <span class="service-dash">—</span>
-          <div>
-            <p class="service-name">Marketing Admin &amp; Reporting</p>
-            <p class="service-desc">Organize marketing assets, track performance data, and prepare reports so you always know what is working.</p>
-          </div>
-        </div>
+      <div class="feature-card">
+        <span class="feature-card__icon">🔗</span>
+        <p class="feature-card__title">Cross-functional by default</p>
+        <p class="feature-card__desc">
+          Every team member knows what the others are working on. That's how we catch gaps
+          before they become problems.
+        </p>
       </div>
 
-      <!-- Portfolio grid -->
-      <div class="service-portfolio">
-        <div class="portfolio-grid">
-          <div class="portfolio-card">
-            <span class="portfolio-card-label">Social Media Campaign</span>
-            <span class="portfolio-card-text">Portfolio Coming Soon</span>
-          </div>
-          <div class="portfolio-card">
-            <span class="portfolio-card-label">Campaign Assets</span>
-            <span class="portfolio-card-text">Portfolio Coming Soon</span>
-          </div>
-          <div class="portfolio-card">
-            <span class="portfolio-card-label">Content Calendar</span>
-            <span class="portfolio-card-text">Portfolio Coming Soon</span>
-          </div>
-          <div class="portfolio-card">
-            <span class="portfolio-card-label">Marketing Report</span>
-            <span class="portfolio-card-text">Portfolio Coming Soon</span>
-          </div>
-        </div>
+      <div class="feature-card">
+        <span class="feature-card__icon">📋</span>
+        <p class="feature-card__title">One point of contact</p>
+        <p class="feature-card__desc">
+          You don't manage five different people. Bruno stays involved and keeps the whole
+          picture clear.
+        </p>
+      </div>
+
+      <div class="feature-card">
+        <span class="feature-card__icon">📈</span>
+        <p class="feature-card__title">Built to grow with you</p>
+        <p class="feature-card__desc">
+          We start where you are and scale as you grow. You don't need all seven areas
+          on day one.
+        </p>
       </div>
 
     </div>
-
-    <!-- CTA strip -->
-    <div class="section-cta fade-in">
-      <span class="section-cta-text">Ready to get help with marketing?</span>
-      <a href="index.html#contact" class="section-cta-link">Book a Call →</a>
-    </div>
-
   </div>
 </section>
 
 
 <!-- ════════════════════════════════════════════
-     SECTION 4 — CONTENT & CREATIVE SUPPORT
+     S5, WHAT YOU GET  ·  Cream
 ════════════════════════════════════════════ -->
-<section id="content" class="service-section" style="background:white;">
-  <div class="service-section-inner">
+<section class="gets-section">
+  <div class="container">
+    <div class="section-header fade-in">
+      <span class="eyebrow">Working With BBC</span>
+      <h2>Real People, Real Work, Real Accountability.</h2>
+      <div class="divider-bar"></div>
+      <p>When you bring BBC in, you're not getting a service, you're getting a team that takes ownership.</p>
+    </div>
 
-    <div class="service-header fade-in">
-      <span class="inline-block font-semibold uppercase mb-4"
-            style="color:#2D5BFF; font-size:12px; letter-spacing:0.14em; font-weight:600;">
-        Content &amp; Creative Support
-      </span>
-      <h2 style="color:#0B1120; font-size:clamp(26px,3vw,40px); font-weight:700; line-height:1.2; margin:0;">
-        Content That Looks Professional<br>and Gets Produced Consistently
+    <div class="gets-grid fade-in">
+
+      <div class="get-card">
+        <span class="get-card__icon">🧠</span>
+        <p class="get-card__title">A team that learns your business</p>
+        <p class="get-card__desc">
+          Not just task-completers. We study how you work, what you're building, and what's
+          getting in the way, so every decision we make is grounded in your reality.
+        </p>
+      </div>
+
+      <div class="get-card">
+        <span class="get-card__icon">🗓️</span>
+        <p class="get-card__title">Weekly check-ins and async communication</p>
+        <p class="get-card__desc">
+          On your schedule. We adapt to how you like to work, whether that's a standing
+          call, a shared doc, or quick async updates throughout the week.
+        </p>
+      </div>
+
+      <div class="get-card">
+        <span class="get-card__icon">📁</span>
+        <p class="get-card__title">Documented systems</p>
+        <p class="get-card__desc">
+          So nothing lives only in someone's head. Every workflow we build, every process
+          we run, documented, transferable, and owned by you.
+        </p>
+      </div>
+
+      <div class="get-card">
+        <span class="get-card__icon">💬</span>
+        <p class="get-card__title">Honest feedback</p>
+        <p class="get-card__desc">
+          We tell you when something isn't working, even when it's uncomfortable. That's
+          what a real team does. We'd rather be honest early than polite and unhelpful.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════
+     S6, CTA  ·  Dark
+════════════════════════════════════════════ -->
+<section class="cta-section">
+  <div class="container">
+    <div class="fade-in">
+      <span class="eyebrow eyebrow--pale">Ready to Start</span>
+      <h2 class="cta-title">
+        Let's Figure Out Where to <em>Begin.</em>
       </h2>
-      <p class="mx-auto mt-4"
-         style="color:#475569; font-size:17px; max-width:560px; line-height:1.75;">
-        From graphics and videos to brand assets and content calendars — BBC's creative team
-        handles the production so your content never falls behind.
+      <p class="cta-body">
+        You don't need to know exactly what you need. That's what the first conversation is for.
+        Tell us where you're at, we'll help you figure out the rest.
       </p>
+      <div class="cta-actions">
+        <a href="contact.html" class="btn btn-gold">Start a Conversation</a>
+        <a href="how-it-works.html" class="btn btn-ghost">See How We Work</a>
+      </div>
+      <p class="cta-note">No pressure. No pitch. Just a real conversation.</p>
     </div>
-
-    <div class="service-body fade-in">
-
-      <div class="service-list">
-        <div class="service-item">
-          <span class="service-dash">—</span>
-          <div>
-            <p class="service-name">Graphic Design &amp; Social Media Visuals</p>
-            <p class="service-desc">Create on-brand graphics, social media posts, banners, and visual assets using your brand colors, fonts, and style.</p>
-          </div>
-        </div>
-        <div class="service-item">
-          <span class="service-dash">—</span>
-          <div>
-            <p class="service-name">Short-Form Video Editing &amp; Production</p>
-            <p class="service-desc">Edit raw footage into polished short-form videos for Reels, TikTok, YouTube Shorts, and social media with captions, music, and transitions.</p>
-          </div>
-        </div>
-        <div class="service-item">
-          <span class="service-dash">—</span>
-          <div>
-            <p class="service-name">Captions &amp; Copywriting</p>
-            <p class="service-desc">Write engaging captions, post copy, and short-form content that matches your brand voice and connects with your audience.</p>
-          </div>
-        </div>
-        <div class="service-item">
-          <span class="service-dash">—</span>
-          <div>
-            <p class="service-name">Content Calendars &amp; Planning</p>
-            <p class="service-desc">Build and maintain a structured content calendar so your marketing stays organized, consistent, and planned weeks in advance.</p>
-          </div>
-        </div>
-        <div class="service-item">
-          <span class="service-dash">—</span>
-          <div>
-            <p class="service-name">Brand Assets &amp; Identity Materials</p>
-            <p class="service-desc">Design and organize brand assets including logos, color guides, font guides, templates, and brand kits.</p>
-          </div>
-        </div>
-        <div class="service-item">
-          <span class="service-dash">—</span>
-          <div>
-            <p class="service-name">Presentation Design</p>
-            <p class="service-desc">Create polished slide decks, pitch presentations, and proposal documents that represent your brand professionally.</p>
-          </div>
-        </div>
-        <div class="service-item">
-          <span class="service-dash">—</span>
-          <div>
-            <p class="service-name">Ad Creatives &amp; Thumbnails</p>
-            <p class="service-desc">Design scroll-stopping ad creatives, YouTube thumbnails, and promotional visuals optimized for performance.</p>
-          </div>
-        </div>
-        <div class="service-item">
-          <span class="service-dash">—</span>
-          <div>
-            <p class="service-name">Podcast Support</p>
-            <p class="service-desc">Edit podcast episodes, write show notes, create cover art, and assist with publishing and promotion.</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="service-portfolio">
-        <div class="portfolio-grid">
-          <div class="portfolio-card">
-            <span class="portfolio-card-label">Social Media Graphics</span>
-            <span class="portfolio-card-text">Portfolio Coming Soon</span>
-          </div>
-          <div class="portfolio-card">
-            <span class="portfolio-card-label">Short-Form Video</span>
-            <span class="portfolio-card-text">Portfolio Coming Soon</span>
-          </div>
-          <div class="portfolio-card">
-            <span class="portfolio-card-label">Brand Assets</span>
-            <span class="portfolio-card-text">Portfolio Coming Soon</span>
-          </div>
-          <div class="portfolio-card">
-            <span class="portfolio-card-label">Ad Creatives</span>
-            <span class="portfolio-card-text">Portfolio Coming Soon</span>
-          </div>
-        </div>
-      </div>
-
-    </div>
-
-    <div class="section-cta fade-in">
-      <span class="section-cta-text">Ready to get help with content and creative work?</span>
-      <a href="index.html#contact" class="section-cta-link">Book a Call →</a>
-    </div>
-
-  </div>
-</section>
-
-
-<!-- ════════════════════════════════════════════
-     SECTION 5 — WEBSITES & DIGITAL PRESENCE
-════════════════════════════════════════════ -->
-<section id="websites" class="service-section" style="background:#F8FAFC;">
-  <div class="service-section-inner">
-
-    <div class="service-header fade-in">
-      <span class="inline-block font-semibold uppercase mb-4"
-            style="color:#2D5BFF; font-size:12px; letter-spacing:0.14em; font-weight:600;">
-        Websites &amp; Digital Presence
-      </span>
-      <h2 style="color:#0B1120; font-size:clamp(26px,3vw,40px); font-weight:700; line-height:1.2; margin:0;">
-        A Digital Presence That Works<br>as Hard as You Do
-      </h2>
-      <p class="mx-auto mt-4"
-         style="color:#475569; font-size:17px; max-width:560px; line-height:1.75;">
-        BBC builds, maintains, and improves websites and digital assets so your business
-        looks credible, loads fast, and converts visitors into clients.
-      </p>
-    </div>
-
-    <div class="service-body fade-in">
-
-      <div class="service-list">
-        <div class="service-item">
-          <span class="service-dash">—</span>
-          <div>
-            <p class="service-name">WordPress Website Builds &amp; Support</p>
-            <p class="service-desc">Build full WordPress websites from scratch or improve existing ones — including theme setup, page building, plugins, and ongoing maintenance.</p>
-          </div>
-        </div>
-        <div class="service-item">
-          <span class="service-dash">—</span>
-          <div>
-            <p class="service-name">Shopify Store Builds &amp; Management</p>
-            <p class="service-desc">Build and manage Shopify stores including product pages, collections, checkout setup, and store organization.</p>
-          </div>
-        </div>
-        <div class="service-item">
-          <span class="service-dash">—</span>
-          <div>
-            <p class="service-name">Landing Page Design &amp; Setup</p>
-            <p class="service-desc">Design and build high-converting landing pages for campaigns, lead generation, and product launches.</p>
-          </div>
-        </div>
-        <div class="service-item">
-          <span class="service-dash">—</span>
-          <div>
-            <p class="service-name">Page Updates &amp; Website Maintenance</p>
-            <p class="service-desc">Keep your website updated with fresh content, new pages, image updates, and regular maintenance checks.</p>
-          </div>
-        </div>
-        <div class="service-item">
-          <span class="service-dash">—</span>
-          <div>
-            <p class="service-name">Speed Optimization &amp; Mobile Responsiveness</p>
-            <p class="service-desc">Improve website loading speed and ensure your site looks and works perfectly on all devices.</p>
-          </div>
-        </div>
-        <div class="service-item">
-          <span class="service-dash">—</span>
-          <div>
-            <p class="service-name">Plugin Setup &amp; Configuration</p>
-            <p class="service-desc">Install, configure, and manage WordPress plugins for forms, SEO, security, performance, and more.</p>
-          </div>
-        </div>
-        <div class="service-item">
-          <span class="service-dash">—</span>
-          <div>
-            <p class="service-name">Domain &amp; Hosting Support</p>
-            <p class="service-desc">Assist with domain setup, DNS configuration, hosting management, and website migration.</p>
-          </div>
-        </div>
-        <div class="service-item">
-          <span class="service-dash">—</span>
-          <div>
-            <p class="service-name">E-Commerce Product Listing &amp; Organization</p>
-            <p class="service-desc">Upload products, write descriptions, organize collections, and manage your online store catalog.</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="service-portfolio">
-        <div class="portfolio-grid">
-          <div class="portfolio-card">
-            <span class="portfolio-card-label">WordPress Website</span>
-            <span class="portfolio-card-text">Portfolio Coming Soon</span>
-          </div>
-          <div class="portfolio-card">
-            <span class="portfolio-card-label">Shopify Store</span>
-            <span class="portfolio-card-text">Portfolio Coming Soon</span>
-          </div>
-          <div class="portfolio-card">
-            <span class="portfolio-card-label">Landing Page</span>
-            <span class="portfolio-card-text">Portfolio Coming Soon</span>
-          </div>
-          <div class="portfolio-card">
-            <span class="portfolio-card-label">Website Redesign</span>
-            <span class="portfolio-card-text">Portfolio Coming Soon</span>
-          </div>
-        </div>
-      </div>
-
-    </div>
-
-    <div class="section-cta fade-in">
-      <span class="section-cta-text">Ready to get help with your website?</span>
-      <a href="index.html#contact" class="section-cta-link">Book a Call →</a>
-    </div>
-
-  </div>
-</section>
-
-
-<!-- ════════════════════════════════════════════
-     SECTION 6 — EMAIL, CRM & OUTREACH
-════════════════════════════════════════════ -->
-<section id="email" class="service-section" style="background:white;">
-  <div class="service-section-inner">
-
-    <div class="service-header fade-in">
-      <span class="inline-block font-semibold uppercase mb-4"
-            style="color:#2D5BFF; font-size:12px; letter-spacing:0.14em; font-weight:600;">
-        Email, CRM &amp; Outreach
-      </span>
-      <h2 style="color:#0B1120; font-size:clamp(26px,3vw,40px); font-weight:700; line-height:1.2; margin:0;">
-        Stay Connected, Organized,<br>and Always Following Up
-      </h2>
-      <p class="mx-auto mt-4"
-         style="color:#475569; font-size:17px; max-width:560px; line-height:1.75;">
-        BBC builds and manages the systems that keep your leads warm, your clients engaged,
-        and your outreach running without you doing it manually.
-      </p>
-    </div>
-
-    <div class="service-body fade-in">
-
-      <div class="service-list">
-        <div class="service-item">
-          <span class="service-dash">—</span>
-          <div>
-            <p class="service-name">Email Campaign Creation &amp; Management</p>
-            <p class="service-desc">Write, design, and send email campaigns that keep your audience informed, engaged, and moving toward action.</p>
-          </div>
-        </div>
-        <div class="service-item">
-          <span class="service-dash">—</span>
-          <div>
-            <p class="service-name">Follow-Up &amp; Lead Nurture Sequences</p>
-            <p class="service-desc">Build automated email sequences that follow up with leads, nurture relationships, and guide prospects toward becoming clients.</p>
-          </div>
-        </div>
-        <div class="service-item">
-          <span class="service-dash">—</span>
-          <div>
-            <p class="service-name">CRM Setup &amp; Pipeline Management</p>
-            <p class="service-desc">Set up and organize your CRM so every lead, client, and opportunity is tracked, categorized, and followed up on properly.</p>
-          </div>
-        </div>
-        <div class="service-item">
-          <span class="service-dash">—</span>
-          <div>
-            <p class="service-name">Contact List Organization</p>
-            <p class="service-desc">Clean, segment, and organize your email and contact lists so your outreach reaches the right people.</p>
-          </div>
-        </div>
-        <div class="service-item">
-          <span class="service-dash">—</span>
-          <div>
-            <p class="service-name">Newsletter Management &amp; Templates</p>
-            <p class="service-desc">Design and manage your regular newsletter — from template creation to writing, scheduling, and sending.</p>
-          </div>
-        </div>
-        <div class="service-item">
-          <span class="service-dash">—</span>
-          <div>
-            <p class="service-name">Social Media Outreach &amp; DM Campaigns</p>
-            <p class="service-desc">Run organized outreach campaigns through social media direct messages to connect with potential clients and partners.</p>
-          </div>
-        </div>
-        <div class="service-item">
-          <span class="service-dash">—</span>
-          <div>
-            <p class="service-name">Client Communication Support</p>
-            <p class="service-desc">Assist with managing client communications, inbox organization, and professional response drafting.</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="service-portfolio">
-        <div class="portfolio-grid">
-          <div class="portfolio-card">
-            <span class="portfolio-card-label">Email Campaign</span>
-            <span class="portfolio-card-text">Portfolio Coming Soon</span>
-          </div>
-          <div class="portfolio-card">
-            <span class="portfolio-card-label">CRM Setup</span>
-            <span class="portfolio-card-text">Portfolio Coming Soon</span>
-          </div>
-          <div class="portfolio-card">
-            <span class="portfolio-card-label">Nurture Sequence</span>
-            <span class="portfolio-card-text">Portfolio Coming Soon</span>
-          </div>
-          <div class="portfolio-card">
-            <span class="portfolio-card-label">Outreach Campaign</span>
-            <span class="portfolio-card-text">Portfolio Coming Soon</span>
-          </div>
-        </div>
-      </div>
-
-    </div>
-
-    <div class="section-cta fade-in">
-      <span class="section-cta-text">Ready to get help with email and outreach?</span>
-      <a href="index.html#contact" class="section-cta-link">Book a Call →</a>
-    </div>
-
-  </div>
-</section>
-
-
-<!-- ════════════════════════════════════════════
-     SECTION 7 — AI & AUTOMATION SUPPORT
-════════════════════════════════════════════ -->
-<section id="automation" class="service-section" style="background:#F8FAFC;">
-  <div class="service-section-inner">
-
-    <div class="service-header fade-in">
-      <span class="inline-block font-semibold uppercase mb-4"
-            style="color:#2D5BFF; font-size:12px; letter-spacing:0.14em; font-weight:600;">
-        AI &amp; Automation Support
-      </span>
-      <h2 style="color:#0B1120; font-size:clamp(26px,3vw,40px); font-weight:700; line-height:1.2; margin:0;">
-        Work Smarter With Systems<br>That Run Themselves
-      </h2>
-      <p class="mx-auto mt-4"
-         style="color:#475569; font-size:17px; max-width:560px; line-height:1.75;">
-        BBC builds AI-assisted workflows and automation systems that reduce manual work,
-        improve consistency, and help your business operate more efficiently.
-      </p>
-    </div>
-
-    <div class="service-body fade-in">
-
-      <div class="service-list">
-        <div class="service-item">
-          <span class="service-dash">—</span>
-          <div>
-            <p class="service-name">AI-Assisted Workflows &amp; Processes</p>
-            <p class="service-desc">Design and implement workflows that use AI tools to speed up content creation, research, reporting, and operational tasks.</p>
-          </div>
-        </div>
-        <div class="service-item">
-          <span class="service-dash">—</span>
-          <div>
-            <p class="service-name">Task Automation via Zapier or Make</p>
-            <p class="service-desc">Build automated workflows that connect your apps and tools — eliminating repetitive manual tasks and keeping everything in sync.</p>
-          </div>
-        </div>
-        <div class="service-item">
-          <span class="service-dash">—</span>
-          <div>
-            <p class="service-name">CRM Automation &amp; Workflows</p>
-            <p class="service-desc">Automate your CRM processes including lead assignment, follow-up triggers, pipeline updates, and client onboarding sequences.</p>
-          </div>
-        </div>
-        <div class="service-item">
-          <span class="service-dash">—</span>
-          <div>
-            <p class="service-name">Client Onboarding Systems</p>
-            <p class="service-desc">Build automated onboarding workflows that deliver welcome emails, collect questionnaire responses, assign tasks, and set up new clients efficiently.</p>
-          </div>
-        </div>
-        <div class="service-item">
-          <span class="service-dash">—</span>
-          <div>
-            <p class="service-name">Chatbot Setup &amp; Configuration</p>
-            <p class="service-desc">Set up and configure chatbots for your website or social media to handle inquiries, qualify leads, and provide instant responses.</p>
-          </div>
-        </div>
-        <div class="service-item">
-          <span class="service-dash">—</span>
-          <div>
-            <p class="service-name">Automated Follow-Up Systems</p>
-            <p class="service-desc">Build trigger-based follow-up sequences that reach out to leads and clients automatically based on their actions and behaviors.</p>
-          </div>
-        </div>
-        <div class="service-item">
-          <span class="service-dash">—</span>
-          <div>
-            <p class="service-name">Internal Process Documentation</p>
-            <p class="service-desc">Document your automated workflows, systems, and processes so your team always knows how everything works and nothing gets lost.</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="service-portfolio">
-        <div class="portfolio-grid">
-          <div class="portfolio-card">
-            <span class="portfolio-card-label">Automation Workflow</span>
-            <span class="portfolio-card-text">Portfolio Coming Soon</span>
-          </div>
-          <div class="portfolio-card">
-            <span class="portfolio-card-label">CRM Automation</span>
-            <span class="portfolio-card-text">Portfolio Coming Soon</span>
-          </div>
-          <div class="portfolio-card">
-            <span class="portfolio-card-label">Onboarding System</span>
-            <span class="portfolio-card-text">Portfolio Coming Soon</span>
-          </div>
-          <div class="portfolio-card">
-            <span class="portfolio-card-label">AI Workflow</span>
-            <span class="portfolio-card-text">Portfolio Coming Soon</span>
-          </div>
-        </div>
-      </div>
-
-    </div>
-
-    <div class="section-cta fade-in">
-      <span class="section-cta-text">Ready to get help with automation and AI workflows?</span>
-      <a href="index.html#contact" class="section-cta-link">Book a Call →</a>
-    </div>
-
-  </div>
-</section>
-
-
-<!-- ════════════════════════════════════════════
-     SECTION 8 — SEO & VISIBILITY
-════════════════════════════════════════════ -->
-<section id="seo" class="service-section" style="background:white;">
-  <div class="service-section-inner">
-
-    <div class="service-header fade-in">
-      <span class="inline-block font-semibold uppercase mb-4"
-            style="color:#2D5BFF; font-size:12px; letter-spacing:0.14em; font-weight:600;">
-        SEO &amp; Visibility
-      </span>
-      <h2 style="color:#0B1120; font-size:clamp(26px,3vw,40px); font-weight:700; line-height:1.2; margin:0;">
-        Get Found by the Right People<br>at the Right Time
-      </h2>
-      <p class="mx-auto mt-4"
-         style="color:#475569; font-size:17px; max-width:560px; line-height:1.75;">
-        BBC helps businesses improve their search visibility through organized on-page SEO,
-        content strategy, and consistent optimization that builds long-term organic reach.
-      </p>
-    </div>
-
-    <div class="service-body fade-in">
-
-      <div class="service-list">
-        <div class="service-item">
-          <span class="service-dash">—</span>
-          <div>
-            <p class="service-name">On-Page SEO &amp; Page Structure</p>
-            <p class="service-desc">Optimize your website pages with proper heading structure, keyword placement, meta information, and technical SEO best practices.</p>
-          </div>
-        </div>
-        <div class="service-item">
-          <span class="service-dash">—</span>
-          <div>
-            <p class="service-name">Keyword Research &amp; Organization</p>
-            <p class="service-desc">Research and organize the keywords your target audience is searching for — and map them to the right pages and content.</p>
-          </div>
-        </div>
-        <div class="service-item">
-          <span class="service-dash">—</span>
-          <div>
-            <p class="service-name">Blog Planning &amp; Writing Support</p>
-            <p class="service-desc">Plan and produce SEO-optimized blog content that builds your authority, attracts organic traffic, and answers your audience's questions.</p>
-          </div>
-        </div>
-        <div class="service-item">
-          <span class="service-dash">—</span>
-          <div>
-            <p class="service-name">Meta Descriptions &amp; Title Tags</p>
-            <p class="service-desc">Write compelling meta descriptions and title tags that improve click-through rates from search engine results pages.</p>
-          </div>
-        </div>
-        <div class="service-item">
-          <span class="service-dash">—</span>
-          <div>
-            <p class="service-name">Internal Linking Strategy</p>
-            <p class="service-desc">Build a strong internal linking structure that helps search engines understand your site and keeps visitors exploring your content.</p>
-          </div>
-        </div>
-        <div class="service-item">
-          <span class="service-dash">—</span>
-          <div>
-            <p class="service-name">Local SEO Support</p>
-            <p class="service-desc">Optimize your online presence for local search — including Google Business Profile, local citations, and location-based keyword targeting.</p>
-          </div>
-        </div>
-        <div class="service-item">
-          <span class="service-dash">—</span>
-          <div>
-            <p class="service-name">SEO Audits &amp; Content Updates</p>
-            <p class="service-desc">Audit existing pages for SEO issues and update older content to improve rankings and keep your site current.</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="service-portfolio">
-        <div class="portfolio-grid">
-          <div class="portfolio-card">
-            <span class="portfolio-card-label">SEO Audit Report</span>
-            <span class="portfolio-card-text">Portfolio Coming Soon</span>
-          </div>
-          <div class="portfolio-card">
-            <span class="portfolio-card-label">Blog Content</span>
-            <span class="portfolio-card-text">Portfolio Coming Soon</span>
-          </div>
-          <div class="portfolio-card">
-            <span class="portfolio-card-label">Keyword Map</span>
-            <span class="portfolio-card-text">Portfolio Coming Soon</span>
-          </div>
-          <div class="portfolio-card">
-            <span class="portfolio-card-label">Local SEO Setup</span>
-            <span class="portfolio-card-text">Portfolio Coming Soon</span>
-          </div>
-        </div>
-      </div>
-
-    </div>
-
-    <div class="section-cta fade-in">
-      <span class="section-cta-text">Ready to get help with SEO and visibility?</span>
-      <a href="index.html#contact" class="section-cta-link">Book a Call →</a>
-    </div>
-
-  </div>
-</section>
-
-
-<!-- ════════════════════════════════════════════
-     SECTION 9 — OPERATIONS & ADMIN SUPPORT
-════════════════════════════════════════════ -->
-<section id="operations" class="service-section" style="background:#F8FAFC;">
-  <div class="service-section-inner">
-
-    <div class="service-header fade-in">
-      <span class="inline-block font-semibold uppercase mb-4"
-            style="color:#2D5BFF; font-size:12px; letter-spacing:0.14em; font-weight:600;">
-        Operations &amp; Admin Support
-      </span>
-      <h2 style="color:#0B1120; font-size:clamp(26px,3vw,40px); font-weight:700; line-height:1.2; margin:0;">
-        Keep Your Business Organized,<br>Documented, and Running Smoothly
-      </h2>
-      <p class="mx-auto mt-4"
-         style="color:#475569; font-size:17px; max-width:560px; line-height:1.75;">
-        BBC helps business owners build the operational backbone their business needs —
-        from SOPs and file systems to project tracking and virtual admin support.
-      </p>
-    </div>
-
-    <div class="service-body fade-in">
-
-      <div class="service-list">
-        <div class="service-item">
-          <span class="service-dash">—</span>
-          <div>
-            <p class="service-name">SOP Creation &amp; Documentation</p>
-            <p class="service-desc">Create clear, organized standard operating procedures so your team always knows how tasks should be done and nothing depends on one person's memory.</p>
-          </div>
-        </div>
-        <div class="service-item">
-          <span class="service-dash">—</span>
-          <div>
-            <p class="service-name">Task &amp; Project Management Support</p>
-            <p class="service-desc">Set up and manage your project management tools — organizing tasks, deadlines, priorities, and team assignments so nothing falls through the cracks.</p>
-          </div>
-        </div>
-        <div class="service-item">
-          <span class="service-dash">—</span>
-          <div>
-            <p class="service-name">File &amp; Folder Organization</p>
-            <p class="service-desc">Organize your Google Drive, Dropbox, or file system into a clean, logical structure that everyone on your team can navigate easily.</p>
-          </div>
-        </div>
-        <div class="service-item">
-          <span class="service-dash">—</span>
-          <div>
-            <p class="service-name">Calendar &amp; Inbox Management</p>
-            <p class="service-desc">Manage your calendar, schedule appointments, and keep your inbox organized so you can focus on running your business.</p>
-          </div>
-        </div>
-        <div class="service-item">
-          <span class="service-dash">—</span>
-          <div>
-            <p class="service-name">Data Entry &amp; Research Tasks</p>
-            <p class="service-desc">Handle data entry, database management, online research, and information gathering tasks accurately and efficiently.</p>
-          </div>
-        </div>
-        <div class="service-item">
-          <span class="service-dash">—</span>
-          <div>
-            <p class="service-name">Team Coordination Support</p>
-            <p class="service-desc">Assist with coordinating tasks and communication across your internal team or external contractors to keep projects moving forward.</p>
-          </div>
-        </div>
-        <div class="service-item">
-          <span class="service-dash">—</span>
-          <div>
-            <p class="service-name">Virtual Admin Support</p>
-            <p class="service-desc">Provide general virtual assistant support for the day-to-day administrative tasks that keep your business running.</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="service-portfolio">
-        <div class="portfolio-grid">
-          <div class="portfolio-card">
-            <span class="portfolio-card-label">SOP Document</span>
-            <span class="portfolio-card-text">Portfolio Coming Soon</span>
-          </div>
-          <div class="portfolio-card">
-            <span class="portfolio-card-label">Project Tracker</span>
-            <span class="portfolio-card-text">Portfolio Coming Soon</span>
-          </div>
-          <div class="portfolio-card">
-            <span class="portfolio-card-label">File System</span>
-            <span class="portfolio-card-text">Portfolio Coming Soon</span>
-          </div>
-          <div class="portfolio-card">
-            <span class="portfolio-card-label">Operations Dashboard</span>
-            <span class="portfolio-card-text">Portfolio Coming Soon</span>
-          </div>
-        </div>
-      </div>
-
-    </div>
-
-    <div class="section-cta fade-in">
-      <span class="section-cta-text">Ready to get help with operations and admin work?</span>
-      <a href="index.html#contact" class="section-cta-link">Book a Call →</a>
-    </div>
-
-  </div>
-</section>
-
-
-<!-- ════════════════════════════════════════════
-     SECTION 10 — INDUSTRIES WE SERVE
-════════════════════════════════════════════ -->
-<section class="service-section" style="background:#0B1120;">
-  <div class="service-section-inner">
-
-    <div class="text-center fade-in mb-14">
-      <span class="inline-block font-semibold uppercase mb-4"
-            style="color:#2D5BFF; font-size:12px; letter-spacing:0.14em; font-weight:600;">
-        Who We Work With
-      </span>
-      <h2 style="color:white; font-size:clamp(26px,3vw,40px); font-weight:700; line-height:1.2; margin:0;">
-        Support Built for Business Owners<br>Across Every Industry
-      </h2>
-    </div>
-
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-5 fade-in" style="max-width:1100px; margin:0 auto;">
-
-      <!-- 1 -->
-      <div class="industry-card">
-        <div class="industry-icon">EC</div>
-        <p style="color:white; font-weight:700; font-size:15px; margin:14px 0 0;">E-Commerce Owners</p>
-        <p style="color:rgba(255,255,255,0.55); font-size:13px; line-height:1.65; margin:8px 0 0;">
-          Store management, product pages, digital marketing, and sales systems.
-        </p>
-      </div>
-
-      <!-- 2 -->
-      <div class="industry-card">
-        <div class="industry-icon">RE</div>
-        <p style="color:white; font-weight:700; font-size:15px; margin:14px 0 0;">Real Estate Agents</p>
-        <p style="color:rgba(255,255,255,0.55); font-size:13px; line-height:1.65; margin:8px 0 0;">
-          Online presence, listing content, social media, and lead generation.
-        </p>
-      </div>
-
-      <!-- 3 -->
-      <div class="industry-card">
-        <div class="industry-icon">CS</div>
-        <p style="color:white; font-weight:700; font-size:15px; margin:14px 0 0;">Coaches &amp; Consultants</p>
-        <p style="color:rgba(255,255,255,0.55); font-size:13px; line-height:1.65; margin:8px 0 0;">
-          Digital brand, content calendar, email systems, and client workflows.
-        </p>
-      </div>
-
-      <!-- 4 -->
-      <div class="industry-card">
-        <div class="industry-icon">HS</div>
-        <p style="color:white; font-weight:700; font-size:15px; margin:14px 0 0;">Home Service Businesses</p>
-        <p style="color:rgba(255,255,255,0.55); font-size:13px; line-height:1.65; margin:8px 0 0;">
-          Website, local SEO, social media, and marketing to attract more clients.
-        </p>
-      </div>
-
-      <!-- 5 -->
-      <div class="industry-card">
-        <div class="industry-icon">RS</div>
-        <p style="color:white; font-weight:700; font-size:15px; margin:14px 0 0;">Restaurants &amp; Hospitality</p>
-        <p style="color:rgba(255,255,255,0.55); font-size:13px; line-height:1.65; margin:8px 0 0;">
-          Online presence, social content, promotions, and digital assets.
-        </p>
-      </div>
-
-      <!-- 6 -->
-      <div class="industry-card">
-        <div class="industry-icon">AG</div>
-        <p style="color:white; font-weight:700; font-size:15px; margin:14px 0 0;">Agencies</p>
-        <p style="color:rgba(255,255,255,0.55); font-size:13px; line-height:1.65; margin:8px 0 0;">
-          White-label support for delivery, operations, and campaign execution.
-        </p>
-      </div>
-
-      <!-- 7 -->
-      <div class="industry-card">
-        <div class="industry-icon">CR</div>
-        <p style="color:white; font-weight:700; font-size:15px; margin:14px 0 0;">Creators &amp; Personal Brands</p>
-        <p style="color:rgba(255,255,255,0.55); font-size:13px; line-height:1.65; margin:8px 0 0;">
-          Content systems, video editing, graphics, and audience growth.
-        </p>
-      </div>
-
-      <!-- 8 -->
-      <div class="industry-card">
-        <div class="industry-icon">LB</div>
-        <p style="color:white; font-weight:700; font-size:15px; margin:14px 0 0;">Local Businesses</p>
-        <p style="color:rgba(255,255,255,0.55); font-size:13px; line-height:1.65; margin:8px 0 0;">
-          Digital presence, marketing consistency, and online visibility.
-        </p>
-      </div>
-
-      <!-- 9 -->
-      <div class="industry-card">
-        <div class="industry-icon">CN</div>
-        <p style="color:white; font-weight:700; font-size:15px; margin:14px 0 0;">Construction Companies</p>
-        <p style="color:rgba(255,255,255,0.55); font-size:13px; line-height:1.65; margin:8px 0 0;">
-          Website, project showcases, social media, and lead generation content.
-        </p>
-      </div>
-
-      <!-- 10 -->
-      <div class="industry-card">
-        <div class="industry-icon">SB</div>
-        <p style="color:white; font-weight:700; font-size:15px; margin:14px 0 0;">Service Businesses</p>
-        <p style="color:rgba(255,255,255,0.55); font-size:13px; line-height:1.65; margin:8px 0 0;">
-          Operations, marketing support, and digital systems that scale.
-        </p>
-      </div>
-
-      <!-- 11 -->
-      <div class="industry-card">
-        <div class="industry-icon">RT</div>
-        <p style="color:white; font-weight:700; font-size:15px; margin:14px 0 0;">Retailers</p>
-        <p style="color:rgba(255,255,255,0.55); font-size:13px; line-height:1.65; margin:8px 0 0;">
-          Product content, e-commerce setup, promotions, and digital marketing.
-        </p>
-      </div>
-
-      <!-- 12 -->
-      <div class="industry-card">
-        <div class="industry-icon">NP</div>
-        <p style="color:white; font-weight:700; font-size:15px; margin:14px 0 0;">Nonprofits &amp; Foundations</p>
-        <p style="color:rgba(255,255,255,0.55); font-size:13px; line-height:1.65; margin:8px 0 0;">
-          Online presence, content, donor communications, and digital ops.
-        </p>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-
-<!-- ════════════════════════════════════════════
-     SECTION 11 — FINAL CTA
-════════════════════════════════════════════ -->
-<section class="service-section"
-         style="background:#0B1120; border-top:1px solid rgba(255,255,255,0.08);
-                padding-top:120px; padding-bottom:120px; text-align:center;">
-  <div class="max-w-2xl mx-auto fade-in">
-
-    <h2 class="font-bold text-white"
-        style="font-size:clamp(28px,3.5vw,44px); font-weight:700; line-height:1.2;">
-      Not Sure What You Need?<br>Let's Figure It Out Together.
-    </h2>
-
-    <p class="mx-auto mt-5"
-       style="color:rgba(255,255,255,0.6); font-size:18px; max-width:500px; line-height:1.7;">
-      Book a call with RJ. We will learn about your business, identify the gaps, and recommend
-      exactly what kind of support will make the biggest difference.
-    </p>
-
-    <div class="mt-10">
-      <a href="index.html#contact"
-         class="inline-flex items-center px-10 py-5 rounded-full text-white font-bold"
-         style="background:#2D5BFF; font-size:18px; font-weight:700;">
-        Book a Call
-      </a>
-    </div>
-
-    <p class="mt-4" style="font-size:14px; color:rgba(255,255,255,0.35);">
-      No pressure. Just a conversation.
-    </p>
-
   </div>
 </section>
 
@@ -1271,101 +779,51 @@
 <!-- ════════════════════════════════════════════
      FOOTER
 ════════════════════════════════════════════ -->
-<footer style="background:#0B1120; border-top:1px solid rgba(255,255,255,0.08); padding:80px 0 40px;">
-  <div class="max-w-7xl mx-auto px-6">
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
 
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12">
-
-      <!-- Col 1: Brand -->
       <div>
-        <div class="flex items-center gap-3">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 210" width="42" height="42"
-               style="color:white; flex-shrink:0;" aria-hidden="true">
-            <rect x="38" y="6" width="13" height="62" rx="2" fill="currentColor"/>
-            <line x1="100" y1="38" x2="6" y2="90" stroke="currentColor" stroke-width="9" stroke-linecap="round"/>
-            <line x1="100" y1="38" x2="194" y2="90" stroke="currentColor" stroke-width="9" stroke-linecap="round"/>
-            <rect x="24" y="90" width="152" height="86" rx="6" fill="none" stroke="currentColor" stroke-width="9"/>
-            <text x="100" y="154" text-anchor="middle" font-size="46" font-weight="800"
-                  font-family="Georgia,'Times New Roman',serif" fill="currentColor">BBC</text>
-            <rect x="91" y="176" width="18" height="18" rx="2" fill="currentColor"/>
-            <rect x="64" y="194" width="72" height="11" rx="5.5" fill="currentColor"/>
-          </svg>
-          <span class="font-bold text-white" style="font-size:16px; font-weight:700;">Balay ni Bruno &amp; Co.</span>
-        </div>
-        <p class="mt-4 leading-relaxed"
-           style="color:rgba(255,255,255,0.5); font-size:14px; line-height:1.7; max-width:240px;">
-          Managed virtual operations support for business owners who need reliable help with marketing,
-          websites, content, automation, and digital operations.
+        <p class="footer-brand-name">Balay ni Bruno &amp; Co.</p>
+        <p class="footer-brand-desc">
+          A family-built operational support studio helping business owners grow through
+          real collaboration, honest systems, and long-term care.
         </p>
-        <div class="flex gap-2 mt-5">
-          <div class="w-7 h-7 rounded-md" style="border:1px solid rgba(255,255,255,0.15);"></div>
-          <div class="w-7 h-7 rounded-md" style="border:1px solid rgba(255,255,255,0.15);"></div>
-          <div class="w-7 h-7 rounded-md" style="border:1px solid rgba(255,255,255,0.15);"></div>
-        </div>
       </div>
 
-      <!-- Col 2: How We Help -->
       <div>
-        <p class="font-semibold uppercase tracking-widest mb-5"
-           style="color:rgba(255,255,255,0.4); font-size:12px; letter-spacing:0.1em;">How We Help</p>
-        <ul>
-          <li><a href="how-we-help.html#marketing"  class="hover:text-white transition-colors" style="color:rgba(255,255,255,0.65); font-size:14px; line-height:2.2; display:block;">Marketing Support</a></li>
-          <li><a href="how-we-help.html#content"    class="hover:text-white transition-colors" style="color:rgba(255,255,255,0.65); font-size:14px; line-height:2.2; display:block;">Content &amp; Creative</a></li>
-          <li><a href="how-we-help.html#websites"   class="hover:text-white transition-colors" style="color:rgba(255,255,255,0.65); font-size:14px; line-height:2.2; display:block;">Websites &amp; Digital</a></li>
-          <li><a href="how-we-help.html#email"      class="hover:text-white transition-colors" style="color:rgba(255,255,255,0.65); font-size:14px; line-height:2.2; display:block;">Email, CRM &amp; Outreach</a></li>
-          <li><a href="how-we-help.html#automation" class="hover:text-white transition-colors" style="color:rgba(255,255,255,0.65); font-size:14px; line-height:2.2; display:block;">AI &amp; Automation</a></li>
-          <li><a href="how-we-help.html#seo"        class="hover:text-white transition-colors" style="color:rgba(255,255,255,0.65); font-size:14px; line-height:2.2; display:block;">SEO &amp; Visibility</a></li>
-          <li><a href="how-we-help.html#operations" class="hover:text-white transition-colors" style="color:rgba(255,255,255,0.65); font-size:14px; line-height:2.2; display:block;">Operations &amp; Admin</a></li>
-        </ul>
+        <p class="footer-col-label">How We Help</p>
+        <a href="how-we-help.html#marketing" class="footer-link">Marketing Support</a>
+        <a href="how-we-help.html#content" class="footer-link">Content &amp; Creative</a>
+        <a href="how-we-help.html#websites" class="footer-link">Websites &amp; Digital</a>
+        <a href="how-we-help.html#seo" class="footer-link">SEO &amp; Visibility</a>
+        <a href="how-we-help.html#operations" class="footer-link">Operations &amp; Admin</a>
       </div>
 
-      <!-- Col 3: Company -->
       <div>
-        <p class="font-semibold uppercase tracking-widest mb-5"
-           style="color:rgba(255,255,255,0.4); font-size:12px; letter-spacing:0.1em;">Company</p>
-        <ul>
-          <li><a href="index.html"           class="hover:text-white transition-colors" style="color:rgba(255,255,255,0.65); font-size:14px; line-height:2.2; display:block;">Home</a></li>
-          <li><a href="about.html"           class="hover:text-white transition-colors" style="color:rgba(255,255,255,0.65); font-size:14px; line-height:2.2; display:block;">Our Story</a></li>
-          <li><a href="how-it-works.html"    class="hover:text-white transition-colors" style="color:rgba(255,255,255,0.65); font-size:14px; line-height:2.2; display:block;">How It Works</a></li>
-          <li><a href="how-we-help.html"     class="hover:text-white transition-colors" style="color:rgba(255,255,255,0.65); font-size:14px; line-height:2.2; display:block;">How We Help</a></li>
-          <li><a href="index.html#team"      class="hover:text-white transition-colors" style="color:rgba(255,255,255,0.65); font-size:14px; line-height:2.2; display:block;">Team</a></li>
-          <li><a href="our-work.html"        class="hover:text-white transition-colors" style="color:rgba(255,255,255,0.65); font-size:14px; line-height:2.2; display:block;">Our Work</a></li>
-          <li><a href="index.html#reviews"   class="hover:text-white transition-colors" style="color:rgba(255,255,255,0.65); font-size:14px; line-height:2.2; display:block;">Reviews</a></li>
-          <li><a href="index.html#insights"  class="hover:text-white transition-colors" style="color:rgba(255,255,255,0.65); font-size:14px; line-height:2.2; display:block;">Insights</a></li>
-          <li><a href="index.html#contact"   class="hover:text-white transition-colors" style="color:rgba(255,255,255,0.65); font-size:14px; line-height:2.2; display:block;">Contact</a></li>
-        </ul>
+        <p class="footer-col-label">Company</p>
+        <a href="about.html" class="footer-link">Our Story</a>
+        <a href="how-it-works.html" class="footer-link">How It Works</a>
+        <a href="our-team.html" class="footer-link">Our Team</a>
+        <a href="our-work.html" class="footer-link">Our Work</a>
+        <a href="insights.html" class="footer-link">Insights</a>
+        <a href="resources.html" class="footer-link">Forms &amp; Resources</a>
+        <a href="contact.html" class="footer-link">Contact</a>
       </div>
 
-      <!-- Col 4: Contact -->
       <div>
-        <p class="font-semibold uppercase tracking-widest mb-5"
-           style="color:rgba(255,255,255,0.4); font-size:12px; letter-spacing:0.1em;">Contact</p>
-        <p style="color:rgba(255,255,255,0.65); font-size:14px; line-height:2.2;">hello@balaynibruno.com</p>
-        <p style="color:rgba(255,255,255,0.65); font-size:14px; line-height:2.2;">+1 (000) 000-0000</p>
-        <p class="mt-1" style="color:rgba(255,255,255,0.65); font-size:14px; line-height:1.7;">
-          Serving clients in the US, UK, and internationally.
-        </p>
-        <a href="index.html#contact" class="block mt-4 font-semibold"
-           style="color:#2D5BFF; font-size:14px; font-weight:600;">
-          Book a Call →
-        </a>
+        <p class="footer-col-label">Contact</p>
+        <p class="footer-link">admin@balaynibruno.co</p>
+        <p class="footer-link">+63 935 663 0324</p>
+        <p class="footer-link">Serving US, UK &amp; international clients</p>
+        <a href="https://calendly.com/rj-balaynibruno/bbc-strategy-call" target="_blank" rel="noopener noreferrer" class="btn btn-gold btn-sm" style="margin-top:1rem;">Book a Call</a>
       </div>
 
     </div>
 
-    <!-- Bottom bar -->
-    <div class="flex flex-col sm:flex-row items-center justify-between gap-4"
-         style="border-top:1px solid rgba(255,255,255,0.08); margin-top:60px; padding-top:28px;">
-      <p style="color:rgba(255,255,255,0.35); font-size:13px;">
-        &copy; 2025 Balay ni Bruno &amp; Co. All rights reserved.
-      </p>
-      <p style="color:rgba(255,255,255,0.35); font-size:13px;">
-        <a href="#" class="hover:text-white transition-colors" style="color:rgba(255,255,255,0.35);">Privacy Policy</a>
-        <span style="margin:0 8px;">·</span>
-        <a href="#" class="hover:text-white transition-colors" style="color:rgba(255,255,255,0.35);">Terms of Service</a>
-      </p>
+    <div class="footer-bottom">
+      <p class="footer-copy">&copy; 2026 Balay ni Bruno &amp; Co. All rights reserved.</p>
     </div>
-
   </div>
 </footer>
 
@@ -1374,79 +832,43 @@
      JAVASCRIPT
 ════════════════════════════════════════════ -->
 <script>
-  // ── Sticky header shadow ─────────────────────
+  // Sticky header
   const header = document.getElementById('site-header');
   window.addEventListener('scroll', () => {
     header.classList.toggle('scrolled', window.scrollY > 60);
-  });
+  }, { passive: true });
 
-  // ── Hamburger toggle ─────────────────────────
+  // Hamburger
   const hamburger = document.getElementById('hamburger');
-  const mobileNav = document.getElementById('mobile-nav');
+  const mobileMenu = document.getElementById('mobile-menu');
   const hb1 = document.getElementById('hb1');
   const hb2 = document.getElementById('hb2');
   const hb3 = document.getElementById('hb3');
-
   hamburger.addEventListener('click', () => {
-    const isOpen = mobileNav.classList.toggle('open');
-    hb1.style.transform = isOpen ? 'translateY(8px) rotate(45deg)' : '';
-    hb2.style.opacity   = isOpen ? '0' : '';
-    hb3.style.transform = isOpen ? 'translateY(-8px) rotate(-45deg)' : '';
+    const open = mobileMenu.classList.toggle('open');
+    if (open) {
+      hb1.style.transform = 'translateY(7px) rotate(45deg)';
+      hb2.style.opacity = '0';
+      hb3.style.transform = 'translateY(-7px) rotate(-45deg)';
+    } else {
+      hb1.style.transform = ''; hb2.style.opacity = ''; hb3.style.transform = '';
+    }
+  });
+  mobileMenu.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      mobileMenu.classList.remove('open');
+      hb1.style.transform = ''; hb2.style.opacity = ''; hb3.style.transform = '';
+    });
   });
 
-  // ── Scroll fade-in ───────────────────────────
+  // Fade-in on scroll
   const fadeEls = document.querySelectorAll('.fade-in');
-  const fadeObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-        fadeObserver.unobserve(entry.target);
-      }
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
     });
-  }, { threshold: 0.08 });
-  fadeEls.forEach(el => fadeObserver.observe(el));
-
-  // ── Active category pill via IntersectionObserver ──
-  const sections   = ['marketing','content','websites','email','automation','seo','operations'];
-  const pills      = document.querySelectorAll('.cat-pill');
-  const pillMap    = {};
-  pills.forEach(p => { pillMap[p.dataset.section] = p; });
-
-  const pillObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      const id = entry.target.id;
-      if (pillMap[id]) {
-        if (entry.isIntersecting) {
-          // Clear all, set this one active
-          pills.forEach(p => p.classList.remove('active'));
-          pillMap[id].classList.add('active');
-        }
-      }
-    });
-  }, {
-    // Trigger when top of section hits mid-viewport
-    rootMargin: '-40% 0px -50% 0px',
-    threshold: 0
-  });
-
-  sections.forEach(id => {
-    const el = document.getElementById(id);
-    if (el) pillObserver.observe(el);
-  });
-
-  // ── Smooth scroll for category pills ────────
-  pills.forEach(pill => {
-    pill.addEventListener('click', e => {
-      e.preventDefault();
-      const target = document.getElementById(pill.dataset.section);
-      if (target) {
-        // Offset for main header (64px) + cat nav (56px)
-        const offset = 64 + 56 + 16;
-        const top = target.getBoundingClientRect().top + window.scrollY - offset;
-        window.scrollTo({ top, behavior: 'smooth' });
-      }
-    });
-  });
+  }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+  fadeEls.forEach(el => io.observe(el));
 </script>
 
 </body>
