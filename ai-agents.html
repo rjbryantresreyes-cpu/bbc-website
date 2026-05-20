@@ -1,0 +1,1247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Agents | Balay ni Bruno &amp; Co.</title>
+  <meta name="description" content="Meet the AI side of the Balay ni Bruno &amp; Co. family. Seven purpose-built agents working behind the scenes on research, content, operations, and more." />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            navy: '#0B1120',
+            blue: '#2D5BFF',
+            'off-white': '#F8FAFC',
+            slate: '#475569',
+            lightgray: '#D1D5DB',
+          },
+          fontFamily: { sans: ['Montserrat', 'sans-serif'] },
+        }
+      }
+    }
+  </script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Montserrat', sans-serif; background: #F8FAFC; color: #0B1120; }
+
+    /* Header */
+    #main-header {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(255,255,255,0.97);
+      border-bottom: 1px solid #E2E8F0;
+      transition: box-shadow 0.3s;
+    }
+    #main-header.scrolled { box-shadow: 0 4px 24px rgba(11,17,32,0.10); }
+
+    /* Hamburger */
+    .hamburger { display:flex; flex-direction:column; gap:5px; cursor:pointer; padding:4px; }
+    .hamburger span { display:block; width:24px; height:2px; background:#0B1120; border-radius:2px; transition:all 0.3s; }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity:0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* Mobile nav */
+    #mobile-nav { max-height:0; overflow:hidden; transition:max-height 0.4s ease; background:#fff; border-top:1px solid #E2E8F0; }
+    #mobile-nav.open { max-height:600px; }
+
+    /* Scroll fade */
+    .fade-in { opacity:0; transform:translateY(28px); transition:opacity 0.65s ease, transform 0.65s ease; }
+    .fade-in.visible { opacity:1; transform:translateY(0); }
+
+    /* Pulse dot */
+    @keyframes pulse-dot {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(22,163,74,0.55); }
+      50% { box-shadow: 0 0 0 6px rgba(22,163,74,0); }
+    }
+    .pulse-dot {
+      width: 10px; height: 10px;
+      background: #16a34a;
+      border-radius: 50%;
+      display: inline-block;
+      animation: pulse-dot 1.8s infinite;
+    }
+
+    /* Agent card accordion */
+    .agent-capabilities {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.45s ease;
+    }
+    .agent-capabilities.open { max-height: 600px; }
+    .cap-toggle-icon { transition: transform 0.3s; display:inline-block; }
+    .cap-toggle-icon.open { transform: rotate(45deg); }
+
+    /* Family tree */
+    .tree-node {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+    }
+    .tree-card {
+      background: white;
+      border: 2px solid #E2E8F0;
+      border-radius: 12px;
+      padding: 12px 20px;
+      text-align: center;
+      font-size: 13px;
+      font-weight: 600;
+      min-width: 110px;
+      position: relative;
+      z-index: 2;
+    }
+    .tree-card.founder {
+      border-color: #2D5BFF;
+      background: #2D5BFF;
+      color: white;
+      font-size: 14px;
+    }
+    .tree-card.human { border-color: #7c3aed; color: #7c3aed; }
+    .tree-card.ai-agent { border-color: #0d9488; color: #0d9488; }
+    .tree-connector-v {
+      width: 2px; height: 32px;
+      background: #D1D5DB;
+      margin: 0 auto;
+    }
+    .tree-connector-h {
+      height: 2px;
+      background: #D1D5DB;
+      flex: 1;
+    }
+    .tree-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 0;
+      justify-content: center;
+    }
+
+    /* FAQ */
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease;
+    }
+    .faq-answer.open { max-height: 400px; }
+    .faq-icon { transition: transform 0.3s; }
+    .faq-icon.open { transform: rotate(45deg); }
+
+    /* House rules */
+    .rule-card {
+      background: white;
+      border-left: 4px solid #2D5BFF;
+      border-radius: 0 12px 12px 0;
+      padding: 24px 28px;
+    }
+
+    /* How they work together */
+    .flow-step {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+    }
+    .flow-num {
+      width: 36px; height: 36px;
+      background: #2D5BFF;
+      color: white;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 700; font-size: 14px;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    /* Charter quote */
+    .charter-quote {
+      border-left: 4px solid rgba(255,255,255,0.3);
+      padding-left: 24px;
+      font-size: 20px;
+      line-height: 1.6;
+      font-style: italic;
+      color: rgba(255,255,255,0.9);
+    }
+
+    /* Trait pill */
+    .trait-pill {
+      display: inline-block;
+      background: rgba(45,91,255,0.10);
+      color: #2D5BFF;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 4px 12px;
+      border-radius: 99px;
+      letter-spacing: 0.03em;
+    }
+
+    /* Section spacing */
+    .section-pad { padding: 80px 0; }
+    @media (max-width:768px) { .section-pad { padding: 56px 0; } }
+
+    /* Hover lift */
+    .hover-lift { transition: transform 0.25s, box-shadow 0.25s; }
+    .hover-lift:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(11,17,32,0.10); }
+
+    /* Agent avatar glow */
+    .agent-avatar { border-radius: 16px; position: relative; overflow: hidden; }
+    .agent-avatar::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, rgba(255,255,255,0.10) 0%, transparent 60%);
+    }
+
+    /* Status badge */
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(22,163,74,0.10);
+      color: #15803d;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 99px;
+      letter-spacing: 0.04em;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ===== HEADER ===== -->
+<header id="main-header">
+  <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+
+    <!-- Logo -->
+    <a href="index.html" class="flex items-center gap-3" aria-label="Balay ni Bruno &amp; Co. Home">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 210" width="36" height="36"
+           style="color:#2D5BFF; flex-shrink:0;" aria-hidden="true">
+        <rect x="38" y="6" width="13" height="62" rx="2" fill="currentColor"/>
+        <line x1="100" y1="38" x2="6" y2="90" stroke="currentColor" stroke-width="9" stroke-linecap="round"/>
+        <line x1="100" y1="38" x2="194" y2="90" stroke="currentColor" stroke-width="9" stroke-linecap="round"/>
+        <rect x="24" y="90" width="152" height="86" rx="6" fill="none" stroke="currentColor" stroke-width="9"/>
+        <text x="100" y="154" text-anchor="middle" font-size="46" font-weight="800"
+              font-family="Georgia,'Times New Roman',serif" fill="currentColor">BBC</text>
+        <rect x="91" y="176" width="18" height="18" rx="2" fill="currentColor"/>
+        <rect x="64" y="194" width="72" height="11" rx="5.5" fill="currentColor"/>
+      </svg>
+      <div>
+        <div style="font-weight:700; font-size:14px; color:#0B1120; line-height:1.1;">Balay ni Bruno &amp; Co.</div>
+        <div style="font-size:10px; color:#475569; letter-spacing:0.08em; font-weight:500;">OPERATIONAL SUPPORT STUDIO</div>
+      </div>
+    </a>
+
+    <!-- Desktop Nav -->
+    <nav class="hidden lg:flex items-center gap-7" aria-label="Main navigation">
+      <a href="index.html" style="color:#475569; font-weight:500; font-size:14px;" class="hover:text-navy transition-colors">Home</a>
+      <a href="about.html" style="color:#475569; font-weight:500; font-size:14px;" class="hover:text-navy transition-colors">Our Story</a>
+      <a href="how-it-works.html" style="color:#475569; font-weight:500; font-size:14px;" class="hover:text-navy transition-colors">How It Works</a>
+      <a href="how-we-help.html" style="color:#475569; font-weight:500; font-size:14px;" class="hover:text-navy transition-colors">How We Help</a>
+      <a href="index.html#team" style="color:#475569; font-weight:500; font-size:14px;" class="hover:text-navy transition-colors">Team</a>
+      <a href="ai-agents.html" style="color:#2D5BFF; font-weight:700; font-size:14px;" aria-current="page">AI Agents</a>
+      <a href="our-work.html" style="color:#475569; font-weight:500; font-size:14px;" class="hover:text-navy transition-colors">Our Work</a>
+      <a href="index.html#insights" style="color:#475569; font-weight:500; font-size:14px;" class="hover:text-navy transition-colors">Insights</a>
+      <a href="index.html#contact"
+         style="background:#2D5BFF; color:white; font-size:13px; font-weight:600; padding:9px 20px; border-radius:8px;"
+         class="hover:opacity-90 transition-opacity">Start a Conversation</a>
+    </nav>
+
+    <!-- Hamburger -->
+    <button class="hamburger lg:hidden" id="hamburger-btn" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+
+  <!-- Mobile Nav -->
+  <div id="mobile-nav" role="navigation" aria-label="Mobile navigation">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex flex-col gap-1">
+      <a href="index.html" class="py-3 border-b border-gray-100 text-sm font-medium text-slate">Home</a>
+      <a href="about.html" class="py-3 border-b border-gray-100 text-sm font-medium text-slate">Our Story</a>
+      <a href="how-it-works.html" class="py-3 border-b border-gray-100 text-sm font-medium text-slate">How It Works</a>
+      <a href="how-we-help.html" class="py-3 border-b border-gray-100 text-sm font-medium text-slate">How We Help</a>
+      <a href="index.html#team" class="py-3 border-b border-gray-100 text-sm font-medium text-slate">Team</a>
+      <a href="ai-agents.html" class="py-3 border-b border-gray-100 text-sm font-bold" style="color:#2D5BFF;">AI Agents</a>
+      <a href="our-work.html" class="py-3 border-b border-gray-100 text-sm font-medium text-slate">Our Work</a>
+      <a href="index.html#insights" class="py-3 border-b border-gray-100 text-sm font-medium text-slate">Insights</a>
+      <a href="index.html#contact" class="mt-3 py-3 text-center rounded-lg text-sm font-semibold text-white"
+         style="background:#2D5BFF;">Start a Conversation</a>
+    </div>
+  </div>
+</header>
+
+
+<!-- ===== HERO ===== -->
+<section style="background: linear-gradient(135deg, #0B1120 0%, #0f1f44 60%, #0B1120 100%); padding: 100px 0 80px; position:relative; overflow:hidden;">
+  <!-- Decorative stars -->
+  <div style="position:absolute; inset:0; pointer-events:none; overflow:hidden;" aria-hidden="true">
+    <div style="position:absolute; width:2px; height:2px; background:rgba(255,255,255,0.6); border-radius:50%; top:18%; left:12%;"></div>
+    <div style="position:absolute; width:3px; height:3px; background:rgba(255,255,255,0.4); border-radius:50%; top:34%; left:78%;"></div>
+    <div style="position:absolute; width:2px; height:2px; background:rgba(255,255,255,0.5); border-radius:50%; top:62%; left:24%;"></div>
+    <div style="position:absolute; width:2px; height:2px; background:rgba(255,255,255,0.3); border-radius:50%; top:75%; left:88%;"></div>
+    <div style="position:absolute; width:4px; height:4px; background:rgba(45,91,255,0.6); border-radius:50%; top:22%; left:56%; filter:blur(1px);"></div>
+    <div style="position:absolute; width:300px; height:300px; background:rgba(45,91,255,0.07); border-radius:50%; top:-80px; right:-80px; filter:blur(60px);"></div>
+    <div style="position:absolute; width:200px; height:200px; background:rgba(79,70,229,0.08); border-radius:50%; bottom:40px; left:10%; filter:blur(50px);"></div>
+  </div>
+
+  <div class="max-w-4xl mx-auto px-6 text-center" style="position:relative; z-index:2;">
+    <div class="fade-in">
+      <span class="status-badge mb-6 inline-flex" style="background:rgba(22,163,74,0.15); color:#4ade80;">
+        <span class="pulse-dot"></span> ALL AGENTS ONLINE
+      </span>
+    </div>
+    <h1 class="fade-in" style="font-size:clamp(36px,6vw,64px); font-weight:700; color:white; line-height:1.15; margin-bottom:24px;">
+      Meet the AI Side<br/>of the Family
+    </h1>
+    <p class="fade-in" style="font-size:18px; color:rgba(255,255,255,0.70); max-width:560px; margin:0 auto 40px; line-height:1.7;">
+      Seven purpose-built agents working behind the scenes. They do not replace the humans. They work beside them, so the humans can do more of what only humans can do.
+    </p>
+    <div class="fade-in" style="display:flex; gap:16px; justify-content:center; flex-wrap:wrap;">
+      <a href="#meet-the-agents"
+         style="background:#2D5BFF; color:white; font-size:14px; font-weight:600; padding:14px 28px; border-radius:10px; text-decoration:none;"
+         class="hover:opacity-90 transition-opacity">Meet the Agents</a>
+      <a href="#family-tree"
+         style="border:2px solid rgba(255,255,255,0.25); color:white; font-size:14px; font-weight:600; padding:14px 28px; border-radius:10px; text-decoration:none;"
+         class="hover:border-white transition-colors">See the Family Tree</a>
+    </div>
+  </div>
+</section>
+
+
+<!-- ===== TWO SIDES OF THE FAMILY ===== -->
+<section class="section-pad" style="background:#F8FAFC;">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="fade-in text-center mb-16">
+      <p style="font-size:12px; font-weight:700; letter-spacing:0.12em; color:#2D5BFF; margin-bottom:12px;">THE CONCEPT</p>
+      <h2 style="font-size:clamp(28px,4vw,44px); font-weight:700; color:#0B1120; margin-bottom:16px;">One Family. Two Sides.</h2>
+      <p style="font-size:16px; color:#475569; max-width:520px; margin:0 auto; line-height:1.7;">
+        Balay ni Bruno &amp; Co. has always been built on people. The AI agents are not a replacement. They are a second wing of the same house.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <!-- Human side -->
+      <div class="fade-in hover-lift" style="background:white; border-radius:20px; padding:40px; border:2px solid #E2E8F0; position:relative; overflow:hidden;">
+        <div style="position:absolute; top:-20px; right:-20px; width:100px; height:100px; background:rgba(124,58,237,0.06); border-radius:50%;"></div>
+        <div style="font-size:40px; margin-bottom:20px;">👨‍👩‍👧‍👦</div>
+        <h3 style="font-size:22px; font-weight:700; color:#0B1120; margin-bottom:12px;">The Human Team</h3>
+        <p style="color:#7c3aed; font-size:12px; font-weight:700; letter-spacing:0.1em; margin-bottom:16px;">THE HEART</p>
+        <p style="color:#475569; line-height:1.7; font-size:15px; margin-bottom:20px;">
+          Bruno and the team bring judgment, relationships, creativity, and care. They make decisions, hold client relationships, and set the direction. Every client interaction is human-led.
+        </p>
+        <div style="display:flex; flex-wrap:wrap; gap:8px;">
+          <span style="background:#f5f3ff; color:#7c3aed; font-size:11px; font-weight:600; padding:5px 12px; border-radius:99px;">Judgment</span>
+          <span style="background:#f5f3ff; color:#7c3aed; font-size:11px; font-weight:600; padding:5px 12px; border-radius:99px;">Relationships</span>
+          <span style="background:#f5f3ff; color:#7c3aed; font-size:11px; font-weight:600; padding:5px 12px; border-radius:99px;">Creativity</span>
+          <span style="background:#f5f3ff; color:#7c3aed; font-size:11px; font-weight:600; padding:5px 12px; border-radius:99px;">Care</span>
+        </div>
+      </div>
+
+      <!-- AI side -->
+      <div class="fade-in hover-lift" style="background:white; border-radius:20px; padding:40px; border:2px solid #E2E8F0; position:relative; overflow:hidden;">
+        <div style="position:absolute; top:-20px; right:-20px; width:100px; height:100px; background:rgba(45,91,255,0.06); border-radius:50%;"></div>
+        <div style="font-size:40px; margin-bottom:20px;">🤖</div>
+        <h3 style="font-size:22px; font-weight:700; color:#0B1120; margin-bottom:12px;">The AI Agents</h3>
+        <p style="color:#2D5BFF; font-size:12px; font-weight:700; letter-spacing:0.1em; margin-bottom:16px;">THE INTELLIGENCE</p>
+        <p style="color:#475569; line-height:1.7; font-size:15px; margin-bottom:20px;">
+          The agents handle volume, speed, and consistency. They research, draft, organize, and build so the humans have more space to think. They never make decisions. They make decisions easier.
+        </p>
+        <div style="display:flex; flex-wrap:wrap; gap:8px;">
+          <span class="trait-pill">Speed</span>
+          <span class="trait-pill">Volume</span>
+          <span class="trait-pill">Consistency</span>
+          <span class="trait-pill">Memory</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ===== MEET THE AGENTS ===== -->
+<section id="meet-the-agents" class="section-pad" style="background:#0B1120;">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="fade-in text-center mb-16">
+      <p style="font-size:12px; font-weight:700; letter-spacing:0.12em; color:#2D5BFF; margin-bottom:12px;">THE AI FAMILY</p>
+      <h2 style="font-size:clamp(28px,4vw,44px); font-weight:700; color:white; margin-bottom:16px;">Your Seven AI Team Members</h2>
+      <p style="font-size:16px; color:rgba(255,255,255,0.60); max-width:520px; margin:0 auto; line-height:1.7;">
+        Each agent has a name, a personality, a specialty, and a human partner they work alongside. Click any card to see what they can do.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="agents-grid">
+
+      <!-- ATLAS -->
+      <div class="fade-in hover-lift agent-card" style="background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.10); border-radius:20px; padding:28px; cursor:pointer;" data-agent="atlas">
+        <div class="flex items-start justify-between mb-20">
+          <div class="agent-avatar" style="width:64px; height:64px; background:linear-gradient(135deg, #0B1120, #2D5BFF); display:flex; align-items:center; justify-content:center; font-size:28px;">
+            🧭
+          </div>
+          <span class="status-badge" style="background:rgba(22,163,74,0.15); color:#4ade80; font-size:10px;">
+            <span class="pulse-dot" style="width:7px; height:7px;"></span> ONLINE
+          </span>
+        </div>
+        <div style="margin-bottom:4px;">
+          <div style="display:flex; align-items:center; gap:10px; margin-bottom:6px;">
+            <h3 style="font-size:22px; font-weight:700; color:white;">Atlas</h3>
+          </div>
+          <p style="font-size:12px; font-weight:700; color:#2D5BFF; letter-spacing:0.08em; margin-bottom:8px;">STRATEGIC PLANNING AGENT</p>
+          <p style="font-size:13px; color:rgba(255,255,255,0.55); font-style:italic; margin-bottom:16px;">"The one who always has a plan"</p>
+        </div>
+        <div style="display:flex; flex-wrap:wrap; gap:6px; margin-bottom:20px;">
+          <span class="trait-pill" style="background:rgba(45,91,255,0.15);">Analytical</span>
+          <span class="trait-pill" style="background:rgba(45,91,255,0.15);">Structured</span>
+          <span class="trait-pill" style="background:rgba(45,91,255,0.15);">Calm</span>
+        </div>
+        <div style="display:flex; align-items:center; gap:8px; margin-bottom:16px; padding:10px 14px; background:rgba(255,255,255,0.05); border-radius:8px;">
+          <span style="font-size:13px; color:rgba(255,255,255,0.50);">Works alongside</span>
+          <span style="font-size:13px; font-weight:600; color:rgba(255,255,255,0.90);">Bruno (RJ)</span>
+        </div>
+        <button class="cap-toggle w-full text-left" style="display:flex; align-items:center; justify-content:space-between; background:none; border:1px solid rgba(255,255,255,0.15); border-radius:8px; padding:10px 14px; cursor:pointer; color:rgba(255,255,255,0.70); font-size:13px; font-weight:600;">
+          View Full Capabilities
+          <span class="cap-toggle-icon" style="font-size:18px; color:#2D5BFF; font-weight:300;">+</span>
+        </button>
+        <div class="agent-capabilities">
+          <div style="padding:16px 0 4px; display:flex; flex-direction:column; gap:10px;">
+            <div style="display:flex; gap:10px; align-items:flex-start;">
+              <span style="color:#2D5BFF; font-size:16px; flex-shrink:0; margin-top:1px;">&#10003;</span>
+              <span style="color:rgba(255,255,255,0.70); font-size:13px; line-height:1.5;">Builds project briefs, scope outlines, and phased delivery roadmaps</span>
+            </div>
+            <div style="display:flex; gap:10px; align-items:flex-start;">
+              <span style="color:#2D5BFF; font-size:16px; flex-shrink:0; margin-top:1px;">&#10003;</span>
+              <span style="color:rgba(255,255,255,0.70); font-size:13px; line-height:1.5;">Structures proposals and client onboarding documents</span>
+            </div>
+            <div style="display:flex; gap:10px; align-items:flex-start;">
+              <span style="color:#2D5BFF; font-size:16px; flex-shrink:0; margin-top:1px;">&#10003;</span>
+              <span style="color:rgba(255,255,255,0.70); font-size:13px; line-height:1.5;">Maps priorities across multiple active projects</span>
+            </div>
+            <div style="display:flex; gap:10px; align-items:flex-start;">
+              <span style="color:#2D5BFF; font-size:16px; flex-shrink:0; margin-top:1px;">&#10003;</span>
+              <span style="color:rgba(255,255,255,0.70); font-size:13px; line-height:1.5;">Synthesizes team inputs into clear action plans</span>
+            </div>
+            <div style="display:flex; gap:10px; align-items:flex-start;">
+              <span style="color:#2D5BFF; font-size:16px; flex-shrink:0; margin-top:1px;">&#10003;</span>
+              <span style="color:rgba(255,255,255,0.70); font-size:13px; line-height:1.5;">Creates meeting agendas and decision frameworks</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- NOVA -->
+      <div class="fade-in hover-lift agent-card" style="background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.10); border-radius:20px; padding:28px; cursor:pointer;" data-agent="nova">
+        <div class="flex items-start justify-between mb-20">
+          <div class="agent-avatar" style="width:64px; height:64px; background:linear-gradient(135deg, #0B1120, #4f46e5); display:flex; align-items:center; justify-content:center; font-size:28px;">
+            ✍️
+          </div>
+          <span class="status-badge" style="background:rgba(22,163,74,0.15); color:#4ade80; font-size:10px;">
+            <span class="pulse-dot" style="width:7px; height:7px;"></span> ONLINE
+          </span>
+        </div>
+        <div style="margin-bottom:4px;">
+          <div style="margin-bottom:6px;">
+            <h3 style="font-size:22px; font-weight:700; color:white;">Nova</h3>
+          </div>
+          <p style="font-size:12px; font-weight:700; color:#4f46e5; letter-spacing:0.08em; margin-bottom:8px;">CONTENT CREATION AGENT</p>
+          <p style="font-size:13px; color:rgba(255,255,255,0.55); font-style:italic; margin-bottom:16px;">"The one who never runs out of words"</p>
+        </div>
+        <div style="display:flex; flex-wrap:wrap; gap:6px; margin-bottom:20px;">
+          <span class="trait-pill" style="background:rgba(79,70,229,0.15); color:#818cf8;">Expressive</span>
+          <span class="trait-pill" style="background:rgba(79,70,229,0.15); color:#818cf8;">Adaptive</span>
+          <span class="trait-pill" style="background:rgba(79,70,229,0.15); color:#818cf8;">Fast</span>
+        </div>
+        <div style="display:flex; align-items:center; gap:8px; margin-bottom:16px; padding:10px 14px; background:rgba(255,255,255,0.05); border-radius:8px;">
+          <span style="font-size:13px; color:rgba(255,255,255,0.50);">Works alongside</span>
+          <span style="font-size:13px; font-weight:600; color:rgba(255,255,255,0.90);">Ryan C.</span>
+        </div>
+        <button class="cap-toggle w-full text-left" style="display:flex; align-items:center; justify-content:space-between; background:none; border:1px solid rgba(255,255,255,0.15); border-radius:8px; padding:10px 14px; cursor:pointer; color:rgba(255,255,255,0.70); font-size:13px; font-weight:600;">
+          View Full Capabilities
+          <span class="cap-toggle-icon" style="font-size:18px; color:#4f46e5; font-weight:300;">+</span>
+        </button>
+        <div class="agent-capabilities">
+          <div style="padding:16px 0 4px; display:flex; flex-direction:column; gap:10px;">
+            <div style="display:flex; gap:10px; align-items:flex-start;">
+              <span style="color:#4f46e5; font-size:16px; flex-shrink:0; margin-top:1px;">&#10003;</span>
+              <span style="color:rgba(255,255,255,0.70); font-size:13px; line-height:1.5;">Drafts blog posts, captions, newsletters, and scripts</span>
+            </div>
+            <div style="display:flex; gap:10px; align-items:flex-start;">
+              <span style="color:#4f46e5; font-size:16px; flex-shrink:0; margin-top:1px;">&#10003;</span>
+              <span style="color:rgba(255,255,255,0.70); font-size:13px; line-height:1.5;">Adapts brand voice across platforms and tone</span>
+            </div>
+            <div style="display:flex; gap:10px; align-items:flex-start;">
+              <span style="color:#4f46e5; font-size:16px; flex-shrink:0; margin-top:1px;">&#10003;</span>
+              <span style="color:rgba(255,255,255,0.70); font-size:13px; line-height:1.5;">Generates content calendars from themes and goals</span>
+            </div>
+            <div style="display:flex; gap:10px; align-items:flex-start;">
+              <span style="color:#4f46e5; font-size:16px; flex-shrink:0; margin-top:1px;">&#10003;</span>
+              <span style="color:rgba(255,255,255,0.70); font-size:13px; line-height:1.5;">Repurposes long-form content into short-form assets</span>
+            </div>
+            <div style="display:flex; gap:10px; align-items:flex-start;">
+              <span style="color:#4f46e5; font-size:16px; flex-shrink:0; margin-top:1px;">&#10003;</span>
+              <span style="color:rgba(255,255,255,0.70); font-size:13px; line-height:1.5;">Writes product descriptions, landing pages, and CTAs</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CLEO -->
+      <div class="fade-in hover-lift agent-card" style="background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.10); border-radius:20px; padding:28px; cursor:pointer;" data-agent="cleo">
+        <div class="flex items-start justify-between mb-20">
+          <div class="agent-avatar" style="width:64px; height:64px; background:linear-gradient(135deg, #0B1120, #0891b2); display:flex; align-items:center; justify-content:center; font-size:28px;">
+            🔍
+          </div>
+          <span class="status-badge" style="background:rgba(22,163,74,0.15); color:#4ade80; font-size:10px;">
+            <span class="pulse-dot" style="width:7px; height:7px;"></span> ONLINE
+          </span>
+        </div>
+        <div style="margin-bottom:4px;">
+          <div style="margin-bottom:6px;">
+            <h3 style="font-size:22px; font-weight:700; color:white;">Cleo</h3>
+          </div>
+          <p style="font-size:12px; font-weight:700; color:#0891b2; letter-spacing:0.08em; margin-bottom:8px;">RESEARCH SCOUT AGENT</p>
+          <p style="font-size:13px; color:rgba(255,255,255,0.55); font-style:italic; margin-bottom:16px;">"The one who knows what's happening before you do"</p>
+        </div>
+        <div style="display:flex; flex-wrap:wrap; gap:6px; margin-bottom:20px;">
+          <span class="trait-pill" style="background:rgba(8,145,178,0.15); color:#22d3ee;">Curious</span>
+          <span class="trait-pill" style="background:rgba(8,145,178,0.15); color:#22d3ee;">Thorough</span>
+          <span class="trait-pill" style="background:rgba(8,145,178,0.15); color:#22d3ee;">Precise</span>
+        </div>
+        <div style="display:flex; align-items:center; gap:8px; margin-bottom:16px; padding:10px 14px; background:rgba(255,255,255,0.05); border-radius:8px;">
+          <span style="font-size:13px; color:rgba(255,255,255,0.50);">Works alongside</span>
+          <span style="font-size:13px; font-weight:600; color:rgba(255,255,255,0.90);">Krizza</span>
+        </div>
+        <button class="cap-toggle w-full text-left" style="display:flex; align-items:center; justify-content:space-between; background:none; border:1px solid rgba(255,255,255,0.15); border-radius:8px; padding:10px 14px; cursor:pointer; color:rgba(255,255,255,0.70); font-size:13px; font-weight:600;">
+          View Full Capabilities
+          <span class="cap-toggle-icon" style="font-size:18px; color:#0891b2; font-weight:300;">+</span>
+        </button>
+        <div class="agent-capabilities">
+          <div style="padding:16px 0 4px; display:flex; flex-direction:column; gap:10px;">
+            <div style="display:flex; gap:10px; align-items:flex-start;">
+              <span style="color:#0891b2; font-size:16px; flex-shrink:0; margin-top:1px;">&#10003;</span>
+              <span style="color:rgba(255,255,255,0.70); font-size:13px; line-height:1.5;">Researches competitors, trends, and market positioning</span>
+            </div>
+            <div style="display:flex; gap:10px; align-items:flex-start;">
+              <span style="color:#0891b2; font-size:16px; flex-shrink:0; margin-top:1px;">&#10003;</span>
+              <span style="color:rgba(255,255,255,0.70); font-size:13px; line-height:1.5;">Pulls audience insights and buyer behavior patterns</span>
+            </div>
+            <div style="display:flex; gap:10px; align-items:flex-start;">
+              <span style="color:#0891b2; font-size:16px; flex-shrink:0; margin-top:1px;">&#10003;</span>
+              <span style="color:rgba(255,255,255,0.70); font-size:13px; line-height:1.5;">Compiles client background dossiers before discovery calls</span>
+            </div>
+            <div style="display:flex; gap:10px; align-items:flex-start;">
+              <span style="color:#0891b2; font-size:16px; flex-shrink:0; margin-top:1px;">&#10003;</span>
+              <span style="color:rgba(255,255,255,0.70); font-size:13px; line-height:1.5;">Monitors industry news and flags what matters</span>
+            </div>
+            <div style="display:flex; gap:10px; align-items:flex-start;">
+              <span style="color:#0891b2; font-size:16px; flex-shrink:0; margin-top:1px;">&#10003;</span>
+              <span style="color:rgba(255,255,255,0.70); font-size:13px; line-height:1.5;">Supports SEO keyword research and content gap analysis</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- REX -->
+      <div class="fade-in hover-lift agent-card" style="background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.10); border-radius:20px; padding:28px; cursor:pointer;" data-agent="rex">
+        <div class="flex items-start justify-between mb-20">
+          <div class="agent-avatar" style="width:64px; height:64px; background:linear-gradient(135deg, #0B1120, #0d9488); display:flex; align-items:center; justify-content:center; font-size:28px;">
+            🏗️
+          </div>
+          <span class="status-badge" style="background:rgba(22,163,74,0.15); color:#4ade80; font-size:10px;">
+            <span class="pulse-dot" style="width:7px; height:7px;"></span> ONLINE
+          </span>
+        </div>
+        <div style="margin-bottom:4px;">
+          <div style="margin-bottom:6px;">
+            <h3 style="font-size:22px; font-weight:700; color:white;">Rex</h3>
+          </div>
+          <p style="font-size:12px; font-weight:700; color:#0d9488; letter-spacing:0.08em; margin-bottom:8px;">OPERATIONS BUILDER AGENT</p>
+          <p style="font-size:13px; color:rgba(255,255,255,0.55); font-style:italic; margin-bottom:16px;">"The one who makes sure nothing gets lost"</p>
+        </div>
+        <div style="display:flex; flex-wrap:wrap; gap:6px; margin-bottom:20px;">
+          <span class="trait-pill" style="background:rgba(13,148,136,0.15); color:#2dd4bf;">Reliable</span>
+          <span class="trait-pill" style="background:rgba(13,148,136,0.15); color:#2dd4bf;">Systematic</span>
+          <span class="trait-pill" style="background:rgba(13,148,136,0.15); color:#2dd4bf;">Tireless</span>
+        </div>
+        <div style="display:flex; align-items:center; gap:8px; margin-bottom:16px; padding:10px 14px; background:rgba(255,255,255,0.05); border-radius:8px;">
+          <span style="font-size:13px; color:rgba(255,255,255,0.50);">Works alongside</span>
+          <span style="font-size:13px; font-weight:600; color:rgba(255,255,255,0.90);">Ryan (Ops)</span>
+        </div>
+        <button class="cap-toggle w-full text-left" style="display:flex; align-items:center; justify-content:space-between; background:none; border:1px solid rgba(255,255,255,0.15); border-radius:8px; padding:10px 14px; cursor:pointer; color:rgba(255,255,255,0.70); font-size:13px; font-weight:600;">
+          View Full Capabilities
+          <span class="cap-toggle-icon" style="font-size:18px; color:#0d9488; font-weight:300;">+</span>
+        </button>
+        <div class="agent-capabilities">
+          <div style="padding:16px 0 4px; display:flex; flex-direction:column; gap:10px;">
+            <div style="display:flex; gap:10px; align-items:flex-start;">
+              <span style="color:#0d9488; font-size:16px; flex-shrink:0; margin-top:1px;">&#10003;</span>
+              <span style="color:rgba(255,255,255,0.70); font-size:13px; line-height:1.5;">Builds SOPs, process docs, and internal wikis</span>
+            </div>
+            <div style="display:flex; gap:10px; align-items:flex-start;">
+              <span style="color:#0d9488; font-size:16px; flex-shrink:0; margin-top:1px;">&#10003;</span>
+              <span style="color:rgba(255,255,255,0.70); font-size:13px; line-height:1.5;">Designs project tracking systems and team dashboards</span>
+            </div>
+            <div style="display:flex; gap:10px; align-items:flex-start;">
+              <span style="color:#0d9488; font-size:16px; flex-shrink:0; margin-top:1px;">&#10003;</span>
+              <span style="color:rgba(255,255,255,0.70); font-size:13px; line-height:1.5;">Audits workflows and spots friction points</span>
+            </div>
+            <div style="display:flex; gap:10px; align-items:flex-start;">
+              <span style="color:#0d9488; font-size:16px; flex-shrink:0; margin-top:1px;">&#10003;</span>
+              <span style="color:rgba(255,255,255,0.70); font-size:13px; line-height:1.5;">Builds onboarding flows for new clients and team members</span>
+            </div>
+            <div style="display:flex; gap:10px; align-items:flex-start;">
+              <span style="color:#0d9488; font-size:16px; flex-shrink:0; margin-top:1px;">&#10003;</span>
+              <span style="color:rgba(255,255,255,0.70); font-size:13px; line-height:1.5;">Creates templates that keep delivery consistent</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ECHO -->
+      <div class="fade-in hover-lift agent-card" style="background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.10); border-radius:20px; padding:28px; cursor:pointer;" data-agent="echo">
+        <div class="flex items-start justify-between mb-20">
+          <div class="agent-avatar" style="width:64px; height:64px; background:linear-gradient(135deg, #0B1120, #7c3aed); display:flex; align-items:center; justify-content:center; font-size:28px;">
+            📨
+          </div>
+          <span class="status-badge" style="background:rgba(22,163,74,0.15); color:#4ade80; font-size:10px;">
+            <span class="pulse-dot" style="width:7px; height:7px;"></span> ONLINE
+          </span>
+        </div>
+        <div style="margin-bottom:4px;">
+          <div style="margin-bottom:6px;">
+            <h3 style="font-size:22px; font-weight:700; color:white;">Echo</h3>
+          </div>
+          <p style="font-size:12px; font-weight:700; color:#7c3aed; letter-spacing:0.08em; margin-bottom:8px;">EMAIL &amp; OUTREACH AGENT</p>
+          <p style="font-size:13px; color:rgba(255,255,255,0.55); font-style:italic; margin-bottom:16px;">"The one who always follows up, perfectly"</p>
+        </div>
+        <div style="display:flex; flex-wrap:wrap; gap:6px; margin-bottom:20px;">
+          <span class="trait-pill" style="background:rgba(124,58,237,0.15); color:#a78bfa;">Warm</span>
+          <span class="trait-pill" style="background:rgba(124,58,237,0.15); color:#a78bfa;">Persistent</span>
+          <span class="trait-pill" style="background:rgba(124,58,237,0.15); color:#a78bfa;">Personable</span>
+        </div>
+        <div style="display:flex; align-items:center; gap:8px; margin-bottom:16px; padding:10px 14px; background:rgba(255,255,255,0.05); border-radius:8px;">
+          <span style="font-size:13px; color:rgba(255,255,255,0.50);">Works alongside</span>
+          <span style="font-size:13px; font-weight:600; color:rgba(255,255,255,0.90);">Krizza / Vi</span>
+        </div>
+        <button class="cap-toggle w-full text-left" style="display:flex; align-items:center; justify-content:space-between; background:none; border:1px solid rgba(255,255,255,0.15); border-radius:8px; padding:10px 14px; cursor:pointer; color:rgba(255,255,255,0.70); font-size:13px; font-weight:600;">
+          View Full Capabilities
+          <span class="cap-toggle-icon" style="font-size:18px; color:#7c3aed; font-weight:300;">+</span>
+        </button>
+        <div class="agent-capabilities">
+          <div style="padding:16px 0 4px; display:flex; flex-direction:column; gap:10px;">
+            <div style="display:flex; gap:10px; align-items:flex-start;">
+              <span style="color:#7c3aed; font-size:16px; flex-shrink:0; margin-top:1px;">&#10003;</span>
+              <span style="color:rgba(255,255,255,0.70); font-size:13px; line-height:1.5;">Drafts outreach emails that feel personal, not templated</span>
+            </div>
+            <div style="display:flex; gap:10px; align-items:flex-start;">
+              <span style="color:#7c3aed; font-size:16px; flex-shrink:0; margin-top:1px;">&#10003;</span>
+              <span style="color:rgba(255,255,255,0.70); font-size:13px; line-height:1.5;">Writes follow-up sequences with tone variations</span>
+            </div>
+            <div style="display:flex; gap:10px; align-items:flex-start;">
+              <span style="color:#7c3aed; font-size:16px; flex-shrink:0; margin-top:1px;">&#10003;</span>
+              <span style="color:rgba(255,255,255,0.70); font-size:13px; line-height:1.5;">Handles newsletter drafts and email campaign copy</span>
+            </div>
+            <div style="display:flex; gap:10px; align-items:flex-start;">
+              <span style="color:#7c3aed; font-size:16px; flex-shrink:0; margin-top:1px;">&#10003;</span>
+              <span style="color:rgba(255,255,255,0.70); font-size:13px; line-height:1.5;">Manages lead nurture messaging across touchpoints</span>
+            </div>
+            <div style="display:flex; gap:10px; align-items:flex-start;">
+              <span style="color:#7c3aed; font-size:16px; flex-shrink:0; margin-top:1px;">&#10003;</span>
+              <span style="color:rgba(255,255,255,0.70); font-size:13px; line-height:1.5;">Drafts client check-in and satisfaction messages</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PIXEL -->
+      <div class="fade-in hover-lift agent-card" style="background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.10); border-radius:20px; padding:28px; cursor:pointer;" data-agent="pixel">
+        <div class="flex items-start justify-between mb-20">
+          <div class="agent-avatar" style="width:64px; height:64px; background:linear-gradient(135deg, #0B1120, #be185d); display:flex; align-items:center; justify-content:center; font-size:28px;">
+            🎨
+          </div>
+          <span class="status-badge" style="background:rgba(22,163,74,0.15); color:#4ade80; font-size:10px;">
+            <span class="pulse-dot" style="width:7px; height:7px;"></span> ONLINE
+          </span>
+        </div>
+        <div style="margin-bottom:4px;">
+          <div style="margin-bottom:6px;">
+            <h3 style="font-size:22px; font-weight:700; color:white;">Pixel</h3>
+          </div>
+          <p style="font-size:12px; font-weight:700; color:#be185d; letter-spacing:0.08em; margin-bottom:8px;">CREATIVE ASSISTANT AGENT</p>
+          <p style="font-size:13px; color:rgba(255,255,255,0.55); font-style:italic; margin-bottom:16px;">"The one who makes everything look like it belongs together"</p>
+        </div>
+        <div style="display:flex; flex-wrap:wrap; gap:6px; margin-bottom:20px;">
+          <span class="trait-pill" style="background:rgba(190,24,93,0.15); color:#f472b6;">Aesthetic</span>
+          <span class="trait-pill" style="background:rgba(190,24,93,0.15); color:#f472b6;">Detail-led</span>
+          <span class="trait-pill" style="background:rgba(190,24,93,0.15); color:#f472b6;">Visual</span>
+        </div>
+        <div style="display:flex; align-items:center; gap:8px; margin-bottom:16px; padding:10px 14px; background:rgba(255,255,255,0.05); border-radius:8px;">
+          <span style="font-size:13px; color:rgba(255,255,255,0.50);">Works alongside</span>
+          <span style="font-size:13px; font-weight:600; color:rgba(255,255,255,0.90);">Kenz / Daryl</span>
+        </div>
+        <button class="cap-toggle w-full text-left" style="display:flex; align-items:center; justify-content:space-between; background:none; border:1px solid rgba(255,255,255,0.15); border-radius:8px; padding:10px 14px; cursor:pointer; color:rgba(255,255,255,0.70); font-size:13px; font-weight:600;">
+          View Full Capabilities
+          <span class="cap-toggle-icon" style="font-size:18px; color:#be185d; font-weight:300;">+</span>
+        </button>
+        <div class="agent-capabilities">
+          <div style="padding:16px 0 4px; display:flex; flex-direction:column; gap:10px;">
+            <div style="display:flex; gap:10px; align-items:flex-start;">
+              <span style="color:#be185d; font-size:16px; flex-shrink:0; margin-top:1px;">&#10003;</span>
+              <span style="color:rgba(255,255,255,0.70); font-size:13px; line-height:1.5;">Writes creative briefs, moodboard descriptions, and style guides</span>
+            </div>
+            <div style="display:flex; gap:10px; align-items:flex-start;">
+              <span style="color:#be185d; font-size:16px; flex-shrink:0; margin-top:1px;">&#10003;</span>
+              <span style="color:rgba(255,255,255,0.70); font-size:13px; line-height:1.5;">Generates social media caption variants and hooks</span>
+            </div>
+            <div style="display:flex; gap:10px; align-items:flex-start;">
+              <span style="color:#be185d; font-size:16px; flex-shrink:0; margin-top:1px;">&#10003;</span>
+              <span style="color:rgba(255,255,255,0.70); font-size:13px; line-height:1.5;">Supports visual concept ideation with written direction</span>
+            </div>
+            <div style="display:flex; gap:10px; align-items:flex-start;">
+              <span style="color:#be185d; font-size:16px; flex-shrink:0; margin-top:1px;">&#10003;</span>
+              <span style="color:rgba(255,255,255,0.70); font-size:13px; line-height:1.5;">Reviews copy for brand voice consistency across visuals</span>
+            </div>
+            <div style="display:flex; gap:10px; align-items:flex-start;">
+              <span style="color:#be185d; font-size:16px; flex-shrink:0; margin-top:1px;">&#10003;</span>
+              <span style="color:rgba(255,255,255,0.70); font-size:13px; line-height:1.5;">Builds content batch outlines and posting schedules</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- FLUX -->
+      <div class="fade-in hover-lift agent-card md:col-span-2 lg:col-span-3 lg:max-w-md lg:mx-auto" style="background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.10); border-radius:20px; padding:28px; cursor:pointer; width:100%;" data-agent="flux">
+        <div class="flex items-start justify-between mb-20">
+          <div class="agent-avatar" style="width:64px; height:64px; background:linear-gradient(135deg, #0B1120, #059669); display:flex; align-items:center; justify-content:center; font-size:28px;">
+            ⚡
+          </div>
+          <span class="status-badge" style="background:rgba(22,163,74,0.15); color:#4ade80; font-size:10px;">
+            <span class="pulse-dot" style="width:7px; height:7px;"></span> ONLINE
+          </span>
+        </div>
+        <div style="margin-bottom:4px;">
+          <div style="margin-bottom:6px;">
+            <h3 style="font-size:22px; font-weight:700; color:white;">Flux</h3>
+          </div>
+          <p style="font-size:12px; font-weight:700; color:#059669; letter-spacing:0.08em; margin-bottom:8px;">AUTOMATION ARCHITECT AGENT</p>
+          <p style="font-size:13px; color:rgba(255,255,255,0.55); font-style:italic; margin-bottom:16px;">"The one who connects everything so nothing slips"</p>
+        </div>
+        <div style="display:flex; flex-wrap:wrap; gap:6px; margin-bottom:20px;">
+          <span class="trait-pill" style="background:rgba(5,150,105,0.15); color:#34d399;">Connected</span>
+          <span class="trait-pill" style="background:rgba(5,150,105,0.15); color:#34d399;">Logical</span>
+          <span class="trait-pill" style="background:rgba(5,150,105,0.15); color:#34d399;">Never-off</span>
+        </div>
+        <div style="display:flex; align-items:center; gap:8px; margin-bottom:16px; padding:10px 14px; background:rgba(255,255,255,0.05); border-radius:8px;">
+          <span style="font-size:13px; color:rgba(255,255,255,0.50);">Works alongside</span>
+          <span style="font-size:13px; font-weight:600; color:rgba(255,255,255,0.90);">Ryan C.</span>
+        </div>
+        <button class="cap-toggle w-full text-left" style="display:flex; align-items:center; justify-content:space-between; background:none; border:1px solid rgba(255,255,255,0.15); border-radius:8px; padding:10px 14px; cursor:pointer; color:rgba(255,255,255,0.70); font-size:13px; font-weight:600;">
+          View Full Capabilities
+          <span class="cap-toggle-icon" style="font-size:18px; color:#059669; font-weight:300;">+</span>
+        </button>
+        <div class="agent-capabilities">
+          <div style="padding:16px 0 4px; display:flex; flex-direction:column; gap:10px;">
+            <div style="display:flex; gap:10px; align-items:flex-start;">
+              <span style="color:#059669; font-size:16px; flex-shrink:0; margin-top:1px;">&#10003;</span>
+              <span style="color:rgba(255,255,255,0.70); font-size:13px; line-height:1.5;">Designs multi-step automation workflows across tools</span>
+            </div>
+            <div style="display:flex; gap:10px; align-items:flex-start;">
+              <span style="color:#059669; font-size:16px; flex-shrink:0; margin-top:1px;">&#10003;</span>
+              <span style="color:rgba(255,255,255,0.70); font-size:13px; line-height:1.5;">Connects platforms like Make, Zapier, Notion, and Airtable</span>
+            </div>
+            <div style="display:flex; gap:10px; align-items:flex-start;">
+              <span style="color:#059669; font-size:16px; flex-shrink:0; margin-top:1px;">&#10003;</span>
+              <span style="color:rgba(255,255,255,0.70); font-size:13px; line-height:1.5;">Builds triggers that move work forward without human input</span>
+            </div>
+            <div style="display:flex; gap:10px; align-items:flex-start;">
+              <span style="color:#059669; font-size:16px; flex-shrink:0; margin-top:1px;">&#10003;</span>
+              <span style="color:rgba(255,255,255,0.70); font-size:13px; line-height:1.5;">Documents automation logic so the team can maintain it</span>
+            </div>
+            <div style="display:flex; gap:10px; align-items:flex-start;">
+              <span style="color:#059669; font-size:16px; flex-shrink:0; margin-top:1px;">&#10003;</span>
+              <span style="color:rgba(255,255,255,0.70); font-size:13px; line-height:1.5;">Troubleshoots broken workflows and rebuilds cleaner versions</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /agents-grid -->
+  </div>
+</section>
+
+
+<!-- ===== FAMILY TREE ===== -->
+<section id="family-tree" class="section-pad" style="background:#F8FAFC;">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="fade-in text-center mb-16">
+      <p style="font-size:12px; font-weight:700; letter-spacing:0.12em; color:#2D5BFF; margin-bottom:12px;">THE STRUCTURE</p>
+      <h2 style="font-size:clamp(28px,4vw,44px); font-weight:700; color:#0B1120; margin-bottom:16px;">The Full Family Tree</h2>
+      <p style="font-size:16px; color:#475569; max-width:520px; margin:0 auto; line-height:1.7;">
+        Every person and every agent traces back to one house. One founder. One direction.
+      </p>
+    </div>
+
+    <!-- Tree visualization -->
+    <div class="fade-in" style="overflow-x:auto; padding-bottom:16px;">
+      <div style="min-width:640px;">
+        <!-- Root -->
+        <div style="display:flex; flex-direction:column; align-items:center;">
+          <div class="tree-card founder" style="padding:14px 28px;">
+            🏠 Bruno (RJ) &mdash; Founder
+          </div>
+          <div class="tree-connector-v"></div>
+
+          <!-- Two branches row -->
+          <div style="display:flex; align-items:flex-start; width:100%; max-width:800px; position:relative; justify-content:center;">
+            <!-- Left connector -->
+            <div style="flex:1; display:flex; flex-direction:column; align-items:flex-end;">
+              <div style="width:50%; height:2px; background:#D1D5DB;"></div>
+            </div>
+            <!-- Right connector -->
+            <div style="flex:1; display:flex; flex-direction:column; align-items:flex-start;">
+              <div style="width:50%; height:2px; background:#D1D5DB;"></div>
+            </div>
+          </div>
+
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:64px; width:100%; max-width:800px;">
+
+            <!-- Human branch -->
+            <div style="display:flex; flex-direction:column; align-items:center; gap:0;">
+              <div class="tree-connector-v"></div>
+              <div style="background:#f5f3ff; border:2px solid #7c3aed; border-radius:10px; padding:10px 20px; font-size:13px; font-weight:700; color:#7c3aed; margin-bottom:0;">
+                👥 Human Team
+              </div>
+              <div class="tree-connector-v"></div>
+              <div style="display:flex; flex-direction:column; gap:8px; width:100%; align-items:center;">
+                <div style="background:white; border:1px solid #e2e8f0; border-radius:8px; padding:8px 14px; font-size:12px; font-weight:600; color:#475569; width:140px; text-align:center;">Vi</div>
+                <div style="background:white; border:1px solid #e2e8f0; border-radius:8px; padding:8px 14px; font-size:12px; font-weight:600; color:#475569; width:140px; text-align:center;">Kenz</div>
+                <div style="background:white; border:1px solid #e2e8f0; border-radius:8px; padding:8px 14px; font-size:12px; font-weight:600; color:#475569; width:140px; text-align:center;">Ryan</div>
+                <div style="background:white; border:1px solid #e2e8f0; border-radius:8px; padding:8px 14px; font-size:12px; font-weight:600; color:#475569; width:140px; text-align:center;">Krizza</div>
+                <div style="background:white; border:1px solid #e2e8f0; border-radius:8px; padding:8px 14px; font-size:12px; font-weight:600; color:#475569; width:140px; text-align:center;">Al</div>
+                <div style="background:white; border:1px solid #e2e8f0; border-radius:8px; padding:8px 14px; font-size:12px; font-weight:600; color:#475569; width:140px; text-align:center;">Ryan C.</div>
+                <div style="background:white; border:1px solid #e2e8f0; border-radius:8px; padding:8px 14px; font-size:12px; font-weight:600; color:#475569; width:140px; text-align:center;">Daryl</div>
+              </div>
+            </div>
+
+            <!-- AI branch -->
+            <div style="display:flex; flex-direction:column; align-items:center; gap:0;">
+              <div class="tree-connector-v"></div>
+              <div style="background:#f0fdf4; border:2px solid #0d9488; border-radius:10px; padding:10px 20px; font-size:13px; font-weight:700; color:#0d9488; margin-bottom:0;">
+                🤖 AI Agents
+              </div>
+              <div class="tree-connector-v"></div>
+              <div style="display:flex; flex-direction:column; gap:8px; width:100%; align-items:center;">
+                <div style="background:white; border:1px solid #e2e8f0; border-radius:8px; padding:8px 14px; font-size:12px; font-weight:600; color:#2D5BFF; width:140px; text-align:center; display:flex; align-items:center; justify-content:center; gap:6px;"><span class="pulse-dot" style="width:6px; height:6px;"></span>Atlas</div>
+                <div style="background:white; border:1px solid #e2e8f0; border-radius:8px; padding:8px 14px; font-size:12px; font-weight:600; color:#4f46e5; width:140px; text-align:center; display:flex; align-items:center; justify-content:center; gap:6px;"><span class="pulse-dot" style="width:6px; height:6px;"></span>Nova</div>
+                <div style="background:white; border:1px solid #e2e8f0; border-radius:8px; padding:8px 14px; font-size:12px; font-weight:600; color:#0891b2; width:140px; text-align:center; display:flex; align-items:center; justify-content:center; gap:6px;"><span class="pulse-dot" style="width:6px; height:6px;"></span>Cleo</div>
+                <div style="background:white; border:1px solid #e2e8f0; border-radius:8px; padding:8px 14px; font-size:12px; font-weight:600; color:#0d9488; width:140px; text-align:center; display:flex; align-items:center; justify-content:center; gap:6px;"><span class="pulse-dot" style="width:6px; height:6px;"></span>Rex</div>
+                <div style="background:white; border:1px solid #e2e8f0; border-radius:8px; padding:8px 14px; font-size:12px; font-weight:600; color:#7c3aed; width:140px; text-align:center; display:flex; align-items:center; justify-content:center; gap:6px;"><span class="pulse-dot" style="width:6px; height:6px;"></span>Echo</div>
+                <div style="background:white; border:1px solid #e2e8f0; border-radius:8px; padding:8px 14px; font-size:12px; font-weight:600; color:#be185d; width:140px; text-align:center; display:flex; align-items:center; justify-content:center; gap:6px;"><span class="pulse-dot" style="width:6px; height:6px;"></span>Pixel</div>
+                <div style="background:white; border:1px solid #e2e8f0; border-radius:8px; padding:8px 14px; font-size:12px; font-weight:600; color:#059669; width:140px; text-align:center; display:flex; align-items:center; justify-content:center; gap:6px;"><span class="pulse-dot" style="width:6px; height:6px;"></span>Flux</div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Legend -->
+    <div class="fade-in" style="margin-top:40px; display:flex; gap:24px; justify-content:center; flex-wrap:wrap;">
+      <div style="display:flex; align-items:center; gap:8px; font-size:13px; color:#475569;">
+        <div style="width:12px; height:12px; border-radius:2px; background:#2D5BFF;"></div>
+        Founder
+      </div>
+      <div style="display:flex; align-items:center; gap:8px; font-size:13px; color:#475569;">
+        <div style="width:12px; height:12px; border-radius:2px; background:#7c3aed;"></div>
+        Human Team
+      </div>
+      <div style="display:flex; align-items:center; gap:8px; font-size:13px; color:#475569;">
+        <div style="width:12px; height:12px; border-radius:2px; background:#0d9488;"></div>
+        AI Agents
+      </div>
+      <div style="display:flex; align-items:center; gap:8px; font-size:13px; color:#475569;">
+        <span class="pulse-dot" style="width:8px; height:8px;"></span>
+        Active / Online
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ===== HOW AI + HUMAN WORK TOGETHER ===== -->
+<section class="section-pad" style="background:white;">
+  <div class="max-w-5xl mx-auto px-6">
+    <div class="fade-in text-center mb-16">
+      <p style="font-size:12px; font-weight:700; letter-spacing:0.12em; color:#2D5BFF; margin-bottom:12px;">THE WORKFLOW</p>
+      <h2 style="font-size:clamp(28px,4vw,44px); font-weight:700; color:#0B1120; margin-bottom:16px;">How They Work Together</h2>
+      <p style="font-size:16px; color:#475569; max-width:520px; margin:0 auto; line-height:1.7;">
+        The human leads. The agent supports. Together, they move faster without losing the personal touch.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-10">
+      <div class="fade-in flow-step">
+        <div class="flow-num">1</div>
+        <div>
+          <h4 style="font-size:16px; font-weight:700; color:#0B1120; margin-bottom:6px;">Bruno or the team sets the direction</h4>
+          <p style="font-size:14px; color:#475569; line-height:1.6;">Every agent task starts with a human decision. What do we need? Who does it serve? The team defines this. Always.</p>
+        </div>
+      </div>
+      <div class="fade-in flow-step">
+        <div class="flow-num">2</div>
+        <div>
+          <h4 style="font-size:16px; font-weight:700; color:#0B1120; margin-bottom:6px;">The right agent is assigned</h4>
+          <p style="font-size:14px; color:#475569; line-height:1.6;">Based on the task type, the matching agent takes it on. Research goes to Cleo. Content goes to Nova. Operations goes to Rex.</p>
+        </div>
+      </div>
+      <div class="fade-in flow-step">
+        <div class="flow-num">3</div>
+        <div>
+          <h4 style="font-size:16px; font-weight:700; color:#0B1120; margin-bottom:6px;">The agent builds the draft or output</h4>
+          <p style="font-size:14px; color:#475569; line-height:1.6;">The agent works fast and brings back a complete first version. Not perfect. Ready for the human to shape into something great.</p>
+        </div>
+      </div>
+      <div class="fade-in flow-step">
+        <div class="flow-num">4</div>
+        <div>
+          <h4 style="font-size:16px; font-weight:700; color:#0B1120; margin-bottom:6px;">The human reviews and refines</h4>
+          <p style="font-size:14px; color:#475569; line-height:1.6;">The team member who partnered with the agent adds their judgment, voice, and care. That is what the client actually receives.</p>
+        </div>
+      </div>
+      <div class="fade-in flow-step">
+        <div class="flow-num">5</div>
+        <div>
+          <h4 style="font-size:16px; font-weight:700; color:#0B1120; margin-bottom:6px;">Delivery happens under the human's name</h4>
+          <p style="font-size:14px; color:#475569; line-height:1.6;">The client always works with a real person. The agent stays behind the scenes. The relationship stays human.</p>
+        </div>
+      </div>
+      <div class="fade-in flow-step">
+        <div class="flow-num">6</div>
+        <div>
+          <h4 style="font-size:16px; font-weight:700; color:#0B1120; margin-bottom:6px;">The loop improves every time</h4>
+          <p style="font-size:14px; color:#475569; line-height:1.6;">Each cycle teaches the system. The agents get better at the studio's style. The humans get more time to focus on what matters.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ===== THE HOUSE RULES ===== -->
+<section class="section-pad" style="background:#F8FAFC;">
+  <div class="max-w-4xl mx-auto px-6">
+    <div class="fade-in text-center mb-16">
+      <p style="font-size:12px; font-weight:700; letter-spacing:0.12em; color:#2D5BFF; margin-bottom:12px;">THE PRINCIPLES</p>
+      <h2 style="font-size:clamp(28px,4vw,44px); font-weight:700; color:#0B1120; margin-bottom:16px;">The House Rules</h2>
+      <p style="font-size:16px; color:#475569; max-width:520px; margin:0 auto; line-height:1.7;">
+        Every family has rules. These three govern how the AI side of the house operates.
+      </p>
+    </div>
+
+    <div style="display:flex; flex-direction:column; gap:16px;">
+      <div class="fade-in rule-card hover-lift">
+        <div style="display:flex; align-items:flex-start; gap:16px;">
+          <div style="font-size:32px; flex-shrink:0; line-height:1;">🌙</div>
+          <div>
+            <h3 style="font-size:18px; font-weight:700; color:#0B1120; margin-bottom:8px;">Rule 1: They Never Sleep</h3>
+            <p style="color:#475569; line-height:1.7; font-size:15px;">The agents work whenever the team needs them. 2am brief. Sunday research sprint. Midnight proposal draft. They are available without asking, without overtime, without burning out.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="fade-in rule-card hover-lift">
+        <div style="display:flex; align-items:flex-start; gap:16px;">
+          <div style="font-size:32px; flex-shrink:0; line-height:1;">🧠</div>
+          <div>
+            <h3 style="font-size:18px; font-weight:700; color:#0B1120; margin-bottom:8px;">Rule 2: They Learn from Bruno</h3>
+            <p style="color:#475569; line-height:1.7; font-size:15px;">Every agent is guided by the same values Bruno built into this studio. The warmth. The directness. The care for quality. They do not have opinions. They carry the studio's standards.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="fade-in rule-card hover-lift">
+        <div style="display:flex; align-items:flex-start; gap:16px;">
+          <div style="font-size:32px; flex-shrink:0; line-height:1;">🤝</div>
+          <div>
+            <h3 style="font-size:18px; font-weight:700; color:#0B1120; margin-bottom:8px;">Rule 3: They Work FOR People, Not Instead of Them</h3>
+            <p style="color:#475569; line-height:1.7; font-size:15px;">No agent makes a client decision. No agent replaces a conversation. Every output goes through a human before it leaves the house. That is non-negotiable, now and always.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ===== FAMILY CHARTER (FOUNDER QUOTE) ===== -->
+<section class="section-pad" style="background:linear-gradient(135deg, #0B1120 0%, #0f1f44 100%);">
+  <div class="max-w-3xl mx-auto px-6">
+    <div class="fade-in text-center mb-12">
+      <p style="font-size:12px; font-weight:700; letter-spacing:0.12em; color:#2D5BFF; margin-bottom:12px;">THE FAMILY CHARTER</p>
+    </div>
+    <div class="fade-in">
+      <p class="charter-quote">
+        "I built this studio because I believe good work should feel like it comes from people who care, not from a machine running through a checklist. The AI agents in our house exist for one reason: to give our people more capacity to actually care. More time to think. More space to build real relationships. The agents are fast. The humans are the reason."
+      </p>
+      <div style="margin-top:32px; display:flex; align-items:center; gap:16px;">
+        <div style="width:48px; height:48px; background:linear-gradient(135deg, #2D5BFF, #4f46e5); border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:22px; flex-shrink:0;">
+          🏠
+        </div>
+        <div>
+          <div style="font-size:15px; font-weight:700; color:white;">Bruno</div>
+          <div style="font-size:13px; color:rgba(255,255,255,0.55);">Founder, Balay ni Bruno &amp; Co.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ===== FAQ ===== -->
+<section class="section-pad" style="background:#F8FAFC;">
+  <div class="max-w-3xl mx-auto px-6">
+    <div class="fade-in text-center mb-16">
+      <p style="font-size:12px; font-weight:700; letter-spacing:0.12em; color:#2D5BFF; margin-bottom:12px;">GOOD QUESTIONS</p>
+      <h2 style="font-size:clamp(28px,4vw,40px); font-weight:700; color:#0B1120; margin-bottom:16px;">Things People Ask About AI Agents</h2>
+    </div>
+
+    <div style="display:flex; flex-direction:column; gap:2px;">
+
+      <div class="fade-in faq-item" style="background:white; border-radius:12px; overflow:hidden; border:1px solid #E2E8F0;">
+        <button class="faq-trigger" style="width:100%; display:flex; align-items:center; justify-content:space-between; padding:20px 24px; background:none; border:none; cursor:pointer; text-align:left;">
+          <span style="font-size:15px; font-weight:600; color:#0B1120;">Are these real agents you actually use, or just a concept?</span>
+          <span class="faq-icon" style="font-size:20px; color:#2D5BFF; font-weight:300; flex-shrink:0; margin-left:12px;">+</span>
+        </button>
+        <div class="faq-answer">
+          <div style="padding:0 24px 20px; color:#475569; font-size:14px; line-height:1.7;">
+            Real. Every agent listed here is an active part of how Balay ni Bruno &amp; Co. operates. We use them daily across client work, internal builds, and studio operations. They are not a product we sell. They are how we work.
+          </div>
+        </div>
+      </div>
+
+      <div class="fade-in faq-item" style="background:white; border-radius:12px; overflow:hidden; border:1px solid #E2E8F0; margin-top:8px;">
+        <button class="faq-trigger" style="width:100%; display:flex; align-items:center; justify-content:space-between; padding:20px 24px; background:none; border:none; cursor:pointer; text-align:left;">
+          <span style="font-size:15px; font-weight:600; color:#0B1120;">Will AI agents be working on my project directly?</span>
+          <span class="faq-icon" style="font-size:20px; color:#2D5BFF; font-weight:300; flex-shrink:0; margin-left:12px;">+</span>
+        </button>
+        <div class="faq-answer">
+          <div style="padding:0 24px 20px; color:#475569; font-size:14px; line-height:1.7;">
+            Yes, but always under human supervision. When Cleo researches your industry or Nova drafts content for your brand, a team member reviews and refines that output before it ever reaches you. You get the speed of AI and the care of a person.
+          </div>
+        </div>
+      </div>
+
+      <div class="fade-in faq-item" style="background:white; border-radius:12px; overflow:hidden; border:1px solid #E2E8F0; margin-top:8px;">
+        <button class="faq-trigger" style="width:100%; display:flex; align-items:center; justify-content:space-between; padding:20px 24px; background:none; border:none; cursor:pointer; text-align:left;">
+          <span style="font-size:15px; font-weight:600; color:#0B1120;">Does using AI agents mean the work is lower quality?</span>
+          <span class="faq-icon" style="font-size:20px; color:#2D5BFF; font-weight:300; flex-shrink:0; margin-left:12px;">+</span>
+        </button>
+        <div class="faq-answer">
+          <div style="padding:0 24px 20px; color:#475569; font-size:14px; line-height:1.7;">
+            The opposite. Agents remove the low-value, high-volume tasks that slow people down. When a human is not spending four hours on a first draft, they have four more hours to think about what actually matters for your project. The quality goes up. The timeline gets shorter.
+          </div>
+        </div>
+      </div>
+
+      <div class="fade-in faq-item" style="background:white; border-radius:12px; overflow:hidden; border:1px solid #E2E8F0; margin-top:8px;">
+        <button class="faq-trigger" style="width:100%; display:flex; align-items:center; justify-content:space-between; padding:20px 24px; background:none; border:none; cursor:pointer; text-align:left;">
+          <span style="font-size:15px; font-weight:600; color:#0B1120;">Can you build AI agents for my business?</span>
+          <span class="faq-icon" style="font-size:20px; color:#2D5BFF; font-weight:300; flex-shrink:0; margin-left:12px;">+</span>
+        </button>
+        <div class="faq-answer">
+          <div style="padding:0 24px 20px; color:#475569; font-size:14px; line-height:1.7;">
+            Yes. AI agent setup and workflow automation is part of the operational support we offer. If you want your own Atlas or Flux working inside your business, that is a conversation worth having. Start a conversation with us and we will talk through what makes sense for your team.
+          </div>
+        </div>
+      </div>
+
+      <div class="fade-in faq-item" style="background:white; border-radius:12px; overflow:hidden; border:1px solid #E2E8F0; margin-top:8px;">
+        <button class="faq-trigger" style="width:100%; display:flex; align-items:center; justify-content:space-between; padding:20px 24px; background:none; border:none; cursor:pointer; text-align:left;">
+          <span style="font-size:15px; font-weight:600; color:#0B1120;">Why give them names and personalities?</span>
+          <span class="faq-icon" style="font-size:20px; color:#2D5BFF; font-weight:300; flex-shrink:0; margin-left:12px;">+</span>
+        </button>
+        <div class="faq-answer">
+          <div style="padding:0 24px 20px; color:#475569; font-size:14px; line-height:1.7;">
+            Because this studio runs like a family. Everything we do has a name and a reason behind it. The agents are part of that culture. Giving them names makes it easier for the team to talk about who is handling what, and it reflects the warmth we bring to everything we build.
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ===== CTA ===== -->
+<section class="section-pad" style="background:white;">
+  <div class="max-w-3xl mx-auto px-6 text-center">
+    <div class="fade-in">
+      <p style="font-size:12px; font-weight:700; letter-spacing:0.12em; color:#2D5BFF; margin-bottom:16px;">READY TO WORK WITH US</p>
+      <h2 style="font-size:clamp(28px,4vw,44px); font-weight:700; color:#0B1120; margin-bottom:20px; line-height:1.2;">The Whole Family Is Ready for You</h2>
+      <p style="font-size:16px; color:#475569; max-width:480px; margin:0 auto 40px; line-height:1.7;">
+        Seven humans. Seven agents. One studio built to give your business the kind of support that actually moves things forward.
+      </p>
+      <div style="display:flex; gap:16px; justify-content:center; flex-wrap:wrap;">
+        <a href="index.html#contact"
+           style="background:#2D5BFF; color:white; font-size:15px; font-weight:600; padding:16px 32px; border-radius:10px; text-decoration:none;"
+           class="hover:opacity-90 transition-opacity">Start a Conversation</a>
+        <a href="how-we-help.html"
+           style="border:2px solid #E2E8F0; color:#0B1120; font-size:15px; font-weight:600; padding:16px 32px; border-radius:10px; text-decoration:none;"
+           class="hover:border-navy transition-colors">See How We Help</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ===== FOOTER ===== -->
+<footer style="background:#0B1120; padding:64px 0 32px;">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
+
+      <!-- Brand -->
+      <div class="md:col-span-2">
+        <a href="index.html" class="flex items-center gap-3 mb-4" aria-label="Balay ni Bruno &amp; Co. Home">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 210" width="42" height="42"
+               style="color:white; flex-shrink:0;" aria-hidden="true">
+            <rect x="38" y="6" width="13" height="62" rx="2" fill="currentColor"/>
+            <line x1="100" y1="38" x2="6" y2="90" stroke="currentColor" stroke-width="9" stroke-linecap="round"/>
+            <line x1="100" y1="38" x2="194" y2="90" stroke="currentColor" stroke-width="9" stroke-linecap="round"/>
+            <rect x="24" y="90" width="152" height="86" rx="6" fill="none" stroke="currentColor" stroke-width="9"/>
+            <text x="100" y="154" text-anchor="middle" font-size="46" font-weight="800"
+                  font-family="Georgia,'Times New Roman',serif" fill="currentColor">BBC</text>
+            <rect x="91" y="176" width="18" height="18" rx="2" fill="currentColor"/>
+            <rect x="64" y="194" width="72" height="11" rx="5.5" fill="currentColor"/>
+          </svg>
+          <div>
+            <div style="font-weight:700; font-size:14px; color:white; line-height:1.1;">Balay ni Bruno &amp; Co.</div>
+            <div style="font-size:10px; color:rgba(255,255,255,0.45); letter-spacing:0.08em; font-weight:500;">OPERATIONAL SUPPORT STUDIO</div>
+          </div>
+        </a>
+        <p style="color:rgba(255,255,255,0.50); font-size:14px; line-height:1.7; max-width:300px; margin-bottom:20px;">
+          A family-built studio helping businesses grow without losing what makes them human.
+        </p>
+        <div style="display:flex; flex-direction:column; gap:6px;">
+          <a href="mailto:admin@balaynibruno.co" style="color:rgba(255,255,255,0.50); font-size:13px; text-decoration:none;" class="hover:text-white transition-colors">admin@balaynibruno.co</a>
+          <span style="color:rgba(255,255,255,0.50); font-size:13px;">+63 935 663 0324</span>
+        </div>
+      </div>
+
+      <!-- Pages -->
+      <div>
+        <h4 style="color:white; font-size:13px; font-weight:700; letter-spacing:0.08em; margin-bottom:16px;">PAGES</h4>
+        <div style="display:flex; flex-direction:column; gap:10px;">
+          <a href="index.html" style="color:rgba(255,255,255,0.50); font-size:14px; text-decoration:none;" class="hover:text-white transition-colors">Home</a>
+          <a href="about.html" style="color:rgba(255,255,255,0.50); font-size:14px; text-decoration:none;" class="hover:text-white transition-colors">Our Story</a>
+          <a href="how-it-works.html" style="color:rgba(255,255,255,0.50); font-size:14px; text-decoration:none;" class="hover:text-white transition-colors">How It Works</a>
+          <a href="how-we-help.html" style="color:rgba(255,255,255,0.50); font-size:14px; text-decoration:none;" class="hover:text-white transition-colors">How We Help</a>
+          <a href="ai-agents.html" style="color:white; font-size:14px; font-weight:600; text-decoration:none;">AI Agents</a>
+          <a href="our-work.html" style="color:rgba(255,255,255,0.50); font-size:14px; text-decoration:none;" class="hover:text-white transition-colors">Our Work</a>
+        </div>
+      </div>
+
+      <!-- Quick links -->
+      <div>
+        <h4 style="color:white; font-size:13px; font-weight:700; letter-spacing:0.08em; margin-bottom:16px;">THE FAMILY</h4>
+        <div style="display:flex; flex-direction:column; gap:10px;">
+          <a href="index.html#team" style="color:rgba(255,255,255,0.50); font-size:14px; text-decoration:none;" class="hover:text-white transition-colors">Human Team</a>
+          <a href="ai-agents.html" style="color:rgba(255,255,255,0.50); font-size:14px; text-decoration:none;" class="hover:text-white transition-colors">AI Agents</a>
+          <a href="index.html#insights" style="color:rgba(255,255,255,0.50); font-size:14px; text-decoration:none;" class="hover:text-white transition-colors">Insights</a>
+          <a href="index.html#contact" style="color:rgba(255,255,255,0.50); font-size:14px; text-decoration:none;" class="hover:text-white transition-colors">Contact</a>
+        </div>
+      </div>
+
+    </div>
+
+    <div style="border-top:1px solid rgba(255,255,255,0.08); padding-top:24px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
+      <p style="color:rgba(255,255,255,0.30); font-size:12px;">
+        &copy; 2025 Balay ni Bruno &amp; Co. All rights reserved.
+      </p>
+      <p style="color:rgba(255,255,255,0.30); font-size:12px;">
+        Built with care in the Philippines.
+      </p>
+    </div>
+  </div>
+</footer>
+
+
+<!-- ===== JAVASCRIPT ===== -->
+<script>
+  // Sticky header shadow
+  const header = document.getElementById('main-header');
+  window.addEventListener('scroll', () => {
+    header.classList.toggle('scrolled', window.scrollY > 60);
+  });
+
+  // Hamburger toggle
+  const hamburgerBtn = document.getElementById('hamburger-btn');
+  const mobileNav = document.getElementById('mobile-nav');
+  hamburgerBtn.addEventListener('click', () => {
+    const isOpen = mobileNav.classList.toggle('open');
+    hamburgerBtn.classList.toggle('open', isOpen);
+    hamburgerBtn.setAttribute('aria-expanded', isOpen);
+  });
+
+  // Scroll fade-in
+  const fadeEls = document.querySelectorAll('.fade-in');
+  const fadeObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        fadeObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.08 });
+  fadeEls.forEach(el => fadeObserver.observe(el));
+
+  // Agent card capability toggles
+  document.querySelectorAll('.cap-toggle').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const card = btn.closest('.agent-card');
+      const panel = card.querySelector('.agent-capabilities');
+      const icon = btn.querySelector('.cap-toggle-icon');
+      const isOpen = panel.classList.toggle('open');
+      icon.classList.toggle('open', isOpen);
+      btn.querySelector('.cap-toggle-icon').textContent = isOpen ? '×' : '+';
+    });
+  });
+
+  // FAQ toggles
+  document.querySelectorAll('.faq-trigger').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const item = btn.closest('.faq-item');
+      const answer = item.querySelector('.faq-answer');
+      const icon = btn.querySelector('.faq-icon');
+      const isOpen = answer.classList.toggle('open');
+      icon.classList.toggle('open', isOpen);
+      icon.textContent = isOpen ? '×' : '+';
+
+      // Close others
+      document.querySelectorAll('.faq-item').forEach(other => {
+        if (other !== item) {
+          other.querySelector('.faq-answer').classList.remove('open');
+          const otherIcon = other.querySelector('.faq-icon');
+          otherIcon.classList.remove('open');
+          otherIcon.textContent = '+';
+        }
+      });
+    });
+  });
+
+  // Smooth scroll for anchor links
+  document.querySelectorAll('a[href^="#"]').forEach(link => {
+    link.addEventListener('click', (e) => {
+      const id = link.getAttribute('href').slice(1);
+      const target = document.getElementById(id);
+      if (!target) return;
+      e.preventDefault();
+      const OFFSET = 80;
+      const top = target.getBoundingClientRect().top + window.scrollY - OFFSET;
+      window.scrollTo({ top, behavior: 'smooth' });
+    });
+  });
+</script>
+
+</body>
+</html>

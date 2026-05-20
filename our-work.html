@@ -1,1015 +1,1573 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Our Work | Balay ni Bruno &amp; Co.</title>
-  <meta name="description" content="Real implementation work built for real businesses. See how Balay ni Bruno &amp; Co. has shown up, learned the business, and built things that last." />
-  <link rel="canonical" href="https://balaynibruno.co/our-work.html" />
-  <meta property="og:type" content="website" />
-  <meta property="og:site_name" content="Balay ni Bruno &amp; Co." />
-  <meta property="og:title" content="Our Work, Balay ni Bruno &amp; Co." />
-  <meta property="og:description" content="Real implementation work built for real businesses. See how BBC has shown up, learned the business, and built things that last." />
-  <meta property="og:url" content="https://balaynibruno.co/our-work.html" />
-  <meta property="og:image" content="https://balaynibruno.co/bbc-logo.png" />
-  <meta name="twitter:card" content="summary_large_image" />
-  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <title>Our Work — Balay ni Bruno &amp; Co.</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            navy:        '#0B1120',
+            blue:        '#2D5BFF',
+            'off-white': '#F8FAFC',
+            slate:       '#475569',
+            lightgray:   '#D1D5DB',
+          },
+          fontFamily: { sans: ['Montserrat', 'sans-serif'] },
+        }
+      }
+    }
+  </script>
+
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Lora:ital,wght@0,400;0,500;1,400;1,500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet" />
 
   <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    body { font-family: 'Montserrat', sans-serif; margin: 0; padding: 0; }
 
-    :root {
-      --deep-blue:   #1F3557;
-      --mid-blue:    #4B6FA5;
-      --warm-blue:   #6D8FC7;
-      --light-blue:  #A8C0DC;
-      --pale-blue:   #DDE8F2;
+    /* ── Header ── */
+    #site-header { transition: box-shadow 0.2s ease; }
+    #site-header.scrolled { box-shadow: 0 2px 24px rgba(11,17,32,0.10); }
 
-      --bg-primary:  #F5F1EA;
-      --bg-section:  #EDE8DF;
-      --bg-card:     #FDFAF6;
-      --bg-dark:     #1C2E47;
-      --bg-footer:   #172540;
+    /* ── Mobile nav ── */
+    #mobile-nav { display: none; }
+    #mobile-nav.open { display: flex; }
 
-      --neutral-100: #E8E2D6;
-      --neutral-200: #D5CEC3;
-      --neutral-300: #B8B1A6;
+    /* ── Fade-in ── */
+    .fade-in { opacity: 0; transform: translateY(24px); transition: opacity 0.55s ease, transform 0.55s ease; }
+    .fade-in.visible { opacity: 1; transform: none; }
 
-      --text-ink:    #2A3040;
-      --text-body:   #4E5666;
-      --text-muted:  #888FA0;
-      --text-warm:   #F5F1EA;
-
-      --gold:        #B8923E;
-      --gold-pale:   #E6CFA0;
-      --gold-warm:   #D4A84B;
-      --sage:        #4E9E74;
-
-      --font-display:'Playfair Display', Georgia, serif;
-      --font-body:   'Lora', Georgia, serif;
-      --font-ui:     'DM Sans', system-ui, sans-serif;
-
-      --max-width:   1200px;
-      --radius-sm:   8px;
-      --radius:      16px;
-      --radius-lg:   24px;
-      --radius-xl:   32px;
-
-      --shadow-xs:   0 1px 6px  rgba(85,60,35,0.055);
-      --shadow-sm:   0 3px 18px rgba(85,60,35,0.08);
-      --shadow-md:   0 7px 36px rgba(85,60,35,0.11);
-      --shadow-lg:   0 14px 56px rgba(85,60,35,0.14);
-
-      --border-card: 1px solid rgba(85,60,35,0.09);
-      --border-warm: 1px solid rgba(85,60,35,0.12);
-      --border-dark: 1px solid rgba(255,255,255,0.07);
-
-      --s1: 0.5rem;  --s2: 1rem;   --s3: 1.5rem;
-      --s4: 2.5rem;  --s5: 4rem;   --s6: 6rem;  --s7: 9rem;
+    /* ── Filter strip ── */
+    #filter-strip {
+      position: sticky;
+      top: 64px;
+      z-index: 40;
+      background: white;
+      border-bottom: 1px solid #D1D5DB;
+      padding: 12px 0;
     }
-
-    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-
-    body {
-      font-family: var(--font-body);
-      color: var(--text-ink);
-      background: var(--bg-primary);
-      line-height: 1.6;
-      -webkit-font-smoothing: antialiased;
-      overflow-x: hidden;
+    #filter-inner {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 0 24px;
+      max-width: 1200px;
+      margin: 0 auto;
+      overflow-x: auto;
+      scrollbar-width: none;
     }
-
-    body::after {
-      content: '';
-      position: fixed; inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23n)' opacity='0.026'/%3E%3C/svg%3E");
-      pointer-events: none; z-index: 9999; mix-blend-mode: multiply;
-    }
-
-    /* ── TYPOGRAPHY ─────────────────────────────────────────── */
-    h1, h2, h3, h4 { font-family: var(--font-display); line-height: 1.22; color: var(--deep-blue); }
-    h1 { font-size: clamp(2.2rem, 4.8vw, 3.6rem); line-height: 1.16; font-weight: 700; }
-    h2 { font-size: clamp(1.7rem, 3vw, 2.6rem); line-height: 1.22; font-weight: 600; }
-    h3 { font-size: clamp(1.05rem, 1.6vw, 1.3rem); font-weight: 600; }
-    h4 { font-size: 0.95rem; font-family: var(--font-ui); font-weight: 700; }
-
-    p { font-family: var(--font-body); font-size: 1rem; line-height: 1.87; color: var(--text-body); }
-    p.lead { font-size: 1.08rem; line-height: 1.9; color: var(--text-ink); }
-    a { text-decoration: none; }
-
-    .eyebrow {
-      display: block;
-      font-family: var(--font-ui);
-      font-size: 0.68rem; font-weight: 600;
-      letter-spacing: 0.17em; text-transform: uppercase;
-      color: var(--warm-blue); margin-bottom: var(--s2);
-    }
-    .eyebrow--gold { color: var(--gold); }
-    .eyebrow--pale { color: rgba(245,241,234,0.5); }
-
-    /* ── LAYOUT ─────────────────────────────────────────────── */
-    .container { max-width: var(--max-width); margin: 0 auto; padding: 0 var(--s4); }
-    .section        { padding: var(--s7) 0; }
-    .section--tight { padding: var(--s5) 0; }
-    .section--warm  { background: var(--bg-section); }
-    .section--card  { background: var(--bg-card); }
-    .section--dark  { background: var(--bg-dark); }
-    .section--cream { background: var(--bg-primary); }
-    .text-center    { text-align: center; }
-
-    .divider-bar {
-      width: 44px; height: 2.5px;
-      background: linear-gradient(90deg, var(--gold), var(--warm-blue));
-      border-radius: 2px; margin: var(--s3) auto; opacity: 0.8;
-    }
-    .divider-bar--left { margin-left: 0; }
-
-    .fade-in { opacity: 0; transform: translateY(22px); transition: opacity 0.65s ease, transform 0.65s ease; }
-    .fade-in.visible { opacity: 1; transform: translateY(0); }
-
-    /* ── BUTTONS ─────────────────────────────────────────────── */
-    .btn {
-      display: inline-flex; align-items: center; gap: 0.45rem;
-      padding: 0.88rem 2rem; border-radius: 100px;
-      font-family: var(--font-ui); font-size: 0.86rem; font-weight: 600;
-      letter-spacing: 0.02em; cursor: pointer;
-      transition: all 0.3s ease; border: 1.5px solid transparent;
+    #filter-inner::-webkit-scrollbar { display: none; }
+    .filter-pill {
+      display: inline-flex;
+      align-items: center;
+      padding: 8px 20px;
+      border-radius: 9999px;
+      border: 1px solid #D1D5DB;
+      background: #F8FAFC;
+      color: #0B1120;
+      font-size: 13px;
+      font-weight: 600;
       white-space: nowrap;
+      text-decoration: none;
+      cursor: pointer;
+      transition: background 0.18s, color 0.18s, border-color 0.18s;
     }
-    .btn-primary { background: var(--deep-blue); color: var(--text-warm); }
-    .btn-primary:hover { background: #243f64; transform: translateY(-2px); box-shadow: 0 10px 32px rgba(31,53,87,0.28); }
-    .btn-outline { background: transparent; color: var(--deep-blue); border-color: rgba(75,111,165,0.42); }
-    .btn-outline:hover { background: var(--deep-blue); color: var(--text-warm); border-color: var(--deep-blue); transform: translateY(-2px); }
-    .btn-ghost { background: transparent; color: var(--text-warm); border-color: rgba(245,241,234,0.28); }
-    .btn-ghost:hover { background: rgba(245,241,234,0.08); border-color: rgba(245,241,234,0.55); }
-    .header__cta .btn-ghost { color:var(--deep-blue); border-color:rgba(31,53,87,0.22); }
-    .header__cta .btn-ghost:hover { background:rgba(31,53,87,0.06); border-color:rgba(31,53,87,0.38); color:var(--deep-blue); }
-    .btn-gold { background: var(--gold); color: #fff; font-weight: 700; }
-    .btn-gold:hover { background: var(--gold-warm); transform: translateY(-2px); box-shadow: 0 10px 32px rgba(184,146,62,0.35); }
-    .btn-sm { padding: 0.62rem 1.35rem; font-size: 0.78rem; }
-
-    /* ── HEADER ──────────────────────────────────────────────── */
-    .site-header {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
-      background: rgba(245,241,234,0.94);
-      backdrop-filter: blur(20px) saturate(1.2);
-      -webkit-backdrop-filter: blur(20px) saturate(1.2);
-      border-bottom: var(--border-warm);
-      transition: box-shadow 0.3s ease;
-    }
-    .site-header.scrolled { box-shadow: var(--shadow-sm); }
-
-    .header__inner {
-      max-width: var(--max-width); margin: 0 auto; padding: 0 var(--s4);
-      height: 68px; display: flex; align-items: center;
-      justify-content: space-between; gap: var(--s3);
-    }
-    .header__logo { display:flex; flex-direction:row; align-items:center; gap:0.6rem; }
-    .header__logo-name {
-      font-family: var(--font-display); font-size: 1.05rem; font-weight: 700;
-      color: var(--deep-blue); line-height: 1; letter-spacing: -0.01em;
-    }
-    .header__nav { display: flex; align-items: center; gap: 1.5rem; list-style: none; }
-    .header__nav a {
-      font-family: var(--font-ui); font-size: 0.78rem; font-weight: 500;
-      color: var(--text-body); transition: color 0.2s;
-      white-space: nowrap;
-    }
-    .header__nav a:hover, .header__nav a.active { color: var(--deep-blue); font-weight: 600; }
-    .header__cta { display: flex; align-items: center; gap: 0.9rem; flex-shrink: 0; }
-
-    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 8px; }
-    .hamburger span { display: block; width: 20px; height: 2px; background: var(--text-ink); border-radius: 2px; transition: all 0.25s ease; }
-
-    .mobile-menu {
-      display: none; flex-direction: column;
-      background: var(--bg-card); border-top: var(--border-warm);
-      padding: 1rem var(--s4) 1.5rem;
-    }
-    .mobile-menu.open { display: flex; }
-    .mobile-menu a {
-      font-family: var(--font-ui); font-size: 0.9rem; font-weight: 500;
-      color: var(--text-body); padding: 0.7rem 0;
-      border-bottom: var(--border-card); transition: color 0.2s;
-    }
-    .mobile-menu a:hover { color: var(--deep-blue); }
-    .mobile-menu a:last-of-type { border-bottom: none; }
-    .mobile-menu .mobile-cta { margin-top: 1rem; }
-
-    @media (max-width: 1024px) { .header__nav { display: none; } }
-    @media (max-width: 768px) { .header__cta .btn-gold { display: none; } .hamburger { display: flex; } }
-
-    /* ── HERO ────────────────────────────────────────────────── */
-    .page-hero {
-      background: var(--bg-dark);
-      padding: calc(68px + 6rem) 0 6rem;
-      position: relative; overflow: hidden;
-    }
-    .page-hero::before {
-      content: '';
-      position: absolute; top: -100px; right: -100px;
-      width: 600px; height: 600px;
-      background: radial-gradient(ellipse at center, rgba(184,146,62,0.09) 0%, rgba(184,146,62,0.02) 45%, transparent 68%);
-      pointer-events: none;
-    }
-    .page-hero::after {
-      content: '';
-      position: absolute; bottom: -60px; left: -60px;
-      width: 400px; height: 400px;
-      background: radial-gradient(ellipse at center, rgba(109,143,199,0.06) 0%, transparent 65%);
-      pointer-events: none;
-    }
-    .page-hero__inner { position: relative; z-index: 1; max-width: 760px; }
-    .page-hero__eyebrow {
-      display: inline-flex; align-items: center; gap: 0.6rem;
-      font-family: var(--font-ui); font-size: 0.68rem; font-weight: 600;
-      letter-spacing: 0.18em; text-transform: uppercase;
-      color: var(--gold-pale); margin-bottom: 1.6rem;
-    }
-    .page-hero__eyebrow-dot {
-      width: 5px; height: 5px; border-radius: 50%;
-      background: var(--gold); opacity: 0.75; flex-shrink: 0;
-    }
-    .page-hero h1 { color: #fff; margin-bottom: 1.4rem; }
-    .page-hero h1 em { font-style: italic; color: var(--gold-pale); }
-    .page-hero p {
-      font-family: var(--font-body); font-size: 1.06rem;
-      line-height: 1.88; color: rgba(245,241,234,0.68);
-      max-width: 580px;
+    .filter-pill:hover,
+    .filter-pill.active {
+      background: #2D5BFF;
+      color: white;
+      border-color: #2D5BFF;
     }
 
-    /* ── FILTER TABS ─────────────────────────────────────────── */
-    .filter-tabs {
-      background: var(--bg-primary);
-      padding: 2.5rem 0;
-      border-bottom: var(--border-warm);
-      position: sticky; top: 68px; z-index: 100;
-    }
-    .filter-tabs__inner {
-      display: flex; align-items: center; gap: 0.6rem;
-      flex-wrap: wrap;
-    }
-    .filter-tab {
-      font-family: var(--font-ui); font-size: 0.8rem; font-weight: 500;
-      color: var(--text-body); background: transparent;
-      border: 1.5px solid rgba(85,60,35,0.16);
-      border-radius: 100px; padding: 0.5rem 1.2rem;
-      cursor: pointer; transition: all 0.25s ease;
-      white-space: nowrap;
-    }
-    .filter-tab:hover { border-color: var(--mid-blue); color: var(--deep-blue); }
-    .filter-tab.active {
-      background: var(--deep-blue); color: #fff;
-      border-color: var(--deep-blue);
-    }
-    .filter-tabs__label {
-      font-family: var(--font-ui); font-size: 0.7rem; font-weight: 600;
-      letter-spacing: 0.1em; text-transform: uppercase;
-      color: var(--text-muted); margin-right: 0.4rem;
+    /* ── Work sections ── */
+    .work-section { padding: 100px 24px; }
+    .work-inner { max-width: 1200px; margin: 0 auto; }
+    .work-header { text-align: center; margin-bottom: 56px; }
+
+    /* ── Project grid ── */
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      align-items: stretch;
     }
 
-    /* ── WORK GRID ───────────────────────────────────────────── */
-    .work-grid-section { background: var(--bg-section); padding: var(--s7) 0; }
-    .work-grid {
-      display: grid; grid-template-columns: repeat(3, 1fr);
-      gap: 2rem;
-    }
-    @media (max-width: 960px) { .work-grid { grid-template-columns: repeat(2, 1fr); } }
-    @media (max-width: 580px) { .work-grid { grid-template-columns: 1fr; } }
-
-    .work-card {
-      background: var(--bg-card);
-      border: var(--border-card);
-      border-radius: var(--radius-lg);
+    /* ── Project card ── */
+    .project-card {
+      background: white;
+      border: 1px solid #D1D5DB;
+      border-radius: 20px;
       overflow: hidden;
-      box-shadow: var(--shadow-sm);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      display: flex; flex-direction: column;
+      display: flex;
+      flex-direction: column;
+      transition: all 0.3s ease;
     }
-    .work-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-md); }
-
-    .work-card__image {
-      aspect-ratio: 16/10;
-      background: var(--bg-section);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 3rem;
-      border-bottom: var(--border-card);
-      position: relative; overflow: hidden;
-    }
-    .work-card__image::before {
-      content: '';
-      position: absolute; inset: 0;
-      background: linear-gradient(135deg, rgba(31,53,87,0.04) 0%, rgba(184,146,62,0.06) 100%);
+    .project-card:hover {
+      border-color: #2D5BFF;
+      transform: translateY(-3px);
+      box-shadow: 0 12px 40px rgba(45,91,255,0.12);
     }
 
-    .work-card__body { padding: 1.75rem; flex: 1; display: flex; flex-direction: column; }
-
-    .work-card__category {
-      display: inline-flex; align-items: center;
-      font-family: var(--font-ui); font-size: 0.65rem; font-weight: 600;
-      letter-spacing: 0.12em; text-transform: uppercase;
-      color: var(--gold); background: rgba(184,146,62,0.1);
-      border: 1px solid rgba(184,146,62,0.2);
-      border-radius: 100px; padding: 0.3rem 0.85rem;
-      margin-bottom: 1rem;
+    /* Card image */
+    .card-img {
+      height: 220px;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .card-cat-tag {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      background: rgba(45,91,255,0.9);
+      color: white;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 4px 10px;
+      border-radius: 9999px;
+    }
+    .card-img-icon {
+      width: 64px;
+      height: 64px;
+      border: 2px solid rgba(255,255,255,0.15);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(255,255,255,0.4);
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
     }
 
-    .work-card h3 { color: var(--deep-blue); margin-bottom: 0.75rem; font-size: 1.15rem; }
-
-    .work-card p {
-      font-size: 0.9rem; line-height: 1.8;
-      color: var(--text-body); margin-bottom: 1.25rem;
+    /* Card body */
+    .card-body {
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
       flex: 1;
     }
+    .industry-tag {
+      display: inline-block;
+      background: rgba(45,91,255,0.08);
+      color: #2D5BFF;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      padding: 4px 12px;
+      border-radius: 9999px;
+      margin-bottom: 12px;
+      align-self: flex-start;
+    }
+    .card-title {
+      color: #0B1120;
+      font-weight: 700;
+      font-size: 17px;
+      line-height: 1.35;
+      margin: 0;
+    }
+    .card-desc {
+      color: #475569;
+      font-size: 14px;
+      line-height: 1.7;
+      margin: 8px 0 0;
+    }
+    .service-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 14px;
+    }
+    .service-tag {
+      background: #F8FAFC;
+      border: 1px solid #D1D5DB;
+      color: #475569;
+      font-size: 11px;
+      padding: 3px 10px;
+      border-radius: 9999px;
+    }
+    .card-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: auto;
+      padding-top: 20px;
+    }
+    .status-badge {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .status-live   .status-dot { background: #22c55e; }
+    .status-live   { color: #16a34a; }
+    .status-soon   .status-dot { background: #94a3b8; }
+    .status-soon   { color: #475569; }
+    .card-link {
+      font-size: 13px;
+      font-weight: 600;
+      text-decoration: none;
+      cursor: default;
+      color: #94a3b8;
+    }
+    .card-link.live {
+      color: #2D5BFF;
+      cursor: pointer;
+    }
+    .card-link.live:hover { text-decoration: underline; }
 
-    .work-card__team {
-      display: flex; flex-wrap: wrap; gap: 0.45rem; margin-bottom: 1.25rem;
+    /* Privacy note */
+    .privacy-note {
+      background: rgba(45,91,255,0.06);
+      border: 1px solid rgba(45,91,255,0.15);
+      border-radius: 12px;
+      padding: 16px 24px;
+      max-width: 600px;
+      margin: 0 auto 48px;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
     }
-    .work-card__badge {
-      font-family: var(--font-ui); font-size: 0.68rem; font-weight: 500;
-      color: var(--mid-blue); background: rgba(75,111,165,0.08);
-      border: 1px solid rgba(75,111,165,0.16);
-      border-radius: 100px; padding: 0.25rem 0.7rem;
+    .privacy-note-icon {
+      width: 18px;
+      height: 18px;
+      flex-shrink: 0;
+      margin-top: 2px;
+      color: #2D5BFF;
     }
-
-    .work-card__tags {
-      display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1.5rem;
-    }
-    .work-card__tag {
-      font-family: var(--font-ui); font-size: 0.62rem; font-weight: 600;
-      letter-spacing: 0.06em;
-      color: var(--text-muted); background: rgba(85,60,35,0.06);
-      border-radius: 100px; padding: 0.22rem 0.65rem;
-    }
-
-    .work-card__link {
-      font-family: var(--font-ui); font-size: 0.8rem; font-weight: 600;
-      color: var(--mid-blue); display: inline-flex; align-items: center; gap: 0.3rem;
-      transition: color 0.2s, gap 0.2s;
-    }
-    .work-card__link:hover { color: var(--deep-blue); gap: 0.55rem; }
-
-    /* Placeholder card */
-    .work-card--placeholder .work-card__image {
-      background: repeating-linear-gradient(
-        45deg,
-        rgba(85,60,35,0.03) 0px, rgba(85,60,35,0.03) 1px,
-        transparent 1px, transparent 12px
-      );
-    }
-    .work-card--placeholder h3 { color: var(--text-muted); }
-    .work-card--placeholder p { color: var(--text-muted); font-style: italic; }
-
-    /* ── HOW WE DOCUMENT ─────────────────────────────────────── */
-    .approach-section { background: var(--bg-primary); padding: var(--s7) 0; }
-    .approach-grid {
-      display: grid; grid-template-columns: 1fr 1fr;
-      gap: var(--s6); align-items: center;
-    }
-    @media (max-width: 860px) { .approach-grid { grid-template-columns: 1fr; } }
-
-    .approach-pillars { display: flex; flex-direction: column; gap: 1.25rem; margin-top: 2rem; }
-    .approach-pillar {
-      display: flex; align-items: flex-start; gap: 1rem;
-      padding: 1.25rem 1.4rem;
-      background: var(--bg-card);
-      border: var(--border-card);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow-xs);
-    }
-    .approach-pillar__icon {
-      font-size: 1.4rem; flex-shrink: 0;
-      width: 44px; height: 44px; border-radius: var(--radius-sm);
-      background: rgba(184,146,62,0.08);
-      display: flex; align-items: center; justify-content: center;
-    }
-    .approach-pillar h4 {
-      font-family: var(--font-ui); font-size: 0.9rem; font-weight: 600;
-      color: var(--deep-blue); margin-bottom: 0.3rem;
-    }
-    .approach-pillar p { font-size: 0.87rem; line-height: 1.7; }
-
-    /* ── WANT TO SEE MORE ────────────────────────────────────── */
-    .more-section {
-      background: var(--bg-section);
-      padding: var(--s5) 0;
-    }
-    .more-card {
-      background: var(--bg-card);
-      border: var(--border-warm);
-      border-radius: var(--radius-xl);
-      padding: 3rem 3.5rem;
-      display: flex; align-items: center; justify-content: space-between;
-      gap: 2rem; box-shadow: var(--shadow-sm);
-    }
-    @media (max-width: 760px) {
-      .more-card { flex-direction: column; text-align: center; padding: 2.5rem 2rem; }
-    }
-    .more-card__copy h2 { font-size: clamp(1.4rem, 2.5vw, 2rem); margin-bottom: 0.75rem; }
-    .more-card__copy p { max-width: 480px; }
-    .more-card__actions { flex-shrink: 0; display: flex; gap: 0.85rem; flex-wrap: wrap; }
-
-    /* ── CTA SECTION ─────────────────────────────────────────── */
-    .cta-section {
-      background: var(--bg-dark);
-      padding: var(--s7) 0;
-      position: relative; overflow: hidden;
-    }
-    .cta-section::before {
-      content: '';
-      position: absolute; top: -80px; right: -80px;
-      width: 500px; height: 500px;
-      background: radial-gradient(ellipse at center, rgba(184,146,62,0.08) 0%, transparent 65%);
-      pointer-events: none;
-    }
-    .cta-section__inner { position: relative; z-index: 1; text-align: center; max-width: 640px; margin: 0 auto; }
-    .cta-section h2 { color: #fff; margin-bottom: 1rem; }
-    .cta-section p { color: rgba(245,241,234,0.68); font-size: 1.06rem; line-height: 1.85; margin-bottom: 2.5rem; }
-    .cta-section__actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
-
-    /* ── FOOTER ──────────────────────────────────────────────── */
-    .site-footer {
-      background: var(--bg-footer);
-      padding: var(--s6) 0 var(--s4);
-      border-top: 1px solid rgba(255,255,255,0.04);
-    }
-    .footer__grid {
-      display: grid;
-      grid-template-columns: 1.8fr 1fr 1fr 1.2fr;
-      gap: var(--s4);
-      padding-bottom: var(--s4);
-      border-bottom: 1px solid rgba(255,255,255,0.06);
-      margin-bottom: var(--s3);
-    }
-    @media (max-width: 900px) { .footer__grid { grid-template-columns: 1fr 1fr; } }
-    @media (max-width: 540px)  { .footer__grid { grid-template-columns: 1fr; } }
-
-    .footer__brand-name {
-      font-family: var(--font-display); font-size: 1.05rem; font-weight: 700;
-      color: var(--text-warm); margin-bottom: 0.35rem;
-    }
-    .footer__brand-sub {
-      font-family: var(--font-ui); font-size: 0.58rem; font-weight: 600;
-      letter-spacing: 0.14em; text-transform: uppercase;
-      color: rgba(245,241,234,0.3); margin-bottom: 1rem;
-    }
-    .footer__brand-desc {
-      font-family: var(--font-body); font-size: 0.85rem;
-      line-height: 1.8; color: rgba(245,241,234,0.42); max-width: 260px;
+    .privacy-note p {
+      color: #475569;
+      font-size: 14px;
+      line-height: 1.7;
+      margin: 0;
     }
 
-    .footer__col-title {
-      font-family: var(--font-ui); font-size: 0.65rem; font-weight: 700;
-      letter-spacing: 0.14em; text-transform: uppercase;
-      color: rgba(245,241,234,0.28); margin-bottom: 1.1rem;
+    /* ── Responsive ── */
+    @media (max-width: 1024px) {
+      .project-grid { grid-template-columns: repeat(2, 1fr); }
     }
-    .footer__links { list-style: none; display: flex; flex-direction: column; gap: 0.65rem; }
-    .footer__links a {
-      font-family: var(--font-ui); font-size: 0.82rem; font-weight: 400;
-      color: rgba(245,241,234,0.52); transition: color 0.2s;
+    @media (max-width: 640px) {
+      .project-grid { grid-template-columns: 1fr; }
+      .card-img { height: 180px; }
     }
-    .footer__links a:hover { color: var(--text-warm); }
-
-    .footer__bottom {
-      display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap;
-      gap: 0.75rem;
-    }
-    .footer__copy {
-      font-family: var(--font-ui); font-size: 0.74rem;
-      color: rgba(245,241,234,0.28);
-    }
-    .footer__copy a { color: rgba(245,241,234,0.42); transition: color 0.2s; }
-    .footer__copy a:hover { color: var(--text-warm); }
-    .footer__tagline {
-      font-family: var(--font-display); font-size: 0.78rem; font-style: italic;
-      color: rgba(245,241,234,0.24);
-    }
-
   </style>
 </head>
-<body>
+<body class="bg-white text-navy">
 
-  <!-- ── HEADER ──────────────────────────────────────────────── -->
-  <header class="site-header" id="site-header">
-    <div class="header__inner">
-      <a href="index.html" class="header__logo">
-        <img src="bbc-logo.png" alt="Balay ni Bruno &amp; Co." style="height:42px; width:auto; display:block;">
-        <span class="header__logo-name">Balay ni Bruno &amp; Co.</span>
-      </a>
-      <nav>
-        <ul class="header__nav">
-          <li><a href="index.html">Home</a></li>
-          <li><a href="about.html">Our Story</a></li>
-          <li><a href="how-it-works.html">How It Works</a></li>
-          <li><a href="how-we-help.html">How We Help</a></li>
-          <li><a href="our-team.html">Our Team</a></li>
-          <li><a href="our-work.html" class="active">Our Work</a></li>
-          <li><a href="insights.html">Insights</a></li>
-          <li><a href="contact.html">Contact</a></li>
-        </ul>
-      </nav>
-      <div class="header__cta">
-        <a href="contact.html" class="btn btn-outline btn-sm">Contact</a>
-        <a href="https://calendly.com/rj-balaynibruno/bbc-strategy-call" target="_blank" rel="noopener noreferrer" class="btn btn-gold btn-sm">Book a Call</a>
-      </div>
-      <button class="hamburger" id="hamburger" aria-label="Open menu">
-        <span></span><span></span><span></span>
-      </button>
-    </div>
-    <nav class="mobile-menu" id="mobile-menu">
-      <a href="index.html">Home</a>
-      <a href="about.html">Our Story</a>
-      <a href="how-it-works.html">How It Works</a>
-      <a href="how-we-help.html">How We Help</a>
-      <a href="our-team.html">Our Team</a>
-      <a href="our-work.html" class="active">Our Work</a>
-      <a href="insights.html">Insights</a>
-      <a href="contact.html">Contact</a>
-      <a href="https://calendly.com/rj-balaynibruno/bbc-strategy-call" target="_blank" rel="noopener noreferrer" class="btn btn-gold mobile-cta">Book a Call</a>
+
+<!-- ════════════════════════════════════════════
+     HEADER
+════════════════════════════════════════════ -->
+<header id="site-header" class="fixed top-0 left-0 right-0 z-50 bg-white border-b border-gray-100">
+  <div class="max-w-7xl mx-auto px-6 flex items-center justify-between h-16">
+
+    <!-- Logo -->
+    <a href="index.html" class="flex items-center gap-3 no-underline">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 210" width="36" height="36"
+           style="color:#2D5BFF; flex-shrink:0;" aria-hidden="true">
+        <rect x="38" y="6" width="13" height="62" rx="2" fill="currentColor"/>
+        <line x1="100" y1="38" x2="6" y2="90" stroke="currentColor" stroke-width="9" stroke-linecap="round"/>
+        <line x1="100" y1="38" x2="194" y2="90" stroke="currentColor" stroke-width="9" stroke-linecap="round"/>
+        <rect x="24" y="90" width="152" height="86" rx="6" fill="none" stroke="currentColor" stroke-width="9"/>
+        <text x="100" y="154" text-anchor="middle" font-size="46" font-weight="800"
+              font-family="Georgia,'Times New Roman',serif" fill="currentColor">BBC</text>
+        <rect x="91" y="176" width="18" height="18" rx="2" fill="currentColor"/>
+        <rect x="64" y="194" width="72" height="11" rx="5.5" fill="currentColor"/>
+      </svg>
+      <span class="font-bold" style="color:#0B1120; font-weight:700; font-size:15px; letter-spacing:-0.01em;">
+        Balay ni Bruno &amp; Co.
+      </span>
+    </a>
+
+    <!-- Desktop Nav -->
+    <nav class="hidden lg:flex items-center gap-6">
+      <a href="index.html"          style="color:#475569; font-weight:500; font-size:14px;" class="hover:text-navy transition-colors">Home</a>
+      <a href="about.html"          style="color:#475569; font-weight:500; font-size:14px;" class="hover:text-navy transition-colors">Our Story</a>
+      <a href="how-it-works.html"   style="color:#475569; font-weight:500; font-size:14px;" class="hover:text-navy transition-colors">How It Works</a>
+      <a href="how-we-help.html"    style="color:#475569; font-weight:500; font-size:14px;" class="hover:text-navy transition-colors">How We Help</a>
+      <a href="our-work.html"       style="color:#2D5BFF; font-weight:700; font-size:14px;" aria-current="page">Our Work</a>
+      <a href="ai-agents.html"      style="color:#475569; font-weight:500; font-size:14px;" class="hover:text-navy transition-colors">AI Agents</a>
+      <a href="index.html#insights" style="color:#475569; font-weight:500; font-size:14px;" class="hover:text-navy transition-colors">Insights</a>
+      <a href="index.html#contact"  style="color:#475569; font-weight:500; font-size:14px;" class="hover:text-navy transition-colors">Contact</a>
     </nav>
-  </header>
 
-  <!-- ── HERO ────────────────────────────────────────────────── -->
-  <section class="page-hero">
-    <div class="container">
-      <div class="page-hero__inner fade-in">
-        <div class="page-hero__eyebrow">
-          <span class="page-hero__eyebrow-dot"></span>
-          Our Work
-        </div>
-        <h1><em>Work Worth Being Proud Of.</em></h1>
-        <p>These aren't just projects. They're relationships where we showed up, learned the business, and built something that lasts.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- ── FILTER TABS ─────────────────────────────────────────── -->
-  <div class="filter-tabs">
-    <div class="container">
-      <div class="filter-tabs__inner">
-        <span class="filter-tabs__label">Filter by</span>
-        <button class="filter-tab active" data-filter="all">All</button>
-        <button class="filter-tab" data-filter="websites">Websites</button>
-        <button class="filter-tab" data-filter="branding">Branding &amp; Social</button>
-        <button class="filter-tab" data-filter="seo">SEO</button>
-        <button class="filter-tab" data-filter="automation">Automation &amp; AI</button>
-        <button class="filter-tab" data-filter="operations">Operations</button>
-      </div>
+    <!-- CTA + Hamburger -->
+    <div class="flex items-center gap-3">
+      <a href="index.html#contact"
+         class="hidden md:inline-flex items-center px-5 py-2 rounded-full text-white font-semibold text-sm"
+         style="background:#2D5BFF; font-weight:600;">
+        Book a Call
+      </a>
+      <button id="hamburger" class="lg:hidden flex flex-col gap-1.5 p-2" aria-label="Toggle navigation menu">
+        <span id="hb1" class="block w-5 h-0.5 bg-gray-700 rounded"></span>
+        <span id="hb2" class="block w-5 h-0.5 bg-gray-700 rounded"></span>
+        <span id="hb3" class="block w-5 h-0.5 bg-gray-700 rounded"></span>
+      </button>
     </div>
   </div>
 
-  <!-- ── WORK GRID ───────────────────────────────────────────── -->
-  <section class="work-grid-section">
-    <div class="container">
-      <div class="work-grid">
+  <!-- Mobile Nav Dropdown -->
+  <div id="mobile-nav" class="lg:hidden flex-col border-t border-gray-100 bg-white px-6 py-4 gap-0.5">
+    <a href="index.html"          class="block py-2.5 text-sm font-medium" style="color:#475569;">Home</a>
+    <a href="about.html"          class="block py-2.5 text-sm font-medium" style="color:#475569;">Our Story</a>
+    <a href="how-it-works.html"   class="block py-2.5 text-sm font-medium" style="color:#475569;">How It Works</a>
+    <a href="how-we-help.html"    class="block py-2.5 text-sm font-medium" style="color:#475569;">How We Help</a>
+    <a href="our-work.html"       class="block py-2.5 text-sm font-bold"   style="color:#2D5BFF;">Our Work</a>
+    <a href="ai-agents.html"      class="block py-2.5 text-sm font-medium" style="color:#475569;">AI Agents</a>
+    <a href="index.html#insights" class="block py-2.5 text-sm font-medium" style="color:#475569;">Insights</a>
+    <a href="index.html#contact"  class="block py-2.5 text-sm font-medium" style="color:#475569;">Contact</a>
+    <a href="index.html#contact"
+       class="block mt-3 text-center px-5 py-2.5 rounded-full text-white font-semibold text-sm"
+       style="background:#2D5BFF;">
+      Book a Call
+    </a>
+  </div>
+</header>
 
-        <!-- Wooden Woodworks -->
-        <div class="work-card fade-in" data-category="websites branding">
-          <div class="work-card__image">🪵</div>
-          <div class="work-card__body">
-            <span class="work-card__category">Website + Brand Identity</span>
-            <h3>Wooden Woodworks</h3>
-            <p>Built a warm, hand-crafted digital presence reflecting the quality and craft of their woodworking. Full website design, brand identity, and visual system.</p>
-            <div class="work-card__team">
-              <span class="work-card__badge">Krizza · Creative Lead</span>
-              <span class="work-card__badge">Ryan · Development</span>
-            </div>
-            <div class="work-card__tags">
-              <span class="work-card__tag">Website</span>
-              <span class="work-card__tag">Brand</span>
-              <span class="work-card__tag">Design</span>
-            </div>
-            <a href="contact.html" class="work-card__link">View Details →</a>
-          </div>
-        </div>
 
-        <!-- First Class Finishes -->
-        <div class="work-card fade-in" data-category="websites seo branding">
-          <div class="work-card__image">✨</div>
-          <div class="work-card__body">
-            <span class="work-card__category">Digital Presence + Social Media + SEO</span>
-            <h3>First Class Finishes</h3>
-            <p>Full digital buildout for this Texas-based finishing service, website, local SEO, and an ongoing social media presence powered by AI-assisted content creation. Ryan built AI workflows using ChatGPT, HeyGen, and ElevenLabs to produce platform-optimized short-form content, AI avatar videos, and scripted voiceovers at scale.</p>
-            <div class="work-card__team">
-              <span class="work-card__badge">Ryan C. · Social Media &amp; AI Content</span>
-              <span class="work-card__badge">Al · SEO Lead</span>
-            </div>
-            <div class="work-card__tags">
-              <span class="work-card__tag">Social Media</span>
-              <span class="work-card__tag">AI Content</span>
-              <span class="work-card__tag">SEO</span>
-              <span class="work-card__tag">Video Production</span>
-              <span class="work-card__tag">Website</span>
-              <span class="work-card__tag">Local Search</span>
-            </div>
-            <a href="contact.html" class="work-card__link">View Details →</a>
-          </div>
-        </div>
+<!-- ════════════════════════════════════════════
+     SECTION 1 — PAGE HERO
+════════════════════════════════════════════ -->
+<section style="background:#0B1120; padding:calc(120px + 64px) 24px 80px; text-align:center;">
+  <div class="max-w-3xl mx-auto fade-in">
 
-        <!-- Home Vision Studios -->
-        <div class="work-card fade-in" data-category="websites">
-          <div class="work-card__image">🏛️</div>
-          <div class="work-card__body">
-            <span class="work-card__category">Website + Content</span>
-            <h3>Home Vision Studios</h3>
-            <p>Designed and built a portfolio site that showcases their architectural vision work. Clean editorial layout with strong content strategy.</p>
-            <div class="work-card__team">
-              <span class="work-card__badge">Krizza · Creative</span>
-              <span class="work-card__badge">Ryan · Dev</span>
-              <span class="work-card__badge">Al · Content</span>
-            </div>
-            <div class="work-card__tags">
-              <span class="work-card__tag">Website</span>
-              <span class="work-card__tag">Content</span>
-              <span class="work-card__tag">Design</span>
-            </div>
-            <a href="contact.html" class="work-card__link">View Details →</a>
-          </div>
-        </div>
+    <span class="inline-block font-semibold uppercase mb-5"
+          style="color:#2D5BFF; font-size:12px; letter-spacing:0.14em; font-weight:600;">
+      Proof of Work
+    </span>
 
-        <!-- Hi-Up Roofing -->
-        <div class="work-card fade-in" data-category="seo websites branding">
-          <div class="work-card__image">🏠</div>
-          <div class="work-card__body">
-            <span class="work-card__category">Local SEO + Social Media + Web</span>
-            <h3>Hi-Up Roofing</h3>
-            <p>Built local search presence and an active social media strategy for this roofing business. Ryan managed content scheduling, produced AI-assisted short-form content, and handled graphic design for their digital platforms, while SEO work built their organic visibility in their local market.</p>
-            <div class="work-card__team">
-              <span class="work-card__badge">Ryan C. · Social Media &amp; AI Content</span>
-              <span class="work-card__badge">Al · SEO</span>
-            </div>
-            <div class="work-card__tags">
-              <span class="work-card__tag">SEO</span>
-              <span class="work-card__tag">Social Media</span>
-              <span class="work-card__tag">AI Content</span>
-              <span class="work-card__tag">Graphic Design</span>
-              <span class="work-card__tag">Local Search</span>
-              <span class="work-card__tag">Website</span>
-            </div>
-            <a href="contact.html" class="work-card__link">View Details →</a>
-          </div>
-        </div>
+    <h1 class="font-bold text-white"
+        style="font-size:clamp(30px,4.5vw,48px); line-height:1.2; font-weight:700;">
+      Real Work Built for<br>Real Businesses
+    </h1>
 
-        <!-- Sriviere Hair -->
-        <div class="work-card fade-in" data-category="branding">
-          <div class="work-card__image">💇</div>
-          <div class="work-card__body">
-            <span class="work-card__category">Brand + Social Content</span>
-            <h3>Sriviere Hair</h3>
-            <p>Developed a cohesive brand identity and social content strategy for this hair salon, warm, elevated, and on-brand at every touchpoint.</p>
-            <div class="work-card__team">
-              <span class="work-card__badge">Krizza · Brand</span>
-              <span class="work-card__badge">Al · Content Strategy</span>
-            </div>
-            <div class="work-card__tags">
-              <span class="work-card__tag">Brand</span>
-              <span class="work-card__tag">Content</span>
-              <span class="work-card__tag">Creative</span>
-            </div>
-            <a href="contact.html" class="work-card__link">View Details →</a>
-          </div>
-        </div>
+    <p class="mx-auto mt-5"
+       style="color:rgba(255,255,255,0.6); font-size:18px; line-height:1.75; max-width:560px;">
+      A growing collection of websites, marketing campaigns, creative assets, operations systems,
+      AI workflows, and e-commerce projects built by the BBC team for business owners across
+      multiple industries.
+    </p>
 
-        <!-- Cavalry Realty Group -->
-        <div class="work-card fade-in" data-category="branding operations">
-          <div class="work-card__image">🏡</div>
-          <div class="work-card__body">
-            <span class="work-card__category">Social Media + Content + Operations</span>
-            <h3>Cavalry Realty Group</h3>
-            <p>Provided ongoing social media management, content posting, and operational support for this real estate brand led by Tre Serrano. Kenz managed content calendars, handled lead generation research, and kept the digital presence consistent and active across platforms.</p>
-            <div class="work-card__team">
-              <span class="work-card__badge">Kenz · Social Media &amp; Operations</span>
-            </div>
-            <div class="work-card__tags">
-              <span class="work-card__tag">Social Media</span>
-              <span class="work-card__tag">Content Scheduling</span>
-              <span class="work-card__tag">Lead Generation</span>
-              <span class="work-card__tag">Real Estate</span>
-              <span class="work-card__tag">Operations</span>
-            </div>
-            <a href="contact.html" class="work-card__link">View Details →</a>
-          </div>
-        </div>
+    <p class="mt-4" style="color:rgba(255,255,255,0.4); font-size:14px;">
+      Some client details are kept private by request. All work shown is real.
+    </p>
 
-        <!-- Top Producer Investment Capital -->
-        <div class="work-card fade-in" data-category="branding operations">
-          <div class="work-card__image">📈</div>
-          <div class="work-card__body">
-            <span class="work-card__category">Social Media + Branding Support</span>
-            <h3>Top Producer Investment Capital</h3>
-            <p>Supported TPIC's digital brand presence with social media management, content scheduling, and business research. Kenz handled platform-specific content strategy and workflow tracking to keep the brand's online presence sharp and consistent across channels.</p>
-            <div class="work-card__team">
-              <span class="work-card__badge">Kenz · Social Media &amp; Research</span>
-            </div>
-            <div class="work-card__tags">
-              <span class="work-card__tag">Social Media</span>
-              <span class="work-card__tag">Branding</span>
-              <span class="work-card__tag">Content Strategy</span>
-              <span class="work-card__tag">Real Estate Investment</span>
-            </div>
-            <a href="contact.html" class="work-card__link">View Details →</a>
-          </div>
-        </div>
-
-        <!-- Crown Limited Supply -->
-        <div class="work-card fade-in" data-category="operations branding">
-          <div class="work-card__image">👑</div>
-          <div class="work-card__body">
-            <span class="work-card__category">E-Commerce Operations + Content</span>
-            <h3>Crown Limited Supply</h3>
-            <p>Delivered e-commerce operations support, content management, and workflow organization for this supply brand. Kenz handled Shopify platform support, content posting, and CRM assistance, keeping the business backend running smoothly while the brand stayed visible and active online.</p>
-            <div class="work-card__team">
-              <span class="work-card__badge">Kenz · Operations &amp; Content</span>
-            </div>
-            <div class="work-card__tags">
-              <span class="work-card__tag">E-Commerce</span>
-              <span class="work-card__tag">Shopify</span>
-              <span class="work-card__tag">Operations</span>
-              <span class="work-card__tag">Content Management</span>
-              <span class="work-card__tag">CRM Support</span>
-            </div>
-            <a href="contact.html" class="work-card__link">View Details →</a>
-          </div>
-        </div>
-
-        <!-- All Ryze Operations -->
-        <div class="work-card fade-in" data-category="operations automation">
-          <div class="work-card__image">🚀</div>
-          <div class="work-card__body">
-            <span class="work-card__category">Audience Engagement &amp; Operations Management</span>
-            <h3>All Ryze Operations</h3>
-            <p>BBC manages the full operational infrastructure of this digital audience engagement and growth agency. Ryan Bernaldez leads day-to-day operations, overseeing a team of engagement specialists, building scalable communication systems, coordinating multi-platform outreach across Reddit, Twitter/X, Instagram, and Facebook Groups, and delivering performance reporting to the client. BBC built the SOPs, trained the team, and keeps the engine running.</p>
-            <div class="work-card__team">
-              <span class="work-card__badge">Ryan B. · Team Lead &amp; Ops Manager</span>
-              <span class="work-card__badge">Kenz · Outreach &amp; Engagement</span>
-              <span class="work-card__badge">Kirsty · Outreach &amp; Engagement</span>
-            </div>
-            <div class="work-card__tags">
-              <span class="work-card__tag">Operations Management</span>
-              <span class="work-card__tag">Audience Engagement</span>
-              <span class="work-card__tag">Multi-Platform Outreach</span>
-              <span class="work-card__tag">SOP Development</span>
-              <span class="work-card__tag">Team Coordination</span>
-              <span class="work-card__tag">Retention Systems</span>
-            </div>
-            <a href="contact.html" class="work-card__link">View Details →</a>
-          </div>
-        </div>
-
-        <!-- DuDilagent AI -->
-        <div class="work-card fade-in" data-category="automation operations">
-          <div class="work-card__image">🤖</div>
-          <div class="work-card__body">
-            <span class="work-card__category">AI Workflow + Business Acquisition Research</span>
-            <h3>DuDilagent AI</h3>
-            <p>Supported this AI-focused venture led by Humphry with business acquisition research, lead generation, and AI-assisted workflow support. Kenz used Apollo and Instant Data Scraper to build prospect lists and research pipelines, fueling the team's outreach and business development efforts.</p>
-            <div class="work-card__team">
-              <span class="work-card__badge">Kenz · Research &amp; AI Ops</span>
-            </div>
-            <div class="work-card__tags">
-              <span class="work-card__tag">AI Workflow</span>
-              <span class="work-card__tag">Lead Generation</span>
-              <span class="work-card__tag">Business Research</span>
-              <span class="work-card__tag">Apollo</span>
-              <span class="work-card__tag">Automation</span>
-            </div>
-            <a href="contact.html" class="work-card__link">View Details →</a>
-          </div>
-        </div>
-
-        <!-- 4Ocean -->
-        <div class="work-card fade-in" data-category="branding automation operations">
-          <div class="work-card__image">🌊</div>
-          <div class="work-card__body">
-            <span class="work-card__category">Creative Content + Social Media + Campaigns</span>
-            <h3>4Ocean</h3>
-            <p>Ongoing creative and content support for this global ocean sustainability brand. BBC develops social media content, ad campaigns, and brand storytelling that moves people to action, backing a mission that pulls millions of pounds of plastic from the ocean. Work spans content production, creative strategy, campaign coordination, and platform management across a high-reach audience.</p>
-            <div class="work-card__team">
-              <span class="work-card__badge">BBC Creative Team</span>
-            </div>
-            <div class="work-card__tags">
-              <span class="work-card__tag">Social Media</span>
-              <span class="work-card__tag">Ad Campaigns</span>
-              <span class="work-card__tag">Content Strategy</span>
-              <span class="work-card__tag">Creative Production</span>
-              <span class="work-card__tag">Brand Storytelling</span>
-            </div>
-            <a href="contact.html" class="work-card__link">View Details →</a>
-          </div>
-        </div>
-
-        <!-- AJ Battle Foundation -->
-        <div class="work-card fade-in" data-category="branding websites operations">
-          <div class="work-card__image">🏆</div>
-          <div class="work-card__body">
-            <span class="work-card__category">Social Media + Design + Website Management</span>
-            <h3>AJ Battle Foundation</h3>
-            <p>Long-term multi-year partnership supporting two interconnected brand ecosystems, a youth empowerment nonprofit and a real estate investment business. BBC handles social media management, content creation, graphic design, and website operations across Instagram, Facebook, TikTok, and YouTube. Visa leads social and content, Al handles design and operational support, keeping both brands consistent, active, and aligned with their growth mission.</p>
-            <div class="work-card__team">
-              <span class="work-card__badge">Visa · Social &amp; Content</span>
-              <span class="work-card__badge">Al · Design &amp; Ops</span>
-            </div>
-            <div class="work-card__tags">
-              <span class="work-card__tag">Social Media</span>
-              <span class="work-card__tag">Graphic Design</span>
-              <span class="work-card__tag">Website Management</span>
-              <span class="work-card__tag">Content Creation</span>
-              <span class="work-card__tag">Nonprofit</span>
-              <span class="work-card__tag">Real Estate</span>
-            </div>
-            <a href="contact.html" class="work-card__link">View Details →</a>
-          </div>
-        </div>
-
-        <!-- Coming Soon -->
-        <div class="work-card work-card--placeholder fade-in">
-          <div class="work-card__image">🔍</div>
-          <div class="work-card__body">
-            <span class="work-card__category" style="background:rgba(85,60,35,0.06); color:var(--text-muted); border-color:rgba(85,60,35,0.1);">Coming Soon</span>
-            <h3>New Project Coming Soon</h3>
-            <p>We're always working on something worth showing. Check back soon, the next case study is in progress.</p>
-            <div style="margin-top:auto; padding-top:1rem;">
-              <a href="https://calendly.com/rj-balaynibruno/bbc-strategy-call" target="_blank" rel="noopener noreferrer" class="work-card__link">Become a Client →</a>
-            </div>
-          </div>
-        </div>
-
-      </div>
+    <div class="mt-10">
+      <a href="index.html#contact"
+         class="inline-flex items-center px-8 py-4 rounded-full text-white font-bold"
+         style="background:#2D5BFF; font-size:16px; font-weight:700;">
+        Book a Call
+      </a>
     </div>
-  </section>
 
-  <!-- ── HOW WE DOCUMENT OUR WORK ──────────────────────────── -->
-  <section class="approach-section">
-    <div class="container">
-      <div class="approach-grid">
-        <div class="fade-in">
-          <span class="eyebrow eyebrow--gold">Our Approach</span>
-          <h2>How We Document Our Work</h2>
-          <div class="divider-bar divider-bar--left"></div>
-          <p class="lead" style="margin-bottom:1rem;">Proof of work isn't just screenshots. It's showing you what we built, who built it, and why the decisions we made were right for the client.</p>
-          <p>Every project we take on is documented with intention, not to impress, but to be accountable. When a client asks "what did we get?", we want the answer to be specific, honest, and traceable back to the people who showed up.</p>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════
+     SECTION 2 — CATEGORY FILTER STRIP
+════════════════════════════════════════════ -->
+<div id="filter-strip">
+  <div id="filter-inner">
+    <button class="filter-pill active" data-target="top">All Work</button>
+    <button class="filter-pill" data-target="websites">Website Builds</button>
+    <button class="filter-pill" data-target="marketing">Marketing Support</button>
+    <button class="filter-pill" data-target="creative">Creative Assets</button>
+    <button class="filter-pill" data-target="operations">Operations Systems</button>
+    <button class="filter-pill" data-target="automation">AI &amp; Automation</button>
+    <button class="filter-pill" data-target="ecommerce">E-Commerce Support</button>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════════════════
+     SECTION 3 — WEBSITE BUILDS
+════════════════════════════════════════════ -->
+<section id="websites" class="work-section" style="background:#F8FAFC;">
+  <div class="work-inner">
+
+    <div class="work-header fade-in">
+      <span class="inline-block font-semibold uppercase mb-4"
+            style="color:#2D5BFF; font-size:12px; letter-spacing:0.14em; font-weight:600;">
+        Website Builds
+      </span>
+      <h2 style="color:#0B1120; font-size:clamp(26px,3vw,40px); font-weight:700; line-height:1.2; margin:0;">
+        Websites Built From Scratch<br>and Redesigned for Results
+      </h2>
+      <p class="mx-auto mt-4"
+         style="color:#475569; font-size:17px; max-width:520px; line-height:1.75;">
+        WordPress, Shopify, landing pages, and full website redesigns built for clients across
+        multiple industries.
+      </p>
+    </div>
+
+    <div class="project-grid fade-in">
+
+      <!-- Card 1 -->
+      <div class="project-card">
+        <div class="card-img" style="background:linear-gradient(135deg,#0B1120,#1a2744);">
+          <span class="card-cat-tag">WORDPRESS</span>
+          <div class="card-img-icon">WWW</div>
         </div>
-        <div class="fade-in">
-          <div class="approach-pillars">
-            <div class="approach-pillar">
-              <div class="approach-pillar__icon">📸</div>
-              <div>
-                <h4>Before &amp; After Screenshots</h4>
-                <p>We capture the starting point and the result, so the transformation is visible, not just claimed.</p>
-              </div>
-            </div>
-            <div class="approach-pillar">
-              <div class="approach-pillar__icon">📋</div>
-              <div>
-                <h4>Case Study Writeups</h4>
-                <p>For select clients, we document the challenge, the decision process, and the outcome in plain language.</p>
-              </div>
-            </div>
-            <div class="approach-pillar">
-              <div class="approach-pillar__icon">👥</div>
-              <div>
-                <h4>Team Contributions Credited</h4>
-                <p>Every deliverable is tied to a real team member. No anonymous output, just real people doing good work.</p>
-              </div>
-            </div>
-            <div class="approach-pillar">
-              <div class="approach-pillar__icon">🔒</div>
-              <div>
-                <h4>Client Consent, Always</h4>
-                <p>We only publish what clients have approved. Some of our best work stays private out of respect.</p>
-              </div>
-            </div>
+        <div class="card-body">
+          <span class="industry-tag">Home Services</span>
+          <h3 class="card-title">Full Website Build — Home Services Business</h3>
+          <p class="card-desc">Complete WordPress website built from scratch including service pages, contact forms, booking system, and local SEO optimization.</p>
+          <div class="service-tags">
+            <span class="service-tag">WordPress</span>
+            <span class="service-tag">SEO</span>
+            <span class="service-tag">Design</span>
+          </div>
+          <div class="card-bottom">
+            <span class="status-badge status-soon"><span class="status-dot"></span>Coming Soon</span>
+            <span class="card-link">View Site →</span>
           </div>
         </div>
       </div>
-    </div>
-  </section>
 
-  <!-- ── WANT TO SEE MORE ───────────────────────────────────── -->
-  <section class="more-section">
-    <div class="container">
-      <div class="more-card fade-in">
-        <div class="more-card__copy">
-          <span class="eyebrow eyebrow--gold">Deeper Dives Available</span>
-          <h2>Want to See More?</h2>
-          <p>Detailed case studies, with screenshots, strategy notes, and outcome data, are available on request. We're happy to walk through specific work that's relevant to your business and goals.</p>
+      <!-- Card 2 -->
+      <div class="project-card">
+        <div class="card-img" style="background:linear-gradient(135deg,#0B1120,#1a2744);">
+          <span class="card-cat-tag">SHOPIFY</span>
+          <div class="card-img-icon">WWW</div>
         </div>
-        <div class="more-card__actions">
-          <a href="https://calendly.com/rj-balaynibruno/bbc-strategy-call" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Book a Call</a>
-          <a href="contact.html" class="btn btn-outline">Request Case Study</a>
+        <div class="card-body">
+          <span class="industry-tag">E-Commerce</span>
+          <h3 class="card-title">Shopify Store Build — Online Retail</h3>
+          <p class="card-desc">Full Shopify store setup including product pages, collections, payment gateway, and branded design.</p>
+          <div class="service-tags">
+            <span class="service-tag">Shopify</span>
+            <span class="service-tag">E-Commerce</span>
+            <span class="service-tag">Design</span>
+          </div>
+          <div class="card-bottom">
+            <span class="status-badge status-soon"><span class="status-dot"></span>Coming Soon</span>
+            <span class="card-link">View Site →</span>
+          </div>
         </div>
       </div>
-    </div>
-  </section>
 
-  <!-- ── CTA ───────────────────────────────────────────────── -->
-  <section class="cta-section">
-    <div class="container">
-      <div class="cta-section__inner fade-in">
-        <span class="eyebrow eyebrow--pale">Let's Build Something</span>
-        <h2>Ready to Build Something Worth Showing?</h2>
-        <p>We'd love to learn your business and add your project to this page, done right, with the care it deserves.</p>
-        <div class="cta-section__actions">
-          <a href="https://calendly.com/rj-balaynibruno/bbc-strategy-call" target="_blank" rel="noopener noreferrer" class="btn btn-gold">Book a Call</a>
-          <a href="how-we-help.html" class="btn btn-ghost">See How We Help</a>
+      <!-- Card 3 -->
+      <div class="project-card">
+        <div class="card-img" style="background:linear-gradient(135deg,#0B1120,#1a2744);">
+          <span class="card-cat-tag">LANDING PAGE</span>
+          <div class="card-img-icon">WWW</div>
+        </div>
+        <div class="card-body">
+          <span class="industry-tag">Consulting</span>
+          <h3 class="card-title">Lead Generation Landing Page — Consulting Business</h3>
+          <p class="card-desc">High-converting landing page designed to capture leads for a consulting business with CTA optimization and form integration.</p>
+          <div class="service-tags">
+            <span class="service-tag">Design</span>
+            <span class="service-tag">CRM</span>
+            <span class="service-tag">Copywriting</span>
+          </div>
+          <div class="card-bottom">
+            <span class="status-badge status-soon"><span class="status-dot"></span>Coming Soon</span>
+            <span class="card-link">View Site →</span>
+          </div>
         </div>
       </div>
-    </div>
-  </section>
 
-  <!-- ── FOOTER ─────────────────────────────────────────────── -->
-  <footer class="site-footer">
-    <div class="container">
-      <div class="footer__grid">
-        <div>
-          <div class="footer__brand-name">Balay ni Bruno &amp; Co.</div>
-          <div class="footer__brand-sub">Operational Support Studio</div>
-          <p class="footer__brand-desc">A family-built team helping business owners grow through real collaboration, thoughtful systems, and long-term care.</p>
+      <!-- Card 4 -->
+      <div class="project-card">
+        <div class="card-img" style="background:linear-gradient(135deg,#0B1120,#1a2744);">
+          <span class="card-cat-tag">WORDPRESS</span>
+          <div class="card-img-icon">WWW</div>
         </div>
-        <div>
-          <div class="footer__col-title">Studio</div>
-          <ul class="footer__links">
-            <li><a href="about.html">Our Story</a></li>
-            <li><a href="our-team.html">Our Team</a></li>
-            <li><a href="how-it-works.html">How It Works</a></li>
-            <li><a href="how-we-help.html">How We Help</a></li>
-          </ul>
-        </div>
-        <div>
-          <div class="footer__col-title">Work</div>
-          <ul class="footer__links">
-            <li><a href="our-work.html">Our Work</a></li>
-            <li><a href="insights.html">Insights</a></li>
-            <li><a href="resources.html">Forms &amp; Resources</a></li>
-            <li><a href="contact.html">Contact</a></li>
-            <li><a href="https://calendly.com/rj-balaynibruno/bbc-strategy-call" target="_blank" rel="noopener noreferrer">Book a Call</a></li>
-          </ul>
-        </div>
-        <div>
-          <div class="footer__col-title">Get In Touch</div>
-          <ul class="footer__links">
-            <li><a href="mailto:hello@balaynibruno.co">hello@balaynibruno.co</a></li>
-            <li><a href="https://calendly.com/rj-balaynibruno/bbc-strategy-call" target="_blank" rel="noopener noreferrer">Schedule a Discovery Call</a></li>
-          </ul>
+        <div class="card-body">
+          <span class="industry-tag">Real Estate</span>
+          <h3 class="card-title">Real Estate Agent Website</h3>
+          <p class="card-desc">Professional WordPress website for a real estate agent including property showcase, about page, testimonials, and contact system.</p>
+          <div class="service-tags">
+            <span class="service-tag">WordPress</span>
+            <span class="service-tag">SEO</span>
+            <span class="service-tag">Design</span>
+          </div>
+          <div class="card-bottom">
+            <span class="status-badge status-soon"><span class="status-dot"></span>Coming Soon</span>
+            <span class="card-link">View Site →</span>
+          </div>
         </div>
       </div>
-      <div class="footer__bottom">
-        <p class="footer__copy">&copy; 2025 Balay ni Bruno &amp; Co. &middot; <a href="#">Privacy</a></p>
-        <span class="footer__tagline">Built with intention.</span>
+
+      <!-- Card 5 -->
+      <div class="project-card">
+        <div class="card-img" style="background:linear-gradient(135deg,#0B1120,#1a2744);">
+          <span class="card-cat-tag">REDESIGN</span>
+          <div class="card-img-icon">WWW</div>
+        </div>
+        <div class="card-body">
+          <span class="industry-tag">Restaurant</span>
+          <h3 class="card-title">Restaurant Website Redesign</h3>
+          <p class="card-desc">Full website redesign for a local restaurant including updated menu pages, photo gallery, reservation system, and mobile optimization.</p>
+          <div class="service-tags">
+            <span class="service-tag">WordPress</span>
+            <span class="service-tag">Design</span>
+            <span class="service-tag">SEO</span>
+          </div>
+          <div class="card-bottom">
+            <span class="status-badge status-soon"><span class="status-dot"></span>Coming Soon</span>
+            <span class="card-link">View Site →</span>
+          </div>
+        </div>
       </div>
+
+      <!-- Card 6 -->
+      <div class="project-card">
+        <div class="card-img" style="background:linear-gradient(135deg,#0B1120,#1a2744);">
+          <span class="card-cat-tag">SHOPIFY</span>
+          <div class="card-img-icon">WWW</div>
+        </div>
+        <div class="card-body">
+          <span class="industry-tag">Retail</span>
+          <h3 class="card-title">E-Commerce Store — Retail Brand</h3>
+          <p class="card-desc">Shopify store built for a retail brand with custom product pages, discount system, and email capture integration.</p>
+          <div class="service-tags">
+            <span class="service-tag">Shopify</span>
+            <span class="service-tag">Email</span>
+            <span class="service-tag">Design</span>
+          </div>
+          <div class="card-bottom">
+            <span class="status-badge status-soon"><span class="status-dot"></span>Coming Soon</span>
+            <span class="card-link">View Site →</span>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /.project-grid -->
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════
+     SECTION 4 — MARKETING SUPPORT
+════════════════════════════════════════════ -->
+<section id="marketing" class="work-section" style="background:white;">
+  <div class="work-inner">
+
+    <div class="work-header fade-in">
+      <span class="inline-block font-semibold uppercase mb-4"
+            style="color:#2D5BFF; font-size:12px; letter-spacing:0.14em; font-weight:600;">
+        Marketing Support
+      </span>
+      <h2 style="color:#0B1120; font-size:clamp(26px,3vw,40px); font-weight:700; line-height:1.2; margin:0;">
+        Campaigns, Content,<br>and Social Media Management
+      </h2>
+      <p class="mx-auto mt-4"
+         style="color:#475569; font-size:17px; max-width:520px; line-height:1.75;">
+        Marketing work BBC has handled for clients across different industries — from social media
+        management to full campaign execution.
+      </p>
     </div>
-  </footer>
 
-  <script>
-    // Sticky header scroll class
-    const header = document.getElementById('site-header');
-    window.addEventListener('scroll', () => {
-      header.classList.toggle('scrolled', window.scrollY > 20);
-    }, { passive: true });
+    <div class="project-grid fade-in">
 
-    // Mobile hamburger
-    const hamburger = document.getElementById('hamburger');
-    const mobileMenu = document.getElementById('mobile-menu');
-    hamburger.addEventListener('click', () => {
-      mobileMenu.classList.toggle('open');
+      <!-- Card 1 -->
+      <div class="project-card">
+        <div class="card-img" style="background:linear-gradient(135deg,#1a1060,rgba(45,91,255,0.2));">
+          <span class="card-cat-tag">SOCIAL MEDIA</span>
+          <div class="card-img-icon">MKT</div>
+        </div>
+        <div class="card-body">
+          <span class="industry-tag">Local Business</span>
+          <h3 class="card-title">Social Media Management — Local Service Business</h3>
+          <p class="card-desc">Full social media management including content calendar, post creation, scheduling, and audience engagement across Instagram and Facebook.</p>
+          <div class="service-tags">
+            <span class="service-tag">Social Media</span>
+            <span class="service-tag">Content</span>
+            <span class="service-tag">Design</span>
+          </div>
+          <div class="card-bottom">
+            <span class="status-badge status-soon"><span class="status-dot"></span>Coming Soon</span>
+            <span class="card-link">View Site →</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="project-card">
+        <div class="card-img" style="background:linear-gradient(135deg,#1a1060,rgba(45,91,255,0.2));">
+          <span class="card-cat-tag">CAMPAIGN</span>
+          <div class="card-img-icon">MKT</div>
+        </div>
+        <div class="card-body">
+          <span class="industry-tag">E-Commerce</span>
+          <h3 class="card-title">Product Launch Campaign — E-Commerce Brand</h3>
+          <p class="card-desc">End-to-end campaign management for a product launch including graphics, captions, email blast, and social media promotion.</p>
+          <div class="service-tags">
+            <span class="service-tag">Campaign</span>
+            <span class="service-tag">Email</span>
+            <span class="service-tag">Design</span>
+          </div>
+          <div class="card-bottom">
+            <span class="status-badge status-soon"><span class="status-dot"></span>Coming Soon</span>
+            <span class="card-link">View Site →</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="project-card">
+        <div class="card-img" style="background:linear-gradient(135deg,#1a1060,rgba(45,91,255,0.2));">
+          <span class="card-cat-tag">OUTREACH</span>
+          <div class="card-img-icon">MKT</div>
+        </div>
+        <div class="card-body">
+          <span class="industry-tag">Consulting</span>
+          <h3 class="card-title">Lead Generation Outreach — B2B Consulting</h3>
+          <p class="card-desc">Organized outreach campaign targeting potential clients through LinkedIn and email with follow-up sequences and tracking.</p>
+          <div class="service-tags">
+            <span class="service-tag">Outreach</span>
+            <span class="service-tag">CRM</span>
+            <span class="service-tag">Email</span>
+          </div>
+          <div class="card-bottom">
+            <span class="status-badge status-soon"><span class="status-dot"></span>Coming Soon</span>
+            <span class="card-link">View Site →</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="project-card">
+        <div class="card-img" style="background:linear-gradient(135deg,#1a1060,rgba(45,91,255,0.2));">
+          <span class="card-cat-tag">SOCIAL MEDIA</span>
+          <div class="card-img-icon">MKT</div>
+        </div>
+        <div class="card-body">
+          <span class="industry-tag">Restaurant</span>
+          <h3 class="card-title">Social Media Growth — Restaurant &amp; Food Business</h3>
+          <p class="card-desc">Monthly social media management including content planning, food photography direction, caption writing, and community management.</p>
+          <div class="service-tags">
+            <span class="service-tag">Social Media</span>
+            <span class="service-tag">Content</span>
+            <span class="service-tag">Design</span>
+          </div>
+          <div class="card-bottom">
+            <span class="status-badge status-soon"><span class="status-dot"></span>Coming Soon</span>
+            <span class="card-link">View Site →</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 5 -->
+      <div class="project-card">
+        <div class="card-img" style="background:linear-gradient(135deg,#1a1060,rgba(45,91,255,0.2));">
+          <span class="card-cat-tag">CAMPAIGN</span>
+          <div class="card-img-icon">MKT</div>
+        </div>
+        <div class="card-body">
+          <span class="industry-tag">Real Estate</span>
+          <h3 class="card-title">Listing Promotion Campaign — Real Estate Agent</h3>
+          <p class="card-desc">Property listing promotion campaign across social media platforms with designed graphics and targeted outreach.</p>
+          <div class="service-tags">
+            <span class="service-tag">Campaign</span>
+            <span class="service-tag">Design</span>
+            <span class="service-tag">Outreach</span>
+          </div>
+          <div class="card-bottom">
+            <span class="status-badge status-soon"><span class="status-dot"></span>Coming Soon</span>
+            <span class="card-link">View Site →</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 6 -->
+      <div class="project-card">
+        <div class="card-img" style="background:linear-gradient(135deg,#1a1060,rgba(45,91,255,0.2));">
+          <span class="card-cat-tag">MARKETING ADMIN</span>
+          <div class="card-img-icon">MKT</div>
+        </div>
+        <div class="card-body">
+          <span class="industry-tag">Service Business</span>
+          <h3 class="card-title">Marketing System Setup — Service Business</h3>
+          <p class="card-desc">Full marketing admin setup including content calendar, asset library organization, reporting templates, and workflow documentation.</p>
+          <div class="service-tags">
+            <span class="service-tag">Admin</span>
+            <span class="service-tag">Systems</span>
+            <span class="service-tag">Planning</span>
+          </div>
+          <div class="card-bottom">
+            <span class="status-badge status-soon"><span class="status-dot"></span>Coming Soon</span>
+            <span class="card-link">View Site →</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════
+     SECTION 5 — CREATIVE ASSETS
+════════════════════════════════════════════ -->
+<section id="creative" class="work-section" style="background:#F8FAFC;">
+  <div class="work-inner">
+
+    <div class="work-header fade-in">
+      <span class="inline-block font-semibold uppercase mb-4"
+            style="color:#2D5BFF; font-size:12px; letter-spacing:0.14em; font-weight:600;">
+        Creative Assets
+      </span>
+      <h2 style="color:#0B1120; font-size:clamp(26px,3vw,40px); font-weight:700; line-height:1.2; margin:0;">
+        Graphics, Videos, and<br>Brand Visuals That Perform
+      </h2>
+      <p class="mx-auto mt-4"
+         style="color:#475569; font-size:17px; max-width:520px; line-height:1.75;">
+        Creative work produced by the BBC team — social media graphics, short-form videos,
+        brand assets, and ad creatives.
+      </p>
+      <p class="mx-auto mt-3" style="color:rgba(71,85,105,0.6); font-size:14px;">
+        View live examples on our social media channels or request a portfolio sample during
+        your discovery call.
+      </p>
+    </div>
+
+    <div class="project-grid fade-in">
+
+      <!-- Card 1 -->
+      <div class="project-card">
+        <div class="card-img" style="background:linear-gradient(135deg,#0a1a0a,#1a4a1a);">
+          <span class="card-cat-tag">GRAPHICS</span>
+          <div class="card-img-icon">CRE</div>
+        </div>
+        <div class="card-body">
+          <span class="industry-tag">E-Commerce</span>
+          <h3 class="card-title">Social Media Graphics Pack — E-Commerce Brand</h3>
+          <p class="card-desc">Full set of branded social media graphics including product posts, story templates, highlight covers, and promotional banners.</p>
+          <div class="service-tags">
+            <span class="service-tag">Design</span>
+            <span class="service-tag">Branding</span>
+            <span class="service-tag">Social</span>
+          </div>
+          <div class="card-bottom">
+            <span class="status-badge status-soon"><span class="status-dot"></span>Coming Soon</span>
+            <span class="card-link">View Site →</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="project-card">
+        <div class="card-img" style="background:linear-gradient(135deg,#0a1a0a,#1a4a1a);">
+          <span class="card-cat-tag">VIDEO</span>
+          <div class="card-img-icon">CRE</div>
+        </div>
+        <div class="card-body">
+          <span class="industry-tag">Personal Brand</span>
+          <h3 class="card-title">Short-Form Video Edits — Creator &amp; Personal Brand</h3>
+          <p class="card-desc">Series of short-form videos edited for Reels and TikTok including captions, transitions, music, and branded end cards.</p>
+          <div class="service-tags">
+            <span class="service-tag">Video</span>
+            <span class="service-tag">Editing</span>
+            <span class="service-tag">Captions</span>
+          </div>
+          <div class="card-bottom">
+            <span class="status-badge status-soon"><span class="status-dot"></span>Coming Soon</span>
+            <span class="card-link">View Site →</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="project-card">
+        <div class="card-img" style="background:linear-gradient(135deg,#0a1a0a,#1a4a1a);">
+          <span class="card-cat-tag">BRAND ASSETS</span>
+          <div class="card-img-icon">CRE</div>
+        </div>
+        <div class="card-body">
+          <span class="industry-tag">Startup</span>
+          <h3 class="card-title">Brand Kit &amp; Identity Assets — New Business Launch</h3>
+          <p class="card-desc">Complete brand kit including logo variations, color guide, font guide, business card design, and social media templates.</p>
+          <div class="service-tags">
+            <span class="service-tag">Branding</span>
+            <span class="service-tag">Design</span>
+            <span class="service-tag">Templates</span>
+          </div>
+          <div class="card-bottom">
+            <span class="status-badge status-soon"><span class="status-dot"></span>Coming Soon</span>
+            <span class="card-link">View Site →</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="project-card">
+        <div class="card-img" style="background:linear-gradient(135deg,#0a1a0a,#1a4a1a);">
+          <span class="card-cat-tag">AD CREATIVES</span>
+          <div class="card-img-icon">CRE</div>
+        </div>
+        <div class="card-body">
+          <span class="industry-tag">Retail</span>
+          <h3 class="card-title">Ad Creative Set — Retail Promotion Campaign</h3>
+          <p class="card-desc">Set of ad creatives designed for Meta ads including static images, carousel formats, and story placements.</p>
+          <div class="service-tags">
+            <span class="service-tag">Design</span>
+            <span class="service-tag">Ads</span>
+            <span class="service-tag">Campaign</span>
+          </div>
+          <div class="card-bottom">
+            <span class="status-badge status-soon"><span class="status-dot"></span>Coming Soon</span>
+            <span class="card-link">View Site →</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 5 -->
+      <div class="project-card">
+        <div class="card-img" style="background:linear-gradient(135deg,#0a1a0a,#1a4a1a);">
+          <span class="card-cat-tag">VIDEO</span>
+          <div class="card-img-icon">CRE</div>
+        </div>
+        <div class="card-body">
+          <span class="industry-tag">Restaurant</span>
+          <h3 class="card-title">Food &amp; Ambiance Video Content — Restaurant Brand</h3>
+          <p class="card-desc">Short-form video content showcasing food, ambiance, and brand story for use across Instagram, TikTok, and Facebook.</p>
+          <div class="service-tags">
+            <span class="service-tag">Video</span>
+            <span class="service-tag">Editing</span>
+            <span class="service-tag">Social</span>
+          </div>
+          <div class="card-bottom">
+            <span class="status-badge status-soon"><span class="status-dot"></span>Coming Soon</span>
+            <span class="card-link">View Site →</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 6 -->
+      <div class="project-card">
+        <div class="card-img" style="background:linear-gradient(135deg,#0a1a0a,#1a4a1a);">
+          <span class="card-cat-tag">PRESENTATION</span>
+          <div class="card-img-icon">CRE</div>
+        </div>
+        <div class="card-body">
+          <span class="industry-tag">Consulting</span>
+          <h3 class="card-title">Pitch Deck &amp; Presentation Design — Consulting Firm</h3>
+          <p class="card-desc">Professional pitch deck and presentation template designed to match brand identity for client proposals and investor meetings.</p>
+          <div class="service-tags">
+            <span class="service-tag">Design</span>
+            <span class="service-tag">Branding</span>
+            <span class="service-tag">Slides</span>
+          </div>
+          <div class="card-bottom">
+            <span class="status-badge status-soon"><span class="status-dot"></span>Coming Soon</span>
+            <span class="card-link">View Site →</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════
+     SECTION 6 — OPERATIONS SYSTEMS
+════════════════════════════════════════════ -->
+<section id="operations" class="work-section" style="background:white;">
+  <div class="work-inner">
+
+    <div class="work-header fade-in">
+      <span class="inline-block font-semibold uppercase mb-4"
+            style="color:#2D5BFF; font-size:12px; letter-spacing:0.14em; font-weight:600;">
+        Operations Systems
+      </span>
+      <h2 style="color:#0B1120; font-size:clamp(26px,3vw,40px); font-weight:700; line-height:1.2; margin:0;">
+        Systems, SOPs, and Processes<br>Built for Real Businesses
+      </h2>
+      <p class="mx-auto mt-4"
+         style="color:#475569; font-size:17px; max-width:520px; line-height:1.75;">
+        Operational frameworks, documentation, and process systems created by BBC — shared here
+        as examples without confidential client details.
+      </p>
+    </div>
+
+    <!-- Privacy note -->
+    <div class="privacy-note fade-in">
+      <svg class="privacy-note-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+           stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+        <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+      </svg>
+      <p>Client-specific details are kept private by default. Work shown here represents real
+      systems built for real businesses — shared as examples of BBC's operational capability.</p>
+    </div>
+
+    <div class="project-grid fade-in">
+
+      <!-- Card 1 -->
+      <div class="project-card">
+        <div class="card-img" style="background:linear-gradient(135deg,#1a0a0a,#4a1a0a);">
+          <span class="card-cat-tag">SOP</span>
+          <div class="card-img-icon">OPS</div>
+        </div>
+        <div class="card-body">
+          <span class="industry-tag">Service Business</span>
+          <h3 class="card-title">Client Onboarding SOP — Service Business</h3>
+          <p class="card-desc">Complete standard operating procedure for onboarding new clients — from first contact to project kickoff — with checklists, templates, and responsible parties.</p>
+          <div class="service-tags">
+            <span class="service-tag">SOP</span>
+            <span class="service-tag">Documentation</span>
+            <span class="service-tag">Systems</span>
+          </div>
+          <div class="card-bottom">
+            <span class="status-badge status-soon"><span class="status-dot"></span>Coming Soon</span>
+            <span class="card-link">View Site →</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="project-card">
+        <div class="card-img" style="background:linear-gradient(135deg,#1a0a0a,#4a1a0a);">
+          <span class="card-cat-tag">PROJECT MANAGEMENT</span>
+          <div class="card-img-icon">OPS</div>
+        </div>
+        <div class="card-body">
+          <span class="industry-tag">Agency</span>
+          <h3 class="card-title">Project Management System — Digital Agency</h3>
+          <p class="card-desc">Full project management setup in Notion including task boards, client portals, deadline tracking, and team workflow organization.</p>
+          <div class="service-tags">
+            <span class="service-tag">Systems</span>
+            <span class="service-tag">PM</span>
+            <span class="service-tag">Organization</span>
+          </div>
+          <div class="card-bottom">
+            <span class="status-badge status-soon"><span class="status-dot"></span>Coming Soon</span>
+            <span class="card-link">View Site →</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="project-card">
+        <div class="card-img" style="background:linear-gradient(135deg,#1a0a0a,#4a1a0a);">
+          <span class="card-cat-tag">FILE SYSTEM</span>
+          <div class="card-img-icon">OPS</div>
+        </div>
+        <div class="card-body">
+          <span class="industry-tag">Real Estate</span>
+          <h3 class="card-title">File &amp; Folder System — Real Estate Business</h3>
+          <p class="card-desc">Organized Google Drive structure for a real estate business covering listings, contracts, client files, and marketing assets.</p>
+          <div class="service-tags">
+            <span class="service-tag">Organization</span>
+            <span class="service-tag">Admin</span>
+            <span class="service-tag">Systems</span>
+          </div>
+          <div class="card-bottom">
+            <span class="status-badge status-soon"><span class="status-dot"></span>Coming Soon</span>
+            <span class="card-link">View Site →</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="project-card">
+        <div class="card-img" style="background:linear-gradient(135deg,#1a0a0a,#4a1a0a);">
+          <span class="card-cat-tag">WORKFLOW</span>
+          <div class="card-img-icon">OPS</div>
+        </div>
+        <div class="card-body">
+          <span class="industry-tag">E-Commerce</span>
+          <h3 class="card-title">Order Fulfillment Workflow — E-Commerce Operations</h3>
+          <p class="card-desc">Documented workflow for order processing, fulfillment, customer communication, and returns handling for an online store.</p>
+          <div class="service-tags">
+            <span class="service-tag">Workflow</span>
+            <span class="service-tag">SOP</span>
+            <span class="service-tag">E-Commerce</span>
+          </div>
+          <div class="card-bottom">
+            <span class="status-badge status-soon"><span class="status-dot"></span>Coming Soon</span>
+            <span class="card-link">View Site →</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 5 -->
+      <div class="project-card">
+        <div class="card-img" style="background:linear-gradient(135deg,#1a0a0a,#4a1a0a);">
+          <span class="card-cat-tag">PROCESS DOC</span>
+          <div class="card-img-icon">OPS</div>
+        </div>
+        <div class="card-body">
+          <span class="industry-tag">Consulting</span>
+          <h3 class="card-title">Internal Process Documentation — Consulting Practice</h3>
+          <p class="card-desc">Full internal process documentation covering client intake, project delivery, invoicing, and team communication protocols.</p>
+          <div class="service-tags">
+            <span class="service-tag">Documentation</span>
+            <span class="service-tag">SOP</span>
+            <span class="service-tag">Admin</span>
+          </div>
+          <div class="card-bottom">
+            <span class="status-badge status-soon"><span class="status-dot"></span>Coming Soon</span>
+            <span class="card-link">View Site →</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 6 -->
+      <div class="project-card">
+        <div class="card-img" style="background:linear-gradient(135deg,#1a0a0a,#4a1a0a);">
+          <span class="card-cat-tag">TEAM SYSTEM</span>
+          <div class="card-img-icon">OPS</div>
+        </div>
+        <div class="card-body">
+          <span class="industry-tag">Service Business</span>
+          <h3 class="card-title">Team Coordination System — Growing Service Business</h3>
+          <p class="card-desc">Complete team coordination setup including task assignment system, communication protocols, weekly reporting templates, and accountability frameworks.</p>
+          <div class="service-tags">
+            <span class="service-tag">Systems</span>
+            <span class="service-tag">Team</span>
+            <span class="service-tag">Operations</span>
+          </div>
+          <div class="card-bottom">
+            <span class="status-badge status-soon"><span class="status-dot"></span>Coming Soon</span>
+            <span class="card-link">View Site →</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════
+     SECTION 7 — AI & AUTOMATION
+════════════════════════════════════════════ -->
+<section id="automation" class="work-section" style="background:#F8FAFC;">
+  <div class="work-inner">
+
+    <div class="work-header fade-in">
+      <span class="inline-block font-semibold uppercase mb-4"
+            style="color:#2D5BFF; font-size:12px; letter-spacing:0.14em; font-weight:600;">
+        AI &amp; Automation
+      </span>
+      <h2 style="color:#0B1120; font-size:clamp(26px,3vw,40px); font-weight:700; line-height:1.2; margin:0;">
+        Workflows and Systems That<br>Work While You Sleep
+      </h2>
+      <p class="mx-auto mt-4"
+         style="color:#475569; font-size:17px; max-width:520px; line-height:1.75;">
+        AI-assisted workflows and automation systems built by BBC to reduce manual work
+        and improve consistency for business owners.
+      </p>
+    </div>
+
+    <div class="project-grid fade-in">
+
+      <!-- Card 1 -->
+      <div class="project-card">
+        <div class="card-img" style="background:linear-gradient(135deg,#0a0a1a,#1a1060);">
+          <span class="card-cat-tag">AUTOMATION</span>
+          <div class="card-img-icon">AI</div>
+        </div>
+        <div class="card-body">
+          <span class="industry-tag">Service Business</span>
+          <h3 class="card-title">Client Onboarding Automation — Service Business</h3>
+          <p class="card-desc">Automated onboarding workflow using Make that triggers welcome emails, sends questionnaires, creates project folders, and notifies the team — all without manual input.</p>
+          <div class="service-tags">
+            <span class="service-tag">Automation</span>
+            <span class="service-tag">Make</span>
+            <span class="service-tag">CRM</span>
+          </div>
+          <div class="card-bottom">
+            <span class="status-badge status-soon"><span class="status-dot"></span>Coming Soon</span>
+            <span class="card-link">View Site →</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="project-card">
+        <div class="card-img" style="background:linear-gradient(135deg,#0a0a1a,#1a1060);">
+          <span class="card-cat-tag">AI WORKFLOW</span>
+          <div class="card-img-icon">AI</div>
+        </div>
+        <div class="card-body">
+          <span class="industry-tag">Content Creator</span>
+          <h3 class="card-title">AI Content Workflow — Content Creator</h3>
+          <p class="card-desc">AI-assisted content production workflow using ChatGPT and Canva automation to produce social media content at scale with brand consistency.</p>
+          <div class="service-tags">
+            <span class="service-tag">AI</span>
+            <span class="service-tag">Workflow</span>
+            <span class="service-tag">Content</span>
+          </div>
+          <div class="card-bottom">
+            <span class="status-badge status-soon"><span class="status-dot"></span>Coming Soon</span>
+            <span class="card-link">View Site →</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="project-card">
+        <div class="card-img" style="background:linear-gradient(135deg,#0a0a1a,#1a1060);">
+          <span class="card-cat-tag">CRM AUTOMATION</span>
+          <div class="card-img-icon">AI</div>
+        </div>
+        <div class="card-body">
+          <span class="industry-tag">Real Estate</span>
+          <h3 class="card-title">Lead Follow-Up Automation — Real Estate Agent</h3>
+          <p class="card-desc">Automated CRM workflow that triggers follow-up emails and task reminders based on lead activity and pipeline stage.</p>
+          <div class="service-tags">
+            <span class="service-tag">CRM</span>
+            <span class="service-tag">Automation</span>
+            <span class="service-tag">Email</span>
+          </div>
+          <div class="card-bottom">
+            <span class="status-badge status-soon"><span class="status-dot"></span>Coming Soon</span>
+            <span class="card-link">View Site →</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="project-card">
+        <div class="card-img" style="background:linear-gradient(135deg,#0a0a1a,#1a1060);">
+          <span class="card-cat-tag">ZAPIER</span>
+          <div class="card-img-icon">AI</div>
+        </div>
+        <div class="card-body">
+          <span class="industry-tag">E-Commerce</span>
+          <h3 class="card-title">Order &amp; Review Automation — E-Commerce Store</h3>
+          <p class="card-desc">Zapier workflow that automatically requests reviews after delivery, tags customers in CRM, and updates inventory tracking sheets.</p>
+          <div class="service-tags">
+            <span class="service-tag">Zapier</span>
+            <span class="service-tag">E-Commerce</span>
+            <span class="service-tag">CRM</span>
+          </div>
+          <div class="card-bottom">
+            <span class="status-badge status-soon"><span class="status-dot"></span>Coming Soon</span>
+            <span class="card-link">View Site →</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 5 -->
+      <div class="project-card">
+        <div class="card-img" style="background:linear-gradient(135deg,#0a0a1a,#1a1060);">
+          <span class="card-cat-tag">AI WORKFLOW</span>
+          <div class="card-img-icon">AI</div>
+        </div>
+        <div class="card-body">
+          <span class="industry-tag">Agency</span>
+          <h3 class="card-title">AI-Assisted Reporting System — Digital Agency</h3>
+          <p class="card-desc">AI workflow that compiles weekly performance data, generates draft reports, and sends them to clients automatically on schedule.</p>
+          <div class="service-tags">
+            <span class="service-tag">AI</span>
+            <span class="service-tag">Automation</span>
+            <span class="service-tag">Reporting</span>
+          </div>
+          <div class="card-bottom">
+            <span class="status-badge status-soon"><span class="status-dot"></span>Coming Soon</span>
+            <span class="card-link">View Site →</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 6 -->
+      <div class="project-card">
+        <div class="card-img" style="background:linear-gradient(135deg,#0a0a1a,#1a1060);">
+          <span class="card-cat-tag">CHATBOT</span>
+          <div class="card-img-icon">AI</div>
+        </div>
+        <div class="card-body">
+          <span class="industry-tag">Local Business</span>
+          <h3 class="card-title">Website Chatbot Setup — Local Business</h3>
+          <p class="card-desc">Chatbot configured for a local business website to answer FAQs, capture lead information, and route inquiries to the right team member automatically.</p>
+          <div class="service-tags">
+            <span class="service-tag">Chatbot</span>
+            <span class="service-tag">Automation</span>
+            <span class="service-tag">CRM</span>
+          </div>
+          <div class="card-bottom">
+            <span class="status-badge status-soon"><span class="status-dot"></span>Coming Soon</span>
+            <span class="card-link">View Site →</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════
+     SECTION 8 — E-COMMERCE SUPPORT
+════════════════════════════════════════════ -->
+<section id="ecommerce" class="work-section" style="background:white;">
+  <div class="work-inner">
+
+    <div class="work-header fade-in">
+      <span class="inline-block font-semibold uppercase mb-4"
+            style="color:#2D5BFF; font-size:12px; letter-spacing:0.14em; font-weight:600;">
+        E-Commerce Support
+      </span>
+      <h2 style="color:#0B1120; font-size:clamp(26px,3vw,40px); font-weight:700; line-height:1.2; margin:0;">
+        Stores Built to Sell and<br>Organized to Scale
+      </h2>
+      <p class="mx-auto mt-4"
+         style="color:#475569; font-size:17px; max-width:520px; line-height:1.75;">
+        Shopify builds, product page setups, landing pages, and e-commerce operations
+        built for online store owners.
+      </p>
+    </div>
+
+    <div class="project-grid fade-in">
+
+      <!-- Card 1 -->
+      <div class="project-card">
+        <div class="card-img" style="background:linear-gradient(135deg,#0a1a10,#1a4a2a);">
+          <span class="card-cat-tag">SHOPIFY BUILD</span>
+          <div class="card-img-icon">ECO</div>
+        </div>
+        <div class="card-body">
+          <span class="industry-tag">Fashion</span>
+          <h3 class="card-title">Full Shopify Store — Fashion &amp; Apparel Brand</h3>
+          <p class="card-desc">Complete Shopify store built from scratch including branded theme, product catalog, size guides, payment setup, and mobile optimization.</p>
+          <div class="service-tags">
+            <span class="service-tag">Shopify</span>
+            <span class="service-tag">Design</span>
+            <span class="service-tag">E-Commerce</span>
+          </div>
+          <div class="card-bottom">
+            <span class="status-badge status-soon"><span class="status-dot"></span>Coming Soon</span>
+            <span class="card-link">View Site →</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="project-card">
+        <div class="card-img" style="background:linear-gradient(135deg,#0a1a10,#1a4a2a);">
+          <span class="card-cat-tag">PRODUCT PAGES</span>
+          <div class="card-img-icon">ECO</div>
+        </div>
+        <div class="card-body">
+          <span class="industry-tag">Health &amp; Wellness</span>
+          <h3 class="card-title">Product Page Optimization — Health &amp; Wellness Store</h3>
+          <p class="card-desc">Full redesign and copywriting of product pages to improve conversion rate — including better descriptions, photography guidance, and review integration.</p>
+          <div class="service-tags">
+            <span class="service-tag">Shopify</span>
+            <span class="service-tag">Copywriting</span>
+            <span class="service-tag">CRO</span>
+          </div>
+          <div class="card-bottom">
+            <span class="status-badge status-soon"><span class="status-dot"></span>Coming Soon</span>
+            <span class="card-link">View Site →</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="project-card">
+        <div class="card-img" style="background:linear-gradient(135deg,#0a1a10,#1a4a2a);">
+          <span class="card-cat-tag">STORE SETUP</span>
+          <div class="card-img-icon">ECO</div>
+        </div>
+        <div class="card-body">
+          <span class="industry-tag">Home Goods</span>
+          <h3 class="card-title">Shopify Store Setup — Home Goods Brand</h3>
+          <p class="card-desc">New Shopify store setup including domain connection, product import, collection organization, shipping setup, and payment gateway.</p>
+          <div class="service-tags">
+            <span class="service-tag">Shopify</span>
+            <span class="service-tag">Setup</span>
+            <span class="service-tag">E-Commerce</span>
+          </div>
+          <div class="card-bottom">
+            <span class="status-badge status-soon"><span class="status-dot"></span>Coming Soon</span>
+            <span class="card-link">View Site →</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="project-card">
+        <div class="card-img" style="background:linear-gradient(135deg,#0a1a10,#1a4a2a);">
+          <span class="card-cat-tag">LANDING PAGE</span>
+          <div class="card-img-icon">ECO</div>
+        </div>
+        <div class="card-body">
+          <span class="industry-tag">Digital Products</span>
+          <h3 class="card-title">Sales Landing Page — Digital Product Launch</h3>
+          <p class="card-desc">High-converting sales page built for a digital product launch with payment integration, testimonials section, and email capture.</p>
+          <div class="service-tags">
+            <span class="service-tag">Landing Page</span>
+            <span class="service-tag">Design</span>
+            <span class="service-tag">Email</span>
+          </div>
+          <div class="card-bottom">
+            <span class="status-badge status-soon"><span class="status-dot"></span>Coming Soon</span>
+            <span class="card-link">View Site →</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 5 -->
+      <div class="project-card">
+        <div class="card-img" style="background:linear-gradient(135deg,#0a1a10,#1a4a2a);">
+          <span class="card-cat-tag">STORE MANAGEMENT</span>
+          <div class="card-img-icon">ECO</div>
+        </div>
+        <div class="card-body">
+          <span class="industry-tag">Retail</span>
+          <h3 class="card-title">Ongoing Store Management — Online Retail Brand</h3>
+          <p class="card-desc">Ongoing Shopify store management including new product uploads, collection updates, promotional banners, and inventory organization.</p>
+          <div class="service-tags">
+            <span class="service-tag">Shopify</span>
+            <span class="service-tag">Management</span>
+            <span class="service-tag">Admin</span>
+          </div>
+          <div class="card-bottom">
+            <span class="status-badge status-soon"><span class="status-dot"></span>Coming Soon</span>
+            <span class="card-link">View Site →</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 6 -->
+      <div class="project-card">
+        <div class="card-img" style="background:linear-gradient(135deg,#0a1a10,#1a4a2a);">
+          <span class="card-cat-tag">E-COMMERCE OPS</span>
+          <div class="card-img-icon">ECO</div>
+        </div>
+        <div class="card-body">
+          <span class="industry-tag">Food &amp; Beverage</span>
+          <h3 class="card-title">E-Commerce Operations Setup — Food &amp; Beverage Brand</h3>
+          <p class="card-desc">Full e-commerce operations setup including order workflow, fulfillment process documentation, customer service templates, and returns management system.</p>
+          <div class="service-tags">
+            <span class="service-tag">Operations</span>
+            <span class="service-tag">Shopify</span>
+            <span class="service-tag">SOP</span>
+          </div>
+          <div class="card-bottom">
+            <span class="status-badge status-soon"><span class="status-dot"></span>Coming Soon</span>
+            <span class="card-link">View Site →</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════
+     SECTION 9 — FINAL CTA
+════════════════════════════════════════════ -->
+<section style="background:#0B1120; padding:120px 24px; text-align:center;">
+  <div class="max-w-2xl mx-auto fade-in">
+
+    <h2 class="font-bold text-white"
+        style="font-size:clamp(28px,3.5vw,44px); font-weight:700; line-height:1.2;">
+      Want Work Like This<br>Built for Your Business?
+    </h2>
+
+    <p class="mx-auto mt-5"
+       style="color:rgba(255,255,255,0.6); font-size:18px; max-width:500px; line-height:1.7;">
+      Book a call with RJ. We will learn about your business and put together the right
+      team and plan to start building results.
+    </p>
+
+    <div class="mt-10">
+      <a href="index.html#contact"
+         class="inline-flex items-center px-10 py-5 rounded-full text-white font-bold"
+         style="background:#2D5BFF; font-size:18px; font-weight:700;">
+        Book a Call
+      </a>
+    </div>
+
+    <p class="mt-4" style="font-size:14px; color:rgba(255,255,255,0.35);">
+      No pressure. Just a conversation.
+    </p>
+
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════
+     FOOTER
+════════════════════════════════════════════ -->
+<footer style="background:#0B1120; border-top:1px solid rgba(255,255,255,0.08); padding:80px 0 40px;">
+  <div class="max-w-7xl mx-auto px-6">
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12">
+
+      <!-- Col 1: Brand -->
+      <div>
+        <div class="flex items-center gap-3">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 210" width="42" height="42"
+               style="color:white; flex-shrink:0;" aria-hidden="true">
+            <rect x="38" y="6" width="13" height="62" rx="2" fill="currentColor"/>
+            <line x1="100" y1="38" x2="6" y2="90" stroke="currentColor" stroke-width="9" stroke-linecap="round"/>
+            <line x1="100" y1="38" x2="194" y2="90" stroke="currentColor" stroke-width="9" stroke-linecap="round"/>
+            <rect x="24" y="90" width="152" height="86" rx="6" fill="none" stroke="currentColor" stroke-width="9"/>
+            <text x="100" y="154" text-anchor="middle" font-size="46" font-weight="800"
+                  font-family="Georgia,'Times New Roman',serif" fill="currentColor">BBC</text>
+            <rect x="91" y="176" width="18" height="18" rx="2" fill="currentColor"/>
+            <rect x="64" y="194" width="72" height="11" rx="5.5" fill="currentColor"/>
+          </svg>
+          <span class="font-bold text-white" style="font-size:16px; font-weight:700;">Balay ni Bruno &amp; Co.</span>
+        </div>
+        <p class="mt-4 leading-relaxed"
+           style="color:rgba(255,255,255,0.5); font-size:14px; line-height:1.7; max-width:240px;">
+          Managed virtual operations support for business owners who need reliable help with marketing,
+          websites, content, automation, and digital operations.
+        </p>
+        <div class="flex gap-2 mt-5">
+          <div class="w-7 h-7 rounded-md" style="border:1px solid rgba(255,255,255,0.15);"></div>
+          <div class="w-7 h-7 rounded-md" style="border:1px solid rgba(255,255,255,0.15);"></div>
+          <div class="w-7 h-7 rounded-md" style="border:1px solid rgba(255,255,255,0.15);"></div>
+        </div>
+      </div>
+
+      <!-- Col 2: How We Help -->
+      <div>
+        <p class="font-semibold uppercase tracking-widest mb-5"
+           style="color:rgba(255,255,255,0.4); font-size:12px; letter-spacing:0.1em;">How We Help</p>
+        <ul>
+          <li><a href="how-we-help.html#marketing"  class="hover:text-white transition-colors" style="color:rgba(255,255,255,0.65); font-size:14px; line-height:2.2; display:block;">Marketing Support</a></li>
+          <li><a href="how-we-help.html#content"    class="hover:text-white transition-colors" style="color:rgba(255,255,255,0.65); font-size:14px; line-height:2.2; display:block;">Content &amp; Creative</a></li>
+          <li><a href="how-we-help.html#websites"   class="hover:text-white transition-colors" style="color:rgba(255,255,255,0.65); font-size:14px; line-height:2.2; display:block;">Websites &amp; Digital</a></li>
+          <li><a href="how-we-help.html#email"      class="hover:text-white transition-colors" style="color:rgba(255,255,255,0.65); font-size:14px; line-height:2.2; display:block;">Email, CRM &amp; Outreach</a></li>
+          <li><a href="how-we-help.html#automation" class="hover:text-white transition-colors" style="color:rgba(255,255,255,0.65); font-size:14px; line-height:2.2; display:block;">AI &amp; Automation</a></li>
+          <li><a href="how-we-help.html#seo"        class="hover:text-white transition-colors" style="color:rgba(255,255,255,0.65); font-size:14px; line-height:2.2; display:block;">SEO &amp; Visibility</a></li>
+          <li><a href="how-we-help.html#operations" class="hover:text-white transition-colors" style="color:rgba(255,255,255,0.65); font-size:14px; line-height:2.2; display:block;">Operations &amp; Admin</a></li>
+        </ul>
+      </div>
+
+      <!-- Col 3: Company -->
+      <div>
+        <p class="font-semibold uppercase tracking-widest mb-5"
+           style="color:rgba(255,255,255,0.4); font-size:12px; letter-spacing:0.1em;">Company</p>
+        <ul>
+          <li><a href="index.html"          class="hover:text-white transition-colors" style="color:rgba(255,255,255,0.65); font-size:14px; line-height:2.2; display:block;">Home</a></li>
+          <li><a href="about.html"          class="hover:text-white transition-colors" style="color:rgba(255,255,255,0.65); font-size:14px; line-height:2.2; display:block;">Our Story</a></li>
+          <li><a href="how-it-works.html"   class="hover:text-white transition-colors" style="color:rgba(255,255,255,0.65); font-size:14px; line-height:2.2; display:block;">How It Works</a></li>
+          <li><a href="how-we-help.html"    class="hover:text-white transition-colors" style="color:rgba(255,255,255,0.65); font-size:14px; line-height:2.2; display:block;">How We Help</a></li>
+          <li><a href="our-work.html"       class="hover:text-white transition-colors" style="color:rgba(255,255,255,0.65); font-size:14px; line-height:2.2; display:block;">Our Work</a></li>
+          <li><a href="index.html#insights" class="hover:text-white transition-colors" style="color:rgba(255,255,255,0.65); font-size:14px; line-height:2.2; display:block;">Insights</a></li>
+          <li><a href="index.html#contact"  class="hover:text-white transition-colors" style="color:rgba(255,255,255,0.65); font-size:14px; line-height:2.2; display:block;">Contact</a></li>
+        </ul>
+      </div>
+
+      <!-- Col 4: Contact -->
+      <div>
+        <p class="font-semibold uppercase tracking-widest mb-5"
+           style="color:rgba(255,255,255,0.4); font-size:12px; letter-spacing:0.1em;">Contact</p>
+        <p style="color:rgba(255,255,255,0.65); font-size:14px; line-height:2.2;">hello@balaynibruno.com</p>
+        <p style="color:rgba(255,255,255,0.65); font-size:14px; line-height:2.2;">+1 (000) 000-0000</p>
+        <p class="mt-1" style="color:rgba(255,255,255,0.65); font-size:14px; line-height:1.7;">
+          Serving clients in the US, UK, and internationally.
+        </p>
+        <a href="index.html#contact" class="block mt-4 font-semibold"
+           style="color:#2D5BFF; font-size:14px; font-weight:600;">
+          Book a Call →
+        </a>
+      </div>
+
+    </div>
+
+    <!-- Bottom bar -->
+    <div class="flex flex-col sm:flex-row items-center justify-between gap-4"
+         style="border-top:1px solid rgba(255,255,255,0.08); margin-top:60px; padding-top:28px;">
+      <p style="color:rgba(255,255,255,0.35); font-size:13px;">
+        &copy; 2025 Balay ni Bruno &amp; Co. All rights reserved.
+      </p>
+      <p style="color:rgba(255,255,255,0.35); font-size:13px;">
+        <a href="#" class="hover:text-white transition-colors" style="color:rgba(255,255,255,0.35);">Privacy Policy</a>
+        <span style="margin:0 8px;">·</span>
+        <a href="#" class="hover:text-white transition-colors" style="color:rgba(255,255,255,0.35);">Terms of Service</a>
+      </p>
+    </div>
+
+  </div>
+</footer>
+
+
+<!-- ════════════════════════════════════════════
+     JAVASCRIPT
+════════════════════════════════════════════ -->
+<script>
+  // ── Sticky header shadow ─────────────────────
+  const header = document.getElementById('site-header');
+  window.addEventListener('scroll', () => {
+    header.classList.toggle('scrolled', window.scrollY > 60);
+  });
+
+  // ── Hamburger toggle ─────────────────────────
+  const hamburger = document.getElementById('hamburger');
+  const mobileNav = document.getElementById('mobile-nav');
+  const hb1 = document.getElementById('hb1');
+  const hb2 = document.getElementById('hb2');
+  const hb3 = document.getElementById('hb3');
+  hamburger.addEventListener('click', () => {
+    const isOpen = mobileNav.classList.toggle('open');
+    hb1.style.transform = isOpen ? 'translateY(8px) rotate(45deg)' : '';
+    hb2.style.opacity   = isOpen ? '0' : '';
+    hb3.style.transform = isOpen ? 'translateY(-8px) rotate(-45deg)' : '';
+  });
+
+  // ── Scroll fade-in ───────────────────────────
+  const fadeEls = document.querySelectorAll('.fade-in');
+  const fadeObs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); fadeObs.unobserve(e.target); }
     });
+  }, { threshold: 0.08 });
+  fadeEls.forEach(el => fadeObs.observe(el));
 
-    // Fade-in with IntersectionObserver
-    const fadeEls = document.querySelectorAll('.fade-in');
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          observer.unobserve(entry.target);
+  // ── Filter pill click ────────────────────────
+  const pills        = document.querySelectorAll('.filter-pill');
+  const HEADER_H     = 64;
+  const STRIP_H      = document.getElementById('filter-strip').offsetHeight;
+  const SCROLL_OFFSET = HEADER_H + STRIP_H + 24;
+
+  pills.forEach(pill => {
+    pill.addEventListener('click', () => {
+      // Update active state
+      pills.forEach(p => p.classList.remove('active'));
+      pill.classList.add('active');
+
+      const target = pill.dataset.target;
+      if (target === 'top') {
+        // Scroll to just below the filter strip
+        const firstSection = document.getElementById('websites');
+        if (firstSection) {
+          const top = firstSection.getBoundingClientRect().top + window.scrollY - SCROLL_OFFSET;
+          window.scrollTo({ top, behavior: 'smooth' });
         }
-      });
-    }, { threshold: 0.12 });
-    fadeEls.forEach(el => observer.observe(el));
-
-    // Filter tabs
-    const filterTabs = document.querySelectorAll('.filter-tab');
-    const workCards = document.querySelectorAll('.work-card');
-
-    filterTabs.forEach(tab => {
-      tab.addEventListener('click', () => {
-        filterTabs.forEach(t => t.classList.remove('active'));
-        tab.classList.add('active');
-
-        const filter = tab.dataset.filter;
-        workCards.forEach(card => {
-          if (filter === 'all') {
-            card.style.display = '';
-          } else {
-            const cats = (card.dataset.category || '').split(' ');
-            card.style.display = cats.includes(filter) ? '' : 'none';
-          }
-        });
-      });
+      } else {
+        const section = document.getElementById(target);
+        if (section) {
+          const top = section.getBoundingClientRect().top + window.scrollY - SCROLL_OFFSET;
+          window.scrollTo({ top, behavior: 'smooth' });
+        }
+      }
     });
-  </script>
+  });
+</script>
 
 </body>
 </html>

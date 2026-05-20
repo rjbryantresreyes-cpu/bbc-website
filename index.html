@@ -1,1806 +1,1352 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Balay ni Bruno &amp; Co. | A Team You Can Actually Grow With</title>
-  <meta name="description" content="Balay ni Bruno &amp; Co. is a family-built operational support studio helping business owners grow through real collaboration, thoughtful systems, and long-term care." />
-  <link rel="canonical" href="https://balaynibruno.co/" />
-  <meta property="og:type" content="website" />
-  <meta property="og:site_name" content="Balay ni Bruno &amp; Co." />
-  <meta property="og:title" content="Balay ni Bruno &amp; Co. | A Team You Can Actually Grow With" />
-  <meta property="og:description" content="A family-built operational support studio helping business owners grow through real collaboration, thoughtful systems, and long-term care." />
-  <meta property="og:url" content="https://balaynibruno.co/" />
-  <meta property="og:image" content="https://balaynibruno.co/bbc-logo.png" />
-  <meta name="twitter:card" content="summary_large_image" />
-  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <title>Balay ni Bruno & Co. — Managed Virtual Operations Support</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Lora:ital,wght@0,400;0,500;1,400;1,500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
-
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            navy:        '#0B1120',
+            blue:        '#2D5BFF',
+            'off-white': '#F8FAFC',
+            slate:       '#475569',
+            lightgray:   '#D1D5DB',
+          },
+          fontFamily: {
+            sans: ['Montserrat', 'sans-serif'],
+          },
+        },
+      },
+    };
+  </script>
   <style>
-
-    /* ============================================================
-       BBC DESIGN SYSTEM v5.1, CINEMATIC COLOR FLOW REBUILD
-       ──────────────────────────────────────────────────────────
-       Color Flow (first 5 sections):
-         S1 Hero       → --bg-dark   (cinematic anchor)
-         S2 Stats      → --bg-footer (seamless dark extension)
-         S3 Philosophy → --bg-primary (warm cream, the breath)
-         S4 Difference → --bg-section (deeper cream, warmth)
-         S5 How Work   → --bg-dark   (contrast moment)
-       Then S6–S11 resume their existing rhythm.
-    ============================================================ */
-
-    :root {
-      --deep-blue:   #1F3557;
-      --mid-blue:    #4B6FA5;
-      --warm-blue:   #6D8FC7;
-      --light-blue:  #A8C0DC;
-      --pale-blue:   #DDE8F2;
-
-      --bg-primary:  #F5F1EA;
-      --bg-section:  #EDE8DF;
-      --bg-card:     #FDFAF6;
-      --bg-card-alt: #FAF6EF;
-      --bg-dark:     #1C2E47;
-      --bg-footer:   #172540;
-
-      --neutral-100: #E8E2D6;
-      --neutral-200: #D5CEC3;
-      --neutral-300: #B8B1A6;
-      --neutral-400: #9A9490;
-
-      --text-ink:    #2A3040;
-      --text-body:   #4E5666;
-      --text-muted:  #888FA0;
-      --text-warm:   #F5F1EA;
-
-      --gold:        #B8923E;
-      --gold-pale:   #E6CFA0;
-      --gold-warm:   #D4A84B;
-      --sage:        #4E9E74;
-
-      --font-display:'Playfair Display', Georgia, serif;
-      --font-body:   'Lora', Georgia, serif;
-      --font-ui:     'DM Sans', system-ui, sans-serif;
-
-      --max-width:   1200px;
-      --radius-sm:   8px;
-      --radius:      16px;
-      --radius-lg:   24px;
-      --radius-xl:   32px;
-
-      --shadow-xs:   0 1px 6px  rgba(85,60,35,0.055);
-      --shadow-sm:   0 3px 18px rgba(85,60,35,0.08);
-      --shadow-md:   0 7px 36px rgba(85,60,35,0.11);
-      --shadow-lg:   0 14px 56px rgba(85,60,35,0.14);
-      --shadow-xl:   0 24px 80px rgba(85,60,35,0.18);
-
-      --border-card: 1px solid rgba(85,60,35,0.09);
-      --border-warm: 1px solid rgba(85,60,35,0.12);
-      --border-dark: 1px solid rgba(255,255,255,0.07);
-
-      --s1: 0.5rem;  --s2: 1rem;   --s3: 1.5rem;
-      --s4: 2.5rem;  --s5: 4rem;   --s6: 6rem;  --s7: 9rem;
-    }
-
-    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    /* ── Base ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
+    body { font-family: 'Montserrat', sans-serif; background: #F8FAFC; color: #0B1120; overflow-x: hidden; }
 
-    body {
-      font-family: var(--font-body);
-      color: var(--text-ink);
-      background: var(--bg-primary);
-      line-height: 1.6;
-      -webkit-font-smoothing: antialiased;
-      overflow-x: hidden;
+    /* ── Marquee ── */
+    .marquee-track { display: flex; white-space: nowrap; animation: marquee 30s linear infinite; }
+    @keyframes marquee {
+      0%   { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
     }
 
-    body::after {
-      content: '';
-      position: fixed; inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23n)' opacity='0.026'/%3E%3C/svg%3E");
-      pointer-events: none; z-index: 9999; mix-blend-mode: multiply;
-    }
-
-    /* ── TYPOGRAPHY ─────────────────────────────────────────── */
-    h1, h2, h3, h4 { font-family: var(--font-display); line-height: 1.22; color: var(--deep-blue); }
-    h1 { font-size: clamp(2.2rem, 4.8vw, 3.6rem); line-height: 1.16; font-weight: 700; }
-    h2 { font-size: clamp(1.7rem, 3vw, 2.6rem); line-height: 1.22; font-weight: 600; }
-    h3 { font-size: clamp(1.05rem, 1.6vw, 1.3rem); font-weight: 600; }
-    h4 { font-size: 0.95rem; font-family: var(--font-ui); font-weight: 700; }
-
-    p { font-family: var(--font-body); font-size: 1rem; line-height: 1.87; color: var(--text-body); }
-    p.lead { font-size: 1.08rem; line-height: 1.9; color: var(--text-ink); }
-    a { text-decoration: none; }
-
-    .eyebrow {
-      display: block;
-      font-family: var(--font-ui);
-      font-size: 0.68rem; font-weight: 600;
-      letter-spacing: 0.17em; text-transform: uppercase;
-      color: var(--warm-blue); margin-bottom: var(--s2);
-    }
-    .eyebrow--gold { color: var(--gold); }
-    .eyebrow--pale { color: rgba(245,241,234,0.5); }
-
-    /* ── LAYOUT ─────────────────────────────────────────────── */
-    .container { max-width: var(--max-width); margin: 0 auto; padding: 0 var(--s4); }
-    .section        { padding: var(--s7) 0; }
-    .section--tight { padding: var(--s5) 0; }
-    .section--warm  { background: var(--bg-section); }
-    .section--white { background: var(--bg-card); }
-    .section--dark  { background: var(--bg-dark); }
-    .section--cream { background: var(--bg-primary); }
-    .text-center    { text-align: center; }
-
-    .divider-bar {
-      width: 44px; height: 2.5px;
-      background: linear-gradient(90deg, var(--gold), var(--warm-blue));
-      border-radius: 2px; margin: var(--s3) auto; opacity: 0.8;
-    }
-    .divider-bar--left { margin-left: 0; }
-
-    .fade-in { opacity: 0; transform: translateY(22px); transition: opacity 0.65s ease, transform 0.65s ease; }
+    /* ── Fade-in on scroll ── */
+    .fade-in { opacity: 0; transform: translateY(24px); transition: opacity 0.65s ease, transform 0.65s ease; }
     .fade-in.visible { opacity: 1; transform: translateY(0); }
 
-    /* ── BUTTONS ─────────────────────────────────────────────── */
-    .btn {
-      display: inline-flex; align-items: center; gap: 0.45rem;
-      padding: 0.88rem 2rem; border-radius: 100px;
-      font-family: var(--font-ui); font-size: 0.86rem; font-weight: 600;
-      letter-spacing: 0.02em; cursor: pointer;
-      transition: all 0.3s ease; border: 1.5px solid transparent;
-      white-space: nowrap;
-    }
-    .btn-primary { background: var(--deep-blue); color: var(--text-warm); }
-    .btn-primary:hover { background: #243f64; transform: translateY(-2px); box-shadow: 0 10px 32px rgba(31,53,87,0.28); }
-    .btn-outline { background: transparent; color: var(--deep-blue); border-color: rgba(75,111,165,0.42); }
-    .btn-outline:hover { background: var(--deep-blue); color: var(--text-warm); border-color: var(--deep-blue); transform: translateY(-2px); }
-    .btn-ghost { background: transparent; color: var(--text-warm); border-color: rgba(245,241,234,0.28); }
-    .btn-ghost:hover { background: rgba(245,241,234,0.08); border-color: rgba(245,241,234,0.55); }
-    .header__cta .btn-ghost { color:var(--deep-blue); border-color:rgba(31,53,87,0.22); }
-    .header__cta .btn-ghost:hover { background:rgba(31,53,87,0.06); border-color:rgba(31,53,87,0.38); color:var(--deep-blue); }
-    .btn-gold { background: var(--gold); color: #fff; font-weight: 700; }
-    .btn-gold:hover { background: var(--gold-warm); transform: translateY(-2px); box-shadow: 0 10px 32px rgba(184,146,62,0.35); }
-    .btn-warm-outline { background: transparent; color: var(--text-warm); border-color: rgba(245,241,234,0.28); }
-    .btn-warm-outline:hover { background: rgba(245,241,234,0.08); border-color: rgba(245,241,234,0.55); }
-    .btn-sm { padding: 0.62rem 1.35rem; font-size: 0.78rem; }
+    /* ── Sticky header scroll shadow ── */
+    #site-header { transition: box-shadow 0.3s ease, background 0.3s ease; }
+    #site-header.scrolled { box-shadow: 0 1px 16px rgba(0,0,0,0.09); }
 
-    /* ── HEADER ──────────────────────────────────────────────── */
-    .site-header {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
-      background: rgba(245,241,234,0.94);
-      backdrop-filter: blur(20px) saturate(1.2);
-      -webkit-backdrop-filter: blur(20px) saturate(1.2);
-      border-bottom: var(--border-warm);
-      transition: box-shadow 0.3s ease;
+    /* ── Hero illustrated cards ── */
+    .hero-card {
+      position: absolute;
+      border-radius: 16px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.12);
+      padding: 20px 22px;
     }
-    .site-header.scrolled { box-shadow: var(--shadow-sm); }
-
-    .header__inner {
-      max-width: var(--max-width); margin: 0 auto; padding: 0 var(--s4);
-      height: 68px; display: flex; align-items: center;
-      justify-content: space-between; gap: var(--s3);
-    }
-    .header__logo { display:flex; flex-direction:row; align-items:center; gap:0.6rem; }
-    .header__logo-name {
-      font-family: var(--font-display); font-size: 1.05rem; font-weight: 700;
-      color: var(--deep-blue); line-height: 1; letter-spacing: -0.01em;
-    }
-    .header__nav { display: flex; align-items: center; gap: 1.5rem; list-style: none; }
-    .header__nav a {
-      font-family: var(--font-ui); font-size: 0.78rem; font-weight: 500;
-      color: var(--text-body); transition: color 0.2s;
-      white-space: nowrap;
-    }
-    .header__nav a:hover, .header__nav a.active { color: var(--deep-blue); font-weight: 600; }
-    .header__cta { display: flex; align-items: center; gap: 0.9rem; flex-shrink: 0; }
-
-    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 8px; }
-    .hamburger span { display: block; width: 20px; height: 2px; background: var(--text-ink); border-radius: 2px; transition: all 0.25s ease; }
-
-    .mobile-menu {
-      display: none; flex-direction: column;
-      background: var(--bg-card); border-top: var(--border-warm);
-      padding: 1rem var(--s4) 1.5rem;
-    }
-    .mobile-menu.open { display: flex; }
-    .mobile-menu a {
-      font-family: var(--font-ui); font-size: 0.9rem; font-weight: 500;
-      color: var(--text-body); padding: 0.7rem 0;
-      border-bottom: var(--border-card); transition: color 0.2s;
-    }
-    .mobile-menu a:hover { color: var(--deep-blue); }
-    .mobile-menu a:last-of-type { border-bottom: none; }
-    .mobile-menu .mobile-cta { margin-top: 1rem; }
-
-    @media (max-width: 1024px) { .header__nav { display: none; } }
-    @media (max-width: 768px) { .header__cta .btn-gold { display: none; } .hamburger { display: flex; } }
-
-
-    /* ══════════════════════════════════════════════════════════
-       S1, HERO  ·  --bg-dark  ·  Cinematic anchor
-    ══════════════════════════════════════════════════════════ */
-    .hero {
-      min-height: 100vh;
-      padding-top: 68px;
-      background: var(--bg-dark);
-      display: flex; align-items: center;
-      position: relative; overflow: hidden;
-    }
-    /* Ambient warm glow top-right */
-    .hero::before {
-      content: '';
-      position: absolute; top: -120px; right: -120px;
-      width: 700px; height: 700px;
-      background: radial-gradient(ellipse at center,
-        rgba(184,146,62,0.08) 0%, rgba(184,146,62,0.02) 45%, transparent 68%);
-      pointer-events: none;
-    }
-    /* Soft blue-cool glow bottom-left */
-    .hero::after {
-      content: '';
-      position: absolute; bottom: -80px; left: -80px;
-      width: 480px; height: 480px;
-      background: radial-gradient(ellipse at center,
-        rgba(109,143,199,0.06) 0%, transparent 65%);
-      pointer-events: none;
-    }
-    .hero__grid {
-      max-width: var(--max-width); margin: 0 auto;
-      padding: var(--s6) var(--s4);
-      display: grid; grid-template-columns: 3fr 2fr;
-      gap: var(--s6); align-items: center;
-      position: relative; z-index: 1; width: 100%;
+    .hero-card-line {
+      height: 8px;
+      border-radius: 4px;
+      background: rgba(255,255,255,0.13);
+      margin-top: 10px;
     }
 
-    /* Left, editorial copy */
-    .hero__eyebrow {
-      display: inline-flex; align-items: center; gap: 0.6rem;
-      font-family: var(--font-ui); font-size: 0.68rem; font-weight: 600;
-      letter-spacing: 0.18em; text-transform: uppercase;
-      color: var(--gold-pale); margin-bottom: 1.8rem;
-    }
-    .hero__eyebrow-dot {
-      width: 5px; height: 5px; border-radius: 50%;
-      background: var(--gold); opacity: 0.75;
-      flex-shrink: 0;
-    }
+    /* ── Support card hover ── */
+    .support-card { transition: border-color 0.25s ease, transform 0.25s ease; }
+    .support-card:hover { border-color: #2D5BFF !important; transform: translateY(-2px); }
 
-    .hero__title {
-      font-family: var(--font-display);
-      font-size: clamp(2.2rem, 4.6vw, 3.6rem);
-      font-weight: 700; color: #fff;
-      line-height: 1.15; margin-bottom: 1.6rem;
-    }
-    .hero__title em { font-style: italic; color: var(--gold-pale); }
+    /* ── Blog card hover ── */
+    .blog-card { transition: transform 0.25s ease, box-shadow 0.25s ease; }
+    .blog-card:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(0,0,0,0.08); }
 
-    .hero__body {
-      font-family: var(--font-body); font-size: 1.06rem;
-      line-height: 1.88; color: rgba(245,241,234,0.68);
-      max-width: 500px; margin-bottom: 2.6rem;
-    }
+    /* ── Mobile nav ── */
+    #mobile-nav { display: none; }
+    #mobile-nav.open { display: flex; }
 
-    .hero__actions { display: flex; flex-wrap: wrap; gap: 1rem; margin-bottom: 3rem; }
-
-    .hero__trust {
-      display: flex; align-items: center; gap: 1.6rem;
-      padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.06);
-      flex-wrap: wrap;
-    }
-    .hero__trust-label {
-      font-family: var(--font-ui); font-size: 0.62rem; font-weight: 600;
-      letter-spacing: 0.12em; text-transform: uppercase;
-      color: rgba(245,241,234,0.26); white-space: nowrap;
-    }
-    .hero__trust-items { display: flex; gap: 1.25rem; flex-wrap: wrap; }
-    .hero__trust-item {
-      display: flex; align-items: center; gap: 0.38rem;
-      font-family: var(--font-ui); font-size: 0.76rem; font-weight: 500;
-      color: rgba(245,241,234,0.5);
-    }
-    .hero__trust-item::before {
-      content: '✓'; color: var(--gold); font-size: 0.68rem; font-weight: 800;
-    }
-
-    /* Right, studio panel (editorial service list) */
-    .hero__visual { position: relative; }
-
-    .hero__studio {
-      background: rgba(255,255,255,0.025);
-      border: 1px solid rgba(255,255,255,0.07);
-      border-radius: var(--radius-xl);
-      padding: 2rem 1.75rem;
-      position: relative; overflow: hidden;
-    }
-    /* Warm amber glow inside panel */
-    .hero__studio::before {
-      content: '';
-      position: absolute; top: -60px; right: -60px;
-      width: 220px; height: 220px;
-      background: radial-gradient(ellipse at center,
-        rgba(184,146,62,0.1) 0%, transparent 65%);
-      pointer-events: none;
-    }
-
-    .hero__studio-header {
-      display: flex; align-items: center; gap: 0.65rem;
-      padding-bottom: 1.25rem;
-      border-bottom: 1px solid rgba(255,255,255,0.05);
-      margin-bottom: 1.25rem;
-    }
-    .hero__studio-dot {
-      width: 7px; height: 7px; border-radius: 50%;
-      background: var(--sage); box-shadow: 0 0 6px rgba(78,158,116,0.5);
-    }
-    .hero__studio-name {
-      font-family: var(--font-ui); font-size: 0.65rem; font-weight: 700;
-      letter-spacing: 0.18em; text-transform: uppercase;
-      color: rgba(245,241,234,0.38);
-    }
-    .hero__studio-badge {
-      margin-left: auto;
-      font-family: var(--font-ui); font-size: 0.6rem; font-weight: 600;
-      color: var(--gold); background: rgba(184,146,62,0.12);
-      padding: 3px 10px; border-radius: 999px;
-    }
-
-    /* Service list */
-    .hero__service-list { display: flex; flex-direction: column; gap: 0.55rem; margin-bottom: 1.5rem; }
-    .hero__service-row {
-      display: flex; align-items: center; gap: 0.75rem;
-      padding: 0.7rem 0.9rem;
-      background: rgba(245,230,200,0.035);
-      border: 1px solid rgba(245,230,200,0.06);
-      border-radius: var(--radius-sm);
-      transition: background 0.25s;
-    }
-    .hero__service-row:hover { background: rgba(245,230,200,0.065); }
-    .hero__service-icon { font-size: 1rem; flex-shrink: 0; opacity: 0.85; }
-    .hero__service-name {
-      font-family: var(--font-ui); font-size: 0.78rem; font-weight: 500;
-      color: rgba(245,241,234,0.78); flex: 1;
-    }
-    .hero__service-tag {
-      font-family: var(--font-ui); font-size: 0.58rem; font-weight: 700;
-      letter-spacing: 0.08em; text-transform: uppercase;
-      color: rgba(245,241,234,0.3);
-    }
-
-    /* Studio stats strip */
-    .hero__studio-divider {
-      height: 1px; background: rgba(255,255,255,0.05); margin-bottom: 1.25rem;
-    }
-    .hero__studio-stats { display: flex; gap: 0; }
-    .hero__studio-stat {
-      flex: 1; text-align: center; padding: 0.65rem 0.5rem;
-      border-right: 1px solid rgba(255,255,255,0.05);
-    }
-    .hero__studio-stat:last-child { border-right: none; }
-    .hero__studio-stat-num {
-      font-family: var(--font-display); font-size: 1.4rem; font-weight: 700;
-      color: var(--gold-pale); line-height: 1; margin-bottom: 0.2rem;
-    }
-    .hero__studio-stat-label {
-      font-family: var(--font-ui); font-size: 0.58rem; font-weight: 600;
-      letter-spacing: 0.06em; text-transform: uppercase;
-      color: rgba(245,241,234,0.32);
-    }
-
-    @media (max-width: 920px) { .hero__grid { grid-template-columns: 1fr; } .hero__visual { display: none; } }
-    @media (max-width: 560px) { .hero__actions { flex-direction: column; } .hero__actions .btn { justify-content: center; } }
-
-
-    /* ══════════════════════════════════════════════════════════
-       S2, STATS BAR  ·  --bg-footer  ·  Seamless dark extension
-       A warm amber hairline at the top anchors the visual join.
-    ══════════════════════════════════════════════════════════ */
-    .stats-bar {
-      background: var(--bg-footer);
-      border-top: 1px solid rgba(184,146,62,0.18);
-      padding: 3.5rem 0;
-    }
-    .stats-bar__inner {
-      max-width: var(--max-width); margin: 0 auto; padding: 0 var(--s4);
-      display: grid; grid-template-columns: repeat(5, 1fr);
-      gap: 0; align-items: center;
-    }
-    .stats-bar__item {
-      display: flex; flex-direction: column; align-items: center;
-      text-align: center; padding: 0 1.5rem;
-      border-right: 1px solid rgba(255,255,255,0.05);
-    }
-    .stats-bar__item:last-child { border-right: none; }
-    .stats-bar__num {
-      font-family: var(--font-display); font-size: 2.2rem; font-weight: 700;
-      color: var(--gold-pale); line-height: 1; margin-bottom: 0.45rem;
-    }
-    .stats-bar__label {
-      font-family: var(--font-ui); font-size: 0.72rem; font-weight: 500;
-      color: rgba(245,241,234,0.42); letter-spacing: 0.04em; line-height: 1.5;
-    }
-
-    @media (max-width: 900px) {
-      .stats-bar__inner { grid-template-columns: repeat(3, 1fr); }
-      .stats-bar__item:nth-child(3) { border-right: none; }
-    }
-    @media (max-width: 540px) {
-      .stats-bar__inner { grid-template-columns: 1fr 1fr; }
-      .stats-bar__item { border-right: none; padding-bottom: 1.5rem; margin-bottom: 1rem; border-bottom: 1px solid rgba(255,255,255,0.05); }
-      .stats-bar__item:nth-last-child(-n+2) { border-bottom: none; }
-    }
-
-
-    /* ══════════════════════════════════════════════════════════
-       S3, PHILOSOPHY + FOUNDER  ·  --bg-primary  ·  The Breath
-       Large cream open section, the emotional heart of the page.
-    ══════════════════════════════════════════════════════════ */
-    .philosophy {
-      background: var(--bg-primary);
-      padding: var(--s7) 0;
-      position: relative; overflow: hidden;
-    }
-    /* Warm ambient light, top right atmospheric */
-    .philosophy::before {
-      content: '';
-      position: absolute; top: -80px; right: -80px;
-      width: 600px; height: 600px;
-      background: radial-gradient(ellipse at center,
-        rgba(184,146,62,0.05) 0%, transparent 65%);
-      pointer-events: none;
-    }
-
-    .philosophy__grid {
-      display: grid; grid-template-columns: 1fr 1fr;
-      gap: var(--s6); align-items: center;
-    }
-    @media (max-width: 880px) { .philosophy__grid { grid-template-columns: 1fr; } }
-
-    /* Copy side */
-    .philosophy__copy h2 { margin-bottom: 1.25rem; }
-    .philosophy__copy p   { margin-bottom: 1.15rem; }
-
-    .philosophy__quote {
-      margin: 2rem 0;
-      padding: 1.6rem 1.75rem;
-      border-left: 3px solid var(--gold);
-      background: rgba(184,146,62,0.05);
-      border-radius: 0 var(--radius) var(--radius) 0;
-    }
-    .philosophy__quote p {
-      font-family: var(--font-display);
-      font-size: 1.1rem; font-style: italic;
-      color: var(--deep-blue); line-height: 1.65;
-      margin-bottom: 0.7rem;
-    }
-    .philosophy__quote-attr {
-      font-family: var(--font-ui); font-size: 0.7rem; font-weight: 700;
-      letter-spacing: 0.07em; color: var(--gold);
-    }
-    .philosophy__actions { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 2rem; }
-
-    /* Visual side */
-    .philosophy__visual { position: relative; }
-
-    .video-block {
-      aspect-ratio: 16/9;
-      border-radius: var(--radius-lg);
-      overflow: hidden;
-      background: var(--bg-dark);
-      box-shadow: var(--shadow-lg);
-      display: flex; flex-direction: column;
-      align-items: center; justify-content: center;
-      cursor: pointer; position: relative;
-    }
-    .video-block::before {
-      content: '';
-      position: absolute; inset: 0;
-      background: radial-gradient(ellipse at 35% 45%, rgba(184,146,62,0.09) 0%, transparent 60%);
-    }
-    .video-block__play {
-      width: 72px; height: 72px; border-radius: 50%;
-      background: rgba(245,241,234,0.92);
-      box-shadow: 0 4px 28px rgba(0,0,0,0.3);
-      display: flex; align-items: center; justify-content: center;
-      margin-bottom: 1.1rem; position: relative; z-index: 1;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-    }
-    .video-block__play:hover { transform: scale(1.07); box-shadow: 0 8px 36px rgba(0,0,0,0.38); }
-    .video-block__play::after {
-      content: '';
-      width: 0; height: 0;
-      border-top: 11px solid transparent;
-      border-bottom: 11px solid transparent;
-      border-left: 20px solid var(--deep-blue);
-      margin-left: 5px;
-    }
-    .video-block__caption {
-      font-family: var(--font-ui); font-size: 0.82rem;
-      color: rgba(245,241,234,0.65); position: relative; z-index: 1;
-    }
-
-    /* Three pillars below video */
-    .philosophy__pillars { display: flex; gap: 0.75rem; margin-top: 1.5rem; }
-    .philosophy__pillar {
-      flex: 1; background: var(--bg-card); border: var(--border-card);
-      border-radius: var(--radius-sm); padding: 1rem 1.1rem;
-      box-shadow: var(--shadow-xs);
-    }
-    .philosophy__pillar-accent {
-      width: 8px; height: 8px; border-radius: 50%;
-      margin-bottom: 0.55rem;
-    }
-    .philosophy__pillar-title {
-      font-family: var(--font-ui); font-size: 0.76rem; font-weight: 700;
-      color: var(--deep-blue); margin-bottom: 3px;
-    }
-    .philosophy__pillar-body {
-      font-family: var(--font-body); font-size: 0.71rem;
-      color: var(--text-muted); line-height: 1.55;
-    }
-
-    @media (max-width: 480px) {
-      .philosophy__pillars { flex-direction: column; }
-      .philosophy__actions .btn { width: 100%; justify-content: center; }
-    }
-
-
-    /* ══════════════════════════════════════════════════════════
-       S4, DIFFERENCE + JOURNEY  ·  --bg-section  ·  Deeper cream
-       Comparison cards on top, journey steps below, one section.
-    ══════════════════════════════════════════════════════════ */
-    .diff-journey {
-      background: var(--bg-section);
-      padding: var(--s7) 0;
-    }
-    .diff-journey__intro {
-      text-align: center; max-width: 620px; margin: 0 auto var(--s5);
-    }
-    .diff-journey__intro h2 { margin-bottom: 1rem; }
-    .diff-journey__intro p  { color: var(--text-body); }
-
-    /* Comparison */
-    .compare-grid {
-      display: grid; grid-template-columns: 1fr 1fr;
-      gap: 1.5rem; max-width: 880px; margin: 0 auto var(--s5);
-    }
-    @media (max-width: 680px) { .compare-grid { grid-template-columns: 1fr; } }
-
-    .compare-card {
-      border-radius: var(--radius-lg); padding: 2.25rem 2rem;
-      box-shadow: var(--shadow-sm);
-    }
-    .compare-card--plain {
-      background: rgba(85,60,35,0.038);
-      border: var(--border-warm);
-    }
-    .compare-card--bbc {
-      background: var(--bg-card);
-      border: 2px solid rgba(75,111,165,0.3);
-      position: relative; overflow: hidden;
-    }
-    .compare-card--bbc::before {
-      content: '';
-      position: absolute; left: 0; top: 2rem; bottom: 2rem;
+    /* ── Comparison card accent bar ── */
+    .bbc-accent-bar {
+      position: absolute;
+      left: 0; top: 24px; bottom: 24px;
       width: 4px;
-      background: linear-gradient(180deg, var(--gold), var(--warm-blue));
-      border-radius: 0 3px 3px 0;
+      background: #2D5BFF;
+      border-radius: 0 4px 4px 0;
     }
 
-    .compare-header { display: flex; align-items: center; gap: 0.7rem; margin-bottom: 1.4rem; }
-    .compare-header__dot { width: 11px; height: 11px; border-radius: 50%; }
-    .compare-header__dot--muted { background: var(--neutral-300); }
-    .compare-header__dot--bbc   { background: var(--mid-blue); }
-    .compare-header__label { font-family: var(--font-ui); font-size: 0.95rem; font-weight: 700; color: var(--text-ink); }
+    /* ── Section spacing ── */
+    .section-pad { padding: 100px 0; }
+    @media (max-width: 768px) { .section-pad { padding: 64px 0; } }
 
-    .compare-list { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
-    .compare-list li {
-      display: flex; align-items: flex-start; gap: 0.7rem;
-      font-family: var(--font-body); font-size: 0.9rem; line-height: 1.7; color: var(--text-body);
-    }
-    .compare-marker { flex-shrink: 0; font-family: var(--font-ui); font-weight: 700; font-size: 0.9rem; line-height: 1.7; }
-    .compare-marker--no  { color: var(--neutral-300); }
-    .compare-marker--yes { color: var(--mid-blue); }
+    /* ── Hide hero visual on mobile ── */
+    @media (max-width: 640px) { .hero-visual { display: none !important; } }
 
-    /* Journey, horizontal steps with connecting line */
-    .journey__intro {
-      text-align: center;
-      font-family: var(--font-ui); font-size: 0.64rem; font-weight: 600;
-      letter-spacing: 0.16em; text-transform: uppercase;
-      color: var(--warm-blue); margin-bottom: 1.75rem;
-    }
+    /* ── Hamburger transition ── */
+    #hb1, #hb2, #hb3 { transition: transform 0.25s ease, opacity 0.25s ease; }
 
-    .journey-steps {
-      display: flex; position: relative;
-      max-width: 880px; margin: 0 auto;
-    }
-    /* Horizontal connecting line through step numbers */
-    .journey-steps::before {
-      content: '';
-      position: absolute; top: 21px; left: 10%; right: 10%;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(75,111,165,0.2) 20%, rgba(75,111,165,0.2) 80%, transparent);
-    }
-
-    .journey-step {
-      flex: 1; display: flex; flex-direction: column;
-      align-items: center; text-align: center;
-      padding: 0 0.65rem; position: relative;
-    }
-    .journey-step__num {
-      width: 42px; height: 42px; border-radius: 50%;
-      background: var(--bg-card);
-      border: 2px solid rgba(75,111,165,0.25);
-      display: flex; align-items: center; justify-content: center;
-      font-family: var(--font-ui); font-size: 0.78rem; font-weight: 700;
-      color: var(--mid-blue); margin-bottom: 1rem;
-      position: relative; z-index: 1;
-      box-shadow: var(--shadow-xs);
-    }
-    .journey-step__title {
-      font-family: var(--font-ui); font-size: 0.78rem; font-weight: 700;
-      color: var(--deep-blue); margin-bottom: 0.35rem;
-    }
-    .journey-step__body {
-      font-family: var(--font-body); font-size: 0.74rem;
-      color: var(--text-muted); line-height: 1.55;
-    }
-
-    @media (max-width: 700px) {
-      .journey-steps { flex-direction: column; gap: 1.25rem; }
-      .journey-steps::before { display: none; }
-      .journey-step { flex-direction: row; text-align: left; gap: 1rem; align-items: flex-start; }
-      .journey-step__num { flex-shrink: 0; margin-bottom: 0; }
-    }
-
-
-    /* ══════════════════════════════════════════════════════════
-       S5, HOW WE WORK  ·  --bg-dark  ·  Contrast moment
-       After two warm cream sections, a cinematic dark section
-       breaks the rhythm and adds visual depth.
-    ══════════════════════════════════════════════════════════ */
-    .how-work {
-      background: var(--bg-dark);
-      padding: var(--s7) 0;
-      position: relative; overflow: hidden;
-    }
-    .how-work::before {
-      content: '';
-      position: absolute; top: -80px; right: -80px;
-      width: 520px; height: 520px;
-      background: radial-gradient(ellipse at center, rgba(184,146,62,0.06) 0%, transparent 65%);
-      pointer-events: none;
-    }
-    .how-work::after {
-      content: '';
-      position: absolute; bottom: -60px; left: -60px;
-      width: 380px; height: 380px;
-      background: radial-gradient(ellipse at center, rgba(109,143,199,0.05) 0%, transparent 62%);
-      pointer-events: none;
-    }
-
-    .how-work__header { text-align: center; max-width: 580px; margin: 0 auto var(--s5); }
-    .how-work__header h2 { color: #fff; margin-bottom: 1rem; }
-    .how-work__header p  { color: rgba(245,241,234,0.6); }
-
-    /* 5-step card grid on dark */
-    .how-work__grid {
-      display: grid; grid-template-columns: repeat(5, 1fr);
-      gap: 1.1rem; position: relative; margin-bottom: var(--s4);
-    }
-    /* Connecting hairline through all number badges */
-    .how-work__grid::before {
-      content: '';
-      position: absolute; top: 22px; left: 5%; right: 5%;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(184,146,62,0.2) 20%, rgba(184,146,62,0.2) 80%, transparent);
-      z-index: 0;
-    }
-
-    @media (max-width: 900px) { .how-work__grid { grid-template-columns: repeat(2, 1fr); } .how-work__grid::before { display: none; } }
-    @media (max-width: 520px) { .how-work__grid { grid-template-columns: 1fr; } }
-
-    .how-work-card {
-      background: rgba(245,230,200,0.04);
-      border: 1px solid rgba(245,230,200,0.08);
-      border-radius: var(--radius);
-      padding: 1.75rem 1.4rem;
-      display: flex; flex-direction: column; align-items: center; text-align: center;
-      position: relative; z-index: 1;
-      transition: background 0.25s ease;
-    }
-    .how-work-card:hover { background: rgba(245,230,200,0.08); }
-
-    .how-work-card__num {
-      width: 44px; height: 44px; border-radius: 50%;
-      background: var(--gold);
-      display: flex; align-items: center; justify-content: center;
-      font-family: var(--font-ui); font-size: 0.84rem; font-weight: 700;
-      color: #fff; margin-bottom: 1.1rem;
-      box-shadow: 0 4px 18px rgba(184,146,62,0.4);
-      position: relative; z-index: 1;
-    }
-    .how-work-card h4 {
-      font-family: var(--font-ui); font-size: 0.86rem; font-weight: 700;
-      color: rgba(245,241,234,0.88); margin-bottom: 0.55rem;
-    }
-    .how-work-card p {
-      font-size: 0.8rem; color: rgba(245,241,234,0.44); line-height: 1.65;
-    }
-
-    .how-work__footer { text-align: center; position: relative; z-index: 1; }
-
-
-    /* ══════════════════════════════════════════════════════════
-       S6, AREAS WHERE WE SHOW UP  ·  --bg-primary (warm cream)
-    ══════════════════════════════════════════════════════════ */
-    .areas-grid {
-      display: grid; grid-template-columns: repeat(4, 1fr);
-      gap: 1.25rem; margin-top: var(--s4);
-    }
-    @media (max-width: 900px) { .areas-grid { grid-template-columns: repeat(2, 1fr); } }
-    @media (max-width: 520px) { .areas-grid { grid-template-columns: 1fr; } }
-
-    .area-card {
-      background: var(--bg-card); border: var(--border-card);
-      border-radius: var(--radius-lg); padding: 1.75rem 1.6rem;
-      box-shadow: var(--shadow-xs);
-      transition: box-shadow 0.3s ease, transform 0.3s ease;
-    }
-    .area-card:hover { box-shadow: var(--shadow-md); transform: translateY(-3px); }
-    .area-card__icon { font-size: 1.6rem; margin-bottom: 1rem; display: block; }
-    .area-card__tag {
-      display: inline-block; font-family: var(--font-ui);
-      font-size: 0.6rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
-      color: var(--warm-blue); background: rgba(109,143,199,0.1);
-      padding: 3px 10px; border-radius: 999px; margin-bottom: 0.7rem;
-    }
-    .area-card h3 { font-size: 1rem; margin-bottom: 0.55rem; }
-    .area-card p  { font-size: 0.84rem; color: var(--text-muted); line-height: 1.68; }
-    .area-card--feature { background: var(--deep-blue); border-color: transparent; }
-    .area-card--feature h3, .area-card--feature p { color: var(--text-warm); }
-    .area-card--feature p { color: rgba(245,241,234,0.65); }
-    .area-card--feature .area-card__tag { color: var(--gold-pale); background: rgba(184,146,62,0.2); }
-    .areas__footer { text-align: center; margin-top: 2.5rem; }
-
-
-    /* ══════════════════════════════════════════════════════════
-       S7, TEAM  ·  --bg-section (deeper cream)
-    ══════════════════════════════════════════════════════════ */
-    .team-grid {
-      display: grid; grid-template-columns: repeat(4, 1fr);
-      gap: 1.5rem; margin-top: var(--s4);
-    }
-    @media (max-width: 1024px) { .team-grid { grid-template-columns: repeat(2, 1fr); } }
-    @media (max-width: 540px) { .team-grid { grid-template-columns: 1fr; } }
-
-    .team-card {
-      background: var(--bg-card); border: var(--border-card);
-      border-radius: var(--radius-lg); padding: 2rem 1.75rem;
-      box-shadow: var(--shadow-xs); text-align: center;
-      transition: box-shadow 0.25s ease, transform 0.25s ease;
-    }
-    .team-card:hover { box-shadow: var(--shadow-md); transform: translateY(-3px); }
-    .team-card--featured { border: 2px solid rgba(75,111,165,0.3); }
-
-    .team-card__avatar {
-      width: 80px; height: 80px; border-radius: 50%;
-      background: linear-gradient(135deg, var(--pale-blue), var(--mid-blue));
-      margin: 0 auto 1.1rem;
-      display: flex; align-items: center; justify-content: center;
-      font-family: var(--font-display); font-size: 1.4rem; font-weight: 700; color: #fff;
-    }
-    .team-card--featured .team-card__avatar { background: linear-gradient(135deg, var(--gold-pale), var(--gold)); }
-    .team-card h3 { font-size: 1.05rem; margin-bottom: 0.25rem; }
-    .team-card__role {
-      font-family: var(--font-ui); font-size: 0.72rem; font-weight: 600;
-      letter-spacing: 0.08em; text-transform: uppercase;
-      color: var(--warm-blue); margin-bottom: 0.9rem;
-    }
-    .team-card--featured .team-card__role { color: var(--gold); }
-    .team-card p { font-size: 0.86rem; color: var(--text-muted); line-height: 1.68; }
-    .team-card__badge {
-      display: inline-block; margin-top: 0.9rem;
-      font-family: var(--font-ui); font-size: 0.65rem; font-weight: 700;
-      letter-spacing: 0.08em; text-transform: uppercase;
-      color: var(--gold); background: rgba(184,146,62,0.1);
-      padding: 4px 12px; border-radius: 999px;
-    }
-    .team__footer { text-align: center; margin-top: 2.5rem; }
-
-
-    /* ══════════════════════════════════════════════════════════
-       S8, REAL RELATIONSHIPS  ·  --bg-dark
-    ══════════════════════════════════════════════════════════ */
-    .real__header { text-align: center; max-width: 600px; margin: 0 auto var(--s5); }
-    .real__header h2 { color: #fff; margin-bottom: 1rem; }
-    .real__header p  { color: rgba(245,241,234,0.62); }
-
-    .reviews-grid {
-      display: grid; grid-template-columns: repeat(3, 1fr);
-      gap: 1.25rem; margin-bottom: var(--s5);
-    }
-    @media (max-width: 860px) { .reviews-grid { grid-template-columns: 1fr 1fr; } }
-    @media (max-width: 540px) { .reviews-grid { grid-template-columns: 1fr; } }
-
-    .review-card {
-      background: rgba(245,230,200,0.04); border: var(--border-dark);
-      border-radius: var(--radius); padding: 1.75rem 1.6rem;
-      transition: background 0.25s;
-    }
-    .review-card:hover { background: rgba(245,230,200,0.07); }
-    .review-stars { font-size: 0.85rem; color: var(--gold); letter-spacing: 1px; margin-bottom: 0.9rem; }
-    .review-card p {
-      font-family: var(--font-body); font-size: 0.9rem; font-style: italic;
-      color: rgba(245,241,234,0.78); line-height: 1.75; margin-bottom: 1.25rem;
-    }
-    .review-author { display: flex; align-items: center; gap: 0.75rem; }
-    .review-author__avatar {
-      width: 36px; height: 36px; border-radius: 50%;
-      background: rgba(184,146,62,0.25);
-      display: flex; align-items: center; justify-content: center;
-      font-family: var(--font-ui); font-size: 0.7rem; font-weight: 700;
-      color: var(--gold-pale); flex-shrink: 0;
-    }
-    .review-author__name { font-family: var(--font-ui); font-size: 0.78rem; font-weight: 700; color: rgba(245,241,234,0.85); }
-    .review-author__title { font-family: var(--font-ui); font-size: 0.66rem; color: rgba(245,241,234,0.42); }
-
-    .real__row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
-    @media (max-width: 720px) { .real__row { grid-template-columns: 1fr; } }
-
-    .real__sub-label {
-      font-family: var(--font-ui); font-size: 0.62rem; font-weight: 600;
-      letter-spacing: 0.16em; text-transform: uppercase;
-      color: rgba(245,241,234,0.3); margin-bottom: 1rem;
-    }
-    .work-previews { display: flex; flex-direction: column; gap: 0.9rem; }
-    .work-preview-card {
-      background: rgba(245,230,200,0.04); border: var(--border-dark);
-      border-radius: var(--radius); padding: 1.1rem 1.3rem;
-      display: flex; align-items: center; gap: 1rem; transition: background 0.25s;
-    }
-    .work-preview-card:hover { background: rgba(245,230,200,0.07); }
-    .work-preview__thumb {
-      width: 52px; height: 52px; border-radius: var(--radius-sm);
-      background: linear-gradient(135deg, rgba(184,146,62,0.2), rgba(75,111,165,0.2));
-      flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 1.3rem;
-    }
-    .work-preview__info { flex: 1; }
-    .work-preview__name { font-family: var(--font-ui); font-size: 0.84rem; font-weight: 600; color: rgba(245,241,234,0.85); margin-bottom: 0.2rem; }
-    .work-preview__tag  { font-family: var(--font-ui); font-size: 0.66rem; color: rgba(245,241,234,0.38); }
-
-    .insights-list { display: flex; flex-direction: column; gap: 0.9rem; }
-    .insight-item {
-      background: rgba(245,230,200,0.04); border: var(--border-dark);
-      border-radius: var(--radius); padding: 1.1rem 1.3rem; transition: background 0.25s;
-    }
-    .insight-item:hover { background: rgba(245,230,200,0.07); }
-    .insight-item__meta { font-family: var(--font-ui); font-size: 0.64rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.4rem; }
-    .insight-item__title { font-family: var(--font-display); font-size: 0.92rem; color: rgba(245,241,234,0.88); line-height: 1.45; margin-bottom: 0.3rem; }
-    .insight-item__body  { font-family: var(--font-body); font-size: 0.76rem; color: rgba(245,241,234,0.42); line-height: 1.6; }
-    .real__footer { text-align: center; margin-top: var(--s4); }
-
-
-    /* ══════════════════════════════════════════════════════════
-       S9, FOUNDER ANCHOR  ·  --bg-primary (warm cream)
-    ══════════════════════════════════════════════════════════ */
-    .founder__grid { display: grid; grid-template-columns: 2fr 3fr; gap: var(--s6); align-items: center; }
-    @media (max-width: 860px) { .founder__grid { grid-template-columns: 1fr; } }
-
-    .founder__photo-block { position: relative; }
-    .founder__photo-placeholder {
-      width: 100%; max-height: 480px; aspect-ratio: 3/4;
-      border-radius: var(--radius-xl);
-      background: var(--bg-section); border: var(--border-warm);
-      display: flex; flex-direction: column; align-items: center; justify-content: center;
-      box-shadow: var(--shadow-md);
-    }
-    .founder__photo-placeholder span { font-size: 4rem; opacity: 0.35; display: block; margin-bottom: 1rem; }
-    .founder__photo-placeholder p { font-family: var(--font-ui); font-size: 0.72rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--neutral-300); }
-    .founder__badge {
-      position: absolute; bottom: -1rem; right: -1rem;
-      background: var(--deep-blue); border-radius: var(--radius);
-      padding: 1rem 1.25rem; box-shadow: var(--shadow-md);
-      text-align: center; min-width: 120px;
-    }
-    .founder__badge-num  { font-family: var(--font-display); font-size: 1.6rem; font-weight: 700; color: var(--gold-pale); line-height: 1; }
-    .founder__badge-label { font-family: var(--font-ui); font-size: 0.62rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(245,241,234,0.5); margin-top: 0.2rem; }
-
-    .founder__copy h2 { margin-bottom: 1.25rem; }
-    .founder__copy p  { margin-bottom: 1.1rem; }
-    .founder__copy p.lead { margin-bottom: 1.4rem; }
-
-    .founder__values { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin: 1.75rem 0; }
-    @media (max-width: 480px) { .founder__values { grid-template-columns: 1fr; } }
-
-    .founder__value { display: flex; align-items: flex-start; gap: 0.65rem; }
-    .founder__value-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--gold); flex-shrink: 0; margin-top: 6px; }
-    .founder__value-text { font-family: var(--font-body); font-size: 0.88rem; color: var(--text-body); line-height: 1.6; }
-    .founder__value-text strong { font-family: var(--font-ui); font-weight: 700; color: var(--deep-blue); display: block; font-size: 0.82rem; }
-
-    .founder__sig { margin-top: 1.75rem; display: flex; align-items: center; gap: 1rem; }
-    .founder__sig-line  { width: 44px; height: 2px; background: var(--gold); opacity: 0.6; }
-    .founder__sig-name  { font-family: var(--font-display); font-size: 1.05rem; font-style: italic; color: var(--deep-blue); }
-    .founder__sig-title { font-family: var(--font-ui); font-size: 0.66rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--warm-blue); }
-
-
-    /* ══════════════════════════════════════════════════════════
-       S10, TRUSTED PARTNER  ·  --bg-section (deeper cream)
-    ══════════════════════════════════════════════════════════ */
-    .partner__header { text-align: center; max-width: 600px; margin: 0 auto var(--s5); }
-    .partner__header h2 { margin-bottom: 1rem; }
-    .partner__header p  { color: var(--text-body); }
-
-    .partner-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
-    @media (max-width: 860px) { .partner-grid { grid-template-columns: 1fr 1fr; } }
-    @media (max-width: 540px) { .partner-grid { grid-template-columns: 1fr; } }
-
-    .partner-card {
-      background: var(--bg-card); border: var(--border-card);
-      border-radius: var(--radius-lg); padding: 2rem 1.75rem;
-      box-shadow: var(--shadow-xs); transition: box-shadow 0.25s, transform 0.25s;
-    }
-    .partner-card:hover { box-shadow: var(--shadow-md); transform: translateY(-3px); }
-    .partner-card__icon { font-size: 1.7rem; display: block; margin-bottom: 1rem; }
-    .partner-card h3 { font-size: 1.05rem; margin-bottom: 0.55rem; }
-    .partner-card p  { font-size: 0.86rem; color: var(--text-muted); line-height: 1.68; }
-
-
-    /* ══════════════════════════════════════════════════════════
-       S11, FINAL CTA  ·  --bg-dark
-    ══════════════════════════════════════════════════════════ */
-    .final-cta { background: var(--bg-dark); position: relative; overflow: hidden; }
-    .final-cta::before {
-      content: '';
-      position: absolute; top: -100px; right: -100px;
-      width: 500px; height: 500px;
-      background: radial-gradient(ellipse at center, rgba(184,146,62,0.07) 0%, transparent 65%);
-      pointer-events: none;
-    }
-    .final-cta::after {
-      content: '';
-      position: absolute; bottom: -80px; left: -80px;
-      width: 380px; height: 380px;
-      background: radial-gradient(ellipse at center, rgba(109,143,199,0.06) 0%, transparent 60%);
-      pointer-events: none;
-    }
-    .final-cta__inner { max-width: 720px; margin: 0 auto; text-align: center; position: relative; z-index: 1; }
-    .final-cta h2 { color: #fff; margin-bottom: 1.25rem; }
-    .final-cta p  { color: rgba(245,241,234,0.65); font-size: 1.05rem; line-height: 1.88; margin-bottom: 2.5rem; }
-    .final-cta__actions { display: flex; justify-content: center; gap: 1.1rem; flex-wrap: wrap; margin-bottom: 2rem; }
-    .final-cta__note { font-family: var(--font-ui); font-size: 0.72rem; color: rgba(245,241,234,0.3); letter-spacing: 0.04em; }
-
-
-    /* ── FOOTER ──────────────────────────────────────────────── */
-    .footer { background: var(--bg-footer); border-top: var(--border-dark); padding: var(--s6) 0 var(--s4); }
-    .footer__grid {
-      max-width: var(--max-width); margin: 0 auto; padding: 0 var(--s4);
-      display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
-      gap: var(--s5); margin-bottom: var(--s5);
-    }
-    @media (max-width: 900px) { .footer__grid { grid-template-columns: 1fr 1fr; gap: var(--s4); } }
-    @media (max-width: 540px) { .footer__grid { grid-template-columns: 1fr; gap: var(--s3); } }
-
-    .footer__brand-name { font-family: var(--font-display); font-size: 1.1rem; font-weight: 700; color: rgba(245,241,234,0.88); margin-bottom: 0.35rem; }
-    .footer__brand-sub  { font-family: var(--font-ui); font-size: 0.58rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--warm-blue); opacity: 0.7; margin-bottom: 1rem; }
-    .footer__brand-copy { font-family: var(--font-body); font-size: 0.86rem; line-height: 1.78; color: rgba(245,241,234,0.45); }
-    .footer__col-label  { font-family: var(--font-ui); font-size: 0.64rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(245,241,234,0.35); margin-bottom: 1rem; }
-    .footer__links { list-style: none; display: flex; flex-direction: column; gap: 0.55rem; }
-    .footer__links a { font-family: var(--font-ui); font-size: 0.84rem; color: rgba(245,241,234,0.5); transition: color 0.2s; }
-    .footer__links a:hover { color: rgba(245,241,234,0.85); }
-
-    .footer__bottom {
-      max-width: var(--max-width); margin: 0 auto; padding: var(--s3) var(--s4) 0;
-      border-top: var(--border-dark);
-      display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap;
-    }
-    .footer__copyright { font-family: var(--font-ui); font-size: 0.72rem; color: rgba(245,241,234,0.28); }
-    .footer__legal { display: flex; gap: 1.25rem; }
-    .footer__legal a { font-family: var(--font-ui); font-size: 0.72rem; color: rgba(245,241,234,0.28); transition: color 0.2s; }
-    .footer__legal a:hover { color: rgba(245,241,234,0.6); }
-
+    /* ── Smooth interactions ── */
+    a, button { transition: opacity 0.2s ease, background 0.2s ease, color 0.2s ease, border-color 0.2s ease; }
   </style>
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    "name": "Balay ni Bruno & Co.",
-    "url": "https://balaynibruno.co",
-    "logo": "https://balaynibruno.co/bbc-logo.png",
-    "description": "A family-built operational support studio helping business owners grow through real collaboration, thoughtful systems, and long-term care.",
-    "email": "admin@balaynibruno.co",
-    "telephone": "+63-935-663-0324",
-    "founder": {
-      "@type": "Person",
-      "name": "RJ Bryan Tres Reyes",
-      "jobTitle": "Founder & Lead Strategist"
-    },
-    "contactPoint": {
-      "@type": "ContactPoint",
-      "telephone": "+63-935-663-0324",
-      "email": "admin@balaynibruno.co",
-      "contactType": "customer service",
-      "availableLanguage": "English"
-    },
-    "areaServed": ["US", "GB", "PH", "International"],
-    "knowsAbout": ["Operational Support", "E-Commerce", "Social Media Management", "AI Automation", "Content Creation", "Shopify Development"]
-  }
-  </script>
 </head>
 <body>
 
-  <!-- ── HEADER ───────────────────────────────────────────────── -->
-  <header class="site-header" id="siteHeader">
-    <div class="header__inner">
-      <a href="index.html" class="header__logo">
-        <img src="bbc-logo.png" alt="Balay ni Bruno &amp; Co." style="height:42px; width:auto; display:block;">
-        <span class="header__logo-name">Balay ni Bruno &amp; Co.</span>
-      </a>
-      <nav>
-        <ul class="header__nav">
-          <li><a href="index.html" class="active">Home</a></li>
-          <li><a href="about.html">Our Story</a></li>
-          <li><a href="how-it-works.html">How It Works</a></li>
-          <li><a href="how-we-help.html">How We Help</a></li>
-          <li><a href="our-team.html">Our Team</a></li>
-          <li><a href="our-work.html">Our Work</a></li>
-          <li><a href="insights.html">Insights</a></li>
-          <li><a href="contact.html">Contact</a></li>
-        </ul>
-      </nav>
-      <div class="header__cta">
-        <a href="contact.html" class="btn btn-outline btn-sm">Start a Conversation</a>
-        <a href="https://calendly.com/rj-balaynibruno/bbc-strategy-call" target="_blank" rel="noopener noreferrer" class="btn btn-gold btn-sm">Book a Call</a>
-        <button class="hamburger" id="hamburger" aria-label="Open menu">
-          <span></span><span></span><span></span>
-        </button>
-      </div>
-    </div>
-    <nav class="mobile-menu" id="mobileMenu">
-      <a href="index.html">Home</a>
-      <a href="about.html">Our Story</a>
-      <a href="how-it-works.html">How It Works</a>
-      <a href="how-we-help.html">How We Help</a>
-      <a href="our-team.html">Our Team</a>
-      <a href="our-work.html">Our Work</a>
-      <a href="insights.html">Insights</a>
-      <a href="contact.html">Contact</a>
-      <a href="https://calendly.com/rj-balaynibruno/bbc-strategy-call" target="_blank" rel="noopener noreferrer" class="btn btn-gold mobile-cta">Book a Call</a>
+<!-- ════════════════════════════════════════════
+     HEADER
+════════════════════════════════════════════ -->
+<header id="site-header" class="fixed top-0 left-0 right-0 z-50 bg-white border-b border-gray-100">
+  <div class="max-w-7xl mx-auto px-6 flex items-center justify-between h-16">
+
+    <!-- Logo -->
+    <a href="#home" class="flex items-center gap-3 no-underline">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 210" width="36" height="36"
+           style="color:#2D5BFF; flex-shrink:0;" aria-hidden="true">
+        <!-- Chimney -->
+        <rect x="38" y="6" width="13" height="62" rx="2" fill="currentColor"/>
+        <!-- Roof left -->
+        <line x1="100" y1="38" x2="6" y2="90" stroke="currentColor" stroke-width="9" stroke-linecap="round"/>
+        <!-- Roof right -->
+        <line x1="100" y1="38" x2="194" y2="90" stroke="currentColor" stroke-width="9" stroke-linecap="round"/>
+        <!-- Monitor frame -->
+        <rect x="24" y="90" width="152" height="86" rx="6" fill="none" stroke="currentColor" stroke-width="9"/>
+        <!-- BBC text inside monitor -->
+        <text x="100" y="154" text-anchor="middle" font-size="46" font-weight="800"
+              font-family="Georgia,'Times New Roman',serif" fill="currentColor">BBC</text>
+        <!-- Stand neck -->
+        <rect x="91" y="176" width="18" height="18" rx="2" fill="currentColor"/>
+        <!-- Stand base -->
+        <rect x="64" y="194" width="72" height="11" rx="5.5" fill="currentColor"/>
+      </svg>
+      <span class="font-bold" style="color:#0B1120; font-weight:700; font-size:15px; letter-spacing:-0.01em;">
+        Balay ni Bruno &amp; Co.
+      </span>
+    </a>
+
+    <!-- Desktop Nav -->
+    <nav class="hidden lg:flex items-center gap-6">
+      <a href="index.html"     style="color:#2D5BFF; font-weight:700; font-size:14px;">Home</a>
+      <a href="about.html"     style="color:#475569; font-weight:500; font-size:14px;" class="hover:text-navy transition-colors">Our Story</a>
+      <a href="how-it-works.html" style="color:#475569; font-weight:500; font-size:14px;" class="hover:text-navy transition-colors">How It Works</a>
+      <a href="how-we-help.html" style="color:#475569; font-weight:500; font-size:14px;" class="hover:text-navy transition-colors">How We Help</a>
+      <a href="#team"          style="color:#475569; font-weight:500; font-size:14px;" class="hover:text-navy transition-colors">Team</a>
+      <a href="our-work.html"  style="color:#475569; font-weight:500; font-size:14px;" class="hover:text-navy transition-colors">Our Work</a>
+      <a href="ai-agents.html" style="color:#475569; font-weight:500; font-size:14px;" class="hover:text-navy transition-colors">AI Agents</a>
+      <a href="#insights"      style="color:#475569; font-weight:500; font-size:14px;" class="hover:text-navy transition-colors">Insights</a>
+      <a href="#contact"       style="color:#475569; font-weight:500; font-size:14px;" class="hover:text-navy transition-colors">Contact</a>
     </nav>
-  </header>
 
-
-  <!-- ══════════════════════════════════════════════════════════
-       S1, HERO  ·  Dark cinematic anchor
-  ══════════════════════════════════════════════════════════ -->
-  <section class="hero" id="home">
-    <div class="hero__grid">
-
-      <div class="hero__copy">
-        <div class="hero__eyebrow">
-          <span class="hero__eyebrow-dot"></span>
-          Balay ni Bruno &amp; Co. &mdash; Family-Built, Founder-Led
-        </div>
-
-        <h1 class="hero__title">
-          <em>A Team You Can<br>Actually Grow With.</em>
-        </h1>
-
-        <p class="hero__body">
-          We're not a vendor you hand tasks to and forget about. We're the operational backbone that grows alongside you, a family-built studio of people who show up, learn your business deeply, and stay for the long haul.
-        </p>
-
-        <div class="hero__actions">
-          <a href="https://calendly.com/rj-balaynibruno/bbc-strategy-call" target="_blank" rel="noopener noreferrer" class="btn btn-gold">Book a Call &rarr;</a>
-          <a href="how-it-works.html" class="btn btn-warm-outline">See How We Work</a>
-        </div>
-
-        <div class="hero__trust">
-          <span class="hero__trust-label">Built on</span>
-          <div class="hero__trust-items">
-            <span class="hero__trust-item">Real relationships</span>
-            <span class="hero__trust-item">Long-term care</span>
-            <span class="hero__trust-item">Organized systems</span>
-            <span class="hero__trust-item">Founder-guided</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="hero__visual">
-        <div class="hero__studio">
-          <div class="hero__studio-header">
-            <div class="hero__studio-dot"></div>
-            <span class="hero__studio-name">BBC Studio</span>
-            <span class="hero__studio-badge">Active</span>
-          </div>
-
-          <div class="hero__service-list">
-            <div class="hero__service-row">
-              <span class="hero__service-icon">🌐</span>
-              <span class="hero__service-name">Website Design &amp; Development</span>
-              <span class="hero__service-tag">Foundation</span>
-            </div>
-            <div class="hero__service-row">
-              <span class="hero__service-icon">🔍</span>
-              <span class="hero__service-name">SEO &amp; Search Presence</span>
-              <span class="hero__service-tag">Visibility</span>
-            </div>
-            <div class="hero__service-row">
-              <span class="hero__service-icon">⚙️</span>
-              <span class="hero__service-name">AI Systems &amp; Automation</span>
-              <span class="hero__service-tag">Efficiency</span>
-            </div>
-            <div class="hero__service-row">
-              <span class="hero__service-icon">🎨</span>
-              <span class="hero__service-name">Brand Identity &amp; Design</span>
-              <span class="hero__service-tag">Identity</span>
-            </div>
-          </div>
-
-          <div class="hero__studio-divider"></div>
-
-          <div class="hero__studio-stats">
-            <div class="hero__studio-stat">
-              <div class="hero__studio-stat-num">5+</div>
-              <div class="hero__studio-stat-label">Years</div>
-            </div>
-            <div class="hero__studio-stat">
-              <div class="hero__studio-stat-num">40+</div>
-              <div class="hero__studio-stat-label">Clients</div>
-            </div>
-            <div class="hero__studio-stat">
-              <div class="hero__studio-stat-num">100%</div>
-              <div class="hero__studio-stat-label">Founder-Led</div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-
-  <!-- ══════════════════════════════════════════════════════════
-       S2, STATS BAR  ·  Dark seamless extension of hero
-       Amber hairline separates sections; rhythm stays dark.
-  ══════════════════════════════════════════════════════════ -->
-  <div class="stats-bar">
-    <div class="stats-bar__inner">
-      <div class="stats-bar__item fade-in">
-        <div class="stats-bar__num">100%</div>
-        <div class="stats-bar__label">Founder-Guided<br>Every Project</div>
-      </div>
-      <div class="stats-bar__item fade-in">
-        <div class="stats-bar__num">40+</div>
-        <div class="stats-bar__label">Long-Term Client<br>Relationships</div>
-      </div>
-      <div class="stats-bar__item fade-in">
-        <div class="stats-bar__num">7</div>
-        <div class="stats-bar__label">Support Areas<br>Under One Roof</div>
-      </div>
-      <div class="stats-bar__item fade-in">
-        <div class="stats-bar__num">5+</div>
-        <div class="stats-bar__label">Years Building<br>Real Partnerships</div>
-      </div>
-      <div class="stats-bar__item fade-in">
-        <div class="stats-bar__num">🏡</div>
-        <div class="stats-bar__label">Balay, "Home"<br>in Every Engagement</div>
-      </div>
+    <!-- CTA + Hamburger -->
+    <div class="flex items-center gap-3">
+      <a href="#cta"
+         class="hidden md:inline-flex items-center px-5 py-2 rounded-full text-white font-semibold text-sm"
+         style="background:#2D5BFF; font-weight:600;">
+        Book a Call
+      </a>
+      <button id="hamburger" class="lg:hidden flex flex-col gap-1.5 p-2" aria-label="Toggle navigation menu">
+        <span id="hb1" class="block w-5 h-0.5 bg-gray-700 rounded"></span>
+        <span id="hb2" class="block w-5 h-0.5 bg-gray-700 rounded"></span>
+        <span id="hb3" class="block w-5 h-0.5 bg-gray-700 rounded"></span>
+      </button>
     </div>
   </div>
 
+  <!-- Mobile Nav Dropdown -->
+  <div id="mobile-nav" class="lg:hidden flex-col border-t border-gray-100 bg-white px-6 py-4 gap-0.5">
+    <a href="index.html"     class="block py-2.5 text-sm font-bold" style="color:#2D5BFF;">Home</a>
+    <a href="about.html"     class="block py-2.5 text-sm font-medium" style="color:#475569;">Our Story</a>
+    <a href="how-it-works.html" class="block py-2.5 text-sm font-medium" style="color:#475569;">How It Works</a>
+    <a href="how-we-help.html" class="block py-2.5 text-sm font-medium" style="color:#475569;">How We Help</a>
+    <a href="#team"          class="block py-2.5 text-sm font-medium" style="color:#475569;">Team</a>
+    <a href="our-work.html"  class="block py-2.5 text-sm font-medium" style="color:#475569;">Our Work</a>
+    <a href="ai-agents.html" class="block py-2.5 text-sm font-medium" style="color:#475569;">AI Agents</a>
+    <a href="#insights"      class="block py-2.5 text-sm font-medium" style="color:#475569;">Insights</a>
+    <a href="#contact"       class="block py-2.5 text-sm font-medium" style="color:#475569;">Contact</a>
+    <a href="#cta"
+       class="block mt-3 text-center px-5 py-2.5 rounded-full text-white font-semibold text-sm"
+       style="background:#2D5BFF;">
+      Book a Call
+    </a>
+  </div>
+</header>
 
-  <!-- ══════════════════════════════════════════════════════════
-       S3, BALAY PHILOSOPHY + FOUNDER  ·  Warm cream, The Breath
-       After the dark opening, this is the emotional landing.
-  ══════════════════════════════════════════════════════════ -->
-  <section class="philosophy" id="philosophy">
-    <div class="container">
-      <div class="philosophy__grid">
 
-        <div class="philosophy__copy fade-in">
-          <span class="eyebrow eyebrow--gold">Our Philosophy</span>
-          <h2>Built Around People.<br>Organized by Systems.</h2>
-          <div class="divider-bar divider-bar--left"></div>
+<!-- ════════════════════════════════════════════
+     SECTION 1 — HERO
+════════════════════════════════════════════ -->
+<section id="home" style="background:#0B1120; min-height:90vh; padding-top:64px;" class="flex items-center">
+  <div class="max-w-7xl mx-auto px-6 w-full py-20 flex flex-col lg:flex-row items-center gap-12">
 
-          <p class="lead">
-            "Balay" means home in Visayan. That name isn't decoration, it's how we treat every client relationship. You're not a ticket in a queue. You're someone we show up for.
+    <!-- Left copy -->
+    <div class="w-full lg:w-3/5 fade-in">
+      <span class="inline-block text-xs font-semibold uppercase mb-6"
+            style="color:#2D5BFF; letter-spacing:0.14em;">
+        Managed Virtual Operations Support
+      </span>
+
+      <h1 class="font-bold text-white"
+          style="font-size:clamp(32px,4.5vw,56px); line-height:1.15; font-weight:700;">
+        Reliable Digital Support&nbsp;—<br>
+        Built Around Your Business,<br>
+        Not Just Assigned to It
+      </h1>
+
+      <p class="mt-5"
+         style="color:rgba(255,255,255,0.75); font-size:18px; line-height:1.7; max-width:540px;">
+        BBC helps business owners get organized digital support through matched assistants,
+        founder-led setup, structured workflows, and long-term operational collaboration —
+        so you're never left managing the work alone.
+      </p>
+
+      <div class="flex flex-wrap gap-4 mt-9">
+        <a href="#cta"
+           class="inline-flex items-center px-8 py-4 rounded-full text-white font-bold"
+           style="background:#2D5BFF; font-size:16px; font-weight:700;">
+          Book a Call
+        </a>
+        <a href="#how-it-works"
+           class="inline-flex items-center px-8 py-4 rounded-full font-semibold"
+           style="border:2px solid rgba(255,255,255,0.8); color:white; font-size:16px; font-weight:600; background:transparent;">
+          See How It Works
+        </a>
+      </div>
+
+      <p class="mt-12" style="font-size:13px; color:rgba(255,255,255,0.45);">
+        Serving clients in the US, UK, and internationally
+      </p>
+    </div>
+
+    <!-- Right illustrated card cluster (desktop only) -->
+    <div class="hero-visual w-full lg:w-2/5 flex-shrink-0" style="position:relative; height:360px;">
+
+      <!-- Card 1: Team card (back-left, rotated) -->
+      <div class="hero-card fade-in"
+           style="width:220px; top:10px; left:20px; transform:rotate(-4deg);">
+        <div class="flex items-center gap-2 mb-2">
+          <div class="w-3 h-3 rounded-full" style="background:#2D5BFF;"></div>
+          <span style="color:rgba(255,255,255,0.7); font-size:12px; font-weight:600;">Team Assignment</span>
+        </div>
+        <div class="hero-card-line w-full"></div>
+        <div class="hero-card-line" style="width:70%;"></div>
+        <div class="hero-card-line" style="width:50%;"></div>
+        <div class="flex items-center gap-1.5 mt-4">
+          <div class="w-6 h-6 rounded-full flex items-center justify-center text-white font-bold"
+               style="background:#2D5BFF; font-size:9px;">BB</div>
+          <div class="w-6 h-6 rounded-full flex items-center justify-center text-white font-bold"
+               style="background:rgba(255,255,255,0.15); font-size:9px;">MC</div>
+          <div class="w-6 h-6 rounded-full flex items-center justify-center text-white font-bold"
+               style="background:rgba(255,255,255,0.15); font-size:9px;">WT</div>
+        </div>
+      </div>
+
+      <!-- Card 2: Workflow card (centre, slight tilt) -->
+      <div class="hero-card fade-in"
+           style="width:240px; top:60px; left:90px; transform:rotate(2deg); z-index:2;">
+        <div class="flex items-center gap-2 mb-3">
+          <div class="w-3 h-3 rounded-full" style="background:#2D5BFF;"></div>
+          <span style="color:rgba(255,255,255,0.7); font-size:12px; font-weight:600;">Workflow Setup</span>
+        </div>
+        <div class="flex flex-col gap-2">
+          <div class="flex items-center gap-2">
+            <div class="w-2 h-2 rounded-full" style="background:rgba(45,91,255,0.7);"></div>
+            <div style="flex:1; height:8px; border-radius:4px; background:rgba(255,255,255,0.13);"></div>
+          </div>
+          <div class="flex items-center gap-2">
+            <div class="w-2 h-2 rounded-full" style="background:rgba(45,91,255,0.45);"></div>
+            <div style="width:75%; height:8px; border-radius:4px; background:rgba(255,255,255,0.13);"></div>
+          </div>
+          <div class="flex items-center gap-2">
+            <div class="w-2 h-2 rounded-full" style="background:rgba(45,91,255,0.25);"></div>
+            <div style="width:55%; height:8px; border-radius:4px; background:rgba(255,255,255,0.13);"></div>
+          </div>
+        </div>
+        <div class="flex gap-2 mt-4">
+          <div style="background:rgba(45,91,255,0.25); color:#2D5BFF; font-size:10px; font-weight:600; padding:3px 10px; border-radius:999px;">In Progress</div>
+          <div style="background:rgba(255,255,255,0.07); color:rgba(255,255,255,0.5); font-size:10px; font-weight:500; padding:3px 10px; border-radius:999px;">3 tasks</div>
+        </div>
+      </div>
+
+      <!-- Card 3: Task card (front-right) -->
+      <div class="hero-card fade-in"
+           style="width:200px; top:165px; left:160px; transform:rotate(-1.5deg); z-index:3;">
+        <div class="flex items-center gap-2 mb-3">
+          <div class="w-3 h-3 rounded-full" style="background:#2D5BFF;"></div>
+          <span style="color:rgba(255,255,255,0.7); font-size:12px; font-weight:600;">Tasks This Week</span>
+        </div>
+        <div style="height:8px; border-radius:4px; background:rgba(255,255,255,0.13); width:100%;"></div>
+        <div style="height:8px; border-radius:4px; background:rgba(255,255,255,0.13); width:80%; margin-top:8px;"></div>
+        <div class="flex items-center justify-between mt-3">
+          <span style="font-size:11px; color:rgba(255,255,255,0.4);">Progress</span>
+          <span style="font-size:11px; color:#2D5BFF; font-weight:600;">8 / 12</span>
+        </div>
+        <div style="height:4px; border-radius:999px; background:rgba(255,255,255,0.1); margin-top:6px; overflow:hidden;">
+          <div style="width:66%; height:100%; background:#2D5BFF; border-radius:999px;"></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════
+     SECTION 2 — INDUSTRIES MARQUEE
+════════════════════════════════════════════ -->
+<section style="background:#0B1120; border-top:1px solid rgba(255,255,255,0.08); padding:20px 0; overflow:hidden;">
+  <div class="max-w-7xl mx-auto px-6 flex items-center gap-6">
+    <span class="flex-shrink-0 font-semibold uppercase whitespace-nowrap"
+          style="color:rgba(255,255,255,0.5); font-size:13px; letter-spacing:0.1em;">
+      Industries We Serve:
+    </span>
+    <div style="overflow:hidden; flex:1;">
+      <div class="marquee-track">
+        <span style="color:rgba(255,255,255,0.6); font-size:14px; padding-right:14px;">Real Estate</span><span style="color:rgba(45,91,255,0.5); padding-right:14px;">·</span>
+        <span style="color:rgba(255,255,255,0.6); font-size:14px; padding-right:14px;">E-Commerce</span><span style="color:rgba(45,91,255,0.5); padding-right:14px;">·</span>
+        <span style="color:rgba(255,255,255,0.6); font-size:14px; padding-right:14px;">Construction</span><span style="color:rgba(45,91,255,0.5); padding-right:14px;">·</span>
+        <span style="color:rgba(255,255,255,0.6); font-size:14px; padding-right:14px;">Home Services</span><span style="color:rgba(45,91,255,0.5); padding-right:14px;">·</span>
+        <span style="color:rgba(255,255,255,0.6); font-size:14px; padding-right:14px;">Local Businesses</span><span style="color:rgba(45,91,255,0.5); padding-right:14px;">·</span>
+        <span style="color:rgba(255,255,255,0.6); font-size:14px; padding-right:14px;">Restaurants</span><span style="color:rgba(45,91,255,0.5); padding-right:14px;">·</span>
+        <span style="color:rgba(255,255,255,0.6); font-size:14px; padding-right:14px;">Agencies</span><span style="color:rgba(45,91,255,0.5); padding-right:14px;">·</span>
+        <span style="color:rgba(255,255,255,0.6); font-size:14px; padding-right:14px;">Consultants</span><span style="color:rgba(45,91,255,0.5); padding-right:14px;">·</span>
+        <span style="color:rgba(255,255,255,0.6); font-size:14px; padding-right:14px;">Creators</span><span style="color:rgba(45,91,255,0.5); padding-right:14px;">·</span>
+        <span style="color:rgba(255,255,255,0.6); font-size:14px; padding-right:14px;">Coaches</span><span style="color:rgba(45,91,255,0.5); padding-right:14px;">·</span>
+        <span style="color:rgba(255,255,255,0.6); font-size:14px; padding-right:14px;">Service Businesses</span><span style="color:rgba(45,91,255,0.5); padding-right:14px;">·</span>
+        <span style="color:rgba(255,255,255,0.6); font-size:14px; padding-right:14px;">Hospitality</span><span style="color:rgba(45,91,255,0.5); padding-right:14px;">·</span>
+        <span style="color:rgba(255,255,255,0.6); font-size:14px; padding-right:14px;">Law Firms</span><span style="color:rgba(45,91,255,0.5); padding-right:14px;">·</span>
+        <span style="color:rgba(255,255,255,0.6); font-size:14px; padding-right:28px;">Financial Advisors</span>
+        <!-- Duplicate for seamless loop -->
+        <span style="color:rgba(255,255,255,0.6); font-size:14px; padding-right:14px;">Real Estate</span><span style="color:rgba(45,91,255,0.5); padding-right:14px;">·</span>
+        <span style="color:rgba(255,255,255,0.6); font-size:14px; padding-right:14px;">E-Commerce</span><span style="color:rgba(45,91,255,0.5); padding-right:14px;">·</span>
+        <span style="color:rgba(255,255,255,0.6); font-size:14px; padding-right:14px;">Construction</span><span style="color:rgba(45,91,255,0.5); padding-right:14px;">·</span>
+        <span style="color:rgba(255,255,255,0.6); font-size:14px; padding-right:14px;">Home Services</span><span style="color:rgba(45,91,255,0.5); padding-right:14px;">·</span>
+        <span style="color:rgba(255,255,255,0.6); font-size:14px; padding-right:14px;">Local Businesses</span><span style="color:rgba(45,91,255,0.5); padding-right:14px;">·</span>
+        <span style="color:rgba(255,255,255,0.6); font-size:14px; padding-right:14px;">Restaurants</span><span style="color:rgba(45,91,255,0.5); padding-right:14px;">·</span>
+        <span style="color:rgba(255,255,255,0.6); font-size:14px; padding-right:14px;">Agencies</span><span style="color:rgba(45,91,255,0.5); padding-right:14px;">·</span>
+        <span style="color:rgba(255,255,255,0.6); font-size:14px; padding-right:14px;">Consultants</span><span style="color:rgba(45,91,255,0.5); padding-right:14px;">·</span>
+        <span style="color:rgba(255,255,255,0.6); font-size:14px; padding-right:14px;">Creators</span><span style="color:rgba(45,91,255,0.5); padding-right:14px;">·</span>
+        <span style="color:rgba(255,255,255,0.6); font-size:14px; padding-right:14px;">Coaches</span><span style="color:rgba(45,91,255,0.5); padding-right:14px;">·</span>
+        <span style="color:rgba(255,255,255,0.6); font-size:14px; padding-right:14px;">Service Businesses</span><span style="color:rgba(45,91,255,0.5); padding-right:14px;">·</span>
+        <span style="color:rgba(255,255,255,0.6); font-size:14px; padding-right:14px;">Hospitality</span><span style="color:rgba(45,91,255,0.5); padding-right:14px;">·</span>
+        <span style="color:rgba(255,255,255,0.6); font-size:14px; padding-right:14px;">Law Firms</span><span style="color:rgba(45,91,255,0.5); padding-right:14px;">·</span>
+        <span style="color:rgba(255,255,255,0.6); font-size:14px; padding-right:28px;">Financial Advisors</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════
+     SECTION 3 — ABOUT + VIDEO
+════════════════════════════════════════════ -->
+<section id="about" class="section-pad" style="background:#F8FAFC;">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
+
+      <!-- Video placeholder -->
+      <div class="w-full lg:w-1/2 fade-in">
+        <div class="rounded-2xl flex flex-col items-center justify-center cursor-pointer group"
+             style="background:#0B1120; aspect-ratio:16/9; box-shadow:0 20px 60px rgba(11,17,32,0.18);">
+          <div class="w-16 h-16 rounded-full flex items-center justify-center mb-4"
+               style="background:rgba(255,255,255,0.95); box-shadow:0 4px 20px rgba(0,0,0,0.3); transition:transform 0.2s ease;"
+               onmouseover="this.style.transform='scale(1.08)'" onmouseout="this.style.transform='scale(1)'">
+            <div style="width:0;height:0;border-top:10px solid transparent;border-bottom:10px solid transparent;border-left:18px solid #0B1120;margin-left:4px;"></div>
+          </div>
+          <p style="color:rgba(255,255,255,0.8); font-size:15px; font-weight:500;">
+            Watch: How BBC's Managed Support Works
           </p>
-          <p>
-            We believe the best operational support isn't about moving faster or doing more tasks. It's about understanding your business deeply enough to know what actually matters, and building systems that carry it forward without you having to chase anyone down.
+        </div>
+      </div>
+
+      <!-- Text content -->
+      <div class="w-full lg:w-1/2 fade-in">
+        <span class="inline-block text-xs font-semibold uppercase mb-4"
+              style="color:#2D5BFF; letter-spacing:0.14em;">About BBC</span>
+
+        <h2 class="font-bold leading-tight mb-5"
+            style="font-size:clamp(26px,3vw,36px); font-weight:700; color:#0B1120; line-height:1.25;">
+          Built Around Trust, Collaboration, and Organized Execution
+        </h2>
+
+        <p style="color:#475569; font-size:16px; line-height:1.75;">
+          Balay ni Bruno &amp; Co. is a systems-oriented support agency built around a close-knit team
+          of trusted collaborators, family members, and skilled assistants helping businesses manage
+          digital operations with more structure and clarity.
+        </p>
+        <p class="mt-4" style="color:#475569; font-size:16px; line-height:1.75;">
+          Unlike traditional VA agencies, BBC stays actively involved during planning, setup, workflow
+          organization, and early execution — so clients receive guidance, support, and long-term
+          operational direction, not just task execution.
+        </p>
+
+        <!-- Three mini value cards -->
+        <div class="flex flex-col sm:flex-row gap-3 mt-8">
+          <div class="flex-1 rounded-xl p-4 border" style="background:white; border-color:#D1D5DB;">
+            <div class="w-2.5 h-2.5 rounded-full mb-2" style="background:#2D5BFF;"></div>
+            <p class="font-bold text-sm mb-1" style="color:#0B1120;">Founder-Led Setup</p>
+            <p class="text-xs" style="color:#475569;">Personally planned and guided.</p>
+          </div>
+          <div class="flex-1 rounded-xl p-4 border" style="background:white; border-color:#D1D5DB;">
+            <div class="w-2.5 h-2.5 rounded-full mb-2" style="background:#2D5BFF;"></div>
+            <p class="font-bold text-sm mb-1" style="color:#0B1120;">Matched Assistant</p>
+            <p class="text-xs" style="color:#475569;">Chosen for your specific needs.</p>
+          </div>
+          <div class="flex-1 rounded-xl p-4 border" style="background:white; border-color:#D1D5DB;">
+            <div class="w-2.5 h-2.5 rounded-full mb-2" style="background:#2D5BFF;"></div>
+            <p class="font-bold text-sm mb-1" style="color:#0B1120;">Long-Term Collaboration</p>
+            <p class="text-xs" style="color:#475569;">Strategy and support that stays.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════
+     SECTION 4 — WHY BBC IS DIFFERENT
+════════════════════════════════════════════ -->
+<section id="difference" class="section-pad" style="background:white;">
+  <div class="max-w-7xl mx-auto px-6">
+
+    <div class="text-center mb-14 fade-in">
+      <span class="inline-block text-xs font-semibold uppercase mb-4"
+            style="color:#2D5BFF; letter-spacing:0.14em;">The Difference</span>
+      <h2 class="font-bold"
+          style="font-size:clamp(28px,3.5vw,40px); font-weight:700; color:#0B1120; line-height:1.2;">
+        Not Just a VA Match —<br>A Managed Support System
+      </h2>
+    </div>
+
+    <div class="flex flex-col md:flex-row gap-8 max-w-4xl mx-auto fade-in">
+
+      <!-- Typical VA Agency -->
+      <div class="flex-1 rounded-2xl border p-10" style="background:#F8FAFC; border-color:#D1D5DB;">
+        <div class="flex items-center gap-3 mb-6">
+          <div class="w-3 h-3 rounded-full" style="background:#D1D5DB;"></div>
+          <span class="font-bold" style="color:#475569; font-size:18px;">Typical VA Agency</span>
+        </div>
+        <ul class="flex flex-col gap-0">
+          <li class="flex items-start gap-3" style="color:#475569; font-size:15px; line-height:2.2;">
+            <span class="flex-shrink-0 font-bold" style="color:#9CA3AF;">—</span>
+            Client signs up and a VA is assigned or interviewed
+          </li>
+          <li class="flex items-start gap-3" style="color:#475569; font-size:15px; line-height:2.2;">
+            <span class="flex-shrink-0 font-bold" style="color:#9CA3AF;">—</span>
+            Client manages all onboarding and setup alone
+          </li>
+          <li class="flex items-start gap-3" style="color:#475569; font-size:15px; line-height:2.2;">
+            <span class="flex-shrink-0 font-bold" style="color:#9CA3AF;">—</span>
+            Little strategic guidance or workflow planning
+          </li>
+          <li class="flex items-start gap-3" style="color:#475569; font-size:15px; line-height:2.2;">
+            <span class="flex-shrink-0 font-bold" style="color:#9CA3AF;">—</span>
+            Founder or leadership not involved after sign-up
+          </li>
+          <li class="flex items-start gap-3" style="color:#475569; font-size:15px; line-height:2.2;">
+            <span class="flex-shrink-0 font-bold" style="color:#9CA3AF;">—</span>
+            Client is responsible for managing VA output
+          </li>
+        </ul>
+      </div>
+
+      <!-- BBC Approach -->
+      <div class="flex-1 rounded-2xl border-2 p-10 relative overflow-hidden"
+           style="background:white; border-color:#2D5BFF;">
+        <div class="bbc-accent-bar"></div>
+        <div class="flex items-center gap-3 mb-6">
+          <div class="w-3 h-3 rounded-full" style="background:#2D5BFF;"></div>
+          <span class="font-bold" style="color:#2D5BFF; font-size:18px;">The BBC Approach</span>
+        </div>
+        <ul class="flex flex-col gap-0">
+          <li class="flex items-start gap-3" style="color:#0B1120; font-size:15px; line-height:2.2;">
+            <span class="flex-shrink-0 font-bold" style="color:#2D5BFF;">✓</span>
+            Founder understands your business before anyone is matched
+          </li>
+          <li class="flex items-start gap-3" style="color:#0B1120; font-size:15px; line-height:2.2;">
+            <span class="flex-shrink-0 font-bold" style="color:#2D5BFF;">✓</span>
+            Assistant selected based on genuine skill and style fit
+          </li>
+          <li class="flex items-start gap-3" style="color:#0B1120; font-size:15px; line-height:2.2;">
+            <span class="flex-shrink-0 font-bold" style="color:#2D5BFF;">✓</span>
+            Setup is planned together — tasks, tools, workflows, priorities
+          </li>
+          <li class="flex items-start gap-3" style="color:#0B1120; font-size:15px; line-height:2.2;">
+            <span class="flex-shrink-0 font-bold" style="color:#2D5BFF;">✓</span>
+            Founder guides early execution and stays involved for strategy
+          </li>
+          <li class="flex items-start gap-3" style="color:#0B1120; font-size:15px; line-height:2.2;">
+            <span class="flex-shrink-0 font-bold" style="color:#2D5BFF;">✓</span>
+            You get an organized support system, not just extra hands
+          </li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════
+     SECTION 5 — HOW IT WORKS
+════════════════════════════════════════════ -->
+<section id="how-it-works" class="section-pad" style="background:#0B1120;">
+  <div class="max-w-7xl mx-auto px-6">
+
+    <div class="text-center mb-16 fade-in">
+      <span class="inline-block text-xs font-semibold uppercase mb-4"
+            style="color:#2D5BFF; letter-spacing:0.14em;">The Process</span>
+      <h2 class="font-bold text-white"
+          style="font-size:clamp(28px,3.5vw,40px); font-weight:700;">
+        How Our Managed Support Works
+      </h2>
+      <p class="mt-4 mx-auto"
+         style="color:rgba(255,255,255,0.6); font-size:17px; max-width:560px; line-height:1.7;">
+        A structured process built around your business — not a generic onboarding flow.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 fade-in">
+
+      <div class="rounded-2xl p-7 flex flex-col items-center text-center"
+           style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1);">
+        <div class="w-10 h-10 rounded-full flex items-center justify-center font-bold text-white text-sm flex-shrink-0"
+             style="background:#2D5BFF;">1</div>
+        <h3 class="font-bold text-white mt-4" style="font-size:16px; font-weight:700;">Book a Call</h3>
+        <p class="mt-2" style="color:rgba(255,255,255,0.6); font-size:14px; line-height:1.7;">
+          We learn about your business, workload, goals, and the kind of support you need.
+          This is a real conversation — not a form.
+        </p>
+      </div>
+
+      <div class="rounded-2xl p-7 flex flex-col items-center text-center"
+           style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1);">
+        <div class="w-10 h-10 rounded-full flex items-center justify-center font-bold text-white text-sm flex-shrink-0"
+             style="background:#2D5BFF;">2</div>
+        <h3 class="font-bold text-white mt-4" style="font-size:16px; font-weight:700;">Match the Right Assistant</h3>
+        <p class="mt-2" style="color:rgba(255,255,255,0.6); font-size:14px; line-height:1.7;">
+          The founder personally selects a team member whose skills, working style, and experience
+          align with your specific needs.
+        </p>
+      </div>
+
+      <div class="rounded-2xl p-7 flex flex-col items-center text-center"
+           style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1);">
+        <div class="w-10 h-10 rounded-full flex items-center justify-center font-bold text-white text-sm flex-shrink-0"
+             style="background:#2D5BFF;">3</div>
+        <h3 class="font-bold text-white mt-4" style="font-size:16px; font-weight:700;">Plan the Setup Together</h3>
+        <p class="mt-2" style="color:rgba(255,255,255,0.6); font-size:14px; line-height:1.7;">
+          The founder, client, and assistant work together to organize tasks, tools, workflows,
+          priorities, and the first operational roadmap.
+        </p>
+      </div>
+
+      <div class="rounded-2xl p-7 flex flex-col items-center text-center"
+           style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1);">
+        <div class="w-10 h-10 rounded-full flex items-center justify-center font-bold text-white text-sm flex-shrink-0"
+             style="background:#2D5BFF;">4</div>
+        <h3 class="font-bold text-white mt-4" style="font-size:16px; font-weight:700;">Build the System</h3>
+        <p class="mt-2" style="color:rgba(255,255,255,0.6); font-size:14px; line-height:1.7;">
+          We set up workflows, marketing tasks, content systems, websites, email processes,
+          automation structures, or operational frameworks.
+        </p>
+      </div>
+
+      <div class="rounded-2xl p-7 flex flex-col items-center text-center"
+           style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1);">
+        <div class="w-10 h-10 rounded-full flex items-center justify-center font-bold text-white text-sm flex-shrink-0"
+             style="background:#2D5BFF;">5</div>
+        <h3 class="font-bold text-white mt-4" style="font-size:16px; font-weight:700;">Ongoing Support + Strategy</h3>
+        <p class="mt-2" style="color:rgba(255,255,255,0.6); font-size:14px; line-height:1.7;">
+          After setup, your assistant handles ongoing work. The founder stays involved for strategy
+          sessions and quarterly planning. You are not left alone.
+        </p>
+      </div>
+
+    </div>
+
+    <p class="text-center mt-12 fade-in"
+       style="font-size:13px; color:rgba(255,255,255,0.4);">
+      BBC stays actively involved throughout — setup, execution, and long-term strategy.
+    </p>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════
+     SECTION 6 — SUPPORT AREAS
+════════════════════════════════════════════ -->
+<section id="support-areas" class="section-pad" style="background:#F8FAFC;">
+  <div class="max-w-7xl mx-auto px-6">
+
+    <div class="text-center mb-4 fade-in">
+      <span class="inline-block text-xs font-semibold uppercase mb-4"
+            style="color:#2D5BFF; letter-spacing:0.14em;">Capabilities</span>
+      <h2 class="font-bold"
+          style="font-size:clamp(28px,3.5vw,40px); font-weight:700; color:#0B1120;">
+        What Our Team Can Help With
+      </h2>
+      <p class="mt-4 mx-auto" style="color:#475569; font-size:17px; max-width:560px; line-height:1.7;">
+        Depending on your business needs, your matched assistant can support you across these areas.
+      </p>
+      <p class="mt-2" style="font-size:13px; color:rgba(71,85,105,0.6);">
+        These are capabilities within your managed support relationship — not separate services.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-14 fade-in">
+
+      <!-- 1 Marketing -->
+      <div class="support-card rounded-2xl p-7 border bg-white" style="border-color:#D1D5DB;">
+        <div class="w-8 h-8 rounded-lg flex items-center justify-center text-white font-bold text-sm" style="background:#2D5BFF;">M</div>
+        <h3 class="font-bold mt-4 mb-4" style="color:#0B1120; font-size:18px; font-weight:700;">Marketing Support</h3>
+        <ul>
+          <li class="flex items-center gap-2 text-sm" style="color:#475569; line-height:2.2;"><span style="color:#2D5BFF; font-weight:700; font-size:16px;">—</span> Social media support</li>
+          <li class="flex items-center gap-2 text-sm" style="color:#475569; line-height:2.2;"><span style="color:#2D5BFF; font-weight:700; font-size:16px;">—</span> Campaign assistance</li>
+          <li class="flex items-center gap-2 text-sm" style="color:#475569; line-height:2.2;"><span style="color:#2D5BFF; font-weight:700; font-size:16px;">—</span> Outreach support</li>
+          <li class="flex items-center gap-2 text-sm" style="color:#475569; line-height:2.2;"><span style="color:#2D5BFF; font-weight:700; font-size:16px;">—</span> Content planning</li>
+          <li class="flex items-center gap-2 text-sm" style="color:#475569; line-height:2.2;"><span style="color:#2D5BFF; font-weight:700; font-size:16px;">—</span> Marketing admin</li>
+        </ul>
+      </div>
+
+      <!-- 2 Websites -->
+      <div class="support-card rounded-2xl p-7 border bg-white" style="border-color:#D1D5DB;">
+        <div class="w-8 h-8 rounded-lg flex items-center justify-center text-white font-bold text-sm" style="background:#2D5BFF;">W</div>
+        <h3 class="font-bold mt-4 mb-4" style="color:#0B1120; font-size:18px; font-weight:700;">Websites &amp; Digital Presence</h3>
+        <ul>
+          <li class="flex items-center gap-2 text-sm" style="color:#475569; line-height:2.2;"><span style="color:#2D5BFF; font-weight:700; font-size:16px;">—</span> WordPress support</li>
+          <li class="flex items-center gap-2 text-sm" style="color:#475569; line-height:2.2;"><span style="color:#2D5BFF; font-weight:700; font-size:16px;">—</span> Shopify support</li>
+          <li class="flex items-center gap-2 text-sm" style="color:#475569; line-height:2.2;"><span style="color:#2D5BFF; font-weight:700; font-size:16px;">—</span> Landing pages</li>
+          <li class="flex items-center gap-2 text-sm" style="color:#475569; line-height:2.2;"><span style="color:#2D5BFF; font-weight:700; font-size:16px;">—</span> Page updates</li>
+          <li class="flex items-center gap-2 text-sm" style="color:#475569; line-height:2.2;"><span style="color:#2D5BFF; font-weight:700; font-size:16px;">—</span> Website maintenance</li>
+        </ul>
+      </div>
+
+      <!-- 3 AI & Automation -->
+      <div class="support-card rounded-2xl p-7 border bg-white" style="border-color:#D1D5DB;">
+        <div class="w-8 h-8 rounded-lg flex items-center justify-center text-white font-bold text-sm" style="background:#2D5BFF;">A</div>
+        <h3 class="font-bold mt-4 mb-4" style="color:#0B1120; font-size:18px; font-weight:700;">AI &amp; Automation Support</h3>
+        <ul>
+          <li class="flex items-center gap-2 text-sm" style="color:#475569; line-height:2.2;"><span style="color:#2D5BFF; font-weight:700; font-size:16px;">—</span> AI-assisted workflows</li>
+          <li class="flex items-center gap-2 text-sm" style="color:#475569; line-height:2.2;"><span style="color:#2D5BFF; font-weight:700; font-size:16px;">—</span> Task automation</li>
+          <li class="flex items-center gap-2 text-sm" style="color:#475569; line-height:2.2;"><span style="color:#2D5BFF; font-weight:700; font-size:16px;">—</span> CRM workflows</li>
+          <li class="flex items-center gap-2 text-sm" style="color:#475569; line-height:2.2;"><span style="color:#2D5BFF; font-weight:700; font-size:16px;">—</span> Client onboarding systems</li>
+          <li class="flex items-center gap-2 text-sm" style="color:#475569; line-height:2.2;"><span style="color:#2D5BFF; font-weight:700; font-size:16px;">—</span> Internal process systems</li>
+        </ul>
+      </div>
+
+      <!-- 4 Content & Creative -->
+      <div class="support-card rounded-2xl p-7 border bg-white" style="border-color:#D1D5DB;">
+        <div class="w-8 h-8 rounded-lg flex items-center justify-center text-white font-bold text-sm" style="background:#2D5BFF;">C</div>
+        <h3 class="font-bold mt-4 mb-4" style="color:#0B1120; font-size:18px; font-weight:700;">Content &amp; Creative Support</h3>
+        <ul>
+          <li class="flex items-center gap-2 text-sm" style="color:#475569; line-height:2.2;"><span style="color:#2D5BFF; font-weight:700; font-size:16px;">—</span> Graphics</li>
+          <li class="flex items-center gap-2 text-sm" style="color:#475569; line-height:2.2;"><span style="color:#2D5BFF; font-weight:700; font-size:16px;">—</span> Short-form videos</li>
+          <li class="flex items-center gap-2 text-sm" style="color:#475569; line-height:2.2;"><span style="color:#2D5BFF; font-weight:700; font-size:16px;">—</span> Captions</li>
+          <li class="flex items-center gap-2 text-sm" style="color:#475569; line-height:2.2;"><span style="color:#2D5BFF; font-weight:700; font-size:16px;">—</span> Content calendars</li>
+          <li class="flex items-center gap-2 text-sm" style="color:#475569; line-height:2.2;"><span style="color:#2D5BFF; font-weight:700; font-size:16px;">—</span> Brand assets</li>
+        </ul>
+      </div>
+
+      <!-- 5 Email & CRM -->
+      <div class="support-card rounded-2xl p-7 border bg-white" style="border-color:#D1D5DB;">
+        <div class="w-8 h-8 rounded-lg flex items-center justify-center text-white font-bold text-sm" style="background:#2D5BFF;">E</div>
+        <h3 class="font-bold mt-4 mb-4" style="color:#0B1120; font-size:18px; font-weight:700;">Email &amp; CRM Support</h3>
+        <ul>
+          <li class="flex items-center gap-2 text-sm" style="color:#475569; line-height:2.2;"><span style="color:#2D5BFF; font-weight:700; font-size:16px;">—</span> Email campaigns</li>
+          <li class="flex items-center gap-2 text-sm" style="color:#475569; line-height:2.2;"><span style="color:#2D5BFF; font-weight:700; font-size:16px;">—</span> Follow-up systems</li>
+          <li class="flex items-center gap-2 text-sm" style="color:#475569; line-height:2.2;"><span style="color:#2D5BFF; font-weight:700; font-size:16px;">—</span> Lead nurture flows</li>
+          <li class="flex items-center gap-2 text-sm" style="color:#475569; line-height:2.2;"><span style="color:#2D5BFF; font-weight:700; font-size:16px;">—</span> Email sequences</li>
+          <li class="flex items-center gap-2 text-sm" style="color:#475569; line-height:2.2;"><span style="color:#2D5BFF; font-weight:700; font-size:16px;">—</span> List organization</li>
+        </ul>
+      </div>
+
+      <!-- 6 SEO -->
+      <div class="support-card rounded-2xl p-7 border bg-white" style="border-color:#D1D5DB;">
+        <div class="w-8 h-8 rounded-lg flex items-center justify-center text-white font-bold text-sm" style="background:#2D5BFF;">S</div>
+        <h3 class="font-bold mt-4 mb-4" style="color:#0B1120; font-size:18px; font-weight:700;">SEO &amp; Visibility</h3>
+        <ul>
+          <li class="flex items-center gap-2 text-sm" style="color:#475569; line-height:2.2;"><span style="color:#2D5BFF; font-weight:700; font-size:16px;">—</span> SEO page structure</li>
+          <li class="flex items-center gap-2 text-sm" style="color:#475569; line-height:2.2;"><span style="color:#2D5BFF; font-weight:700; font-size:16px;">—</span> Blog planning</li>
+          <li class="flex items-center gap-2 text-sm" style="color:#475569; line-height:2.2;"><span style="color:#2D5BFF; font-weight:700; font-size:16px;">—</span> Keyword organization</li>
+          <li class="flex items-center gap-2 text-sm" style="color:#475569; line-height:2.2;"><span style="color:#2D5BFF; font-weight:700; font-size:16px;">—</span> Internal linking</li>
+          <li class="flex items-center gap-2 text-sm" style="color:#475569; line-height:2.2;"><span style="color:#2D5BFF; font-weight:700; font-size:16px;">—</span> Content updates</li>
+        </ul>
+      </div>
+
+      <!-- 7 Operations & Admin (full width on tablet) -->
+      <div class="support-card rounded-2xl p-7 border bg-white sm:col-span-2 lg:col-span-1" style="border-color:#D1D5DB;">
+        <div class="w-8 h-8 rounded-lg flex items-center justify-center text-white font-bold text-sm" style="background:#2D5BFF;">O</div>
+        <h3 class="font-bold mt-4 mb-4" style="color:#0B1120; font-size:18px; font-weight:700;">Operations &amp; Admin Support</h3>
+        <ul>
+          <li class="flex items-center gap-2 text-sm" style="color:#475569; line-height:2.2;"><span style="color:#2D5BFF; font-weight:700; font-size:16px;">—</span> SOPs</li>
+          <li class="flex items-center gap-2 text-sm" style="color:#475569; line-height:2.2;"><span style="color:#2D5BFF; font-weight:700; font-size:16px;">—</span> Task organization</li>
+          <li class="flex items-center gap-2 text-sm" style="color:#475569; line-height:2.2;"><span style="color:#2D5BFF; font-weight:700; font-size:16px;">—</span> File systems</li>
+          <li class="flex items-center gap-2 text-sm" style="color:#475569; line-height:2.2;"><span style="color:#2D5BFF; font-weight:700; font-size:16px;">—</span> Process documentation</li>
+          <li class="flex items-center gap-2 text-sm" style="color:#475569; line-height:2.2;"><span style="color:#2D5BFF; font-weight:700; font-size:16px;">—</span> Project management support</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════
+     SECTION 7 — TEAM
+════════════════════════════════════════════ -->
+<section id="team" class="section-pad" style="background:white;">
+  <div class="max-w-7xl mx-auto px-6">
+
+    <div class="text-center mb-4 fade-in">
+      <span class="inline-block text-xs font-semibold uppercase mb-4"
+            style="color:#2D5BFF; letter-spacing:0.14em;">The Team</span>
+      <h2 class="font-bold"
+          style="font-size:clamp(28px,3.5vw,40px); font-weight:700; color:#0B1120;">
+        Meet the Team Behind the Support
+      </h2>
+      <p class="mt-4 mx-auto" style="color:#475569; font-size:17px; max-width:600px; line-height:1.7;">
+        Behind every client account is a small, coordinated team matched to your needs —
+        built around communication, reliability, and organized execution.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-14 fade-in">
+
+      <!-- Bruno (Founder) -->
+      <div class="rounded-2xl p-7 border text-center" style="background:#F8FAFC; border-color:#D1D5DB;">
+        <div class="rounded-full flex items-center justify-center mx-auto font-bold text-white"
+             style="width:72px; height:72px; background:linear-gradient(135deg,#2D5BFF,#0B1120); font-size:22px; font-weight:700;">BB</div>
+        <p class="mt-4 font-semibold uppercase tracking-widest"
+           style="color:#2D5BFF; font-size:11px; letter-spacing:0.1em;">Founder &amp; Strategy Lead</p>
+        <p class="mt-1 font-bold" style="color:#0B1120; font-size:17px; font-weight:700;">Bruno</p>
+        <p class="mt-3 text-left leading-relaxed"
+           style="color:#475569; font-size:14px; line-height:1.7;">
+          Handles client discovery, assistant matching, workflow planning, and strategic oversight —
+          and stays involved throughout every engagement.
+        </p>
+      </div>
+
+      <!-- Marketing -->
+      <div class="rounded-2xl p-7 border text-center" style="background:#F8FAFC; border-color:#D1D5DB;">
+        <div class="rounded-full flex items-center justify-center mx-auto font-bold text-white"
+             style="width:72px; height:72px; background:linear-gradient(135deg,#2D5BFF,#0B1120); font-size:22px; font-weight:700;">MC</div>
+        <p class="mt-4 font-semibold uppercase tracking-widest"
+           style="color:#2D5BFF; font-size:11px; letter-spacing:0.1em;">Marketing &amp; Content</p>
+        <p class="mt-1 font-bold" style="color:#0B1120; font-size:17px; font-weight:700;">Marketing Assistant</p>
+        <p class="mt-3 text-left leading-relaxed"
+           style="color:#475569; font-size:14px; line-height:1.7;">
+          Manages social media presence, content calendars, campaign tasks, and outreach support
+          so your business stays visible and active.
+        </p>
+      </div>
+
+      <!-- Web Support -->
+      <div class="rounded-2xl p-7 border text-center" style="background:#F8FAFC; border-color:#D1D5DB;">
+        <div class="rounded-full flex items-center justify-center mx-auto font-bold text-white"
+             style="width:72px; height:72px; background:linear-gradient(135deg,#2D5BFF,#0B1120); font-size:22px; font-weight:700;">WT</div>
+        <p class="mt-4 font-semibold uppercase tracking-widest"
+           style="color:#2D5BFF; font-size:11px; letter-spacing:0.1em;">Websites &amp; Tech</p>
+        <p class="mt-1 font-bold" style="color:#0B1120; font-size:17px; font-weight:700;">Web Support Assistant</p>
+        <p class="mt-3 text-left leading-relaxed"
+           style="color:#475569; font-size:14px; line-height:1.7;">
+          Handles WordPress, Shopify, landing pages, page updates, and technical website tasks
+          so your digital presence stays organized.
+        </p>
+      </div>
+
+      <!-- Creative -->
+      <div class="rounded-2xl p-7 border text-center" style="background:#F8FAFC; border-color:#D1D5DB;">
+        <div class="rounded-full flex items-center justify-center mx-auto font-bold text-white"
+             style="width:72px; height:72px; background:linear-gradient(135deg,#2D5BFF,#0B1120); font-size:22px; font-weight:700;">CS</div>
+        <p class="mt-4 font-semibold uppercase tracking-widest"
+           style="color:#2D5BFF; font-size:11px; letter-spacing:0.1em;">Creative Support</p>
+        <p class="mt-1 font-bold" style="color:#0B1120; font-size:17px; font-weight:700;">Creative Assistant</p>
+        <p class="mt-3 text-left leading-relaxed"
+           style="color:#475569; font-size:14px; line-height:1.7;">
+          Produces graphics, short-form video content, brand assets, and visual materials
+          so your content looks professional and consistent.
+        </p>
+      </div>
+
+      <!-- Operations -->
+      <div class="rounded-2xl p-7 border text-center" style="background:#F8FAFC; border-color:#D1D5DB;">
+        <div class="rounded-full flex items-center justify-center mx-auto font-bold text-white"
+             style="width:72px; height:72px; background:linear-gradient(135deg,#2D5BFF,#0B1120); font-size:22px; font-weight:700;">OA</div>
+        <p class="mt-4 font-semibold uppercase tracking-widest"
+           style="color:#2D5BFF; font-size:11px; letter-spacing:0.1em;">Operations &amp; Admin</p>
+        <p class="mt-1 font-bold" style="color:#0B1120; font-size:17px; font-weight:700;">Operations Assistant</p>
+        <p class="mt-3 text-left leading-relaxed"
+           style="color:#475569; font-size:14px; line-height:1.7;">
+          Organizes workflows, documentation, file systems, SOPs, and project tracking
+          so your business runs with more clarity.
+        </p>
+      </div>
+
+      <!-- Automation -->
+      <div class="rounded-2xl p-7 border text-center" style="background:#F8FAFC; border-color:#D1D5DB;">
+        <div class="rounded-full flex items-center justify-center mx-auto font-bold text-white"
+             style="width:72px; height:72px; background:linear-gradient(135deg,#2D5BFF,#0B1120); font-size:22px; font-weight:700;">AI</div>
+        <p class="mt-4 font-semibold uppercase tracking-widest"
+           style="color:#2D5BFF; font-size:11px; letter-spacing:0.1em;">AI &amp; Automation</p>
+        <p class="mt-1 font-bold" style="color:#0B1120; font-size:17px; font-weight:700;">Automation Support</p>
+        <p class="mt-3 text-left leading-relaxed"
+           style="color:#475569; font-size:14px; line-height:1.7;">
+          Builds AI-assisted workflows, automation systems, CRM setups, and process improvements
+          that make the whole team faster.
+        </p>
+      </div>
+
+    </div>
+
+    <div class="text-center mt-12 fade-in">
+      <a href="#"
+         class="inline-flex items-center px-8 py-3 rounded-full font-semibold border-2"
+         style="color:#2D5BFF; border-color:#2D5BFF; font-size:15px; font-weight:600; background:transparent;"
+         onmouseover="this.style.background='#2D5BFF';this.style.color='white';"
+         onmouseout="this.style.background='transparent';this.style.color='#2D5BFF';">
+        View Full Team →
+      </a>
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════
+     SECTION 8 — PROJECTS
+════════════════════════════════════════════ -->
+<section id="projects" class="section-pad" style="background:#0B1120;">
+  <div class="max-w-7xl mx-auto px-6">
+
+    <div class="text-center mb-4 fade-in">
+      <span class="inline-block text-xs font-semibold uppercase mb-4"
+            style="color:#2D5BFF; letter-spacing:0.14em;">Proof of Work</span>
+      <h2 class="font-bold text-white"
+          style="font-size:clamp(24px,3.5vw,40px); font-weight:700;">
+        Work Built Across Digital Support, Websites &amp; Operations
+      </h2>
+      <p class="mt-4 mx-auto"
+         style="color:rgba(255,255,255,0.6); font-size:17px; max-width:520px; line-height:1.7;">
+        A growing collection of websites, systems, creative work, and operational projects.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-14 fade-in">
+
+      <div class="rounded-2xl overflow-hidden" style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1);">
+        <div class="flex items-center justify-center" style="height:180px; background:rgba(255,255,255,0.08);">
+          <span style="color:rgba(255,255,255,0.3); font-size:13px;">Project Preview</span>
+        </div>
+        <div class="p-6">
+          <span class="inline-block text-xs font-semibold uppercase tracking-widest px-2.5 py-1 rounded-full mb-3"
+                style="background:rgba(45,91,255,0.2); color:#2D5BFF; letter-spacing:0.08em;">Websites</span>
+          <h3 class="font-bold text-white" style="font-size:17px; font-weight:700;">Website Builds</h3>
+          <p class="mt-2" style="color:rgba(255,255,255,0.55); font-size:14px; line-height:1.65;">
+            WordPress, Shopify, landing pages, and full website redesigns built for clients across multiple industries.
           </p>
-
-          <blockquote class="philosophy__quote">
-            <p>"We don't want to just be your support team. We want to be the reason things feel more manageable, and more possible."</p>
-            <div class="philosophy__quote-attr">&mdash; Bruno, Founder of BBC</div>
-          </blockquote>
-
-          <div class="philosophy__actions">
-            <a href="about.html" class="btn btn-primary">Learn Our Story</a>
-            <a href="our-team.html" class="btn btn-outline">Meet the Team</a>
-          </div>
-        </div>
-
-        <div class="philosophy__visual fade-in">
-          <div class="video-block">
-            <div class="video-block__play"></div>
-            <div class="video-block__caption">A message from Bruno &mdash; Founder of BBC</div>
-          </div>
-
-          <div class="philosophy__pillars">
-            <div class="philosophy__pillar">
-              <div class="philosophy__pillar-accent" style="background: var(--gold);"></div>
-              <div class="philosophy__pillar-title">Family-Built</div>
-              <div class="philosophy__pillar-body">A real team that treats your goals like our own</div>
-            </div>
-            <div class="philosophy__pillar">
-              <div class="philosophy__pillar-accent" style="background: var(--mid-blue);"></div>
-              <div class="philosophy__pillar-title">Systems-Driven</div>
-              <div class="philosophy__pillar-body">Organized processes that scale with your growth</div>
-            </div>
-            <div class="philosophy__pillar">
-              <div class="philosophy__pillar-accent" style="background: var(--sage);"></div>
-              <div class="philosophy__pillar-title">Long-Term Focused</div>
-              <div class="philosophy__pillar-body">Relationships over transactions, built to last</div>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-
-  <!-- ══════════════════════════════════════════════════════════
-       S4, DIFFERENCE + JOURNEY  ·  Deeper warm cream
-       Comparison above, journey steps below, one unified section.
-  ══════════════════════════════════════════════════════════ -->
-  <section class="diff-journey" id="why-bbc">
-    <div class="container">
-
-      <div class="diff-journey__intro fade-in">
-        <span class="eyebrow">Why BBC Is Different</span>
-        <h2>A Journey, Not a Transaction.</h2>
-        <div class="divider-bar"></div>
-        <p>Most support feels like handing something off and hoping for the best. We built BBC to feel like the opposite, a real working relationship with people genuinely invested in where you're headed.</p>
-      </div>
-
-      <div class="compare-grid fade-in">
-        <div class="compare-card compare-card--plain">
-          <div class="compare-header">
-            <div class="compare-header__dot compare-header__dot--muted"></div>
-            <div class="compare-header__label">Typical Support</div>
-          </div>
-          <ul class="compare-list">
-            <li><span class="compare-marker compare-marker--no">✗</span> New person assigned every project</li>
-            <li><span class="compare-marker compare-marker--no">✗</span> You explain your business every time</li>
-            <li><span class="compare-marker compare-marker--no">✗</span> Generic deliverables, no real context</li>
-            <li><span class="compare-marker compare-marker--no">✗</span> Transactional, just checking boxes</li>
-            <li><span class="compare-marker compare-marker--no">✗</span> Hard to reach when things go sideways</li>
-          </ul>
-        </div>
-        <div class="compare-card compare-card--bbc">
-          <div class="compare-header">
-            <div class="compare-header__dot compare-header__dot--bbc"></div>
-            <div class="compare-header__label">Balay ni Bruno &amp; Co.</div>
-          </div>
-          <ul class="compare-list">
-            <li><span class="compare-marker compare-marker--yes">✓</span> Consistent team who knows your story</li>
-            <li><span class="compare-marker compare-marker--yes">✓</span> Deep familiarity, we learn your business</li>
-            <li><span class="compare-marker compare-marker--yes">✓</span> Solutions built around your actual needs</li>
-            <li><span class="compare-marker compare-marker--yes">✓</span> Real relationships, long-term investment</li>
-            <li><span class="compare-marker compare-marker--yes">✓</span> Founder-accessible, always communicating</li>
-          </ul>
         </div>
       </div>
 
-      <div class="journey__intro fade-in">How we get there together</div>
-      <div class="journey-steps fade-in">
-        <div class="journey-step">
-          <div class="journey-step__num">01</div>
-          <div class="journey-step__title">Discovery Call</div>
-          <div class="journey-step__body">We listen first. No pitch deck, just a real conversation about where you are and where you want to go.</div>
+      <div class="rounded-2xl overflow-hidden" style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1);">
+        <div class="flex items-center justify-center" style="height:180px; background:rgba(255,255,255,0.08);">
+          <span style="color:rgba(255,255,255,0.3); font-size:13px;">Project Preview</span>
         </div>
-        <div class="journey-step">
-          <div class="journey-step__num">02</div>
-          <div class="journey-step__title">We Learn Your World</div>
-          <div class="journey-step__body">We understand your goals, team, tools, and what makes your business tick, before we touch a single deliverable.</div>
+        <div class="p-6">
+          <span class="inline-block text-xs font-semibold uppercase tracking-widest px-2.5 py-1 rounded-full mb-3"
+                style="background:rgba(45,91,255,0.2); color:#2D5BFF; letter-spacing:0.08em;">Marketing</span>
+          <h3 class="font-bold text-white" style="font-size:17px; font-weight:700;">Marketing Support</h3>
+          <p class="mt-2" style="color:rgba(255,255,255,0.55); font-size:14px; line-height:1.65;">
+            Social media systems, content calendars, campaign execution, and outreach support across service-based businesses.
+          </p>
         </div>
-        <div class="journey-step">
-          <div class="journey-step__num">03</div>
-          <div class="journey-step__title">Build Together</div>
-          <div class="journey-step__body">We work alongside you, building systems, delivering projects, adjusting as your needs evolve.</div>
+      </div>
+
+      <div class="rounded-2xl overflow-hidden" style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1);">
+        <div class="flex items-center justify-center" style="height:180px; background:rgba(255,255,255,0.08);">
+          <span style="color:rgba(255,255,255,0.3); font-size:13px;">Project Preview</span>
         </div>
-        <div class="journey-step">
-          <div class="journey-step__num">04</div>
-          <div class="journey-step__title">Grow With You</div>
-          <div class="journey-step__body">As you scale, we scale with you. Same team, deeper understanding, better results over time.</div>
+        <div class="p-6">
+          <span class="inline-block text-xs font-semibold uppercase tracking-widest px-2.5 py-1 rounded-full mb-3"
+                style="background:rgba(45,91,255,0.2); color:#2D5BFF; letter-spacing:0.08em;">Creative</span>
+          <h3 class="font-bold text-white" style="font-size:17px; font-weight:700;">Creative Assets</h3>
+          <p class="mt-2" style="color:rgba(255,255,255,0.55); font-size:14px; line-height:1.65;">
+            Graphics, short-form videos, brand visuals, and ad creatives developed for client campaigns and brand presence.
+          </p>
         </div>
-        <div class="journey-step">
-          <div class="journey-step__num">05</div>
-          <div class="journey-step__title">Long-Term Partner</div>
-          <div class="journey-step__body">We're not here for a project. We're here for the long haul, invested in your success as if it's our own.</div>
+      </div>
+
+      <div class="rounded-2xl overflow-hidden" style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1);">
+        <div class="flex items-center justify-center" style="height:180px; background:rgba(255,255,255,0.08);">
+          <span style="color:rgba(255,255,255,0.3); font-size:13px;">Project Preview</span>
+        </div>
+        <div class="p-6">
+          <span class="inline-block text-xs font-semibold uppercase tracking-widest px-2.5 py-1 rounded-full mb-3"
+                style="background:rgba(45,91,255,0.2); color:#2D5BFF; letter-spacing:0.08em;">Operations</span>
+          <h3 class="font-bold text-white" style="font-size:17px; font-weight:700;">Operations Systems</h3>
+          <p class="mt-2" style="color:rgba(255,255,255,0.55); font-size:14px; line-height:1.65;">
+            SOPs, folder structures, task management systems, and onboarding workflows built for internal business operations.
+          </p>
+        </div>
+      </div>
+
+      <div class="rounded-2xl overflow-hidden" style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1);">
+        <div class="flex items-center justify-center" style="height:180px; background:rgba(255,255,255,0.08);">
+          <span style="color:rgba(255,255,255,0.3); font-size:13px;">Project Preview</span>
+        </div>
+        <div class="p-6">
+          <span class="inline-block text-xs font-semibold uppercase tracking-widest px-2.5 py-1 rounded-full mb-3"
+                style="background:rgba(45,91,255,0.2); color:#2D5BFF; letter-spacing:0.08em;">AI &amp; Automation</span>
+          <h3 class="font-bold text-white" style="font-size:17px; font-weight:700;">AI &amp; Automation</h3>
+          <p class="mt-2" style="color:rgba(255,255,255,0.55); font-size:14px; line-height:1.65;">
+            AI-assisted workflows, CRM automation, client onboarding systems, and internal process improvements.
+          </p>
+        </div>
+      </div>
+
+      <div class="rounded-2xl overflow-hidden" style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1);">
+        <div class="flex items-center justify-center" style="height:180px; background:rgba(255,255,255,0.08);">
+          <span style="color:rgba(255,255,255,0.3); font-size:13px;">Project Preview</span>
+        </div>
+        <div class="p-6">
+          <span class="inline-block text-xs font-semibold uppercase tracking-widest px-2.5 py-1 rounded-full mb-3"
+                style="background:rgba(45,91,255,0.2); color:#2D5BFF; letter-spacing:0.08em;">E-Commerce</span>
+          <h3 class="font-bold text-white" style="font-size:17px; font-weight:700;">E-Commerce Support</h3>
+          <p class="mt-2" style="color:rgba(255,255,255,0.55); font-size:14px; line-height:1.65;">
+            Shopify store builds, product pages, collections, and store organization for e-commerce business owners.
+          </p>
         </div>
       </div>
 
     </div>
-  </section>
+
+    <div class="text-center mt-12 fade-in">
+      <a href="#"
+         class="inline-flex items-center px-8 py-3 rounded-full font-semibold text-white"
+         style="background:#2D5BFF; font-size:15px; font-weight:600;">
+        View More Projects →
+      </a>
+    </div>
+  </div>
+</section>
 
 
-  <!-- ══════════════════════════════════════════════════════════
-       S5, HOW WE WORK WITH YOU  ·  Dark, contrast moment
-       After two warm sections, this dark section creates the
-       cinematic visual break before cream sections resume.
-  ══════════════════════════════════════════════════════════ -->
-  <section class="how-work" id="how-we-work">
-    <div class="container">
+<!-- ════════════════════════════════════════════
+     SECTION 9 — REVIEWS
+════════════════════════════════════════════ -->
+<section id="reviews" class="section-pad" style="background:#F8FAFC;">
+  <div class="max-w-7xl mx-auto px-6">
 
-      <div class="how-work__header fade-in">
-        <span class="eyebrow eyebrow--gold">Our Process</span>
-        <h2>How We Work With You</h2>
-        <div class="divider-bar"></div>
-        <p>Every engagement starts with listening. Then we build a rhythm that works for your life and business, not the other way around.</p>
-      </div>
+    <div class="text-center mb-14 fade-in">
+      <span class="inline-block text-xs font-semibold uppercase mb-4"
+            style="color:#2D5BFF; letter-spacing:0.14em;">Client Reviews</span>
+      <h2 class="font-bold"
+          style="font-size:clamp(28px,3.5vw,40px); font-weight:700; color:#0B1120; line-height:1.2;">
+        Clients Should Feel Supported —<br>Not Just Served
+      </h2>
+    </div>
 
-      <div class="how-work__grid">
-        <div class="how-work-card fade-in">
-          <div class="how-work-card__num">1</div>
-          <h4>Conversation First</h4>
-          <p>We start with a real call, no templates, no pressure. Just understanding what you actually need.</p>
-        </div>
-        <div class="how-work-card fade-in">
-          <div class="how-work-card__num">2</div>
-          <h4>Scoped Together</h4>
-          <p>We map out the support you need, the timeline that makes sense, and a plan you can see yourself in.</p>
-        </div>
-        <div class="how-work-card fade-in">
-          <div class="how-work-card__num">3</div>
-          <h4>Systems Built</h4>
-          <p>We put organized, repeatable processes in place, so things don't fall through the cracks, ever.</p>
-        </div>
-        <div class="how-work-card fade-in">
-          <div class="how-work-card__num">4</div>
-          <h4>Active Delivery</h4>
-          <p>We execute, stay in communication, and keep you in the loop, without you having to chase anyone.</p>
-        </div>
-        <div class="how-work-card fade-in">
-          <div class="how-work-card__num">5</div>
-          <h4>Ongoing &amp; Evolving</h4>
-          <p>We review, adjust, and grow with you as your needs change, a partnership that improves over time.</p>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 fade-in">
+
+      <div class="rounded-2xl p-9 border bg-white" style="border-color:#D1D5DB;">
+        <div style="color:#F59E0B; font-size:16px; letter-spacing:3px; margin-bottom:20px;">★★★★★</div>
+        <p class="font-medium italic leading-relaxed"
+           style="color:#0B1120; font-size:17px; line-height:1.75; font-weight:500;">
+          "BBC didn't just assign someone to help — they helped us understand what we needed to build first.
+          The founder was involved from day one."
+        </p>
+        <div class="mt-6">
+          <p class="font-semibold text-sm" style="color:#475569; font-weight:600;">Business Owner</p>
+          <p style="color:rgba(71,85,105,0.6); font-size:13px;">Home Services</p>
         </div>
       </div>
 
-      <div class="how-work__footer fade-in">
-        <a href="how-it-works.html" class="btn btn-warm-outline">View Full Process &rarr;</a>
+      <div class="rounded-2xl p-9 border bg-white" style="border-color:#D1D5DB;">
+        <div style="color:#F59E0B; font-size:16px; letter-spacing:3px; margin-bottom:20px;">★★★★★</div>
+        <p class="font-medium italic leading-relaxed"
+           style="color:#0B1120; font-size:17px; line-height:1.75; font-weight:500;">
+          "The team was organized, responsive, and easy to work with. We finally had a system that made sense
+          for our business."
+        </p>
+        <div class="mt-6">
+          <p class="font-semibold text-sm" style="color:#475569; font-weight:600;">Business Owner</p>
+          <p style="color:rgba(71,85,105,0.6); font-size:13px;">E-Commerce</p>
+        </div>
+      </div>
+
+      <div class="rounded-2xl p-9 border bg-white" style="border-color:#D1D5DB;">
+        <div style="color:#F59E0B; font-size:16px; letter-spacing:3px; margin-bottom:20px;">★★★★★</div>
+        <p class="font-medium italic leading-relaxed"
+           style="color:#0B1120; font-size:17px; line-height:1.75; font-weight:500;">
+          "I was nervous about handing over digital operations, but BBC built everything out clearly and
+          made the whole transition smooth."
+        </p>
+        <div class="mt-6">
+          <p class="font-semibold text-sm" style="color:#475569; font-weight:600;">Business Owner</p>
+          <p style="color:rgba(71,85,105,0.6); font-size:13px;">Real Estate</p>
+        </div>
+      </div>
+
+      <div class="rounded-2xl p-9 border bg-white" style="border-color:#D1D5DB;">
+        <div style="color:#F59E0B; font-size:16px; letter-spacing:3px; margin-bottom:20px;">★★★★★</div>
+        <p class="font-medium italic leading-relaxed"
+           style="color:#0B1120; font-size:17px; line-height:1.75; font-weight:500;">
+          "What surprised me most was how involved the founder stayed after the setup.
+          We still have regular strategy calls."
+        </p>
+        <div class="mt-6">
+          <p class="font-semibold text-sm" style="color:#475569; font-weight:600;">Business Owner</p>
+          <p style="color:rgba(71,85,105,0.6); font-size:13px;">Consulting</p>
+        </div>
       </div>
 
     </div>
-  </section>
+  </div>
+</section>
 
 
-  <!-- ══════════════════════════════════════════════════════════
-       S6, AREAS WHERE WE SHOW UP  ·  --bg-primary (warm cream)
-       Cream after dark, visual relief, rhythm continues.
-  ══════════════════════════════════════════════════════════ -->
-  <section class="section section--cream" id="areas">
-    <div class="container">
-      <div class="text-center fade-in" style="max-width: 600px; margin: 0 auto var(--s2);">
-        <span class="eyebrow">How We Help</span>
-        <h2>Areas Where We Show Up</h2>
-        <div class="divider-bar"></div>
-        <p>We cover the operational, digital, and creative ground that growing businesses actually need, all under one roof, all with the same team.</p>
-      </div>
-      <div class="areas-grid">
-        <div class="area-card fade-in">
-          <span class="area-card__icon">🌐</span>
-          <span class="area-card__tag">Foundation</span>
-          <h3>Website Design &amp; Development</h3>
-          <p>Custom-built websites that reflect your brand, work beautifully, and convert visitors into clients.</p>
-        </div>
-        <div class="area-card fade-in">
-          <span class="area-card__icon">🔍</span>
-          <span class="area-card__tag">Visibility</span>
-          <h3>SEO &amp; Search Presence</h3>
-          <p>Get found by the right people. We build long-term search visibility, no shortcuts, no black-hat nonsense.</p>
-        </div>
-        <div class="area-card fade-in">
-          <span class="area-card__icon">⚙️</span>
-          <span class="area-card__tag">Efficiency</span>
-          <h3>AI Systems &amp; Automation</h3>
-          <p>Smart workflows and automation tools that free up your time for the work only you can do.</p>
-        </div>
-        <div class="area-card fade-in">
-          <span class="area-card__icon">🎨</span>
-          <span class="area-card__tag">Identity</span>
-          <h3>Brand Identity &amp; Design</h3>
-          <p>A brand that feels unmistakably you, visual identity, messaging, and materials to back it up.</p>
-        </div>
-        <div class="area-card fade-in">
-          <span class="area-card__icon">📝</span>
-          <span class="area-card__tag">Content</span>
-          <h3>Content &amp; Copywriting</h3>
-          <p>Words that connect and convert, website copy, blog content, and email that sounds like a real person.</p>
-        </div>
-        <div class="area-card fade-in">
-          <span class="area-card__icon">📊</span>
-          <span class="area-card__tag">Strategy</span>
-          <h3>Digital Strategy &amp; Analytics</h3>
-          <p>Data-informed decisions without the overwhelm. We translate numbers into actions that move you forward.</p>
-        </div>
-        <div class="area-card area-card--feature fade-in">
-          <span class="area-card__icon">🏡</span>
-          <span class="area-card__tag">The BBC Way</span>
-          <h3>Operational Support</h3>
-          <p>The glue that holds it all together, the consistent, ongoing care that makes everything else work better.</p>
-        </div>
-      </div>
-      <div class="areas__footer fade-in">
-        <a href="how-we-help.html" class="btn btn-primary">Explore How We Help &rarr;</a>
-      </div>
+<!-- ════════════════════════════════════════════
+     SECTION 10 — BLOG / INSIGHTS
+════════════════════════════════════════════ -->
+<section id="insights" class="section-pad" style="background:white;">
+  <div class="max-w-7xl mx-auto px-6">
+
+    <div class="text-center mb-4 fade-in">
+      <span class="inline-block text-xs font-semibold uppercase mb-4"
+            style="color:#2D5BFF; letter-spacing:0.14em;">Insights</span>
+      <h2 class="font-bold"
+          style="font-size:clamp(28px,3.5vw,40px); font-weight:700; color:#0B1120;">
+        Insights, Systems &amp; Operational Thinking
+      </h2>
+      <p class="mt-4 mx-auto" style="color:#475569; font-size:17px; max-width:520px; line-height:1.7;">
+        Practical thinking on managed support, business operations, and building systems that scale.
+      </p>
     </div>
-  </section>
 
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-14 fade-in">
 
-  <!-- ══════════════════════════════════════════════════════════
-       S7, TEAM  ·  --bg-section (deeper cream)
-  ══════════════════════════════════════════════════════════ -->
-  <section class="section section--warm" id="team">
-    <div class="container">
-      <div class="text-center fade-in" style="max-width: 560px; margin: 0 auto var(--s2);">
-        <span class="eyebrow">The People Behind the Work</span>
-        <h2>Your Team at BBC</h2>
-        <div class="divider-bar"></div>
-        <p>We're a small, dedicated team, and that's intentional. You'll know us by name, and we'll know your business inside and out.</p>
-      </div>
-      <div class="team-grid">
-        <div class="team-card team-card--featured fade-in">
-          <div class="team-card__avatar">B</div>
-          <h3>Bruno</h3>
-          <div class="team-card__role">Founder &amp; Lead Strategist</div>
-          <p>The heart of BBC. Bruno built this studio around the belief that great support starts with genuine relationship, and he leads every client engagement with that intention.</p>
-          <div class="team-card__badge">Founder-Led</div>
+      <div class="blog-card rounded-2xl overflow-hidden border bg-white" style="border-color:#D1D5DB;">
+        <div class="flex items-center justify-center" style="height:200px; background:#0B1120;">
+          <span style="color:rgba(255,255,255,0.2); font-size:13px;">Article Image</span>
         </div>
-        <div class="team-card fade-in">
-          <div class="team-card__avatar" style="background:linear-gradient(135deg,#2A4A6E,#1C3250);">V</div>
-          <h3>Vi</h3>
-          <div class="team-card__role">E-Commerce &amp; Social Media Specialist</div>
-          <p>Vi runs the full e-commerce stack, from Shopify builds and email marketing to social media and AI-powered content workflows. Detail-driven, always on brand.</p>
-        </div>
-        <div class="team-card fade-in">
-          <div class="team-card__avatar" style="background:linear-gradient(135deg,#3A3060,#221D45);">K</div>
-          <h3>Kenz</h3>
-          <div class="team-card__role">Creative &amp; Brand Lead</div>
-          <p>Turns concepts into visuals that feel true. Kenz brings warmth, intention, and sharp creative instinct to every brand and design project she touches.</p>
-        </div>
-        <div class="team-card fade-in">
-          <div class="team-card__avatar">R</div>
-          <h3>Ryan</h3>
-          <div class="team-card__role">Operations &amp; Web Development Lead</div>
-          <p>Leads BBC's operational systems and web development work. Ryan keeps internal workflows running and builds digital infrastructure clients can rely on long-term.</p>
-        </div>
-        <div class="team-card fade-in">
-          <div class="team-card__avatar" style="background:linear-gradient(135deg,#3A3060,#221D45);">K</div>
-          <h3>Krizza</h3>
-          <div class="team-card__role">Social Media Manager &amp; Client Operations</div>
-          <p>Manages social media strategy and CRM workflows for BBC clients. Krizza keeps communication tight, platforms consistent, and client relationships well-organized.</p>
-        </div>
-        <div class="team-card fade-in">
-          <div class="team-card__avatar" style="background:linear-gradient(135deg,#244A3A,#1A3529);">A</div>
-          <h3>Al</h3>
-          <div class="team-card__role">Shopify Developer &amp; Creative Support</div>
-          <p>Builds Shopify stores and backs them up with strong design and content. Al works across e-commerce, graphic design, and platform management for BBC clients.</p>
-        </div>
-        <div class="team-card fade-in">
-          <div class="team-card__avatar" style="background:linear-gradient(135deg,#4A2060,#2E1440);">R</div>
-          <h3>Ryan C.</h3>
-          <div class="team-card__role">AI Content Creator &amp; Automations</div>
-          <p>Builds AI-powered content systems and automation workflows that help BBC clients publish more without burning out. Where creative output meets smart technology.</p>
-        </div>
-        <div class="team-card fade-in">
-          <div class="team-card__avatar" style="background:linear-gradient(135deg,#1A4A5A,#0F2E3A);">D</div>
-          <h3>Daryl</h3>
-          <div class="team-card__role">Content Creator &amp; Marketing Support</div>
-          <p>Covers the full creative and marketing spectrum, from graphic design and video editing to social media, email marketing, SEO writing, and AI-assisted workflows.</p>
+        <div class="p-7">
+          <span class="inline-block text-xs font-semibold uppercase tracking-widest px-2.5 py-1 rounded-full mb-3.5"
+                style="background:rgba(45,91,255,0.08); color:#2D5BFF; letter-spacing:0.08em;">Operations &amp; Support</span>
+          <h3 class="font-bold leading-snug"
+              style="color:#0B1120; font-size:18px; line-height:1.4; font-weight:700;">
+            How Managed VA Support Helps Business Owners Stay Organized
+          </h3>
+          <p class="mt-2.5 leading-relaxed"
+             style="color:#475569; font-size:14px; line-height:1.7;">
+            Why having a managed support system — not just extra help — changes how your business operates.
+          </p>
+          <a href="#" class="block mt-5 font-semibold" style="color:#2D5BFF; font-weight:600; font-size:14px;">Read More →</a>
         </div>
       </div>
-      <div class="team__footer fade-in">
-        <a href="our-team.html" class="btn btn-outline">Meet the Full Team &rarr;</a>
+
+      <div class="blog-card rounded-2xl overflow-hidden border bg-white" style="border-color:#D1D5DB;">
+        <div class="flex items-center justify-center" style="height:200px; background:#0B1120;">
+          <span style="color:rgba(255,255,255,0.2); font-size:13px;">Article Image</span>
+        </div>
+        <div class="p-7">
+          <span class="inline-block text-xs font-semibold uppercase tracking-widest px-2.5 py-1 rounded-full mb-3.5"
+                style="background:rgba(45,91,255,0.08); color:#2D5BFF; letter-spacing:0.08em;">Strategy</span>
+          <h3 class="font-bold leading-snug"
+              style="color:#0B1120; font-size:18px; line-height:1.4; font-weight:700;">
+            Why Founder-Led Setup Makes Virtual Assistance More Effective
+          </h3>
+          <p class="mt-2.5 leading-relaxed"
+             style="color:#475569; font-size:14px; line-height:1.7;">
+            The difference between being matched and being guided through the process from the very start.
+          </p>
+          <a href="#" class="block mt-5 font-semibold" style="color:#2D5BFF; font-weight:600; font-size:14px;">Read More →</a>
+        </div>
       </div>
+
+      <div class="blog-card rounded-2xl overflow-hidden border bg-white" style="border-color:#D1D5DB;">
+        <div class="flex items-center justify-center" style="height:200px; background:#0B1120;">
+          <span style="color:rgba(255,255,255,0.2); font-size:13px;">Article Image</span>
+        </div>
+        <div class="p-7">
+          <span class="inline-block text-xs font-semibold uppercase tracking-widest px-2.5 py-1 rounded-full mb-3.5"
+                style="background:rgba(45,91,255,0.08); color:#2D5BFF; letter-spacing:0.08em;">Systems &amp; AI</span>
+          <h3 class="font-bold leading-snug"
+              style="color:#0B1120; font-size:18px; line-height:1.4; font-weight:700;">
+            How SOPs, Workflows &amp; AI Systems Improve Client Support
+          </h3>
+          <p class="mt-2.5 leading-relaxed"
+             style="color:#475569; font-size:14px; line-height:1.7;">
+            How BBC builds operational frameworks that make ongoing support faster and more consistent.
+          </p>
+          <a href="#" class="block mt-5 font-semibold" style="color:#2D5BFF; font-weight:600; font-size:14px;">Read More →</a>
+        </div>
+      </div>
+
     </div>
-  </section>
+  </div>
+</section>
 
 
-  <!-- ══════════════════════════════════════════════════════════
-       S8, REAL RELATIONSHIPS  ·  --bg-dark
-  ══════════════════════════════════════════════════════════ -->
-  <section class="section section--dark" id="real-relationships">
-    <div class="container">
-      <div class="real__header fade-in">
-        <span class="eyebrow eyebrow--gold">Real Results, Real People</span>
-        <h2>What Working With BBC Actually Feels Like</h2>
-        <div class="divider-bar"></div>
-        <p>The best way we can tell our story is through the people we've had the privilege of working with.</p>
-      </div>
-      <div class="reviews-grid">
-        <div class="review-card fade-in">
-          <div class="review-stars">★★★★★</div>
-          <p>"BBC isn't just a vendor, they feel like an extension of my own team. Bruno and the crew actually care about your success. That's rare."</p>
-          <div class="review-author">
-            <div class="review-author__avatar">SC</div>
-            <div>
-              <div class="review-author__name">Sarah C.</div>
-              <div class="review-author__title">E-commerce Founder</div>
-            </div>
-          </div>
-        </div>
-        <div class="review-card fade-in">
-          <div class="review-stars">★★★★★</div>
-          <p>"I'd tried other agencies and always felt like I had to manage them. With BBC, I finally have a team I can trust to just handle it, and they do."</p>
-          <div class="review-author">
-            <div class="review-author__avatar">JM</div>
-            <div>
-              <div class="review-author__name">James M.</div>
-              <div class="review-author__title">Service Business Owner</div>
-            </div>
-          </div>
-        </div>
-        <div class="review-card fade-in">
-          <div class="review-stars">★★★★★</div>
-          <p>"The systems they built for us changed everything. Less chaos, more clarity. And they explained it all in plain English, no jargon, just solutions."</p>
-          <div class="review-author">
-            <div class="review-author__avatar">AL</div>
-            <div>
-              <div class="review-author__name">Angie L.</div>
-              <div class="review-author__title">Coaching Practice Owner</div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="real__row fade-in">
-        <div>
-          <div class="real__sub-label">Recent Work</div>
-          <div class="work-previews">
-            <div class="work-preview-card">
-              <div class="work-preview__thumb">🌐</div>
-              <div class="work-preview__info">
-                <div class="work-preview__name">Coastal Coaching Co.</div>
-                <div class="work-preview__tag">Website Design + SEO</div>
-              </div>
-            </div>
-            <div class="work-preview-card">
-              <div class="work-preview__thumb">🎨</div>
-              <div class="work-preview__info">
-                <div class="work-preview__name">Verde Health Collective</div>
-                <div class="work-preview__tag">Brand Identity + Web</div>
-              </div>
-            </div>
-            <div class="work-preview-card">
-              <div class="work-preview__thumb">⚙️</div>
-              <div class="work-preview__info">
-                <div class="work-preview__name">Summit Real Estate Group</div>
-                <div class="work-preview__tag">Automation + CRM Systems</div>
-              </div>
-            </div>
-          </div>
-          <div style="margin-top: 1.25rem;">
-            <a href="our-work.html" class="btn btn-warm-outline btn-sm">View All Work &rarr;</a>
-          </div>
-        </div>
-        <div>
-          <div class="real__sub-label">From the Insights</div>
-          <div class="insights-list">
-            <div class="insight-item">
-              <div class="insight-item__meta">Operations &middot; 4 min read</div>
-              <div class="insight-item__title">Why Most Businesses Outgrow Their Support Before They Realize It</div>
-              <div class="insight-item__body">The signs are subtle, and by the time they're obvious, you're already behind.</div>
-            </div>
-            <div class="insight-item">
-              <div class="insight-item__meta">Systems &middot; 6 min read</div>
-              <div class="insight-item__title">Building a Business That Doesn't Depend on You Remembering Everything</div>
-              <div class="insight-item__body">Systems aren't about removing the human touch. They're about protecting it.</div>
-            </div>
-            <div class="insight-item">
-              <div class="insight-item__meta">Growth &middot; 3 min read</div>
-              <div class="insight-item__title">What "Founder-Led" Actually Means When You're Scaling</div>
-              <div class="insight-item__body">There's a difference between staying involved and staying in control of everything.</div>
-            </div>
-          </div>
-          <div style="margin-top: 1.25rem;">
-            <a href="insights.html" class="btn btn-warm-outline btn-sm">Browse All Insights &rarr;</a>
-          </div>
-        </div>
-      </div>
+<!-- ════════════════════════════════════════════
+     SECTION 11 — KNOWLEDGE LIBRARY
+════════════════════════════════════════════ -->
+<section id="library" style="background:#F8FAFC; padding:80px 0;">
+  <div class="max-w-7xl mx-auto px-6">
+
+    <div class="text-center mb-10 fade-in">
+      <span class="inline-block text-xs font-semibold uppercase mb-4"
+            style="color:#2D5BFF; letter-spacing:0.14em;">Internal Knowledge</span>
+      <h2 class="font-bold"
+          style="font-size:clamp(24px,3vw,32px); font-weight:700; color:#0B1120;">
+        A Growing Operational Library Behind the Work
+      </h2>
+      <p class="mt-4 mx-auto"
+         style="color:#475569; font-size:16px; max-width:600px; line-height:1.75;">
+        BBC continues building an internal library of strategies, skills, techniques, workflows, SOPs,
+        AI systems, and reusable operational frameworks — ensuring every client receives consistent,
+        improving support over time.
+      </p>
     </div>
-  </section>
 
+    <div class="flex flex-col sm:flex-row justify-center gap-6 max-w-2xl mx-auto fade-in">
 
-  <!-- ══════════════════════════════════════════════════════════
-       S9, FOUNDER ANCHOR  ·  --bg-primary (warm cream)
-  ══════════════════════════════════════════════════════════ -->
-  <section class="section section--cream" id="founder">
-    <div class="container">
-      <div class="founder__grid">
-        <div class="founder__photo-block fade-in">
-          <div class="founder__photo-placeholder">
-            <span>📷</span>
-            <p>Founder Photo</p>
-          </div>
-          <div class="founder__badge">
-            <div class="founder__badge-num">5+</div>
-            <div class="founder__badge-label">Years in Business</div>
-          </div>
-        </div>
-        <div class="founder__copy fade-in">
-          <span class="eyebrow eyebrow--gold">From the Founder</span>
-          <h2>We Built This Because We Believe You Deserve Better.</h2>
-          <div class="divider-bar divider-bar--left"></div>
-          <p class="lead">I started BBC because I kept seeing the same thing: business owners working with agencies that didn't actually know them, teams that came and went, and support that felt more like a transaction than a relationship.</p>
-          <p>So I built something different. A team that treats your business like we treat our own. A studio where people stay, grow with you, and genuinely care about what happens next.</p>
-          <p>"Balay" means home. That's what we're building, a place where your business feels taken care of, not just serviced.</p>
-          <div class="founder__values">
-            <div class="founder__value">
-              <div class="founder__value-dot"></div>
-              <div class="founder__value-text"><strong>People-First</strong>We build around the human, not just the deliverable</div>
-            </div>
-            <div class="founder__value">
-              <div class="founder__value-dot"></div>
-              <div class="founder__value-text"><strong>Honest Always</strong>We tell you what we actually think, even when it's harder</div>
-            </div>
-            <div class="founder__value">
-              <div class="founder__value-dot"></div>
-              <div class="founder__value-text"><strong>Built to Last</strong>Every system, every project is built to keep working long-term</div>
-            </div>
-            <div class="founder__value">
-              <div class="founder__value-dot"></div>
-              <div class="founder__value-text"><strong>Family Business</strong>We run this like a family, with care, pride, and accountability</div>
-            </div>
-          </div>
-          <div class="founder__sig">
-            <div class="founder__sig-line"></div>
-            <div>
-              <div class="founder__sig-name">Bruno</div>
-              <div class="founder__sig-title">Founder, Balay ni Bruno &amp; Co.</div>
-            </div>
-          </div>
-          <div style="margin-top: 2rem; display: flex; gap: 1rem; flex-wrap: wrap;">
-            <a href="about.html" class="btn btn-primary">Our Full Story &rarr;</a>
-            <a href="contact.html" class="btn btn-outline">Start a Conversation</a>
-          </div>
-        </div>
+      <div class="flex-1 rounded-xl p-6 text-center border bg-white" style="border-color:#D1D5DB;">
+        <div class="w-8 h-8 rounded-lg flex items-center justify-center text-white font-bold text-sm mx-auto"
+             style="background:#2D5BFF;">S</div>
+        <p class="font-bold mt-3 mb-1" style="color:#0B1120; font-size:16px; font-weight:700;">Strategy Library</p>
+        <p class="text-xs" style="color:#475569;">Frameworks and approaches.</p>
       </div>
+
+      <div class="flex-1 rounded-xl p-6 text-center border bg-white" style="border-color:#D1D5DB;">
+        <div class="w-8 h-8 rounded-lg flex items-center justify-center text-white font-bold text-sm mx-auto"
+             style="background:#2D5BFF;">K</div>
+        <p class="font-bold mt-3 mb-1" style="color:#0B1120; font-size:16px; font-weight:700;">Skills Library</p>
+        <p class="text-xs" style="color:#475569;">Capabilities and techniques.</p>
+      </div>
+
+      <div class="flex-1 rounded-xl p-6 text-center border bg-white" style="border-color:#D1D5DB;">
+        <div class="w-8 h-8 rounded-lg flex items-center justify-center text-white font-bold text-sm mx-auto"
+             style="background:#2D5BFF;">O</div>
+        <p class="font-bold mt-3 mb-1" style="color:#0B1120; font-size:16px; font-weight:700;">Operational Systems</p>
+        <p class="text-xs" style="color:#475569;">Workflows and SOPs.</p>
+      </div>
+
     </div>
-  </section>
+  </div>
+</section>
 
 
-  <!-- ══════════════════════════════════════════════════════════
-       S10, TRUSTED PARTNER  ·  --bg-section (deeper cream)
-  ══════════════════════════════════════════════════════════ -->
-  <section class="section section--warm" id="trusted-partner">
-    <div class="container">
-      <div class="partner__header fade-in">
-        <span class="eyebrow">What Sets Us Apart</span>
-        <h2>Not Just Support.<br>A Trusted Operational Partner.</h2>
-        <div class="divider-bar"></div>
-        <p>The difference between hiring a freelancer, an agency, and BBC isn't just the work. It's the relationship, the accountability, and the depth of care that goes into everything we do.</p>
-      </div>
-      <div class="partner-grid">
-        <div class="partner-card fade-in">
-          <span class="partner-card__icon">🧭</span>
-          <h3>Founder-Accessible</h3>
-          <p>Bruno is involved in every engagement. You're not passed off after you sign, leadership stays in the room.</p>
-        </div>
-        <div class="partner-card fade-in">
-          <span class="partner-card__icon">🤝</span>
-          <h3>Relationship-First</h3>
-          <p>We invest in understanding your business before we touch a single deliverable. The relationship is the work.</p>
-        </div>
-        <div class="partner-card fade-in">
-          <span class="partner-card__icon">📋</span>
-          <h3>Organized by Design</h3>
-          <p>Every project comes with clear processes and documentation, so nothing gets lost and you always know where things stand.</p>
-        </div>
-        <div class="partner-card fade-in">
-          <span class="partner-card__icon">🔄</span>
-          <h3>Built to Scale With You</h3>
-          <p>We don't build for where you are today. We build for where you're going, systems and support that grow as you grow.</p>
-        </div>
-        <div class="partner-card fade-in">
-          <span class="partner-card__icon">💬</span>
-          <h3>Always Communicating</h3>
-          <p>No chasing. No silence. We keep you informed, give real updates, and flag things before they become problems.</p>
-        </div>
-        <div class="partner-card fade-in">
-          <span class="partner-card__icon">🏡</span>
-          <h3>The Balay Difference</h3>
-          <p>"Balay" means home. Every client relationship is built with the warmth, trust, and stability that word implies.</p>
-        </div>
-      </div>
+<!-- ════════════════════════════════════════════
+     SECTION 12 — FINAL CTA
+════════════════════════════════════════════ -->
+<section id="cta" class="text-center" style="background:#0B1120; padding:120px 24px;">
+  <div class="max-w-3xl mx-auto fade-in">
+    <h2 class="font-bold text-white mx-auto"
+        style="font-size:clamp(28px,4vw,44px); font-weight:700; line-height:1.2; max-width:700px;">
+      Ready to Get Support That's Built Around Your Business?
+    </h2>
+    <p class="mx-auto mt-5"
+       style="color:rgba(255,255,255,0.65); font-size:18px; max-width:520px; line-height:1.7;">
+      Book a call — we'll learn about your business, identify the support you need,
+      and see if BBC is the right fit.
+    </p>
+    <div class="mt-10">
+      <a href="#"
+         class="inline-flex items-center px-10 py-5 rounded-full text-white font-bold"
+         style="background:#2D5BFF; font-size:18px; font-weight:700;">
+        Book a Call
+      </a>
     </div>
-  </section>
+    <p class="mt-4" style="font-size:14px; color:rgba(255,255,255,0.35);">
+      No pressure. Just a conversation.
+    </p>
+  </div>
+</section>
 
 
-  <!-- ══════════════════════════════════════════════════════════
-       S11, FINAL CTA  ·  --bg-dark
-  ══════════════════════════════════════════════════════════ -->
-  <section class="section final-cta" id="cta">
-    <div class="container">
-      <div class="final-cta__inner fade-in">
-        <span class="eyebrow eyebrow--gold" style="margin-bottom: 1.5rem;">Let's Begin</span>
-        <h2>Let's Build Something<br><em style="font-style:italic; color: var(--gold-pale);">Worth Keeping.</em></h2>
-        <div class="divider-bar"></div>
-        <p>If you're tired of support that feels transactional, teams that come and go, and systems that fall apart under pressure, we'd love to talk. No pitch deck. No pressure. Just a real conversation about what's possible.</p>
-        <div class="final-cta__actions">
-          <a href="https://calendly.com/rj-balaynibruno/bbc-strategy-call" target="_blank" rel="noopener noreferrer" class="btn btn-gold">Book a Call &rarr;</a>
-          <a href="contact.html" class="btn btn-warm-outline">Start a Conversation</a>
-        </div>
-        <div class="final-cta__note">No pressure. No pitch deck. Just a real conversation.</div>
-      </div>
-    </div>
-  </section>
+<!-- ════════════════════════════════════════════
+     FOOTER
+════════════════════════════════════════════ -->
+<footer id="contact"
+        style="background:#0B1120; border-top:1px solid rgba(255,255,255,0.08); padding:80px 0 40px;">
+  <div class="max-w-7xl mx-auto px-6">
 
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12">
 
-  <!-- ── FOOTER ────────────────────────────────────────────────── -->
-  <footer class="footer">
-    <div class="footer__grid">
+      <!-- Col 1: Brand -->
       <div>
-        <div class="footer__brand-name">Balay ni Bruno &amp; Co.</div>
-        <div class="footer__brand-sub">Operational Support Studio</div>
-        <p class="footer__brand-copy">A family-built, founder-led studio helping business owners grow through real collaboration, organized systems, and long-term operational care. Balay means home, and that's how we treat every client.</p>
+        <div class="flex items-center gap-3">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 210" width="42" height="42"
+               style="color:white; flex-shrink:0;" aria-hidden="true">
+            <!-- Chimney -->
+            <rect x="38" y="6" width="13" height="62" rx="2" fill="currentColor"/>
+            <!-- Roof left -->
+            <line x1="100" y1="38" x2="6" y2="90" stroke="currentColor" stroke-width="9" stroke-linecap="round"/>
+            <!-- Roof right -->
+            <line x1="100" y1="38" x2="194" y2="90" stroke="currentColor" stroke-width="9" stroke-linecap="round"/>
+            <!-- Monitor frame -->
+            <rect x="24" y="90" width="152" height="86" rx="6" fill="none" stroke="currentColor" stroke-width="9"/>
+            <!-- BBC text inside monitor -->
+            <text x="100" y="154" text-anchor="middle" font-size="46" font-weight="800"
+                  font-family="Georgia,'Times New Roman',serif" fill="currentColor">BBC</text>
+            <!-- Stand neck -->
+            <rect x="91" y="176" width="18" height="18" rx="2" fill="currentColor"/>
+            <!-- Stand base -->
+            <rect x="64" y="194" width="72" height="11" rx="5.5" fill="currentColor"/>
+          </svg>
+          <span class="font-bold text-white" style="font-size:16px; font-weight:700;">Balay ni Bruno &amp; Co.</span>
+        </div>
+        <p class="mt-4 leading-relaxed"
+           style="color:rgba(255,255,255,0.5); font-size:14px; line-height:1.7; max-width:240px;">
+          Managed virtual operations support for business owners who need reliable help with marketing,
+          websites, content, automation, and digital operations.
+        </p>
+        <div class="flex gap-2 mt-5">
+          <div class="w-7 h-7 rounded-md" style="border:1px solid rgba(255,255,255,0.15);"></div>
+          <div class="w-7 h-7 rounded-md" style="border:1px solid rgba(255,255,255,0.15);"></div>
+          <div class="w-7 h-7 rounded-md" style="border:1px solid rgba(255,255,255,0.15);"></div>
+        </div>
       </div>
+
+      <!-- Col 2: How We Help -->
       <div>
-        <div class="footer__col-label">Navigate</div>
-        <ul class="footer__links">
-          <li><a href="index.html">Home</a></li>
-          <li><a href="about.html">Our Story</a></li>
-          <li><a href="how-it-works.html">How It Works</a></li>
-          <li><a href="our-team.html">Our Team</a></li>
+        <p class="font-semibold uppercase tracking-widest mb-5"
+           style="color:rgba(255,255,255,0.4); font-size:12px; letter-spacing:0.1em;">How We Help</p>
+        <ul>
+          <li><a href="how-we-help.html#marketing"  class="hover:text-white transition-colors" style="color:rgba(255,255,255,0.65); font-size:14px; line-height:2.2; display:block;">Marketing Support</a></li>
+          <li><a href="how-we-help.html#content"    class="hover:text-white transition-colors" style="color:rgba(255,255,255,0.65); font-size:14px; line-height:2.2; display:block;">Content &amp; Creative</a></li>
+          <li><a href="how-we-help.html#websites"   class="hover:text-white transition-colors" style="color:rgba(255,255,255,0.65); font-size:14px; line-height:2.2; display:block;">Websites &amp; Digital</a></li>
+          <li><a href="how-we-help.html#email"      class="hover:text-white transition-colors" style="color:rgba(255,255,255,0.65); font-size:14px; line-height:2.2; display:block;">Email, CRM &amp; Outreach</a></li>
+          <li><a href="how-we-help.html#automation" class="hover:text-white transition-colors" style="color:rgba(255,255,255,0.65); font-size:14px; line-height:2.2; display:block;">AI &amp; Automation</a></li>
+          <li><a href="how-we-help.html#seo"        class="hover:text-white transition-colors" style="color:rgba(255,255,255,0.65); font-size:14px; line-height:2.2; display:block;">SEO &amp; Visibility</a></li>
+          <li><a href="how-we-help.html#operations" class="hover:text-white transition-colors" style="color:rgba(255,255,255,0.65); font-size:14px; line-height:2.2; display:block;">Operations &amp; Admin</a></li>
         </ul>
       </div>
+
+      <!-- Col 3: Company -->
       <div>
-        <div class="footer__col-label">Work With Us</div>
-        <ul class="footer__links">
-          <li><a href="how-we-help.html">How We Help</a></li>
-          <li><a href="our-work.html">Our Work</a></li>
-          <li><a href="https://calendly.com/rj-balaynibruno/bbc-strategy-call" target="_blank" rel="noopener noreferrer">Book a Call</a></li>
-          <li><a href="contact.html">Contact</a></li>
+        <p class="font-semibold uppercase tracking-widest mb-5"
+           style="color:rgba(255,255,255,0.4); font-size:12px; letter-spacing:0.1em;">Company</p>
+        <ul>
+          <li><a href="index.html"         class="hover:text-white transition-colors" style="color:rgba(255,255,255,0.65); font-size:14px; line-height:2.2; display:block;">Home</a></li>
+          <li><a href="about.html"         class="hover:text-white transition-colors" style="color:rgba(255,255,255,0.65); font-size:14px; line-height:2.2; display:block;">Our Story</a></li>
+          <li><a href="how-it-works.html"  class="hover:text-white transition-colors" style="color:rgba(255,255,255,0.65); font-size:14px; line-height:2.2; display:block;">How It Works</a></li>
+          <li><a href="how-we-help.html"   class="hover:text-white transition-colors" style="color:rgba(255,255,255,0.65); font-size:14px; line-height:2.2; display:block;">How We Help</a></li>
+          <li><a href="#team"              class="hover:text-white transition-colors" style="color:rgba(255,255,255,0.65); font-size:14px; line-height:2.2; display:block;">Team</a></li>
+          <li><a href="our-work.html"       class="hover:text-white transition-colors" style="color:rgba(255,255,255,0.65); font-size:14px; line-height:2.2; display:block;">Our Work</a></li>
+          <li><a href="#reviews"           class="hover:text-white transition-colors" style="color:rgba(255,255,255,0.65); font-size:14px; line-height:2.2; display:block;">Reviews</a></li>
+          <li><a href="#insights"          class="hover:text-white transition-colors" style="color:rgba(255,255,255,0.65); font-size:14px; line-height:2.2; display:block;">Insights</a></li>
+          <li><a href="#contact"           class="hover:text-white transition-colors" style="color:rgba(255,255,255,0.65); font-size:14px; line-height:2.2; display:block;">Contact</a></li>
         </ul>
       </div>
+
+      <!-- Col 4: Contact -->
       <div>
-        <div class="footer__col-label">Resources</div>
-        <ul class="footer__links">
-          <li><a href="insights.html">Insights</a></li>
-          <li><a href="resources.html">Forms &amp; Resources</a></li>
-          <li><a href="newsletter.html">Newsletter</a></li>
-          <li><a href="contact.html">Start a Conversation</a></li>
-        </ul>
+        <p class="font-semibold uppercase tracking-widest mb-5"
+           style="color:rgba(255,255,255,0.4); font-size:12px; letter-spacing:0.1em;">Contact</p>
+        <p style="color:rgba(255,255,255,0.65); font-size:14px; line-height:2.2;">hello@balaynibruno.com</p>
+        <p style="color:rgba(255,255,255,0.65); font-size:14px; line-height:2.2;">+1 (000) 000-0000</p>
+        <p class="mt-1" style="color:rgba(255,255,255,0.65); font-size:14px; line-height:1.7;">
+          Serving clients in the US, UK, and internationally.
+        </p>
+        <a href="#cta" class="block mt-4 font-semibold" style="color:#2D5BFF; font-size:14px; font-weight:600;">
+          Book a Call →
+        </a>
       </div>
+
     </div>
-    <div class="footer__bottom">
-      <div class="footer__copyright">&copy; 2026 Balay ni Bruno &amp; Co. All rights reserved.</div>
+
+    <!-- Bottom bar -->
+    <div class="flex flex-col sm:flex-row items-center justify-between gap-4"
+         style="border-top:1px solid rgba(255,255,255,0.08); margin-top:60px; padding-top:28px;">
+      <p style="color:rgba(255,255,255,0.35); font-size:13px;">
+        © 2025 Balay ni Bruno &amp; Co. All rights reserved.
+      </p>
+      <p style="color:rgba(255,255,255,0.35); font-size:13px;">
+        <a href="#" class="hover:text-white transition-colors" style="color:rgba(255,255,255,0.35);">Privacy Policy</a>
+        <span style="margin:0 8px;">·</span>
+        <a href="#" class="hover:text-white transition-colors" style="color:rgba(255,255,255,0.35);">Terms of Service</a>
+      </p>
     </div>
-  </footer>
+
+  </div>
+</footer>
 
 
-  <script>
-    const header = document.getElementById('siteHeader');
-    window.addEventListener('scroll', () => {
-      header.classList.toggle('scrolled', window.scrollY > 12);
-    }, { passive: true });
+<!-- ════════════════════════════════════════════
+     JAVASCRIPT
+════════════════════════════════════════════ -->
+<script>
+  // ── Hamburger menu toggle ────────────────────
+  const hamburger = document.getElementById('hamburger');
+  const mobileNav = document.getElementById('mobile-nav');
+  const hb1 = document.getElementById('hb1');
+  const hb2 = document.getElementById('hb2');
+  const hb3 = document.getElementById('hb3');
 
-    const hamburger = document.getElementById('hamburger');
-    const mobileMenu = document.getElementById('mobileMenu');
-    hamburger.addEventListener('click', () => mobileMenu.classList.toggle('open'));
+  hamburger.addEventListener('click', () => {
+    const isOpen = mobileNav.classList.toggle('open');
+    if (isOpen) {
+      hb1.style.transform = 'translateY(8px) rotate(45deg)';
+      hb2.style.opacity   = '0';
+      hb3.style.transform = 'translateY(-8px) rotate(-45deg)';
+    } else {
+      hb1.style.transform = '';
+      hb2.style.opacity   = '';
+      hb3.style.transform = '';
+    }
+  });
 
-    const observer = new IntersectionObserver(
-      entries => entries.forEach(el => {
-        if (el.isIntersecting) { el.target.classList.add('visible'); observer.unobserve(el.target); }
-      }),
-      { threshold: 0.12, rootMargin: '0px 0px -40px 0px' }
-    );
-    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
-  </script>
+  // Close mobile nav on link click
+  mobileNav.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      mobileNav.classList.remove('open');
+      hb1.style.transform = '';
+      hb2.style.opacity   = '';
+      hb3.style.transform = '';
+    });
+  });
+
+  // ── Sticky header: add shadow after 60px scroll ──
+  const siteHeader = document.getElementById('site-header');
+  window.addEventListener('scroll', () => {
+    siteHeader.classList.toggle('scrolled', window.scrollY > 60);
+  }, { passive: true });
+
+  // ── Scroll fade-in via IntersectionObserver ──
+  const fadeEls = document.querySelectorAll('.fade-in');
+  const io = new IntersectionObserver(
+    (entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          io.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }
+  );
+  fadeEls.forEach(el => io.observe(el));
+
+  // ── Smooth scroll for anchor links ──────────
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        const offset = siteHeader.offsetHeight + 8;
+        const top = target.getBoundingClientRect().top + window.scrollY - offset;
+        window.scrollTo({ top, behavior: 'smooth' });
+      }
+    });
+  });
+</script>
 
 </body>
 </html>

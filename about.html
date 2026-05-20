@@ -1,876 +1,976 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Our Story | Balay ni Bruno &amp; Co.</title>
-  <meta name="description" content="The story behind Balay ni Bruno &amp; Co., built on real work, grown through real relationships, and rooted in the meaning of Balay: home." />
-  <link rel="canonical" href="https://balaynibruno.co/about.html" />
-  <meta property="og:type" content="website" />
-  <meta property="og:site_name" content="Balay ni Bruno &amp; Co." />
-  <meta property="og:title" content="Our Story, Balay ni Bruno &amp; Co." />
-  <meta property="og:description" content="The story behind Balay ni Bruno &amp; Co., built on real work, grown through real relationships." />
-  <meta property="og:url" content="https://balaynibruno.co/about.html" />
-  <meta property="og:image" content="https://balaynibruno.co/bbc-logo.png" />
-  <meta name="twitter:card" content="summary_large_image" />
-  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <title>Our Story — Balay ni Bruno &amp; Co.</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Lora:ital,wght@0,400;0,500;1,400;1,500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
-
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            navy:        '#0B1120',
+            blue:        '#2D5BFF',
+            'off-white': '#F8FAFC',
+            slate:       '#475569',
+            lightgray:   '#D1D5DB',
+          },
+          fontFamily: {
+            sans: ['Montserrat', 'sans-serif'],
+          },
+        },
+      },
+    };
+  </script>
   <style>
-    :root {
-      --deep-blue:   #1F3557;
-      --mid-blue:    #4B6FA5;
-      --warm-blue:   #6D8FC7;
-      --light-blue:  #A8C0DC;
-      --pale-blue:   #DDE8F2;
-      --bg-primary:  #F5F1EA;
-      --bg-section:  #EDE8DF;
-      --bg-card:     #FDFAF6;
-      --bg-card-alt: #FAF6EF;
-      --bg-dark:     #1C2E47;
-      --bg-footer:   #172540;
-      --neutral-100: #E8E2D6;
-      --neutral-200: #D5CEC3;
-      --neutral-300: #B8B1A6;
-      --text-ink:    #2A3040;
-      --text-body:   #4E5666;
-      --text-muted:  #888FA0;
-      --text-warm:   #F5F1EA;
-      --gold:        #B8923E;
-      --gold-pale:   #E6CFA0;
-      --gold-warm:   #D4A84B;
-      --sage:        #4E9E74;
-      --font-display:'Playfair Display', Georgia, serif;
-      --font-body:   'Lora', Georgia, serif;
-      --font-ui:     'DM Sans', system-ui, sans-serif;
-      --max-width:   1200px;
-      --radius-sm:   8px;
-      --radius:      16px;
-      --radius-lg:   24px;
-      --radius-xl:   32px;
-      --shadow-xs:   0 1px 6px  rgba(85,60,35,0.055);
-      --shadow-sm:   0 3px 18px rgba(85,60,35,0.08);
-      --shadow-md:   0 7px 36px rgba(85,60,35,0.11);
-      --shadow-lg:   0 14px 56px rgba(85,60,35,0.14);
-      --border-card: 1px solid rgba(85,60,35,0.09);
-      --border-warm: 1px solid rgba(85,60,35,0.12);
-      --border-dark: 1px solid rgba(255,255,255,0.07);
-      --s1:0.5rem; --s2:1rem; --s3:1.5rem; --s4:2.5rem; --s5:4rem; --s6:6rem; --s7:9rem;
+    /* ── Base ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Montserrat', sans-serif; background: #F8FAFC; color: #0B1120; overflow-x: hidden; }
+
+    /* ── Fade-in on scroll ── */
+    .fade-in { opacity: 0; transform: translateY(24px); transition: opacity 0.65s ease, transform 0.65s ease; }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+    /* ── Sticky header scroll shadow ── */
+    #site-header { transition: box-shadow 0.3s ease; }
+    #site-header.scrolled { box-shadow: 0 1px 16px rgba(0,0,0,0.09); }
+
+    /* ── Mobile nav ── */
+    #mobile-nav { display: none; }
+    #mobile-nav.open { display: flex; }
+
+    /* ── Hamburger bars ── */
+    #hb1, #hb2, #hb3 { transition: transform 0.25s ease, opacity 0.25s ease; }
+
+    /* ── Section spacing ── */
+    .section-pad { padding: 100px 0; }
+    @media (max-width: 768px) { .section-pad { padding: 64px 0; } }
+
+    /* ── Smooth link/button interactions ── */
+    a, button { transition: opacity 0.2s ease, background 0.2s ease, color 0.2s ease, border-color 0.2s ease; }
+
+    /* ══════════════════════════════════════════
+       VERTICAL TIMELINE STYLES
+    ══════════════════════════════════════════ */
+
+    /* Outer wrapper: holds the center line + all rows */
+    .timeline {
+      position: relative;
+      max-width: 780px;
+      margin: 0 auto;
+      padding-bottom: 8px;
     }
 
-    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
-    html { scroll-behavior:smooth; }
-    body {
-      font-family: var(--font-body);
-      color: var(--text-ink);
-      background: var(--bg-primary);
-      line-height: 1.6;
-      -webkit-font-smoothing: antialiased;
-      overflow-x: hidden;
-    }
-    body::after {
-      content:'';
-      position:fixed; inset:0;
-      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23n)' opacity='0.026'/%3E%3C/svg%3E");
-      pointer-events:none; z-index:9999; mix-blend-mode:multiply;
+    /* The vertical center line — desktop only */
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: #D1D5DB;
+      transform: translateX(-50%);
     }
 
-    /* ── Typography ── */
-    h1,h2,h3,h4 { font-family:var(--font-display); line-height:1.22; color:var(--deep-blue); }
-    h1 { font-size:clamp(2.2rem,4.8vw,3.6rem); line-height:1.16; font-weight:700; }
-    h2 { font-size:clamp(1.7rem,3vw,2.6rem); line-height:1.22; font-weight:600; }
-    h3 { font-size:clamp(1.05rem,1.6vw,1.3rem); font-weight:600; }
-    p  { font-family:var(--font-body); font-size:1rem; line-height:1.87; color:var(--text-body); }
-    p.lead { font-size:1.08rem; line-height:1.9; color:var(--text-ink); }
-    a  { text-decoration:none; }
-
-    .eyebrow {
-      display:block; font-family:var(--font-ui);
-      font-size:0.68rem; font-weight:600;
-      letter-spacing:0.17em; text-transform:uppercase;
-      color:var(--warm-blue); margin-bottom:var(--s2);
-    }
-    .eyebrow--gold { color:var(--gold); }
-    .eyebrow--pale { color:rgba(245,241,234,0.5); }
-
-    /* ── Layout ── */
-    .container { max-width:var(--max-width); margin:0 auto; padding:0 var(--s4); }
-    .section        { padding:var(--s7) 0; }
-    .section--tight { padding:var(--s5) 0; }
-    .section--warm  { background:var(--bg-section); }
-    .section--card  { background:var(--bg-card); }
-    .section--dark  { background:var(--bg-dark); }
-    .section--cream { background:var(--bg-primary); }
-    .section--footer{ background:var(--bg-footer); }
-    .text-center    { text-align:center; }
-
-    .divider-bar {
-      width:44px; height:2.5px;
-      background:linear-gradient(90deg,var(--gold),var(--warm-blue));
-      border-radius:2px; margin:var(--s3) auto; opacity:0.8;
-    }
-    .divider-bar--left { margin-left:0; }
-
-    .fade-in { opacity:0; transform:translateY(22px); transition:opacity 0.65s ease, transform 0.65s ease; }
-    .fade-in.visible { opacity:1; transform:translateY(0); }
-
-    /* ── Buttons ── */
-    .btn {
-      display:inline-flex; align-items:center; gap:0.45rem;
-      padding:0.88rem 2rem; border-radius:100px;
-      font-family:var(--font-ui); font-size:0.86rem; font-weight:600;
-      letter-spacing:0.02em; cursor:pointer;
-      transition:all 0.3s ease; border:1.5px solid transparent;
-      white-space:nowrap;
-    }
-    .btn-primary { background:var(--deep-blue); color:var(--text-warm); }
-    .btn-primary:hover { background:#243f64; transform:translateY(-2px); box-shadow:0 10px 32px rgba(31,53,87,0.28); }
-    .btn-ghost { background:transparent; color:var(--text-warm); border-color:rgba(245,241,234,0.28); }
-    .btn-ghost:hover { background:rgba(245,241,234,0.08); border-color:rgba(245,241,234,0.55); }
-    .btn-gold { background:var(--gold); color:#fff; font-weight:700; }
-    .btn-gold:hover { background:var(--gold-warm); transform:translateY(-2px); box-shadow:0 10px 32px rgba(184,146,62,0.35); }
-    .btn-outline { background:transparent; color:var(--deep-blue); border-color:rgba(75,111,165,0.42); }
-    .btn-outline:hover { background:var(--deep-blue); color:var(--text-warm); }
-    .btn-sm { padding:0.62rem 1.35rem; font-size:0.78rem; }
-
-    /* ── Header ── */
-    .site-header {
-      position:fixed; top:0; left:0; right:0; z-index:200;
-      background:rgba(245,241,234,0.94);
-      backdrop-filter:blur(20px) saturate(1.2);
-      -webkit-backdrop-filter:blur(20px) saturate(1.2);
-      border-bottom:var(--border-warm);
-      transition:box-shadow 0.3s ease;
-    }
-    .site-header.scrolled { box-shadow:var(--shadow-sm); }
-    .header__inner {
-      max-width:var(--max-width); margin:0 auto; padding:0 var(--s4);
-      height:68px; display:flex; align-items:center;
-      justify-content:space-between; gap:var(--s3);
-    }
-    .header__logo { display:flex; flex-direction:row; align-items:center; gap:0.6rem; }
-    .header__logo-name {
-      font-family:var(--font-display); font-size:1.05rem; font-weight:700;
-      color:var(--deep-blue); line-height:1; letter-spacing:-0.01em;
-    }
-    .header__nav { display:flex; align-items:center; gap:1.5rem; list-style:none; }
-    .header__nav a {
-      font-family:var(--font-ui); font-size:0.78rem; font-weight:500;
-      color:var(--text-body); transition:color 0.2s; white-space:nowrap;
-    }
-    .header__nav a:hover, .header__nav a.active { color:var(--deep-blue); font-weight:600; }
-    .header__cta { display:flex; align-items:center; gap:0.9rem; flex-shrink:0; }
-    .hamburger { display:none; flex-direction:column; gap:5px; cursor:pointer; background:none; border:none; padding:8px; }
-    .hamburger span { display:block; width:20px; height:2px; background:var(--text-ink); border-radius:2px; transition:all 0.25s ease; }
-    .mobile-menu { display:none; flex-direction:column; background:var(--bg-card); border-top:var(--border-warm); padding:1rem var(--s4) 1.5rem; }
-    .mobile-menu.open { display:flex; }
-    .mobile-menu a { font-family:var(--font-ui); font-size:0.9rem; font-weight:500; color:var(--text-body); padding:0.7rem 0; border-bottom:var(--border-card); transition:color 0.2s; }
-    .mobile-menu a:hover { color:var(--deep-blue); }
-    .mobile-menu a:last-of-type { border-bottom:none; }
-    .mobile-menu .mobile-cta { margin-top:1rem; }
-    @media (max-width:1024px) { .header__nav { display:none; } }
-    @media (max-width:768px) { .header__cta .btn-ghost { display:none; } .hamburger { display:flex; } }
-
-    /* ════════════════════════════════════════════
-       S1, HERO  ·  --bg-dark
-    ════════════════════════════════════════════ */
-    .hero {
-      background:var(--bg-dark);
-      padding-top:68px;
-      padding-bottom:var(--s6);
-      text-align:center;
-      position:relative;
-      overflow:hidden;
-    }
-    .hero::before {
-      content:'';
-      position:absolute; top:-100px; right:-120px;
-      width:600px; height:600px;
-      background:radial-gradient(ellipse at center, rgba(184,146,62,0.07) 0%, transparent 65%);
-      pointer-events:none;
-    }
-    .hero::after {
-      content:'';
-      position:absolute; bottom:-60px; left:-80px;
-      width:400px; height:400px;
-      background:radial-gradient(ellipse at center, rgba(109,143,199,0.05) 0%, transparent 65%);
-      pointer-events:none;
-    }
-    .hero__inner {
-      max-width:800px; margin:0 auto;
-      padding:var(--s6) var(--s4) var(--s5);
-      position:relative; z-index:1;
-    }
-    .hero__eyebrow {
-      display:inline-flex; align-items:center; gap:0.6rem;
-      font-family:var(--font-ui); font-size:0.68rem; font-weight:600;
-      letter-spacing:0.18em; text-transform:uppercase;
-      color:var(--gold-pale); margin-bottom:1.8rem;
-    }
-    .hero__eyebrow-dot { width:5px; height:5px; border-radius:50%; background:var(--gold); opacity:0.75; flex-shrink:0; }
-    .hero__title { font-family:var(--font-display); font-size:clamp(2.2rem,4.6vw,3.6rem); font-weight:700; color:#fff; line-height:1.15; margin-bottom:1.6rem; }
-    .hero__title em { font-style:italic; color:var(--gold-pale); }
-    .hero__body { font-family:var(--font-body); font-size:1.06rem; line-height:1.88; color:rgba(245,241,234,0.68); max-width:560px; margin:0 auto 2.6rem; }
-    .hero__actions { display:flex; flex-wrap:wrap; gap:1rem; justify-content:center; }
-
-    /* ════════════════════════════════════════════
-       S2, BALAY MEANING  ·  --bg-primary (cream breath)
-    ════════════════════════════════════════════ */
-    .balay-section {
-      background:var(--bg-primary);
-      padding:var(--s7) 0;
-      position:relative; overflow:hidden;
-    }
-    .balay-section::before {
-      content:'';
-      position:absolute; top:-60px; right:-80px;
-      width:500px; height:500px;
-      background:radial-gradient(ellipse at center, rgba(184,146,62,0.05) 0%, transparent 65%);
-      pointer-events:none;
-    }
-    .balay-grid {
-      display:grid; grid-template-columns:1fr 1fr;
-      gap:var(--s6); align-items:center;
-    }
-    @media (max-width:880px) { .balay-grid { grid-template-columns:1fr; } }
-    .balay-word-card {
-      background:var(--bg-card);
-      border:var(--border-warm);
-      border-radius:var(--radius-xl);
-      padding:var(--s5) var(--s4);
-      text-align:center;
-      box-shadow:var(--shadow-md);
-      position:relative; overflow:hidden;
-    }
-    .balay-word-card::before {
-      content:'';
-      position:absolute; top:-40px; right:-40px;
-      width:200px; height:200px;
-      background:radial-gradient(ellipse at center, rgba(184,146,62,0.08) 0%, transparent 65%);
-      pointer-events:none;
-    }
-    .balay-word {
-      font-family:var(--font-display);
-      font-size:clamp(3rem,8vw,5.5rem);
-      font-weight:700; font-style:italic;
-      color:var(--deep-blue); line-height:1;
-      margin-bottom:0.5rem;
-    }
-    .balay-translation {
-      font-family:var(--font-ui); font-size:0.72rem; font-weight:600;
-      letter-spacing:0.18em; text-transform:uppercase;
-      color:var(--gold); margin-bottom:1.5rem;
-    }
-    .balay-definition {
-      font-family:var(--font-body); font-size:1rem; line-height:1.8;
-      color:var(--text-body); max-width:320px; margin:0 auto;
-    }
-    .balay-copy h2 { margin-bottom:1.25rem; }
-    .balay-copy p  { margin-bottom:1.15rem; }
-    .balay-quote {
-      margin:2rem 0;
-      padding:1.6rem 1.75rem;
-      border-left:3px solid var(--gold);
-      background:rgba(184,146,62,0.05);
-      border-radius:0 var(--radius) var(--radius) 0;
-    }
-    .balay-quote p {
-      font-family:var(--font-display);
-      font-size:1.1rem; font-style:italic;
-      color:var(--deep-blue); line-height:1.65;
-      margin-bottom:0;
+    /* Each timeline row */
+    .tl-row {
+      display: flex;
+      align-items: flex-start;
+      position: relative;
+      margin-bottom: 48px;
     }
 
-    /* ════════════════════════════════════════════
-       S3, FOUNDER STORY  ·  --bg-section (deeper cream)
-    ════════════════════════════════════════════ */
-    .founder-section {
-      background:var(--bg-section);
-      padding:var(--s7) 0;
-    }
-    .founder-grid {
-      display:grid; grid-template-columns:2fr 3fr;
-      gap:var(--s5); align-items:start;
-    }
-    @media (max-width:900px) { .founder-grid { grid-template-columns:1fr; } }
-    .founder-photo {
-      background:var(--bg-card);
-      border:var(--border-warm);
-      border-radius:var(--radius-lg);
-      aspect-ratio:3/4;
-      display:flex; flex-direction:column;
-      align-items:center; justify-content:center;
-      box-shadow:var(--shadow-md);
-      position:relative; overflow:hidden;
-    }
-    .founder-photo::before {
-      content:'';
-      position:absolute; inset:0;
-      background:radial-gradient(ellipse at 40% 40%, rgba(184,146,62,0.07) 0%, transparent 60%);
-    }
-    .founder-initials {
-      font-family:var(--font-display); font-size:3rem; font-weight:700;
-      color:var(--deep-blue); opacity:0.25; margin-bottom:0.5rem;
-    }
-    .founder-photo-label {
-      font-family:var(--font-ui); font-size:0.62rem; font-weight:600;
-      letter-spacing:0.14em; text-transform:uppercase;
-      color:var(--text-muted);
-    }
-    .founder-signature {
-      display:flex; align-items:center; gap:1rem; margin-top:2rem;
-      padding:1.25rem 1.5rem;
-      background:var(--bg-card); border:var(--border-card);
-      border-radius:var(--radius); box-shadow:var(--shadow-xs);
-    }
-    .founder-avatar {
-      width:52px; height:52px; border-radius:50%;
-      background:linear-gradient(135deg, var(--deep-blue), var(--bg-dark));
-      display:flex; align-items:center; justify-content:center;
-      flex-shrink:0;
-      font-family:var(--font-display); font-size:1rem; font-weight:700;
-      color:var(--gold-pale);
-    }
-    .founder-sig-name { font-family:var(--font-body); font-size:0.95rem; font-weight:500; color:var(--text-ink); }
-    .founder-sig-title { font-family:var(--font-ui); font-size:0.72rem; color:var(--text-muted); margin-top:2px; }
-    .founder-copy h2 { margin-bottom:1.25rem; }
-    .founder-copy p  { margin-bottom:1.15rem; }
+    /* LEFT-side rows: card left, dot center */
+    .tl-row.tl-left  { flex-direction: row; }
+    /* RIGHT-side rows: dot center, card right */
+    .tl-row.tl-right { flex-direction: row-reverse; }
 
-    /* ════════════════════════════════════════════
-       S4, TIMELINE  ·  --bg-dark (contrast moment)
-    ════════════════════════════════════════════ */
-    .timeline-section {
-      background:var(--bg-dark);
-      padding:var(--s7) 0;
-      position:relative; overflow:hidden;
-    }
-    .timeline-section::before {
-      content:'';
-      position:absolute; top:-80px; left:-80px;
-      width:480px; height:480px;
-      background:radial-gradient(ellipse at center, rgba(184,146,62,0.06) 0%, transparent 65%);
-      pointer-events:none;
-    }
-    .timeline-track {
-      position:relative;
-      max-width:900px;
-      margin:var(--s5) auto 0;
-      padding-left:3rem;
-    }
-    .timeline-track::before {
-      content:'';
-      position:absolute; left:0; top:0; bottom:0;
-      width:2px;
-      background:linear-gradient(to bottom, rgba(184,146,62,0.6), rgba(184,146,62,0.1));
-    }
-    .timeline-item {
-      position:relative;
-      margin-bottom:var(--s4);
-      padding:1.75rem 2rem;
-      background:rgba(255,255,255,0.03);
-      border:var(--border-dark);
-      border-radius:var(--radius-lg);
-      transition:background 0.25s;
-    }
-    .timeline-item:hover { background:rgba(255,255,255,0.05); }
-    .timeline-item:last-child { margin-bottom:0; }
-    .timeline-dot {
-      position:absolute; left:-3.6rem; top:1.75rem;
-      width:14px; height:14px; border-radius:50%;
-      background:var(--gold);
-      box-shadow:0 0 10px rgba(184,146,62,0.5);
-      border:3px solid var(--bg-dark);
-    }
-    .timeline-era {
-      font-family:var(--font-ui); font-size:0.62rem; font-weight:700;
-      letter-spacing:0.16em; text-transform:uppercase;
-      color:var(--gold); margin-bottom:0.6rem;
-    }
-    .timeline-title {
-      font-family:var(--font-display); font-size:1.2rem; font-weight:600;
-      color:#fff; margin-bottom:0.6rem; line-height:1.3;
-    }
-    .timeline-body { font-family:var(--font-body); font-size:0.92rem; line-height:1.8; color:rgba(245,241,234,0.6); margin:0; }
-    @media (max-width:640px) {
-      .timeline-track { padding-left:2rem; }
-      .timeline-dot { left:-2.6rem; }
-      .timeline-item { padding:1.25rem 1.25rem; }
+    /* Spacer on the opposing side */
+    .tl-spacer { flex: 1; }
+
+    /* The blue dot pinned on the center line */
+    .tl-dot {
+      position: absolute;
+      left: 50%;
+      top: 28px;
+      transform: translate(-50%, 0);
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: #2D5BFF;
+      border: 4px solid #F8FAFC;
+      z-index: 2;
+      flex-shrink: 0;
     }
 
-    /* ════════════════════════════════════════════
-       S5, VALUES  ·  --bg-card (fresh white warmth)
-    ════════════════════════════════════════════ */
-    .values-section { background:var(--bg-card); padding:var(--s7) 0; }
-    .values-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:1.5rem; margin-top:var(--s4); }
-    @media (max-width:700px) { .values-grid { grid-template-columns:1fr; } }
-    .value-card {
-      background:var(--bg-primary);
-      border:var(--border-warm);
-      border-radius:var(--radius-lg);
-      padding:2rem;
-      transition:transform 0.25s, box-shadow 0.25s;
+    /* Card occupies ~45% width */
+    .tl-card {
+      width: calc(50% - 32px);
+      background: white;
+      border: 1px solid #D1D5DB;
+      border-radius: 20px;
+      padding: 28px 32px;
+      position: relative;
     }
-    .value-card:hover { transform:translateY(-3px); box-shadow:var(--shadow-md); }
-    .value-icon {
-      width:44px; height:44px; border-radius:var(--radius-sm);
-      background:rgba(31,53,87,0.07);
-      display:flex; align-items:center; justify-content:center;
-      margin-bottom:1.1rem;
-      font-family:var(--font-ui); font-size:0.75rem; font-weight:700;
-      color:var(--deep-blue);
-    }
-    .value-title { font-family:var(--font-display); font-size:1.1rem; font-weight:600; color:var(--deep-blue); margin-bottom:0.65rem; }
-    .value-desc  { font-family:var(--font-body); font-size:0.9rem; line-height:1.8; color:var(--text-body); margin:0; }
 
-    /* ════════════════════════════════════════════
-       S6, FINAL CTA  ·  --bg-dark
-    ════════════════════════════════════════════ */
-    .cta-section {
-      background:var(--bg-dark);
-      padding:var(--s7) 0;
-      text-align:center;
-      position:relative; overflow:hidden;
-    }
-    .cta-section::before {
-      content:'';
-      position:absolute; top:-80px; right:-80px;
-      width:500px; height:500px;
-      background:radial-gradient(ellipse at center, rgba(184,146,62,0.07) 0%, transparent 65%);
-      pointer-events:none;
-    }
-    .cta-title { font-family:var(--font-display); font-size:clamp(1.8rem,3.5vw,2.8rem); font-weight:700; color:#fff; line-height:1.2; margin-bottom:1.25rem; }
-    .cta-title em { font-style:italic; color:var(--gold-pale); }
-    .cta-body { font-family:var(--font-body); font-size:1.05rem; line-height:1.85; color:rgba(245,241,234,0.62); max-width:520px; margin:0 auto 2.5rem; }
-    .cta-actions { display:flex; flex-wrap:wrap; gap:1rem; justify-content:center; }
-    .cta-note { font-family:var(--font-ui); font-size:0.75rem; color:rgba(245,241,234,0.28); margin-top:1.25rem; }
+    /* Muted/vision style for Node 7 */
+    .tl-card.tl-vision { border-color: rgba(71,85,105,0.3); }
+    .tl-card.tl-vision .tl-era { color: rgba(45,91,255,0.55); }
+    .tl-card.tl-vision .tl-title { color: #475569; }
 
-    /* ── Footer ── */
-    .site-footer {
-      background:var(--bg-footer);
-      border-top:var(--border-dark);
-      padding:var(--s6) 0 var(--s4);
-    }
-    .footer-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:var(--s4); }
-    @media (max-width:900px) { .footer-grid { grid-template-columns:repeat(2,1fr); } }
-    @media (max-width:540px) { .footer-grid { grid-template-columns:1fr; } }
-    .footer-brand-name { font-family:var(--font-display); font-size:1rem; font-weight:700; color:#fff; }
-    .footer-brand-desc { font-family:var(--font-body); font-size:0.82rem; line-height:1.75; color:rgba(245,241,234,0.45); margin-top:0.8rem; max-width:240px; }
-    .footer-col-label { font-family:var(--font-ui); font-size:0.62rem; font-weight:600; letter-spacing:0.14em; text-transform:uppercase; color:rgba(245,241,234,0.32); margin-bottom:1.1rem; }
-    .footer-link { display:block; font-family:var(--font-ui); font-size:0.83rem; color:rgba(245,241,234,0.6); line-height:2.15; transition:color 0.2s; }
-    .footer-link:hover { color:#fff; }
-    .footer-bottom { margin-top:var(--s4); padding-top:1.5rem; border-top:var(--border-dark); display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.75rem; }
-    .footer-copy { font-family:var(--font-ui); font-size:0.75rem; color:rgba(245,241,234,0.28); }
+    /* ── MOBILE: collapse to single left-aligned column ── */
+    @media (max-width: 768px) {
+      .timeline::before { left: 16px; transform: none; }
 
-    /* Misc */
-    .section-header { max-width:680px; margin:0 auto var(--s5); text-align:center; }
-    .section-header h2 { margin-bottom:0.75rem; }
-    .section-header p { color:var(--text-body); }
-      .header__cta .btn-ghost { color:var(--deep-blue); border-color:rgba(31,53,87,0.22); }
-    .header__cta .btn-ghost:hover { background:rgba(31,53,87,0.06); border-color:rgba(31,53,87,0.38); color:var(--deep-blue); }
+      .tl-row,
+      .tl-row.tl-right { flex-direction: column; align-items: flex-start; padding-left: 44px; }
+
+      .tl-dot { left: 16px; top: 4px; transform: none; }
+      .tl-spacer { display: none; }
+      .tl-card { width: 100%; }
+    }
+
+    /* ── Value card subtle hover ── */
+    .value-card { transition: border-color 0.25s ease, transform 0.25s ease; }
+    .value-card:hover { border-color: rgba(45,91,255,0.35) !important; transform: translateY(-2px); }
   </style>
 </head>
 <body>
 
 <!-- ════════════════════════════════════════════
-     HEADER, "Our Story" active
+     SHARED HEADER (about.html — "Our Story" is active)
 ════════════════════════════════════════════ -->
-<header class="site-header" id="site-header">
-  <div class="header__inner">
-    <a href="index.html" class="header__logo">
-      <img src="bbc-logo.png" alt="Balay ni Bruno &amp; Co." style="height:42px; width:auto; display:block;">
-      <span class="header__logo-name">Balay ni Bruno &amp; Co.</span>
+<header id="site-header" class="fixed top-0 left-0 right-0 z-50 bg-white border-b border-gray-100">
+  <div class="max-w-7xl mx-auto px-6 flex items-center justify-between h-16">
+
+    <!-- Logo → back to index.html -->
+    <a href="index.html" class="flex items-center gap-3">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 210" width="36" height="36"
+           style="color:#2D5BFF; flex-shrink:0;" aria-hidden="true">
+        <!-- Chimney -->
+        <rect x="38" y="6" width="13" height="62" rx="2" fill="currentColor"/>
+        <!-- Roof left -->
+        <line x1="100" y1="38" x2="6" y2="90" stroke="currentColor" stroke-width="9" stroke-linecap="round"/>
+        <!-- Roof right -->
+        <line x1="100" y1="38" x2="194" y2="90" stroke="currentColor" stroke-width="9" stroke-linecap="round"/>
+        <!-- Monitor frame -->
+        <rect x="24" y="90" width="152" height="86" rx="6" fill="none" stroke="currentColor" stroke-width="9"/>
+        <!-- BBC text inside monitor -->
+        <text x="100" y="154" text-anchor="middle" font-size="46" font-weight="800"
+              font-family="Georgia,'Times New Roman',serif" fill="currentColor">BBC</text>
+        <!-- Stand neck -->
+        <rect x="91" y="176" width="18" height="18" rx="2" fill="currentColor"/>
+        <!-- Stand base -->
+        <rect x="64" y="194" width="72" height="11" rx="5.5" fill="currentColor"/>
+      </svg>
+      <span class="font-bold" style="color:#0B1120; font-weight:700; font-size:15px; letter-spacing:-0.01em;">
+        Balay ni Bruno &amp; Co.
+      </span>
     </a>
-    <nav>
-      <ul class="header__nav">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="about.html" class="active">Our Story</a></li>
-        <li><a href="how-it-works.html">How It Works</a></li>
-        <li><a href="how-we-help.html">How We Help</a></li>
-        <li><a href="our-team.html">Our Team</a></li>
-        <li><a href="our-work.html">Our Work</a></li>
-        <li><a href="insights.html">Insights</a></li>
-        <li><a href="contact.html">Contact</a></li>
-      </ul>
+
+    <!-- Desktop Nav -->
+    <nav class="hidden lg:flex items-center gap-6">
+      <a href="index.html"              style="color:#475569; font-weight:500; font-size:14px;" class="hover:text-navy transition-colors">Home</a>
+      <a href="about.html"              style="color:#2D5BFF; font-weight:700; font-size:14px;" aria-current="page">Our Story</a>
+      <a href="how-it-works.html"       style="color:#475569; font-weight:500; font-size:14px;" class="hover:text-navy transition-colors">How It Works</a>
+      <a href="how-we-help.html"         style="color:#475569; font-weight:500; font-size:14px;" class="hover:text-navy transition-colors">How We Help</a>
+      <a href="index.html#team"         style="color:#475569; font-weight:500; font-size:14px;" class="hover:text-navy transition-colors">Team</a>
+      <a href="our-work.html"           style="color:#475569; font-weight:500; font-size:14px;" class="hover:text-navy transition-colors">Our Work</a>
+      <a href="ai-agents.html"          style="color:#475569; font-weight:500; font-size:14px;" class="hover:text-navy transition-colors">AI Agents</a>
+      <a href="index.html#insights"     style="color:#475569; font-weight:500; font-size:14px;" class="hover:text-navy transition-colors">Insights</a>
+      <a href="index.html#contact"      style="color:#475569; font-weight:500; font-size:14px;" class="hover:text-navy transition-colors">Contact</a>
     </nav>
-    <div class="header__cta">
-      <a href="contact.html" class="btn btn-ghost btn-sm">Start a Conversation</a>
-      <a href="https://calendly.com/rj-balaynibruno/bbc-strategy-call" target="_blank" rel="noopener noreferrer" class="btn btn-gold btn-sm">Book a Call</a>
+
+    <!-- CTA + Hamburger -->
+    <div class="flex items-center gap-3">
+      <a href="index.html#contact"
+         class="hidden md:inline-flex items-center px-5 py-2 rounded-full text-white font-semibold text-sm"
+         style="background:#2D5BFF; font-weight:600;">
+        Book a Call
+      </a>
+      <button id="hamburger" class="lg:hidden flex flex-col gap-1.5 p-2" aria-label="Toggle navigation menu">
+        <span id="hb1" class="block w-5 h-0.5 bg-gray-700 rounded"></span>
+        <span id="hb2" class="block w-5 h-0.5 bg-gray-700 rounded"></span>
+        <span id="hb3" class="block w-5 h-0.5 bg-gray-700 rounded"></span>
+      </button>
     </div>
-    <button class="hamburger" id="hamburger" aria-label="Open menu">
-      <span id="hb1"></span>
-      <span id="hb2"></span>
-      <span id="hb3"></span>
-    </button>
   </div>
-  <div class="mobile-menu" id="mobile-menu">
-    <a href="index.html">Home</a>
-    <a href="about.html" style="color:var(--deep-blue);font-weight:600;">Our Story</a>
-    <a href="how-it-works.html">How It Works</a>
-    <a href="how-we-help.html">How We Help</a>
-    <a href="our-team.html">Our Team</a>
-    <a href="our-work.html">Our Work</a>
-    <a href="insights.html">Insights</a>
-    <a href="contact.html">Contact</a>
-    <a href="https://calendly.com/rj-balaynibruno/bbc-strategy-call" target="_blank" rel="noopener noreferrer" class="btn btn-gold mobile-cta" style="text-align:center;justify-content:center;">Book a Call</a>
+
+  <!-- Mobile Nav Dropdown -->
+  <div id="mobile-nav" class="lg:hidden flex-col border-t border-gray-100 bg-white px-6 py-4 gap-0.5">
+    <a href="index.html"               class="block py-2.5 text-sm font-medium" style="color:#475569;">Home</a>
+    <a href="about.html"               class="block py-2.5 text-sm font-bold"   style="color:#2D5BFF;">Our Story</a>
+    <a href="how-it-works.html"         class="block py-2.5 text-sm font-medium" style="color:#475569;">How It Works</a>
+    <a href="how-we-help.html"          class="block py-2.5 text-sm font-medium" style="color:#475569;">How We Help</a>
+    <a href="index.html#team"          class="block py-2.5 text-sm font-medium" style="color:#475569;">Team</a>
+    <a href="our-work.html"            class="block py-2.5 text-sm font-medium" style="color:#475569;">Our Work</a>
+    <a href="ai-agents.html"           class="block py-2.5 text-sm font-medium" style="color:#475569;">AI Agents</a>
+    <a href="index.html#insights"      class="block py-2.5 text-sm font-medium" style="color:#475569;">Insights</a>
+    <a href="index.html#contact"       class="block py-2.5 text-sm font-medium" style="color:#475569;">Contact</a>
+    <a href="index.html#contact"
+       class="block mt-3 text-center px-5 py-2.5 rounded-full text-white font-semibold text-sm"
+       style="background:#2D5BFF;">
+      Book a Call
+    </a>
   </div>
 </header>
 
 
 <!-- ════════════════════════════════════════════
-     S1, HERO  ·  Dark
+     SECTION 1 — PAGE HERO
 ════════════════════════════════════════════ -->
-<section class="hero">
-  <div class="hero__inner fade-in">
+<section style="background:#0B1120; padding:120px 24px 80px; padding-top:calc(120px + 64px); text-align:center;">
+  <div class="max-w-3xl mx-auto fade-in">
 
-    <div class="hero__eyebrow">
-      <span class="hero__eyebrow-dot"></span>
+    <span class="inline-block text-xs font-semibold uppercase mb-5"
+          style="color:#2D5BFF; letter-spacing:0.16em; font-weight:600;">
       Our Story
-    </div>
+    </span>
 
-    <h1 class="hero__title">
-      Built on Real Work.<br>
-      <em>Grown Through Real Relationships.</em>
+    <h1 class="font-bold text-white mx-auto"
+        style="font-size:clamp(32px,5vw,48px); font-weight:700; line-height:1.2; max-width:700px;">
+      Built With Purpose,<br>
+      Run With People,<br>
+      Growing With Structure
     </h1>
 
-    <p class="hero__body">
-      Bruno didn't start with a business plan. He started with a decision, to work remotely,
-      be present for his family, and build something meaningful with the people he trusted most.
-      What began as one person doing digital work became a studio rooted in care.
+    <p class="mx-auto mt-5"
+       style="color:rgba(255,255,255,0.6); font-size:18px; line-height:1.75; max-width:560px;">
+      Balay ni Bruno &amp; Co. didn't start as a business plan. It started as a
+      commitment — to do this the right way, with the right people, for the right reasons.
     </p>
 
-    <div class="hero__actions">
-      <a href="#founder" class="btn btn-gold">Read the Story</a>
-      <a href="our-team.html" class="btn btn-ghost">Meet the Team</a>
-    </div>
-
   </div>
 </section>
 
 
 <!-- ════════════════════════════════════════════
-     S2, BALAY MEANING  ·  Cream (the breath)
+     SECTION 2 — FOUNDER VIDEO
 ════════════════════════════════════════════ -->
-<section class="balay-section">
-  <div class="container">
-    <div class="balay-grid">
+<section class="section-pad" style="background:#F8FAFC;">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="flex flex-col lg:flex-row items-center gap-16">
 
-      <div class="balay-word-card fade-in">
-        <p class="balay-word">Balay</p>
-        <p class="balay-translation">Visayan · noun · /ba-lai/</p>
-        <p class="balay-definition">
-          In the Visayan language of the Philippines, <em>Balay</em> means <strong>home</strong> —
-          not just the structure, but the warmth, the care, the people inside it.
-        </p>
-      </div>
-
-      <div class="balay-copy fade-in">
-        <span class="eyebrow eyebrow--gold">The Name Behind the Studio</span>
-        <h2>Why We Called It <em>Home</em></h2>
-        <div class="divider-bar divider-bar--left"></div>
-
-        <p>
-          When Bruno named this studio, he wasn't thinking about branding. He was thinking
-          about the kind of place he wanted to build, one where clients felt cared for,
-          where the team felt invested, and where the work felt like it meant something.
-        </p>
-
-        <div class="balay-quote">
-          <p>
-            "We don't treat clients like accounts. We treat them like guests in our home —
-            you come in, we take care of you, and we don't let you leave without knowing
-            you're in good hands."
+      <!-- Left: Video placeholder (55%) -->
+      <div class="w-full lg:w-[55%] fade-in">
+        <div class="rounded-2xl flex flex-col items-center justify-center cursor-pointer group"
+             style="background:#0B1120; aspect-ratio:16/9; border-radius:20px; overflow:hidden; box-shadow:0 24px 64px rgba(11,17,32,0.22);">
+          <!-- Play button -->
+          <div class="w-18 h-18 rounded-full flex items-center justify-center mb-4"
+               style="width:72px; height:72px; background:rgba(255,255,255,0.95); box-shadow:0 4px 24px rgba(0,0,0,0.3); transition:transform 0.2s ease;"
+               onmouseover="this.style.transform='scale(1.09)'" onmouseout="this.style.transform='scale(1)'">
+            <div style="width:0;height:0;border-top:12px solid transparent;border-bottom:12px solid transparent;border-left:22px solid #0B1120;margin-left:5px;"></div>
+          </div>
+          <p style="color:rgba(255,255,255,0.75); font-size:15px; font-weight:500; margin-top:16px;">
+            BBC — Who We Are and How We Work
+          </p>
+          <p style="color:rgba(255,255,255,0.45); font-size:13px; margin-top:6px;">
+            A message from the founder
           </p>
         </div>
+      </div>
 
-        <p>
-          That idea, home as the emotional anchor, shapes everything at BBC.
-          The way we onboard. The way we communicate. The way we stay involved long after
-          the initial setup is done. You're not hiring a service. You're joining a house.
+      <!-- Right: Founder copy (45%) -->
+      <div class="w-full lg:w-[45%] fade-in">
+
+        <span class="inline-block text-xs font-semibold uppercase mb-3"
+              style="color:#2D5BFF; letter-spacing:0.14em; font-weight:600;">
+          From the Founder
+        </span>
+
+        <h2 class="font-bold"
+            style="color:#0B1120; font-size:clamp(24px,2.8vw,32px); font-weight:700; line-height:1.3; margin-top:12px;">
+          How a Family Decision<br>Became a Business Built on People
+        </h2>
+
+        <p style="color:#475569; font-size:16px; line-height:1.8; margin-top:20px;">
+          Before BBC existed, I was working in the call center industry here in the
+          Philippines. When the pandemic hit, I made one decision — I wanted to work
+          remotely so I could be home with my family.
+        </p>
+        <p style="color:#475569; font-size:16px; line-height:1.8; margin-top:16px;">
+          I became a VA. I worked hard, kept learning, and kept building my skills.
+          And the people closest to me — friends, cousins, relatives, colleagues —
+          saw what I was doing and wanted to be part of it.
+        </p>
+        <p style="color:#475569; font-size:16px; line-height:1.8; margin-top:16px;">
+          So I trained them myself. When client work grew, I brought in the people
+          I had already invested in. No cold hiring. No random matching. Just people
+          I trusted, working together the way family does.
+        </p>
+        <p style="color:#475569; font-size:16px; line-height:1.8; margin-top:16px;">
+          That same spirit is how we work with every client today. Welcome to
+          Balay ni Bruno — the house we built together.
         </p>
 
-      </div>
-    </div>
-  </div>
-</section>
-
-
-<!-- ════════════════════════════════════════════
-     S3, FOUNDER STORY  ·  Section (deeper cream)
-════════════════════════════════════════════ -->
-<section class="founder-section" id="founder">
-  <div class="container">
-    <div class="founder-grid">
-
-      <!-- Left: founder visual -->
-      <div class="fade-in">
-        <div class="founder-photo">
-          <div class="founder-initials">B</div>
-          <p class="founder-photo-label">Bruno, Founder</p>
-        </div>
-        <div class="founder-signature">
-          <div class="founder-avatar">RJ</div>
+        <!-- Signature block -->
+        <div class="flex items-center gap-4 mt-7">
+          <div class="rounded-full flex items-center justify-center flex-shrink-0 font-bold text-white"
+               style="width:52px; height:52px; background:linear-gradient(135deg,#2D5BFF,#0B1120); font-size:16px; font-weight:700;">
+            RJ
+          </div>
           <div>
-            <p class="founder-sig-name">RJ Bryan B. Tres Reyes</p>
-            <p class="founder-sig-title">Founder &amp; Lead Strategist, Balay ni Bruno &amp; Co.</p>
+            <p class="font-bold" style="color:#0B1120; font-size:16px; font-weight:700;">RJ Bryan B. Tres Reyes</p>
+            <p style="color:#475569; font-size:13px; margin-top:2px;">Founder, Balay ni Bruno &amp; Co.</p>
           </div>
         </div>
+
       </div>
-
-      <!-- Right: story copy -->
-      <div class="founder-copy fade-in">
-        <span class="eyebrow">From the Founder</span>
-        <h2>How a Family Decision Became a Studio Built on Trust</h2>
-        <div class="divider-bar divider-bar--left"></div>
-
-        <p>
-          Before BBC, I was working in the call center industry in the Philippines.
-          When the pandemic hit, I made a decision that changed everything, I wanted
-          to work from home so I could be present for my family. So I became a virtual
-          assistant. I learned, I worked hard, and I built my skills one client at a time.
-        </p>
-
-        <p>
-          As the work grew, the people closest to me wanted in. Friends. Cousins. Colleagues
-          I had watched work with integrity for years. I didn't hire from a job board —
-          I trained the people I already trusted, people I had watched grow, people whose
-          character I already knew.
-        </p>
-
-        <p>
-          When client work expanded, I brought those people alongside me. Not cold hires.
-          Not matched strangers. Real people who had proven themselves to me personally —
-          working together the way family does, with honesty and accountability built in
-          from the start.
-        </p>
-
-        <p>
-          BBC was also born from something deeper: a belief that our skills and our work
-          should create real opportunities, for us, for our families, and for every client
-          who puts their trust in us. That's not a company value posted on a wall.
-          It's the reason we show up every day.
-        </p>
-
-        <p>
-          Welcome to Balay ni Bruno, the house we built together.
-        </p>
-      </div>
-
     </div>
   </div>
 </section>
 
 
 <!-- ════════════════════════════════════════════
-     S4, HOW THE TEAM GREW  ·  Dark (contrast)
+     SECTION 3 — ORIGIN STORY
 ════════════════════════════════════════════ -->
-<section class="timeline-section">
-  <div class="container">
-    <div class="section-header fade-in" style="text-align:center;">
-      <span class="eyebrow eyebrow--pale">The Journey</span>
-      <h2 style="color:#fff;">How BBC Grew from Solo to Studio</h2>
-      <div class="divider-bar"></div>
-      <p style="color:rgba(245,241,234,0.55);">
-        Not a funding round or a rebrand, just a founder who kept doing real work
-        and brought the right people in at the right time.
-      </p>
-    </div>
+<section class="section-pad" style="background:white;">
+  <div class="max-w-3xl mx-auto px-6">
 
-    <div class="timeline-track fade-in">
-
-      <div class="timeline-item">
-        <div class="timeline-dot"></div>
-        <p class="timeline-era">Where It Started</p>
-        <h3 class="timeline-title">One Person, One Decision</h3>
-        <p class="timeline-body">
-          Bruno went remote during the pandemic, built his VA skills from scratch, and started
-          landing real clients in the US. Every engagement taught him something about what
-          business owners actually needed, not just tasks, but real operational support.
-        </p>
-      </div>
-
-      <div class="timeline-item">
-        <div class="timeline-dot"></div>
-        <p class="timeline-era">When the Team Formed</p>
-        <h3 class="timeline-title">Trusted People, One at a Time</h3>
-        <p class="timeline-body">
-          As work grew, Bruno trained the people closest to him, friends, family members,
-          trusted colleagues, rather than hiring cold from a platform. Each person was
-          chosen for their character first, then their skills. No cold matching. No guesswork.
-        </p>
-      </div>
-
-      <div class="timeline-item">
-        <div class="timeline-dot"></div>
-        <p class="timeline-era">When It Became a Studio</p>
-        <h3 class="timeline-title">Balay ni Bruno &amp; Co. Takes Shape</h3>
-        <p class="timeline-body">
-          What had been one person doing digital work became a coordinated team, with
-          a name, a structure, a set of values, and a clear identity. BBC was born not from
-          a pitch deck, but from the natural growth of real work done with real people.
-        </p>
-      </div>
-
-      <div class="timeline-item">
-        <div class="timeline-dot"></div>
-        <p class="timeline-era">Where We Are Now</p>
-        <h3 class="timeline-title">A Small Team, Deeply Invested</h3>
-        <p class="timeline-body">
-          Today BBC is a founder-led operational support studio, Bruno, Visa, Krizza,
-          Ryan, Al, and the collaborators around them. Small by design. Every client is
-          known by name. Every engagement is led by Bruno personally. The work keeps growing
-          because the relationships do too.
-        </p>
-      </div>
-
-      <div class="timeline-item" style="border-color:rgba(184,146,62,0.2);">
-        <div class="timeline-dot" style="background:rgba(184,146,62,0.4);"></div>
-        <p class="timeline-era">Looking Ahead</p>
-        <h3 class="timeline-title">Built to Grow With You</h3>
-        <p class="timeline-body">
-          BBC isn't finished. As our clients grow, we grow alongside them. New team members
-          are added with the same care as the first, trained, trusted, aligned. The house
-          gets bigger without losing what made it home.
-        </p>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-
-<!-- ════════════════════════════════════════════
-     S5, CORE VALUES  ·  Card (fresh warmth)
-════════════════════════════════════════════ -->
-<section class="values-section">
-  <div class="container">
-    <div class="section-header fade-in">
-      <span class="eyebrow">What We Stand For</span>
-      <h2>The Values Behind Every Engagement</h2>
-      <div class="divider-bar"></div>
-      <p>These aren't written on a wall. They're built into the way we work.</p>
-    </div>
-
-    <div class="values-grid fade-in">
-
-      <div class="value-card">
-        <div class="value-icon">01</div>
-        <p class="value-title">People-First</p>
-        <p class="value-desc">
-          Systems exist to serve people, not the other way around. Every workflow we
-          build, every process we design, starts with the human on the other end of it.
-          Clients are not accounts. They're people we take responsibility for.
-        </p>
-      </div>
-
-      <div class="value-card">
-        <div class="value-icon">02</div>
-        <p class="value-title">Honest Always</p>
-        <p class="value-desc">
-          We tell you what's working and what isn't. We don't oversell, overpromise,
-          or disappear when things get complicated. Honest communication is the foundation
-          of every relationship we build, with clients and within the team.
-        </p>
-      </div>
-
-      <div class="value-card">
-        <div class="value-icon">03</div>
-        <p class="value-title">Built to Last</p>
-        <p class="value-desc">
-          We don't optimize for the quick win. We build systems, structures, and
-          relationships that hold up over time. Most BBC clients stay for years.
-          That's not an accident, it's what happens when support is designed to grow.
-        </p>
-      </div>
-
-      <div class="value-card">
-        <div class="value-icon">04</div>
-        <p class="value-title">Family Business</p>
-        <p class="value-desc">
-          The name says it, this is a house we built. Bruno trained the people around him,
-          invested in them personally, and brought them into something that creates real
-          opportunity. That spirit extends to every client who becomes part of it.
-        </p>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-
-<!-- ════════════════════════════════════════════
-     S6, FINAL CTA  ·  Dark
-════════════════════════════════════════════ -->
-<section class="cta-section">
-  <div class="container">
-    <div class="fade-in">
-      <span class="eyebrow eyebrow--pale">Ready When You Are</span>
-      <h2 class="cta-title">
-        Ready to Feel What<br><em>Real Support Feels Like?</em>
+    <div class="text-center fade-in">
+      <span class="inline-block text-xs font-semibold uppercase mb-3"
+            style="color:#2D5BFF; letter-spacing:0.14em; font-weight:600;">
+        How It Started
+      </span>
+      <h2 class="font-bold"
+          style="color:#0B1120; font-size:clamp(28px,3.5vw,40px); font-weight:700; line-height:1.2; margin-top:12px;">
+        It Started at Home —<br>and That's Still How It Runs
       </h2>
-      <p class="cta-body">
-        Book a call with Bruno. We'll talk about your business, what you're dealing with,
-        and whether BBC is the right fit. No pitch. No pressure. Just an honest conversation.
+    </div>
+
+    <div class="mt-10 fade-in">
+      <p style="color:#475569; font-size:17px; line-height:1.85;">
+        BBC didn't start with a business plan. It started with a decision to go remote
+        during the pandemic, be present for family, and build something meaningful from
+        that choice. RJ trained the people around him — friends, family members,
+        colleagues — and together they became the foundation of what BBC is today.
       </p>
-      <div class="cta-actions">
-        <a href="https://calendly.com/rj-balaynibruno/bbc-strategy-call" target="_blank" rel="noopener noreferrer" class="btn btn-gold">Book a Call</a>
-        <a href="our-team.html" class="btn btn-ghost">Meet the Team</a>
+
+      <p style="color:#475569; font-size:17px; line-height:1.85; margin-top:32px;">
+        Balay ni Bruno means the house of Bruno. That name reflects something real.
+        This is not a platform or a faceless agency. It is a home — built by people
+        who trust each other, run with care, and extended to every client who becomes
+        part of it.
+      </p>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════
+     SECTION 4 — CLIENT JOURNEY ROADMAP
+════════════════════════════════════════════ -->
+<section class="section-pad" style="background:#F8FAFC;">
+  <div class="max-w-7xl mx-auto px-6">
+
+    <div class="text-center mb-4 fade-in">
+      <span class="inline-block text-xs font-semibold uppercase mb-3"
+            style="color:#2D5BFF; letter-spacing:0.14em; font-weight:600;">
+        Your Journey With BBC
+      </span>
+      <h2 class="font-bold"
+          style="color:#0B1120; font-size:clamp(28px,3.5vw,40px); font-weight:700; line-height:1.2; margin-top:12px;">
+        What It Looks Like to<br>Work With BBC
+      </h2>
+      <p class="mx-auto mt-4"
+         style="color:#475569; font-size:17px; max-width:520px; line-height:1.7;">
+        From your first call to long-term operational support — here is the full client journey.
+      </p>
+    </div>
+
+    <!-- Timeline -->
+    <div class="timeline fade-in" style="margin-top:72px;">
+
+      <!-- Node 1 — LEFT: Discovery Call -->
+      <div class="tl-row tl-left">
+        <div class="tl-card">
+          <p class="tl-era text-xs font-semibold uppercase tracking-widest"
+             style="color:#2D5BFF; letter-spacing:0.12em; font-size:11px;">Stage 01</p>
+          <h3 class="tl-title font-bold mt-1.5"
+              style="color:#0B1120; font-size:19px; font-weight:700;">Discovery Call</h3>
+          <p class="mt-2.5" style="color:#475569; font-size:15px; line-height:1.75;">
+            We start with a real conversation. The founder learns about your business,
+            your current workload, your goals, and the kind of support you actually need.
+            No forms. No pressure. Just clarity.
+          </p>
+        </div>
+        <div class="tl-dot"></div>
+        <div class="tl-spacer"></div>
       </div>
-      <p class="cta-note">No obligation. Just a real conversation.</p>
+
+      <!-- Node 2 — RIGHT: Onboarding & Setup -->
+      <div class="tl-row tl-right">
+        <div class="tl-card">
+          <p class="tl-era text-xs font-semibold uppercase tracking-widest"
+             style="color:#2D5BFF; letter-spacing:0.12em; font-size:11px;">Stage 02</p>
+          <h3 class="tl-title font-bold mt-1.5"
+              style="color:#0B1120; font-size:19px; font-weight:700;">Onboarding &amp; Setup</h3>
+          <p class="mt-2.5" style="color:#475569; font-size:15px; line-height:1.75;">
+            Once we're aligned, we move into onboarding. This includes a detailed
+            questionnaire, account and tool access, workflow planning, and organizing
+            everything your assistant needs to hit the ground running. The founder
+            guides this entire stage personally.
+          </p>
+        </div>
+        <div class="tl-dot"></div>
+        <div class="tl-spacer"></div>
+      </div>
+
+      <!-- Node 3 — LEFT: Building Your Digital Foundation -->
+      <div class="tl-row tl-left">
+        <div class="tl-card">
+          <p class="tl-era text-xs font-semibold uppercase tracking-widest"
+             style="color:#2D5BFF; letter-spacing:0.12em; font-size:11px;">Stage 03</p>
+          <h3 class="tl-title font-bold mt-1.5"
+              style="color:#0B1120; font-size:19px; font-weight:700;">Building Your Digital Foundation</h3>
+          <p class="mt-2.5" style="color:#475569; font-size:15px; line-height:1.75;">
+            This is where the real work begins. Depending on your needs, we build or
+            organize your website, set up your digital marketing systems, create your
+            content workflows, establish your operations structure, and get everything
+            running from scratch or reorganized properly.
+          </p>
+        </div>
+        <div class="tl-dot"></div>
+        <div class="tl-spacer"></div>
+      </div>
+
+      <!-- Node 4 — RIGHT: Planning & Campaigns -->
+      <div class="tl-row tl-right">
+        <div class="tl-card">
+          <p class="tl-era text-xs font-semibold uppercase tracking-widest"
+             style="color:#2D5BFF; letter-spacing:0.12em; font-size:11px;">Stage 04</p>
+          <h3 class="tl-title font-bold mt-1.5"
+              style="color:#0B1120; font-size:19px; font-weight:700;">Planning &amp; Campaigns</h3>
+          <p class="mt-2.5" style="color:#475569; font-size:15px; line-height:1.75;">
+            With the foundation in place, we move into active planning. We map out
+            upcoming campaigns, content calendars, marketing priorities, and the next
+            operational roadmap — so your business always has a clear direction and
+            a team executing toward it.
+          </p>
+        </div>
+        <div class="tl-dot"></div>
+        <div class="tl-spacer"></div>
+      </div>
+
+      <!-- Node 5 — LEFT: Ongoing Support & Growth -->
+      <div class="tl-row tl-left" style="margin-bottom:0;">
+        <div class="tl-card">
+          <p class="tl-era text-xs font-semibold uppercase tracking-widest"
+             style="color:#2D5BFF; letter-spacing:0.12em; font-size:11px;">Stage 05</p>
+          <h3 class="tl-title font-bold mt-1.5"
+              style="color:#0B1120; font-size:19px; font-weight:700;">Ongoing Support &amp; Growth</h3>
+          <p class="mt-2.5" style="color:#475569; font-size:15px; line-height:1.75;">
+            Your assistant handles the ongoing workload while the founder stays involved
+            for strategy, check-ins, and quarterly planning. We monitor performance,
+            review analytics, identify what needs to improve, and keep building — so
+            your business never stops moving forward.
+          </p>
+        </div>
+        <div class="tl-dot"></div>
+        <div class="tl-spacer"></div>
+      </div>
+
+    </div><!-- /timeline -->
+
+    <p class="text-center fade-in" style="font-size:14px; color:rgba(71,85,105,0.6); margin-top:48px;">
+      Most BBC clients stay for years. Some pause and come back. Almost all of our new clients
+      come from referrals. That's the kind of support we aim to build.
+    </p>
+
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════
+     SECTION 5 — WHO BBC HELPS
+════════════════════════════════════════════ -->
+<section class="section-pad" style="background:white;">
+  <div class="max-w-6xl mx-auto px-6">
+
+    <div class="text-center mb-4 fade-in">
+      <span class="inline-block text-xs font-semibold uppercase mb-3"
+            style="color:#2D5BFF; letter-spacing:0.14em; font-weight:600;">
+        Who We Work With
+      </span>
+      <h2 class="font-bold"
+          style="color:#0B1120; font-size:clamp(28px,3.5vw,40px); font-weight:700; line-height:1.2; margin-top:12px;">
+        Built for Business Owners<br>Who Need Real Support
+      </h2>
+      <p class="mx-auto mt-4"
+         style="color:#475569; font-size:17px; max-width:560px; line-height:1.7;">
+        BBC works with business owners across different industries who need organized,
+        reliable digital support — not just extra hands.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mt-14 fade-in">
+
+      <!-- 1 E-Commerce -->
+      <div class="rounded-2xl border bg-white p-6"
+           style="border-color:#D1D5DB; transition:border-color 0.25s ease, transform 0.25s ease;"
+           onmouseover="this.style.borderColor='#2D5BFF';this.style.transform='translateY(-2px)';"
+           onmouseout="this.style.borderColor='#D1D5DB';this.style.transform='translateY(0)';">
+        <div class="flex items-center justify-center font-bold rounded-lg"
+             style="width:40px; height:40px; background:rgba(45,91,255,0.08); color:#2D5BFF; font-size:14px; font-weight:700;">EC</div>
+        <h3 class="font-bold mt-3.5" style="color:#0B1120; font-size:16px; font-weight:700;">E-Commerce Owners</h3>
+        <p class="mt-2" style="color:#475569; font-size:14px; line-height:1.65;">
+          Need help managing their store, product pages, content, and digital marketing
+          to drive consistent sales.
+        </p>
+      </div>
+
+      <!-- 2 Real Estate -->
+      <div class="rounded-2xl border bg-white p-6"
+           style="border-color:#D1D5DB; transition:border-color 0.25s ease, transform 0.25s ease;"
+           onmouseover="this.style.borderColor='#2D5BFF';this.style.transform='translateY(-2px)';"
+           onmouseout="this.style.borderColor='#D1D5DB';this.style.transform='translateY(0)';">
+        <div class="flex items-center justify-center font-bold rounded-lg"
+             style="width:40px; height:40px; background:rgba(45,91,255,0.08); color:#2D5BFF; font-size:14px; font-weight:700;">RE</div>
+        <h3 class="font-bold mt-3.5" style="color:#0B1120; font-size:16px; font-weight:700;">Real Estate Agents &amp; Realtors</h3>
+        <p class="mt-2" style="color:#475569; font-size:14px; line-height:1.65;">
+          Need help with their online presence, listing content, social media, and
+          lead generation systems.
+        </p>
+      </div>
+
+      <!-- 3 Coaches & Consultants -->
+      <div class="rounded-2xl border bg-white p-6"
+           style="border-color:#D1D5DB; transition:border-color 0.25s ease, transform 0.25s ease;"
+           onmouseover="this.style.borderColor='#2D5BFF';this.style.transform='translateY(-2px)';"
+           onmouseout="this.style.borderColor='#D1D5DB';this.style.transform='translateY(0)';">
+        <div class="flex items-center justify-center font-bold rounded-lg"
+             style="width:40px; height:40px; background:rgba(45,91,255,0.08); color:#2D5BFF; font-size:14px; font-weight:700;">CS</div>
+        <h3 class="font-bold mt-3.5" style="color:#0B1120; font-size:16px; font-weight:700;">Coaches &amp; Consultants</h3>
+        <p class="mt-2" style="color:#475569; font-size:14px; line-height:1.65;">
+          Need help building their digital brand, content calendar, email systems,
+          and client workflows.
+        </p>
+      </div>
+
+      <!-- 4 Home Services -->
+      <div class="rounded-2xl border bg-white p-6"
+           style="border-color:#D1D5DB; transition:border-color 0.25s ease, transform 0.25s ease;"
+           onmouseover="this.style.borderColor='#2D5BFF';this.style.transform='translateY(-2px)';"
+           onmouseout="this.style.borderColor='#D1D5DB';this.style.transform='translateY(0)';">
+        <div class="flex items-center justify-center font-bold rounded-lg"
+             style="width:40px; height:40px; background:rgba(45,91,255,0.08); color:#2D5BFF; font-size:14px; font-weight:700;">HS</div>
+        <h3 class="font-bold mt-3.5" style="color:#0B1120; font-size:16px; font-weight:700;">Home Service Businesses</h3>
+        <p class="mt-2" style="color:#475569; font-size:14px; line-height:1.65;">
+          Need help with their website, local SEO, social media presence, and
+          marketing to attract more clients.
+        </p>
+      </div>
+
+      <!-- 5 Restaurants & Hospitality -->
+      <div class="rounded-2xl border bg-white p-6"
+           style="border-color:#D1D5DB; transition:border-color 0.25s ease, transform 0.25s ease;"
+           onmouseover="this.style.borderColor='#2D5BFF';this.style.transform='translateY(-2px)';"
+           onmouseout="this.style.borderColor='#D1D5DB';this.style.transform='translateY(0)';">
+        <div class="flex items-center justify-center font-bold rounded-lg"
+             style="width:40px; height:40px; background:rgba(45,91,255,0.08); color:#2D5BFF; font-size:14px; font-weight:700;">RS</div>
+        <h3 class="font-bold mt-3.5" style="color:#0B1120; font-size:16px; font-weight:700;">Restaurants &amp; Hospitality</h3>
+        <p class="mt-2" style="color:#475569; font-size:14px; line-height:1.65;">
+          Need help managing their online presence, social content, promotions, and
+          customer-facing digital assets.
+        </p>
+      </div>
+
+      <!-- 6 Agencies -->
+      <div class="rounded-2xl border bg-white p-6"
+           style="border-color:#D1D5DB; transition:border-color 0.25s ease, transform 0.25s ease;"
+           onmouseover="this.style.borderColor='#2D5BFF';this.style.transform='translateY(-2px)';"
+           onmouseout="this.style.borderColor='#D1D5DB';this.style.transform='translateY(0)';">
+        <div class="flex items-center justify-center font-bold rounded-lg"
+             style="width:40px; height:40px; background:rgba(45,91,255,0.08); color:#2D5BFF; font-size:14px; font-weight:700;">AG</div>
+        <h3 class="font-bold mt-3.5" style="color:#0B1120; font-size:16px; font-weight:700;">Agencies</h3>
+        <p class="mt-2" style="color:#475569; font-size:14px; line-height:1.65;">
+          Need white-label support for client delivery, operations, content production,
+          and campaign execution.
+        </p>
+      </div>
+
+      <!-- 7 Creators & Personal Brands -->
+      <div class="rounded-2xl border bg-white p-6"
+           style="border-color:#D1D5DB; transition:border-color 0.25s ease, transform 0.25s ease;"
+           onmouseover="this.style.borderColor='#2D5BFF';this.style.transform='translateY(-2px)';"
+           onmouseout="this.style.borderColor='#D1D5DB';this.style.transform='translateY(0)';">
+        <div class="flex items-center justify-center font-bold rounded-lg"
+             style="width:40px; height:40px; background:rgba(45,91,255,0.08); color:#2D5BFF; font-size:14px; font-weight:700;">CR</div>
+        <h3 class="font-bold mt-3.5" style="color:#0B1120; font-size:16px; font-weight:700;">Creators &amp; Personal Brands</h3>
+        <p class="mt-2" style="color:#475569; font-size:14px; line-height:1.65;">
+          Need help with content systems, short-form video, graphics, scheduling,
+          and growing their audience.
+        </p>
+      </div>
+
+      <!-- 8 Local Businesses -->
+      <div class="rounded-2xl border bg-white p-6"
+           style="border-color:#D1D5DB; transition:border-color 0.25s ease, transform 0.25s ease;"
+           onmouseover="this.style.borderColor='#2D5BFF';this.style.transform='translateY(-2px)';"
+           onmouseout="this.style.borderColor='#D1D5DB';this.style.transform='translateY(0)';">
+        <div class="flex items-center justify-center font-bold rounded-lg"
+             style="width:40px; height:40px; background:rgba(45,91,255,0.08); color:#2D5BFF; font-size:14px; font-weight:700;">LB</div>
+        <h3 class="font-bold mt-3.5" style="color:#0B1120; font-size:16px; font-weight:700;">Local Businesses</h3>
+        <p class="mt-2" style="color:#475569; font-size:14px; line-height:1.65;">
+          Need help getting found online, managing their digital presence, and staying
+          consistent with marketing.
+        </p>
+      </div>
+
+      <!-- 9 Construction Companies -->
+      <div class="rounded-2xl border bg-white p-6"
+           style="border-color:#D1D5DB; transition:border-color 0.25s ease, transform 0.25s ease;"
+           onmouseover="this.style.borderColor='#2D5BFF';this.style.transform='translateY(-2px)';"
+           onmouseout="this.style.borderColor='#D1D5DB';this.style.transform='translateY(0)';">
+        <div class="flex items-center justify-center font-bold rounded-lg"
+             style="width:40px; height:40px; background:rgba(45,91,255,0.08); color:#2D5BFF; font-size:14px; font-weight:700;">CN</div>
+        <h3 class="font-bold mt-3.5" style="color:#0B1120; font-size:16px; font-weight:700;">Construction Companies</h3>
+        <p class="mt-2" style="color:#475569; font-size:14px; line-height:1.65;">
+          Need help with their website, project showcases, social media, and lead
+          generation content.
+        </p>
+      </div>
+
+      <!-- 10 Service Businesses -->
+      <div class="rounded-2xl border bg-white p-6"
+           style="border-color:#D1D5DB; transition:border-color 0.25s ease, transform 0.25s ease;"
+           onmouseover="this.style.borderColor='#2D5BFF';this.style.transform='translateY(-2px)';"
+           onmouseout="this.style.borderColor='#D1D5DB';this.style.transform='translateY(0)';">
+        <div class="flex items-center justify-center font-bold rounded-lg"
+             style="width:40px; height:40px; background:rgba(45,91,255,0.08); color:#2D5BFF; font-size:14px; font-weight:700;">SB</div>
+        <h3 class="font-bold mt-3.5" style="color:#0B1120; font-size:16px; font-weight:700;">Service Businesses</h3>
+        <p class="mt-2" style="color:#475569; font-size:14px; line-height:1.65;">
+          Need organized operations, marketing support, and digital systems that help
+          them scale without chaos.
+        </p>
+      </div>
+
+      <!-- 11 Retailers -->
+      <div class="rounded-2xl border bg-white p-6"
+           style="border-color:#D1D5DB; transition:border-color 0.25s ease, transform 0.25s ease;"
+           onmouseover="this.style.borderColor='#2D5BFF';this.style.transform='translateY(-2px)';"
+           onmouseout="this.style.borderColor='#D1D5DB';this.style.transform='translateY(0)';">
+        <div class="flex items-center justify-center font-bold rounded-lg"
+             style="width:40px; height:40px; background:rgba(45,91,255,0.08); color:#2D5BFF; font-size:14px; font-weight:700;">RT</div>
+        <h3 class="font-bold mt-3.5" style="color:#0B1120; font-size:16px; font-weight:700;">Retailers</h3>
+        <p class="mt-2" style="color:#475569; font-size:14px; line-height:1.65;">
+          Need help with product content, e-commerce setup, promotions, and consistent
+          digital marketing.
+        </p>
+      </div>
+
+      <!-- 12 Nonprofits & Foundations -->
+      <div class="rounded-2xl border bg-white p-6"
+           style="border-color:#D1D5DB; transition:border-color 0.25s ease, transform 0.25s ease;"
+           onmouseover="this.style.borderColor='#2D5BFF';this.style.transform='translateY(-2px)';"
+           onmouseout="this.style.borderColor='#D1D5DB';this.style.transform='translateY(0)';">
+        <div class="flex items-center justify-center font-bold rounded-lg"
+             style="width:40px; height:40px; background:rgba(45,91,255,0.08); color:#2D5BFF; font-size:14px; font-weight:700;">NP</div>
+        <h3 class="font-bold mt-3.5" style="color:#0B1120; font-size:16px; font-weight:700;">Nonprofits &amp; Foundations</h3>
+        <p class="mt-2" style="color:#475569; font-size:14px; line-height:1.65;">
+          Need help with their online presence, content, donor communications, and
+          digital operations support.
+        </p>
+      </div>
+
+    </div>
+
+    <p class="text-center fade-in" style="font-size:14px; color:rgba(71,85,105,0.6); margin-top:40px;">
+      Don't see your industry? If you need organized digital support, BBC can likely help.
+      <a href="index.html#contact" style="color:#2D5BFF; font-weight:600;">Book a call</a> and let's find out.
+    </p>
+
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════
+     SECTION 5 — BBC VALUES
+════════════════════════════════════════════ -->
+<section class="section-pad" style="background:#0B1120;">
+  <div class="max-w-6xl mx-auto px-6">
+
+    <div class="text-center mb-4 fade-in">
+      <span class="inline-block text-xs font-semibold uppercase mb-3"
+            style="color:#2D5BFF; letter-spacing:0.14em; font-weight:600;">
+        What We Stand For
+      </span>
+      <h2 class="font-bold text-white"
+          style="font-size:clamp(28px,3.5vw,40px); font-weight:700; line-height:1.2; margin-top:12px;">
+        The Values Behind<br>Every Client Relationship
+      </h2>
+      <p class="mx-auto mt-4"
+         style="color:rgba(255,255,255,0.6); font-size:17px; max-width:520px; line-height:1.7;">
+        These aren't posted on a wall. They're how we actually work.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-14 fade-in">
+
+      <!-- 01 People Before Process -->
+      <div class="value-card rounded-2xl" style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); padding:36px 28px;">
+        <div class="flex items-center justify-center font-bold text-white rounded-xl mb-5"
+             style="width:44px; height:44px; background:rgba(45,91,255,0.2); font-size:14px; font-weight:700;">01</div>
+        <h3 class="font-bold text-white" style="font-size:19px; font-weight:700;">People Before Process</h3>
+        <p class="mt-2.5" style="color:rgba(255,255,255,0.6); font-size:15px; line-height:1.75;">
+          We believe the most important thing in any client relationship is the human
+          connection. Systems support people — they don't replace them. Every workflow
+          we build exists to make someone's work life better.
+        </p>
+      </div>
+
+      <!-- 02 Stay Involved -->
+      <div class="value-card rounded-2xl" style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); padding:36px 28px;">
+        <div class="flex items-center justify-center font-bold text-white rounded-xl mb-5"
+             style="width:44px; height:44px; background:rgba(45,91,255,0.2); font-size:14px; font-weight:700;">02</div>
+        <h3 class="font-bold text-white" style="font-size:19px; font-weight:700;">Stay Involved</h3>
+        <p class="mt-2.5" style="color:rgba(255,255,255,0.6); font-size:15px; line-height:1.75;">
+          We don't match and disappear. The founder stays actively involved from discovery
+          through setup, execution, and long-term strategy. Our clients are never left to
+          figure things out alone.
+        </p>
+      </div>
+
+      <!-- 03 Organized by Default -->
+      <div class="value-card rounded-2xl" style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); padding:36px 28px;">
+        <div class="flex items-center justify-center font-bold text-white rounded-xl mb-5"
+             style="width:44px; height:44px; background:rgba(45,91,255,0.2); font-size:14px; font-weight:700;">03</div>
+        <h3 class="font-bold text-white" style="font-size:19px; font-weight:700;">Organized by Default</h3>
+        <p class="mt-2.5" style="color:rgba(255,255,255,0.6); font-size:15px; line-height:1.75;">
+          Clarity and structure are not extras at BBC — they are the baseline. Every
+          engagement starts with a plan, every system is documented, and every workflow
+          is built to be understood, not just completed.
+        </p>
+      </div>
+
+      <!-- 04 Trusted Collaboration -->
+      <div class="value-card rounded-2xl" style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); padding:36px 28px;">
+        <div class="flex items-center justify-center font-bold text-white rounded-xl mb-5"
+             style="width:44px; height:44px; background:rgba(45,91,255,0.2); font-size:14px; font-weight:700;">04</div>
+        <h3 class="font-bold text-white" style="font-size:19px; font-weight:700;">Trusted Collaboration</h3>
+        <p class="mt-2.5" style="color:rgba(255,255,255,0.6); font-size:15px; line-height:1.75;">
+          BBC is built on trust — between the founder, the team, and the client. Every
+          assistant is chosen carefully. Every relationship is treated like a long-term
+          partnership, not a transaction.
+        </p>
+      </div>
+
+      <!-- 05 Build for the Long Term -->
+      <div class="value-card rounded-2xl" style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); padding:36px 28px;">
+        <div class="flex items-center justify-center font-bold text-white rounded-xl mb-5"
+             style="width:44px; height:44px; background:rgba(45,91,255,0.2); font-size:14px; font-weight:700;">05</div>
+        <h3 class="font-bold text-white" style="font-size:19px; font-weight:700;">Build for the Long Term</h3>
+        <p class="mt-2.5" style="color:rgba(255,255,255,0.6); font-size:15px; line-height:1.75;">
+          We don't optimize for quick wins. We build systems, workflows, and operational
+          structures that grow with the business — and we stay involved to make sure
+          they continue to improve.
+        </p>
+      </div>
+
+      <!-- 06 Family-Rooted -->
+      <div class="value-card rounded-2xl" style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); padding:36px 28px;">
+        <div class="flex items-center justify-center font-bold text-white rounded-xl mb-5"
+             style="width:44px; height:44px; background:rgba(45,91,255,0.2); font-size:14px; font-weight:700;">06</div>
+        <h3 class="font-bold text-white" style="font-size:19px; font-weight:700;">Family-Rooted</h3>
+        <p class="mt-2.5" style="color:rgba(255,255,255,0.6); font-size:15px; line-height:1.75;">
+          The name Balay ni Bruno — the house of Bruno — reflects something real. This
+          agency is built like a home: with care, with people who trust each other, and
+          with a genuine commitment to doing things right.
+        </p>
+      </div>
+
     </div>
   </div>
 </section>
 
 
 <!-- ════════════════════════════════════════════
-     FOOTER
+     SECTION 6 — TEAM TEASER
 ════════════════════════════════════════════ -->
-<footer class="site-footer">
-  <div class="container">
-    <div class="footer-grid">
+<section class="section-pad text-center" style="background:#F8FAFC;">
+  <div class="max-w-3xl mx-auto px-6 fade-in">
 
+    <span class="inline-block text-xs font-semibold uppercase mb-3"
+          style="color:#2D5BFF; letter-spacing:0.14em; font-weight:600;">
+      The People
+    </span>
+
+    <h2 class="font-bold"
+        style="color:#0B1120; font-size:clamp(28px,3.5vw,40px); font-weight:700; margin-top:12px;">
+      A Team RJ Built From Trust
+    </h2>
+
+    <p class="mx-auto mt-5"
+       style="color:#475569; font-size:17px; max-width:580px; line-height:1.8;">
+      Every person on the BBC team was personally trained and brought in by RJ.
+      Not hired from a job board — grown from real relationships with friends,
+      family members, and trusted colleagues who share the same values:
+      reliability, care, and a commitment to doing good work for the people
+      they support.
+    </p>
+
+    <div class="flex flex-wrap items-center justify-center gap-4 mt-10">
+      <a href="index.html#team"
+         class="inline-flex items-center px-8 py-4 rounded-full text-white font-bold"
+         style="background:#2D5BFF; font-size:16px; font-weight:700;">
+        Meet the Team
+      </a>
+      <a href="index.html#contact"
+         class="inline-flex items-center px-8 py-4 rounded-full font-semibold border-2"
+         style="color:#2D5BFF; border-color:#2D5BFF; font-size:16px; font-weight:600; background:transparent;"
+         onmouseover="this.style.background='#2D5BFF';this.style.color='white';"
+         onmouseout="this.style.background='transparent';this.style.color='#2D5BFF';">
+        Book a Call
+      </a>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════
+     SECTION 7 — FINAL CTA
+════════════════════════════════════════════ -->
+<section class="text-center" style="background:#0B1120; padding:120px 24px;">
+  <div class="max-w-3xl mx-auto fade-in">
+
+    <h2 class="font-bold text-white mx-auto"
+        style="font-size:clamp(28px,4vw,44px); font-weight:700; line-height:1.2; max-width:680px;">
+      Now That You Know Our Story —<br>Let's Talk About Yours
+    </h2>
+
+    <p class="mx-auto mt-5"
+       style="color:rgba(255,255,255,0.6); font-size:18px; max-width:500px; line-height:1.7;">
+      Book a call with the founder. We'll learn about your business, identify
+      the support you need, and see if BBC is the right fit.
+    </p>
+
+    <div class="mt-10">
+      <a href="index.html#contact"
+         class="inline-flex items-center px-10 py-5 rounded-full text-white font-bold"
+         style="background:#2D5BFF; font-size:18px; font-weight:700;">
+        Book a Call
+      </a>
+    </div>
+
+    <p class="mt-4" style="font-size:14px; color:rgba(255,255,255,0.35);">
+      No pressure. Just a conversation.
+    </p>
+
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════
+     SHARED FOOTER
+════════════════════════════════════════════ -->
+<footer style="background:#0B1120; border-top:1px solid rgba(255,255,255,0.08); padding:80px 0 40px;">
+  <div class="max-w-7xl mx-auto px-6">
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12">
+
+      <!-- Col 1: Brand -->
       <div>
-        <p class="footer-brand-name">Balay ni Bruno &amp; Co.</p>
-        <p class="footer-brand-desc">
-          A family-built operational support studio helping business owners grow through
-          real collaboration, honest systems, and long-term care.
+        <div class="flex items-center gap-3">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 210" width="42" height="42"
+               style="color:white; flex-shrink:0;" aria-hidden="true">
+            <!-- Chimney -->
+            <rect x="38" y="6" width="13" height="62" rx="2" fill="currentColor"/>
+            <!-- Roof left -->
+            <line x1="100" y1="38" x2="6" y2="90" stroke="currentColor" stroke-width="9" stroke-linecap="round"/>
+            <!-- Roof right -->
+            <line x1="100" y1="38" x2="194" y2="90" stroke="currentColor" stroke-width="9" stroke-linecap="round"/>
+            <!-- Monitor frame -->
+            <rect x="24" y="90" width="152" height="86" rx="6" fill="none" stroke="currentColor" stroke-width="9"/>
+            <!-- BBC text inside monitor -->
+            <text x="100" y="154" text-anchor="middle" font-size="46" font-weight="800"
+                  font-family="Georgia,'Times New Roman',serif" fill="currentColor">BBC</text>
+            <!-- Stand neck -->
+            <rect x="91" y="176" width="18" height="18" rx="2" fill="currentColor"/>
+            <!-- Stand base -->
+            <rect x="64" y="194" width="72" height="11" rx="5.5" fill="currentColor"/>
+          </svg>
+          <span class="font-bold text-white" style="font-size:16px; font-weight:700;">Balay ni Bruno &amp; Co.</span>
+        </div>
+        <p class="mt-4 leading-relaxed"
+           style="color:rgba(255,255,255,0.5); font-size:14px; line-height:1.7; max-width:240px;">
+          Managed virtual operations support for business owners who need reliable help
+          with marketing, websites, content, automation, and digital operations.
         </p>
+        <div class="flex gap-2 mt-5">
+          <div class="w-7 h-7 rounded-md" style="border:1px solid rgba(255,255,255,0.15);"></div>
+          <div class="w-7 h-7 rounded-md" style="border:1px solid rgba(255,255,255,0.15);"></div>
+          <div class="w-7 h-7 rounded-md" style="border:1px solid rgba(255,255,255,0.15);"></div>
+        </div>
       </div>
 
+      <!-- Col 2: How We Help -->
       <div>
-        <p class="footer-col-label">How We Help</p>
-        <a href="how-we-help.html#marketing" class="footer-link">Marketing Support</a>
-        <a href="how-we-help.html#content" class="footer-link">Content &amp; Creative</a>
-        <a href="how-we-help.html#websites" class="footer-link">Websites &amp; Digital</a>
-        <a href="how-we-help.html#seo" class="footer-link">SEO &amp; Visibility</a>
-        <a href="how-we-help.html#operations" class="footer-link">Operations &amp; Admin</a>
+        <p class="font-semibold uppercase tracking-widest mb-5"
+           style="color:rgba(255,255,255,0.4); font-size:12px; letter-spacing:0.1em;">How We Help</p>
+        <ul>
+          <li><a href="how-we-help.html#marketing"  class="hover:text-white transition-colors" style="color:rgba(255,255,255,0.65); font-size:14px; line-height:2.2; display:block;">Marketing Support</a></li>
+          <li><a href="how-we-help.html#content"    class="hover:text-white transition-colors" style="color:rgba(255,255,255,0.65); font-size:14px; line-height:2.2; display:block;">Content &amp; Creative</a></li>
+          <li><a href="how-we-help.html#websites"   class="hover:text-white transition-colors" style="color:rgba(255,255,255,0.65); font-size:14px; line-height:2.2; display:block;">Websites &amp; Digital</a></li>
+          <li><a href="how-we-help.html#email"      class="hover:text-white transition-colors" style="color:rgba(255,255,255,0.65); font-size:14px; line-height:2.2; display:block;">Email, CRM &amp; Outreach</a></li>
+          <li><a href="how-we-help.html#automation" class="hover:text-white transition-colors" style="color:rgba(255,255,255,0.65); font-size:14px; line-height:2.2; display:block;">AI &amp; Automation</a></li>
+          <li><a href="how-we-help.html#seo"        class="hover:text-white transition-colors" style="color:rgba(255,255,255,0.65); font-size:14px; line-height:2.2; display:block;">SEO &amp; Visibility</a></li>
+          <li><a href="how-we-help.html#operations" class="hover:text-white transition-colors" style="color:rgba(255,255,255,0.65); font-size:14px; line-height:2.2; display:block;">Operations &amp; Admin</a></li>
+        </ul>
       </div>
 
+      <!-- Col 3: Company -->
       <div>
-        <p class="footer-col-label">Company</p>
-        <a href="about.html" class="footer-link">Our Story</a>
-        <a href="how-it-works.html" class="footer-link">How It Works</a>
-        <a href="our-team.html" class="footer-link">Our Team</a>
-        <a href="our-work.html" class="footer-link">Our Work</a>
-        <a href="insights.html" class="footer-link">Insights</a>
-        <a href="resources.html" class="footer-link">Forms &amp; Resources</a>
-        <a href="contact.html" class="footer-link">Contact</a>
+        <p class="font-semibold uppercase tracking-widest mb-5"
+           style="color:rgba(255,255,255,0.4); font-size:12px; letter-spacing:0.1em;">Company</p>
+        <ul>
+          <li><a href="about.html"              class="hover:text-white transition-colors" style="color:rgba(255,255,255,0.65); font-size:14px; line-height:2.2; display:block;">Our Story</a></li>
+          <li><a href="how-it-works.html"        class="hover:text-white transition-colors" style="color:rgba(255,255,255,0.65); font-size:14px; line-height:2.2; display:block;">How It Works</a></li>
+          <li><a href="index.html#team"         class="hover:text-white transition-colors" style="color:rgba(255,255,255,0.65); font-size:14px; line-height:2.2; display:block;">Team</a></li>
+          <li><a href="our-work.html"           class="hover:text-white transition-colors" style="color:rgba(255,255,255,0.65); font-size:14px; line-height:2.2; display:block;">Our Work</a></li>
+          <li><a href="index.html#reviews"      class="hover:text-white transition-colors" style="color:rgba(255,255,255,0.65); font-size:14px; line-height:2.2; display:block;">Reviews</a></li>
+          <li><a href="index.html#insights"     class="hover:text-white transition-colors" style="color:rgba(255,255,255,0.65); font-size:14px; line-height:2.2; display:block;">Insights</a></li>
+          <li><a href="index.html#contact"      class="hover:text-white transition-colors" style="color:rgba(255,255,255,0.65); font-size:14px; line-height:2.2; display:block;">Contact</a></li>
+        </ul>
       </div>
 
+      <!-- Col 4: Contact -->
       <div>
-        <p class="footer-col-label">Contact</p>
-        <p class="footer-link">admin@balaynibruno.co</p>
-        <p class="footer-link">+63 935 663 0324</p>
-        <p class="footer-link">Serving US, UK &amp; international clients</p>
-        <a href="https://calendly.com/rj-balaynibruno/bbc-strategy-call" target="_blank" rel="noopener noreferrer" class="btn btn-gold btn-sm" style="margin-top:1rem;">Book a Call</a>
+        <p class="font-semibold uppercase tracking-widest mb-5"
+           style="color:rgba(255,255,255,0.4); font-size:12px; letter-spacing:0.1em;">Contact</p>
+        <p style="color:rgba(255,255,255,0.65); font-size:14px; line-height:2.2;">hello@balaynibruno.com</p>
+        <p style="color:rgba(255,255,255,0.65); font-size:14px; line-height:2.2;">+1 (000) 000-0000</p>
+        <p class="mt-1" style="color:rgba(255,255,255,0.65); font-size:14px; line-height:1.7;">
+          Serving clients in the US, UK, and internationally.
+        </p>
+        <a href="index.html#contact" class="block mt-4 font-semibold"
+           style="color:#2D5BFF; font-size:14px; font-weight:600;">
+          Book a Call →
+        </a>
       </div>
 
     </div>
 
-    <div class="footer-bottom">
-      <p class="footer-copy">&copy; 2026 Balay ni Bruno &amp; Co. All rights reserved.</p>
+    <!-- Bottom bar -->
+    <div class="flex flex-col sm:flex-row items-center justify-between gap-4"
+         style="border-top:1px solid rgba(255,255,255,0.08); margin-top:60px; padding-top:28px;">
+      <p style="color:rgba(255,255,255,0.35); font-size:13px;">
+        © 2025 Balay ni Bruno &amp; Co. All rights reserved.
+      </p>
+      <p style="color:rgba(255,255,255,0.35); font-size:13px;">
+        <a href="#" class="hover:text-white transition-colors" style="color:rgba(255,255,255,0.35);">Privacy Policy</a>
+        <span style="margin:0 8px;">·</span>
+        <a href="#" class="hover:text-white transition-colors" style="color:rgba(255,255,255,0.35);">Terms of Service</a>
+      </p>
     </div>
+
   </div>
 </footer>
 
@@ -879,42 +979,55 @@
      JAVASCRIPT
 ════════════════════════════════════════════ -->
 <script>
-  // Sticky header
-  const header = document.getElementById('site-header');
-  window.addEventListener('scroll', () => {
-    header.classList.toggle('scrolled', window.scrollY > 60);
-  }, { passive: true });
-
-  // Hamburger
+  // ── Hamburger menu toggle ────────────────────
   const hamburger = document.getElementById('hamburger');
-  const mobileMenu = document.getElementById('mobile-menu');
+  const mobileNav = document.getElementById('mobile-nav');
   const hb1 = document.getElementById('hb1');
   const hb2 = document.getElementById('hb2');
   const hb3 = document.getElementById('hb3');
+
   hamburger.addEventListener('click', () => {
-    const open = mobileMenu.classList.toggle('open');
-    if (open) {
-      hb1.style.transform = 'translateY(7px) rotate(45deg)';
-      hb2.style.opacity = '0';
-      hb3.style.transform = 'translateY(-7px) rotate(-45deg)';
+    const isOpen = mobileNav.classList.toggle('open');
+    if (isOpen) {
+      hb1.style.transform = 'translateY(8px) rotate(45deg)';
+      hb2.style.opacity   = '0';
+      hb3.style.transform = 'translateY(-8px) rotate(-45deg)';
     } else {
-      hb1.style.transform = ''; hb2.style.opacity = ''; hb3.style.transform = '';
+      hb1.style.transform = '';
+      hb2.style.opacity   = '';
+      hb3.style.transform = '';
     }
   });
-  mobileMenu.querySelectorAll('a').forEach(a => {
-    a.addEventListener('click', () => {
-      mobileMenu.classList.remove('open');
-      hb1.style.transform = ''; hb2.style.opacity = ''; hb3.style.transform = '';
+
+  // Close mobile nav on any link click
+  mobileNav.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      mobileNav.classList.remove('open');
+      hb1.style.transform = '';
+      hb2.style.opacity   = '';
+      hb3.style.transform = '';
     });
   });
 
-  // Fade-in on scroll
+  // ── Sticky header: add shadow after 60px scroll ──
+  const siteHeader = document.getElementById('site-header');
+  window.addEventListener('scroll', () => {
+    siteHeader.classList.toggle('scrolled', window.scrollY > 60);
+  }, { passive: true });
+
+  // ── Scroll fade-in via IntersectionObserver ──
   const fadeEls = document.querySelectorAll('.fade-in');
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
-    });
-  }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+  const io = new IntersectionObserver(
+    (entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          io.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.08, rootMargin: '0px 0px -40px 0px' }
+  );
   fadeEls.forEach(el => io.observe(el));
 </script>
 
