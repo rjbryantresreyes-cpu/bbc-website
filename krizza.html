@@ -172,33 +172,55 @@
     .media-embed iframe{width:100%;height:340px;border:none;}
       .header__cta .btn-ghost { color:var(--deep-blue); border-color:rgba(31,53,87,0.22); }
     .header__cta .btn-ghost:hover { background:rgba(31,53,87,0.06); border-color:rgba(31,53,87,0.38); color:var(--deep-blue); }
-/* ── BBC Portfolio Intelligence System v2.0 ── */
-.pis-client-bar{display:flex;flex-wrap:wrap;gap:0.6rem;margin-bottom:2rem;}
-.pis-client-btn{font-family:var(--font-ui);font-size:0.78rem;font-weight:600;padding:0.55rem 1.2rem;border-radius:999px;border:1.5px solid rgba(31,53,87,0.18);background:transparent;color:var(--text-body);cursor:pointer;transition:all 0.22s;}
-.pis-client-btn:hover{border-color:var(--deep-blue);color:var(--deep-blue);}
-.pis-client-btn.active{background:var(--deep-blue);color:#fff;border-color:var(--deep-blue);}
-.client-intel{display:none;background:linear-gradient(135deg,rgba(31,53,87,0.06),rgba(184,146,62,0.05));border:1.5px solid rgba(31,53,87,0.14);border-radius:var(--radius-lg);padding:1.75rem 2rem;margin-bottom:1.5rem;animation:fadeUp 0.3s ease;}
-.client-intel.active{display:block;}
+/* ── BBC PIS v3.0 — Sidebar Client Panel ── */
 @keyframes fadeUp{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
-.client-intel__label{font-family:var(--font-ui);font-size:0.6rem;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:0.5rem;}
-.client-intel__name{font-family:var(--font-display);font-size:1.4rem;font-weight:700;color:var(--deep-blue);margin-bottom:0.2rem;}
-.client-intel__role{font-family:var(--font-ui);font-size:0.82rem;color:var(--text-muted);margin-bottom:1rem;}
-.client-intel__desc{font-family:var(--font-body);font-size:0.88rem;line-height:1.8;color:var(--text-body);margin-bottom:1.25rem;}
-.client-intel__chips{display:flex;flex-wrap:wrap;gap:0.5rem;margin-bottom:1.25rem;}
-.intel-chip{font-family:var(--font-ui);font-size:0.7rem;font-weight:600;padding:0.3rem 0.85rem;border-radius:999px;background:rgba(31,53,87,0.08);color:var(--deep-blue);border:1px solid rgba(31,53,87,0.12);}
-.intel-chip--gold{background:rgba(184,146,62,0.1);color:var(--gold);border-color:rgba(184,146,62,0.22);}
-.client-intel__stats{display:flex;flex-wrap:wrap;gap:1.5rem;padding-top:1rem;border-top:1px solid rgba(31,53,87,0.08);}
-.intel-stat__val{font-family:var(--font-display);font-size:1.35rem;font-weight:700;color:var(--deep-blue);line-height:1;}
-.intel-stat__label{font-family:var(--font-ui);font-size:0.65rem;color:var(--text-muted);margin-top:3px;text-transform:uppercase;letter-spacing:0.08em;}
-.cat-nav{display:flex;flex-wrap:wrap;gap:0.5rem;padding:1rem 1.5rem;background:var(--bg-section);border-left:1px solid rgba(85,60,35,0.09);border-right:1px solid rgba(85,60,35,0.09);}
-.cat-btn{font-family:var(--font-ui);font-size:0.72rem;font-weight:600;padding:0.38rem 0.9rem;border-radius:999px;border:1.5px solid rgba(31,53,87,0.14);background:transparent;color:var(--text-body);cursor:pointer;transition:all 0.18s;}
-.cat-btn:hover{border-color:var(--deep-blue);color:var(--deep-blue);}
-.cat-btn.active{background:rgba(31,53,87,0.1);color:var(--deep-blue);border-color:rgba(31,53,87,0.28);}
+.pis-layout{display:grid;grid-template-columns:290px 1fr;gap:24px;align-items:start;}
+.pis-client-panel{position:sticky;top:92px;background:var(--bg-card);border:var(--border-card);border-radius:var(--radius-lg);box-shadow:var(--shadow-sm);padding:1.25rem;}
+.pis-panel-title{font-family:var(--font-ui);font-size:0.62rem;text-transform:uppercase;letter-spacing:0.14em;color:var(--text-muted);font-weight:700;margin-bottom:1rem;}
+.pis-client-btn{width:100%;border:var(--border-card);background:var(--bg-card);border-radius:var(--radius);padding:0.9rem 1rem;margin-bottom:0.6rem;text-align:left;cursor:pointer;transition:all 0.2s ease;}
+.pis-client-btn:last-of-type{margin-bottom:0;}
+.pis-client-btn:hover{transform:translateY(-1px);box-shadow:var(--shadow-xs);}
+.pis-client-btn.active{background:var(--deep-blue);border-color:var(--deep-blue);}
+.pis-client-btn strong{display:block;font-family:var(--font-ui);font-size:0.88rem;font-weight:600;color:var(--text-ink);margin-bottom:3px;}
+.pis-client-btn span{display:block;font-family:var(--font-ui);font-size:0.72rem;color:var(--text-muted);}
+.pis-client-btn.active strong{color:#fff;}
+.pis-client-btn.active span{color:rgba(245,241,234,0.55);}
+.pis-work-area{background:var(--bg-card);border:var(--border-card);border-radius:var(--radius-lg);box-shadow:var(--shadow-sm);overflow:hidden;min-height:400px;}
+.pis-work-hero{padding:1.75rem 2rem;border-bottom:var(--border-card);background:linear-gradient(135deg,#fff,rgba(237,232,223,0.6));}
+.pis-work-hero__top{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;flex-wrap:wrap;margin-bottom:1.25rem;}
+.pis-work-hero h3{font-family:var(--font-display);font-size:1.5rem;color:var(--deep-blue);margin-bottom:0.3rem;}
+.pis-work-role{font-family:var(--font-ui);font-size:0.78rem;color:var(--text-muted);margin-bottom:0.6rem;font-weight:500;}
+.pis-work-hero>div>p,.pis-work-hero .pis-work-hero__top>div>p{font-size:0.88rem;line-height:1.8;color:var(--text-body);max-width:640px;}
+.pis-site-badge{display:inline-flex;align-items:center;font-family:var(--font-ui);font-size:0.72rem;font-weight:600;color:var(--gold);border:1px solid rgba(184,146,62,0.3);border-radius:999px;padding:0.4rem 1rem;white-space:nowrap;flex-shrink:0;transition:all 0.2s;}
+.pis-site-badge:hover{background:rgba(184,146,62,0.08);}
+.pis-site-preview{border-radius:var(--radius);overflow:hidden;border:var(--border-card);margin-bottom:1.25rem;box-shadow:var(--shadow-xs);}
+.pis-chrome{display:flex;align-items:center;gap:0.4rem;padding:0.55rem 0.9rem;background:#E8E2D6;border-bottom:1px solid rgba(85,60,35,0.1);}
+.pis-chrome-url{flex:1;margin-left:0.4rem;background:rgba(255,255,255,0.65);border-radius:5px;padding:0.18rem 0.65rem;font-family:var(--font-ui);font-size:0.68rem;color:var(--text-muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.pis-category-tabs{display:flex;flex-wrap:wrap;gap:0.5rem;}
+.pis-cat-tab{border:var(--border-card);background:#fff;border-radius:999px;padding:0.48rem 1rem;font-family:var(--font-ui);font-size:0.72rem;font-weight:600;color:var(--text-body);cursor:pointer;transition:all 0.2s;}
+.pis-cat-tab:hover{border-color:var(--mid-blue);color:var(--deep-blue);}
+.pis-cat-tab.active{background:var(--gold);color:#fff;border-color:var(--gold);}
+.pis-category-section{padding:1.75rem 2rem;border-bottom:var(--border-card);}
+.pis-category-section:last-child{border-bottom:none;}
+.pis-cat-header{display:flex;align-items:center;justify-content:space-between;gap:1rem;margin-bottom:1.1rem;}
+.pis-cat-header h4{font-family:var(--font-display);font-size:1.15rem;color:var(--deep-blue);}
+.pis-cat-count{font-family:var(--font-ui);font-size:0.62rem;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:0.1em;white-space:nowrap;}
+.pis-deliverable-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem;}
+.pis-deliverable{background:var(--bg-primary);border:var(--border-card);border-radius:var(--radius);padding:1.25rem;transition:all 0.22s;}
+.pis-deliverable:hover{transform:translateY(-2px);box-shadow:var(--shadow-sm);}
+.pis-deliverable h5{font-family:var(--font-ui);font-size:0.85rem;font-weight:600;color:var(--text-ink);margin-bottom:0.4rem;}
+.pis-deliverable p{font-size:0.8rem;line-height:1.7;color:var(--text-body);margin:0;}
+.pis-portfolio-link{display:inline-flex;margin-top:0.75rem;font-family:var(--font-ui);font-size:0.75rem;font-weight:600;color:var(--mid-blue);background:rgba(75,111,165,0.08);border:1px solid rgba(75,111,165,0.18);border-radius:999px;padding:0.38rem 0.9rem;transition:all 0.2s;}
+.pis-portfolio-link:hover{background:rgba(75,111,165,0.14);}
+.pis-preview-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:0.5rem;margin-top:0.85rem;}
+.pis-thumb{height:66px;border-radius:10px;background:linear-gradient(135deg,rgba(31,53,87,0.06),rgba(184,146,62,0.08));border:1px dashed rgba(85,60,35,0.14);display:grid;place-items:center;font-family:var(--font-ui);font-size:0.65rem;font-weight:600;color:var(--text-muted);text-align:center;padding:6px;}
+.pis-empty{padding:3.5rem 2rem;text-align:center;font-family:var(--font-ui);font-size:0.88rem;color:var(--text-muted);}
 .hero-metrics{display:flex;gap:2rem;flex-wrap:wrap;margin-top:1.5rem;padding-top:1.5rem;border-top:1px solid rgba(255,255,255,0.1);}
 .hero-metric__val{font-family:var(--font-display);font-size:1.5rem;font-weight:700;color:#fff;line-height:1;}
 .hero-metric__label{font-family:var(--font-ui);font-size:0.65rem;color:rgba(245,241,234,0.5);text-transform:uppercase;letter-spacing:0.1em;margin-top:3px;}
 .stack-chips{display:flex;flex-wrap:wrap;gap:0.45rem;margin-top:1rem;}
 .stack-chip{font-family:var(--font-ui);font-size:0.68rem;font-weight:500;padding:0.25rem 0.75rem;border-radius:999px;background:rgba(255,255,255,0.08);color:rgba(245,241,234,0.7);border:1px solid rgba(255,255,255,0.12);}
+@media(max-width:960px){.pis-layout{grid-template-columns:1fr}.pis-client-panel{position:relative;top:auto;display:flex;flex-wrap:wrap;gap:0.5rem;background:transparent;border:none;box-shadow:none;padding:0;}.pis-panel-title{display:none}.pis-client-btn{flex:1;min-width:140px;margin-bottom:0;}.pis-deliverable-grid{grid-template-columns:1fr}.pis-preview-strip{grid-template-columns:1fr}}
   </style>
 </head>
 <body>
@@ -461,20 +483,24 @@ if(hamburger){hamburger.addEventListener('click',()=>{const o=mm.classList.toggl
 document.querySelectorAll('.fade-in').forEach(el=>new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('visible');});},{threshold:0.08,rootMargin:'0px 0px -40px 0px'}).observe(el));
 const navLinks=document.querySelectorAll('.profile-nav__link');
 document.querySelectorAll('section[id]').forEach(s=>new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){navLinks.forEach(l=>l.classList.remove('active'));const a=document.querySelector(`.profile-nav__link[href="#${x.target.id}"]`);if(a)a.classList.add('active');}});},{threshold:0.3,rootMargin:'-80px 0px -60% 0px'}).observe(s));
-let activeClient='all';
-const clientCats={};
-const workEntries=document.querySelectorAll('.work-entry');
-const clientBlocks=document.querySelectorAll('.client-block');
-const clientIntels=document.querySelectorAll('.client-intel');
-const noResults=document.getElementById('no-results');
-function render(){
-  clientBlocks.forEach(b=>{const bid=b.dataset.client;b.style.display=(activeClient==='all'||activeClient===bid)?'':'none';});
-  clientIntels.forEach(i=>{i.classList.toggle('active',activeClient!=='all'&&i.dataset.client===activeClient);});
-  let v=0;
-  workEntries.forEach(en=>{const ec=en.dataset.client,cats=(en.dataset.cat||'').split(' '),activeCat=clientCats[ec]||'all',cm=activeClient==='all'||ec===activeClient,catM=activeCat==='all'||cats.includes(activeCat),show=cm&&catM;en.classList.toggle('hidden',!show);if(show)v++;});
-  if(noResults)noResults.classList.toggle('visible',v===0);
+// ── BBC PIS v3.0 ── //
+const pisData={ww:{name:'Wooden Woodworks',url:'https://woodenwoodworksllc.com/',site:'woodenwoodworksllc.com',role:'Social Media Manager & Brand Content Creator',desc:'Complete social media management and content creation for Wooden Woodworks, a custom cabinetry and woodworking company. Krizza handled brand storytelling, visual content, video production, and SOP documentation.',tabs:['All Work','Social Media','Design','Video','SOPs'],sections:[{key:'Social Media',name:'Social Media Management',icon:'📱',desc:'End-to-end social media management across Instagram and Facebook, including content calendar planning.',items:['Instagram management','Facebook management','Content calendar','Publishing schedule'],link:null},{key:'Design',name:'Graphic Design',icon:'🎨',desc:'Branded graphics and project showcases reflecting Wooden Woodworks\' premium custom craftsmanship.',items:['Project graphics','Announcement posts','Brand visuals','Social templates'],link:null},{key:'Video',name:'Video Editing & Reels',icon:'🎬',desc:'Short-form video editing for Instagram reels, project walkthroughs, and before/after showcase content.',items:['Instagram reels','Project previews','Before/after clips','Social video'],link:null},{key:'SOPs',name:'SOPs & Content Systems',icon:'📋',desc:'Repeatable posting, content planning, and creative workflow processes keeping content operations organized.',items:['Posting SOP','Content calendar SOP','Asset organization SOP','Workflow docs'],link:null}]}};
+function pisRender(clientKey){
+  const data=pisData[clientKey];
+  const area=document.getElementById('pisWorkArea');
+  if(!data){area.innerHTML='<div class="pis-empty">Select a client to view their work.</div>';return;}
+  let activeTab='All Work';
+  function build(){
+    const secs=data.sections.filter(s=>activeTab==='All Work'||s.key===activeTab);
+    const sp=data.url?`<div class="pis-site-preview"><div class="pis-chrome"><span class="c-dot" style="background:#FF5F57"></span><span class="c-dot" style="background:#FEBC2E"></span><span class="c-dot" style="background:#28C840"></span><span class="pis-chrome-url">${data.site}</span></div><a href="${data.url}" target="_blank" rel="noopener noreferrer"><img src="https://image.thum.io/get/width/900/crop/380/noanimate/${data.url}" alt="${data.name} preview" loading="lazy" style="width:100%;display:block;max-height:220px;object-fit:cover;object-position:top;"></a></div>`:'';
+    const sb=data.url?`<a href="${data.url}" target="_blank" rel="noopener noreferrer" class="pis-site-badge">${data.site} ↗</a>`:'';
+    const sh=secs.map(s=>`<div class="pis-category-section"><div class="pis-cat-header"><h4>${s.icon} ${s.name}</h4><span class="pis-cat-count">${s.items.length} deliverables</span></div><div class="pis-deliverable-grid"><div class="pis-deliverable"><h5>${s.name} Overview</h5><p>${s.desc}</p>${s.link?`<a href="${s.link.url}" target="_blank" rel="noopener noreferrer" class="pis-portfolio-link">${s.link.label}</a>`:''}</div><div class="pis-deliverable"><h5>Deliverables &amp; Assets</h5><p>Work samples, screenshots, and files for this category.</p><div class="pis-preview-strip">${s.items.map(x=>`<div class="pis-thumb">${x}</div>`).join('')}</div></div></div></div>`).join('');
+    area.innerHTML=`<div class="pis-work-hero"><div class="pis-work-hero__top"><div><span class="eyebrow eyebrow--gold">Selected Client</span><h3>${data.name}</h3><p class="pis-work-role">${data.role}</p><p>${data.desc}</p></div>${sb}</div>${sp}<div class="pis-category-tabs">${data.tabs.map(t=>`<button class="pis-cat-tab${t===activeTab?' active':''}" data-tab="${t}">${t}</button>`).join('')}</div></div>${sh}`;
+    area.querySelectorAll('.pis-cat-tab').forEach(b=>b.addEventListener('click',()=>{activeTab=b.dataset.tab;build();}));
+  }
+  build();
 }
-document.querySelectorAll('.pis-client-btn').forEach(btn=>btn.addEventListener('click',()=>{document.querySelectorAll('.pis-client-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');activeClient=btn.dataset.client;render();}));
+document.querySelectorAll('.pis-client-btn').forEach(btn=>btn.addEventListener('click',()=>{document.querySelectorAll('.pis-client-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');pisRender(btn.dataset.client);}));pisRender('ww');}));
 document.querySelectorAll('.cat-btn').forEach(btn=>btn.addEventListener('click',()=>{const clientId=btn.closest('.client-block').dataset.client;btn.closest('.cat-nav').querySelectorAll('.cat-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');clientCats[clientId]=btn.dataset.cat;render();}));
 render();
 </script>

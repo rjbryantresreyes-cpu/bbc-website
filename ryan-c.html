@@ -562,33 +562,55 @@
     .no-results.visible { display:block; }
       .header__cta .btn-ghost { color:var(--deep-blue); border-color:rgba(31,53,87,0.22); }
     .header__cta .btn-ghost:hover { background:rgba(31,53,87,0.06); border-color:rgba(31,53,87,0.38); color:var(--deep-blue); }
-/* ── BBC Portfolio Intelligence System v2.0 ── */
-.pis-client-bar{display:flex;flex-wrap:wrap;gap:0.6rem;margin-bottom:2rem;}
-.pis-client-btn{font-family:var(--font-ui);font-size:0.78rem;font-weight:600;padding:0.55rem 1.2rem;border-radius:999px;border:1.5px solid rgba(31,53,87,0.18);background:transparent;color:var(--text-body);cursor:pointer;transition:all 0.22s;}
-.pis-client-btn:hover{border-color:var(--deep-blue);color:var(--deep-blue);}
-.pis-client-btn.active{background:var(--deep-blue);color:#fff;border-color:var(--deep-blue);}
-.client-intel{display:none;background:linear-gradient(135deg,rgba(31,53,87,0.06),rgba(184,146,62,0.05));border:1.5px solid rgba(31,53,87,0.14);border-radius:var(--radius-lg);padding:1.75rem 2rem;margin-bottom:1.5rem;animation:fadeUp 0.3s ease;}
-.client-intel.active{display:block;}
+/* ── BBC PIS v3.0 — Sidebar Client Panel ── */
 @keyframes fadeUp{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
-.client-intel__label{font-family:var(--font-ui);font-size:0.6rem;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:0.5rem;}
-.client-intel__name{font-family:var(--font-display);font-size:1.4rem;font-weight:700;color:var(--deep-blue);margin-bottom:0.2rem;}
-.client-intel__role{font-family:var(--font-ui);font-size:0.82rem;color:var(--text-muted);margin-bottom:1rem;}
-.client-intel__desc{font-family:var(--font-body);font-size:0.88rem;line-height:1.8;color:var(--text-body);margin-bottom:1.25rem;}
-.client-intel__chips{display:flex;flex-wrap:wrap;gap:0.5rem;margin-bottom:1.25rem;}
-.intel-chip{font-family:var(--font-ui);font-size:0.7rem;font-weight:600;padding:0.3rem 0.85rem;border-radius:999px;background:rgba(31,53,87,0.08);color:var(--deep-blue);border:1px solid rgba(31,53,87,0.12);}
-.intel-chip--gold{background:rgba(184,146,62,0.1);color:var(--gold);border-color:rgba(184,146,62,0.22);}
-.client-intel__stats{display:flex;flex-wrap:wrap;gap:1.5rem;padding-top:1rem;border-top:1px solid rgba(31,53,87,0.08);}
-.intel-stat__val{font-family:var(--font-display);font-size:1.35rem;font-weight:700;color:var(--deep-blue);line-height:1;}
-.intel-stat__label{font-family:var(--font-ui);font-size:0.65rem;color:var(--text-muted);margin-top:3px;text-transform:uppercase;letter-spacing:0.08em;}
-.cat-nav{display:flex;flex-wrap:wrap;gap:0.5rem;padding:1rem 1.5rem;background:var(--bg-section);border-left:1px solid rgba(85,60,35,0.09);border-right:1px solid rgba(85,60,35,0.09);}
-.cat-btn{font-family:var(--font-ui);font-size:0.72rem;font-weight:600;padding:0.38rem 0.9rem;border-radius:999px;border:1.5px solid rgba(31,53,87,0.14);background:transparent;color:var(--text-body);cursor:pointer;transition:all 0.18s;}
-.cat-btn:hover{border-color:var(--deep-blue);color:var(--deep-blue);}
-.cat-btn.active{background:rgba(31,53,87,0.1);color:var(--deep-blue);border-color:rgba(31,53,87,0.28);}
+.pis-layout{display:grid;grid-template-columns:290px 1fr;gap:24px;align-items:start;}
+.pis-client-panel{position:sticky;top:92px;background:var(--bg-card);border:var(--border-card);border-radius:var(--radius-lg);box-shadow:var(--shadow-sm);padding:1.25rem;}
+.pis-panel-title{font-family:var(--font-ui);font-size:0.62rem;text-transform:uppercase;letter-spacing:0.14em;color:var(--text-muted);font-weight:700;margin-bottom:1rem;}
+.pis-client-btn{width:100%;border:var(--border-card);background:var(--bg-card);border-radius:var(--radius);padding:0.9rem 1rem;margin-bottom:0.6rem;text-align:left;cursor:pointer;transition:all 0.2s ease;}
+.pis-client-btn:last-of-type{margin-bottom:0;}
+.pis-client-btn:hover{transform:translateY(-1px);box-shadow:var(--shadow-xs);}
+.pis-client-btn.active{background:var(--deep-blue);border-color:var(--deep-blue);}
+.pis-client-btn strong{display:block;font-family:var(--font-ui);font-size:0.88rem;font-weight:600;color:var(--text-ink);margin-bottom:3px;}
+.pis-client-btn span{display:block;font-family:var(--font-ui);font-size:0.72rem;color:var(--text-muted);}
+.pis-client-btn.active strong{color:#fff;}
+.pis-client-btn.active span{color:rgba(245,241,234,0.55);}
+.pis-work-area{background:var(--bg-card);border:var(--border-card);border-radius:var(--radius-lg);box-shadow:var(--shadow-sm);overflow:hidden;min-height:400px;}
+.pis-work-hero{padding:1.75rem 2rem;border-bottom:var(--border-card);background:linear-gradient(135deg,#fff,rgba(237,232,223,0.6));}
+.pis-work-hero__top{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;flex-wrap:wrap;margin-bottom:1.25rem;}
+.pis-work-hero h3{font-family:var(--font-display);font-size:1.5rem;color:var(--deep-blue);margin-bottom:0.3rem;}
+.pis-work-role{font-family:var(--font-ui);font-size:0.78rem;color:var(--text-muted);margin-bottom:0.6rem;font-weight:500;}
+.pis-work-hero>div>p,.pis-work-hero .pis-work-hero__top>div>p{font-size:0.88rem;line-height:1.8;color:var(--text-body);max-width:640px;}
+.pis-site-badge{display:inline-flex;align-items:center;font-family:var(--font-ui);font-size:0.72rem;font-weight:600;color:var(--gold);border:1px solid rgba(184,146,62,0.3);border-radius:999px;padding:0.4rem 1rem;white-space:nowrap;flex-shrink:0;transition:all 0.2s;}
+.pis-site-badge:hover{background:rgba(184,146,62,0.08);}
+.pis-site-preview{border-radius:var(--radius);overflow:hidden;border:var(--border-card);margin-bottom:1.25rem;box-shadow:var(--shadow-xs);}
+.pis-chrome{display:flex;align-items:center;gap:0.4rem;padding:0.55rem 0.9rem;background:#E8E2D6;border-bottom:1px solid rgba(85,60,35,0.1);}
+.pis-chrome-url{flex:1;margin-left:0.4rem;background:rgba(255,255,255,0.65);border-radius:5px;padding:0.18rem 0.65rem;font-family:var(--font-ui);font-size:0.68rem;color:var(--text-muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.pis-category-tabs{display:flex;flex-wrap:wrap;gap:0.5rem;}
+.pis-cat-tab{border:var(--border-card);background:#fff;border-radius:999px;padding:0.48rem 1rem;font-family:var(--font-ui);font-size:0.72rem;font-weight:600;color:var(--text-body);cursor:pointer;transition:all 0.2s;}
+.pis-cat-tab:hover{border-color:var(--mid-blue);color:var(--deep-blue);}
+.pis-cat-tab.active{background:var(--gold);color:#fff;border-color:var(--gold);}
+.pis-category-section{padding:1.75rem 2rem;border-bottom:var(--border-card);}
+.pis-category-section:last-child{border-bottom:none;}
+.pis-cat-header{display:flex;align-items:center;justify-content:space-between;gap:1rem;margin-bottom:1.1rem;}
+.pis-cat-header h4{font-family:var(--font-display);font-size:1.15rem;color:var(--deep-blue);}
+.pis-cat-count{font-family:var(--font-ui);font-size:0.62rem;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:0.1em;white-space:nowrap;}
+.pis-deliverable-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem;}
+.pis-deliverable{background:var(--bg-primary);border:var(--border-card);border-radius:var(--radius);padding:1.25rem;transition:all 0.22s;}
+.pis-deliverable:hover{transform:translateY(-2px);box-shadow:var(--shadow-sm);}
+.pis-deliverable h5{font-family:var(--font-ui);font-size:0.85rem;font-weight:600;color:var(--text-ink);margin-bottom:0.4rem;}
+.pis-deliverable p{font-size:0.8rem;line-height:1.7;color:var(--text-body);margin:0;}
+.pis-portfolio-link{display:inline-flex;margin-top:0.75rem;font-family:var(--font-ui);font-size:0.75rem;font-weight:600;color:var(--mid-blue);background:rgba(75,111,165,0.08);border:1px solid rgba(75,111,165,0.18);border-radius:999px;padding:0.38rem 0.9rem;transition:all 0.2s;}
+.pis-portfolio-link:hover{background:rgba(75,111,165,0.14);}
+.pis-preview-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:0.5rem;margin-top:0.85rem;}
+.pis-thumb{height:66px;border-radius:10px;background:linear-gradient(135deg,rgba(31,53,87,0.06),rgba(184,146,62,0.08));border:1px dashed rgba(85,60,35,0.14);display:grid;place-items:center;font-family:var(--font-ui);font-size:0.65rem;font-weight:600;color:var(--text-muted);text-align:center;padding:6px;}
+.pis-empty{padding:3.5rem 2rem;text-align:center;font-family:var(--font-ui);font-size:0.88rem;color:var(--text-muted);}
 .hero-metrics{display:flex;gap:2rem;flex-wrap:wrap;margin-top:1.5rem;padding-top:1.5rem;border-top:1px solid rgba(255,255,255,0.1);}
 .hero-metric__val{font-family:var(--font-display);font-size:1.5rem;font-weight:700;color:#fff;line-height:1;}
 .hero-metric__label{font-family:var(--font-ui);font-size:0.65rem;color:rgba(245,241,234,0.5);text-transform:uppercase;letter-spacing:0.1em;margin-top:3px;}
 .stack-chips{display:flex;flex-wrap:wrap;gap:0.45rem;margin-top:1rem;}
 .stack-chip{font-family:var(--font-ui);font-size:0.68rem;font-weight:500;padding:0.25rem 0.75rem;border-radius:999px;background:rgba(255,255,255,0.08);color:rgba(245,241,234,0.7);border:1px solid rgba(255,255,255,0.12);}
+@media(max-width:960px){.pis-layout{grid-template-columns:1fr}.pis-client-panel{position:relative;top:auto;display:flex;flex-wrap:wrap;gap:0.5rem;background:transparent;border:none;box-shadow:none;padding:0;}.pis-panel-title{display:none}.pis-client-btn{flex:1;min-width:140px;margin-bottom:0;}.pis-deliverable-grid{grid-template-columns:1fr}.pis-preview-strip{grid-template-columns:1fr}}
   </style>
 </head>
 <body>
@@ -808,261 +830,24 @@
       <span class="eyebrow">Portfolio Work</span>
       <h2>Companies &amp; Work Delivered</h2>
       <div class="divider-bar divider-bar--left"></div>
-      <p style="max-width:640px;">A full breakdown of what Ryan delivered for each client, including live site previews, graphic portfolios, and video content.</p>
+      <p style="max-width:640px;">A full breakdown of what Ryan delivered for each client, organized by company and work category.</p>
     </div>
 
-    <!-- PIS v2.0 Client Bar -->
-    <div class="pis-client-bar fade-in">
-      <button class="pis-client-btn active" data-client="all">All Clients</button>
-      <button class="pis-client-btn" data-client="fcf">First Class Finishes</button>
-      <button class="pis-client-btn" data-client="hiup">Hi-Up Roofing</button>
+    <div class="pis-layout fade-in">
+      <aside class="pis-client-panel">
+        <p class="pis-panel-title">Filter by Client</p>
+        <button class="pis-client-btn active" data-client="fcf">
+          <strong>First Class Finishes Texas</strong>
+          <span>Website, SEO, AI content, social media</span>
+        </button>
+        <button class="pis-client-btn" data-client="hiup">
+          <strong>Hi-Up Roofing</strong>
+          <span>Social media, AI content, video</span>
+        </button>
+      </aside>
+      <div class="pis-work-area" id="pisWorkArea"></div>
     </div>
 
-    <!-- Client Intel Cards -->
-    <div class="client-intel" data-client="fcf">
-      <span class="client-intel__label">Client Intelligence</span>
-      <p class="client-intel__name">First Class Finishes Texas</p>
-      <p class="client-intel__role">AI Content Creator, Social Media Manager &amp; SEO Specialist</p>
-      <div class="client-intel__chips">
-        <span class="intel-chip">AI Video</span>
-        <span class="intel-chip">Social Media</span>
-        <span class="intel-chip">SEO</span>
-        <span class="intel-chip">Graphic Design</span>
-        <span class="intel-chip">Content</span>
-        <span class="intel-chip intel-chip--gold">firstclass-finishes.com</span>
-      </div>
-      <p class="client-intel__desc">Full digital content and SEO operations for First Class Finishes Texas, social media management, AI video production via HeyGen/ElevenLabs, graphic design, and SEO content writing for the local Texas market.</p>
-      <div class="client-intel__stats">
-        <div><p class="intel-stat__val">4</p><p class="intel-stat__label">Services</p></div>
-        <div><p class="intel-stat__val">firstclass-finishes.com</p><p class="intel-stat__label">Client Site</p></div>
-        <div><p class="intel-stat__val">Texas Market</p><p class="intel-stat__label">Location</p></div>
-      </div>
-    </div>
-    <div class="client-intel" data-client="hiup">
-      <span class="client-intel__label">Client Intelligence</span>
-      <p class="client-intel__name">Hi-Up Roofing</p>
-      <p class="client-intel__role">AI Content Creator &amp; Social Media Manager</p>
-      <div class="client-intel__chips">
-        <span class="intel-chip">AI Video</span>
-        <span class="intel-chip">Social Media</span>
-        <span class="intel-chip">Content Creation</span>
-        <span class="intel-chip intel-chip--gold">hi-uproofing.com</span>
-      </div>
-      <p class="client-intel__desc">Social media management and AI-assisted content production for Hi-Up Roofing, maintaining consistent digital presence for this local roofing company with short-form video and platform-native content.</p>
-      <div class="client-intel__stats">
-        <div><p class="intel-stat__val">2</p><p class="intel-stat__label">Services</p></div>
-        <div><p class="intel-stat__val">hi-uproofing.com</p><p class="intel-stat__label">Client Site</p></div>
-      </div>
-    </div>
-
-    <!-- ═══ CLIENT: First Class Finishes Texas ═══ -->
-    <div class="client-block fade-in" id="block-fcf" data-client="fcf">
-
-      <div class="company-banner">
-        <div>
-          <p class="company-banner__name">First Class Finishes Texas</p>
-          <p class="company-banner__meta">Painting &amp; Property Maintenance · Texas</p>
-        </div>
-        <a href="https://firstclass-finishes.com/" target="_blank" rel="noopener noreferrer" class="company-banner__link">Visit Site ↗</a>
-      </div>
-
-      <div class="site-preview">
-        <div class="site-preview__chrome">
-          <span class="c-dot"></span><span class="c-dot"></span><span class="c-dot"></span>
-          <span class="site-preview__url">firstclass-finishes.com</span>
-        </div>
-        <a href="https://firstclass-finishes.com/" target="_blank" rel="noopener noreferrer" class="site-preview__frame">
-          <img src="https://image.thum.io/get/width/900/crop/560/noanimate/https://firstclass-finishes.com/"
-               alt="First Class Finishes Texas website preview" loading="lazy" />
-        </a>
-      </div>
-
-      <div class="cat-nav">
-        <button class="cat-btn active" data-cat="all">All Work</button>
-        <button class="cat-btn" data-cat="ai-video">AI Video</button>
-        <button class="cat-btn" data-cat="social">Social Media</button>
-        <button class="cat-btn" data-cat="seo">SEO</button>
-        <button class="cat-btn" data-cat="design">Design</button>
-      </div>
-
-      <div class="work-grid">
-
-        <div class="work-entry" data-client="fcf" data-cat="social ai-video">
-          <span class="work-entry__company">First Class Finishes</span>
-          <h3>Social Media Account Management</h3>
-          <p>Full social media management for First Class Finishes Texas, Ryan ran their accounts end to end, maintaining a consistent publishing schedule and brand voice across platforms.</p>
-          <div class="work-entry__tasks">
-            <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>Content calendar planning and weekly publishing schedule</div>
-            <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>Platform-specific content formatting (Instagram, Facebook)</div>
-            <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>AI-assisted caption and copy writing via ChatGPT</div>
-            <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>Audience engagement and account maintenance</div>
-            <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>Scheduling and publishing via Meta Business Suite</div>
-          </div>
-          <div class="work-entry__tags">
-            <span class="work-entry__tag work-entry__tag--blue">Social Media</span>
-            <span class="work-entry__tag">Content Planning</span>
-            <span class="work-entry__tag">Meta Business Suite</span>
-            <span class="work-entry__tag">AI-Assisted Copy</span>
-          </div>
-        </div>
-
-        <div class="work-entry" data-client="fcf" data-cat="ai-video video">
-          <span class="work-entry__company">First Class Finishes</span>
-          <h3>AI Video Content Production</h3>
-          <p>Built and operated an AI-powered video content workflow, producing short-form video, AI avatar content, and voiceover-driven promotional pieces at scale without the cost of traditional production.</p>
-          <div class="work-entry__tasks">
-            <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>ChatGPT scripting, video scripts optimized per platform and audience</div>
-            <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>HeyGen AI avatar video creation, branded spokesperson videos</div>
-            <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>ElevenLabs voiceover production, professional voice for ads and promos</div>
-            <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>CapCut editing, assembled and polished final short-form videos</div>
-            <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>Batch production system, multiple videos produced per session</div>
-          </div>
-          <div class="work-entry__tags">
-            <span class="work-entry__tag work-entry__tag--blue">AI Video</span>
-            <span class="work-entry__tag">HeyGen</span>
-            <span class="work-entry__tag">ElevenLabs</span>
-            <span class="work-entry__tag">CapCut</span>
-            <span class="work-entry__tag">Short-Form</span>
-          </div>
-        </div>
-
-        <div class="work-entry" data-client="fcf" data-cat="design">
-          <span class="work-entry__company">First Class Finishes</span>
-          <h3>Graphic Design &amp; Brand Assets</h3>
-          <p>Created visual content and branded graphics to support First Class Finishes' digital presence, maintaining a consistent visual identity across social platforms and digital materials.</p>
-          <div class="work-entry__tasks">
-            <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>Social media graphics and promotional image design (Canva)</div>
-            <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>Branded templates for recurring content types</div>
-            <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>Before/after project showcases and work sample graphics</div>
-            <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>Story and reel cover design</div>
-          </div>
-          <div class="work-entry__tags">
-            <span class="work-entry__tag work-entry__tag--blue">Graphic Design</span>
-            <span class="work-entry__tag">Canva</span>
-            <span class="work-entry__tag">Brand Assets</span>
-            <span class="work-entry__tag">Social Graphics</span>
-          </div>
-        </div>
-
-        <div class="work-entry" data-client="fcf" data-cat="seo">
-          <span class="work-entry__company">First Class Finishes</span>
-          <h3>SEO &amp; Content Writing Support</h3>
-          <p>Supported First Class Finishes with SEO-aligned content and web copy to improve their search visibility and communicate services clearly to the local Texas market.</p>
-          <div class="work-entry__tasks">
-            <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>Service page copy writing and optimization</div>
-            <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>Keyword-aligned blog and social content</div>
-            <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>Website/landing page content support</div>
-            <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>Local search copy (Google Business-aligned)</div>
-          </div>
-          <div class="work-entry__tags">
-            <span class="work-entry__tag work-entry__tag--blue">SEO</span>
-            <span class="work-entry__tag">Content Writing</span>
-            <span class="work-entry__tag">Local Search</span>
-            <span class="work-entry__tag">Web Copy</span>
-          </div>
-        </div>
-
-      </div>
-
-      <div class="media-row">
-        <div class="media-card">
-          <div class="media-card__top">
-            <span class="media-card__icon">🎨</span>
-            <p class="media-card__title">Graphic Design Portfolio</p>
-          </div>
-          <p class="media-card__desc">Social media graphics, branded templates, and promotional visual assets created for First Class Finishes Texas, including before/after showcases and story covers.</p>
-          <a href="https://www.facebook.com/FirstClassFinishesTexas" target="_blank" rel="noopener noreferrer" class="media-toggle">View Live on Facebook ↗</a>
-        </div>
-        <div class="media-card">
-          <div class="media-card__top">
-            <span class="media-card__icon">🎬</span>
-            <p class="media-card__title">AI Video Content Portfolio</p>
-          </div>
-          <p class="media-card__desc">Short-form videos, AI avatar content, and voiceover-driven promotional reels produced using HeyGen, ElevenLabs &amp; CapCut.</p>
-          <button class="media-toggle" onclick="this.nextElementSibling.classList.toggle('open');this.textContent=this.nextElementSibling.classList.contains('open')?'▲ Hide Videos':'▾ Watch Video Portfolio';">▾ Watch Video Portfolio</button>
-          <div class="media-embed">
-            <iframe src="https://drive.google.com/embeddedfolderview?id=1SshL-ByMh-j-cX4mdelKQyt8yRYYp-h5#grid"
-                    height="360" allowfullscreen title="Ryan C Video Portfolio"></iframe>
-          </div>
-        </div>
-      </div>
-
-    </div><!-- /block-fcf -->
-
-
-    <!-- ═══ CLIENT: Hi-Up Roofing ═══ -->
-    <div class="client-block fade-in" id="block-hiup" data-client="hiup">
-
-      <div class="company-banner">
-        <div>
-          <p class="company-banner__name">Hi-Up Roofing</p>
-          <p class="company-banner__meta">Roofing &amp; Home Services</p>
-        </div>
-        <a href="https://hi-uproofing.com/" target="_blank" rel="noopener noreferrer" class="company-banner__link">Visit Site ↗</a>
-      </div>
-
-      <div class="site-preview">
-        <div class="site-preview__chrome">
-          <span class="c-dot"></span><span class="c-dot"></span><span class="c-dot"></span>
-          <span class="site-preview__url">hi-uproofing.com</span>
-        </div>
-        <a href="https://hi-uproofing.com/" target="_blank" rel="noopener noreferrer" class="site-preview__frame">
-          <img src="https://image.thum.io/get/width/900/crop/560/noanimate/https://hi-uproofing.com/"
-               alt="Hi-Up Roofing website preview" loading="lazy" />
-        </a>
-      </div>
-
-      <div class="cat-nav">
-        <button class="cat-btn active" data-cat="all">All Work</button>
-        <button class="cat-btn" data-cat="ai-video">AI Video</button>
-        <button class="cat-btn" data-cat="social">Social Media</button>
-        <button class="cat-btn" data-cat="content">Content</button>
-      </div>
-
-      <div class="work-grid">
-
-        <div class="work-entry" data-client="hiup" data-cat="social">
-          <span class="work-entry__company">Hi-Up Roofing</span>
-          <h3>Social Media Management</h3>
-          <p>Managed Hi-Up Roofing's social media presence, keeping their digital accounts active, professional, and consistently published for their local roofing market audience.</p>
-          <div class="work-entry__tasks">
-            <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>Full account management and posting schedule</div>
-            <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>Content calendar planning per platform</div>
-            <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>Meta Business Suite scheduling and publishing</div>
-            <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>Community management and audience engagement</div>
-          </div>
-          <div class="work-entry__tags">
-            <span class="work-entry__tag work-entry__tag--blue">Social Media</span>
-            <span class="work-entry__tag">Meta Business Suite</span>
-            <span class="work-entry__tag">Content Calendar</span>
-          </div>
-        </div>
-
-        <div class="work-entry" data-client="hiup" data-cat="ai-video content">
-          <span class="work-entry__company">Hi-Up Roofing</span>
-          <h3>AI Content &amp; Video Production</h3>
-          <p>Produced AI-assisted content and short-form video for Hi-Up Roofing's social channels, building visual credibility and consistent digital presence for this local roofing company.</p>
-          <div class="work-entry__tasks">
-            <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>Short-form video editing and production (CapCut)</div>
-            <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>AI-assisted content scripting (ChatGPT)</div>
-            <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>Canva graphics for social platforms</div>
-            <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>Promotional and service showcase content</div>
-            <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>Platform-optimized content formatting</div>
-          </div>
-          <div class="work-entry__tags">
-            <span class="work-entry__tag work-entry__tag--blue">AI Content</span>
-            <span class="work-entry__tag">Video Editing</span>
-            <span class="work-entry__tag">Graphic Design</span>
-            <span class="work-entry__tag">CapCut</span>
-            <span class="work-entry__tag">Canva</span>
-          </div>
-        </div>
-
-      </div>
-
-    </div><!-- /block-hiup -->
-
-    <div class="no-results" id="no-results"><p style="text-align:center;padding:3rem;color:var(--text-muted);font-family:var(--font-ui);">No work entries match the selected filters. Try a different combination.</p></div>
 
   </div>
 </section>
@@ -1470,22 +1255,34 @@ if(hamburger){hamburger.addEventListener('click',()=>{const o=mm.classList.toggl
 document.querySelectorAll('.fade-in').forEach(el=>new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('visible');});},{threshold:0.07,rootMargin:'0px 0px -40px 0px'}).observe(el));
 const secTabs=document.querySelectorAll('.sec-tab');
 document.querySelectorAll('section[id^="sec-"]').forEach(s=>new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){const id=x.target.id;secTabs.forEach(t=>t.classList.toggle('active',t.getAttribute('href')==='#'+id));}});},{rootMargin:'-30% 0px -60% 0px',threshold:0}).observe(s));
-let activeClient='all';
-const clientCats={};
-const workEntries=document.querySelectorAll('.work-entry');
-const clientBlocks=document.querySelectorAll('.client-block');
-const clientIntels=document.querySelectorAll('.client-intel');
-const noResults=document.getElementById('no-results');
-function render(){
-  clientBlocks.forEach(b=>{const bid=b.dataset.client;b.style.display=(activeClient==='all'||activeClient===bid)?'':'none';});
-  clientIntels.forEach(i=>{i.classList.toggle('active',activeClient!=='all'&&i.dataset.client===activeClient);});
-  let v=0;
-  workEntries.forEach(en=>{const ec=en.dataset.client,cats=(en.dataset.cat||'').split(' '),activeCat=clientCats[ec]||'all',cm=activeClient==='all'||ec===activeClient,catM=activeCat==='all'||cats.includes(activeCat),show=cm&&catM;en.classList.toggle('hidden',!show);if(show)v++;});
-  if(noResults)noResults.classList.toggle('visible',v===0);
+// ── BBC PIS v3.0 — Client Sidebar ── //
+const pisData={
+  fcf:{name:'First Class Finishes Texas',url:'https://firstclass-finishes.com/',site:'firstclass-finishes.com',role:'AI Content Creator, Social Media Manager & SEO Specialist',desc:'Full digital content and SEO operations for First Class Finishes Texas. Social media management, AI video production via HeyGen and ElevenLabs, graphic design, and SEO content writing for the local Texas market.',tabs:['All Work','AI Video','Social Media','SEO','Design'],sections:[
+    {key:'AI Video',name:'AI Video Production',icon:'🎬',desc:'Built and operated an AI-powered video content workflow producing short-form video, AI avatar content, and voiceover-driven promotional pieces at scale without the cost of traditional production.',items:['ChatGPT scripts','HeyGen avatar videos','ElevenLabs voiceovers','CapCut editing','Batch production system'],link:{label:'Watch Video Portfolio ↗',url:'https://drive.google.com/drive/folders/1SshL-ByMh-j-cX4mdelKQyt8yRYYp-h5'}},
+    {key:'Social Media',name:'Social Media Management',icon:'📱',desc:'End-to-end social media management for First Class Finishes Texas. Content calendar, publishing schedule, and audience engagement across Instagram and Facebook.',items:['Content calendar planning','Platform-specific formatting','AI-assisted captions','Audience engagement','Meta Business Suite'],link:{label:'View Live on Facebook ↗',url:'https://www.facebook.com/FirstClassFinishesTexas'}},
+    {key:'SEO',name:'SEO & Content Writing',icon:'🔍',desc:'SEO-aligned web copy and content writing to improve local search visibility for the Texas market.',items:['Service page copy','Keyword-aligned content','Local search copy','Website content support'],link:null},
+    {key:'Design',name:'Graphic Design & Brand Assets',icon:'🎨',desc:'Branded graphics, social media visuals, and promotional image design using Canva to maintain consistent visual identity across all digital platforms.',items:['Social media graphics','Branded templates','Before/after showcases','Story and reel covers'],link:null}
+  ]},
+  hiup:{name:'Hi-Up Roofing',url:'https://hi-uproofing.com/',site:'hi-uproofing.com',role:'AI Content Creator & Social Media Manager',desc:'Social media management and AI-assisted content production for Hi-Up Roofing. Maintaining consistent digital presence for this local roofing company with short-form video and platform-native content.',tabs:['All Work','AI Content','Social Media','Video'],sections:[
+    {key:'Social Media',name:'Social Media Management',icon:'📱',desc:'Full account management, publishing schedule, and community management for Hi-Up Roofing across Instagram and Facebook.',items:['Full account management','Content calendar','Meta Business Suite','Community management'],link:null},
+    {key:'AI Content',name:'AI Content & Video Production',icon:'🎬',desc:'AI-assisted short-form video production and content creation keeping Hi-Up Roofing consistently visible online.',items:['CapCut video editing','ChatGPT scripting','Canva graphics','Platform-optimized content'],link:null}
+  ]}
+};
+function pisRender(clientKey){
+  const data=pisData[clientKey];
+  const area=document.getElementById('pisWorkArea');
+  if(!data){area.innerHTML='<div class="pis-empty">Select a client to view their work.</div>';return;}
+  let activeTab='All Work';
+  function build(){
+    const secs=data.sections.filter(s=>activeTab==='All Work'||s.key===activeTab);
+    const secHTML=secs.map(s=>`<div class="pis-category-section"><div class="pis-cat-header"><h4>${s.icon} ${s.name}</h4><span class="pis-cat-count">${s.items.length} deliverables</span></div><div class="pis-deliverable-grid"><div class="pis-deliverable"><h5>${s.name} Overview</h5><p>${s.desc}</p>${s.link?`<a href="${s.link.url}" target="_blank" rel="noopener noreferrer" class="pis-portfolio-link">${s.link.label}</a>`:''}</div><div class="pis-deliverable"><h5>Deliverables &amp; Assets</h5><p>Work samples, screenshots, files, and portfolio assets for this category.</p><div class="pis-preview-strip">${s.items.map(x=>`<div class="pis-thumb">${x}</div>`).join('')}</div></div></div></div>`).join('');
+    area.innerHTML=`<div class="pis-work-hero"><div class="pis-work-hero__top"><div><span class="eyebrow eyebrow--gold">Selected Client</span><h3>${data.name}</h3><p class="pis-work-role">${data.role}</p><p>${data.desc}</p></div><a href="${data.url}" target="_blank" rel="noopener noreferrer" class="pis-site-badge">${data.site} ↗</a></div><div class="pis-site-preview"><div class="pis-chrome"><span class="c-dot" style="background:#FF5F57"></span><span class="c-dot" style="background:#FEBC2E"></span><span class="c-dot" style="background:#28C840"></span><span class="pis-chrome-url">${data.site}</span></div><a href="${data.url}" target="_blank" rel="noopener noreferrer"><img src="https://image.thum.io/get/width/900/crop/380/noanimate/${data.url}" alt="${data.name} preview" loading="lazy" style="width:100%;display:block;max-height:220px;object-fit:cover;object-position:top;"></a></div><div class="pis-category-tabs">${data.tabs.map(t=>`<button class="pis-cat-tab${t===activeTab?' active':''}" data-tab="${t}">${t}</button>`).join('')}</div></div>${secHTML}`;
+    area.querySelectorAll('.pis-cat-tab').forEach(b=>b.addEventListener('click',()=>{activeTab=b.dataset.tab;build();}));
+  }
+  build();
 }
-document.querySelectorAll('.pis-client-btn').forEach(btn=>btn.addEventListener('click',()=>{document.querySelectorAll('.pis-client-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');activeClient=btn.dataset.client;render();}));
-document.querySelectorAll('.cat-btn').forEach(btn=>btn.addEventListener('click',()=>{const clientId=btn.closest('.client-block').dataset.client;btn.closest('.cat-nav').querySelectorAll('.cat-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');clientCats[clientId]=btn.dataset.cat;render();}));
-render();
+document.querySelectorAll('.pis-client-btn').forEach(btn=>btn.addEventListener('click',()=>{document.querySelectorAll('.pis-client-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');pisRender(btn.dataset.client);}));
+pisRender('fcf');
 </script>
 
 </body>
