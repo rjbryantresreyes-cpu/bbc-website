@@ -377,6 +377,50 @@
 
     .no-results { grid-column:1/-1; text-align:center; padding:3rem 2rem; background:var(--bg-card); border:var(--border-card); border-radius:var(--radius-lg); font-family:var(--font-ui); font-size:0.88rem; color:var(--text-muted); display:none; }
     .no-results.visible { display:block; }
+
+    /* ── Client blocks ── */
+    .client-block { margin-bottom:3.5rem; }
+    .client-block:last-child { margin-bottom:0; }
+    /* ── Company banner (if not already present) ── */
+    .company-banner {
+      background:var(--bg-dark); border:var(--border-dark);
+      border-radius:var(--radius-lg); padding:1.75rem 2rem;
+      margin-bottom:1.75rem;
+      display:flex; align-items:center; justify-content:space-between;
+      gap:1.5rem; flex-wrap:wrap;
+    }
+    .company-banner__name { font-family:var(--font-display); font-size:1.3rem; font-weight:700; color:#fff; margin-bottom:0.3rem; }
+    .company-banner__meta { font-family:var(--font-ui); font-size:0.8rem; color:rgba(245,241,234,0.5); }
+    .company-banner__link {
+      font-family:var(--font-ui); font-size:0.78rem; font-weight:600;
+      color:var(--gold-pale); border:1px solid rgba(184,146,62,0.3);
+      border-radius:999px; padding:0.45rem 1.1rem;
+      transition:all 0.22s; white-space:nowrap;
+    }
+    .company-banner__link:hover { background:rgba(184,146,62,0.12); }
+    /* ── Site Preview ── */
+    .site-preview { margin-bottom:1.75rem; border-radius:var(--radius-lg); overflow:hidden; box-shadow:var(--shadow-md); border:var(--border-card); }
+    .site-preview__chrome { display:flex; align-items:center; gap:0.45rem; padding:0.6rem 1rem; background:#E8E2D6; border-bottom:1px solid rgba(85,60,35,0.1); }
+    .c-dot { width:10px; height:10px; border-radius:50%; display:inline-block; flex-shrink:0; }
+    .c-dot:nth-child(1){background:#FF5F57;} .c-dot:nth-child(2){background:#FFBD2E;} .c-dot:nth-child(3){background:#28C940;}
+    .site-preview__url { flex:1; margin-left:0.5rem; background:rgba(255,255,255,0.65); border-radius:6px; padding:0.2rem 0.75rem; font-family:var(--font-ui); font-size:0.7rem; color:var(--text-muted); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+    .site-preview__frame { display:block; position:relative; overflow:hidden; max-height:300px; }
+    .site-preview__frame::after { content:'Visit Site ↗'; position:absolute; inset:0; background:rgba(31,53,87,0); color:#fff; display:flex; align-items:center; justify-content:center; font-family:var(--font-ui); font-size:1rem; font-weight:700; letter-spacing:0.03em; opacity:0; transition:all 0.3s ease; }
+    .site-preview__frame:hover::after { background:rgba(31,53,87,0.52); opacity:1; }
+    .site-preview__frame img { width:100%; display:block; height:auto; }
+    /* ── Media row ── */
+    .media-row { display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-top:1.5rem; }
+    @media (max-width:720px) { .media-row { grid-template-columns:1fr; } }
+    .media-card { background:var(--bg-card); border:var(--border-card); border-radius:var(--radius-lg); padding:1.25rem 1.5rem; display:flex; flex-direction:column; gap:0.75rem; box-shadow:var(--shadow-xs); }
+    .media-card__top { display:flex; align-items:center; gap:0.85rem; }
+    .media-card__icon { font-size:1.5rem; flex-shrink:0; }
+    .media-card__title { font-family:var(--font-ui); font-size:0.88rem; font-weight:700; color:var(--deep-blue); margin:0; }
+    .media-card__desc { font-family:var(--font-body); font-size:0.8rem; line-height:1.7; color:var(--text-muted); margin:0; }
+    .media-toggle { font-family:var(--font-ui); font-size:0.78rem; font-weight:600; color:var(--mid-blue); background:rgba(75,111,165,0.08); border:1px solid rgba(75,111,165,0.18); border-radius:999px; padding:0.4rem 1rem; cursor:pointer; transition:all 0.2s; width:fit-content; }
+    .media-toggle:hover { background:rgba(75,111,165,0.15); }
+    .media-embed { border-radius:10px; overflow:hidden; border:var(--border-card); display:none; margin-top:0.25rem; }
+    .media-embed.open { display:block; }
+    .media-embed iframe { display:block; width:100%; border:none; }
   </style>
 </head>
 <body>
@@ -606,182 +650,305 @@
       <button class="filter-btn" data-task="content">Content</button>
     </div>
 
-    <div class="work-grid fade-in" id="work-grid">
-
-      <!-- Cavalry Realty Group -->
-      <div class="work-entry" data-company="cavalry" data-task="social content">
-        <span class="work-entry__company">Cavalry Realty Group</span>
-        <h3>Social Media Management</h3>
-        <p>Managed Cavalry Realty Group's social media presence for real estate agent Tre Serrano — keeping platforms active, content consistent, and the brand visible to their target buyer/seller audience.</p>
-        <div class="work-entry__tasks">
-          <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>Full account management across Instagram and Facebook</div>
-          <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>Content calendar planning and weekly publishing schedule</div>
-          <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>AI-assisted caption writing and copy (ChatGPT)</div>
-          <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>Graphic design support for listing and brand posts (Canva)</div>
-          <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>Meta Business Suite scheduling and publishing</div>
+    <!-- ── Cavalry Realty Group ── -->
+    <div class="client-block fade-in" id="block-cavalry">
+      <div class="company-banner">
+        <div>
+          <p class="company-banner__name">Cavalry Realty Group</p>
+          <p class="company-banner__meta">Real Estate · Texas</p>
         </div>
-        <div class="work-entry__tags">
-          <span class="work-entry__tag work-entry__tag--blue">Social Media</span>
-          <span class="work-entry__tag">Real Estate</span>
-          <span class="work-entry__tag">Content Calendar</span>
-          <span class="work-entry__tag">Canva</span>
+        <a href="https://callthecavalrygroup.com/" target="_blank" rel="noopener noreferrer" class="company-banner__link">Visit Site ↗</a>
+      </div>
+      <div class="site-preview">
+        <div class="site-preview__chrome">
+          <span class="c-dot"></span><span class="c-dot"></span><span class="c-dot"></span>
+          <span class="site-preview__url">callthecavalrygroup.com</span>
+        </div>
+        <a href="https://callthecavalrygroup.com/" target="_blank" rel="noopener noreferrer" class="site-preview__frame">
+          <img src="https://image.thum.io/get/width/900/crop/560/noanimate/https://callthecavalrygroup.com/" alt="Cavalry Realty Group website preview" loading="lazy" />
+        </a>
+      </div>
+      <div class="work-grid" id="work-grid">
+        <div class="work-entry" data-company="cavalry" data-task="social content">
+          <span class="work-entry__company">Cavalry Realty Group</span>
+          <h3>Social Media Management</h3>
+          <p>Managed Cavalry Realty Group's social media presence for real estate agent Tre Serrano — keeping platforms active, content consistent, and the brand visible to their target buyer/seller audience.</p>
+          <div class="work-entry__tasks">
+            <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>Full account management across Instagram and Facebook</div>
+            <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>Content calendar planning and weekly publishing schedule</div>
+            <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>AI-assisted caption writing and copy (ChatGPT)</div>
+            <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>Graphic design support for listing and brand posts (Canva)</div>
+            <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>Meta Business Suite scheduling and publishing</div>
+          </div>
+          <div class="work-entry__tags">
+            <span class="work-entry__tag work-entry__tag--blue">Social Media</span>
+            <span class="work-entry__tag">Real Estate</span>
+            <span class="work-entry__tag">Content Calendar</span>
+            <span class="work-entry__tag">Canva</span>
+          </div>
+        </div>
+        <div class="work-entry" data-company="cavalry" data-task="lead-gen operations">
+          <span class="work-entry__company">Cavalry Realty Group</span>
+          <h3>Lead Generation &amp; CRM Support</h3>
+          <p>Supported Cavalry Realty Group's outreach pipeline with lead generation research and CRM maintenance — building prospect lists and keeping the sales pipeline organized for agent Tre Serrano.</p>
+          <div class="work-entry__tasks">
+            <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>Prospect research using Apollo and Instant Data Scraper</div>
+            <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>Targeted lead list building for buyer/seller outreach</div>
+            <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>CRM pipeline maintenance and contact management</div>
+            <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>Google Sheets tracking for lead status and follow-up</div>
+          </div>
+          <div class="work-entry__tags">
+            <span class="work-entry__tag work-entry__tag--blue">Lead Generation</span>
+            <span class="work-entry__tag">Apollo</span>
+            <span class="work-entry__tag">CRM</span>
+            <span class="work-entry__tag">Google Sheets</span>
+          </div>
         </div>
       </div>
-
-      <div class="work-entry" data-company="cavalry" data-task="lead-gen operations">
-        <span class="work-entry__company">Cavalry Realty Group</span>
-        <h3>Lead Generation &amp; CRM Support</h3>
-        <p>Supported Cavalry Realty Group's outreach pipeline with lead generation research and CRM maintenance — building prospect lists and keeping the sales pipeline organized for agent Tre Serrano.</p>
-        <div class="work-entry__tasks">
-          <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>Prospect research using Apollo and Instant Data Scraper</div>
-          <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>Targeted lead list building for buyer/seller outreach</div>
-          <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>CRM pipeline maintenance and contact management</div>
-          <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>Google Sheets tracking for lead status and follow-up</div>
-        </div>
-        <div class="work-entry__tags">
-          <span class="work-entry__tag work-entry__tag--blue">Lead Generation</span>
-          <span class="work-entry__tag">Apollo</span>
-          <span class="work-entry__tag">CRM</span>
-          <span class="work-entry__tag">Google Sheets</span>
+      <div class="media-row" style="grid-template-columns:1fr;">
+        <div class="media-card">
+          <div class="media-card__top">
+            <span class="media-card__icon">📊</span>
+            <p class="media-card__title">Content Portfolio</p>
+          </div>
+          <p class="media-card__desc">Graphics, videos, social media posts, and workflow documentation created for this client — organized in Kenz's portfolio tracker.</p>
+          <a href="https://docs.google.com/spreadsheets/d/1WHscb_XvjVAf8_m9OcJsGtSAHG-iqv0wgE35IgKCxa8/edit?usp=sharing" target="_blank" rel="noopener noreferrer" class="media-toggle">View Portfolio Tracker ↗</a>
         </div>
       </div>
+    </div>
 
-      <!-- TPIC -->
-      <div class="work-entry" data-company="tpic" data-task="social content">
-        <span class="work-entry__company">Top Producer Investment Capital</span>
-        <h3>Social Media &amp; Branding Support</h3>
-        <p>Managed social media operations for TPIC (Ryan Tanel) — a real estate investment company. Kenz handled platform content, scheduling, and brand consistency to maintain a professional online presence.</p>
-        <div class="work-entry__tasks">
-          <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>Social media management across platforms</div>
-          <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>Content scheduling and platform-specific posting</div>
-          <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>AI-assisted caption and post copy writing</div>
-          <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>Brand consistency across visual and written content</div>
+    <!-- ── TPIC ── -->
+    <div class="client-block fade-in" id="block-tpic">
+      <div class="company-banner">
+        <div>
+          <p class="company-banner__name">Top Producer Investment Capital</p>
+          <p class="company-banner__meta">Real Estate Investment</p>
         </div>
-        <div class="work-entry__tags">
-          <span class="work-entry__tag work-entry__tag--blue">Social Media</span>
-          <span class="work-entry__tag">Real Estate Investment</span>
-          <span class="work-entry__tag">Content Scheduling</span>
-          <span class="work-entry__tag">Branding</span>
+        <a href="https://topproducerinvestmentcapital.com/" target="_blank" rel="noopener noreferrer" class="company-banner__link">Visit Site ↗</a>
+      </div>
+      <div class="site-preview">
+        <div class="site-preview__chrome">
+          <span class="c-dot"></span><span class="c-dot"></span><span class="c-dot"></span>
+          <span class="site-preview__url">topproducerinvestmentcapital.com</span>
+        </div>
+        <a href="https://topproducerinvestmentcapital.com/" target="_blank" rel="noopener noreferrer" class="site-preview__frame">
+          <img src="https://image.thum.io/get/width/900/crop/560/noanimate/https://topproducerinvestmentcapital.com/" alt="TPIC website preview" loading="lazy" />
+        </a>
+      </div>
+      <div class="work-grid">
+        <div class="work-entry" data-company="tpic" data-task="social content">
+          <span class="work-entry__company">Top Producer Investment Capital</span>
+          <h3>Social Media &amp; Branding Support</h3>
+          <p>Managed social media operations for TPIC (Ryan Tanel) — a real estate investment company. Kenz handled platform content, scheduling, and brand consistency to maintain a professional online presence.</p>
+          <div class="work-entry__tasks">
+            <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>Social media management across platforms</div>
+            <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>Content scheduling and platform-specific posting</div>
+            <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>AI-assisted caption and post copy writing</div>
+            <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>Brand consistency across visual and written content</div>
+          </div>
+          <div class="work-entry__tags">
+            <span class="work-entry__tag work-entry__tag--blue">Social Media</span>
+            <span class="work-entry__tag">Real Estate Investment</span>
+            <span class="work-entry__tag">Content Scheduling</span>
+            <span class="work-entry__tag">Branding</span>
+          </div>
+        </div>
+        <div class="work-entry" data-company="tpic" data-task="research operations">
+          <span class="work-entry__company">Top Producer Investment Capital</span>
+          <h3>Business Research &amp; Workflow Tracking</h3>
+          <p>Supported TPIC's operational layer with business research and Google Sheets-based workflow tracking — keeping deliverables organized and the team's pipeline documented and accountable.</p>
+          <div class="work-entry__tasks">
+            <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>Market and business research for investment targets</div>
+            <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>Google Sheets workflow tracking and project management</div>
+            <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>Deliverable tracking and status documentation</div>
+            <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>Operational support and task coordination</div>
+          </div>
+          <div class="work-entry__tags">
+            <span class="work-entry__tag work-entry__tag--blue">Business Research</span>
+            <span class="work-entry__tag">Google Sheets</span>
+            <span class="work-entry__tag">Workflow Tracking</span>
+            <span class="work-entry__tag">Operations</span>
+          </div>
         </div>
       </div>
-
-      <div class="work-entry" data-company="tpic" data-task="research operations">
-        <span class="work-entry__company">Top Producer Investment Capital</span>
-        <h3>Business Research &amp; Workflow Tracking</h3>
-        <p>Supported TPIC's operational layer with business research and Google Sheets-based workflow tracking — keeping deliverables organized and the team's pipeline documented and accountable.</p>
-        <div class="work-entry__tasks">
-          <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>Market and business research for investment targets</div>
-          <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>Google Sheets workflow tracking and project management</div>
-          <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>Deliverable tracking and status documentation</div>
-          <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>Operational support and task coordination</div>
-        </div>
-        <div class="work-entry__tags">
-          <span class="work-entry__tag work-entry__tag--blue">Business Research</span>
-          <span class="work-entry__tag">Google Sheets</span>
-          <span class="work-entry__tag">Workflow Tracking</span>
-          <span class="work-entry__tag">Operations</span>
+      <div class="media-row" style="grid-template-columns:1fr;">
+        <div class="media-card">
+          <div class="media-card__top">
+            <span class="media-card__icon">📊</span>
+            <p class="media-card__title">Content Portfolio</p>
+          </div>
+          <p class="media-card__desc">Graphics, videos, social media posts, and workflow documentation created for this client — organized in Kenz's portfolio tracker.</p>
+          <a href="https://docs.google.com/spreadsheets/d/1WHscb_XvjVAf8_m9OcJsGtSAHG-iqv0wgE35IgKCxa8/edit?usp=sharing" target="_blank" rel="noopener noreferrer" class="media-toggle">View Portfolio Tracker ↗</a>
         </div>
       </div>
+    </div>
 
-      <!-- Crown Limited Supply -->
-      <div class="work-entry" data-company="crown" data-task="operations social content">
-        <span class="work-entry__company">Crown Limited Supply</span>
-        <h3>E-Commerce Operations &amp; Social Media</h3>
-        <p>Delivered e-commerce operations support and social media management for Crown Limited Supply — handling Shopify backend maintenance, content posting, and the day-to-day operational layer.</p>
-        <div class="work-entry__tasks">
-          <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>Shopify platform support — product updates, listings, basic ops</div>
-          <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>Social media management and content posting</div>
-          <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>Content calendar planning and scheduling</div>
-          <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>CRM support and customer contact management</div>
-          <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>Graphic design support for product and promotional content</div>
+    <!-- ── Crown Limited Supply ── -->
+    <div class="client-block fade-in" id="block-crown">
+      <div class="company-banner">
+        <div>
+          <p class="company-banner__name">Crown Limited Supply</p>
+          <p class="company-banner__meta">E-Commerce Supply</p>
         </div>
-        <div class="work-entry__tags">
-          <span class="work-entry__tag work-entry__tag--blue">E-Commerce</span>
-          <span class="work-entry__tag">Shopify</span>
-          <span class="work-entry__tag">Social Media</span>
-          <span class="work-entry__tag">CRM</span>
-          <span class="work-entry__tag">Operations</span>
+        <a href="https://crownlimitedsupply.com/" target="_blank" rel="noopener noreferrer" class="company-banner__link">Visit Site ↗</a>
+      </div>
+      <div class="site-preview">
+        <div class="site-preview__chrome">
+          <span class="c-dot"></span><span class="c-dot"></span><span class="c-dot"></span>
+          <span class="site-preview__url">crownlimitedsupply.com</span>
+        </div>
+        <a href="https://crownlimitedsupply.com/" target="_blank" rel="noopener noreferrer" class="site-preview__frame">
+          <img src="https://image.thum.io/get/width/900/crop/560/noanimate/https://crownlimitedsupply.com/" alt="Crown Limited Supply website preview" loading="lazy" />
+        </a>
+      </div>
+      <div class="work-grid">
+        <div class="work-entry" data-company="crown" data-task="operations social content">
+          <span class="work-entry__company">Crown Limited Supply</span>
+          <h3>E-Commerce Operations &amp; Social Media</h3>
+          <p>Delivered e-commerce operations support and social media management for Crown Limited Supply — handling Shopify backend maintenance, content posting, and the day-to-day operational layer.</p>
+          <div class="work-entry__tasks">
+            <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>Shopify platform support — product updates, listings, basic ops</div>
+            <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>Social media management and content posting</div>
+            <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>Content calendar planning and scheduling</div>
+            <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>CRM support and customer contact management</div>
+            <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>Graphic design support for product and promotional content</div>
+          </div>
+          <div class="work-entry__tags">
+            <span class="work-entry__tag work-entry__tag--blue">E-Commerce</span>
+            <span class="work-entry__tag">Shopify</span>
+            <span class="work-entry__tag">Social Media</span>
+            <span class="work-entry__tag">CRM</span>
+            <span class="work-entry__tag">Operations</span>
+          </div>
+        </div>
+        <div class="work-entry" data-company="crown" data-task="operations">
+          <span class="work-entry__company">Crown Limited Supply</span>
+          <h3>Workflow Organization &amp; Tracking</h3>
+          <p>Built and maintained workflow tracking systems for Crown Limited Supply's operational backend — using Google Sheets to document processes, track deliverables, and keep the team's operations organized.</p>
+          <div class="work-entry__tasks">
+            <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>Google Sheets-based operational tracking system</div>
+            <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>Process documentation and workflow mapping</div>
+            <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>Deliverable status tracking and team accountability</div>
+            <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>Inventory and logistics support documentation</div>
+          </div>
+          <div class="work-entry__tags">
+            <span class="work-entry__tag work-entry__tag--blue">Workflow Systems</span>
+            <span class="work-entry__tag">Google Sheets</span>
+            <span class="work-entry__tag">Operations</span>
+            <span class="work-entry__tag">Process Documentation</span>
+          </div>
         </div>
       </div>
-
-      <div class="work-entry" data-company="crown" data-task="operations">
-        <span class="work-entry__company">Crown Limited Supply</span>
-        <h3>Workflow Organization &amp; Tracking</h3>
-        <p>Built and maintained workflow tracking systems for Crown Limited Supply's operational backend — using Google Sheets to document processes, track deliverables, and keep the team's operations organized.</p>
-        <div class="work-entry__tasks">
-          <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>Google Sheets-based operational tracking system</div>
-          <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>Process documentation and workflow mapping</div>
-          <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>Deliverable status tracking and team accountability</div>
-          <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>Inventory and logistics support documentation</div>
-        </div>
-        <div class="work-entry__tags">
-          <span class="work-entry__tag work-entry__tag--blue">Workflow Systems</span>
-          <span class="work-entry__tag">Google Sheets</span>
-          <span class="work-entry__tag">Operations</span>
-          <span class="work-entry__tag">Process Documentation</span>
+      <div class="media-row" style="grid-template-columns:1fr;">
+        <div class="media-card">
+          <div class="media-card__top">
+            <span class="media-card__icon">📊</span>
+            <p class="media-card__title">Content Portfolio</p>
+          </div>
+          <p class="media-card__desc">Graphics, videos, social media posts, and workflow documentation created for this client — organized in Kenz's portfolio tracker.</p>
+          <a href="https://docs.google.com/spreadsheets/d/1WHscb_XvjVAf8_m9OcJsGtSAHG-iqv0wgE35IgKCxa8/edit?usp=sharing" target="_blank" rel="noopener noreferrer" class="media-toggle">View Portfolio Tracker ↗</a>
         </div>
       </div>
+    </div>
 
-      <!-- All Ryze Operations -->
-      <div class="work-entry" data-company="allryze" data-task="operations content social">
-        <span class="work-entry__company">All Ryze Operations</span>
-        <h3>Digital Operations &amp; Content Management</h3>
-        <p>Provided comprehensive digital operations support for All Ryze Operations — managing the workflow infrastructure, content scheduling, and operational tracking that keeps the business backend organized.</p>
-        <div class="work-entry__tasks">
-          <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>Digital operations management and workflow organization</div>
-          <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>Content scheduling and social media management</div>
-          <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>Google Sheets tracking systems for deliverables and tasks</div>
-          <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>Process documentation and operational accountability</div>
-          <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>AI-assisted content creation and caption writing</div>
-        </div>
-        <div class="work-entry__tags">
-          <span class="work-entry__tag work-entry__tag--blue">Operations</span>
-          <span class="work-entry__tag">Social Media</span>
-          <span class="work-entry__tag">Workflow Systems</span>
-          <span class="work-entry__tag">Content Scheduling</span>
+    <!-- ── All Ryze Operations ── -->
+    <div class="client-block fade-in" id="block-allryze">
+      <div class="company-banner">
+        <div>
+          <p class="company-banner__name">All Ryze Operations</p>
+          <p class="company-banner__meta">Digital Audience Engagement</p>
         </div>
       </div>
-
-      <!-- DuDilagent AI -->
-      <div class="work-entry" data-company="dudilagent" data-task="lead-gen research">
-        <span class="work-entry__company">DuDilagent AI</span>
-        <h3>Business Acquisition Research &amp; Lead Generation</h3>
-        <p>Powered DuDilagent AI's business development pipeline with targeted research and lead generation — building prospect lists, researching acquisition targets, and fueling outreach for Humphry's team.</p>
-        <div class="work-entry__tasks">
-          <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>Apollo-based prospect research and list building</div>
-          <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>Instant Data Scraper for targeted lead scraping</div>
-          <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>Business acquisition target identification and research</div>
-          <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>Prospect pipeline documentation in Google Sheets</div>
-          <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>Competitive and market research for outreach strategy</div>
-        </div>
-        <div class="work-entry__tags">
-          <span class="work-entry__tag work-entry__tag--blue">Lead Generation</span>
-          <span class="work-entry__tag">Apollo</span>
-          <span class="work-entry__tag">Business Research</span>
-          <span class="work-entry__tag">Instant Data Scraper</span>
-          <span class="work-entry__tag">AI/Tech</span>
-        </div>
-      </div>
-
-      <div class="work-entry" data-company="dudilagent" data-task="operations research">
-        <span class="work-entry__company">DuDilagent AI</span>
-        <h3>AI Workflow Support &amp; Operations</h3>
-        <p>Supported DuDilagent AI's workflow and operational infrastructure — contributing to the AI-focused systems and processes that the company uses internally and develops for its clients.</p>
-        <div class="work-entry__tasks">
-          <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>AI workflow support and process contribution</div>
-          <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>Operational tracking and documentation</div>
-          <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>Research pipeline maintenance and data organization</div>
-          <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>CRM support for client and prospect management</div>
-        </div>
-        <div class="work-entry__tags">
-          <span class="work-entry__tag work-entry__tag--blue">AI Workflow</span>
-          <span class="work-entry__tag">Operations</span>
-          <span class="work-entry__tag">CRM</span>
-          <span class="work-entry__tag">Process Support</span>
+      <div class="work-grid">
+        <div class="work-entry" data-company="allryze" data-task="operations content social">
+          <span class="work-entry__company">All Ryze Operations</span>
+          <h3>Digital Operations &amp; Content Management</h3>
+          <p>Provided comprehensive digital operations support for All Ryze Operations — managing the workflow infrastructure, content scheduling, and operational tracking that keeps the business backend organized.</p>
+          <div class="work-entry__tasks">
+            <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>Digital operations management and workflow organization</div>
+            <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>Content scheduling and social media management</div>
+            <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>Google Sheets tracking systems for deliverables and tasks</div>
+            <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>Process documentation and operational accountability</div>
+            <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>AI-assisted content creation and caption writing</div>
+          </div>
+          <div class="work-entry__tags">
+            <span class="work-entry__tag work-entry__tag--blue">Operations</span>
+            <span class="work-entry__tag">Social Media</span>
+            <span class="work-entry__tag">Workflow Systems</span>
+            <span class="work-entry__tag">Content Scheduling</span>
+          </div>
         </div>
       </div>
+      <div class="media-row" style="grid-template-columns:1fr;">
+        <div class="media-card">
+          <div class="media-card__top">
+            <span class="media-card__icon">📊</span>
+            <p class="media-card__title">Content Portfolio</p>
+          </div>
+          <p class="media-card__desc">Graphics, videos, social media posts, and workflow documentation created for this client — organized in Kenz's portfolio tracker.</p>
+          <a href="https://docs.google.com/spreadsheets/d/1WHscb_XvjVAf8_m9OcJsGtSAHG-iqv0wgE35IgKCxa8/edit?usp=sharing" target="_blank" rel="noopener noreferrer" class="media-toggle">View Portfolio Tracker ↗</a>
+        </div>
+      </div>
+    </div>
 
-    </div><!-- /work-grid -->
+    <!-- ── DuDilagent AI ── -->
+    <div class="client-block fade-in" id="block-dudilagent">
+      <div class="company-banner">
+        <div>
+          <p class="company-banner__name">DuDilagent AI</p>
+          <p class="company-banner__meta">AI Business Acquisitions</p>
+        </div>
+      </div>
+      <div class="work-grid">
+        <div class="work-entry" data-company="dudilagent" data-task="lead-gen research">
+          <span class="work-entry__company">DuDilagent AI</span>
+          <h3>Business Acquisition Research &amp; Lead Generation</h3>
+          <p>Powered DuDilagent AI's business development pipeline with targeted research and lead generation — building prospect lists, researching acquisition targets, and fueling outreach for Humphry's team.</p>
+          <div class="work-entry__tasks">
+            <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>Apollo-based prospect research and list building</div>
+            <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>Instant Data Scraper for targeted lead scraping</div>
+            <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>Business acquisition target identification and research</div>
+            <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>Prospect pipeline documentation in Google Sheets</div>
+            <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>Competitive and market research for outreach strategy</div>
+          </div>
+          <div class="work-entry__tags">
+            <span class="work-entry__tag work-entry__tag--blue">Lead Generation</span>
+            <span class="work-entry__tag">Apollo</span>
+            <span class="work-entry__tag">Business Research</span>
+            <span class="work-entry__tag">Instant Data Scraper</span>
+            <span class="work-entry__tag">AI/Tech</span>
+          </div>
+        </div>
+        <div class="work-entry" data-company="dudilagent" data-task="operations research">
+          <span class="work-entry__company">DuDilagent AI</span>
+          <h3>AI Workflow Support &amp; Operations</h3>
+          <p>Supported DuDilagent AI's workflow and operational infrastructure — contributing to the AI-focused systems and processes that the company uses internally and develops for its clients.</p>
+          <div class="work-entry__tasks">
+            <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>AI workflow support and process contribution</div>
+            <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>Operational tracking and documentation</div>
+            <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>Research pipeline maintenance and data organization</div>
+            <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>CRM support for client and prospect management</div>
+          </div>
+          <div class="work-entry__tags">
+            <span class="work-entry__tag work-entry__tag--blue">AI Workflow</span>
+            <span class="work-entry__tag">Operations</span>
+            <span class="work-entry__tag">CRM</span>
+            <span class="work-entry__tag">Process Support</span>
+          </div>
+        </div>
+      </div>
+      <div class="media-row" style="grid-template-columns:1fr;">
+        <div class="media-card">
+          <div class="media-card__top">
+            <span class="media-card__icon">📊</span>
+            <p class="media-card__title">Content Portfolio</p>
+          </div>
+          <p class="media-card__desc">Graphics, videos, social media posts, and workflow documentation created for this client — organized in Kenz's portfolio tracker.</p>
+          <a href="https://docs.google.com/spreadsheets/d/1WHscb_XvjVAf8_m9OcJsGtSAHG-iqv0wgE35IgKCxa8/edit?usp=sharing" target="_blank" rel="noopener noreferrer" class="media-toggle">View Portfolio Tracker ↗</a>
+        </div>
+      </div>
+    </div>
+
     <div class="no-results" id="no-results">No work entries match the selected filters.</div>
 
   </div>
@@ -1201,17 +1368,24 @@
   const noResults   = document.getElementById('no-results');
 
   function applyFilters() {
-    let visible = 0;
+    let totalVisible = 0;
     entries.forEach(entry => {
-      const company  = entry.dataset.company;
-      const tasks    = (entry.dataset.task || '').split(' ');
+      const company = entry.dataset.company;
+      const tasks = (entry.dataset.task || '').split(' ');
       const companyMatch = activeCompany === 'all' || company === activeCompany;
-      const taskMatch    = activeTask    === 'all' || tasks.includes(activeTask);
+      const taskMatch = activeTask === 'all' || tasks.includes(activeTask);
       const show = companyMatch && taskMatch;
       entry.classList.toggle('hidden', !show);
-      if (show) visible++;
+      if (show) totalVisible++;
     });
-    noResults.classList.toggle('visible', visible === 0);
+    document.querySelectorAll('.client-block').forEach(block => {
+      const blockCompany = block.id.replace('block-', '');
+      const companyMatch = activeCompany === 'all' || activeCompany === blockCompany;
+      const hasVisible = Array.from(block.querySelectorAll('.work-entry')).some(e => !e.classList.contains('hidden'));
+      block.style.display = (companyMatch && hasVisible) ? '' : 'none';
+    });
+    const noRes = document.getElementById('no-results');
+    if (noRes) noRes.style.display = totalVisible === 0 ? 'block' : 'none';
   }
 
   companyBtns.forEach(btn => {

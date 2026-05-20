@@ -379,6 +379,18 @@
     .footer-link:hover { color:#fff; }
     .footer-bottom { margin-top:var(--s4); padding-top:1.5rem; border-top:var(--border-dark); display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.75rem; }
     .footer-copy { font-family:var(--font-ui); font-size:0.75rem; color:rgba(245,241,234,0.28); }
+    /* ── New standard: client blocks ── */
+    .client-block{margin-bottom:3rem;}
+    .company-banner{background:var(--bg-dark);border-radius:var(--radius-lg) var(--radius-lg) 0 0;padding:1.25rem 1.75rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:0.75rem;}
+    .company-banner__name{font-family:var(--font-display);font-size:1.1rem;font-weight:700;color:#fff;}
+    .company-banner__meta{font-family:var(--font-ui);font-size:0.72rem;color:rgba(245,241,234,0.5);letter-spacing:0.08em;text-transform:uppercase;}
+    .company-banner__link{font-family:var(--font-ui);font-size:0.78rem;color:var(--gold-pale);text-decoration:none;opacity:0.85;transition:opacity 0.2s;} .company-banner__link:hover{opacity:1;}
+    .client-block .work-grid{border-radius:0;border-top:none;}
+    .media-row{border-left:1px solid rgba(85,60,35,0.09);border-right:1px solid rgba(85,60,35,0.09);border-bottom:1px solid rgba(85,60,35,0.09);border-radius:0 0 var(--radius-lg) var(--radius-lg);background:var(--bg-card);padding:1.25rem 1.5rem;display:flex;flex-wrap:wrap;gap:1rem;align-items:center;}
+    .media-card{display:flex;align-items:flex-start;gap:0.9rem;background:#fff;border:var(--border-warm);border-radius:var(--radius);padding:1rem 1.25rem;flex:1;min-width:220px;box-shadow:var(--shadow-xs);text-decoration:none;transition:transform 0.22s,box-shadow 0.22s;} .media-card:hover{transform:translateY(-2px);box-shadow:var(--shadow-md);}
+    .media-card__icon{font-size:1.4rem;flex-shrink:0;}
+    .media-card__title{font-family:var(--font-ui);font-size:0.8rem;font-weight:600;color:var(--deep-blue);margin-bottom:0.2rem;}
+    .media-card__desc{font-family:var(--font-ui);font-size:0.72rem;color:var(--text-muted);line-height:1.5;}
   </style>
 </head>
 <body>
@@ -565,62 +577,77 @@
       </div>
     </div>
 
-    <div class="work-grid fade-in" id="work-grid">
-
-      <!-- All Ryze — Conversational Engagement -->
-      <div class="work-entry" data-company="allryze" data-task="engagement content">
-        <p class="work-entry__company">All Ryze Operations</p>
-        <h3 class="work-entry__title">Audience Engagement &amp; Communication</h3>
-        <p class="work-entry__desc">Managed high-volume conversational engagement across multiple platforms — building real, personalized connections with audience members. Focused on retention-based communication that keeps relationships warm, drives repeat interaction, and maintains consistent presence across accounts.</p>
-        <div class="work-entry__tags">
-          <span class="work-tag">Audience Engagement</span>
-          <span class="work-tag">Conversational Workflows</span>
-          <span class="work-tag">Retention Communication</span>
+    <!-- ── All Ryze ── -->
+    <div class="client-block fade-in" id="block-allryze">
+      <div class="company-banner">
+        <div>
+          <p class="company-banner__name">All Ryze</p>
+          <p class="company-banner__meta">Engagement · Outreach · Operations · Content</p>
+        </div>
+        <span class="company-banner__meta" style="color:rgba(245,241,234,0.35);">Digital Audience Engagement &amp; Growth Management</span>
+      </div>
+      <div class="work-grid" id="work-grid">
+        <!-- All Ryze — Conversational Engagement -->
+        <div class="work-entry" data-company="allryze" data-task="engagement content">
+          <p class="work-entry__company">All Ryze Operations</p>
+          <h3 class="work-entry__title">Audience Engagement &amp; Communication</h3>
+          <p class="work-entry__desc">Managed high-volume conversational engagement across multiple platforms — building real, personalized connections with audience members. Focused on retention-based communication that keeps relationships warm, drives repeat interaction, and maintains consistent presence across accounts.</p>
+          <div class="work-entry__tags">
+            <span class="work-tag">Audience Engagement</span>
+            <span class="work-tag">Conversational Workflows</span>
+            <span class="work-tag">Retention Communication</span>
+          </div>
+        </div>
+        <!-- All Ryze — Multi-Platform Outreach -->
+        <div class="work-entry" data-company="allryze" data-task="outreach social">
+          <p class="work-entry__company">All Ryze Operations</p>
+          <h3 class="work-entry__title">Multi-Platform Outreach Campaigns</h3>
+          <p class="work-entry__desc">Executed outreach campaigns across social media platforms — identifying target audiences, initiating conversations, and driving new engagement through community participation. Maintained compliance with platform guidelines while sustaining high outreach volume and response quality.</p>
+          <div class="work-entry__tags">
+            <span class="work-tag">Social Outreach</span>
+            <span class="work-tag">Community Engagement</span>
+            <span class="work-tag">Traffic Generation</span>
+          </div>
+        </div>
+        <!-- All Ryze — Operations Support -->
+        <div class="work-entry" data-company="allryze" data-task="operations content">
+          <p class="work-entry__company">All Ryze Operations</p>
+          <h3 class="work-entry__title">Operational Workflow Support</h3>
+          <p class="work-entry__desc">Supported day-to-day operational workflows under Ryan Bernaldez's team management — following SOPs, tracking engagement performance, and maintaining accountability across shift responsibilities. Contributed to the smooth execution of BBC's operations management system for the client.</p>
+          <div class="work-entry__tags">
+            <span class="work-tag">Operations</span>
+            <span class="work-tag">SOP Adherence</span>
+            <span class="work-tag">Performance Tracking</span>
+          </div>
+        </div>
+        <!-- Content Creation (broad portfolio) -->
+        <div class="work-entry" data-company="allryze" data-task="content social">
+          <p class="work-entry__company">BBC Portfolio — Creative Work</p>
+          <h3 class="work-entry__title">Content Creation &amp; Creative Execution</h3>
+          <p class="work-entry__desc">Brings graphic design, video editing, and content writing capabilities to BBC's client support work. Creates platform-ready visuals, edits short-form video, produces email marketing content, and supports branding initiatives — a full creative toolkit applied wherever client projects require it.</p>
+          <div class="work-entry__tags">
+            <span class="work-tag">Graphic Design</span>
+            <span class="work-tag">Video Editing</span>
+            <span class="work-tag">Email Marketing</span>
+            <span class="work-tag">Branding</span>
+          </div>
         </div>
       </div>
-
-      <!-- All Ryze — Multi-Platform Outreach -->
-      <div class="work-entry" data-company="allryze" data-task="outreach social">
-        <p class="work-entry__company">All Ryze Operations</p>
-        <h3 class="work-entry__title">Multi-Platform Outreach Campaigns</h3>
-        <p class="work-entry__desc">Executed outreach campaigns across social media platforms — identifying target audiences, initiating conversations, and driving new engagement through community participation. Maintained compliance with platform guidelines while sustaining high outreach volume and response quality.</p>
-        <div class="work-entry__tags">
-          <span class="work-tag">Social Outreach</span>
-          <span class="work-tag">Community Engagement</span>
-          <span class="work-tag">Traffic Generation</span>
-        </div>
+      <div class="media-row">
+        <a href="contact.html" class="media-card">
+          <span class="media-card__icon">📁</span>
+          <div>
+            <p class="media-card__title">Request Portfolio Access</p>
+            <p class="media-card__desc">Content samples and creative work available on request.</p>
+          </div>
+        </a>
       </div>
-
-      <!-- All Ryze — Operations Support -->
-      <div class="work-entry" data-company="allryze" data-task="operations content">
-        <p class="work-entry__company">All Ryze Operations</p>
-        <h3 class="work-entry__title">Operational Workflow Support</h3>
-        <p class="work-entry__desc">Supported day-to-day operational workflows under Ryan Bernaldez's team management — following SOPs, tracking engagement performance, and maintaining accountability across shift responsibilities. Contributed to the smooth execution of BBC's operations management system for the client.</p>
-        <div class="work-entry__tags">
-          <span class="work-tag">Operations</span>
-          <span class="work-tag">SOP Adherence</span>
-          <span class="work-tag">Performance Tracking</span>
-        </div>
-      </div>
-
-      <!-- Content Creation (broad portfolio) -->
-      <div class="work-entry" data-company="allryze" data-task="content social">
-        <p class="work-entry__company">BBC Portfolio — Creative Work</p>
-        <h3 class="work-entry__title">Content Creation &amp; Creative Execution</h3>
-        <p class="work-entry__desc">Brings graphic design, video editing, and content writing capabilities to BBC's client support work. Creates platform-ready visuals, edits short-form video, produces email marketing content, and supports branding initiatives — a full creative toolkit applied wherever client projects require it.</p>
-        <div class="work-entry__tags">
-          <span class="work-tag">Graphic Design</span>
-          <span class="work-tag">Video Editing</span>
-          <span class="work-tag">Email Marketing</span>
-          <span class="work-tag">Branding</span>
-        </div>
-      </div>
-
-      <div class="no-results" id="no-results">
-        <p>No work entries match this filter combination. Try adjusting your selection.</p>
-      </div>
-
     </div>
+
+    <div class="no-results" id="no-results">
+      <p>No work entries match this filter combination. Try adjusting your selection.</p>
+    </div>
+
   </div>
 </section>
 
@@ -950,6 +977,12 @@
       const show = compMatch && taskMatch;
       entry.classList.toggle('hidden', !show);
       if (show) visible++;
+    });
+    document.querySelectorAll('.client-block').forEach(block => {
+      const bc = block.id.replace('block-', '');
+      const cm = activeCompany === 'all' || activeCompany === bc;
+      const hv = Array.from(block.querySelectorAll('.work-entry')).some(e => !e.classList.contains('hidden'));
+      block.style.display = (cm && hv) ? '' : 'none';
     });
     noResults.classList.toggle('visible', visible === 0);
   }
