@@ -172,6 +172,33 @@
     .media-embed iframe{width:100%;height:340px;border:none;}
       .header__cta .btn-ghost { color:var(--deep-blue); border-color:rgba(31,53,87,0.22); }
     .header__cta .btn-ghost:hover { background:rgba(31,53,87,0.06); border-color:rgba(31,53,87,0.38); color:var(--deep-blue); }
+/* ── BBC Portfolio Intelligence System v2.0 ── */
+.pis-client-bar{display:flex;flex-wrap:wrap;gap:0.6rem;margin-bottom:2rem;}
+.pis-client-btn{font-family:var(--font-ui);font-size:0.78rem;font-weight:600;padding:0.55rem 1.2rem;border-radius:999px;border:1.5px solid rgba(31,53,87,0.18);background:transparent;color:var(--text-body);cursor:pointer;transition:all 0.22s;}
+.pis-client-btn:hover{border-color:var(--deep-blue);color:var(--deep-blue);}
+.pis-client-btn.active{background:var(--deep-blue);color:#fff;border-color:var(--deep-blue);}
+.client-intel{display:none;background:linear-gradient(135deg,rgba(31,53,87,0.06),rgba(184,146,62,0.05));border:1.5px solid rgba(31,53,87,0.14);border-radius:var(--radius-lg);padding:1.75rem 2rem;margin-bottom:1.5rem;animation:fadeUp 0.3s ease;}
+.client-intel.active{display:block;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
+.client-intel__label{font-family:var(--font-ui);font-size:0.6rem;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:0.5rem;}
+.client-intel__name{font-family:var(--font-display);font-size:1.4rem;font-weight:700;color:var(--deep-blue);margin-bottom:0.2rem;}
+.client-intel__role{font-family:var(--font-ui);font-size:0.82rem;color:var(--text-muted);margin-bottom:1rem;}
+.client-intel__desc{font-family:var(--font-body);font-size:0.88rem;line-height:1.8;color:var(--text-body);margin-bottom:1.25rem;}
+.client-intel__chips{display:flex;flex-wrap:wrap;gap:0.5rem;margin-bottom:1.25rem;}
+.intel-chip{font-family:var(--font-ui);font-size:0.7rem;font-weight:600;padding:0.3rem 0.85rem;border-radius:999px;background:rgba(31,53,87,0.08);color:var(--deep-blue);border:1px solid rgba(31,53,87,0.12);}
+.intel-chip--gold{background:rgba(184,146,62,0.1);color:var(--gold);border-color:rgba(184,146,62,0.22);}
+.client-intel__stats{display:flex;flex-wrap:wrap;gap:1.5rem;padding-top:1rem;border-top:1px solid rgba(31,53,87,0.08);}
+.intel-stat__val{font-family:var(--font-display);font-size:1.35rem;font-weight:700;color:var(--deep-blue);line-height:1;}
+.intel-stat__label{font-family:var(--font-ui);font-size:0.65rem;color:var(--text-muted);margin-top:3px;text-transform:uppercase;letter-spacing:0.08em;}
+.cat-nav{display:flex;flex-wrap:wrap;gap:0.5rem;padding:1rem 1.5rem;background:var(--bg-section);border-left:1px solid rgba(85,60,35,0.09);border-right:1px solid rgba(85,60,35,0.09);}
+.cat-btn{font-family:var(--font-ui);font-size:0.72rem;font-weight:600;padding:0.38rem 0.9rem;border-radius:999px;border:1.5px solid rgba(31,53,87,0.14);background:transparent;color:var(--text-body);cursor:pointer;transition:all 0.18s;}
+.cat-btn:hover{border-color:var(--deep-blue);color:var(--deep-blue);}
+.cat-btn.active{background:rgba(31,53,87,0.1);color:var(--deep-blue);border-color:rgba(31,53,87,0.28);}
+.hero-metrics{display:flex;gap:2rem;flex-wrap:wrap;margin-top:1.5rem;padding-top:1.5rem;border-top:1px solid rgba(255,255,255,0.1);}
+.hero-metric__val{font-family:var(--font-display);font-size:1.5rem;font-weight:700;color:#fff;line-height:1;}
+.hero-metric__label{font-family:var(--font-ui);font-size:0.65rem;color:rgba(245,241,234,0.5);text-transform:uppercase;letter-spacing:0.1em;margin-top:3px;}
+.stack-chips{display:flex;flex-wrap:wrap;gap:0.45rem;margin-top:1rem;}
+.stack-chip{font-family:var(--font-ui);font-size:0.68rem;font-weight:500;padding:0.25rem 0.75rem;border-radius:999px;background:rgba(255,255,255,0.08);color:rgba(245,241,234,0.7);border:1px solid rgba(255,255,255,0.12);}
   </style>
 </head>
 <body>
@@ -198,6 +225,19 @@
         <div class="profile-stat"><p class="profile-stat-num">6</p><p class="profile-stat-label">Core Services</p></div>
         <div class="profile-stat"><p class="profile-stat-num">CRM</p><p class="profile-stat-label">HubSpot Certified</p></div>
         <div class="profile-stat"><p class="profile-stat-num">Full</p><p class="profile-stat-label">Ops Coverage</p></div>
+      </div>
+      <div class="hero-metrics">
+        <div class="hero-metric"><p class="hero-metric__val">1+</p><p class="hero-metric__label">Clients</p></div>
+        <div class="hero-metric"><p class="hero-metric__val">4+</p><p class="hero-metric__label">Services</p></div>
+        <div class="hero-metric"><p class="hero-metric__val">2yr</p><p class="hero-metric__label">Experience</p></div>
+      </div>
+      <div class="stack-chips">
+        <span class="stack-chip">HubSpot</span>
+        <span class="stack-chip">Canva</span>
+        <span class="stack-chip">Facebook</span>
+        <span class="stack-chip">Instagram</span>
+        <span class="stack-chip">Google Sheets</span>
+        <span class="stack-chip">ChatGPT</span>
       </div>
     </div>
   </div>
@@ -248,13 +288,40 @@
 
 <section class="profile-section profile-section--alt" id="work">
   <div class="container">
-    <div class="section-header fade-in"><span class="eyebrow">Work Portfolio</span><h2>Projects &amp; Contributions</h2><div class="divider-bar"></div></div>
-    <div class="fade-in" style="background:var(--bg-card);border:var(--border-warm);border-radius:var(--radius-lg);padding:1.25rem 1.5rem;margin-bottom:1.75rem;box-shadow:var(--shadow-xs);">
-      <div class="filter-group"><span class="filter-label">Company</span><button class="filter-btn active" data-company="all">All</button><button class="filter-btn" data-company="ww">Wooden Woodworks</button></div>
-      <div class="filter-group"><span class="filter-label">Type</span><button class="filter-btn active" data-task="all">All</button><button class="filter-btn" data-task="social">Social Media</button><button class="filter-btn" data-task="content">Content</button><button class="filter-btn" data-task="crm">CRM</button><button class="filter-btn" data-task="operations">Operations</button></div>
+    <div class="section-header fade-in">
+      <span class="eyebrow">Companies &amp; Work Delivered</span>
+      <h2>Client Portfolio</h2>
+      <div class="divider-bar"></div>
+      <p>Select a client to explore deliverables, services, and operational contributions.</p>
     </div>
-    <!-- ── Wooden Woodworks ── -->
-    <div class="client-block fade-in" id="block-ww">
+
+    <!-- PIS v2.0: Client Filter Bar -->
+    <div class="pis-client-bar fade-in">
+      <button class="pis-client-btn active" data-client="all">All Clients</button>
+      <button class="pis-client-btn" data-client="ww">Wooden Woodworks</button>
+    </div>
+
+    <!-- Client Intelligence Cards -->
+    <div class="client-intel fade-in" data-client="ww" id="intel-ww">
+      <span class="client-intel__label">Client Overview</span>
+      <h3 class="client-intel__name">Wooden Woodworks</h3>
+      <p class="client-intel__role">Social Media Manager &amp; CRM Lead</p>
+      <div class="client-intel__chips">
+        <span class="intel-chip">Social Media</span>
+        <span class="intel-chip">HubSpot CRM</span>
+        <span class="intel-chip">Operations</span>
+        <span class="intel-chip">Builder Outreach</span>
+        <span class="intel-chip intel-chip--gold">HubSpot</span>
+      </div>
+      <p class="client-intel__desc">Full social media and CRM management for a craft woodworking brand — building audience presence, managing client relationships through HubSpot, and running builder outreach to grow trade partnerships.</p>
+      <div class="client-intel__stats">
+        <div><p class="intel-stat__val">4</p><p class="intel-stat__label">Services Delivered</p></div>
+        <div><p class="intel-stat__val">HubSpot</p><p class="intel-stat__label">Primary Tool</p></div>
+      </div>
+    </div>
+
+    <!-- Client Block: Wooden Woodworks -->
+    <div class="client-block fade-in" data-client="ww" id="block-ww">
       <div class="company-banner">
         <div>
           <p class="company-banner__name">Wooden Woodworks</p>
@@ -271,26 +338,33 @@
         </div>
         <img src="https://image.thum.io/get/width/900/crop/560/noanimate/https://woodenwoodworksllc.com" alt="Wooden Woodworks website preview" class="site-preview__frame" loading="lazy" />
       </div>
-      <div class="work-grid" id="work-grid">
-        <div class="work-entry" data-company="ww" data-task="social content">
+      <div class="cat-nav">
+        <button class="cat-btn active" data-cat="all">All Work</button>
+        <button class="cat-btn" data-cat="social">Social Media</button>
+        <button class="cat-btn" data-cat="crm">CRM</button>
+        <button class="cat-btn" data-cat="operations">Operations</button>
+        <button class="cat-btn" data-cat="content">Content</button>
+      </div>
+      <div class="work-grid">
+        <div class="work-entry" data-client="ww" data-cat="social content">
           <p class="work-entry__company">Wooden Woodworks</p>
           <h3 class="work-entry__title">Social Media Management &amp; Content Strategy</h3>
           <p class="work-entry__desc">Manages the full social media presence for Wooden Woodworks — creating content, writing captions, scheduling posts, and maintaining a consistent brand voice across platforms. Develops and executes the content calendar, ensuring the brand stays active, visually cohesive, and audience-aligned.</p>
           <div class="work-entry__tags"><span class="work-tag">Social Media</span><span class="work-tag">Content Creation</span><span class="work-tag">Scheduling</span><span class="work-tag">Brand Voice</span></div>
         </div>
-        <div class="work-entry" data-company="ww" data-task="crm operations">
+        <div class="work-entry" data-client="ww" data-cat="crm operations">
           <p class="work-entry__company">Wooden Woodworks</p>
           <h3 class="work-entry__title">CRM Management &amp; Client Relations</h3>
           <p class="work-entry__desc">Manages the CRM system for Wooden Woodworks through HubSpot — tracking client contacts, maintaining communication records, and keeping the client relationship pipeline organized. Ensures follow-ups happen on time and no relationship falls through the cracks.</p>
           <div class="work-entry__tags"><span class="work-tag">HubSpot CRM</span><span class="work-tag">Client Management</span><span class="work-tag">Follow-Up Systems</span></div>
         </div>
-        <div class="work-entry" data-company="ww" data-task="operations">
+        <div class="work-entry" data-client="ww" data-cat="operations">
           <p class="work-entry__company">Wooden Woodworks</p>
           <h3 class="work-entry__title">Builder Outreach &amp; Operations Support</h3>
           <p class="work-entry__desc">Handles builder outreach for Wooden Woodworks — identifying and reaching out to contractors, builders, and trade partners to support business development. Also manages operational workflows behind the scenes, keeping day-to-day business functions organized and running efficiently.</p>
           <div class="work-entry__tags"><span class="work-tag">Builder Outreach</span><span class="work-tag">Business Development</span><span class="work-tag">Operations</span></div>
         </div>
-        <div class="work-entry" data-company="ww" data-task="content social">
+        <div class="work-entry" data-client="ww" data-cat="content social">
           <p class="work-entry__company">Wooden Woodworks</p>
           <h3 class="work-entry__title">Brand Consistency &amp; Creative Production</h3>
           <p class="work-entry__desc">Ensures every piece of content produced for Wooden Woodworks reflects their brand identity — warm, craft-focused, and quality-driven. Maintains visual and tonal consistency across all social media content, making the brand recognizable and trustworthy at every touchpoint.</p>
@@ -307,7 +381,8 @@
         </a>
       </div>
     </div>
-    <div class="no-results" id="no-results"><p style="color:var(--text-muted);font-family:var(--font-ui);">No entries match. Try adjusting your filter.</p></div>
+
+    <div class="no-results" id="no-results"><p style="color:var(--text-muted);font-family:var(--font-ui);">No work entries match this filter.</p></div>
   </div>
 </section>
 
@@ -378,19 +453,30 @@
 </footer>
 
 <script>
-  const header=document.getElementById('site-header');
-  window.addEventListener('scroll',()=>header.classList.toggle('scrolled',window.scrollY>60),{passive:true});
-  const hamburger=document.getElementById('hamburger'),mm=document.getElementById('mobile-menu'),h1=document.getElementById('hb1'),h2=document.getElementById('hb2'),h3=document.getElementById('hb3');
-  hamburger.addEventListener('click',()=>{const o=mm.classList.toggle('open');if(o){h1.style.transform='translateY(7px) rotate(45deg)';h2.style.opacity='0';h3.style.transform='translateY(-7px) rotate(-45deg)';}else{h1.style.transform='';h2.style.opacity='';h3.style.transform='';}});
-  mm.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{mm.classList.remove('open');h1.style.transform='';h2.style.opacity='';h3.style.transform='';}));
-  document.querySelectorAll('.fade-in').forEach(el=>new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('visible');});},{threshold:0.08,rootMargin:'0px 0px -40px 0px'}).observe(el));
-  const navLinks=document.querySelectorAll('.profile-nav__link');
-  document.querySelectorAll('section[id]').forEach(s=>new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){navLinks.forEach(l=>l.classList.remove('active'));const a=document.querySelector(`.profile-nav__link[href="#${x.target.id}"]`);if(a)a.classList.add('active');}});},{threshold:0.3,rootMargin:'-80px 0px -60% 0px'}).observe(s));
-  const entries=document.querySelectorAll('.work-entry'),noR=document.getElementById('no-results');
-  let aC='all',aT='all';
-  function af(){let v=0;entries.forEach(en=>{const c=en.dataset.company,t=(en.dataset.task||'').split(' '),s=(aC==='all'||c===aC)&&(aT==='all'||t.includes(aT));en.classList.toggle('hidden',!s);if(s)v++;});document.querySelectorAll('.client-block').forEach(block=>{const bc=block.id.replace('block-','');const cm=aC==='all'||aC===bc;const hv=Array.from(block.querySelectorAll('.work-entry')).some(e=>!e.classList.contains('hidden'));block.style.display=(cm&&hv)?'':'none';});noR.classList.toggle('visible',v===0);}
-  document.querySelectorAll('[data-company]').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('[data-company]').forEach(x=>x.classList.remove('active'));b.classList.add('active');aC=b.dataset.company;af();}));
-  document.querySelectorAll('[data-task]').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('[data-task]').forEach(x=>x.classList.remove('active'));b.classList.add('active');aT=b.dataset.task;af();}));
+// ── BBC Portfolio Intelligence System v2.0 ── //
+const header=document.getElementById('site-header');
+window.addEventListener('scroll',()=>header.classList.toggle('scrolled',window.scrollY>60),{passive:true});
+const hamburger=document.getElementById('hamburger'),mm=document.getElementById('mobile-menu'),h1=document.getElementById('hb1'),h2=document.getElementById('hb2'),h3=document.getElementById('hb3');
+if(hamburger){hamburger.addEventListener('click',()=>{const o=mm.classList.toggle('open');if(o){h1.style.transform='translateY(7px) rotate(45deg)';h2.style.opacity='0';h3.style.transform='translateY(-7px) rotate(-45deg)';}else{h1.style.transform='';h2.style.opacity='';h3.style.transform='';}});mm.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{mm.classList.remove('open');h1.style.transform='';h2.style.opacity='';h3.style.transform='';}))}
+document.querySelectorAll('.fade-in').forEach(el=>new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('visible');});},{threshold:0.08,rootMargin:'0px 0px -40px 0px'}).observe(el));
+const navLinks=document.querySelectorAll('.profile-nav__link');
+document.querySelectorAll('section[id]').forEach(s=>new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){navLinks.forEach(l=>l.classList.remove('active'));const a=document.querySelector(`.profile-nav__link[href="#${x.target.id}"]`);if(a)a.classList.add('active');}});},{threshold:0.3,rootMargin:'-80px 0px -60% 0px'}).observe(s));
+let activeClient='all';
+const clientCats={};
+const workEntries=document.querySelectorAll('.work-entry');
+const clientBlocks=document.querySelectorAll('.client-block');
+const clientIntels=document.querySelectorAll('.client-intel');
+const noResults=document.getElementById('no-results');
+function render(){
+  clientBlocks.forEach(b=>{const bid=b.dataset.client;b.style.display=(activeClient==='all'||activeClient===bid)?'':'none';});
+  clientIntels.forEach(i=>{i.classList.toggle('active',activeClient!=='all'&&i.dataset.client===activeClient);});
+  let v=0;
+  workEntries.forEach(en=>{const ec=en.dataset.client,cats=(en.dataset.cat||'').split(' '),activeCat=clientCats[ec]||'all',cm=activeClient==='all'||ec===activeClient,catM=activeCat==='all'||cats.includes(activeCat),show=cm&&catM;en.classList.toggle('hidden',!show);if(show)v++;});
+  if(noResults)noResults.classList.toggle('visible',v===0);
+}
+document.querySelectorAll('.pis-client-btn').forEach(btn=>btn.addEventListener('click',()=>{document.querySelectorAll('.pis-client-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');activeClient=btn.dataset.client;render();}));
+document.querySelectorAll('.cat-btn').forEach(btn=>btn.addEventListener('click',()=>{const clientId=btn.closest('.client-block').dataset.client;btn.closest('.cat-nav').querySelectorAll('.cat-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');clientCats[clientId]=btn.dataset.cat;render();}));
+render();
 </script>
 </body>
 </html>

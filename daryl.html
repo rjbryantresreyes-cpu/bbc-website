@@ -393,6 +393,33 @@
     .media-card__desc{font-family:var(--font-ui);font-size:0.72rem;color:var(--text-muted);line-height:1.5;}
       .header__cta .btn-ghost { color:var(--deep-blue); border-color:rgba(31,53,87,0.22); }
     .header__cta .btn-ghost:hover { background:rgba(31,53,87,0.06); border-color:rgba(31,53,87,0.38); color:var(--deep-blue); }
+/* ── BBC Portfolio Intelligence System v2.0 ── */
+.pis-client-bar{display:flex;flex-wrap:wrap;gap:0.6rem;margin-bottom:2rem;}
+.pis-client-btn{font-family:var(--font-ui);font-size:0.78rem;font-weight:600;padding:0.55rem 1.2rem;border-radius:999px;border:1.5px solid rgba(31,53,87,0.18);background:transparent;color:var(--text-body);cursor:pointer;transition:all 0.22s;}
+.pis-client-btn:hover{border-color:var(--deep-blue);color:var(--deep-blue);}
+.pis-client-btn.active{background:var(--deep-blue);color:#fff;border-color:var(--deep-blue);}
+.client-intel{display:none;background:linear-gradient(135deg,rgba(31,53,87,0.06),rgba(184,146,62,0.05));border:1.5px solid rgba(31,53,87,0.14);border-radius:var(--radius-lg);padding:1.75rem 2rem;margin-bottom:1.5rem;animation:fadeUp 0.3s ease;}
+.client-intel.active{display:block;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
+.client-intel__label{font-family:var(--font-ui);font-size:0.6rem;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:0.5rem;}
+.client-intel__name{font-family:var(--font-display);font-size:1.4rem;font-weight:700;color:var(--deep-blue);margin-bottom:0.2rem;}
+.client-intel__role{font-family:var(--font-ui);font-size:0.82rem;color:var(--text-muted);margin-bottom:1rem;}
+.client-intel__desc{font-family:var(--font-body);font-size:0.88rem;line-height:1.8;color:var(--text-body);margin-bottom:1.25rem;}
+.client-intel__chips{display:flex;flex-wrap:wrap;gap:0.5rem;margin-bottom:1.25rem;}
+.intel-chip{font-family:var(--font-ui);font-size:0.7rem;font-weight:600;padding:0.3rem 0.85rem;border-radius:999px;background:rgba(31,53,87,0.08);color:var(--deep-blue);border:1px solid rgba(31,53,87,0.12);}
+.intel-chip--gold{background:rgba(184,146,62,0.1);color:var(--gold);border-color:rgba(184,146,62,0.22);}
+.client-intel__stats{display:flex;flex-wrap:wrap;gap:1.5rem;padding-top:1rem;border-top:1px solid rgba(31,53,87,0.08);}
+.intel-stat__val{font-family:var(--font-display);font-size:1.35rem;font-weight:700;color:var(--deep-blue);line-height:1;}
+.intel-stat__label{font-family:var(--font-ui);font-size:0.65rem;color:var(--text-muted);margin-top:3px;text-transform:uppercase;letter-spacing:0.08em;}
+.cat-nav{display:flex;flex-wrap:wrap;gap:0.5rem;padding:1rem 1.5rem;background:var(--bg-section);border-left:1px solid rgba(85,60,35,0.09);border-right:1px solid rgba(85,60,35,0.09);}
+.cat-btn{font-family:var(--font-ui);font-size:0.72rem;font-weight:600;padding:0.38rem 0.9rem;border-radius:999px;border:1.5px solid rgba(31,53,87,0.14);background:transparent;color:var(--text-body);cursor:pointer;transition:all 0.18s;}
+.cat-btn:hover{border-color:var(--deep-blue);color:var(--deep-blue);}
+.cat-btn.active{background:rgba(31,53,87,0.1);color:var(--deep-blue);border-color:rgba(31,53,87,0.28);}
+.hero-metrics{display:flex;gap:2rem;flex-wrap:wrap;margin-top:1.5rem;padding-top:1.5rem;border-top:1px solid rgba(255,255,255,0.1);}
+.hero-metric__val{font-family:var(--font-display);font-size:1.5rem;font-weight:700;color:#fff;line-height:1;}
+.hero-metric__label{font-family:var(--font-ui);font-size:0.65rem;color:rgba(245,241,234,0.5);text-transform:uppercase;letter-spacing:0.1em;margin-top:3px;}
+.stack-chips{display:flex;flex-wrap:wrap;gap:0.45rem;margin-top:1rem;}
+.stack-chip{font-family:var(--font-ui);font-size:0.68rem;font-weight:500;padding:0.25rem 0.75rem;border-radius:999px;background:rgba(255,255,255,0.08);color:rgba(245,241,234,0.7);border:1px solid rgba(255,255,255,0.12);}
   </style>
 </head>
 <body>
@@ -467,6 +494,20 @@
           <p class="profile-stat-num">Full</p>
           <p class="profile-stat-label">Stack Coverage</p>
         </div>
+      </div>
+      <div class="hero-metrics">
+        <div class="hero-metric"><p class="hero-metric__val">1+</p><p class="hero-metric__label">Clients</p></div>
+        <div class="hero-metric"><p class="hero-metric__val">4+</p><p class="hero-metric__label">Services</p></div>
+        <div class="hero-metric"><p class="hero-metric__val">1yr</p><p class="hero-metric__label">Experience</p></div>
+      </div>
+      <div class="stack-chips">
+        <span class="stack-chip">Canva</span>
+        <span class="stack-chip">CapCut</span>
+        <span class="stack-chip">ChatGPT</span>
+        <span class="stack-chip">Instagram</span>
+        <span class="stack-chip">Facebook</span>
+        <span class="stack-chip">Reddit</span>
+        <span class="stack-chip">Twitter/X</span>
       </div>
     </div>
   </div>
@@ -561,26 +602,33 @@
       <p>Content created, systems built, and platforms managed across Daryl's BBC work.</p>
     </div>
 
-    <!-- Filters -->
-    <div class="fade-in" style="background:var(--bg-card);border:var(--border-warm);border-radius:var(--radius-lg);padding:1.25rem 1.5rem;margin-bottom:1.75rem;box-shadow:var(--shadow-xs);">
-      <div class="filter-group">
-        <span class="filter-label">Company</span>
-        <button class="filter-btn active" data-company="all">All</button>
-        <button class="filter-btn" data-company="allryze">All Ryze</button>
+    <!-- PIS v2.0 Client Bar -->
+    <div class="pis-client-bar fade-in">
+      <button class="pis-client-btn active" data-client="all">All Clients</button>
+      <button class="pis-client-btn" data-client="allryze">All Ryze</button>
+    </div>
+
+    <!-- Client Intel Card -->
+    <div class="client-intel" data-client="allryze">
+      <span class="client-intel__label">Client Intelligence</span>
+      <p class="client-intel__name">All Ryze</p>
+      <p class="client-intel__role">Audience Engagement Specialist &amp; Content Creator</p>
+      <div class="client-intel__chips">
+        <span class="intel-chip">Audience Engagement</span>
+        <span class="intel-chip">Multi-Platform</span>
+        <span class="intel-chip">Operations</span>
+        <span class="intel-chip">Content Creation</span>
+        <span class="intel-chip intel-chip--gold">Multi-Platform</span>
       </div>
-      <div class="filter-group">
-        <span class="filter-label">Task Type</span>
-        <button class="filter-btn active" data-task="all">All</button>
-        <button class="filter-btn" data-task="engagement">Engagement</button>
-        <button class="filter-btn" data-task="outreach">Outreach</button>
-        <button class="filter-btn" data-task="social">Social Media</button>
-        <button class="filter-btn" data-task="content">Content</button>
-        <button class="filter-btn" data-task="operations">Operations</button>
+      <p class="client-intel__desc">Daryl supports All Ryze — a digital audience engagement and growth management agency — handling outreach, engagement workflows, operational support, and content creation across multiple platforms under BBC's operations management system.</p>
+      <div class="client-intel__stats">
+        <div><p class="intel-stat__val">4</p><p class="intel-stat__label">Services</p></div>
+        <div><p class="intel-stat__val">Multi-Platform</p><p class="intel-stat__label">Scope</p></div>
       </div>
     </div>
 
     <!-- ── All Ryze ── -->
-    <div class="client-block fade-in" id="block-allryze">
+    <div class="client-block fade-in" id="block-allryze" data-client="allryze">
       <div class="company-banner">
         <div>
           <p class="company-banner__name">All Ryze</p>
@@ -588,9 +636,15 @@
         </div>
         <span class="company-banner__meta" style="color:rgba(245,241,234,0.35);">Digital Audience Engagement &amp; Growth Management</span>
       </div>
-      <div class="work-grid" id="work-grid">
-        <!-- All Ryze — Conversational Engagement -->
-        <div class="work-entry" data-company="allryze" data-task="engagement content">
+      <div class="cat-nav">
+        <button class="cat-btn active" data-cat="all">All Work</button>
+        <button class="cat-btn" data-cat="engagement">Engagement</button>
+        <button class="cat-btn" data-cat="outreach">Outreach</button>
+        <button class="cat-btn" data-cat="operations">Operations</button>
+        <button class="cat-btn" data-cat="content">Content</button>
+      </div>
+      <div class="work-grid">
+        <div class="work-entry" data-client="allryze" data-cat="engagement content">
           <p class="work-entry__company">All Ryze Operations</p>
           <h3 class="work-entry__title">Audience Engagement &amp; Communication</h3>
           <p class="work-entry__desc">Managed high-volume conversational engagement across multiple platforms — building real, personalized connections with audience members. Focused on retention-based communication that keeps relationships warm, drives repeat interaction, and maintains consistent presence across accounts.</p>
@@ -600,8 +654,7 @@
             <span class="work-tag">Retention Communication</span>
           </div>
         </div>
-        <!-- All Ryze — Multi-Platform Outreach -->
-        <div class="work-entry" data-company="allryze" data-task="outreach social">
+        <div class="work-entry" data-client="allryze" data-cat="outreach social">
           <p class="work-entry__company">All Ryze Operations</p>
           <h3 class="work-entry__title">Multi-Platform Outreach Campaigns</h3>
           <p class="work-entry__desc">Executed outreach campaigns across social media platforms — identifying target audiences, initiating conversations, and driving new engagement through community participation. Maintained compliance with platform guidelines while sustaining high outreach volume and response quality.</p>
@@ -611,8 +664,7 @@
             <span class="work-tag">Traffic Generation</span>
           </div>
         </div>
-        <!-- All Ryze — Operations Support -->
-        <div class="work-entry" data-company="allryze" data-task="operations content">
+        <div class="work-entry" data-client="allryze" data-cat="operations content">
           <p class="work-entry__company">All Ryze Operations</p>
           <h3 class="work-entry__title">Operational Workflow Support</h3>
           <p class="work-entry__desc">Supported day-to-day operational workflows under Ryan Bernaldez's team management — following SOPs, tracking engagement performance, and maintaining accountability across shift responsibilities. Contributed to the smooth execution of BBC's operations management system for the client.</p>
@@ -622,8 +674,7 @@
             <span class="work-tag">Performance Tracking</span>
           </div>
         </div>
-        <!-- Content Creation (broad portfolio) -->
-        <div class="work-entry" data-company="allryze" data-task="content social">
+        <div class="work-entry" data-client="allryze" data-cat="content social">
           <p class="work-entry__company">BBC Portfolio — Creative Work</p>
           <h3 class="work-entry__title">Content Creation &amp; Creative Execution</h3>
           <p class="work-entry__desc">Brings graphic design, video editing, and content writing capabilities to BBC's client support work. Creates platform-ready visuals, edits short-form video, produces email marketing content, and supports branding initiatives — a full creative toolkit applied wherever client projects require it.</p>
@@ -912,101 +963,30 @@
 
 
 <script>
-  /* ── Header scroll ── */
-  const header = document.getElementById('site-header');
-  window.addEventListener('scroll', () => {
-    header.classList.toggle('scrolled', window.scrollY > 60);
-  }, { passive: true });
-
-  /* ── Hamburger ── */
-  const hamburger = document.getElementById('hamburger');
-  const mobileMenu = document.getElementById('mobile-menu');
-  const hb1 = document.getElementById('hb1');
-  const hb2 = document.getElementById('hb2');
-  const hb3 = document.getElementById('hb3');
-  hamburger.addEventListener('click', () => {
-    const open = mobileMenu.classList.toggle('open');
-    if (open) {
-      hb1.style.transform = 'translateY(7px) rotate(45deg)';
-      hb2.style.opacity   = '0';
-      hb3.style.transform = 'translateY(-7px) rotate(-45deg)';
-    } else {
-      hb1.style.transform = ''; hb2.style.opacity = ''; hb3.style.transform = '';
-    }
-  });
-  mobileMenu.querySelectorAll('a').forEach(a => {
-    a.addEventListener('click', () => {
-      mobileMenu.classList.remove('open');
-      hb1.style.transform = ''; hb2.style.opacity = ''; hb3.style.transform = '';
-    });
-  });
-
-  /* ── Fade-in ── */
-  const fadeEls = document.querySelectorAll('.fade-in');
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
-    });
-  }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
-  fadeEls.forEach(el => io.observe(el));
-
-  /* ── Sticky nav active state ── */
-  const navLinks  = document.querySelectorAll('.profile-nav__link');
-  const sections  = document.querySelectorAll('section[id]');
-  const navObs = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        navLinks.forEach(l => l.classList.remove('active'));
-        const active = document.querySelector(`.profile-nav__link[href="#${e.target.id}"]`);
-        if (active) active.classList.add('active');
-      }
-    });
-  }, { threshold: 0.3, rootMargin: '-80px 0px -60% 0px' });
-  sections.forEach(s => navObs.observe(s));
-
-  /* ── Dual-axis filter ── */
-  const entries   = document.querySelectorAll('.work-entry');
-  const noResults = document.getElementById('no-results');
-  let activeCompany = 'all';
-  let activeTask    = 'all';
-
-  function applyFilters() {
-    let visible = 0;
-    entries.forEach(entry => {
-      const company   = entry.dataset.company;
-      const tasks     = (entry.dataset.task || '').split(' ');
-      const compMatch = activeCompany === 'all' || company === activeCompany;
-      const taskMatch = activeTask    === 'all' || tasks.includes(activeTask);
-      const show = compMatch && taskMatch;
-      entry.classList.toggle('hidden', !show);
-      if (show) visible++;
-    });
-    document.querySelectorAll('.client-block').forEach(block => {
-      const bc = block.id.replace('block-', '');
-      const cm = activeCompany === 'all' || activeCompany === bc;
-      const hv = Array.from(block.querySelectorAll('.work-entry')).some(e => !e.classList.contains('hidden'));
-      block.style.display = (cm && hv) ? '' : 'none';
-    });
-    noResults.classList.toggle('visible', visible === 0);
-  }
-
-  document.querySelectorAll('[data-company]').forEach(btn => {
-    btn.addEventListener('click', () => {
-      document.querySelectorAll('[data-company]').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      activeCompany = btn.dataset.company;
-      applyFilters();
-    });
-  });
-
-  document.querySelectorAll('[data-task]').forEach(btn => {
-    btn.addEventListener('click', () => {
-      document.querySelectorAll('[data-task]').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      activeTask = btn.dataset.task;
-      applyFilters();
-    });
-  });
+// ── BBC Portfolio Intelligence System v2.0 ── //
+const header=document.getElementById('site-header');
+window.addEventListener('scroll',()=>header.classList.toggle('scrolled',window.scrollY>60),{passive:true});
+const hamburger=document.getElementById('hamburger'),mm=document.getElementById('mobile-menu'),h1=document.getElementById('hb1'),h2=document.getElementById('hb2'),h3=document.getElementById('hb3');
+if(hamburger){hamburger.addEventListener('click',()=>{const o=mm.classList.toggle('open');if(o){h1.style.transform='translateY(7px) rotate(45deg)';h2.style.opacity='0';h3.style.transform='translateY(-7px) rotate(-45deg)';}else{h1.style.transform='';h2.style.opacity='';h3.style.transform='';}});mm.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{mm.classList.remove('open');h1.style.transform='';h2.style.opacity='';h3.style.transform='';}))}
+document.querySelectorAll('.fade-in').forEach(el=>new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('visible');});},{threshold:0.08,rootMargin:'0px 0px -40px 0px'}).observe(el));
+const navLinks=document.querySelectorAll('.profile-nav__link');
+document.querySelectorAll('section[id]').forEach(s=>new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){navLinks.forEach(l=>l.classList.remove('active'));const a=document.querySelector(`.profile-nav__link[href="#${x.target.id}"]`);if(a)a.classList.add('active');}});},{threshold:0.3,rootMargin:'-80px 0px -60% 0px'}).observe(s));
+let activeClient='all';
+const clientCats={};
+const workEntries=document.querySelectorAll('.work-entry');
+const clientBlocks=document.querySelectorAll('.client-block');
+const clientIntels=document.querySelectorAll('.client-intel');
+const noResults=document.getElementById('no-results');
+function render(){
+  clientBlocks.forEach(b=>{const bid=b.dataset.client;b.style.display=(activeClient==='all'||activeClient===bid)?'':'none';});
+  clientIntels.forEach(i=>{i.classList.toggle('active',activeClient!=='all'&&i.dataset.client===activeClient);});
+  let v=0;
+  workEntries.forEach(en=>{const ec=en.dataset.client,cats=(en.dataset.cat||'').split(' '),activeCat=clientCats[ec]||'all',cm=activeClient==='all'||ec===activeClient,catM=activeCat==='all'||cats.includes(activeCat),show=cm&&catM;en.classList.toggle('hidden',!show);if(show)v++;});
+  if(noResults)noResults.classList.toggle('visible',v===0);
+}
+document.querySelectorAll('.pis-client-btn').forEach(btn=>btn.addEventListener('click',()=>{document.querySelectorAll('.pis-client-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');activeClient=btn.dataset.client;render();}));
+document.querySelectorAll('.cat-btn').forEach(btn=>btn.addEventListener('click',()=>{const clientId=btn.closest('.client-block').dataset.client;btn.closest('.cat-nav').querySelectorAll('.cat-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');clientCats[clientId]=btn.dataset.cat;render();}));
+render();
 </script>
 
 </body>

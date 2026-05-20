@@ -423,6 +423,33 @@
     .media-embed iframe { display:block; width:100%; border:none; }
       .header__cta .btn-ghost { color:var(--deep-blue); border-color:rgba(31,53,87,0.22); }
     .header__cta .btn-ghost:hover { background:rgba(31,53,87,0.06); border-color:rgba(31,53,87,0.38); color:var(--deep-blue); }
+/* ── BBC Portfolio Intelligence System v2.0 ── */
+.pis-client-bar{display:flex;flex-wrap:wrap;gap:0.6rem;margin-bottom:2rem;}
+.pis-client-btn{font-family:var(--font-ui);font-size:0.78rem;font-weight:600;padding:0.55rem 1.2rem;border-radius:999px;border:1.5px solid rgba(31,53,87,0.18);background:transparent;color:var(--text-body);cursor:pointer;transition:all 0.22s;}
+.pis-client-btn:hover{border-color:var(--deep-blue);color:var(--deep-blue);}
+.pis-client-btn.active{background:var(--deep-blue);color:#fff;border-color:var(--deep-blue);}
+.client-intel{display:none;background:linear-gradient(135deg,rgba(31,53,87,0.06),rgba(184,146,62,0.05));border:1.5px solid rgba(31,53,87,0.14);border-radius:var(--radius-lg);padding:1.75rem 2rem;margin-bottom:1.5rem;animation:fadeUp 0.3s ease;}
+.client-intel.active{display:block;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
+.client-intel__label{font-family:var(--font-ui);font-size:0.6rem;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:0.5rem;}
+.client-intel__name{font-family:var(--font-display);font-size:1.4rem;font-weight:700;color:var(--deep-blue);margin-bottom:0.2rem;}
+.client-intel__role{font-family:var(--font-ui);font-size:0.82rem;color:var(--text-muted);margin-bottom:1rem;}
+.client-intel__desc{font-family:var(--font-body);font-size:0.88rem;line-height:1.8;color:var(--text-body);margin-bottom:1.25rem;}
+.client-intel__chips{display:flex;flex-wrap:wrap;gap:0.5rem;margin-bottom:1.25rem;}
+.intel-chip{font-family:var(--font-ui);font-size:0.7rem;font-weight:600;padding:0.3rem 0.85rem;border-radius:999px;background:rgba(31,53,87,0.08);color:var(--deep-blue);border:1px solid rgba(31,53,87,0.12);}
+.intel-chip--gold{background:rgba(184,146,62,0.1);color:var(--gold);border-color:rgba(184,146,62,0.22);}
+.client-intel__stats{display:flex;flex-wrap:wrap;gap:1.5rem;padding-top:1rem;border-top:1px solid rgba(31,53,87,0.08);}
+.intel-stat__val{font-family:var(--font-display);font-size:1.35rem;font-weight:700;color:var(--deep-blue);line-height:1;}
+.intel-stat__label{font-family:var(--font-ui);font-size:0.65rem;color:var(--text-muted);margin-top:3px;text-transform:uppercase;letter-spacing:0.08em;}
+.cat-nav{display:flex;flex-wrap:wrap;gap:0.5rem;padding:1rem 1.5rem;background:var(--bg-section);border-left:1px solid rgba(85,60,35,0.09);border-right:1px solid rgba(85,60,35,0.09);}
+.cat-btn{font-family:var(--font-ui);font-size:0.72rem;font-weight:600;padding:0.38rem 0.9rem;border-radius:999px;border:1.5px solid rgba(31,53,87,0.14);background:transparent;color:var(--text-body);cursor:pointer;transition:all 0.18s;}
+.cat-btn:hover{border-color:var(--deep-blue);color:var(--deep-blue);}
+.cat-btn.active{background:rgba(31,53,87,0.1);color:var(--deep-blue);border-color:rgba(31,53,87,0.28);}
+.hero-metrics{display:flex;gap:2rem;flex-wrap:wrap;margin-top:1.5rem;padding-top:1.5rem;border-top:1px solid rgba(255,255,255,0.1);}
+.hero-metric__val{font-family:var(--font-display);font-size:1.5rem;font-weight:700;color:#fff;line-height:1;}
+.hero-metric__label{font-family:var(--font-ui);font-size:0.65rem;color:rgba(245,241,234,0.5);text-transform:uppercase;letter-spacing:0.1em;margin-top:3px;}
+.stack-chips{display:flex;flex-wrap:wrap;gap:0.45rem;margin-top:1rem;}
+.stack-chip{font-family:var(--font-ui);font-size:0.68rem;font-weight:500;padding:0.25rem 0.75rem;border-radius:999px;background:rgba(255,255,255,0.08);color:rgba(245,241,234,0.7);border:1px solid rgba(255,255,255,0.12);}
   </style>
 </head>
 <body>
@@ -505,6 +532,20 @@
         <p class="profile-stat-num">100K+</p>
         <p class="profile-stat-label">Followers Supported</p>
       </div>
+    </div>
+    <div class="hero-metrics">
+      <div class="hero-metric"><p class="hero-metric__val">5+</p><p class="hero-metric__label">Clients</p></div>
+      <div class="hero-metric"><p class="hero-metric__val">5+</p><p class="hero-metric__label">Services</p></div>
+      <div class="hero-metric"><p class="hero-metric__val">3yr</p><p class="hero-metric__label">Experience</p></div>
+    </div>
+    <div class="stack-chips">
+      <span class="stack-chip">Canva</span>
+      <span class="stack-chip">Adobe Express</span>
+      <span class="stack-chip">ChatGPT</span>
+      <span class="stack-chip">Claude</span>
+      <span class="stack-chip">Notion</span>
+      <span class="stack-chip">Instagram</span>
+      <span class="stack-chip">Facebook</span>
     </div>
 
   </div>
@@ -630,30 +671,104 @@
       <span class="eyebrow">Portfolio Work</span>
       <h2>Companies &amp; Work Delivered</h2>
       <div class="divider-bar divider-bar--left"></div>
-      <p style="max-width:640px;">Filter by company or by task type to see exactly what Kenz delivered for each client.</p>
+      <p style="max-width:640px;">Select a client to explore the work Kenz delivered — with category filtering inside each account.</p>
     </div>
 
-    <!-- Filter bar -->
-    <div class="filter-bar fade-in">
-      <span class="filter-bar__label">Company</span>
-      <button class="filter-btn active" data-company="all">All</button>
-      <button class="filter-btn" data-company="cavalry">Cavalry Realty</button>
-      <button class="filter-btn" data-company="tpic">TPIC</button>
-      <button class="filter-btn" data-company="crown">Crown Supply</button>
-      <button class="filter-btn" data-company="allryze">All Ryze</button>
-      <button class="filter-btn" data-company="dudilagent">DuDilagent AI</button>
-      <span class="filter-divider"></span>
-      <span class="filter-bar__label">Task</span>
-      <button class="filter-btn active" data-task="all">All Tasks</button>
-      <button class="filter-btn" data-task="social">Social Media</button>
-      <button class="filter-btn" data-task="lead-gen">Lead Gen</button>
-      <button class="filter-btn" data-task="operations">Operations</button>
-      <button class="filter-btn" data-task="research">Research</button>
-      <button class="filter-btn" data-task="content">Content</button>
+    <!-- PIS v2.0 Client Bar -->
+    <div class="pis-client-bar fade-in">
+      <button class="pis-client-btn active" data-client="all">All Clients</button>
+      <button class="pis-client-btn" data-client="cavalry">Cavalry Group</button>
+      <button class="pis-client-btn" data-client="tpic">TPIC</button>
+      <button class="pis-client-btn" data-client="crown">Crown Supply</button>
+      <button class="pis-client-btn" data-client="allryze">All Ryze</button>
+      <button class="pis-client-btn" data-client="dudilagent">DuDilagent AI</button>
+    </div>
+
+    <!-- Client Intel Cards -->
+    <div class="client-intel" data-client="cavalry">
+      <span class="client-intel__label">Client Intelligence</span>
+      <p class="client-intel__name">Cavalry Group</p>
+      <p class="client-intel__role">Social Media Manager &amp; Content Strategist</p>
+      <div class="client-intel__chips">
+        <span class="intel-chip">Social Media</span>
+        <span class="intel-chip">Content Strategy</span>
+        <span class="intel-chip">Brand Management</span>
+        <span class="intel-chip intel-chip--gold">callthecavalrygroup.com</span>
+      </div>
+      <p class="client-intel__desc">Managed Cavalry Realty Group's social media presence for agent Tre Serrano — content calendar, scheduling, AI-assisted copy, Canva graphics, and CRM-linked lead generation.</p>
+      <div class="client-intel__stats">
+        <div><p class="intel-stat__val">3</p><p class="intel-stat__label">Services</p></div>
+        <div><p class="intel-stat__val">callthecavalrygroup.com</p><p class="intel-stat__label">Client Site</p></div>
+      </div>
+    </div>
+    <div class="client-intel" data-client="tpic">
+      <span class="client-intel__label">Client Intelligence</span>
+      <p class="client-intel__name">Top Producer Investment Capital</p>
+      <p class="client-intel__role">Social Media &amp; Brand Content Specialist</p>
+      <div class="client-intel__chips">
+        <span class="intel-chip">Social Media</span>
+        <span class="intel-chip">Brand Content</span>
+        <span class="intel-chip">Finance</span>
+        <span class="intel-chip intel-chip--gold">Finance Sector</span>
+      </div>
+      <p class="client-intel__desc">Managed social media operations and brand content for TPIC (Ryan Tanel) — content scheduling, AI-assisted copy, brand consistency, and workflow tracking for this real estate investment firm.</p>
+      <div class="client-intel__stats">
+        <div><p class="intel-stat__val">2</p><p class="intel-stat__label">Services</p></div>
+        <div><p class="intel-stat__val">Finance Sector</p><p class="intel-stat__label">Industry</p></div>
+      </div>
+    </div>
+    <div class="client-intel" data-client="crown">
+      <span class="client-intel__label">Client Intelligence</span>
+      <p class="client-intel__name">Crown Limited Supply</p>
+      <p class="client-intel__role">Creative &amp; Brand Lead</p>
+      <div class="client-intel__chips">
+        <span class="intel-chip">Creative Direction</span>
+        <span class="intel-chip">Brand</span>
+        <span class="intel-chip">Social Media</span>
+        <span class="intel-chip intel-chip--gold">crownlimitedsupply.com</span>
+      </div>
+      <p class="client-intel__desc">Delivered e-commerce operations support and social media management for Crown Limited Supply — Shopify backend, content posting, content calendar, CRM support, and workflow tracking systems.</p>
+      <div class="client-intel__stats">
+        <div><p class="intel-stat__val">2</p><p class="intel-stat__label">Services</p></div>
+        <div><p class="intel-stat__val">crownlimitedsupply.com</p><p class="intel-stat__label">Client Site</p></div>
+      </div>
+    </div>
+    <div class="client-intel" data-client="allryze">
+      <span class="client-intel__label">Client Intelligence</span>
+      <p class="client-intel__name">All Ryze</p>
+      <p class="client-intel__role">Engagement &amp; Outreach Specialist</p>
+      <div class="client-intel__chips">
+        <span class="intel-chip">Engagement</span>
+        <span class="intel-chip">Outreach</span>
+        <span class="intel-chip">Operations</span>
+        <span class="intel-chip">Multi-Platform</span>
+        <span class="intel-chip intel-chip--gold">Multi-Platform</span>
+      </div>
+      <p class="client-intel__desc">Provided digital operations support for All Ryze — a digital audience engagement and growth management agency — managing workflow infrastructure, content scheduling, and operational tracking.</p>
+      <div class="client-intel__stats">
+        <div><p class="intel-stat__val">2</p><p class="intel-stat__label">Services</p></div>
+        <div><p class="intel-stat__val">Multi-Platform</p><p class="intel-stat__label">Scope</p></div>
+      </div>
+    </div>
+    <div class="client-intel" data-client="dudilagent">
+      <span class="client-intel__label">Client Intelligence</span>
+      <p class="client-intel__name">DuDilagent AI</p>
+      <p class="client-intel__role">AI Content &amp; Brand Specialist</p>
+      <div class="client-intel__chips">
+        <span class="intel-chip">AI Content</span>
+        <span class="intel-chip">Brand</span>
+        <span class="intel-chip">Content Strategy</span>
+        <span class="intel-chip intel-chip--gold">AI Brand</span>
+      </div>
+      <p class="client-intel__desc">Powered DuDilagent AI's business development pipeline with lead generation research, prospect list building, and operational workflow support for Humphry's team.</p>
+      <div class="client-intel__stats">
+        <div><p class="intel-stat__val">1</p><p class="intel-stat__label">Service</p></div>
+        <div><p class="intel-stat__val">AI Brand</p><p class="intel-stat__label">Focus</p></div>
+      </div>
     </div>
 
     <!-- ── Cavalry Realty Group ── -->
-    <div class="client-block fade-in" id="block-cavalry">
+    <div class="client-block fade-in" id="block-cavalry" data-client="cavalry">
       <div class="company-banner">
         <div>
           <p class="company-banner__name">Cavalry Realty Group</p>
@@ -670,8 +785,14 @@
           <img src="https://image.thum.io/get/width/900/crop/560/noanimate/https://callthecavalrygroup.com/" alt="Cavalry Realty Group website preview" loading="lazy" />
         </a>
       </div>
-      <div class="work-grid" id="work-grid">
-        <div class="work-entry" data-company="cavalry" data-task="social content">
+      <div class="cat-nav">
+        <button class="cat-btn active" data-cat="all">All Work</button>
+        <button class="cat-btn" data-cat="social">Social Media</button>
+        <button class="cat-btn" data-cat="content">Content</button>
+        <button class="cat-btn" data-cat="brand">Brand</button>
+      </div>
+      <div class="work-grid">
+        <div class="work-entry" data-client="cavalry" data-cat="social content">
           <span class="work-entry__company">Cavalry Realty Group</span>
           <h3>Social Media Management</h3>
           <p>Managed Cavalry Realty Group's social media presence for real estate agent Tre Serrano — keeping platforms active, content consistent, and the brand visible to their target buyer/seller audience.</p>
@@ -689,7 +810,7 @@
             <span class="work-entry__tag">Canva</span>
           </div>
         </div>
-        <div class="work-entry" data-company="cavalry" data-task="lead-gen operations">
+        <div class="work-entry" data-client="cavalry" data-cat="brand content">
           <span class="work-entry__company">Cavalry Realty Group</span>
           <h3>Lead Generation &amp; CRM Support</h3>
           <p>Supported Cavalry Realty Group's outreach pipeline with lead generation research and CRM maintenance — building prospect lists and keeping the sales pipeline organized for agent Tre Serrano.</p>
@@ -720,7 +841,7 @@
     </div>
 
     <!-- ── TPIC ── -->
-    <div class="client-block fade-in" id="block-tpic">
+    <div class="client-block fade-in" id="block-tpic" data-client="tpic">
       <div class="company-banner">
         <div>
           <p class="company-banner__name">Top Producer Investment Capital</p>
@@ -737,8 +858,14 @@
           <img src="https://image.thum.io/get/width/900/crop/560/noanimate/https://topproducerinvestmentcapital.com/" alt="TPIC website preview" loading="lazy" />
         </a>
       </div>
+      <div class="cat-nav">
+        <button class="cat-btn active" data-cat="all">All Work</button>
+        <button class="cat-btn" data-cat="social">Social Media</button>
+        <button class="cat-btn" data-cat="brand">Brand</button>
+        <button class="cat-btn" data-cat="content">Content</button>
+      </div>
       <div class="work-grid">
-        <div class="work-entry" data-company="tpic" data-task="social content">
+        <div class="work-entry" data-client="tpic" data-cat="social content">
           <span class="work-entry__company">Top Producer Investment Capital</span>
           <h3>Social Media &amp; Branding Support</h3>
           <p>Managed social media operations for TPIC (Ryan Tanel) — a real estate investment company. Kenz handled platform content, scheduling, and brand consistency to maintain a professional online presence.</p>
@@ -755,7 +882,7 @@
             <span class="work-entry__tag">Branding</span>
           </div>
         </div>
-        <div class="work-entry" data-company="tpic" data-task="research operations">
+        <div class="work-entry" data-client="tpic" data-cat="brand content">
           <span class="work-entry__company">Top Producer Investment Capital</span>
           <h3>Business Research &amp; Workflow Tracking</h3>
           <p>Supported TPIC's operational layer with business research and Google Sheets-based workflow tracking — keeping deliverables organized and the team's pipeline documented and accountable.</p>
@@ -786,7 +913,7 @@
     </div>
 
     <!-- ── Crown Limited Supply ── -->
-    <div class="client-block fade-in" id="block-crown">
+    <div class="client-block fade-in" id="block-crown" data-client="crown">
       <div class="company-banner">
         <div>
           <p class="company-banner__name">Crown Limited Supply</p>
@@ -803,8 +930,14 @@
           <img src="https://image.thum.io/get/width/900/crop/560/noanimate/https://crownlimitedsupply.com/" alt="Crown Limited Supply website preview" loading="lazy" />
         </a>
       </div>
+      <div class="cat-nav">
+        <button class="cat-btn active" data-cat="all">All Work</button>
+        <button class="cat-btn" data-cat="creative">Creative</button>
+        <button class="cat-btn" data-cat="brand">Brand</button>
+        <button class="cat-btn" data-cat="social">Social Media</button>
+      </div>
       <div class="work-grid">
-        <div class="work-entry" data-company="crown" data-task="operations social content">
+        <div class="work-entry" data-client="crown" data-cat="creative social brand">
           <span class="work-entry__company">Crown Limited Supply</span>
           <h3>E-Commerce Operations &amp; Social Media</h3>
           <p>Delivered e-commerce operations support and social media management for Crown Limited Supply — handling Shopify backend maintenance, content posting, and the day-to-day operational layer.</p>
@@ -823,7 +956,7 @@
             <span class="work-entry__tag">Operations</span>
           </div>
         </div>
-        <div class="work-entry" data-company="crown" data-task="operations">
+        <div class="work-entry" data-client="crown" data-cat="creative brand">
           <span class="work-entry__company">Crown Limited Supply</span>
           <h3>Workflow Organization &amp; Tracking</h3>
           <p>Built and maintained workflow tracking systems for Crown Limited Supply's operational backend — using Google Sheets to document processes, track deliverables, and keep the team's operations organized.</p>
@@ -854,18 +987,24 @@
     </div>
 
     <!-- ── All Ryze Operations ── -->
-    <div class="client-block fade-in" id="block-allryze">
+    <div class="client-block fade-in" id="block-allryze" data-client="allryze">
       <div class="company-banner">
         <div>
           <p class="company-banner__name">All Ryze Operations</p>
-          <p class="company-banner__meta">Digital Audience Engagement</p>
+          <p class="company-banner__meta">Digital Audience Engagement &amp; Growth Management</p>
         </div>
       </div>
+      <div class="cat-nav">
+        <button class="cat-btn active" data-cat="all">All Work</button>
+        <button class="cat-btn" data-cat="engagement">Engagement</button>
+        <button class="cat-btn" data-cat="outreach">Outreach</button>
+        <button class="cat-btn" data-cat="operations">Operations</button>
+      </div>
       <div class="work-grid">
-        <div class="work-entry" data-company="allryze" data-task="operations content social">
+        <div class="work-entry" data-client="allryze" data-cat="operations engagement outreach">
           <span class="work-entry__company">All Ryze Operations</span>
           <h3>Digital Operations &amp; Content Management</h3>
-          <p>Provided comprehensive digital operations support for All Ryze Operations — managing the workflow infrastructure, content scheduling, and operational tracking that keeps the business backend organized.</p>
+          <p>Provided comprehensive digital operations support for All Ryze — a digital audience engagement and growth management agency — managing workflow infrastructure, content scheduling, and operational tracking that keeps the business backend organized.</p>
           <div class="work-entry__tasks">
             <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>Digital operations management and workflow organization</div>
             <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>Content scheduling and social media management</div>
@@ -894,15 +1033,21 @@
     </div>
 
     <!-- ── DuDilagent AI ── -->
-    <div class="client-block fade-in" id="block-dudilagent">
+    <div class="client-block fade-in" id="block-dudilagent" data-client="dudilagent">
       <div class="company-banner">
         <div>
           <p class="company-banner__name">DuDilagent AI</p>
           <p class="company-banner__meta">AI Business Acquisitions</p>
         </div>
       </div>
+      <div class="cat-nav">
+        <button class="cat-btn active" data-cat="all">All Work</button>
+        <button class="cat-btn" data-cat="content">Content</button>
+        <button class="cat-btn" data-cat="brand">Brand</button>
+        <button class="cat-btn" data-cat="ai">AI</button>
+      </div>
       <div class="work-grid">
-        <div class="work-entry" data-company="dudilagent" data-task="lead-gen research">
+        <div class="work-entry" data-client="dudilagent" data-cat="content ai">
           <span class="work-entry__company">DuDilagent AI</span>
           <h3>Business Acquisition Research &amp; Lead Generation</h3>
           <p>Powered DuDilagent AI's business development pipeline with targeted research and lead generation — building prospect lists, researching acquisition targets, and fueling outreach for Humphry's team.</p>
@@ -921,7 +1066,7 @@
             <span class="work-entry__tag">AI/Tech</span>
           </div>
         </div>
-        <div class="work-entry" data-company="dudilagent" data-task="operations research">
+        <div class="work-entry" data-client="dudilagent" data-cat="brand ai">
           <span class="work-entry__company">DuDilagent AI</span>
           <h3>AI Workflow Support &amp; Operations</h3>
           <p>Supported DuDilagent AI's workflow and operational infrastructure — contributing to the AI-focused systems and processes that the company uses internally and develops for its clients.</p>
@@ -1312,102 +1457,30 @@
 
 <!-- ── JAVASCRIPT ── -->
 <script>
-  const header = document.getElementById('site-header');
-  window.addEventListener('scroll', () => {
-    header.classList.toggle('scrolled', window.scrollY > 60);
-  }, { passive: true });
-
-  const hamburger = document.getElementById('hamburger');
-  const mobileMenu = document.getElementById('mobile-menu');
-  const hb1 = document.getElementById('hb1');
-  const hb2 = document.getElementById('hb2');
-  const hb3 = document.getElementById('hb3');
-  hamburger.addEventListener('click', () => {
-    const open = mobileMenu.classList.toggle('open');
-    if (open) {
-      hb1.style.transform = 'translateY(7px) rotate(45deg)';
-      hb2.style.opacity = '0';
-      hb3.style.transform = 'translateY(-7px) rotate(-45deg)';
-    } else {
-      hb1.style.transform = ''; hb2.style.opacity = ''; hb3.style.transform = '';
-    }
-  });
-  mobileMenu.querySelectorAll('a').forEach(a => {
-    a.addEventListener('click', () => {
-      mobileMenu.classList.remove('open');
-      hb1.style.transform = ''; hb2.style.opacity = ''; hb3.style.transform = '';
-    });
-  });
-
-  const fadeEls = document.querySelectorAll('.fade-in');
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
-    });
-  }, { threshold: 0.07, rootMargin: '0px 0px -40px 0px' });
-  fadeEls.forEach(el => io.observe(el));
-
-  const secTabs = document.querySelectorAll('.sec-tab');
-  const sections = document.querySelectorAll('section[id^="sec-"]');
-  const secObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        const id = entry.target.id;
-        secTabs.forEach(tab => {
-          tab.classList.toggle('active', tab.getAttribute('href') === '#' + id);
-        });
-      }
-    });
-  }, { rootMargin: '-30% 0px -60% 0px', threshold: 0 });
-  sections.forEach(s => secObserver.observe(s));
-
-  // Filter system
-  let activeCompany = 'all';
-  let activeTask    = 'all';
-
-  const companyBtns = document.querySelectorAll('[data-company]');
-  const taskBtns    = document.querySelectorAll('[data-task]');
-  const entries     = document.querySelectorAll('.work-entry');
-  const noResults   = document.getElementById('no-results');
-
-  function applyFilters() {
-    let totalVisible = 0;
-    entries.forEach(entry => {
-      const company = entry.dataset.company;
-      const tasks = (entry.dataset.task || '').split(' ');
-      const companyMatch = activeCompany === 'all' || company === activeCompany;
-      const taskMatch = activeTask === 'all' || tasks.includes(activeTask);
-      const show = companyMatch && taskMatch;
-      entry.classList.toggle('hidden', !show);
-      if (show) totalVisible++;
-    });
-    document.querySelectorAll('.client-block').forEach(block => {
-      const blockCompany = block.id.replace('block-', '');
-      const companyMatch = activeCompany === 'all' || activeCompany === blockCompany;
-      const hasVisible = Array.from(block.querySelectorAll('.work-entry')).some(e => !e.classList.contains('hidden'));
-      block.style.display = (companyMatch && hasVisible) ? '' : 'none';
-    });
-    const noRes = document.getElementById('no-results');
-    if (noRes) noRes.style.display = totalVisible === 0 ? 'block' : 'none';
-  }
-
-  companyBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      activeCompany = btn.dataset.company;
-      companyBtns.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      applyFilters();
-    });
-  });
-
-  taskBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      activeTask = btn.dataset.task;
-      taskBtns.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      applyFilters();
-    });
-  });
+// ── BBC Portfolio Intelligence System v2.0 ── //
+const header=document.getElementById('site-header');
+window.addEventListener('scroll',()=>header.classList.toggle('scrolled',window.scrollY>60),{passive:true});
+const hamburger=document.getElementById('hamburger'),mm=document.getElementById('mobile-menu'),h1=document.getElementById('hb1'),h2=document.getElementById('hb2'),h3=document.getElementById('hb3');
+if(hamburger){hamburger.addEventListener('click',()=>{const o=mm.classList.toggle('open');if(o){h1.style.transform='translateY(7px) rotate(45deg)';h2.style.opacity='0';h3.style.transform='translateY(-7px) rotate(-45deg)';}else{h1.style.transform='';h2.style.opacity='';h3.style.transform='';}});mm.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{mm.classList.remove('open');h1.style.transform='';h2.style.opacity='';h3.style.transform='';}))}
+document.querySelectorAll('.fade-in').forEach(el=>new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('visible');});},{threshold:0.07,rootMargin:'0px 0px -40px 0px'}).observe(el));
+const secTabs=document.querySelectorAll('.sec-tab');
+document.querySelectorAll('section[id^="sec-"]').forEach(s=>new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){const id=x.target.id;secTabs.forEach(t=>t.classList.toggle('active',t.getAttribute('href')==='#'+id));}});},{rootMargin:'-30% 0px -60% 0px',threshold:0}).observe(s));
+let activeClient='all';
+const clientCats={};
+const workEntries=document.querySelectorAll('.work-entry');
+const clientBlocks=document.querySelectorAll('.client-block');
+const clientIntels=document.querySelectorAll('.client-intel');
+const noResults=document.getElementById('no-results');
+function render(){
+  clientBlocks.forEach(b=>{const bid=b.dataset.client;b.style.display=(activeClient==='all'||activeClient===bid)?'':'none';});
+  clientIntels.forEach(i=>{i.classList.toggle('active',activeClient!=='all'&&i.dataset.client===activeClient);});
+  let v=0;
+  workEntries.forEach(en=>{const ec=en.dataset.client,cats=(en.dataset.cat||'').split(' '),activeCat=clientCats[ec]||'all',cm=activeClient==='all'||ec===activeClient,catM=activeCat==='all'||cats.includes(activeCat),show=cm&&catM;en.classList.toggle('hidden',!show);if(show)v++;});
+  if(noResults)noResults.classList.toggle('visible',v===0);
+}
+document.querySelectorAll('.pis-client-btn').forEach(btn=>btn.addEventListener('click',()=>{document.querySelectorAll('.pis-client-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');activeClient=btn.dataset.client;render();}));
+document.querySelectorAll('.cat-btn').forEach(btn=>btn.addEventListener('click',()=>{const clientId=btn.closest('.client-block').dataset.client;btn.closest('.cat-nav').querySelectorAll('.cat-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');clientCats[clientId]=btn.dataset.cat;render();}));
+render();
 </script>
 
 </body>
