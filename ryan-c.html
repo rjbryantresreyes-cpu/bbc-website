@@ -374,6 +374,68 @@
     }
     .company-banner__link:hover { background:rgba(184,146,62,0.12); }
 
+    /* ── Client blocks ── */
+    .client-block { margin-bottom:3.5rem; }
+    .client-block:last-child { margin-bottom:0; }
+
+    /* ── Site Preview (browser mockup) ── */
+    .site-preview {
+      margin-bottom:1.75rem;
+      border-radius:var(--radius-lg); overflow:hidden;
+      box-shadow:var(--shadow-md); border:var(--border-card);
+    }
+    .site-preview__chrome {
+      display:flex; align-items:center; gap:0.45rem;
+      padding:0.6rem 1rem; background:#E8E2D6;
+      border-bottom:1px solid rgba(85,60,35,0.1);
+    }
+    .c-dot { width:10px; height:10px; border-radius:50%; display:inline-block; flex-shrink:0; }
+    .c-dot:nth-child(1) { background:#FF5F57; }
+    .c-dot:nth-child(2) { background:#FFBD2E; }
+    .c-dot:nth-child(3) { background:#28C940; }
+    .site-preview__url {
+      flex:1; margin-left:0.5rem; background:rgba(255,255,255,0.65);
+      border-radius:6px; padding:0.2rem 0.75rem;
+      font-family:var(--font-ui); font-size:0.7rem; color:var(--text-muted);
+      white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+    }
+    .site-preview__frame {
+      display:block; position:relative; overflow:hidden; max-height:300px;
+    }
+    .site-preview__frame::after {
+      content:'Visit Site ↗'; position:absolute; inset:0;
+      background:rgba(31,53,87,0); color:#fff;
+      display:flex; align-items:center; justify-content:center;
+      font-family:var(--font-ui); font-size:1rem; font-weight:700;
+      letter-spacing:0.03em; opacity:0; transition:all 0.3s ease;
+    }
+    .site-preview__frame:hover::after { background:rgba(31,53,87,0.52); opacity:1; }
+    .site-preview__frame img { width:100%; display:block; height:auto; }
+
+    /* ── Media row ── */
+    .media-row { display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-top:1.5rem; }
+    @media (max-width:720px) { .media-row { grid-template-columns:1fr; } }
+    .media-card {
+      background:var(--bg-card); border:var(--border-card);
+      border-radius:var(--radius-lg); padding:1.25rem 1.5rem;
+      display:flex; flex-direction:column; gap:0.75rem;
+      box-shadow:var(--shadow-xs);
+    }
+    .media-card__top { display:flex; align-items:center; gap:0.85rem; }
+    .media-card__icon { font-size:1.5rem; flex-shrink:0; }
+    .media-card__title { font-family:var(--font-ui); font-size:0.88rem; font-weight:700; color:var(--deep-blue); margin:0; }
+    .media-card__desc { font-family:var(--font-body); font-size:0.8rem; line-height:1.7; color:var(--text-muted); margin:0; }
+    .media-toggle {
+      font-family:var(--font-ui); font-size:0.78rem; font-weight:600;
+      color:var(--mid-blue); background:rgba(75,111,165,0.08);
+      border:1px solid rgba(75,111,165,0.18); border-radius:999px;
+      padding:0.4rem 1rem; cursor:pointer; transition:all 0.2s; width:fit-content;
+    }
+    .media-toggle:hover { background:rgba(75,111,165,0.15); }
+    .media-embed { border-radius:10px; overflow:hidden; border:var(--border-card); display:none; margin-top:0.25rem; }
+    .media-embed.open { display:block; }
+    .media-embed iframe { display:block; width:100%; border:none; }
+
     /* ── Services section ── */
     .services-grid { display:grid; grid-template-columns:1fr 1fr; gap:2rem; }
     @media (max-width:860px) { .services-grid { grid-template-columns:1fr; } }
@@ -703,7 +765,7 @@
       <h2>Companies &amp; Work Delivered</h2>
       <div class="divider-bar divider-bar--left"></div>
       <p style="max-width:640px;">
-        A full breakdown of what Ryan delivered for each client — filterable by company and by task type.
+        A full breakdown of what Ryan delivered for each client — including live site previews, graphic portfolios, and video content. Filter by company or task type below.
       </p>
     </div>
 
@@ -723,124 +785,204 @@
       <button class="filter-btn" data-task="seo">SEO</button>
     </div>
 
-    <!-- Work entries grid -->
-    <div class="work-grid fade-in" id="work-grid">
+    <!-- ═══ CLIENT: First Class Finishes Texas ═══ -->
+    <div class="client-block fade-in" id="block-fcf">
 
-      <div class="work-entry" data-company="fcf" data-task="social ai-content">
-        <span class="work-entry__company">First Class Finishes</span>
-        <h3>Social Media Account Management</h3>
-        <p>Full social media management for First Class Finishes Texas — a finishing services company. Ryan ran their accounts from end to end, maintaining a consistent publishing schedule and brand voice across platforms.</p>
-        <div class="work-entry__tasks">
-          <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>Content calendar planning and weekly publishing schedule</div>
-          <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>Platform-specific content formatting (Instagram, Facebook)</div>
-          <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>AI-assisted caption and copy writing via ChatGPT</div>
-          <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>Audience engagement and account maintenance</div>
-          <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>Scheduling and publishing via Meta Business Suite</div>
+      <div class="company-banner">
+        <div>
+          <p class="company-banner__name">First Class Finishes Texas</p>
+          <p class="company-banner__meta">Painting &amp; Property Maintenance · Texas</p>
         </div>
-        <div class="work-entry__tags">
-          <span class="work-entry__tag work-entry__tag--blue">Social Media</span>
-          <span class="work-entry__tag">Content Planning</span>
-          <span class="work-entry__tag">Meta Business Suite</span>
-          <span class="work-entry__tag">AI-Assisted Copy</span>
+        <a href="https://firstclass-finishes.com/" target="_blank" rel="noopener noreferrer" class="company-banner__link">Visit Site ↗</a>
+      </div>
+
+      <!-- Live Website Preview -->
+      <div class="site-preview">
+        <div class="site-preview__chrome">
+          <span class="c-dot"></span><span class="c-dot"></span><span class="c-dot"></span>
+          <span class="site-preview__url">firstclass-finishes.com</span>
+        </div>
+        <a href="https://firstclass-finishes.com/" target="_blank" rel="noopener noreferrer" class="site-preview__frame">
+          <img src="https://image.thum.io/get/width/900/crop/560/noanimate/https://firstclass-finishes.com/"
+               alt="First Class Finishes Texas website preview" loading="lazy" />
+        </a>
+      </div>
+
+      <!-- Work Cards -->
+      <div class="work-grid" id="work-grid">
+
+        <div class="work-entry" data-company="fcf" data-task="social ai-content">
+          <span class="work-entry__company">First Class Finishes</span>
+          <h3>Social Media Account Management</h3>
+          <p>Full social media management for First Class Finishes Texas — Ryan ran their accounts end to end, maintaining a consistent publishing schedule and brand voice across platforms.</p>
+          <div class="work-entry__tasks">
+            <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>Content calendar planning and weekly publishing schedule</div>
+            <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>Platform-specific content formatting (Instagram, Facebook)</div>
+            <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>AI-assisted caption and copy writing via ChatGPT</div>
+            <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>Audience engagement and account maintenance</div>
+            <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>Scheduling and publishing via Meta Business Suite</div>
+          </div>
+          <div class="work-entry__tags">
+            <span class="work-entry__tag work-entry__tag--blue">Social Media</span>
+            <span class="work-entry__tag">Content Planning</span>
+            <span class="work-entry__tag">Meta Business Suite</span>
+            <span class="work-entry__tag">AI-Assisted Copy</span>
+          </div>
+        </div>
+
+        <div class="work-entry" data-company="fcf" data-task="ai-content video">
+          <span class="work-entry__company">First Class Finishes</span>
+          <h3>AI Video Content Production</h3>
+          <p>Built and operated an AI-powered video content workflow — producing short-form video, AI avatar content, and voiceover-driven promotional pieces at scale without the cost of traditional production.</p>
+          <div class="work-entry__tasks">
+            <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>ChatGPT scripting — video scripts optimized per platform and audience</div>
+            <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>HeyGen AI avatar video creation — branded spokesperson videos</div>
+            <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>ElevenLabs voiceover production — professional voice for ads and promos</div>
+            <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>CapCut editing — assembled and polished final short-form videos</div>
+            <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>Batch production system — multiple videos produced per session</div>
+          </div>
+          <div class="work-entry__tags">
+            <span class="work-entry__tag work-entry__tag--blue">AI Video</span>
+            <span class="work-entry__tag">HeyGen</span>
+            <span class="work-entry__tag">ElevenLabs</span>
+            <span class="work-entry__tag">CapCut</span>
+            <span class="work-entry__tag">Short-Form</span>
+          </div>
+        </div>
+
+        <div class="work-entry" data-company="fcf" data-task="design">
+          <span class="work-entry__company">First Class Finishes</span>
+          <h3>Graphic Design &amp; Brand Assets</h3>
+          <p>Created visual content and branded graphics to support First Class Finishes' digital presence — maintaining a consistent visual identity across social platforms and digital materials.</p>
+          <div class="work-entry__tasks">
+            <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>Social media graphics and promotional image design (Canva)</div>
+            <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>Branded templates for recurring content types</div>
+            <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>Before/after project showcases and work sample graphics</div>
+            <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>Story and reel cover design</div>
+          </div>
+          <div class="work-entry__tags">
+            <span class="work-entry__tag work-entry__tag--blue">Graphic Design</span>
+            <span class="work-entry__tag">Canva</span>
+            <span class="work-entry__tag">Brand Assets</span>
+            <span class="work-entry__tag">Social Graphics</span>
+          </div>
+        </div>
+
+        <div class="work-entry" data-company="fcf" data-task="seo">
+          <span class="work-entry__company">First Class Finishes</span>
+          <h3>SEO &amp; Content Writing Support</h3>
+          <p>Supported First Class Finishes with SEO-aligned content and web copy to improve their search visibility and communicate services clearly to the local Texas market.</p>
+          <div class="work-entry__tasks">
+            <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>Service page copy writing and optimization</div>
+            <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>Keyword-aligned blog and social content</div>
+            <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>Website/landing page content support</div>
+            <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>Local search copy (Google Business-aligned)</div>
+          </div>
+          <div class="work-entry__tags">
+            <span class="work-entry__tag work-entry__tag--blue">SEO</span>
+            <span class="work-entry__tag">Content Writing</span>
+            <span class="work-entry__tag">Local Search</span>
+            <span class="work-entry__tag">Web Copy</span>
+          </div>
+        </div>
+
+      </div><!-- /work-grid fcf -->
+
+      <!-- Media Showcase -->
+      <div class="media-row">
+        <div class="media-card">
+          <div class="media-card__top">
+            <span class="media-card__icon">🎨</span>
+            <p class="media-card__title">Graphic Design Portfolio</p>
+          </div>
+          <p class="media-card__desc">Social media graphics, branded templates, and promotional visual assets created for First Class Finishes Texas — including before/after showcases and story covers.</p>
+          <a href="https://www.facebook.com/FirstClassFinishesTexas" target="_blank" rel="noopener noreferrer" class="media-toggle">View Live on Facebook ↗</a>
+        </div>
+        <div class="media-card">
+          <div class="media-card__top">
+            <span class="media-card__icon">🎬</span>
+            <p class="media-card__title">AI Video Content Portfolio</p>
+          </div>
+          <p class="media-card__desc">Short-form videos, AI avatar content, and voiceover-driven promotional reels produced using HeyGen, ElevenLabs &amp; CapCut.</p>
+          <button class="media-toggle" onclick="this.nextElementSibling.classList.toggle('open');this.textContent=this.nextElementSibling.classList.contains('open')?'▲ Hide Videos':'▾ Watch Video Portfolio';">▾ Watch Video Portfolio</button>
+          <div class="media-embed">
+            <iframe src="https://drive.google.com/embeddedfolderview?id=1SshL-ByMh-j-cX4mdelKQyt8yRYYp-h5#grid"
+                    height="360" allowfullscreen title="Ryan C Video Portfolio"></iframe>
+          </div>
         </div>
       </div>
 
-      <div class="work-entry" data-company="fcf" data-task="ai-content video">
-        <span class="work-entry__company">First Class Finishes</span>
-        <h3>AI Video Content Production</h3>
-        <p>Built and operated an AI-powered video content workflow for First Class Finishes — producing short-form video, AI avatar content, and voiceover-driven promotional pieces at scale without the cost of traditional production.</p>
-        <div class="work-entry__tasks">
-          <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>ChatGPT scripting — wrote video scripts optimized per platform and audience</div>
-          <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>HeyGen AI avatar video creation — branded spokesperson videos</div>
-          <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>ElevenLabs voiceover production — professional voice for ads and promos</div>
-          <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>CapCut editing — assembled and polished final short-form videos</div>
-          <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>Batch production system — multiple videos produced per session</div>
+    </div><!-- /block-fcf -->
+
+
+    <!-- ═══ CLIENT: Hi-Up Roofing ═══ -->
+    <div class="client-block fade-in" id="block-hiup">
+
+      <div class="company-banner">
+        <div>
+          <p class="company-banner__name">Hi-Up Roofing</p>
+          <p class="company-banner__meta">Roofing &amp; Home Services</p>
         </div>
-        <div class="work-entry__tags">
-          <span class="work-entry__tag work-entry__tag--blue">AI Video</span>
-          <span class="work-entry__tag">HeyGen</span>
-          <span class="work-entry__tag">ElevenLabs</span>
-          <span class="work-entry__tag">CapCut</span>
-          <span class="work-entry__tag">Short-Form</span>
-        </div>
+        <a href="https://hi-uproofing.com/" target="_blank" rel="noopener noreferrer" class="company-banner__link">Visit Site ↗</a>
       </div>
 
-      <div class="work-entry" data-company="fcf" data-task="design">
-        <span class="work-entry__company">First Class Finishes</span>
-        <h3>Graphic Design &amp; Brand Assets</h3>
-        <p>Created visual content and branded graphics to support First Class Finishes' digital presence — maintaining a consistent visual identity across their social platforms and digital materials.</p>
-        <div class="work-entry__tasks">
-          <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>Social media graphics and promotional image design (Canva)</div>
-          <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>Branded templates for recurring content types</div>
-          <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>Before/after project showcases and work sample graphics</div>
-          <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>Story and reel cover design</div>
+      <!-- Live Website Preview -->
+      <div class="site-preview">
+        <div class="site-preview__chrome">
+          <span class="c-dot"></span><span class="c-dot"></span><span class="c-dot"></span>
+          <span class="site-preview__url">hi-uproofing.com</span>
         </div>
-        <div class="work-entry__tags">
-          <span class="work-entry__tag work-entry__tag--blue">Graphic Design</span>
-          <span class="work-entry__tag">Canva</span>
-          <span class="work-entry__tag">Brand Assets</span>
-          <span class="work-entry__tag">Social Graphics</span>
-        </div>
+        <a href="https://hi-uproofing.com/" target="_blank" rel="noopener noreferrer" class="site-preview__frame">
+          <img src="https://image.thum.io/get/width/900/crop/560/noanimate/https://hi-uproofing.com/"
+               alt="Hi-Up Roofing website preview" loading="lazy" />
+        </a>
       </div>
 
-      <div class="work-entry" data-company="fcf" data-task="seo">
-        <span class="work-entry__company">First Class Finishes</span>
-        <h3>SEO &amp; Content Writing Support</h3>
-        <p>Supported First Class Finishes with SEO-aligned content and web copy to improve their search visibility and communicate their services clearly to the local Texas market.</p>
-        <div class="work-entry__tasks">
-          <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>Service page copy writing and optimization</div>
-          <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>Keyword-aligned blog and social content</div>
-          <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>Website/landing page content support</div>
-          <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>Local search copy (Google Business-aligned)</div>
-        </div>
-        <div class="work-entry__tags">
-          <span class="work-entry__tag work-entry__tag--blue">SEO</span>
-          <span class="work-entry__tag">Content Writing</span>
-          <span class="work-entry__tag">Local Search</span>
-          <span class="work-entry__tag">Web Copy</span>
-        </div>
-      </div>
+      <!-- Work Cards -->
+      <div class="work-grid">
 
-      <div class="work-entry" data-company="hiup" data-task="social">
-        <span class="work-entry__company">Hi-Up Roofing</span>
-        <h3>Social Media Management</h3>
-        <p>Managed Hi-Up Roofing's social media presence — keeping their digital accounts active, professional, and consistently published for their local roofing market audience.</p>
-        <div class="work-entry__tasks">
-          <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>Full account management and posting schedule</div>
-          <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>Content calendar planning per platform</div>
-          <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>Meta Business Suite scheduling and publishing</div>
-          <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>Community management and audience engagement</div>
+        <div class="work-entry" data-company="hiup" data-task="social">
+          <span class="work-entry__company">Hi-Up Roofing</span>
+          <h3>Social Media Management</h3>
+          <p>Managed Hi-Up Roofing's social media presence — keeping their digital accounts active, professional, and consistently published for their local roofing market audience.</p>
+          <div class="work-entry__tasks">
+            <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>Full account management and posting schedule</div>
+            <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>Content calendar planning per platform</div>
+            <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>Meta Business Suite scheduling and publishing</div>
+            <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>Community management and audience engagement</div>
+          </div>
+          <div class="work-entry__tags">
+            <span class="work-entry__tag work-entry__tag--blue">Social Media</span>
+            <span class="work-entry__tag">Meta Business Suite</span>
+            <span class="work-entry__tag">Content Calendar</span>
+          </div>
         </div>
-        <div class="work-entry__tags">
-          <span class="work-entry__tag work-entry__tag--blue">Social Media</span>
-          <span class="work-entry__tag">Meta Business Suite</span>
-          <span class="work-entry__tag">Content Calendar</span>
-        </div>
-      </div>
 
-      <div class="work-entry" data-company="hiup" data-task="ai-content video design">
-        <span class="work-entry__company">Hi-Up Roofing</span>
-        <h3>AI Content &amp; Video Production</h3>
-        <p>Produced AI-assisted content and short-form video for Hi-Up Roofing's social channels — building visual credibility and consistent digital presence for this local roofing company.</p>
-        <div class="work-entry__tasks">
-          <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>Short-form video editing and production (CapCut)</div>
-          <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>AI-assisted content scripting (ChatGPT)</div>
-          <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>Canva graphics for social platforms</div>
-          <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>Promotional and service showcase content</div>
-          <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>Platform-optimized content formatting</div>
+        <div class="work-entry" data-company="hiup" data-task="ai-content video design">
+          <span class="work-entry__company">Hi-Up Roofing</span>
+          <h3>AI Content &amp; Video Production</h3>
+          <p>Produced AI-assisted content and short-form video for Hi-Up Roofing's social channels — building visual credibility and consistent digital presence for this local roofing company.</p>
+          <div class="work-entry__tasks">
+            <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>Short-form video editing and production (CapCut)</div>
+            <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>AI-assisted content scripting (ChatGPT)</div>
+            <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>Canva graphics for social platforms</div>
+            <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>Promotional and service showcase content</div>
+            <div class="work-entry__task-item"><span class="work-entry__task-dot"></span>Platform-optimized content formatting</div>
+          </div>
+          <div class="work-entry__tags">
+            <span class="work-entry__tag work-entry__tag--blue">AI Content</span>
+            <span class="work-entry__tag">Video Editing</span>
+            <span class="work-entry__tag">Graphic Design</span>
+            <span class="work-entry__tag">CapCut</span>
+            <span class="work-entry__tag">Canva</span>
+          </div>
         </div>
-        <div class="work-entry__tags">
-          <span class="work-entry__tag work-entry__tag--blue">AI Content</span>
-          <span class="work-entry__tag">Video Editing</span>
-          <span class="work-entry__tag">Graphic Design</span>
-          <span class="work-entry__tag">CapCut</span>
-          <span class="work-entry__tag">Canva</span>
-        </div>
-      </div>
 
-    </div><!-- /work-grid -->
+      </div><!-- /work-grid hiup -->
 
-    <div class="no-results" id="no-results">No work entries match the selected filters. Try a different combination.</div>
+    </div><!-- /block-hiup -->
+
+    <div class="no-results" id="no-results" style="display:none;text-align:center;padding:3rem;color:var(--text-muted);font-family:var(--font-ui);">No work entries match the selected filters. Try a different combination.</div>
 
   </div>
 </section>
@@ -1297,23 +1439,38 @@
   let activeCompany = 'all';
   let activeTask    = 'all';
 
-  const companyBtns = document.querySelectorAll('[data-company]');
-  const taskBtns    = document.querySelectorAll('[data-task]');
-  const entries     = document.querySelectorAll('.work-entry');
-  const noResults   = document.getElementById('no-results');
+  const companyBtns  = document.querySelectorAll('[data-company]');
+  const taskBtns     = document.querySelectorAll('[data-task]');
+  const entries      = document.querySelectorAll('.work-entry');
+  const clientBlocks = document.querySelectorAll('.client-block');
+  const noResults    = document.getElementById('no-results');
 
   function applyFilters() {
-    let visible = 0;
+    let totalVisible = 0;
+
+    // Show/hide individual work entries based on task filter
     entries.forEach(entry => {
-      const company  = entry.dataset.company;
-      const tasks    = (entry.dataset.task || '').split(' ');
+      const company     = entry.dataset.company;
+      const tasks       = (entry.dataset.task || '').split(' ');
       const companyMatch = activeCompany === 'all' || company === activeCompany;
       const taskMatch    = activeTask    === 'all' || tasks.includes(activeTask);
       const show = companyMatch && taskMatch;
       entry.classList.toggle('hidden', !show);
-      if (show) visible++;
+      if (show) totalVisible++;
     });
-    noResults.classList.toggle('visible', visible === 0);
+
+    // Show/hide entire client blocks based on company filter
+    clientBlocks.forEach(block => {
+      const blockId       = block.id; // "block-fcf" or "block-hiup"
+      const blockCompany  = blockId.replace('block-', '');
+      const companyMatch  = activeCompany === 'all' || activeCompany === blockCompany;
+      // Also hide block if all its entries are hidden by task filter
+      const hasVisible    = Array.from(block.querySelectorAll('.work-entry'))
+                              .some(e => !e.classList.contains('hidden'));
+      block.style.display = (companyMatch && hasVisible) ? '' : 'none';
+    });
+
+    noResults.style.display = totalVisible === 0 ? 'block' : 'none';
   }
 
   companyBtns.forEach(btn => {
