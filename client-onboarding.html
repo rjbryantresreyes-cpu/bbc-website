@@ -401,6 +401,38 @@
       padding:3px 10px; border-radius:100px;
     }
 
+    /* ── Optional Access Toggle ── */
+    .access-toggle { margin-top:0.9rem; }
+    .access-toggle-btn {
+      display:inline-flex; align-items:center; gap:0.6rem;
+      background:none; border:1.5px dashed rgba(184,146,62,0.35);
+      border-radius:var(--radius-sm); padding:0.45rem 1rem;
+      font-family:var(--font-ui); font-size:0.78rem; font-weight:500;
+      color:var(--gold); cursor:pointer; transition:all 0.2s ease;
+    }
+    .access-toggle-btn:hover { background:rgba(184,146,62,0.06); border-color:var(--gold); }
+    .access-toggle-btn.open { background:rgba(184,146,62,0.06); border-style:solid; }
+    .toggle-arrow { font-size:0.68rem; transition:transform 0.22s; display:inline-block; }
+    .access-toggle-btn.open .toggle-arrow { transform:rotate(180deg); }
+    .opt-badge {
+      font-size:0.6rem; font-weight:700; text-transform:uppercase; letter-spacing:0.1em;
+      background:rgba(184,146,62,0.12); color:var(--gold);
+      padding:2px 7px; border-radius:100px;
+    }
+    .access-toggle-body {
+      display:none; margin-top:0.85rem;
+      background:rgba(184,146,62,0.03);
+      border:1px solid rgba(184,146,62,0.14);
+      border-radius:var(--radius); padding:1.25rem;
+    }
+    .access-disclaimer {
+      font-family:var(--font-ui); font-size:0.73rem; color:var(--text-muted);
+      line-height:1.6; background:rgba(31,53,87,0.04);
+      border-left:3px solid var(--light-blue);
+      border-radius:0 var(--radius-sm) var(--radius-sm) 0;
+      padding:0.6rem 0.9rem; margin-bottom:1rem;
+    }
+
     /* ══════════════════════════════════════════
        SUBMIT SECTION ,  dark
     ══════════════════════════════════════════ */
@@ -696,6 +728,29 @@
         </div>
       </div>
 
+      <div class="access-toggle">
+        <button type="button" class="access-toggle-btn" onclick="this.classList.toggle('open');this.nextElementSibling.style.display=this.classList.contains('open')?'block':'none'">
+          🔐 Share website &amp; hosting access &nbsp;<span class="opt-badge">Optional</span><span class="toggle-arrow">▾</span>
+        </button>
+        <div class="access-toggle-body">
+          <p class="access-disclaimer">🔒 Only fill this in if BBC will be managing your website or hosting. Completely optional — you can also share credentials during your onboarding call instead.</p>
+          <div class="field-row">
+            <div class="field-group" style="margin-bottom:0;">
+              <label class="field-label" for="websiteLoginUser">Login Email / Username</label>
+              <input type="text" id="websiteLoginUser" name="websiteLoginUser" placeholder="admin@yourbusiness.com" autocomplete="off" />
+            </div>
+            <div class="field-group" style="margin-bottom:0;">
+              <label class="field-label" for="websiteLoginPass">Password</label>
+              <input type="password" id="websiteLoginPass" name="websiteLoginPass" placeholder="••••••••" autocomplete="new-password" />
+            </div>
+          </div>
+          <div class="field-group" style="margin-top:0.75rem;margin-bottom:0;">
+            <label class="field-label" for="websiteLoginNotes">Platform Notes</label>
+            <input type="text" id="websiteLoginNotes" name="websiteLoginNotes" placeholder="e.g. GoDaddy, Shopify Admin, WordPress — include any 2FA notes if applicable" />
+          </div>
+        </div>
+      </div>
+
       <div class="field-group">
         <label class="field-label">Social Media Profiles</label>
         <p class="field-hint" style="margin-bottom:0.85rem;">Paste links to all active profiles. Leave blank if you don't have one yet.</p>
@@ -717,6 +772,45 @@
           <div class="field-group" style="margin-bottom:0;">
             <label class="field-label" for="otherSocials" style="font-weight:500;">Other (LinkedIn, YouTube, Pinterest…)</label>
             <input type="text" id="otherSocials" name="otherSocials" placeholder="Paste links separated by commas" />
+          </div>
+        </div>
+      </div>
+
+      <div class="access-toggle">
+        <button type="button" class="access-toggle-btn" onclick="this.classList.toggle('open');this.nextElementSibling.style.display=this.classList.contains('open')?'block':'none'">
+          🔐 Share social media access &nbsp;<span class="opt-badge">Optional</span><span class="toggle-arrow">▾</span>
+        </button>
+        <div class="access-toggle-body">
+          <p class="access-disclaimer">🔒 Only share credentials for platforms BBC will be managing. Leave any platform blank that you're keeping private. You can also do this after your onboarding call.</p>
+          <div class="field-row" style="margin-bottom:0.85rem;">
+            <div class="field-group" style="margin-bottom:0;">
+              <label class="field-label" style="font-weight:500;">Instagram Username</label>
+              <input type="text" id="igLoginUser" name="igLoginUser" placeholder="@yourbrand" autocomplete="off" />
+            </div>
+            <div class="field-group" style="margin-bottom:0;">
+              <label class="field-label" style="font-weight:500;">Instagram Password</label>
+              <input type="password" id="igLoginPass" name="igLoginPass" placeholder="••••••••" autocomplete="new-password" />
+            </div>
+          </div>
+          <div class="field-row" style="margin-bottom:0.85rem;">
+            <div class="field-group" style="margin-bottom:0;">
+              <label class="field-label" style="font-weight:500;">Facebook Login Email</label>
+              <input type="email" id="fbLoginUser" name="fbLoginUser" placeholder="you@email.com" autocomplete="off" />
+            </div>
+            <div class="field-group" style="margin-bottom:0;">
+              <label class="field-label" style="font-weight:500;">Facebook Password</label>
+              <input type="password" id="fbLoginPass" name="fbLoginPass" placeholder="••••••••" autocomplete="new-password" />
+            </div>
+          </div>
+          <div class="field-row">
+            <div class="field-group" style="margin-bottom:0;">
+              <label class="field-label" style="font-weight:500;">TikTok Username</label>
+              <input type="text" id="ttLoginUser" name="ttLoginUser" placeholder="@yourbrand" autocomplete="off" />
+            </div>
+            <div class="field-group" style="margin-bottom:0;">
+              <label class="field-label" style="font-weight:500;">TikTok Password</label>
+              <input type="password" id="ttLoginPass" name="ttLoginPass" placeholder="••••••••" autocomplete="new-password" />
+            </div>
           </div>
         </div>
       </div>
@@ -970,7 +1064,7 @@
       <div class="divider-bar"></div>
       <p class="section-desc">
         BBC needs access to your platforms to manage, build, and optimize your business.
-        Tell us what you have. You'll provide actual login details securely, not here.
+        Tell us what you have. If you already shared login credentials in Section 1, no need to repeat them here.
       </p>
 
       <div class="access-card">
@@ -1579,10 +1673,19 @@ document.getElementById('onboarding-form').addEventListener('submit', async (e) 
     businessLocation:     document.getElementById('businessLocation').value.trim(),
     businessWebsite:      document.getElementById('businessWebsite').value.trim(),
     businessStage:        document.getElementById('businessStage').value,
+    websiteLoginUser:     document.getElementById('websiteLoginUser').value.trim(),
+    websiteLoginPass:     document.getElementById('websiteLoginPass').value,
+    websiteLoginNotes:    document.getElementById('websiteLoginNotes').value.trim(),
     instagram:            document.getElementById('instagram').value.trim(),
     facebook:             document.getElementById('facebook').value.trim(),
     tiktok:               document.getElementById('tiktok').value.trim(),
     otherSocials:         document.getElementById('otherSocials').value.trim(),
+    igLoginUser:          document.getElementById('igLoginUser').value.trim(),
+    igLoginPass:          document.getElementById('igLoginPass').value,
+    fbLoginUser:          document.getElementById('fbLoginUser').value.trim(),
+    fbLoginPass:          document.getElementById('fbLoginPass').value,
+    ttLoginUser:          document.getElementById('ttLoginUser').value.trim(),
+    ttLoginPass:          document.getElementById('ttLoginPass').value,
     businessDescription:  document.getElementById('businessDescription').value.trim(),
     primaryGoal:          document.getElementById('primaryGoal').value,
     targetTimeline:       document.getElementById('targetTimeline').value,
