@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Weekly Task Submission | Balay ni Bruno &amp; Co.</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Lora:ital,wght@0,400;0,500;1,400;1,500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --deep-blue:   #1F3557;
+      --mid-blue:    #4B6FA5;
+      --warm-blue:   #6D8FC7;
+      --light-blue:  #A8C0DC;
+      --pale-blue:   #DDE8F2;
+      --bg-primary:  #F5F1EA;
+      --bg-section:  #EDE8DF;
+      --bg-card:     #FDFAF6;
+      --bg-card-alt: #FAF6EF;
+      --bg-dark:     #1C2E47;
+      --bg-footer:   #172540;
+      --neutral-100: #E8E2D6;
+      --neutral-200: #D5CEC3;
+      --text-ink:    #2A3040;
+      --text-body:   #4E5666;
+      --text-muted:  #888FA0;
+      --text-warm:   #F5F1EA;
+      --gold:        #B8923E;
+      --gold-pale:   #E6CFA0;
+      --gold-warm:   #D4A84B;
+      --sage:        #4E9E74;
+      --font-display:'Playfair Display', Georgia, serif;
+      --font-body:   'Lora', Georgia, serif;
+      --font-ui:     'DM Sans', system-ui, sans-serif;
+      --max-width:   820px;
+      --radius-sm:   8px;
+      --radius:      16px;
+      --radius-lg:   24px;
+      --radius-xl:   32px;
+      --shadow-xs:   0 1px 6px  rgba(85,60,35,0.055);
+      --shadow-sm:   0 3px 18px rgba(85,60,35,0.08);
+      --shadow-md:   0 7px 36px rgba(85,60,35,0.11);
+      --shadow-lg:   0 14px 56px rgba(85,60,35,0.14);
+      --border-card: 1px solid rgba(85,60,35,0.09);
+      --border-warm: 1px solid rgba(85,60,35,0.12);
+      --s1:.5rem; --s2:1rem; --s3:1.5rem; --s4:2.5rem; --s5:4rem; --s6:6rem;
+    }
+
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body {
+      font-family:var(--font-body);
+      color:var(--text-ink);
+      background:var(--bg-primary);
+      line-height:1.6;
+      -webkit-font-smoothing:antialiased;
+    }
+    body::after {
+      content:'';
+      position:fixed; inset:0;
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23n)' opacity='0.026'/%3E%3C/svg%3E");
+      pointer-events:none; z-index:9999; mix-blend-mode:multiply;
+    }
+
+    h1,h2,h3,h4 { font-family:var(--font-display); line-height:1.22; color:var(--deep-blue); }
+    p { font-family:var(--font-body); font-size:1rem; line-height:1.87; color:var(--text-body); }
+    a { text-decoration:none; color:var(--mid-blue); }
+
+    .eyebrow {
+      display:inline-block; font-family:var(--font-ui);
+      font-size:0.68rem; font-weight:600;
+      letter-spacing:0.17em; text-transform:uppercase;
+      color:var(--warm-blue); margin-bottom:var(--s2);
+    }
+
+    .container { max-width:var(--max-width); margin:0 auto; padding:0 var(--s4); }
+    @media(max-width:640px){ .container { padding:0 var(--s2); } }
+
+    .divider-bar {
+      width:44px; height:2.5px;
+      background:linear-gradient(90deg,var(--gold),var(--warm-blue));
+      border-radius:2px; margin:var(--s2) 0 var(--s3); opacity:0.8;
+    }
+
+    /* ── Header ── */
+    .site-header {
+      background:var(--bg-dark); padding:1.1rem var(--s4);
+      display:flex; align-items:center; gap:1rem;
+    }
+    .site-header__logo {
+      font-family:var(--font-display); font-size:1rem; font-weight:700;
+      color:rgba(245,241,234,0.9); white-space:nowrap;
+    }
+    .site-header__badge {
+      font-family:var(--font-ui); font-size:0.62rem; font-weight:700;
+      text-transform:uppercase; letter-spacing:0.12em;
+      background:rgba(184,146,62,0.18); color:var(--gold-pale);
+      padding:3px 10px; border-radius:100px;
+    }
+
+    /* ── Page Hero ── */
+    .page-hero {
+      background:linear-gradient(135deg, var(--bg-dark) 0%, #2a3f60 100%);
+      padding:var(--s5) var(--s4) var(--s4);
+      text-align:center; position:relative; overflow:hidden;
+    }
+    .page-hero::before {
+      content:'';
+      position:absolute; top:-60px; left:50%; transform:translateX(-50%);
+      width:600px; height:400px;
+      background:radial-gradient(ellipse, rgba(184,146,62,0.08) 0%, transparent 70%);
+      pointer-events:none;
+    }
+    .page-hero h1 { color:var(--text-warm); font-size:clamp(1.8rem,4vw,2.8rem); margin-bottom:0.75rem; position:relative; z-index:1; }
+    .page-hero p { color:rgba(245,241,234,0.65); font-size:0.95rem; max-width:520px; margin:0 auto; position:relative; z-index:1; }
+
+    /* ── Form base ── */
+    .form-wrap { padding:var(--s4) 0 var(--s6); }
+
+    .field-label {
+      display:block; font-family:var(--font-ui); font-size:0.78rem;
+      font-weight:600; color:var(--deep-blue); margin-bottom:0.4rem;
+      letter-spacing:0.01em;
+    }
+    .req { color:var(--gold); margin-left:2px; }
+    .field-hint {
+      font-family:var(--font-ui); font-size:0.72rem;
+      color:var(--text-muted); margin-top:0.3rem;
+    }
+    .field-group { margin-bottom:1.1rem; }
+    .field-row { display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-bottom:1.1rem; }
+    @media(max-width:560px){ .field-row { grid-template-columns:1fr; } }
+
+    input[type="text"],
+    input[type="url"],
+    input[type="date"],
+    input[type="email"],
+    textarea,
+    select {
+      width:100%; padding:0.65rem 0.9rem;
+      background:var(--bg-card); border:var(--border-warm);
+      border-radius:var(--radius-sm); font-family:var(--font-ui);
+      font-size:0.88rem; color:var(--text-ink);
+      transition:border-color 0.2s, box-shadow 0.2s;
+      appearance:none; outline:none;
+    }
+    input:focus, textarea:focus, select:focus {
+      border-color:var(--mid-blue);
+      box-shadow:0 0 0 3px rgba(75,111,165,0.1);
+    }
+    textarea { resize:vertical; line-height:1.6; }
+
+    /* ── Info Card ── */
+    .info-card {
+      background:var(--bg-card);
+      border:var(--border-warm);
+      border-radius:var(--radius-lg);
+      padding:var(--s3);
+      box-shadow:var(--shadow-sm);
+      margin-bottom:var(--s3);
+    }
+    .info-card__title {
+      font-family:var(--font-display); font-size:1.05rem; font-weight:600;
+      color:var(--deep-blue); margin-bottom:var(--s2);
+      padding-bottom:0.75rem; border-bottom:var(--border-card);
+    }
+
+    /* ── Task Card ── */
+    .task-list { display:flex; flex-direction:column; gap:1.1rem; margin-bottom:1.25rem; }
+
+    .task-card {
+      background:var(--bg-card);
+      border:var(--border-warm);
+      border-radius:var(--radius-lg);
+      padding:var(--s3);
+      box-shadow:var(--shadow-sm);
+      position:relative;
+      transition:box-shadow 0.2s;
+    }
+    .task-card:hover { box-shadow:var(--shadow-md); }
+
+    .task-card__header {
+      display:flex; align-items:center; justify-content:space-between;
+      margin-bottom:var(--s2); padding-bottom:0.75rem;
+      border-bottom:var(--border-card);
+    }
+    .task-card__num {
+      font-family:var(--font-ui); font-size:0.72rem; font-weight:700;
+      text-transform:uppercase; letter-spacing:0.12em;
+      color:var(--text-muted);
+    }
+    .task-card__num span {
+      font-family:var(--font-display); font-size:1.1rem; font-weight:600;
+      color:var(--deep-blue); margin-left:0.4rem;
+    }
+    .task-remove {
+      width:28px; height:28px; border-radius:50%;
+      background:rgba(200,60,60,0.07); border:1px solid rgba(200,60,60,0.15);
+      color:rgba(180,40,40,0.6); font-size:1rem; line-height:1;
+      cursor:pointer; display:flex; align-items:center; justify-content:center;
+      transition:all 0.18s; font-family:var(--font-ui);
+    }
+    .task-remove:hover { background:rgba(200,60,60,0.14); color:rgba(180,40,40,0.9); border-color:rgba(200,60,60,0.3); }
+
+    /* ── Add Task Button ── */
+    .add-task-btn {
+      width:100%; padding:0.85rem;
+      background:rgba(31,53,87,0.04); border:2px dashed rgba(31,53,87,0.2);
+      border-radius:var(--radius-lg); cursor:pointer;
+      font-family:var(--font-ui); font-size:0.88rem; font-weight:600;
+      color:var(--mid-blue); display:flex; align-items:center; justify-content:center;
+      gap:0.5rem; transition:all 0.2s;
+    }
+    .add-task-btn:hover { background:rgba(31,53,87,0.07); border-color:var(--mid-blue); color:var(--deep-blue); }
+    .add-task-btn .plus { font-size:1.2rem; line-height:1; }
+
+    /* ── Status badge ── */
+    .status-row { display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
+    @media(max-width:560px){ .status-row { grid-template-columns:1fr; } }
+
+    /* ── Submit Section ── */
+    .submit-section {
+      background:var(--bg-dark); padding:var(--s5) var(--s4);
+      text-align:center; position:relative; overflow:hidden;
+    }
+    .submit-section::before {
+      content:'';
+      position:absolute; top:-80px; left:-80px;
+      width:500px; height:500px;
+      background:radial-gradient(ellipse, rgba(184,146,62,0.06) 0%, transparent 65%);
+      pointer-events:none;
+    }
+    .submit-inner { max-width:520px; margin:0 auto; position:relative; z-index:1; }
+    .submit-inner h2 { color:var(--text-warm); margin-bottom:0.6rem; }
+    .submit-inner p { color:rgba(245,241,234,0.55); font-size:0.88rem; margin-bottom:var(--s3); }
+
+    .btn-submit {
+      display:inline-flex; align-items:center; gap:0.6rem;
+      background:var(--gold); color:#fff;
+      font-family:var(--font-ui); font-size:0.92rem; font-weight:600;
+      padding:0.85rem 2.5rem; border-radius:100px;
+      border:none; cursor:pointer;
+      transition:background 0.2s, transform 0.15s, box-shadow 0.2s;
+      box-shadow:0 4px 20px rgba(184,146,62,0.35);
+    }
+    .btn-submit:hover { background:var(--gold-warm); transform:translateY(-1px); box-shadow:0 6px 28px rgba(184,146,62,0.45); }
+    .btn-submit:disabled { opacity:0.6; cursor:not-allowed; transform:none; }
+
+    .spinner {
+      display:none; width:16px; height:16px;
+      border:2px solid rgba(255,255,255,0.3);
+      border-top-color:#fff; border-radius:50%;
+      animation:spin 0.7s linear infinite;
+    }
+    @keyframes spin { to { transform:rotate(360deg); } }
+
+    /* ── Validation Banner ── */
+    .validation-banner {
+      display:none; background:rgba(180,40,40,0.08);
+      border:1px solid rgba(180,40,40,0.2); border-radius:var(--radius);
+      padding:1rem 1.25rem; margin-bottom:var(--s3);
+      font-family:var(--font-ui); font-size:0.82rem; color:#8B2020;
+    }
+
+    /* ── Success State ── */
+    .success-state {
+      display:none; text-align:center;
+      background:rgba(78,158,116,0.07); border:1px solid rgba(78,158,116,0.2);
+      border-radius:var(--radius-xl); padding:var(--s4);
+      margin-bottom:var(--s3);
+    }
+    .success-state .icon { font-size:2.5rem; margin-bottom:0.75rem; }
+    .success-state h3 { color:var(--sage); margin-bottom:0.5rem; }
+    .success-state p { font-size:0.88rem; color:var(--text-muted); }
+
+    /* ── Error msg ── */
+    .error-msg {
+      display:none; font-family:var(--font-ui); font-size:0.72rem;
+      color:#B03030; margin-top:0.3rem;
+    }
+    .field-error input, .field-error textarea, .field-error select { border-color:#C0392B !important; }
+    .field-error .error-msg { display:block; }
+
+    /* ── Footer ── */
+    .page-footer {
+      background:var(--bg-footer); padding:1.5rem var(--s4);
+      text-align:center;
+      font-family:var(--font-ui); font-size:0.72rem; color:rgba(245,241,234,0.3);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="site-header">
+    <span class="site-header__logo">Balay ni Bruno &amp; Co.</span>
+    <span class="site-header__badge">Internal — Team Only</span>
+  </header>
+
+  <!-- Hero -->
+  <section class="page-hero">
+    <span class="eyebrow" style="color:var(--gold-pale);">BBC Team Portal</span>
+    <h1>Weekly Task Submission</h1>
+    <p>Log your tasks for the week — client, business, what you did, and what you delivered. Add as many tasks as needed.</p>
+  </section>
+
+  <!-- Form -->
+  <div class="form-wrap">
+    <div class="container">
+
+      <!-- Validation Banner -->
+      <div class="validation-banner" id="validation-banner">
+        Please fill in all required fields before submitting.
+      </div>
+
+      <!-- Success State -->
+      <div class="success-state" id="success-state">
+        <div class="icon">✅</div>
+        <h3>Tasks Submitted</h3>
+        <p>Your tasks for this week have been logged. Bruno will review them shortly.</p>
+      </div>
+
+      <!-- VA Info -->
+      <div class="info-card">
+        <p class="info-card__title">Your Information</p>
+        <div class="field-row">
+          <div class="field-group" style="margin-bottom:0;">
+            <label class="field-label" for="vaName">Your Name <span class="req">*</span></label>
+            <select id="vaName" name="vaName" required>
+              <option value="">— Select your name —</option>
+              <option>Vi Carmelle Tres Reyes</option>
+              <option>Kenz Lloyd D. Villaflores</option>
+              <option>Ryan Crismin Bernaldez</option>
+              <option>Kirsty Daryl A. Agadia</option>
+              <option>Al Carmelle Managase</option>
+              <option>Krizza Managase</option>
+            </select>
+            <p class="error-msg" id="err-vaName">Please select your name.</p>
+          </div>
+          <div class="field-group" style="margin-bottom:0;">
+            <label class="field-label" for="weekOf">Week Of <span class="req">*</span></label>
+            <input type="date" id="weekOf" name="weekOf" required />
+            <p class="field-hint">Pick any day within the week you're reporting on.</p>
+            <p class="error-msg" id="err-weekOf">Please select the week.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Task List -->
+      <div class="task-list" id="taskList"></div>
+
+      <!-- Add Task Button -->
+      <button type="button" class="add-task-btn" id="addTaskBtn" onclick="addTask()">
+        <span class="plus">+</span> Add Task
+      </button>
+
+    </div>
+  </div>
+
+  <!-- Submit -->
+  <section class="submit-section">
+    <div class="submit-inner">
+      <h2>Ready to Submit?</h2>
+      <p>Double-check your tasks and outputs before sending. Once submitted, Bruno gets notified.</p>
+      <button type="button" class="btn-submit" id="submit-btn" onclick="handleSubmit()">
+        <span id="btn-text">Submit Tasks</span>
+        <span class="spinner" id="btn-spinner"></span>
+      </button>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="page-footer">
+    &copy; 2026 Balay ni Bruno &amp; Co. &mdash; Internal Team Portal
+  </footer>
+
+  <!-- Datalist for known clients -->
+  <datalist id="client-suggestions">
+    <option value="Home Vision Studio">
+    <option value="AJ Battle Foundation">
+    <option value="Blackbelt Commerce">
+    <option value="Cavalry Realty Group">
+    <option value="Top Producer Investment Capital">
+    <option value="Crown Limited Supply">
+    <option value="All Ryze Operations">
+    <option value="DuDilagent AI">
+    <option value="First Class Finishes">
+    <option value="HI-U Roofing">
+    <option value="S. Riviere Hair Collection">
+    <option value="Exquisite AV">
+    <option value="ESE Socials">
+    <option value="Max Premium Tax">
+    <option value="Balay ni Bruno &amp; Co. (Internal)">
+  </datalist>
+
+<script>
+const SUBMIT_URL = 'https://script.google.com/macros/s/PLACEHOLDER_TASK_SUBMISSION/exec';
+
+let taskCount = 0;
+
+function addTask() {
+  taskCount++;
+  const list = document.getElementById('taskList');
+  const card = document.createElement('div');
+  card.className = 'task-card';
+  card.id = `task-${taskCount}`;
+  card.innerHTML = `
+    <div class="task-card__header">
+      <div class="task-card__num">Task <span>#${taskCount}</span></div>
+      ${taskCount > 1 ? `<button type="button" class="task-remove" onclick="removeTask('task-${taskCount}')" title="Remove task">&times;</button>` : '<div></div>'}
+    </div>
+    <div class="field-row">
+      <div class="field-group" style="margin-bottom:0;">
+        <label class="field-label">Client Name <span class="req">*</span></label>
+        <input type="text" name="task_client_${taskCount}" placeholder="e.g. Home Vision Studio" list="client-suggestions" data-required="true" />
+        <p class="error-msg">Please enter the client name.</p>
+      </div>
+      <div class="field-group" style="margin-bottom:0;">
+        <label class="field-label">Business / Brand Name <span class="req">*</span></label>
+        <input type="text" name="task_business_${taskCount}" placeholder="e.g. homevisionstudio.com" data-required="true" />
+        <p class="error-msg">Please enter the business name.</p>
+      </div>
+    </div>
+    <div class="field-group">
+      <label class="field-label">Task Title <span class="req">*</span></label>
+      <input type="text" name="task_title_${taskCount}" placeholder="e.g. Uploaded 5 new product photos to Shopify" data-required="true" />
+      <p class="error-msg">Please enter a task title.</p>
+    </div>
+    <div class="field-group">
+      <label class="field-label">Task Description <span class="req">*</span></label>
+      <textarea name="task_desc_${taskCount}" rows="3" placeholder="Describe what you did in detail — steps taken, decisions made, anything Bruno should know." data-required="true"></textarea>
+      <p class="error-msg">Please describe the task.</p>
+    </div>
+    <div class="status-row">
+      <div class="field-group" style="margin-bottom:0;">
+        <label class="field-label">Output / Deliverable</label>
+        <input type="text" name="task_output_${taskCount}" placeholder="Paste a link, file name, or describe the output" />
+        <p class="field-hint">Drive link, screenshot, published URL, doc — anything that proves it's done.</p>
+      </div>
+      <div class="field-group" style="margin-bottom:0;">
+        <label class="field-label">Status <span class="req">*</span></label>
+        <select name="task_status_${taskCount}" data-required="true">
+          <option value="">— Select status —</option>
+          <option value="Completed">Completed</option>
+          <option value="In Progress">In Progress</option>
+          <option value="Needs Review">Needs Review</option>
+          <option value="Blocked">Blocked</option>
+        </select>
+        <p class="error-msg">Please select a status.</p>
+      </div>
+    </div>
+  `;
+  list.appendChild(card);
+  card.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  renumberTasks();
+}
+
+function removeTask(id) {
+  const card = document.getElementById(id);
+  if (card) {
+    card.style.opacity = '0';
+    card.style.transform = 'translateY(-8px)';
+    card.style.transition = 'opacity 0.2s, transform 0.2s';
+    setTimeout(() => { card.remove(); renumberTasks(); }, 200);
+  }
+}
+
+function renumberTasks() {
+  const cards = document.querySelectorAll('.task-card');
+  cards.forEach((card, i) => {
+    const num = card.querySelector('.task-card__num');
+    if (num) num.innerHTML = `Task <span>#${i + 1}</span>`;
+    const removeBtn = card.querySelector('.task-remove');
+    if (cards.length === 1 && removeBtn) removeBtn.style.display = 'none';
+    else if (removeBtn) removeBtn.style.display = 'flex';
+  });
+}
+
+function collectTasks() {
+  const cards = document.querySelectorAll('.task-card');
+  const tasks = [];
+  cards.forEach((card, i) => {
+    const get = (name) => {
+      const el = card.querySelector(`[name="${name.replace('_N_', `_${i + 1}_`)}"]`);
+      return el ? el.value.trim() : '';
+    };
+    tasks.push({
+      client:   card.querySelector(`input[name^="task_client_"]`)?.value.trim()   || '',
+      business: card.querySelector(`input[name^="task_business_"]`)?.value.trim() || '',
+      title:    card.querySelector(`input[name^="task_title_"]`)?.value.trim()    || '',
+      desc:     card.querySelector(`textarea[name^="task_desc_"]`)?.value.trim()  || '',
+      output:   card.querySelector(`input[name^="task_output_"]`)?.value.trim()   || '',
+      status:   card.querySelector(`select[name^="task_status_"]`)?.value          || '',
+    });
+  });
+  return tasks;
+}
+
+function validateForm() {
+  let valid = true;
+
+  // VA Name
+  const vaEl = document.getElementById('vaName');
+  const vaGroup = vaEl.closest('.field-group');
+  if (!vaEl.value) { vaGroup.classList.add('field-error'); valid = false; }
+  else vaGroup.classList.remove('field-error');
+
+  // Week Of
+  const weekEl = document.getElementById('weekOf');
+  const weekGroup = weekEl.closest('.field-group');
+  if (!weekEl.value) { weekGroup.classList.add('field-error'); valid = false; }
+  else weekGroup.classList.remove('field-error');
+
+  // Tasks
+  const cards = document.querySelectorAll('.task-card');
+  if (cards.length === 0) { valid = false; }
+  cards.forEach(card => {
+    card.querySelectorAll('[data-required="true"]').forEach(field => {
+      const group = field.closest('.field-group');
+      if (!field.value.trim()) { group.classList.add('field-error'); valid = false; }
+      else group.classList.remove('field-error');
+    });
+  });
+
+  return valid;
+}
+
+async function handleSubmit() {
+  document.getElementById('validation-banner').style.display = 'none';
+
+  if (document.querySelectorAll('.task-card').length === 0) {
+    document.getElementById('validation-banner').textContent = 'Please add at least one task before submitting.';
+    document.getElementById('validation-banner').style.display = 'block';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    return;
+  }
+
+  if (!validateForm()) {
+    document.getElementById('validation-banner').textContent = 'Please fill in all required fields before submitting.';
+    document.getElementById('validation-banner').style.display = 'block';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    return;
+  }
+
+  const tasks = collectTasks();
+  const payload = {
+    submittedAt:  new Date().toISOString(),
+    vaName:       document.getElementById('vaName').value,
+    weekOf:       document.getElementById('weekOf').value,
+    taskCount:    tasks.length,
+    tasks,
+    formVersion:  '1.0',
+  };
+
+  const btn     = document.getElementById('submit-btn');
+  const btnText = document.getElementById('btn-text');
+  const spinner = document.getElementById('btn-spinner');
+  btn.disabled        = true;
+  btnText.textContent = 'Submitting…';
+  spinner.style.display = 'inline-block';
+
+  try {
+    const res = await fetch(SUBMIT_URL, {
+      method: 'POST',
+      body: JSON.stringify(payload),
+    });
+    if (res.ok) {
+      document.getElementById('success-state').style.display = 'block';
+      document.getElementById('taskList').style.display = 'none';
+      document.getElementById('addTaskBtn').style.display = 'none';
+      document.querySelector('.submit-section').style.display = 'none';
+      document.getElementById('success-state').scrollIntoView({ behavior: 'smooth' });
+    } else {
+      throw new Error('Server error');
+    }
+  } catch {
+    btnText.textContent = 'Submit Tasks';
+    spinner.style.display = 'none';
+    btn.disabled = false;
+    document.getElementById('validation-banner').textContent = 'Something went wrong. Please try again or contact Bruno directly.';
+    document.getElementById('validation-banner').style.display = 'block';
+  }
+}
+
+// Auto-fill Business Name when Client is picked from suggestions
+document.addEventListener('input', (e) => {
+  if (e.target.matches('input[name^="task_client_"]')) {
+    const card = e.target.closest('.task-card');
+    const businessField = card.querySelector('input[name^="task_business_"]');
+    if (businessField && !businessField.value) {
+      const map = {
+        'Home Vision Studio':             'homevisionstudio.com',
+        'AJ Battle Foundation':           'theajbattlefoundation.org',
+        'Blackbelt Commerce':             'blackbeltcommerce.com',
+        'Cavalry Realty Group':           'callthecavalrygroup.com',
+        'Top Producer Investment Capital':'topproducerinvestmentcapital.com',
+        'Crown Limited Supply':           'crownlimitedsupply.com',
+        'All Ryze Operations':            'All Ryze Operations',
+        'DuDilagent AI':                  'DuDilagent AI',
+        'First Class Finishes':           'firstclass-finishes.com',
+        'HI-U Roofing':                   'hi-uproofing.com',
+        'S. Riviere Hair Collection':     'S. Riviere Hair Collection',
+        'Exquisite AV':                   'exquisite-av.com',
+        'ESE Socials':                    'ESE Socials',
+        'Max Premium Tax':                'Max Premium Tax',
+        'Balay ni Bruno & Co. (Internal)':'balaynibruno.co',
+      };
+      if (map[e.target.value]) businessField.value = map[e.target.value];
+    }
+  }
+});
+
+// Start with one task on load
+addTask();
+</script>
+
+</body>
+</html>
