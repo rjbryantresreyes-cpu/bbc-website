@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Weekly Task Submission | Balay ni Bruno &amp; Co.</title>
+  <title>Task Submission | Balay ni Bruno &amp; Co.</title>
   <meta name="robots" content="noindex, nofollow" />
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -304,7 +304,7 @@
   <!-- Hero -->
   <section class="page-hero">
     <span class="eyebrow" style="color:var(--gold-pale);">BBC Team Portal</span>
-    <h1>Weekly Task Submission</h1>
+    <h1>Task Submission</h1>
     <p>Log your tasks for the week — client, business, what you did, and what you delivered. Add as many tasks as needed.</p>
   </section>
 
@@ -569,7 +569,7 @@ async function handleSubmit() {
   ).join('\n\n---\n\n');
 
   try {
-    const res = await fetch('/', {
+    const res = await fetch('/task-submission.html', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body: new URLSearchParams({
