@@ -1091,6 +1091,81 @@
         </div>
       </div>
 
+      <!-- Optional Access Sharing -->
+      <div style="margin-top:2rem; padding-top:1.5rem; border-top:1px dashed rgba(85,60,35,0.18);">
+        <p class="field-label" style="margin-bottom:0.4rem;">Optional — Share access now</p>
+        <p class="field-hint" style="margin-bottom:1rem;">If you're comfortable sharing login credentials at this stage, you can do that below. Everything stays private and is only accessible to the Balay ni Bruno &amp; Co. team. If you'd prefer to share these later, skip this entirely.</p>
+
+        <!-- Website Access Toggle -->
+        <div class="access-toggle">
+          <button type="button" class="access-toggle-btn" onclick="this.classList.toggle('open');this.nextElementSibling.style.display=this.classList.contains('open')?'block':'none';">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:0.45rem;flex-shrink:0;"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+            Share Website Login (Optional)
+            <svg class="toggle-arrow" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="margin-left:auto;flex-shrink:0;"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="access-toggle-body" style="display:none; padding:1.25rem; margin-top:0.5rem; border-radius:0.5rem;">
+            <p class="access-disclaimer" style="font-size:0.82rem; color:var(--warm-brown); background:rgba(184,146,62,0.06); border-left:3px solid var(--gold); padding:0.6rem 0.85rem; border-radius:0 0.4rem 0.4rem 0; margin-bottom:1rem;">🔒 These credentials are kept private and shared only with the BBC team. Never stored with a third party.</p>
+            <div class="field-row">
+              <div class="field-group">
+                <label class="field-label" for="websiteLoginUser">Website Username or Email</label>
+                <input type="text" id="websiteLoginUser" name="websiteLoginUser" placeholder="admin@yourbusiness.com" autocomplete="off" />
+              </div>
+              <div class="field-group">
+                <label class="field-label" for="websiteLoginPass">Website Password</label>
+                <input type="password" id="websiteLoginPass" name="websiteLoginPass" placeholder="••••••••" autocomplete="new-password" />
+              </div>
+            </div>
+            <div class="field-group">
+              <label class="field-label" for="websiteLoginNotes">Login Notes</label>
+              <input type="text" id="websiteLoginNotes" name="websiteLoginNotes" placeholder="e.g. WordPress admin, login page: yourbusiness.com/wp-admin" />
+            </div>
+          </div>
+        </div>
+
+        <!-- Social Media Access Toggle -->
+        <div class="access-toggle" style="margin-top:0.75rem;">
+          <button type="button" class="access-toggle-btn" onclick="this.classList.toggle('open');this.nextElementSibling.style.display=this.classList.contains('open')?'block':'none';">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:0.45rem;flex-shrink:0;"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+            Share Social Media Logins (Optional)
+            <svg class="toggle-arrow" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="margin-left:auto;flex-shrink:0;"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="access-toggle-body" style="display:none; padding:1.25rem; margin-top:0.5rem; border-radius:0.5rem;">
+            <p class="access-disclaimer" style="font-size:0.82rem; color:var(--warm-brown); background:rgba(184,146,62,0.06); border-left:3px solid var(--gold); padding:0.6rem 0.85rem; border-radius:0 0.4rem 0.4rem 0; margin-bottom:0.75rem;">🔒 These credentials are kept private and shared only with the BBC team. Never stored with a third party.</p>
+            <p class="field-hint" style="margin-bottom:1rem;">Only share platforms we'll be managing for you.</p>
+            <div class="field-row">
+              <div class="field-group">
+                <label class="field-label" for="igLoginUser">Instagram Username</label>
+                <input type="text" id="igLoginUser" name="igLoginUser" placeholder="@yourbrand" autocomplete="off" />
+              </div>
+              <div class="field-group">
+                <label class="field-label" for="igLoginPass">Instagram Password</label>
+                <input type="password" id="igLoginPass" name="igLoginPass" placeholder="••••••••" autocomplete="new-password" />
+              </div>
+            </div>
+            <div class="field-row">
+              <div class="field-group">
+                <label class="field-label" for="fbLoginUser">Facebook Email or Username</label>
+                <input type="text" id="fbLoginUser" name="fbLoginUser" placeholder="email or username" autocomplete="off" />
+              </div>
+              <div class="field-group">
+                <label class="field-label" for="fbLoginPass">Facebook Password</label>
+                <input type="password" id="fbLoginPass" name="fbLoginPass" placeholder="••••••••" autocomplete="new-password" />
+              </div>
+            </div>
+            <div class="field-row">
+              <div class="field-group">
+                <label class="field-label" for="ttLoginUser">TikTok Username</label>
+                <input type="text" id="ttLoginUser" name="ttLoginUser" placeholder="@yourbrand" autocomplete="off" />
+              </div>
+              <div class="field-group">
+                <label class="field-label" for="ttLoginPass">TikTok Password</label>
+                <input type="password" id="ttLoginPass" name="ttLoginPass" placeholder="••••••••" autocomplete="new-password" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <div class="field-group" style="margin-top:1.5rem;">
         <label class="field-label" for="anythingElse">Anything important about your business, your goals, or your situation that we didn't ask, and that you want us to know before we start?</label>
         <textarea id="anythingElse" name="anythingElse" rows="4" placeholder="Optional. Anything you want us to know."></textarea>
@@ -1417,7 +1492,7 @@ document.getElementById('onboarding-form').addEventListener('submit', async (e) 
     btn.disabled = false;
     btnText.textContent = 'Submit Onboarding Form';
     spinner.style.display = 'none';
-    alert('Submission failed. Please check your connection and try again.\n\nIf the issue continues, email rj@balaynibruno.co\n\nError: ' + err.message);
+    alert('Submission failed. Please check your connection and try again.\n\nIf the issue continues, email admin@balaynibruno.co\n\nError: ' + err.message);
   }
 });
 
