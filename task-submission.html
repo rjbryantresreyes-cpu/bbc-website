@@ -398,7 +398,7 @@
   </datalist>
 
 <script>
-const SUBMIT_URL = 'https://script.google.com/macros/s/PLACEHOLDER_TASK_SUBMISSION/exec';
+// Submissions go to Netlify Forms — no backend URL needed
 
 let taskCount = 0;
 
@@ -563,10 +563,23 @@ async function handleSubmit() {
   btnText.textContent = 'Submitting…';
   spinner.style.display = 'inline-block';
 
+  // Format tasks as readable text for Netlify dashboard
+  const tasksSummary = tasks.map((t, i) =>
+    `Task ${i + 1}: ${t.title}\nClient: ${t.client} (${t.business})\nDescription: ${t.desc}\nOutput: ${t.output}\nStatus: ${t.status}`
+  ).join('\n\n---\n\n');
+
   try {
-    const res = await fetch(SUBMIT_URL, {
+    const res = await fetch('/', {
       method: 'POST',
-      body: JSON.stringify(payload),
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams({
+        'form-name':    'bbc-task-submission',
+        'va-name':      payload.vaName,
+        'week-of':      payload.weekOf,
+        'task-count':   String(payload.taskCount),
+        'submitted-at': payload.submittedAt,
+        'tasks':        tasksSummary
+      }).toString()
     });
     if (res.ok) {
       document.getElementById('success-state').style.display = 'block';
@@ -617,6 +630,15 @@ document.addEventListener('input', (e) => {
 // Start with one task on load
 addTask();
 </script>
+
+<!-- Netlify form detection (hidden) -->
+<form name="bbc-task-submission" netlify netlify-honeypot="bot-field" hidden>
+  <input name="va-name" />
+  <input name="week-of" />
+  <input name="task-count" />
+  <input name="submitted-at" />
+  <textarea name="tasks"></textarea>
+</form>
 
 </body>
 </html>
