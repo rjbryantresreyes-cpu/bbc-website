@@ -1475,7 +1475,7 @@ document.getElementById('onboarding-form').addEventListener('submit', async (e) 
   const urlEncoded = new URLSearchParams(formData).toString();
 
   try {
-    const res = await fetch('/', {
+    const res = await fetch('/client-onboarding.html', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body: urlEncoded
