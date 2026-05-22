@@ -637,7 +637,7 @@
 <!-- ══════════════════════════════════════════
      FORM
 ══════════════════════════════════════════ -->
-<form id="onboarding-form" name="bbc-onboarding" data-netlify="true" netlify-honeypot="bot-field" method="POST" novalidate>
+<form id="onboarding-form" name="bbc-onboarding" netlify data-netlify="true" netlify-honeypot="bot-field" method="POST" novalidate>
 
   <input type="hidden" name="form-name" value="bbc-onboarding" />
   <p style="display:none;"><label>Don't fill this out if you're human: <input name="bot-field" /></label></p>
@@ -1469,16 +1469,16 @@ document.getElementById('onboarding-form').addEventListener('submit', async (e) 
   btnText.textContent = 'Submitting…';
   spinner.style.display = 'inline-block';
 
-  // Netlify Forms expects URL-encoded POST to "/"
+  // Netlify Forms — send as FormData (multipart), more reliable than URL-encoded
   const form = document.getElementById('onboarding-form');
   const formData = new FormData(form);
-  const urlEncoded = new URLSearchParams(formData).toString();
+  // Ensure form-name is explicitly present
+  formData.set('form-name', 'bbc-onboarding');
 
   try {
     const res = await fetch('/client-onboarding.html', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: urlEncoded
+      body: formData
     });
 
     if (res.ok) {
