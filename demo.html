@@ -383,6 +383,78 @@
       text-align:center;
     }
     .footer__copy { font-family:var(--font-ui); font-size:0.73rem; color:rgba(245,241,234,0.3); }
+
+    /* ── In-page expand-to-fullscreen (no OS fullscreen, stays in tab) ── */
+    .video-frame--expandable { position: relative; }
+    .video-expand-btn {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      z-index: 5;
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      border: none;
+      background: rgba(31, 53, 87, 0.78);
+      color: #F5F1EA;
+      font-size: 16px;
+      line-height: 1;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.15s ease, transform 0.15s ease;
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+    }
+    .video-expand-btn:hover { background: rgba(31, 53, 87, 0.95); transform: scale(1.05); }
+    .video-expand-btn:focus-visible { outline: 2px solid #B8923E; outline-offset: 2px; }
+    .video-frame--expandable.is-expanded {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background: #000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 0;
+      margin: 0;
+      padding: 0;
+      max-width: none;
+    }
+    .video-frame--expandable.is-expanded video {
+      width: 100vw;
+      height: 100vh;
+      max-width: 100vw;
+      max-height: 100vh;
+      object-fit: contain;
+      border-radius: 0;
+    }
+    .video-frame--expandable.is-expanded .video-expand-btn {
+      top: max(24px, env(safe-area-inset-top, 24px));
+      right: max(24px, env(safe-area-inset-right, 24px));
+      width: 48px;
+      height: 48px;
+      font-size: 20px;
+    }
+    body.is-video-expanded { overflow: hidden; }
+
+    /* ── Mobile + tablet adjustments (touch-friendly) ── */
+    @media (max-width: 768px) {
+      .video-expand-btn {
+        /* WCAG 44x44 minimum touch target on mobile/tablet */
+        width: 44px;
+        height: 44px;
+        top: 10px;
+        right: 10px;
+        font-size: 17px;
+      }
+      .video-frame--expandable.is-expanded video {
+        /* Account for iOS safe area on expanded view */
+        max-height: 100dvh;
+        height: 100dvh;
+      }
+    }
   </style>
 </head>
 <body>
@@ -457,8 +529,9 @@
             </span>
             <span class="video-column-title">How this page was built</span>
           </div>
-          <div class="video-frame video-frame--small">
-            <video src="videos/process_recording.mp4" controls preload="metadata" playsinline></video>
+          <div class="video-frame video-frame--small video-frame--expandable">
+            <video src="videos/process_recording_v2.mp4" controls preload="metadata" playsinline></video>
+            <button class="video-expand-btn" type="button" aria-label="Expand video to fill page" title="Expand to fill page">⛶</button>
           </div>
           <p class="video-column-desc">A screen recording of the exact conversation that built this page. The brief, the AI, the output. Nothing hidden.</p>
         </div>
@@ -586,6 +659,28 @@
       entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
     }, { threshold: 0.08 });
     allFadeEls.forEach(el => observer.observe(el));
+
+    // ── In-page video expand (stays in browser tab, not OS fullscreen) ──
+    document.querySelectorAll('.video-expand-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const wrap = btn.closest('.video-frame--expandable');
+        if (!wrap) return;
+        const expanded = wrap.classList.toggle('is-expanded');
+        document.body.classList.toggle('is-video-expanded', expanded);
+        btn.textContent = expanded ? '✕' : '⛶';
+        btn.setAttribute('aria-label', expanded ? 'Collapse video' : 'Expand video to fill page');
+      });
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        document.querySelectorAll('.video-frame--expandable.is-expanded').forEach(w => {
+          w.classList.remove('is-expanded');
+          document.body.classList.remove('is-video-expanded');
+          const btn = w.querySelector('.video-expand-btn');
+          if (btn) { btn.textContent = '⛶'; btn.setAttribute('aria-label', 'Expand video to fill page'); }
+        });
+      }
+    });
   </script>
 </body>
 </html>
