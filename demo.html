@@ -179,6 +179,27 @@
       aspect-ratio:16/9;
     }
 
+    /* Caption under the main top video — tells visitors this is the AI-edited cut */
+    .main-video-caption {
+      text-align:center;
+      margin:1.4rem auto 0;
+      max-width:620px;
+      font-family:var(--font-ui);
+      font-size:0.92rem;
+      line-height:1.65;
+      color:var(--text-body);
+    }
+    .main-video-caption__lead {
+      display:inline-flex; align-items:center; gap:0.45rem;
+      color:var(--gold); font-weight:600;
+    }
+    .main-video-caption__lead::before {
+      content:''; width:6px; height:6px; border-radius:50%; background:var(--gold);
+    }
+    @media (max-width:480px) {
+      .main-video-caption { font-size:0.86rem; padding:0 0.5rem; }
+    }
+
     /* Placeholder styling for when video URLs aren't set yet */
     .video-placeholder {
       aspect-ratio:16/9;
@@ -218,10 +239,9 @@
     .before-after-section .section-header p { max-width:600px; margin:0 auto; }
 
     .before-after-grid {
-      display:grid; grid-template-columns:1fr 1fr; gap:2rem;
-      margin-bottom:var(--s4);
+      display:grid; grid-template-columns:1fr; gap:2rem;
+      max-width:720px; margin:0 auto var(--s4);
     }
-    @media (max-width:720px) { .before-after-grid { grid-template-columns:1fr; } }
 
     .video-column {}
     .video-column-label {
@@ -487,13 +507,17 @@
       <div class="section-header fade-in">
         <span class="eyebrow eyebrow--gold">The Full Demo</span>
         <h2>Watch the entire BBC AI system in action</h2>
-        <p>One recording. One AI system. Website edits, video production, social media research, and client work — all handled through a single prompt.</p>
+        <p>One recording. One AI system. Website edits, video production, social media research, and client work, all handled through a single prompt.</p>
       </div>
 
       <div class="fade-in">
         <div class="video-frame video-frame--large">
           <iframe src="https://drive.google.com/file/d/1YytDP20SOhlYr0VjLYJwahMlc0bP9XSm/preview" allow="autoplay; encrypted-media" allowfullscreen title="BBC AI System Full Demo"></iframe>
         </div>
+        <p class="main-video-caption">
+          <span class="main-video-caption__lead">Edited by Vidz, our AI.</span>
+          The raw, unedited recording is right below.
+        </p>
       </div>
     </div>
   </section>
@@ -504,37 +528,23 @@
       <div class="section-header fade-in">
         <span class="eyebrow">The Proof</span>
         <h2>The raw recording. <em>And how it became that.</em></h2>
-        <p>The main video above started as the raw screen recording on the left. On the right, the same recording after Vidz, our video AI, stripped out every silence, pause, and filler in one command.</p>
+        <p>The video you just watched at the top? It started as this. One command to Vidz, our video AI, stripped out every silence, pause, and filler.</p>
       </div>
 
       <div class="before-after-grid fade-in">
 
-        <!-- BEFORE -->
+        <!-- BEFORE (the raw footage that became the main video above) -->
         <div class="video-column">
           <div class="video-column-label">
             <span class="video-column-badge badge--before">
               <span class="badge-dot"></span>Before
             </span>
-            <span class="video-column-title">The raw recording</span>
+            <span class="video-column-title">The raw, unedited recording</span>
           </div>
           <div class="video-frame video-frame--small">
             <iframe src="https://drive.google.com/file/d/1RhmSC8kfmitXETjVat47apcZGXEYA88c/preview" allow="autoplay; encrypted-media" allowfullscreen title="Raw recording, before"></iframe>
           </div>
-          <p class="video-column-desc">Unedited. Every pause, every "um," every filler left in. This is what goes into the AI.</p>
-        </div>
-
-        <!-- AFTER — VIDZ CUT -->
-        <div class="video-column">
-          <div class="video-column-label">
-            <span class="video-column-badge badge--after">
-              <span class="badge-dot"></span>After
-            </span>
-            <span class="video-column-title">Vidz cut — silences removed</span>
-          </div>
-          <div class="video-frame video-frame--small">
-            <iframe src="https://drive.google.com/file/d/1OhUjcM81Z24gHxXM5DIfhZIVRiiFql_9/preview" allow="autoplay; encrypted-media" allowfullscreen title="Vidz cut, silences removed"></iframe>
-          </div>
-          <p class="video-column-desc">Already doing the heavy lifting. It may still need a little training to fully match your style, but the foundation is there and it gets sharper the more you use it.</p>
+          <p class="video-column-desc">Every pause, every "um," every filler left in. This is what goes into the AI. The polished cut at the top is what comes out.</p>
         </div>
 
       </div>
