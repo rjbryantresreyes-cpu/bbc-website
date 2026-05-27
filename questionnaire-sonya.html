@@ -351,7 +351,9 @@ Got it? Ready for question 1?</pre>
         netlify
         data-netlify="true"
         netlify-honeypot="bot-field"
-        method="POST">
+        method="POST"
+        action="/questionnaire-sonya.html"
+        novalidate>
     <input type="hidden" name="form-name" value="sonya-questionnaire" />
     <p style="display:none;"><label>Don't fill this out if you're human: <input name="bot-field" /></label></p>
 
@@ -697,7 +699,12 @@ Got it? Ready for question 1?</pre>
     }
   });
 
-  /* ---------- Form submit (Netlify Forms) ---------- */
+  /* ---------- Form submit (Netlify Forms) ----------
+     Matches the working pattern from client-onboarding.html:
+     - POST to the page URL itself (not /)
+     - Send raw FormData (multipart) — more reliable than URL-encoded for long text
+     - Let the browser set Content-Type with boundary
+  */
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
     const submitBtn = document.getElementById('submit-btn');
@@ -708,10 +715,9 @@ Got it? Ready for question 1?</pre>
     formData.set('form-name', 'sonya-questionnaire');
 
     try {
-      const response = await fetch('/', {
+      const response = await fetch('/questionnaire-sonya.html', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: new URLSearchParams(formData).toString()
+        body: formData
       });
 
       if (response.ok) {
@@ -720,12 +726,12 @@ Got it? Ready for question 1?</pre>
         localStorage.removeItem(STORAGE_KEY);
         window.scrollTo({ top: 0, behavior: 'smooth' });
       } else {
-        throw new Error('Submission failed');
+        throw new Error('Submission failed with status ' + response.status);
       }
     } catch (err) {
       submitBtn.disabled = false;
       submitBtn.textContent = 'Send my answers';
-      alert('Something went wrong sending your answers. Please try again, or message RJ on WhatsApp and we\'ll grab them another way.');
+      alert('Something went wrong sending your answers.\n\nError: ' + err.message + '\n\nPlease try again, or message RJ on WhatsApp and we\'ll grab them another way.');
     }
   });
 </script>
