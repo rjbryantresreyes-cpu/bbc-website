@@ -207,6 +207,34 @@
       border-color:var(--gold);
       box-shadow:0 0 0 3px rgba(184,146,62,0.18);
     }
+    /* validation — missing field highlight */
+    .q.is-missing { border-color:#C8553D; box-shadow:0 0 0 1px #C8553D; }
+    .q.is-missing .q__label { color:#C8553D; }
+    .q.is-missing textarea { border-color:#C8553D; }
+    .q.is-missing textarea:focus { border-color:#C8553D; box-shadow:0 0 0 3px rgba(200,85,61,0.18); }
+
+    /* validation banner */
+    .validation-banner {
+      display:none;
+      background:#FDF1EE;
+      border:1px solid #C8553D;
+      border-left:4px solid #C8553D;
+      color:#7A2D1E;
+      border-radius:var(--radius-sm);
+      padding:1rem 1.25rem;
+      margin:1.5rem 0;
+      font-family:var(--font-ui);
+      font-size:0.95rem;
+      line-height:1.55;
+    }
+    .validation-banner.is-visible { display:block; }
+    .validation-banner strong { font-weight:600; }
+    .validation-banner button {
+      background:none; border:none; color:#7A2D1E;
+      font-family:var(--font-ui); font-size:0.9rem; font-weight:600;
+      text-decoration:underline; cursor:pointer; margin-top:0.4rem;
+      padding:0; min-height:44px;
+    }
 
     /* SUBMIT BAR */
     .submit-bar {
@@ -565,6 +593,9 @@ Got it? Ready for question 1?</pre>
       </div>
     </div>
 
+    <!-- VALIDATION BANNER (shown when submit attempted with missing fields) -->
+    <div class="validation-banner" id="validation-banner" role="alert"></div>
+
     <!-- SUBMIT BAR -->
     <div class="submit-bar">
       <h2>Ready to send?</h2>
@@ -631,6 +662,11 @@ Got it? Ready for question 1?</pre>
   textareas.forEach(t => {
     t.addEventListener('input', () => {
       updateProgress();
+      // clear missing-field highlight as soon as user types something
+      if (t.value.trim().length > 0) {
+        const q = t.closest('.q');
+        if (q) q.classList.remove('is-missing');
+      }
       clearTimeout(saveTimer);
       saveTimer = setTimeout(saveAll, 400);
     });
@@ -661,6 +697,44 @@ Got it? Ready for question 1?</pre>
     }
   });
 
+  /* ---------- Validation ---------- */
+  const banner = document.getElementById('validation-banner');
+
+  function validateAll() {
+    const missing = [];
+    textareas.forEach(t => {
+      const q = t.closest('.q');
+      if (t.value.trim().length === 0) {
+        missing.push({ id: t.dataset.qId, el: q });
+        q.classList.add('is-missing');
+      } else {
+        q.classList.remove('is-missing');
+      }
+    });
+    return missing;
+  }
+
+  function showMissingBanner(missing) {
+    const ids = missing.map(m => m.id).join(', ');
+    banner.innerHTML =
+      '<strong>You missed ' + missing.length + ' question' +
+      (missing.length === 1 ? '' : 's') +
+      '.</strong><br>' +
+      'Scroll up to fill in: ' + ids +
+      '<br><button type="button" id="jump-to-first">Take me to the first one</button>';
+    banner.classList.add('is-visible');
+    document.getElementById('jump-to-first').addEventListener('click', () => {
+      const first = missing[0].el;
+      if (first) {
+        first.scrollIntoView({ behavior:'smooth', block:'center' });
+        const ta = first.querySelector('textarea');
+        if (ta) setTimeout(() => ta.focus(), 600);
+      }
+    });
+  }
+
+  function hideBanner() { banner.classList.remove('is-visible'); }
+
   /* ---------- Form submit (Netlify Forms) ----------
      Matches the working pattern from client-onboarding.html:
      - POST to the page URL itself (not /)
@@ -669,6 +743,17 @@ Got it? Ready for question 1?</pre>
   */
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
+
+    // Block submit if any question is empty
+    const missing = validateAll();
+    if (missing.length > 0) {
+      showMissingBanner(missing);
+      // scroll to banner so Sonya sees the message
+      banner.scrollIntoView({ behavior:'smooth', block:'center' });
+      return;
+    }
+    hideBanner();
+
     const submitBtn = document.getElementById('submit-btn');
     submitBtn.disabled = true;
     submitBtn.textContent = 'Sending...';
