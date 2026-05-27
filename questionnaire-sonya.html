@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sonya — S. Riviere Hair Questionnaire | Balay ni Bruno &amp; Co.</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Lora:ital,wght@0,400;0,500;1,400;1,500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --deep-blue:   #1F3557;
+      --mid-blue:    #4B6FA5;
+      --warm-blue:   #6D8FC7;
+      --bg-primary:  #F5F1EA;
+      --bg-section:  #EDE8DF;
+      --bg-card:     #FDFAF6;
+      --bg-dark:     #1C2E47;
+      --bg-footer:   #172540;
+      --text-ink:    #2A3040;
+      --text-body:   #4E5666;
+      --text-muted:  #888FA0;
+      --text-warm:   #F5F1EA;
+      --gold:        #B8923E;
+      --gold-pale:   #E6CFA0;
+      --gold-warm:   #D4A84B;
+      --font-display:'Playfair Display', Georgia, serif;
+      --font-body:   'Lora', Georgia, serif;
+      --font-ui:     'DM Sans', system-ui, sans-serif;
+      --radius-sm:   8px;
+      --radius:      16px;
+      --radius-lg:   24px;
+      --shadow-sm:   0 3px 18px rgba(85,60,35,0.08);
+      --shadow-md:   0 7px 36px rgba(85,60,35,0.11);
+      --border-card: 1px solid rgba(85,60,35,0.09);
+    }
+
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body {
+      font-family:var(--font-body);
+      color:var(--text-ink);
+      background:var(--bg-primary);
+      line-height:1.65;
+      -webkit-font-smoothing:antialiased;
+      min-height:100dvh;
+    }
+
+    h1, h2, h3 { font-family:var(--font-display); line-height:1.22; color:var(--deep-blue); }
+    h1 { font-size:clamp(1.9rem, 5vw, 2.8rem); font-weight:700; }
+    h2 { font-size:clamp(1.4rem, 3vw, 1.9rem); font-weight:600; margin-top:0; }
+    h3 { font-size:clamp(1.05rem, 2vw, 1.2rem); font-weight:600; }
+    p  { font-size:1rem; line-height:1.75; color:var(--text-body); }
+
+    .eyebrow {
+      display:inline-block; font-family:var(--font-ui);
+      font-size:0.7rem; font-weight:600;
+      letter-spacing:0.15em; text-transform:uppercase;
+      color:var(--gold); margin-bottom:0.75rem;
+    }
+
+    .wrap {
+      max-width:760px;
+      margin:0 auto;
+      padding:2rem 1.25rem 5rem;
+    }
+
+    /* HERO */
+    .hero {
+      background:var(--bg-dark);
+      color:var(--text-warm);
+      padding:3.5rem 1.25rem 3rem;
+      margin-bottom:2.5rem;
+      border-bottom:3px solid var(--gold);
+    }
+    .hero .inner { max-width:760px; margin:0 auto; }
+    .hero .eyebrow { color:var(--gold-pale); }
+    .hero h1 { color:var(--text-warm); margin-bottom:1rem; }
+    .hero p { color:rgba(245,241,234,0.85); font-size:1.05rem; max-width:600px; }
+
+    /* PROGRESS BAR */
+    .progress-rail {
+      position:sticky; top:0; z-index:50;
+      background:var(--bg-primary);
+      border-bottom:1px solid rgba(85,60,35,0.12);
+      padding:0.6rem 1.25rem;
+      box-shadow:0 1px 4px rgba(85,60,35,0.05);
+    }
+    .progress-rail__inner {
+      max-width:760px; margin:0 auto;
+      display:flex; align-items:center; justify-content:space-between;
+      gap:1rem; font-family:var(--font-ui); font-size:0.85rem;
+    }
+    .progress-rail__label { color:var(--text-muted); }
+    .progress-rail__saved {
+      color:var(--gold); font-weight:600;
+      opacity:0; transition:opacity 0.4s ease;
+    }
+    .progress-rail__saved.is-visible { opacity:1; }
+    .progress-bar {
+      flex:1; max-width:240px;
+      height:6px; background:rgba(85,60,35,0.08);
+      border-radius:3px; overflow:hidden;
+    }
+    .progress-bar__fill {
+      height:100%; width:0%;
+      background:linear-gradient(90deg, var(--gold), var(--gold-warm));
+      transition:width 0.3s ease;
+    }
+
+    /* CLAUDE PROMPT CALLOUT */
+    .claude-callout {
+      background:var(--bg-card);
+      border:var(--border-card);
+      border-left:4px solid var(--gold);
+      border-radius:var(--radius);
+      padding:1.5rem 1.25rem;
+      margin:2.5rem 0;
+      box-shadow:var(--shadow-sm);
+    }
+    .claude-callout h3 { margin-bottom:0.5rem; }
+    .claude-callout p { margin-bottom:0.75rem; }
+    .claude-callout ol { margin:0.75rem 0 1rem 1.2rem; }
+    .claude-callout li { margin-bottom:0.4rem; color:var(--text-body); }
+    .claude-callout pre {
+      background:#fff;
+      border:1px solid rgba(85,60,35,0.1);
+      border-radius:var(--radius-sm);
+      padding:1rem;
+      font-family:'Courier New', monospace;
+      font-size:0.82rem;
+      line-height:1.55;
+      color:var(--text-ink);
+      overflow-x:auto;
+      white-space:pre-wrap;
+      word-break:break-word;
+    }
+    .copy-btn {
+      display:inline-flex; align-items:center; gap:0.4rem;
+      background:var(--gold); color:#fff;
+      font-family:var(--font-ui); font-size:0.82rem; font-weight:600;
+      padding:0.6rem 1rem; border-radius:var(--radius-sm);
+      border:none; cursor:pointer;
+      transition:background 0.2s ease;
+      margin-top:0.75rem;
+      min-height:44px;
+    }
+    .copy-btn:hover { background:var(--gold-warm); }
+    .copy-btn.copied { background:var(--mid-blue); }
+
+    /* SECTIONS */
+    .section {
+      margin-top:3rem;
+      padding-top:2.25rem;
+      border-top:1px solid rgba(85,60,35,0.12);
+    }
+    .section:first-of-type { border-top:none; padding-top:0; margin-top:0; }
+    .section__intro { margin-bottom:1.75rem; color:var(--text-body); }
+
+    /* QUESTIONS */
+    .q {
+      background:var(--bg-card);
+      border:var(--border-card);
+      border-radius:var(--radius);
+      padding:1.5rem 1.25rem;
+      margin-bottom:1.25rem;
+      box-shadow:var(--shadow-sm);
+    }
+    .q__label {
+      display:block;
+      font-family:var(--font-ui);
+      font-size:0.72rem; font-weight:600;
+      letter-spacing:0.13em; text-transform:uppercase;
+      color:var(--gold); margin-bottom:0.4rem;
+    }
+    .q__title {
+      font-family:var(--font-display);
+      font-size:1.15rem; font-weight:600;
+      color:var(--deep-blue); line-height:1.35;
+      margin-bottom:0.5rem;
+    }
+    .q__help {
+      font-size:0.92rem;
+      color:var(--text-body);
+      margin-bottom:1rem;
+      line-height:1.6;
+    }
+    .q textarea {
+      width:100%;
+      min-height:110px;
+      font-family:var(--font-body);
+      font-size:1rem;
+      line-height:1.6;
+      color:var(--text-ink);
+      background:#fff;
+      border:1px solid rgba(85,60,35,0.18);
+      border-radius:var(--radius-sm);
+      padding:0.9rem 1rem;
+      resize:vertical;
+      transition:border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+    .q textarea:focus {
+      outline:none;
+      border-color:var(--gold);
+      box-shadow:0 0 0 3px rgba(184,146,62,0.18);
+    }
+
+    /* SUBMIT BAR */
+    .submit-bar {
+      margin-top:3rem;
+      padding:2rem 1.25rem;
+      background:var(--bg-dark);
+      color:var(--text-warm);
+      border-radius:var(--radius-lg);
+      text-align:center;
+    }
+    .submit-bar h2 { color:var(--text-warm); margin-bottom:0.5rem; }
+    .submit-bar p {
+      color:rgba(245,241,234,0.8);
+      margin-bottom:1.5rem;
+      font-size:0.95rem;
+    }
+    .submit-btn {
+      display:inline-block;
+      background:var(--gold); color:#fff;
+      font-family:var(--font-ui); font-size:1rem; font-weight:600;
+      padding:1rem 2.5rem; border-radius:var(--radius-sm);
+      border:none; cursor:pointer;
+      transition:background 0.2s ease, transform 0.1s ease;
+      min-height:52px;
+    }
+    .submit-btn:hover { background:var(--gold-warm); }
+    .submit-btn:active { transform:translateY(1px); }
+    .submit-btn:disabled { opacity:0.5; cursor:not-allowed; }
+
+    /* SUCCESS STATE */
+    .success-state {
+      display:none;
+      background:var(--bg-card);
+      border:var(--border-card);
+      border-left:4px solid var(--gold);
+      border-radius:var(--radius);
+      padding:2.5rem 1.5rem;
+      text-align:center;
+      box-shadow:var(--shadow-md);
+      margin-top:2rem;
+    }
+    .success-state.is-visible { display:block; }
+    .success-state h2 { color:var(--deep-blue); margin-bottom:0.75rem; }
+    .success-state p { color:var(--text-body); margin-bottom:1rem; }
+
+    /* MOBILE */
+    @media (max-width:600px) {
+      .wrap { padding:1.5rem 1rem 4rem; }
+      .hero { padding:2.75rem 1rem 2.25rem; }
+      .q { padding:1.25rem 1rem; }
+      .q__title { font-size:1.05rem; }
+      .claude-callout { padding:1.25rem 1rem; }
+      .claude-callout pre { font-size:0.76rem; padding:0.85rem; }
+      .submit-bar { padding:1.75rem 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="inner">
+    <span class="eyebrow">Hi Sonya — From RJ + the BBC team</span>
+    <h1>Let's build Olivia and your new site.</h1>
+    <p>30-60 minutes. Break it into 2-3 sittings if you want — your answers save automatically. Skip anything that feels off. Hit submit when you're done.</p>
+  </div>
+</section>
+
+<!-- PROGRESS BAR -->
+<div class="progress-rail">
+  <div class="progress-rail__inner">
+    <span class="progress-rail__label" id="progress-label">0 of 31 answered</span>
+    <div class="progress-bar"><div class="progress-bar__fill" id="progress-fill"></div></div>
+    <span class="progress-rail__saved" id="saved-indicator">✓ Saved</span>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <!-- CLAUDE PROMPT CALLOUT -->
+  <div class="claude-callout">
+    <h3>Pro tip — use Claude to help you answer</h3>
+    <p>You don't have to type cold. Open <strong>claude.ai</strong> in a new tab. Paste the prompt below into Claude first. Then for each question, talk to Claude — she'll ask follow-ups and write a clean answer you can paste here.</p>
+    <ol>
+      <li>Go to <strong>claude.ai</strong> → start a new chat</li>
+      <li>Paste the prompt below</li>
+      <li>For each question, talk to Claude → paste her clean version here</li>
+    </ol>
+    <pre id="claude-prompt">Hi Claude. I'm Sonya Riviere, founder of S. Riviere Hair Collection. My agency (Balay ni Bruno &amp; Co.) is building me an AI named Olivia and rebuilding my website srivierehair.com. They sent me a questionnaire to fill out.
+
+Here's how I want to use you:
+1. I'll paste one question at a time
+2. I'll talk to you about my answer (voice or text)
+3. You ask me follow-up questions to pull out the deeper answer
+4. When the answer feels real and complete, you write a clean final version I can copy back to my team's form
+5. You stay direct. You don't flatter. You push me to be specific when I'm vague.
+
+Got it? Ready for question 1?</pre>
+    <button type="button" class="copy-btn" id="copy-prompt-btn">Copy the prompt</button>
+  </div>
+
+  <!-- FORM -->
+  <form id="sonya-form"
+        name="sonya-questionnaire"
+        netlify
+        data-netlify="true"
+        netlify-honeypot="bot-field"
+        method="POST">
+    <input type="hidden" name="form-name" value="sonya-questionnaire" />
+    <p style="display:none;"><label>Don't fill this out if you're human: <input name="bot-field" /></label></p>
+
+    <!-- PART A — OLIVIA'S SOUL -->
+    <div class="section">
+      <span class="eyebrow">Part A</span>
+      <h2>Olivia's Soul</h2>
+      <p class="section__intro">These questions tell us who Olivia (your AI) needs to be so she feels like YOUR AI, not generic.</p>
+
+      <div class="q">
+        <span class="q__label">A1</span>
+        <div class="q__title">The "1-minute Sonya" question</div>
+        <p class="q__help">If you had 1 minute to explain who you are — not what you sell, but who you ARE — what would you say? Imagine you're at a wedding and someone asks "so what do you do?"</p>
+        <textarea name="A1_one_minute_sonya" data-q-id="A1"></textarea>
+      </div>
+
+      <div class="q">
+        <span class="q__label">A2</span>
+        <div class="q__title">The film/TV story</div>
+        <p class="q__help">Your bio mentions extensions on actors, film, TV, red carpets, IATSE union work. What's the credit you're proudest of? What's one story from that world nobody knows but should?</p>
+        <textarea name="A2_film_tv_story" data-q-id="A2"></textarea>
+      </div>
+
+      <div class="q">
+        <span class="q__label">A3</span>
+        <div class="q__title">Why this brand exists</div>
+        <p class="q__help">Why did you start S. Riviere? Not the marketing answer. The real one. What were you frustrated about in the hair industry that made you say "I'll build it myself"?</p>
+        <textarea name="A3_why_brand_exists" data-q-id="A3"></textarea>
+      </div>
+
+      <div class="q">
+        <span class="q__label">A4</span>
+        <div class="q__title">The customer you build for</div>
+        <p class="q__help">Picture your favorite customer — the one who "got it" the second she touched the hair. Who is she? What's her life like? What did she say to you that made you remember her?</p>
+        <textarea name="A4_favorite_customer" data-q-id="A4"></textarea>
+      </div>
+
+      <div class="q">
+        <span class="q__label">A5</span>
+        <div class="q__title">The customer you're NOT for</div>
+        <p class="q__help">There's a customer S. Riviere isn't right for. Who is she? It's okay to be specific. "Not for someone who…"</p>
+        <textarea name="A5_not_for_customer" data-q-id="A5"></textarea>
+      </div>
+
+      <div class="q">
+        <span class="q__label">A6</span>
+        <div class="q__title">Three things Olivia should ALWAYS do</div>
+        <p class="q__help">Examples: "Always check with me before posting" / "Always speak in [tone]" / "Always remember [X]". List 3+ if you want.</p>
+        <textarea name="A6_always_do" data-q-id="A6"></textarea>
+      </div>
+
+      <div class="q">
+        <span class="q__label">A7</span>
+        <div class="q__title">Three things Olivia should NEVER do</div>
+        <p class="q__help">Examples: "Never use the words 'hair loss' — always say 'hair transformation'" / "Never agree with me just to make me feel good" / "Never recommend [X]"</p>
+        <textarea name="A7_never_do" data-q-id="A7"></textarea>
+      </div>
+
+      <div class="q">
+        <span class="q__label">A8</span>
+        <div class="q__title">How direct should Olivia be?</div>
+        <p class="q__help">Describe in your own words. Examples: "direct but warm" / "mostly agree, push back only on big issues" / "real friend energy — say the hard stuff" / "mix — gentler personal, direct business"</p>
+        <textarea name="A8_directness" data-q-id="A8"></textarea>
+      </div>
+
+      <div class="q">
+        <span class="q__label">A9</span>
+        <div class="q__title">How does Olivia talk?</div>
+        <p class="q__help">Sentence length (short / medium / detailed). Vocabulary (industry-fluent / plain English / mix). Energy (calm / warm / bold). Pick one each or describe in your own words.</p>
+        <textarea name="A9_how_olivia_talks" data-q-id="A9"></textarea>
+      </div>
+
+      <div class="q">
+        <span class="q__label">A10</span>
+        <div class="q__title">What does success with Olivia look like?</div>
+        <p class="q__help">Six months from now, when Olivia is fully built in: what's she doing for you every week? What's off your plate? What's she catching that you used to forget?</p>
+        <textarea name="A10_success_looks_like" data-q-id="A10"></textarea>
+      </div>
+
+      <div class="q">
+        <span class="q__label">A11</span>
+        <div class="q__title">Boundaries</div>
+        <p class="q__help">Anything Olivia should NEVER touch? Specific topics? People you don't want her to message or mention? Data she shouldn't access?</p>
+        <textarea name="A11_boundaries" data-q-id="A11"></textarea>
+      </div>
+
+      <div class="q">
+        <span class="q__label">A12</span>
+        <div class="q__title">Your story</div>
+        <p class="q__help">If Olivia met someone for the first time and they asked "tell me about Sonya," what should she say? One or two paragraphs is plenty.</p>
+        <textarea name="A12_your_story" data-q-id="A12"></textarea>
+      </div>
+    </div>
+
+    <!-- PART B — YOUR DREAM WEBSITE -->
+    <div class="section">
+      <span class="eyebrow">Part B</span>
+      <h2>Your Dream Website</h2>
+      <p class="section__intro">These help us build a site that reflects how YOU want the brand to feel, not how generic luxury beauty sites look.</p>
+      <p class="section__intro" style="font-size:0.9rem;"><strong>Context — sites you've already shared as inspiration:</strong><br>
+        luxyhair.com • trueandpuretexture.com • thehairshop.com • remyandvirgin.com • dhwarakindianhair.com • oribe.com (about page) • rawhaushairco.com • @curt_cobain on Instagram</p>
+
+      <div class="q">
+        <span class="q__label">B1</span>
+        <div class="q__title">What you LOVE about your current site</div>
+        <p class="q__help">What's working on srivierehair.com today that you'd be sad to lose? Be specific — a phrase, a page, a feature, a vibe.</p>
+        <textarea name="B1_love_current" data-q-id="B1"></textarea>
+      </div>
+
+      <div class="q">
+        <span class="q__label">B2</span>
+        <div class="q__title">What FRUSTRATES you about your current site</div>
+        <p class="q__help">What makes you cringe a little when you look at it? What do you wish was different?</p>
+        <textarea name="B2_frustrates_current" data-q-id="B2"></textarea>
+      </div>
+
+      <div class="q">
+        <span class="q__label">B3</span>
+        <div class="q__title">The one site closest to your vision</div>
+        <p class="q__help">Out of the inspiration sites above (or one you haven't named yet) — if you could only keep ONE as the reference, which one and why?</p>
+        <textarea name="B3_closest_vision" data-q-id="B3"></textarea>
+      </div>
+
+      <div class="q">
+        <span class="q__label">B4</span>
+        <div class="q__title">The one section you wish your site had</div>
+        <p class="q__help">A page ("guide for first-time wig buyers"), a feature ("booking on the home page"), a vibe ("editorial photo essays like Oribe"), or a moment ("a video of me explaining single-donor hair on the home page"). What is it?</p>
+        <textarea name="B4_section_wished" data-q-id="B4"></textarea>
+      </div>
+
+      <div class="q">
+        <span class="q__label">B5</span>
+        <div class="q__title">The customer's first 10 seconds</div>
+        <p class="q__help">A stranger lands on srivierehair.com for the first time. They have 10 seconds to decide if you're "for them." What do they need to see, feel, or read?</p>
+        <textarea name="B5_first_10_seconds" data-q-id="B5"></textarea>
+      </div>
+
+      <div class="q">
+        <span class="q__label">B6</span>
+        <div class="q__title">The big differentiator</div>
+        <p class="q__help">Comparing you to Luxy, True and Pure, The Hair Shop, Remy and Virgin, Dhwarak — what does YOUR site need to make obvious that theirs doesn't? We have ideas: single donor, IATSE film background, temple sourcing. What's the ONE you want loudest?</p>
+        <textarea name="B6_differentiator" data-q-id="B6"></textarea>
+      </div>
+
+      <div class="q">
+        <span class="q__label">B7</span>
+        <div class="q__title">Educational content for wig beginners</div>
+        <p class="q__help">Wig beginners are a huge audience. Do you want the new site to teach them heavily, lightly, or save it for socials? Why?</p>
+        <textarea name="B7_education" data-q-id="B7"></textarea>
+      </div>
+
+      <div class="q">
+        <span class="q__label">B8</span>
+        <div class="q__title">Booking flow</div>
+        <p class="q__help">Right now booking goes off-site to GlossGenius. Keep it that way (make the transition feel native), move booking on-site fully, or no preference?</p>
+        <textarea name="B8_booking" data-q-id="B8"></textarea>
+      </div>
+
+      <div class="q">
+        <span class="q__label">B9</span>
+        <div class="q__title">Mobile vs desktop</div>
+        <p class="q__help">Where do your customers actually shop? Be honest — sometimes the answer surprises us.</p>
+        <textarea name="B9_mobile_desktop" data-q-id="B9"></textarea>
+      </div>
+
+      <div class="q">
+        <span class="q__label">B10</span>
+        <div class="q__title">Photo direction</div>
+        <p class="q__help">Same approach just better / more editorial like Oribe / more behind-the-scenes founder-led like @curt_cobain / mix / not sure show me options. Pick one or describe.</p>
+        <textarea name="B10_photo_direction" data-q-id="B10"></textarea>
+      </div>
+
+      <div class="q">
+        <span class="q__label">B11</span>
+        <div class="q__title">Voice for the new site</div>
+        <p class="q__help">Your current voice is educational + ethical + slightly reverent. Keep it exactly / more serious and luxurious / more personal and warm / mix. Pick one or describe.</p>
+        <textarea name="B11_voice" data-q-id="B11"></textarea>
+      </div>
+
+      <div class="q">
+        <span class="q__label">B12</span>
+        <div class="q__title">What you DON'T want</div>
+        <p class="q__help">Sometimes it's easier to know what you DON'T want. What kind of site / vibe / phrase makes you say "absolutely not"?</p>
+        <textarea name="B12_dont_want" data-q-id="B12"></textarea>
+      </div>
+    </div>
+
+    <!-- PART C — VISUAL DIRECTION -->
+    <div class="section">
+      <span class="eyebrow">Part C</span>
+      <h2>Visual Direction (Colors + Fonts)</h2>
+      <p class="section__intro">Either you give us direction here, or you tell us to pick — both are great answers.</p>
+
+      <div class="q">
+        <span class="q__label">C1</span>
+        <div class="q__title">Colors</div>
+        <p class="q__help"><strong>Option 1 — you have an idea:</strong> describe in words ("warm browns and creams with deep maroon accents"), name 3-5 colors you love, or send hex codes.<br><br><strong>Option 2 — let BBC pick:</strong> answer this — what FEELING do you want when someone visits? (Calm / luxurious / warm / bold / earthy / editorial / classic / modern / quiet luxury / something else.) We'll design from the feeling.</p>
+        <textarea name="C1_colors" data-q-id="C1"></textarea>
+      </div>
+
+      <div class="q">
+        <span class="q__label">C2</span>
+        <div class="q__title">Fonts</div>
+        <p class="q__help"><strong>Option 1 — you have an idea:</strong> name a brand whose font feels like S. Riviere should feel. Or describe ("serif and elegant like a magazine" / "modern and clean like Apple" / "warm and friendly").<br><br><strong>Option 2 — let BBC pick:</strong> editorial (Vogue) / modern (Glossier) / classic (Ralph Lauren) / crafted (small atelier).</p>
+        <textarea name="C2_fonts" data-q-id="C2"></textarea>
+      </div>
+
+      <div class="q">
+        <span class="q__label">C3</span>
+        <div class="q__title">Logo</div>
+        <p class="q__help">Keep current logo / refresh it (small evolution) / replace it (new direction) / BBC pick. Pick one or describe.</p>
+        <textarea name="C3_logo" data-q-id="C3"></textarea>
+      </div>
+
+      <div class="q">
+        <span class="q__label">C4</span>
+        <div class="q__title">Photo style for the rebrand shoot</div>
+        <p class="q__help">Editorial fashion-magazine / behind-the-scenes founder-led / lifestyle aspirational / studio clean product / mix / BBC pick. Pick one or describe.</p>
+        <textarea name="C4_photo_style" data-q-id="C4"></textarea>
+      </div>
+    </div>
+
+    <!-- PART D — ANYTHING ELSE -->
+    <div class="section">
+      <span class="eyebrow">Part D</span>
+      <h2>Anything Else?</h2>
+
+      <div class="q">
+        <span class="q__label">D1</span>
+        <div class="q__title">Anything you want us to know that we didn't ask?</div>
+        <p class="q__help">Whatever's on your mind. No question is too random.</p>
+        <textarea name="D1_anything_else" data-q-id="D1"></textarea>
+      </div>
+
+      <div class="q">
+        <span class="q__label">D2</span>
+        <div class="q__title">What scares you about this rebrand?</div>
+        <p class="q__help">There's always something. Knowing it helps us protect against it.</p>
+        <textarea name="D2_scares_you" data-q-id="D2"></textarea>
+      </div>
+
+      <div class="q">
+        <span class="q__label">D3</span>
+        <div class="q__title">What excites you most?</div>
+        <p class="q__help">No wrong answer. Just tell us what you're looking forward to.</p>
+        <textarea name="D3_excites_you" data-q-id="D3"></textarea>
+      </div>
+    </div>
+
+    <!-- SUBMIT BAR -->
+    <div class="submit-bar">
+      <h2>Ready to send?</h2>
+      <p>Your answers go straight to RJ + the BBC team. You'll hear back within a week with the first drafts of Olivia and the rebrand direction.</p>
+      <button type="submit" class="submit-btn" id="submit-btn">Send my answers</button>
+    </div>
+  </form>
+
+  <!-- SUCCESS STATE (shown after submit) -->
+  <div class="success-state" id="success-state">
+    <h2>Thank you, Sonya.</h2>
+    <p>Your answers are saved. RJ + Vi are on it. First drafts of Olivia + the rebrand direction within 1 week.</p>
+    <p style="font-size:0.92rem; color:var(--text-muted);">If you remembered something else, just message RJ on WhatsApp — we'll add it in.</p>
+  </div>
+
+</div>
+
+<script>
+  /* ---------- LocalStorage save/restore ---------- */
+  const STORAGE_KEY = 'sonya_questionnaire_v1';
+  const form = document.getElementById('sonya-form');
+  const textareas = form.querySelectorAll('textarea[data-q-id]');
+  const progressFill = document.getElementById('progress-fill');
+  const progressLabel = document.getElementById('progress-label');
+  const savedIndicator = document.getElementById('saved-indicator');
+
+  function loadSaved() {
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if (!raw) return;
+      const saved = JSON.parse(raw);
+      textareas.forEach(t => {
+        const id = t.dataset.qId;
+        if (saved[id]) t.value = saved[id];
+      });
+    } catch (e) { /* ignore corrupt storage */ }
+  }
+
+  function saveAll() {
+    const data = {};
+    textareas.forEach(t => {
+      if (t.value.trim()) data[t.dataset.qId] = t.value;
+    });
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+      savedIndicator.classList.add('is-visible');
+      clearTimeout(window.__savedTimer);
+      window.__savedTimer = setTimeout(() => {
+        savedIndicator.classList.remove('is-visible');
+      }, 1500);
+    } catch (e) { /* storage full or blocked */ }
+  }
+
+  function updateProgress() {
+    const total = textareas.length;
+    let filled = 0;
+    textareas.forEach(t => { if (t.value.trim().length > 0) filled++; });
+    const pct = total === 0 ? 0 : Math.round((filled / total) * 100);
+    progressFill.style.width = pct + '%';
+    progressLabel.textContent = filled + ' of ' + total + ' answered';
+  }
+
+  let saveTimer;
+  textareas.forEach(t => {
+    t.addEventListener('input', () => {
+      updateProgress();
+      clearTimeout(saveTimer);
+      saveTimer = setTimeout(saveAll, 400);
+    });
+  });
+
+  loadSaved();
+  updateProgress();
+
+  /* ---------- Copy Claude prompt ---------- */
+  const copyBtn = document.getElementById('copy-prompt-btn');
+  const promptEl = document.getElementById('claude-prompt');
+  copyBtn.addEventListener('click', async () => {
+    try {
+      await navigator.clipboard.writeText(promptEl.textContent);
+      copyBtn.textContent = '✓ Copied — now paste into Claude';
+      copyBtn.classList.add('copied');
+      setTimeout(() => {
+        copyBtn.textContent = 'Copy the prompt';
+        copyBtn.classList.remove('copied');
+      }, 2500);
+    } catch (e) {
+      /* clipboard blocked — fallback: select text */
+      const range = document.createRange();
+      range.selectNode(promptEl);
+      window.getSelection().removeAllRanges();
+      window.getSelection().addRange(range);
+      copyBtn.textContent = 'Press Cmd/Ctrl+C to copy';
+    }
+  });
+
+  /* ---------- Form submit (Netlify Forms) ---------- */
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const submitBtn = document.getElementById('submit-btn');
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Sending...';
+
+    const formData = new FormData(form);
+    formData.set('form-name', 'sonya-questionnaire');
+
+    try {
+      const response = await fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams(formData).toString()
+      });
+
+      if (response.ok) {
+        form.style.display = 'none';
+        document.getElementById('success-state').classList.add('is-visible');
+        localStorage.removeItem(STORAGE_KEY);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else {
+        throw new Error('Submission failed');
+      }
+    } catch (err) {
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Send my answers';
+      alert('Something went wrong sending your answers. Please try again, or message RJ on WhatsApp and we\'ll grab them another way.');
+    }
+  });
+</script>
+
+</body>
+</html>
