@@ -259,7 +259,9 @@
       font-family:var(--font-display); font-size:2rem; font-weight:700;
       color:var(--gold-pale);
       box-shadow:var(--shadow-sm);
+      overflow:hidden;
     }
+    .team-avatar img { width:100%; height:100%; object-fit:cover; border-radius:50%; }
     .team-avatar--bruno { background:linear-gradient(135deg, var(--deep-blue), var(--bg-dark)); border:3px solid rgba(184,146,62,0.3); }
     .founder-pill {
       display:inline-flex; align-items:center; gap:5px;
@@ -301,7 +303,9 @@
       font-family:var(--font-display); font-size:1.15rem; font-weight:700;
       color:var(--gold-pale);
       box-shadow:var(--shadow-xs);
+      overflow:hidden;
     }
+    .team-avatar-sm img { width:100%; height:100%; object-fit:cover; border-radius:50%; }
     .team-card-name { font-family:var(--font-display); font-size:1.1rem; font-weight:600; color:var(--deep-blue); margin-bottom:0.15rem; }
     .team-card-role { font-family:var(--font-ui); font-size:0.75rem; color:var(--text-muted); }
     .team-card-desc { font-family:var(--font-body); font-size:0.875rem; line-height:1.8; color:var(--text-body); margin-bottom:1.1rem; flex:1; }
@@ -551,7 +555,7 @@
 
     <!-- Featured: Bruno -->
     <div class="team-featured fade-in">
-      <div class="team-avatar team-avatar--bruno">B</div>
+      <div class="team-avatar team-avatar--bruno"><img src="images/team/rj-bryan.jpg" alt="Bruno — RJ Bryan Tres Reyes" /></div>
       <div>
         <p class="founder-pill">&#9733; Founder &amp; Lead Strategist</p>
         <p class="team-featured-name">Bruno</p>
@@ -694,7 +698,7 @@
       <!-- Kenz Lloyd D. Villaflores -->
       <div class="team-card">
         <div class="team-card-top">
-          <div class="team-avatar-sm" style="background:linear-gradient(135deg,#3D2A5A,#2A1D40);">KL</div>
+          <div class="team-avatar-sm" style="background:linear-gradient(135deg,#3D2A5A,#2A1D40);"><img src="images/team/kenz-villaflores.jpg" alt="Kenz Villaflores" /></div>
           <div>
             <p class="team-card-name">Kenz</p>
             <p class="team-card-role">Social Media Manager &amp; AI Operations Support</p>

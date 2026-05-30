@@ -176,6 +176,10 @@
       background:linear-gradient(135deg,#3D2A5A,#2A1D40);
       border:3px solid rgba(184,146,62,0.28);
       flex-shrink:0; box-shadow:var(--shadow-md);
+      overflow:hidden;
+    }
+    .profile-avatar img {
+      width:100%; height:100%; object-fit:cover; border-radius:50%;
     }
     .profile-hero__name { font-family:var(--font-display); font-size:clamp(1.8rem,3.5vw,2.8rem); font-weight:700; color:#fff; margin-bottom:0.4rem; line-height:1.15; }
     .profile-hero__role { font-family:var(--font-body); font-size:1.05rem; color:rgba(245,241,234,0.65); margin-bottom:1rem; }
@@ -525,7 +529,7 @@
     <a href="our-team.html" class="profile-hero__back">← Back to Our Team</a>
 
     <div class="profile-hero__top">
-      <div class="profile-avatar">KL</div>
+      <div class="profile-avatar"><img src="images/team/kenz-villaflores.jpg" alt="Kenz Lloyd D. Villaflores" /></div>
       <div>
         <h1 class="profile-hero__name">Kenz Lloyd D. Villaflores</h1>
         <p class="profile-hero__role">Social Media Manager &amp; AI Operations Support Specialist</p>
