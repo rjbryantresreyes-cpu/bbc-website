@@ -1,0 +1,38 @@
+# BBC Website — .claudeignore
+# Claude should NOT index these files/directories
+
+# Archive and superseded files
+OLD BBC WEBSITE.html
+archive/
+drafts/
+
+# Orphan template/ex-team files
+team-member.html
+kirsty.html
+
+# Git internals
+.git/
+
+# System files
+*.log
+*.tmp
+.DS_Store
+Thumbs.db
+Thumbs.db:encryptable
+desktop.ini
+
+# Binary / media (Claude can't read these anyway)
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.ico
+*.webp
+*.mp4
+*.mp3
+*.pdf
+
+# Future build artifacts
+dist/
+build/
+.cache/

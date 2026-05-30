@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+
+Disallow: /portfolio-form.html
+
+Sitemap: https://balaynibruno.co/sitemap.xml
