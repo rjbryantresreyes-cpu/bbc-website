@@ -306,6 +306,8 @@
     .review-feature__source { transition: color 0.2s; }
     a.review-feature:hover .review-feature__source { color: var(--gold); }
 
+    .cs-video { max-width: 420px; margin: 0 auto; }
+
     .cs-did-grid {
       display: grid; grid-template-columns: repeat(2, 1fr);
       gap: 1.25rem; margin-top: var(--s4);
@@ -664,6 +666,25 @@
           <span class="review-feature__source">Read this review on Google &rarr;</span>
         </div>
       </a>
+    </div>
+  </section>
+
+  <!-- ── WATCH THE STORY (video) ─────────────────────────────── -->
+  <section class="section section--cream">
+    <div class="container container--narrow">
+      <div class="text-center fade-in" style="margin-bottom:var(--s4);">
+        <span class="eyebrow eyebrow--gold">Watch the Story</span>
+        <h2>Two Years, In Under a Minute</h2>
+        <div class="divider-bar"></div>
+      </div>
+      <div class="cs-video fade-in">
+        <video controls playsinline preload="metadata"
+               poster="assets/clients/tpic/tpic_review_poster.jpg"
+               style="width:100%; height:auto; display:block; border-radius:var(--radius-lg); box-shadow:var(--shadow-md);">
+          <source src="assets/clients/tpic/tpic_review_video.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+      </div>
     </div>
   </section>
 
