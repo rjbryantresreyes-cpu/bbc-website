@@ -280,14 +280,36 @@
     }
     .download-card h3 { font-size:1.3rem; }
     .download-card p { font-size:0.95rem; max-width:420px; }
+    .email-form {
+      display:flex; gap:0.6rem; width:100%; max-width:400px;
+      flex-wrap:wrap;
+    }
+    .email-form input[type="email"] {
+      flex:1; min-width:180px;
+      padding:0.82rem 1.2rem;
+      border:var(--border-warm);
+      border-radius:100px;
+      background:#fff;
+      font-family:var(--font-ui); font-size:0.9rem;
+      color:var(--text-ink);
+      outline:none;
+      transition:border-color 0.2s, box-shadow 0.2s;
+    }
+    .email-form input[type="email"]:focus {
+      border-color:var(--gold);
+      box-shadow:0 0 0 3px rgba(184,146,62,0.12);
+    }
+    .email-form input[type="email"]::placeholder { color:var(--text-muted); }
     .btn-download {
       display:inline-flex; align-items:center; gap:0.5rem;
-      padding:0.85rem 2rem;
+      padding:0.82rem 1.6rem;
       background:var(--deep-blue); color:#fff;
+      border:none; cursor:pointer;
       border-radius:100px;
-      font-family:var(--font-ui); font-size:0.9rem; font-weight:600;
+      font-family:var(--font-ui); font-size:0.88rem; font-weight:600;
       box-shadow:var(--shadow-sm);
       transition:all 0.22s;
+      white-space:nowrap;
     }
     .btn-download:hover {
       background:var(--mid-blue); transform:translateY(-2px);
@@ -468,11 +490,21 @@
       <div class="download-card fade-in">
         <div class="download-card__icon">&#8595;</div>
         <h3>Get the free workflow guide</h3>
-        <p>A one-page breakdown of the exact steps, commands, and AI Family roles we use every day to run this workflow.</p>
-        <a href="downloads/bbc-daily-carousel-workflow.pdf" download class="btn-download">
-          &#8595;&nbsp; Download the Workflow Guide
-        </a>
-        <p class="download-note">PDF, free, no email required</p>
+        <p>Drop your email and we will send you the one-page breakdown of the exact steps, commands, and AI Family roles behind this workflow.</p>
+        <form
+          class="email-form"
+          name="carousel-guide-download"
+          method="POST"
+          action="/downloads/bbc-daily-carousel-workflow.pdf"
+          data-netlify="true"
+          data-netlify-honeypot="bot-field"
+        >
+          <input type="hidden" name="form-name" value="carousel-guide-download" />
+          <input type="hidden" name="bot-field" />
+          <input type="email" name="email" placeholder="Your email address" required autocomplete="email" />
+          <button type="submit" class="btn-download">&#8595;&nbsp; Send it to me</button>
+        </form>
+        <p class="download-note">No spam. One email with the PDF, that is it.</p>
       </div>
     </div>
   </section>
