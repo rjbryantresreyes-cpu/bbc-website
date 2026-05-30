@@ -548,6 +548,98 @@
     .section-header p { color:var(--text-body); }
       .header__cta .btn-ghost { color:var(--deep-blue); border-color:rgba(31,53,87,0.22); }
     .header__cta .btn-ghost:hover { background:rgba(31,53,87,0.06); border-color:rgba(31,53,87,0.38); color:var(--deep-blue); }
+
+    /* ── Workflows Section ── */
+    .workflows-section {
+      background:var(--bg-dark);
+      padding:var(--s7) 0;
+    }
+    .workflows-header {
+      display:flex; align-items:flex-end; justify-content:space-between;
+      gap:1rem; flex-wrap:wrap; margin-bottom:var(--s4);
+    }
+    .workflows-header h2 { color:#fff; margin-bottom:0.4rem; }
+    .workflows-header p { color:rgba(245,241,234,0.55); font-size:0.95rem; max-width:480px; }
+    .workflows-header__right {
+      font-family:var(--font-ui); font-size:0.8rem;
+      color:rgba(245,241,234,0.35); white-space:nowrap;
+    }
+    .workflows-grid {
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:1.25rem;
+    }
+    @media (max-width:860px) { .workflows-grid { grid-template-columns:repeat(2,1fr); } }
+    @media (max-width:540px) { .workflows-grid { grid-template-columns:1fr; } }
+    .wf-card {
+      background:rgba(255,255,255,0.04);
+      border:1px solid rgba(255,255,255,0.07);
+      border-radius:var(--radius-lg);
+      padding:1.75rem;
+      display:flex; flex-direction:column; gap:1rem;
+      transition:border-color 0.25s, background 0.25s, transform 0.25s;
+      text-decoration:none;
+    }
+    .wf-card--live:hover {
+      background:rgba(255,255,255,0.07);
+      border-color:rgba(184,146,62,0.3);
+      transform:translateY(-3px);
+    }
+    .wf-card--soon { opacity:0.6; cursor:default; }
+    .wf-card__top {
+      display:flex; align-items:center; justify-content:space-between;
+    }
+    .wf-card__num {
+      font-family:var(--font-display); font-size:1.8rem;
+      font-weight:700; color:var(--gold); opacity:0.5; line-height:1;
+    }
+    .wf-card__badge {
+      display:inline-flex; align-items:center; gap:0.3rem;
+      padding:0.2rem 0.7rem;
+      border-radius:100px;
+      font-family:var(--font-ui); font-size:0.68rem; font-weight:600;
+      letter-spacing:0.1em; text-transform:uppercase;
+    }
+    .wf-card__badge--live {
+      background:rgba(78,158,116,0.15);
+      border:1px solid rgba(78,158,116,0.3);
+      color:#6fcf97;
+    }
+    .wf-card__badge--soon {
+      background:rgba(136,143,160,0.1);
+      border:1px solid rgba(136,143,160,0.2);
+      color:rgba(245,241,234,0.4);
+    }
+    .wf-card__badge-dot {
+      width:5px; height:5px; border-radius:50%;
+    }
+    .wf-card__badge--live .wf-card__badge-dot { background:#6fcf97; }
+    .wf-card__badge--soon .wf-card__badge-dot { background:rgba(136,143,160,0.5); }
+    .wf-card h3 {
+      font-family:var(--font-display); font-size:1.15rem;
+      font-weight:600; color:#fff; line-height:1.3; margin:0;
+    }
+    .wf-card__desc {
+      font-family:var(--font-ui); font-size:0.85rem;
+      color:rgba(245,241,234,0.5); line-height:1.65; margin:0;
+    }
+    .wf-card__family {
+      display:flex; gap:0.4rem; flex-wrap:wrap; margin-top:auto;
+    }
+    .wf-tag {
+      font-family:var(--font-ui); font-size:0.68rem; font-weight:600;
+      padding:0.18rem 0.55rem;
+      background:rgba(184,146,62,0.1);
+      border:1px solid rgba(184,146,62,0.18);
+      border-radius:100px;
+      color:var(--gold-pale);
+    }
+    .wf-card__arrow {
+      font-family:var(--font-ui); font-size:0.8rem;
+      color:var(--gold); margin-top:0.25rem;
+      opacity:0; transition:opacity 0.2s;
+    }
+    .wf-card--live:hover .wf-card__arrow { opacity:1; }
   </style>
   <link rel="stylesheet" href="bbc-styles-v6.css" />
 </head>
@@ -673,7 +765,77 @@
 
 
 <!-- ════════════════════════════════════════════
-     S3, ARTICLE GRID  ·  Deeper Cream
+     S3, WORKFLOWS  ·  Dark
+════════════════════════════════════════════ -->
+<section class="workflows-section">
+  <div class="container">
+
+    <div class="workflows-header fade-in">
+      <div>
+        <span class="eyebrow" style="color:rgba(245,241,234,0.45);">BBC AI Workflows</span>
+        <h2>The workflows behind the studio</h2>
+        <p>Every workflow is a repeatable system the BBC AI Family runs. Pick a topic, give one command, and a finished deliverable lands in the queue.</p>
+      </div>
+      <span class="workflows-header__right">3 of 16 documented</span>
+    </div>
+
+    <div class="workflows-grid fade-in">
+
+      <!-- Workflow 03 — Daily Carousel (LIVE) -->
+      <a href="workflow-daily-carousel.html" class="wf-card wf-card--live">
+        <div class="wf-card__top">
+          <span class="wf-card__num">03</span>
+          <span class="wf-card__badge wf-card__badge--live">
+            <span class="wf-card__badge-dot"></span>Live
+          </span>
+        </div>
+        <h3>The Daily Carousel</h3>
+        <p class="wf-card__desc">Trending news in. Finished carousel slides and platform captions out. One command runs Raphy, Sonny, and Vidz in parallel.</p>
+        <div class="wf-card__family">
+          <span class="wf-tag">Raphy</span>
+          <span class="wf-tag">Sonny</span>
+          <span class="wf-tag">Vidz</span>
+        </div>
+        <p class="wf-card__arrow">View workflow &rarr;</p>
+      </a>
+
+      <!-- Workflow 01 — Three-Segment Reel (COMING SOON) -->
+      <div class="wf-card wf-card--soon">
+        <div class="wf-card__top">
+          <span class="wf-card__num">01</span>
+          <span class="wf-card__badge wf-card__badge--soon">
+            <span class="wf-card__badge-dot"></span>Coming Soon
+          </span>
+        </div>
+        <h3>The Three-Segment Reel</h3>
+        <p class="wf-card__desc">Talking head intro, split-screen teaching middle, talking head close. One script produces a polished short-form reel from three raw clips.</p>
+        <div class="wf-card__family">
+          <span class="wf-tag">Vidz</span>
+        </div>
+      </div>
+
+      <!-- Workflow 02 — Claude Terminal Explainer (COMING SOON) -->
+      <div class="wf-card wf-card--soon">
+        <div class="wf-card__top">
+          <span class="wf-card__num">02</span>
+          <span class="wf-card__badge wf-card__badge--soon">
+            <span class="wf-card__badge-dot"></span>Coming Soon
+          </span>
+        </div>
+        <h3>The Terminal Explainer</h3>
+        <p class="wf-card__desc">82 seconds of programmatic motion graphics. A workflow, a command, or a concept shown as a live terminal session inside a browser window.</p>
+        <div class="wf-card__family">
+          <span class="wf-tag">Vidz</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════
+     S4, ARTICLE GRID  ·  Deeper Cream
 ════════════════════════════════════════════ -->
 <section class="grid-section">
   <div class="container">
@@ -687,6 +849,7 @@
     <!-- Filter pills -->
     <div class="filter-pills fade-in">
       <span class="filter-pill filter-pill--active">All Insights</span>
+      <span class="filter-pill">Workflows</span>
       <span class="filter-pill">Case Studies</span>
       <span class="filter-pill">AI &amp; Automation</span>
       <span class="filter-pill">Operations</span>
