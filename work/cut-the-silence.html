@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Cut the Silence | Balay ni Bruno &amp; Co.</title>
+  <meta name="description" content="Stop editing your own voice for hours. Drop your raw recording in. Our AI cuts every silence and dead-air moment. Get back a tight version, ready to post the same day." />
+  <link rel="canonical" href="https://balaynibruno.co/work/cut-the-silence.html" />
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Balay ni Bruno &amp; Co." />
+  <meta property="og:title" content="Cut the Silence — Balay ni Bruno &amp; Co." />
+  <meta property="og:description" content="From a 22-minute raw recording to a tight 20-minute cleaned version. The AI does the editing in one command." />
+  <meta property="og:url" content="https://balaynibruno.co/work/cut-the-silence.html" />
+  <meta property="og:image" content="https://balaynibruno.co/assets/work/cut-the-silence/slide_01_hero.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Lora:ital,wght@0,400;0,500;1,400;1,500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    "name": "Cut silence and filler words from your recording with AI",
+    "description": "Drop your raw recording in, the AI marks every silent gap and filler, then cuts and restitches your voice and video together. Get back a tight version ready to post.",
+    "image": "https://balaynibruno.co/assets/work/cut-the-silence/slide_01_hero.png",
+    "totalTime": "PT3M",
+    "estimatedCost": {
+      "@type": "MonetaryAmount",
+      "currency": "USD",
+      "value": "0"
+    },
+    "supply": [{"@type":"HowToSupply","name":"A raw audio or video recording"}],
+    "tool": [{"@type":"HowToTool","name":"Our AI cleanup system (Auto-Cut, run by Balay ni Bruno &amp; Co.)"}],
+    "step": [
+      {"@type":"HowToStep","name":"Send us your raw recording","text":"Drop your raw recording into our shared folder. Any length, any format."},
+      {"@type":"HowToStep","name":"The AI scans and cuts","text":"Our AI listens through the whole thing, marks every silent gap and dead-air moment, then cuts them out."},
+      {"@type":"HowToStep","name":"You get back the cleaned version","text":"Your audio and video are restitched cleanly. Your voice and rhythm stay intact. The dead air is gone."}
+    ]
+  }
+  </script>
+
+  <style>
+    :root {
+      --deep-blue:   #1F3557;
+      --mid-blue:    #4B6FA5;
+      --warm-blue:   #6D8FC7;
+      --pale-blue:   #DDE8F2;
+      --bg-primary:  #F5F1EA;
+      --bg-section:  #EDE8DF;
+      --bg-card:     #FDFAF6;
+      --bg-dark:     #1C2E47;
+      --bg-footer:   #172540;
+      --text-ink:    #2A3040;
+      --text-body:   #4E5666;
+      --text-muted:  #888FA0;
+      --text-warm:   #F5F1EA;
+      --gold:        #B8923E;
+      --gold-pale:   #E6CFA0;
+      --gold-warm:   #D4A84B;
+      --sage:        #4E9E74;
+      --font-display:'Playfair Display', Georgia, serif;
+      --font-body:   'Lora', Georgia, serif;
+      --font-ui:     'DM Sans', system-ui, sans-serif;
+      --radius:      16px;
+      --radius-lg:   24px;
+      --shadow-xs:   0 1px 6px rgba(85,60,35,0.055);
+      --shadow-sm:   0 3px 18px rgba(85,60,35,0.08);
+      --shadow-md:   0 7px 36px rgba(85,60,35,0.11);
+      --shadow-lg:   0 18px 60px rgba(85,60,35,0.16);
+      --s1:0.5rem; --s2:0.75rem; --s3:1rem; --s4:1.5rem; --s5:2rem; --s6:3rem; --s7:5rem;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+    body {
+      font-family: var(--font-body);
+      color: var(--text-body);
+      background: var(--bg-primary);
+      line-height: 1.6;
+      font-size: 17px;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+      padding-top: 72px;
+    }
+    h1,h2,h3,h4 { font-family: var(--font-display); color: var(--text-ink); line-height: 1.18; font-weight: 600; }
+    h1 { font-size: clamp(2.2rem, 5.5vw, 3.6rem); letter-spacing: -0.015em; }
+    h2 { font-size: clamp(1.7rem, 3.6vw, 2.4rem); letter-spacing: -0.01em; }
+    h3 { font-size: clamp(1.2rem, 2.4vw, 1.5rem); }
+    a { color: var(--deep-blue); text-decoration: none; }
+    img, video { max-width: 100%; height: auto; display: block; }
+    em { color: var(--gold); font-style: italic; }
+
+    .container { max-width: 1180px; margin: 0 auto; padding: 0 var(--s4); }
+    @media (min-width: 768px) { .container { padding: 0 var(--s5); } }
+
+    /* ────── HEADER ────── */
+    .site-header {
+      position: fixed; top: 0; left: 0; right: 0;
+      background: rgba(245,241,234,0.94);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(0,0,0,0.04);
+      z-index: 100;
+      transition: box-shadow 200ms;
+    }
+    .site-header.scrolled { box-shadow: 0 2px 14px rgba(0,0,0,0.05); }
+    .header__inner {
+      max-width: 1320px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0.9rem var(--s4); gap: 1rem;
+    }
+    .header__logo { display: flex; align-items: center; gap: 0.6rem; }
+    .header__logo-name { font-family: var(--font-display); font-weight: 600; color: var(--deep-blue); font-size: 1.05rem; white-space: nowrap; }
+    .header__nav { display: none; gap: 1.7rem; list-style: none; }
+    .header__nav a { font-family: var(--font-ui); font-size: 0.95rem; color: var(--text-ink); font-weight: 400; transition: color 200ms; }
+    .header__nav a:hover { color: var(--deep-blue); }
+    .header__cta { display: none; gap: 0.6rem; align-items: center; }
+    @media (min-width: 1024px) {
+      .header__nav { display: flex; }
+      .header__cta { display: flex; }
+    }
+    .btn {
+      font-family: var(--font-ui); font-weight: 500; font-size: 0.92rem;
+      padding: 0.7rem 1.3rem; border-radius: 60px; border: 1px solid transparent;
+      cursor: pointer; transition: all 200ms; text-decoration: none; display: inline-block;
+      min-height: 44px; line-height: 1.5;
+    }
+    .btn-sm { padding: 0.55rem 1.05rem; font-size: 0.88rem; min-height: 38px; }
+    .btn-gold { background: var(--gold); color: #fff; }
+    .btn-gold:hover { background: var(--gold-warm); transform: translateY(-1px); box-shadow: 0 6px 18px rgba(184,146,62,0.32); }
+    .btn-ghost { background: transparent; color: var(--deep-blue); border-color: rgba(31,53,87,0.22); }
+    .btn-ghost:hover { background: rgba(31,53,87,0.06); border-color: rgba(31,53,87,0.38); }
+    .btn-light { background: rgba(255,255,255,0.92); color: var(--deep-blue); }
+    .btn-light:hover { background: #fff; }
+
+    .hamburger {
+      display: flex; flex-direction: column; gap: 5px; background: none; border: none;
+      cursor: pointer; padding: 12px; min-width: 44px; min-height: 44px; align-items: center; justify-content: center;
+    }
+    .hamburger span { width: 22px; height: 2px; background: var(--text-ink); transition: all 200ms; }
+    @media (min-width: 1024px) { .hamburger { display: none; } }
+    .mobile-menu { display: none; }
+    .mobile-menu.open { display: block; position: fixed; top: 64px; left: 0; right: 0; background: var(--bg-card); padding: var(--s4); box-shadow: var(--shadow-md); z-index: 99; }
+    .mobile-menu ul { list-style: none; display: flex; flex-direction: column; gap: 0.8rem; }
+    .mobile-menu a { font-family: var(--font-ui); color: var(--text-ink); padding: 0.7rem 0; display: block; min-height: 44px; }
+
+    /* ────── HERO ────── */
+    .page-hero {
+      background: var(--bg-dark);
+      color: var(--text-warm);
+      padding: var(--s7) 0 var(--s6);
+      position: relative;
+      overflow: hidden;
+    }
+    .page-hero::before {
+      content: ''; position: absolute; top: -20%; right: -10%; width: 700px; height: 700px;
+      background: radial-gradient(circle, rgba(212,168,75,0.18) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .page-hero::after {
+      content: ''; position: absolute; bottom: -30%; left: -10%; width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(75,111,165,0.22) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .page-hero__inner { position: relative; z-index: 1; max-width: 820px; }
+    .page-hero__eyebrow {
+      font-family: var(--font-ui); font-size: 0.86rem; letter-spacing: 0.22em;
+      text-transform: uppercase; color: var(--gold-pale); margin-bottom: 1.4rem;
+      display: inline-flex; align-items: center; gap: 0.5rem; opacity: 0.9;
+    }
+    .page-hero__eyebrow-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--gold); display: inline-block; }
+    .page-hero h1 { color: #fff; margin-bottom: 1.4rem; font-weight: 600; }
+    .page-hero h1 em { color: var(--gold-pale); font-style: italic; }
+    .page-hero__lede { font-size: 1.15rem; line-height: 1.65; color: rgba(245,241,234,0.86); max-width: 640px; margin-bottom: 2rem; }
+    @media (min-width: 768px) {
+      .page-hero__lede { font-size: 1.25rem; }
+    }
+    .page-hero__cta-row { display: flex; gap: 0.8rem; flex-wrap: wrap; }
+
+    /* ────── SECTIONS ────── */
+    .section { padding: var(--s6) 0; }
+    @media (min-width: 768px) { .section { padding: var(--s7) 0; } }
+    .section--warm { background: var(--bg-section); }
+    .section--card { background: var(--bg-card); }
+    .section--dark { background: var(--bg-dark); color: var(--text-warm); }
+    .section--dark h2 { color: #fff; }
+    .section--dark p { color: rgba(245,241,234,0.82); }
+
+    .section__eyebrow {
+      font-family: var(--font-ui); font-size: 0.84rem; letter-spacing: 0.22em;
+      text-transform: uppercase; color: var(--gold); margin-bottom: 0.9rem;
+    }
+    .section__title { margin-bottom: 1rem; max-width: 720px; }
+    .section__intro { font-size: 1.08rem; line-height: 1.65; max-width: 680px; margin-bottom: 2.5rem; }
+
+    /* ────── REEL ────── */
+    .reel-wrap {
+      max-width: 420px; margin: 0 auto;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      background: #000;
+      box-shadow: var(--shadow-lg);
+      position: relative;
+    }
+    .reel-wrap video {
+      width: 100%; height: auto; display: block; aspect-ratio: 9 / 16;
+    }
+    .reel-caption {
+      text-align: center; margin-top: 1.2rem; font-family: var(--font-ui);
+      font-size: 0.92rem; color: var(--text-muted); letter-spacing: 0.05em;
+    }
+
+    /* ────── HOW IT WORKS ────── */
+    .steps {
+      display: grid; gap: 1.4rem;
+      grid-template-columns: 1fr;
+    }
+    @media (min-width: 768px) {
+      .steps { grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+    }
+    .step {
+      background: var(--bg-card);
+      border: 1px solid rgba(184,146,62,0.18);
+      border-radius: var(--radius);
+      padding: 1.7rem 1.5rem;
+      box-shadow: var(--shadow-xs);
+      position: relative;
+    }
+    .step__num {
+      font-family: var(--font-display); font-size: 2.6rem; font-weight: 600;
+      color: var(--gold); line-height: 1; margin-bottom: 0.7rem;
+    }
+    .step h3 { font-size: 1.25rem; margin-bottom: 0.6rem; color: var(--text-ink); }
+    .step p { font-size: 1rem; color: var(--text-body); }
+
+    /* ────── PROOF STATS ────── */
+    .proof-grid {
+      display: grid; gap: 1.4rem;
+      grid-template-columns: 1fr;
+      margin-top: 1.6rem;
+    }
+    @media (min-width: 600px) {
+      .proof-grid { grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+    }
+    .proof-stat {
+      text-align: center; padding: 1.6rem 1rem;
+    }
+    .proof-stat__value {
+      font-family: var(--font-display); font-size: clamp(2.4rem, 6vw, 3.4rem);
+      font-weight: 600; color: var(--gold-pale); line-height: 1; margin-bottom: 0.5rem;
+      letter-spacing: -0.02em;
+    }
+    .proof-stat__label {
+      font-family: var(--font-ui); font-size: 0.84rem; letter-spacing: 0.22em;
+      text-transform: uppercase; color: rgba(245,241,234,0.78);
+    }
+    .proof-source {
+      font-family: var(--font-body); font-style: italic; font-size: 0.92rem;
+      color: rgba(245,241,234,0.62); text-align: center; margin-top: 1.4rem;
+    }
+
+    /* ────── CAROUSEL GALLERY ────── */
+    .carousel-scroll {
+      display: flex; gap: 1rem; overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      padding: 0.5rem 0 1rem;
+      scrollbar-width: thin;
+      scrollbar-color: var(--gold) var(--bg-section);
+    }
+    .carousel-scroll::-webkit-scrollbar { height: 8px; }
+    .carousel-scroll::-webkit-scrollbar-track { background: var(--bg-section); }
+    .carousel-scroll::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 4px; }
+    .carousel-slide {
+      flex: 0 0 260px; scroll-snap-align: center;
+      border-radius: var(--radius); overflow: hidden;
+      box-shadow: var(--shadow-md);
+      transition: transform 200ms;
+      aspect-ratio: 4 / 5;
+      background: var(--bg-card);
+    }
+    @media (min-width: 768px) {
+      .carousel-slide { flex: 0 0 320px; }
+    }
+    .carousel-slide img { width: 100%; height: 100%; display: block; object-fit: cover; }
+
+    /* ────── USE CASES ────── */
+    .use-cases {
+      display: grid; gap: 0.9rem;
+      grid-template-columns: 1fr;
+      margin-top: 1.6rem;
+    }
+    @media (min-width: 600px) {
+      .use-cases { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (min-width: 1024px) {
+      .use-cases { grid-template-columns: repeat(5, 1fr); }
+    }
+    .use-case {
+      background: var(--bg-card);
+      border: 1px solid rgba(184,146,62,0.18);
+      border-radius: var(--radius);
+      padding: 1.3rem 1rem;
+      text-align: center;
+      box-shadow: var(--shadow-xs);
+    }
+    .use-case__icon { font-size: 1.6rem; margin-bottom: 0.5rem; }
+    .use-case__label {
+      font-family: var(--font-ui); font-weight: 600; font-size: 0.96rem;
+      color: var(--text-ink);
+    }
+
+    /* ────── CTA ────── */
+    .cta-section {
+      background: linear-gradient(135deg, var(--gold) 0%, var(--gold-warm) 100%);
+      color: #fff; text-align: center;
+    }
+    .cta-section h2 { color: #fff; margin-bottom: 1rem; }
+    .cta-section p { color: rgba(255,255,255,0.92); font-size: 1.1rem; margin-bottom: 2rem; }
+    .cta-section .btn-light { background: var(--deep-blue); color: #fff; }
+    .cta-section .btn-light:hover { background: var(--bg-footer); }
+    .cta-section .btn-ghost { color: #fff; border-color: rgba(255,255,255,0.5); }
+    .cta-section .btn-ghost:hover { background: rgba(255,255,255,0.12); border-color: rgba(255,255,255,0.85); }
+
+    /* ────── FOOTER ────── */
+    .site-footer { background: var(--bg-footer); color: var(--text-warm); padding: var(--s6) 0 var(--s4); }
+    .footer-grid { display: grid; gap: var(--s4); grid-template-columns: 1fr; margin-bottom: var(--s5); }
+    @media (min-width: 768px) { .footer-grid { grid-template-columns: 2fr 1fr 1fr 1.5fr; gap: var(--s5); } }
+    .footer-brand { font-family: var(--font-display); font-size: 1.3rem; color: #fff; margin-bottom: 0.5rem; }
+    .footer-tagline { font-family: var(--font-body); font-style: italic; color: rgba(245,241,234,0.65); font-size: 0.95rem; }
+    .footer-col-label { font-family: var(--font-ui); font-size: 0.8rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold-pale); margin-bottom: 0.8rem; }
+    .footer-link { font-family: var(--font-body); color: rgba(245,241,234,0.78); margin-bottom: 0.45rem; font-size: 0.95rem; }
+    .footer-link a { color: rgba(245,241,234,0.78); transition: color 200ms; }
+    .footer-link a:hover { color: var(--gold-pale); }
+    .footer-bottom { border-top: 1px solid rgba(245,241,234,0.12); padding-top: var(--s4); }
+    .footer-copy { font-size: 0.85rem; color: rgba(245,241,234,0.5); }
+
+    /* fade-in scroll reveal */
+    .fade-in { opacity: 0; transform: translateY(20px); transition: opacity 700ms, transform 700ms; }
+    .fade-in.is-visible { opacity: 1; transform: translateY(0); }
+
+    /* safe area inset for mobile */
+    @supports (padding: env(safe-area-inset-bottom)) {
+      .site-footer { padding-bottom: calc(var(--s4) + env(safe-area-inset-bottom)); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="site-header" id="site-header">
+    <div class="header__inner">
+      <a href="../index.html" class="header__logo">
+        <img src="../favicon.svg" alt="BBC" style="width:32px;height:32px;" />
+        <span class="header__logo-name">Balay ni Bruno &amp; Co.</span>
+      </a>
+      <nav><ul class="header__nav">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="../about.html">Our Story</a></li>
+        <li><a href="../how-it-works.html">How It Works</a></li>
+        <li><a href="../how-we-help.html">How We Help</a></li>
+        <li><a href="../our-team.html">Our Team</a></li>
+        <li><a href="../our-work.html">Our Work</a></li>
+        <li><a href="../insights.html">Insights</a></li>
+        <li><a href="../contact.html">Contact</a></li>
+      </ul></nav>
+      <div class="header__cta">
+        <a href="../contact.html" class="btn btn-ghost btn-sm">Start a Conversation</a>
+        <a href="https://calendly.com/rj-balaynibruno/bbc-strategy-call" target="_blank" rel="noopener" class="btn btn-gold btn-sm">Book a Call</a>
+      </div>
+      <button class="hamburger" id="hamburger" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <nav class="mobile-menu" id="mobile-menu">
+      <ul>
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="../about.html">Our Story</a></li>
+        <li><a href="../how-it-works.html">How It Works</a></li>
+        <li><a href="../how-we-help.html">How We Help</a></li>
+        <li><a href="../our-team.html">Our Team</a></li>
+        <li><a href="../our-work.html">Our Work</a></li>
+        <li><a href="../insights.html">Insights</a></li>
+        <li><a href="../contact.html">Contact</a></li>
+        <li><a href="../contact.html" class="btn btn-ghost btn-sm" style="margin-top:1rem;">Start a Conversation</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- HERO -->
+  <section class="page-hero">
+    <div class="container page-hero__inner">
+      <div class="page-hero__eyebrow">
+        <span class="page-hero__eyebrow-dot"></span>
+        For content creators
+      </div>
+      <h1>Cut the silence.<br /><em>Keep the story.</em></h1>
+      <p class="page-hero__lede">
+        Drop your raw recording in. The AI cuts every silent gap, every breath, every dead-air moment. You get back a tight version, ready to post the same day.
+      </p>
+      <div class="page-hero__cta-row">
+        <a href="../contact.html" class="btn btn-gold">Start a Conversation</a>
+        <a href="#how-it-works" class="btn btn-ghost" style="color:#fff;border-color:rgba(255,255,255,0.4);">See how it works</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- REEL -->
+  <section class="section section--card">
+    <div class="container">
+      <div class="reel-wrap fade-in">
+        <video
+          src="../assets/work/cut-the-silence/reel_v3.mp4"
+          poster="../assets/work/cut-the-silence/slide_01_hero.png"
+          controls
+          playsinline
+          preload="metadata"
+          aria-label="A 58-second video showing how Cut the Silence works."
+        >
+          Your browser does not support the video tag.
+          <a href="../assets/work/cut-the-silence/reel_v1.mp4">Download the video</a>.
+        </video>
+      </div>
+      <p class="reel-caption">58 seconds. Watch it with sound.</p>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="section section--warm" id="how-it-works">
+    <div class="container">
+      <div class="section__eyebrow">How it works</div>
+      <h2 class="section__title fade-in">Three steps. One command.</h2>
+      <p class="section__intro fade-in">
+        Most business owners record themselves talking, then dread sitting down to clean it up. That part is now ours.
+      </p>
+      <div class="steps">
+        <div class="step fade-in">
+          <div class="step__num">01</div>
+          <h3>You send your recording</h3>
+          <p>Drop your raw recording into our shared folder. Any length. Audio or video.</p>
+        </div>
+        <div class="step fade-in">
+          <div class="step__num">02</div>
+          <h3>The AI does the editing</h3>
+          <p>It listens through the whole thing, marks every silent gap, every breath, every dead-air moment. Then it cuts them out and stitches your voice and video back together.</p>
+        </div>
+        <div class="step fade-in">
+          <div class="step__num">03</div>
+          <h3>You get back the cleaned version</h3>
+          <p>Your voice and rhythm stay. The dead air is gone. Tight, ready to post.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROOF -->
+  <section class="section section--dark">
+    <div class="container">
+      <div class="section__eyebrow" style="color:var(--gold-pale);">Real result</div>
+      <h2 class="section__title fade-in">A 22-minute pitch.<br />Cleaned in one command.</h2>
+      <p class="section__intro fade-in">
+        These numbers are from a real client pitch recording we cleaned in May. No estimates. Actual file in, actual file out.
+      </p>
+      <div class="proof-grid">
+        <div class="proof-stat fade-in">
+          <div class="proof-stat__value">22:10</div>
+          <div class="proof-stat__label">Raw recording</div>
+        </div>
+        <div class="proof-stat fade-in">
+          <div class="proof-stat__value">20:46</div>
+          <div class="proof-stat__label">After cleanup</div>
+        </div>
+        <div class="proof-stat fade-in">
+          <div class="proof-stat__value">30 min</div>
+          <div class="proof-stat__label">Editing time saved</div>
+        </div>
+      </div>
+      <p class="proof-source">From a real client pitch, processed 2026-05-23.</p>
+    </div>
+  </section>
+
+  <!-- CAROUSEL GALLERY -->
+  <section class="section section--card">
+    <div class="container">
+      <div class="section__eyebrow">The carousel</div>
+      <h2 class="section__title fade-in">Swipe through the breakdown.</h2>
+      <p class="section__intro fade-in">
+        Save the slides. Send them to your team. Or share them with a friend who needs to hear this.
+      </p>
+      <div class="carousel-scroll fade-in">
+        <div class="carousel-slide"><img src="../assets/work/cut-the-silence/slide_01_hero.png" alt="Cut the silence. Keep the story." loading="lazy" /></div>
+        <div class="carousel-slide"><img src="../assets/work/cut-the-silence/slide_02_problem.png" alt="The pain of editing your own voice" loading="lazy" /></div>
+        <div class="carousel-slide"><img src="../assets/work/cut-the-silence/slide_03_teach_01.png" alt="Step 1 - send your recording" loading="lazy" /></div>
+        <div class="carousel-slide"><img src="../assets/work/cut-the-silence/slide_04_teach_02.png" alt="Step 2 - the AI cuts the gaps" loading="lazy" /></div>
+        <div class="carousel-slide"><img src="../assets/work/cut-the-silence/slide_05_teach_03.png" alt="Step 3 - tight, ready to post" loading="lazy" /></div>
+        <div class="carousel-slide"><img src="../assets/work/cut-the-silence/slide_06_wow.png" alt="Real result - 30 minutes saved" loading="lazy" /></div>
+        <div class="carousel-slide"><img src="../assets/work/cut-the-silence/slide_07_cta.png" alt="Want this for your business?" loading="lazy" /></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- USE CASES -->
+  <section class="section section--warm">
+    <div class="container">
+      <div class="section__eyebrow">Where it works</div>
+      <h2 class="section__title fade-in">Anything you record yourself doing.</h2>
+      <p class="section__intro fade-in">
+        Long-form content with a voice on it. We have run it on hours of footage. It just works.
+      </p>
+      <div class="use-cases">
+        <div class="use-case fade-in"><div class="use-case__icon">🎙</div><div class="use-case__label">Podcast episodes</div></div>
+        <div class="use-case fade-in"><div class="use-case__icon">📞</div><div class="use-case__label">Coaching calls</div></div>
+        <div class="use-case fade-in"><div class="use-case__icon">📈</div><div class="use-case__label">Sales pitches</div></div>
+        <div class="use-case fade-in"><div class="use-case__icon">🎓</div><div class="use-case__label">Course recordings</div></div>
+        <div class="use-case fade-in"><div class="use-case__icon">📱</div><div class="use-case__label">Social reels</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section cta-section">
+    <div class="container">
+      <h2 class="fade-in">Want this for your business?</h2>
+      <p class="fade-in">We set up the same system for you. You record. We hand it back clean.</p>
+      <div class="page-hero__cta-row fade-in" style="justify-content:center;">
+        <a href="../contact.html" class="btn btn-light">Start a Conversation</a>
+        <a href="https://calendly.com/rj-balaynibruno/bbc-strategy-call" target="_blank" rel="noopener" class="btn btn-ghost">Book a Call</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <p class="footer-brand">Balay ni Bruno &amp; Co.</p>
+          <p class="footer-tagline">A family-built operational support studio.</p>
+        </div>
+        <div>
+          <p class="footer-col-label">How We Help</p>
+          <p class="footer-link"><a href="../how-we-help.html">All Services</a></p>
+          <p class="footer-link"><a href="../our-work.html">Our Work</a></p>
+          <p class="footer-link"><a href="../how-it-works.html">How It Works</a></p>
+        </div>
+        <div>
+          <p class="footer-col-label">Company</p>
+          <p class="footer-link"><a href="../about.html">Our Story</a></p>
+          <p class="footer-link"><a href="../our-team.html">Our Team</a></p>
+          <p class="footer-link"><a href="../insights.html">Insights</a></p>
+        </div>
+        <div>
+          <p class="footer-col-label">Contact</p>
+          <p class="footer-link">admin@balaynibruno.co</p>
+          <p class="footer-link">+63 935 663 0324</p>
+          <p class="footer-link">Serving US, UK &amp; international clients</p>
+          <a href="https://calendly.com/rj-balaynibruno/bbc-strategy-call" target="_blank" rel="noopener" class="btn btn-gold btn-sm" style="margin-top:0.8rem;">Book a Call</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p class="footer-copy">&copy; 2026 Balay ni Bruno &amp; Co. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Scroll header shadow
+    (function(){
+      var h = document.getElementById('site-header');
+      window.addEventListener('scroll', function(){
+        if (window.scrollY > 8) h.classList.add('scrolled');
+        else h.classList.remove('scrolled');
+      }, { passive: true });
+    })();
+
+    // Mobile menu
+    (function(){
+      var btn = document.getElementById('hamburger');
+      var menu = document.getElementById('mobile-menu');
+      if (!btn || !menu) return;
+      btn.addEventListener('click', function(){
+        menu.classList.toggle('open');
+      });
+    })();
+
+    // Fade-in observer
+    (function(){
+      var obs = new IntersectionObserver(function(entries){
+        entries.forEach(function(e){
+          if (e.isIntersecting) {
+            e.target.classList.add('is-visible');
+            obs.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.12 });
+      document.querySelectorAll('.fade-in').forEach(function(el){ obs.observe(el); });
+    })();
+  </script>
+
+</body>
+</html>

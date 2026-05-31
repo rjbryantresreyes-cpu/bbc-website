@@ -1,0 +1,343 @@
+/* ═══════════════════════════════════════════════════════
+   BBC Article Visual Components — bbc-article-visuals.css
+   Used by all 25 SEO content pages
+   ═══════════════════════════════════════════════════════ */
+
+/* ── Step Flow (numbered process steps) ── */
+.step-flow {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin: 2rem 0;
+}
+.step-flow--horizontal {
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 0;
+}
+.step {
+  display: flex;
+  gap: 1.25rem;
+  align-items: flex-start;
+  background: var(--bg-card, #FDFAF6);
+  border: 1px solid rgba(85,60,35,0.09);
+  border-radius: 16px;
+  padding: 1.25rem 1.5rem;
+}
+.step-flow--horizontal .step {
+  flex: 1;
+  min-width: 180px;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+  position: relative;
+}
+.step-flow--horizontal .step:not(:last-child)::after {
+  content: '→';
+  position: absolute;
+  right: -1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--gold, #B8923E);
+  font-size: 1.2rem;
+  z-index: 1;
+}
+@media (max-width: 640px) {
+  .step-flow--horizontal { flex-direction: column; }
+  .step-flow--horizontal .step::after { display: none; }
+}
+.step__num {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--deep-blue, #1F3557);
+  color: #fff;
+  font-family: 'DM Sans', system-ui, sans-serif;
+  font-size: 0.85rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.step-flow--horizontal .step__num {
+  margin: 0 auto 0.75rem;
+}
+.step__content {}
+.step__title {
+  font-family: 'DM Sans', system-ui, sans-serif;
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--deep-blue, #1F3557);
+  margin-bottom: 0.3rem;
+}
+.step__desc {
+  font-family: 'Lora', Georgia, serif;
+  font-size: 0.9rem;
+  line-height: 1.7;
+  color: var(--text-body, #4E5666);
+  margin: 0;
+}
+
+/* ── Stat Callout (big number + label) ── */
+.stat-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin: 2rem 0;
+}
+@media (max-width: 600px) { .stat-row { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 380px) { .stat-row { grid-template-columns: 1fr; } }
+.stat-card {
+  background: var(--bg-dark, #1C2E47);
+  border-radius: 16px;
+  padding: 1.5rem 1.25rem;
+  text-align: center;
+}
+.stat-card--light {
+  background: var(--bg-section, #EDE8DF);
+}
+.stat-card__value {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  font-weight: 700;
+  color: var(--gold, #B8923E);
+  line-height: 1;
+  margin-bottom: 0.4rem;
+}
+.stat-card--light .stat-card__value {
+  color: var(--deep-blue, #1F3557);
+}
+.stat-card__label {
+  font-family: 'DM Sans', system-ui, sans-serif;
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: rgba(245,241,234,0.6);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+.stat-card--light .stat-card__label {
+  color: var(--text-muted, #888FA0);
+}
+
+/* ── Before / After comparison ── */
+.before-after-compare {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin: 2rem 0;
+}
+@media (max-width: 580px) { .before-after-compare { grid-template-columns: 1fr; } }
+.compare-col {
+  border-radius: 16px;
+  padding: 1.5rem;
+}
+.compare-col--before {
+  background: rgba(136,143,160,0.08);
+  border: 1px solid rgba(136,143,160,0.2);
+}
+.compare-col--after {
+  background: rgba(78,158,116,0.08);
+  border: 1px solid rgba(78,158,116,0.25);
+}
+.compare-col__label {
+  font-family: 'DM Sans', system-ui, sans-serif;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+.compare-col--before .compare-col__label { color: var(--text-muted, #888FA0); }
+.compare-col--after .compare-col__label { color: #4E9E74; }
+.compare-col__dot {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+}
+.compare-col--before .compare-col__dot { background: var(--text-muted, #888FA0); }
+.compare-col--after .compare-col__dot { background: #4E9E74; }
+.compare-col ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.compare-col li {
+  font-family: 'Lora', Georgia, serif;
+  font-size: 0.9rem;
+  line-height: 1.7;
+  color: var(--text-body, #4E5666);
+  padding: 0.35rem 0;
+  border-bottom: 1px solid rgba(85,60,35,0.06);
+  margin: 0;
+}
+.compare-col li:last-child { border-bottom: none; }
+.compare-col li::before {
+  content: '✗ ';
+  color: var(--text-muted, #888FA0);
+  font-size: 0.75rem;
+}
+.compare-col--after li::before {
+  content: '✓ ';
+  color: #4E9E74;
+}
+
+/* ── Tool Stack badges ── */
+.tool-stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 1.5rem 0;
+  align-items: center;
+}
+.tool-stack__label {
+  font-family: 'DM Sans', system-ui, sans-serif;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted, #888FA0);
+  margin-right: 0.25rem;
+}
+.tool-badge {
+  font-family: 'DM Sans', system-ui, sans-serif;
+  font-size: 0.78rem;
+  font-weight: 600;
+  padding: 0.28rem 0.75rem;
+  border-radius: 100px;
+  background: rgba(31,53,87,0.08);
+  border: 1px solid rgba(31,53,87,0.14);
+  color: var(--deep-blue, #1F3557);
+}
+.tool-badge--gold {
+  background: rgba(184,146,62,0.1);
+  border-color: rgba(184,146,62,0.2);
+  color: var(--gold, #B8923E);
+}
+
+/* ── Process Roadmap (visual timeline) ── */
+.roadmap {
+  margin: 2rem 0;
+  position: relative;
+}
+.roadmap::before {
+  content: '';
+  position: absolute;
+  left: 18px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(to bottom, var(--gold, #B8923E), rgba(184,146,62,0.1));
+}
+.roadmap-item {
+  display: flex;
+  gap: 1.25rem;
+  align-items: flex-start;
+  margin-bottom: 1.5rem;
+  position: relative;
+}
+.roadmap-item__dot {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--bg-primary, #F5F1EA);
+  border: 2px solid var(--gold, #B8923E);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-family: 'DM Sans', system-ui, sans-serif;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--gold, #B8923E);
+  z-index: 1;
+}
+.roadmap-item__body {
+  padding-top: 0.4rem;
+  flex: 1;
+}
+.roadmap-item__title {
+  font-family: 'DM Sans', system-ui, sans-serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--deep-blue, #1F3557);
+  margin-bottom: 0.3rem;
+}
+.roadmap-item__desc {
+  font-family: 'Lora', Georgia, serif;
+  font-size: 0.9rem;
+  line-height: 1.75;
+  color: var(--text-body, #4E5666);
+  margin: 0;
+}
+
+/* ── Tip / Warning / Note boxes ── */
+.tip-box {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+  padding: 1.1rem 1.4rem;
+  border-radius: 12px;
+  margin: 1.5rem 0;
+}
+.tip-box--tip {
+  background: rgba(78,158,116,0.07);
+  border: 1px solid rgba(78,158,116,0.2);
+}
+.tip-box--warning {
+  background: rgba(212,168,75,0.08);
+  border: 1px solid rgba(212,168,75,0.25);
+}
+.tip-box--note {
+  background: rgba(75,111,165,0.07);
+  border: 1px solid rgba(75,111,165,0.2);
+}
+.tip-box__icon {
+  font-size: 1.1rem;
+  flex-shrink: 0;
+  margin-top: 0.05rem;
+}
+.tip-box__text {
+  font-family: 'Lora', Georgia, serif;
+  font-size: 0.92rem;
+  line-height: 1.75;
+  color: var(--text-body, #4E5666);
+  margin: 0;
+}
+.tip-box__text strong {
+  font-family: 'DM Sans', system-ui, sans-serif;
+  font-weight: 600;
+  color: var(--text-ink, #2A3040);
+}
+
+/* ── Cost comparison table ── */
+.cost-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+  font-family: 'DM Sans', system-ui, sans-serif;
+  font-size: 0.88rem;
+}
+.cost-table th {
+  background: var(--deep-blue, #1F3557);
+  color: #fff;
+  padding: 0.75rem 1rem;
+  text-align: left;
+  font-weight: 600;
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.cost-table td {
+  padding: 0.7rem 1rem;
+  border-bottom: 1px solid rgba(85,60,35,0.08);
+  color: var(--text-body, #4E5666);
+  vertical-align: top;
+}
+.cost-table tr:last-child td { border-bottom: none; }
+.cost-table tr:nth-child(even) td { background: rgba(85,60,35,0.025); }
+.cost-table .cost--high { color: #c0392b; font-weight: 600; }
+.cost-table .cost--low { color: #4E9E74; font-weight: 600; }
+.cost-table .cost--zero { color: var(--gold, #B8923E); font-weight: 700; }
