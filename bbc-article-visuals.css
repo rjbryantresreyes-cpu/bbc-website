@@ -184,6 +184,74 @@
   color: #4E9E74;
 }
 
+/* ── Before/After generic child support (.before / .after shorthand) ── */
+.before-after-compare .before,
+.before-after-compare .after {
+  border-radius: 16px;
+  padding: 1.5rem;
+}
+.before-after-compare .before {
+  background: rgba(136,143,160,0.08);
+  border: 1px solid rgba(136,143,160,0.2);
+}
+.before-after-compare .after {
+  background: rgba(78,158,116,0.08);
+  border: 1px solid rgba(78,158,116,0.25);
+}
+.before-after-compare .before h4,
+.before-after-compare .after h4 {
+  font-family: 'DM Sans', system-ui, sans-serif;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+  margin-top: 0;
+}
+.before-after-compare .before h4 { color: var(--text-muted, #888FA0); }
+.before-after-compare .after h4 { color: #4E9E74; }
+.before-after-compare .before ul li::before { content: '✗ '; color: var(--text-muted, #888FA0); font-size: 0.75rem; }
+.before-after-compare .after ul li::before { content: '✓ '; color: #4E9E74; }
+.before-after-compare .before li,
+.before-after-compare .after li {
+  font-family: 'Lora', Georgia, serif;
+  font-size: 0.9rem;
+  line-height: 1.7;
+  color: var(--text-body, #4E5666);
+  padding: 0.35rem 0;
+  border-bottom: 1px solid rgba(85,60,35,0.06);
+  margin: 0;
+}
+.before-after-compare .before li:last-child,
+.before-after-compare .after li:last-child { border-bottom: none; }
+
+/* ── Cost table inside a wrapper div ── */
+.cost-table table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0;
+  font-family: 'DM Sans', system-ui, sans-serif;
+  font-size: 0.88rem;
+}
+.cost-table table th {
+  background: var(--deep-blue, #1F3557);
+  color: #fff;
+  padding: 0.75rem 1rem;
+  text-align: left;
+  font-weight: 600;
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.cost-table table td {
+  padding: 0.7rem 1rem;
+  border-bottom: 1px solid rgba(85,60,35,0.08);
+  color: var(--text-body, #4E5666);
+  vertical-align: top;
+}
+.cost-table table tr:last-child td { border-bottom: none; }
+.cost-table table tr:nth-child(even) td { background: rgba(85,60,35,0.025); }
+
 /* ── Tool Stack badges ── */
 .tool-stack {
   display: flex;
@@ -275,12 +343,25 @@
 
 /* ── Tip / Warning / Note boxes ── */
 .tip-box {
-  display: flex;
-  gap: 1rem;
-  align-items: flex-start;
+  display: block;
   padding: 1.1rem 1.4rem;
   border-radius: 12px;
   margin: 1.5rem 0;
+  font-family: 'Lora', Georgia, serif;
+  font-size: 0.92rem;
+  line-height: 1.75;
+  color: var(--text-body, #4E5666);
+}
+.tip-box strong {
+  font-family: 'DM Sans', system-ui, sans-serif;
+  font-weight: 600;
+  color: var(--text-ink, #2A3040);
+}
+/* Structured tip-box with icon+text children */
+.tip-box:has(.tip-box__icon) {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
 }
 .tip-box--tip {
   background: rgba(78,158,116,0.07);
