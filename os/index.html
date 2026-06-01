@@ -144,6 +144,28 @@
   .dashcard .metric b{color:var(--gold);font-family:var(--display);font-size:19px;}
   .dashcard .todo{font-size:12.5px;color:var(--muted);margin-top:8px;display:flex;gap:8px;line-height:1.4;}
   .dashcard .todo .lab{color:var(--gold2);font-family:var(--mono);font-size:9px;letter-spacing:1px;text-transform:uppercase;white-space:nowrap;padding-top:2px;}
+
+  /* BI PANELS (Home) */
+  .panelgrid{display:grid;grid-template-columns:1fr;gap:12px;}
+  @media(min-width:680px){ .panelgrid{grid-template-columns:1fr 1fr;} }
+  .panel{background:var(--bg2);border:1px solid var(--line);border-radius:14px;padding:14px;}
+  .panel.tap{cursor:pointer;} .panel.tap:active{transform:scale(0.995);} .panel.tap:hover{border-color:var(--gold);}
+  .panel .ptitle{display:block;text-align:center;font-family:var(--mono);font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--ink);background:var(--bg3);border:1px solid var(--line);border-radius:8px;padding:6px;margin-bottom:12px;}
+  .gauge-sub{text-align:center;font-size:11px;color:var(--muted);margin-top:4px;}
+  .wkbars{display:flex;justify-content:space-between;align-items:flex-end;gap:6px;height:90px;padding:0 2px;}
+  .wkbars .wb{flex:1;display:flex;flex-direction:column;align-items:center;gap:6px;height:100%;justify-content:flex-end;}
+  .wkbars .bar{width:100%;border-radius:4px 4px 0 0;min-height:4px;}
+  .wkbars .lbl{font-family:var(--mono);font-size:9px;color:var(--muted);}
+  .ptable{width:100%;border-collapse:collapse;}
+  .ptable td{padding:8px 4px;border-bottom:1px solid var(--line);font-size:12.5px;color:var(--ink);}
+  .ptable td:nth-child(2),.ptable td:nth-child(3){text-align:right;color:var(--gold2);font-family:var(--mono);font-size:11.5px;}
+  .ptable tr:last-child td{border-bottom:none;}
+  .hbar{display:flex;align-items:center;gap:8px;margin-bottom:10px;}
+  .hbar:last-child{margin-bottom:0;}
+  .hbar .hl{font-size:11.5px;color:var(--ink);width:104px;flex:none;}
+  .hbar .htrack{flex:1;height:14px;background:var(--bg3);border-radius:7px;overflow:hidden;}
+  .hbar .htrack i{display:block;height:100%;border-radius:7px;}
+  .hbar .hv{font-family:var(--mono);font-size:11px;color:var(--gold2);width:26px;text-align:right;flex:none;}
 </style>
 </head>
 <body>
@@ -330,16 +352,24 @@
       </div>
       ${(()=>{
         const gaps=80-ship;
-        const wfNext=D.workflows.filter(w=>{const p=pct(w);return p>0&&p<100;}).sort((a,b)=>pct(b)-pct(a))[0];
-        const wfMiss=wfNext?ORDER.filter(a=>!wfNext.artifacts[a]):[];
-        const card=(color,title,chip,metric,lab,todo,view)=>`<div class="dashcard" style="border-left-color:${color}" onclick="go('${view}')"><div class="dh"><div class="dt">${title}</div><div class="chip">${chip}</div></div><div class="metric">${metric}</div><div class="todo"><span class="lab">${lab}</span><span>${todo}</span></div></div>`;
-        return `<div class="sec">Your BBC at a glance</div>
-          ${card('#2DD4BF','Websites','TASKS',`<b>${D.websitePages.length}</b> pages live · ${D.websiteTasks.length} open tasks`,'Do next',esc(D.websiteTasks[0]||'all clear'),'websites')}
-          ${card('#A78BFA','Workflows','READINESS',`<b>${ship}</b>/80 artifacts · ${gaps} gaps`,'Create',wfNext?esc(wfNext.title.split(' — ')[0])+' — add '+wfMiss.join(' + '):'all caught up','workflows')}
-          ${card('#EC4899','Social Media','THIS WEEK',`<b>${pending}</b> posts pending`,'Today',dueToday?esc(dueToday.graphic)+' (graphic + reel)':'nothing scheduled','social')}
-          ${card('#D4AF37','Clients','ACTIVE',`<b>${D.clients.length}</b> clients`,'Now','Sonya — Olivia ready, rebrand site is next','clients')}
-          ${card('#4ADE80','Reminders','TODAY',`<b>0</b> items`,'Note','Wire the brain so Cuh captures reminders here','reminders')}
-          ${card('#60A5FA','News','RESEARCH',`<b>${D.newsFeed.length}</b> saved`,'Run','Tap a topic box to deep-search','news')}`;
+        const wfReady=Math.round(ship/80*100);
+        const weekPosted=D.content.days.filter(x=>x.posted).length;
+        const clientsNoAI=D.clients.filter(c=>c.ai==='-').length;
+        const gauge=(p,sub)=>{const r=74,c=Math.PI*r,len=(p/100)*c;return `<svg viewBox="0 0 180 116" style="width:100%;max-width:210px;display:block;margin:0 auto"><path d="M16 100 A ${r} ${r} 0 0 1 164 100" fill="none" stroke="#22324d" stroke-width="15" stroke-linecap="round"/><path d="M16 100 A ${r} ${r} 0 0 1 164 100" fill="none" stroke="#D4AF37" stroke-width="15" stroke-linecap="round" stroke-dasharray="${len} ${c}"/><text x="90" y="88" text-anchor="middle" font-family="Playfair Display,serif" font-size="36" font-weight="700" fill="#F5F1EA">${p}%</text><text x="90" y="108" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" fill="#C9A961">${sub}</text></svg>`;};
+        const weekBars=D.content.days.map(x=>{const has=(x.graphic&&x.graphic!=='-')||(x.reel&&x.reel!=='-');const h=x.posted?100:(has?68:22);const col=x.posted?'#4ADE80':(has?'#D4AF37':'#2a3a52');return `<div class="wb"><div class="bar" style="height:${h}%;background:${col}"></div><div class="lbl">${esc(x.d.split(' ')[0][0])}</div></div>`;}).join('');
+        const grp=g=>D.websitePages.filter(p=>p.group===g).length;
+        const webRows=`<tr><td>Main pages</td><td>${grp('Main pages')}</td></tr><tr><td>VA profiles</td><td>${grp('VA profiles (noindex)')}</td></tr><tr><td>Internal</td><td>${grp('Internal (noindex)')}</td></tr><tr><td>Open tasks</td><td>${D.websiteTasks.length}</td></tr>`;
+        const attn=[{l:'Workflow gaps',v:gaps,m:80},{l:'Posts pending',v:pending,m:7},{l:'Website tasks',v:D.websiteTasks.length,m:10},{l:'Clients w/o AI',v:clientsNoAI,m:D.clients.length}];
+        const attnBars=attn.map(a=>{const r=a.v/a.m;const col=r>0.66?'#EF6B6B':(r>0.33?'#D4AF37':'#4ADE80');const w=Math.max(8,Math.round(r*100));return `<div class="hbar"><span class="hl">${a.l}</span><div class="htrack"><i style="width:${w}%;background:${col}"></i></div><span class="hv">${a.v}</span></div>`;}).join('');
+        const clientRows=D.clients.map(c=>`<tr><td>${esc(c.name)}</td><td>${esc(c.handler)}</td><td>${c.ai!=='-'?'AI ✓':'—'}</td></tr>`).join('');
+        return `<div class="sec">Business at a glance</div>
+          <div class="panelgrid">
+            <div class="panel tap" onclick="go('workflows')"><span class="ptitle">Workflow Readiness</span>${gauge(wfReady,ship+' of 80 artifacts')}<div class="gauge-sub">${gaps} gaps to ship</div></div>
+            <div class="panel tap" onclick="go('social')"><span class="ptitle">This Week</span><div class="wkbars">${weekBars}</div><div class="gauge-sub">${weekPosted} of 7 posted</div></div>
+            <div class="panel tap" onclick="go('websites')"><span class="ptitle">Websites</span><table class="ptable">${webRows}</table></div>
+            <div class="panel"><span class="ptitle">Needs Attention</span>${attnBars}</div>
+            <div class="panel tap" onclick="go('clients')" style="grid-column:1/-1"><span class="ptitle">Clients (${D.clients.length})</span><table class="ptable">${clientRows}</table></div>
+          </div>`;
       })()}
       <a class="morelink" onclick="go('more')">AI Family · Team · Systems →</a>`;
   };
