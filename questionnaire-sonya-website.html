@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-L6S574R0CE"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-L6S574R0CE');
+  </script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sonya — Website Build Questions | Balay ni Bruno &amp; Co.</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Lora:ital,wght@0,400;0,500;1,400;1,500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --deep-blue:   #1F3557;
+      --mid-blue:    #4B6FA5;
+      --warm-blue:   #6D8FC7;
+      --bg-primary:  #F5F1EA;
+      --bg-section:  #EDE8DF;
+      --bg-card:     #FDFAF6;
+      --bg-dark:     #1C2E47;
+      --bg-footer:   #172540;
+      --text-ink:    #2A3040;
+      --text-body:   #4E5666;
+      --text-muted:  #888FA0;
+      --text-warm:   #F5F1EA;
+      --gold:        #B8923E;
+      --gold-pale:   #E6CFA0;
+      --gold-warm:   #D4A84B;
+      --font-display:'Playfair Display', Georgia, serif;
+      --font-body:   'Lora', Georgia, serif;
+      --font-ui:     'DM Sans', system-ui, sans-serif;
+      --radius-sm:   8px;
+      --radius:      16px;
+      --radius-lg:   24px;
+      --shadow-sm:   0 3px 18px rgba(85,60,35,0.08);
+      --shadow-md:   0 7px 36px rgba(85,60,35,0.11);
+      --border-card: 1px solid rgba(85,60,35,0.09);
+    }
+
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body {
+      font-family:var(--font-body);
+      color:var(--text-ink);
+      background:var(--bg-primary);
+      line-height:1.65;
+      -webkit-font-smoothing:antialiased;
+      min-height:100dvh;
+    }
+
+    h1, h2, h3 { font-family:var(--font-display); line-height:1.22; color:var(--deep-blue); }
+    h1 { font-size:clamp(1.9rem, 5vw, 2.8rem); font-weight:700; }
+    h2 { font-size:clamp(1.4rem, 3vw, 1.9rem); font-weight:600; margin-top:0; }
+    h3 { font-size:clamp(1.05rem, 2vw, 1.2rem); font-weight:600; }
+    p  { font-size:1rem; line-height:1.75; color:var(--text-body); }
+
+    .eyebrow {
+      display:inline-block; font-family:var(--font-ui);
+      font-size:0.7rem; font-weight:600;
+      letter-spacing:0.15em; text-transform:uppercase;
+      color:var(--gold); margin-bottom:0.75rem;
+    }
+
+    .wrap {
+      max-width:760px;
+      margin:0 auto;
+      padding:2rem 1.25rem 5rem;
+    }
+
+    /* HERO */
+    .hero {
+      background:var(--bg-dark);
+      color:var(--text-warm);
+      padding:3.5rem 1.25rem 3rem;
+      margin-bottom:2.5rem;
+      border-bottom:3px solid var(--gold);
+    }
+    .hero .inner { max-width:760px; margin:0 auto; }
+    .hero .eyebrow { color:var(--gold-pale); }
+    .hero h1 { color:var(--text-warm); margin-bottom:1rem; }
+    .hero p { color:rgba(245,241,234,0.85); font-size:1.05rem; max-width:600px; }
+
+    /* PROGRESS BAR */
+    .progress-rail {
+      position:sticky; top:0; z-index:50;
+      background:var(--bg-primary);
+      border-bottom:1px solid rgba(85,60,35,0.12);
+      padding:0.6rem 1.25rem;
+      box-shadow:0 1px 4px rgba(85,60,35,0.05);
+    }
+    .progress-rail__inner {
+      max-width:760px; margin:0 auto;
+      display:flex; align-items:center; justify-content:space-between;
+      gap:1rem; font-family:var(--font-ui); font-size:0.85rem;
+    }
+    .progress-rail__label { color:var(--text-muted); }
+    .progress-rail__saved {
+      color:var(--gold); font-weight:600;
+      opacity:0; transition:opacity 0.4s ease;
+    }
+    .progress-rail__saved.is-visible { opacity:1; }
+    .progress-bar {
+      flex:1; max-width:240px;
+      height:6px; background:rgba(85,60,35,0.08);
+      border-radius:3px; overflow:hidden;
+    }
+    .progress-bar__fill {
+      height:100%; width:0%;
+      background:linear-gradient(90deg, var(--gold), var(--gold-warm));
+      transition:width 0.3s ease;
+    }
+
+    /* CLAUDE PROMPT CALLOUT */
+    .claude-callout {
+      background:var(--bg-card);
+      border:var(--border-card);
+      border-left:4px solid var(--gold);
+      border-radius:var(--radius);
+      padding:1.5rem 1.25rem;
+      margin:2.5rem 0;
+      box-shadow:var(--shadow-sm);
+    }
+    .claude-callout h3 { margin-bottom:0.5rem; }
+    .claude-callout p { margin-bottom:0.75rem; }
+    .claude-callout ol { margin:0.75rem 0 1rem 1.2rem; }
+    .claude-callout li { margin-bottom:0.4rem; color:var(--text-body); }
+    .claude-callout pre {
+      background:#fff;
+      border:1px solid rgba(85,60,35,0.1);
+      border-radius:var(--radius-sm);
+      padding:1rem;
+      font-family:'Courier New', monospace;
+      font-size:0.82rem;
+      line-height:1.55;
+      color:var(--text-ink);
+      overflow-x:auto;
+      white-space:pre-wrap;
+      word-break:break-word;
+    }
+    .copy-btn {
+      display:inline-flex; align-items:center; gap:0.4rem;
+      background:var(--gold); color:#fff;
+      font-family:var(--font-ui); font-size:0.82rem; font-weight:600;
+      padding:0.6rem 1rem; border-radius:var(--radius-sm);
+      border:none; cursor:pointer;
+      transition:background 0.2s ease;
+      margin-top:0.75rem;
+      min-height:44px;
+    }
+    .copy-btn:hover { background:var(--gold-warm); }
+    .copy-btn.copied { background:var(--mid-blue); }
+
+    /* SECTIONS */
+    .section {
+      margin-top:3rem;
+      padding-top:2.25rem;
+      border-top:1px solid rgba(85,60,35,0.12);
+    }
+    .section:first-of-type { border-top:none; padding-top:0; margin-top:0; }
+    .section__intro { margin-bottom:1.75rem; color:var(--text-body); }
+    .tier-tag {
+      display:inline-block; font-family:var(--font-ui);
+      font-size:0.68rem; font-weight:600; letter-spacing:0.08em;
+      text-transform:uppercase; color:var(--mid-blue);
+      background:rgba(75,111,165,0.1); border-radius:999px;
+      padding:0.25rem 0.7rem; margin-bottom:0.6rem;
+    }
+
+    /* QUESTIONS */
+    .q {
+      background:var(--bg-card);
+      border:var(--border-card);
+      border-radius:var(--radius);
+      padding:1.5rem 1.25rem;
+      margin-bottom:1.25rem;
+      box-shadow:var(--shadow-sm);
+    }
+    .q__label {
+      display:block;
+      font-family:var(--font-ui);
+      font-size:0.72rem; font-weight:600;
+      letter-spacing:0.13em; text-transform:uppercase;
+      color:var(--gold); margin-bottom:0.4rem;
+    }
+    .q__title {
+      font-family:var(--font-display);
+      font-size:1.15rem; font-weight:600;
+      color:var(--deep-blue); line-height:1.35;
+      margin-bottom:0.5rem;
+    }
+    .q__help {
+      font-size:0.92rem;
+      color:var(--text-body);
+      margin-bottom:1rem;
+      line-height:1.6;
+    }
+    .q textarea {
+      width:100%;
+      min-height:110px;
+      font-family:var(--font-body);
+      font-size:1rem;
+      line-height:1.6;
+      color:var(--text-ink);
+      background:#fff;
+      border:1px solid rgba(85,60,35,0.18);
+      border-radius:var(--radius-sm);
+      padding:0.9rem 1rem;
+      resize:vertical;
+      transition:border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+    .q textarea:focus {
+      outline:none;
+      border-color:var(--gold);
+      box-shadow:0 0 0 3px rgba(184,146,62,0.18);
+    }
+
+    /* SUBMIT BAR */
+    .submit-bar {
+      margin-top:3rem;
+      padding:2rem 1.25rem;
+      background:var(--bg-dark);
+      color:var(--text-warm);
+      border-radius:var(--radius-lg);
+      text-align:center;
+    }
+    .submit-bar h2 { color:var(--text-warm); margin-bottom:0.5rem; }
+    .submit-bar p {
+      color:rgba(245,241,234,0.8);
+      margin-bottom:1.5rem;
+      font-size:0.95rem;
+    }
+    .submit-btn {
+      display:inline-block;
+      background:var(--gold); color:#fff;
+      font-family:var(--font-ui); font-size:1rem; font-weight:600;
+      padding:1rem 2.5rem; border-radius:var(--radius-sm);
+      border:none; cursor:pointer;
+      transition:background 0.2s ease, transform 0.1s ease;
+      min-height:52px;
+    }
+    .submit-btn:hover { background:var(--gold-warm); }
+    .submit-btn:active { transform:translateY(1px); }
+    .submit-btn:disabled { opacity:0.5; cursor:not-allowed; }
+
+    /* SUCCESS STATE */
+    .success-state {
+      display:none;
+      background:var(--bg-card);
+      border:var(--border-card);
+      border-left:4px solid var(--gold);
+      border-radius:var(--radius);
+      padding:2.5rem 1.5rem;
+      text-align:center;
+      box-shadow:var(--shadow-md);
+      margin-top:2rem;
+    }
+    .success-state.is-visible { display:block; }
+    .success-state h2 { color:var(--deep-blue); margin-bottom:0.75rem; }
+    .success-state p { color:var(--text-body); margin-bottom:1rem; }
+
+    /* MOBILE */
+    @media (max-width:600px) {
+      .wrap { padding:1.5rem 1rem 4rem; }
+      .hero { padding:2.75rem 1rem 2.25rem; }
+      .q { padding:1.25rem 1rem; }
+      .q__title { font-size:1.05rem; }
+      .claude-callout { padding:1.25rem 1rem; }
+      .claude-callout pre { font-size:0.76rem; padding:0.85rem; }
+      .submit-bar { padding:1.75rem 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="inner">
+    <span class="eyebrow">Hi Sonya — From RJ + the BBC team</span>
+    <h1>A few questions to build your new site.</h1>
+    <p>This is the round that lets us actually design srivierehair.com. Answer what you can, in any order. Your answers save automatically, so you can stop and come back. Hit send whenever you're ready, even if some are blank.</p>
+  </div>
+</section>
+
+<!-- PROGRESS BAR -->
+<div class="progress-rail">
+  <div class="progress-rail__inner">
+    <span class="progress-rail__label" id="progress-label">0 of 20 answered</span>
+    <div class="progress-bar"><div class="progress-bar__fill" id="progress-fill"></div></div>
+    <span class="progress-rail__saved" id="saved-indicator">✓ Saved</span>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <!-- CLAUDE PROMPT CALLOUT -->
+  <div class="claude-callout">
+    <h3>Pro tip — talk it out with Claude</h3>
+    <p>You don't have to type cold. Open <strong>claude.ai</strong> in a new tab, paste the prompt below, then for each question just talk to Claude. She'll help you find the words and write a clean answer you can paste here.</p>
+    <pre id="claude-prompt">Hi Claude. I'm Sonya Riviere, founder of S. Riviere Hair Collection. My agency (Balay ni Bruno &amp; Co.) is rebuilding my website srivierehair.com. They sent me a set of questions about how I want the new site to look and feel.
+
+Here's how I want to use you:
+1. I'll paste one question at a time
+2. I'll talk to you about my answer (voice or text)
+3. You ask me follow-up questions to pull out the real answer
+4. When it feels right, you write a clean final version I can paste back into their form
+5. Stay direct. Don't flatter. Push me to be specific when I'm vague.
+
+Got it? Ready for the first question?</pre>
+    <button type="button" class="copy-btn" id="copy-prompt-btn">Copy the prompt</button>
+  </div>
+
+  <!-- FORM -->
+  <form id="sonya-web-form"
+        name="sonya-website-questionnaire"
+        netlify
+        data-netlify="true"
+        netlify-honeypot="bot-field"
+        method="POST"
+        novalidate>
+    <input type="hidden" name="form-name" value="sonya-website-questionnaire" />
+    <p style="display:none;"><label>Don't fill this out if you're human: <input name="bot-field" /></label></p>
+
+    <!-- TIER 1 — THE BIG ONES -->
+    <div class="section">
+      <span class="tier-tag">Start here</span>
+      <h2>The big ones</h2>
+      <p class="section__intro">If you only answer one section, make it this one. These decide the whole look and feel. The most important is the very first question.</p>
+
+      <div class="q">
+        <span class="q__label">Q1 — the key one</span>
+        <div class="q__title">Which ONE site is THE reference?</div>
+        <p class="q__help">You sent us: Oribe (about page), rawhaushairco.com, luxyhair.com, trueandpuretexture.com, thehairshop.com, remyandvirgin.com, dhwarakindianhair.com, @curt_cobain on Instagram. If you could keep only ONE as the model for how your new site should FEEL, which one? And in one sentence, what specifically do you love about it?</p>
+        <textarea name="Q1_reference_site" data-q-id="Q1"></textarea>
+      </div>
+
+      <div class="q">
+        <span class="q__label">Q2</span>
+        <div class="q__title">The first 5 seconds — what should a stranger FEEL?</div>
+        <p class="q__help">Not what they read. What they FEEL. Examples: "this is serious luxury," "she really knows her craft," "this is different from every other hair brand," "I can trust her." What's the feeling?</p>
+        <textarea name="Q2_first_feeling" data-q-id="Q2"></textarea>
+      </div>
+
+      <div class="q">
+        <span class="q__label">Q3</span>
+        <div class="q__title">Colors</div>
+        <p class="q__help"><strong>Option A — you have an idea:</strong> describe the feel ("warm and creamy like champagne," "dark and editorial like a fashion magazine," "earthy and warm like raw textures") or name colors.<br><br><strong>Option B — let us pick:</strong> just give one feeling word (calm / bold / warm / editorial / earthy / classic / quiet luxury / other).</p>
+        <textarea name="Q3_colors" data-q-id="Q3"></textarea>
+      </div>
+
+      <div class="q">
+        <span class="q__label">Q4</span>
+        <div class="q__title">Fonts</div>
+        <p class="q__help"><strong>Option A:</strong> name a brand whose typography feels right (Oribe, Vogue, Ralph Lauren, Glossier, Apple, other).<br><strong>Option B:</strong> pick one word — editorial / modern / classic / handcrafted.<br><strong>Option C:</strong> just say "BBC pick."</p>
+        <textarea name="Q4_fonts" data-q-id="Q4"></textarea>
+      </div>
+
+      <div class="q">
+        <span class="q__label">Q5</span>
+        <div class="q__title">Logo — keep, refresh, or replace?</div>
+        <p class="q__help">Pick one. If refresh or replace, one sentence on the direction (bolder, cleaner, more elegant, more modern).</p>
+        <textarea name="Q5_logo" data-q-id="Q5"></textarea>
+      </div>
+
+      <div class="q">
+        <span class="q__label">Q6</span>
+        <div class="q__title">Tone level for the new site</div>
+        <p class="q__help">Your current site reads educational + ethical + slightly reverent (the temple framing is beautiful). For the new site: (a) keep it exactly, (b) more formal and luxurious (dial up prestige), (c) more personal (more "I" voice, more of you), or (d) mix — formal on product pages, personal on your story page.</p>
+        <textarea name="Q6_tone_level" data-q-id="Q6"></textarea>
+      </div>
+    </div>
+
+    <!-- TIER 2 — STORY + SECTIONS -->
+    <div class="section">
+      <span class="tier-tag">Next</span>
+      <h2>Your story + the pages</h2>
+      <p class="section__intro">These shape specific pages. A voice memo could cover most of them.</p>
+
+      <div class="q">
+        <span class="q__label">Q7</span>
+        <div class="q__title">The "Meet Sonya" / About page</div>
+        <p class="q__help">Your current Meet Sonya page is strong. For the rebrand: (a) keep it mostly as-is, just cleaner, (b) rewrite it warmer and more personal, or (c) expand it (more film/TV, the Chandani story). And: what's the ONE thing about your story the current site doesn't say loudly enough?</p>
+        <textarea name="Q7_about_page" data-q-id="Q7"></textarea>
+      </div>
+
+      <div class="q">
+        <span class="q__label">Q8</span>
+        <div class="q__title">Film and TV — what can we actually say?</div>
+        <p class="q__help">We know you're IATSE Local 798 and your work has been on film, TV, red carpet, editorial. What are you comfortable putting on the site? E.g. "extensions featured in film and television" (general), "union-credentialed film and TV stylist," specific titles if any are public, or "featured in bridal, editorial, and on-screen productions." What level feels right and safe?</p>
+        <textarea name="Q8_film_tv_disclosure" data-q-id="Q8"></textarea>
+      </div>
+
+      <div class="q">
+        <span class="q__label">Q9</span>
+        <div class="q__title">The Chandani story — how prominent?</div>
+        <p class="q__help">Chandani faux locs is your own original, named creation. On the new site: (a) its own section or page ("The Chandani Collection"), (b) a hero product within the normal catalog, (c) mentioned in your brand story but not standalone, or (d) BBC pick.</p>
+        <textarea name="Q9_chandani" data-q-id="Q9"></textarea>
+      </div>
+
+      <div class="q">
+        <span class="q__label">Q10</span>
+        <div class="q__title">The Sundari name — is there a story?</div>
+        <p class="q__help">Does "Sundari" have a meaning or story you want told on the site? Or is it just the product line name?</p>
+        <textarea name="Q10_sundari" data-q-id="Q10"></textarea>
+      </div>
+
+      <div class="q">
+        <span class="q__label">Q11</span>
+        <div class="q__title">Educational content — how much on the site?</div>
+        <p class="q__help">Wig beginners are one of your audiences. (a) a full beginner's guide page ("New to wigs? Start here"), (b) a short guided section on the homepage ("Find your match"), (c) keep education on blog/social and keep the site sales-focused, or (d) a quiz that helps customers find their product.</p>
+        <textarea name="Q11_education" data-q-id="Q11"></textarea>
+      </div>
+
+      <div class="q">
+        <span class="q__label">Q12</span>
+        <div class="q__title">Booking</div>
+        <p class="q__help">Right now GlossGenius takes people off-site. (a) keep GlossGenius but style the transition so it feels intentional ("Book a Session" button), (b) embed GlossGenius on a dedicated Booking page so they don't fully leave, or (c) no preference, whatever's cleanest.</p>
+        <textarea name="Q12_booking" data-q-id="Q12"></textarea>
+      </div>
+
+      <div class="q">
+        <span class="q__label">Q13</span>
+        <div class="q__title">Video on the new site?</div>
+        <p class="q__help">Oribe uses video beautifully. (a) you have footage we can use (you working, a shoot, styling, explaining the hair), (b) you want to shoot something for the rebrand, or (c) no video, photos only.</p>
+        <textarea name="Q13_video" data-q-id="Q13"></textarea>
+      </div>
+
+      <div class="q">
+        <span class="q__label">Q14</span>
+        <div class="q__title">Mobile or desktop — where do your customers shop?</div>
+        <p class="q__help">Be honest. If you have Shopify analytics, what's the split? Or just your gut. If you're not sure, we design mobile-first by default.</p>
+        <textarea name="Q14_mobile_desktop" data-q-id="Q14"></textarea>
+      </div>
+    </div>
+
+    <!-- TIER 3 — DEPTH -->
+    <div class="section">
+      <span class="tier-tag">If you have time</span>
+      <h2>The finishing details</h2>
+      <p class="section__intro">Not blockers, but they make the site sharper. Answer any that spark something.</p>
+
+      <div class="q">
+        <span class="q__label">Q15</span>
+        <div class="q__title">What should people do FIRST when they land?</div>
+        <p class="q__help">Pick a primary action: (a) shop the collection, (b) learn about raw Indian hair (education first), (c) learn about you / the brand story, (d) book a styling session, or (e) mix — different action for different visitors.</p>
+        <textarea name="Q15_primary_action" data-q-id="Q15"></textarea>
+      </div>
+
+      <div class="q">
+        <span class="q__label">Q16</span>
+        <div class="q__title">What do you HATE about other hair brand sites?</div>
+        <p class="q__help">What makes you click away from a competitor? A phrase, a vibe, a layout, an image style — what signals "this isn't the level I'm at"?</p>
+        <textarea name="Q16_hate_about_others" data-q-id="Q16"></textarea>
+      </div>
+
+      <div class="q">
+        <span class="q__label">Q17</span>
+        <div class="q__title">Social proof — what do you have?</div>
+        <p class="q__help">For the homepage we want real proof up top. What can we pull? Written reviews (Yelp, The Knot, WeddingWire, Google)? Customer photos in your hair? Before/after shots? Press features besides Voyage ATL?</p>
+        <textarea name="Q17_social_proof" data-q-id="Q17"></textarea>
+      </div>
+
+      <div class="q">
+        <span class="q__label">Q18</span>
+        <div class="q__title">The tagline</div>
+        <p class="q__help">Our working direction from your own language is: <strong>"Raw. Single Donor. Real."</strong> Does that feel right? Too clinical? What would YOU say if someone asked "what is S. Riviere in four words"?</p>
+        <textarea name="Q18_tagline" data-q-id="Q18"></textarea>
+      </div>
+
+      <div class="q">
+        <span class="q__label">Q19</span>
+        <div class="q__title">Hero products to lead with</div>
+        <p class="q__help">Of all your products, which 4-6 do you want featured on the homepage? Not necessarily best sellers — the ones that say the most about what S. Riviere is.</p>
+        <textarea name="Q19_hero_products" data-q-id="Q19"></textarea>
+      </div>
+
+      <div class="q">
+        <span class="q__label">Q20</span>
+        <div class="q__title">What scares you about this rebrand?</div>
+        <p class="q__help">There's always something. What are you most worried about getting wrong? Knowing it helps us protect against it.</p>
+        <textarea name="Q20_what_scares_you" data-q-id="Q20"></textarea>
+      </div>
+    </div>
+
+    <!-- SUBMIT BAR -->
+    <div class="submit-bar">
+      <h2>Ready to send?</h2>
+      <p>Answers go straight to RJ + the BBC team. It's fine to send with some blank — you can always come back and send again. We'll turn this into your first design direction.</p>
+      <button type="submit" class="submit-btn" id="submit-btn">Send my answers</button>
+    </div>
+  </form>
+
+  <!-- SUCCESS STATE (shown after submit) -->
+  <div class="success-state" id="success-state">
+    <h2>Got it, Sonya. Thank you.</h2>
+    <p>Your answers are in. RJ + Al are on it, and this becomes your first design direction for the new srivierehair.com.</p>
+    <p style="font-size:0.92rem; color:var(--text-muted);">Remembered something else? Just message RJ on WhatsApp, or come back and send the form again.</p>
+  </div>
+
+</div>
+
+<script>
+  /* ---------- LocalStorage save/restore ---------- */
+  const STORAGE_KEY = 'sonya_website_questionnaire_v1';
+  const form = document.getElementById('sonya-web-form');
+  const textareas = form.querySelectorAll('textarea[data-q-id]');
+  const progressFill = document.getElementById('progress-fill');
+  const progressLabel = document.getElementById('progress-label');
+  const savedIndicator = document.getElementById('saved-indicator');
+
+  function loadSaved() {
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if (!raw) return;
+      const saved = JSON.parse(raw);
+      textareas.forEach(t => {
+        const id = t.dataset.qId;
+        if (saved[id]) t.value = saved[id];
+      });
+    } catch (e) { /* ignore corrupt storage */ }
+  }
+
+  function saveAll() {
+    const data = {};
+    textareas.forEach(t => {
+      if (t.value.trim()) data[t.dataset.qId] = t.value;
+    });
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+      savedIndicator.classList.add('is-visible');
+      clearTimeout(window.__savedTimer);
+      window.__savedTimer = setTimeout(() => {
+        savedIndicator.classList.remove('is-visible');
+      }, 1500);
+    } catch (e) { /* storage full or blocked */ }
+  }
+
+  function updateProgress() {
+    const total = textareas.length;
+    let filled = 0;
+    textareas.forEach(t => { if (t.value.trim().length > 0) filled++; });
+    const pct = total === 0 ? 0 : Math.round((filled / total) * 100);
+    progressFill.style.width = pct + '%';
+    progressLabel.textContent = filled + ' of ' + total + ' answered';
+  }
+
+  let saveTimer;
+  textareas.forEach(t => {
+    t.addEventListener('input', () => {
+      updateProgress();
+      clearTimeout(saveTimer);
+      saveTimer = setTimeout(saveAll, 400);
+    });
+  });
+
+  loadSaved();
+  updateProgress();
+
+  /* ---------- Copy Claude prompt ---------- */
+  const copyBtn = document.getElementById('copy-prompt-btn');
+  const promptEl = document.getElementById('claude-prompt');
+  copyBtn.addEventListener('click', async () => {
+    try {
+      await navigator.clipboard.writeText(promptEl.textContent);
+      copyBtn.textContent = '✓ Copied — now paste into Claude';
+      copyBtn.classList.add('copied');
+      setTimeout(() => {
+        copyBtn.textContent = 'Copy the prompt';
+        copyBtn.classList.remove('copied');
+      }, 2500);
+    } catch (e) {
+      const range = document.createRange();
+      range.selectNode(promptEl);
+      window.getSelection().removeAllRanges();
+      window.getSelection().addRange(range);
+      copyBtn.textContent = 'Press Cmd/Ctrl+C to copy';
+    }
+  });
+
+  /* ---------- Form submit (Netlify Forms) ----------
+     Proven pattern from questionnaire-sonya.html:
+     - POST to the page URL itself (window.location.pathname) — handles Pretty URLs
+     - Send raw FormData (multipart) — reliable for long-form textareas
+     - Fields are optional; Sonya can submit partial and come back
+  */
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const submitBtn = document.getElementById('submit-btn');
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Sending...';
+
+    const formData = new FormData(form);
+    formData.set('form-name', 'sonya-website-questionnaire');
+
+    try {
+      const response = await fetch(window.location.pathname, {
+        method: 'POST',
+        body: formData
+      });
+
+      if (response.ok) {
+        form.style.display = 'none';
+        document.getElementById('success-state').classList.add('is-visible');
+        localStorage.removeItem(STORAGE_KEY);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else {
+        throw new Error('Submission failed with status ' + response.status);
+      }
+    } catch (err) {
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Send my answers';
+      alert('Something went wrong sending your answers.\n\nError: ' + err.message + '\n\nPlease try again, or message RJ on WhatsApp and we\'ll grab them another way.');
+    }
+  });
+</script>
+
+</body>
+</html>
