@@ -132,6 +132,18 @@
   .pagemap{display:flex;align-items:center;gap:8px;min-width:max-content;padding-bottom:6px;}
   .mapnode{background:var(--bg2);border:1px solid var(--line);border-radius:8px;padding:8px 12px;font-size:12px;white-space:nowrap;color:var(--ink);}
   .maparrow{color:var(--gold2);font-size:13px;}
+
+  /* DASHBOARD CARDS (Home) */
+  .dashcard{background:var(--bg2);border:1px solid var(--line);border-left:4px solid var(--gold);border-radius:14px;padding:15px 16px;margin-bottom:10px;cursor:pointer;transition:border-color .15s,transform .1s;}
+  .dashcard:active{transform:scale(0.99);}
+  .dashcard:hover{border-color:var(--gold);}
+  .dashcard .dh{display:flex;align-items:center;justify-content:space-between;margin-bottom:9px;}
+  .dashcard .dt{font-family:var(--display);font-size:17px;font-weight:700;color:var(--ink);}
+  .dashcard .chip{font-family:var(--mono);font-size:9px;color:var(--gold2);background:rgba(212,175,55,0.12);padding:3px 9px;border-radius:999px;letter-spacing:1px;}
+  .dashcard .metric{font-size:13px;color:var(--ink);}
+  .dashcard .metric b{color:var(--gold);font-family:var(--display);font-size:19px;}
+  .dashcard .todo{font-size:12.5px;color:var(--muted);margin-top:8px;display:flex;gap:8px;line-height:1.4;}
+  .dashcard .todo .lab{color:var(--gold2);font-family:var(--mono);font-size:9px;letter-spacing:1px;text-transform:uppercase;white-space:nowrap;padding-top:2px;}
 </style>
 </head>
 <body>
@@ -316,21 +328,20 @@
         <div class="chat-in"><input placeholder="Ask Cuh anything..." disabled><button disabled>Send</button></div>
         <div class="soon-note">GOES LIVE WHEN WE WIRE THE ANTHROPIC API KEY (BRAIN LAYER)</div>
       </div>
-      <div class="grid3">
-        <div class="stat"><div class="n">${D.clients.length}</div><div class="l">Clients</div></div>
-        <div class="stat"><div class="n">${D.aiFamily.filter(a=>a.status==='active').length}</div><div class="l">AIs live</div></div>
-        <div class="stat"><div class="n gold">${ship}</div><div class="l">Artifacts shipped</div></div>
-      </div>
-      <div class="sec">Due today</div>
-      <div class="card" onclick="go('social')"><div class="row1"><span class="dot" style="background:var(--gold)"></span><div class="nm">${dueToday?esc(dueToday.graphic)+' (graphic + reel)':'Nothing scheduled'}</div></div><div class="meta">${pending} posts pending this week. Tap for the calendar.</div></div>
-      <div class="sec">Jump in</div>
-      <div class="grid2">
-        <div class="stat" onclick="go('websites')" style="cursor:pointer"><div class="n">🌐</div><div class="l">Websites</div></div>
-        <div class="stat" onclick="go('workflows')" style="cursor:pointer"><div class="n">🔄</div><div class="l">Workflows</div></div>
-        <div class="stat" onclick="go('social')" style="cursor:pointer"><div class="n">📱</div><div class="l">Social Media</div></div>
-        <div class="stat" onclick="go('news')" style="cursor:pointer"><div class="n">📰</div><div class="l">News</div></div>
-      </div>
-      <a class="morelink" onclick="go('more')">Clients · AI Family · Team · Systems →</a>`;
+      ${(()=>{
+        const gaps=80-ship;
+        const wfNext=D.workflows.filter(w=>{const p=pct(w);return p>0&&p<100;}).sort((a,b)=>pct(b)-pct(a))[0];
+        const wfMiss=wfNext?ORDER.filter(a=>!wfNext.artifacts[a]):[];
+        const card=(color,title,chip,metric,lab,todo,view)=>`<div class="dashcard" style="border-left-color:${color}" onclick="go('${view}')"><div class="dh"><div class="dt">${title}</div><div class="chip">${chip}</div></div><div class="metric">${metric}</div><div class="todo"><span class="lab">${lab}</span><span>${todo}</span></div></div>`;
+        return `<div class="sec">Your BBC at a glance</div>
+          ${card('#2DD4BF','Websites','TASKS',`<b>${D.websitePages.length}</b> pages live · ${D.websiteTasks.length} open tasks`,'Do next',esc(D.websiteTasks[0]||'all clear'),'websites')}
+          ${card('#A78BFA','Workflows','READINESS',`<b>${ship}</b>/80 artifacts · ${gaps} gaps`,'Create',wfNext?esc(wfNext.title.split(' — ')[0])+' — add '+wfMiss.join(' + '):'all caught up','workflows')}
+          ${card('#EC4899','Social Media','THIS WEEK',`<b>${pending}</b> posts pending`,'Today',dueToday?esc(dueToday.graphic)+' (graphic + reel)':'nothing scheduled','social')}
+          ${card('#D4AF37','Clients','ACTIVE',`<b>${D.clients.length}</b> clients`,'Now','Sonya — Olivia ready, rebrand site is next','clients')}
+          ${card('#4ADE80','Reminders','TODAY',`<b>0</b> items`,'Note','Wire the brain so Cuh captures reminders here','reminders')}
+          ${card('#60A5FA','News','RESEARCH',`<b>${D.newsFeed.length}</b> saved`,'Run','Tap a topic box to deep-search','news')}`;
+      })()}
+      <a class="morelink" onclick="go('more')">AI Family · Team · Systems →</a>`;
   };
 
   views.clients=()=>{
