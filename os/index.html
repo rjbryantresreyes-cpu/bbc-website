@@ -84,7 +84,7 @@
 
   /* BOTTOM NAV */
   .nav{position:fixed;left:0;right:0;bottom:0;z-index:40;height:calc(var(--navh) + env(safe-area-inset-bottom));padding-bottom:env(safe-area-inset-bottom);display:flex;background:rgba(10,20,34,0.95);backdrop-filter:blur(12px);border-top:1px solid var(--line);}
-  .nav button{flex:1;background:none;border:none;color:var(--muted);font-family:var(--ui);font-size:9px;font-weight:600;white-space:nowrap;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;cursor:pointer;padding-top:8px;}
+  .nav button{flex:1;background:none;border:none;color:var(--muted);font-family:var(--ui);font-size:10px;font-weight:600;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;cursor:pointer;padding-top:8px;}
   .nav button .i{font-size:19px;line-height:1;}
   .nav button.active{color:var(--gold);}
 
@@ -110,21 +110,6 @@
   .cal-legend .ev-r{background:rgba(167,139,250,0.2);border-color:#A78BFA;}
   .cal-legend .done{background:rgba(74,222,128,0.2);border-color:var(--green);}
   .cal-legend .pend{background:rgba(212,175,55,0.2);border-color:var(--gold);}
-
-  /* CHAT + NEWS + MORE */
-  .chat-box{background:linear-gradient(135deg,#1A2E47,#14253E);border:1px solid var(--gold);border-radius:16px;padding:16px;margin-bottom:18px;}
-  .chat-box h3{font-family:var(--display);font-size:19px;margin-bottom:3px;}
-  .chat-box p{font-size:13px;color:var(--muted);margin-bottom:12px;line-height:1.45;}
-  .chat-in{display:flex;gap:8px;}
-  .chat-in input{flex:1;background:var(--bg3);border:1px solid var(--line);border-radius:10px;color:var(--ink);padding:12px;font-size:14px;}
-  .chat-in button{background:var(--gold);color:#0A1422;border:none;border-radius:10px;padding:0 18px;font-weight:700;font-family:var(--ui);}
-  .soon-note{font-family:var(--mono);font-size:9px;letter-spacing:.5px;color:var(--gold2);margin-top:9px;}
-  .morelink{display:block;margin-top:18px;font-size:13px;color:var(--gold2);text-decoration:none;border:1px solid var(--line);padding:11px 14px;border-radius:9px;text-align:center;cursor:pointer;}
-  .morelink:hover{border-color:var(--gold);color:var(--gold);}
-  .newsgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:6px;}
-  .newsbox{background:var(--bg2);border:1px solid var(--line);border-radius:14px;padding:16px;cursor:pointer;}
-  .newsbox:active{transform:scale(0.99);}.newsbox:hover{border-color:var(--gold);}
-  .newsbox .ic{font-size:22px;}.newsbox .t{font-weight:600;margin-top:8px;font-size:14px;}.newsbox .q{font-size:11px;color:var(--muted);margin-top:4px;line-height:1.4;}
 </style>
 </head>
 <body>
@@ -140,11 +125,10 @@
 
 <nav class="nav" id="nav">
   <button data-v="home" class="active"><span class="i">🏠</span>Home</button>
-  <button data-v="websites"><span class="i">🌐</span>Websites</button>
+  <button data-v="clients"><span class="i">👥</span>Clients</button>
   <button data-v="workflows"><span class="i">🔄</span>Workflows</button>
-  <button data-v="social"><span class="i">📱</span>Social</button>
-  <button data-v="reminders"><span class="i">✅</span>Reminders</button>
-  <button data-v="news"><span class="i">📰</span>News</button>
+  <button data-v="content"><span class="i">📅</span>Content</button>
+  <button data-v="more"><span class="i">⋯</span>More</button>
 </nav>
 
 <script type="application/json" id="bbc-data">
@@ -197,54 +181,6 @@
       {"d":"Sat Jun 6","graphic":"Workflow Menu","reel":"-","posted":false}
     ]
   },
-  "websitePages":[
-    {"name":"Home","path":"index.html","status":"live"},
-    {"name":"Our Story","path":"about.html","status":"live"},
-    {"name":"How It Works","path":"how-it-works.html","status":"live"},
-    {"name":"How We Help","path":"how-we-help.html","status":"live"},
-    {"name":"Our Team","path":"our-team.html","status":"live"},
-    {"name":"Our Work","path":"our-work.html","status":"live"},
-    {"name":"Insights","path":"insights.html","status":"live"},
-    {"name":"Contact","path":"contact.html","status":"live"},
-    {"name":"Client Onboarding","path":"client-onboarding.html","status":"live"},
-    {"name":"Resources","path":"resources.html","status":"live"},
-    {"name":"Sonya Questionnaire","path":"questionnaire-sonya.html","status":"live","noindex":true},
-    {"name":"Sonya Website Questionnaire","path":"questionnaire-sonya-website.html","status":"live","noindex":true},
-    {"name":"Command Center (this app)","path":"os/","status":"live","noindex":true}
-  ],
-  "websiteTasks":[
-    "Sonya rebrand site — standalone interactive (pending, Al)",
-    "Add password gate to /os dashboard (pending)",
-    "Wire Google Analytics via service account (pending)"
-  ],
-  "socialAccounts":[
-    {"platform":"Instagram","handle":"@balaynibruno"},
-    {"platform":"Facebook","handle":"Balay ni Bruno & Co."},
-    {"platform":"LinkedIn","handle":"Balay ni Bruno & Co."},
-    {"platform":"TikTok","handle":"@balaynibruno"},
-    {"platform":"YouTube","handle":"Balay ni Bruno & Co."}
-  ],
-  "contentPillars":[
-    {"day":"Sunday","slot":"Rest Day","note":"Relatable carousel — rest / family / hobby. Soft CTA."},
-    {"day":"Monday","slot":"BBC Reel","note":"Team / segment / brand reel."},
-    {"day":"Tuesday","slot":"Workflow Reel","note":"An AI doing real work. Result-led."},
-    {"day":"Wednesday","slot":"Reviews / Shout-outs","note":"Client review or team shout-out."},
-    {"day":"Thursday","slot":"Educational / Value","note":"Teach one useful thing. No pitch."},
-    {"day":"Friday","slot":"Workflow Reel","note":"Second workflow reel of the week."},
-    {"day":"Saturday","slot":"Workflow Menu","note":"Interactive vote on next week's reel."}
-  ],
-  "newsTopics":[
-    {"label":"API & MCP news","q":"new MCP servers + Claude / Anthropic API updates"},
-    {"label":"AI tools","q":"new AI tools useful for agencies + small business"},
-    {"label":"Trending for small biz","q":"trending news relevant to small business owners today"},
-    {"label":"New workflows","q":"new automation workflows agencies are shipping"}
-  ],
-  "newsFeed":[
-    {"title":"Visual Dashboard / CRM for BBC","date":"2026-05-30","path":"LEARNINGS"},
-    {"title":"Full Social AI Stack deep dive","date":"2026-05-29","path":"LEARNINGS"},
-    {"title":"Interactive Design + Motion Stack","date":"2026-05-28","path":"LEARNINGS"},
-    {"title":"Netlify Forms gotchas","date":"2026-05-28","path":"LEARNINGS"}
-  ],
   "artifactOrder":["graphic","video","page","social","zip"],
   "artifactIcon":{"graphic":"▦","video":"▶","page":"▤","social":"✉","zip":"⬇"},
   "workflows":[
@@ -296,27 +232,21 @@
     const ship=D.workflows.reduce((n,w)=>n+ORDER.filter(a=>w.artifacts[a]).length,0);
     const dueToday=D.content.days.find(x=>x.d.includes('Jun 2'));
     const pending=D.content.days.filter(x=>!x.posted).length;
-    return `<div class="chat-box">
-        <h3>Chat with Cuh</h3>
-        <p>Your all-around AI. Ask, plan, draft — and everything gets documented to the BBC Drive.</p>
-        <div class="chat-in"><input placeholder="Ask Cuh anything..." disabled><button disabled>Send</button></div>
-        <div class="soon-note">GOES LIVE WHEN WE WIRE THE ANTHROPIC API KEY (BRAIN LAYER)</div>
-      </div>
+    return `<h2 class="vt">Good day, RJ.</h2><div class="vsub">${D.content.weekOf} · here's where BBC stands.</div>
       <div class="grid3">
         <div class="stat"><div class="n">${D.clients.length}</div><div class="l">Clients</div></div>
         <div class="stat"><div class="n">${D.aiFamily.filter(a=>a.status==='active').length}</div><div class="l">AIs live</div></div>
         <div class="stat"><div class="n gold">${ship}</div><div class="l">Artifacts shipped</div></div>
       </div>
       <div class="sec">Due today</div>
-      <div class="card" onclick="go('social')"><div class="row1"><span class="dot" style="background:var(--gold)"></span><div class="nm">${dueToday?esc(dueToday.graphic)+' (graphic + reel)':'Nothing scheduled'}</div></div><div class="meta">${pending} posts pending this week. Tap for the calendar.</div></div>
+      <div class="card" onclick="go('content')"><div class="row1"><span class="dot" style="background:var(--gold)"></span><div class="nm">${dueToday?esc(dueToday.graphic)+' (graphic + reel)':'Nothing scheduled'}</div></div><div class="meta">Tap to open the content calendar. ${pending} posts pending this week.</div></div>
       <div class="sec">Jump in</div>
       <div class="grid2">
-        <div class="stat" onclick="go('websites')" style="cursor:pointer"><div class="n">🌐</div><div class="l">Websites</div></div>
+        <div class="stat" onclick="go('clients')" style="cursor:pointer"><div class="n">👥</div><div class="l">Clients</div></div>
         <div class="stat" onclick="go('workflows')" style="cursor:pointer"><div class="n">🔄</div><div class="l">Workflows</div></div>
-        <div class="stat" onclick="go('social')" style="cursor:pointer"><div class="n">📱</div><div class="l">Social Media</div></div>
-        <div class="stat" onclick="go('news')" style="cursor:pointer"><div class="n">📰</div><div class="l">News</div></div>
-      </div>
-      <a class="morelink" onclick="go('more')">Clients · AI Family · Team · Systems →</a>`;
+        <div class="stat" onclick="go('content')" style="cursor:pointer"><div class="n">📅</div><div class="l">Content</div></div>
+        <div class="stat" onclick="go('more')" style="cursor:pointer"><div class="n">🧠</div><div class="l">AI Family + more</div></div>
+      </div>`;
   };
 
   views.clients=()=>{
@@ -346,7 +276,7 @@
       <div id="wfwrap">${body}</div>`;
   };
 
-  views.social=()=>{
+  views.content=()=>{
     const today='Jun 2';
     const cells=D.content.days.map(x=>{
       const parts=x.d.split(' '); const dow=parts[0]; const dnum=parts.slice(1).join(' ');
@@ -355,39 +285,14 @@
       if(x.graphic && x.graphic!=='-') evs.push(`<div class="ev ev-g ${x.posted?'done':''}">▦ ${esc(x.graphic)}</div>`);
       if(x.reel && x.reel!=='-') evs.push(`<div class="ev ev-r ${x.posted?'done':''}">▶ ${esc(x.reel)}</div>`);
       if(!evs.length) evs.push(`<div class="ev ev-none">—</div>`);
-      return `<div class="cal-day ${isToday?'today':''}"><div class="cal-dh"><span class="dow">${dow}</span><span class="dnum">${dnum}</span>${isToday?'<span class="todaytag">today</span>':''}</div><div class="cal-ev">${evs.join('')}</div></div>`;
+      return `<div class="cal-day ${isToday?'today':''}">
+        <div class="cal-dh"><span class="dow">${dow}</span><span class="dnum">${dnum}</span>${isToday?'<span class="todaytag">today</span>':''}</div>
+        <div class="cal-ev">${evs.join('')}</div></div>`;
     }).join('');
-    const pillars=D.contentPillars.map(p=>`<div class="card"><div class="row1"><div class="nm" style="font-size:14px">${esc(p.day)} · ${esc(p.slot)}</div></div><div class="meta">${esc(p.note)}</div></div>`).join('');
-    const accts=D.socialAccounts.map(a=>`<div class="card"><div class="row1"><div class="nm" style="font-size:15px">${esc(a.platform)}</div><span class="meta" style="margin:0">${esc(a.handle)}</span></div></div>`).join('');
-    return `<h2 class="vt">Social Media</h2><div class="vsub">Calendar · pillars · accounts</div>
-      <div class="sec">This week (${esc(D.content.weekOf)}) · swipe sideways</div>
+    return `<h2 class="vt">Content</h2><div class="vsub">Week of ${esc(D.content.weekOf)} · swipe sideways</div>
       <div class="cal-scroll"><div class="cal-week">${cells}</div></div>
-      <div class="cal-legend"><span><i class="lg ev-g"></i>Graphic</span><span><i class="lg ev-r"></i>Reel</span><span><i class="lg done"></i>Posted</span><span><i class="lg pend"></i>Pending</span></div>
-      <div class="sec">Weekly content framework</div>${pillars}
-      <div class="sec">Accounts</div>${accts}
-      <div class="sec">Analytics</div><div class="card"><div class="meta">Connect Google + platform APIs to enable live analytics here.</div></div>`;
+      <div class="cal-legend"><span><i class="lg ev-g"></i>Graphic</span><span><i class="lg ev-r"></i>Reel</span><span><i class="lg done"></i>Posted</span><span><i class="lg pend"></i>Pending</span></div>`;
   };
-  views.websites=()=>{
-    const pages=D.websitePages.map(p=>`<div class="card"><div class="row1"><span class="dot" style="background:${p.status==='live'?'var(--green)':'var(--gold)'}"></span><div class="nm" style="font-size:15px">${esc(p.name)}</div>${p.noindex?'<span class="pill p-concept">noindex</span>':'<span class="pill p-active">live</span>'}</div><div class="meta">${esc(p.path)}</div></div>`).join('');
-    const tasks=D.websiteTasks.map(t=>`<div class="card"><div class="row1"><span class="dot" style="background:var(--gold)"></span><div class="nm" style="font-size:14px">${esc(t)}</div></div></div>`).join('');
-    const csites=D.clients.filter(c=>c.site&&c.site!=='-').map(c=>`<div class="card"><div class="nm" style="font-size:15px">${esc(c.name)}</div><div class="meta">${esc(c.site)} · handler ${esc(c.handler)}</div></div>`).join('');
-    return `<h2 class="vt">Websites</h2><div class="vsub">balaynibruno.co + client sites</div>
-      <div class="sec">BBC pages (${D.websitePages.length})</div>${pages}
-      <div class="sec">Website tasks</div>${tasks}
-      <div class="sec">Client sites</div>${csites}
-      <div class="sec">Page map + analytics</div><div class="card"><div class="meta">Page-connection map + Google Analytics will appear here once the service account is wired.</div></div>`;
-  };
-  views.reminders=()=>`<h2 class="vt">Reminders</h2><div class="vsub">General + daily to-do</div>
-    <div class="sec">Today</div><div class="card"><div class="meta">No items yet. When the brain is wired, Cuh adds reminders here from your chats, and Kriz's reminders log syncs in.</div></div>
-    <div class="sec">General</div><div class="card"><div class="meta">Standing reminders will live here.</div></div>`;
-  views.news=()=>{
-    const boxes=D.newsTopics.map((t,i)=>`<div class="newsbox" onclick="newsSearch(${i})"><div class="ic">🔎</div><div class="t">${esc(t.label)}</div><div class="q">${esc(t.q)}</div></div>`).join('');
-    const feed=D.newsFeed.map(f=>`<div class="card"><div class="nm" style="font-size:14px">${esc(f.title)}</div><div class="meta">${esc(f.date)} · ${esc(f.path)}</div></div>`).join('');
-    return `<h2 class="vt">News &amp; Research</h2><div class="vsub">Tap a box → Cuh runs a deep search on that topic and saves it (brain layer).</div>
-      <div class="newsgrid">${boxes}</div>
-      <div class="sec">Recent research (Drive)</div>${feed}`;
-  };
-  window.newsSearch=i=>{ const t=D.newsTopics[i]; openSheet(`<h3>${esc(t.label)}</h3><div class="sec">Search brief</div><div class="kv"><span>${esc(t.q)}</span></div><div class="sec">Status</div><div class="kv"><span>Auto deep-search activates when the brain layer (Anthropic API) is wired. For now, tell Cuh in Claude Code: "deep search ${esc(t.q)}".</span></div>`); };
 
   views.more=()=>{
     const ai=D.aiFamily.map(a=>`<div class="card" onclick="aiSheet('${a.key}')"><div class="row1"><div class="av" style="background:${OWN[a.key]||'#888'}">${esc(a.name[0])}</div><div class="nm" style="font-size:15px">${esc(a.name)}</div>${pillStatus(a.status)}</div><div class="meta">${esc(a.role)}</div></div>`).join('');

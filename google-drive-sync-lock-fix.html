@@ -92,6 +92,56 @@
     .footer a:hover{color:var(--gold-pale)}
     </style>
   <link rel="stylesheet" href="bbc-article-visuals.css" />
+  <!-- bbc-schema -->
+  <script type="application/ld+json">
+{
+    "@context":  "https://schema.org",
+    "@graph":  [
+                   {
+                       "@type":  "Organization",
+                       "@id":  "https://balaynibruno.co/#organization",
+                       "name":  "Balay ni Bruno \u0026 Co.",
+                       "url":  "https://balaynibruno.co/",
+                       "logo":  "https://balaynibruno.co/bbc-logo.png",
+                       "email":  "admin@balaynibruno.co",
+                       "telephone":  "+63 935 663 0324",
+                       "founder":  {
+                                       "@type":  "Person",
+                                       "name":  "RJ Bryan Tres Reyes"
+                                   },
+                       "sameAs":  [
+                                      "https://www.facebook.com/profile.php?id=61590006878673",
+                                      "https://www.instagram.com/balaynibruno/",
+                                      "https://www.tiktok.com/@balaynibruno.co",
+                                      "https://youtube.com/@balaynibruno"
+                                  ]
+                   },
+                   {
+                       "@type":  "WebSite",
+                       "@id":  "https://balaynibruno.co/#website",
+                       "name":  "Balay ni Bruno \u0026 Co.",
+                       "url":  "https://balaynibruno.co/",
+                       "publisher":  {
+                                         "@id":  "https://balaynibruno.co/#organization"
+                                     }
+                   },
+                   {
+                       "@type":  "Article",
+                       "headline":  "Google Drive Locked Our Folders Mid-Script and Did Not Tell Us Why",
+                       "description":  "Google Drive Shared Drive sync creates invisible file locks. Folders become unmovable with no error message. Here is what causes it and the reliable fix.",
+                       "url":  "https://balaynibruno.co/google-drive-sync-lock-fix.html",
+                       "mainEntityOfPage":  "https://balaynibruno.co/google-drive-sync-lock-fix.html",
+                       "image":  "https://balaynibruno.co/bbc-logo.png",
+                       "author":  {
+                                      "@id":  "https://balaynibruno.co/#organization"
+                                  },
+                       "publisher":  {
+                                         "@id":  "https://balaynibruno.co/#organization"
+                                     }
+                   }
+               ]
+}
+  </script>
 </head>
 <body>
 <nav class="nav"><div class="nav__inner"><a href="index.html" class="nav__logo">Balay ni Bruno &amp; Co.</a><a href="insights.html" class="nav__back">&#8592; Back to Insights</a></div></nav>
