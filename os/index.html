@@ -172,6 +172,46 @@
   .odot{width:8px;height:8px;border-radius:50%;flex:none;}
   .oname{flex:1;color:var(--ink);}
   .ocad{font-family:var(--mono);font-size:8.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;white-space:nowrap;}
+
+  /* FULL-SCREEN CHAT */
+  .chatscreen{position:fixed;inset:0;z-index:200;background:var(--bg);display:none;flex-direction:column;}
+  .chatscreen.open{display:flex;}
+  .cs-head{display:flex;align-items:center;gap:10px;padding:calc(12px + env(safe-area-inset-top)) 14px 12px;border-bottom:1px solid var(--line);background:var(--bg2);}
+  .cs-back{background:none;border:1px solid var(--line);color:var(--ink);border-radius:8px;padding:8px 13px;font-size:16px;cursor:pointer;flex:none;}
+  .cs-title-in{flex:1;min-width:0;background:var(--bg3);border:1px solid var(--line);border-radius:8px;color:var(--ink);padding:9px 12px;font-size:14px;font-family:var(--ui);}
+  .cs-title-in:focus{outline:none;border-color:var(--gold);}
+  .cs-agents-top{font-family:var(--mono);font-size:10px;color:var(--gold2);white-space:nowrap;max-width:120px;overflow:hidden;text-overflow:ellipsis;}
+  .cs-toggle{background:none;border:1px solid var(--line);color:var(--gold2);border-radius:8px;padding:8px 11px;font-size:12px;cursor:pointer;flex:none;}
+  .cs-body{flex:1;display:grid;grid-template-columns:1fr;min-height:0;}
+  @media(min-width:820px){ .cs-body{grid-template-columns:1fr 320px;} .cs-toggle{display:none;} }
+  .cs-main{display:flex;flex-direction:column;min-height:0;}
+  .cs-thread{flex:1;overflow-y:auto;padding:18px 16px;display:flex;flex-direction:column;gap:11px;}
+  .cs-empty{margin:auto;text-align:center;color:var(--muted);max-width:340px;}
+  .msg{max-width:82%;padding:11px 14px;border-radius:14px;font-size:14px;line-height:1.5;white-space:pre-wrap;}
+  .msg.u{align-self:flex-end;background:var(--gold);color:#0A1422;border-bottom-right-radius:4px;}
+  .msg.a{align-self:flex-start;background:var(--bg2);border:1px solid var(--line);color:var(--ink);border-bottom-left-radius:4px;}
+  .msg.sys{align-self:center;background:rgba(212,175,55,0.1);color:var(--gold2);font-size:11.5px;font-family:var(--mono);text-align:center;}
+  .cs-input{display:flex;gap:8px;padding:12px 16px calc(14px + env(safe-area-inset-bottom));border-top:1px solid var(--line);background:var(--bg2);}
+  .cs-input textarea{flex:1;background:var(--bg3);border:1px solid var(--line);border-radius:12px;color:var(--ink);padding:12px;font-size:14px;font-family:var(--ui);resize:none;max-height:120px;}
+  .cs-input textarea:focus{outline:none;border-color:var(--gold);}
+  .cs-send{background:var(--gold);color:#0A1422;border:none;border-radius:12px;padding:0 18px;font-weight:700;cursor:pointer;flex:none;}
+  .cs-side{border-left:1px solid var(--line);background:var(--bg2);overflow-y:auto;padding:16px;}
+  @media(max-width:819px){ .cs-side{position:fixed;inset:0;z-index:210;display:none;border-left:none;} .cs-side.open{display:block;} }
+  .cs-side .sec{margin-top:18px;} .cs-side .sec:first-of-type{margin-top:0;}
+  .chip-row{display:flex;flex-wrap:wrap;gap:7px;}
+  .achip{font-size:12px;padding:7px 11px;border-radius:999px;border:1px solid var(--line);color:var(--muted);cursor:pointer;display:flex;align-items:center;gap:6px;}
+  .achip.on{border-color:var(--gold);color:var(--ink);background:rgba(212,175,55,0.1);}
+  .achip .d{width:8px;height:8px;border-radius:50%;}
+  .fld{margin-bottom:12px;} .fld label{display:block;font-family:var(--mono);font-size:9px;letter-spacing:1px;text-transform:uppercase;color:var(--gold2);margin-bottom:5px;}
+  .fld input,.fld textarea,.fld select{width:100%;background:var(--bg3);border:1px solid var(--line);border-radius:8px;color:var(--ink);padding:9px 10px;font-size:13px;font-family:var(--ui);}
+  .fld textarea{min-height:64px;resize:vertical;}
+  .cs-save{width:100%;background:var(--gold);color:#0A1422;border:none;border-radius:10px;padding:11px;font-weight:700;cursor:pointer;}
+  .savedtask{padding:9px 10px;border:1px solid var(--line);border-radius:8px;margin-bottom:7px;cursor:pointer;}
+  .savedtask:hover{border-color:var(--gold);}
+  .savedtask .st-t{color:var(--ink);font-weight:600;font-size:12.5px;}
+  .savedtask .st-m{color:var(--muted);font-size:11px;margin-top:2px;}
+  .cs-side-close{display:none;}
+  @media(max-width:819px){ .cs-side-close{display:block;width:100%;background:none;border:1px solid var(--line);color:var(--ink);border-radius:8px;padding:10px;margin-bottom:14px;cursor:pointer;} }
 </style>
 </head>
 <body>
@@ -184,6 +224,38 @@
 <main id="app"></main>
 
 <div class="sheet" id="sheet"><div class="sheet-inner"><div class="grab"></div><div id="sheet-body"></div></div></div>
+
+<!-- FULL-SCREEN CUH CHAT -->
+<div class="chatscreen" id="chatscreen">
+  <div class="cs-head">
+    <button class="cs-back" onclick="closeChat()">&larr;</button>
+    <input class="cs-title-in" id="cs-title" placeholder="What are we working on? (task title)">
+    <span class="cs-agents-top" id="cs-agents-top">Cuh</span>
+    <button class="cs-toggle" onclick="toggleSide()">Setup</button>
+  </div>
+  <div class="cs-body">
+    <div class="cs-main">
+      <div class="cs-thread" id="cs-thread"></div>
+      <div class="cs-input">
+        <textarea id="cs-msg" rows="1" placeholder="Message Cuh..."></textarea>
+        <button class="cs-send" onclick="sendMsg()">Send</button>
+      </div>
+    </div>
+    <div class="cs-side" id="cs-side">
+      <button class="cs-side-close" onclick="toggleSide()">Done</button>
+      <div class="sec">AI agent(s) — pick one or more</div>
+      <div class="chip-row" id="cs-agentpicker"></div>
+      <div class="sec">Task details</div>
+      <div class="fld"><label>Description</label><textarea id="cs-desc" placeholder="What we're trying to do and why"></textarea></div>
+      <div class="fld"><label>Category</label><select id="cs-cat"></select></div>
+      <div class="fld"><label>Client</label><select id="cs-client"></select></div>
+      <div class="fld"><label>Tags</label><input id="cs-tags" placeholder="comma, separated"></div>
+      <button class="cs-save" onclick="saveTask()">Save task</button>
+      <div class="sec">Recent tasks</div>
+      <div id="cs-saved"></div>
+    </div>
+  </div>
+</div>
 
 <nav class="nav" id="nav">
   <button data-v="home" class="active"><span class="i">🏠</span>Home</button>
@@ -387,11 +459,11 @@
     const ship=D.workflows.reduce((n,w)=>n+ORDER.filter(a=>w.artifacts[a]).length,0);
     const dueToday=D.content.days.find(x=>x.d.includes('Jun 2'));
     const pending=D.content.days.filter(x=>!x.posted).length;
-    return `<div class="chat-box">
+    return `<div class="chat-box" onclick="openChat()" style="cursor:pointer">
         <h3>Chat with Cuh</h3>
-        <p>Your all-around AI. Ask, plan, draft — and everything gets documented to the BBC Drive.</p>
-        <div class="chat-in"><input placeholder="Ask Cuh anything..." disabled><button disabled>Send</button></div>
-        <div class="soon-note">GOES LIVE WHEN WE WIRE THE ANTHROPIC API KEY (BRAIN LAYER)</div>
+        <p>Your all-around AI. Tap to open full-screen chat, pick your agent(s), and save it as a task.</p>
+        <div class="chat-in"><input placeholder="Ask Cuh anything..." readonly style="cursor:pointer"><button>Open chat</button></div>
+        <div class="soon-note">FULL-SCREEN CHAT READY · LIVE REPLIES WHEN THE API KEY IS WIRED</div>
       </div>
       ${(()=>{
         const gaps=80-ship;
@@ -559,6 +631,63 @@
   window.filterCards=(inp,wrapId)=>{ const q=inp.value.toLowerCase(); const wrap=document.getElementById(wrapId);
     wrap.querySelectorAll('.card').forEach(c=>{ const hay=(c.dataset.search||c.textContent).toLowerCase(); c.style.display=hay.includes(q)?'':'none'; }); };
   document.querySelectorAll('.nav button').forEach(b=>b.onclick=()=>go(b.dataset.v));
+
+  /* ---------- Full-screen Cuh chat ---------- */
+  const CHAT_AGENTS=[{k:'Cuh',c:'#D4AF37'}].concat(D.aiFamily.filter(a=>a.key!=='Brunz').map(a=>({k:a.name.split(' ')[0],c:OWN[a.key]||'#7C8AA5'})));
+  let csAgents=new Set(['Cuh']); let csThread=[]; let csEditingId=null;
+  function csTasks(){ try{return JSON.parse(localStorage.getItem('bbc_tasks')||'[]');}catch(e){return [];} }
+  function renderAgents(){
+    const el=document.getElementById('cs-agentpicker');
+    el.innerHTML=CHAT_AGENTS.map(a=>`<span class="achip ${csAgents.has(a.k)?'on':''}" data-k="${a.k}"><span class="d" style="background:${a.c}"></span>${a.k}</span>`).join('');
+    el.querySelectorAll('.achip').forEach(c=>c.onclick=()=>{const k=c.dataset.k; if(csAgents.has(k)){if(csAgents.size>1)csAgents.delete(k);}else csAgents.add(k); renderAgents();});
+    document.getElementById('cs-agents-top').textContent=[...csAgents].join(' + ');
+  }
+  function renderThread(){
+    const el=document.getElementById('cs-thread');
+    if(!csThread.length){ el.innerHTML=`<div class="cs-empty"><h3 style="font-family:var(--display);color:var(--ink);margin-bottom:8px">Start with Cuh</h3><p>Type below. Pick your agent(s) and fill the task details so this chat is saved as an organized workflow.</p></div>`; return; }
+    el.innerHTML=csThread.map(m=>`<div class="msg ${m.r}">${esc(m.t)}</div>`).join('');
+    el.scrollTop=el.scrollHeight;
+  }
+  function renderSaved(){
+    const el=document.getElementById('cs-saved'); const all=csTasks();
+    el.innerHTML=all.length?all.slice(0,8).map(x=>`<div class="savedtask" data-id="${x.id}"><div class="st-t">${esc(x.title)}</div><div class="st-m">${esc(x.cat||'')}${x.client&&x.client!=='Internal / BBC'?' · '+esc(x.client):''} · ${(x.agents||[]).join(', ')}</div></div>`).join(''):'<div class="st-m" style="color:var(--muted);font-size:12px">No saved tasks yet.</div>';
+    el.querySelectorAll('.savedtask').forEach(d=>d.onclick=()=>loadTask(d.dataset.id));
+  }
+  function loadTask(id){
+    const x=csTasks().find(t=>t.id===id); if(!x)return;
+    csEditingId=x.id;
+    document.getElementById('cs-title').value=x.title||''; document.getElementById('cs-desc').value=x.desc||'';
+    document.getElementById('cs-cat').value=x.cat||'Other'; document.getElementById('cs-client').value=x.client||'Internal / BBC';
+    document.getElementById('cs-tags').value=x.tags||'';
+    csAgents=new Set(x.agents&&x.agents.length?x.agents:['Cuh']); csThread=x.thread||[];
+    renderAgents(); renderThread(); if(window.innerWidth<820) document.getElementById('cs-side').classList.remove('open');
+  }
+  window.openChat=()=>{
+    document.getElementById('cs-cat').innerHTML=['Website','Social Media','Workflow','Client work','Content','Research','Strategy','Other'].map(c=>`<option>${c}</option>`).join('');
+    document.getElementById('cs-client').innerHTML=['Internal / BBC',...D.clients.map(c=>c.name)].map(c=>`<option>${esc(c)}</option>`).join('');
+    csThread=[]; csAgents=new Set(['Cuh']); csEditingId=null;
+    document.getElementById('cs-title').value=''; document.getElementById('cs-desc').value=''; document.getElementById('cs-tags').value='';
+    renderAgents(); renderThread(); renderSaved();
+    document.getElementById('chatscreen').classList.add('open');
+    setTimeout(()=>document.getElementById('cs-title').focus(),120);
+  };
+  window.closeChat=()=>document.getElementById('chatscreen').classList.remove('open');
+  window.toggleSide=()=>document.getElementById('cs-side').classList.toggle('open');
+  window.sendMsg=()=>{
+    const ta=document.getElementById('cs-msg'); const v=ta.value.trim(); if(!v) return;
+    csThread.push({r:'u',t:v}); ta.value='';
+    csThread.push({r:'sys',t:'Saved to this task. '+[...csAgents].join(' + ')+' will reply live once the Anthropic API key is wired.'});
+    renderThread();
+  };
+  window.saveTask=()=>{
+    const t=document.getElementById('cs-title').value.trim()||'Untitled task';
+    const task={id:csEditingId||('t'+Date.now()),title:t,desc:document.getElementById('cs-desc').value,cat:document.getElementById('cs-cat').value,client:document.getElementById('cs-client').value,tags:document.getElementById('cs-tags').value,agents:[...csAgents],thread:csThread};
+    const all=csTasks(); const i=all.findIndex(x=>x.id===task.id); if(i>=0)all[i]=task; else all.unshift(task);
+    try{localStorage.setItem('bbc_tasks',JSON.stringify(all));}catch(e){}
+    csEditingId=task.id; renderSaved();
+    const b=document.querySelector('.cs-save'); b.textContent='Saved ✓'; setTimeout(()=>b.textContent='Save task',1500);
+  };
+  document.getElementById('cs-msg').addEventListener('keydown',e=>{ if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();window.sendMsg();} });
 
   /* PWA service worker — auto-update so deploys show without manual cache clears */
   if('serviceWorker' in navigator){
