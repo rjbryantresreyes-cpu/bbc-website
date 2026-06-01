@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#0E1A2E">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icon-192.png">
+<title>BBC Command Center</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0E1A2E;--bg2:#14253E;--bg3:#0A1422;--ink:#F5F1EA;--muted:#9FB0C7;
+    --gold:#D4AF37;--gold2:#C9A961;--goldB:#B8923E;--green:#4ADE80;
+    --line:rgba(212,175,55,0.18);
+    --display:'Playfair Display',Georgia,serif;--ui:'DM Sans',system-ui,sans-serif;--mono:'JetBrains Mono',monospace;
+    --navh:64px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+  body{font-family:var(--ui);background:radial-gradient(130% 80% at 70% 0%,#1A2E47 0%,#0E1A2E 50%,#08111E 100%);background-attachment:fixed;color:var(--ink);min-height:100dvh;-webkit-font-smoothing:antialiased;padding-bottom:calc(var(--navh) + env(safe-area-inset-bottom));}
+
+  /* HEADER */
+  .hdr{position:sticky;top:0;z-index:30;display:flex;align-items:center;justify-content:space-between;padding:calc(14px + env(safe-area-inset-top)) 18px 14px;background:rgba(14,26,46,0.85);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);}
+  .hdr .b{font-family:var(--display);font-size:19px;font-weight:700;}
+  .hdr .b small{font-family:var(--mono);font-size:9px;letter-spacing:1.5px;color:var(--gold2);display:block;margin-top:1px;}
+  .hdr .date{font-family:var(--mono);font-size:11px;color:var(--muted);text-align:right;}
+
+  .view{padding:18px 16px 24px;max-width:640px;margin:0 auto;}
+  .view.hidden{display:none;}
+  h2.vt{font-family:var(--display);font-size:24px;font-weight:700;margin-bottom:4px;}
+  .vsub{font-size:13px;color:var(--muted);margin-bottom:18px;}
+  .sec{font-family:var(--mono);font-size:10px;letter-spacing:2px;color:var(--gold2);text-transform:uppercase;margin:22px 0 10px;}
+
+  /* STAT GRID */
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+  .grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;}
+  .stat{background:var(--bg2);border:1px solid var(--line);border-radius:14px;padding:16px;}
+  .stat .n{font-family:var(--display);font-size:30px;font-weight:700;line-height:1;}
+  .stat .n.green{color:var(--green);}.stat .n.gold{color:var(--gold);}
+  .stat .l{font-family:var(--mono);font-size:9px;letter-spacing:1px;color:var(--muted);text-transform:uppercase;margin-top:7px;}
+
+  /* CARD */
+  .card{background:var(--bg2);border:1px solid var(--line);border-radius:14px;padding:15px;margin-bottom:10px;cursor:pointer;transition:border-color .15s,transform .1s;}
+  .card:active{transform:scale(0.99);}
+  .card:hover{border-color:var(--gold);}
+  .card .row1{display:flex;align-items:center;gap:11px;}
+  .dot{width:11px;height:11px;border-radius:50%;flex:none;}
+  .av{width:38px;height:38px;border-radius:11px;flex:none;display:flex;align-items:center;justify-content:center;font-family:var(--display);font-weight:700;font-size:16px;color:#0A1422;}
+  .card .nm{font-size:16px;font-weight:600;flex:1;min-width:0;}
+  .card .meta{font-size:12.5px;color:var(--muted);margin-top:7px;line-height:1.5;}
+  .pill{display:inline-block;font-family:var(--mono);font-size:9px;letter-spacing:.5px;padding:3px 8px;border-radius:999px;text-transform:uppercase;}
+  .p-active{background:rgba(74,222,128,0.15);color:var(--green);}
+  .p-dev{background:rgba(212,175,55,0.15);color:var(--gold);}
+  .p-concept{background:rgba(159,176,199,0.15);color:var(--muted);}
+  .mini{display:flex;gap:4px;}
+  .pip{width:9px;height:9px;border-radius:3px;background:#1F2937;border:1px solid #3a4658;}
+  .pip.on{background:var(--green);border-color:var(--green);}
+
+  /* SEARCH */
+  .search{width:100%;background:var(--bg3);border:1px solid var(--line);border-radius:11px;color:var(--ink);font-family:var(--ui);font-size:15px;padding:13px 14px;margin-bottom:14px;}
+  .search:focus{outline:none;border-color:var(--gold);}
+
+  /* DETAIL SHEET */
+  .sheet{position:fixed;inset:0;z-index:60;background:rgba(8,17,30,0.55);backdrop-filter:blur(3px);display:none;}
+  .sheet.open{display:block;}
+  .sheet-inner{position:absolute;left:0;right:0;bottom:0;max-height:92dvh;overflow-y:auto;background:var(--bg);border-top:2px solid var(--gold);border-radius:20px 20px 0 0;padding:10px 18px calc(28px + env(safe-area-inset-bottom));}
+  .grab{width:44px;height:5px;border-radius:3px;background:#3a4658;margin:8px auto 14px;}
+  .sheet h3{font-family:var(--display);font-size:24px;font-weight:700;line-height:1.15;margin-bottom:6px;}
+  .sheet .row1{display:flex;align-items:center;gap:10px;margin-bottom:14px;color:var(--muted);font-size:13px;}
+  .bar{height:9px;background:var(--bg3);border:1px solid #3a4658;border-radius:5px;overflow:hidden;margin:8px 0;}
+  .bar>i{display:block;height:100%;background:linear-gradient(90deg,var(--goldB),var(--gold));}
+  .arts{display:grid;grid-template-columns:repeat(5,1fr);gap:7px;}
+  .art{text-align:center;padding:11px 4px;border:1px solid var(--line);border-radius:10px;}
+  .art.on{border-color:var(--green);background:rgba(74,222,128,0.08);}
+  .art .ic{font-size:17px;}.art .nm{font-family:var(--mono);font-size:8px;letter-spacing:.5px;color:var(--muted);text-transform:uppercase;margin-top:6px;}
+  .art.on .nm{color:var(--green);}
+  .kv{font-size:14px;line-height:1.6;margin-bottom:5px;}.kv b{color:var(--ink);}.kv span{color:var(--muted);}
+  .angle{font-size:15px;font-style:italic;line-height:1.55;}
+  .lnk{display:block;font-size:13px;color:var(--gold2);text-decoration:none;padding:10px 12px;border:1px solid var(--line);border-radius:9px;margin-bottom:6px;word-break:break-all;}
+  .lnk:hover{border-color:var(--gold);color:var(--gold);}
+
+  /* BOTTOM NAV */
+  .nav{position:fixed;left:0;right:0;bottom:0;z-index:40;height:calc(var(--navh) + env(safe-area-inset-bottom));padding-bottom:env(safe-area-inset-bottom);display:flex;background:rgba(10,20,34,0.95);backdrop-filter:blur(12px);border-top:1px solid var(--line);}
+  .nav button{flex:1;background:none;border:none;color:var(--muted);font-family:var(--ui);font-size:10px;font-weight:600;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;cursor:pointer;padding-top:8px;}
+  .nav button .i{font-size:19px;line-height:1;}
+  .nav button.active{color:var(--gold);}
+</style>
+</head>
+<body>
+
+<div class="hdr">
+  <div class="b">BBC Command Center<small id="hdr-sub">OPERATING SYSTEM</small></div>
+  <div class="date" id="hdr-date">2026-06-02</div>
+</div>
+
+<main id="app"></main>
+
+<div class="sheet" id="sheet"><div class="sheet-inner"><div class="grab"></div><div id="sheet-body"></div></div></div>
+
+<nav class="nav" id="nav">
+  <button data-v="home" class="active"><span class="i">🏠</span>Home</button>
+  <button data-v="clients"><span class="i">👥</span>Clients</button>
+  <button data-v="workflows"><span class="i">🔄</span>Workflows</button>
+  <button data-v="content"><span class="i">📅</span>Content</button>
+  <button data-v="more"><span class="i">⋯</span>More</button>
+</nav>
+
+<script type="application/json" id="bbc-data">
+{
+  "meta":{"updated":"2026-06-02"},
+  "owners":{"Vidz":"#A78BFA","Raphy":"#F97316","Sonny":"#EC4899","Boogy":"#22D3EE","Webby":"#2DD4BF","Brunz":"#60A5FA","Kriz":"#F472B6","Cowork":"#D4AF37","Mai":"#34D399","Jenny":"#FBBF24","Lana":"#FB7185","Casey":"#A3E635","Emy":"#38BDF8"},
+  "clients":[
+    {"name":"S. Riviere Hair Collection","owner":"Sonya Riviere","handler":"Al","ai":"Olivia (v1.1)","site":"srivierehair.com","industry":"Luxury raw hair extensions (Shopify)","status":"active","notes":"Olivia built + full capability. Rebrand site = first deliverable (standalone interactive). Website questionnaire live."},
+    {"name":"Wooden Woodworks","owner":"Oscar & Marla","handler":"Krizza","ai":"Woody","site":"woodenwoodworksllc.com","industry":"Custom luxury woodwork","status":"active","notes":"Luxury positioning. Krizza only BBC member in WW OS. Owners on Claude.ai Pro only."},
+    {"name":"4Ocean","owner":"4Ocean","handler":"BBC","ai":"-","site":"4ocean.com","industry":"Ocean-cleanup ecommerce","status":"active","notes":"Slack + Asana = 4Ocean only. Product accuracy non-negotiable. Hopeful tone only."},
+    {"name":"Home Vision Studio","owner":"-","handler":"Al","ai":"-","site":"homevisionstudio.com","industry":"Shopify store, design centers","status":"active","notes":"Shopify build."},
+    {"name":"First Class Finishes","owner":"-","handler":"Ryan C.","ai":"-","site":"firstclass-finishes.com","industry":"Commercial painting + roofing, Texas","status":"active","notes":""},
+    {"name":"Hi-Up Roofing","owner":"-","handler":"Ryan C.","ai":"-","site":"hi-uproofing.com","industry":"Roofing, storm damage","status":"active","notes":"Insurance SEO, storm damage."},
+    {"name":"AJ Battle Foundation","owner":"AJ","handler":"Al","ai":"-","site":"theajbattlefoundation.org","industry":"Nonprofit","status":"active","notes":"Sister business to Sonya. Coordinate carefully."},
+    {"name":"All Ryze","owner":"-","handler":"Kenz / Daryl","ai":"-","site":"-","industry":"Digital audience engagement & growth management agency","status":"active","notes":"NEVER use adult-platform language. Describe as a digital audience engagement and growth management agency."}
+  ],
+  "team":[
+    {"name":"Bruno (RJ)","role":"Founder & Lead Strategist"},
+    {"name":"Vi Carmelle Tres Reyes","role":"E-Commerce & Social Media"},
+    {"name":"Kenz","role":"Creative & Brand Lead"},
+    {"name":"Ryan Bernaldez","role":"Operations & Web Dev Lead"},
+    {"name":"Krizza Managase","role":"Social Media & Client Ops"},
+    {"name":"Al Carmelle Managase","role":"Shopify Dev & Creative"},
+    {"name":"Ryan C.","role":"AI Content & Automations"},
+    {"name":"Daryl Agadia","role":"Content & Marketing"}
+  ],
+  "aiFamily":[
+    {"name":"Brunz (LC)","role":"Head AI / Father","status":"active","key":"Brunz"},
+    {"name":"Kriz","role":"VA AI / Mother","status":"dev","key":"Kriz"},
+    {"name":"Webby","role":"Website AI","status":"active","key":"Webby"},
+    {"name":"Mai","role":"Marketing AI","status":"active","key":"Mai"},
+    {"name":"Boogy","role":"Blog AI","status":"active","key":"Boogy"},
+    {"name":"Jenny","role":"Content Creation AI (SaaS)","status":"active","key":"Jenny"},
+    {"name":"Vidz","role":"Programmatic Video AI","status":"active","key":"Vidz"},
+    {"name":"Raphy","role":"Graphic Design AI","status":"active","key":"Raphy"},
+    {"name":"Casey","role":"Case Study AI","status":"dev","key":"Casey"},
+    {"name":"Sonny","role":"Social Media AI","status":"concept","key":"Sonny"},
+    {"name":"Emy","role":"Email AI","status":"concept","key":"Emy"},
+    {"name":"Lana","role":"Lead Generation AI","status":"dev","key":"Lana"}
+  ],
+  "content":{
+    "weekOf":"May 31 - Jun 6",
+    "days":[
+      {"d":"Sun May 31","graphic":"Sunday Rest Day","reel":"-","posted":true},
+      {"d":"Mon Jun 1","graphic":"-","reel":"Segment 3","posted":true},
+      {"d":"Tue Jun 2","graphic":"Cut the Silence","reel":"Cut the Silence","posted":false},
+      {"d":"Wed Jun 3","graphic":"Ryan review","reel":"Ryan review","posted":false},
+      {"d":"Thu Jun 4","graphic":"4 Tasks Eating Your Week","reel":"-","posted":false},
+      {"d":"Fri Jun 5","graphic":"-","reel":"Content Engine (workflow)","posted":false},
+      {"d":"Sat Jun 6","graphic":"Workflow Menu","reel":"-","posted":false}
+    ]
+  },
+  "artifactOrder":["graphic","video","page","social","zip"],
+  "artifactIcon":{"graphic":"▦","video":"▶","page":"▤","social":"✉","zip":"⬇"},
+  "workflows":[
+    {"id":"w01","cat":"Vidz Production","title":"Workflow 01 — Three-Segment Reel","owners":["Vidz"],"role":"talking head + split-screen + payoff","angle":"The 3-segment reel structure our AI uses for every short. Steal it.","audience":"Creators + small business owners","artifacts":{"graphic":false,"video":true,"page":false,"social":false,"zip":false}},
+    {"id":"w02","cat":"Vidz Production","title":"Workflow 02 — Claude Terminal Explainer","owners":["Vidz"],"role":"82-sec programmatic motion graphics","angle":"Turn any explainer into an 82-second motion graphic without After Effects.","audience":"Agencies + creators","artifacts":{"graphic":false,"video":true,"page":false,"social":false,"zip":false}},
+    {"id":"w03","cat":"Vidz Production","title":"Workflow 03 — Daily Carousel","owners":["Raphy"],"role":"hero + teaching slides + CTA","angle":"Our AI builds a finished carousel + caption pack daily. The exact pipeline.","audience":"Small business owners + agencies","artifacts":{"graphic":true,"video":true,"page":false,"social":false,"zip":false}},
+    {"id":"w04","cat":"Vidz Production","title":"Workflow 04 — Process-Content Video","owners":["Vidz","Boogy"],"role":"meta capture of building in public","angle":"The workflow that makes every other workflow shareable. One process into 7 posts.","audience":"Agencies + founders","artifacts":{"graphic":true,"video":true,"page":false,"social":false,"zip":false}},
+    {"id":"f1","cat":"Specialist AI","title":"Sonny F1 — Trending Caption + Hashtag","owners":["Sonny"],"role":"per-platform output + live receipts","angle":"Captions that match what's trending right now. With proof receipts.","audience":"Owners + creators","artifacts":{"graphic":false,"video":false,"page":false,"social":false,"zip":false}},
+    {"id":"f2","cat":"Specialist AI","title":"Sonny F2 — Content Comprehension","owners":["Sonny"],"role":"drop a link, Sonny reports back","angle":"Drop our AI any link or video. It tells you what's in it in 30 seconds.","audience":"Small business owners","artifacts":{"graphic":false,"video":false,"page":false,"social":false,"zip":false}},
+    {"id":"raphy4","cat":"Specialist AI","title":"Raphy 4 Lanes — Generate/Edit/Compose/3D","owners":["Raphy"],"role":"full graphic stack to 3D","angle":"The 4 things our design AI does that replace 4 apps. One AI, 4 modes.","audience":"Owners + designers","artifacts":{"graphic":false,"video":false,"page":false,"social":false,"zip":false}},
+    {"id":"cw1","cat":"Cowork Skills","title":"Cowork — client-weekly-report","owners":["Cowork"],"role":"weekly client status digest","angle":"A clean weekly client report every Friday from Asana + Drive. We just send.","audience":"Agencies + VAs","artifacts":{"graphic":false,"video":false,"page":false,"social":false,"zip":false}},
+    {"id":"cw2","cat":"Cowork Skills","title":"Cowork — content-calendar-drafter","owners":["Cowork"],"role":"weekly social calendar from inputs","angle":"Next week's social content planned every Sunday, before we sit down.","audience":"Owners + agencies","artifacts":{"graphic":false,"video":false,"page":false,"social":false,"zip":false}},
+    {"id":"cw3","cat":"Cowork Skills","title":"Cowork — inbox-triage","owners":["Cowork"],"role":"sorts inbox into action lanes","angle":"Inbox sorted into urgent / wait / archive every morning, replies drafted.","audience":"Owners + solopreneurs","artifacts":{"graphic":false,"video":false,"page":false,"social":false,"zip":false}},
+    {"id":"cw4","cat":"Cowork Skills","title":"Cowork — new-lead-intake","owners":["Cowork"],"role":"routes a new lead into qualifying","angle":"Replies to a new lead in 60 seconds. Drafts, logs to CRM, schedules follow-up.","audience":"Owners + agencies","artifacts":{"graphic":false,"video":false,"page":false,"social":false,"zip":false}},
+    {"id":"r12","cat":"Rules as Workflows","title":"Rule 12 — Honest Partner Rule","owners":["Brunz"],"role":"recommend the best path even if costly","angle":"We told our AI to recommend the best path even if it costs us money.","audience":"Agencies + founders","artifacts":{"graphic":false,"video":false,"page":false,"social":false,"zip":false}},
+    {"id":"r14","cat":"Rules as Workflows","title":"Rule 14 — Process-as-Content Rule","owners":["Brunz"],"role":"every build captured + repurposed","angle":"We don't 'make content.' We capture the work we're already doing.","audience":"Agencies + creators","artifacts":{"graphic":false,"video":false,"page":false,"social":false,"zip":false}},
+    {"id":"r17","cat":"Rules as Workflows","title":"Rule 17 — Mobile-First Website Rule","owners":["Webby"],"role":"verify 375/768/1280 before push","angle":"We never push a site change without checking 3 screen sizes.","audience":"Owners + designers","artifacts":{"graphic":false,"video":false,"page":false,"social":false,"zip":false}},
+    {"id":"r18","cat":"Rules as Workflows","title":"Rule 18 — Universal Caption Rule","owners":["Sonny"],"role":"plain enough any owner gets it","angle":"If a salon owner can't understand your caption, you wrote it wrong.","audience":"Creators + agencies","artifacts":{"graphic":false,"video":false,"page":false,"social":false,"zip":false}},
+    {"id":"r27","cat":"Rules as Workflows","title":"Rule 27 — Daily Carousel Standard","owners":["Raphy"],"role":"hero + teaching + CTA, daily","angle":"The daily carousel pipeline already running. Pairs with Workflow 03.","audience":"Owners + agencies","artifacts":{"graphic":true,"video":true,"page":false,"social":false,"zip":false}}
+  ],
+  "systems":[
+    {"name":"Weekly Content Calendar","path":"BBC Operating System/02_SERVICE_SYSTEMS/SOCIAL_MEDIA_SYSTEMS/BBC_WEEKLY_CONTENT_CALENDAR.md"},
+    {"name":"Workflow Content Flow","path":"BBC Operating System/07_MARKETING/01_SOCIAL_MEDIA/WORKFLOW_CONTENT_FLOW.md"},
+    {"name":"Shareable Workflows Filter","path":"BBC Operating System/07_MARKETING/01_SOCIAL_MEDIA/SHAREABLE_WORKFLOWS_FILTER.md"},
+    {"name":"Client Questionnaire System","path":"BBC Operating System/02_SERVICE_SYSTEMS/CLIENT_QUESTIONNAIRE_SYSTEM/"},
+    {"name":"AI Family Build SOP","path":"BBC Operating System/02_SERVICE_SYSTEMS/BBC_BUSINESS_AI_SYSTEM/04_BUILD_PROCESS/AI_FAMILY_BUILD_SOP.md"},
+    {"name":"Content Readiness Matrix","path":"BBC Operating System/03_AI_OPERATING_SYSTEM/VISUALS/content_readiness_matrix.png"}
+  ]
+}
+</script>
+
+<script>
+  const D = JSON.parse(document.getElementById('bbc-data').textContent);
+  const OWN=D.owners, ORDER=D.artifactOrder, ICON=D.artifactIcon;
+  const app=document.getElementById('app');
+  const sheet=document.getElementById('sheet'), sheetBody=document.getElementById('sheet-body');
+  document.getElementById('hdr-date').textContent='AUDIT '+D.meta.updated;
+  const pct=w=>Math.round(ORDER.filter(a=>w.artifacts[a]).length/ORDER.length*100);
+  const esc=s=>(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;');
+  const pillStatus=s=>`<span class="pill p-${s==='active'?'active':s==='dev'?'dev':'concept'}">${s}</span>`;
+
+  function openSheet(html){ sheetBody.innerHTML=html; sheet.classList.add('open'); }
+  sheet.onclick=e=>{ if(e.target===sheet) sheet.classList.remove('open'); };
+
+  /* ---------- VIEWS ---------- */
+  const views={};
+
+  views.home=()=>{
+    const ship=D.workflows.reduce((n,w)=>n+ORDER.filter(a=>w.artifacts[a]).length,0);
+    const dueToday=D.content.days.find(x=>x.d.includes('Jun 2'));
+    const pending=D.content.days.filter(x=>!x.posted).length;
+    return `<h2 class="vt">Good day, RJ.</h2><div class="vsub">${D.content.weekOf} · here's where BBC stands.</div>
+      <div class="grid3">
+        <div class="stat"><div class="n">${D.clients.length}</div><div class="l">Clients</div></div>
+        <div class="stat"><div class="n">${D.aiFamily.filter(a=>a.status==='active').length}</div><div class="l">AIs live</div></div>
+        <div class="stat"><div class="n gold">${ship}</div><div class="l">Artifacts shipped</div></div>
+      </div>
+      <div class="sec">Due today</div>
+      <div class="card" onclick="go('content')"><div class="row1"><span class="dot" style="background:var(--gold)"></span><div class="nm">${dueToday?esc(dueToday.graphic)+' (graphic + reel)':'Nothing scheduled'}</div></div><div class="meta">Tap to open the content calendar. ${pending} posts pending this week.</div></div>
+      <div class="sec">Jump in</div>
+      <div class="grid2">
+        <div class="stat" onclick="go('clients')" style="cursor:pointer"><div class="n">👥</div><div class="l">Clients</div></div>
+        <div class="stat" onclick="go('workflows')" style="cursor:pointer"><div class="n">🔄</div><div class="l">Workflows</div></div>
+        <div class="stat" onclick="go('content')" style="cursor:pointer"><div class="n">📅</div><div class="l">Content</div></div>
+        <div class="stat" onclick="go('more')" style="cursor:pointer"><div class="n">🧠</div><div class="l">AI Family + more</div></div>
+      </div>`;
+  };
+
+  views.clients=()=>{
+    const cards=D.clients.map((c,i)=>`<div class="card" onclick="clientSheet(${i})">
+      <div class="row1"><div class="av" style="background:linear-gradient(135deg,var(--gold),var(--goldB))">${esc(c.name[0])}</div>
+        <div class="nm">${esc(c.name)}</div>${pillStatus(c.status)}</div>
+      <div class="meta">${esc(c.industry)}<br>Handler: <b>${esc(c.handler)}</b>${c.ai!=='-'?' · AI: '+esc(c.ai):''}</div></div>`).join('');
+    return `<h2 class="vt">Clients</h2><div class="vsub">${D.clients.length} active. Tap any client for their details.</div>
+      <input class="search" placeholder="Search clients..." oninput="filterCards(this,'cli')">
+      <div id="cli">${cards}</div>`;
+  };
+
+  views.workflows=()=>{
+    const cats=[...new Set(D.workflows.map(w=>w.cat))];
+    const body=cats.map(cat=>{
+      const rows=D.workflows.filter(w=>w.cat===cat).map(w=>{
+        const dots=w.owners.map(o=>`<span class="dot" style="background:${OWN[o]||'#888'}"></span>`).join('');
+        const pips=ORDER.map(a=>`<span class="pip ${w.artifacts[a]?'on':''}"></span>`).join('');
+        return `<div class="card" data-search="${esc((w.title+' '+w.owners.join(' ')+' '+w.angle).toLowerCase())}" onclick="wfSheet('${w.id}')">
+          <div class="row1"><span style="display:flex;gap:3px">${dots}</span><div class="nm" style="font-size:14.5px">${esc(w.title)}</div><span style="font-family:var(--mono);font-size:12px;color:var(--gold2)">${pct(w)}%</span></div>
+          <div class="row1" style="margin-top:9px;justify-content:space-between"><div class="meta" style="margin:0">${esc(w.role)}</div><div class="mini">${pips}</div></div></div>`;
+      }).join('');
+      return `<div class="sec">${esc(cat)}</div>${rows}`;
+    }).join('');
+    return `<h2 class="vt">Workflows</h2><div class="vsub">16 shareable systems · ${D.workflows.reduce((n,w)=>n+ORDER.filter(a=>w.artifacts[a]).length,0)} of 80 artifacts shipped.</div>
+      <input class="search" placeholder="Search workflows..." oninput="filterCards(this,'wfwrap')">
+      <div id="wfwrap">${body}</div>`;
+  };
+
+  views.content=()=>{
+    const rows=D.content.days.map(x=>`<div class="card">
+      <div class="row1"><span class="dot" style="background:${x.posted?'var(--green)':'var(--gold)'}"></span><div class="nm" style="font-size:15px">${esc(x.d)}</div>${x.posted?'<span class="pill p-active">posted</span>':'<span class="pill p-dev">pending</span>'}</div>
+      <div class="meta">▦ ${esc(x.graphic)} &nbsp;·&nbsp; ▶ ${esc(x.reel)}</div></div>`).join('');
+    return `<h2 class="vt">Content</h2><div class="vsub">Week of ${esc(D.content.weekOf)}</div>${rows}`;
+  };
+
+  views.more=()=>{
+    const ai=D.aiFamily.map(a=>`<div class="card" onclick="aiSheet('${a.key}')"><div class="row1"><div class="av" style="background:${OWN[a.key]||'#888'}">${esc(a.name[0])}</div><div class="nm" style="font-size:15px">${esc(a.name)}</div>${pillStatus(a.status)}</div><div class="meta">${esc(a.role)}</div></div>`).join('');
+    const team=D.team.map(t=>`<div class="card"><div class="row1"><div class="av" style="background:linear-gradient(135deg,#2A4A6E,#1C3250);color:#F5F1EA">${esc(t.name[0])}</div><div class="nm" style="font-size:15px">${esc(t.name)}</div></div><div class="meta">${esc(t.role)}</div></div>`).join('');
+    const sys=D.systems.map(s=>`<a class="lnk" title="${esc(s.path)}">🧩 ${esc(s.name)} <span style="opacity:.6">— ${esc(s.path)}</span></a>`).join('');
+    return `<h2 class="vt">More</h2><div class="vsub">AI Family · Team · Systems</div>
+      <div class="sec">AI Family (${D.aiFamily.length})</div>${ai}
+      <div class="sec">Team (${D.team.length})</div>${team}
+      <div class="sec">Systems &amp; SOPs</div>${sys}`;
+  };
+
+  /* ---------- SHEETS ---------- */
+  window.wfSheet=id=>{ const w=D.workflows.find(x=>x.id===id);
+    const arts=ORDER.map(a=>`<div class="art ${w.artifacts[a]?'on':''}"><div class="ic">${w.artifacts[a]?'✔':ICON[a]}</div><div class="nm">${a}</div></div>`).join('');
+    openSheet(`<h3>${esc(w.title)}</h3><div class="row1">${w.owners.map(o=>`<span class="dot" style="background:${OWN[o]||'#888'}"></span>${o}`).join(' ')} · ${esc(w.cat)}</div>
+      <div class="bar"><i style="width:${pct(w)}%"></i></div>
+      <div class="sec">The angle</div><div class="angle">"${esc(w.angle)}"</div><div class="kv" style="margin-top:8px"><span>Audience: ${esc(w.audience)}</span></div>
+      <div class="sec">Content readiness (${pct(w)}%)</div><div class="arts">${arts}</div>
+      <div class="sec">Ship the gaps</div><div class="kv"><span>Run WORKFLOW_CONTENT_FLOW.md: graphic → video → page → social → zip. Each shipped artifact lights a cell.</span></div>`);
+  };
+  window.clientSheet=i=>{ const c=D.clients[i];
+    openSheet(`<h3>${esc(c.name)}</h3><div class="row1">${pillStatus(c.status)} · ${esc(c.industry)}</div>
+      <div class="sec">Details</div>
+      <div class="kv"><b>Owner:</b> <span>${esc(c.owner)}</span></div>
+      <div class="kv"><b>BBC Handler:</b> <span>${esc(c.handler)}</span></div>
+      <div class="kv"><b>AI:</b> <span>${esc(c.ai)}</span></div>
+      <div class="kv"><b>Site:</b> <span>${esc(c.site)}</span></div>
+      <div class="sec">Notes</div><div class="kv"><span>${esc(c.notes)||'—'}</span></div>`);
+  };
+  window.aiSheet=key=>{ const a=D.aiFamily.find(x=>x.key===key);
+    openSheet(`<h3>${esc(a.name)}</h3><div class="row1">${pillStatus(a.status)}</div><div class="sec">Role</div><div class="kv"><span>${esc(a.role)}</span></div>`);
+  };
+
+  /* ---------- ROUTER ---------- */
+  window.go=v=>{ app.innerHTML=`<div class="view">${views[v]()}</div>`; window.scrollTo(0,0);
+    document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('active',b.dataset.v===v));
+    sheet.classList.remove('open'); };
+  window.filterCards=(inp,wrapId)=>{ const q=inp.value.toLowerCase(); const wrap=document.getElementById(wrapId);
+    wrap.querySelectorAll('.card').forEach(c=>{ const hay=(c.dataset.search||c.textContent).toLowerCase(); c.style.display=hay.includes(q)?'':'none'; }); };
+  document.querySelectorAll('.nav button').forEach(b=>b.onclick=()=>go(b.dataset.v));
+
+  /* PWA service worker */
+  if('serviceWorker' in navigator){ navigator.serviceWorker.register('sw.js').catch(()=>{}); }
+
+  go('home');
+</script>
+</body>
+</html>

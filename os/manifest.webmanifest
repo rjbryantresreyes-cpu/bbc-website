@@ -1,0 +1,15 @@
+{
+  "name": "BBC Command Center",
+  "short_name": "BBC OS",
+  "description": "Balay ni Bruno & Co. operating system — clients, workflows, content, AI Family.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0E1A2E",
+  "theme_color": "#0E1A2E",
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ]
+}
