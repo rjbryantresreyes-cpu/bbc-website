@@ -87,6 +87,29 @@
   .nav button{flex:1;background:none;border:none;color:var(--muted);font-family:var(--ui);font-size:10px;font-weight:600;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;cursor:pointer;padding-top:8px;}
   .nav button .i{font-size:19px;line-height:1;}
   .nav button.active{color:var(--gold);}
+
+  /* CALENDAR */
+  .cal-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:0 -16px;padding:0 16px 8px;}
+  .cal-week{display:grid;grid-template-columns:repeat(7,minmax(132px,1fr));gap:7px;min-width:780px;}
+  .cal-day{background:var(--bg2);border:1px solid var(--line);border-radius:12px;padding:10px;min-height:158px;display:flex;flex-direction:column;}
+  .cal-day.today{border-color:var(--gold);box-shadow:0 0 0 1px var(--gold);}
+  .cal-dh{border-bottom:1px solid var(--line);padding-bottom:7px;margin-bottom:8px;position:relative;}
+  .cal-dh .dow{font-family:var(--mono);font-size:10px;letter-spacing:1px;color:var(--gold2);text-transform:uppercase;display:block;}
+  .cal-dh .dnum{font-family:var(--display);font-size:17px;font-weight:700;color:var(--ink);}
+  .cal-dh .todaytag{position:absolute;top:-1px;right:0;font-family:var(--mono);font-size:8px;background:var(--gold);color:#0A1422;padding:2px 6px;border-radius:999px;letter-spacing:.5px;}
+  .cal-ev{display:flex;flex-direction:column;gap:6px;}
+  .ev{font-size:11.5px;line-height:1.3;padding:7px 8px;border-radius:8px;border-left:3px solid;}
+  .ev-g{background:rgba(45,212,191,0.12);border-color:#2DD4BF;color:#cdeee9;}
+  .ev-r{background:rgba(167,139,250,0.12);border-color:#A78BFA;color:#e2d9fb;}
+  .ev.done{background:rgba(74,222,128,0.12);border-color:var(--green);color:#cdeecd;}
+  .ev-none{background:transparent;border-color:#3a4658;color:var(--muted);text-align:center;}
+  .cal-legend{display:flex;gap:14px;flex-wrap:wrap;margin-top:14px;font-size:12px;color:var(--muted);}
+  .cal-legend span{display:flex;align-items:center;gap:6px;}
+  .cal-legend .lg{width:13px;height:13px;border-radius:3px;border-left:3px solid;}
+  .cal-legend .ev-g{background:rgba(45,212,191,0.2);border-color:#2DD4BF;}
+  .cal-legend .ev-r{background:rgba(167,139,250,0.2);border-color:#A78BFA;}
+  .cal-legend .done{background:rgba(74,222,128,0.2);border-color:var(--green);}
+  .cal-legend .pend{background:rgba(212,175,55,0.2);border-color:var(--gold);}
 </style>
 </head>
 <body>
@@ -254,10 +277,21 @@
   };
 
   views.content=()=>{
-    const rows=D.content.days.map(x=>`<div class="card">
-      <div class="row1"><span class="dot" style="background:${x.posted?'var(--green)':'var(--gold)'}"></span><div class="nm" style="font-size:15px">${esc(x.d)}</div>${x.posted?'<span class="pill p-active">posted</span>':'<span class="pill p-dev">pending</span>'}</div>
-      <div class="meta">▦ ${esc(x.graphic)} &nbsp;·&nbsp; ▶ ${esc(x.reel)}</div></div>`).join('');
-    return `<h2 class="vt">Content</h2><div class="vsub">Week of ${esc(D.content.weekOf)}</div>${rows}`;
+    const today='Jun 2';
+    const cells=D.content.days.map(x=>{
+      const parts=x.d.split(' '); const dow=parts[0]; const dnum=parts.slice(1).join(' ');
+      const isToday=x.d.includes(today);
+      const evs=[];
+      if(x.graphic && x.graphic!=='-') evs.push(`<div class="ev ev-g ${x.posted?'done':''}">▦ ${esc(x.graphic)}</div>`);
+      if(x.reel && x.reel!=='-') evs.push(`<div class="ev ev-r ${x.posted?'done':''}">▶ ${esc(x.reel)}</div>`);
+      if(!evs.length) evs.push(`<div class="ev ev-none">—</div>`);
+      return `<div class="cal-day ${isToday?'today':''}">
+        <div class="cal-dh"><span class="dow">${dow}</span><span class="dnum">${dnum}</span>${isToday?'<span class="todaytag">today</span>':''}</div>
+        <div class="cal-ev">${evs.join('')}</div></div>`;
+    }).join('');
+    return `<h2 class="vt">Content</h2><div class="vsub">Week of ${esc(D.content.weekOf)} · swipe sideways</div>
+      <div class="cal-scroll"><div class="cal-week">${cells}</div></div>
+      <div class="cal-legend"><span><i class="lg ev-g"></i>Graphic</span><span><i class="lg ev-r"></i>Reel</span><span><i class="lg done"></i>Posted</span><span><i class="lg pend"></i>Pending</span></div>`;
   };
 
   views.more=()=>{
