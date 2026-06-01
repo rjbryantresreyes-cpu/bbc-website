@@ -28,7 +28,7 @@
   .hdr .b small{font-family:var(--mono);font-size:9px;letter-spacing:1.5px;color:var(--gold2);display:block;margin-top:1px;}
   .hdr .date{font-family:var(--mono);font-size:11px;color:var(--muted);text-align:right;}
 
-  .view{padding:18px 16px 24px;max-width:640px;margin:0 auto;}
+  .view{padding:18px 20px 28px;max-width:1320px;margin:0 auto;}
   .view.hidden{display:none;}
   h2.vt{font-family:var(--display);font-size:24px;font-weight:700;margin-bottom:4px;}
   .vsub{font-size:13px;color:var(--muted);margin-bottom:18px;}
@@ -146,9 +146,8 @@
   .dashcard .todo .lab{color:var(--gold2);font-family:var(--mono);font-size:9px;letter-spacing:1px;text-transform:uppercase;white-space:nowrap;padding-top:2px;}
 
   /* BI PANELS (Home) */
-  .panelgrid{display:grid;grid-template-columns:1fr;gap:12px;}
-  @media(min-width:680px){ .panelgrid{grid-template-columns:1fr 1fr;} }
-  .panel{background:var(--bg2);border:1px solid var(--line);border-radius:14px;padding:14px;}
+  .panelgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(258px,1fr));gap:13px;align-items:stretch;}
+  .panel{background:var(--bg2);border:1px solid var(--line);border-radius:14px;padding:14px;display:flex;flex-direction:column;}
   .panel.tap{cursor:pointer;} .panel.tap:active{transform:scale(0.995);} .panel.tap:hover{border-color:var(--gold);}
   .panel .ptitle{display:block;text-align:center;font-family:var(--mono);font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--ink);background:var(--bg3);border:1px solid var(--line);border-radius:8px;padding:6px;margin-bottom:12px;}
   .gauge-sub{text-align:center;font-size:11px;color:var(--muted);margin-top:4px;}
@@ -368,7 +367,7 @@
             <div class="panel tap" onclick="go('social')"><span class="ptitle">This Week</span><div class="wkbars">${weekBars}</div><div class="gauge-sub">${weekPosted} of 7 posted</div></div>
             <div class="panel tap" onclick="go('websites')"><span class="ptitle">Websites</span><table class="ptable">${webRows}</table></div>
             <div class="panel"><span class="ptitle">Needs Attention</span>${attnBars}</div>
-            <div class="panel tap" onclick="go('clients')" style="grid-column:1/-1"><span class="ptitle">Clients (${D.clients.length})</span><table class="ptable">${clientRows}</table></div>
+            <div class="panel tap" onclick="go('clients')"><span class="ptitle">Clients (${D.clients.length})</span><table class="ptable">${clientRows}</table></div>
           </div>`;
       })()}
       <a class="morelink" onclick="go('more')">AI Family · Team · Systems →</a>`;
