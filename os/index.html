@@ -165,6 +165,13 @@
   .hbar .htrack{flex:1;height:14px;background:var(--bg3);border-radius:7px;overflow:hidden;}
   .hbar .htrack i{display:block;height:100%;border-radius:7px;}
   .hbar .hv{font-family:var(--mono);font-size:11px;color:var(--gold2);width:26px;text-align:right;flex:none;}
+
+  /* OPERATIONS rows */
+  .opitem{display:flex;align-items:center;gap:9px;padding:8px 0;border-bottom:1px solid var(--line);font-size:12.5px;}
+  .opitem:last-child{border-bottom:none;}
+  .odot{width:8px;height:8px;border-radius:50%;flex:none;}
+  .oname{flex:1;color:var(--ink);}
+  .ocad{font-family:var(--mono);font-size:8.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;white-space:nowrap;}
 </style>
 </head>
 <body>
@@ -292,6 +299,43 @@
     {"title":"Interactive Design + Motion Stack","date":"2026-05-28","path":"LEARNINGS"},
     {"title":"Netlify Forms gotchas","date":"2026-05-28","path":"LEARNINGS"}
   ],
+  "ops":[
+    {"area":"Content & Social","color":"#EC4899","items":[
+      {"name":"Post today's content","cad":"daily"},
+      {"name":"Review content queue","cad":"daily"},
+      {"name":"Check pending-to-post","cad":"daily"},
+      {"name":"Trending research","cad":"daily"}
+    ]},
+    {"area":"Website","color":"#2DD4BF","items":[
+      {"name":"Site edits + pushes (mobile-verify)","cad":"as needed"},
+      {"name":"Active build: Sonya rebrand","cad":"active"}
+    ]},
+    {"area":"Workflow Engine","color":"#A78BFA","items":[
+      {"name":"Run Workflow Content Flow","cad":"weekly"},
+      {"name":"Process-as-content capture","cad":"daily"}
+    ]},
+    {"area":"Client Ops","color":"#D4AF37","items":[
+      {"name":"Client check-ins / comms","cad":"daily"},
+      {"name":"Client deliverables","cad":"daily"}
+    ]},
+    {"area":"Growth","color":"#4ADE80","items":[
+      {"name":"Leads & follow-up","cad":"daily"},
+      {"name":"Email marketing","cad":"weekly"},
+      {"name":"SEO","cad":"weekly"},
+      {"name":"Monthly reporting","cad":"monthly"}
+    ]},
+    {"area":"Back-office","color":"#60A5FA","items":[
+      {"name":"Reviews / reputation","cad":"weekly"},
+      {"name":"Invoicing / finance","cad":"weekly"},
+      {"name":"Team / VA check-ins","cad":"daily"}
+    ]},
+    {"area":"System & Knowledge","color":"#9FB0C7","items":[
+      {"name":"Knowledge capture to LEARNINGS","cad":"daily"},
+      {"name":"Daily external scan","cad":"daily"},
+      {"name":"End-of-day wrap","cad":"daily"},
+      {"name":"Handoffs, Project sync, device parity","cad":"as needed"}
+    ]}
+  ],
   "artifactOrder":["graphic","video","page","social","zip"],
   "artifactIcon":{"graphic":"▦","video":"▶","page":"▤","social":"✉","zip":"⬇"},
   "workflows":[
@@ -369,6 +413,14 @@
             <div class="panel"><span class="ptitle">Needs Attention</span>${attnBars}</div>
             <div class="panel tap" onclick="go('clients')"><span class="ptitle">Clients (${D.clients.length})</span><table class="ptable">${clientRows}</table></div>
           </div>`;
+      })()}
+      ${(()=>{
+        const cc={daily:'#D4AF37',weekly:'#60A5FA',monthly:'#7C8AA5','as needed':'#7C8AA5',active:'#4ADE80'};
+        const boxes=D.ops.map(o=>{
+          const rows=o.items.map(it=>`<div class="opitem"><span class="odot" style="background:${cc[it.cad]||'#7C8AA5'}"></span><span class="oname">${esc(it.name)}</span><span class="ocad">${esc(it.cad)}</span></div>`).join('');
+          return `<div class="panel"><span class="ptitle" style="color:${o.color}">${esc(o.area)}</span>${rows}</div>`;
+        }).join('');
+        return `<div class="sec">Operations — what needs attention</div><div class="panelgrid">${boxes}</div>`;
       })()}
       <a class="morelink" onclick="go('more')">AI Family · Team · Systems →</a>`;
   };
