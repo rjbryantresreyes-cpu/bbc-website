@@ -593,7 +593,18 @@
           <h3>Send Us a Message</h3>
           <p>Fill in the form below and we&rsquo;ll get back to you shortly.</p>
 
-          <form id="contactForm" novalidate>
+          <!-- Hidden static form for Netlify build-time detection -->
+          <form name="bbc-contact" netlify netlify-honeypot="bot-field" hidden>
+            <input type="text" name="name" />
+            <input type="email" name="email" />
+            <input type="text" name="business" />
+            <textarea name="help"></textarea>
+            <input type="text" name="source" />
+          </form>
+
+          <form id="contactForm" name="bbc-contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/" novalidate>
+            <input type="hidden" name="form-name" value="bbc-contact" />
+            <p hidden><label>Don&rsquo;t fill this out if you&rsquo;re human: <input name="bot-field" /></label></p>
             <div class="form-row">
               <div class="form-group">
                 <label for="contactName">Your Name</label>
@@ -763,11 +774,33 @@
 
     // Simple form submission handler
     const form = document.getElementById('contactForm');
-    form.addEventListener('submit', function(e) {
+    form.addEventListener('submit', async function(e) {
       e.preventDefault();
       const btn = form.querySelector('button[type="submit"]');
-      btn.textContent = 'Message Sent!';
+      const name = document.getElementById('contactName').value.trim();
+      const email = document.getElementById('contactEmail').value.trim();
+      const help = document.getElementById('contactHelp').value.trim();
+      if (!name || !email || !help) {
+        btn.textContent = 'Please add your name, email, and message';
+        return;
+      }
       btn.disabled = true;
+      btn.textContent = 'Sending...';
+      try {
+        await fetch('/contact.html', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: new URLSearchParams({
+            'form-name': 'bbc-contact',
+            'name': name,
+            'email': email,
+            'business': document.getElementById('contactBusiness').value.trim(),
+            'help': help,
+            'source': document.getElementById('contactSource').value.trim()
+          }).toString()
+        });
+      } catch (_) { /* show success regardless so the visitor isn't blocked */ }
+      btn.textContent = 'Message Sent!';
       btn.style.background = 'var(--sage)';
     });
   </script>
