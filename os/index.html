@@ -356,6 +356,23 @@
     "Add password gate to /os dashboard (pending)",
     "Wire Google Analytics via service account (pending)"
   ],
+  "websiteTools":[
+    {"n":"Interactive motion stack","d":"GSAP + ScrollTrigger + Lenis + reduced-motion (free)"},
+    {"n":"Website Replicator Pipeline","d":"URL to screenshots to design tokens to code (Playwright + vision)"},
+    {"n":"Hallmark quality bar","d":"anti-AI-slop, 65 gates, on every build/redesign"},
+    {"n":"Mobile-first verify","d":"check 375 / 768 / 1280 before push (Playwright / preview)"},
+    {"n":"Design tokens","d":"design-tokens.json per site so AI builds without drift"},
+    {"n":"Deploy","d":"GitHub to Netlify auto-deploy ~60s, verify in incognito"},
+    {"n":"Netlify Forms","d":"client questionnaires (proven pattern)"}
+  ],
+  "websiteWorkflows":[
+    {"n":"New client website build","d":"discovery, tokens, build, mobile QA, launch"},
+    {"n":"Create /work page per workflow","d":"Workflow Content Flow step 4 — every shipped workflow gets a page"},
+    {"n":"Case study page","d":"new workflow, Casey writes the case study, page goes up"},
+    {"n":"Process page","d":"new documented process becomes a page that explains it"},
+    {"n":"Review feature","d":"new review gets featured on the relevant page"},
+    {"n":"Redesign / audit","d":"refresh or audit an existing site"}
+  ],
   "socialAccounts":[
     {"platform":"Instagram","handle":"@balaynibruno"},
     {"platform":"Facebook","handle":"Balay ni Bruno & Co."},
@@ -578,14 +595,27 @@
       const url='https://'+c.site.replace(/^https?:\/\//,'');
       return `<div class="card" onclick="window.open('${url}','_blank')"><img class="wshot sm" src="${shot(url,500,300)}" loading="lazy" alt=""><div class="row1" style="margin-top:9px"><div class="nm" style="font-size:14.5px">${esc(c.name)}</div></div><div class="meta">${esc(c.site)} · ${esc(c.handler)}</div></div>`;
     }).join('');
-    const tasks=D.websiteTasks.map(t=>`<div class="card"><div class="row1"><span class="dot" style="background:var(--gold)"></span><div class="nm" style="font-size:14px">${esc(t)}</div></div></div>`).join('');
-    return `<h2 class="vt">Websites</h2><div class="vsub">balaynibruno.co + client sites · tap any page for details</div>
+    const pageGaps=D.workflows.filter(w=>!w.artifacts.page);
+    const todoPages=pageGaps.map(w=>`<div class="opitem"><span class="odot" style="background:#D4AF37"></span><span class="oname">Create page: ${esc(w.title.split(' — ')[0])} <span style="color:var(--muted)">to /work/${w.id}</span></span><span class="ocad">new workflow</span></div>`).join('');
+    const todoTasks=D.websiteTasks.map(t=>`<div class="opitem"><span class="odot" style="background:#EF6B6B"></span><span class="oname">${esc(t)}</span><span class="ocad">task</span></div>`).join('');
+    const tools=(D.websiteTools||[]).map(x=>`<div class="opitem"><span class="odot" style="background:#2DD4BF"></span><span class="oname">${esc(x.n)} <span style="color:var(--muted)">— ${esc(x.d)}</span></span></div>`).join('');
+    const flows=(D.websiteWorkflows||[]).map(x=>`<div class="opitem"><span class="odot" style="background:#A78BFA"></span><span class="oname">${esc(x.n)} <span style="color:var(--muted)">— ${esc(x.d)}</span></span></div>`).join('');
+    return `<h2 class="vt">Websites</h2><div class="vsub">Everything website — analytics, reviews, to-do, pages, workflows, tools</div>
+      <div class="sec">Overview</div>
+      <div class="panelgrid">
+        <div class="panel"><span class="ptitle">Analytics</span><div class="kv"><span>Visitors, top pages, and search clicks show here.</span></div><div class="gauge-sub" style="margin-top:10px">Connect Google Analytics + Search Console to enable.</div></div>
+        <div class="panel"><span class="ptitle">Google Reviews</span><div class="kv"><span>New reviews appear here automatically.</span></div><div class="gauge-sub" style="margin-top:10px">Connect Google Business Profile to pull reviews.</div></div>
+        <div class="panel"><span class="ptitle">Website To-Do</span><div class="metric"><b>${pageGaps.length}</b> pages to create &middot; <b>${D.websiteTasks.length}</b> tasks</div><div class="gauge-sub" style="margin-top:8px">Auto-adds when a workflow, process, or review needs a page.</div></div>
+      </div>
+      <div class="sec">Website to-do (auto-generated + tasks)</div>
+      <div class="panel">${todoTasks}${todoPages}</div>
+      <div class="gauge-sub" style="text-align:left;margin-top:8px">Auto-rule: new workflow → create its /work page + case study · new process → page · new review → feature it.</div>
       <div class="sec">BBC site</div>${hero}
       <div class="sec">Page map (main nav flow)</div><div class="cal-scroll"><div class="pagemap">${map}</div></div>
       <div class="sec">All pages (${D.websitePages.length})</div>${pagesByGroup}
-      <div class="sec">Client sites (${D.clients.filter(c=>c.site&&c.site!=='-').length})</div><div class="grid2">${csites}</div>
-      <div class="sec">Website tasks</div>${tasks}
-      <div class="sec">Analytics</div><div class="card"><div class="meta">Live Google Analytics + Search Console appear here once the service account is wired.</div></div>`;
+      <div class="sec">Website workflows</div><div class="panel">${flows}</div>
+      <div class="sec">Website tools (for the team + Claude)</div><div class="panel">${tools}</div>
+      <div class="sec">Client sites (${D.clients.filter(c=>c.site&&c.site!=='-').length})</div><div class="grid2">${csites}</div>`;
   };
   window.pageSheet=i=>{ const p=D.websitePages[i]; const url=pageUrl(p);
     openSheet(`<h3>${esc(p.name)}</h3><div class="row1">${p.noindex?'<span class="pill p-concept">noindex</span>':'<span class="pill p-active">live</span>'} · ${esc(p.group)}</div>
