@@ -212,6 +212,13 @@
   .savedtask .st-m{color:var(--muted);font-size:11px;margin-top:2px;}
   .cs-side-close{display:none;}
   @media(max-width:819px){ .cs-side-close{display:block;width:100%;background:none;border:1px solid var(--line);color:var(--ink);border-radius:8px;padding:10px;margin-bottom:14px;cursor:pointer;} }
+  .agentrow{display:flex;align-items:center;gap:8px;padding:8px 10px;border:1px solid var(--line);border-radius:9px;margin-bottom:6px;cursor:pointer;font-size:12.5px;}
+  .agentrow.on{border-color:var(--gold);background:rgba(212,175,55,0.08);}
+  .agentrow .d{width:9px;height:9px;border-radius:50%;flex:none;}
+  .agentrow .nm{color:var(--ink);font-weight:600;flex:none;}
+  .agentrow .rl{color:var(--muted);font-size:11px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+  .cs-previews{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:8px;}
+  .cs-previews img,.cs-previews video{width:100%;border-radius:8px;border:1px solid var(--line);display:block;}
 </style>
 </head>
 <body>
@@ -244,13 +251,19 @@
     <div class="cs-side" id="cs-side">
       <button class="cs-side-close" onclick="toggleSide()">Done</button>
       <div class="sec">AI agent(s) — pick one or more</div>
-      <div class="chip-row" id="cs-agentpicker"></div>
+      <div id="cs-agentpicker"></div>
       <div class="sec">Task details</div>
       <div class="fld"><label>Description</label><textarea id="cs-desc" placeholder="What we're trying to do and why"></textarea></div>
+      <div class="fld"><label>Global prompt for this process</label><textarea id="cs-gprompt" placeholder="Standing instructions the agent(s) always follow for this task/process"></textarea></div>
       <div class="fld"><label>Category</label><select id="cs-cat"></select></div>
+      <div class="fld"><label>Project (where to save)</label><select id="cs-project"></select></div>
       <div class="fld"><label>Client</label><select id="cs-client"></select></div>
       <div class="fld"><label>Tags</label><input id="cs-tags" placeholder="comma, separated"></div>
       <button class="cs-save" onclick="saveTask()">Save task</button>
+      <div class="sec">Attachments (photo / video)</div>
+      <input type="file" id="cs-files" accept="image/*,video/*" multiple style="font-size:12px;color:var(--muted);width:100%">
+      <div id="cs-previews" class="cs-previews"></div>
+      <div class="st-m" style="color:var(--muted);font-size:11px;margin-top:6px">Previews now. Permanent hosting + display lands when storage is wired.</div>
       <div class="sec">Recent tasks</div>
       <div id="cs-saved"></div>
     </div>
@@ -633,13 +646,13 @@
   document.querySelectorAll('.nav button').forEach(b=>b.onclick=()=>go(b.dataset.v));
 
   /* ---------- Full-screen Cuh chat ---------- */
-  const CHAT_AGENTS=[{k:'Cuh',c:'#D4AF37'}].concat(D.aiFamily.filter(a=>a.key!=='Brunz').map(a=>({k:a.name.split(' ')[0],c:OWN[a.key]||'#7C8AA5'})));
+  const CHAT_AGENTS=[{k:'Cuh',c:'#D4AF37',r:'all-around, your main AI'}].concat(D.aiFamily.filter(a=>a.key!=='Brunz').map(a=>({k:a.name.split(' ')[0],c:OWN[a.key]||'#7C8AA5',r:a.role})));
   let csAgents=new Set(['Cuh']); let csThread=[]; let csEditingId=null;
   function csTasks(){ try{return JSON.parse(localStorage.getItem('bbc_tasks')||'[]');}catch(e){return [];} }
   function renderAgents(){
     const el=document.getElementById('cs-agentpicker');
-    el.innerHTML=CHAT_AGENTS.map(a=>`<span class="achip ${csAgents.has(a.k)?'on':''}" data-k="${a.k}"><span class="d" style="background:${a.c}"></span>${a.k}</span>`).join('');
-    el.querySelectorAll('.achip').forEach(c=>c.onclick=()=>{const k=c.dataset.k; if(csAgents.has(k)){if(csAgents.size>1)csAgents.delete(k);}else csAgents.add(k); renderAgents();});
+    el.innerHTML=CHAT_AGENTS.map(a=>`<div class="agentrow ${csAgents.has(a.k)?'on':''}" data-k="${a.k}"><span class="d" style="background:${a.c}"></span><span class="nm">${a.k}</span><span class="rl">(${esc(a.r)})</span></div>`).join('');
+    el.querySelectorAll('.agentrow').forEach(c=>c.onclick=()=>{const k=c.dataset.k; if(csAgents.has(k)){if(csAgents.size>1)csAgents.delete(k);}else csAgents.add(k); renderAgents();});
     document.getElementById('cs-agents-top').textContent=[...csAgents].join(' + ');
   }
   function renderThread(){
@@ -657,7 +670,8 @@
     const x=csTasks().find(t=>t.id===id); if(!x)return;
     csEditingId=x.id;
     document.getElementById('cs-title').value=x.title||''; document.getElementById('cs-desc').value=x.desc||'';
-    document.getElementById('cs-cat').value=x.cat||'Other'; document.getElementById('cs-client').value=x.client||'Internal / BBC';
+    document.getElementById('cs-gprompt').value=x.gprompt||'';
+    document.getElementById('cs-cat').value=x.cat||'Other'; document.getElementById('cs-project').value=x.project||'BBC Command Center'; document.getElementById('cs-client').value=x.client||'Internal / BBC';
     document.getElementById('cs-tags').value=x.tags||'';
     csAgents=new Set(x.agents&&x.agents.length?x.agents:['Cuh']); csThread=x.thread||[];
     renderAgents(); renderThread(); if(window.innerWidth<820) document.getElementById('cs-side').classList.remove('open');
@@ -665,8 +679,9 @@
   window.openChat=()=>{
     document.getElementById('cs-cat').innerHTML=['Website','Social Media','Workflow','Client work','Content','Research','Strategy','Other'].map(c=>`<option>${c}</option>`).join('');
     document.getElementById('cs-client').innerHTML=['Internal / BBC',...D.clients.map(c=>c.name)].map(c=>`<option>${esc(c)}</option>`).join('');
+    document.getElementById('cs-project').innerHTML=['BBC Command Center','Content Engine','BBC Website','BBC Social','Client Work',...D.clients.map(c=>c.name)].map(c=>`<option>${esc(c)}</option>`).join('');
     csThread=[]; csAgents=new Set(['Cuh']); csEditingId=null;
-    document.getElementById('cs-title').value=''; document.getElementById('cs-desc').value=''; document.getElementById('cs-tags').value='';
+    document.getElementById('cs-title').value=''; document.getElementById('cs-desc').value=''; document.getElementById('cs-tags').value=''; document.getElementById('cs-gprompt').value=''; document.getElementById('cs-previews').innerHTML=''; document.getElementById('cs-files').value='';
     renderAgents(); renderThread(); renderSaved();
     document.getElementById('chatscreen').classList.add('open');
     setTimeout(()=>document.getElementById('cs-title').focus(),120);
@@ -681,13 +696,14 @@
   };
   window.saveTask=()=>{
     const t=document.getElementById('cs-title').value.trim()||'Untitled task';
-    const task={id:csEditingId||('t'+Date.now()),title:t,desc:document.getElementById('cs-desc').value,cat:document.getElementById('cs-cat').value,client:document.getElementById('cs-client').value,tags:document.getElementById('cs-tags').value,agents:[...csAgents],thread:csThread};
+    const task={id:csEditingId||('t'+Date.now()),title:t,desc:document.getElementById('cs-desc').value,gprompt:document.getElementById('cs-gprompt').value,cat:document.getElementById('cs-cat').value,project:document.getElementById('cs-project').value,client:document.getElementById('cs-client').value,tags:document.getElementById('cs-tags').value,agents:[...csAgents],thread:csThread};
     const all=csTasks(); const i=all.findIndex(x=>x.id===task.id); if(i>=0)all[i]=task; else all.unshift(task);
     try{localStorage.setItem('bbc_tasks',JSON.stringify(all));}catch(e){}
     csEditingId=task.id; renderSaved();
     const b=document.querySelector('.cs-save'); b.textContent='Saved ✓'; setTimeout(()=>b.textContent='Save task',1500);
   };
   document.getElementById('cs-msg').addEventListener('keydown',e=>{ if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();window.sendMsg();} });
+  document.getElementById('cs-files').addEventListener('change',e=>{ const box=document.getElementById('cs-previews'); box.innerHTML=''; [...e.target.files].forEach(f=>{ const url=URL.createObjectURL(f); box.insertAdjacentHTML('beforeend', f.type.startsWith('video')?`<video src="${url}" controls></video>`:`<img src="${url}" alt="">`); }); });
 
   /* PWA service worker — auto-update so deploys show without manual cache clears */
   if('serviceWorker' in navigator){
