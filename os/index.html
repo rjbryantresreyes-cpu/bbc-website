@@ -163,6 +163,16 @@
   .pagerow .arr{color:var(--gold2);font-size:14px;}
   .preview-tag{color:var(--muted);font-family:var(--mono);font-size:9px;letter-spacing:.5px;text-transform:none;}
 
+  /* WORKFLOWS v2 — category boxes */
+  .catgrid{display:grid;grid-template-columns:1fr 1fr;gap:11px;}
+  @media(min-width:680px){.catgrid{grid-template-columns:repeat(auto-fit,minmax(240px,1fr));}}
+  .catbox{background:var(--bg2);border:1px solid var(--line);border-radius:16px;padding:17px 15px;cursor:pointer;transition:border-color .15s,transform .1s;display:flex;flex-direction:column;min-height:160px;}
+  .catbox:hover{border-color:var(--gold);} .catbox:active{transform:scale(0.98);}
+  .catbox-ic{width:46px;height:46px;border-radius:13px;display:flex;align-items:center;justify-content:center;font-size:23px;margin-bottom:13px;}
+  .catbox-nm{font-family:var(--display);font-size:18px;font-weight:700;color:var(--ink);line-height:1.15;}
+  .catbox-meta{font-size:12px;color:var(--muted);margin-top:6px;}
+  .catbox-dots{display:flex;gap:4px;margin-top:11px;flex-wrap:wrap;}
+
   /* DASHBOARD CARDS (Home) */
   .dashcard{background:var(--bg2);border:1px solid var(--line);border-left:4px solid var(--gold);border-radius:14px;padding:15px 16px;margin-bottom:10px;cursor:pointer;transition:border-color .15s,transform .1s;}
   .dashcard:active{transform:scale(0.99);}
@@ -579,19 +589,40 @@
 
   views.workflows=()=>{
     const cats=[...new Set(D.workflows.map(w=>w.cat))];
-    const body=cats.map(cat=>{
-      const rows=D.workflows.filter(w=>w.cat===cat).map(w=>{
-        const dots=w.owners.map(o=>`<span class="dot" style="background:${OWN[o]||'#888'}"></span>`).join('');
-        const pips=ORDER.map(a=>`<span class="pip ${w.artifacts[a]?'on':''}"></span>`).join('');
-        return `<div class="card" data-search="${esc((w.title+' '+w.owners.join(' ')+' '+w.angle).toLowerCase())}" onclick="wfSheet('${w.id}')">
-          <div class="row1"><span style="display:flex;gap:3px">${dots}</span><div class="nm" style="font-size:14.5px">${esc(w.title)}</div><span style="font-family:var(--mono);font-size:12px;color:var(--gold2)">${pct(w)}%</span></div>
-          <div class="row1" style="margin-top:9px;justify-content:space-between"><div class="meta" style="margin:0">${esc(w.role)}</div><div class="mini">${pips}</div></div></div>`;
-      }).join('');
-      return `<div class="sec">${esc(cat)}</div>${rows}`;
+    const CIC={'Vidz Production':'🎬','Specialist AI':'🤖','Cowork Skills':'🧩','Rules as Workflows':'📜'};
+    const CCOL={'Vidz Production':'#A78BFA','Specialist AI':'#EC4899','Cowork Skills':'#D4AF37','Rules as Workflows':'#60A5FA'};
+    const totalArt=D.workflows.reduce((n,w)=>n+ORDER.filter(a=>w.artifacts[a]).length,0);
+    const boxes=cats.map(cat=>{
+      const list=D.workflows.filter(w=>w.cat===cat);
+      const avg=Math.round(list.reduce((s,w)=>s+pct(w),0)/list.length);
+      const owners=[...new Set(list.flatMap(w=>w.owners))];
+      const dots=owners.map(o=>`<span class="dot" style="background:${OWN[o]||'#888'}"></span>`).join('');
+      const ic=CIC[cat]||'📦', col=CCOL[cat]||'#D4AF37';
+      return `<div class="catbox" onclick="wfCat('${cat}')">
+        <div class="catbox-ic" style="background:${col}22;color:${col}">${ic}</div>
+        <div class="catbox-nm">${esc(cat)}</div>
+        <div class="catbox-meta">${list.length} workflows · ${avg}% ready</div>
+        <div class="catbox-dots">${dots}</div>
+        <div class="bar" style="margin-top:auto"><i style="width:${avg}%"></i></div></div>`;
     }).join('');
-    return `<h2 class="vt">Workflows</h2><div class="vsub">16 shareable systems · ${D.workflows.reduce((n,w)=>n+ORDER.filter(a=>w.artifacts[a]).length,0)} of 80 artifacts shipped.</div>
-      <input class="search" placeholder="Search workflows..." oninput="filterCards(this,'wfwrap')">
-      <div id="wfwrap">${body}</div>`;
+    return `<h2 class="vt">Workflows</h2><div class="vsub">${cats.length} categories · ${totalArt} of 80 artifacts shipped. Tap a category to open it.</div>
+      <div class="catgrid">${boxes}</div>`;
+  };
+  window.wfCat=(cat)=>{
+    const list=D.workflows.filter(w=>w.cat===cat);
+    const rows=list.map(w=>{
+      const dots=w.owners.map(o=>`<span class="dot" style="background:${OWN[o]||'#888'}"></span>`).join('');
+      const pips=ORDER.map(a=>`<span class="pip ${w.artifacts[a]?'on':''}"></span>`).join('');
+      return `<div class="card" data-search="${esc((w.title+' '+w.owners.join(' ')+' '+w.angle).toLowerCase())}" onclick="wfSheet('${w.id}')">
+        <div class="row1"><span style="display:flex;gap:3px">${dots}</span><div class="nm" style="font-size:14.5px">${esc(w.title)}</div><span style="font-family:var(--mono);font-size:12px;color:var(--gold2)">${pct(w)}%</span></div>
+        <div class="row1" style="margin-top:9px;justify-content:space-between"><div class="meta" style="margin:0">${esc(w.role)}</div><div class="mini">${pips}</div></div></div>`;
+    }).join('');
+    app.innerHTML=`<div class="view">
+      <div class="morelink" style="margin-top:0;margin-bottom:14px" onclick="go('workflows')">← All categories</div>
+      <h2 class="vt">${esc(cat)}</h2><div class="vsub">${list.length} workflows · tap any for the full breakdown.</div>
+      <input class="search" placeholder="Search ${esc(cat)}..." oninput="filterCards(this,'wfwrap')">
+      <div id="wfwrap">${rows}</div></div>`;
+    window.scrollTo(0,0); sheet.classList.remove('open');
   };
 
   views.social=()=>{
