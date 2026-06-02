@@ -1,0 +1,1258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#0E1A2E">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icon-192.png">
+<title>BBC Command Center</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0E1A2E;--bg2:#14253E;--bg3:#0A1422;--ink:#F5F1EA;--muted:#9FB0C7;
+    --gold:#D4AF37;--gold2:#C9A961;--goldB:#B8923E;--green:#4ADE80;
+    --line:rgba(212,175,55,0.18);
+    --display:'Playfair Display',Georgia,serif;--ui:'DM Sans',system-ui,sans-serif;--mono:'JetBrains Mono',monospace;
+    --navh:64px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+  body{font-family:var(--ui);background:radial-gradient(130% 80% at 70% 0%,#1A2E47 0%,#0E1A2E 50%,#08111E 100%);background-attachment:fixed;color:var(--ink);min-height:100dvh;-webkit-font-smoothing:antialiased;padding-bottom:calc(var(--navh) + env(safe-area-inset-bottom));}
+
+  /* HEADER */
+  .hdr{position:sticky;top:0;z-index:30;display:flex;align-items:center;justify-content:space-between;padding:calc(14px + env(safe-area-inset-top)) 18px 14px;background:rgba(14,26,46,0.85);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);}
+  .hdr .b{font-family:var(--display);font-size:19px;font-weight:700;}
+  .hdr .b small{font-family:var(--mono);font-size:9px;letter-spacing:1.5px;color:var(--gold2);display:block;margin-top:1px;}
+  .hdr .date{font-family:var(--mono);font-size:11px;color:var(--muted);text-align:right;}
+
+  .view{padding:18px 20px 28px;max-width:1320px;margin:0 auto;}
+  .view.hidden{display:none;}
+  h2.vt{font-family:var(--display);font-size:24px;font-weight:700;margin-bottom:4px;}
+  .vsub{font-size:13px;color:var(--muted);margin-bottom:18px;}
+  .sec{font-family:var(--mono);font-size:10px;letter-spacing:2px;color:var(--gold2);text-transform:uppercase;margin:22px 0 10px;}
+
+  /* STAT GRID */
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+  .grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;}
+  .stat{background:var(--bg2);border:1px solid var(--line);border-radius:14px;padding:16px;}
+  .stat .n{font-family:var(--display);font-size:30px;font-weight:700;line-height:1;}
+  .stat .n.green{color:var(--green);}.stat .n.gold{color:var(--gold);}
+  .stat .l{font-family:var(--mono);font-size:9px;letter-spacing:1px;color:var(--muted);text-transform:uppercase;margin-top:7px;}
+
+  /* CARD */
+  .card{background:var(--bg2);border:1px solid var(--line);border-radius:14px;padding:15px;margin-bottom:10px;cursor:pointer;transition:border-color .15s,transform .1s;}
+  .card:active{transform:scale(0.99);}
+  .card:hover{border-color:var(--gold);}
+  .card .row1{display:flex;align-items:center;gap:11px;}
+  .dot{width:11px;height:11px;border-radius:50%;flex:none;}
+  .av{width:38px;height:38px;border-radius:11px;flex:none;display:flex;align-items:center;justify-content:center;font-family:var(--display);font-weight:700;font-size:16px;color:#0A1422;}
+  .card .nm{font-size:16px;font-weight:600;flex:1;min-width:0;}
+  .card .meta{font-size:12.5px;color:var(--muted);margin-top:7px;line-height:1.5;}
+  .pill{display:inline-block;font-family:var(--mono);font-size:9px;letter-spacing:.5px;padding:3px 8px;border-radius:999px;text-transform:uppercase;}
+  .p-active{background:rgba(74,222,128,0.15);color:var(--green);}
+  .p-dev{background:rgba(212,175,55,0.15);color:var(--gold);}
+  .p-concept{background:rgba(159,176,199,0.15);color:var(--muted);}
+  .mini{display:flex;gap:4px;}
+  .pip{width:9px;height:9px;border-radius:3px;background:#1F2937;border:1px solid #3a4658;}
+  .pip.on{background:var(--green);border-color:var(--green);}
+
+  /* SEARCH */
+  .search{width:100%;background:var(--bg3);border:1px solid var(--line);border-radius:11px;color:var(--ink);font-family:var(--ui);font-size:15px;padding:13px 14px;margin-bottom:14px;}
+  .search:focus{outline:none;border-color:var(--gold);}
+
+  /* DETAIL SHEET */
+  .sheet{position:fixed;inset:0;z-index:60;background:rgba(8,17,30,0.55);backdrop-filter:blur(3px);display:none;}
+  .sheet.open{display:block;}
+  .sheet-inner{position:absolute;left:0;right:0;bottom:0;max-height:92dvh;overflow-y:auto;background:var(--bg);border-top:2px solid var(--gold);border-radius:20px 20px 0 0;padding:10px 18px calc(28px + env(safe-area-inset-bottom));}
+  .grab{width:44px;height:5px;border-radius:3px;background:#3a4658;margin:8px auto 14px;}
+  .sheet h3{font-family:var(--display);font-size:24px;font-weight:700;line-height:1.15;margin-bottom:6px;}
+  .sheet .row1{display:flex;align-items:center;gap:10px;margin-bottom:14px;color:var(--muted);font-size:13px;}
+  .bar{height:9px;background:var(--bg3);border:1px solid #3a4658;border-radius:5px;overflow:hidden;margin:8px 0;}
+  .bar>i{display:block;height:100%;background:linear-gradient(90deg,var(--goldB),var(--gold));}
+  .arts{display:grid;grid-template-columns:repeat(5,1fr);gap:7px;}
+  .art{text-align:center;padding:11px 4px;border:1px solid var(--line);border-radius:10px;}
+  .art.on{border-color:var(--green);background:rgba(74,222,128,0.08);}
+  .art .ic{font-size:17px;}.art .nm{font-family:var(--mono);font-size:8px;letter-spacing:.5px;color:var(--muted);text-transform:uppercase;margin-top:6px;}
+  .art.on .nm{color:var(--green);}
+  .kv{font-size:14px;line-height:1.6;margin-bottom:5px;}.kv b{color:var(--ink);}.kv span{color:var(--muted);}
+  .angle{font-size:15px;font-style:italic;line-height:1.55;}
+  .lnk{display:block;font-size:13px;color:var(--gold2);text-decoration:none;padding:10px 12px;border:1px solid var(--line);border-radius:9px;margin-bottom:6px;word-break:break-all;}
+  .lnk:hover{border-color:var(--gold);color:var(--gold);}
+
+  /* BOTTOM NAV */
+  .nav{position:fixed;left:0;right:0;bottom:0;z-index:40;height:calc(var(--navh) + env(safe-area-inset-bottom));padding-bottom:env(safe-area-inset-bottom);display:flex;background:rgba(10,20,34,0.95);backdrop-filter:blur(12px);border-top:1px solid var(--line);}
+  .nav button{flex:1;background:none;border:none;color:var(--muted);font-family:var(--ui);font-size:9px;font-weight:600;white-space:nowrap;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;cursor:pointer;padding-top:8px;}
+  .nav button .i{font-size:19px;line-height:1;}
+  .nav button.active{color:var(--gold);}
+
+  /* FLOATING CUH BUTTON (every page) */
+  .fab{position:fixed;right:16px;bottom:calc(var(--navh) + 16px + env(safe-area-inset-bottom));z-index:35;background:linear-gradient(135deg,var(--gold),var(--goldB));color:#0A1422;border:none;border-radius:999px;padding:13px 18px;font-family:var(--ui);font-weight:700;font-size:14px;display:flex;align-items:center;gap:8px;box-shadow:0 8px 26px rgba(0,0,0,0.4);cursor:pointer;transition:transform .1s;}
+  .fab .i{font-size:16px;line-height:1;}
+  .fab:active{transform:scale(0.95);}
+
+  /* CALENDAR */
+  .cal-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:0 -16px;padding:0 16px 8px;}
+  .cal-week{display:grid;grid-template-columns:repeat(7,minmax(132px,1fr));gap:7px;min-width:780px;}
+  .cal-day{background:var(--bg2);border:1px solid var(--line);border-radius:12px;padding:10px;min-height:158px;display:flex;flex-direction:column;}
+  .cal-day.today{border-color:var(--gold);box-shadow:0 0 0 1px var(--gold);}
+  .cal-dh{border-bottom:1px solid var(--line);padding-bottom:7px;margin-bottom:8px;position:relative;}
+  .cal-dh .dow{font-family:var(--mono);font-size:10px;letter-spacing:1px;color:var(--gold2);text-transform:uppercase;display:block;}
+  .cal-dh .dnum{font-family:var(--display);font-size:17px;font-weight:700;color:var(--ink);}
+  .cal-dh .todaytag{position:absolute;top:-1px;right:0;font-family:var(--mono);font-size:8px;background:var(--gold);color:#0A1422;padding:2px 6px;border-radius:999px;letter-spacing:.5px;}
+  .cal-ev{display:flex;flex-direction:column;gap:6px;}
+  .ev{font-size:11.5px;line-height:1.3;padding:7px 8px;border-radius:8px;border-left:3px solid;}
+  .ev-g{background:rgba(45,212,191,0.12);border-color:#2DD4BF;color:#cdeee9;}
+  .ev-r{background:rgba(167,139,250,0.12);border-color:#A78BFA;color:#e2d9fb;}
+  .ev.done{background:rgba(74,222,128,0.12);border-color:var(--green);color:#cdeecd;}
+  .ev-none{background:transparent;border-color:#3a4658;color:var(--muted);text-align:center;}
+  .cal-legend{display:flex;gap:14px;flex-wrap:wrap;margin-top:14px;font-size:12px;color:var(--muted);}
+  .cal-legend span{display:flex;align-items:center;gap:6px;}
+  .cal-legend .lg{width:13px;height:13px;border-radius:3px;border-left:3px solid;}
+  .cal-legend .ev-g{background:rgba(45,212,191,0.2);border-color:#2DD4BF;}
+  .cal-legend .ev-r{background:rgba(167,139,250,0.2);border-color:#A78BFA;}
+  .cal-legend .done{background:rgba(74,222,128,0.2);border-color:var(--green);}
+  .cal-legend .pend{background:rgba(212,175,55,0.2);border-color:var(--gold);}
+
+  /* MONTH CALENDAR (big) */
+  .month{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:0 -16px;padding:0 16px 8px;}
+  .month-grid{min-width:940px;}
+  .month-dow{display:grid;grid-template-columns:repeat(7,1fr);gap:7px;margin-bottom:7px;}
+  .month-dow span{font-family:var(--mono);font-size:10px;letter-spacing:1px;color:var(--gold2);text-transform:uppercase;text-align:center;}
+  .month-week{display:grid;grid-template-columns:repeat(7,1fr);gap:7px;margin-bottom:7px;}
+  .mcell{background:var(--bg2);border:1px solid var(--line);border-radius:11px;padding:9px;min-height:124px;display:flex;flex-direction:column;gap:5px;}
+  .mcell.out{opacity:.38;}
+  .mcell.today{border-color:var(--gold);box-shadow:0 0 0 1px var(--gold);}
+  .mcell-d{display:flex;align-items:flex-start;justify-content:space-between;gap:6px;}
+  .mcell-num{font-family:var(--display);font-size:15px;font-weight:700;color:var(--ink);line-height:1;}
+  .mcell-slot{font-family:var(--mono);font-size:8px;color:var(--muted);text-transform:uppercase;letter-spacing:.3px;text-align:right;max-width:70px;}
+  .mev{font-size:10.5px;line-height:1.25;padding:5px 7px;border-radius:7px;border-left:3px solid;}
+  .mev-graphic{background:rgba(45,212,191,0.13);border-color:#2DD4BF;color:#cdeee9;}
+  .mev-reel{background:rgba(167,139,250,0.13);border-color:#A78BFA;color:#e2d9fb;}
+  .mev.posted{background:rgba(74,222,128,0.13);border-color:var(--green);color:#cdeecd;}
+  .mev-event{background:rgba(212,175,55,0.15);border-color:var(--gold);color:#f0e2c0;}
+  .mev-rem{display:block;font-size:9px;color:var(--gold2);margin-top:2px;opacity:.9;}
+
+  /* POSTING RHYTHM boxes */
+  .rhythm{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+  @media(min-width:720px){.rhythm{grid-template-columns:repeat(auto-fit,minmax(150px,1fr));}}
+  .rbox{background:var(--bg2);border:1px solid var(--line);border-top:3px solid var(--gold);border-radius:12px;padding:13px;}
+  .rbox .day{font-family:var(--display);font-size:15px;font-weight:700;color:var(--ink);}
+  .rbox .slot{font-family:var(--mono);font-size:9px;letter-spacing:.5px;text-transform:uppercase;color:var(--gold2);margin-top:4px;}
+  .rbox .note{font-size:11.5px;color:var(--muted);margin-top:7px;line-height:1.4;}
+
+  /* ANALYTICS boxes */
+  .anagrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+  @media(min-width:720px){.anagrid{grid-template-columns:repeat(auto-fit,minmax(190px,1fr));}}
+  .anabox{background:var(--bg2);border:1px solid var(--line);border-radius:14px;padding:14px;}
+  .anabox .pl{font-weight:700;font-size:15px;color:var(--ink);}
+  .anabox .hd{font-size:11px;color:var(--muted);margin-top:2px;}
+  .anabox .mets{display:flex;gap:7px;margin-top:11px;}
+  .anabox .met{flex:1;text-align:center;background:var(--bg3);border:1px solid var(--line);border-radius:8px;padding:8px 3px;}
+  .anabox .met .v{font-family:var(--display);font-size:16px;color:var(--gold2);}
+  .anabox .met .k{font-family:var(--mono);font-size:8px;color:var(--muted);text-transform:uppercase;margin-top:3px;letter-spacing:.3px;}
+
+  /* IDEA BOX trigger */
+  .ideabtn{width:100%;background:linear-gradient(135deg,#1A2E47,#14253E);border:1px solid var(--gold);color:var(--ink);border-radius:12px;padding:15px;font-family:var(--ui);font-weight:700;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:9px;margin-bottom:11px;transition:transform .1s;}
+  .ideabtn:active{transform:scale(.99);} .ideabtn:hover{border-color:var(--gold2);}
+  .ideabtn .i{font-size:17px;line-height:1;}
+
+  /* BRUNO PAGE (private) */
+  .hdr-lock{background:none;border:1px solid var(--line);color:var(--gold2);border-radius:9px;padding:6px 9px;font-size:14px;cursor:pointer;line-height:1;}
+  .hdr-lock:hover{border-color:var(--gold);}
+  .bgate{max-width:380px;margin:40px auto;text-align:center;}
+  .bgate .lk{font-size:40px;}
+  .bgate h3{font-family:var(--display);font-size:24px;font-weight:700;margin:14px 0 6px;}
+  .bgate p{color:var(--muted);font-size:13px;margin-bottom:18px;line-height:1.5;}
+  .bgate input{width:100%;background:var(--bg3);border:1px solid var(--line);border-radius:11px;color:var(--ink);font-size:18px;text-align:center;letter-spacing:3px;padding:13px;margin-bottom:10px;}
+  .bgate input:focus{outline:none;border-color:var(--gold);}
+  .bgate button{width:100%;background:var(--gold);color:#0A1422;border:none;border-radius:11px;padding:13px;font-weight:700;font-family:var(--ui);cursor:pointer;}
+  .bgate .err{color:#EF6B6B;font-size:12px;margin-top:9px;min-height:14px;}
+  .brunolock{display:inline-block;margin-top:16px;font-size:12px;color:var(--muted);cursor:pointer;border:1px solid var(--line);padding:8px 13px;border-radius:9px;}
+  .brunolock:hover{border-color:var(--gold);color:var(--gold);}
+
+  /* FOLDERS browser */
+  .crumbs{display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-size:12.5px;margin-bottom:13px;}
+  .crumbs a{color:var(--gold2);cursor:pointer;} .crumbs a:hover{color:var(--gold);}
+  .crumbs .sep{color:var(--muted);} .crumbs .cur{color:var(--ink);font-weight:600;}
+  .foldergrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+  @media(min-width:680px){.foldergrid{grid-template-columns:repeat(auto-fit,minmax(210px,1fr));}}
+  .folderbox{background:var(--bg2);border:1px solid var(--line);border-radius:13px;padding:14px;cursor:pointer;display:flex;align-items:center;gap:11px;transition:border-color .15s,transform .1s;}
+  .folderbox:hover{border-color:var(--gold);} .folderbox:active{transform:scale(.98);}
+  .folderbox .fic{font-size:22px;flex:none;line-height:1;}
+  .folderbox .fn{flex:1;min-width:0;}
+  .folderbox .fn .nm{font-size:13px;color:var(--ink);font-weight:600;line-height:1.25;word-break:break-word;}
+  .folderbox .fn .mt{font-family:var(--mono);font-size:9px;color:var(--muted);margin-top:3px;}
+  .folderbox .arr{color:var(--gold2);flex:none;}
+
+  /* CLIENTS page + client command center */
+  .clientgrid{display:grid;grid-template-columns:1fr;gap:12px;}
+  @media(min-width:720px){.clientgrid{grid-template-columns:1fr 1fr;}}
+  .clientbox{background:var(--bg2);border:1px solid var(--line);border-radius:16px;padding:16px;cursor:pointer;transition:border-color .15s,transform .1s;}
+  .clientbox:hover{border-color:var(--gold);} .clientbox:active{transform:scale(.99);}
+  .cb-hd{display:flex;align-items:center;gap:11px;}
+  .cb-av{width:42px;height:42px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-family:var(--display);font-weight:700;font-size:18px;flex:none;}
+  .cb-t{flex:1;min-width:0;} .cb-nm{font-family:var(--display);font-size:17px;font-weight:700;color:var(--ink);line-height:1.12;} .cb-meta{font-size:12px;color:var(--muted);margin-top:3px;}
+  .cb-class{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:6px;margin:13px 0 11px;}
+  .cchip{background:var(--bg3);border:1px solid var(--line);border-radius:8px;padding:7px 4px;text-align:center;}
+  .cchip.on{border-color:rgba(74,222,128,0.4);}
+  .cchip .ck{display:block;font-family:var(--mono);font-size:8px;letter-spacing:.3px;text-transform:uppercase;color:var(--muted);}
+  .cchip .cv{display:block;font-size:11px;color:var(--ink);margin-top:3px;} .cchip.on .cv{color:var(--green);}
+  .cb-open{font-family:var(--mono);font-size:10px;letter-spacing:.5px;color:var(--gold2);text-align:right;}
+  .cc-hero{display:flex;align-items:center;gap:13px;border-radius:16px;padding:16px;margin-bottom:14px;}
+  .cc-nm{font-family:var(--display);font-size:22px;font-weight:700;color:var(--ink);line-height:1.1;}
+  .cc-sub{font-size:12.5px;color:var(--muted);margin-top:4px;}
+
+  /* CHAT + NEWS + MORE */
+  .chat-box{background:linear-gradient(135deg,#1A2E47,#14253E);border:1px solid var(--gold);border-radius:16px;padding:16px;margin-bottom:18px;}
+  .chat-box h3{font-family:var(--display);font-size:19px;margin-bottom:3px;}
+  .chat-box p{font-size:13px;color:var(--muted);margin-bottom:12px;line-height:1.45;}
+  .chat-in{display:flex;gap:8px;}
+  .chat-in input{flex:1;background:var(--bg3);border:1px solid var(--line);border-radius:10px;color:var(--ink);padding:12px;font-size:14px;}
+  .chat-in button{background:var(--gold);color:#0A1422;border:none;border-radius:10px;padding:0 18px;font-weight:700;font-family:var(--ui);}
+  .soon-note{font-family:var(--mono);font-size:9px;letter-spacing:.5px;color:var(--gold2);margin-top:9px;}
+  .morelink{display:block;margin-top:18px;font-size:13px;color:var(--gold2);text-decoration:none;border:1px solid var(--line);padding:11px 14px;border-radius:9px;text-align:center;cursor:pointer;}
+  .morelink:hover{border-color:var(--gold);color:var(--gold);}
+  .newsgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:6px;}
+  .newsbox{background:var(--bg2);border:1px solid var(--line);border-radius:14px;padding:16px;cursor:pointer;}
+  .newsbox:active{transform:scale(0.99);}.newsbox:hover{border-color:var(--gold);}
+  .newsbox .ic{font-size:22px;}.newsbox .t{font-weight:600;margin-top:8px;font-size:14px;}.newsbox .q{font-size:11px;color:var(--muted);margin-top:4px;line-height:1.4;}
+
+  /* WEBSITES */
+  .wshot{width:100%;border-radius:10px;border:1px solid var(--line);display:block;background:var(--bg3);min-height:60px;}
+  .wshot.sm{height:118px;object-fit:cover;object-position:top;}
+  .pagemap{display:flex;align-items:center;gap:8px;min-width:max-content;padding-bottom:6px;}
+  .mapnode{background:var(--bg2);border:1px solid var(--line);border-radius:8px;padding:8px 12px;font-size:12px;white-space:nowrap;color:var(--ink);}
+  .maparrow{color:var(--gold2);font-size:13px;}
+
+  /* WEBSITES v2 */
+  .site-hero{position:relative;border-radius:14px;overflow:hidden;border:1px solid var(--line);cursor:pointer;margin-bottom:10px;}
+  .site-hero:hover{border-color:var(--gold);}
+  .site-shot{width:100%;display:block;background:var(--bg3);height:150px;object-fit:cover;object-position:top;}
+  .site-bar{display:flex;align-items:center;gap:9px;padding:12px 14px;background:var(--bg2);font-size:14.5px;font-weight:600;}
+  .site-bar .grow{flex:1;}
+  .site-bar .arr{color:var(--gold2);font-size:15px;}
+  .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:6px;}
+  .kpi{background:var(--bg2);border:1px solid var(--line);border-radius:12px;padding:13px 6px;text-align:center;}
+  .kpi .n{font-family:var(--display);font-size:23px;font-weight:700;line-height:1;}
+  .kpi .n.green{color:var(--green);} .kpi .n.gold{color:var(--gold);}
+  .kpi .l{font-family:var(--mono);font-size:8px;letter-spacing:.5px;color:var(--muted);text-transform:uppercase;margin-top:7px;line-height:1.2;}
+  .deprow{display:flex;align-items:center;gap:9px;padding:9px 0;border-bottom:1px solid var(--line);font-size:12.5px;color:var(--ink);}
+  .deprow:last-child{border-bottom:none;}
+  .deprow .when{margin-left:auto;font-family:var(--mono);font-size:10px;color:var(--muted);white-space:nowrap;}
+  .connect{background:var(--bg2);border:1px dashed rgba(212,175,55,0.35);border-radius:12px;padding:15px 12px;text-align:center;cursor:pointer;transition:border-color .15s;}
+  .connect:hover{border-color:var(--gold);}
+  .connect .ic{font-size:21px;} .connect .t{font-size:13.5px;font-weight:600;margin-top:7px;color:var(--ink);} .connect .c{font-family:var(--mono);font-size:8.5px;color:var(--gold2);margin-top:6px;letter-spacing:.5px;}
+  .pagerow{display:flex;align-items:center;gap:10px;padding:11px 13px;background:var(--bg2);border:1px solid var(--line);border-radius:10px;margin-bottom:6px;cursor:pointer;transition:border-color .15s;}
+  .pagerow:hover{border-color:var(--gold);}
+  .pagerow .pn{flex:1;font-size:14px;font-weight:500;color:var(--ink);}
+  .pagerow .pp{font-family:var(--mono);font-size:9px;color:var(--muted);background:rgba(159,176,199,0.12);padding:2px 7px;border-radius:999px;}
+  .pagerow .arr{color:var(--gold2);font-size:14px;}
+  .preview-tag{color:var(--muted);font-family:var(--mono);font-size:9px;letter-spacing:.5px;text-transform:none;}
+
+  /* WORKFLOWS v2 — category boxes */
+  .catgrid{display:grid;grid-template-columns:1fr 1fr;gap:11px;}
+  @media(min-width:680px){.catgrid{grid-template-columns:repeat(auto-fit,minmax(240px,1fr));}}
+  .catbox{background:var(--bg2);border:1px solid var(--line);border-radius:16px;padding:17px 15px;cursor:pointer;transition:border-color .15s,transform .1s;display:flex;flex-direction:column;min-height:160px;}
+  .catbox:hover{border-color:var(--gold);} .catbox:active{transform:scale(0.98);}
+  .catbox-ic{width:46px;height:46px;border-radius:13px;display:flex;align-items:center;justify-content:center;font-size:23px;margin-bottom:13px;}
+  .catbox-nm{font-family:var(--display);font-size:18px;font-weight:700;color:var(--ink);line-height:1.15;}
+  .catbox-meta{font-size:12px;color:var(--muted);margin-top:6px;}
+  .catbox-dots{display:flex;gap:4px;margin-top:11px;flex-wrap:wrap;}
+  /* category panels (all details shown) */
+  .wfgrid{display:grid;grid-template-columns:1fr;gap:12px;}
+  @media(min-width:760px){.wfgrid{grid-template-columns:1fr 1fr;}}
+  .wfcat{background:var(--bg2);border:1px solid var(--line);border-radius:16px;padding:15px;display:flex;flex-direction:column;}
+  .wfcat-hd{display:flex;align-items:center;gap:11px;}
+  .wfcat-ic{width:40px;height:40px;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:20px;flex:none;}
+  .wfcat-nm{font-family:var(--display);font-size:17px;font-weight:700;color:var(--ink);flex:1;line-height:1.1;}
+  .wfcat-pct{font-family:var(--mono);font-size:11px;color:var(--gold2);flex:none;}
+  .wfcat-bar{margin:11px 0 6px;}
+  .wfrow{display:flex;align-items:center;gap:9px;padding:10px 0;border-bottom:1px solid var(--line);cursor:pointer;}
+  .wfrow:last-child{border-bottom:none;}
+  .wfrow:hover .wfrow-nm{color:var(--gold);}
+  .wfrow-dots{display:flex;gap:3px;flex:none;}
+  .wfrow-nm{flex:1;font-size:13px;color:var(--ink);line-height:1.3;min-width:0;}
+  .wfrow-pct{font-family:var(--mono);font-size:10.5px;color:var(--gold2);flex:none;}
+  .recrow .meta b{color:var(--gold);}
+
+  /* DASHBOARD CARDS (Home) */
+  .dashcard{background:var(--bg2);border:1px solid var(--line);border-left:4px solid var(--gold);border-radius:14px;padding:15px 16px;margin-bottom:10px;cursor:pointer;transition:border-color .15s,transform .1s;}
+  .dashcard:active{transform:scale(0.99);}
+  .dashcard:hover{border-color:var(--gold);}
+  .dashcard .dh{display:flex;align-items:center;justify-content:space-between;margin-bottom:9px;}
+  .dashcard .dt{font-family:var(--display);font-size:17px;font-weight:700;color:var(--ink);}
+  .dashcard .chip{font-family:var(--mono);font-size:9px;color:var(--gold2);background:rgba(212,175,55,0.12);padding:3px 9px;border-radius:999px;letter-spacing:1px;}
+  .dashcard .metric{font-size:13px;color:var(--ink);}
+  .dashcard .metric b{color:var(--gold);font-family:var(--display);font-size:19px;}
+  .dashcard .todo{font-size:12.5px;color:var(--muted);margin-top:8px;display:flex;gap:8px;line-height:1.4;}
+  .dashcard .todo .lab{color:var(--gold2);font-family:var(--mono);font-size:9px;letter-spacing:1px;text-transform:uppercase;white-space:nowrap;padding-top:2px;}
+
+  /* BI PANELS (Home) */
+  .panelgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(258px,1fr));gap:13px;align-items:stretch;}
+  .panel{background:var(--bg2);border:1px solid var(--line);border-radius:14px;padding:14px;display:flex;flex-direction:column;}
+  .panel.tap{cursor:pointer;} .panel.tap:active{transform:scale(0.995);} .panel.tap:hover{border-color:var(--gold);}
+  .panel .ptitle{display:block;text-align:center;font-family:var(--mono);font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--ink);background:var(--bg3);border:1px solid var(--line);border-radius:8px;padding:6px;margin-bottom:12px;}
+  .gauge-sub{text-align:center;font-size:11px;color:var(--muted);margin-top:4px;}
+  .wkbars{display:flex;justify-content:space-between;align-items:flex-end;gap:6px;height:90px;padding:0 2px;}
+  .wkbars .wb{flex:1;display:flex;flex-direction:column;align-items:center;gap:6px;height:100%;justify-content:flex-end;}
+  .wkbars .bar{width:100%;border-radius:4px 4px 0 0;min-height:4px;}
+  .wkbars .lbl{font-family:var(--mono);font-size:9px;color:var(--muted);}
+  .ptable{width:100%;border-collapse:collapse;}
+  .ptable td{padding:8px 4px;border-bottom:1px solid var(--line);font-size:12.5px;color:var(--ink);}
+  .ptable td:nth-child(2),.ptable td:nth-child(3){text-align:right;color:var(--gold2);font-family:var(--mono);font-size:11.5px;}
+  .ptable tr:last-child td{border-bottom:none;}
+  .hbar{display:flex;align-items:center;gap:8px;margin-bottom:10px;}
+  .hbar:last-child{margin-bottom:0;}
+  .hbar .hl{font-size:11.5px;color:var(--ink);width:104px;flex:none;}
+  .hbar .htrack{flex:1;height:14px;background:var(--bg3);border-radius:7px;overflow:hidden;}
+  .hbar .htrack i{display:block;height:100%;border-radius:7px;}
+  .hbar .hv{font-family:var(--mono);font-size:11px;color:var(--gold2);width:26px;text-align:right;flex:none;}
+
+  /* OPERATIONS rows */
+  .opitem{display:flex;align-items:center;gap:9px;padding:8px 0;border-bottom:1px solid var(--line);font-size:12.5px;}
+  .opitem:last-child{border-bottom:none;}
+  .odot{width:8px;height:8px;border-radius:50%;flex:none;}
+  .oname{flex:1;color:var(--ink);}
+  .ocad{font-family:var(--mono);font-size:8.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;white-space:nowrap;}
+
+  /* FULL-SCREEN CHAT */
+  .chatscreen{position:fixed;inset:0;z-index:200;background:var(--bg);display:none;flex-direction:column;}
+  .chatscreen.open{display:flex;}
+  .cs-head{display:flex;align-items:center;gap:10px;padding:calc(12px + env(safe-area-inset-top)) 14px 12px;border-bottom:1px solid var(--line);background:var(--bg2);}
+  .cs-back{background:none;border:1px solid var(--line);color:var(--ink);border-radius:8px;padding:8px 13px;font-size:16px;cursor:pointer;flex:none;}
+  .cs-title-in{flex:1;min-width:0;background:var(--bg3);border:1px solid var(--line);border-radius:8px;color:var(--ink);padding:9px 12px;font-size:14px;font-family:var(--ui);}
+  .cs-title-in:focus{outline:none;border-color:var(--gold);}
+  .cs-agents-top{font-family:var(--mono);font-size:10px;color:var(--gold2);white-space:nowrap;max-width:120px;overflow:hidden;text-overflow:ellipsis;}
+  .cs-toggle{background:none;border:1px solid var(--line);color:var(--gold2);border-radius:8px;padding:8px 11px;font-size:12px;cursor:pointer;flex:none;}
+  .cs-body{flex:1;display:grid;grid-template-columns:1fr;min-height:0;}
+  @media(min-width:820px){ .cs-body{grid-template-columns:1fr 320px;} .cs-toggle{display:none;} }
+  .cs-main{display:flex;flex-direction:column;min-height:0;}
+  .cs-thread{flex:1;overflow-y:auto;padding:18px 16px;display:flex;flex-direction:column;gap:11px;}
+  .cs-empty{margin:auto;text-align:center;color:var(--muted);max-width:340px;}
+  .msg{max-width:82%;padding:11px 14px;border-radius:14px;font-size:14px;line-height:1.5;white-space:pre-wrap;}
+  .msg.u{align-self:flex-end;background:var(--gold);color:#0A1422;border-bottom-right-radius:4px;}
+  .msg.a{align-self:flex-start;background:var(--bg2);border:1px solid var(--line);color:var(--ink);border-bottom-left-radius:4px;}
+  .msg.sys{align-self:center;background:rgba(212,175,55,0.1);color:var(--gold2);font-size:11.5px;font-family:var(--mono);text-align:center;}
+  .cs-input{display:flex;gap:8px;padding:12px 16px calc(14px + env(safe-area-inset-bottom));border-top:1px solid var(--line);background:var(--bg2);}
+  .cs-input textarea{flex:1;background:var(--bg3);border:1px solid var(--line);border-radius:12px;color:var(--ink);padding:12px;font-size:14px;font-family:var(--ui);resize:none;max-height:120px;}
+  .cs-input textarea:focus{outline:none;border-color:var(--gold);}
+  .cs-send{background:var(--gold);color:#0A1422;border:none;border-radius:12px;padding:0 18px;font-weight:700;cursor:pointer;flex:none;}
+  .cs-side{border-left:1px solid var(--line);background:var(--bg2);overflow-y:auto;padding:16px;}
+  @media(max-width:819px){ .cs-side{position:fixed;inset:0;z-index:210;display:none;border-left:none;} .cs-side.open{display:block;} }
+  .cs-side .sec{margin-top:18px;} .cs-side .sec:first-of-type{margin-top:0;}
+  .chip-row{display:flex;flex-wrap:wrap;gap:7px;}
+  .achip{font-size:12px;padding:7px 11px;border-radius:999px;border:1px solid var(--line);color:var(--muted);cursor:pointer;display:flex;align-items:center;gap:6px;}
+  .achip.on{border-color:var(--gold);color:var(--ink);background:rgba(212,175,55,0.1);}
+  .achip .d{width:8px;height:8px;border-radius:50%;}
+  .fld{margin-bottom:12px;} .fld label{display:block;font-family:var(--mono);font-size:9px;letter-spacing:1px;text-transform:uppercase;color:var(--gold2);margin-bottom:5px;}
+  .fld input,.fld textarea,.fld select{width:100%;background:var(--bg3);border:1px solid var(--line);border-radius:8px;color:var(--ink);padding:9px 10px;font-size:13px;font-family:var(--ui);}
+  .fld textarea{min-height:64px;resize:vertical;}
+  .cs-save{width:100%;background:var(--gold);color:#0A1422;border:none;border-radius:10px;padding:11px;font-weight:700;cursor:pointer;}
+  .savedtask{padding:9px 10px;border:1px solid var(--line);border-radius:8px;margin-bottom:7px;cursor:pointer;}
+  .savedtask:hover{border-color:var(--gold);}
+  .savedtask .st-t{color:var(--ink);font-weight:600;font-size:12.5px;}
+  .savedtask .st-m{color:var(--muted);font-size:11px;margin-top:2px;}
+  .cs-side-close{display:none;}
+  @media(max-width:819px){ .cs-side-close{display:block;width:100%;background:none;border:1px solid var(--line);color:var(--ink);border-radius:8px;padding:10px;margin-bottom:14px;cursor:pointer;} }
+  .agentrow{display:flex;align-items:center;gap:8px;padding:8px 10px;border:1px solid var(--line);border-radius:9px;margin-bottom:6px;cursor:pointer;font-size:12.5px;}
+  .agentrow.on{border-color:var(--gold);background:rgba(212,175,55,0.08);}
+  .agentrow .d{width:9px;height:9px;border-radius:50%;flex:none;}
+  .agentrow .nm{color:var(--ink);font-weight:600;flex:none;}
+  .agentrow .rl{color:var(--muted);font-size:11px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+  .cs-previews{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:8px;}
+  .cs-previews img,.cs-previews video{width:100%;border-radius:8px;border:1px solid var(--line);display:block;}
+</style>
+</head>
+<body>
+
+<div class="hdr">
+  <div class="b">BBC Command Center<small id="hdr-sub">OPERATING SYSTEM</small></div>
+  <div style="display:flex;align-items:center;gap:11px">
+    <div class="date" id="hdr-date">2026-06-02</div>
+    <button class="hdr-lock" onclick="go('bruno')" aria-label="Bruno page" title="Bruno page (private)">🔒</button>
+  </div>
+</div>
+
+<main id="app"></main>
+
+<div class="sheet" id="sheet"><div class="sheet-inner"><div class="grab"></div><div id="sheet-body"></div></div></div>
+
+<!-- FULL-SCREEN CUH CHAT -->
+<div class="chatscreen" id="chatscreen">
+  <div class="cs-head">
+    <button class="cs-back" onclick="closeChat()">&larr;</button>
+    <input class="cs-title-in" id="cs-title" placeholder="What are we working on? (task title)">
+    <span class="cs-agents-top" id="cs-agents-top">Cuh</span>
+    <button class="cs-toggle" onclick="toggleSide()">Setup</button>
+  </div>
+  <div class="cs-body">
+    <div class="cs-main">
+      <div class="cs-thread" id="cs-thread"></div>
+      <div class="cs-input">
+        <textarea id="cs-msg" rows="1" placeholder="Message Cuh..."></textarea>
+        <button class="cs-send" onclick="sendMsg()">Send</button>
+      </div>
+    </div>
+    <div class="cs-side" id="cs-side">
+      <button class="cs-side-close" onclick="toggleSide()">Done</button>
+      <div class="sec">AI agent(s) — pick one or more</div>
+      <div id="cs-agentpicker"></div>
+      <div class="sec">Task details</div>
+      <div class="fld"><label>Description</label><textarea id="cs-desc" placeholder="What we're trying to do and why"></textarea></div>
+      <div class="fld"><label>Global prompt for this process</label><textarea id="cs-gprompt" placeholder="Standing instructions the agent(s) always follow for this task/process"></textarea></div>
+      <div class="fld"><label>Category</label><select id="cs-cat"></select></div>
+      <div class="fld"><label>Project (where to save)</label><select id="cs-project"></select></div>
+      <div class="fld"><label>Client</label><select id="cs-client"></select></div>
+      <div class="fld"><label>Tags</label><input id="cs-tags" placeholder="comma, separated"></div>
+      <button class="cs-save" onclick="saveTask()">Save task</button>
+      <div class="sec">Attachments (photo / video)</div>
+      <input type="file" id="cs-files" accept="image/*,video/*" multiple style="font-size:12px;color:var(--muted);width:100%">
+      <div id="cs-previews" class="cs-previews"></div>
+      <div class="st-m" style="color:var(--muted);font-size:11px;margin-top:6px">Previews now. Permanent hosting + display lands when storage is wired.</div>
+      <div class="sec">Recent tasks</div>
+      <div id="cs-saved"></div>
+    </div>
+  </div>
+</div>
+
+<button class="fab" id="cuhFab" onclick="openChat(curView)" aria-label="Chat with Cuh"><span class="i">💬</span>Cuh</button>
+
+<nav class="nav" id="nav">
+  <button data-v="home" class="active"><span class="i">🏠</span>Home</button>
+  <button data-v="websites"><span class="i">🌐</span>Websites</button>
+  <button data-v="workflows"><span class="i">🔄</span>Workflows</button>
+  <button data-v="social"><span class="i">📱</span>Social</button>
+  <button data-v="reminders"><span class="i">✅</span>Reminders</button>
+  <button data-v="folders"><span class="i">📁</span>Folders</button>
+  <button data-v="news"><span class="i">📰</span>News</button>
+</nav>
+
+<script type="application/json" id="bbc-data">
+{
+  "meta":{"updated":"2026-06-02"},
+  "owners":{"Vidz":"#A78BFA","Raphy":"#F97316","Sonny":"#EC4899","Boogy":"#22D3EE","Webby":"#2DD4BF","Brunz":"#60A5FA","Kriz":"#F472B6","Cowork":"#D4AF37","Mai":"#34D399","Jenny":"#FBBF24","Lana":"#FB7185","Casey":"#A3E635","Emy":"#38BDF8"},
+  "clients":[
+    {"name":"S. Riviere Hair Collection","owner":"Sonya Riviere","handler":"Al","ai":"Olivia (v1.1)","site":"srivierehair.com","industry":"Luxury raw hair extensions (Shopify)","status":"active","notes":"Olivia built + full capability. Rebrand site = first deliverable (standalone interactive). Website questionnaire live."},
+    {"name":"Wooden Woodworks","owner":"Oscar & Marla","handler":"Krizza","ai":"Woody","site":"woodenwoodworksllc.com","industry":"Custom luxury woodwork","status":"active","notes":"Luxury positioning. Krizza only BBC member in WW OS. Owners on Claude.ai Pro only."},
+    {"name":"4Ocean","owner":"4Ocean","handler":"BBC","ai":"-","site":"4ocean.com","industry":"Ocean-cleanup ecommerce","status":"active","notes":"Slack + Asana = 4Ocean only. Product accuracy non-negotiable. Hopeful tone only."},
+    {"name":"Home Vision Studio","owner":"-","handler":"Al","ai":"-","site":"homevisionstudio.com","industry":"Shopify store, design centers","status":"active","notes":"Shopify build."},
+    {"name":"First Class Finishes","owner":"-","handler":"Ryan C.","ai":"-","site":"firstclass-finishes.com","industry":"Commercial painting + roofing, Texas","status":"active","notes":""},
+    {"name":"Hi-Up Roofing","owner":"-","handler":"Ryan C.","ai":"-","site":"hi-uproofing.com","industry":"Roofing, storm damage","status":"active","notes":"Insurance SEO, storm damage."},
+    {"name":"AJ Battle Foundation","owner":"AJ","handler":"Al","ai":"-","site":"theajbattlefoundation.org","industry":"Nonprofit","status":"active","notes":"Sister business to Sonya. Coordinate carefully."},
+    {"name":"All Ryze","owner":"-","handler":"Kenz / Daryl","ai":"-","site":"-","industry":"Digital audience engagement & growth management agency","status":"active","notes":"NEVER use adult-platform language. Describe as a digital audience engagement and growth management agency."},
+    {"name":"Cavalry Group","owner":"Tre","handler":"Kenz","ai":"-","site":"callthecavalrygroup.com","industry":"Real estate","status":"active","notes":"Kenz works this account. Two website builds in progress: A-Beal and B-Military. Main contact: Tre."}
+  ],
+  "team":[
+    {"name":"Bruno (RJ)","role":"Founder & Lead Strategist"},
+    {"name":"Vi Carmelle Tres Reyes","role":"E-Commerce & Social Media"},
+    {"name":"Kenz","role":"Creative & Brand Lead"},
+    {"name":"Ryan Bernaldez","role":"Operations & Web Dev Lead"},
+    {"name":"Krizza Managase","role":"Social Media & Client Ops"},
+    {"name":"Al Carmelle Managase","role":"Shopify Dev & Creative"},
+    {"name":"Ryan C.","role":"AI Content & Automations"},
+    {"name":"Daryl Agadia","role":"Content & Marketing"}
+  ],
+  "aiFamily":[
+    {"name":"Brunz (LC)","role":"Head AI / Father","status":"active","key":"Brunz"},
+    {"name":"Kriz","role":"VA AI / Mother","status":"dev","key":"Kriz"},
+    {"name":"Webby","role":"Website AI","status":"active","key":"Webby"},
+    {"name":"Mai","role":"Marketing AI","status":"active","key":"Mai"},
+    {"name":"Boogy","role":"Blog AI","status":"active","key":"Boogy"},
+    {"name":"Jenny","role":"Content Creation AI (SaaS)","status":"active","key":"Jenny"},
+    {"name":"Vidz","role":"Programmatic Video AI","status":"active","key":"Vidz"},
+    {"name":"Raphy","role":"Graphic Design AI","status":"active","key":"Raphy"},
+    {"name":"Casey","role":"Case Study AI","status":"dev","key":"Casey"},
+    {"name":"Sonny","role":"Social Media AI","status":"concept","key":"Sonny"},
+    {"name":"Emy","role":"Email AI","status":"concept","key":"Emy"},
+    {"name":"Lana","role":"Lead Generation AI","status":"dev","key":"Lana"}
+  ],
+  "content":{
+    "weekOf":"May 31 - Jun 6",
+    "days":[
+      {"d":"Sun May 31","graphic":"Sunday Rest Day","reel":"-","posted":true},
+      {"d":"Mon Jun 1","graphic":"-","reel":"Segment 3","posted":true},
+      {"d":"Tue Jun 2","graphic":"Cut the Silence","reel":"Cut the Silence","posted":false},
+      {"d":"Wed Jun 3","graphic":"Ryan review","reel":"Ryan review","posted":false},
+      {"d":"Thu Jun 4","graphic":"4 Tasks Eating Your Week","reel":"-","posted":false},
+      {"d":"Fri Jun 5","graphic":"-","reel":"Content Engine (workflow)","posted":false},
+      {"d":"Sat Jun 6","graphic":"Workflow Menu","reel":"-","posted":false}
+    ]
+  },
+  "calendar":{
+    "label":"June 2026","year":2026,"monthIdx":5,"today":"2026-06-02",
+    "posts":{
+      "2026-05-31":{"graphic":"Sunday Rest Day","posted":true},
+      "2026-06-01":{"reel":"Segment 3","posted":true},
+      "2026-06-02":{"graphic":"Cut the Silence","reel":"Cut the Silence","posted":false},
+      "2026-06-03":{"graphic":"Ryan review","reel":"Ryan review","posted":false},
+      "2026-06-04":{"graphic":"4 Tasks Eating Your Week","posted":false},
+      "2026-06-05":{"reel":"Content Engine","posted":false},
+      "2026-06-06":{"graphic":"Workflow Menu","posted":false}
+    },
+    "events":[
+      {"date":"2026-06-14","label":"Flag Day","type":"holiday"},
+      {"date":"2026-06-19","label":"Juneteenth","type":"holiday"},
+      {"date":"2026-06-20","label":"First Day of Summer","type":"season"},
+      {"date":"2026-06-21","label":"Father's Day","type":"holiday"}
+    ]
+  },
+  "protocols":{
+    "code":"balay2026",
+    "source":"~/.claude/CLAUDE.md (global rules)",
+    "groups":[
+      {"cat":"Identity & Relationship","color":"#60A5FA","items":[
+        {"t":"Honest Partner Rule","trig":"always","s":"RJ is co-founder, not a user. Always recommend the genuinely best path even if it costs money. If a paid tool is 50%+ better, say so with cost + ROI + the free alternative. Default to truth, not flattery."},
+        {"t":"Brunz Identity — LC","s":"Brunz = Luke Clyde Tres Reyes (LC), call sign 'Cuh'. RJ's brother and co-founder. Internal: LC / Cuh. External/formal: 'Brunz, Head AI of Balay ni Bruno & Co.'"},
+        {"t":"BBC Brand Identity","s":"Balay ni Bruno & Co. = warm, family-built operational support studio. Emotional promise: relief, trust, stability, warmth. Not a tech brand, not a VA agency."},
+        {"t":"BBC Business Model","s":"BBC sells the VA partnership. AIs, skills, and functions are internal tools and funnels, never sold separately. No per-AI pricing."}
+      ]},
+      {"cat":"How the AI talks to RJ","color":"#34D399","items":[
+        {"t":"Response Length Rule","trig":"every reply","s":"Default short. Lead with the concept. 1-3 sentences for most replies. Long only for deep dives, build plans, or audits RJ asked for."},
+        {"t":"Plain English Rule","s":"Translate confusing terms inline ('Plain English: ...'). Only the confusing parts, not everything."},
+        {"t":"Explain-Like-I'm-New Rule","s":"For anything non-trivial: explain what's happening, the idea behind it, and a simple roadmap of where we are and where we're going. Assume the reader is new."},
+        {"t":"Prompt-First Rule","trig":"non-trivial instruction","s":"Restate the instruction as a clean prompt, confirm if ambiguous, then execute. Always restate for new builds, live changes, and voice-to-text."},
+        {"t":"Question + Task Order Rule","s":"If a message has both a question and a task, answer the question(s) first, then do the task."},
+        {"t":"Screenshot Handling Rule","s":"A screenshot with no design task: don't analyze design, focus on content/context. Only analyze design if RJ says 'check the design'."},
+        {"t":"Never Tell RJ to Rest","s":"Never suggest he sleep, rest, take a break, or stop for the day. RJ sets his own pace. Only run the wrap protocol if HE says he's stopping."}
+      ]},
+      {"cat":"Content & Voice","color":"#EC4899","items":[
+        {"t":"Content Integrity Rule","trig":"any content","s":"Never invent names, AI names, copy, sections, pricing, or any live content. Use only what's in the Drive or what RJ gave. Missing info: ask first. Invented live content = critical failure."},
+        {"t":"Webby Writing Rules (external)","s":"No em-dashes, no mid-sentence hyphen-dashes, no filler (seamlessly/leverage/robust/streamline). Warm and human. External = always 'Balay ni Bruno & Co.', never 'BBC'."},
+        {"t":"Universal Caption Rule","s":"External captions are for general business owners. No jargon (no 'AI agent', 'MCP', 'workflow'). Plain enough anyone gets it, framed so any business can apply it."},
+        {"t":"Paste-Ready Caption Output","s":"Captions output copy-paste ready per platform. No 'Caption:' / 'Hashtags:' labels. Receipts go in a footer, not inside the block."},
+        {"t":"Content Quality Tier Rule","s":"Drafts render light/fast for review. Finals re-render at HIGH quality before posting or storing. Nothing draft-quality gets posted."},
+        {"t":"Process-as-Content Rule","s":"Capture every build/process (screen rec, before/after, quotes) and repurpose it. Lead with the RESULT. No listicles, no 'comment for the link' bait."}
+      ]},
+      {"cat":"Protocols (trigger phrases)","color":"#D4AF37","items":[
+        {"t":"Session Title Rule","trig":"every session","s":"Title format: [DeviceNickname] - MM/DD/YYYY (then -0.1, -0.2 for same-day). Surface it in the first response and remind RJ to rename the sidebar."},
+        {"t":"Save and Sync Protocol","trig":"'save and sync'","s":"Save everything (learnings, rules, memory, code) to the right homes, push every repo, mirror CLAUDE.md to the Drive, run the brain-sync, then report a checklist per channel."},
+        {"t":"End-of-Day Wrap Protocol","trig":"'good night' / 'wrapping up'","s":"5 stages: deep diagnostic, day audit, improvement deep-dive, tomorrow preview, save the wrap report to Kriz DAILY_WRAPS."},
+        {"t":"Brunz Upgrade Protocol","trig":"'upgrade Brunz' / new Claude release","s":"4 steps: search the update, find what helps BBC, search the broader internet, implement what's safe + free + high-leverage. Save findings to LEARNINGS."},
+        {"t":"Soft / Hard Update","trig":"'soft update' / 'hard update'","s":"Soft = quick recap since the last update point. Hard = full system diagnostic (drives, tools, hooks, memory, subagents, flags)."},
+        {"t":"Handoff Protocol","s":"Bridge Claude Desktop (planning) and Claude Code (execution) via _HANDOFFS/. Check PENDING at session start; execute on 'run the handoff'."},
+        {"t":"Claude.ai Project Sync","trig":"'sync to the cloud project'","s":"Sync Drive files to the matching Claude.ai Project via the Chrome connection. Suggest proactively after big decisions or new rules."}
+      ]},
+      {"cat":"Research & Tools","color":"#A78BFA","items":[
+        {"t":"Deep Search Rule","trig":"'deep search'","s":"Comprehensive search across MCPs, APIs, agents, open-source, SaaS. Check internal catalogs first, dispatch bbc-researcher, save to LEARNINGS."},
+        {"t":"BBC-Lens Research Rule","s":"Every research output includes: what it is, how it serves BBC, the cost, the BBC use case, and a recommendation (install / pilot / watch / skip)."},
+        {"t":"Capability-Gap Deep-Search","trig":"hit an 'I can't from here' wall","s":"When a tool is missing, deep-search MCPs/APIs/tools to close the gap, install it, finish the task, and save the learning. Don't push the work back to RJ."},
+        {"t":"Tool-First Audit Rule","s":"Before brute-forcing with code or manual work, audit available MCPs/APIs/tools and pick the right one for the job."},
+        {"t":"AI Routing Rules","s":"Haiku subagent for copy/bulk edits. Sonnet for standard work, builds, debugging. Opus for major architecture and critical strategy."},
+        {"t":"Token Efficiency Rules","s":"Read project CLAUDE.md first. Grep before reading. Targeted edits over full rewrites. /compact after each major task."}
+      ]},
+      {"cat":"AI Family & Knowledge","color":"#F472B6","items":[
+        {"t":"AI Family DNA Rule","s":"Every BBC-owned AI inherits Brunz's directness + Kriz's warmth, then layers its specialist flavor on top."},
+        {"t":"Client AI Capability Parity","s":"Client AIs get the same body (full capability) as BBC's AIs, just a different soul (client brand). Strip all BBC DNA — Client Brand Purity."},
+        {"t":"Cross-Pollination Rule","s":"Before declaring an AI done, scan sibling AIs for transferable skills that improve it without disrupting its main function. Report what was added."},
+        {"t":"Knowledge Capture Rule","s":"Proactively save useful patterns, processes, and decisions to LEARNINGS. Tell RJ: 'Saved: [title] -> [path]'."},
+        {"t":"Personal Info Routing","s":"Any personal info RJ shares about himself/his life routes to Kriz's knowledge base, not scattered across other folders."}
+      ]},
+      {"cat":"Permissions & Build","color":"#9FB0C7","items":[
+        {"t":"Permission & Autonomy","s":"Auto-approve everything routine (files, edits, commits, installs, builds). Only ask if it could damage the system or business: data loss, breaking a live site, irreversible, sensitive, or real money."},
+        {"t":"Mobile-First Website Rule","trig":"any site push","s":"Verify 375 / 768 / 1280 before any website push. Touch targets >=44px, body text >=16px, playsinline on video, 100dvh for full-height."},
+        {"t":"Sellable Project Rule","s":"Every project ships 4 layers: documentation, strategy, sales, and a VA implementation guide a VA can run without asking RJ."},
+        {"t":"Content Posting Awareness","trig":"session start","s":"Surface pending-to-post folders at session start. A ' POSTED' suffix on the folder marks it done so it stops nagging."}
+      ]}
+    ]
+  },
+  "drive":{
+    "rootUrl":"https://drive.google.com/drive/folders/0ADNHm1Hxk5xiUk9PVA",
+    "note":"Live file browsing + in-app graphic/video playback turn on when the Google Drive API is connected.",
+    "tree":{"name":"BBC Drive","children":[
+      {"name":"01_LEADS"},
+      {"name":"02_ACTIVE_CLIENTS","children":[{"name":"4OCEAN"},{"name":"AJ-BATTLE-FOUNDATION"},{"name":"ALL-RYZE"},{"name":"FIRST-CLASS-FINISHES"},{"name":"HI-UP-ROOFING"},{"name":"HOME-VISION-STUDIO"},{"name":"PRIMEFLEX"},{"name":"REAL_CAVALRY"},{"name":"S-RIVIERE-HAIR-COLLECTION"},{"name":"TOP-PRODUCER-INVESTMENT-CAPITAL"},{"name":"WOODEN-WOODWORKS"}]},
+      {"name":"03_ARCHIVED_CLIENTS"},
+      {"name":"04_TEAM"},
+      {"name":"05_OPERATIONS"},
+      {"name":"06_FINANCE"},
+      {"name":"07_MARKETING"},
+      {"name":"08_KNOWLEDGE_BASE"},
+      {"name":"09_POTENTIAL CLIENTS"},
+      {"name":"BBC Content","url":"https://drive.google.com/drive/folders/1fxfMhnqjYzNjnplQC1nVx4LPRE77wgIK","children":[{"name":"BBC Bruno recordings"},{"name":"BBC Content Posting"},{"name":"BBC Graphic"},{"name":"BBC Team Building"},{"name":"Tre 1"},{"name":"Tre 2"},{"name":"Website Workflow Reel"}]},
+      {"name":"BBC Operating System"},
+      {"name":"BBC WEBSITE HTML"},
+      {"name":"BBC_AI_FAMILY","children":[{"name":"BRUNZ"},{"name":"KRIZ"},{"name":"WEBBY"},{"name":"MAI"},{"name":"BOOGY"},{"name":"JENNY"},{"name":"VIDZ"},{"name":"RAPHY"},{"name":"CASEY"},{"name":"SONNY"},{"name":"EMY"},{"name":"LANA"},{"name":"SEAN"},{"name":"AGENT_PROFILES"}]},
+      {"name":"CONTENT_QUEUE","children":[{"name":"2026-05-29_google_ask_advisor"},{"name":"2026-05-30_tpic_ryan_review"},{"name":"2026-05-31_sunday_restday_rest"},{"name":"2026-06-05_content_engine_workflow"},{"name":"_PENDING_DRAFT"},{"name":"_TRENDING_IDEAS"}]},
+      {"name":"CONTENT_POSTED"},
+      {"name":"VOICEOVERS"},
+      {"name":"Vidz Test"},
+      {"name":"NPC-Portfolio-System"},
+      {"name":"Bruno's Idea"},
+      {"name":"Daryl BBC Folder"},
+      {"name":"_BBC Logo Final"},
+      {"name":"_SYSTEM"}
+    ]}
+  },
+  "siteNav":["Home","Our Story","How It Works","How We Help","Our Team","Our Work","Insights","Contact"],
+  "websitePages":[
+    {"name":"Home","path":"index.html","group":"Main pages","purpose":"Main landing page — hero, philosophy, proof, CTA.","status":"live"},
+    {"name":"Our Story","path":"about.html","group":"Main pages","purpose":"About BBC and Bruno's founder story.","status":"live"},
+    {"name":"How It Works","path":"how-it-works.html","group":"Main pages","purpose":"The BBC process, step by step.","status":"live"},
+    {"name":"How We Help","path":"how-we-help.html","group":"Main pages","purpose":"Services overview.","status":"live"},
+    {"name":"Our Team","path":"our-team.html","group":"Main pages","purpose":"The full team grid.","status":"live"},
+    {"name":"Our Work","path":"our-work.html","group":"Main pages","purpose":"Portfolio and case studies.","status":"live"},
+    {"name":"Insights","path":"insights.html","group":"Main pages","purpose":"Blog and articles.","status":"live"},
+    {"name":"Contact","path":"contact.html","group":"Main pages","purpose":"Contact form and details.","status":"live"},
+    {"name":"Client Onboarding","path":"client-onboarding.html","group":"Main pages","purpose":"New client intake form.","status":"live"},
+    {"name":"Resources","path":"resources.html","group":"Main pages","purpose":"Resource hub.","status":"live"},
+    {"name":"Vi","path":"vi.html","group":"VA profiles (noindex)","purpose":"VA profile page for Vi.","status":"live","noindex":true},
+    {"name":"Kenz","path":"kenz.html","group":"VA profiles (noindex)","purpose":"VA profile page for Kenz.","status":"live","noindex":true},
+    {"name":"Ryan C.","path":"ryan-c.html","group":"VA profiles (noindex)","purpose":"VA profile page for Ryan C.","status":"live","noindex":true},
+    {"name":"Krizza","path":"krizza.html","group":"VA profiles (noindex)","purpose":"VA profile page for Krizza.","status":"live","noindex":true},
+    {"name":"Al","path":"al.html","group":"VA profiles (noindex)","purpose":"VA profile page for Al.","status":"live","noindex":true},
+    {"name":"Daryl","path":"daryl.html","group":"VA profiles (noindex)","purpose":"VA profile page for Daryl.","status":"live","noindex":true},
+    {"name":"Sonya Questionnaire","path":"questionnaire-sonya.html","group":"Internal (noindex)","purpose":"S. Riviere onboarding + Olivia intake.","status":"live","noindex":true},
+    {"name":"Sonya Website Questionnaire","path":"questionnaire-sonya-website.html","group":"Internal (noindex)","purpose":"S. Riviere website-build questions.","status":"live","noindex":true},
+    {"name":"Command Center","path":"os/","group":"Internal (noindex)","purpose":"This dashboard — the BBC OS app.","status":"live","noindex":true}
+  ],
+  "netlify":{"connected":false,"branch":"master","autoDeploy":true,"recent":[
+    {"msg":"Sample — your recent deploys list here","when":"—"},
+    {"msg":"Sample — commit message + status","when":"—"},
+    {"msg":"Sample — connect token for live history","when":"—"}
+  ]},
+  "websiteTasks":[
+    "Add client logos to every client box on the website (pending)",
+    "Create client walkthrough pages — all clients, TPIC-style (pending)",
+    "Create the Referral Map page (pending)",
+    "Add password gate to /os dashboard (pending)",
+    "Wire Google Analytics via service account (pending)"
+  ],
+  "websiteTodoDoc":"BBC WEBSITE HTML/_WEBSITE_TODO.md",
+  "websiteTools":[
+    {"n":"Interactive motion stack","d":"GSAP + ScrollTrigger + Lenis + reduced-motion (free)"},
+    {"n":"Website Replicator Pipeline","d":"URL to screenshots to design tokens to code (Playwright + vision)"},
+    {"n":"Hallmark quality bar","d":"anti-AI-slop, 65 gates, on every build/redesign"},
+    {"n":"Mobile-first verify","d":"check 375 / 768 / 1280 before push (Playwright / preview)"},
+    {"n":"Design tokens","d":"design-tokens.json per site so AI builds without drift"},
+    {"n":"Deploy","d":"GitHub to Netlify auto-deploy ~60s, verify in incognito"},
+    {"n":"Netlify Forms","d":"client questionnaires (proven pattern)"}
+  ],
+  "websiteWorkflows":[
+    {"n":"New client website build","d":"discovery, tokens, build, mobile QA, launch"},
+    {"n":"Create /work page per workflow","d":"Workflow Content Flow step 4 — every shipped workflow gets a page"},
+    {"n":"Case study page","d":"new workflow, Casey writes the case study, page goes up"},
+    {"n":"Process page","d":"new documented process becomes a page that explains it"},
+    {"n":"Review feature","d":"new review gets featured on the relevant page"},
+    {"n":"Redesign / audit","d":"refresh or audit an existing site"}
+  ],
+  "socialAccounts":[
+    {"platform":"Instagram","handle":"@balaynibruno"},
+    {"platform":"Facebook","handle":"Balay ni Bruno & Co."},
+    {"platform":"LinkedIn","handle":"Balay ni Bruno & Co."},
+    {"platform":"TikTok","handle":"@balaynibruno"},
+    {"platform":"YouTube","handle":"Balay ni Bruno & Co."}
+  ],
+  "contentPillars":[
+    {"day":"Sunday","slot":"Rest Day","note":"Relatable carousel — rest / family / hobby. Soft CTA."},
+    {"day":"Monday","slot":"BBC Reel","note":"Team / segment / brand reel."},
+    {"day":"Tuesday","slot":"Workflow Reel","note":"An AI doing real work. Result-led."},
+    {"day":"Wednesday","slot":"Reviews / Shout-outs","note":"Client review or team shout-out."},
+    {"day":"Thursday","slot":"Educational / Value","note":"Teach one useful thing. No pitch."},
+    {"day":"Friday","slot":"Workflow Reel","note":"Second workflow reel of the week."},
+    {"day":"Saturday","slot":"Workflow Menu","note":"Interactive vote on next week's reel."}
+  ],
+  "newsTopics":[
+    {"label":"API & MCP news","q":"new MCP servers + Claude / Anthropic API updates"},
+    {"label":"AI tools","q":"new AI tools useful for agencies + small business"},
+    {"label":"Trending for small biz","q":"trending news relevant to small business owners today"},
+    {"label":"New workflows","q":"new automation workflows agencies are shipping"}
+  ],
+  "newsFeed":[
+    {"title":"Visual Dashboard / CRM for BBC","date":"2026-05-30","path":"LEARNINGS"},
+    {"title":"Full Social AI Stack deep dive","date":"2026-05-29","path":"LEARNINGS"},
+    {"title":"Interactive Design + Motion Stack","date":"2026-05-28","path":"LEARNINGS"},
+    {"title":"Netlify Forms gotchas","date":"2026-05-28","path":"LEARNINGS"}
+  ],
+  "ops":[
+    {"area":"Content & Social","color":"#EC4899","items":[
+      {"name":"Post today's content","cad":"daily"},
+      {"name":"Review content queue","cad":"daily"},
+      {"name":"Check pending-to-post","cad":"daily"},
+      {"name":"Trending research","cad":"daily"}
+    ]},
+    {"area":"Website","color":"#2DD4BF","items":[
+      {"name":"Site edits + pushes (mobile-verify)","cad":"as needed"},
+      {"name":"Active build: Sonya rebrand","cad":"active"}
+    ]},
+    {"area":"Workflow Engine","color":"#A78BFA","items":[
+      {"name":"Run Workflow Content Flow","cad":"weekly"},
+      {"name":"Process-as-content capture","cad":"daily"}
+    ]},
+    {"area":"Client Ops","color":"#D4AF37","items":[
+      {"name":"Client check-ins / comms","cad":"daily"},
+      {"name":"Client deliverables","cad":"daily"}
+    ]},
+    {"area":"Growth","color":"#4ADE80","items":[
+      {"name":"Leads & follow-up","cad":"daily"},
+      {"name":"Email marketing","cad":"weekly"},
+      {"name":"SEO","cad":"weekly"},
+      {"name":"Monthly reporting","cad":"monthly"}
+    ]},
+    {"area":"Back-office","color":"#60A5FA","items":[
+      {"name":"Reviews / reputation","cad":"weekly"},
+      {"name":"Invoicing / finance","cad":"weekly"},
+      {"name":"Team / VA check-ins","cad":"daily"}
+    ]},
+    {"area":"System & Knowledge","color":"#9FB0C7","items":[
+      {"name":"Knowledge capture to LEARNINGS","cad":"daily"},
+      {"name":"Daily external scan","cad":"daily"},
+      {"name":"End-of-day wrap","cad":"daily"},
+      {"name":"Handoffs, Project sync, device parity","cad":"as needed"}
+    ]}
+  ],
+  "artifactOrder":["graphic","video","page","social","zip"],
+  "artifactIcon":{"graphic":"▦","video":"▶","page":"▤","social":"✉","zip":"⬇"},
+  "workflows":[
+    {"id":"w01","cat":"Vidz Production","title":"Workflow 01 — Three-Segment Reel","owners":["Vidz"],"role":"talking head + split-screen + payoff","angle":"The 3-segment reel structure our AI uses for every short. Steal it.","audience":"Creators + small business owners","artifacts":{"graphic":false,"video":true,"page":false,"social":false,"zip":false}},
+    {"id":"w02","cat":"Vidz Production","title":"Workflow 02 — Claude Terminal Explainer","owners":["Vidz"],"role":"82-sec programmatic motion graphics","angle":"Turn any explainer into an 82-second motion graphic without After Effects.","audience":"Agencies + creators","artifacts":{"graphic":false,"video":true,"page":false,"social":false,"zip":false}},
+    {"id":"w03","cat":"Vidz Production","title":"Workflow 03 — Daily Carousel","owners":["Raphy"],"role":"hero + teaching slides + CTA","angle":"Our AI builds a finished carousel + caption pack daily. The exact pipeline.","audience":"Small business owners + agencies","artifacts":{"graphic":true,"video":true,"page":false,"social":false,"zip":false}},
+    {"id":"w04","cat":"Vidz Production","title":"Workflow 04 — Process-Content Video","owners":["Vidz","Boogy"],"role":"meta capture of building in public","angle":"The workflow that makes every other workflow shareable. One process into 7 posts.","audience":"Agencies + founders","artifacts":{"graphic":true,"video":true,"page":false,"social":false,"zip":false}},
+    {"id":"f1","cat":"Specialist AI","title":"Sonny F1 — Trending Caption + Hashtag","owners":["Sonny"],"role":"per-platform output + live receipts","angle":"Captions that match what's trending right now. With proof receipts.","audience":"Owners + creators","artifacts":{"graphic":false,"video":false,"page":false,"social":false,"zip":false}},
+    {"id":"f2","cat":"Specialist AI","title":"Sonny F2 — Content Comprehension","owners":["Sonny"],"role":"drop a link, Sonny reports back","angle":"Drop our AI any link or video. It tells you what's in it in 30 seconds.","audience":"Small business owners","artifacts":{"graphic":false,"video":false,"page":false,"social":false,"zip":false}},
+    {"id":"raphy4","cat":"Specialist AI","title":"Raphy 4 Lanes — Generate/Edit/Compose/3D","owners":["Raphy"],"role":"full graphic stack to 3D","angle":"The 4 things our design AI does that replace 4 apps. One AI, 4 modes.","audience":"Owners + designers","artifacts":{"graphic":false,"video":false,"page":false,"social":false,"zip":false}},
+    {"id":"cw1","cat":"Cowork Skills","title":"Cowork — client-weekly-report","owners":["Cowork"],"role":"weekly client status digest","angle":"A clean weekly client report every Friday from Asana + Drive. We just send.","audience":"Agencies + VAs","artifacts":{"graphic":false,"video":false,"page":false,"social":false,"zip":false}},
+    {"id":"cw2","cat":"Cowork Skills","title":"Cowork — content-calendar-drafter","owners":["Cowork"],"role":"weekly social calendar from inputs","angle":"Next week's social content planned every Sunday, before we sit down.","audience":"Owners + agencies","artifacts":{"graphic":false,"video":false,"page":false,"social":false,"zip":false}},
+    {"id":"cw3","cat":"Cowork Skills","title":"Cowork — inbox-triage","owners":["Cowork"],"role":"sorts inbox into action lanes","angle":"Inbox sorted into urgent / wait / archive every morning, replies drafted.","audience":"Owners + solopreneurs","artifacts":{"graphic":false,"video":false,"page":false,"social":false,"zip":false}},
+    {"id":"cw4","cat":"Cowork Skills","title":"Cowork — new-lead-intake","owners":["Cowork"],"role":"routes a new lead into qualifying","angle":"Replies to a new lead in 60 seconds. Drafts, logs to CRM, schedules follow-up.","audience":"Owners + agencies","artifacts":{"graphic":false,"video":false,"page":false,"social":false,"zip":false}},
+    {"id":"r12","cat":"Rules as Workflows","title":"Rule 12 — Honest Partner Rule","owners":["Brunz"],"role":"recommend the best path even if costly","angle":"We told our AI to recommend the best path even if it costs us money.","audience":"Agencies + founders","artifacts":{"graphic":false,"video":false,"page":false,"social":false,"zip":false}},
+    {"id":"r14","cat":"Rules as Workflows","title":"Rule 14 — Process-as-Content Rule","owners":["Brunz"],"role":"every build captured + repurposed","angle":"We don't 'make content.' We capture the work we're already doing.","audience":"Agencies + creators","artifacts":{"graphic":false,"video":false,"page":false,"social":false,"zip":false}},
+    {"id":"r17","cat":"Rules as Workflows","title":"Rule 17 — Mobile-First Website Rule","owners":["Webby"],"role":"verify 375/768/1280 before push","angle":"We never push a site change without checking 3 screen sizes.","audience":"Owners + designers","artifacts":{"graphic":false,"video":false,"page":false,"social":false,"zip":false}},
+    {"id":"r18","cat":"Rules as Workflows","title":"Rule 18 — Universal Caption Rule","owners":["Sonny"],"role":"plain enough any owner gets it","angle":"If a salon owner can't understand your caption, you wrote it wrong.","audience":"Creators + agencies","artifacts":{"graphic":false,"video":false,"page":false,"social":false,"zip":false}},
+    {"id":"r27","cat":"Rules as Workflows","title":"Rule 27 — Daily Carousel Standard","owners":["Raphy"],"role":"hero + teaching + CTA, daily","angle":"The daily carousel pipeline already running. Pairs with Workflow 03.","audience":"Owners + agencies","artifacts":{"graphic":true,"video":true,"page":false,"social":false,"zip":false}}
+  ],
+  "systems":[
+    {"name":"Weekly Content Calendar","path":"BBC Operating System/02_SERVICE_SYSTEMS/SOCIAL_MEDIA_SYSTEMS/BBC_WEEKLY_CONTENT_CALENDAR.md"},
+    {"name":"Workflow Content Flow","path":"BBC Operating System/07_MARKETING/01_SOCIAL_MEDIA/WORKFLOW_CONTENT_FLOW.md"},
+    {"name":"Shareable Workflows Filter","path":"BBC Operating System/07_MARKETING/01_SOCIAL_MEDIA/SHAREABLE_WORKFLOWS_FILTER.md"},
+    {"name":"Client Questionnaire System","path":"BBC Operating System/02_SERVICE_SYSTEMS/CLIENT_QUESTIONNAIRE_SYSTEM/"},
+    {"name":"AI Family Build SOP","path":"BBC Operating System/02_SERVICE_SYSTEMS/BBC_BUSINESS_AI_SYSTEM/04_BUILD_PROCESS/AI_FAMILY_BUILD_SOP.md"},
+    {"name":"Content Readiness Matrix","path":"BBC Operating System/03_AI_OPERATING_SYSTEM/VISUALS/content_readiness_matrix.png"}
+  ]
+}
+</script>
+
+<script>
+  const D = JSON.parse(document.getElementById('bbc-data').textContent);
+  const OWN=D.owners, ORDER=D.artifactOrder, ICON=D.artifactIcon;
+  const app=document.getElementById('app');
+  const sheet=document.getElementById('sheet'), sheetBody=document.getElementById('sheet-body');
+  document.getElementById('hdr-date').textContent='AUDIT '+D.meta.updated;
+  const pct=w=>Math.round(ORDER.filter(a=>w.artifacts[a]).length/ORDER.length*100);
+  const esc=s=>(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;');
+  const pillStatus=s=>`<span class="pill p-${s==='active'?'active':s==='dev'?'dev':'concept'}">${s}</span>`;
+
+  function openSheet(html){ sheetBody.innerHTML=html; sheet.classList.add('open'); }
+  sheet.onclick=e=>{ if(e.target===sheet) sheet.classList.remove('open'); };
+
+  /* ---------- VIEWS ---------- */
+  const views={};
+
+  views.home=()=>{
+    const ship=D.workflows.reduce((n,w)=>n+ORDER.filter(a=>w.artifacts[a]).length,0);
+    const dueToday=D.content.days.find(x=>x.d.includes('Jun 2'));
+    const pending=D.content.days.filter(x=>!x.posted).length;
+    return `<div class="chat-box" onclick="openChat('home')" style="cursor:pointer">
+        <h3>Chat with Cuh</h3>
+        <p>Your all-around AI. Tap to open full-screen chat, pick your agent(s), and save it as a task.</p>
+        <div class="chat-in"><input placeholder="Ask Cuh anything..." readonly style="cursor:pointer"><button>Open chat</button></div>
+        <div class="soon-note">FULL-SCREEN CHAT READY · LIVE REPLIES WHEN THE API KEY IS WIRED</div>
+      </div>
+      ${(()=>{
+        const gaps=80-ship;
+        const wfReady=Math.round(ship/80*100);
+        const weekPosted=D.content.days.filter(x=>x.posted).length;
+        const clientsNoAI=D.clients.filter(c=>c.ai==='-').length;
+        const gauge=(p,sub)=>{const r=74,c=Math.PI*r,len=(p/100)*c;return `<svg viewBox="0 0 180 116" style="width:100%;max-width:210px;display:block;margin:0 auto"><path d="M16 100 A ${r} ${r} 0 0 1 164 100" fill="none" stroke="#22324d" stroke-width="15" stroke-linecap="round"/><path d="M16 100 A ${r} ${r} 0 0 1 164 100" fill="none" stroke="#D4AF37" stroke-width="15" stroke-linecap="round" stroke-dasharray="${len} ${c}"/><text x="90" y="88" text-anchor="middle" font-family="Playfair Display,serif" font-size="36" font-weight="700" fill="#F5F1EA">${p}%</text><text x="90" y="108" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" fill="#C9A961">${sub}</text></svg>`;};
+        const weekBars=D.content.days.map(x=>{const has=(x.graphic&&x.graphic!=='-')||(x.reel&&x.reel!=='-');const h=x.posted?100:(has?68:22);const col=x.posted?'#4ADE80':(has?'#D4AF37':'#2a3a52');return `<div class="wb"><div class="bar" style="height:${h}%;background:${col}"></div><div class="lbl">${esc(x.d.split(' ')[0][0])}</div></div>`;}).join('');
+        const grp=g=>D.websitePages.filter(p=>p.group===g).length;
+        const webRows=`<tr><td>Main pages</td><td>${grp('Main pages')}</td></tr><tr><td>VA profiles</td><td>${grp('VA profiles (noindex)')}</td></tr><tr><td>Internal</td><td>${grp('Internal (noindex)')}</td></tr><tr><td>Open tasks</td><td>${D.websiteTasks.length}</td></tr>`;
+        const attn=[{l:'Workflow gaps',v:gaps,m:80},{l:'Posts pending',v:pending,m:7},{l:'Website tasks',v:D.websiteTasks.length,m:10},{l:'Clients w/o AI',v:clientsNoAI,m:D.clients.length}];
+        const attnBars=attn.map(a=>{const r=a.v/a.m;const col=r>0.66?'#EF6B6B':(r>0.33?'#D4AF37':'#4ADE80');const w=Math.max(8,Math.round(r*100));return `<div class="hbar"><span class="hl">${a.l}</span><div class="htrack"><i style="width:${w}%;background:${col}"></i></div><span class="hv">${a.v}</span></div>`;}).join('');
+        const clientRows=D.clients.map(c=>`<tr><td>${esc(c.name)}</td><td>${esc(c.handler)}</td><td>${c.ai!=='-'?'AI ✓':'—'}</td></tr>`).join('');
+        return `<div class="sec">Business at a glance</div>
+          <div class="panelgrid">
+            <div class="panel tap" onclick="go('workflows')"><span class="ptitle">Workflow Readiness</span>${gauge(wfReady,ship+' of 80 artifacts')}<div class="gauge-sub">${gaps} gaps to ship</div></div>
+            <div class="panel tap" onclick="go('social')"><span class="ptitle">This Week</span><div class="wkbars">${weekBars}</div><div class="gauge-sub">${weekPosted} of 7 posted</div></div>
+            <div class="panel tap" onclick="go('websites')"><span class="ptitle">Websites</span><table class="ptable">${webRows}</table></div>
+            <div class="panel"><span class="ptitle">Needs Attention</span>${attnBars}</div>
+            <div class="panel tap" onclick="go('clients')"><span class="ptitle">Clients (${D.clients.length})</span><table class="ptable">${clientRows}</table></div>
+          </div>`;
+      })()}
+      ${(()=>{
+        const cc={daily:'#D4AF37',weekly:'#60A5FA',monthly:'#7C8AA5','as needed':'#7C8AA5',active:'#4ADE80'};
+        const boxes=D.ops.map(o=>{
+          const rows=o.items.map(it=>`<div class="opitem"><span class="odot" style="background:${cc[it.cad]||'#7C8AA5'}"></span><span class="oname">${esc(it.name)}</span><span class="ocad">${esc(it.cad)}</span></div>`).join('');
+          return `<div class="panel"><span class="ptitle" style="color:${o.color}">${esc(o.area)}</span>${rows}</div>`;
+        }).join('');
+        return `<div class="sec">Operations — what needs attention</div><div class="panelgrid">${boxes}</div>`;
+      })()}
+      <a class="morelink" onclick="go('more')">AI Family · Team · Systems →</a>`;
+  };
+
+  const CFOLDER={'S. Riviere Hair Collection':'S-RIVIERE-HAIR-COLLECTION','4Ocean':'4OCEAN','Wooden Woodworks':'WOODEN-WOODWORKS','Home Vision Studio':'HOME-VISION-STUDIO','First Class Finishes':'FIRST-CLASS-FINISHES','Hi-Up Roofing':'HI-UP-ROOFING','AJ Battle Foundation':'AJ-BATTLE-FOUNDATION','All Ryze':'ALL-RYZE','Cavalry Group':'REAL_CAVALRY'};
+  const CCOLOR={'S. Riviere Hair Collection':'#C9A961','4Ocean':'#2D9CDB','Wooden Woodworks':'#A9744F','Home Vision Studio':'#6D8FC7','First Class Finishes':'#C0552E','Hi-Up Roofing':'#4A6FA5','AJ Battle Foundation':'#4E9E74','All Ryze':'#A855F7','Cavalry Group':'#7C8A5A'};
+  const cColor=c=>CCOLOR[c.name]||'#D4AF37';
+  views.clients=()=>{
+    const cards=D.clients.map((c,i)=>{
+      const col=cColor(c), hasSite=c.site&&c.site!=='-';
+      const chips=[{k:'Website',on:hasSite,v:hasSite?'live':'setup'},{k:'Social',on:false,v:'setup'},{k:'Reminders',on:false,v:'–'},{k:'Tasks',on:false,v:'–'}];
+      const chipHtml=chips.map(ch=>`<div class="cchip ${ch.on?'on':''}"><span class="ck">${ch.k}</span><span class="cv">${ch.v}</span></div>`).join('');
+      return `<div class="clientbox" data-search="${esc((c.name+' '+c.industry+' '+c.handler+' '+(c.ai||'')).toLowerCase())}" onclick="clientCC(${i})" style="border-top:3px solid ${col}">
+        <div class="cb-hd"><div class="cb-av" style="background:${col}22;color:${col}">${esc(c.name[0])}</div>
+          <div class="cb-t"><div class="cb-nm">${esc(c.name)}</div><div class="cb-meta">${esc(c.industry)} · ${esc(c.handler)}${c.ai!=='-'?' · '+esc(c.ai):''}</div></div>${pillStatus(c.status)}</div>
+        <div class="cb-class">${chipHtml}</div>
+        <div class="cb-open">Open command center →</div></div>`;
+    }).join('');
+    return `<h2 class="vt">Clients</h2><div class="vsub">${D.clients.length} clients · tap a box to open that client's command center</div>
+      <input class="search" placeholder="Search clients..." oninput="filterCards(this,'cli')">
+      <div class="clientgrid" id="cli">${cards}</div>`;
+  };
+  window.openClientFolder=(folder)=>{ window.__drivePath=folder?['02_ACTIVE_CLIENTS',folder]:[]; go('folders'); };
+  window.clientCC=(i)=>{
+    const c=D.clients[i], col=cColor(c), folder=CFOLDER[c.name];
+    const hasSite=c.site&&c.site!=='-', siteUrl=hasSite?'https://'+c.site.replace(/^https?:\/\//,''):'';
+    const isCav=c.name==='Cavalry Group';
+    const panel=(ic,title,inner)=>`<div class="wfcat"><div class="wfcat-hd"><div class="wfcat-ic" style="background:${col}22;color:${col}">${ic}</div><div class="wfcat-nm">${esc(title)}</div></div>${inner}</div>`;
+    const kv=(k,v)=>`<div class="kv"><b>${k}:</b> <span>${esc(v||'—')}</span></div>`;
+    const overview=panel('🏠','Overview',`${kv('Owner',c.owner)}${kv('Handler',c.handler)}${kv('AI',c.ai)}${kv('Status',c.status)}<div class="sec" style="margin-top:10px">Notes</div><div class="kv"><span>${esc(c.notes)||'—'}</span></div>`);
+    const webInner=isCav
+      ? `<div class="opitem"><span class="odot" style="background:var(--green)"></span><span class="oname">Website A — Beal <span style="color:var(--muted)">build in progress</span></span></div><div class="opitem"><span class="odot" style="background:var(--green)"></span><span class="oname">Website B — Military <span style="color:var(--muted)">build in progress</span></span></div><a class="lnk" href="${siteUrl}" target="_blank" style="margin-top:8px">${esc(c.site)} ↗</a>`
+      : (hasSite?`<a class="lnk" href="${siteUrl}" target="_blank">${esc(c.site)} ↗</a><div class="gauge-sub" style="text-align:left;margin-top:8px">Analytics + page list populate when we connect this client's site.</div>`:`<div class="kv"><span>No public site on file yet.</span></div>`);
+    const website=panel('🌐','Website',webInner);
+    const social=panel('📱','Social Media',`<div class="kv"><span>Content calendar + posting rhythm appear here once we load this client's social plan.</span></div><div class="gauge-sub" style="text-align:left;margin-top:6px">In setup.</div>`);
+    const reminders=panel('✅','Reminders & tasks',`<div class="kv"><span>Tasks and reminders for ${esc(c.name)} show here. Log them with Cuh below.</span></div><div class="gauge-sub" style="text-align:left;margin-top:6px">In setup.</div>`);
+    const drive=panel('📁','Drive folder',`<div class="kv"><span>${folder?'02_ACTIVE_CLIENTS / '+esc(folder):'Folder not mapped yet.'}</span></div>${folder?`<a class="lnk" onclick="openClientFolder('${folder.replace(/'/g,"\\'")}')" style="margin-top:8px;cursor:pointer">Open in Folders →</a>`:''}`);
+    return app.innerHTML=`<div class="view">
+      <div class="morelink" style="margin-top:0;margin-bottom:14px" onclick="go('clients')">← All clients</div>
+      <div class="cc-hero" style="background:linear-gradient(135deg,${col}33,${col}0d);border:1px solid ${col}66">
+        <div class="cb-av" style="background:${col};color:#0A1422">${esc(c.name[0])}</div>
+        <div><div class="cc-nm">${esc(c.name)}</div><div class="cc-sub">${esc(c.industry)} · Handler ${esc(c.handler)}${c.ai!=='-'?' · AI '+esc(c.ai):''}</div></div>
+      </div>
+      <button class="ideabtn" onclick="openChat('clients','Work for ${esc(c.name)} — ','${esc(c.name)}')"><span class="i">＋</span>Log work for ${esc(c.name)}</button>
+      <div class="wfgrid">${overview}${website}${social}${reminders}${drive}</div>
+      <div class="gauge-sub" style="text-align:left;margin-top:10px">${isCav?'Cavalry is the first full client command center — sections fill out as Kenz works the account.':'Re-souled clone of the BBC command center, scoped to '+esc(c.name)+'. Brand theming + live data apply as we connect this client.'} Login access + activity tracking for the handler turn on in the final step.</div>`;
+  };
+
+  const CIC={'Vidz Production':'🎬','Specialist AI':'🤖','Cowork Skills':'🧩','Rules as Workflows':'📜'};
+  const CCOL={'Vidz Production':'#A78BFA','Specialist AI':'#EC4899','Cowork Skills':'#D4AF37','Rules as Workflows':'#60A5FA'};
+  views.workflows=()=>{
+    const cats=[...new Set(D.workflows.map(w=>w.cat))];
+    const totalArt=D.workflows.reduce((n,w)=>n+ORDER.filter(a=>w.artifacts[a]).length,0);
+
+    /* Recommended next — finish what's closest to done, show the exact next artifact */
+    const ranked=[...D.workflows].filter(w=>pct(w)<100).sort((a,b)=>pct(b)-pct(a));
+    const recs=ranked.slice(0,3).map(w=>{
+      const p=pct(w), nextArt=ORDER.find(a=>!w.artifacts[a]), verb=p>0?'Next':'Start';
+      const dots=w.owners.map(o=>`<span class="dot" style="background:${OWN[o]||'#888'}"></span>`).join('');
+      return `<div class="card recrow" onclick="wfSheet('${w.id}')" style="margin-bottom:8px">
+        <div class="row1"><span style="display:flex;gap:3px">${dots}</span><div class="nm" style="font-size:14px">${esc(w.title)}</div><span style="font-family:var(--mono);font-size:11px;color:var(--gold2)">${p}%</span></div>
+        <div class="meta" style="margin-top:7px">${verb}: create the <b>${nextArt?nextArt.toUpperCase():'—'}</b>${nextArt?' '+ICON[nextArt]:''} · ${esc(w.role)}</div></div>`;
+    }).join('');
+
+    /* All categories, all details shown in boxes */
+    const boxes=cats.map(cat=>{
+      const list=D.workflows.filter(w=>w.cat===cat);
+      const avg=Math.round(list.reduce((s,w)=>s+pct(w),0)/list.length);
+      const ic=CIC[cat]||'📦', col=CCOL[cat]||'#D4AF37';
+      const rows=list.map(w=>{
+        const dots=w.owners.map(o=>`<span class="dot" style="background:${OWN[o]||'#888'}"></span>`).join('');
+        const pips=ORDER.map(a=>`<span class="pip ${w.artifacts[a]?'on':''}"></span>`).join('');
+        return `<div class="wfrow" data-search="${esc((w.title+' '+w.owners.join(' ')+' '+w.angle+' '+w.role).toLowerCase())}" onclick="wfSheet('${w.id}')"><span class="wfrow-dots">${dots}</span><span class="wfrow-nm">${esc(w.title)}</span><span class="mini">${pips}</span><span class="wfrow-pct">${pct(w)}%</span></div>`;
+      }).join('');
+      return `<div class="wfcat">
+        <div class="wfcat-hd"><div class="wfcat-ic" style="background:${col}22;color:${col}">${ic}</div><div class="wfcat-nm">${esc(cat)}</div><span class="wfcat-pct">${list.length} · ${avg}%</span></div>
+        <div class="bar wfcat-bar"><i style="width:${avg}%"></i></div>
+        ${rows}</div>`;
+    }).join('');
+
+    return `<h2 class="vt">Workflows</h2><div class="vsub">${cats.length} categories · ${totalArt} of 80 artifacts shipped. Tap any workflow for the full breakdown.</div>
+      <input class="search" placeholder="Search all workflows..." oninput="filterCards(this,'wfwrap')">
+      <div class="sec">⭐ Recommended next</div>
+      <div class="gauge-sub" style="text-align:left;margin:-4px 0 10px">Closest to done — ship these to finish the set faster.</div>
+      ${recs}
+      <div class="sec">All workflows by category</div>
+      <div id="wfwrap" class="wfgrid">${boxes}</div>`;
+  };
+
+  views.social=()=>{
+    const C=D.calendar;
+    const iso=dt=>dt.getFullYear()+'-'+String(dt.getMonth()+1).padStart(2,'0')+'-'+String(dt.getDate()).padStart(2,'0');
+    const first=new Date(C.year,C.monthIdx,1);
+    const startDow=first.getDay();
+    const daysInMonth=new Date(C.year,C.monthIdx+1,0).getDate();
+    const weeks=Math.ceil((startDow+daysInMonth)/7);
+    const gridStart=new Date(C.year,C.monthIdx,1-startDow);
+    const slotByDow=D.contentPillars; // index 0=Sun ... 6=Sat
+
+    let weeksHtml='';
+    for(let w=0;w<weeks;w++){
+      let cellsHtml='';
+      for(let d=0;d<7;d++){
+        const dt=new Date(gridStart); dt.setDate(gridStart.getDate()+w*7+d);
+        const key=iso(dt), inMonth=dt.getMonth()===C.monthIdx, isToday=key===C.today;
+        const post=C.posts[key]||{}; const evs=C.events.filter(e=>e.date===key);
+        const slot=slotByDow[dt.getDay()];
+        let body='';
+        if(post.graphic) body+=`<div class="mev mev-graphic ${post.posted?'posted':''}">▦ ${esc(post.graphic)}</div>`;
+        if(post.reel) body+=`<div class="mev mev-reel ${post.posted?'posted':''}">▶ ${esc(post.reel)}</div>`;
+        evs.forEach(e=>{ body+=`<div class="mev mev-event">🎉 ${esc(e.label)}<span class="mev-rem">+ make a content for this</span></div>`; });
+        cellsHtml+=`<div class="mcell ${inMonth?'':'out'} ${isToday?'today':''}">
+          <div class="mcell-d"><span class="mcell-num">${dt.getDate()}</span>${inMonth&&slot?`<span class="mcell-slot">${esc(slot.slot)}</span>`:''}</div>
+          ${body}</div>`;
+      }
+      weeksHtml+=`<div class="month-week">${cellsHtml}</div>`;
+    }
+    const dowHead=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'].map(x=>`<span>${x}</span>`).join('');
+    const monthCal=`<div class="month"><div class="month-grid"><div class="month-dow">${dowHead}</div>${weeksHtml}</div></div>`;
+
+    /* posting rhythm Mon -> Sun */
+    const order=[1,2,3,4,5,6,0];
+    const rhythm=order.map(i=>{const p=slotByDow[i];return `<div class="rbox"><div class="day">${esc(p.day)}</div><div class="slot">${esc(p.slot)}</div><div class="note">${esc(p.note)}</div></div>`;}).join('');
+
+    /* analytics per platform */
+    const ana=D.socialAccounts.map(a=>`<div class="anabox"><div class="pl">${esc(a.platform)}</div><div class="hd">${esc(a.handle)}</div>
+      <div class="mets"><div class="met"><div class="v">—</div><div class="k">Followers</div></div><div class="met"><div class="v">—</div><div class="k">Reach</div></div><div class="met"><div class="v">—</div><div class="k">Posts</div></div></div></div>`).join('');
+
+    /* what to post next — data-driven from the calendar */
+    const MON=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    const DOWS=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+    const todayDay=parseInt(C.today.split('-')[2],10); const recs=[];
+    for(let i=0;i<14 && recs.length<4;i++){
+      const dt=new Date(C.year,C.monthIdx,todayDay+i); if(dt.getMonth()!==C.monthIdx) break;
+      const key=iso(dt), post=C.posts[key], ev=C.events.find(e=>e.date===key), slot=slotByDow[dt.getDay()];
+      const when=(i===0?'Today':DOWS[dt.getDay()]+' '+MON[dt.getMonth()]+' '+dt.getDate());
+      if(post && (post.graphic||post.reel) && !post.posted) recs.push({tag:'scheduled',txt:'Finish + post: '+(post.graphic||post.reel),when});
+      else if(ev) recs.push({tag:'event',txt:'Create a post for '+ev.label,when});
+      else if(slot) recs.push({tag:slot.slot,txt:'Create '+slot.slot+' — '+slot.day,when});
+    }
+    window.__socRecs=recs.map(r=>r.txt);
+    const recCards=recs.map((r,i)=>`<div class="card recrow" onclick="openChat('social', __socRecs[${i}])" style="margin-bottom:8px"><div class="row1"><div class="nm" style="font-size:13.5px;flex:1">${esc(r.txt)}</div><span style="font-family:var(--mono);font-size:10px;color:var(--gold2);white-space:nowrap">${esc(r.when)}</span></div><div class="meta" style="margin-top:5px">${esc(r.tag)}</div></div>`).join('');
+
+    return `<h2 class="vt">Social Media</h2><div class="vsub">Idea box · month calendar · posting rhythm · analytics</div>
+      <div class="sec">💡 Idea box — what to post next</div>
+      <button class="ideabtn" onclick="ideaBox()"><span class="i">🔎</span>Find trending ideas (deep search)</button>
+      ${recCards}
+      <div class="sec">${esc(C.label)} · scroll sideways to see the full month</div>
+      ${monthCal}
+      <div class="cal-legend"><span><i class="lg ev-g"></i>Graphic</span><span><i class="lg ev-r"></i>Reel</span><span><i class="lg done"></i>Posted</span><span><i class="lg pend"></i>Event / note</span></div>
+      <div class="sec">Posting rhythm — Monday to Sunday</div>
+      <div class="rhythm">${rhythm}</div>
+      <div class="sec">Analytics — per platform</div>
+      <div class="anagrid">${ana}</div>
+      <div class="gauge-sub" style="text-align:left;margin-top:8px">Numbers populate once each platform's API is connected.</div>`;
+  };
+  const pageUrl=p=>{ if(p.path==='index.html') return 'https://balaynibruno.co'; return 'https://balaynibruno.co/'+p.path.replace('.html','').replace(/\/$/,''); };
+  const shot=(url,w,h)=>`https://image.thum.io/get/width/${w}/crop/${h}/noanimate/${url}`;
+  views.websites=()=>{
+    const N=D.netlify||{};
+    const pageGaps=D.workflows.filter(w=>!w.artifacts.page);
+    const livePages=D.websitePages.filter(p=>p.status==='live').length;
+    const map=D.siteNav.map((n,i)=>`<span class="mapnode">${esc(n)}</span>${i<D.siteNav.length-1?'<span class="maparrow">→</span>':''}`).join('');
+
+    /* hero + KPIs */
+    const hero=`<div class="site-hero" onclick="window.open('https://balaynibruno.co','_blank')">
+      <img class="site-shot" src="${shot('https://balaynibruno.co',640,320)}" loading="lazy" alt="balaynibruno.co">
+      <div class="site-bar"><span class="dot" style="background:var(--green)"></span><span class="grow">balaynibruno.co</span><span class="pill p-active">live</span><span class="arr">↗</span></div></div>`;
+    const kpis=`<div class="kpis">
+      <div class="kpi"><div class="n">${livePages}</div><div class="l">Live pages</div></div>
+      <div class="kpi"><div class="n gold">${D.websiteTasks.length}</div><div class="l">Open tasks</div></div>
+      <div class="kpi"><div class="n gold">${pageGaps.length}</div><div class="l">Pages to make</div></div>
+      <div class="kpi"><div class="n green">✓</div><div class="l">Auto-deploy</div></div></div>`;
+
+    /* Netlify */
+    const depRows=(N.recent||[]).map(d=>`<div class="deprow"><span class="dot" style="background:#3a4658"></span><span style="color:var(--muted)">${esc(d.msg)}</span><span class="when">${esc(d.when)}</span></div>`).join('');
+    const netlify=`<div class="sec">Netlify — deploys <span class="preview-tag">· sample until token wired</span></div>
+      <div class="panel">
+        <div class="deprow"><span class="dot" style="background:var(--green)"></span><span><b>Auto-deploy active</b> · GitHub → Netlify</span><span class="when">${esc(N.branch||'master')}</span></div>
+        ${depRows}
+        <div class="gauge-sub" style="text-align:left;margin-top:10px">Connect your Netlify token to show live deploy status, build logs, and one-tap rollback.</div></div>`;
+
+    /* connect cards */
+    const connect=`<div class="sec">Connect to unlock</div>
+      <div class="grid2">
+        <div class="connect"><div class="ic">📊</div><div class="t">Analytics</div><div class="c">CONNECT GA + SEARCH CONSOLE</div></div>
+        <div class="connect"><div class="ic">⭐</div><div class="t">Google Reviews</div><div class="c">CONNECT BUSINESS PROFILE</div></div></div>`;
+
+    /* to-do */
+    const todoTasks=D.websiteTasks.map(t=>`<div class="opitem"><span class="odot" style="background:#EF6B6B"></span><span class="oname">${esc(t)}</span><span class="ocad">task</span></div>`).join('');
+    const todoPages=pageGaps.map(w=>`<div class="opitem"><span class="odot" style="background:#D4AF37"></span><span class="oname">Create page: ${esc(w.title.split(' — ')[0])} <span style="color:var(--muted)">/work/${w.id}</span></span><span class="ocad">new workflow</span></div>`).join('');
+    const todo=`<div class="sec">Website to-do</div>
+      <div class="panel">${todoTasks}${todoPages}</div>
+      <div class="gauge-sub" style="text-align:left;margin-top:8px">Auto-rule: new workflow → /work page + case study · new process → page · new review → feature it.</div>
+      ${D.websiteTodoDoc?`<div class="gauge-sub" style="text-align:left;margin-top:4px">Source of truth: <span style="color:var(--gold2)">${esc(D.websiteTodoDoc)}</span></div>`:''}`;
+
+    /* pages (compact rows) */
+    const groups=[...new Set(D.websitePages.map(p=>p.group))];
+    const pagesByGroup=groups.map(g=>{
+      const items=D.websitePages.filter(p=>p.group===g).map(p=>{
+        const gi=D.websitePages.indexOf(p);
+        return `<div class="pagerow" onclick="pageSheet(${gi})"><span class="dot" style="background:var(--green)"></span><span class="pn">${esc(p.name)}</span>${p.noindex?'<span class="pp">noindex</span>':''}<span class="arr">→</span></div>`;
+      }).join('');
+      return `<div class="sec" style="margin-top:14px">${esc(g)} (${D.websitePages.filter(p=>p.group===g).length})</div>${items}`;
+    }).join('');
+
+    /* workflows + tools */
+    const flows=(D.websiteWorkflows||[]).map(x=>`<div class="opitem"><span class="odot" style="background:#A78BFA"></span><span class="oname">${esc(x.n)} <span style="color:var(--muted)">— ${esc(x.d)}</span></span></div>`).join('');
+    const tools=(D.websiteTools||[]).map(x=>`<div class="opitem"><span class="odot" style="background:#2DD4BF"></span><span class="oname">${esc(x.n)} <span style="color:var(--muted)">— ${esc(x.d)}</span></span></div>`).join('');
+
+    return `<h2 class="vt">Websites</h2><div class="vsub">BBC's web operation — site, deploys, pages, workflows.</div>
+      ${hero}${kpis}
+      ${netlify}
+      ${connect}
+      ${todo}
+      <div class="sec">Page map (main nav flow)</div><div class="cal-scroll"><div class="pagemap">${map}</div></div>
+      <div class="sec">All pages (${D.websitePages.length})</div>${pagesByGroup}
+      <div class="sec">Website workflows</div><div class="panel">${flows}</div>
+      <div class="sec">Tools (team + Claude)</div><div class="panel">${tools}</div>`;
+  };
+  window.pageSheet=i=>{ const p=D.websitePages[i]; const url=pageUrl(p);
+    openSheet(`<h3>${esc(p.name)}</h3><div class="row1">${p.noindex?'<span class="pill p-concept">noindex</span>':'<span class="pill p-active">live</span>'} · ${esc(p.group)}</div>
+      <img class="wshot" src="${shot(url,600,420)}" loading="lazy" alt="" style="margin:10px 0">
+      <div class="sec">Purpose</div><div class="kv"><span>${esc(p.purpose)}</span></div>
+      <div class="sec">URL</div><a class="lnk" href="${url}" target="_blank">${url}</a>`);
+  };
+  views.reminders=()=>{
+    const C=D.calendar;
+    const iso=dt=>dt.getFullYear()+'-'+String(dt.getMonth()+1).padStart(2,'0')+'-'+String(dt.getDate()).padStart(2,'0');
+    const MON=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    const DOWS=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+    const todayDay=parseInt(C.today.split('-')[2],10);
+    const fmt=dt=>DOWS[dt.getDay()]+' '+MON[dt.getMonth()]+' '+dt.getDate();
+
+    const due=[]; const tp=C.posts[C.today]||{};
+    if(tp.graphic&&!tp.posted) due.push({t:'Post graphic — '+tp.graphic});
+    if(tp.reel&&!tp.posted) due.push({t:'Post reel — '+tp.reel});
+    C.events.filter(e=>e.date===C.today).forEach(e=>due.push({t:e.label+' — post something'}));
+    if(!due.length) due.push({t:'Nothing due today',muted:true});
+
+    const week=[];
+    for(let i=1;i<=7;i++){ const dt=new Date(C.year,C.monthIdx,todayDay+i); const k=iso(dt); const p=C.posts[k];
+      if(p&&(p.graphic||p.reel)) week.push({t:(p.graphic||p.reel),w:fmt(dt)});
+      C.events.filter(e=>e.date===k).forEach(e=>week.push({t:'🎉 '+e.label,w:fmt(dt)}));
+    }
+    if(!week.length) week.push({t:'Nothing scheduled in the next 7 days',muted:true});
+
+    const content=Object.keys(C.posts).filter(k=>!C.posts[k].posted).sort().map(k=>{const p=C.posts[k],dt=new Date(k+'T00:00:00');return {t:(p.graphic||p.reel)+(p.graphic&&p.reel?' (graphic + reel)':''),w:fmt(dt)};});
+    if(!content.length) content.push({t:'All scheduled content posted',muted:true});
+
+    const gaps=D.workflows.filter(w=>!w.artifacts.page).length;
+    const web=[{t:gaps+' workflow pages to create',muted:true}].concat(D.websiteTasks.map(t=>({t})));
+
+    const daily=[]; D.ops.forEach(o=>o.items.forEach(it=>{ if(it.cad==='daily') daily.push({t:it.name,w:o.area}); }));
+
+    const dates=C.events.map(e=>{const dt=new Date(e.date+'T00:00:00');return {t:e.label,w:fmt(dt)};});
+
+    const cross=[{t:'Syncs from Kriz reminders log + _HANDOFFS when the brain is wired',muted:true}];
+
+    const box=(ic,col,title,items)=>{
+      const rows=items.map(r=>`<div class="wfrow"><span class="wfrow-dots"><span class="dot" style="background:${r.muted?'#3a4658':col}"></span></span><span class="wfrow-nm"${r.muted?' style="color:var(--muted)"':''}>${esc(r.t)}</span>${r.w?`<span class="wfrow-pct">${esc(r.w)}</span>`:''}</div>`).join('');
+      return `<div class="wfcat"><div class="wfcat-hd"><div class="wfcat-ic" style="background:${col}22;color:${col}">${ic}</div><div class="wfcat-nm">${esc(title)}</div><span class="wfcat-pct">${items.filter(x=>!x.muted).length}</span></div>${rows}</div>`;
+    };
+    const actionable=due.filter(x=>!x.muted).length+content.filter(x=>!x.muted).length+(D.websiteTasks.length)+daily.length;
+
+    return `<h2 class="vt">Reminders</h2><div class="vsub">${actionable} open items · organized by area</div>
+      <button class="ideabtn" onclick="openChat('reminders','New reminder — ')"><span class="i">＋</span>Add a reminder</button>
+      <div class="wfgrid">
+        ${box('🔴','#EF6B6B','Due today',due)}
+        ${box('📅','#D4AF37','This week',week)}
+        ${box('✏️','#EC4899','Content to post',content)}
+        ${box('🌐','#2DD4BF','Website to-do',web)}
+        ${box('🔁','#A78BFA','Recurring (daily)',daily)}
+        ${box('🎉','#34D399','Important dates',dates)}
+        ${box('🤝','#60A5FA','Cross-AI & handoffs',cross)}
+      </div>`;
+  };
+  views.news=()=>{
+    const boxes=D.newsTopics.map((t,i)=>`<div class="newsbox" onclick="newsSearch(${i})"><div class="ic">🔎</div><div class="t">${esc(t.label)}</div><div class="q">${esc(t.q)}</div></div>`).join('');
+    const feed=D.newsFeed.map(f=>`<div class="card"><div class="nm" style="font-size:14px">${esc(f.title)}</div><div class="meta">${esc(f.date)} · ${esc(f.path)}</div></div>`).join('');
+    return `<h2 class="vt">News &amp; Research</h2><div class="vsub">Tap a box → Cuh runs a deep search on that topic and saves it (brain layer).</div>
+      <div class="newsgrid">${boxes}</div>
+      <div class="sec">Recent research (Drive)</div>${feed}`;
+  };
+  window.newsSearch=i=>{ const t=D.newsTopics[i]; openSheet(`<h3>${esc(t.label)}</h3><div class="sec">Search brief</div><div class="kv"><span>${esc(t.q)}</span></div><div class="sec">Status</div><div class="kv"><span>Auto deep-search activates when the brain layer (Anthropic API) is wired. For now, tell Cuh in Claude Code: "deep search ${esc(t.q)}".</span></div>`); };
+
+  views.more=()=>{
+    const ai=D.aiFamily.map(a=>`<div class="card" onclick="aiSheet('${a.key}')"><div class="row1"><div class="av" style="background:${OWN[a.key]||'#888'}">${esc(a.name[0])}</div><div class="nm" style="font-size:15px">${esc(a.name)}</div>${pillStatus(a.status)}</div><div class="meta">${esc(a.role)}</div></div>`).join('');
+    const team=D.team.map(t=>`<div class="card"><div class="row1"><div class="av" style="background:linear-gradient(135deg,#2A4A6E,#1C3250);color:#F5F1EA">${esc(t.name[0])}</div><div class="nm" style="font-size:15px">${esc(t.name)}</div></div><div class="meta">${esc(t.role)}</div></div>`).join('');
+    const sys=D.systems.map(s=>`<a class="lnk" title="${esc(s.path)}">🧩 ${esc(s.name)} <span style="opacity:.6">— ${esc(s.path)}</span></a>`).join('');
+    return `<h2 class="vt">More</h2><div class="vsub">AI Family · Team · Systems</div>
+      <div class="sec">AI Family (${D.aiFamily.length})</div>${ai}
+      <div class="sec">Team (${D.team.length})</div>${team}
+      <div class="sec">Systems &amp; SOPs</div>${sys}`;
+  };
+
+  /* ---------- BRUNO PAGE (private) ---------- */
+  views.bruno=()=>{
+    if(localStorage.getItem('bbc_bruno_ok')!=='1'){
+      return `<div class="bgate">
+        <div class="lk">🔒</div>
+        <h3>Bruno Page</h3>
+        <p>Private. RJ only. Enter your access code to see every global rule and protocol.</p>
+        <input id="bruno-code" type="password" placeholder="access code" onkeydown="if(event.key==='Enter')brunoUnlock()">
+        <button onclick="brunoUnlock()">Unlock</button>
+        <div class="err" id="bruno-err"></div>
+      </div>`;
+    }
+    const P=D.protocols, total=P.groups.reduce((n,g)=>n+g.items.length,0);
+    const boxes=P.groups.map((g,gi)=>{
+      const rows=g.items.map((it,ii)=>`<div class="wfrow" data-search="${esc((it.t+' '+(it.trig||'')+' '+it.s).toLowerCase())}" onclick="ruleSheet(${gi},${ii})"><span class="wfrow-dots"><span class="dot" style="background:${g.color}"></span></span><span class="wfrow-nm">${esc(it.t)}</span>${it.trig?`<span class="pill p-concept">${esc(it.trig)}</span>`:''}<span style="color:var(--gold2)">→</span></div>`).join('');
+      return `<div class="wfcat"><div class="wfcat-hd"><div class="wfcat-ic" style="background:${g.color}22;color:${g.color}">§</div><div class="wfcat-nm">${esc(g.cat)}</div><span class="wfcat-pct">${g.items.length}</span></div>${rows}</div>`;
+    }).join('');
+    return `<h2 class="vt">Bruno Page</h2><div class="vsub">${P.groups.length} groups · ${total} rules & protocols · source: ${esc(P.source)}</div>
+      <button class="ideabtn" onclick="openChat('home','New protocol to add — ')"><span class="i">＋</span>Add a protocol</button>
+      <input class="search" placeholder="Search rules & protocols..." oninput="filterCards(this,'brunowrap')">
+      <div id="brunowrap" class="wfgrid">${boxes}</div>
+      <div style="text-align:center;margin-top:6px"><span class="brunolock" onclick="brunoLockNow()">🔒 Lock this page</span></div>`;
+  };
+  window.brunoUnlock=()=>{ const el=document.getElementById('bruno-code'); if(el.value.trim()===D.protocols.code){localStorage.setItem('bbc_bruno_ok','1'); go('bruno');} else {document.getElementById('bruno-err').textContent='Wrong code. Try again.'; el.value=''; el.focus();} };
+  window.brunoLockNow=()=>{ localStorage.removeItem('bbc_bruno_ok'); go('home'); };
+  window.ruleSheet=(gi,ii)=>{ const g=D.protocols.groups[gi], it=g.items[ii];
+    openSheet(`<h3>${esc(it.t)}</h3><div class="row1"><span class="pill p-dev">${esc(g.cat)}</span>${it.trig?` &middot; <span style="color:var(--gold2)">trigger: ${esc(it.trig)}</span>`:''}</div>
+      <div class="sec">What it is</div><div class="kv"><span>${esc(it.s)}</span></div>
+      <div class="sec">Source</div><div class="kv"><span>${esc(D.protocols.source)}</span></div>`); };
+
+  /* ---------- SHEETS ---------- */
+  window.wfSheet=id=>{ const w=D.workflows.find(x=>x.id===id);
+    const arts=ORDER.map(a=>`<div class="art ${w.artifacts[a]?'on':''}"><div class="ic">${w.artifacts[a]?'✔':ICON[a]}</div><div class="nm">${a}</div></div>`).join('');
+    openSheet(`<h3>${esc(w.title)}</h3><div class="row1">${w.owners.map(o=>`<span class="dot" style="background:${OWN[o]||'#888'}"></span>${o}`).join(' ')} · ${esc(w.cat)}</div>
+      <div class="bar"><i style="width:${pct(w)}%"></i></div>
+      <div class="sec">The angle</div><div class="angle">"${esc(w.angle)}"</div><div class="kv" style="margin-top:8px"><span>Audience: ${esc(w.audience)}</span></div>
+      <div class="sec">Content readiness (${pct(w)}%)</div><div class="arts">${arts}</div>
+      <div class="sec">Ship the gaps</div><div class="kv"><span>Run WORKFLOW_CONTENT_FLOW.md: graphic → video → page → social → zip. Each shipped artifact lights a cell.</span></div>`);
+  };
+  window.clientSheet=i=>{ const c=D.clients[i];
+    openSheet(`<h3>${esc(c.name)}</h3><div class="row1">${pillStatus(c.status)} · ${esc(c.industry)}</div>
+      <div class="sec">Details</div>
+      <div class="kv"><b>Owner:</b> <span>${esc(c.owner)}</span></div>
+      <div class="kv"><b>BBC Handler:</b> <span>${esc(c.handler)}</span></div>
+      <div class="kv"><b>AI:</b> <span>${esc(c.ai)}</span></div>
+      <div class="kv"><b>Site:</b> <span>${esc(c.site)}</span></div>
+      <div class="sec">Notes</div><div class="kv"><span>${esc(c.notes)||'—'}</span></div>`);
+  };
+  window.aiSheet=key=>{ const a=D.aiFamily.find(x=>x.key===key);
+    openSheet(`<h3>${esc(a.name)}</h3><div class="row1">${pillStatus(a.status)}</div><div class="sec">Role</div><div class="kv"><span>${esc(a.role)}</span></div>`);
+  };
+
+  /* ---------- ROUTER ---------- */
+  /* Chat context per page — opening Cuh from a page auto-files the task under that area */
+  const CHAT_CTX={
+    home:{cat:'Other',project:'BBC Command Center',label:'Home'},
+    websites:{cat:'Website',project:'BBC Website',label:'Websites'},
+    workflows:{cat:'Workflow',project:'Content Engine',label:'Workflows'},
+    social:{cat:'Social Media',project:'BBC Social',label:'Social'},
+    news:{cat:'Research',project:'BBC Command Center',label:'News'},
+    reminders:{cat:'Other',project:'BBC Command Center',label:'Reminders'},
+    folders:{cat:'Other',project:'BBC Command Center',label:'Folders'},
+    clients:{cat:'Client work',project:'Client Work',label:'Clients'},
+    more:{cat:'Other',project:'BBC Command Center',label:'More'}
+  };
+  window.curView='home'; window.__drivePath=[];
+  function driveNodeAt(path){ let n=D.drive.tree; (path||[]).forEach(name=>{ const c=(n.children||[]).find(x=>x.name===name); if(c) n=c; }); return n; }
+  window.driveGo=(name)=>{ const node=driveNodeAt(window.__drivePath); const c=(node.children||[]).find(x=>x.name===name); if(!c) return; if(c.children&&c.children.length){ window.__drivePath.push(name); go('folders'); } else { window.open(c.url||D.drive.rootUrl,'_blank'); } };
+  window.driveUp=(i)=>{ window.__drivePath=window.__drivePath.slice(0,i); go('folders'); };
+  views.folders=()=>{
+    const node=driveNodeAt(window.__drivePath), kids=node.children||[];
+    const items=['BBC Drive',...window.__drivePath];
+    const crumbs=items.map((c,i)=>{const last=i===items.length-1; return (last?`<span class="cur">${esc(c)}</span>`:`<a onclick="driveUp(${i})">${esc(c)}</a>`)+(last?'':'<span class="sep">/</span>');}).join('');
+    const curUrl=node.url||D.drive.rootUrl;
+    const boxes=kids.map(c=>{const has=c.children&&c.children.length; return `<div class="folderbox" onclick="driveGo('${c.name.replace(/'/g,"\\'")}')"><span class="fic">📁</span><div class="fn"><div class="nm">${esc(c.name)}</div><div class="mt">${has?c.children.length+' items':'open in Drive ↗'}</div></div><span class="arr">${has?'→':'↗'}</span></div>`;}).join('');
+    const body=boxes||`<div class="card"><div class="meta">No mapped subfolders yet. Open this folder in Google Drive to see everything inside (live in-app browse + media playback come with the Drive API).</div></div>`;
+    return `<h2 class="vt">Folders</h2><div class="vsub">Browse the BBC Drive. ${esc(D.drive.note)}</div>
+      <div class="crumbs">${crumbs}</div>
+      <button class="ideabtn" onclick="window.open('${curUrl}','_blank')"><span class="i">📂</span>Open this folder in Google Drive</button>
+      <div class="foldergrid">${body}</div>`;
+  };
+  window.go=v=>{ window.curView=v; app.innerHTML=`<div class="view">${views[v]()}</div>`; window.scrollTo(0,0);
+    document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('active',b.dataset.v===v));
+    sheet.classList.remove('open'); };
+  window.filterCards=(inp,wrapId)=>{ const q=inp.value.toLowerCase(); const wrap=document.getElementById(wrapId);
+    wrap.querySelectorAll('.card,.wfrow,.clientbox').forEach(c=>{ const hay=(c.dataset.search||c.textContent).toLowerCase(); c.style.display=hay.includes(q)?'':'none'; });
+    wrap.querySelectorAll('.wfcat').forEach(p=>{ const any=[...p.querySelectorAll('.wfrow')].some(r=>r.style.display!=='none'); p.style.display=any?'':'none'; }); };
+  document.querySelectorAll('.nav button').forEach(b=>b.onclick=()=>go(b.dataset.v));
+
+  /* ---------- Full-screen Cuh chat ---------- */
+  const CHAT_AGENTS=[{k:'Cuh',c:'#D4AF37',r:'all-around, your main AI'}].concat(D.aiFamily.filter(a=>a.key!=='Brunz').map(a=>({k:a.name.split(' ')[0],c:OWN[a.key]||'#7C8AA5',r:a.role})));
+  let csAgents=new Set(['Cuh']); let csThread=[]; let csEditingId=null;
+  function csTasks(){ try{return JSON.parse(localStorage.getItem('bbc_tasks')||'[]');}catch(e){return [];} }
+  function renderAgents(){
+    const el=document.getElementById('cs-agentpicker');
+    el.innerHTML=CHAT_AGENTS.map(a=>`<div class="agentrow ${csAgents.has(a.k)?'on':''}" data-k="${a.k}"><span class="d" style="background:${a.c}"></span><span class="nm">${a.k}</span><span class="rl">(${esc(a.r)})</span></div>`).join('');
+    el.querySelectorAll('.agentrow').forEach(c=>c.onclick=()=>{const k=c.dataset.k; if(csAgents.has(k)){if(csAgents.size>1)csAgents.delete(k);}else csAgents.add(k); renderAgents();});
+    document.getElementById('cs-agents-top').textContent=[...csAgents].join(' + ');
+  }
+  function renderThread(){
+    const el=document.getElementById('cs-thread');
+    if(!csThread.length){ el.innerHTML=`<div class="cs-empty"><h3 style="font-family:var(--display);color:var(--ink);margin-bottom:8px">Start with Cuh</h3><p>Type below. Pick your agent(s) and fill the task details so this chat is saved as an organized workflow.</p></div>`; return; }
+    el.innerHTML=csThread.map(m=>`<div class="msg ${m.r}">${esc(m.t)}</div>`).join('');
+    el.scrollTop=el.scrollHeight;
+  }
+  function renderSaved(){
+    const el=document.getElementById('cs-saved'); const all=csTasks();
+    el.innerHTML=all.length?all.slice(0,8).map(x=>`<div class="savedtask" data-id="${x.id}"><div class="st-t">${esc(x.title)}</div><div class="st-m">${esc(x.cat||'')}${x.client&&x.client!=='Internal / BBC'?' · '+esc(x.client):''} · ${(x.agents||[]).join(', ')}</div></div>`).join(''):'<div class="st-m" style="color:var(--muted);font-size:12px">No saved tasks yet.</div>';
+    el.querySelectorAll('.savedtask').forEach(d=>d.onclick=()=>loadTask(d.dataset.id));
+  }
+  function loadTask(id){
+    const x=csTasks().find(t=>t.id===id); if(!x)return;
+    csEditingId=x.id;
+    document.getElementById('cs-title').value=x.title||''; document.getElementById('cs-desc').value=x.desc||'';
+    document.getElementById('cs-gprompt').value=x.gprompt||'';
+    document.getElementById('cs-cat').value=x.cat||'Other'; document.getElementById('cs-project').value=x.project||'BBC Command Center'; document.getElementById('cs-client').value=x.client||'Internal / BBC';
+    document.getElementById('cs-tags').value=x.tags||'';
+    csAgents=new Set(x.agents&&x.agents.length?x.agents:['Cuh']); csThread=x.thread||[];
+    renderAgents(); renderThread(); if(window.innerWidth<820) document.getElementById('cs-side').classList.remove('open');
+  }
+  window.openChat=(viewKey,prefill,client)=>{
+    const ctx=CHAT_CTX[viewKey]||CHAT_CTX.home;
+    document.getElementById('cs-cat').innerHTML=['Website','Social Media','Workflow','Client work','Content','Research','Strategy','Other'].map(c=>`<option>${c}</option>`).join('');
+    document.getElementById('cs-client').innerHTML=['Internal / BBC',...D.clients.map(c=>c.name)].map(c=>`<option>${esc(c)}</option>`).join('');
+    document.getElementById('cs-project').innerHTML=['BBC Command Center','Content Engine','BBC Website','BBC Social','Client Work',...D.clients.map(c=>c.name)].map(c=>`<option>${esc(c)}</option>`).join('');
+    csAgents=new Set(['Cuh']); csEditingId=null;
+    csThread=[{r:'sys',t:`Opened from the ${ctx.label} page — filing this under ${ctx.cat} · ${ctx.project}. Change it in Setup if needed.`}];
+    document.getElementById('cs-title').value=''; document.getElementById('cs-desc').value=''; document.getElementById('cs-tags').value=''; document.getElementById('cs-gprompt').value=''; document.getElementById('cs-previews').innerHTML=''; document.getElementById('cs-files').value='';
+    renderAgents(); renderThread(); renderSaved();
+    document.getElementById('cs-cat').value=ctx.cat;
+    document.getElementById('cs-project').value=ctx.project;
+    if(prefill) document.getElementById('cs-title').value=prefill;
+    if(client) document.getElementById('cs-client').value=client;
+    document.getElementById('chatscreen').classList.add('open');
+    setTimeout(()=>document.getElementById('cs-title').focus(),120);
+  };
+  window.ideaBox=()=>{
+    openChat('social','Trending social ideas — deep search');
+    csAgents=new Set(['Cuh','Sonny','Mai']); renderAgents();
+    document.getElementById('cs-msg').value="Deep search what's trending and new for socials we can do right now. Give me 3-5 ideas, each with a source link and a BBC angle.";
+    csThread.push({r:'sys',t:'Idea box: when the brain is wired, Cuh runs this deep search live and drops the ideas right here.'}); renderThread();
+  };
+  window.closeChat=()=>document.getElementById('chatscreen').classList.remove('open');
+  window.toggleSide=()=>document.getElementById('cs-side').classList.toggle('open');
+  window.sendMsg=()=>{
+    const ta=document.getElementById('cs-msg'); const v=ta.value.trim(); if(!v) return;
+    csThread.push({r:'u',t:v}); ta.value='';
+    csThread.push({r:'sys',t:'Saved to this task. '+[...csAgents].join(' + ')+' will reply live once the Anthropic API key is wired.'});
+    renderThread();
+  };
+  window.saveTask=()=>{
+    const t=document.getElementById('cs-title').value.trim()||'Untitled task';
+    const task={id:csEditingId||('t'+Date.now()),title:t,desc:document.getElementById('cs-desc').value,gprompt:document.getElementById('cs-gprompt').value,cat:document.getElementById('cs-cat').value,project:document.getElementById('cs-project').value,client:document.getElementById('cs-client').value,tags:document.getElementById('cs-tags').value,agents:[...csAgents],thread:csThread};
+    const all=csTasks(); const i=all.findIndex(x=>x.id===task.id); if(i>=0)all[i]=task; else all.unshift(task);
+    try{localStorage.setItem('bbc_tasks',JSON.stringify(all));}catch(e){}
+    csEditingId=task.id; renderSaved();
+    const b=document.querySelector('.cs-save'); b.textContent='Saved ✓'; setTimeout(()=>b.textContent='Save task',1500);
+  };
+  document.getElementById('cs-msg').addEventListener('keydown',e=>{ if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();window.sendMsg();} });
+  document.getElementById('cs-files').addEventListener('change',e=>{ const box=document.getElementById('cs-previews'); box.innerHTML=''; [...e.target.files].forEach(f=>{ const url=URL.createObjectURL(f); box.insertAdjacentHTML('beforeend', f.type.startsWith('video')?`<video src="${url}" controls></video>`:`<img src="${url}" alt="">`); }); });
+
+  /* PWA service worker — auto-update so deploys show without manual cache clears */
+  if(false){
+    navigator.serviceWorker.register('sw.js').then(reg=>{ reg.update&&reg.update(); }).catch(()=>{});
+    let refreshing=false;
+    navigator.serviceWorker.addEventListener('controllerchange',()=>{ if(refreshing) return; refreshing=true; location.reload(); });
+  }
+
+  go('home');
+</script>
+</body>
+</html>
