@@ -88,6 +88,11 @@
   .nav button .i{font-size:19px;line-height:1;}
   .nav button.active{color:var(--gold);}
 
+  /* FLOATING CUH BUTTON (every page) */
+  .fab{position:fixed;right:16px;bottom:calc(var(--navh) + 16px + env(safe-area-inset-bottom));z-index:35;background:linear-gradient(135deg,var(--gold),var(--goldB));color:#0A1422;border:none;border-radius:999px;padding:13px 18px;font-family:var(--ui);font-weight:700;font-size:14px;display:flex;align-items:center;gap:8px;box-shadow:0 8px 26px rgba(0,0,0,0.4);cursor:pointer;transition:transform .1s;}
+  .fab .i{font-size:16px;line-height:1;}
+  .fab:active{transform:scale(0.95);}
+
   /* CALENDAR */
   .cal-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:0 -16px;padding:0 16px 8px;}
   .cal-week{display:grid;grid-template-columns:repeat(7,minmax(132px,1fr));gap:7px;min-width:780px;}
@@ -294,6 +299,8 @@
     </div>
   </div>
 </div>
+
+<button class="fab" id="cuhFab" onclick="openChat(curView)" aria-label="Chat with Cuh"><span class="i">💬</span>Cuh</button>
 
 <nav class="nav" id="nav">
   <button data-v="home" class="active"><span class="i">🏠</span>Home</button>
@@ -522,7 +529,7 @@
     const ship=D.workflows.reduce((n,w)=>n+ORDER.filter(a=>w.artifacts[a]).length,0);
     const dueToday=D.content.days.find(x=>x.d.includes('Jun 2'));
     const pending=D.content.days.filter(x=>!x.posted).length;
-    return `<div class="chat-box" onclick="openChat()" style="cursor:pointer">
+    return `<div class="chat-box" onclick="openChat('home')" style="cursor:pointer">
         <h3>Chat with Cuh</h3>
         <p>Your all-around AI. Tap to open full-screen chat, pick your agent(s), and save it as a task.</p>
         <div class="chat-in"><input placeholder="Ask Cuh anything..." readonly style="cursor:pointer"><button>Open chat</button></div>
@@ -723,7 +730,19 @@
   };
 
   /* ---------- ROUTER ---------- */
-  window.go=v=>{ app.innerHTML=`<div class="view">${views[v]()}</div>`; window.scrollTo(0,0);
+  /* Chat context per page — opening Cuh from a page auto-files the task under that area */
+  const CHAT_CTX={
+    home:{cat:'Other',project:'BBC Command Center',label:'Home'},
+    websites:{cat:'Website',project:'BBC Website',label:'Websites'},
+    workflows:{cat:'Workflow',project:'Content Engine',label:'Workflows'},
+    social:{cat:'Social Media',project:'BBC Social',label:'Social'},
+    news:{cat:'Research',project:'BBC Command Center',label:'News'},
+    reminders:{cat:'Other',project:'BBC Command Center',label:'Reminders'},
+    clients:{cat:'Client work',project:'Client Work',label:'Clients'},
+    more:{cat:'Other',project:'BBC Command Center',label:'More'}
+  };
+  window.curView='home';
+  window.go=v=>{ window.curView=v; app.innerHTML=`<div class="view">${views[v]()}</div>`; window.scrollTo(0,0);
     document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('active',b.dataset.v===v));
     sheet.classList.remove('open'); };
   window.filterCards=(inp,wrapId)=>{ const q=inp.value.toLowerCase(); const wrap=document.getElementById(wrapId);
@@ -761,13 +780,17 @@
     csAgents=new Set(x.agents&&x.agents.length?x.agents:['Cuh']); csThread=x.thread||[];
     renderAgents(); renderThread(); if(window.innerWidth<820) document.getElementById('cs-side').classList.remove('open');
   }
-  window.openChat=()=>{
+  window.openChat=(viewKey)=>{
+    const ctx=CHAT_CTX[viewKey]||CHAT_CTX.home;
     document.getElementById('cs-cat').innerHTML=['Website','Social Media','Workflow','Client work','Content','Research','Strategy','Other'].map(c=>`<option>${c}</option>`).join('');
     document.getElementById('cs-client').innerHTML=['Internal / BBC',...D.clients.map(c=>c.name)].map(c=>`<option>${esc(c)}</option>`).join('');
     document.getElementById('cs-project').innerHTML=['BBC Command Center','Content Engine','BBC Website','BBC Social','Client Work',...D.clients.map(c=>c.name)].map(c=>`<option>${esc(c)}</option>`).join('');
-    csThread=[]; csAgents=new Set(['Cuh']); csEditingId=null;
+    csAgents=new Set(['Cuh']); csEditingId=null;
+    csThread=[{r:'sys',t:`Opened from the ${ctx.label} page — filing this under ${ctx.cat} · ${ctx.project}. Change it in Setup if needed.`}];
     document.getElementById('cs-title').value=''; document.getElementById('cs-desc').value=''; document.getElementById('cs-tags').value=''; document.getElementById('cs-gprompt').value=''; document.getElementById('cs-previews').innerHTML=''; document.getElementById('cs-files').value='';
     renderAgents(); renderThread(); renderSaved();
+    document.getElementById('cs-cat').value=ctx.cat;
+    document.getElementById('cs-project').value=ctx.project;
     document.getElementById('chatscreen').classList.add('open');
     setTimeout(()=>document.getElementById('cs-title').focus(),120);
   };
