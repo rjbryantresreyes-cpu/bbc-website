@@ -84,8 +84,8 @@
 
   /* BOTTOM NAV */
   .nav{position:fixed;left:0;right:0;bottom:0;z-index:40;height:calc(var(--navh) + env(safe-area-inset-bottom));padding-bottom:env(safe-area-inset-bottom);display:flex;background:rgba(10,20,34,0.95);backdrop-filter:blur(12px);border-top:1px solid var(--line);}
-  .nav button{flex:1;background:none;border:none;color:var(--muted);font-family:var(--ui);font-size:9px;font-weight:600;white-space:nowrap;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;cursor:pointer;padding-top:8px;}
-  .nav button .i{font-size:19px;line-height:1;}
+  .nav button{flex:1;min-width:0;background:none;border:none;color:var(--muted);font-family:var(--ui);font-size:8px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;cursor:pointer;padding-top:8px;}
+  .nav button .i{font-size:18px;line-height:1;}
   .nav button.active{color:var(--gold);}
 
   /* FLOATING CUH BUTTON (every page) */
@@ -435,6 +435,7 @@
 
 <nav class="nav" id="nav">
   <button data-v="home" class="active"><span class="i">🏠</span>Home</button>
+  <button data-v="clients"><span class="i">👥</span>Clients</button>
   <button data-v="websites"><span class="i">🌐</span>Websites</button>
   <button data-v="workflows"><span class="i">🔄</span>Workflows</button>
   <button data-v="social"><span class="i">📱</span>Social</button>
