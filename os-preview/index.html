@@ -205,6 +205,26 @@
   .cc-nm{font-family:var(--display);font-size:22px;font-weight:700;color:var(--ink);line-height:1.1;}
   .cc-sub{font-size:12.5px;color:var(--muted);margin-top:4px;}
 
+  /* CAVALRY command center (re-souled: navy/black/white/gold) */
+  .cav-hero{display:flex;align-items:center;gap:14px;border-radius:16px;padding:18px;margin-bottom:14px;background:linear-gradient(135deg,#0B1B33,#0A0F1A);border:1px solid rgba(201,162,71,0.25);border-left:3px solid #C9A247;}
+  .cav-badge{width:50px;height:50px;border-radius:13px;display:flex;align-items:center;justify-content:center;font-family:var(--display);font-weight:700;font-size:20px;background:linear-gradient(135deg,#C9A247,#9c7d2f);color:#0A0F1A;flex:none;}
+  .cav-nm{font-family:var(--display);font-size:22px;font-weight:700;color:#fff;line-height:1.05;}
+  .cav-sub{font-size:12px;color:#9FB0C7;margin-top:4px;}
+  .cav-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:14px;}
+  .cav-stat{background:var(--bg2);border:1px solid var(--line);border-radius:12px;padding:12px 5px;text-align:center;}
+  .cav-stat .n{font-family:var(--display);font-size:18px;font-weight:700;color:#C9A247;line-height:1;}
+  .cav-stat .l{font-family:var(--mono);font-size:8px;letter-spacing:.3px;text-transform:uppercase;color:var(--muted);margin-top:6px;line-height:1.2;}
+  .tboard{background:var(--bg2);border:1px solid var(--line);border-radius:14px;padding:14px;margin-bottom:11px;}
+  .tboard-hd{display:flex;align-items:center;gap:8px;font-family:var(--display);font-size:16px;font-weight:700;color:var(--ink);}
+  .tboard-hd .tag{font-family:var(--mono);font-size:9px;letter-spacing:.5px;text-transform:uppercase;color:#C9A247;background:rgba(201,162,71,0.12);padding:2px 7px;border-radius:999px;}
+  .tboard-desc{font-size:11.5px;color:var(--muted);margin:5px 0 11px;line-height:1.4;}
+  .tboard-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:0 -14px;padding:0 14px 6px;}
+  .tlists{display:flex;gap:8px;min-width:max-content;}
+  .tlist{background:var(--bg3);border:1px solid var(--line);border-top:2px solid #C9A247;border-radius:9px;padding:9px 10px;min-width:124px;max-width:140px;}
+  .tlist .ln{font-size:11.5px;font-weight:600;color:var(--ink);line-height:1.25;}
+  .tlist .lm{font-size:9.5px;color:var(--muted);margin-top:4px;line-height:1.3;}
+  .tboard-foot{font-size:11px;color:var(--muted);margin-top:10px;border-top:1px solid var(--line);padding-top:9px;line-height:1.5;}
+
   /* DEVICES & TEAM ACTIVITY */
   .devgrid{display:grid;grid-template-columns:1fr;gap:11px;}
   @media(min-width:680px){.devgrid{grid-template-columns:1fr 1fr;}}
@@ -2544,7 +2564,7 @@
   const sheet=document.getElementById('sheet'), sheetBody=document.getElementById('sheet-body');
   document.getElementById('hdr-date').textContent='AUDIT '+D.meta.updated;
   const pct=w=>Math.round(ORDER.filter(a=>w.artifacts[a]).length/ORDER.length*100);
-  const esc=s=>(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;');
+  const esc=s=>String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;');
   const pillStatus=s=>`<span class="pill p-${s==='active'?'active':s==='dev'?'dev':'concept'}">${s}</span>`;
 
   function openSheet(html){ sheetBody.innerHTML=html; sheet.classList.add('open'); }
@@ -2615,7 +2635,65 @@
       <div class="clientgrid" id="cli">${cards}</div>`;
   };
   window.openClientFolder=(folder)=>{ window.__drivePath=folder?['02_ACTIVE_CLIENTS',folder]:[]; go('folders'); };
+  const CAV={
+    principal:'Tre Serrano', brokerage:'Cavalry Realty Group · brokered by Real',
+    stats:[{n:'511',l:'Career closings'},{n:'$171M',l:'Career volume'},{n:'16K',l:'YouTube subs'},{n:'111',l:'5-star reviews'}],
+    avatar:'Military buyers $500K–$1M relocating to San Antonio (Fort Sam Houston, Lackland AFB). VA loans, Hill Country luxury. Not below $500K.',
+    voice:'First person, never "we/our." Disciplined, warm, straight talk. Feels like home + a partnership, not techy.',
+    palette:[{c:'#0B1B33',n:'Navy'},{c:'#0A0F1A',n:'Black'},{c:'#FFFFFF',n:'White'},{c:'#C9A247',n:'Gold'}],
+    sites:[{n:'callthecavalrygroup.com',u:'https://callthecavalrygroup.com'},{n:'Agent Originators — new build (TBD)',u:''}],
+    ai:'Ester',
+    social:[{p:'YouTube',h:'sanantoniosuburbstreserrano · 16K',u:'https://youtube.com/sanantoniosuburbstreserrano'},{p:'Instagram',h:'@cavalryrealtygroup',u:'https://instagram.com/cavalryrealtygroup'},{p:'Facebook',h:'Cavalry Realty Group',u:'https://facebook.com/cavalryrealtygroup'}],
+    team:[{n:'Tre Serrano',r:'Principal · content face'},{n:'Stephen',r:'Video lead (A-roll, shorts, long-form)'},{n:'Hannah',r:'Transaction coordinator · Trello · scheduling'},{n:'Amber',r:"Buyer's agent · blog + content approver"},{n:'Stacey',r:"Tre's wife · buyer-facing"},{n:'Brianna',r:'Agent'},{n:'Ayoub',r:'Live thumbnails (Upwork)'},{n:'Thi Be Nong',r:'Video editing (Upwork)'},{n:'Fatima',r:'YouTube thumbnails (Upwork)'}],
+    engines:[{n:'Yo San Antonio',d:'Local-news lead magnet — AI videos + carousels + Thursday newsletter. Feeds emails into the funnel.'},{n:'Weekly Live',d:'Thursday YouTube live → edited video + shorts + blog post.'},{n:'Listing Content',d:'Vertical + horizontal reel per house (Zillow + social); full tours feed the luxury channel; AI home tours.'}],
+    boards:[
+      {nm:'Marketing Coordinating',tag:'Yo San Antonio',desc:'Local-news content → graphic + AI video → approval → post → blog.',
+       lists:[['Yo San Antonio - Articles','idea capture'],['Working on Avatar / Graphics','build graphic + AI video'],['Waiting for Approval','Tre reviews'],['Needs Video Revisions','fix + resend'],['Approved to Post',''],['Waiting for Amber Approval','2nd approver'],['Posting in Progress',''],['Pending post for YSA',''],['PENDING BLOG POST FOR YSA','blocked: no YSA site yet'],['Done','']],
+       foot:'Tools: caption GPT · Canva · ChatGPT script · ElevenLabs · HeyGen · CapCut · Drive. Approval: Tre (+ Amber).'},
+      {nm:'Transaction Media',tag:'Listings',desc:'Per-property media by status. 12-step: checklist → attachments → create → approve → post → move.',
+       lists:[['Listing Prep','prep before launch'],['Coming Soon Launch',''],['Just Listed Launch',''],['Price Change Re-Marketing',''],['Offer Accepted Posts',''],['Back on Market',''],['Just Closed Posts','']],
+       foot:'Tools: Canva / Maxa · CapCut · ChatGPT · Drive. Approval: Tre.'},
+      {nm:'Weekly Live',tag:'YouTube',desc:'Thursday live → edit → review → publish → blog.',
+       lists:[['Tre Live Ideas',''],['Pre-Production','Ayoub: live thumbnail'],['Post-Live Queue','send ISO to editor'],['Editing in Progress','Thi Be Nong'],['Tre Review','Tre + Stephen'],['Publish','Fatima thumbnail → post'],['Create Blog Post','Amber reviews'],['Done','']],
+       foot:'Tools: StreamYard · YouTube. People: Ayoub, Thi Be Nong, Fatima, Tre, Stephen, Amber.'}
+    ]
+  };
+  window.cavalryCC=(i)=>{
+    const c=D.clients[i], folder=c.folder||'REAL_CAVALRY';
+    const stats=CAV.stats.map(s=>`<div class="cav-stat"><div class="n">${esc(s.n)}</div><div class="l">${esc(s.l)}</div></div>`).join('');
+    const boards=CAV.boards.map(b=>{
+      const lists=b.lists.map(([ln,lm])=>`<div class="tlist"><div class="ln">${esc(ln)}</div>${lm?`<div class="lm">${esc(lm)}</div>`:''}</div>`).join('');
+      return `<div class="tboard"><div class="tboard-hd">📋 ${esc(b.nm)} <span class="tag">${esc(b.tag)}</span></div><div class="tboard-desc">${esc(b.desc)}</div><div class="tboard-scroll"><div class="tlists">${lists}</div></div><div class="tboard-foot">${esc(b.foot)}</div></div>`;
+    }).join('');
+    const engines=CAV.engines.map(e=>`<div class="opitem"><span class="odot" style="background:#C9A247"></span><span class="oname"><b>${esc(e.n)}</b> — ${esc(e.d)}</span></div>`).join('');
+    const team=CAV.team.map(t=>`<div class="opitem"><span class="odot" style="background:#C9A247"></span><span class="oname"><b>${esc(t.n)}</b> — ${esc(t.r)}</span></div>`).join('');
+    const pal=CAV.palette.map(p=>`<div style="text-align:center"><div style="height:38px;border-radius:8px;background:${p.c};border:1px solid var(--line)"></div><div style="font-family:var(--mono);font-size:9px;color:var(--muted);margin-top:5px">${esc(p.n)}</div></div>`).join('');
+    const social=CAV.social.map(s=>`<a class="lnk" href="${s.u}" target="_blank">${esc(s.p)} · ${esc(s.h)} ↗</a>`).join('');
+    const sites=CAV.sites.map(s=>s.u?`<a class="lnk" href="${s.u}" target="_blank">${esc(s.n)} ↗</a>`:`<div class="lnk" style="opacity:.7">${esc(s.n)}</div>`).join('');
+    const panel=(ic,title,inner)=>`<div class="wfcat"><div class="wfcat-hd"><div class="wfcat-ic" style="background:rgba(201,162,71,0.13);color:#C9A247">${ic}</div><div class="wfcat-nm">${esc(title)}</div></div>${inner}</div>`;
+    app.innerHTML=`<div class="view">
+      <div class="morelink" style="margin-top:0;margin-bottom:14px" onclick="go('clients')">← All clients</div>
+      <div class="cav-hero"><div class="cav-badge">C</div><div><div class="cav-nm">Cavalry Realty Group</div><div class="cav-sub">${esc(CAV.principal)} · ${esc(CAV.brokerage)}</div></div></div>
+      <div class="cav-stats">${stats}</div>
+      <button class="ideabtn" onclick="openChat('clients','Work for Cavalry — ','Cavalry Group')"><span class="i">＋</span>Log work for Cavalry</button>
+      <div class="sec">📋 Trello workflows — Tre's live boards</div>
+      ${boards}
+      <div class="sec">Content engines</div><div class="panel">${engines}</div>
+      <div class="sec">Overview</div>
+      <div class="wfgrid">
+        ${panel('🎯','Avatar client',`<div class="kv"><span>${esc(CAV.avatar)}</span></div>`)}
+        ${panel('🗣️','Brand voice',`<div class="kv"><span>${esc(CAV.voice)}</span></div>`)}
+        ${panel('🎨','Palette',`<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px">${pal}</div>`)}
+        ${panel('🌐','Sites',sites)}
+        ${panel('📱','Social',social)}
+        ${panel('🤖','AI + Drive',`<div class="kv"><b>AI:</b> <span>${esc(CAV.ai)}</span></div><a class="lnk" onclick="openClientFolder('${folder}')" style="cursor:pointer;margin-top:8px">Open Drive folder →</a>`)}
+      </div>
+      <div class="sec">Team</div><div class="panel">${team}</div>
+      <div class="gauge-sub" style="text-align:left;margin-top:10px">Cavalry's command center, scoped to Tre's real workflows. Live board data + Kenz's login access turn on in the final step.</div>`;
+    window.scrollTo(0,0); sheet.classList.remove('open');
+  };
   window.clientCC=(i)=>{
+    if(D.clients[i] && D.clients[i].name==='Cavalry Group') return cavalryCC(i);
     const c=D.clients[i], col=cColor(c), folder=c.folder||CFOLDER[c.name];
     const hasSite=c.site&&c.site!=='-', siteUrl=hasSite?'https://'+c.site.replace(/^https?:\/\//,''):'';
     const isCav=c.name==='Cavalry Group';
