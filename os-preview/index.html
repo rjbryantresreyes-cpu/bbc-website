@@ -205,6 +205,19 @@
   .cc-nm{font-family:var(--display);font-size:22px;font-weight:700;color:var(--ink);line-height:1.1;}
   .cc-sub{font-size:12.5px;color:var(--muted);margin-top:4px;}
 
+  /* DEVICES & TEAM ACTIVITY */
+  .devgrid{display:grid;grid-template-columns:1fr;gap:11px;}
+  @media(min-width:680px){.devgrid{grid-template-columns:1fr 1fr;}}
+  .devbox{background:var(--bg2);border:1px solid var(--line);border-radius:14px;padding:15px;}
+  .dev-hd{display:flex;align-items:center;justify-content:space-between;}
+  .dev-nick{font-family:var(--display);font-size:18px;font-weight:700;color:var(--ink);}
+  .dev-dot{width:10px;height:10px;border-radius:50%;background:#3a4658;flex:none;}
+  .dev-user{font-size:13px;color:var(--ink);margin-top:5px;}
+  .dev-role{font-size:11.5px;color:var(--muted);margin-top:2px;}
+  .dev-row{display:flex;justify-content:space-between;gap:10px;font-size:12px;margin-top:9px;border-top:1px solid var(--line);padding-top:8px;}
+  .dev-k{font-family:var(--mono);font-size:9px;letter-spacing:.5px;text-transform:uppercase;color:var(--gold2);flex:none;}
+  .dev-v{color:var(--ink);text-align:right;}
+
   /* CHAT + NEWS + MORE */
   .chat-box{background:linear-gradient(135deg,#1A2E47,#14253E);border:1px solid var(--gold);border-radius:16px;padding:16px;margin-bottom:18px;}
   .chat-box h3{font-family:var(--display);font-size:19px;margin-bottom:3px;}
@@ -454,6 +467,13 @@
     {"name":"Al Carmelle Managase","role":"Shopify Dev & Creative"},
     {"name":"Ryan C.","role":"AI Content & Automations"},
     {"name":"Daryl Agadia","role":"Content & Marketing"}
+  ],
+  "devices":[
+    {"nick":"Plus","user":"RJ Bryan","role":"Founder · main PC","cc":"All access"},
+    {"nick":"OG","user":"RJ Bryan","role":"Secondary PC","cc":"All access"},
+    {"nick":"Tuff","user":"RJ Bryan","role":"Laptop","cc":"All access"},
+    {"nick":"Daryl","user":"Daryl Agadia","role":"Content & Marketing","cc":"BBC Command Center"},
+    {"nick":"John","user":"John T","role":"Virtual Assistant","cc":"BBC Command Center"}
   ],
   "aiFamily":[
     {"name":"Brunz (LC)","role":"Head AI / Father","status":"active","key":"Brunz"},
@@ -779,6 +799,7 @@
             <div class="panel tap" onclick="go('websites')"><span class="ptitle">Websites</span><table class="ptable">${webRows}</table></div>
             <div class="panel"><span class="ptitle">Needs Attention</span>${attnBars}</div>
             <div class="panel tap" onclick="go('clients')"><span class="ptitle">Clients (${D.clients.length})</span><table class="ptable">${clientRows}</table></div>
+            <div class="panel tap" onclick="go('devices')"><span class="ptitle">Team & Devices</span><div class="metric"><b>${D.devices.length}</b> devices</div><div class="gauge-sub" style="margin-top:8px">Who's online + what they're working on (live when login is wired).</div></div>
           </div>`;
       })()}
       ${(()=>{
@@ -1084,6 +1105,20 @@
       <div class="sec">Systems &amp; SOPs</div>${sys}`;
   };
 
+  views.devices=()=>{
+    const cards=D.devices.map(d=>`<div class="devbox">
+      <div class="dev-hd"><div class="dev-nick">${esc(d.nick)}</div><span class="dev-dot" title="offline"></span></div>
+      <div class="dev-user">${esc(d.user)}</div>
+      <div class="dev-role">${esc(d.role)}</div>
+      <div class="dev-row"><span class="dev-k">Command center</span><span class="dev-v">${esc(d.cc)}</span></div>
+      <div class="dev-row"><span class="dev-k">Status</span><span class="dev-v" style="color:var(--muted)">offline · last seen —</span></div>
+      <div class="dev-row"><span class="dev-k">Working on</span><span class="dev-v" style="color:var(--muted)">— connect to track</span></div></div>`).join('');
+    return `<h2 class="vt">Team & Devices</h2><div class="vsub">${D.devices.length} known devices · who's online and what they're working on</div>
+      <div class="card" style="border-color:rgba(212,175,55,0.35)"><div class="meta">Live status, who's logged in, and current activity turn on when login + the brain are wired. The data sources already exist: per-device sync logs (last seen), ActivityWatch (current app/window), and Claude sessions. A small reporter on each PC feeds this page.</div></div>
+      <div class="sec">Devices</div>
+      <div class="devgrid">${cards}</div>`;
+  };
+
   /* ---------- BRUNO PAGE (private) ---------- */
   views.bruno=()=>{
     if(localStorage.getItem('bbc_bruno_ok')!=='1'){
@@ -1146,6 +1181,7 @@
     news:{cat:'Research',project:'BBC Command Center',label:'News'},
     reminders:{cat:'Other',project:'BBC Command Center',label:'Reminders'},
     folders:{cat:'Other',project:'BBC Command Center',label:'Folders'},
+    devices:{cat:'Other',project:'BBC Command Center',label:'Team & Devices'},
     clients:{cat:'Client work',project:'Client Work',label:'Clients'},
     more:{cat:'Other',project:'BBC Command Center',label:'More'}
   };

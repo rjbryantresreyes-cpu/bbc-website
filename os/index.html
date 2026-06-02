@@ -116,6 +116,108 @@
   .cal-legend .done{background:rgba(74,222,128,0.2);border-color:var(--green);}
   .cal-legend .pend{background:rgba(212,175,55,0.2);border-color:var(--gold);}
 
+  /* MONTH CALENDAR (big) */
+  .month{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:0 -16px;padding:0 16px 8px;}
+  .month-grid{min-width:940px;}
+  .month-dow{display:grid;grid-template-columns:repeat(7,1fr);gap:7px;margin-bottom:7px;}
+  .month-dow span{font-family:var(--mono);font-size:10px;letter-spacing:1px;color:var(--gold2);text-transform:uppercase;text-align:center;}
+  .month-week{display:grid;grid-template-columns:repeat(7,1fr);gap:7px;margin-bottom:7px;}
+  .mcell{background:var(--bg2);border:1px solid var(--line);border-radius:11px;padding:9px;min-height:124px;display:flex;flex-direction:column;gap:5px;}
+  .mcell.out{opacity:.38;}
+  .mcell.today{border-color:var(--gold);box-shadow:0 0 0 1px var(--gold);}
+  .mcell-d{display:flex;align-items:flex-start;justify-content:space-between;gap:6px;}
+  .mcell-num{font-family:var(--display);font-size:15px;font-weight:700;color:var(--ink);line-height:1;}
+  .mcell-slot{font-family:var(--mono);font-size:8px;color:var(--muted);text-transform:uppercase;letter-spacing:.3px;text-align:right;max-width:70px;}
+  .mev{font-size:10.5px;line-height:1.25;padding:5px 7px;border-radius:7px;border-left:3px solid;}
+  .mev-graphic{background:rgba(45,212,191,0.13);border-color:#2DD4BF;color:#cdeee9;}
+  .mev-reel{background:rgba(167,139,250,0.13);border-color:#A78BFA;color:#e2d9fb;}
+  .mev.posted{background:rgba(74,222,128,0.13);border-color:var(--green);color:#cdeecd;}
+  .mev-event{background:rgba(212,175,55,0.15);border-color:var(--gold);color:#f0e2c0;}
+  .mev-rem{display:block;font-size:9px;color:var(--gold2);margin-top:2px;opacity:.9;}
+
+  /* POSTING RHYTHM boxes */
+  .rhythm{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+  @media(min-width:720px){.rhythm{grid-template-columns:repeat(auto-fit,minmax(150px,1fr));}}
+  .rbox{background:var(--bg2);border:1px solid var(--line);border-top:3px solid var(--gold);border-radius:12px;padding:13px;}
+  .rbox .day{font-family:var(--display);font-size:15px;font-weight:700;color:var(--ink);}
+  .rbox .slot{font-family:var(--mono);font-size:9px;letter-spacing:.5px;text-transform:uppercase;color:var(--gold2);margin-top:4px;}
+  .rbox .note{font-size:11.5px;color:var(--muted);margin-top:7px;line-height:1.4;}
+
+  /* ANALYTICS boxes */
+  .anagrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+  @media(min-width:720px){.anagrid{grid-template-columns:repeat(auto-fit,minmax(190px,1fr));}}
+  .anabox{background:var(--bg2);border:1px solid var(--line);border-radius:14px;padding:14px;}
+  .anabox .pl{font-weight:700;font-size:15px;color:var(--ink);}
+  .anabox .hd{font-size:11px;color:var(--muted);margin-top:2px;}
+  .anabox .mets{display:flex;gap:7px;margin-top:11px;}
+  .anabox .met{flex:1;text-align:center;background:var(--bg3);border:1px solid var(--line);border-radius:8px;padding:8px 3px;}
+  .anabox .met .v{font-family:var(--display);font-size:16px;color:var(--gold2);}
+  .anabox .met .k{font-family:var(--mono);font-size:8px;color:var(--muted);text-transform:uppercase;margin-top:3px;letter-spacing:.3px;}
+
+  /* IDEA BOX trigger */
+  .ideabtn{width:100%;background:linear-gradient(135deg,#1A2E47,#14253E);border:1px solid var(--gold);color:var(--ink);border-radius:12px;padding:15px;font-family:var(--ui);font-weight:700;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:9px;margin-bottom:11px;transition:transform .1s;}
+  .ideabtn:active{transform:scale(.99);} .ideabtn:hover{border-color:var(--gold2);}
+  .ideabtn .i{font-size:17px;line-height:1;}
+
+  /* BRUNO PAGE (private) */
+  .hdr-lock{background:none;border:1px solid var(--line);color:var(--gold2);border-radius:9px;padding:6px 9px;font-size:14px;cursor:pointer;line-height:1;}
+  .hdr-lock:hover{border-color:var(--gold);}
+  .bgate{max-width:380px;margin:40px auto;text-align:center;}
+  .bgate .lk{font-size:40px;}
+  .bgate h3{font-family:var(--display);font-size:24px;font-weight:700;margin:14px 0 6px;}
+  .bgate p{color:var(--muted);font-size:13px;margin-bottom:18px;line-height:1.5;}
+  .bgate input{width:100%;background:var(--bg3);border:1px solid var(--line);border-radius:11px;color:var(--ink);font-size:18px;text-align:center;letter-spacing:3px;padding:13px;margin-bottom:10px;}
+  .bgate input:focus{outline:none;border-color:var(--gold);}
+  .bgate button{width:100%;background:var(--gold);color:#0A1422;border:none;border-radius:11px;padding:13px;font-weight:700;font-family:var(--ui);cursor:pointer;}
+  .bgate .err{color:#EF6B6B;font-size:12px;margin-top:9px;min-height:14px;}
+  .brunolock{display:inline-block;margin-top:16px;font-size:12px;color:var(--muted);cursor:pointer;border:1px solid var(--line);padding:8px 13px;border-radius:9px;}
+  .brunolock:hover{border-color:var(--gold);color:var(--gold);}
+
+  /* FOLDERS browser */
+  .crumbs{display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-size:12.5px;margin-bottom:13px;}
+  .crumbs a{color:var(--gold2);cursor:pointer;} .crumbs a:hover{color:var(--gold);}
+  .crumbs .sep{color:var(--muted);} .crumbs .cur{color:var(--ink);font-weight:600;}
+  .foldergrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+  @media(min-width:680px){.foldergrid{grid-template-columns:repeat(auto-fit,minmax(210px,1fr));}}
+  .folderbox{background:var(--bg2);border:1px solid var(--line);border-radius:13px;padding:14px;cursor:pointer;display:flex;align-items:center;gap:11px;transition:border-color .15s,transform .1s;}
+  .folderbox:hover{border-color:var(--gold);} .folderbox:active{transform:scale(.98);}
+  .folderbox .fic{font-size:22px;flex:none;line-height:1;}
+  .folderbox .fn{flex:1;min-width:0;}
+  .folderbox .fn .nm{font-size:13px;color:var(--ink);font-weight:600;line-height:1.25;word-break:break-word;}
+  .folderbox .fn .mt{font-family:var(--mono);font-size:9px;color:var(--muted);margin-top:3px;}
+  .folderbox .arr{color:var(--gold2);flex:none;}
+
+  /* CLIENTS page + client command center */
+  .clientgrid{display:grid;grid-template-columns:1fr;gap:12px;}
+  @media(min-width:720px){.clientgrid{grid-template-columns:1fr 1fr;}}
+  .clientbox{background:var(--bg2);border:1px solid var(--line);border-radius:16px;padding:16px;cursor:pointer;transition:border-color .15s,transform .1s;}
+  .clientbox:hover{border-color:var(--gold);} .clientbox:active{transform:scale(.99);}
+  .cb-hd{display:flex;align-items:center;gap:11px;}
+  .cb-av{width:42px;height:42px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-family:var(--display);font-weight:700;font-size:18px;flex:none;}
+  .cb-t{flex:1;min-width:0;} .cb-nm{font-family:var(--display);font-size:17px;font-weight:700;color:var(--ink);line-height:1.12;} .cb-meta{font-size:12px;color:var(--muted);margin-top:3px;}
+  .cb-class{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:6px;margin:13px 0 11px;}
+  .cchip{background:var(--bg3);border:1px solid var(--line);border-radius:8px;padding:7px 4px;text-align:center;}
+  .cchip.on{border-color:rgba(74,222,128,0.4);}
+  .cchip .ck{display:block;font-family:var(--mono);font-size:8px;letter-spacing:.3px;text-transform:uppercase;color:var(--muted);}
+  .cchip .cv{display:block;font-size:11px;color:var(--ink);margin-top:3px;} .cchip.on .cv{color:var(--green);}
+  .cb-open{font-family:var(--mono);font-size:10px;letter-spacing:.5px;color:var(--gold2);text-align:right;}
+  .cc-hero{display:flex;align-items:center;gap:13px;border-radius:16px;padding:16px;margin-bottom:14px;}
+  .cc-nm{font-family:var(--display);font-size:22px;font-weight:700;color:var(--ink);line-height:1.1;}
+  .cc-sub{font-size:12.5px;color:var(--muted);margin-top:4px;}
+
+  /* DEVICES & TEAM ACTIVITY */
+  .devgrid{display:grid;grid-template-columns:1fr;gap:11px;}
+  @media(min-width:680px){.devgrid{grid-template-columns:1fr 1fr;}}
+  .devbox{background:var(--bg2);border:1px solid var(--line);border-radius:14px;padding:15px;}
+  .dev-hd{display:flex;align-items:center;justify-content:space-between;}
+  .dev-nick{font-family:var(--display);font-size:18px;font-weight:700;color:var(--ink);}
+  .dev-dot{width:10px;height:10px;border-radius:50%;background:#3a4658;flex:none;}
+  .dev-user{font-size:13px;color:var(--ink);margin-top:5px;}
+  .dev-role{font-size:11.5px;color:var(--muted);margin-top:2px;}
+  .dev-row{display:flex;justify-content:space-between;gap:10px;font-size:12px;margin-top:9px;border-top:1px solid var(--line);padding-top:8px;}
+  .dev-k{font-family:var(--mono);font-size:9px;letter-spacing:.5px;text-transform:uppercase;color:var(--gold2);flex:none;}
+  .dev-v{color:var(--ink);text-align:right;}
+
   /* CHAT + NEWS + MORE */
   .chat-box{background:linear-gradient(135deg,#1A2E47,#14253E);border:1px solid var(--gold);border-radius:16px;padding:16px;margin-bottom:18px;}
   .chat-box h3{font-family:var(--display);font-size:19px;margin-bottom:3px;}
@@ -281,7 +383,10 @@
 
 <div class="hdr">
   <div class="b">BBC Command Center<small id="hdr-sub">OPERATING SYSTEM</small></div>
-  <div class="date" id="hdr-date">2026-06-02</div>
+  <div style="display:flex;align-items:center;gap:11px">
+    <div class="date" id="hdr-date">2026-06-02</div>
+    <button class="hdr-lock" onclick="go('bruno')" aria-label="Bruno page" title="Bruno page (private)">🔒</button>
+  </div>
 </div>
 
 <main id="app"></main>
@@ -334,6 +439,7 @@
   <button data-v="workflows"><span class="i">🔄</span>Workflows</button>
   <button data-v="social"><span class="i">📱</span>Social</button>
   <button data-v="reminders"><span class="i">✅</span>Reminders</button>
+  <button data-v="folders"><span class="i">📁</span>Folders</button>
   <button data-v="news"><span class="i">📰</span>News</button>
 </nav>
 
@@ -349,7 +455,8 @@
     {"name":"First Class Finishes","owner":"-","handler":"Ryan C.","ai":"-","site":"firstclass-finishes.com","industry":"Commercial painting + roofing, Texas","status":"active","notes":""},
     {"name":"Hi-Up Roofing","owner":"-","handler":"Ryan C.","ai":"-","site":"hi-uproofing.com","industry":"Roofing, storm damage","status":"active","notes":"Insurance SEO, storm damage."},
     {"name":"AJ Battle Foundation","owner":"AJ","handler":"Al","ai":"-","site":"theajbattlefoundation.org","industry":"Nonprofit","status":"active","notes":"Sister business to Sonya. Coordinate carefully."},
-    {"name":"All Ryze","owner":"-","handler":"Kenz / Daryl","ai":"-","site":"-","industry":"Digital audience engagement & growth management agency","status":"active","notes":"NEVER use adult-platform language. Describe as a digital audience engagement and growth management agency."}
+    {"name":"All Ryze","owner":"-","handler":"Kenz / Daryl","ai":"-","site":"-","industry":"Digital audience engagement & growth management agency","status":"active","notes":"NEVER use adult-platform language. Describe as a digital audience engagement and growth management agency."},
+    {"name":"Cavalry Group","owner":"Tre","handler":"Kenz","ai":"-","site":"callthecavalrygroup.com","industry":"Real estate","status":"active","notes":"Kenz works this account. Two website builds in progress: A-Beal and B-Military. Main contact: Tre."}
   ],
   "team":[
     {"name":"Bruno (RJ)","role":"Founder & Lead Strategist"},
@@ -360,6 +467,13 @@
     {"name":"Al Carmelle Managase","role":"Shopify Dev & Creative"},
     {"name":"Ryan C.","role":"AI Content & Automations"},
     {"name":"Daryl Agadia","role":"Content & Marketing"}
+  ],
+  "devices":[
+    {"nick":"Plus","user":"RJ Bryan","role":"Founder · main PC","cc":"All access"},
+    {"nick":"OG","user":"RJ Bryan","role":"Secondary PC","cc":"All access"},
+    {"nick":"Tuff","user":"RJ Bryan","role":"Laptop","cc":"All access"},
+    {"nick":"Daryl","user":"Daryl Agadia","role":"Content & Marketing","cc":"BBC Command Center"},
+    {"nick":"John","user":"John T","role":"Virtual Assistant","cc":"BBC Command Center"}
   ],
   "aiFamily":[
     {"name":"Brunz (LC)","role":"Head AI / Father","status":"active","key":"Brunz"},
@@ -386,6 +500,111 @@
       {"d":"Fri Jun 5","graphic":"-","reel":"Content Engine (workflow)","posted":false},
       {"d":"Sat Jun 6","graphic":"Workflow Menu","reel":"-","posted":false}
     ]
+  },
+  "calendar":{
+    "label":"June 2026","year":2026,"monthIdx":5,"today":"2026-06-02",
+    "posts":{
+      "2026-05-31":{"graphic":"Sunday Rest Day","posted":true},
+      "2026-06-01":{"reel":"Segment 3","posted":true},
+      "2026-06-02":{"graphic":"Cut the Silence","reel":"Cut the Silence","posted":false},
+      "2026-06-03":{"graphic":"Ryan review","reel":"Ryan review","posted":false},
+      "2026-06-04":{"graphic":"4 Tasks Eating Your Week","posted":false},
+      "2026-06-05":{"reel":"Content Engine","posted":false},
+      "2026-06-06":{"graphic":"Workflow Menu","posted":false}
+    },
+    "events":[
+      {"date":"2026-06-14","label":"Flag Day","type":"holiday"},
+      {"date":"2026-06-19","label":"Juneteenth","type":"holiday"},
+      {"date":"2026-06-20","label":"First Day of Summer","type":"season"},
+      {"date":"2026-06-21","label":"Father's Day","type":"holiday"}
+    ]
+  },
+  "protocols":{
+    "code":"balay2026",
+    "source":"~/.claude/CLAUDE.md (global rules)",
+    "groups":[
+      {"cat":"Identity & Relationship","color":"#60A5FA","items":[
+        {"t":"Honest Partner Rule","trig":"always","s":"RJ is co-founder, not a user. Always recommend the genuinely best path even if it costs money. If a paid tool is 50%+ better, say so with cost + ROI + the free alternative. Default to truth, not flattery."},
+        {"t":"Brunz Identity — LC","s":"Brunz = Luke Clyde Tres Reyes (LC), call sign 'Cuh'. RJ's brother and co-founder. Internal: LC / Cuh. External/formal: 'Brunz, Head AI of Balay ni Bruno & Co.'"},
+        {"t":"BBC Brand Identity","s":"Balay ni Bruno & Co. = warm, family-built operational support studio. Emotional promise: relief, trust, stability, warmth. Not a tech brand, not a VA agency."},
+        {"t":"BBC Business Model","s":"BBC sells the VA partnership. AIs, skills, and functions are internal tools and funnels, never sold separately. No per-AI pricing."}
+      ]},
+      {"cat":"How the AI talks to RJ","color":"#34D399","items":[
+        {"t":"Response Length Rule","trig":"every reply","s":"Default short. Lead with the concept. 1-3 sentences for most replies. Long only for deep dives, build plans, or audits RJ asked for."},
+        {"t":"Plain English Rule","s":"Translate confusing terms inline ('Plain English: ...'). Only the confusing parts, not everything."},
+        {"t":"Explain-Like-I'm-New Rule","s":"For anything non-trivial: explain what's happening, the idea behind it, and a simple roadmap of where we are and where we're going. Assume the reader is new."},
+        {"t":"Prompt-First Rule","trig":"non-trivial instruction","s":"Restate the instruction as a clean prompt, confirm if ambiguous, then execute. Always restate for new builds, live changes, and voice-to-text."},
+        {"t":"Question + Task Order Rule","s":"If a message has both a question and a task, answer the question(s) first, then do the task."},
+        {"t":"Screenshot Handling Rule","s":"A screenshot with no design task: don't analyze design, focus on content/context. Only analyze design if RJ says 'check the design'."},
+        {"t":"Never Tell RJ to Rest","s":"Never suggest he sleep, rest, take a break, or stop for the day. RJ sets his own pace. Only run the wrap protocol if HE says he's stopping."}
+      ]},
+      {"cat":"Content & Voice","color":"#EC4899","items":[
+        {"t":"Content Integrity Rule","trig":"any content","s":"Never invent names, AI names, copy, sections, pricing, or any live content. Use only what's in the Drive or what RJ gave. Missing info: ask first. Invented live content = critical failure."},
+        {"t":"Webby Writing Rules (external)","s":"No em-dashes, no mid-sentence hyphen-dashes, no filler (seamlessly/leverage/robust/streamline). Warm and human. External = always 'Balay ni Bruno & Co.', never 'BBC'."},
+        {"t":"Universal Caption Rule","s":"External captions are for general business owners. No jargon (no 'AI agent', 'MCP', 'workflow'). Plain enough anyone gets it, framed so any business can apply it."},
+        {"t":"Paste-Ready Caption Output","s":"Captions output copy-paste ready per platform. No 'Caption:' / 'Hashtags:' labels. Receipts go in a footer, not inside the block."},
+        {"t":"Content Quality Tier Rule","s":"Drafts render light/fast for review. Finals re-render at HIGH quality before posting or storing. Nothing draft-quality gets posted."},
+        {"t":"Process-as-Content Rule","s":"Capture every build/process (screen rec, before/after, quotes) and repurpose it. Lead with the RESULT. No listicles, no 'comment for the link' bait."}
+      ]},
+      {"cat":"Protocols (trigger phrases)","color":"#D4AF37","items":[
+        {"t":"Session Title Rule","trig":"every session","s":"Title format: [DeviceNickname] - MM/DD/YYYY (then -0.1, -0.2 for same-day). Surface it in the first response and remind RJ to rename the sidebar."},
+        {"t":"Save and Sync Protocol","trig":"'save and sync'","s":"Save everything (learnings, rules, memory, code) to the right homes, push every repo, mirror CLAUDE.md to the Drive, run the brain-sync, then report a checklist per channel."},
+        {"t":"End-of-Day Wrap Protocol","trig":"'good night' / 'wrapping up'","s":"5 stages: deep diagnostic, day audit, improvement deep-dive, tomorrow preview, save the wrap report to Kriz DAILY_WRAPS."},
+        {"t":"Brunz Upgrade Protocol","trig":"'upgrade Brunz' / new Claude release","s":"4 steps: search the update, find what helps BBC, search the broader internet, implement what's safe + free + high-leverage. Save findings to LEARNINGS."},
+        {"t":"Soft / Hard Update","trig":"'soft update' / 'hard update'","s":"Soft = quick recap since the last update point. Hard = full system diagnostic (drives, tools, hooks, memory, subagents, flags)."},
+        {"t":"Handoff Protocol","s":"Bridge Claude Desktop (planning) and Claude Code (execution) via _HANDOFFS/. Check PENDING at session start; execute on 'run the handoff'."},
+        {"t":"Claude.ai Project Sync","trig":"'sync to the cloud project'","s":"Sync Drive files to the matching Claude.ai Project via the Chrome connection. Suggest proactively after big decisions or new rules."}
+      ]},
+      {"cat":"Research & Tools","color":"#A78BFA","items":[
+        {"t":"Deep Search Rule","trig":"'deep search'","s":"Comprehensive search across MCPs, APIs, agents, open-source, SaaS. Check internal catalogs first, dispatch bbc-researcher, save to LEARNINGS."},
+        {"t":"BBC-Lens Research Rule","s":"Every research output includes: what it is, how it serves BBC, the cost, the BBC use case, and a recommendation (install / pilot / watch / skip)."},
+        {"t":"Capability-Gap Deep-Search","trig":"hit an 'I can't from here' wall","s":"When a tool is missing, deep-search MCPs/APIs/tools to close the gap, install it, finish the task, and save the learning. Don't push the work back to RJ."},
+        {"t":"Tool-First Audit Rule","s":"Before brute-forcing with code or manual work, audit available MCPs/APIs/tools and pick the right one for the job."},
+        {"t":"AI Routing Rules","s":"Haiku subagent for copy/bulk edits. Sonnet for standard work, builds, debugging. Opus for major architecture and critical strategy."},
+        {"t":"Token Efficiency Rules","s":"Read project CLAUDE.md first. Grep before reading. Targeted edits over full rewrites. /compact after each major task."}
+      ]},
+      {"cat":"AI Family & Knowledge","color":"#F472B6","items":[
+        {"t":"AI Family DNA Rule","s":"Every BBC-owned AI inherits Brunz's directness + Kriz's warmth, then layers its specialist flavor on top."},
+        {"t":"Client AI Capability Parity","s":"Client AIs get the same body (full capability) as BBC's AIs, just a different soul (client brand). Strip all BBC DNA — Client Brand Purity."},
+        {"t":"Cross-Pollination Rule","s":"Before declaring an AI done, scan sibling AIs for transferable skills that improve it without disrupting its main function. Report what was added."},
+        {"t":"Knowledge Capture Rule","s":"Proactively save useful patterns, processes, and decisions to LEARNINGS. Tell RJ: 'Saved: [title] -> [path]'."},
+        {"t":"Personal Info Routing","s":"Any personal info RJ shares about himself/his life routes to Kriz's knowledge base, not scattered across other folders."}
+      ]},
+      {"cat":"Permissions & Build","color":"#9FB0C7","items":[
+        {"t":"Permission & Autonomy","s":"Auto-approve everything routine (files, edits, commits, installs, builds). Only ask if it could damage the system or business: data loss, breaking a live site, irreversible, sensitive, or real money."},
+        {"t":"Mobile-First Website Rule","trig":"any site push","s":"Verify 375 / 768 / 1280 before any website push. Touch targets >=44px, body text >=16px, playsinline on video, 100dvh for full-height."},
+        {"t":"Sellable Project Rule","s":"Every project ships 4 layers: documentation, strategy, sales, and a VA implementation guide a VA can run without asking RJ."},
+        {"t":"Content Posting Awareness","trig":"session start","s":"Surface pending-to-post folders at session start. A ' POSTED' suffix on the folder marks it done so it stops nagging."}
+      ]}
+    ]
+  },
+  "drive":{
+    "rootUrl":"https://drive.google.com/drive/folders/0ADNHm1Hxk5xiUk9PVA",
+    "note":"Live file browsing + in-app graphic/video playback turn on when the Google Drive API is connected.",
+    "tree":{"name":"BBC Drive","children":[
+      {"name":"01_LEADS"},
+      {"name":"02_ACTIVE_CLIENTS","children":[{"name":"4OCEAN"},{"name":"AJ-BATTLE-FOUNDATION"},{"name":"ALL-RYZE"},{"name":"FIRST-CLASS-FINISHES"},{"name":"HI-UP-ROOFING"},{"name":"HOME-VISION-STUDIO"},{"name":"PRIMEFLEX"},{"name":"REAL_CAVALRY"},{"name":"S-RIVIERE-HAIR-COLLECTION"},{"name":"TOP-PRODUCER-INVESTMENT-CAPITAL"},{"name":"WOODEN-WOODWORKS"}]},
+      {"name":"03_ARCHIVED_CLIENTS"},
+      {"name":"04_TEAM"},
+      {"name":"05_OPERATIONS"},
+      {"name":"06_FINANCE"},
+      {"name":"07_MARKETING"},
+      {"name":"08_KNOWLEDGE_BASE"},
+      {"name":"09_POTENTIAL CLIENTS"},
+      {"name":"BBC Content","url":"https://drive.google.com/drive/folders/1fxfMhnqjYzNjnplQC1nVx4LPRE77wgIK","children":[{"name":"BBC Bruno recordings"},{"name":"BBC Content Posting"},{"name":"BBC Graphic"},{"name":"BBC Team Building"},{"name":"Tre 1"},{"name":"Tre 2"},{"name":"Website Workflow Reel"}]},
+      {"name":"BBC Operating System"},
+      {"name":"BBC WEBSITE HTML"},
+      {"name":"BBC_AI_FAMILY","children":[{"name":"BRUNZ"},{"name":"KRIZ"},{"name":"WEBBY"},{"name":"MAI"},{"name":"BOOGY"},{"name":"JENNY"},{"name":"VIDZ"},{"name":"RAPHY"},{"name":"CASEY"},{"name":"SONNY"},{"name":"EMY"},{"name":"LANA"},{"name":"SEAN"},{"name":"AGENT_PROFILES"}]},
+      {"name":"CONTENT_QUEUE","children":[{"name":"2026-05-29_google_ask_advisor"},{"name":"2026-05-30_tpic_ryan_review"},{"name":"2026-05-31_sunday_restday_rest"},{"name":"2026-06-05_content_engine_workflow"},{"name":"_PENDING_DRAFT"},{"name":"_TRENDING_IDEAS"}]},
+      {"name":"CONTENT_POSTED"},
+      {"name":"VOICEOVERS"},
+      {"name":"Vidz Test"},
+      {"name":"NPC-Portfolio-System"},
+      {"name":"Bruno's Idea"},
+      {"name":"Daryl BBC Folder"},
+      {"name":"_BBC Logo Final"},
+      {"name":"_SYSTEM"}
+    ]}
   },
   "siteNav":["Home","Our Story","How It Works","How We Help","Our Team","Our Work","Insights","Contact"],
   "websitePages":[
@@ -580,6 +799,7 @@
             <div class="panel tap" onclick="go('websites')"><span class="ptitle">Websites</span><table class="ptable">${webRows}</table></div>
             <div class="panel"><span class="ptitle">Needs Attention</span>${attnBars}</div>
             <div class="panel tap" onclick="go('clients')"><span class="ptitle">Clients (${D.clients.length})</span><table class="ptable">${clientRows}</table></div>
+            <div class="panel tap" onclick="go('devices')"><span class="ptitle">Team & Devices</span><div class="metric"><b>${D.devices.length}</b> devices</div><div class="gauge-sub" style="margin-top:8px">Who's online + what they're working on (live when login is wired).</div></div>
           </div>`;
       })()}
       ${(()=>{
@@ -593,14 +813,48 @@
       <a class="morelink" onclick="go('more')">AI Family · Team · Systems →</a>`;
   };
 
+  const CFOLDER={'S. Riviere Hair Collection':'S-RIVIERE-HAIR-COLLECTION','4Ocean':'4OCEAN','Wooden Woodworks':'WOODEN-WOODWORKS','Home Vision Studio':'HOME-VISION-STUDIO','First Class Finishes':'FIRST-CLASS-FINISHES','Hi-Up Roofing':'HI-UP-ROOFING','AJ Battle Foundation':'AJ-BATTLE-FOUNDATION','All Ryze':'ALL-RYZE','Cavalry Group':'REAL_CAVALRY'};
+  const CCOLOR={'S. Riviere Hair Collection':'#C9A961','4Ocean':'#2D9CDB','Wooden Woodworks':'#A9744F','Home Vision Studio':'#6D8FC7','First Class Finishes':'#C0552E','Hi-Up Roofing':'#4A6FA5','AJ Battle Foundation':'#4E9E74','All Ryze':'#A855F7','Cavalry Group':'#7C8A5A'};
+  const cColor=c=>CCOLOR[c.name]||'#D4AF37';
   views.clients=()=>{
-    const cards=D.clients.map((c,i)=>`<div class="card" onclick="clientSheet(${i})">
-      <div class="row1"><div class="av" style="background:linear-gradient(135deg,var(--gold),var(--goldB))">${esc(c.name[0])}</div>
-        <div class="nm">${esc(c.name)}</div>${pillStatus(c.status)}</div>
-      <div class="meta">${esc(c.industry)}<br>Handler: <b>${esc(c.handler)}</b>${c.ai!=='-'?' · AI: '+esc(c.ai):''}</div></div>`).join('');
-    return `<h2 class="vt">Clients</h2><div class="vsub">${D.clients.length} active. Tap any client for their details.</div>
+    const cards=D.clients.map((c,i)=>{
+      const col=cColor(c), hasSite=c.site&&c.site!=='-';
+      const chips=[{k:'Website',on:hasSite,v:hasSite?'live':'setup'},{k:'Social',on:false,v:'setup'},{k:'Reminders',on:false,v:'–'},{k:'Tasks',on:false,v:'–'}];
+      const chipHtml=chips.map(ch=>`<div class="cchip ${ch.on?'on':''}"><span class="ck">${ch.k}</span><span class="cv">${ch.v}</span></div>`).join('');
+      return `<div class="clientbox" data-search="${esc((c.name+' '+c.industry+' '+c.handler+' '+(c.ai||'')).toLowerCase())}" onclick="clientCC(${i})" style="border-top:3px solid ${col}">
+        <div class="cb-hd"><div class="cb-av" style="background:${col}22;color:${col}">${esc(c.name[0])}</div>
+          <div class="cb-t"><div class="cb-nm">${esc(c.name)}</div><div class="cb-meta">${esc(c.industry)} · ${esc(c.handler)}${c.ai!=='-'?' · '+esc(c.ai):''}</div></div>${pillStatus(c.status)}</div>
+        <div class="cb-class">${chipHtml}</div>
+        <div class="cb-open">Open command center →</div></div>`;
+    }).join('');
+    return `<h2 class="vt">Clients</h2><div class="vsub">${D.clients.length} clients · tap a box to open that client's command center</div>
       <input class="search" placeholder="Search clients..." oninput="filterCards(this,'cli')">
-      <div id="cli">${cards}</div>`;
+      <div class="clientgrid" id="cli">${cards}</div>`;
+  };
+  window.openClientFolder=(folder)=>{ window.__drivePath=folder?['02_ACTIVE_CLIENTS',folder]:[]; go('folders'); };
+  window.clientCC=(i)=>{
+    const c=D.clients[i], col=cColor(c), folder=CFOLDER[c.name];
+    const hasSite=c.site&&c.site!=='-', siteUrl=hasSite?'https://'+c.site.replace(/^https?:\/\//,''):'';
+    const isCav=c.name==='Cavalry Group';
+    const panel=(ic,title,inner)=>`<div class="wfcat"><div class="wfcat-hd"><div class="wfcat-ic" style="background:${col}22;color:${col}">${ic}</div><div class="wfcat-nm">${esc(title)}</div></div>${inner}</div>`;
+    const kv=(k,v)=>`<div class="kv"><b>${k}:</b> <span>${esc(v||'—')}</span></div>`;
+    const overview=panel('🏠','Overview',`${kv('Owner',c.owner)}${kv('Handler',c.handler)}${kv('AI',c.ai)}${kv('Status',c.status)}<div class="sec" style="margin-top:10px">Notes</div><div class="kv"><span>${esc(c.notes)||'—'}</span></div>`);
+    const webInner=isCav
+      ? `<div class="opitem"><span class="odot" style="background:var(--green)"></span><span class="oname">Website A — Beal <span style="color:var(--muted)">build in progress</span></span></div><div class="opitem"><span class="odot" style="background:var(--green)"></span><span class="oname">Website B — Military <span style="color:var(--muted)">build in progress</span></span></div><a class="lnk" href="${siteUrl}" target="_blank" style="margin-top:8px">${esc(c.site)} ↗</a>`
+      : (hasSite?`<a class="lnk" href="${siteUrl}" target="_blank">${esc(c.site)} ↗</a><div class="gauge-sub" style="text-align:left;margin-top:8px">Analytics + page list populate when we connect this client's site.</div>`:`<div class="kv"><span>No public site on file yet.</span></div>`);
+    const website=panel('🌐','Website',webInner);
+    const social=panel('📱','Social Media',`<div class="kv"><span>Content calendar + posting rhythm appear here once we load this client's social plan.</span></div><div class="gauge-sub" style="text-align:left;margin-top:6px">In setup.</div>`);
+    const reminders=panel('✅','Reminders & tasks',`<div class="kv"><span>Tasks and reminders for ${esc(c.name)} show here. Log them with Cuh below.</span></div><div class="gauge-sub" style="text-align:left;margin-top:6px">In setup.</div>`);
+    const drive=panel('📁','Drive folder',`<div class="kv"><span>${folder?'02_ACTIVE_CLIENTS / '+esc(folder):'Folder not mapped yet.'}</span></div>${folder?`<a class="lnk" onclick="openClientFolder('${folder.replace(/'/g,"\\'")}')" style="margin-top:8px;cursor:pointer">Open in Folders →</a>`:''}`);
+    return app.innerHTML=`<div class="view">
+      <div class="morelink" style="margin-top:0;margin-bottom:14px" onclick="go('clients')">← All clients</div>
+      <div class="cc-hero" style="background:linear-gradient(135deg,${col}33,${col}0d);border:1px solid ${col}66">
+        <div class="cb-av" style="background:${col};color:#0A1422">${esc(c.name[0])}</div>
+        <div><div class="cc-nm">${esc(c.name)}</div><div class="cc-sub">${esc(c.industry)} · Handler ${esc(c.handler)}${c.ai!=='-'?' · AI '+esc(c.ai):''}</div></div>
+      </div>
+      <button class="ideabtn" onclick="openChat('clients','Work for ${esc(c.name)} — ','${esc(c.name)}')"><span class="i">＋</span>Log work for ${esc(c.name)}</button>
+      <div class="wfgrid">${overview}${website}${social}${reminders}${drive}</div>
+      <div class="gauge-sub" style="text-align:left;margin-top:10px">${isCav?'Cavalry is the first full client command center — sections fill out as Kenz works the account.':'Re-souled clone of the BBC command center, scoped to '+esc(c.name)+'. Brand theming + live data apply as we connect this client.'} Login access + activity tracking for the handler turn on in the final step.</div>`;
   };
 
   const CIC={'Vidz Production':'🎬','Specialist AI':'🤖','Cowork Skills':'🧩','Rules as Workflows':'📜'};
@@ -645,25 +899,71 @@
   };
 
   views.social=()=>{
-    const today='Jun 2';
-    const cells=D.content.days.map(x=>{
-      const parts=x.d.split(' '); const dow=parts[0]; const dnum=parts.slice(1).join(' ');
-      const isToday=x.d.includes(today);
-      const evs=[];
-      if(x.graphic && x.graphic!=='-') evs.push(`<div class="ev ev-g ${x.posted?'done':''}">▦ ${esc(x.graphic)}</div>`);
-      if(x.reel && x.reel!=='-') evs.push(`<div class="ev ev-r ${x.posted?'done':''}">▶ ${esc(x.reel)}</div>`);
-      if(!evs.length) evs.push(`<div class="ev ev-none">—</div>`);
-      return `<div class="cal-day ${isToday?'today':''}"><div class="cal-dh"><span class="dow">${dow}</span><span class="dnum">${dnum}</span>${isToday?'<span class="todaytag">today</span>':''}</div><div class="cal-ev">${evs.join('')}</div></div>`;
-    }).join('');
-    const pillars=D.contentPillars.map(p=>`<div class="card"><div class="row1"><div class="nm" style="font-size:14px">${esc(p.day)} · ${esc(p.slot)}</div></div><div class="meta">${esc(p.note)}</div></div>`).join('');
-    const accts=D.socialAccounts.map(a=>`<div class="card"><div class="row1"><div class="nm" style="font-size:15px">${esc(a.platform)}</div><span class="meta" style="margin:0">${esc(a.handle)}</span></div></div>`).join('');
-    return `<h2 class="vt">Social Media</h2><div class="vsub">Calendar · pillars · accounts</div>
-      <div class="sec">This week (${esc(D.content.weekOf)}) · swipe sideways</div>
-      <div class="cal-scroll"><div class="cal-week">${cells}</div></div>
-      <div class="cal-legend"><span><i class="lg ev-g"></i>Graphic</span><span><i class="lg ev-r"></i>Reel</span><span><i class="lg done"></i>Posted</span><span><i class="lg pend"></i>Pending</span></div>
-      <div class="sec">Weekly content framework</div>${pillars}
-      <div class="sec">Accounts</div>${accts}
-      <div class="sec">Analytics</div><div class="card"><div class="meta">Connect Google + platform APIs to enable live analytics here.</div></div>`;
+    const C=D.calendar;
+    const iso=dt=>dt.getFullYear()+'-'+String(dt.getMonth()+1).padStart(2,'0')+'-'+String(dt.getDate()).padStart(2,'0');
+    const first=new Date(C.year,C.monthIdx,1);
+    const startDow=first.getDay();
+    const daysInMonth=new Date(C.year,C.monthIdx+1,0).getDate();
+    const weeks=Math.ceil((startDow+daysInMonth)/7);
+    const gridStart=new Date(C.year,C.monthIdx,1-startDow);
+    const slotByDow=D.contentPillars; // index 0=Sun ... 6=Sat
+
+    let weeksHtml='';
+    for(let w=0;w<weeks;w++){
+      let cellsHtml='';
+      for(let d=0;d<7;d++){
+        const dt=new Date(gridStart); dt.setDate(gridStart.getDate()+w*7+d);
+        const key=iso(dt), inMonth=dt.getMonth()===C.monthIdx, isToday=key===C.today;
+        const post=C.posts[key]||{}; const evs=C.events.filter(e=>e.date===key);
+        const slot=slotByDow[dt.getDay()];
+        let body='';
+        if(post.graphic) body+=`<div class="mev mev-graphic ${post.posted?'posted':''}">▦ ${esc(post.graphic)}</div>`;
+        if(post.reel) body+=`<div class="mev mev-reel ${post.posted?'posted':''}">▶ ${esc(post.reel)}</div>`;
+        evs.forEach(e=>{ body+=`<div class="mev mev-event">🎉 ${esc(e.label)}<span class="mev-rem">+ make a content for this</span></div>`; });
+        cellsHtml+=`<div class="mcell ${inMonth?'':'out'} ${isToday?'today':''}">
+          <div class="mcell-d"><span class="mcell-num">${dt.getDate()}</span>${inMonth&&slot?`<span class="mcell-slot">${esc(slot.slot)}</span>`:''}</div>
+          ${body}</div>`;
+      }
+      weeksHtml+=`<div class="month-week">${cellsHtml}</div>`;
+    }
+    const dowHead=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'].map(x=>`<span>${x}</span>`).join('');
+    const monthCal=`<div class="month"><div class="month-grid"><div class="month-dow">${dowHead}</div>${weeksHtml}</div></div>`;
+
+    /* posting rhythm Mon -> Sun */
+    const order=[1,2,3,4,5,6,0];
+    const rhythm=order.map(i=>{const p=slotByDow[i];return `<div class="rbox"><div class="day">${esc(p.day)}</div><div class="slot">${esc(p.slot)}</div><div class="note">${esc(p.note)}</div></div>`;}).join('');
+
+    /* analytics per platform */
+    const ana=D.socialAccounts.map(a=>`<div class="anabox"><div class="pl">${esc(a.platform)}</div><div class="hd">${esc(a.handle)}</div>
+      <div class="mets"><div class="met"><div class="v">—</div><div class="k">Followers</div></div><div class="met"><div class="v">—</div><div class="k">Reach</div></div><div class="met"><div class="v">—</div><div class="k">Posts</div></div></div></div>`).join('');
+
+    /* what to post next — data-driven from the calendar */
+    const MON=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    const DOWS=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+    const todayDay=parseInt(C.today.split('-')[2],10); const recs=[];
+    for(let i=0;i<14 && recs.length<4;i++){
+      const dt=new Date(C.year,C.monthIdx,todayDay+i); if(dt.getMonth()!==C.monthIdx) break;
+      const key=iso(dt), post=C.posts[key], ev=C.events.find(e=>e.date===key), slot=slotByDow[dt.getDay()];
+      const when=(i===0?'Today':DOWS[dt.getDay()]+' '+MON[dt.getMonth()]+' '+dt.getDate());
+      if(post && (post.graphic||post.reel) && !post.posted) recs.push({tag:'scheduled',txt:'Finish + post: '+(post.graphic||post.reel),when});
+      else if(ev) recs.push({tag:'event',txt:'Create a post for '+ev.label,when});
+      else if(slot) recs.push({tag:slot.slot,txt:'Create '+slot.slot+' — '+slot.day,when});
+    }
+    window.__socRecs=recs.map(r=>r.txt);
+    const recCards=recs.map((r,i)=>`<div class="card recrow" onclick="openChat('social', __socRecs[${i}])" style="margin-bottom:8px"><div class="row1"><div class="nm" style="font-size:13.5px;flex:1">${esc(r.txt)}</div><span style="font-family:var(--mono);font-size:10px;color:var(--gold2);white-space:nowrap">${esc(r.when)}</span></div><div class="meta" style="margin-top:5px">${esc(r.tag)}</div></div>`).join('');
+
+    return `<h2 class="vt">Social Media</h2><div class="vsub">Idea box · month calendar · posting rhythm · analytics</div>
+      <div class="sec">💡 Idea box — what to post next</div>
+      <button class="ideabtn" onclick="ideaBox()"><span class="i">🔎</span>Find trending ideas (deep search)</button>
+      ${recCards}
+      <div class="sec">${esc(C.label)} · scroll sideways to see the full month</div>
+      ${monthCal}
+      <div class="cal-legend"><span><i class="lg ev-g"></i>Graphic</span><span><i class="lg ev-r"></i>Reel</span><span><i class="lg done"></i>Posted</span><span><i class="lg pend"></i>Event / note</span></div>
+      <div class="sec">Posting rhythm — Monday to Sunday</div>
+      <div class="rhythm">${rhythm}</div>
+      <div class="sec">Analytics — per platform</div>
+      <div class="anagrid">${ana}</div>
+      <div class="gauge-sub" style="text-align:left;margin-top:8px">Numbers populate once each platform's API is connected.</div>`;
   };
   const pageUrl=p=>{ if(p.path==='index.html') return 'https://balaynibruno.co'; return 'https://balaynibruno.co/'+p.path.replace('.html','').replace(/\/$/,''); };
   const shot=(url,w,h)=>`https://image.thum.io/get/width/${w}/crop/${h}/noanimate/${url}`;
@@ -735,9 +1035,57 @@
       <div class="sec">Purpose</div><div class="kv"><span>${esc(p.purpose)}</span></div>
       <div class="sec">URL</div><a class="lnk" href="${url}" target="_blank">${url}</a>`);
   };
-  views.reminders=()=>`<h2 class="vt">Reminders</h2><div class="vsub">General + daily to-do</div>
-    <div class="sec">Today</div><div class="card"><div class="meta">No items yet. When the brain is wired, Cuh adds reminders here from your chats, and Kriz's reminders log syncs in.</div></div>
-    <div class="sec">General</div><div class="card"><div class="meta">Standing reminders will live here.</div></div>`;
+  views.reminders=()=>{
+    const C=D.calendar;
+    const iso=dt=>dt.getFullYear()+'-'+String(dt.getMonth()+1).padStart(2,'0')+'-'+String(dt.getDate()).padStart(2,'0');
+    const MON=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    const DOWS=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+    const todayDay=parseInt(C.today.split('-')[2],10);
+    const fmt=dt=>DOWS[dt.getDay()]+' '+MON[dt.getMonth()]+' '+dt.getDate();
+
+    const due=[]; const tp=C.posts[C.today]||{};
+    if(tp.graphic&&!tp.posted) due.push({t:'Post graphic — '+tp.graphic});
+    if(tp.reel&&!tp.posted) due.push({t:'Post reel — '+tp.reel});
+    C.events.filter(e=>e.date===C.today).forEach(e=>due.push({t:e.label+' — post something'}));
+    if(!due.length) due.push({t:'Nothing due today',muted:true});
+
+    const week=[];
+    for(let i=1;i<=7;i++){ const dt=new Date(C.year,C.monthIdx,todayDay+i); const k=iso(dt); const p=C.posts[k];
+      if(p&&(p.graphic||p.reel)) week.push({t:(p.graphic||p.reel),w:fmt(dt)});
+      C.events.filter(e=>e.date===k).forEach(e=>week.push({t:'🎉 '+e.label,w:fmt(dt)}));
+    }
+    if(!week.length) week.push({t:'Nothing scheduled in the next 7 days',muted:true});
+
+    const content=Object.keys(C.posts).filter(k=>!C.posts[k].posted).sort().map(k=>{const p=C.posts[k],dt=new Date(k+'T00:00:00');return {t:(p.graphic||p.reel)+(p.graphic&&p.reel?' (graphic + reel)':''),w:fmt(dt)};});
+    if(!content.length) content.push({t:'All scheduled content posted',muted:true});
+
+    const gaps=D.workflows.filter(w=>!w.artifacts.page).length;
+    const web=[{t:gaps+' workflow pages to create',muted:true}].concat(D.websiteTasks.map(t=>({t})));
+
+    const daily=[]; D.ops.forEach(o=>o.items.forEach(it=>{ if(it.cad==='daily') daily.push({t:it.name,w:o.area}); }));
+
+    const dates=C.events.map(e=>{const dt=new Date(e.date+'T00:00:00');return {t:e.label,w:fmt(dt)};});
+
+    const cross=[{t:'Syncs from Kriz reminders log + _HANDOFFS when the brain is wired',muted:true}];
+
+    const box=(ic,col,title,items)=>{
+      const rows=items.map(r=>`<div class="wfrow"><span class="wfrow-dots"><span class="dot" style="background:${r.muted?'#3a4658':col}"></span></span><span class="wfrow-nm"${r.muted?' style="color:var(--muted)"':''}>${esc(r.t)}</span>${r.w?`<span class="wfrow-pct">${esc(r.w)}</span>`:''}</div>`).join('');
+      return `<div class="wfcat"><div class="wfcat-hd"><div class="wfcat-ic" style="background:${col}22;color:${col}">${ic}</div><div class="wfcat-nm">${esc(title)}</div><span class="wfcat-pct">${items.filter(x=>!x.muted).length}</span></div>${rows}</div>`;
+    };
+    const actionable=due.filter(x=>!x.muted).length+content.filter(x=>!x.muted).length+(D.websiteTasks.length)+daily.length;
+
+    return `<h2 class="vt">Reminders</h2><div class="vsub">${actionable} open items · organized by area</div>
+      <button class="ideabtn" onclick="openChat('reminders','New reminder — ')"><span class="i">＋</span>Add a reminder</button>
+      <div class="wfgrid">
+        ${box('🔴','#EF6B6B','Due today',due)}
+        ${box('📅','#D4AF37','This week',week)}
+        ${box('✏️','#EC4899','Content to post',content)}
+        ${box('🌐','#2DD4BF','Website to-do',web)}
+        ${box('🔁','#A78BFA','Recurring (daily)',daily)}
+        ${box('🎉','#34D399','Important dates',dates)}
+        ${box('🤝','#60A5FA','Cross-AI & handoffs',cross)}
+      </div>`;
+  };
   views.news=()=>{
     const boxes=D.newsTopics.map((t,i)=>`<div class="newsbox" onclick="newsSearch(${i})"><div class="ic">🔎</div><div class="t">${esc(t.label)}</div><div class="q">${esc(t.q)}</div></div>`).join('');
     const feed=D.newsFeed.map(f=>`<div class="card"><div class="nm" style="font-size:14px">${esc(f.title)}</div><div class="meta">${esc(f.date)} · ${esc(f.path)}</div></div>`).join('');
@@ -756,6 +1104,50 @@
       <div class="sec">Team (${D.team.length})</div>${team}
       <div class="sec">Systems &amp; SOPs</div>${sys}`;
   };
+
+  views.devices=()=>{
+    const cards=D.devices.map(d=>`<div class="devbox">
+      <div class="dev-hd"><div class="dev-nick">${esc(d.nick)}</div><span class="dev-dot" title="offline"></span></div>
+      <div class="dev-user">${esc(d.user)}</div>
+      <div class="dev-role">${esc(d.role)}</div>
+      <div class="dev-row"><span class="dev-k">Command center</span><span class="dev-v">${esc(d.cc)}</span></div>
+      <div class="dev-row"><span class="dev-k">Status</span><span class="dev-v" style="color:var(--muted)">offline · last seen —</span></div>
+      <div class="dev-row"><span class="dev-k">Working on</span><span class="dev-v" style="color:var(--muted)">— connect to track</span></div></div>`).join('');
+    return `<h2 class="vt">Team & Devices</h2><div class="vsub">${D.devices.length} known devices · who's online and what they're working on</div>
+      <div class="card" style="border-color:rgba(212,175,55,0.35)"><div class="meta">Live status, who's logged in, and current activity turn on when login + the brain are wired. The data sources already exist: per-device sync logs (last seen), ActivityWatch (current app/window), and Claude sessions. A small reporter on each PC feeds this page.</div></div>
+      <div class="sec">Devices</div>
+      <div class="devgrid">${cards}</div>`;
+  };
+
+  /* ---------- BRUNO PAGE (private) ---------- */
+  views.bruno=()=>{
+    if(localStorage.getItem('bbc_bruno_ok')!=='1'){
+      return `<div class="bgate">
+        <div class="lk">🔒</div>
+        <h3>Bruno Page</h3>
+        <p>Private. RJ only. Enter your access code to see every global rule and protocol.</p>
+        <input id="bruno-code" type="password" placeholder="access code" onkeydown="if(event.key==='Enter')brunoUnlock()">
+        <button onclick="brunoUnlock()">Unlock</button>
+        <div class="err" id="bruno-err"></div>
+      </div>`;
+    }
+    const P=D.protocols, total=P.groups.reduce((n,g)=>n+g.items.length,0);
+    const boxes=P.groups.map((g,gi)=>{
+      const rows=g.items.map((it,ii)=>`<div class="wfrow" data-search="${esc((it.t+' '+(it.trig||'')+' '+it.s).toLowerCase())}" onclick="ruleSheet(${gi},${ii})"><span class="wfrow-dots"><span class="dot" style="background:${g.color}"></span></span><span class="wfrow-nm">${esc(it.t)}</span>${it.trig?`<span class="pill p-concept">${esc(it.trig)}</span>`:''}<span style="color:var(--gold2)">→</span></div>`).join('');
+      return `<div class="wfcat"><div class="wfcat-hd"><div class="wfcat-ic" style="background:${g.color}22;color:${g.color}">§</div><div class="wfcat-nm">${esc(g.cat)}</div><span class="wfcat-pct">${g.items.length}</span></div>${rows}</div>`;
+    }).join('');
+    return `<h2 class="vt">Bruno Page</h2><div class="vsub">${P.groups.length} groups · ${total} rules & protocols · source: ${esc(P.source)}</div>
+      <button class="ideabtn" onclick="openChat('home','New protocol to add — ')"><span class="i">＋</span>Add a protocol</button>
+      <input class="search" placeholder="Search rules & protocols..." oninput="filterCards(this,'brunowrap')">
+      <div id="brunowrap" class="wfgrid">${boxes}</div>
+      <div style="text-align:center;margin-top:6px"><span class="brunolock" onclick="brunoLockNow()">🔒 Lock this page</span></div>`;
+  };
+  window.brunoUnlock=()=>{ const el=document.getElementById('bruno-code'); if(el.value.trim()===D.protocols.code){localStorage.setItem('bbc_bruno_ok','1'); go('bruno');} else {document.getElementById('bruno-err').textContent='Wrong code. Try again.'; el.value=''; el.focus();} };
+  window.brunoLockNow=()=>{ localStorage.removeItem('bbc_bruno_ok'); go('home'); };
+  window.ruleSheet=(gi,ii)=>{ const g=D.protocols.groups[gi], it=g.items[ii];
+    openSheet(`<h3>${esc(it.t)}</h3><div class="row1"><span class="pill p-dev">${esc(g.cat)}</span>${it.trig?` &middot; <span style="color:var(--gold2)">trigger: ${esc(it.trig)}</span>`:''}</div>
+      <div class="sec">What it is</div><div class="kv"><span>${esc(it.s)}</span></div>
+      <div class="sec">Source</div><div class="kv"><span>${esc(D.protocols.source)}</span></div>`); };
 
   /* ---------- SHEETS ---------- */
   window.wfSheet=id=>{ const w=D.workflows.find(x=>x.id===id);
@@ -788,15 +1180,32 @@
     social:{cat:'Social Media',project:'BBC Social',label:'Social'},
     news:{cat:'Research',project:'BBC Command Center',label:'News'},
     reminders:{cat:'Other',project:'BBC Command Center',label:'Reminders'},
+    folders:{cat:'Other',project:'BBC Command Center',label:'Folders'},
+    devices:{cat:'Other',project:'BBC Command Center',label:'Team & Devices'},
     clients:{cat:'Client work',project:'Client Work',label:'Clients'},
     more:{cat:'Other',project:'BBC Command Center',label:'More'}
   };
-  window.curView='home';
+  window.curView='home'; window.__drivePath=[];
+  function driveNodeAt(path){ let n=D.drive.tree; (path||[]).forEach(name=>{ const c=(n.children||[]).find(x=>x.name===name); if(c) n=c; }); return n; }
+  window.driveGo=(name)=>{ const node=driveNodeAt(window.__drivePath); const c=(node.children||[]).find(x=>x.name===name); if(!c) return; if(c.children&&c.children.length){ window.__drivePath.push(name); go('folders'); } else { window.open(c.url||D.drive.rootUrl,'_blank'); } };
+  window.driveUp=(i)=>{ window.__drivePath=window.__drivePath.slice(0,i); go('folders'); };
+  views.folders=()=>{
+    const node=driveNodeAt(window.__drivePath), kids=node.children||[];
+    const items=['BBC Drive',...window.__drivePath];
+    const crumbs=items.map((c,i)=>{const last=i===items.length-1; return (last?`<span class="cur">${esc(c)}</span>`:`<a onclick="driveUp(${i})">${esc(c)}</a>`)+(last?'':'<span class="sep">/</span>');}).join('');
+    const curUrl=node.url||D.drive.rootUrl;
+    const boxes=kids.map(c=>{const has=c.children&&c.children.length; return `<div class="folderbox" onclick="driveGo('${c.name.replace(/'/g,"\\'")}')"><span class="fic">📁</span><div class="fn"><div class="nm">${esc(c.name)}</div><div class="mt">${has?c.children.length+' items':'open in Drive ↗'}</div></div><span class="arr">${has?'→':'↗'}</span></div>`;}).join('');
+    const body=boxes||`<div class="card"><div class="meta">No mapped subfolders yet. Open this folder in Google Drive to see everything inside (live in-app browse + media playback come with the Drive API).</div></div>`;
+    return `<h2 class="vt">Folders</h2><div class="vsub">Browse the BBC Drive. ${esc(D.drive.note)}</div>
+      <div class="crumbs">${crumbs}</div>
+      <button class="ideabtn" onclick="window.open('${curUrl}','_blank')"><span class="i">📂</span>Open this folder in Google Drive</button>
+      <div class="foldergrid">${body}</div>`;
+  };
   window.go=v=>{ window.curView=v; app.innerHTML=`<div class="view">${views[v]()}</div>`; window.scrollTo(0,0);
     document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('active',b.dataset.v===v));
     sheet.classList.remove('open'); };
   window.filterCards=(inp,wrapId)=>{ const q=inp.value.toLowerCase(); const wrap=document.getElementById(wrapId);
-    wrap.querySelectorAll('.card,.wfrow').forEach(c=>{ const hay=(c.dataset.search||c.textContent).toLowerCase(); c.style.display=hay.includes(q)?'':'none'; });
+    wrap.querySelectorAll('.card,.wfrow,.clientbox').forEach(c=>{ const hay=(c.dataset.search||c.textContent).toLowerCase(); c.style.display=hay.includes(q)?'':'none'; });
     wrap.querySelectorAll('.wfcat').forEach(p=>{ const any=[...p.querySelectorAll('.wfrow')].some(r=>r.style.display!=='none'); p.style.display=any?'':'none'; }); };
   document.querySelectorAll('.nav button').forEach(b=>b.onclick=()=>go(b.dataset.v));
 
@@ -831,7 +1240,7 @@
     csAgents=new Set(x.agents&&x.agents.length?x.agents:['Cuh']); csThread=x.thread||[];
     renderAgents(); renderThread(); if(window.innerWidth<820) document.getElementById('cs-side').classList.remove('open');
   }
-  window.openChat=(viewKey)=>{
+  window.openChat=(viewKey,prefill,client)=>{
     const ctx=CHAT_CTX[viewKey]||CHAT_CTX.home;
     document.getElementById('cs-cat').innerHTML=['Website','Social Media','Workflow','Client work','Content','Research','Strategy','Other'].map(c=>`<option>${c}</option>`).join('');
     document.getElementById('cs-client').innerHTML=['Internal / BBC',...D.clients.map(c=>c.name)].map(c=>`<option>${esc(c)}</option>`).join('');
@@ -842,8 +1251,16 @@
     renderAgents(); renderThread(); renderSaved();
     document.getElementById('cs-cat').value=ctx.cat;
     document.getElementById('cs-project').value=ctx.project;
+    if(prefill) document.getElementById('cs-title').value=prefill;
+    if(client) document.getElementById('cs-client').value=client;
     document.getElementById('chatscreen').classList.add('open');
     setTimeout(()=>document.getElementById('cs-title').focus(),120);
+  };
+  window.ideaBox=()=>{
+    openChat('social','Trending social ideas — deep search');
+    csAgents=new Set(['Cuh','Sonny','Mai']); renderAgents();
+    document.getElementById('cs-msg').value="Deep search what's trending and new for socials we can do right now. Give me 3-5 ideas, each with a source link and a BBC angle.";
+    csThread.push({r:'sys',t:'Idea box: when the brain is wired, Cuh runs this deep search live and drops the ideas right here.'}); renderThread();
   };
   window.closeChat=()=>document.getElementById('chatscreen').classList.remove('open');
   window.toggleSide=()=>document.getElementById('cs-side').classList.toggle('open');
