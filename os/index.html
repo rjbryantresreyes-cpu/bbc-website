@@ -172,6 +172,22 @@
   .catbox-nm{font-family:var(--display);font-size:18px;font-weight:700;color:var(--ink);line-height:1.15;}
   .catbox-meta{font-size:12px;color:var(--muted);margin-top:6px;}
   .catbox-dots{display:flex;gap:4px;margin-top:11px;flex-wrap:wrap;}
+  /* category panels (all details shown) */
+  .wfgrid{display:grid;grid-template-columns:1fr;gap:12px;}
+  @media(min-width:760px){.wfgrid{grid-template-columns:1fr 1fr;}}
+  .wfcat{background:var(--bg2);border:1px solid var(--line);border-radius:16px;padding:15px;display:flex;flex-direction:column;}
+  .wfcat-hd{display:flex;align-items:center;gap:11px;}
+  .wfcat-ic{width:40px;height:40px;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:20px;flex:none;}
+  .wfcat-nm{font-family:var(--display);font-size:17px;font-weight:700;color:var(--ink);flex:1;line-height:1.1;}
+  .wfcat-pct{font-family:var(--mono);font-size:11px;color:var(--gold2);flex:none;}
+  .wfcat-bar{margin:11px 0 6px;}
+  .wfrow{display:flex;align-items:center;gap:9px;padding:10px 0;border-bottom:1px solid var(--line);cursor:pointer;}
+  .wfrow:last-child{border-bottom:none;}
+  .wfrow:hover .wfrow-nm{color:var(--gold);}
+  .wfrow-dots{display:flex;gap:3px;flex:none;}
+  .wfrow-nm{flex:1;font-size:13px;color:var(--ink);line-height:1.3;min-width:0;}
+  .wfrow-pct{font-family:var(--mono);font-size:10.5px;color:var(--gold2);flex:none;}
+  .recrow .meta b{color:var(--gold);}
 
   /* DASHBOARD CARDS (Home) */
   .dashcard{background:var(--bg2);border:1px solid var(--line);border-left:4px solid var(--gold);border-radius:14px;padding:15px 16px;margin-bottom:10px;cursor:pointer;transition:border-color .15s,transform .1s;}
@@ -587,42 +603,45 @@
       <div id="cli">${cards}</div>`;
   };
 
+  const CIC={'Vidz Production':'🎬','Specialist AI':'🤖','Cowork Skills':'🧩','Rules as Workflows':'📜'};
+  const CCOL={'Vidz Production':'#A78BFA','Specialist AI':'#EC4899','Cowork Skills':'#D4AF37','Rules as Workflows':'#60A5FA'};
   views.workflows=()=>{
     const cats=[...new Set(D.workflows.map(w=>w.cat))];
-    const CIC={'Vidz Production':'🎬','Specialist AI':'🤖','Cowork Skills':'🧩','Rules as Workflows':'📜'};
-    const CCOL={'Vidz Production':'#A78BFA','Specialist AI':'#EC4899','Cowork Skills':'#D4AF37','Rules as Workflows':'#60A5FA'};
     const totalArt=D.workflows.reduce((n,w)=>n+ORDER.filter(a=>w.artifacts[a]).length,0);
+
+    /* Recommended next — finish what's closest to done, show the exact next artifact */
+    const ranked=[...D.workflows].filter(w=>pct(w)<100).sort((a,b)=>pct(b)-pct(a));
+    const recs=ranked.slice(0,3).map(w=>{
+      const p=pct(w), nextArt=ORDER.find(a=>!w.artifacts[a]), verb=p>0?'Next':'Start';
+      const dots=w.owners.map(o=>`<span class="dot" style="background:${OWN[o]||'#888'}"></span>`).join('');
+      return `<div class="card recrow" onclick="wfSheet('${w.id}')" style="margin-bottom:8px">
+        <div class="row1"><span style="display:flex;gap:3px">${dots}</span><div class="nm" style="font-size:14px">${esc(w.title)}</div><span style="font-family:var(--mono);font-size:11px;color:var(--gold2)">${p}%</span></div>
+        <div class="meta" style="margin-top:7px">${verb}: create the <b>${nextArt?nextArt.toUpperCase():'—'}</b>${nextArt?' '+ICON[nextArt]:''} · ${esc(w.role)}</div></div>`;
+    }).join('');
+
+    /* All categories, all details shown in boxes */
     const boxes=cats.map(cat=>{
       const list=D.workflows.filter(w=>w.cat===cat);
       const avg=Math.round(list.reduce((s,w)=>s+pct(w),0)/list.length);
-      const owners=[...new Set(list.flatMap(w=>w.owners))];
-      const dots=owners.map(o=>`<span class="dot" style="background:${OWN[o]||'#888'}"></span>`).join('');
       const ic=CIC[cat]||'📦', col=CCOL[cat]||'#D4AF37';
-      return `<div class="catbox" onclick="wfCat('${cat}')">
-        <div class="catbox-ic" style="background:${col}22;color:${col}">${ic}</div>
-        <div class="catbox-nm">${esc(cat)}</div>
-        <div class="catbox-meta">${list.length} workflows · ${avg}% ready</div>
-        <div class="catbox-dots">${dots}</div>
-        <div class="bar" style="margin-top:auto"><i style="width:${avg}%"></i></div></div>`;
+      const rows=list.map(w=>{
+        const dots=w.owners.map(o=>`<span class="dot" style="background:${OWN[o]||'#888'}"></span>`).join('');
+        const pips=ORDER.map(a=>`<span class="pip ${w.artifacts[a]?'on':''}"></span>`).join('');
+        return `<div class="wfrow" data-search="${esc((w.title+' '+w.owners.join(' ')+' '+w.angle+' '+w.role).toLowerCase())}" onclick="wfSheet('${w.id}')"><span class="wfrow-dots">${dots}</span><span class="wfrow-nm">${esc(w.title)}</span><span class="mini">${pips}</span><span class="wfrow-pct">${pct(w)}%</span></div>`;
+      }).join('');
+      return `<div class="wfcat">
+        <div class="wfcat-hd"><div class="wfcat-ic" style="background:${col}22;color:${col}">${ic}</div><div class="wfcat-nm">${esc(cat)}</div><span class="wfcat-pct">${list.length} · ${avg}%</span></div>
+        <div class="bar wfcat-bar"><i style="width:${avg}%"></i></div>
+        ${rows}</div>`;
     }).join('');
-    return `<h2 class="vt">Workflows</h2><div class="vsub">${cats.length} categories · ${totalArt} of 80 artifacts shipped. Tap a category to open it.</div>
-      <div class="catgrid">${boxes}</div>`;
-  };
-  window.wfCat=(cat)=>{
-    const list=D.workflows.filter(w=>w.cat===cat);
-    const rows=list.map(w=>{
-      const dots=w.owners.map(o=>`<span class="dot" style="background:${OWN[o]||'#888'}"></span>`).join('');
-      const pips=ORDER.map(a=>`<span class="pip ${w.artifacts[a]?'on':''}"></span>`).join('');
-      return `<div class="card" data-search="${esc((w.title+' '+w.owners.join(' ')+' '+w.angle).toLowerCase())}" onclick="wfSheet('${w.id}')">
-        <div class="row1"><span style="display:flex;gap:3px">${dots}</span><div class="nm" style="font-size:14.5px">${esc(w.title)}</div><span style="font-family:var(--mono);font-size:12px;color:var(--gold2)">${pct(w)}%</span></div>
-        <div class="row1" style="margin-top:9px;justify-content:space-between"><div class="meta" style="margin:0">${esc(w.role)}</div><div class="mini">${pips}</div></div></div>`;
-    }).join('');
-    app.innerHTML=`<div class="view">
-      <div class="morelink" style="margin-top:0;margin-bottom:14px" onclick="go('workflows')">← All categories</div>
-      <h2 class="vt">${esc(cat)}</h2><div class="vsub">${list.length} workflows · tap any for the full breakdown.</div>
-      <input class="search" placeholder="Search ${esc(cat)}..." oninput="filterCards(this,'wfwrap')">
-      <div id="wfwrap">${rows}</div></div>`;
-    window.scrollTo(0,0); sheet.classList.remove('open');
+
+    return `<h2 class="vt">Workflows</h2><div class="vsub">${cats.length} categories · ${totalArt} of 80 artifacts shipped. Tap any workflow for the full breakdown.</div>
+      <input class="search" placeholder="Search all workflows..." oninput="filterCards(this,'wfwrap')">
+      <div class="sec">⭐ Recommended next</div>
+      <div class="gauge-sub" style="text-align:left;margin:-4px 0 10px">Closest to done — ship these to finish the set faster.</div>
+      ${recs}
+      <div class="sec">All workflows by category</div>
+      <div id="wfwrap" class="wfgrid">${boxes}</div>`;
   };
 
   views.social=()=>{
@@ -777,7 +796,8 @@
     document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('active',b.dataset.v===v));
     sheet.classList.remove('open'); };
   window.filterCards=(inp,wrapId)=>{ const q=inp.value.toLowerCase(); const wrap=document.getElementById(wrapId);
-    wrap.querySelectorAll('.card').forEach(c=>{ const hay=(c.dataset.search||c.textContent).toLowerCase(); c.style.display=hay.includes(q)?'':'none'; }); };
+    wrap.querySelectorAll('.card,.wfrow').forEach(c=>{ const hay=(c.dataset.search||c.textContent).toLowerCase(); c.style.display=hay.includes(q)?'':'none'; });
+    wrap.querySelectorAll('.wfcat').forEach(p=>{ const any=[...p.querySelectorAll('.wfrow')].some(r=>r.style.display!=='none'); p.style.display=any?'':'none'; }); };
   document.querySelectorAll('.nav button').forEach(b=>b.onclick=()=>go(b.dataset.v));
 
   /* ---------- Full-screen Cuh chat ---------- */
