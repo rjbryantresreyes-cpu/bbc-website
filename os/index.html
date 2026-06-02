@@ -133,6 +133,31 @@
   .mapnode{background:var(--bg2);border:1px solid var(--line);border-radius:8px;padding:8px 12px;font-size:12px;white-space:nowrap;color:var(--ink);}
   .maparrow{color:var(--gold2);font-size:13px;}
 
+  /* WEBSITES v2 */
+  .site-hero{position:relative;border-radius:14px;overflow:hidden;border:1px solid var(--line);cursor:pointer;margin-bottom:10px;}
+  .site-hero:hover{border-color:var(--gold);}
+  .site-shot{width:100%;display:block;background:var(--bg3);height:150px;object-fit:cover;object-position:top;}
+  .site-bar{display:flex;align-items:center;gap:9px;padding:12px 14px;background:var(--bg2);font-size:14.5px;font-weight:600;}
+  .site-bar .grow{flex:1;}
+  .site-bar .arr{color:var(--gold2);font-size:15px;}
+  .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:6px;}
+  .kpi{background:var(--bg2);border:1px solid var(--line);border-radius:12px;padding:13px 6px;text-align:center;}
+  .kpi .n{font-family:var(--display);font-size:23px;font-weight:700;line-height:1;}
+  .kpi .n.green{color:var(--green);} .kpi .n.gold{color:var(--gold);}
+  .kpi .l{font-family:var(--mono);font-size:8px;letter-spacing:.5px;color:var(--muted);text-transform:uppercase;margin-top:7px;line-height:1.2;}
+  .deprow{display:flex;align-items:center;gap:9px;padding:9px 0;border-bottom:1px solid var(--line);font-size:12.5px;color:var(--ink);}
+  .deprow:last-child{border-bottom:none;}
+  .deprow .when{margin-left:auto;font-family:var(--mono);font-size:10px;color:var(--muted);white-space:nowrap;}
+  .connect{background:var(--bg2);border:1px dashed rgba(212,175,55,0.35);border-radius:12px;padding:15px 12px;text-align:center;cursor:pointer;transition:border-color .15s;}
+  .connect:hover{border-color:var(--gold);}
+  .connect .ic{font-size:21px;} .connect .t{font-size:13.5px;font-weight:600;margin-top:7px;color:var(--ink);} .connect .c{font-family:var(--mono);font-size:8.5px;color:var(--gold2);margin-top:6px;letter-spacing:.5px;}
+  .pagerow{display:flex;align-items:center;gap:10px;padding:11px 13px;background:var(--bg2);border:1px solid var(--line);border-radius:10px;margin-bottom:6px;cursor:pointer;transition:border-color .15s;}
+  .pagerow:hover{border-color:var(--gold);}
+  .pagerow .pn{flex:1;font-size:14px;font-weight:500;color:var(--ink);}
+  .pagerow .pp{font-family:var(--mono);font-size:9px;color:var(--muted);background:rgba(159,176,199,0.12);padding:2px 7px;border-radius:999px;}
+  .pagerow .arr{color:var(--gold2);font-size:14px;}
+  .preview-tag{color:var(--muted);font-family:var(--mono);font-size:9px;letter-spacing:.5px;text-transform:none;}
+
   /* DASHBOARD CARDS (Home) */
   .dashcard{background:var(--bg2);border:1px solid var(--line);border-left:4px solid var(--gold);border-radius:14px;padding:15px 16px;margin-bottom:10px;cursor:pointer;transition:border-color .15s,transform .1s;}
   .dashcard:active{transform:scale(0.99);}
@@ -351,11 +376,19 @@
     {"name":"Sonya Website Questionnaire","path":"questionnaire-sonya-website.html","group":"Internal (noindex)","purpose":"S. Riviere website-build questions.","status":"live","noindex":true},
     {"name":"Command Center","path":"os/","group":"Internal (noindex)","purpose":"This dashboard — the BBC OS app.","status":"live","noindex":true}
   ],
+  "netlify":{"connected":false,"branch":"master","autoDeploy":true,"recent":[
+    {"msg":"Sample — your recent deploys list here","when":"—"},
+    {"msg":"Sample — commit message + status","when":"—"},
+    {"msg":"Sample — connect token for live history","when":"—"}
+  ]},
   "websiteTasks":[
-    "Sonya rebrand site — standalone interactive (pending, Al)",
+    "Add client logos to every client box on the website (pending)",
+    "Create client walkthrough pages — all clients, TPIC-style (pending)",
+    "Create the Referral Map page (pending)",
     "Add password gate to /os dashboard (pending)",
     "Wire Google Analytics via service account (pending)"
   ],
+  "websiteTodoDoc":"BBC WEBSITE HTML/_WEBSITE_TODO.md",
   "websiteTools":[
     {"n":"Interactive motion stack","d":"GSAP + ScrollTrigger + Lenis + reduced-motion (free)"},
     {"n":"Website Replicator Pipeline","d":"URL to screenshots to design tokens to code (Playwright + vision)"},
@@ -578,44 +611,66 @@
   const pageUrl=p=>{ if(p.path==='index.html') return 'https://balaynibruno.co'; return 'https://balaynibruno.co/'+p.path.replace('.html','').replace(/\/$/,''); };
   const shot=(url,w,h)=>`https://image.thum.io/get/width/${w}/crop/${h}/noanimate/${url}`;
   views.websites=()=>{
-    const hero=`<div class="card" onclick="window.open('https://balaynibruno.co','_blank')">
-      <img class="wshot" src="${shot('https://balaynibruno.co',600,420)}" loading="lazy" alt="balaynibruno.co preview">
-      <div class="row1" style="margin-top:11px"><span class="dot" style="background:var(--green)"></span><div class="nm">balaynibruno.co</div><span class="pill p-active">live</span></div>
-      <div class="meta">BBC main site · tap to open</div></div>`;
+    const N=D.netlify||{};
+    const pageGaps=D.workflows.filter(w=>!w.artifacts.page);
+    const livePages=D.websitePages.filter(p=>p.status==='live').length;
     const map=D.siteNav.map((n,i)=>`<span class="mapnode">${esc(n)}</span>${i<D.siteNav.length-1?'<span class="maparrow">→</span>':''}`).join('');
+
+    /* hero + KPIs */
+    const hero=`<div class="site-hero" onclick="window.open('https://balaynibruno.co','_blank')">
+      <img class="site-shot" src="${shot('https://balaynibruno.co',640,320)}" loading="lazy" alt="balaynibruno.co">
+      <div class="site-bar"><span class="dot" style="background:var(--green)"></span><span class="grow">balaynibruno.co</span><span class="pill p-active">live</span><span class="arr">↗</span></div></div>`;
+    const kpis=`<div class="kpis">
+      <div class="kpi"><div class="n">${livePages}</div><div class="l">Live pages</div></div>
+      <div class="kpi"><div class="n gold">${D.websiteTasks.length}</div><div class="l">Open tasks</div></div>
+      <div class="kpi"><div class="n gold">${pageGaps.length}</div><div class="l">Pages to make</div></div>
+      <div class="kpi"><div class="n green">✓</div><div class="l">Auto-deploy</div></div></div>`;
+
+    /* Netlify */
+    const depRows=(N.recent||[]).map(d=>`<div class="deprow"><span class="dot" style="background:#3a4658"></span><span style="color:var(--muted)">${esc(d.msg)}</span><span class="when">${esc(d.when)}</span></div>`).join('');
+    const netlify=`<div class="sec">Netlify — deploys <span class="preview-tag">· sample until token wired</span></div>
+      <div class="panel">
+        <div class="deprow"><span class="dot" style="background:var(--green)"></span><span><b>Auto-deploy active</b> · GitHub → Netlify</span><span class="when">${esc(N.branch||'master')}</span></div>
+        ${depRows}
+        <div class="gauge-sub" style="text-align:left;margin-top:10px">Connect your Netlify token to show live deploy status, build logs, and one-tap rollback.</div></div>`;
+
+    /* connect cards */
+    const connect=`<div class="sec">Connect to unlock</div>
+      <div class="grid2">
+        <div class="connect"><div class="ic">📊</div><div class="t">Analytics</div><div class="c">CONNECT GA + SEARCH CONSOLE</div></div>
+        <div class="connect"><div class="ic">⭐</div><div class="t">Google Reviews</div><div class="c">CONNECT BUSINESS PROFILE</div></div></div>`;
+
+    /* to-do */
+    const todoTasks=D.websiteTasks.map(t=>`<div class="opitem"><span class="odot" style="background:#EF6B6B"></span><span class="oname">${esc(t)}</span><span class="ocad">task</span></div>`).join('');
+    const todoPages=pageGaps.map(w=>`<div class="opitem"><span class="odot" style="background:#D4AF37"></span><span class="oname">Create page: ${esc(w.title.split(' — ')[0])} <span style="color:var(--muted)">/work/${w.id}</span></span><span class="ocad">new workflow</span></div>`).join('');
+    const todo=`<div class="sec">Website to-do</div>
+      <div class="panel">${todoTasks}${todoPages}</div>
+      <div class="gauge-sub" style="text-align:left;margin-top:8px">Auto-rule: new workflow → /work page + case study · new process → page · new review → feature it.</div>
+      ${D.websiteTodoDoc?`<div class="gauge-sub" style="text-align:left;margin-top:4px">Source of truth: <span style="color:var(--gold2)">${esc(D.websiteTodoDoc)}</span></div>`:''}`;
+
+    /* pages (compact rows) */
     const groups=[...new Set(D.websitePages.map(p=>p.group))];
     const pagesByGroup=groups.map(g=>{
       const items=D.websitePages.filter(p=>p.group===g).map(p=>{
         const gi=D.websitePages.indexOf(p);
-        return `<div class="card" onclick="pageSheet(${gi})"><div class="row1"><span class="dot" style="background:var(--green)"></span><div class="nm" style="font-size:15px">${esc(p.name)}</div>${p.noindex?'<span class="pill p-concept">noindex</span>':''}</div><div class="meta">${esc(p.purpose)}</div></div>`;
+        return `<div class="pagerow" onclick="pageSheet(${gi})"><span class="dot" style="background:var(--green)"></span><span class="pn">${esc(p.name)}</span>${p.noindex?'<span class="pp">noindex</span>':''}<span class="arr">→</span></div>`;
       }).join('');
-      return `<div class="sec">${esc(g)} (${D.websitePages.filter(p=>p.group===g).length})</div>${items}`;
+      return `<div class="sec" style="margin-top:14px">${esc(g)} (${D.websitePages.filter(p=>p.group===g).length})</div>${items}`;
     }).join('');
-    const csites=D.clients.filter(c=>c.site&&c.site!=='-').map(c=>{
-      const url='https://'+c.site.replace(/^https?:\/\//,'');
-      return `<div class="card" onclick="window.open('${url}','_blank')"><img class="wshot sm" src="${shot(url,500,300)}" loading="lazy" alt=""><div class="row1" style="margin-top:9px"><div class="nm" style="font-size:14.5px">${esc(c.name)}</div></div><div class="meta">${esc(c.site)} · ${esc(c.handler)}</div></div>`;
-    }).join('');
-    const pageGaps=D.workflows.filter(w=>!w.artifacts.page);
-    const todoPages=pageGaps.map(w=>`<div class="opitem"><span class="odot" style="background:#D4AF37"></span><span class="oname">Create page: ${esc(w.title.split(' — ')[0])} <span style="color:var(--muted)">to /work/${w.id}</span></span><span class="ocad">new workflow</span></div>`).join('');
-    const todoTasks=D.websiteTasks.map(t=>`<div class="opitem"><span class="odot" style="background:#EF6B6B"></span><span class="oname">${esc(t)}</span><span class="ocad">task</span></div>`).join('');
-    const tools=(D.websiteTools||[]).map(x=>`<div class="opitem"><span class="odot" style="background:#2DD4BF"></span><span class="oname">${esc(x.n)} <span style="color:var(--muted)">— ${esc(x.d)}</span></span></div>`).join('');
+
+    /* workflows + tools */
     const flows=(D.websiteWorkflows||[]).map(x=>`<div class="opitem"><span class="odot" style="background:#A78BFA"></span><span class="oname">${esc(x.n)} <span style="color:var(--muted)">— ${esc(x.d)}</span></span></div>`).join('');
-    return `<h2 class="vt">Websites</h2><div class="vsub">Everything website — analytics, reviews, to-do, pages, workflows, tools</div>
-      <div class="sec">Overview</div>
-      <div class="panelgrid">
-        <div class="panel"><span class="ptitle">Analytics</span><div class="kv"><span>Visitors, top pages, and search clicks show here.</span></div><div class="gauge-sub" style="margin-top:10px">Connect Google Analytics + Search Console to enable.</div></div>
-        <div class="panel"><span class="ptitle">Google Reviews</span><div class="kv"><span>New reviews appear here automatically.</span></div><div class="gauge-sub" style="margin-top:10px">Connect Google Business Profile to pull reviews.</div></div>
-        <div class="panel"><span class="ptitle">Website To-Do</span><div class="metric"><b>${pageGaps.length}</b> pages to create &middot; <b>${D.websiteTasks.length}</b> tasks</div><div class="gauge-sub" style="margin-top:8px">Auto-adds when a workflow, process, or review needs a page.</div></div>
-      </div>
-      <div class="sec">Website to-do (auto-generated + tasks)</div>
-      <div class="panel">${todoTasks}${todoPages}</div>
-      <div class="gauge-sub" style="text-align:left;margin-top:8px">Auto-rule: new workflow → create its /work page + case study · new process → page · new review → feature it.</div>
-      <div class="sec">BBC site</div>${hero}
+    const tools=(D.websiteTools||[]).map(x=>`<div class="opitem"><span class="odot" style="background:#2DD4BF"></span><span class="oname">${esc(x.n)} <span style="color:var(--muted)">— ${esc(x.d)}</span></span></div>`).join('');
+
+    return `<h2 class="vt">Websites</h2><div class="vsub">BBC's web operation — site, deploys, pages, workflows.</div>
+      ${hero}${kpis}
+      ${netlify}
+      ${connect}
+      ${todo}
       <div class="sec">Page map (main nav flow)</div><div class="cal-scroll"><div class="pagemap">${map}</div></div>
       <div class="sec">All pages (${D.websitePages.length})</div>${pagesByGroup}
       <div class="sec">Website workflows</div><div class="panel">${flows}</div>
-      <div class="sec">Website tools (for the team + Claude)</div><div class="panel">${tools}</div>
-      <div class="sec">Client sites (${D.clients.filter(c=>c.site&&c.site!=='-').length})</div><div class="grid2">${csites}</div>`;
+      <div class="sec">Tools (team + Claude)</div><div class="panel">${tools}</div>`;
   };
   window.pageSheet=i=>{ const p=D.websitePages[i]; const url=pageUrl(p);
     openSheet(`<h3>${esc(p.name)}</h3><div class="row1">${p.noindex?'<span class="pill p-concept">noindex</span>':'<span class="pill p-active">live</span>'} · ${esc(p.group)}</div>
