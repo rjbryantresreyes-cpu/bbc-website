@@ -172,6 +172,25 @@
   .datesheet-item{background:var(--bg2);border:1px solid var(--line);border-radius:12px;padding:14px;margin-top:14px;}
   .datesheet-note{width:100%;min-height:90px;background:var(--bg3);border:1px solid var(--line);border-radius:10px;color:var(--ink);font-family:var(--ui);font-size:13px;padding:10px;resize:vertical;margin-bottom:8px;}
   .datesheet-note:focus{outline:none;border-color:var(--gold);}
+
+  /* Date detail — content artifact rows */
+  .datesheet-artifact{background:var(--bg2);border:1px solid var(--line);border-radius:12px;padding:14px;margin-bottom:10px;border-left:3px solid rgba(159,176,199,0.3);}
+  .datesheet-artifact.shipped{border-left-color:var(--green);background:rgba(74,222,128,0.04);}
+  .datesheet-artifact-action{margin-top:10px;display:flex;gap:6px;align-items:center;}
+  .art-check{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:6px;font-weight:700;font-size:15px;flex-shrink:0;}
+  .art-check.shipped{background:var(--green);color:#0A1422;}
+  .art-check.pending{background:transparent;color:var(--muted);border:2px dashed rgba(159,176,199,0.35);}
+
+  /* Date detail — platform tiles grid */
+  .platform-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;}
+  @media(min-width:600px){.platform-grid{grid-template-columns:repeat(6,1fr);}}
+  .platform-tile{background:var(--bg3);border:1.5px solid var(--line);border-radius:10px;padding:12px 8px;text-align:center;transition:all .15s;}
+  .platform-tile.on{background:rgba(74,222,128,0.13);border-color:var(--green);}
+  .platform-tile.off{opacity:.6;}
+  .platform-tile .pt-ic{font-size:22px;line-height:1;margin-bottom:6px;}
+  .platform-tile .pt-lbl{font-family:var(--ui);font-size:11px;font-weight:600;color:var(--ink);}
+  .platform-tile .pt-state{font-family:var(--mono);font-size:9px;color:var(--muted);margin-top:4px;letter-spacing:.3px;}
+  .platform-tile.on .pt-state{color:var(--green);font-weight:700;}
   .badge-state{font-family:var(--mono);font-size:9px;font-weight:700;letter-spacing:.5px;padding:3px 7px;border-radius:5px;border:1px solid;}
   .badge-state.s-posted{background:rgba(74,222,128,0.13);border-color:var(--green);color:#a7e2b3;}
   .badge-state.s-drafted{background:rgba(212,175,55,0.13);border-color:var(--gold);color:#e8d7a4;}
@@ -3982,17 +4001,18 @@
     wfSheet(id);
   };
   /* Date detail sheet — opens when a Post Tracker calendar cell is clicked.
-     Shows: post title + description (auto from BRIEF.md), per-platform status with Add Link, notes (localStorage). */
-  window.dateLinkGet=(dateKey, platform)=>{ try{ return localStorage.getItem(`bbcDateLink_${dateKey}_${platform}`)||''; }catch{return '';} };
-  window.dateLinkSet=(dateKey, platform, url)=>{ try{ if(url){ localStorage.setItem(`bbcDateLink_${dateKey}_${platform}`,url); } else { localStorage.removeItem(`bbcDateLink_${dateKey}_${platform}`); } }catch{} };
+     Shows content artifacts (graphic / reel) with ✓ ONLY when artifact is created AND has a link attached.
+     Per-platform icons light up based on what Metricool / Sheet platform codes report posted. */
+  window.dateArtifactLinkGet=(dateKey, kind)=>{ try{ return localStorage.getItem(`bbcDateArt_${dateKey}_${kind}`)||''; }catch{return '';} };
+  window.dateArtifactLinkSet=(dateKey, kind, url)=>{ try{ if(url){ localStorage.setItem(`bbcDateArt_${dateKey}_${kind}`,url); } else { localStorage.removeItem(`bbcDateArt_${dateKey}_${kind}`); } }catch{} };
   window.dateNoteGet=(dateKey)=>{ try{ return localStorage.getItem(`bbcDateNote_${dateKey}`)||''; }catch{return '';} };
   window.dateNoteSet=(dateKey, txt)=>{ try{ if(txt){ localStorage.setItem(`bbcDateNote_${dateKey}`,txt); } else { localStorage.removeItem(`bbcDateNote_${dateKey}`); } }catch{} };
-  window.editDateLink=(dateKey, platform)=>{
-    const current = dateLinkGet(dateKey, platform);
-    const next = prompt(`Paste the ${platform.toUpperCase()} post URL for ${dateKey}\n(leave empty to clear)`, current);
+  window.editDateArtifact=(dateKey, kind)=>{
+    const current = dateArtifactLinkGet(dateKey, kind);
+    const next = prompt(`Paste the link to the ${kind.toUpperCase()} (Drive folder, file URL, or any location):\n(leave empty to clear)`, current);
     if(next===null) return;
-    dateLinkSet(dateKey, platform, next.trim());
-    dateSheet(dateKey); // re-render
+    dateArtifactLinkSet(dateKey, kind, next.trim());
+    dateSheet(dateKey);
   };
   window.saveDateNote=(dateKey)=>{
     const ta = document.getElementById('dateSheetNote');
@@ -4007,47 +4027,81 @@
     const monStr = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][dt.getMonth()];
     const dateLabel = `${dowStr}, ${monStr} ${dt.getDate()}`;
 
-    // Build item rows (graphic + reel if both exist and differ)
-    const items = [];
-    if(post.graphic) items.push({title:post.graphic, kind:'graphic', state:post.graphic_state||(post.posted?'posted':(post.drafted?'drafted':'planned')), platforms:post.graphic_platforms||[]});
-    if(post.reel && post.reel!==post.graphic) items.push({title:post.reel, kind:'reel', state:post.reel_state||(post.posted?'posted':(post.drafted?'drafted':'planned')), platforms:post.reel_platforms||[]});
+    /* Build list of artifact rows. Only kinds that exist for THIS day get rows.
+       ✓ check = artifact exists in Sheet AND has a link attached. */
+    const artifacts = [];
+    if(post.graphic){
+      const link = dateArtifactLinkGet(dateKey,'graphic');
+      artifacts.push({
+        kind:'graphic', icon:'▦', label:'Graphic / Carousel', title:post.graphic,
+        state: post.graphic_state || (post.posted?'posted':(post.drafted?'drafted':'planned')),
+        platforms: post.graphic_platforms || [],
+        link, shipped: !!link, // ✓ requires a link
+      });
+    }
+    if(post.reel && post.reel!==post.graphic){
+      const link = dateArtifactLinkGet(dateKey,'reel');
+      artifacts.push({
+        kind:'reel', icon:'▶', label:'Reel / Video', title:post.reel,
+        state: post.reel_state || (post.posted?'posted':(post.drafted?'drafted':'planned')),
+        platforms: post.reel_platforms || [],
+        link, shipped: !!link,
+      });
+    }
 
+    /* All platform statuses unified per day — union of graphic + reel platforms */
+    const allPlatformsPosted = new Set([...(post.graphic_platforms||[]), ...(post.reel_platforms||[])]);
     const PLAT = [
-      {code:'FB', n:'facebook',  url:'https://www.facebook.com/',                  ic:'👤'},
-      {code:'IG', n:'instagram', url:'https://www.instagram.com/',                 ic:'📷'},
-      {code:'LI', n:'linkedin',  url:'https://www.linkedin.com/feed/',             ic:'💼'},
-      {code:'TT', n:'tiktok',    url:'https://www.tiktok.com/upload',              ic:'🎵'},
-      {code:'YT', n:'youtube',   url:'https://studio.youtube.com/',                ic:'▶'},
-      {code:'X',  n:'x',         url:'https://x.com/compose/post',                 ic:'𝕏'},
+      {code:'FB', n:'facebook',  ic:'👤', label:'Facebook'},
+      {code:'IG', n:'instagram', ic:'📷', label:'Instagram'},
+      {code:'LI', n:'linkedin',  ic:'💼', label:'LinkedIn'},
+      {code:'TT', n:'tiktok',    ic:'🎵', label:'TikTok'},
+      {code:'YT', n:'youtube',   ic:'▶',  label:'YouTube'},
+      {code:'X',  n:'x',         ic:'𝕏',  label:'X (Twitter)'},
     ];
 
-    const itemHtml = items.map(it=>{
-      const stateBadge = it.state==='posted'?'<span class="badge-state s-posted">POSTED ✓</span>':
-                        it.state==='drafted'?'<span class="badge-state s-drafted">DRAFTED ✏️</span>':
-                        it.state==='posted-partial'?'<span class="badge-state s-partial">PARTIAL</span>':
+    /* Render content artifacts — Graphic + Reel rows with Add link + ✓ when both created (in Sheet) AND linked */
+    const artifactsHtml = artifacts.length ? artifacts.map(a=>{
+      const stateBadge = a.state==='posted'?'<span class="badge-state s-posted">POSTED ✓</span>':
+                        a.state==='drafted'?'<span class="badge-state s-drafted">DRAFTED ✏️</span>':
+                        a.state==='posted-partial'?'<span class="badge-state s-partial">PARTIAL</span>':
                         '<span class="badge-state s-planned">PLANNED</span>';
-      const platRows = PLAT.map(p=>{
-        const isPosted = it.platforms.includes(p.n);
-        const savedLink = dateLinkGet(dateKey, p.n);
-        const linkBtn = savedLink
-          ? `<a class="artlink" href="${esc(savedLink)}" target="_blank" rel="noopener">View ↗</a><button class="artlink-edit" onclick="editDateLink('${dateKey}','${p.n}')" title="Edit link">✎</button>`
-          : `<button class="artlink-add" onclick="editDateLink('${dateKey}','${p.n}')">🔗 Add post URL</button>`;
-        return `<div class="artrow ${isPosted?'on':''}">
-          <span class="artrow-ic">${p.ic}</span>
-          <span class="artrow-nm">${p.n}<span class="artrow-st ${isPosted?'':'off'}">${isPosted?'posted':'not yet'}</span></span>
-          <span class="artrow-act">${linkBtn}</span>
-        </div>`;
-      }).join('');
-      return `<div class="datesheet-item">
-        <div class="row1" style="gap:8px;margin-bottom:6px">
-          <span style="font-size:14px;font-weight:700;flex:1">${it.kind==='reel'?'▶':'▦'} ${esc(it.title)}</span>
+      const checkMark = a.shipped ? '<span class="art-check shipped">✓</span>' : '<span class="art-check pending">○</span>';
+      const linkBtn = a.link
+        ? `<a class="artlink" href="${esc(a.link)}" target="_blank" rel="noopener">View ↗</a><button class="artlink-edit" onclick="editDateArtifact('${dateKey}','${a.kind}')" title="Change link">✎</button>`
+        : `<button class="artlink-add" onclick="editDateArtifact('${dateKey}','${a.kind}')">🔗 Add link to ${a.kind}</button>`;
+      return `<div class="datesheet-artifact ${a.shipped?'shipped':''}">
+        <div class="row1" style="gap:10px">
+          ${checkMark}
+          <span style="font-size:22px;line-height:1">${a.icon}</span>
+          <div style="flex:1;min-width:0">
+            <div style="font-size:14px;font-weight:700">${esc(a.label)}</div>
+            <div style="font-size:12px;color:var(--muted);margin-top:2px">${esc(a.title)}</div>
+          </div>
           ${stateBadge}
         </div>
-        <div class="kv" style="margin-bottom:8px"><span style="font-size:12px">Type: ${it.kind}</span></div>
-        <div class="sec" style="margin-top:8px">Per-platform status + post links</div>
-        <div class="artrows">${platRows}</div>
+        <div class="datesheet-artifact-action">${linkBtn}</div>
       </div>`;
-    }).join('<div style="height:14px"></div>');
+    }).join('') : '<div class="kv" style="margin-top:8px"><span>No content scheduled for this date.</span></div>';
+
+    /* Platform icon row — lights up based on platforms posted (from Sheet codes / Metricool) */
+    const platformsRow = '<div class="platform-grid">' + PLAT.map(p=>{
+      const isPosted = allPlatformsPosted.has(p.n);
+      return `<div class="platform-tile ${isPosted?'on':'off'}" title="${p.label}: ${isPosted?'posted ✓':'not yet'}">
+        <div class="pt-ic">${p.ic}</div>
+        <div class="pt-lbl">${p.label}</div>
+        <div class="pt-state">${isPosted?'✓ posted':'not yet'}</div>
+      </div>`;
+    }).join('') + '</div>';
+
+    const itemHtml = `
+      <div class="sec">📦 Content artifacts — ✓ when created AND linked</div>
+      ${artifactsHtml}
+
+      <div class="sec" style="margin-top:18px">📱 Posted on platforms — auto-detects from Metricool / Sheet codes</div>
+      ${platformsRow}
+      <div class="gauge-sub" style="text-align:left;margin-top:6px;font-size:11px">Icons light when a platform is marked posted in the Sheet (e.g. <code>Content (FB IG)</code>) or by Metricool API (when wired). Manual today; auto soon.</div>
+    `;
 
     const eventsHtml = evs.length ? `<div class="sec">📅 Special days on this date</div>` + evs.map(e=>`<div class="kv"><b>${esc(e.label)}</b> <span style="font-size:12px;color:var(--muted)">${e.oneliner?' — '+esc(e.oneliner):''}</span>${e.angle?`<div class="kv" style="margin-top:4px;font-size:12px;color:var(--gold2)">BBC angle: ${esc(e.angle)}</div>`:''}</div>`).join('') : '';
 
