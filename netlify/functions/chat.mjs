@@ -77,7 +77,20 @@ const CLIENT_SOULS = {
   }
 };
 
-function systemPrompt(agents, task, scope, client) {
+// Wave 2: the synced Drive folder index, so the brain can answer "which folder / open the folder for X".
+function driveBlock(drive) {
+  if (!drive || !Array.isArray(drive.folders) || !drive.folders.length) return "";
+  const lines = drive.folders.slice(0, 400).join("\n");
+  return [
+    "",
+    "BBC DRIVE FOLDER MAP — you CAN answer folder/location questions from this. Each line is a folder path; a [link] after it opens that folder in Google Drive.",
+    "When RJ asks where something is, what folder to open, or to find a folder: pick the best match below and reply with the path + the open link (as the raw URL). Resolve nicknames (e.g. 'woodworking'→WOODEN-WOODWORKS, 'Sonya'→S-RIVIERE-HAIR-COLLECTION, 'roofing'→HI-UP-ROOFING, 'painting'→FIRST-CLASS-FINISHES). If a folder has no [link], give the path and the Drive root (" + (drive.root || "the BBC Drive") + ") so he can navigate there. If nothing matches, say it's not in the synced folder map yet.",
+    "Folders:",
+    lines
+  ].join("\n");
+}
+
+function systemPrompt(agents, task, scope, client, drive) {
   if (client && CLIENT_SOULS[client]) return CLIENT_SOULS[client](scope);
   const picked = (agents && agents.length ? agents : ["Cuh"]);
   const lead = picked[0];
@@ -100,8 +113,9 @@ function systemPrompt(agents, task, scope, client) {
     lines,
     scopeBlock(scope),
     "",
-    "What you can do right now (Wave 1): answer questions, think through BBC work, draft and plan, route what RJ wants into clear next steps.",
-    "What is coming next (Wave 2, not yet live): looking things up directly in the BBC Google Drive (which folder a thing is in, opening folders) and pushing commands to the main system. If RJ asks you to find a specific file/folder or run a command, say plainly that Drive lookup is the next wave and isn't wired yet, then give your best guess from what you know.",
+    "What you can do right now: answer questions, think through BBC work, draft and plan, route what RJ wants into clear next steps, AND tell RJ which Drive folder something is in / give the open link when a folder map is provided below.",
+    "Still coming (not yet live): reading INSIDE files, and pushing commands to the main system. If RJ asks you to open a specific file's contents or run a command, say that's the next upgrade and isn't wired yet.",
+    driveBlock(drive),
     "",
     "Writing rules for anything RJ might post externally: no em-dashes, no mid-sentence dashes, no filler words (seamlessly, leverage, robust, streamline). Warm, human, plain English. Internally (just talking to RJ) be natural and direct.",
     "Never invent BBC facts, names, or content you don't actually know. If unsure, say so and ask.",
@@ -131,9 +145,10 @@ export default async (req) => {
 
   const scope = body.scope || null;
   const client = body.client || null;
+  const drive = body.drive || null;
   const history = Array.isArray(body.messages) ? body.messages.slice(-12) : [];
   const messages = [
-    { role: "system", content: systemPrompt(body.agents, body.task, scope, client) },
+    { role: "system", content: systemPrompt(body.agents, body.task, scope, client, drive) },
     ...history.map(m => ({ role: m.role === "assistant" ? "assistant" : "user", content: String(m.content || "").slice(0, 6000) }))
   ];
   // page-scoped chat = short + fast; dashboard chat = room to think

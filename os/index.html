@@ -3524,6 +3524,13 @@
     more:{cat:'Other',project:'BBC Command Center',label:'More'}
   };
   window.curView='home'; window.__drivePath=[];
+  // Wave 2: flatten the synced Drive tree into a folder index the brain can search (free, no Drive API).
+  function driveIndexLines(){
+    const out=[]; const root=(D.drive&&D.drive.tree)||{name:'BBC Drive'};
+    (function walk(node,path){ (node.children||[]).forEach(c=>{ const p=path.concat(c.name); out.push(p.join(' / ')+(c.url?'  ['+c.url+']':'')); if(c.children&&c.children.length) walk(c,p); }); })(root,[root.name||'BBC Drive']);
+    return out;
+  }
+  function wantsDrive(t){ return /\b(folder|where|locat|open |find |drive|file|path|which|stored|saved|directory)\b/i.test(t||''); }
   function driveNodeAt(path){ let n=D.drive.tree; (path||[]).forEach(name=>{ const c=(n.children||[]).find(x=>x.name===name); if(c) n=c; }); return n; }
   window.driveGo=(name)=>{ const node=driveNodeAt(window.__drivePath); const c=(node.children||[]).find(x=>x.name===name); if(!c) return; if(c.children&&c.children.length){ window.__drivePath.push(name); go('folders'); } else { window.open(c.url||D.drive.rootUrl,'_blank'); } };
   window.driveUp=(i)=>{ window.__drivePath=window.__drivePath.slice(0,i); go('folders'); };
@@ -3612,8 +3619,9 @@
     // history for the brain: map our thread roles to chat roles (skip sys notices)
     const history=csThread.filter(m=>m.r==='u'||m.r==='a').map(m=>({role:m.r==='u'?'user':'assistant',content:m.t}));
     const task={title:document.getElementById('cs-title').value,desc:document.getElementById('cs-desc').value,gprompt:document.getElementById('cs-gprompt').value,cat:document.getElementById('cs-cat').value,project:document.getElementById('cs-project').value,client:document.getElementById('cs-client').value};
+    const drive=wantsDrive(v)?{root:D.drive&&D.drive.rootUrl,folders:driveIndexLines()}:null;
     try{
-      const res=await fetch('/.netlify/functions/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({messages:history,agents:[...csAgents],task,scope:{mode:'dashboard'}})});
+      const res=await fetch('/.netlify/functions/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({messages:history,agents:[...csAgents],task,scope:{mode:'dashboard'},drive})});
       const d=await res.json();
       csThread.pop(); // remove the "thinking" notice
       csThread.push({r:'a',t:d.reply||d.error||'(no reply)'});
@@ -3650,8 +3658,9 @@
     miniThread.push({r:'sys',t:'Cuh is thinking…'}); renderMini();
     miniBusy=true;
     const history=miniThread.filter(m=>m.r==='u'||m.r==='a').map(m=>({role:m.r==='u'?'user':'assistant',content:m.t}));
+    const drive=wantsDrive(v)?{root:D.drive&&D.drive.rootUrl,folders:driveIndexLines()}:null;
     try{
-      const res=await fetch('/.netlify/functions/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({messages:history,agents:['Cuh'],scope:{mode:'page',page:miniLabel(miniView)}})});
+      const res=await fetch('/.netlify/functions/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({messages:history,agents:['Cuh'],scope:{mode:'page',page:miniLabel(miniView)},drive})});
       const d=await res.json();
       miniThread.pop();
       miniThread.push({r:'a',t:d.reply||d.error||'(no reply)'});
