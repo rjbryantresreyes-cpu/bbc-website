@@ -2805,7 +2805,10 @@
     <div class="panelgrid" id="camp-tracker"><div class="panel"><span class="ptitle">Loading…</span><div class="gauge-sub">Reading your CRM + inbox.</div></div></div>
     <div class="sec" style="margin-top:16px">Inbox <span class="gauge-sub" style="font-weight:400">(tap to read)</span></div>
     <div id="crm-inbox"><div class="panel"><span class="ptitle">Loading inbox…</span></div></div>
-    <div class="sec" style="margin-top:16px">Your CRM</div>
+    <div class="sec" style="margin-top:16px">Contacts <span class="gauge-sub" style="font-weight:400">(tap one for their thread + notes)</span></div>
+    <input id="crm-contact-search" placeholder="Search contacts by name, company, email..." oninput="filterContacts(this.value)" style="${EMIN};width:100%;box-sizing:border-box;margin-bottom:8px">
+    <div id="crm-contacts" style="max-height:360px;overflow:auto;border-radius:12px"><div class="panel"><span class="ptitle">Loading contacts…</span></div></div>
+    <div class="sec" style="margin-top:16px">Your CRM (full edit)</div>
     <div style="position:relative;width:100%;height:50vh;min-height:320px;border-radius:14px;overflow:hidden;background:#fff;box-shadow:0 6px 24px rgba(0,0,0,.28)">
       <iframe src="${NOCODB_SHARED}" title="BBC CRM (NocoDB)" allow="clipboard-read; clipboard-write" style="width:100%;height:100%;border:0;display:block"></iframe>
     </div>
@@ -2932,10 +2935,11 @@
       const r=await fetch('/.netlify/functions/gmail-read?max=25'); const d=await r.json();
       if(d.error){ el.innerHTML='<div class="panel"><span class="ptitle">Inbox not connected yet</span><div class="gauge-sub">'+esc(d.error)+'</div></div>'; if(sub)sub.textContent='Add the 3 Google env vars in Netlify, then redeploy.'; return; }
       let th=d.threads||[];
-      if(leadsOnly){ th=th.filter(t=>leadMap[emailOfThread(t)]); }
+      const leadPartyOf=t=>((t.parties&&t.parties.length)?t.parties:[emailOfThread(t)]).find(e=>leadMap[e]);
+      if(leadsOnly){ th=th.filter(t=>leadPartyOf(t)); }
       if(!th.length){ el.innerHTML='<div class="panel"><span class="ptitle">'+(leadsOnly?'No emails from your CRM list right now.':'Inbox empty')+'</span></div>'; if(sub)sub.textContent=''; return; }
       el.innerHTML=th.map(t=>{
-        const em=emailOfThread(t); const lead=leadMap[em];
+        const em=leadPartyOf(t)||emailOfThread(t); const lead=leadMap[em];
         const who=lead?esc(lead['First Name']||lead.Organization||lead.Email):esc((t.from||'').replace(/<[^>]+>/,'').replace(/"/g,'').trim());
         const dot=t.unread?'#60A5FA':'#2a3a52';
         const act=lead?`openContact('${em}')`:`openThread('${t.id}')`;
@@ -2968,6 +2972,19 @@
       openSheet(`<h3 style="font-family:var(--display,serif);color:#F5F1EA;margin-bottom:10px">${esc(msgs[0]?.subject||'Email')}</h3>${html}`);
     }catch(e){ openSheet('<div class="gauge-sub" style="padding:16px">'+esc(String(e).slice(0,120))+'</div>'); }
   };
+  window.loadCrmContacts=async()=>{
+    const el=document.getElementById('crm-contacts'); if(!el) return;
+    const cts=await crmContacts();
+    if(!cts.length){ el.innerHTML='<div class="panel"><span class="ptitle">No contacts loaded</span></div>'; return; }
+    const rank=r=>{ const s=((r.Status||'')+'').toLowerCase(); if(['interested','potential','replied','booked'].includes(s)) return 0; if(((r.Source||'')+'')==='Current Client') return 1; if(s==='emailed') return 2; return 3; };
+    const sorted=[...cts].sort((a,b)=>rank(a)-rank(b));
+    el.innerHTML=sorted.map(r=>{ const em=((r.Email||'')+'').toLowerCase().trim(); if(!em) return '';
+      const hay=esc((((r['First Name']||'')+' '+(r.Organization||'')+' '+em+' '+(r.Status||'')).toLowerCase()));
+      const sc={'Interested':'#4ADE80','Potential':'#D4AF37','Replied':'#60A5FA','Booked':'#4ADE80','Bad Fit':'#EF6B6B','Emailed':'#7C8AA5'}[((r.Status||'')+'').trim()]||'#2a3a52';
+      return `<div class="opitem cc-row" data-search="${hay}" onclick="openContact('${em}')" style="cursor:pointer"><span class="odot" style="background:${sc}"></span><span class="oname">${esc(r['First Name']||r.Organization||r.Email)}${(r.Organization&&r['First Name'])?' · '+esc(r.Organization):''}</span><span class="ocad">${esc(r.Status||'')}</span></div>`;
+    }).join('');
+  };
+  window.filterContacts=(q)=>{ q=((q||'')+'').toLowerCase(); document.querySelectorAll('#crm-contacts .cc-row').forEach(el=>{ el.style.display=((el.dataset.search||'').includes(q))?'':'none'; }); };
   window.openClientFolder=(folder)=>{ window.__drivePath=folder?['02_ACTIVE_CLIENTS',folder]:[]; go('folders'); };
   const CAV={
     principal:'Tre Serrano', brokerage:'Cavalry Realty Group · brokered by Real',
@@ -3496,7 +3513,7 @@
   };
   window.go=v=>{ window.curView=v; app.innerHTML=`<div class="view">${views[v]()}</div>`; window.scrollTo(0,0);
     document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('active',b.dataset.v===v));
-    sheet.classList.remove('open'); if(v==='crm'&&window.loadCampaignStats){ window.loadCampaignStats(); window.loadInbox&&window.loadInbox('crm-inbox',true); } if(v==='inbox'&&window.loadInbox) window.loadInbox(); };
+    sheet.classList.remove('open'); if(v==='crm'&&window.loadCampaignStats){ window.loadCampaignStats(); window.loadInbox&&window.loadInbox('crm-inbox',true); window.loadCrmContacts&&window.loadCrmContacts(); } if(v==='inbox'&&window.loadInbox) window.loadInbox(); };
   window.filterCards=(inp,wrapId)=>{ const q=inp.value.toLowerCase(); const wrap=document.getElementById(wrapId);
     wrap.querySelectorAll('.card,.wfrow,.clientbox,.opitem').forEach(c=>{ const hay=(c.dataset.search||c.textContent).toLowerCase(); c.style.display=hay.includes(q)?'':'none'; });
     wrap.querySelectorAll('.wfcat').forEach(p=>{ const any=[...p.querySelectorAll('.wfrow')].some(r=>r.style.display!=='none'); p.style.display=any?'':'none'; }); };

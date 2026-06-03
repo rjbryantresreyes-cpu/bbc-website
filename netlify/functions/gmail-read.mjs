@@ -61,12 +61,17 @@ export default async (req) => {
     const list = await (await fetch(`https://gmail.googleapis.com/gmail/v1/users/me/threads?q=${encodeURIComponent(q)}&maxResults=${max}`, { headers: H })).json();
     const threads = list.threads || [];
     const out = [];
+    const SELF = ["rj@balaynibruno.co", "admin@balaynibruno.co"];
+    const emailIn = (s) => { const m = (s || "").match(/<([^>]+)>/); return (m ? m[1] : (s || "")).toLowerCase().trim(); };
     for (const th of threads) {
-      const t = await (await fetch(`https://gmail.googleapis.com/gmail/v1/users/me/threads/${th.id}?format=metadata&metadataHeaders=From&metadataHeaders=Subject&metadataHeaders=Date`, { headers: H })).json();
+      const t = await (await fetch(`https://gmail.googleapis.com/gmail/v1/users/me/threads/${th.id}?format=metadata&metadataHeaders=From&metadataHeaders=To&metadataHeaders=Subject&metadataHeaders=Date`, { headers: H })).json();
       const msgs = t.messages || [];
       const last = msgs[msgs.length - 1] || {};
-      const hdr = (n) => (last.payload?.headers || []).find((h) => h.name.toLowerCase() === n)?.value || "";
-      out.push({ id: th.id, from: hdr("from"), subject: hdr("subject"), date: hdr("date"), snippet: last.snippet || t.snippet || "", count: msgs.length, unread: (last.labelIds || []).includes("UNREAD") });
+      const hdr = (m, n) => (m.payload?.headers || []).find((h) => h.name.toLowerCase() === n)?.value || "";
+      // All non-self participant emails across the whole thread (so a thread where YOU replied last still maps to the lead)
+      const parties = new Set();
+      msgs.forEach((m) => { [hdr(m, "from"), ...hdr(m, "to").split(",")].forEach((a) => { const e = emailIn(a); if (e && !SELF.includes(e)) parties.add(e); }); });
+      out.push({ id: th.id, from: hdr(last, "from"), subject: hdr(last, "subject"), date: hdr(last, "date"), snippet: last.snippet || t.snippet || "", count: msgs.length, unread: (last.labelIds || []).includes("UNREAD"), parties: [...parties] });
     }
     return json({ threads: out });
   } catch (e) {
