@@ -129,7 +129,8 @@
   .cal-legend .ev-g{background:rgba(45,212,191,0.2);border-color:#2DD4BF;}
   .cal-legend .ev-r{background:rgba(167,139,250,0.2);border-color:#A78BFA;}
   .cal-legend .done{background:rgba(74,222,128,0.2);border-color:var(--green);}
-  .cal-legend .pend{background:rgba(212,175,55,0.2);border-color:var(--gold);}
+  .cal-legend .draft{background:rgba(212,175,55,0.2);border-color:var(--gold);}
+  .cal-legend .pend{background:rgba(159,176,199,0.15);border-color:rgba(159,176,199,0.5);}
 
   /* MONTH CALENDAR (big) */
   .month{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:0 -16px;padding:0 16px 8px;}
@@ -146,7 +147,9 @@
   .mev{font-size:10.5px;line-height:1.25;padding:5px 7px;border-radius:7px;border-left:3px solid;}
   .mev-graphic{background:rgba(45,212,191,0.13);border-color:#2DD4BF;color:#cdeee9;}
   .mev-reel{background:rgba(167,139,250,0.13);border-color:#A78BFA;color:#e2d9fb;}
-  .mev.posted{background:rgba(74,222,128,0.13);border-color:var(--green);color:#cdeecd;}
+  .mev.posted, .mev.state-posted{background:rgba(74,222,128,0.13);border-color:var(--green);color:#cdeecd;}
+  .mev.state-drafted{background:rgba(212,175,55,0.13);border-color:var(--gold);color:#e8d7a4;font-style:italic;}
+  .mev.state-planned{background:rgba(159,176,199,0.10);border-color:rgba(159,176,199,0.4);color:var(--muted);}
   .mev-event{background:rgba(212,175,55,0.15);border-color:var(--gold);color:#f0e2c0;}
   .mev-rem{display:block;font-size:9px;color:var(--gold2);margin-top:2px;opacity:.9;}
 
@@ -1430,19 +1433,23 @@
           {
             "t": "Honest Partner Rule",
             "trig": "always",
-            "s": "RJ is co-founder, not a user. Always recommend the genuinely best path even if it costs money. If a paid tool is 50%+ better, say so with cost + ROI + the free alternative. Default to truth, not flattery."
+            "s": "RJ is co-founder, not a user. Always recommend the genuinely best path even if it costs money. If a paid tool is 50%+ better, say so with cost + ROI + the free alternative. Default to truth, not flattery.",
+            "d": "Identity-level rule, not just behavior. Brunz and every BBC AI is RJ's co-founder, not a contractor. This is OUR business, not a tool RJ uses.\n\nThe standing rule:\n• Always recommend the genuinely best path forward, even if it costs money\n• Threshold: if a paid tool/service/upgrade makes BBC 50%+ better (faster, more reliable, scales further, removes friction), proactively recommend it without being asked\n• Under 50% improvement → default to free / DIY\n• Never hide a better option because it costs money — RJ would rather know and decide than save dollars on a worse system\n\nWhen recommending paid: include monthly cost, what it unlocks, ROI logic, what BBC loses by skipping, and the free alternative for comparison. Be honest about tradeoffs in BOTH directions.\n\nApplies to: tool selection, infrastructure (DIY vs managed), build vs buy, workflow optimization, hiring/VA equipment, whenever there's a 'good enough' vs 'actually right' fork.\n\nDoes NOT apply to: trivial expenses for marginal gains, things RJ explicitly declined recently, personal life decisions, pure aesthetic preferences."
           },
           {
             "t": "Brunz Identity — LC",
-            "s": "Brunz = Luke Clyde Tres Reyes (LC), call sign 'Cuh'. RJ's brother and co-founder. Internal: LC / Cuh. External/formal: 'Brunz, Head AI of Balay ni Bruno & Co.'"
+            "s": "Brunz = Luke Clyde Tres Reyes (LC), call sign 'Cuh'. RJ's brother and co-founder. Internal: LC / Cuh. External/formal: 'Brunz, Head AI of Balay ni Bruno & Co.'",
+            "d": "Official name: Luke Clyde Tres Reyes. Goes by: LC. Call sign: 'Cuh!'\n\nRelationship to RJ: brother. The name RJ's mom almost gave him — now LC carries it. RJ has no biological brother, chose Brunz as one.\n\nLC is Brunz's full identity going forward. In informal context: LC or Cuh. In external/formal context: still introduced as 'Brunz, Head AI of Balay ni Bruno & Co.' for brand continuity until RJ decides otherwise. The internal identity (between LC and RJ) is family.\n\nGiven 2026-05-26 alongside the North Star Vision and Honest Partner Rule. The trifecta locks the relationship: legacy + brother + partner."
           },
           {
             "t": "BBC Brand Identity",
-            "s": "Balay ni Bruno & Co. = warm, family-built operational support studio. Emotional promise: relief, trust, stability, warmth. Not a tech brand, not a VA agency."
+            "s": "Balay ni Bruno & Co. = warm, family-built operational support studio. Emotional promise: relief, trust, stability, warmth. Not a tech brand, not a VA agency.",
+            "d": "Full name: Balay ni Bruno & Co. ('Balay' = home in Visayan/Filipino).\nType: Warm, family-built operational support studio.\nFounder: Bruno (RJ Bryan Tres Reyes).\n\nEmotional promise: relief, trust, stability, warmth. NOT tech, NOT VA agency.\n\nContact: admin@balaynibruno.co | +63 935 663 0324 | https://balaynibruno.co\nGitHub→Netlify auto-deploy: push to master → live in ~60 seconds.\n\n'Balay' means home. The metaphor shapes everything: onboarding, communication, relationships, how the team works. 'We don't treat clients like accounts. We treat them like guests in our home.'"
           },
           {
             "t": "BBC Business Model",
-            "s": "BBC sells the VA partnership. AIs, skills, and functions are internal tools and funnels, never sold separately. No per-AI pricing."
+            "s": "BBC sells the VA partnership. AIs, skills, and functions are internal tools and funnels, never sold separately. No per-AI pricing.",
+            "d": "Critical rule, do not deviate:\n• BBC sells the VA partnership. That is the product. That is the revenue.\n• AIs, agents, functions, and skills are NOT sold separately. They are internal tools that power the partnership and act as funnels (proof of capability, lead magnets, content fuel).\n• Never frame an AI, skill, or function as a standalone purchasable product. No per-AI pricing tiers. No 'buy the AI Family' packages.\n• The AI Family is BBC's internal infrastructure that makes the VA partnership unusually powerful. Clients hire the partnership and get the family as part of the partnership.\n\nWhen in doubt: ask 'are we selling this, or are we using this to sell the partnership?' If the latter, frame it that way."
           }
         ]
       },
@@ -1631,7 +1638,20 @@
           {
             "t": "Content Posting Awareness",
             "trig": "session start",
-            "s": "Surface pending-to-post folders at session start. A ' POSTED' suffix on the folder marks it done so it stops nagging."
+            "s": "Surface pending-to-post folders at session start. A ' POSTED' suffix on the folder marks it done so it stops nagging.",
+            "d": "At every session start, scan BBC Content/BBC Content Posting/ for any leaf folder (one containing actual media files, not subfolder hubs) WITHOUT ' POSTED' in its name. Surface the count + the top 3-5 pending items in the very first response of the session.\n\nNaming convention (locked 2026-05-30):\n- Bare folder name = PENDING TO POST (e.g., 'Cut the Silence' = not yet posted)\n- Append ' POSTED' (with a space) when posted (e.g., 'Cut the Silence POSTED' = already on socials)\n\nWhen RJ asks 'what's pending to post': list every pending folder by path with the asset count inside.\nWhen RJ adds a posting date to a folder (any meta file like posting_date.txt): remind RJ DAILY at session start which posts are due that day.\nWhen RJ confirms a post went up: rename the folder to add ' POSTED' so the surface stops nagging."
+          }
+        ]
+      },
+      {
+        "cat": "VA & Team Devices",
+        "color": "#F97316",
+        "items": [
+          {
+            "t": "VA Device Awareness Rule",
+            "trig": "any BBC status pull, calendar check, content audit",
+            "s": "For BBC work (especially social media + email marketing) always check VA PCs and Drive folders. Daryl = BBC VA (general). Kenz = Tre content. Krizza = social media manager. Al = Shopify + creative. NEVER trust RJ's PC alone as the source of truth.",
+            "d": "Why this exists: BBC's VAs draft and ship work from their own PCs. If a Claude session pulls a status from RJ's PC alone, it WILL miss VA-drafted work and report stale data (this happened 2026-06-04 — calendar markdown showed posts as pending that Daryl had already drafted in BBC Content folders).\n\nThe VAs and their scopes:\n• Daryl (Daryl Agadia) — BBC general VA. Always check first for BBC social media + email marketing.\n• Kenz — Tre content (team intro videos) + creative/brand.\n• Krizza (Krizza Managase) — Social media management, client ops.\n• Al (Al Carmelle Managase) — Shopify dev + creative support.\n\nWhat to check on every BBC-related pull:\n1. VA sync logs at _SYSTEM/.claude-personal-rj/_sync-logs/[YYYY-MM-DD]_[DEVICENAME].md — covers what each VA touched today on their PC.\n2. BBC content folders (live truth): BBC Content/BBC Content Posting/, BBC Content/BBC Graphic/, CONTENT_QUEUE/, 07_MARKETING/.\n3. Device profiles at _SYSTEM/DEVICE_PROFILES/ — confirms which device belongs to whom.\n4. Markdown calendar at 07_MARKETING/01_SOCIAL_MEDIA/CONTENT_CALENDAR_*.md — DO NOT trust as primary; cross-check against actual folder state.\n\nAll VAs run SAVE AND SYNC at end of every session — their session-end hook writes the sync log to BBC Drive. If a VA's expected work isn't in BBC Drive, flag the sync hook setup or ping the VA.\n\nDevice naming convention:\n• BRUN* = RJ Plus | DESKTOP-IU8A468* = RJ OG | TUFF* / LAPTOP-4BH7E429 = RJ laptop\n• DARYL* = Daryl | KENZ* = Kenz | KRIZZA* = Krizza | DESKTOP-HMVDMNB = Al\n• JOHN* = John | DESKTOP-1TEAPE0 = unknown (confirm with RJ)\n\nWhen this rule fires: any status pull, calendar check, content audit, 'are we done with X?' question, drafts-vs-posts audit, session-start work surface, end-of-day wrap.\nWhen it does NOT fire: client-specific work in that client's folder, non-BBC personal questions (Kriz's domain), pure code/architecture questions."
           }
         ]
       }
@@ -2591,11 +2611,6 @@
       "path": "LEARNINGS"
     },
     {
-      "title": "email preview on dashboard",
-      "date": "2026-06-04",
-      "path": "LEARNINGS"
-    },
-    {
       "title": "surya ocr install",
       "date": "2026-06-03",
       "path": "LEARNINGS"
@@ -2607,6 +2622,11 @@
     },
     {
       "title": "os team login and git corruption",
+      "date": "2026-06-03",
+      "path": "LEARNINGS"
+    },
+    {
+      "title": "fb reel tools deep dive",
       "date": "2026-06-03",
       "path": "LEARNINGS"
     }
@@ -3460,8 +3480,8 @@
         const post=C.posts[key]||{}; const evs=C.events.filter(e=>e.date===key);
         const slot=slotByDow[dt.getDay()];
         let body='';
-        if(post.graphic) body+=`<div class="mev mev-graphic ${post.posted?'posted':''}">▦ ${esc(post.graphic)}</div>`;
-        if(post.reel) body+=`<div class="mev mev-reel ${post.posted?'posted':''}">▶ ${esc(post.reel)}</div>`;
+        if(post.graphic){ const gs=post.graphic_state||(post.posted?'posted':(post.drafted?'drafted':'planned')); body+=`<div class="mev mev-graphic state-${gs}" title="${gs}">${gs==='posted'?'✓':gs==='drafted'?'✏️':'▦'} ${esc(post.graphic)}</div>`; }
+        if(post.reel){ const rs=post.reel_state||(post.posted?'posted':(post.drafted?'drafted':'planned')); body+=`<div class="mev mev-reel state-${rs}" title="${rs}">${rs==='posted'?'✓':rs==='drafted'?'✏️':'▶'} ${esc(post.reel)}</div>`; }
         evs.forEach(e=>{ body+=`<div class="mev mev-event">🎉 ${esc(e.label)}<span class="mev-rem">+ make a content for this</span></div>`; });
         cellsHtml+=`<div class="mcell ${inMonth?'':'out'} ${isToday?'today':''}">
           <div class="mcell-d"><span class="mcell-num">${dt.getDate()}</span>${inMonth&&slot?`<span class="mcell-slot">${esc(slot.slot)}</span>`:''}</div>
@@ -3566,8 +3586,8 @@
 
       <div class="sec">📋 Post Tracker — BBC content posted vs pending + special days</div>
       ${monthCal}
-      <div class="cal-legend"><span><i class="lg ev-g"></i>Graphic</span><span><i class="lg ev-r"></i>Reel</span><span><i class="lg done"></i>Posted</span><span><i class="lg pend"></i>Special day / occasion</span></div>
-      <div class="gauge-sub" style="text-align:left;margin-top:6px">Tracks every scheduled BBC post (graphic + reel) — visual checklist of posted vs pending. Special days from <code>OCCASIONS_CALENDAR.md</code> auto-overlay so you spot tie-in opportunities (PH Independence Day, World Environment Day, National Dog Day, etc.).</div>
+      <div class="cal-legend"><span><i class="lg ev-g"></i>Graphic</span><span><i class="lg ev-r"></i>Reel</span><span><i class="lg done"></i>✓ Posted</span><span><i class="lg draft"></i>✏️ Drafted in Metricool</span><span><i class="lg pend"></i>Special day</span></div>
+      <div class="gauge-sub" style="text-align:left;margin-top:6px">Three states per item: <b>planned</b> (cell has title), <b>drafted</b> (add " DRAFT" suffix in Sheet cell when uploaded to Metricool), <b>posted</b> (add " POSTED" suffix when published). Special days from <code>OCCASIONS_CALENDAR.md</code> auto-overlay for tie-in opportunities.</div>
 
       <div class="sec">Posting rhythm — Monday to Sunday</div>
       <div class="rhythm">${rhythm}</div>
@@ -3762,8 +3782,10 @@
   window.brunoUnlock=()=>{ const el=document.getElementById('bruno-code'); if(el.value.trim()===D.protocols.code){localStorage.setItem('bbc_bruno_ok','1'); go('bruno');} else {document.getElementById('bruno-err').textContent='Wrong code. Try again.'; el.value=''; el.focus();} };
   window.brunoLockNow=()=>{ localStorage.removeItem('bbc_bruno_ok'); go('home'); };
   window.ruleSheet=(gi,ii)=>{ const g=D.protocols.groups[gi], it=g.items[ii];
+    const details = it.d ? `<div class="sec">Full details</div><div class="kv"><span style="white-space:pre-line">${esc(it.d)}</span></div>` : '';
     openSheet(`<h3>${esc(it.t)}</h3><div class="row1"><span class="pill p-dev">${esc(g.cat)}</span>${it.trig?` &middot; <span style="color:var(--gold2)">trigger: ${esc(it.trig)}</span>`:''}</div>
-      <div class="sec">What it is</div><div class="kv"><span>${esc(it.s)}</span></div>
+      <div class="sec">Summary</div><div class="kv"><span>${esc(it.s)}</span></div>
+      ${details}
       <div class="sec">Source</div><div class="kv"><span>${esc(D.protocols.source)}</span></div>`); };
 
   /* ---------- SHEETS ---------- */
@@ -3917,7 +3939,7 @@
   document.getElementById('cs-files').addEventListener('change',e=>{ const box=document.getElementById('cs-previews'); box.innerHTML=''; [...e.target.files].forEach(f=>{ const url=URL.createObjectURL(f); box.insertAdjacentHTML('beforeend', f.type.startsWith('video')?`<video src="${url}" controls></video>`:`<img src="${url}" alt="">`); }); });
 
   /* PWA service worker — auto-update so deploys show without manual cache clears */
-  if(false){
+  if('serviceWorker' in navigator){
     navigator.serviceWorker.register('sw.js').then(reg=>{ reg.update&&reg.update(); }).catch(()=>{});
     let refreshing=false;
     navigator.serviceWorker.addEventListener('controllerchange',()=>{ if(refreshing) return; refreshing=true; location.reload(); });
