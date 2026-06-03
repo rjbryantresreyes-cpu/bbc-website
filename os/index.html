@@ -2718,39 +2718,14 @@
       <input class="search" placeholder="Search clients..." oninput="filterCards(this,'cli')">
       <div class="clientgrid" id="cli">${cards}</div>`;
   };
-  // CRM / Pipeline view — live from NocoDB via the secure Netlify function.
-  views.crm=()=>`<h2 class="vt">CRM · Pipeline</h2><div class="vsub" id="crm-sub">Loading your leads from NocoDB…</div>
-    <input class="search" placeholder="Search leads (name, company, email)..." oninput="filterCards(this,'crm-board')">
-    <div class="panelgrid" id="crm-board"><div class="panel"><span class="ptitle">Loading…</span><div class="gauge-sub">Pulling your contacts live.</div></div></div>`;
-  window.loadCRM=async()=>{
-    const board=document.getElementById('crm-board'), sub=document.getElementById('crm-sub');
-    if(!board) return;
-    try{
-      const res=await fetch('/.netlify/functions/nocodb?table=contacts&limit=500');
-      const data=await res.json();
-      const list=data.list||[];
-      if(!list.length){ board.innerHTML='<div class="panel"><span class="ptitle">No leads yet</span><div class="gauge-sub">NocoDB returned no records.</div></div>'; if(sub)sub.textContent='0 leads'; return; }
-      const SC={New:'#60A5FA',Contacted:'#D4AF37',Qualified:'#4ADE80',Drafted:'#C9A961',Won:'#4ADE80',Lost:'#EF6B6B',Uncategorized:'#7C8AA5'};
-      const order=['New','Contacted','Qualified','Drafted','Won','Lost','Uncategorized'];
-      const groups={};
-      list.forEach(r=>{ const s=((r.Status||'')+'').trim()||'Uncategorized'; (groups[s]=groups[s]||[]).push(r); });
-      const keys=Object.keys(groups).sort((a,b)=>{const ia=order.indexOf(a),ib=order.indexOf(b);return (ia<0?99:ia)-(ib<0?99:ib);});
-      board.innerHTML=keys.map(k=>{
-        const col=SC[k]||'#D4AF37';
-        const rows=groups[k].map(r=>{
-          const nm=esc(r['First Name']||r.Email||'—'), org=esc(r.Organization||'');
-          const right=esc(r.Phone||r.Tier||'');
-          const hay=esc(((r['First Name']||'')+' '+(r.Organization||'')+' '+(r.Email||'')+' '+k).toLowerCase());
-          return `<div class="opitem" data-search="${hay}"><span class="odot" style="background:${col}"></span><span class="oname">${nm}${org?' · '+org:''}</span><span class="ocad">${right}</span></div>`;
-        }).join('');
-        return `<div class="panel"><span class="ptitle" style="color:${col}">${esc(k)} (${groups[k].length})</span>${rows}</div>`;
-      }).join('');
-      if(sub)sub.textContent=list.length+' leads · live from NocoDB · grouped by status';
-    }catch(e){
-      board.innerHTML='<div class="panel"><span class="ptitle">Live on the deployed site</span><div class="gauge-sub">Your leads show on balaynibruno.co/os (the secure connector runs there, not in a local file). Detail: '+esc(String(e).slice(0,90))+'</div></div>';
-      if(sub)sub.textContent='Shows live on balaynibruno.co/os';
-    }
-  };
+  // CRM view — embeds the FULL NocoDB app (all tables, views, workflows) inside the dashboard.
+  const NOCODB_URL='https://app.nocodb.com/wryboloy/p0zn4yka8zr49iu';
+  views.crm=()=>`<h2 class="vt">CRM · NocoDB</h2><div class="vsub">Your full CRM, hosted inside the dashboard. Data, views, and workflows. Live.</div>
+    <div style="display:flex;gap:8px;align-items:center;margin:0 0 10px"><a class="morelink" style="margin:0" href="${NOCODB_URL}" target="_blank" rel="noopener">↗ Open in new tab</a><span class="gauge-sub">Sign in to NocoDB once and it stays logged in.</span></div>
+    <div style="position:relative;width:100%;height:calc(100dvh - 210px);min-height:460px;border-radius:14px;overflow:hidden;background:#fff;box-shadow:0 6px 24px rgba(0,0,0,.28)">
+      <iframe src="${NOCODB_URL}" title="BBC CRM (NocoDB)" allow="clipboard-read; clipboard-write" style="width:100%;height:100%;border:0;display:block" onload="document.getElementById('crm-blank')&&(document.getElementById('crm-blank').style.display='none')"></iframe>
+      <div id="crm-blank" style="position:absolute;left:0;right:0;bottom:0;background:rgba(15,21,32,.92);color:#C9A961;font-size:12px;padding:10px 14px;text-align:center">If this stays blank, NocoDB is blocking the embed. Tell me and we'll switch to a NocoDB "Share" embed link (1 min).</div>
+    </div>`;
   window.openClientFolder=(folder)=>{ window.__drivePath=folder?['02_ACTIVE_CLIENTS',folder]:[]; go('folders'); };
   const CAV={
     principal:'Tre Serrano', brokerage:'Cavalry Realty Group · brokered by Real',
@@ -3213,7 +3188,7 @@
   };
   window.go=v=>{ window.curView=v; app.innerHTML=`<div class="view">${views[v]()}</div>`; window.scrollTo(0,0);
     document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('active',b.dataset.v===v));
-    sheet.classList.remove('open'); if(v==='crm'&&window.loadCRM){window.loadCRM();} };
+    sheet.classList.remove('open'); };
   window.filterCards=(inp,wrapId)=>{ const q=inp.value.toLowerCase(); const wrap=document.getElementById(wrapId);
     wrap.querySelectorAll('.card,.wfrow,.clientbox,.opitem').forEach(c=>{ const hay=(c.dataset.search||c.textContent).toLowerCase(); c.style.display=hay.includes(q)?'':'none'; });
     wrap.querySelectorAll('.wfcat').forEach(p=>{ const any=[...p.querySelectorAll('.wfrow')].some(r=>r.style.display!=='none'); p.style.display=any?'':'none'; }); };
