@@ -3917,7 +3917,7 @@
   document.getElementById('cs-files').addEventListener('change',e=>{ const box=document.getElementById('cs-previews'); box.innerHTML=''; [...e.target.files].forEach(f=>{ const url=URL.createObjectURL(f); box.insertAdjacentHTML('beforeend', f.type.startsWith('video')?`<video src="${url}" controls></video>`:`<img src="${url}" alt="">`); }); });
 
   /* PWA service worker — auto-update so deploys show without manual cache clears */
-  if('serviceWorker' in navigator){
+  if(false){
     navigator.serviceWorker.register('sw.js').then(reg=>{ reg.update&&reg.update(); }).catch(()=>{});
     let refreshing=false;
     navigator.serviceWorker.addEventListener('controllerchange',()=>{ if(refreshing) return; refreshing=true; location.reload(); });
@@ -3936,7 +3936,7 @@
     sb=window.supabase.createClient(window.BBC_SUPABASE_URL,window.BBC_SUPABASE_KEY);
     return sb;
   }
-  var BBC_LOCKED={'kenz.bbc@gmail.com':'cavalry'};
+  var BBC_LOCKED={'kenz.bbc@gmail.com':'cavalry','kenz.bbc11@gmail.com':'cavalry'};
   function showApp(){ document.body.classList.add('authed'); }
   function showGate(){ document.body.classList.remove('authed'); document.body.classList.remove('locked-cavalry'); }
   function routeUser(email){
