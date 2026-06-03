@@ -397,15 +397,62 @@
   .agentrow .rl{color:var(--muted);font-size:11px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
   .cs-previews{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:8px;}
   .cs-previews img,.cs-previews video{width:100%;border-radius:8px;border:1px solid var(--line);display:block;}
+
+  /* ===== AUTH GATE (Supabase team login) ===== */
+  body:not(.authed) .hdr,
+  body:not(.authed) #app,
+  body:not(.authed) #nav,
+  body:not(.authed) .fab,
+  body:not(.authed) #chatscreen{display:none!important;}
+  body.authed #auth-gate{display:none;}
+  #auth-gate{position:fixed;inset:0;z-index:2000;display:flex;align-items:center;justify-content:center;
+    padding:calc(24px + env(safe-area-inset-top)) 24px calc(24px + env(safe-area-inset-bottom));
+    background:radial-gradient(130% 80% at 70% 0%,#1A2E47 0%,#0E1A2E 50%,#08111E 100%);}
+  .auth-card{width:100%;max-width:360px;background:var(--bg2);border:1px solid var(--line);border-radius:20px;padding:34px 26px;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,0.45);}
+  .auth-logo{font-size:42px;line-height:1;margin-bottom:14px;}
+  .auth-card h1{font-family:var(--display);font-size:23px;font-weight:700;margin-bottom:6px;}
+  .auth-card .auth-tag{color:var(--muted);font-size:13px;margin-bottom:22px;line-height:1.5;}
+  #auth-form{display:flex;flex-direction:column;gap:11px;}
+  #auth-form input{width:100%;background:var(--bg3);border:1px solid var(--line);border-radius:12px;color:var(--ink);font-size:16px;padding:14px 15px;font-family:var(--ui);}
+  #auth-form input:focus{outline:none;border-color:var(--gold);}
+  #auth-form button{width:100%;background:var(--gold);color:#0A1422;border:none;border-radius:12px;padding:14px;font-weight:700;font-size:15px;font-family:var(--ui);cursor:pointer;margin-top:4px;min-height:48px;}
+  #auth-form button:disabled{opacity:0.6;cursor:default;}
+  .auth-err{color:#EF6B6B;font-size:12.5px;min-height:16px;margin-top:2px;}
+  .auth-foot{color:var(--muted);font-size:11px;margin-top:18px;}
+  .hdr-logout{background:none;border:1px solid var(--line);color:var(--muted);border-radius:9px;font-size:11px;padding:6px 10px;cursor:pointer;font-family:var(--ui);min-height:32px;}
+  .hdr-logout:hover{color:var(--ink);border-color:var(--gold);}
 </style>
+<!-- Supabase Auth (team login) -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+  window.BBC_SUPABASE_URL = 'https://ctoeuikxoqlhnebgsygp.supabase.co';
+  window.BBC_SUPABASE_KEY = 'sb_publishable_WnJ57fk-ymDuT2xtVZRcHg_khZCWgJL';
+</script>
 </head>
 <body>
+
+<!-- ===== TEAM LOGIN GATE ===== -->
+<div id="auth-gate">
+  <div class="auth-card">
+    <div class="auth-logo">🏠</div>
+    <h1>BBC Command Center</h1>
+    <p class="auth-tag">Team access only. Sign in to continue.</p>
+    <form id="auth-form" autocomplete="on">
+      <input type="email" id="auth-email" placeholder="Email" autocomplete="username" required>
+      <input type="password" id="auth-pass" placeholder="Password" autocomplete="current-password" required>
+      <button type="submit" id="auth-btn">Sign In</button>
+      <div class="auth-err" id="auth-err"></div>
+    </form>
+    <div class="auth-foot">Balay ni Bruno &amp; Co. · private</div>
+  </div>
+</div>
 
 <div class="hdr">
   <div class="b">BBC Command Center<small id="hdr-sub">OPERATING SYSTEM</small></div>
   <div style="display:flex;align-items:center;gap:11px">
     <div class="date" id="hdr-date">2026-06-02</div>
     <button class="hdr-lock" onclick="go('bruno')" aria-label="Bruno page" title="Bruno page (private)">🔒</button>
+    <button class="hdr-logout" id="hdr-logout" onclick="bbcLogout()">Sign out</button>
   </div>
 </div>
 
@@ -2043,13 +2090,13 @@
       "path": "LEARNINGS"
     },
     {
-      "title": "cavalry tre research",
+      "title": "fb reel tools batch2",
       "date": "2026-06-03",
       "path": "LEARNINGS"
     },
     {
-      "title": "weekend content build and renderer fallback",
-      "date": "2026-06-02",
+      "title": "cavalry tre research",
+      "date": "2026-06-03",
       "path": "LEARNINGS"
     }
   ],
@@ -3164,6 +3211,66 @@
   }
 
   go('home');
+</script>
+
+<!-- ===== BBC /os Auth Controller (Supabase) ===== -->
+<script>
+(function(){
+  var sb=null;
+  function initClient(){
+    if(sb) return sb;
+    if(!window.supabase||!window.supabase.createClient||!window.BBC_SUPABASE_URL){return null;}
+    sb=window.supabase.createClient(window.BBC_SUPABASE_URL,window.BBC_SUPABASE_KEY);
+    return sb;
+  }
+  function showApp(){ document.body.classList.add('authed'); }
+  function showGate(){ document.body.classList.remove('authed'); }
+
+  window.bbcLogout=async function(){
+    var c=initClient(); if(c){ try{ await c.auth.signOut(); }catch(e){} }
+    showGate();
+    var em=document.getElementById('auth-email'); if(em) em.value='';
+    var pw=document.getElementById('auth-pass'); if(pw) pw.value='';
+  };
+
+  async function checkSession(){
+    var c=initClient();
+    if(!c){
+      var err=document.getElementById('auth-err');
+      if(err) err.textContent='Login service unavailable. Refresh the page.';
+      return; /* fail closed — stay on gate */
+    }
+    try{
+      var r=await c.auth.getSession();
+      if(r&&r.data&&r.data.session){ showApp(); } else { showGate(); }
+    }catch(e){ showGate(); }
+  }
+
+  function wireForm(){
+    var form=document.getElementById('auth-form');
+    if(!form) return;
+    form.addEventListener('submit',async function(e){
+      e.preventDefault();
+      var c=initClient();
+      var err=document.getElementById('auth-err');
+      var btn=document.getElementById('auth-btn');
+      var email=(document.getElementById('auth-email').value||'').trim();
+      var pass=document.getElementById('auth-pass').value||'';
+      if(err) err.textContent='';
+      if(!c){ if(err) err.textContent='Login service unavailable. Refresh.'; return; }
+      if(btn){ btn.disabled=true; btn.textContent='Signing in...'; }
+      try{
+        var res=await c.auth.signInWithPassword({email:email,password:pass});
+        if(res.error){ if(err) err.textContent=(res.error.message||'Wrong email or password.'); }
+        else { showApp(); }
+      }catch(ex){ if(err) err.textContent='Something went wrong. Try again.'; }
+      finally{ if(btn){ btn.disabled=false; btn.textContent='Sign In'; } }
+    });
+  }
+
+  wireForm();
+  checkSession();
+})();
 </script>
 </body>
 </html>
