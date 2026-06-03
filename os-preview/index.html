@@ -189,6 +189,28 @@
   .mini-btn:hover{border-color:var(--green);background:rgba(74,222,128,0.08);color:var(--green);}
   .mini-btn:active{transform:scale(.97);}
 
+  /* METRICOOL CTA LAUNCHERS */
+  .metricool-launcher{display:grid;grid-template-columns:1fr;gap:8px;margin-bottom:12px;}
+  @media(min-width:600px){.metricool-launcher{grid-template-columns:1fr 1fr;}}
+  .metricool-cta{display:flex;align-items:center;gap:12px;background:var(--bg2);border:1px solid var(--line);border-radius:12px;padding:14px 16px;text-decoration:none;color:var(--ink);transition:border-color .15s,transform .1s;}
+  .metricool-cta:hover{border-color:var(--gold);transform:translateY(-1px);}
+  .metricool-cta.primary{background:linear-gradient(135deg,#1A2E47,#14253E);border-color:var(--gold);}
+  .metricool-cta .cta-ic{font-size:24px;line-height:1;}
+  .metricool-cta .cta-text{flex:1;min-width:0;}
+  .metricool-cta .cta-t{font-family:var(--ui);font-weight:700;font-size:14px;line-height:1.2;}
+  .metricool-cta .cta-s{font-family:var(--ui);font-size:11px;color:var(--muted);margin-top:3px;line-height:1.35;}
+  .metricool-cta .cta-arr{color:var(--gold2);font-size:18px;}
+
+  /* METRICOOL PER-PLATFORM TILES */
+  .metricool-tile{display:flex;flex-direction:column;gap:10px;text-decoration:none;color:var(--ink);transition:border-color .15s,transform .1s;cursor:pointer;}
+  .metricool-tile:hover{border-color:var(--gold);transform:translateY(-1px);}
+  .metricool-tile .anabox-row{display:flex;align-items:center;gap:10px;}
+  .metricool-tile .anabox-icon{font-size:22px;line-height:1;}
+  .metricool-tile .anabox-text{flex:1;min-width:0;}
+  .metricool-tile .anabox-cta{font-family:var(--mono);font-size:10px;color:var(--gold2);letter-spacing:.5px;text-transform:uppercase;text-align:right;}
+  .badge-paid{display:inline-block;background:rgba(212,175,55,0.18);color:var(--gold);font-family:var(--mono);font-size:8px;font-weight:700;padding:2px 6px;border-radius:6px;letter-spacing:.5px;margin-left:4px;vertical-align:middle;}
+  .badge-locked{display:inline-block;background:rgba(159,176,199,0.18);color:var(--muted);font-family:var(--mono);font-size:8px;font-weight:700;padding:2px 6px;border-radius:6px;letter-spacing:.5px;margin-left:4px;vertical-align:middle;}
+
   /* BRUNO PAGE (private) */
   .hdr-lock{background:none;border:1px solid var(--line);color:var(--gold2);border-radius:9px;padding:6px 9px;font-size:14px;cursor:pointer;line-height:1;}
   .hdr-lock:hover{border-color:var(--gold);}
@@ -1186,10 +1208,19 @@
           "name": "NPC-Portfolio-System"
         },
         {
-          "name": ".claude"
+          "name": "08_KNOWLEDGE_BASE"
         },
         {
-          "name": "01_LEADS"
+          "name": "07_MARKETING"
+        },
+        {
+          "name": "06_FINANCE"
+        },
+        {
+          "name": "05_OPERATIONS"
+        },
+        {
+          "name": "03_ARCHIVED_CLIENTS"
         },
         {
           "name": "02_ACTIVE_CLIENTS",
@@ -1198,13 +1229,13 @@
               "name": "4OCEAN"
             },
             {
-              "name": "FIRST-CLASS-FINISHES"
+              "name": "WOODEN-WOODWORKS"
             },
             {
               "name": "HOME-VISION-STUDIO"
             },
             {
-              "name": "WOODEN-WOODWORKS"
+              "name": "FIRST-CLASS-FINISHES"
             },
             {
               "name": "HI-UP-ROOFING"
@@ -1230,19 +1261,10 @@
           ]
         },
         {
-          "name": "03_ARCHIVED_CLIENTS"
+          "name": "01_LEADS"
         },
         {
-          "name": "05_OPERATIONS"
-        },
-        {
-          "name": "06_FINANCE"
-        },
-        {
-          "name": "07_MARKETING"
-        },
-        {
-          "name": "08_KNOWLEDGE_BASE"
+          "name": ".claude"
         },
         {
           "name": "BBC WEBSITE HTML"
@@ -1251,40 +1273,43 @@
           "name": "04_TEAM"
         },
         {
+          "name": "09_POTENTIAL CLIENTS"
+        },
+        {
           "name": "BBC_AI_FAMILY",
           "children": [
             {
-              "name": "CASEY"
-            },
-            {
-              "name": "BOOGY"
-            },
-            {
-              "name": "EMY"
-            },
-            {
-              "name": "SONNY"
-            },
-            {
               "name": "BRUNZ"
-            },
-            {
-              "name": "KRIZ"
-            },
-            {
-              "name": "MAI"
             },
             {
               "name": "WEBBY"
             },
             {
+              "name": "MAI"
+            },
+            {
+              "name": "KRIZ"
+            },
+            {
+              "name": "SONNY"
+            },
+            {
+              "name": "EMY"
+            },
+            {
+              "name": "BOOGY"
+            },
+            {
+              "name": "CASEY"
+            },
+            {
               "name": "_TEMPLATE"
             },
             {
-              "name": "AGENT_PROFILES"
+              "name": "JENNY"
             },
             {
-              "name": "JENNY"
+              "name": "AGENT_PROFILES"
             },
             {
               "name": "_VAULT"
@@ -1311,9 +1336,6 @@
               "name": "_BRAND"
             }
           ]
-        },
-        {
-          "name": "09_POTENTIAL CLIENTS"
         },
         {
           "name": "Daryl BBC Folder"
@@ -3012,9 +3034,20 @@
     const order=[1,2,3,4,5,6,0];
     const rhythm=order.map(i=>{const p=slotByDow[i];return `<div class="rbox"><div class="day">${esc(p.day)}</div><div class="slot">${esc(p.slot)}</div><div class="note">${esc(p.note)}</div></div>`;}).join('');
 
-    /* analytics per platform */
-    const ana=D.socialAccounts.map(a=>`<div class="anabox"><div class="pl">${esc(a.platform)}</div><div class="hd">${esc(a.handle)}</div>
-      <div class="mets"><div class="met"><div class="v">—</div><div class="k">Followers</div></div><div class="met"><div class="v">—</div><div class="k">Reach</div></div><div class="met"><div class="v">—</div><div class="k">Posts</div></div></div></div>`).join('');
+    /* Metricool analytics — per-platform click-through tiles (Free tier compatible) */
+    const METRICOOL_BRAND='6344379'; const METRICOOL_USER='4888313';
+    const metricoolUrl=p=>`https://app.metricool.com/evolution/${p}?blogId=${METRICOOL_BRAND}&userId=${METRICOOL_USER}`;
+    const metricoolPlatforms=[
+      {platform:'Facebook',  handle:'@balaynibruno', icon:'👤', url:metricoolUrl('facebookPage')},
+      {platform:'Instagram', handle:'@balaynibruno', icon:'📷', url:metricoolUrl('instagramPage')},
+      {platform:'TikTok',    handle:'@balaynibruno', icon:'🎵', url:metricoolUrl('tiktokPage')},
+      {platform:'YouTube',   handle:'@balaynibruno', icon:'▶',  url:metricoolUrl('youtubePage')},
+      {platform:'LinkedIn',  handle:'Balay ni Bruno & Co.', icon:'💼', url:metricoolUrl('linkedinPage'), paid:true},
+      {platform:'X',         handle:'(not connected)', icon:'𝕏', url:'https://app.metricool.com/networks/connect?blogId='+METRICOOL_BRAND, locked:true},
+    ];
+    const ana=metricoolPlatforms.map(a=>`<a class="anabox metricool-tile" href="${a.url}" target="_blank" rel="noopener" title="View ${esc(a.platform)} analytics in Metricool">
+      <div class="anabox-row"><span class="anabox-icon">${a.icon}</span><div class="anabox-text"><div class="pl">${esc(a.platform)}${a.paid?' <span class="badge-paid">PAID</span>':''}${a.locked?' <span class="badge-locked">CONNECT</span>':''}</div><div class="hd">${esc(a.handle)}</div></div></div>
+      <div class="anabox-cta">View in Metricool →</div></a>`).join('');
 
     /* what to post next — data-driven from the calendar */
     const MON=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
@@ -3077,11 +3110,27 @@
       <div class="sec">${esc(C.label)} · scroll sideways to see the full month</div>
       ${monthCal}
       <div class="cal-legend"><span><i class="lg ev-g"></i>Graphic</span><span><i class="lg ev-r"></i>Reel</span><span><i class="lg done"></i>Posted</span><span><i class="lg pend"></i>Event / note</span></div>
+
+      <div class="sec">📊 Metricool — live calendar + cross-platform view</div>
+      <div class="metricool-launcher">
+        <a class="metricool-cta primary" href="https://app.metricool.com/planner/calendar?blogId=${METRICOOL_BRAND}&userId=${METRICOOL_USER}" target="_blank" rel="noopener">
+          <div class="cta-ic">🗓️</div>
+          <div class="cta-text"><div class="cta-t">Open Metricool Calendar</div><div class="cta-s">Live view of what's posted + scheduled across all platforms</div></div>
+          <div class="cta-arr">→</div>
+        </a>
+        <a class="metricool-cta" href="https://app.metricool.com/evolution/brandSummary?blogId=${METRICOOL_BRAND}&userId=${METRICOOL_USER}" target="_blank" rel="noopener">
+          <div class="cta-ic">📈</div>
+          <div class="cta-text"><div class="cta-t">Brand Summary</div><div class="cta-s">Followers · reach · engagement across all platforms</div></div>
+          <div class="cta-arr">→</div>
+        </a>
+      </div>
+
       <div class="sec">Posting rhythm — Monday to Sunday</div>
       <div class="rhythm">${rhythm}</div>
-      <div class="sec">Analytics — per platform</div>
+
+      <div class="sec">Analytics — per platform (Metricool)</div>
       <div class="anagrid">${ana}</div>
-      <div class="gauge-sub" style="text-align:left;margin-top:8px">Numbers populate once each platform's API is connected.</div>`;
+      <div class="gauge-sub" style="text-align:left;margin-top:8px">Click any platform to open its detailed analytics in Metricool. Free tier: LinkedIn requires upgrade, X (Twitter) not yet connected.</div>`;
   };
   const pageUrl=p=>{ if(p.path==='index.html') return 'https://balaynibruno.co'; return 'https://balaynibruno.co/'+p.path.replace('.html','').replace(/\/$/,''); };
   const shot=(url,w,h)=>`https://image.thum.io/get/width/${w}/crop/${h}/noanimate/${url}`;
