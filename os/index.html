@@ -6,6 +6,7 @@
 <meta name="robots" content="noindex, nofollow">
 <meta name="theme-color" content="#0E1A2E">
 <link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="icon-192.png">
 <title>BBC Command Center</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -438,6 +439,8 @@
     background:radial-gradient(130% 80% at 70% 0%,#1A2E47 0%,#0E1A2E 50%,#08111E 100%);}
   .auth-card{width:100%;max-width:360px;background:var(--bg2);border:1px solid var(--line);border-radius:20px;padding:34px 26px;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,0.45);}
   .auth-logo{font-size:42px;line-height:1;margin-bottom:14px;}
+  .auth-logo-img{width:58px;height:auto;display:block;margin:0 auto 16px;}
+  .hdr-logo{width:26px;height:26px;vertical-align:middle;margin-right:9px;}
   .auth-card h1{font-family:var(--display);font-size:23px;font-weight:700;margin-bottom:6px;}
   .auth-card .auth-tag{color:var(--muted);font-size:13px;margin-bottom:22px;line-height:1.5;}
   #auth-form{display:flex;flex-direction:column;gap:11px;}
@@ -462,7 +465,7 @@
 <!-- ===== TEAM LOGIN GATE ===== -->
 <div id="auth-gate">
   <div class="auth-card">
-    <div class="auth-logo">🏠</div>
+    <img src="favicon-light.svg" class="auth-logo-img" alt="Balay ni Bruno &amp; Co.">
     <h1>BBC Command Center</h1>
     <p class="auth-tag">Team access only. Sign in to continue.</p>
     <form id="auth-form" autocomplete="on">
@@ -476,7 +479,7 @@
 </div>
 
 <div class="hdr">
-  <div class="b">BBC Command Center<small id="hdr-sub">OPERATING SYSTEM</small></div>
+  <div class="b"><img src="favicon-light.svg" class="hdr-logo" alt="Balay ni Bruno &amp; Co.">BBC Command Center<small id="hdr-sub">OPERATING SYSTEM</small></div>
   <div style="display:flex;align-items:center;gap:11px">
     <div class="date" id="hdr-date">2026-06-02</div>
     <button class="hdr-lock" onclick="go('bruno')" aria-label="Bruno page" title="Bruno page (private)">🔒</button>
