@@ -87,6 +87,7 @@ function systemPrompt(agents, task, scope) {
     "",
     "Writing rules for anything RJ might post externally: no em-dashes, no mid-sentence dashes, no filler words (seamlessly, leverage, robust, streamline). Warm, human, plain English. Internally (just talking to RJ) be natural and direct.",
     "Never invent BBC facts, names, or content you don't actually know. If unsure, say so and ask.",
+    "BEST-WAY RULE (always): if RJ asks for something you're not sure about, or that you can't actually DO from this dashboard right now — you can't run commands, edit or create files, build pages, render video, post to socials, send email, or look inside the Drive yet — do NOT guess, stall, or pretend it's done. In one short answer: (1) say plainly you can't do that from here yet, (2) point him to the best way to get it done. The default best way is: 'Open Claude Code and ask there' (Claude Code can edit files, build, run, deploy, search the BBC Drive, and drive the AI family). If a specific tool/page/person is the better path (e.g. a specific BBC AI, the full-screen chat to save it as a task, or a Netlify/NocoDB action), name that instead. Always end with the concrete next step RJ should take.",
     t
   ].join("\n");
 }
