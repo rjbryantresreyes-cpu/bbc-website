@@ -3489,44 +3489,7 @@
     const cats=[...new Set(D.workflows.map(w=>w.cat))];
     const totalArt=D.workflows.reduce((n,w)=>n+ORDER.filter(a=>w.artifacts[a]).length,0);
 
-    /* Social-calendar-driven priority: match upcoming posts (next 7d) to workflows by normalized name. */
-    const C=D.calendar||{};
-    const norm=(s)=>(s||'').toLowerCase().replace(/[^a-z0-9 ]/g,'').replace(/\s+/g,' ').trim();
-    const todayDay=parseInt((C.today||'').split('-')[2]||'1',10);
-    const upcoming=[]; // {date, title, postedAll}
-    for(let i=0;i<14 && upcoming.length<8;i++){
-      const dt=new Date(C.year,C.monthIdx,todayDay+i); if(dt.getMonth()!==C.monthIdx) break;
-      const key=dt.getFullYear()+'-'+String(dt.getMonth()+1).padStart(2,'0')+'-'+String(dt.getDate()).padStart(2,'0');
-      const post=(C.posts||{})[key]; if(!post) continue;
-      const items=[]; if(post.graphic) items.push(post.graphic); if(post.reel&&post.reel!==post.graphic) items.push(post.reel);
-      items.forEach(title=>{ upcoming.push({date:key,title,postedAll:post.posted===true,daysOut:i}); });
-    }
-    /* Match each upcoming post to a workflow */
-    const priorityRows=[];
-    upcoming.forEach(u=>{
-      if(u.postedAll) return; // already done
-      const nu=norm(u.title);
-      const match=D.workflows.find(w=>{
-        const nt=norm(w.title.split('—')[0]);
-        return nu===nt || nu.includes(nt) || nt.includes(nu);
-      });
-      if(match){
-        const p=pct(match), nextArt=ORDER.find(a=>!match.artifacts[a]);
-        const dueLabel=u.daysOut===0?'TODAY':u.daysOut===1?'TOMORROW':`in ${u.daysOut} days · ${u.date.slice(5)}`;
-        priorityRows.push({wf:match,p,nextArt,due:dueLabel,daysOut:u.daysOut,upcoming:u});
-      }
-    });
-    priorityRows.sort((a,b)=>a.daysOut-b.daysOut);
-
-    const priorityHtml=priorityRows.slice(0,5).map(r=>{
-      const dots=r.wf.owners.map(o=>`<span class="dot" style="background:${OWN[o]||'#888'}"></span>`).join('');
-      const dueColor=r.daysOut===0?'#EF6B6B':r.daysOut<=2?'#D4AF37':'#9FB0C7';
-      return `<div class="card recrow priority-row" onclick="wfSheet('${r.wf.id}')" style="margin-bottom:8px;border-left:3px solid ${dueColor}">
-        <div class="row1"><span style="display:flex;gap:3px">${dots}</span><div class="nm" style="font-size:14px;flex:1">${esc(r.wf.title)}</div><span style="font-family:var(--mono);font-size:10px;color:${dueColor};font-weight:700;letter-spacing:.5px">${r.due}</span></div>
-        <div class="meta" style="margin-top:6px">Posts as: <b>${esc(r.upcoming.title)}</b> · ${r.p}% done · ${r.nextArt?'next: '+r.nextArt.toUpperCase()+' '+ICON[r.nextArt]:'ready to ship'}</div></div>`;
-    }).join('');
-
-    /* Recommended next — closest to done */
+    /* Recommended next — finish what's closest to done, show the exact next artifact */
     const ranked=[...D.workflows].filter(w=>pct(w)<100).sort((a,b)=>pct(b)-pct(a));
     const recs=ranked.slice(0,3).map(w=>{
       const p=pct(w), nextArt=ORDER.find(a=>!w.artifacts[a]), verb=p>0?'Next':'Start';
@@ -3561,7 +3524,6 @@
 
     return `<h2 class="vt">Workflows</h2><div class="vsub">${cats.length} categories · ${totalArt} of ${totalCells} artifacts shipped · ${totalCells-totalArt} gaps to fill. Tap any workflow for the full breakdown.</div>
       <input class="search" placeholder="Search all workflows..." oninput="filterCards(this,'wfwrap')">
-      ${priorityHtml?`<div class="sec">🔴 Priority — needed for upcoming social posts</div><div class="gauge-sub" style="text-align:left;margin:-4px 0 10px">Workflows linked to posts going out in the next 7 days. Red = TODAY, gold = within 2 days.</div>${priorityHtml}`:''}
       <div class="sec">⭐ Recommended next</div>
       <div class="gauge-sub" style="text-align:left;margin:-4px 0 10px">Closest to done — ship these to finish the set faster.</div>
       ${recs}
