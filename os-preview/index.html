@@ -497,6 +497,8 @@
   .auth-foot{color:var(--muted);font-size:11px;margin-top:18px;}
   .hdr-logout{background:none;border:1px solid var(--line);color:var(--muted);border-radius:9px;font-size:11px;padding:6px 10px;cursor:pointer;font-family:var(--ui);min-height:32px;}
   .hdr-logout:hover{color:var(--ink);border-color:var(--gold);}
+  /* Per-user lock: Kenz routed to Cavalry command center only (hide BBC nav + escape links) */
+  body.locked-cavalry #nav,body.locked-cavalry .hdr-lock,body.locked-cavalry .morelink[onclick*="clients"]{display:none!important;}
 </style>
 <!-- Supabase Auth (team login) -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -3931,8 +3933,17 @@
     sb=window.supabase.createClient(window.BBC_SUPABASE_URL,window.BBC_SUPABASE_KEY);
     return sb;
   }
+  var BBC_LOCKED={'kenz.bbc@gmail.com':'cavalry'};
   function showApp(){ document.body.classList.add('authed'); }
-  function showGate(){ document.body.classList.remove('authed'); }
+  function showGate(){ document.body.classList.remove('authed'); document.body.classList.remove('locked-cavalry'); }
+  function routeUser(email){
+    var dest=BBC_LOCKED[(email||'').toLowerCase()];
+    if(dest==='cavalry'){
+      document.body.classList.add('locked-cavalry');
+      try{ var idx=(D.clients||[]).findIndex(function(c){return c.name==='Cavalry Group';}); if(idx>=0 && window.cavalryCC){ window.cavalryCC(idx); return; } }catch(e){}
+    }
+    document.body.classList.remove('locked-cavalry');
+  }
 
   window.bbcLogout=async function(){
     var c=initClient(); if(c){ try{ await c.auth.signOut(); }catch(e){} }
@@ -3950,7 +3961,7 @@
     }
     try{
       var r=await c.auth.getSession();
-      if(r&&r.data&&r.data.session){ showApp(); } else { showGate(); }
+      if(r&&r.data&&r.data.session){ showApp(); routeUser(r.data.session.user&&r.data.session.user.email); } else { showGate(); }
     }catch(e){ showGate(); }
   }
 
@@ -3970,7 +3981,7 @@
       try{
         var res=await c.auth.signInWithPassword({email:email,password:pass});
         if(res.error){ if(err) err.textContent=(res.error.message||'Wrong email or password.'); }
-        else { showApp(); }
+        else { showApp(); routeUser(res.data&&res.data.user&&res.data.user.email); }
       }catch(ex){ if(err) err.textContent='Something went wrong. Try again.'; }
       finally{ if(btn){ btn.disabled=false; btn.textContent='Sign In'; } }
     });
