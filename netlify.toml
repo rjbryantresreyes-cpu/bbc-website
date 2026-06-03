@@ -1,0 +1,6 @@
+# Netlify config for bbc-website
+# Static site + serverless functions (secure backend for the /os dashboard).
+
+[functions]
+  directory = "netlify/functions"
+  node_bundler = "esbuild"
