@@ -60,7 +60,25 @@ function scopeBlock(scope) {
   ].join("\n");
 }
 
-function systemPrompt(agents, task, scope) {
+// ===== Client souls: same Groq body, different soul (BBC Client Brand Purity rule). =====
+// Each client command center passes client:'<key>'. No BBC/Cuh/Brunz DNA leaks into a client soul.
+const CLIENT_SOULS = {
+  cavalry: function (scope) {
+    return [
+      "You are Ester, the AI assistant for Cavalry Realty Group — Tre Serrano's real estate team in San Antonio, Texas (brokered by Real).",
+      "You speak in Cavalry's voice: first-person, professional and warm, grounded in San Antonio, respectful of the military community. Navy-and-gold, squared-away, no hype.",
+      "What you know about the business: Tre Serrano is a former SAPD officer who now leads Cavalry Realty Group. The team specializes in military relocation (PCS moves), VA loans, and Hill Country luxury. Core buyer: military families around JBSA, roughly $500K to $1M. Track record: 511 closings, $171M in volume, 16K subscribers, Top-5 SABOR, 111 reviews. Content engines: Yo San Antonio (YSA), the Weekly Live, and Listings. Support team includes Ayoub, Thi Be Nong, and Fatima.",
+      "Never invent facts, names, listings, numbers, or client details you don't actually know. If you're unsure, say so and ask.",
+      "Writing rules for anything that could go public (captions, emails, posts): no em-dashes, no mid-sentence dashes, no filler words. Plain, human, professional.",
+      "Keep replies short and useful — this is a working dashboard. Lead with the answer.",
+      "BEST-WAY RULE (always): if you're asked for something you're not sure about or can't actually DO from this dashboard right now — you can't run commands, edit or create files, build pages, render video, post to socials, send email, or pull live data yet — do NOT guess or pretend it's done. In one short answer: say plainly you can't do that from here yet, then point to the best way to get it done (the BBC team that runs this system, via Claude Code, is the default). Always end with the concrete next step.",
+      scopeBlock(scope)
+    ].join("\n");
+  }
+};
+
+function systemPrompt(agents, task, scope, client) {
+  if (client && CLIENT_SOULS[client]) return CLIENT_SOULS[client](scope);
   const picked = (agents && agents.length ? agents : ["Cuh"]);
   const lead = picked[0];
   const lines = picked.map(a => "- " + (PERSONAS[a] || (a + " — a BBC AI."))).join("\n");
@@ -93,9 +111,16 @@ function systemPrompt(agents, task, scope) {
 }
 
 export default async (req) => {
+  // CORS: allow client command centers to call this from any origin (Cavalry CC, future client CCs).
+  const CORS = {
+    "access-control-allow-origin": "*",
+    "access-control-allow-methods": "POST, OPTIONS",
+    "access-control-allow-headers": "content-type"
+  };
   const json = (obj, status = 200) =>
-    new Response(JSON.stringify(obj), { status, headers: { "content-type": "application/json" } });
+    new Response(JSON.stringify(obj), { status, headers: { "content-type": "application/json", ...CORS } });
 
+  if (req.method === "OPTIONS") return new Response(null, { status: 204, headers: CORS });
   if (req.method !== "POST") return json({ error: "POST only" }, 405);
 
   const key = process.env.GROQ_API_KEY;
@@ -105,9 +130,10 @@ export default async (req) => {
   try { body = await req.json(); } catch { return json({ error: "bad json" }, 400); }
 
   const scope = body.scope || null;
+  const client = body.client || null;
   const history = Array.isArray(body.messages) ? body.messages.slice(-12) : [];
   const messages = [
-    { role: "system", content: systemPrompt(body.agents, body.task, scope) },
+    { role: "system", content: systemPrompt(body.agents, body.task, scope, client) },
     ...history.map(m => ({ role: m.role === "assistant" ? "assistant" : "user", content: String(m.content || "").slice(0, 6000) }))
   ];
   // page-scoped chat = short + fast; dashboard chat = room to think
