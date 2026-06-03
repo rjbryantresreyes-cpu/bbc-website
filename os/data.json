@@ -1,0 +1,257 @@
+{
+  "meta": {
+    "updated": "2026-06-04",
+    "pendingCount": 7
+  },
+  "calendar": {
+    "label": "June 2026",
+    "year": 2026,
+    "monthIdx": 5,
+    "today": "2026-06-04",
+    "posts": {
+      "2026-05-31": {
+        "graphic": "Sunday Rest Day",
+        "posted": true
+      },
+      "2026-06-01": {
+        "posted": true,
+        "reel": "Segment 3"
+      },
+      "2026-06-02": {
+        "posted": true,
+        "graphic": "Cut the Silence",
+        "reel": "Cut the Silence"
+      },
+      "2026-06-03": {
+        "posted": true,
+        "graphic": "TPIC Ryan review",
+        "reel": "TPIC Ryan review"
+      },
+      "2026-06-04": {
+        "posted": false,
+        "graphic": "Tasks Eating Your Week",
+        "reel": "Tasks Eating Your Week"
+      },
+      "2026-06-05": {
+        "posted": false,
+        "graphic": "Content Engine",
+        "reel": "Content Engine"
+      },
+      "2026-06-06": {
+        "posted": false,
+        "graphic": "Work Flow Menu"
+      },
+      "2026-06-07": {
+        "posted": false,
+        "graphic": "Sunday Rest Day (Family)"
+      },
+      "2026-06-08": {
+        "posted": false
+      },
+      "2026-06-09": {
+        "posted": false
+      },
+      "2026-06-10": {
+        "posted": false
+      },
+      "2026-06-11": {
+        "posted": false
+      },
+      "2026-06-12": {
+        "posted": false
+      },
+      "2026-06-13": {
+        "posted": false
+      },
+      "2026-06-14": {
+        "posted": false
+      },
+      "2026-06-15": {
+        "posted": false
+      },
+      "2026-06-16": {
+        "posted": false
+      },
+      "2026-06-17": {
+        "posted": false
+      },
+      "2026-06-18": {
+        "posted": false
+      },
+      "2026-06-19": {
+        "posted": false
+      },
+      "2026-06-20": {
+        "posted": false
+      },
+      "2026-06-21": {
+        "posted": false
+      },
+      "2026-06-22": {
+        "posted": false
+      },
+      "2026-06-23": {
+        "posted": false
+      },
+      "2026-06-24": {
+        "posted": false
+      },
+      "2026-06-25": {
+        "posted": false
+      },
+      "2026-06-26": {
+        "posted": false
+      },
+      "2026-06-27": {
+        "posted": false
+      },
+      "2026-06-28": {
+        "posted": false
+      },
+      "2026-06-29": {
+        "posted": false
+      },
+      "2026-06-30": {
+        "posted": false
+      }
+    },
+    "events": [
+      {
+        "date": "2026-06-14",
+        "label": "Flag Day",
+        "type": "holiday"
+      },
+      {
+        "date": "2026-06-19",
+        "label": "Juneteenth",
+        "type": "holiday"
+      },
+      {
+        "date": "2026-06-20",
+        "label": "First Day of Summer",
+        "type": "season"
+      },
+      {
+        "date": "2026-06-21",
+        "label": "Father's Day",
+        "type": "holiday"
+      }
+    ]
+  },
+  "_inventory": {
+    "reels": [
+      {
+        "name": "Segment 1",
+        "posted": true,
+        "raw": "Segment 1 posted",
+        "category": "BBC Segment Reels"
+      },
+      {
+        "name": "Segment 2",
+        "posted": true,
+        "raw": "Segment 2 posted",
+        "category": "BBC Segment Reels"
+      },
+      {
+        "name": "Segment 3",
+        "posted": true,
+        "raw": "Segment 3 posted",
+        "category": "BBC Segment Reels"
+      },
+      {
+        "name": "Tre 1 Final",
+        "posted": false,
+        "raw": "Tre 1 Final",
+        "category": "BBC Workflows Reels"
+      },
+      {
+        "name": "Cut the Silence",
+        "posted": true,
+        "raw": "Cut the Silence Posted",
+        "category": "BBC Workflows Reels"
+      },
+      {
+        "name": "Tre 2 Final",
+        "posted": false,
+        "raw": "Tre 2 Final",
+        "category": "BBC Workflows Reels"
+      },
+      {
+        "name": "TPIC Ryan Review",
+        "posted": true,
+        "raw": "TPIC Ryan Review Posted",
+        "category": "BBC Workflows Reels"
+      },
+      {
+        "name": "Content Engine",
+        "posted": false,
+        "raw": "Content Engine",
+        "category": "BBC Workflows Reels"
+      },
+      {
+        "name": "Build Your AI Family",
+        "posted": false,
+        "raw": "Build Your AI Family",
+        "category": "BBC Workflows Reels"
+      }
+    ],
+    "graphics": [
+      {
+        "name": "2026-05-29_Google_Ask_Advisor",
+        "posted": false,
+        "raw": "2026-05-29_Google_Ask_Advisor"
+      },
+      {
+        "name": "2026-06-02_Cut the Silence",
+        "posted": true,
+        "raw": "2026-06-02_Cut the Silence Posted"
+      },
+      {
+        "name": "2026-05-31_Sunday_Rest_Day",
+        "posted": true,
+        "raw": "2026-05-31_Sunday_Rest_Day Posted"
+      },
+      {
+        "name": "2026-06-04_4_Tasks_Eating_Your_Week",
+        "posted": false,
+        "raw": "2026-06-04_4_Tasks_Eating_Your_Week"
+      },
+      {
+        "name": "Content Engine",
+        "posted": false,
+        "raw": "Content Engine"
+      },
+      {
+        "name": "TPIC Ryan Review",
+        "posted": false,
+        "raw": "TPIC Ryan Review"
+      },
+      {
+        "name": "2026-06-06_Saturday_Workflow_Menu",
+        "posted": false,
+        "raw": "2026-06-06_Saturday_Workflow_Menu"
+      },
+      {
+        "name": "2026-06-07_Sunday_Rest_Day_Family",
+        "posted": false,
+        "raw": "2026-06-07_Sunday_Rest_Day_Family"
+      },
+      {
+        "name": "Build Your AI Family",
+        "posted": false,
+        "raw": "Build Your AI Family"
+      },
+      {
+        "name": "2026-06-09_tre_1",
+        "posted": false,
+        "raw": "2026-06-09_tre_1"
+      },
+      {
+        "name": "2026-06-12_tre_2",
+        "posted": false,
+        "raw": "2026-06-12_tre_2"
+      }
+    ],
+    "queueDraftCount": 7
+  }
+}
