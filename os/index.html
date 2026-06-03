@@ -174,6 +174,21 @@
   .ideabtn:active{transform:scale(.99);} .ideabtn:hover{border-color:var(--gold2);}
   .ideabtn .i{font-size:17px;line-height:1;}
 
+  /* QUICK-LAUNCH COMPOSER GRID (Phase A) */
+  .composer-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:12px;}
+  @media(min-width:600px){.composer-grid{grid-template-columns:repeat(6,1fr);}}
+  .composer-btn{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;background:var(--bg,#14253E);border:1px solid var(--line);border-radius:11px;padding:14px 8px;text-decoration:none;color:var(--ink);font-family:var(--ui);font-weight:600;font-size:11.5px;transition:transform .1s,border-color .15s,box-shadow .15s;position:relative;overflow:hidden;}
+  .composer-btn::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,var(--bg) 0%,rgba(0,0,0,0.45) 100%);opacity:.9;z-index:0;}
+  .composer-btn .ic,.composer-btn .lbl{position:relative;z-index:1;}
+  .composer-btn .ic{font-size:22px;line-height:1;}
+  .composer-btn:hover{transform:translateY(-2px);border-color:var(--gold);box-shadow:0 6px 18px rgba(0,0,0,0.35);}
+  .composer-btn:active{transform:scale(.97);}
+
+  /* MINI ACTION BUTTON */
+  .mini-btn{background:var(--bg3);border:1px solid var(--line);color:var(--ink);font-family:var(--ui);font-weight:600;font-size:12px;border-radius:8px;padding:7px 11px;cursor:pointer;transition:border-color .15s,background .15s;}
+  .mini-btn:hover{border-color:var(--green);background:rgba(74,222,128,0.08);color:var(--green);}
+  .mini-btn:active{transform:scale(.97);}
+
   /* BRUNO PAGE (private) */
   .hdr-lock{background:none;border:1px solid var(--line);color:var(--gold2);border-radius:9px;padding:6px 9px;font-size:14px;cursor:pointer;line-height:1;}
   .hdr-lock:hover{border-color:var(--gold);}
@@ -1171,10 +1186,19 @@
           "name": "NPC-Portfolio-System"
         },
         {
-          "name": ".claude"
+          "name": "08_KNOWLEDGE_BASE"
         },
         {
-          "name": "01_LEADS"
+          "name": "07_MARKETING"
+        },
+        {
+          "name": "06_FINANCE"
+        },
+        {
+          "name": "05_OPERATIONS"
+        },
+        {
+          "name": "03_ARCHIVED_CLIENTS"
         },
         {
           "name": "02_ACTIVE_CLIENTS",
@@ -1183,13 +1207,13 @@
               "name": "4OCEAN"
             },
             {
-              "name": "FIRST-CLASS-FINISHES"
+              "name": "WOODEN-WOODWORKS"
             },
             {
               "name": "HOME-VISION-STUDIO"
             },
             {
-              "name": "WOODEN-WOODWORKS"
+              "name": "FIRST-CLASS-FINISHES"
             },
             {
               "name": "HI-UP-ROOFING"
@@ -1215,19 +1239,10 @@
           ]
         },
         {
-          "name": "03_ARCHIVED_CLIENTS"
+          "name": "01_LEADS"
         },
         {
-          "name": "05_OPERATIONS"
-        },
-        {
-          "name": "06_FINANCE"
-        },
-        {
-          "name": "07_MARKETING"
-        },
-        {
-          "name": "08_KNOWLEDGE_BASE"
+          "name": ".claude"
         },
         {
           "name": "BBC WEBSITE HTML"
@@ -1236,40 +1251,43 @@
           "name": "04_TEAM"
         },
         {
+          "name": "09_POTENTIAL CLIENTS"
+        },
+        {
           "name": "BBC_AI_FAMILY",
           "children": [
             {
-              "name": "CASEY"
-            },
-            {
-              "name": "BOOGY"
-            },
-            {
-              "name": "EMY"
-            },
-            {
-              "name": "SONNY"
-            },
-            {
               "name": "BRUNZ"
-            },
-            {
-              "name": "KRIZ"
-            },
-            {
-              "name": "MAI"
             },
             {
               "name": "WEBBY"
             },
             {
+              "name": "MAI"
+            },
+            {
+              "name": "KRIZ"
+            },
+            {
+              "name": "SONNY"
+            },
+            {
+              "name": "EMY"
+            },
+            {
+              "name": "BOOGY"
+            },
+            {
+              "name": "CASEY"
+            },
+            {
               "name": "_TEMPLATE"
             },
             {
-              "name": "AGENT_PROFILES"
+              "name": "JENNY"
             },
             {
-              "name": "JENNY"
+              "name": "AGENT_PROFILES"
             },
             {
               "name": "_VAULT"
@@ -1296,9 +1314,6 @@
               "name": "_BRAND"
             }
           ]
-        },
-        {
-          "name": "09_POTENTIAL CLIENTS"
         },
         {
           "name": "Daryl BBC Folder"
@@ -3016,10 +3031,49 @@
     window.__socRecs=recs.map(r=>r.txt);
     const recCards=recs.map((r,i)=>`<div class="card recrow" onclick="openChat('social', __socRecs[${i}])" style="margin-bottom:8px"><div class="row1"><div class="nm" style="font-size:13.5px;flex:1">${esc(r.txt)}</div><span style="font-family:var(--mono);font-size:10px;color:var(--gold2);white-space:nowrap">${esc(r.when)}</span></div><div class="meta" style="margin-top:5px">${esc(r.tag)}</div></div>`).join('');
 
-    return `<h2 class="vt">Social Media</h2><div class="vsub">Idea box · month calendar · posting rhythm · analytics</div>
+    /* Phase A — Quick-launch composer buttons. Each opens platform composer in new tab. */
+    const composerLinks=[
+      {p:'Instagram', ic:'📷', col:'#E1306C', url:'https://www.instagram.com/'},
+      {p:'Facebook',  ic:'👤', col:'#1877F2', url:'https://www.facebook.com/'},
+      {p:'LinkedIn',  ic:'💼', col:'#0A66C2', url:'https://www.linkedin.com/feed/?shareActive=true'},
+      {p:'TikTok',    ic:'🎵', col:'#000000', url:'https://www.tiktok.com/upload'},
+      {p:'YouTube',   ic:'▶',  col:'#FF0000', url:'https://studio.youtube.com/'},
+      {p:'X',         ic:'𝕏',  col:'#000000', url:'https://x.com/compose/post'},
+    ];
+    const composerHtml=composerLinks.map(c=>`<a class="composer-btn" href="${c.url}" target="_blank" rel="noopener" style="--bg:${c.col}"><span class="ic">${c.ic}</span><span class="lbl">${c.p}</span></a>`).join('');
+
+    /* Phase A — Mark-Posted clipboard helper. */
+    window.markPosted=(name,kind)=>{
+      const baseReel='G:\\\\Shared drives\\\\BBC Drive\\\\BBC Content\\\\BBC Content Posting\\\\BBC Short videos\\\\BBC Workflows Reels';
+      const baseGfx='G:\\\\Shared drives\\\\BBC Drive\\\\BBC Content\\\\BBC Content Posting\\\\BBC Graphic';
+      const folder=kind==='reel'?baseReel:baseGfx;
+      const cmd='Rename-Item -LiteralPath "'+folder+'\\\\'+name+'" -NewName "'+name+' POSTED"';
+      navigator.clipboard.writeText(cmd).then(()=>{
+        alert('Rename command copied to clipboard.\\n\\nPaste in PowerShell + run, then say "save and sync".\\n\\n'+cmd);
+      }).catch(()=>{ prompt('Copy + run in PowerShell, then save and sync:', cmd); });
+    };
+
+    const pendingActions=recs.filter(r=>r.tag==='scheduled').slice(0,4).map(r=>{
+      const name=(r.txt||'').replace(/^Finish \+ post: /,'').trim();
+      const safe=name.replace(/'/g,"\\\\'");
+      return `<div class="card" style="margin-bottom:8px;padding:12px 14px"><div class="row1" style="gap:8px"><span style="font-size:13.5px;flex:1;font-weight:600">${esc(name)}</span><span style="font-family:var(--mono);font-size:10px;color:var(--gold2);white-space:nowrap">${esc(r.when)}</span></div>
+        <div style="display:flex;gap:6px;margin-top:8px;flex-wrap:wrap">
+          <button class="mini-btn" onclick="markPosted('${safe}','graphic')">✓ Mark graphic posted</button>
+          <button class="mini-btn" onclick="markPosted('${safe}','reel')">✓ Mark reel posted</button>
+        </div></div>`;
+    }).join('');
+
+    return `<h2 class="vt">Social Media</h2><div class="vsub">Quick post · idea box · mark posted · calendar · analytics</div>
+
+      <div class="sec">🚀 Quick post — opens composer in a new tab</div>
+      <div class="composer-grid">${composerHtml}</div>
+
       <div class="sec">💡 Idea box — what to post next</div>
       <button class="ideabtn" onclick="ideaBox()"><span class="i">🔎</span>Find trending ideas (deep search)</button>
       ${recCards}
+
+      ${pendingActions?`<div class="sec">✅ Mark as posted — pending this week</div>${pendingActions}<div class="gauge-sub" style="text-align:left;margin-top:6px">Click to copy a rename command. Paste in PowerShell, run it, then say "save and sync" — dashboard auto-refreshes.</div>`:''}
+
       <div class="sec">${esc(C.label)} · scroll sideways to see the full month</div>
       ${monthCal}
       <div class="cal-legend"><span><i class="lg ev-g"></i>Graphic</span><span><i class="lg ev-r"></i>Reel</span><span><i class="lg done"></i>Posted</span><span><i class="lg pend"></i>Event / note</span></div>

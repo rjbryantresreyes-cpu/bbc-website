@@ -174,6 +174,21 @@
   .ideabtn:active{transform:scale(.99);} .ideabtn:hover{border-color:var(--gold2);}
   .ideabtn .i{font-size:17px;line-height:1;}
 
+  /* QUICK-LAUNCH COMPOSER GRID (Phase A) */
+  .composer-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:12px;}
+  @media(min-width:600px){.composer-grid{grid-template-columns:repeat(6,1fr);}}
+  .composer-btn{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;background:var(--bg,#14253E);border:1px solid var(--line);border-radius:11px;padding:14px 8px;text-decoration:none;color:var(--ink);font-family:var(--ui);font-weight:600;font-size:11.5px;transition:transform .1s,border-color .15s,box-shadow .15s;position:relative;overflow:hidden;}
+  .composer-btn::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,var(--bg) 0%,rgba(0,0,0,0.45) 100%);opacity:.9;z-index:0;}
+  .composer-btn .ic,.composer-btn .lbl{position:relative;z-index:1;}
+  .composer-btn .ic{font-size:22px;line-height:1;}
+  .composer-btn:hover{transform:translateY(-2px);border-color:var(--gold);box-shadow:0 6px 18px rgba(0,0,0,0.35);}
+  .composer-btn:active{transform:scale(.97);}
+
+  /* MINI ACTION BUTTON */
+  .mini-btn{background:var(--bg3);border:1px solid var(--line);color:var(--ink);font-family:var(--ui);font-weight:600;font-size:12px;border-radius:8px;padding:7px 11px;cursor:pointer;transition:border-color .15s,background .15s;}
+  .mini-btn:hover{border-color:var(--green);background:rgba(74,222,128,0.08);color:var(--green);}
+  .mini-btn:active{transform:scale(.97);}
+
   /* BRUNO PAGE (private) */
   .hdr-lock{background:none;border:1px solid var(--line);color:var(--gold2);border-radius:9px;padding:6px 9px;font-size:14px;cursor:pointer;line-height:1;}
   .hdr-lock:hover{border-color:var(--gold);}
@@ -1171,10 +1186,19 @@
           "name": "NPC-Portfolio-System"
         },
         {
-          "name": ".claude"
+          "name": "08_KNOWLEDGE_BASE"
         },
         {
-          "name": "01_LEADS"
+          "name": "07_MARKETING"
+        },
+        {
+          "name": "06_FINANCE"
+        },
+        {
+          "name": "05_OPERATIONS"
+        },
+        {
+          "name": "03_ARCHIVED_CLIENTS"
         },
         {
           "name": "02_ACTIVE_CLIENTS",
@@ -1183,13 +1207,13 @@
               "name": "4OCEAN"
             },
             {
-              "name": "FIRST-CLASS-FINISHES"
+              "name": "WOODEN-WOODWORKS"
             },
             {
               "name": "HOME-VISION-STUDIO"
             },
             {
-              "name": "WOODEN-WOODWORKS"
+              "name": "FIRST-CLASS-FINISHES"
             },
             {
               "name": "HI-UP-ROOFING"
@@ -1215,19 +1239,10 @@
           ]
         },
         {
-          "name": "03_ARCHIVED_CLIENTS"
+          "name": "01_LEADS"
         },
         {
-          "name": "05_OPERATIONS"
-        },
-        {
-          "name": "06_FINANCE"
-        },
-        {
-          "name": "07_MARKETING"
-        },
-        {
-          "name": "08_KNOWLEDGE_BASE"
+          "name": ".claude"
         },
         {
           "name": "BBC WEBSITE HTML"
@@ -1236,40 +1251,43 @@
           "name": "04_TEAM"
         },
         {
+          "name": "09_POTENTIAL CLIENTS"
+        },
+        {
           "name": "BBC_AI_FAMILY",
           "children": [
             {
-              "name": "CASEY"
-            },
-            {
-              "name": "BOOGY"
-            },
-            {
-              "name": "EMY"
-            },
-            {
-              "name": "SONNY"
-            },
-            {
               "name": "BRUNZ"
-            },
-            {
-              "name": "KRIZ"
-            },
-            {
-              "name": "MAI"
             },
             {
               "name": "WEBBY"
             },
             {
+              "name": "MAI"
+            },
+            {
+              "name": "KRIZ"
+            },
+            {
+              "name": "SONNY"
+            },
+            {
+              "name": "EMY"
+            },
+            {
+              "name": "BOOGY"
+            },
+            {
+              "name": "CASEY"
+            },
+            {
               "name": "_TEMPLATE"
             },
             {
-              "name": "AGENT_PROFILES"
+              "name": "JENNY"
             },
             {
-              "name": "JENNY"
+              "name": "AGENT_PROFILES"
             },
             {
               "name": "_VAULT"
@@ -1296,9 +1314,6 @@
               "name": "_BRAND"
             }
           ]
-        },
-        {
-          "name": "09_POTENTIAL CLIENTS"
         },
         {
           "name": "Daryl BBC Folder"
@@ -2727,13 +2742,35 @@
   const EMIN='background:#0d1320;border:1px solid #22324d;color:#F5F1EA;border-radius:9px;padding:10px 12px;font-size:14px;font-family:inherit;outline:none';
   views.crm=()=>`<h2 class="vt">CRM + Email</h2><div class="vsub">Your CRM on top. Send email below. Both live.</div>
     <div style="display:flex;gap:8px;align-items:center;margin:0 0 8px"><a class="morelink" style="margin:0" href="${NOCODB_URL}" target="_blank" rel="noopener">↗ Edit in full NocoDB</a></div>
+    <div class="sec" style="margin-top:2px">Campaign tracker</div>
+    <div class="panelgrid" id="camp-tracker"><div class="panel"><span class="ptitle">Loading…</span><div class="gauge-sub">Reading your CRM.</div></div></div>
+    <div class="sec" style="margin-top:16px">Your CRM</div>
     <div style="position:relative;width:100%;height:50vh;min-height:320px;border-radius:14px;overflow:hidden;background:#fff;box-shadow:0 6px 24px rgba(0,0,0,.28)">
       <iframe src="${NOCODB_SHARED}" title="BBC CRM (NocoDB)" allow="clipboard-read; clipboard-write" style="width:100%;height:100%;border:0;display:block"></iframe>
     </div>
     <div class="sec" style="margin-top:16px">Send email</div>
     <div class="panel" style="display:block">
       <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px">
-        <select id="em-from" style="${EMIN};min-width:210px"><option value="admin@balaynibruno.co">admin@balaynibruno.co</option><option value="rj@balaynibruno.co">rj@balaynibruno.co</option></select>
+        <select id="em-template" onchange="applyTemplate()" style="${EMIN};min-width:240px">
+          <option value="">Template: Blank</option>
+          <optgroup label="Version A (Beau referral)">
+            <option value="intro_a">A1 - Intro</option>
+            <option value="hvs_a">A2 - Home Vision Studio</option>
+            <option value="ww_a">A3 - Wooden Woodworks</option>
+            <option value="hiupfcf_a">A4 - Hi-Up + First Class</option>
+            <option value="offer_a">A5 - What we can do for you</option>
+          </optgroup>
+          <optgroup label="Version B (plain)">
+            <option value="intro_b">B1 - Intro</option>
+            <option value="hvs_b">B2 - Home Vision Studio</option>
+            <option value="ww_b">B3 - Wooden Woodworks</option>
+            <option value="hiupfcf_b">B4 - Hi-Up + First Class</option>
+            <option value="offer_b">B5 - What we can do for you</option>
+          </optgroup>
+        </select>
+      </div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px">
+        <select id="em-from" style="${EMIN};min-width:210px"><option value="rj@balaynibruno.co">rj@balaynibruno.co</option></select>
         <input id="em-to" placeholder="To (email address)" style="${EMIN};flex:1;min-width:180px">
       </div>
       <input id="em-subj" placeholder="Subject" style="${EMIN};width:100%;box-sizing:border-box;margin-bottom:8px">
@@ -2743,6 +2780,58 @@
         <span id="em-status" class="gauge-sub" style="flex:1;min-width:140px"></span>
       </div>
     </div>`;
+  window.loadCampaignStats=async()=>{
+    const board=document.getElementById('camp-tracker'); if(!board) return;
+    try{
+      const res=await fetch('/.netlify/functions/nocodb?table=contacts&limit=1000');
+      const data=await res.json();
+      const list=(data.list||[]).filter(r=>((r.Source||'')+'')!=='Current Client');
+      const SENT=['Sent','Emailed','Replied','Interested','Potential','Bad Fit','Not Interested','Booked','Bounced'];
+      const REPLIED=['Replied','Interested','Potential','Bad Fit','Not Interested','Booked'];
+      const ver=(v)=>{ const rows=list.filter(r=>(((r['Email Version']||'')+'').toUpperCase())===v);
+        const sent=rows.filter(r=>SENT.includes(((r.Status||'')+'').trim())).length;
+        const rep=rows.filter(r=>REPLIED.includes(((r.Status||'')+'').trim())).length;
+        return {total:rows.length,sent,rep,rate:(sent?Math.round(rep/sent*100):0)}; };
+      const a=ver('A'), b=ver('B');
+      const abCard=(name,col,d)=>`<div class="panel"><span class="ptitle" style="color:${col}">Version ${name}</span><div class="metric"><b>${d.rate}%</b> reply rate</div><div class="gauge-sub" style="margin-top:6px">${d.total} leads · ${d.sent} emailed · ${d.rep} replied</div></div>`;
+      const today=new Date(); today.setHours(23,59,59,999);
+      const due=list.filter(r=>{ const f=r['Follow Up']; if(!f) return false; const d=new Date(f); return !isNaN(d.getTime()) && d<=today && (((r['Campaign Step']||'')+'')!=='Done'); });
+      const dueRows=due.slice(0,12).map(r=>`<div class="opitem"><span class="odot" style="background:#EF6B6B"></span><span class="oname">${esc(r['First Name']||r.Email||'-')}${r.Organization?' · '+esc(r.Organization):''}</span><span class="ocad">${esc(r['Campaign Step']||'next')}</span></div>`).join('') || '<div class="gauge-sub">Nothing due right now.</div>';
+      const dueCard=`<div class="panel"><span class="ptitle" style="color:#EF6B6B">Follow-ups due (${due.length})</span>${dueRows}</div>`;
+      const assigned=list.filter(r=>['A','B'].includes(((r['Email Version']||'')+'').toUpperCase())).length;
+      const setup=assigned?'':'<div class="panel"><span class="ptitle">Turn on A/B</span><div class="gauge-sub">Add an "Email Version" field (A/B) + a "Campaign Step" field in NocoDB, then tell Cuh to split the leads. Stats fill in here.</div></div>';
+      board.innerHTML=abCard('A','#60A5FA',a)+abCard('B','#D4AF37',b)+dueCard+setup;
+    }catch(e){ board.innerHTML='<div class="panel"><span class="ptitle">Tracker shows on the live site</span><div class="gauge-sub">balaynibruno.co/os. '+esc(String(e).slice(0,80))+'</div></div>'; }
+  };
+  window.applyTemplate=()=>{
+    const TPL={
+      intro_a:{ subject:"Beau at Home Vision Studio pointed me to {{company}}",
+        body:"Hi {{first_name}},\n\nMy name's RJ. I run Balay ni Bruno & Co., working with home builders and remodelers around Texas.\n\nBeau over at Home Vision Studio shared a short list of the builders and remodelers he respects most here in Texas, and {{company}} was on it. That says a lot. Beau doesn't hand those names out lightly.\n\n{{personal_note}}\n\nWe help shops like yours with the marketing and behind-the-scenes side. The website, the social media, the project videos, the outreach. So you can stay focused on the actual work. We already do this for Home Vision Studio, Wooden Woodworks, Hi-Up Roofing, and First Class Finishes, all here in Texas.\n\nI'm not here to pitch you today. I just wanted to introduce myself and say it's good to know you. I'll share a bit more about what we do over the next couple of notes.\n\nGlad to connect, {{first_name}}.\n\nBest,\nRJ\nBalay ni Bruno & Co.\nbalaynibruno.co" },
+      intro_b:{ subject:"We work with builders and remodelers across Texas",
+        body:"Hi {{first_name}},\n\nMy name's RJ. I run Balay ni Bruno & Co. We work with home builders and remodelers around Texas, handling the marketing and behind-the-scenes side so owners can stay focused on the actual work.\n\n{{personal_note}}\n\nRight now we do this for a handful of Texas businesses, including Home Vision Studio, Wooden Woodworks, Hi-Up Roofing, and First Class Finishes. The website, the social media, the project videos, the outreach, all of it handled.\n\nI came across {{company}} and wanted to introduce myself, in case the same kind of help would be useful to you. I'm not here to pitch today. Just saying hello, and I'll share more about what we do over the next couple of notes.\n\nGlad to connect, {{first_name}}.\n\nBest,\nRJ\nBalay ni Bruno & Co.\nbalaynibruno.co" },
+      hvs_a:{ subject:"What we do for Beau at Home Vision Studio",
+        body:"Hi {{first_name}},\n\nFollowing up from my hello. I mentioned we work with Beau at Home Vision Studio, so I wanted to show you what that actually looks like, in case it's useful for {{company}}.\n\nFor Home Vision Studio we built their website and their online design centers, the spots where homeowners pick their carpet, lighting, and countertops before they ever walk in. We run their social media across Facebook, Instagram, Pinterest, and LinkedIn, and we manage their outreach to builders and designers around Central Texas.\n\nThe whole point is to make it easy for builders and homeowners to find them, trust them, and choose them. Beau gets to stay focused on his customers while the marketing runs in the background.\n\nThat's the kind of weight we take off an owner's plate.\n\nMore soon, {{first_name}}. I'll show you the Wooden Woodworks side next.\n\nBest,\nRJ\nBalay ni Bruno & Co." },
+      hvs_b:{ subject:"What we do for Home Vision Studio",
+        body:"Hi {{first_name}},\n\nFollowing up from my note. I wanted to show you what our work with Home Vision Studio looks like, in case it's useful for {{company}}.\n\nFor Home Vision Studio we built their website and their online design centers, where homeowners pick their carpet, lighting, and countertops before they ever walk in. We run their social media across Facebook, Instagram, Pinterest, and LinkedIn, and we handle their outreach to builders and designers around Central Texas.\n\nThe whole point is to make it easy for builders and homeowners to find them, trust them, and choose them, while the owner stays focused on the business.\n\nThat's the kind of weight we take off an owner's plate.\n\nMore soon, {{first_name}}. I'll show you another example next.\n\nBest,\nRJ\nBalay ni Bruno & Co." },
+      ww_a:{ subject:"What we do for Oscar and Marla at Wooden Woodworks",
+        body:"Hi {{first_name}},\n\nLike I promised, here's the other side. Our work with Oscar and Marla at Wooden Woodworks, a custom cabinetry shop.\n\nOscar's a craftsman first. He'd rather be in the shop than online, so we handle all of it for them. We run their social media on Facebook, Instagram, and TikTok, and we produce their walkthrough videos, the slow walk through a finished kitchen showing every cabinet detail and finish. Those videos are their single best-performing content by a mile. We also run their lead generation, getting them in front of builders and remodelers like {{company}}.\n\nReal work, real projects, for people who care more about the craft than the marketing. We just make sure the right people see it.\n\nOne more note coming, {{first_name}}, and this one's about you.\n\nBest,\nRJ\nBalay ni Bruno & Co." },
+      ww_b:{ subject:"What we do for Wooden Woodworks",
+        body:"Hi {{first_name}},\n\nHere's another example. Our work with Wooden Woodworks, a custom cabinetry shop.\n\nWe handle all of their marketing so the team can stay focused on the build. We run their social media on Facebook, Instagram, and TikTok, and we produce their walkthrough videos, the slow walk through a finished kitchen showing every cabinet detail and finish. Those videos are their best-performing content by a mile. We also run their lead generation, getting them in front of builders and remodelers like {{company}}.\n\nReal work, real projects, for people who care more about the craft than the marketing. We just make sure the right people see it.\n\nOne more note coming, {{first_name}}, and this one's about you.\n\nBest,\nRJ\nBalay ni Bruno & Co." },
+      hiupfcf_a:{ subject:"What we do for Hi-Up Roofing and First Class Finishes",
+        body:"Hi {{first_name}},\n\nTwo more from Beau's world, both Texas trade businesses like yours.\n\nHi-Up Roofing is a residential and commercial roofer here in Central Texas. We build their website and run their local SEO, so when someone searches for a roofer, or for storm and insurance help in their area, Hi-Up shows up first. Pages for each service, each city, and the insurance-claim work that wins them jobs.\n\nFirst Class Finishes does commercial painting and roofing. Same idea. We built out their site and their city and service pages so property managers and commercial clients find them on Google instead of a competitor.\n\nDifferent trades, same goal. Get found by the right customers, locally, without the owner touching it.\n\nLast note coming, {{first_name}}, and it's about {{company}}.\n\nBest,\nRJ\nBalay ni Bruno & Co." },
+      hiupfcf_b:{ subject:"What we do for Hi-Up Roofing and First Class Finishes",
+        body:"Hi {{first_name}},\n\nTwo more examples, both Texas trade businesses like yours.\n\nHi-Up Roofing is a residential and commercial roofer in Central Texas. We build their website and run their local SEO, so when someone searches for a roofer, or for storm and insurance help in their area, Hi-Up shows up first. Pages for each service, each city, and the insurance-claim work that wins them jobs.\n\nFirst Class Finishes does commercial painting and roofing. Same idea. We built their site and their city and service pages so property managers and commercial clients find them on Google instead of a competitor.\n\nDifferent trades, same goal. Get found by the right customers, locally, without the owner touching it.\n\nLast note coming, {{first_name}}, and it's about {{company}}.\n\nBest,\nRJ\nBalay ni Bruno & Co." },
+      offer_a:{ subject:"What this could look like for {{company}}",
+        body:"Hi {{first_name}},\n\nI've shown you what we do for Home Vision Studio, Wooden Woodworks, Hi-Up Roofing, and First Class Finishes. All Texas builders and trades, all people Beau respects. So here's the honest version of what we could do for {{company}}.\n\nPicture this off your plate:\n\n- A website that actually brings you work, not just a brochure\n- Local SEO so the right customers find you on Google first\n- Social media and walkthrough videos of your own projects, filmed and posted for you\n- Outreach to builders, remodelers, and designers across Texas\n- The day-to-day admin and follow-ups handled in the background\n\nYou're clearly good at what you build. Beau wouldn't have named you otherwise. Our job would just be to make sure more of the right people see it.\n\nIf any of this sounds worth a conversation, I'd love to hop on a quick call, even just to trade notes. And if the timing isn't right, no worries at all. It was genuinely good to connect.\n\nEither way, {{first_name}}, I'm rooting for {{company}}.\n\nBest,\nRJ\nBalay ni Bruno & Co.\nbalaynibruno.co" },
+      offer_b:{ subject:"What this could look like for {{company}}",
+        body:"Hi {{first_name}},\n\nI've shown you what we do for Home Vision Studio, Wooden Woodworks, Hi-Up Roofing, and First Class Finishes. All Texas builders and trades. So here's the honest version of what we could do for {{company}}.\n\nPicture this off your plate:\n\n- A website that actually brings you work, not just a brochure\n- Local SEO so the right customers find you on Google first\n- Social media and walkthrough videos of your own projects, filmed and posted for you\n- Outreach to builders, remodelers, and designers across Texas\n- The day-to-day admin and follow-ups handled in the background\n\nYou're clearly good at what you do. Our job would just be to make sure more of the right people see it.\n\nIf any of this sounds worth a conversation, I'd love to hop on a quick call, even just to trade notes. And if the timing isn't right, no worries at all. It was genuinely good to connect.\n\nEither way, {{first_name}}, I'm rooting for {{company}}.\n\nBest,\nRJ\nBalay ni Bruno & Co.\nbalaynibruno.co" }
+    };
+    const t=TPL[document.getElementById('em-template').value];
+    if(!t) return;
+    document.getElementById('em-subj').value=t.subject;
+    document.getElementById('em-body').value=t.body;
+    const st=document.getElementById('em-status'); if(st) st.textContent='Template loaded. Fill in {{first_name}} and {{company}}.';
+  };
   window.sendEmail=async()=>{
     const from=document.getElementById('em-from').value, to=document.getElementById('em-to').value.trim(), subject=document.getElementById('em-subj').value.trim(), body=document.getElementById('em-body').value.trim();
     const st=document.getElementById('em-status');
@@ -2942,10 +3031,49 @@
     window.__socRecs=recs.map(r=>r.txt);
     const recCards=recs.map((r,i)=>`<div class="card recrow" onclick="openChat('social', __socRecs[${i}])" style="margin-bottom:8px"><div class="row1"><div class="nm" style="font-size:13.5px;flex:1">${esc(r.txt)}</div><span style="font-family:var(--mono);font-size:10px;color:var(--gold2);white-space:nowrap">${esc(r.when)}</span></div><div class="meta" style="margin-top:5px">${esc(r.tag)}</div></div>`).join('');
 
-    return `<h2 class="vt">Social Media</h2><div class="vsub">Idea box · month calendar · posting rhythm · analytics</div>
+    /* Phase A — Quick-launch composer buttons. Each opens platform composer in new tab. */
+    const composerLinks=[
+      {p:'Instagram', ic:'📷', col:'#E1306C', url:'https://www.instagram.com/'},
+      {p:'Facebook',  ic:'👤', col:'#1877F2', url:'https://www.facebook.com/'},
+      {p:'LinkedIn',  ic:'💼', col:'#0A66C2', url:'https://www.linkedin.com/feed/?shareActive=true'},
+      {p:'TikTok',    ic:'🎵', col:'#000000', url:'https://www.tiktok.com/upload'},
+      {p:'YouTube',   ic:'▶',  col:'#FF0000', url:'https://studio.youtube.com/'},
+      {p:'X',         ic:'𝕏',  col:'#000000', url:'https://x.com/compose/post'},
+    ];
+    const composerHtml=composerLinks.map(c=>`<a class="composer-btn" href="${c.url}" target="_blank" rel="noopener" style="--bg:${c.col}"><span class="ic">${c.ic}</span><span class="lbl">${c.p}</span></a>`).join('');
+
+    /* Phase A — Mark-Posted clipboard helper. */
+    window.markPosted=(name,kind)=>{
+      const baseReel='G:\\\\Shared drives\\\\BBC Drive\\\\BBC Content\\\\BBC Content Posting\\\\BBC Short videos\\\\BBC Workflows Reels';
+      const baseGfx='G:\\\\Shared drives\\\\BBC Drive\\\\BBC Content\\\\BBC Content Posting\\\\BBC Graphic';
+      const folder=kind==='reel'?baseReel:baseGfx;
+      const cmd='Rename-Item -LiteralPath "'+folder+'\\\\'+name+'" -NewName "'+name+' POSTED"';
+      navigator.clipboard.writeText(cmd).then(()=>{
+        alert('Rename command copied to clipboard.\\n\\nPaste in PowerShell + run, then say "save and sync".\\n\\n'+cmd);
+      }).catch(()=>{ prompt('Copy + run in PowerShell, then save and sync:', cmd); });
+    };
+
+    const pendingActions=recs.filter(r=>r.tag==='scheduled').slice(0,4).map(r=>{
+      const name=(r.txt||'').replace(/^Finish \+ post: /,'').trim();
+      const safe=name.replace(/'/g,"\\\\'");
+      return `<div class="card" style="margin-bottom:8px;padding:12px 14px"><div class="row1" style="gap:8px"><span style="font-size:13.5px;flex:1;font-weight:600">${esc(name)}</span><span style="font-family:var(--mono);font-size:10px;color:var(--gold2);white-space:nowrap">${esc(r.when)}</span></div>
+        <div style="display:flex;gap:6px;margin-top:8px;flex-wrap:wrap">
+          <button class="mini-btn" onclick="markPosted('${safe}','graphic')">✓ Mark graphic posted</button>
+          <button class="mini-btn" onclick="markPosted('${safe}','reel')">✓ Mark reel posted</button>
+        </div></div>`;
+    }).join('');
+
+    return `<h2 class="vt">Social Media</h2><div class="vsub">Quick post · idea box · mark posted · calendar · analytics</div>
+
+      <div class="sec">🚀 Quick post — opens composer in a new tab</div>
+      <div class="composer-grid">${composerHtml}</div>
+
       <div class="sec">💡 Idea box — what to post next</div>
       <button class="ideabtn" onclick="ideaBox()"><span class="i">🔎</span>Find trending ideas (deep search)</button>
       ${recCards}
+
+      ${pendingActions?`<div class="sec">✅ Mark as posted — pending this week</div>${pendingActions}<div class="gauge-sub" style="text-align:left;margin-top:6px">Click to copy a rename command. Paste in PowerShell, run it, then say "save and sync" — dashboard auto-refreshes.</div>`:''}
+
       <div class="sec">${esc(C.label)} · scroll sideways to see the full month</div>
       ${monthCal}
       <div class="cal-legend"><span><i class="lg ev-g"></i>Graphic</span><span><i class="lg ev-r"></i>Reel</span><span><i class="lg done"></i>Posted</span><span><i class="lg pend"></i>Event / note</span></div>
@@ -3217,7 +3345,7 @@
   };
   window.go=v=>{ window.curView=v; app.innerHTML=`<div class="view">${views[v]()}</div>`; window.scrollTo(0,0);
     document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('active',b.dataset.v===v));
-    sheet.classList.remove('open'); };
+    sheet.classList.remove('open'); if(v==='crm'&&window.loadCampaignStats) window.loadCampaignStats(); };
   window.filterCards=(inp,wrapId)=>{ const q=inp.value.toLowerCase(); const wrap=document.getElementById(wrapId);
     wrap.querySelectorAll('.card,.wfrow,.clientbox,.opitem').forEach(c=>{ const hay=(c.dataset.search||c.textContent).toLowerCase(); c.style.display=hay.includes(q)?'':'none'; });
     wrap.querySelectorAll('.wfcat').forEach(p=>{ const any=[...p.querySelectorAll('.wfrow')].some(r=>r.style.display!=='none'); p.style.display=any?'':'none'; }); };
