@@ -4132,8 +4132,8 @@
       <button class="mini-btn" onclick="saveDateNote('${dateKey}')">💾 Save notes</button>
       <div class="gauge-sub" style="text-align:left;margin-top:6px;font-size:10.5px">Notes save to this browser (localStorage). Cross-device sync comes with Plus 06/03's write-back system.</div>`;
 
-    const titleLine = `<h3>${dateLabel}</h3><div class="row1">${dateKey}${items.length?' · '+items.length+' post(s) scheduled':' · no post yet'}</div>`;
-    const noContentHtml = items.length===0 ? `<div class="kv" style="margin-top:12px"><span>No post scheduled for this date yet. Add it in the BBC Social Media CALENDAR Google Sheet.</span></div>` : '';
+    const titleLine = `<h3>${dateLabel}</h3><div class="row1">${dateKey}${artifacts.length?' · '+artifacts.length+' post(s) scheduled':' · no post yet'}</div>`;
+    const noContentHtml = artifacts.length===0 ? `<div class="kv" style="margin-top:12px"><span>No post scheduled for this date yet. Add it in the BBC Social Media CALENDAR Google Sheet.</span></div>` : '';
 
     openSheet(`${titleLine}${noContentHtml}${itemHtml}${eventsHtml}${noteHtml}`);
   };
