@@ -80,6 +80,20 @@
   .kv{font-size:14px;line-height:1.6;margin-bottom:5px;}.kv b{color:var(--ink);}.kv span{color:var(--muted);}
   .angle{font-size:15px;font-style:italic;line-height:1.55;}
   .lnk{display:block;font-size:13px;color:var(--gold2);text-decoration:none;padding:10px 12px;border:1px solid var(--line);border-radius:9px;margin-bottom:6px;word-break:break-all;}
+  /* Workflow detail — per-artifact rows with view/edit links */
+  .artrows{display:flex;flex-direction:column;gap:7px;}
+  .artrow{display:flex;align-items:center;gap:10px;padding:10px 12px;border:1px solid var(--line);border-radius:10px;}
+  .artrow.on{border-color:var(--green);background:rgba(74,222,128,0.07);}
+  .artrow-ic{width:26px;height:26px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:13px;background:var(--bg3);color:var(--muted);flex:none;}
+  .artrow.on .artrow-ic{background:rgba(74,222,128,0.16);color:var(--green);}
+  .artrow-nm{flex:1;font-family:var(--mono);font-size:11px;letter-spacing:.5px;text-transform:uppercase;color:var(--ink);display:flex;align-items:center;gap:8px;min-width:0;}
+  .artrow-st{font-family:var(--ui);font-size:10px;text-transform:none;letter-spacing:0;color:var(--green);}
+  .artrow-st.off{color:var(--muted);}
+  .artrow-act{flex:none;display:flex;align-items:center;gap:6px;}
+  .artlink{font-size:12px;color:var(--gold);text-decoration:none;border:1px solid var(--line);border-radius:8px;padding:8px 12px;white-space:nowrap;min-height:44px;display:inline-flex;align-items:center;}
+  .artlink:hover{border-color:var(--gold);}
+  .artlink-add,.artlink-edit{background:none;border:1px solid var(--line);color:var(--muted);border-radius:8px;padding:8px 12px;font-size:12px;cursor:pointer;font-family:var(--ui);min-height:44px;min-width:44px;}
+  .artlink-add:hover,.artlink-edit:hover{border-color:var(--gold);color:var(--gold);}
   .lnk:hover{border-color:var(--gold);color:var(--gold);}
 
   /* BOTTOM NAV */
@@ -3094,12 +3108,30 @@
       <div class="sec">Source</div><div class="kv"><span>${esc(D.protocols.source)}</span></div>`); };
 
   /* ---------- SHEETS ---------- */
+  function wfLinks(){ try{return JSON.parse(localStorage.getItem('bbc_wf_links')||'{}');}catch(e){return{};} }
+  function wfLinkGet(id,a){ return wfLinks()[id+':'+a]||''; }
+  window.wfEditLink=(id,a)=>{
+    const cur=wfLinkGet(id,a);
+    const url=prompt('Paste the link for '+a.toUpperCase()+' — to view or edit the asset (Drive file, YouTube, page URL).\nLeave blank to remove.', cur);
+    if(url===null) return;
+    const all=wfLinks(), k=id+':'+a, v=url.trim();
+    if(v) all[k]=v; else delete all[k];
+    try{localStorage.setItem('bbc_wf_links',JSON.stringify(all));}catch(e){}
+    wfSheet(id);
+  };
   window.wfSheet=id=>{ const w=D.workflows.find(x=>x.id===id);
-    const arts=ORDER.map(a=>`<div class="art ${w.artifacts[a]?'on':''}"><div class="ic">${w.artifacts[a]?'✔':ICON[a]}</div><div class="nm">${a}</div></div>`).join('');
+    const arts=ORDER.map(a=>{
+      const on=w.artifacts[a], link=wfLinkGet(id,a);
+      const act = link
+        ? `<a class="artlink" href="${esc(link)}" target="_blank" rel="noopener">View / Edit ↗</a><button class="artlink-edit" onclick="wfEditLink('${id}','${a}')" title="Change link">✎</button>`
+        : `<button class="artlink-add" onclick="wfEditLink('${id}','${a}')">🔗 Add link</button>`;
+      return `<div class="artrow ${on?'on':''}"><span class="artrow-ic">${on?'✔':ICON[a]}</span><span class="artrow-nm">${a}<span class="artrow-st ${on?'':'off'}">${on?'shipped':'gap'}</span></span><span class="artrow-act">${act}</span></div>`;
+    }).join('');
     openSheet(`<h3>${esc(w.title)}</h3><div class="row1">${w.owners.map(o=>`<span class="dot" style="background:${OWN[o]||'#888'}"></span>${o}`).join(' ')} · ${esc(w.cat)}</div>
       <div class="bar"><i style="width:${pct(w)}%"></i></div>
+      <div class="sec">What it is</div><div class="kv"><span>${esc(w.role)}</span></div>
       <div class="sec">The angle</div><div class="angle">"${esc(w.angle)}"</div><div class="kv" style="margin-top:8px"><span>Audience: ${esc(w.audience)}</span></div>
-      <div class="sec">Content readiness (${pct(w)}%)</div><div class="arts">${arts}</div>
+      <div class="sec">Content readiness (${pct(w)}%) · tap a link to view or edit</div><div class="artrows">${arts}</div>
       <div class="sec">Ship the gaps</div><div class="kv"><span>Run WORKFLOW_CONTENT_FLOW.md: graphic → video → page → social → zip. Each shipped artifact lights a cell.</span></div>`);
   };
   window.clientSheet=i=>{ const c=D.clients[i];
