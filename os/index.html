@@ -2733,6 +2733,12 @@
     <div class="sec" style="margin-top:16px">Send email</div>
     <div class="panel" style="display:block">
       <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px">
+        <select id="em-template" onchange="applyTemplate()" style="${EMIN};min-width:240px">
+          <option value="">Template: Blank</option>
+          <option value="builder_intro">Builder Intro (name-drops our clients)</option>
+        </select>
+      </div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px">
         <select id="em-from" style="${EMIN};min-width:210px"><option value="rj@balaynibruno.co">rj@balaynibruno.co</option></select>
         <input id="em-to" placeholder="To (email address)" style="${EMIN};flex:1;min-width:180px">
       </div>
@@ -2743,6 +2749,19 @@
         <span id="em-status" class="gauge-sub" style="flex:1;min-width:140px"></span>
       </div>
     </div>`;
+  window.applyTemplate=()=>{
+    const TPL={
+      builder_intro:{
+        subject:"Quick idea for {{company}}",
+        body:"Hi {{first_name}},\n\nI run Balay ni Bruno & Co., a small studio that handles the behind-the-scenes work for home builders and remodelers. Websites, social media, content, and the day-to-day that eats your time.\n\nWe already do this for Home Vision Studio and Wooden Woodworks, and I thought {{company}} might be a good fit too.\n\nWould you be open to a short call to see if we can take some of that off your plate?\n\nBest,\nRJ\nBalay ni Bruno & Co.\nbalaynibruno.co"
+      }
+    };
+    const t=TPL[document.getElementById('em-template').value];
+    if(!t) return;
+    document.getElementById('em-subj').value=t.subject;
+    document.getElementById('em-body').value=t.body;
+    const st=document.getElementById('em-status'); if(st) st.textContent='Template loaded. Fill in {{first_name}} and {{company}}.';
+  };
   window.sendEmail=async()=>{
     const from=document.getElementById('em-from').value, to=document.getElementById('em-to').value.trim(), subject=document.getElementById('em-subj').value.trim(), body=document.getElementById('em-body').value.trim();
     const st=document.getElementById('em-status');
