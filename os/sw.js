@@ -1,9 +1,9 @@
-const CACHE = 'bbc-cc-v4';
+const CACHE = 'bbc-cc-v6';
 const ASSETS = ['./manifest.webmanifest', './icon-192.png', './icon-512.png'];
 
 self.addEventListener('install', e => {
   self.skipWaiting();
-  e.waitUntil(cache /* bump */s.open(CACHE).then(c => c.addAll(ASSETS)).catch(() => {}));
+  e.waitUntil(caches.open(CACHE).then(c => c.addAll(ASSETS)).catch(() => {}));
 });
 
 self.addEventListener('activate', e => {
