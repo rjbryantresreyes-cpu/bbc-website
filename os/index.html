@@ -303,12 +303,26 @@
   .wfcat-nm{font-family:var(--display);font-size:17px;font-weight:700;color:var(--ink);flex:1;line-height:1.1;}
   .wfcat-pct{font-family:var(--mono);font-size:11px;color:var(--gold2);flex:none;}
   .wfcat-bar{margin:11px 0 6px;}
-  .wfrow{display:flex;align-items:center;gap:9px;padding:10px 0;border-bottom:1px solid var(--line);cursor:pointer;}
+  /* Workflow readiness matrix (per-box shipped vs gap) */
+  .mxhead,.mxrow{display:grid;grid-template-columns:minmax(0,1fr) repeat(5,24px) 32px;gap:5px;align-items:center;}
+  .mxhead{padding:5px 0 7px;border-bottom:1px solid var(--line);margin-top:6px;}
+  .mxh-sp{font-family:var(--mono);font-size:8.5px;letter-spacing:.5px;color:var(--gold2);text-transform:uppercase;}
+  .mxh-c{font-size:13px;text-align:center;color:var(--muted);}
+  .mxh-p{font-family:var(--mono);font-size:8.5px;color:var(--gold2);text-align:center;}
+  .wfrow{display:block;padding:9px 0;border-bottom:1px solid var(--line);cursor:pointer;}
   .wfrow:last-child{border-bottom:none;}
-  .wfrow:hover .wfrow-nm{color:var(--gold);}
-  .wfrow-dots{display:flex;gap:3px;flex:none;}
-  .wfrow-nm{flex:1;font-size:13px;color:var(--ink);line-height:1.3;min-width:0;}
-  .wfrow-pct{font-family:var(--mono);font-size:10.5px;color:var(--gold2);flex:none;}
+  .wfrow:hover .nmtxt{color:var(--gold);}
+  .mxr-nm{min-width:0;display:flex;align-items:center;gap:6px;font-size:12.5px;color:var(--ink);line-height:1.25;}
+  .mxr-nm .nmtxt{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+  .mxr-dots{display:flex;gap:3px;flex:none;}
+  .mxcell{width:22px;height:22px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:11px;margin:0 auto;font-weight:700;}
+  .mxcell.on{background:rgba(74,222,128,0.16);border:1px solid var(--green);color:var(--green);}
+  .mxcell.off{background:var(--bg3);border:1px solid #3a4658;}
+  .mxr-pct{font-family:var(--mono);font-size:10px;color:var(--gold2);text-align:center;}
+  .mxbar{height:4px;background:var(--bg3);border-radius:3px;overflow:hidden;margin-top:6px;}
+  .mxbar i{display:block;height:100%;background:linear-gradient(90deg,var(--goldB),var(--green));border-radius:3px;}
+  .mxlegend{display:flex;gap:16px;align-items:center;justify-content:center;font-size:11px;color:var(--muted);margin:16px 0 4px;flex-wrap:wrap;}
+  .mxlegend .lg{display:flex;align-items:center;gap:6px;}
   .recrow .meta b{color:var(--gold);}
 
   /* DASHBOARD CARDS (Home) */
@@ -2794,24 +2808,32 @@
       const list=D.workflows.filter(w=>w.cat===cat);
       const avg=Math.round(list.reduce((s,w)=>s+pct(w),0)/list.length);
       const ic=CIC[cat]||'📦', col=CCOL[cat]||'#D4AF37';
+      const head=`<div class="mxhead"><span class="mxh-sp">Workflow</span>${ORDER.map(a=>`<span class="mxh-c" title="${a}">${ICON[a]}</span>`).join('')}<span class="mxh-p">%</span></div>`;
       const rows=list.map(w=>{
         const dots=w.owners.map(o=>`<span class="dot" style="background:${OWN[o]||'#888'}"></span>`).join('');
-        const pips=ORDER.map(a=>`<span class="pip ${w.artifacts[a]?'on':''}"></span>`).join('');
-        return `<div class="wfrow" data-search="${esc((w.title+' '+w.owners.join(' ')+' '+w.angle+' '+w.role).toLowerCase())}" onclick="wfSheet('${w.id}')"><span class="wfrow-dots">${dots}</span><span class="wfrow-nm">${esc(w.title)}</span><span class="mini">${pips}</span><span class="wfrow-pct">${pct(w)}%</span></div>`;
+        const cells=ORDER.map(a=>`<span class="mxcell ${w.artifacts[a]?'on':'off'}" title="${a}">${w.artifacts[a]?'✓':''}</span>`).join('');
+        const p=pct(w);
+        return `<div class="wfrow" data-search="${esc((w.title+' '+w.owners.join(' ')+' '+w.angle+' '+w.role).toLowerCase())}" onclick="wfSheet('${w.id}')">
+          <div class="mxrow"><span class="mxr-nm"><span class="mxr-dots">${dots}</span><span class="nmtxt">${esc(w.title)}</span></span>${cells}<span class="mxr-pct">${p}%</span></div>
+          <div class="mxbar"><i style="width:${p}%"></i></div></div>`;
       }).join('');
       return `<div class="wfcat">
         <div class="wfcat-hd"><div class="wfcat-ic" style="background:${col}22;color:${col}">${ic}</div><div class="wfcat-nm">${esc(cat)}</div><span class="wfcat-pct">${list.length} · ${avg}%</span></div>
         <div class="bar wfcat-bar"><i style="width:${avg}%"></i></div>
-        ${rows}</div>`;
+        ${head}${rows}</div>`;
     }).join('');
 
-    return `<h2 class="vt">Workflows</h2><div class="vsub">${cats.length} categories · ${totalArt} of 80 artifacts shipped. Tap any workflow for the full breakdown.</div>
+    const totalCells=D.workflows.length*ORDER.length;
+    const legend=`<div class="mxlegend"><span class="lg"><span class="mxcell on" style="width:17px;height:17px;font-size:10px">✓</span> shipped</span><span class="lg"><span class="mxcell off" style="width:17px;height:17px"></span> gap to fill</span><span class="lg" style="font-family:var(--mono);font-size:10px">${ORDER.map(a=>ICON[a]+' '+a).join('  ·  ')}</span></div>`;
+
+    return `<h2 class="vt">Workflows</h2><div class="vsub">${cats.length} categories · ${totalArt} of ${totalCells} artifacts shipped · ${totalCells-totalArt} gaps to fill. Tap any workflow for the full breakdown.</div>
       <input class="search" placeholder="Search all workflows..." oninput="filterCards(this,'wfwrap')">
       <div class="sec">⭐ Recommended next</div>
       <div class="gauge-sub" style="text-align:left;margin:-4px 0 10px">Closest to done — ship these to finish the set faster.</div>
       ${recs}
-      <div class="sec">All workflows by category</div>
-      <div id="wfwrap" class="wfgrid">${boxes}</div>`;
+      <div class="sec">Readiness by category</div>
+      <div id="wfwrap" class="wfgrid">${boxes}</div>
+      ${legend}`;
   };
 
   views.social=()=>{
