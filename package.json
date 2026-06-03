@@ -1,0 +1,9 @@
+{
+  "name": "bbc-website-functions",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Serverless functions for the BBC Command Center (/os): NocoDB proxy + Gmail sender.",
+  "dependencies": {
+    "nodemailer": "^6.9.16"
+  }
+}
