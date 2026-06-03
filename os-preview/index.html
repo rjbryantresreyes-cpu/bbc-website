@@ -3549,17 +3549,20 @@
 
       ${pendingActions?`<div class="sec">✅ Mark as posted — pending this week</div>${pendingActions}<div class="gauge-sub" style="text-align:left;margin-top:6px">Click to copy a rename command. Paste in PowerShell, run it, then say "save and sync" — dashboard auto-refreshes.</div>`:''}
 
-      <div class="sec">📊 Metricool — live calendar (embedded)</div>
-      <div class="metricool-embed">
-        <iframe src="https://app.metricool.com/planner/calendar?blogId=${METRICOOL_BRAND}&userId=${METRICOOL_USER}" loading="lazy" referrerpolicy="no-referrer-when-downgrade" sandbox="allow-same-origin allow-scripts allow-forms allow-popups allow-popups-to-escape-sandbox"></iframe>
-        <div class="embed-fallback"><a href="https://app.metricool.com/planner/calendar?blogId=${METRICOOL_BRAND}&userId=${METRICOOL_USER}" target="_blank" rel="noopener">Calendar not loading? Open Metricool in a new tab →</a></div>
+      <div class="sec">📊 Metricool — open in a tab (iframe not supported on Free tier)</div>
+      <div class="metricool-launcher">
+        <a class="metricool-cta primary" href="https://app.metricool.com/planner/calendar?blogId=${METRICOOL_BRAND}&userId=${METRICOOL_USER}" target="_blank" rel="noopener">
+          <div class="cta-ic">🗓️</div>
+          <div class="cta-text"><div class="cta-t">Open Metricool Calendar</div><div class="cta-s">Live view of what's posted + scheduled across all platforms</div></div>
+          <div class="cta-arr">→</div>
+        </a>
+        <a class="metricool-cta" href="https://app.metricool.com/evolution/brandSummary?blogId=${METRICOOL_BRAND}&userId=${METRICOOL_USER}" target="_blank" rel="noopener">
+          <div class="cta-ic">📈</div>
+          <div class="cta-text"><div class="cta-t">Brand Summary</div><div class="cta-s">Followers · reach · engagement across all platforms</div></div>
+          <div class="cta-arr">→</div>
+        </a>
       </div>
-
-      <div class="sec">📈 Metricool — Brand Summary (embedded)</div>
-      <div class="metricool-embed metricool-embed-short">
-        <iframe src="https://app.metricool.com/evolution/brandSummary?blogId=${METRICOOL_BRAND}&userId=${METRICOOL_USER}" loading="lazy" referrerpolicy="no-referrer-when-downgrade" sandbox="allow-same-origin allow-scripts allow-forms allow-popups allow-popups-to-escape-sandbox"></iframe>
-        <div class="embed-fallback"><a href="https://app.metricool.com/evolution/brandSummary?blogId=${METRICOOL_BRAND}&userId=${METRICOOL_USER}" target="_blank" rel="noopener">Summary not loading? Open in Metricool →</a></div>
-      </div>
+      <div class="gauge-sub" style="text-align:left;margin-top:-4px;margin-bottom:10px;font-size:11px">Metricool blocks iframe embeds on Free tier (security policy — login cookies don't cross-frame). Click-through opens in a new tab using your active Metricool session.</div>
 
       <div class="sec">📋 Post Tracker — BBC content posted vs pending + special days</div>
       ${monthCal}
@@ -3914,7 +3917,7 @@
   document.getElementById('cs-files').addEventListener('change',e=>{ const box=document.getElementById('cs-previews'); box.innerHTML=''; [...e.target.files].forEach(f=>{ const url=URL.createObjectURL(f); box.insertAdjacentHTML('beforeend', f.type.startsWith('video')?`<video src="${url}" controls></video>`:`<img src="${url}" alt="">`); }); });
 
   /* PWA service worker — auto-update so deploys show without manual cache clears */
-  if(false){
+  if('serviceWorker' in navigator){
     navigator.serviceWorker.register('sw.js').then(reg=>{ reg.update&&reg.update(); }).catch(()=>{});
     let refreshing=false;
     navigator.serviceWorker.addEventListener('controllerchange',()=>{ if(refreshing) return; refreshing=true; location.reload(); });
