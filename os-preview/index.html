@@ -189,7 +189,15 @@
   .mini-btn:hover{border-color:var(--green);background:rgba(74,222,128,0.08);color:var(--green);}
   .mini-btn:active{transform:scale(.97);}
 
-  /* METRICOOL CTA LAUNCHERS */
+  /* METRICOOL IFRAME EMBED — full live widget inline */
+  .metricool-embed{position:relative;width:100%;border:1px solid var(--line);border-radius:14px;overflow:hidden;margin-bottom:14px;background:var(--bg2);min-height:420px;}
+  .metricool-embed iframe{width:100%;height:700px;border:0;display:block;background:#fff;}
+  .metricool-embed-short iframe{height:500px;}
+  .metricool-embed .embed-fallback{padding:10px 14px;background:var(--bg3);border-top:1px solid var(--line);font-family:var(--mono);font-size:11px;text-align:center;}
+  .metricool-embed .embed-fallback a{color:var(--gold2);text-decoration:none;}
+  .metricool-embed .embed-fallback a:hover{color:var(--gold);text-decoration:underline;}
+
+  /* METRICOOL CTA LAUNCHERS (kept for backup, hidden by default) */
   .metricool-launcher{display:grid;grid-template-columns:1fr;gap:8px;margin-bottom:12px;}
   @media(min-width:600px){.metricool-launcher{grid-template-columns:1fr 1fr;}}
   .metricool-cta{display:flex;align-items:center;gap:12px;background:var(--bg2);border:1px solid var(--line);border-radius:12px;padding:14px 16px;text-decoration:none;color:var(--ink);transition:border-color .15s,transform .1s;}
@@ -974,6 +982,438 @@
         "date": "2026-06-21",
         "label": "Father's Day",
         "type": "holiday"
+      },
+      {
+        "date": "2026-01-01",
+        "label": "New Year's Day",
+        "type": "holiday",
+        "category": "Federal Holiday",
+        "oneliner": "Ring in fresh goals for your business",
+        "angle": "Start the year with clarity on your ops and growth targets"
+      },
+      {
+        "date": "2026-01-19",
+        "label": "MLK Jr. Birthday",
+        "type": "holiday",
+        "category": "Federal Holiday",
+        "oneliner": "Celebrate service and equality",
+        "angle": "Reflect on how your business serves your community"
+      },
+      {
+        "date": "2026-02-09",
+        "label": "National Pizza Day",
+        "type": "observance",
+        "category": "Food",
+        "oneliner": "Celebrate pizza (fun flex for food / service biz owners)",
+        "angle": "[SKIP] Generic food day, thin tie-in unless client is food-related"
+      },
+      {
+        "date": "2026-02-14",
+        "label": "Valentine's Day",
+        "type": "observance",
+        "category": "Family/Warmth",
+        "oneliner": "Love in business: relationships with customers",
+        "angle": "Build loyalty by knowing your customers deeply"
+      },
+      {
+        "date": "2026-02-16",
+        "label": "Presidents' Day",
+        "type": "holiday",
+        "category": "Federal Holiday",
+        "oneliner": "Reflect on leadership",
+        "angle": "What kind of leader are you building your business to be?"
+      },
+      {
+        "date": "2026-03-08",
+        "label": "International Women's Day",
+        "type": "awareness",
+        "category": "Global Awareness",
+        "oneliner": "Celebrate women in business and leadership",
+        "angle": "Amplify female founders, creators, and operators in your network"
+      },
+      {
+        "date": "2026-03-17",
+        "label": "St. Patrick's Day",
+        "type": "observance",
+        "category": "Cultural",
+        "oneliner": "Celebrate Irish heritage and good luck",
+        "angle": "Lean into warmth and hospitality in your brand voice"
+      },
+      {
+        "date": "2026-03-22",
+        "label": "World Water Day",
+        "type": "awareness",
+        "category": "Global Awareness",
+        "oneliner": "Access to clean water",
+        "angle": "Support sustainability in your supply chain (tie to 4Ocean if relevant)"
+      },
+      {
+        "date": "2026-04-02",
+        "label": "Maundy Thursday",
+        "type": "holiday",
+        "category": "PH Holiday",
+        "oneliner": "Holy Week in the Philippines",
+        "angle": "Reach out to your Filipino community and customers"
+      },
+      {
+        "date": "2026-04-03",
+        "label": "Good Friday",
+        "type": "holiday",
+        "category": "PH Holiday",
+        "oneliner": "Holy Week observance",
+        "angle": "Operate with intention and care this week"
+      },
+      {
+        "date": "2026-04-04",
+        "label": "Black Saturday",
+        "type": "holiday",
+        "category": "PH Holiday",
+        "oneliner": "Holy Week in PH",
+        "angle": "Acknowledge the quieter, reflective day in PH markets"
+      },
+      {
+        "date": "2026-04-05",
+        "label": "Easter",
+        "type": "holiday",
+        "category": "US/Global Holiday",
+        "oneliner": "Renewal and celebration",
+        "angle": "Market with joy; focus on fresh starts and family"
+      },
+      {
+        "date": "2026-04-09",
+        "label": "Araw ng Kagitingan (Day of Valor)",
+        "type": "holiday",
+        "category": "PH Holiday",
+        "oneliner": "Honor Filipino heroes and courage",
+        "angle": "Celebrate courage in entrepreneurship; feature PH founders"
+      },
+      {
+        "date": "2026-04-10",
+        "label": "Siblings Day",
+        "type": "observance",
+        "category": "Family",
+        "oneliner": "Celebrate sibling relationships",
+        "angle": "Feature family-built teams (like BBC's Vi + family story)"
+      },
+      {
+        "date": "2026-04-11",
+        "label": "National Pet Day",
+        "type": "awareness",
+        "category": "Pet Awareness",
+        "oneliner": "Celebrate pets and adoption",
+        "angle": "Pet industry owners: highlight animal wellness and care"
+      },
+      {
+        "date": "2026-04-22",
+        "label": "Earth Day",
+        "type": "awareness",
+        "category": "Global Awareness",
+        "oneliner": "Environmental action",
+        "angle": "Sustainable business practices + 4Ocean light nod (tie-in only if relevant)"
+      },
+      {
+        "date": "2026-05-01",
+        "label": "Labor Day (PH + Global)",
+        "type": "holiday",
+        "category": "International Holiday",
+        "oneliner": "Honor workers and labor",
+        "angle": "Celebrate your team and fair operations practices"
+      },
+      {
+        "date": "2026-05-03",
+        "label": "National Small Business Week",
+        "type": "observance",
+        "category": "Small Business",
+        "oneliner": "Peak celebration for small biz",
+        "angle": "HERO POST: Feature BBC's clients, celebrate the small business owner grind"
+      },
+      {
+        "date": "2026-05-10",
+        "label": "Mother's Day",
+        "type": "observance",
+        "category": "Family/Warmth",
+        "oneliner": "Honor mothers and caregivers",
+        "angle": "Feature female leaders + Vi's family story (BBC-specific warmth)"
+      },
+      {
+        "date": "2026-05-10",
+        "label": "National Small Business Day",
+        "type": "observance",
+        "category": "Small Business",
+        "oneliner": "Dedicated day for small biz love",
+        "angle": "Celebrate operations, systems, and how your business runs"
+      },
+      {
+        "date": "2026-05-12",
+        "label": "International Nurses Day",
+        "type": "observance",
+        "category": "Professional",
+        "oneliner": "Honor healthcare workers",
+        "angle": "Appreciate the caregivers in your business and community"
+      },
+      {
+        "date": "2026-05-26",
+        "label": "Memorial Day",
+        "type": "holiday",
+        "category": "US Federal Holiday",
+        "oneliner": "Honor military service and sacrifice",
+        "angle": "Light tie-in for Cavalry Realty (military family broker); honor service"
+      },
+      {
+        "date": "2026-05-31",
+        "label": "World No Tobacco Day",
+        "type": "observance",
+        "category": "Health",
+        "oneliner": "Tobacco cessation",
+        "angle": "[SKIP] Thin business tie-in unless health-related client"
+      },
+      {
+        "date": "2026-06-01",
+        "label": "Pride Month",
+        "type": "awareness",
+        "category": "Global Awareness",
+        "oneliner": "Celebrate LGBTQ+ community and inclusion",
+        "angle": "Build an inclusive workplace; celebrate diverse teams and customers"
+      },
+      {
+        "date": "2026-06-05",
+        "label": "World Environment Day",
+        "type": "awareness",
+        "category": "Global Awareness",
+        "oneliner": "Global environmental action",
+        "angle": "Sustainable ops and responsible sourcing"
+      },
+      {
+        "date": "2026-06-08",
+        "label": "World Oceans Day",
+        "type": "awareness",
+        "category": "Global Awareness",
+        "oneliner": "Ocean conservation and health",
+        "angle": "Light tie-in for 4Ocean; broader message on environmental responsibility"
+      },
+      {
+        "date": "2026-06-12",
+        "label": "Philippine Independence Day",
+        "type": "holiday",
+        "category": "PH Holiday",
+        "oneliner": "Celebrate PH freedom and culture",
+        "angle": "Honor Filipino heritage; celebrate PH-built brands (like BBC)"
+      },
+      {
+        "date": "2026-07-03",
+        "label": "Independence Day (observed)",
+        "type": "holiday",
+        "category": "US Federal Holiday",
+        "oneliner": "Celebrate American freedom and community",
+        "angle": "Reflect on independence and autonomy in business"
+      },
+      {
+        "date": "2026-07-04",
+        "label": "Independence Day",
+        "type": "holiday",
+        "category": "US Federal Holiday",
+        "oneliner": "July 4th fireworks and pride",
+        "angle": "Celebrate American entrepreneurship and freedom to build"
+      },
+      {
+        "date": "2026-08-21",
+        "label": "Ninoy Aquino Day",
+        "type": "holiday",
+        "category": "PH Holiday",
+        "oneliner": "Honor PH hero and democracy",
+        "angle": "Celebrate courage and sacrifice in service to others"
+      },
+      {
+        "date": "2026-08-26",
+        "label": "International Dog Day",
+        "type": "awareness",
+        "category": "Pet Awareness",
+        "oneliner": "Celebrate dogs and dog welfare",
+        "angle": "Pet industry tie-in; celebrate animal companions"
+      },
+      {
+        "date": "2026-09-01",
+        "label": "Labor Day",
+        "type": "holiday",
+        "category": "US Federal Holiday (1st Mon)",
+        "oneliner": "Honor workers and labor",
+        "angle": "Celebrate your team and operations excellence"
+      },
+      {
+        "date": "2026-09-01",
+        "label": "Pinoy Christmas Season Begins",
+        "type": "observance",
+        "category": "Cultural",
+        "oneliner": "Start of Ber months in Filipino culture",
+        "angle": "Light post on holiday planning and operations prep"
+      },
+      {
+        "date": "2026-09-29",
+        "label": "National Coffee Day",
+        "type": "observance",
+        "category": "Food",
+        "oneliner": "Celebrate coffee culture",
+        "angle": "Coffee industry/cafe owners: feature your craft and community"
+      },
+      {
+        "date": "2026-10-08",
+        "label": "Columbus Day",
+        "type": "holiday",
+        "category": "US Federal Holiday (2nd Mon)",
+        "oneliner": "Reflection on discovery and exploration",
+        "angle": "Explore new business opportunities and markets"
+      },
+      {
+        "date": "2026-10-10",
+        "label": "World Mental Health Day",
+        "type": "awareness",
+        "category": "Global Awareness",
+        "oneliner": "Mental health and wellbeing",
+        "angle": "Operate with emotional intelligence; support team mental health"
+      },
+      {
+        "date": "2026-10-29",
+        "label": "National Cat Day",
+        "type": "awareness",
+        "category": "Pet Awareness",
+        "oneliner": "Celebrate cats and cat welfare",
+        "angle": "Pet industry owners: highlight feline care and adoption"
+      },
+      {
+        "date": "2026-10-31",
+        "label": "Halloween",
+        "type": "fun",
+        "category": "Cultural/Fun",
+        "oneliner": "Spooky fun and costume celebration",
+        "angle": "Light-hearted post on creativity in branding and campaigns"
+      },
+      {
+        "date": "2026-11-01",
+        "label": "All Saints' Day",
+        "type": "holiday",
+        "category": "PH Holiday",
+        "oneliner": "Honor loved ones and community",
+        "angle": "Reflect on legacy and impact in your business"
+      },
+      {
+        "date": "2026-11-02",
+        "label": "All Souls' Day (Special Non-Working)",
+        "type": "holiday",
+        "category": "PH Holiday",
+        "oneliner": "Remember those who came before",
+        "angle": "Honor your business roots and gratitude"
+      },
+      {
+        "date": "2026-11-08",
+        "label": "Feast of the Immaculate Conception prep",
+        "type": "holiday",
+        "category": "PH Holiday",
+        "oneliner": "Start of Pinoy Christmas season",
+        "angle": "Pinoy holiday marketing prep; retail + service businesses plan ahead"
+      },
+      {
+        "date": "2026-11-11",
+        "label": "Veterans Day",
+        "type": "holiday",
+        "category": "US Federal Holiday",
+        "oneliner": "Honor military service and sacrifice",
+        "angle": "Light tie-in for military-family clients (Cavalry Realty); honor service"
+      },
+      {
+        "date": "2026-11-17",
+        "label": "National Entrepreneurs' Day",
+        "type": "observance",
+        "category": "Small Business",
+        "oneliner": "Celebrate entrepreneurship",
+        "angle": "HERO POST: Feature BBC clients, celebrate the founder journey"
+      },
+      {
+        "date": "2026-11-16",
+        "label": "Global Entrepreneurship Week",
+        "type": "observance",
+        "category": "Small Business",
+        "oneliner": "Worldwide entrepreneurship celebration",
+        "angle": "Promote mentorship, networking, and founder support"
+      },
+      {
+        "date": "2026-11-01",
+        "label": "National Entrepreneurship Month",
+        "type": "observance",
+        "category": "Small Business",
+        "oneliner": "Month-long entrepreneurship celebration",
+        "angle": "HERO MONTH: Feature BBC's mission, founder stories, and client wins"
+      },
+      {
+        "date": "2026-11-27",
+        "label": "Black Friday",
+        "type": "observance",
+        "category": "Shopping",
+        "oneliner": "Biggest retail day of the year",
+        "angle": "E-commerce and retail owners: plan your promotions and ops"
+      },
+      {
+        "date": "2026-11-28",
+        "label": "Small Business Saturday",
+        "type": "observance",
+        "category": "Small Business",
+        "oneliner": "Shop small movement",
+        "angle": "HERO POST: Celebrate indie and local businesses; promote your small-biz clients"
+      },
+      {
+        "date": "2026-11-30",
+        "label": "Bonifacio Day (PH)",
+        "type": "holiday",
+        "category": "PH Holiday",
+        "oneliner": "Honor PH revolutionary hero",
+        "angle": "Celebrate Filipino courage and nation-building; feature PH entrepreneurs"
+      },
+      {
+        "date": "2026-11-30",
+        "label": "Cyber Monday",
+        "type": "observance",
+        "category": "Shopping",
+        "oneliner": "Biggest online shopping day",
+        "angle": "E-commerce owners: prepare your digital ops for peak traffic"
+      },
+      {
+        "date": "2026-12-08",
+        "label": "Feast of the Immaculate Conception",
+        "type": "holiday",
+        "category": "PH Holiday",
+        "oneliner": "Major PH religious holiday",
+        "angle": "Start of full Pinoy Christmas season; family/warmth messaging"
+      },
+      {
+        "date": "2026-12-24",
+        "label": "Christmas Eve (Special Non-Working PH)",
+        "type": "holiday",
+        "category": "PH Holiday",
+        "oneliner": "Pinoy Christmas Eve traditions",
+        "angle": "Feature family-centered business culture (Vi + Krizza family angle)"
+      },
+      {
+        "date": "2026-12-25",
+        "label": "Christmas Day",
+        "type": "holiday",
+        "category": "US/PH Holiday",
+        "oneliner": "Global celebration of joy and family",
+        "angle": "Celebrate family-built teams and warmth in business (BBC's core story)"
+      },
+      {
+        "date": "2026-12-30",
+        "label": "Rizal Day (PH)",
+        "type": "holiday",
+        "category": "PH Holiday",
+        "oneliner": "Honor national hero and thinker",
+        "angle": "Celebrate PH intellectual legacy and nation-builders"
+      },
+      {
+        "date": "2026-12-31",
+        "label": "New Year's Eve (Special Non-Working PH)",
+        "type": "holiday",
+        "category": "PH Holiday",
+        "oneliner": "Final day of year reflection",
+        "angle": "Reflect on wins; plan for next year's growth"
       }
     ]
   },
@@ -3107,23 +3547,22 @@
 
       ${pendingActions?`<div class="sec">✅ Mark as posted — pending this week</div>${pendingActions}<div class="gauge-sub" style="text-align:left;margin-top:6px">Click to copy a rename command. Paste in PowerShell, run it, then say "save and sync" — dashboard auto-refreshes.</div>`:''}
 
-      <div class="sec">${esc(C.label)} · scroll sideways to see the full month</div>
-      ${monthCal}
-      <div class="cal-legend"><span><i class="lg ev-g"></i>Graphic</span><span><i class="lg ev-r"></i>Reel</span><span><i class="lg done"></i>Posted</span><span><i class="lg pend"></i>Event / note</span></div>
-
-      <div class="sec">📊 Metricool — live calendar + cross-platform view</div>
-      <div class="metricool-launcher">
-        <a class="metricool-cta primary" href="https://app.metricool.com/planner/calendar?blogId=${METRICOOL_BRAND}&userId=${METRICOOL_USER}" target="_blank" rel="noopener">
-          <div class="cta-ic">🗓️</div>
-          <div class="cta-text"><div class="cta-t">Open Metricool Calendar</div><div class="cta-s">Live view of what's posted + scheduled across all platforms</div></div>
-          <div class="cta-arr">→</div>
-        </a>
-        <a class="metricool-cta" href="https://app.metricool.com/evolution/brandSummary?blogId=${METRICOOL_BRAND}&userId=${METRICOOL_USER}" target="_blank" rel="noopener">
-          <div class="cta-ic">📈</div>
-          <div class="cta-text"><div class="cta-t">Brand Summary</div><div class="cta-s">Followers · reach · engagement across all platforms</div></div>
-          <div class="cta-arr">→</div>
-        </a>
+      <div class="sec">📊 Metricool — live calendar (embedded)</div>
+      <div class="metricool-embed">
+        <iframe src="https://app.metricool.com/planner/calendar?blogId=${METRICOOL_BRAND}&userId=${METRICOOL_USER}" loading="lazy" referrerpolicy="no-referrer-when-downgrade" sandbox="allow-same-origin allow-scripts allow-forms allow-popups allow-popups-to-escape-sandbox"></iframe>
+        <div class="embed-fallback"><a href="https://app.metricool.com/planner/calendar?blogId=${METRICOOL_BRAND}&userId=${METRICOOL_USER}" target="_blank" rel="noopener">Calendar not loading? Open Metricool in a new tab →</a></div>
       </div>
+
+      <div class="sec">📈 Metricool — Brand Summary (embedded)</div>
+      <div class="metricool-embed metricool-embed-short">
+        <iframe src="https://app.metricool.com/evolution/brandSummary?blogId=${METRICOOL_BRAND}&userId=${METRICOOL_USER}" loading="lazy" referrerpolicy="no-referrer-when-downgrade" sandbox="allow-same-origin allow-scripts allow-forms allow-popups allow-popups-to-escape-sandbox"></iframe>
+        <div class="embed-fallback"><a href="https://app.metricool.com/evolution/brandSummary?blogId=${METRICOOL_BRAND}&userId=${METRICOOL_USER}" target="_blank" rel="noopener">Summary not loading? Open in Metricool →</a></div>
+      </div>
+
+      <div class="sec">📋 Post Tracker — BBC content posted vs pending + special days</div>
+      ${monthCal}
+      <div class="cal-legend"><span><i class="lg ev-g"></i>Graphic</span><span><i class="lg ev-r"></i>Reel</span><span><i class="lg done"></i>Posted</span><span><i class="lg pend"></i>Special day / occasion</span></div>
+      <div class="gauge-sub" style="text-align:left;margin-top:6px">Tracks every scheduled BBC post (graphic + reel) — visual checklist of posted vs pending. Special days from <code>OCCASIONS_CALENDAR.md</code> auto-overlay so you spot tie-in opportunities (PH Independence Day, World Environment Day, National Dog Day, etc.).</div>
 
       <div class="sec">Posting rhythm — Monday to Sunday</div>
       <div class="rhythm">${rhythm}</div>
@@ -3473,7 +3912,7 @@
   document.getElementById('cs-files').addEventListener('change',e=>{ const box=document.getElementById('cs-previews'); box.innerHTML=''; [...e.target.files].forEach(f=>{ const url=URL.createObjectURL(f); box.insertAdjacentHTML('beforeend', f.type.startsWith('video')?`<video src="${url}" controls></video>`:`<img src="${url}" alt="">`); }); });
 
   /* PWA service worker — auto-update so deploys show without manual cache clears */
-  if(false){
+  if('serviceWorker' in navigator){
     navigator.serviceWorker.register('sw.js').then(reg=>{ reg.update&&reg.update(); }).catch(()=>{});
     let refreshing=false;
     navigator.serviceWorker.addEventListener('controllerchange',()=>{ if(refreshing) return; refreshing=true; location.reload(); });
