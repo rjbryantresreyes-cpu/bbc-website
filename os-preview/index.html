@@ -181,16 +181,16 @@
   .art-check.shipped{background:var(--green);color:#0A1422;}
   .art-check.pending{background:transparent;color:var(--muted);border:2px dashed rgba(159,176,199,0.35);}
 
-  /* Date detail — platform tiles grid */
-  .platform-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;}
-  @media(min-width:600px){.platform-grid{grid-template-columns:repeat(6,1fr);}}
-  .platform-tile{background:var(--bg3);border:1.5px solid var(--line);border-radius:10px;padding:12px 8px;text-align:center;transition:all .15s;}
-  .platform-tile.on{background:rgba(74,222,128,0.13);border-color:var(--green);}
-  .platform-tile.off{opacity:.6;}
-  .platform-tile .pt-ic{font-size:22px;line-height:1;margin-bottom:6px;}
-  .platform-tile .pt-lbl{font-family:var(--ui);font-size:11px;font-weight:600;color:var(--ink);}
-  .platform-tile .pt-state{font-family:var(--mono);font-size:9px;color:var(--muted);margin-top:4px;letter-spacing:.3px;}
-  .platform-tile.on .pt-state{color:var(--green);font-weight:700;}
+  /* Date detail — per-platform rows (icon + name + lit state + Add post URL) */
+  .platform-rows{display:flex;flex-direction:column;gap:6px;}
+  .platform-row{display:flex;align-items:center;gap:12px;background:var(--bg2);border:1px solid var(--line);border-radius:10px;padding:10px 12px;transition:all .15s;}
+  .platform-row.lit{background:rgba(74,222,128,0.10);border-color:var(--green);}
+  .platform-row.unlit{opacity:.85;}
+  .platform-row .pr-ic{font-size:22px;line-height:1;flex-shrink:0;}
+  .platform-row .pr-nm{flex:1;display:flex;align-items:center;gap:8px;font-family:var(--ui);font-size:13.5px;font-weight:600;color:var(--ink);}
+  .platform-row .pr-st{font-family:var(--mono);font-size:9.5px;letter-spacing:.5px;color:var(--muted);font-weight:500;padding:2px 7px;border-radius:5px;background:var(--bg3);}
+  .platform-row.lit .pr-st{color:#0A1422;background:var(--green);font-weight:700;}
+  .platform-row .pr-act{display:flex;align-items:center;gap:4px;}
   .badge-state{font-family:var(--mono);font-size:9px;font-weight:700;letter-spacing:.5px;padding:3px 7px;border-radius:5px;border:1px solid;}
   .badge-state.s-posted{background:rgba(74,222,128,0.13);border-color:var(--green);color:#a7e2b3;}
   .badge-state.s-drafted{background:rgba(212,175,55,0.13);border-color:var(--gold);color:#e8d7a4;}
@@ -4084,23 +4084,28 @@
       </div>`;
     }).join('') : '<div class="kv" style="margin-top:8px"><span>No content scheduled for this date.</span></div>';
 
-    /* Platform icon row — lights up based on platforms posted (from Sheet codes / Metricool) */
-    const platformsRow = '<div class="platform-grid">' + PLAT.map(p=>{
+    /* Per-platform rows — each platform: icon + name + lit state + Add post URL link. */
+    const platformRows = PLAT.map(p=>{
       const isPosted = allPlatformsPosted.has(p.n);
-      return `<div class="platform-tile ${isPosted?'on':'off'}" title="${p.label}: ${isPosted?'posted ✓':'not yet'}">
-        <div class="pt-ic">${p.ic}</div>
-        <div class="pt-lbl">${p.label}</div>
-        <div class="pt-state">${isPosted?'✓ posted':'not yet'}</div>
+      const savedLink = dateArtifactLinkGet(dateKey, 'platform_'+p.n);
+      const linkBtn = savedLink
+        ? `<a class="artlink" href="${esc(savedLink)}" target="_blank" rel="noopener">View ↗</a><button class="artlink-edit" onclick="editDateArtifact('${dateKey}','platform_${p.n}')" title="Change link">✎</button>`
+        : `<button class="artlink-add" onclick="editDateArtifact('${dateKey}','platform_${p.n}')">🔗 Add post URL</button>`;
+      const lightClass = isPosted ? 'lit' : 'unlit';
+      return `<div class="platform-row ${lightClass}">
+        <span class="pr-ic">${p.ic}</span>
+        <span class="pr-nm">${p.label}<span class="pr-st">${isPosted?'✓ posted':'not yet'}</span></span>
+        <span class="pr-act">${linkBtn}</span>
       </div>`;
-    }).join('') + '</div>';
+    }).join('');
 
     const itemHtml = `
-      <div class="sec">📦 Content artifacts — ✓ when created AND linked</div>
+      <div class="sec">📦 Content location — ✓ when artifact is created AND linked</div>
       ${artifactsHtml}
 
-      <div class="sec" style="margin-top:18px">📱 Posted on platforms — auto-detects from Metricool / Sheet codes</div>
-      ${platformsRow}
-      <div class="gauge-sub" style="text-align:left;margin-top:6px;font-size:11px">Icons light when a platform is marked posted in the Sheet (e.g. <code>Content (FB IG)</code>) or by Metricool API (when wired). Manual today; auto soon.</div>
+      <div class="sec" style="margin-top:18px">📱 Posted on platforms — icons light up when posted</div>
+      <div class="platform-rows">${platformRows}</div>
+      <div class="gauge-sub" style="text-align:left;margin-top:6px;font-size:11px">Lit = posted (from Sheet codes <code>(FB IG)</code> or Metricool when wired). Paste the actual social post URL per platform for quick reference + click-through.</div>
     `;
 
     const eventsHtml = evs.length ? `<div class="sec">📅 Special days on this date</div>` + evs.map(e=>`<div class="kv"><b>${esc(e.label)}</b> <span style="font-size:12px;color:var(--muted)">${e.oneliner?' — '+esc(e.oneliner):''}</span>${e.angle?`<div class="kv" style="margin-top:4px;font-size:12px;color:var(--gold2)">BBC angle: ${esc(e.angle)}</div>`:''}</div>`).join('') : '';
