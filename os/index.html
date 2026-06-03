@@ -3458,7 +3458,7 @@
     window.scrollTo(0,0); sheet.classList.remove('open');
   };
   window.clientCC=(i)=>{
-    if(D.clients[i] && D.clients[i].name==='Cavalry Group') return cavalryCC(i);
+    if(D.clients[i] && D.clients[i].name==='Cavalry Group'){ window.location.href='/os/cavalry/'; return; }
     const c=D.clients[i], col=cColor(c), folder=c.folder||CFOLDER[c.name];
     const hasSite=c.site&&c.site!=='-', siteUrl=hasSite?'https://'+c.site.replace(/^https?:\/\//,''):'';
     const isCav=c.name==='Cavalry Group';
@@ -4038,8 +4038,7 @@
   function routeUser(email){
     var dest=BBC_LOCKED[(email||'').toLowerCase()];
     if(dest==='cavalry'){
-      document.body.classList.add('locked-cavalry');
-      try{ var idx=(D.clients||[]).findIndex(function(c){return c.name==='Cavalry Group';}); if(idx>=0 && window.cavalryCC){ window.cavalryCC(idx); return; } }catch(e){}
+      window.location.replace('/os/cavalry/'); return;
     }
     document.body.classList.remove('locked-cavalry');
   }
