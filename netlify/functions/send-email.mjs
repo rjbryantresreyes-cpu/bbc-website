@@ -7,9 +7,11 @@
 import nodemailer from "nodemailer";
 
 // Sender addresses are not secret; only their App Passwords are (in env).
+// NOTE: RJ is using rj@ for now. The Netlify env var GMAIL_ADMIN_PASS currently holds
+// rj@'s App Password. When admin@ is added later, give it its own App Password var.
 const ACCOUNTS = {
-  "admin@balaynibruno.co": { user: "admin@balaynibruno.co", pass: process.env.GMAIL_ADMIN_PASS },
-  "rj@balaynibruno.co":    { user: "rj@balaynibruno.co",    pass: process.env.GMAIL_RJ_PASS },
+  "rj@balaynibruno.co":    { user: "rj@balaynibruno.co",    pass: process.env.GMAIL_ADMIN_PASS },
+  "admin@balaynibruno.co": { user: "admin@balaynibruno.co", pass: process.env.GMAIL_ADMIN_REAL_PASS },
 };
 
 export default async (req) => {
@@ -23,7 +25,7 @@ export default async (req) => {
   const { from, to, subject, body } = data || {};
   if (!to || !subject || !body) return json({ ok: false, error: "Missing to, subject, or body" }, 400);
 
-  const acct = ACCOUNTS[from] || ACCOUNTS["admin@balaynibruno.co"];
+  const acct = ACCOUNTS[from] || ACCOUNTS["rj@balaynibruno.co"];
   if (!acct.pass) return json({ ok: false, error: `Sender ${from} not connected yet (App Password missing in Netlify).` }, 400);
 
   try {
