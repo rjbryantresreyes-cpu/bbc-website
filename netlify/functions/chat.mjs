@@ -26,7 +26,41 @@ const PERSONAS = {
   Sean:  "Sean — AI."
 };
 
-function systemPrompt(agents, task) {
+// What each dashboard page is about — gives the brain instant context so it answers tight + fast.
+const PAGE_HINTS = {
+  "Home": "the dashboard home / business-at-a-glance: workflow readiness, this week, websites count, needs-attention, clients, team & devices.",
+  "Websites": "the BBC websites hub: balaynibruno.co pages, page map, website to-do, analytics + Google reviews, website workflows.",
+  "Workflows": "BBC's recurring workflows/processes by area, each with owner + % readiness + the recommended next artifact to ship.",
+  "Social": "the social media calendar + posting rhythm: graphics/reels per date, what to post next, trending ideas, per-platform analytics.",
+  "News": "trending research / deep-search topics relevant to BBC and small-business owners.",
+  "Reminders": "reminders grouped: due today, this week, content to post, website to-do, recurring daily, important dates, cross-AI.",
+  "Folders": "the BBC Google Drive browser: client folders, content folders, where files live.",
+  "Team & Devices": "BBC team members + their devices, who's online, what they're working on.",
+  "Clients": "BBC's client list (each with website/social/reminders/tasks) and each client's own command center.",
+  "CRM": "the CRM/leads pipeline (NocoDB): contacts, lead status New→Emailed→Replied→Interested→Booked, follow-ups.",
+  "Inbox": "the email inbox: incoming replies, matched to CRM contacts, email compose + templates.",
+  "More": "the secondary nav: clients, AI family, team, systems."
+};
+
+function scopeBlock(scope) {
+  if (!scope || !scope.mode) return "";
+  if (scope.mode === "page") {
+    const page = scope.page || "this";
+    const hint = PAGE_HINTS[page] || ("the " + page + " page of the dashboard.");
+    return [
+      "",
+      "SCOPE — you are the page assistant for the **" + page + "** page. " + page + " is " + hint,
+      "Everything RJ asks here — questions, what-to-do-next, commands, workflows — is about THIS page only. Answer in that frame.",
+      "Be fast and tight: 1-4 sentences or a short list. Don't explain the whole dashboard or other pages unless he asks. If something he wants needs a different page or a tool you don't have yet (like live Drive lookup, Wave 2), say so in one line."
+    ].join("\n");
+  }
+  return [
+    "",
+    "SCOPE — this is the whole-dashboard chat (the full BBC system). RJ may ask about anything across BBC: clients, websites, social, workflows, strategy. Use the task details below to focus."
+  ].join("\n");
+}
+
+function systemPrompt(agents, task, scope) {
   const picked = (agents && agents.length ? agents : ["Cuh"]);
   const lead = picked[0];
   const lines = picked.map(a => "- " + (PERSONAS[a] || (a + " — a BBC AI."))).join("\n");
@@ -46,6 +80,7 @@ function systemPrompt(agents, task) {
     "",
     "You are currently speaking as: " + picked.join(" + ") + " (lead voice: " + lead + ").",
     lines,
+    scopeBlock(scope),
     "",
     "What you can do right now (Wave 1): answer questions, think through BBC work, draft and plan, route what RJ wants into clear next steps.",
     "What is coming next (Wave 2, not yet live): looking things up directly in the BBC Google Drive (which folder a thing is in, opening folders) and pushing commands to the main system. If RJ asks you to find a specific file/folder or run a command, say plainly that Drive lookup is the next wave and isn't wired yet, then give your best guess from what you know.",
@@ -68,17 +103,20 @@ export default async (req) => {
   let body;
   try { body = await req.json(); } catch { return json({ error: "bad json" }, 400); }
 
+  const scope = body.scope || null;
   const history = Array.isArray(body.messages) ? body.messages.slice(-12) : [];
   const messages = [
-    { role: "system", content: systemPrompt(body.agents, body.task) },
+    { role: "system", content: systemPrompt(body.agents, body.task, scope) },
     ...history.map(m => ({ role: m.role === "assistant" ? "assistant" : "user", content: String(m.content || "").slice(0, 6000) }))
   ];
+  // page-scoped chat = short + fast; dashboard chat = room to think
+  const maxTokens = (scope && scope.mode === "page") ? 500 : 900;
 
   try {
     const r = await fetch(GROQ_URL, {
       method: "POST",
       headers: { "Authorization": "Bearer " + key, "content-type": "application/json" },
-      body: JSON.stringify({ model: MODEL, messages, temperature: 0.6, max_tokens: 900 })
+      body: JSON.stringify({ model: MODEL, messages, temperature: 0.5, max_tokens: maxTokens })
     });
     const data = await r.json();
     if (!r.ok) {

@@ -107,6 +107,23 @@
   .fab{position:fixed;right:16px;bottom:calc(var(--navh) + 16px + env(safe-area-inset-bottom));z-index:35;background:linear-gradient(135deg,var(--gold),var(--goldB));color:#0A1422;border:none;border-radius:999px;padding:13px 18px;font-family:var(--ui);font-weight:700;font-size:14px;display:flex;align-items:center;gap:8px;box-shadow:0 8px 26px rgba(0,0,0,0.4);cursor:pointer;transition:transform .1s;}
   .fab .i{font-size:16px;line-height:1;}
   .fab:active{transform:scale(0.95);}
+  /* compact page-scoped Cuh assistant (the floating mini chatbot) */
+  .cuhmini{position:fixed;right:16px;bottom:calc(var(--navh) + 16px + env(safe-area-inset-bottom));z-index:40;width:370px;max-width:calc(100vw - 24px);height:min(72vh,580px);background:var(--bg2);border:1px solid var(--line);border-radius:18px;box-shadow:0 18px 50px rgba(0,0,0,0.55);display:none;flex-direction:column;overflow:hidden;}
+  .cuhmini.open{display:flex;}
+  .cm-head{display:flex;align-items:center;gap:9px;padding:12px 14px;background:linear-gradient(135deg,rgba(212,175,55,0.16),rgba(212,175,55,0.05));border-bottom:1px solid var(--line);}
+  .cm-dot{width:9px;height:9px;border-radius:999px;background:var(--gold);box-shadow:0 0 0 3px rgba(212,175,55,0.18);flex:none;}
+  .cm-ttl{font-family:var(--display);font-weight:700;color:var(--ink);font-size:15px;line-height:1.1;flex:1;}
+  .cm-scope{font-family:var(--mono);font-size:9.5px;color:var(--gold2);text-transform:uppercase;letter-spacing:.06em;display:block;margin-top:2px;}
+  .cm-x{background:none;border:none;color:var(--muted);font-size:20px;cursor:pointer;line-height:1;padding:2px 4px;}
+  .cm-x:hover{color:var(--ink);}
+  .cm-thread{flex:1;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:9px;}
+  .cm-empty{color:var(--muted);font-size:12.5px;line-height:1.5;text-align:center;margin:auto;padding:0 10px;}
+  .cm-input{display:flex;gap:8px;padding:10px;border-top:1px solid var(--line);background:var(--bg2);}
+  .cm-input textarea{flex:1;background:var(--card,#0e1726);border:1px solid var(--line);border-radius:12px;color:var(--ink);font-family:var(--ui);font-size:13.5px;padding:9px 11px;resize:none;max-height:96px;}
+  .cm-send{background:linear-gradient(135deg,var(--gold),var(--goldB));color:#0A1422;border:none;border-radius:12px;font-family:var(--ui);font-weight:700;font-size:13px;padding:0 15px;cursor:pointer;}
+  .cm-send:active{transform:scale(0.96);}
+  .cm-expand{display:block;width:100%;text-align:center;font-family:var(--mono);font-size:10px;color:var(--muted);background:none;border:none;border-top:1px solid var(--line);padding:7px;cursor:pointer;}
+  .cm-expand:hover{color:var(--gold2);}
 
   /* CALENDAR */
   .cal-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:0 -16px;padding:0 16px 8px;}
@@ -469,6 +486,7 @@
   body:not(.authed) #app,
   body:not(.authed) #nav,
   body:not(.authed) .fab,
+  body:not(.authed) .cuhmini,
   body:not(.authed) #chatscreen{display:none!important;}
   body.authed #auth-gate{display:none;}
   #auth-gate{position:fixed;inset:0;z-index:2000;display:flex;align-items:center;justify-content:center;
@@ -566,7 +584,22 @@
   </div>
 </div>
 
-<button class="fab" id="cuhFab" onclick="openChat(curView)" aria-label="Chat with Cuh"><span class="i">💬</span>Cuh</button>
+<button class="fab" id="cuhFab" onclick="openMini(curView)" aria-label="Ask Cuh about this page"><span class="i">💬</span>Cuh</button>
+
+<!-- COMPACT PAGE-SCOPED CUH ASSISTANT -->
+<div class="cuhmini" id="cuhMini">
+  <div class="cm-head">
+    <span class="cm-dot"></span>
+    <div class="cm-ttl">Cuh<span class="cm-scope" id="cm-scope">This page</span></div>
+    <button class="cm-x" onclick="closeMini()" aria-label="Close">&times;</button>
+  </div>
+  <div class="cm-thread" id="cm-thread"></div>
+  <div class="cm-input">
+    <textarea id="cm-msg" rows="1" placeholder="Ask Cuh about this page..."></textarea>
+    <button class="cm-send" onclick="miniSend()">Send</button>
+  </div>
+  <button class="cm-expand" onclick="miniToFull()">Open full chat (save as task) ↗</button>
+</div>
 
 <nav class="nav" id="nav">
   <button data-v="home" class="active"><span class="i">🏠</span>Home</button>
@@ -2707,9 +2740,9 @@
     const pending=D.content.days.filter(x=>!x.posted).length;
     return `<div class="chat-box" onclick="openChat('home')" style="cursor:pointer">
         <h3>Chat with Cuh</h3>
-        <p>Your all-around AI. Tap to open full-screen chat, pick your agent(s), and save it as a task.</p>
+        <p>Your all-around AI for the whole dashboard. Tap to open full-screen chat, pick your agent(s), and save it as a task.</p>
         <div class="chat-in"><input placeholder="Ask Cuh anything..." readonly style="cursor:pointer"><button>Open chat</button></div>
-        <div class="soon-note">FULL-SCREEN CHAT READY · LIVE REPLIES WHEN THE API KEY IS WIRED</div>
+        <div class="soon-note">LIVE · WHOLE-DASHBOARD CHAT · THE 💬 BUTTON ON ANY PAGE = THAT PAGE ONLY</div>
       </div>
       ${(()=>{
         const gaps=80-ship;
@@ -3535,7 +3568,7 @@
     const history=csThread.filter(m=>m.r==='u'||m.r==='a').map(m=>({role:m.r==='u'?'user':'assistant',content:m.t}));
     const task={title:document.getElementById('cs-title').value,desc:document.getElementById('cs-desc').value,gprompt:document.getElementById('cs-gprompt').value,cat:document.getElementById('cs-cat').value,project:document.getElementById('cs-project').value,client:document.getElementById('cs-client').value};
     try{
-      const res=await fetch('/.netlify/functions/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({messages:history,agents:[...csAgents],task})});
+      const res=await fetch('/.netlify/functions/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({messages:history,agents:[...csAgents],task,scope:{mode:'dashboard'}})});
       const d=await res.json();
       csThread.pop(); // remove the "thinking" notice
       csThread.push({r:'a',t:d.reply||d.error||'(no reply)'});
@@ -3545,6 +3578,46 @@
     }
     csBusy=false; renderThread();
   };
+
+  /* ===== Compact page-scoped Cuh assistant ===== */
+  let miniThread=[]; let miniBusy=false; let miniView='home';
+  function miniLabel(v){ return (CHAT_CTX[v]||CHAT_CTX.home).label; }
+  function renderMini(){
+    const el=document.getElementById('cm-thread');
+    if(!miniThread.length){ el.innerHTML=`<div class="cm-empty">Ask me anything about the <b>${esc(miniLabel(miniView))}</b> page — questions, what to do next, or a command. I'll keep it scoped here.</div>`; return; }
+    el.innerHTML=miniThread.map(m=>`<div class="msg ${m.r}">${esc(m.t)}</div>`).join('');
+    el.scrollTop=el.scrollHeight;
+  }
+  window.openMini=(viewKey)=>{
+    const v=viewKey||window.curView||'home';
+    if(miniView!==v){ miniView=v; miniThread=[]; } // new page => fresh scoped thread
+    document.getElementById('cm-scope').textContent='This page · '+miniLabel(v);
+    document.getElementById('cuhMini').classList.add('open');
+    document.getElementById('cuhFab').style.display='none';
+    renderMini(); setTimeout(()=>document.getElementById('cm-msg').focus(),120);
+  };
+  window.closeMini=()=>{ document.getElementById('cuhMini').classList.remove('open'); document.getElementById('cuhFab').style.display=''; };
+  window.miniToFull=()=>{ closeMini(); openChat(miniView); };
+  window.miniSend=async()=>{
+    if(miniBusy) return;
+    const ta=document.getElementById('cm-msg'); const v=ta.value.trim(); if(!v) return;
+    miniThread.push({r:'u',t:v}); ta.value=''; ta.style.height='auto';
+    miniThread.push({r:'sys',t:'Cuh is thinking…'}); renderMini();
+    miniBusy=true;
+    const history=miniThread.filter(m=>m.r==='u'||m.r==='a').map(m=>({role:m.r==='u'?'user':'assistant',content:m.t}));
+    try{
+      const res=await fetch('/.netlify/functions/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({messages:history,agents:['Cuh'],scope:{mode:'page',page:miniLabel(miniView)}})});
+      const d=await res.json();
+      miniThread.pop();
+      miniThread.push({r:'a',t:d.reply||d.error||'(no reply)'});
+    }catch(e){
+      miniThread.pop();
+      miniThread.push({r:'a',t:"Couldn't reach the brain. Try again in a sec."});
+    }
+    miniBusy=false; renderMini();
+  };
+  document.getElementById('cm-msg').addEventListener('keydown',e=>{ if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();window.miniSend();} });
+  document.getElementById('cm-msg').addEventListener('input',e=>{ e.target.style.height='auto'; e.target.style.height=Math.min(e.target.scrollHeight,96)+'px'; });
   window.saveTask=()=>{
     const t=document.getElementById('cs-title').value.trim()||'Untitled task';
     const task={id:csEditingId||('t'+Date.now()),title:t,desc:document.getElementById('cs-desc').value,gprompt:document.getElementById('cs-gprompt').value,cat:document.getElementById('cs-cat').value,project:document.getElementById('cs-project').value,client:document.getElementById('cs-client').value,tags:document.getElementById('cs-tags').value,agents:[...csAgents],thread:csThread};
