@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cavalry Command Center</title>
+<style>
+  :root{
+    --navy:#0B1B33; --navy2:#0F2444; --black:#0A0F1A; --panel:#11203a;
+    --line:#1e3354; --gold:#C9A247; --gold-soft:rgba(201,162,71,.13);
+    --white:#F4F6FA; --muted:#8ea3c4; --muted2:#67809f;
+    --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    --green:#3fb27f; --blue:#4f86d6; --amber:#d99a2b; --purple:#9b7bd4;
+    --red:#d8604f; --teal:#3fb5b2; --gray:#5f7characteristics;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--black);color:var(--white);font-family:var(--sans);font-size:15px;line-height:1.5;-webkit-font-smoothing:antialiased}
+  a{color:var(--gold);text-decoration:none}
+
+  /* layout */
+  .wrap{display:flex;min-height:100vh}
+  .side{width:230px;flex-shrink:0;background:var(--navy);border-right:1px solid var(--line);position:sticky;top:0;height:100dvh;overflow-y:auto;padding:18px 0}
+  .side .brand{padding:0 18px 16px;border-bottom:1px solid var(--line);margin-bottom:10px}
+  .side .badge{width:38px;height:38px;border-radius:9px;background:var(--gold);color:var(--black);font-weight:800;font-size:20px;display:flex;align-items:center;justify-content:center;font-family:var(--mono);margin-bottom:9px}
+  .side .bt{font-weight:700;font-size:14px;letter-spacing:.3px}
+  .side .bs{font-size:11px;color:var(--muted);margin-top:2px}
+  .navlink{display:flex;gap:9px;align-items:center;padding:8px 18px;font-size:13px;color:var(--muted);cursor:pointer;border-left:2px solid transparent}
+  .navlink:hover{color:var(--white);background:rgba(255,255,255,.03)}
+  .navlink.on{color:var(--gold);border-left-color:var(--gold);background:var(--gold-soft)}
+  .navlink .num{font-family:var(--mono);font-size:10px;color:var(--muted2);width:18px}
+
+  .main{flex:1;min-width:0;padding:26px 30px 80px}
+  .topbar{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:12px;margin-bottom:22px}
+  .h1{font-size:24px;font-weight:800;letter-spacing:.2px}
+  .sub{color:var(--muted);font-size:13px;margin-top:3px}
+  .offline-tag{background:rgba(217,154,43,.15);color:var(--amber);border:1px solid rgba(217,154,43,.4);font-size:11px;font-family:var(--mono);padding:5px 10px;border-radius:20px;white-space:nowrap}
+
+  /* hero */
+  .hero{background:linear-gradient(135deg,var(--navy2),var(--navy));border:1px solid var(--line);border-radius:16px;padding:22px;margin-bottom:18px}
+  .hero-top{display:flex;align-items:center;gap:14px;margin-bottom:18px}
+  .hero-av{width:52px;height:52px;border-radius:12px;background:var(--gold);color:var(--black);font-weight:800;font-size:26px;display:flex;align-items:center;justify-content:center;font-family:var(--mono)}
+  .hero-nm{font-size:20px;font-weight:800}
+  .hero-sb{font-size:13px;color:var(--muted);margin-top:2px}
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+  .stat{background:rgba(0,0,0,.25);border:1px solid var(--line);border-radius:11px;padding:13px;text-align:center}
+  .stat .n{font-size:22px;font-weight:800;color:var(--gold);font-family:var(--mono)}
+  .stat .l{font-size:11px;color:var(--muted);margin-top:3px}
+
+  /* sections */
+  .section{margin-top:30px;scroll-margin-top:18px}
+  .sec-hd{display:flex;align-items:center;gap:11px;margin-bottom:6px}
+  .sec-no{font-family:var(--mono);font-size:12px;color:var(--black);background:var(--gold);border-radius:6px;padding:3px 8px;font-weight:700}
+  .sec-ti{font-size:18px;font-weight:800}
+  .sec-note{color:var(--muted);font-size:13px;margin-bottom:14px;max-width:760px}
+  .sec-note.rule{background:rgba(216,96,79,.1);border:1px solid rgba(216,96,79,.35);border-left:3px solid var(--red);border-radius:8px;padding:10px 13px;color:#f0b7ae}
+  .sec-note.rule b{color:#ffd9d2}
+
+  /* tables */
+  .tbl-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:12px;background:var(--panel)}
+  table{border-collapse:collapse;width:100%;min-width:680px;font-size:13px}
+  th{background:var(--navy2);color:var(--muted);text-align:left;padding:10px 12px;font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:.5px;white-space:nowrap;border-bottom:1px solid var(--line)}
+  td{padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+  tr:last-child td{border-bottom:none}
+  tbody tr:hover{background:rgba(255,255,255,.02)}
+  .ph{color:var(--muted2);font-style:italic}
+
+  /* badges */
+  .bdg{display:inline-block;padding:3px 9px;border-radius:20px;font-size:11px;font-weight:600;white-space:nowrap;font-family:var(--mono)}
+
+  /* workflow steps */
+  .wf{display:grid;grid-template-columns:1fr 1fr;gap:18px;align-items:start}
+  .wf>*{min-width:0}
+  @media(max-width:900px){.wf{grid-template-columns:1fr}}
+  .steps{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+  .steps .st-hd{font-size:11px;text-transform:uppercase;letter-spacing:.6px;color:var(--gold);font-weight:700;margin-bottom:10px}
+  .step{display:flex;gap:11px;padding:5px 0;font-size:13px;border-bottom:1px dashed rgba(255,255,255,.05)}
+  .step:last-child{border-bottom:none}
+  .step .si{font-family:var(--mono);font-size:11px;color:var(--gold);background:var(--gold-soft);width:22px;height:22px;border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-weight:700}
+
+  /* chips */
+  .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}
+  .chip{background:var(--gold-soft);color:var(--gold);border:1px solid rgba(201,162,71,.3);border-radius:20px;padding:5px 12px;font-size:12px;font-weight:600}
+
+  /* checklist */
+  .cktitle{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:13px 14px;margin-bottom:12px}
+  .cktitle label{display:block;font-size:11px;text-transform:uppercase;letter-spacing:.6px;color:var(--gold);font-weight:700;margin-bottom:8px}
+  .cktitle-row{display:flex;gap:9px}
+  .cktitle input{flex:1;background:var(--navy);color:var(--white);border:1px solid var(--line);border-radius:8px;padding:10px 12px;font-size:15px;font-family:var(--sans)}
+  .cktitle input:focus{outline:none;border-color:var(--gold)}
+  .cktitle input::placeholder{color:var(--muted2)}
+  .ckclear{background:transparent;color:var(--muted);border:1px solid var(--line);border-radius:8px;padding:0 14px;font-size:12px;font-weight:600;cursor:pointer;white-space:nowrap}
+  .ckclear:hover{color:var(--white);border-color:var(--gold)}
+  .checklist{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:8px 6px}
+  .chk{display:flex;gap:11px;align-items:center;padding:10px 12px;border-bottom:1px solid var(--line);cursor:pointer;font-size:14px}
+  .chk:last-child{border-bottom:none}
+  .chk .box{width:20px;height:20px;border-radius:6px;border:2px solid var(--muted2);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:13px;color:var(--black);transition:.15s}
+  .chk.done .box{background:var(--green);border-color:var(--green)}
+  .chk.done .box:after{content:"\2713";font-weight:800}
+  .chk.done .lbl{color:var(--muted);text-decoration:line-through}
+
+  /* legend grid */
+  .legend{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+  @media(max-width:760px){.legend{grid-template-columns:1fr}}
+  .leg{display:flex;gap:12px;align-items:flex-start;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:11px 13px}
+  .leg .meaning{font-size:12px;color:var(--muted)}
+
+  /* generic panels */
+  .pgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+  @media(max-width:900px){.pgrid{grid-template-columns:1fr}}
+  .pnl{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+  .pnl .ph2{font-size:11px;text-transform:uppercase;letter-spacing:.6px;color:var(--gold);font-weight:700;margin-bottom:10px}
+  .row{display:flex;gap:9px;padding:5px 0;font-size:13px;border-bottom:1px dashed rgba(255,255,255,.05)}
+  .row:last-child{border-bottom:none}
+  .row .dot{width:7px;height:7px;border-radius:50%;background:var(--gold);margin-top:7px;flex-shrink:0}
+  .row b{font-weight:700}
+
+  .foot{margin-top:50px;padding-top:18px;border-top:1px solid var(--line);color:var(--muted2);font-size:12px;text-align:center}
+
+  /* mobile nav */
+  .mobnav{display:none}
+  @media(max-width:820px){
+    .side{display:none}
+    .main{padding:18px 16px 70px}
+    .stats{grid-template-columns:repeat(2,1fr)}
+    .mobnav{display:block;position:sticky;top:0;z-index:20;background:var(--navy);border:1px solid var(--line);border-radius:10px;padding:10px;margin-bottom:16px}
+    .mobnav select{width:100%;background:var(--navy2);color:var(--white);border:1px solid var(--line);border-radius:8px;padding:9px;font-size:14px}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <!-- SIDEBAR -->
+  <nav class="side">
+    <div class="brand">
+      <div class="badge">C</div>
+      <div class="bt">CAVALRY</div>
+      <div class="bs">Command Center</div>
+    </div>
+    <div id="nav"></div>
+  </nav>
+
+  <!-- MAIN -->
+  <main class="main">
+    <div class="topbar">
+      <div>
+        <div class="h1">Cavalry Command Center</div>
+        <div class="sub">Tre Serrano &middot; Cavalry Realty Group, brokered by Real &middot; content + ops dashboard</div>
+      </div>
+      <div class="offline-tag">OFFLINE BUILD &middot; not yet connected to BBC OS</div>
+    </div>
+
+    <div class="mobnav">
+      <select id="mobsel" onchange="location.hash=this.value"></select>
+    </div>
+
+    <!-- HERO -->
+    <div class="hero">
+      <div class="hero-top">
+        <div class="hero-av">C</div>
+        <div>
+          <div class="hero-nm">Cavalry Realty Group</div>
+          <div class="hero-sb">Tre Serrano &middot; brokered by Real &middot; AI: Ester</div>
+        </div>
+      </div>
+      <div class="stats" id="stats"></div>
+    </div>
+
+    <!-- REFERENCE: engines + team -->
+    <div class="pgrid" style="margin-top:18px">
+      <div class="pnl">
+        <div class="ph2">Content Engines</div>
+        <div id="engines"></div>
+      </div>
+      <div class="pnl" style="grid-column:span 2">
+        <div class="ph2">Team</div>
+        <div id="team" style="display:grid;grid-template-columns:1fr 1fr;gap:0 18px"></div>
+      </div>
+    </div>
+
+    <div id="sections"></div>
+
+    <div class="foot">
+      Cavalry Command Center &middot; offline HTML build by Balay ni Bruno &amp; Co. &middot; sections 1&ndash;8, 11, 13&ndash;15<br>
+      Once approved, this connects into balaynibruno.co/os under Cavalry Realty Group.
+    </div>
+  </main>
+</div>
+
+<script>
+/* ---------------- DATA ---------------- */
+const STATS=[
+  {n:'511',l:'Career closings'},{n:'$171M',l:'Career volume'},
+  {n:'16K',l:'YouTube subs'},{n:'111',l:'5-star reviews'}
+];
+const ENGINES=[
+  ['Yo San Antonio','Local-news lead magnet. AI videos + carousels + Thursday newsletter. Feeds emails into the funnel.'],
+  ['Weekly Live','Thursday YouTube live, then edited video + shorts + blog post.'],
+  ['Listing Content','Vertical + horizontal reel per house (Zillow + social), full tours feed the luxury channel, AI home tours.']
+];
+const TEAM=[
+  ['Tre Serrano','Principal, content face'],['Stephen','Video lead (A-roll, shorts, long-form)'],
+  ['Hannah','Transaction coordinator, Trello, scheduling'],['Amber','Buyer’s agent, blog + content approver'],
+  ['Stacey','Tre’s wife, buyer-facing'],['Brianna','Agent'],
+  ['Ayoub','Live thumbnails (Upwork)'],['Thi Be Nong','Video editing (Upwork)'],
+  ['Fatima','YouTube thumbnails (Upwork)']
+];
+
+/* status -> color */
+function stColor(s){
+  const t=(s||'').toLowerCase().trim();
+  if(t==='approved'||t==='completed'||t==='done'||t==='revised and sent back') return 'green';
+  if(t==='ready to post') return 'green';
+  if(t==='in progress') return 'blue';
+  if(t==='waiting on someone'||t.startsWith('waiting')||t==='pending') return 'amber';
+  if(t==='needs tre review'||t==='needs review'||t==='thumbnail needed'||t==='draft needed') return 'purple';
+  if(t==='revision needed'||t==='not sent'||t==='high') return 'red';
+  if(t==='posted') return 'gold';
+  if(t==='not started'||t==='archived'||t==='no'||t==='maybe'||t==='medium') return 'gray';
+  return 'gray';
+}
+const COLORS={green:'#3fb27f',blue:'#4f86d6',amber:'#d99a2b',purple:'#9b7bd4',red:'#d8604f',teal:'#3fb5b2',gold:'#C9A247',gray:'#67809f'};
+function badge(s){ if(!s) return ''; const c=COLORS[stColor(s)]; return `<span class="bdg" style="color:${c};background:${c}1f;border:1px solid ${c}55">${esc(s)}</span>`; }
+function esc(x){return (x==null?'':String(x)).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+/* cells: wrap status-like values in badges, dim placeholders */
+const STWORDS=new Set(['not started','in progress','waiting on someone','needs tre review','needs review','revision needed','revised and sent back','approved','ready to post','posted','archived','completed','done','pending','thumbnail needed','draft needed','not sent']);
+const PHWORDS=new Set(['add link','add date','add notes','add email','add owner','add method','add names','add agent','add address','add person','add tool','add property','add source','add category','add playlist','add text','add topic']);
+function cell(v){
+  if(v==null||v==='') return '';
+  const t=v.toLowerCase().trim();
+  if(STWORDS.has(t)) return badge(v);
+  if(PHWORDS.has(t)) return `<span class="ph">${esc(v)}</span>`;
+  return esc(v);
+}
+
+/* SECTIONS (1-8, 11, 13-15) */
+const SECTIONS=[
+{no:1,id:'priority',title:'Today’s Priority Tasks',note:'Use this section every morning.',type:'table',
+ cols:['Task','Workflow','Assigned To','Due Date','Priority','Status','Waiting On','Notes','Final Action'],
+ rows:[
+  ['Follow up with Fatima for thumbnails','YouTube Thumbnails','RJ','Today','High','Waiting on Someone','Fatima','Ask if she already started creating new thumbnails','Update Tre'],
+  ['Send Worst New Build Neighborhoods for thumbnail','YouTube','RJ','Today','High','Not Started','RJ','Send topic and thumbnail direction to Fatima','Mark sent'],
+  ['San Antonio is Changing thumbnail update','YouTube','RJ','Today','Medium','Completed','None','Old thumbnail changed and new thumbnail uploaded','Confirm with Tre'],
+  ['Actual Cost of Living Short','Shorts','RJ','Today','High','Needs Tre Review','Tre','Edited with text bubble and ready for review','Post after approval'],
+  ['Military Moves Short','Shorts','RJ','Today','High','Needs Tre Review','Tre','Edited with text bubble and ready for review','Post after approval']
+ ]},
+{no:2,id:'approval',title:'Pending Approval From Tre',note:'Anything that cannot move forward until Tre reviews it.',type:'table',
+ cols:['Item','Content Type','Platform','Status','Sent To Tre Date','Tre Feedback','Revision Needed','Next Step'],
+ rows:[
+  ['Actual Cost of Living Short','Short Video','YouTube Shorts, IG, TikTok','Needs Tre Review','Add date','Pending','No','Wait for approval'],
+  ['Military Moves Short','Short Video','YouTube Shorts, IG, TikTok','Needs Tre Review','Add date','Pending','No','Wait for approval'],
+  ['Yo San Antonio carousel','Carousel','Instagram','Needs Tre Review','Add date','Pending','Maybe','Revise or post'],
+  ['Weekly live edited video','Long Form Video','YouTube','Needs Tre Review','Add date','Pending','Maybe','Send to Stephen if needed'],
+  ['Blog draft','Blog','Website','Needs Review','Add date','Pending','Maybe','Send to Amber after Tre approval']
+ ]},
+{no:3,id:'status',title:'Universal Status System',note:'Use these same statuses for every workflow.',type:'legend',
+ rows:[
+  ['Not Started','Task has been added but no work has started'],
+  ['In Progress','Someone is actively working on it'],
+  ['Waiting on Someone','Waiting on Fatima, Ayoub, Thi Be Nong, Amber, Stephen, Tre, or another person'],
+  ['Needs Tre Review','Ready for Tre to check'],
+  ['Revision Needed','Tre or another reviewer requested changes'],
+  ['Revised and Sent Back','Changes were made and sent back for approval'],
+  ['Approved','Tre approved it'],
+  ['Ready to Post','Everything is done and ready to publish'],
+  ['Posted','Content has been published'],
+  ['Archived','Task is completed and no longer active']
+ ]},
+{no:4,id:'ysa',title:'Yo San Antonio Article Workflow',type:'workflow',
+ steps:['Find article','Add article title to Trello','Save article link','Write caption','Create carousel or reel script','Create graphics','Add source line','Send to Tre for review','Revise if needed','Post','Save final post link'],
+ cols:['Article Title','Source','Link','Topic Category','Content Type','Caption Status','Graphic Status','Tre Approval','Posted Date','Final Link','Notes'],
+ rows:[
+  ['Ruby Sparkles Opens in Boerne','MySA','Add link','Local Business','Carousel','Done','Done','Approved','Add date','Add link','Source line needed'],
+  ['Add new article','Add source','Add link','Add category','Reel or Carousel','Not Started','Not Started','Not Sent','Add date','Add link','Add notes']
+ ]},
+{no:5,id:'youtube',title:'YouTube Main Channel Workflow',type:'workflow',
+ steps:['Tre gives topic','Research topic','Create outline or script if needed','Record video','Send recording to editor','Editor creates video','Tre and Stephen review','Send thumbnail request to Fatima','Tre reviews thumbnail','Upload to YouTube','Add title','Add description','Add tags','Add playlist','Add thumbnail','Publish or schedule','Create blog draft','Send blog to Amber','Publish blog','Repurpose into shorts'],
+ cols:['Video Title','Video Type','Recording Link','Editor','Thumbnail Person','Playlist','Status','Tre Review','Publish Date','Blog Needed','Final YouTube Link'],
+ rows:[
+  ['Worst New Build Neighborhoods','Long Form','Add link','Add editor','Fatima','San Antonio Relocation','Thumbnail Needed','Not Sent','Add date','Yes','Add link'],
+  ['San Antonio is Changing','Long Form','Add link','Add editor','Fatima','Market Updates','Posted','Approved','Add date','Yes','Add link'],
+  ['Actual Cost of Living','Short','Add link','RJ','None','Shorts','Needs Tre Review','Pending','Add date','No','Add link']
+ ],
+ chipsTitle:'YouTube Playlist Options',
+ chips:['San Antonio Relocation','San Antonio Cost of Living','Military PCS to San Antonio','VA Buyers','First Time Buyers','San Antonio Suburbs','Worst Areas to Buy','New Construction','Market Updates','Home Tours','San Antonio News','Living in San Antonio']},
+{no:6,id:'live',title:'Weekly Live Workflow',type:'workflow',
+ steps:['Add live topic','Send topic to Ayoub for live thumbnail','Tre reviews thumbnail','Live happens through StreamYard','Move card to post live queue','Send StreamYard ISO recordings to Thi Be Nong','Thi Be Nong edits the video','Tre and Stephen review','If approved, send to Fatima for final YouTube thumbnail','Tre reviews final thumbnail','Post on Tre’s main YouTube account','Create blog post draft','Send blog to Amber for review','Publish blog after approval'],
+ cols:['Live Topic','Date of Live','Thumbnail Status','Recording Status','Editor','Video Review','Blog Status','Final Status','Notes'],
+ rows:[
+  ['Add topic','Add date','Sent to Ayoub','Waiting for live','Thi Be Nong','Needs Tre Review','Not Started','In Progress','Add notes'],
+  ['Add topic','Add date','Approved','Sent to editor','Thi Be Nong','Waiting on Stephen','Draft Needed','In Progress','Add notes']
+ ]},
+{no:7,id:'transaction',title:'Transaction Media Workflow',note:'Use this for listing videos, home tours, property media, and listing graphics.',type:'workflow',
+ steps:['New property media request','Confirm property address','Confirm listing agent','Confirm what media is needed','Schedule photos or video','Collect footage or photos','Edit video','Add text bubbles','Add captions','Send to Tre for review','Make revisions','Final approval','Post or upload','Save final files'],
+ cols:['Property Address','Listing Agent','Media Type','Assigned To','Due Date','Folder Link','Caption Status','Text Bubble','Tre Approval','Final Link','Notes'],
+ rows:[
+  ['Add address','Add agent','Listing Video','Add person','Add date','Add link','Not Started','Add text','Not Sent','Add link','Add notes'],
+  ['Add address','Add agent','AI Home Tour','Add person','Add date','Add link','In Progress','Add text','Needs Review','Add link','Do not generate without approval']
+ ]},
+{no:8,id:'aitours',title:'AI Home Tours Workflow',type:'workflow',
+ rule:'<b>Important rule:</b> Do not generate in Heifield AI or any paid AI tool unless Tre confirms the task, property, and direction first. This avoids wasting credits.',
+ steps:['Confirm Tre wants AI home tour','Gather listing photos or property video','Confirm platform to use','Confirm script','Confirm visual style','Generate only after approval','Review output','Edit in CapCut if needed','Add text bubbles','Add captions','Send to Tre for final approval','Post or save'],
+ cols:['Property','AI Tool','Credit Risk','Approved By Tre','Script Ready','Photos Ready','Generated','Edited','Tre Review','Posted','Notes'],
+ rows:[
+  ['Add property','Heifield AI','High','No','No','No','No','No','Not Sent','No','Wait for approval'],
+  ['Add property','Add tool','Medium','Yes','Yes','Yes','Yes','In Progress','Needs Review','No','Add notes']
+ ]},
+{no:11,id:'logins',title:'Login and Account Tracker',type:'table',
+ noteRule:'<b>Do not save actual passwords inside the dashboard.</b> Save passwords inside a secure password manager. The dashboard should only show where the password is stored and who has access.',
+ cols:['Account Name','Website or App','Login Email','Password Location','Who Has Access','Two Factor Method','Renewal Date','Payment Owner','Notes'],
+ rows:[
+  ['YouTube Main','YouTube','Add email','Password Manager','Tre, Admin','Add method','Add date','Add owner','Do not publish without approval'],
+  ['Yo San Antonio Instagram','Instagram','Add email','Password Manager','Tre, Admin','Add method','Add date','Add owner','Source line required on news posts'],
+  ['CapCut','CapCut','Add email','Password Manager','Add names','Add method','Add date','Add owner','Use Montserrat ExtraBold'],
+  ['Canva','Canva','office@callthecavalry.com','Password Manager','Add names','Add method','Add date','Add owner','Store templates here'],
+  ['StreamYard','StreamYard','Add email','Password Manager','Add names','Add method','Add date','Add owner','Used for weekly lives'],
+  ['Heifield AI','Heifield AI','Add email','Password Manager','Add names','Add method','Add date','Add owner','Do not use credits without approval'],
+  ['ElevenLabs','ElevenLabs','realtortre@gmail.com','Password Manager','Add names','Add method','Add date','Add owner','Used for scripts and voiceovers'],
+  ['Trello','Trello','marketing@callthecavalrygroup.com','Password Manager','Add names','Add method','Add date','Add owner','Active workflow boards'],
+  ['Google Drive','Google Drive','Add email','Password Manager','Add names','Add method','Add date','Add owner','Store files and documents'],
+  ['Dropbox','Dropbox','marketing@callthecavalrygroup.com','Password Manager','Add names','Add method','Add date','Add owner','Store transaction files'],
+  ['Jointly','Jointly','Add email','Password Manager','Add names','Add method','Add date','Add owner','Forms and offers'],
+  ['SABOR MLS','MLS','Add email','Password Manager','Add names','Add method','Add date','Add owner','Listing entry'],
+  ['DocuSign','DocuSign','Add email','Password Manager','Add names','Add method','Add date','Add owner','Signatures'],
+  ['Follow Up Boss','CRM','transactions@callthecavalrygroup.com','Password Manager','Add names','Add method','Add date','Add owner','CRM'],
+  ['Lofty','CRM','transactions@callthecavalrygroup.com','Password Manager','Add names','Add method','Add date','Add owner','CRM or transaction tracking']
+ ]},
+{no:13,id:'questions',title:'Pending Questions for Tre',note:'Use this so you do not need to send Tre too many separate messages.',type:'table',
+ cols:['Question','Related Task','Urgency','Date Added','Tre’s Answer','Final Action'],
+ rows:[
+  ['Should I generate this AI home tour in Heifield AI?','AI Home Tour','High','Add date','Pending','Wait before using credits'],
+  ['Is this text bubble approved?','Short Video','Medium','Add date','Pending','Edit after answer'],
+  ['Which playlist should this YouTube video go under?','YouTube Upload','Medium','Add date','Pending','Add playlist before posting'],
+  ['Is this carousel ready to post?','Yo San Antonio','High','Add date','Pending','Post after approval']
+ ]},
+{no:14,id:'readypost',title:'Ready To Post Checklist',note:'Before posting anything, check this list.',type:'checklist',
+ titleField:'What are you posting?',
+ items:['Tre approved it','Caption is final','Thumbnail is final','Correct account selected','Correct platform selected','Source credited if news content','Hashtags added','Link added if needed','Playlist selected if YouTube','Final post link saved in dashboard']},
+{no:15,id:'cleanup',title:'Weekly Cleanup Routine',note:'Do this every Friday.',type:'checklist',
+ items:['Review all tasks marked Waiting on Someone','Follow up with Fatima on thumbnails','Follow up with editors on videos','Check all Needs Tre Review items','Move posted content to archive','Save all final links','Check blog drafts waiting on Amber','Check Yo San Antonio article queue','Check upcoming weekly live topic','Check account or login issues']}
+];
+
+/* ---------------- RENDER ---------------- */
+function tableHTML(cols,rows){
+  const th=cols.map(c=>`<th>${esc(c)}</th>`).join('');
+  const tr=rows.map(r=>`<tr>${r.map(c=>`<td>${cell(c)}</td>`).join('')}</tr>`).join('');
+  return `<div class="tbl-wrap"><table><thead><tr>${th}</tr></thead><tbody>${tr}</tbody></table></div>`;
+}
+function stepsHTML(steps){
+  const s=steps.map((x,i)=>`<div class="step"><span class="si">${i+1}</span><span>${esc(x)}</span></div>`).join('');
+  return `<div class="steps"><div class="st-hd">Workflow Steps</div>${s}</div>`;
+}
+function renderSection(s){
+  let body='';
+  if(s.type==='table'){
+    if(s.noteRule) body+=`<div class="sec-note rule">${s.noteRule}</div>`;
+    body+=tableHTML(s.cols,s.rows);
+  }
+  else if(s.type==='legend'){
+    body+=`<div class="legend">`+s.rows.map(([st,m])=>`<div class="leg"><div>${badge(st)}</div><div class="meaning">${esc(m)}</div></div>`).join('')+`</div>`;
+  }
+  else if(s.type==='workflow'){
+    if(s.rule) body+=`<div class="sec-note rule">${s.rule}</div>`;
+    body+=`<div class="wf">${stepsHTML(s.steps)}<div><div class="steps" style="padding:0;border:none;background:none"><div class="st-hd">Dashboard Table</div></div>${tableHTML(s.cols,s.rows)}</div></div>`;
+    if(s.chips){
+      body+=`<div class="pnl" style="margin-top:16px"><div class="ph2">${esc(s.chipsTitle)}</div><div class="chips">`+s.chips.map(c=>`<span class="chip">${esc(c)}</span>`).join('')+`</div></div>`;
+    }
+  }
+  else if(s.type==='checklist'){
+    if(s.titleField){
+      body+=`<div class="cktitle"><label for="ckt-${s.id}">${esc(s.titleField)}</label><div class="cktitle-row"><input type="text" id="ckt-${s.id}" placeholder="Type the post or video title…" oninput="saveTitle('${s.id}',this.value)"><button class="ckclear" onclick="resetChecklist('${s.id}',${s.items.length})">Reset</button></div></div>`;
+    }
+    body+=`<div class="checklist">`+s.items.map((it,i)=>`<div class="chk" data-k="${s.id}-${i}" onclick="toggleChk(this)"><span class="box"></span><span class="lbl">${esc(it)}</span></div>`).join('')+`</div>`;
+  }
+  const note=s.note?`<div class="sec-note">${esc(s.note)}</div>`:(s.type==='table'&&!s.noteRule?'':'');
+  return `<div class="section" id="${s.id}">
+    <div class="sec-hd"><span class="sec-no">${s.no}</span><span class="sec-ti">${esc(s.title)}</span></div>
+    ${note}${body}</div>`;
+}
+
+/* mount */
+document.getElementById('stats').innerHTML=STATS.map(s=>`<div class="stat"><div class="n">${esc(s.n)}</div><div class="l">${esc(s.l)}</div></div>`).join('');
+document.getElementById('engines').innerHTML=ENGINES.map(([n,d])=>`<div class="row"><span class="dot"></span><span><b>${esc(n)}</b> &mdash; ${esc(d)}</span></div>`).join('');
+document.getElementById('team').innerHTML=TEAM.map(([n,r])=>`<div class="row"><span class="dot"></span><span><b>${esc(n)}</b> &mdash; ${esc(r)}</span></div>`).join('');
+document.getElementById('sections').innerHTML=SECTIONS.map(renderSection).join('');
+
+/* nav */
+document.getElementById('nav').innerHTML=SECTIONS.map(s=>`<div class="navlink" data-id="${s.id}" onclick="location.hash='${s.id}'"><span class="num">${s.no}</span><span>${esc(s.title)}</span></div>`).join('');
+document.getElementById('mobsel').innerHTML='<option value="">Jump to section…</option>'+SECTIONS.map(s=>`<option value="${s.id}">${s.no}. ${esc(s.title)}</option>`).join('');
+
+/* checklist persistence */
+function toggleChk(el){el.classList.toggle('done');try{localStorage.setItem('cav_'+el.dataset.k,el.classList.contains('done')?'1':'0')}catch(e){}}
+document.querySelectorAll('.chk').forEach(el=>{try{if(localStorage.getItem('cav_'+el.dataset.k)==='1')el.classList.add('done')}catch(e){}});
+function saveTitle(id,v){try{localStorage.setItem('cav_title_'+id,v)}catch(e){}}
+document.querySelectorAll('[id^="ckt-"]').forEach(inp=>{const id=inp.id.slice(4);try{const v=localStorage.getItem('cav_title_'+id);if(v)inp.value=v}catch(e){}});
+function resetChecklist(id,n){const inp=document.getElementById('ckt-'+id);if(inp){inp.value='';saveTitle(id,'');}for(let i=0;i<n;i++){const el=document.querySelector('.chk[data-k="'+id+'-'+i+'"]');if(el){el.classList.remove('done');try{localStorage.setItem('cav_'+id+'-'+i,'0')}catch(e){}}}}
+
+/* scrollspy */
+const links=[...document.querySelectorAll('.navlink')];
+const map={};links.forEach(l=>map[l.dataset.id]=l);
+const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){links.forEach(l=>l.classList.remove('on'));map[e.target.id]&&map[e.target.id].classList.add('on');}})},{rootMargin:'-10% 0px -80% 0px'});
+SECTIONS.forEach(s=>{const el=document.getElementById(s.id);el&&io.observe(el);});
+</script>
+</body>
+</html>
