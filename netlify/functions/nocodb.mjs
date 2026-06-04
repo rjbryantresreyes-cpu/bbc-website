@@ -1,6 +1,7 @@
 // Secure NocoDB proxy for the BBC Command Center (/os).
 // The API token lives ONLY in the Netlify env var NOCODB_TOKEN (never in the browser/repo).
-// Endpoint: /.netlify/functions/nocodb?table=contacts&limit=200
+// GET  /.netlify/functions/nocodb?table=contacts&limit=200   -> read records
+// POST /.netlify/functions/nocodb?table=contacts  body {id, Status}  -> update ONE field (whitelisted)
 //
 // Base: BBC CRM (p0zn4yka8zr49iu) on app.nocodb.com (NocoDB Cloud, API v2).
 
@@ -11,11 +12,14 @@ const TABLES = {
   contacts: "mjjs3wgl3705s9v", // Contacts table (Pipeline view: vw7khib7cust09ee)
 };
 
+// Fields the browser is allowed to write (everything else is rejected — safety).
+const WRITABLE = new Set(["Status"]);
+
 export default async (req) => {
   const json = (obj, status = 200) =>
     new Response(JSON.stringify(obj), {
       status,
-      headers: { "content-type": "application/json", "cache-control": "public, max-age=60" },
+      headers: { "content-type": "application/json", "cache-control": "no-store" },
     });
 
   const token = process.env.NOCODB_TOKEN;
@@ -26,13 +30,42 @@ export default async (req) => {
   const tableId = TABLES[tkey];
   if (!tableId) return json({ error: `Unknown table '${tkey}'. Allowed: ${Object.keys(TABLES).join(", ")}` }, 400);
 
-  const limit = Math.min(parseInt(url.searchParams.get("limit") || "200", 10) || 200, 1000);
-  const api = `${NOCODB_HOST}/api/v2/tables/${tableId}/records?limit=${limit}`;
+  const recordsApi = `${NOCODB_HOST}/api/v2/tables/${tableId}/records`;
 
+  /* ---- WRITE: update one whitelisted field on one record ---- */
+  if (req.method === "POST" || req.method === "PATCH") {
+    let body;
+    try { body = await req.json(); } catch { return json({ error: "Bad JSON body" }, 400); }
+    const id = body && (body.id ?? body.Id);
+    if (id === undefined || id === null || id === "") return json({ error: "Missing record id" }, 400);
+
+    // build a clean patch from whitelisted keys only
+    const patch = { Id: id };
+    let touched = 0;
+    for (const k of Object.keys(body)) {
+      if (WRITABLE.has(k)) { patch[k] = body[k]; touched++; }
+    }
+    if (!touched) return json({ error: `No writable field. Allowed: ${[...WRITABLE].join(", ")}` }, 400);
+
+    try {
+      const r = await fetch(recordsApi, {
+        method: "PATCH",
+        headers: { "xc-token": token, "content-type": "application/json", "accept": "application/json" },
+        body: JSON.stringify([patch]), // NocoDB v2 bulk-update expects an array
+      });
+      const text = await r.text();
+      return new Response(text, { status: r.status, headers: { "content-type": "application/json", "cache-control": "no-store" } });
+    } catch (e) {
+      return json({ error: "NocoDB update failed", detail: String(e).slice(0, 200) }, 502);
+    }
+  }
+
+  /* ---- READ ---- */
+  const limit = Math.min(parseInt(url.searchParams.get("limit") || "200", 10) || 200, 1000);
+  const api = `${recordsApi}?limit=${limit}`;
   try {
     const r = await fetch(api, { headers: { "xc-token": token, "accept": "application/json" } });
     const text = await r.text();
-    // Pass NocoDB's response through (records + pageInfo), preserving status for debugging.
     return new Response(text, {
       status: r.status,
       headers: { "content-type": "application/json", "cache-control": "public, max-age=60" },

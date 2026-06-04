@@ -2767,20 +2767,76 @@
 
   function openSheet(html){ sheetBody.innerHTML=html; sheet.classList.add('open'); }
   window.closeSheet=()=>sheet.classList.remove('open');
-  // Calendar: tap a date -> day sheet with what's scheduled + plan action.
+  // Calendar entries store (synced via NocoDB across all devices).
+  window.loadCalEntries=async(force)=>{
+    if(window.__calEntries && !force) return window.__calEntries;
+    try{ const r=await fetch('/.netlify/functions/calendar'); const d=await r.json(); window.__calEntries=Array.isArray(d.list)?d.list:[]; }
+    catch(e){ window.__calEntries=window.__calEntries||[]; }
+    return window.__calEntries;
+  };
+  window.saveCalEntry=async(key)=>{
+    const g=id=>document.getElementById(id), msg=g('ce-msg');
+    const payload={ date:key, title:(g('ce-title')||{}).value||'', type:(g('ce-type')||{}).value||'', link:(g('ce-link')||{}).value||'', notes:(g('ce-notes')||{}).value||'' };
+    const idv=(g('ce-id')||{}).value; if(idv) payload.id=Number(idv);
+    if(!payload.title && !payload.link && !payload.notes){ if(msg){ msg.textContent='Add a title, link, or note first.'; msg.style.color='#EF6B6B'; } return; }
+    if(msg){ msg.textContent='Saving…'; msg.style.color='#C9A961'; }
+    try{
+      const r=await fetch('/.netlify/functions/calendar',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(payload)});
+      if(!r.ok) throw new Error((await r.text()).slice(0,140));
+      await loadCalEntries(true);
+      if(msg){ msg.textContent='Saved ✓ synced to all your devices'; msg.style.color='#4ADE80'; }
+      calDay(key);
+    }catch(e){ if(msg){ msg.textContent='Could not save: '+String(e.message||e).slice(0,90); msg.style.color='#EF6B6B'; } }
+  };
+  window.delCalEntry=async(id,key)=>{
+    try{ await fetch('/.netlify/functions/calendar',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({delete:true,id:Number(id)})}); await loadCalEntries(true); calDay(key); }catch(e){}
+  };
+  window.editCalEntry=(key,id)=>{
+    const e=(window.__calEntries||[]).find(x=>x.id==id); if(!e) return;
+    calDay(key);
+    setTimeout(()=>{ const g=i=>document.getElementById(i);
+      if(g('ce-title')) g('ce-title').value=e.title||'';
+      if(g('ce-type'))  g('ce-type').value=e.type||'Graphic';
+      if(g('ce-link'))  g('ce-link').value=e.link||'';
+      if(g('ce-notes')) g('ce-notes').value=e.notes||'';
+      if(g('ce-id'))    g('ce-id').value=e.id;
+      if(g('ce-title')) g('ce-title').focus();
+    },60);
+  };
+  // Calendar: tap a date -> day sheet with what's scheduled + add/edit your own entries (synced).
   window.calDay=(key)=>{
     const C=D.calendar||{}; const p=(C.posts&&C.posts[key])||{}; const evs=((C.events||[]).filter(e=>e.date===key));
     const dt=new Date(key+'T00:00:00');
     const DOWS=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
     const MON=['January','February','March','April','May','June','July','August','September','October','November','December'];
     const title=DOWS[dt.getDay()]+', '+MON[dt.getMonth()]+' '+dt.getDate();
+    const SEL='background:#0d1320;border:1px solid #22324d;color:#F5F1EA;border-radius:9px;padding:11px 12px;font-size:15px;font-family:inherit;outline:none';
+    const BTN='background:#D4AF37;color:#0f1520;border:0;font-weight:700;padding:11px 20px;border-radius:10px;cursor:pointer;font-size:15px;min-height:44px';
     let rows='';
     const folderLink=(search,label)=>`<a href="https://drive.google.com/drive/search?q=${search}" target="_blank" rel="noopener" style="display:inline-block;margin-left:8px;padding:2px 8px;font-size:11px;border:1px solid var(--gold);color:var(--gold);border-radius:6px;text-decoration:none">📁 ${label}</a>`;
     if(p.graphic) rows+=`<div class="kv"><b>Graphic:</b> <span>${esc(p.graphic)}${p.posted?' ✓ posted':''}${p.graphicSearch?folderLink(p.graphicSearch,'Open folder'):''}</span></div>`;
     if(p.reel) rows+=`<div class="kv"><b>Reel:</b> <span>${esc(p.reel)}${p.posted?' ✓ posted':''}${p.reelSearch?folderLink(p.reelSearch,'Open folder'):''}</span></div>`;
     evs.forEach(e=>{ rows+=`<div class="kv"><b>Event:</b> <span>${esc(e.label)}</span></div>`; });
-    if(!rows) rows='<div class="kv"><span>Nothing scheduled this day yet.</span></div>';
-    openSheet(`<h3 style="font-family:var(--display);color:var(--ink);margin-bottom:4px">${esc(title)}</h3><div class="sec">Scheduled</div>${rows}<div class="sec">Plan</div><button class="ideabtn" onclick="closeSheet();openChat('social','Content for ${esc(title)} — ')"><span class="i">＋</span>Plan content for this day with Cuh</button>`);
+    if(!rows) rows='<div class="kv"><span>Nothing from the planning sheet this day.</span></div>';
+    // Your own entries for this day (synced via NocoDB)
+    const mine=(window.__calEntries||[]).filter(e=>((e.date||'')+'').trim()===key);
+    const lnk=u=>`<a href="${esc(u)}" target="_blank" rel="noopener" style="display:inline-block;margin-left:6px;padding:2px 8px;font-size:11px;border:1px solid var(--gold);color:var(--gold);border-radius:6px;text-decoration:none">📁 Open</a>`;
+    const mineHtml=mine.map(e=>`<div class="kv" style="display:flex;justify-content:space-between;gap:10px;align-items:flex-start;border-bottom:1px solid #1b2740;padding-bottom:8px">
+        <span style="flex:1"><b>${esc(e.type||'Post')}:</b> ${esc(e.title||'(untitled)')}${e.link?lnk(e.link):''}${e.notes?`<div class="gauge-sub" style="margin-top:3px;white-space:pre-wrap">${esc(e.notes)}</div>`:''}</span>
+        <span style="display:flex;gap:6px;flex:0 0 auto"><button onclick="editCalEntry('${key}',${e.id})" style="background:#1b2740;color:#C9A961;border:0;border-radius:7px;padding:6px 9px;font-size:12px;cursor:pointer;min-height:34px">Edit</button><button onclick="delCalEntry(${e.id},'${key}')" style="background:#1b2740;color:#EF6B6B;border:0;border-radius:7px;padding:6px 10px;font-size:12px;cursor:pointer;min-height:34px">✕</button></span></div>`).join('');
+    const form=`<div class="panel" style="display:block">
+        <input id="ce-id" type="hidden" value="">
+        <input id="ce-title" placeholder="Title (e.g. Cut the Silence)" style="${SEL};width:100%;box-sizing:border-box;margin-bottom:8px">
+        <select id="ce-type" style="${SEL};width:100%;box-sizing:border-box;margin-bottom:8px"><option>Graphic</option><option>Video</option><option>Reel</option><option>Carousel</option><option>Story</option><option>Note</option><option>Other</option></select>
+        <input id="ce-link" placeholder="Paste Google Drive link" style="${SEL};width:100%;box-sizing:border-box;margin-bottom:8px">
+        <textarea id="ce-notes" rows="3" placeholder="Notes (optional)" style="${SEL};width:100%;box-sizing:border-box;resize:vertical;margin-bottom:10px"></textarea>
+        <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap"><button onclick="saveCalEntry('${key}')" style="${BTN}">Save to this day</button><span id="ce-msg" class="gauge-sub" style="flex:1;min-width:140px"></span></div>
+      </div>`;
+    openSheet(`<h3 style="font-family:var(--display);color:var(--ink);margin-bottom:4px">${esc(title)}</h3>
+      <div class="sec">Scheduled</div>${rows}
+      ${mineHtml?'<div class="sec">Your entries (synced)</div>'+mineHtml:''}
+      <div class="sec">Add to this day</div>${form}
+      <div class="sec">Plan</div><button class="ideabtn" onclick="closeSheet();openChat('social','Content for ${esc(title)} — ')"><span class="i">＋</span>Plan content for this day with Cuh</button>`);
   };
   sheet.onclick=e=>{ if(e.target===sheet) sheet.classList.remove('open'); };
 
@@ -3267,6 +3323,8 @@
 
   views.social=()=>{
     const C=D.calendar;
+    // load your synced calendar entries once, then re-render so they appear on the grid
+    if(typeof window.__calEntries==='undefined'){ window.__calEntries=[]; loadCalEntries(true).then(es=>{ if(es&&es.length&&window.curView==='social') go('social'); }); }
     const iso=dt=>dt.getFullYear()+'-'+String(dt.getMonth()+1).padStart(2,'0')+'-'+String(dt.getDate()).padStart(2,'0');
     const first=new Date(C.year,C.monthIdx,1);
     const startDow=first.getDay();
@@ -3289,6 +3347,7 @@
         if(post.graphic) body+=`<div class="mev mev-graphic ${post.posted?'posted':''}">▦ ${esc(post.graphic)}${gfxLink}</div>`;
         if(post.reel) body+=`<div class="mev mev-reel ${post.posted?'posted':''}">▶ ${esc(post.reel)}${reelLink}</div>`;
         evs.forEach(e=>{ body+=`<div class="mev mev-event">🎉 ${esc(e.label)}<span class="mev-rem">+ make a content for this</span></div>`; });
+        (window.__calEntries||[]).filter(e=>((e.date||'')+'').trim()===key).forEach(e=>{ body+=`<div class="mev" style="background:rgba(212,175,55,0.14);border-color:#D4AF37;color:#f0e2b8">✎ ${esc(e.title||e.type||'Post')}${e.link?' 📁':''}</div>`; });
         cellsHtml+=`<div class="mcell ${inMonth?'':'out'} ${isToday?'today':''}" onclick="calDay('${key}')" style="cursor:pointer">
           <div class="mcell-d"><span class="mcell-num">${dt.getDate()}</span>${inMonth&&slot?`<span class="mcell-slot">${esc(slot.slot)}</span>`:''}</div>
           ${body}</div>`;
