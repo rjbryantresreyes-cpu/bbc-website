@@ -1262,19 +1262,10 @@
           "name": "NPC-Portfolio-System"
         },
         {
-          "name": "08_KNOWLEDGE_BASE"
+          "name": ".claude"
         },
         {
-          "name": "07_MARKETING"
-        },
-        {
-          "name": "06_FINANCE"
-        },
-        {
-          "name": "05_OPERATIONS"
-        },
-        {
-          "name": "03_ARCHIVED_CLIENTS"
+          "name": "01_LEADS"
         },
         {
           "name": "02_ACTIVE_CLIENTS",
@@ -1283,13 +1274,13 @@
               "name": "4OCEAN"
             },
             {
-              "name": "WOODEN-WOODWORKS"
+              "name": "FIRST-CLASS-FINISHES"
             },
             {
               "name": "HOME-VISION-STUDIO"
             },
             {
-              "name": "FIRST-CLASS-FINISHES"
+              "name": "WOODEN-WOODWORKS"
             },
             {
               "name": "HI-UP-ROOFING"
@@ -1315,10 +1306,19 @@
           ]
         },
         {
-          "name": "01_LEADS"
+          "name": "03_ARCHIVED_CLIENTS"
         },
         {
-          "name": ".claude"
+          "name": "05_OPERATIONS"
+        },
+        {
+          "name": "06_FINANCE"
+        },
+        {
+          "name": "07_MARKETING"
+        },
+        {
+          "name": "08_KNOWLEDGE_BASE"
         },
         {
           "name": "BBC WEBSITE HTML"
@@ -1327,43 +1327,40 @@
           "name": "04_TEAM"
         },
         {
-          "name": "09_POTENTIAL CLIENTS"
-        },
-        {
           "name": "BBC_AI_FAMILY",
           "children": [
             {
-              "name": "BRUNZ"
-            },
-            {
-              "name": "WEBBY"
-            },
-            {
-              "name": "MAI"
-            },
-            {
-              "name": "KRIZ"
-            },
-            {
-              "name": "SONNY"
-            },
-            {
-              "name": "EMY"
+              "name": "CASEY"
             },
             {
               "name": "BOOGY"
             },
             {
-              "name": "CASEY"
+              "name": "EMY"
+            },
+            {
+              "name": "SONNY"
+            },
+            {
+              "name": "BRUNZ"
+            },
+            {
+              "name": "KRIZ"
+            },
+            {
+              "name": "MAI"
+            },
+            {
+              "name": "WEBBY"
             },
             {
               "name": "_TEMPLATE"
             },
             {
-              "name": "JENNY"
+              "name": "AGENT_PROFILES"
             },
             {
-              "name": "AGENT_PROFILES"
+              "name": "JENNY"
             },
             {
               "name": "_VAULT"
@@ -1390,6 +1387,9 @@
               "name": "_BRAND"
             }
           ]
+        },
+        {
+          "name": "09_POTENTIAL CLIENTS"
         },
         {
           "name": "Daryl BBC Folder"
@@ -1925,6 +1925,14 @@
       "noindex": false
     },
     {
+      "name": "Wooden Woodworks — Owner Dashboard",
+      "path": "_ww-owner-preview.html",
+      "group": "Insights / blog",
+      "purpose": "",
+      "status": "live",
+      "noindex": true
+    },
+    {
       "name": "Al Carmelle Managase | Shopify Developer &amp; Creative Support Specialist · BBC",
       "path": "al.html",
       "group": "VA profiles (noindex)",
@@ -2222,18 +2230,18 @@
       "path": "LEARNINGS"
     },
     {
-      "title": "upc sticker sheet generation",
-      "date": "2026-06-04",
+      "title": "device parity path gotcha",
+      "date": "2026-06-05",
       "path": "LEARNINGS"
     },
     {
-      "title": "os dashboard brain",
-      "date": "2026-06-04",
+      "title": "command center upgrade deep search",
+      "date": "2026-06-05",
       "path": "LEARNINGS"
     },
     {
-      "title": "oljph application engine upgrades",
-      "date": "2026-06-04",
+      "title": "cabinet design center 3d recreate",
+      "date": "2026-06-05",
       "path": "LEARNINGS"
     }
   ],
@@ -3235,6 +3243,8 @@
       <div class="sec">Team</div><div class="panel">${team}</div>
       <div class="gauge-sub" style="text-align:left;margin-top:10px">Cavalry's command center, scoped to Tre's real workflows. Live board data + Kenz's login access turn on in the final step.</div>`;
     window.curClient='cavalry'; // the floating chatbot becomes Ester (Cavalry's AI) while in this view
+    window.curView='clients'; window.__curClientSlug=window.__slug(c.name);
+    if(!window.__routing){ var __ch='#clients/'+window.__curClientSlug; if(location.hash!==__ch){ try{ location.hash=__ch; }catch(e){} } }
     window.scrollTo(0,0); sheet.classList.remove('open');
   };
   window.clientCC=(i)=>{
@@ -3252,6 +3262,8 @@
     const social=panel('📱','Social Media',`<div class="kv"><span>Content calendar + posting rhythm appear here once we load this client's social plan.</span></div><div class="gauge-sub" style="text-align:left;margin-top:6px">In setup.</div>`);
     const reminders=panel('✅','Reminders & tasks',`<div class="kv"><span>Tasks and reminders for ${esc(c.name)} show here. Log them with Cuh below.</span></div><div class="gauge-sub" style="text-align:left;margin-top:6px">In setup.</div>`);
     const drive=panel('📁','Drive folder',`<div class="kv"><span>${folder?'02_ACTIVE_CLIENTS / '+esc(folder):'Folder not mapped yet.'}</span></div>${folder?`<a class="lnk" onclick="openClientFolder('${folder.replace(/'/g,"\\'")}')" style="margin-top:8px;cursor:pointer">Open in Folders →</a>`:''}`);
+    window.curView='clients'; window.curClient=null; window.__curClientSlug=window.__slug(c.name);
+    if(!window.__routing){ var __ch='#clients/'+window.__curClientSlug; if(location.hash!==__ch){ try{ location.hash=__ch; }catch(e){} } }
     return app.innerHTML=`<div class="view">
       <div class="morelink" style="margin-top:0;margin-bottom:14px" onclick="go('clients')">← All clients</div>
       <div class="cc-hero" style="background:linear-gradient(135deg,${col}33,${col}0d);border:1px solid ${col}66">
@@ -3778,7 +3790,8 @@
       <button class="ideabtn" onclick="window.open('${curUrl}','_blank')"><span class="i">📂</span>Open this folder in Google Drive</button>
       <div class="foldergrid">${body}</div>`;
   };
-  window.go=v=>{ window.curView=v; window.curClient=null; app.innerHTML=`<div class="view">${views[v]()}</div>`; window.scrollTo(0,0);
+  window.go=v=>{ window.curView=v; window.curClient=null; window.__curClientSlug=null; app.innerHTML=`<div class="view">${views[v]()}</div>`; window.scrollTo(0,0);
+    if(!window.__routing){ var __nh='#'+v; if(location.hash!==__nh){ try{ location.hash=__nh; }catch(e){} } }
     document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('active',b.dataset.v===v));
     sheet.classList.remove('open'); if(v==='crm'&&window.loadCampaignStats){ window.loadCampaignStats(); window.loadInbox&&window.loadInbox('crm-inbox',true); window.loadCrmContacts&&window.loadCrmContacts(); } if(v==='inbox'&&window.loadInbox) window.loadInbox(); if(v==='home'&&window.loadHomeAttention) window.loadHomeAttention(); };
   window.filterCards=(inp,wrapId)=>{ const q=inp.value.toLowerCase(); const wrap=document.getElementById(wrapId);
@@ -3938,7 +3951,23 @@
     navigator.serviceWorker.addEventListener('controllerchange',()=>{ if(refreshing) return; refreshing=true; location.reload(); });
   }
 
-  go('home');
+  /* ---- per-page URLs: hash routing so refresh / back-forward / bookmarks keep the page ---- */
+  window.__slug=function(s){ return (s||'').toString().toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,''); };
+  window.applyHash=function(){
+    window.__routing=true;
+    try{
+      var h=(location.hash||'').replace(/^#/,''); var parts=h.split('/'); var v=parts[0]||'home';
+      if(!views[v]) v='home';
+      if(v==='clients' && parts[1] && Array.isArray(D.clients)){
+        var i=D.clients.findIndex(function(c){ return window.__slug(c.name)===parts[1]; });
+        if(window.curView!=='clients' || window.__curClientSlug!==parts[1]){ go('clients'); if(i>=0 && window.clientCC) window.clientCC(i); }
+      } else if(window.curView!==v || window.curClient || window.__curClientSlug){
+        go(v);
+      }
+    } finally { window.__routing=false; }
+  };
+  window.addEventListener('hashchange', window.applyHash);
+  window.applyHash(); // boot to the URL's page (or home if none)
 </script>
 
 <!-- ===== BBC /os Auth Controller (Supabase) ===== -->
