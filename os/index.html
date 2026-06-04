@@ -2936,10 +2936,10 @@
     <div class="panelgrid" id="camp-tracker"><div class="panel"><span class="ptitle">Loading…</span><div class="gauge-sub">Reading your CRM + inbox.</div></div></div>
     <div class="sec" style="margin-top:16px">Inbox <span class="gauge-sub" style="font-weight:400">(tap to read)</span></div>
     <div id="crm-inbox"><div class="panel"><span class="ptitle">Loading inbox…</span></div></div>
-    <div class="sec" style="margin-top:16px">Contacts <span class="gauge-sub" style="font-weight:400">(tap one for their thread + notes)</span></div>
+    <div class="sec" style="margin-top:16px">Contacts <span class="gauge-sub" style="font-weight:400">(change Status with the dropdown · tap a name for thread + notes)</span></div>
     <input id="crm-contact-search" placeholder="Search contacts by name, company, email..." oninput="filterContacts(this.value)" style="${EMIN};width:100%;box-sizing:border-box;margin-bottom:8px">
     <div id="crm-contacts" style="max-height:360px;overflow:auto;border-radius:12px"><div class="panel"><span class="ptitle">Loading contacts…</span></div></div>
-    <div class="sec" style="margin-top:16px">Your CRM (full edit)</div>
+    <div class="sec" style="margin-top:16px">Your CRM <span class="gauge-sub" style="font-weight:400">(view-only here — change Status in the Contacts list above, or tap ↗ Edit in full NocoDB)</span></div>
     <div style="position:relative;width:100%;height:50vh;min-height:320px;border-radius:14px;overflow:hidden;background:#fff;box-shadow:0 6px 24px rgba(0,0,0,.28)">
       <iframe src="${NOCODB_SHARED}" title="BBC CRM (NocoDB)" allow="clipboard-read; clipboard-write" style="width:100%;height:100%;border:0;display:block"></iframe>
     </div>
@@ -3118,10 +3118,16 @@
     if(!cts.length){ el.innerHTML='<div class="panel"><span class="ptitle">No contacts loaded</span></div>'; return; }
     const rank=r=>{ const s=((r.Status||'')+'').toLowerCase(); if(['interested','potential','replied','booked'].includes(s)) return 0; if(((r.Source||'')+'')==='Current Client') return 1; if(s==='emailed') return 2; return 3; };
     const sorted=[...cts].sort((a,b)=>rank(a)-rank(b));
+    // status options come only from values already in the CRM (never invent a status)
+    const STATUSES=[...new Set(cts.map(r=>((r.Status||'')+'').trim()).filter(Boolean))].sort();
     el.innerHTML=sorted.map(r=>{ const em=((r.Email||'')+'').toLowerCase().trim(); if(!em) return '';
       const hay=esc((((r['First Name']||'')+' '+(r.Organization||'')+' '+em+' '+(r.Status||'')).toLowerCase()));
-      const sc={'Interested':'#4ADE80','Potential':'#D4AF37','Replied':'#60A5FA','Booked':'#4ADE80','Bad Fit':'#EF6B6B','Emailed':'#7C8AA5'}[((r.Status||'')+'').trim()]||'#2a3a52';
-      return `<div class="opitem cc-row" data-search="${hay}" onclick="openContact('${em}')" style="cursor:pointer"><span class="odot" style="background:${sc}"></span><span class="oname">${esc(r['First Name']||r.Organization||r.Email)}${(r.Organization&&r['First Name'])?' · '+esc(r.Organization):''}</span><span class="ocad">${esc(r.Status||'')}</span></div>`;
+      const cur=((r.Status||'')+'').trim();
+      const sc={'Interested':'#4ADE80','Potential':'#D4AF37','Replied':'#60A5FA','Booked':'#4ADE80','Bad Fit':'#EF6B6B','Emailed':'#7C8AA5'}[cur]||'#2a3a52';
+      const sset=STATUSES.slice(); if(cur && !sset.includes(cur)) sset.unshift(cur);
+      const sopt=['<option value="">— status —</option>'].concat(sset.map(s=>`<option ${s===cur?'selected':''}>${esc(s)}</option>`)).join('');
+      const sel=(r.Id!==undefined&&r.Id!==null)?`<select onclick="event.stopPropagation()" onchange="updateContactStatus(${JSON.stringify(r.Id)},this.value,this)" title="Change status (saves to NocoDB)" style="background:#0d1320;border:1px solid #2a3a52;color:#F5F1EA;border-radius:7px;padding:6px 8px;font-size:12px;min-height:34px;max-width:150px;cursor:pointer">${sopt}</select>`:`<span class="ocad">${esc(cur)}</span>`;
+      return `<div class="opitem cc-row" data-search="${hay}" style="display:flex;align-items:center;gap:8px"><span class="odot" style="background:${sc};flex:0 0 auto"></span><span class="oname" onclick="openContact('${em}')" style="flex:1;cursor:pointer;min-width:0">${esc(r['First Name']||r.Organization||r.Email)}${(r.Organization&&r['First Name'])?' · '+esc(r.Organization):''}</span>${sel}</div>`;
     }).join('');
   };
   window.filterContacts=(q)=>{ q=((q||'')+'').toLowerCase(); document.querySelectorAll('#crm-contacts .cc-row').forEach(el=>{ el.style.display=((el.dataset.search||'').includes(q))?'':'none'; }); };
@@ -3135,7 +3141,13 @@
       // update the in-memory cache so the list + reopen reflect the new status without a reload
       if(Array.isArray(window.__crmContacts)){ const rec=window.__crmContacts.find(x=>(x.Id??x.id)==id); if(rec) rec.Status=val; }
       if(msg){ msg.textContent='Saved ✓'; msg.style.color='#4ADE80'; }
-      if(window.loadCrmContacts) window.loadCrmContacts();
+      // inline (CRM list) feedback: flash the dropdown green + recolor the row dot, no jarring re-sort
+      if(selEl){
+        selEl.style.borderColor='#4ADE80'; selEl.style.boxShadow='0 0 0 2px rgba(74,222,128,.3)';
+        setTimeout(()=>{ try{ selEl.style.borderColor='#2a3a52'; selEl.style.boxShadow='none'; }catch(e){} },1200);
+        try{ const dot=selEl.closest('.cc-row')&&selEl.closest('.cc-row').querySelector('.odot'); if(dot){ const cm={'Interested':'#4ADE80','Potential':'#D4AF37','Replied':'#60A5FA','Booked':'#4ADE80','Bad Fit':'#EF6B6B','Emailed':'#7C8AA5'}; dot.style.background=cm[val]||'#2a3a52'; } }catch(e){}
+      }
+      if(msg && window.loadCrmContacts) window.loadCrmContacts(); // re-render underlying list only when editing from the detail sheet
       if(window.loadCampaignStats) window.loadCampaignStats();
     }catch(err){
       if(msg){ msg.textContent='Could not save: '+String(err.message||err).slice(0,80); msg.style.color='#EF6B6B'; }
