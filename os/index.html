@@ -452,6 +452,8 @@
   .msg.u{align-self:flex-end;background:var(--gold);color:#0A1422;border-bottom-right-radius:4px;}
   .msg.a{align-self:flex-start;background:var(--bg2);border:1px solid var(--line);color:var(--ink);border-bottom-left-radius:4px;}
   .msg.sys{align-self:center;background:rgba(212,175,55,0.1);color:var(--gold2);font-size:11.5px;font-family:var(--mono);text-align:center;}
+  .act-btn{align-self:flex-start;margin-top:-2px;background:linear-gradient(135deg,var(--gold),var(--goldB));color:#0A1422;border:none;border-radius:10px;font-family:var(--ui);font-weight:700;font-size:12.5px;padding:8px 13px;cursor:pointer}
+  .act-btn:active{transform:scale(.96)}
   .cs-input{display:flex;gap:8px;padding:12px 16px calc(14px + env(safe-area-inset-bottom));border-top:1px solid var(--line);background:var(--bg2);}
   .cs-input textarea{flex:1;background:var(--bg3);border:1px solid var(--line);border-radius:12px;color:var(--ink);padding:12px;font-size:14px;font-family:var(--ui);resize:none;max-height:120px;}
   .cs-input textarea:focus{outline:none;border-color:var(--gold);}
@@ -3531,6 +3533,41 @@
     return out;
   }
   function wantsDrive(t){ return /\b(folder|where|locat|open |find |drive|file|path|which|stored|saved|directory)\b/i.test(t||''); }
+  // Step 2: compact live snapshot of real dashboard state, so the brain answers about what's actually happening.
+  function liveSnapshot(view){
+    const L=[];
+    try{ if(D.meta&&D.meta.updated) L.push('Dashboard data updated: '+D.meta.updated); }catch(e){}
+    try{ const cl=(D.clients||[]); if(cl.length) L.push('CLIENTS ('+cl.length+'): '+cl.map(c=>c.name+(c.status&&c.status!=='active'?' ['+c.status+']':'')+(c.ai?', AI '+c.ai:'')+(c.handler?', handled by '+c.handler:'')).join(' | ')); }catch(e){}
+    try{ const pend=(D.queue||[]).filter(q=>!q.posted).map(q=>q.slug||q.name); if(pend.length) L.push('PENDING TO POST ('+pend.length+'): '+pend.join(', ')); }catch(e){}
+    try{ const wt=(D.websiteTasks||[]); if(wt.length) L.push('WEBSITE TO-DO ('+wt.length+'): '+wt.join('; ')); }catch(e){}
+    try{ const wf=(D.workflows||[]); if(wf.length) L.push('WORKFLOW AREAS: '+wf.map(w=>w.title||w.name||w.area).filter(Boolean).slice(0,14).join(', ')); }catch(e){}
+    try{ const af=(D.aiFamily||[]); if(af.length) L.push('AI FAMILY ('+af.length+'): '+af.map(a=>a.name||a.key).filter(Boolean).join(', ')); }catch(e){}
+    return L.join('\n');
+  }
+  // Step 3: Cuh proposes ONE action; user taps to run it (never auto-executed).
+  const ACTION_VIEWS=['home','clients','crm','inbox','websites','workflows','social','reminders','folders','news'];
+  function parseAction(text){
+    const m=(text||'').match(/(^|\n)\s*ACTION\s*(\{[\s\S]*\})\s*$/);
+    if(!m) return {clean:text,action:null};
+    let a=null; try{ a=JSON.parse(m[2]); }catch(e){ return {clean:text,action:null}; }
+    if(!a||!a.action) return {clean:text,action:null};
+    if(a.action==='open_page'&&!ACTION_VIEWS.includes(a.view)) return {clean:text.replace(m[0],'').trim(),action:null};
+    return {clean:text.replace(m[0],'').trim(),action:a};
+  }
+  function findFolderUrl(name){
+    let hit=null; const n=(name||'').toLowerCase();
+    (function walk(node){ (node&&node.children||[]).forEach(c=>{ if(!hit&&c.name&&c.name.toLowerCase().includes(n)) hit=c; if(c.children) walk(c); }); })(D.drive&&D.drive.tree||{});
+    return hit?(hit.url||(D.drive&&D.drive.rootUrl)):null;
+  }
+  window.runAction=(a)=>{
+    if(!a||!a.action) return;
+    try{ document.getElementById('cuhMini').classList.remove('open'); document.getElementById('cuhFab').style.display=''; }catch(e){}
+    try{ closeChat(); }catch(e){}
+    if(a.action==='open_page'){ go(a.view); }
+    else if(a.action==='open_folder'){ const u=findFolderUrl(a.name); window.open(u||(D.drive&&D.drive.rootUrl)||'#','_blank'); }
+    else if(a.action==='new_task'){ openChat(ACTION_VIEWS.includes(a.view)?a.view:'home', a.title||''); }
+  };
+  function actionBtn(a){ return a?`<button class="act-btn" onclick='runAction(${JSON.stringify(a).replace(/"/g,"&quot;").replace(/'/g,"&#39;")})'>▶ ${esc(a.label||'Do it')}</button>`:''; }
   function driveNodeAt(path){ let n=D.drive.tree; (path||[]).forEach(name=>{ const c=(n.children||[]).find(x=>x.name===name); if(c) n=c; }); return n; }
   window.driveGo=(name)=>{ const node=driveNodeAt(window.__drivePath); const c=(node.children||[]).find(x=>x.name===name); if(!c) return; if(c.children&&c.children.length){ window.__drivePath.push(name); go('folders'); } else { window.open(c.url||D.drive.rootUrl,'_blank'); } };
   window.driveUp=(i)=>{ window.__drivePath=window.__drivePath.slice(0,i); go('folders'); };
@@ -3567,7 +3604,7 @@
   function renderThread(){
     const el=document.getElementById('cs-thread');
     if(!csThread.length){ el.innerHTML=`<div class="cs-empty"><h3 style="font-family:var(--display);color:var(--ink);margin-bottom:8px">Start with Cuh</h3><p>Type below. Pick your agent(s) and fill the task details so this chat is saved as an organized workflow.</p></div>`; return; }
-    el.innerHTML=csThread.map(m=>`<div class="msg ${m.r}">${esc(m.t)}</div>`).join('');
+    el.innerHTML=csThread.map(m=>`<div class="msg ${m.r}">${esc(m.t)}</div>`+(m.action?actionBtn(m.action):'')).join('');
     el.scrollTop=el.scrollHeight;
   }
   function renderSaved(){
@@ -3622,10 +3659,11 @@
     const drive=wantsDrive(v)?{root:D.drive&&D.drive.rootUrl,folders:driveIndexLines()}:null;
     const tok=window.bbcToken?await window.bbcToken():null;
     try{
-      const res=await fetch('/.netlify/functions/chat',{method:'POST',headers:{'Content-Type':'application/json',...(tok?{'Authorization':'Bearer '+tok}:{})},body:JSON.stringify({messages:history,agents:[...csAgents],task,scope:{mode:'dashboard'},drive})});
+      const res=await fetch('/.netlify/functions/chat',{method:'POST',headers:{'Content-Type':'application/json',...(tok?{'Authorization':'Bearer '+tok}:{})},body:JSON.stringify({messages:history,agents:[...csAgents],task,scope:{mode:'dashboard'},drive,context:liveSnapshot('dashboard')})});
       const d=await res.json();
       csThread.pop(); // remove the "thinking" notice
-      csThread.push({r:'a',t:d.reply||d.error||'(no reply)'});
+      const pa=parseAction(d.reply||d.error||'(no reply)');
+      csThread.push({r:'a',t:pa.clean,action:pa.action});
     }catch(e){
       csThread.pop();
       csThread.push({r:'a',t:"Couldn't reach the brain. Check the connection and try again."});
@@ -3639,7 +3677,7 @@
   function renderMini(){
     const el=document.getElementById('cm-thread');
     if(!miniThread.length){ el.innerHTML=`<div class="cm-empty">Ask me anything about the <b>${esc(miniLabel(miniView))}</b> page — questions, what to do next, or a command. I'll keep it scoped here.</div>`; return; }
-    el.innerHTML=miniThread.map(m=>`<div class="msg ${m.r}">${esc(m.t)}</div>`).join('');
+    el.innerHTML=miniThread.map(m=>`<div class="msg ${m.r}">${esc(m.t)}</div>`+(m.action?actionBtn(m.action):'')).join('');
     el.scrollTop=el.scrollHeight;
   }
   window.openMini=(viewKey)=>{
@@ -3662,10 +3700,11 @@
     const drive=wantsDrive(v)?{root:D.drive&&D.drive.rootUrl,folders:driveIndexLines()}:null;
     const tok=window.bbcToken?await window.bbcToken():null;
     try{
-      const res=await fetch('/.netlify/functions/chat',{method:'POST',headers:{'Content-Type':'application/json',...(tok?{'Authorization':'Bearer '+tok}:{})},body:JSON.stringify({messages:history,agents:['Cuh'],scope:{mode:'page',page:miniLabel(miniView)},drive})});
+      const res=await fetch('/.netlify/functions/chat',{method:'POST',headers:{'Content-Type':'application/json',...(tok?{'Authorization':'Bearer '+tok}:{})},body:JSON.stringify({messages:history,agents:['Cuh'],scope:{mode:'page',page:miniLabel(miniView)},drive,context:liveSnapshot(miniView)})});
       const d=await res.json();
       miniThread.pop();
-      miniThread.push({r:'a',t:d.reply||d.error||'(no reply)'});
+      const pa=parseAction(d.reply||d.error||'(no reply)');
+      miniThread.push({r:'a',t:pa.clean,action:pa.action});
     }catch(e){
       miniThread.pop();
       miniThread.push({r:'a',t:"Couldn't reach the brain. Try again in a sec."});

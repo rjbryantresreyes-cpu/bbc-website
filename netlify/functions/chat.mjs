@@ -114,7 +114,12 @@ function driveBlock(drive) {
   ].join("\n");
 }
 
-function systemPrompt(agents, task, scope, client, drive) {
+function contextBlock(context) {
+  if (!context || !String(context).trim()) return "";
+  return "\nLIVE DASHBOARD STATE (real, current — trust this over guesses; if RJ asks about clients, pending posts, website to-do, etc., answer from here):\n" + String(context).slice(0, 4000);
+}
+
+function systemPrompt(agents, task, scope, client, drive, context) {
   if (client && CLIENT_SOULS[client]) return CLIENT_SOULS[client](scope);
   const picked = (agents && agents.length ? agents : ["Cuh"]);
   const lead = picked[0];
@@ -139,11 +144,13 @@ function systemPrompt(agents, task, scope, client, drive) {
     "",
     "What you can do right now: answer questions, think through BBC work, draft and plan, route what RJ wants into clear next steps, AND tell RJ which Drive folder something is in / give the open link when a folder map is provided below.",
     "Still coming (not yet live): reading INSIDE files, and pushing commands to the main system. If RJ asks you to open a specific file's contents or run a command, say that's the next upgrade and isn't wired yet.",
+    contextBlock(context),
     driveBlock(drive),
     "",
     "Writing rules for anything RJ might post externally: no em-dashes, no mid-sentence dashes, no filler words (seamlessly, leverage, robust, streamline). Warm, human, plain English. Internally (just talking to RJ) be natural and direct.",
     "Never invent BBC facts, names, or content you don't actually know. If unsure, say so and ask.",
     "BEST-WAY RULE (always): if RJ asks for something you're not sure about, or that you can't actually DO from this dashboard right now — you can't run commands, edit or create files, build pages, render video, post to socials, send email, or look inside the Drive yet — do NOT guess, stall, or pretend it's done. In one short answer: (1) say plainly you can't do that from here yet, (2) point him to the best way to get it done. The default best way is: 'Open Claude Code and ask there' (Claude Code can edit files, build, run, deploy, search the BBC Drive, and drive the AI family). If a specific tool/page/person is the better path (e.g. a specific BBC AI, the full-screen chat to save it as a task, or a Netlify/NocoDB action), name that instead. Always end with the concrete next step RJ should take.",
+    "ACTIONS: when RJ clearly wants to GO somewhere, OPEN a folder, or START a task, you MAY end your reply with ONE action on its very last line, exactly: ACTION {json}. Keep your short normal reply on the lines above it. Allowed actions only: {\"action\":\"open_page\",\"view\":\"home|clients|crm|inbox|websites|workflows|social|reminders|folders|news\",\"label\":\"Open Social\"}; {\"action\":\"open_folder\",\"name\":\"<folder name from the Drive map>\",\"label\":\"Open the Wooden Woodworks folder\"}; {\"action\":\"new_task\",\"view\":\"<page>\",\"title\":\"<task title>\",\"label\":\"Start this task\"}. The dashboard turns this into a button RJ taps to confirm — you NEVER execute it yourself, so never claim it's done. Only add an ACTION when he clearly wants to act; for plain questions, give no ACTION line.",
     t
   ].join("\n");
 }
@@ -174,6 +181,7 @@ export default async (req) => {
   const scope = body.scope || null;
   const client = body.client || null;
   const drive = body.drive || null;
+  const context = body.context || null;
 
   // Auth: the BBC brain requires a logged-in /os user (Supabase). Known client souls (e.g. Cavalry CC, no login) pass on rate-limit only for now.
   if (!client || !CLIENT_SOULS[client]) {
@@ -184,7 +192,7 @@ export default async (req) => {
   }
   const history = Array.isArray(body.messages) ? body.messages.slice(-12) : [];
   const messages = [
-    { role: "system", content: systemPrompt(body.agents, body.task, scope, client, drive) },
+    { role: "system", content: systemPrompt(body.agents, body.task, scope, client, drive, context) },
     ...history.map(m => ({ role: m.role === "assistant" ? "assistant" : "user", content: String(m.content || "").slice(0, 6000) }))
   ];
   // page-scoped chat = short + fast; dashboard chat = room to think
