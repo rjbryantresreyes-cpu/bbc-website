@@ -26,8 +26,9 @@ export default async (req) => {
   try { store = getStore(STORE); }
   catch (e) { return json({ error: "blob store unavailable", detail: String(e.message || e).slice(0, 200) }, 500); }
 
+  // strong consistency so a freshly-added/edited entry shows immediately on the next read (any device)
   const read = async () => {
-    try { return (await store.get(KEY, { type: "json" })) || []; }
+    try { return (await store.get(KEY, { type: "json", consistency: "strong" })) || []; }
     catch { return []; }
   };
 
