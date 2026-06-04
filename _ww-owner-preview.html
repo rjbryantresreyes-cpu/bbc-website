@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Wooden Woodworks — Owner Dashboard</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css">
+<style>
+  :root{
+    --bg:#F3ECE0; --bg2:#FBF8F2; --card:#FFFFFF;
+    --ink:#2B2723; --muted:#857B6E; --soft:#A99E8E;
+    --walnut:#5E4329; --walnut2:#7A5836; --brass:#B08D4F; --brass-d:#977636;
+    --sage:#7E8B6D; --line:rgba(94,67,41,0.15); --line2:rgba(94,67,41,0.07);
+    --green:#5E8B6D; --amber:#C08A3E; --blue:#5E7790;
+    --serif:Georgia,'Times New Roman',serif;
+    --sans:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+    --shadow:0 6px 26px rgba(94,67,41,0.10);
+  }
+  *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+  body{font-family:var(--sans);background:var(--bg);color:var(--ink);min-height:100dvh;line-height:1.5;-webkit-font-smoothing:antialiased;padding-bottom:44px;}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 20px;}
+  svg.i{width:1em;height:1em;stroke:currentColor;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;vertical-align:-0.12em;}
+
+  /* Top bar */
+  .topbar{background:var(--bg2);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:20;}
+  .topbar__in{max-width:1080px;margin:0 auto;padding:13px 20px;display:flex;align-items:center;justify-content:space-between;gap:12px;}
+  .brand{display:flex;align-items:center;gap:12px;min-width:0;}
+  .brand img{height:36px;width:auto;}
+  .brand .t{font-family:var(--serif);font-weight:700;font-size:16px;line-height:1.1;}
+  .brand .s{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--brass-d);margin-top:1px;}
+  .tb-right{display:flex;align-items:center;gap:10px;}
+  .sync{display:inline-flex;align-items:center;gap:7px;font-size:11.5px;color:var(--green);background:rgba(94,139,109,0.12);border:1px solid rgba(94,139,109,0.25);padding:6px 11px;border-radius:20px;font-weight:600;}
+  .sync .pulse{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 0 0 rgba(94,139,109,.5);animation:pulse 2s infinite;}
+  @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(94,139,109,.5)}70%{box-shadow:0 0 0 7px rgba(94,139,109,0)}100%{box-shadow:0 0 0 0 rgba(94,139,109,0)}}
+  .out{font-size:12px;color:var(--muted);border:1px solid var(--line);border-radius:20px;padding:8px 13px;background:none;cursor:pointer;font-family:var(--sans);min-height:38px;}
+
+  /* Hero */
+  .hero{padding:28px 0 6px;}
+  .hero .hi{font-family:var(--serif);font-size:clamp(23px,5vw,31px);font-weight:700;}
+  .hero .hi em{color:var(--walnut);font-style:italic;}
+  .hero .tag{color:var(--muted);font-size:14px;margin-top:5px;}
+  .hero .tag b{color:var(--ink);}
+
+  /* Grid */
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:18px;}
+  .col-2{grid-column:1 / -1;}
+  @media(max-width:760px){ .grid{grid-template-columns:1fr;} }
+
+  .card{background:var(--card);border:1px solid var(--line2);border-radius:16px;padding:20px;box-shadow:var(--shadow);}
+  .card__hd{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:14px;}
+  .card__ti{font-family:var(--serif);font-size:17px;font-weight:700;display:flex;align-items:center;gap:10px;}
+  .card__ti .ic{width:32px;height:32px;border-radius:9px;background:rgba(176,141,79,0.13);color:var(--brass-d);display:flex;align-items:center;justify-content:center;font-size:17px;flex:none;}
+  .card__more{font-size:12px;color:var(--brass-d);text-decoration:none;font-weight:600;white-space:nowrap;}
+
+  /* Projects */
+  .proj-top{display:flex;gap:18px;align-items:center;flex-wrap:wrap;}
+  #projChart{width:130px;height:130px;flex:none;}
+  .proj-legend{flex:1;min-width:160px;display:grid;grid-template-columns:1fr 1fr;gap:7px 14px;}
+  .lg{display:flex;align-items:center;gap:8px;font-size:12.5px;color:var(--muted);}
+  .lg b{color:var(--ink);}
+  .lg .sw{width:10px;height:10px;border-radius:3px;flex:none;}
+  .proj{display:flex;align-items:center;gap:12px;padding:11px 0;border-bottom:1px solid var(--line2);text-decoration:none;color:inherit;}
+  .proj:last-child{border-bottom:none;}
+  .proj:hover .proj__nm{color:var(--walnut);}
+  .proj__main{flex:1;min-width:0;}
+  .proj__nm{font-weight:600;font-size:14px;}
+  .proj__meta{font-size:12px;color:var(--muted);margin-top:1px;}
+  .proj__folder{font-size:11px;color:var(--brass-d);margin-top:2px;display:inline-flex;align-items:center;gap:4px;}
+  .pill{font-size:10.5px;font-weight:700;letter-spacing:.4px;text-transform:uppercase;padding:5px 10px;border-radius:20px;white-space:nowrap;}
+  .pill.design{background:rgba(94,119,144,0.14);color:var(--blue);}
+  .pill.prod{background:rgba(192,138,62,0.16);color:var(--amber);}
+  .pill.finish{background:rgba(176,141,79,0.16);color:var(--brass-d);}
+  .pill.installed{background:rgba(94,139,109,0.16);color:var(--green);}
+
+  /* Numbers */
+  .nums{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+  .num{background:var(--bg2);border:1px solid var(--line2);border-radius:12px;padding:14px;text-align:center;}
+  .num .v{font-family:var(--serif);font-size:23px;font-weight:700;color:var(--walnut);}
+  .num .l{font-size:11px;color:var(--muted);margin-top:3px;}
+  .note-inline{font-size:12px;color:var(--soft);margin-top:12px;font-style:italic;}
+
+  /* Lists */
+  .row{display:flex;gap:10px;padding:9px 0;border-bottom:1px solid var(--line2);font-size:13.5px;align-items:flex-start;}
+  .row:last-child{border-bottom:none;}
+  .dot{width:8px;height:8px;border-radius:50%;background:var(--brass);margin-top:6px;flex:none;}
+  .dot.g{background:var(--green);} .dot.a{background:var(--amber);}
+  .row b{color:var(--ink);} .row .sub{color:var(--muted);}
+
+  .card.krizza{background:linear-gradient(180deg,#FBF6EC,#FFFFFF);border-color:var(--line);}
+  .badge-bbc{font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--brass-d);background:rgba(176,141,79,0.13);padding:3px 8px;border-radius:6px;font-weight:700;}
+
+  /* Drop zone */
+  .drop{border:2px dashed var(--line);border-radius:14px;padding:24px 16px;text-align:center;background:var(--bg2);cursor:pointer;transition:.15s;}
+  .drop:hover,.drop.over{border-color:var(--brass);background:#FAF4E8;}
+  .drop .dic{font-size:26px;color:var(--brass-d);}
+  .drop .t{font-weight:600;margin-top:7px;font-size:14px;}
+  .drop .s{font-size:12px;color:var(--muted);margin-top:3px;}
+  .drop input{display:none;}
+  .folderlink{display:inline-flex;align-items:center;gap:5px;font-size:12px;color:var(--brass-d);text-decoration:none;font-weight:600;margin-top:12px;}
+
+  /* Instructions */
+  textarea.instr{width:100%;border:1px solid var(--line);border-radius:12px;background:var(--bg2);color:var(--ink);font-family:var(--sans);font-size:14px;padding:13px;min-height:92px;resize:vertical;}
+  textarea.instr:focus{outline:none;border-color:var(--brass);}
+  .send{margin-top:11px;background:var(--walnut);color:#fff;border:none;border-radius:11px;padding:12px 20px;font-weight:600;font-size:14px;font-family:var(--sans);cursor:pointer;min-height:46px;display:inline-flex;align-items:center;gap:8px;}
+  .send:hover{background:var(--walnut2);}
+  .footnote{text-align:center;color:var(--soft);font-size:11.5px;margin-top:26px;line-height:1.6;}
+</style>
+</head>
+<body>
+
+<!-- inline Tabler-style icon symbols -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+  <symbol id="ic-cabinet" viewBox="0 0 24 24"><path d="M5 3h14v18H5z"/><path d="M12 3v18M5 12h14"/><path d="M9 7.5v1M9 16v1M15 7.5v1M15 16v1"/></symbol>
+  <symbol id="ic-cash" viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="12" rx="2"/><circle cx="12" cy="12" r="2.5"/><path d="M6 9.5v5M18 9.5v5"/></symbol>
+  <symbol id="ic-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+  <symbol id="ic-users" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><path d="M3 20c0-3 2.7-5 6-5s6 2 6 5"/><path d="M16 5.5a3 3 0 0 1 0 5.5M21 20c0-2.4-1.4-4.2-3.5-4.8"/></symbol>
+  <symbol id="ic-clipboard" viewBox="0 0 24 24"><rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v1H9z"/><path d="M9 11h6M9 15h4"/></symbol>
+  <symbol id="ic-upload" viewBox="0 0 24 24"><path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/><path d="M12 15V4M8 8l4-4 4 4"/></symbol>
+  <symbol id="ic-edit" viewBox="0 0 24 24"><path d="M4 20h4l10-10-4-4L4 16z"/><path d="M13.5 6.5l4 4"/></symbol>
+  <symbol id="ic-folder" viewBox="0 0 24 24"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></symbol>
+  <symbol id="ic-send" viewBox="0 0 24 24"><path d="M4 12l16-7-7 16-2-7z"/></symbol>
+</defs></svg>
+
+<div class="topbar">
+  <div class="topbar__in">
+    <div class="brand">
+      <img src="wooden-woodworks-logo.png" alt="Wooden Woodworks">
+      <div><div class="t">Wooden Woodworks</div><div class="s">Owner Dashboard</div></div>
+    </div>
+    <div class="tb-right">
+      <span class="sync"><span class="pulse"></span><span id="syncT">Updated just now</span></span>
+      <button class="out">Sign out</button>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+  <div class="hero">
+    <div class="hi">Good morning, <em>Oscar &amp; Marla</em></div>
+    <div class="tag">Here is where your business stands today. <b>Crafted for the way you live.</b></div>
+  </div>
+
+  <div class="grid">
+
+    <!-- PROJECTS -->
+    <div class="card col-2">
+      <div class="card__hd">
+        <div class="card__ti"><span class="ic"><svg class="i"><use href="#ic-cabinet"/></svg></span>Current Projects</div>
+        <a class="card__more" href="#">View all &rarr;</a>
+      </div>
+      <div class="proj-top">
+        <div id="projChart"></div>
+        <div class="proj-legend">
+          <div class="lg"><span class="sw" style="background:#5E7790"></span><b>1</b> In Design</div>
+          <div class="lg"><span class="sw" style="background:#C08A3E"></span><b>1</b> In Production</div>
+          <div class="lg"><span class="sw" style="background:#B08D4F"></span><b>1</b> Finishing</div>
+          <div class="lg"><span class="sw" style="background:#5E8B6D"></span><b>1</b> Installed</div>
+        </div>
+      </div>
+      <div style="margin-top:6px">
+        <a class="proj" href="#">
+          <div class="proj__main"><div class="proj__nm">Frameless Kitchen</div><div class="proj__meta">Salado · luxury build · finishing in-house</div><span class="proj__folder"><svg class="i"><use href="#ic-folder"/></svg> Project folder</span></div>
+          <span class="pill prod">In Production</span>
+        </a>
+        <a class="proj" href="#">
+          <div class="proj__main"><div class="proj__nm">Master Bath Vanity</div><div class="proj__meta">Waco · stained walnut · spray booth</div><span class="proj__folder"><svg class="i"><use href="#ic-folder"/></svg> Project folder</span></div>
+          <span class="pill finish">Finishing</span>
+        </a>
+        <a class="proj" href="#">
+          <div class="proj__main"><div class="proj__nm">Built-in Office Wall</div><div class="proj__meta">Austin · painted shaker · installed</div><span class="proj__folder"><svg class="i"><use href="#ic-folder"/></svg> Project folder</span></div>
+          <span class="pill installed">Installed</span>
+        </a>
+        <a class="proj" href="#">
+          <div class="proj__main"><div class="proj__nm">Showroom Cabinetry</div><div class="proj__meta">Salado · new showroom · in design</div><span class="proj__folder"><svg class="i"><use href="#ic-folder"/></svg> Project folder</span></div>
+          <span class="pill design">In Design</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- INVOICES -->
+    <div class="card">
+      <div class="card__hd"><div class="card__ti"><span class="ic"><svg class="i"><use href="#ic-cash"/></svg></span>Invoices</div></div>
+      <div class="nums">
+        <div class="num"><div class="v">$ —</div><div class="l">Outstanding</div></div>
+        <div class="num"><div class="v">$ —</div><div class="l">Paid this month</div></div>
+        <div class="num"><div class="v">—</div><div class="l">Open estimates</div></div>
+        <div class="num"><div class="v">—</div><div class="l">Awaiting deposit</div></div>
+      </div>
+      <div class="note-inline">You keep the numbers. We can sync from QuickBooks or you update these.</div>
+    </div>
+
+    <!-- REMINDERS -->
+    <div class="card">
+      <div class="card__hd"><div class="card__ti"><span class="ic"><svg class="i"><use href="#ic-clock"/></svg></span>Reminders</div></div>
+      <div class="row"><span class="dot a"></span><div><b>90-day review with BBC</b><div class="sub">June 14 · Krizza will send the agenda</div></div></div>
+      <div class="row"><span class="dot"></span><div><b>New showroom opening</b><div class="sub">Before September 2026 · document the progress</div></div></div>
+      <div class="row"><span class="dot g"></span><div><b>Approve this week's content</b><div class="sub">3 reels waiting in the BBC panel</div></div></div>
+    </div>
+
+    <!-- TEAM -->
+    <div class="card">
+      <div class="card__hd"><div class="card__ti"><span class="ic"><svg class="i"><use href="#ic-users"/></svg></span>Your Team</div><a class="card__more" href="#">Notes &rarr;</a></div>
+      <div class="row"><span class="dot"></span><div><b>Margie</b> <span class="sub">— finishing (paint + stain)</span></div></div>
+      <div class="row"><span class="dot"></span><div><b>Thomas</b> <span class="sub">— install crew</span></div></div>
+      <div class="row"><span class="dot a"></span><div><b>Lonnie &amp; Elio</b> <span class="sub">— new builders, ramping up</span></div></div>
+      <div class="row"><span class="dot"></span><div><b>Pablo</b> <span class="sub">— part-time shop support</span></div></div>
+    </div>
+
+    <!-- FROM KRIZZA -->
+    <div class="card krizza">
+      <div class="card__hd"><div class="card__ti"><span class="ic"><svg class="i"><use href="#ic-clipboard"/></svg></span>From Krizza</div><span class="badge-bbc">Your BBC team</span></div>
+      <div class="row"><span class="dot g"></span><div><b>Marla's Google review is now live</b><div class="sub">Featured on your case-study page on balaynibruno.co</div></div></div>
+      <div class="row"><span class="dot"></span><div><b>Content this week</b><div class="sub">Sample: 4 reels + 2 carousels drafted, awaiting approval</div></div></div>
+      <div class="row"><span class="dot"></span><div><b>Leads</b><div class="sub">Sample: new builder inquiries tracked in HubSpot</div></div></div>
+      <div class="row"><span class="dot"></span><div><b>Google Profile</b><div class="sub">Sample: 2 posts published, new project photos uploaded</div></div></div>
+    </div>
+
+    <!-- DROP CONTENT -->
+    <div class="card">
+      <div class="card__hd"><div class="card__ti"><span class="ic"><svg class="i"><use href="#ic-upload"/></svg></span>Drop Content for Krizza</div></div>
+      <label class="drop" id="drop" for="ddrop">
+        <div class="dic"><svg class="i" style="width:28px;height:28px"><use href="#ic-upload"/></svg></div>
+        <div class="t">Drop photos, videos, or graphics here</div>
+        <div class="s">Goes straight to the folder Krizza edits from</div>
+        <input id="ddrop" type="file" multiple>
+      </label>
+      <a class="folderlink" href="#"><svg class="i"><use href="#ic-folder"/></svg> Open the shared content folder</a>
+    </div>
+
+    <!-- INSTRUCTIONS -->
+    <div class="card">
+      <div class="card__hd"><div class="card__ti"><span class="ic"><svg class="i"><use href="#ic-edit"/></svg></span>Notes &amp; Instructions</div></div>
+      <textarea class="instr" id="instr" placeholder="Leave a note or instruction for your BBC team... (e.g., 'Post the Salado kitchen Friday', 'Hold the Austin reel until the client approves')"></textarea>
+      <button class="send" id="sendBtn"><svg class="i"><use href="#ic-send"/></svg> Send to Krizza</button>
+    </div>
+
+  </div>
+
+  <div class="footnote">Wooden Woodworks · Owner view · Sample data shown for layout.<br>Live data, uploads, and notes save to the system (NocoDB) when wired. Powered by Balay ni Bruno &amp; Co.</div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+<script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
+<script>
+  // Project status donut (ApexCharts)
+  try{
+    new ApexCharts(document.querySelector('#projChart'), {
+      chart:{type:'donut',height:130,width:130,animations:{enabled:true}},
+      series:[1,1,1,1], labels:['In Design','In Production','Finishing','Installed'],
+      colors:['#5E7790','#C08A3E','#B08D4F','#5E8B6D'],
+      legend:{show:false}, dataLabels:{enabled:false}, stroke:{width:2,colors:['#fff']},
+      plotOptions:{pie:{donut:{size:'66%',labels:{show:true,total:{show:true,label:'Projects',fontFamily:'Georgia',color:'#5E4329',formatter:()=>'4'}}}}},
+      tooltip:{enabled:true}
+    }).render();
+  }catch(e){ document.querySelector('#projChart').style.display='none'; }
+
+  // Toast feedback (Notyf) — mockups; real save = NocoDB write-back later
+  var notyf; try{ notyf=new Notyf({duration:2600,position:{x:'center',y:'top'},types:[{type:'success',background:'#5E4329'}]}); }catch(e){}
+  function toast(m){ if(notyf) notyf.success(m); }
+
+  var drop=document.getElementById('drop'), ddrop=document.getElementById('ddrop');
+  ;['dragover','dragenter'].forEach(ev=>drop.addEventListener(ev,e=>{e.preventDefault();drop.classList.add('over');}));
+  ;['dragleave','drop'].forEach(ev=>drop.addEventListener(ev,e=>{e.preventDefault();drop.classList.remove('over');}));
+  drop.addEventListener('drop',e=>{ const n=e.dataTransfer.files.length; if(n) toast(n+' file'+(n>1?'s':'')+' sent to Krizza’s folder'); });
+  ddrop.addEventListener('change',e=>{ const n=e.target.files.length; if(n) toast(n+' file'+(n>1?'s':'')+' sent to Krizza’s folder'); });
+
+  document.getElementById('sendBtn').addEventListener('click',()=>{
+    var t=document.getElementById('instr'); if(t.value.trim()){ toast('Note sent to Krizza'); t.value=''; } else { toast('Write a note first'); }
+  });
+</script>
+</body>
+</html>
