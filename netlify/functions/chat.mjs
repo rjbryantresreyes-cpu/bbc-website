@@ -9,6 +9,30 @@
 const GROQ_URL = "https://api.groq.com/openai/v1/chat/completions";
 const MODEL = "llama-3.3-70b-versatile"; // fast, free tier, good enough for routing + Q&A
 
+// ===== Security: only logged-in /os users (Supabase) can use the BBC brain. =====
+const SUPABASE_URL = "https://ctoeuikxoqlhnebgsygp.supabase.co";
+const SUPABASE_KEY = "sb_publishable_WnJ57fk-ymDuT2xtVZRcHg_khZCWgJL"; // publishable (safe in client + here)
+async function verifyUser(token) {
+  if (!token) return null;
+  try {
+    const r = await fetch(SUPABASE_URL + "/auth/v1/user", {
+      headers: { "Authorization": "Bearer " + token, "apikey": SUPABASE_KEY }
+    });
+    if (!r.ok) return null;
+    const u = await r.json();
+    return u && u.id ? u : null;
+  } catch { return null; }
+}
+// Simple in-memory per-IP rate limit (backstop; resets on cold start). 40 requests / 60s.
+const HITS = new Map();
+function rateLimited(ip) {
+  const now = Date.now(), win = 60000, max = 40;
+  const arr = (HITS.get(ip) || []).filter(t => now - t < win);
+  arr.push(now); HITS.set(ip, arr);
+  if (HITS.size > 500) { for (const k of HITS.keys()) { if (k !== ip) { HITS.delete(k); if (HITS.size < 300) break; } } }
+  return arr.length > max;
+}
+
 // One-line personas. The blend leads with the first picked agent; Cuh is the default all-rounder.
 const PERSONAS = {
   Cuh:   "Cuh (Luke Clyde / LC) — RJ's main all-around AI and co-founder. Direct + warm. Sees the whole BBC system.",
@@ -129,7 +153,7 @@ export default async (req) => {
   const CORS = {
     "access-control-allow-origin": "*",
     "access-control-allow-methods": "POST, OPTIONS",
-    "access-control-allow-headers": "content-type"
+    "access-control-allow-headers": "content-type, authorization"
   };
   const json = (obj, status = 200) =>
     new Response(JSON.stringify(obj), { status, headers: { "content-type": "application/json", ...CORS } });
@@ -140,12 +164,24 @@ export default async (req) => {
   const key = process.env.GROQ_API_KEY;
   if (!key) return json({ error: "GROQ_API_KEY not set in Netlify env.", reply: "My brain isn't connected yet — RJ needs to add the free Groq key in Netlify (Site configuration → Environment variables → GROQ_API_KEY)." }, 200);
 
+  // Rate limit per IP (backstop against quota abuse).
+  const ip = req.headers.get("x-nf-client-connection-ip") || (req.headers.get("x-forwarded-for") || "").split(",")[0].trim() || "unknown";
+  if (rateLimited(ip)) return json({ error: "rate limit", reply: "Easy there — too many messages too fast. Give it a few seconds." }, 429);
+
   let body;
   try { body = await req.json(); } catch { return json({ error: "bad json" }, 400); }
 
   const scope = body.scope || null;
   const client = body.client || null;
   const drive = body.drive || null;
+
+  // Auth: the BBC brain requires a logged-in /os user (Supabase). Known client souls (e.g. Cavalry CC, no login) pass on rate-limit only for now.
+  if (!client || !CLIENT_SOULS[client]) {
+    const auth = req.headers.get("authorization") || "";
+    const token = auth.toLowerCase().startsWith("bearer ") ? auth.slice(7) : "";
+    const user = await verifyUser(token);
+    if (!user) return json({ error: "unauthorized", reply: "Please sign in to /os to use Cuh." }, 401);
+  }
   const history = Array.isArray(body.messages) ? body.messages.slice(-12) : [];
   const messages = [
     { role: "system", content: systemPrompt(body.agents, body.task, scope, client, drive) },
