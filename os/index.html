@@ -3527,9 +3527,10 @@
   };
   window.curView='home'; window.__drivePath=[];
   // Wave 2: flatten the synced Drive tree into a folder index the brain can search (free, no Drive API).
+  function driveSearchUrl(name){ return 'https://drive.google.com/drive/search?q='+encodeURIComponent(name||''); }
   function driveIndexLines(){
     const out=[]; const root=(D.drive&&D.drive.tree)||{name:'BBC Drive'};
-    (function walk(node,path){ (node.children||[]).forEach(c=>{ const p=path.concat(c.name); out.push(p.join(' / ')+(c.url?'  ['+c.url+']':'')); if(c.children&&c.children.length) walk(c,p); }); })(root,[root.name||'BBC Drive']);
+    (function walk(node,path){ (node.children||[]).forEach(c=>{ const p=path.concat(c.name); out.push(p.join(' / ')+'  ['+(c.url||driveSearchUrl(c.name))+']'); if(c.children&&c.children.length) walk(c,p); }); })(root,[root.name||'BBC Drive']);
     return out;
   }
   function wantsDrive(t){ return /\b(folder|where|locat|open |find |drive|file|path|which|stored|saved|directory)\b/i.test(t||''); }
@@ -3557,7 +3558,7 @@
   function findFolderUrl(name){
     let hit=null; const n=(name||'').toLowerCase();
     (function walk(node){ (node&&node.children||[]).forEach(c=>{ if(!hit&&c.name&&c.name.toLowerCase().includes(n)) hit=c; if(c.children) walk(c); }); })(D.drive&&D.drive.tree||{});
-    return hit?(hit.url||(D.drive&&D.drive.rootUrl)):null;
+    return hit?(hit.url||driveSearchUrl(hit.name)):null;
   }
   window.runAction=(a)=>{
     if(!a||!a.action) return;
