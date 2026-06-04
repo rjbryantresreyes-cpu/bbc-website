@@ -1720,6 +1720,14 @@
       "noindex": false
     },
     {
+      "name": "How We Built a 3D Product Designer Customers Use in Their Browser",
+      "path": "how-we-built-3d-product-designer-free.html",
+      "group": "Insights / blog",
+      "purpose": "A client wanted an interactive 3D design center like a much bigger competitor. We studied how it was built, then made our own version with free tools. Spin it, change the finish, and view it in your room. No app fees.",
+      "status": "live",
+      "noindex": false
+    },
+    {
       "name": "How We Built a Custom AI Family for a Woodworking Business",
       "path": "how-we-built-woody-ai-family-wooden-woodworks.html",
       "group": "Insights / blog",
@@ -3312,7 +3320,8 @@
     window.scrollTo(0,0); sheet.classList.remove('open');
   };
   window.clientCC=(i)=>{
-    if(D.clients[i] && D.clients[i].name==='Cavalry Group') return cavalryCC(i);
+    // Cavalry Group has its own standalone command center (the one Kenz uses) — always route there.
+    if(D.clients[i] && D.clients[i].name==='Cavalry Group'){ window.location.href='/os/cavalry/'; return; }
     const c=D.clients[i], col=cColor(c), folder=c.folder||CFOLDER[c.name];
     const hasSite=c.site&&c.site!=='-', siteUrl=hasSite?'https://'+c.site.replace(/^https?:\/\//,''):'';
     const isCav=c.name==='Cavalry Group';
