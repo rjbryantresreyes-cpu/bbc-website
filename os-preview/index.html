@@ -452,6 +452,8 @@
   .msg.u{align-self:flex-end;background:var(--gold);color:#0A1422;border-bottom-right-radius:4px;}
   .msg.a{align-self:flex-start;background:var(--bg2);border:1px solid var(--line);color:var(--ink);border-bottom-left-radius:4px;}
   .msg.sys{align-self:center;background:rgba(212,175,55,0.1);color:var(--gold2);font-size:11.5px;font-family:var(--mono);text-align:center;}
+  .act-btn{align-self:flex-start;margin-top:-2px;background:linear-gradient(135deg,var(--gold),var(--goldB));color:#0A1422;border:none;border-radius:10px;font-family:var(--ui);font-weight:700;font-size:12.5px;padding:8px 13px;cursor:pointer}
+  .act-btn:active{transform:scale(.96)}
   .cs-input{display:flex;gap:8px;padding:12px 16px calc(14px + env(safe-area-inset-bottom));border-top:1px solid var(--line);background:var(--bg2);}
   .cs-input textarea{flex:1;background:var(--bg3);border:1px solid var(--line);border-radius:12px;color:var(--ink);padding:12px;font-size:14px;font-family:var(--ui);resize:none;max-height:120px;}
   .cs-input textarea:focus{outline:none;border-color:var(--gold);}
@@ -590,7 +592,7 @@
 <div class="cuhmini" id="cuhMini">
   <div class="cm-head">
     <span class="cm-dot"></span>
-    <div class="cm-ttl">Cuh<span class="cm-scope" id="cm-scope">This page</span></div>
+    <div class="cm-ttl"><span id="cm-name">Cuh</span><span class="cm-scope" id="cm-scope">This page</span></div>
     <button class="cm-x" onclick="closeMini()" aria-label="Close">&times;</button>
   </div>
   <div class="cm-thread" id="cm-thread"></div>
@@ -618,7 +620,7 @@
 {
   "meta": {
     "updated": "2026-06-04",
-    "pendingCount": 8
+    "pendingCount": 9
   },
   "owners": {
     "Vidz": "#A78BFA",
@@ -1242,10 +1244,19 @@
           "name": "NPC-Portfolio-System"
         },
         {
-          "name": ".claude"
+          "name": "08_KNOWLEDGE_BASE"
         },
         {
-          "name": "01_LEADS"
+          "name": "07_MARKETING"
+        },
+        {
+          "name": "06_FINANCE"
+        },
+        {
+          "name": "05_OPERATIONS"
+        },
+        {
+          "name": "03_ARCHIVED_CLIENTS"
         },
         {
           "name": "02_ACTIVE_CLIENTS",
@@ -1254,13 +1265,13 @@
               "name": "4OCEAN"
             },
             {
-              "name": "FIRST-CLASS-FINISHES"
+              "name": "WOODEN-WOODWORKS"
             },
             {
               "name": "HOME-VISION-STUDIO"
             },
             {
-              "name": "WOODEN-WOODWORKS"
+              "name": "FIRST-CLASS-FINISHES"
             },
             {
               "name": "HI-UP-ROOFING"
@@ -1286,19 +1297,10 @@
           ]
         },
         {
-          "name": "03_ARCHIVED_CLIENTS"
+          "name": "01_LEADS"
         },
         {
-          "name": "05_OPERATIONS"
-        },
-        {
-          "name": "06_FINANCE"
-        },
-        {
-          "name": "07_MARKETING"
-        },
-        {
-          "name": "08_KNOWLEDGE_BASE"
+          "name": ".claude"
         },
         {
           "name": "BBC WEBSITE HTML"
@@ -1307,40 +1309,43 @@
           "name": "04_TEAM"
         },
         {
+          "name": "09_POTENTIAL CLIENTS"
+        },
+        {
           "name": "BBC_AI_FAMILY",
           "children": [
             {
-              "name": "CASEY"
-            },
-            {
-              "name": "BOOGY"
-            },
-            {
-              "name": "EMY"
-            },
-            {
-              "name": "SONNY"
-            },
-            {
               "name": "BRUNZ"
-            },
-            {
-              "name": "KRIZ"
-            },
-            {
-              "name": "MAI"
             },
             {
               "name": "WEBBY"
             },
             {
+              "name": "MAI"
+            },
+            {
+              "name": "KRIZ"
+            },
+            {
+              "name": "SONNY"
+            },
+            {
+              "name": "EMY"
+            },
+            {
+              "name": "BOOGY"
+            },
+            {
+              "name": "CASEY"
+            },
+            {
               "name": "_TEMPLATE"
             },
             {
-              "name": "AGENT_PROFILES"
+              "name": "JENNY"
             },
             {
-              "name": "JENNY"
+              "name": "AGENT_PROFILES"
             },
             {
               "name": "_VAULT"
@@ -1367,9 +1372,6 @@
               "name": "_BRAND"
             }
           ]
-        },
-        {
-          "name": "09_POTENTIAL CLIENTS"
         },
         {
           "name": "Daryl BBC Folder"
@@ -1451,6 +1453,9 @@
             },
             {
               "name": "2026-06-09_ai_family_build_workflow"
+            },
+            {
+              "name": "2026-06-04_ww_marla_review"
             }
           ]
         },
@@ -1890,6 +1895,14 @@
       "path": "hire-social-media-manager-what-to-look-for.html",
       "group": "Insights / blog",
       "purpose": "A lot of people call themselves social media managers. Here is how to tell the difference between someone who posts and someone who actually grows a business.",
+      "status": "live",
+      "noindex": false
+    },
+    {
+      "name": "Wooden Woodworks",
+      "path": "wooden-woodworks.html",
+      "group": "Insights / blog",
+      "purpose": "How Balay ni Bruno &amp; Co. runs the content, brand, lead generation, and CRM systems behind Wooden Woodworks, a veteran-owned custom cabinetry shop in Central Texas.",
       "status": "live",
       "noindex": false
     },
@@ -2713,6 +2726,12 @@
       "date": "2026-06-09",
       "slug": "ai_family_build_workflow",
       "posted": false
+    },
+    {
+      "name": "2026-06-04_ww_marla_review",
+      "date": "2026-06-04",
+      "slug": "ww_marla_review",
+      "posted": false
     }
   ]
 }
@@ -2729,6 +2748,21 @@
   const pillStatus=s=>`<span class="pill p-${s==='active'?'active':s==='dev'?'dev':'concept'}">${s}</span>`;
 
   function openSheet(html){ sheetBody.innerHTML=html; sheet.classList.add('open'); }
+  window.closeSheet=()=>sheet.classList.remove('open');
+  // Calendar: tap a date -> day sheet with what's scheduled + plan action.
+  window.calDay=(key)=>{
+    const C=D.calendar||{}; const p=(C.posts&&C.posts[key])||{}; const evs=((C.events||[]).filter(e=>e.date===key));
+    const dt=new Date(key+'T00:00:00');
+    const DOWS=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+    const MON=['January','February','March','April','May','June','July','August','September','October','November','December'];
+    const title=DOWS[dt.getDay()]+', '+MON[dt.getMonth()]+' '+dt.getDate();
+    let rows='';
+    if(p.graphic) rows+=`<div class="kv"><b>Graphic:</b> <span>${esc(p.graphic)}${p.posted?' ✓ posted':''}</span></div>`;
+    if(p.reel) rows+=`<div class="kv"><b>Reel:</b> <span>${esc(p.reel)}${p.posted?' ✓ posted':''}</span></div>`;
+    evs.forEach(e=>{ rows+=`<div class="kv"><b>Event:</b> <span>${esc(e.label)}</span></div>`; });
+    if(!rows) rows='<div class="kv"><span>Nothing scheduled this day yet.</span></div>';
+    openSheet(`<h3 style="font-family:var(--display);color:var(--ink);margin-bottom:4px">${esc(title)}</h3><div class="sec">Scheduled</div>${rows}<div class="sec">Plan</div><button class="ideabtn" onclick="closeSheet();openChat('social','Content for ${esc(title)} — ')"><span class="i">＋</span>Plan content for this day with Cuh</button>`);
+  };
   sheet.onclick=e=>{ if(e.target===sheet) sheet.classList.remove('open'); };
 
   /* ---------- VIEWS ---------- */
@@ -3069,6 +3103,7 @@
       </div>
       <div class="sec">Team</div><div class="panel">${team}</div>
       <div class="gauge-sub" style="text-align:left;margin-top:10px">Cavalry's command center, scoped to Tre's real workflows. Live board data + Kenz's login access turn on in the final step.</div>`;
+    window.curClient='cavalry'; // the floating chatbot becomes Ester (Cavalry's AI) while in this view
     window.scrollTo(0,0); sheet.classList.remove('open');
   };
   window.clientCC=(i)=>{
@@ -3168,7 +3203,7 @@
         if(post.graphic) body+=`<div class="mev mev-graphic ${post.posted?'posted':''}">▦ ${esc(post.graphic)}</div>`;
         if(post.reel) body+=`<div class="mev mev-reel ${post.posted?'posted':''}">▶ ${esc(post.reel)}</div>`;
         evs.forEach(e=>{ body+=`<div class="mev mev-event">🎉 ${esc(e.label)}<span class="mev-rem">+ make a content for this</span></div>`; });
-        cellsHtml+=`<div class="mcell ${inMonth?'':'out'} ${isToday?'today':''}">
+        cellsHtml+=`<div class="mcell ${inMonth?'':'out'} ${isToday?'today':''}" onclick="calDay('${key}')" style="cursor:pointer">
           <div class="mcell-d"><span class="mcell-num">${dt.getDate()}</span>${inMonth&&slot?`<span class="mcell-slot">${esc(slot.slot)}</span>`:''}</div>
           ${body}</div>`;
       }
@@ -3524,6 +3559,49 @@
     more:{cat:'Other',project:'BBC Command Center',label:'More'}
   };
   window.curView='home'; window.__drivePath=[];
+  // Wave 2: flatten the synced Drive tree into a folder index the brain can search (free, no Drive API).
+  function driveSearchUrl(name){ return 'https://drive.google.com/drive/search?q='+encodeURIComponent(name||''); }
+  function driveIndexLines(){
+    const out=[]; const root=(D.drive&&D.drive.tree)||{name:'BBC Drive'};
+    (function walk(node,path){ (node.children||[]).forEach(c=>{ const p=path.concat(c.name); out.push(p.join(' / ')+'  ['+(c.url||driveSearchUrl(c.name))+']'); if(c.children&&c.children.length) walk(c,p); }); })(root,[root.name||'BBC Drive']);
+    return out;
+  }
+  function wantsDrive(t){ return /\b(folder|where|locat|open |find |drive|file|path|which|stored|saved|directory)\b/i.test(t||''); }
+  // Step 2: compact live snapshot of real dashboard state, so the brain answers about what's actually happening.
+  function liveSnapshot(view){
+    const L=[];
+    try{ if(D.meta&&D.meta.updated) L.push('Dashboard data updated: '+D.meta.updated); }catch(e){}
+    try{ const cl=(D.clients||[]); if(cl.length) L.push('CLIENTS ('+cl.length+'): '+cl.map(c=>c.name+(c.status&&c.status!=='active'?' ['+c.status+']':'')+(c.ai?', AI '+c.ai:'')+(c.handler?', handled by '+c.handler:'')).join(' | ')); }catch(e){}
+    try{ const pend=(D.queue||[]).filter(q=>!q.posted).map(q=>q.slug||q.name); if(pend.length) L.push('PENDING TO POST ('+pend.length+'): '+pend.join(', ')); }catch(e){}
+    try{ const wt=(D.websiteTasks||[]); if(wt.length) L.push('WEBSITE TO-DO ('+wt.length+'): '+wt.join('; ')); }catch(e){}
+    try{ const wf=(D.workflows||[]); if(wf.length) L.push('WORKFLOW AREAS: '+wf.map(w=>w.title||w.name||w.area).filter(Boolean).slice(0,14).join(', ')); }catch(e){}
+    try{ const af=(D.aiFamily||[]); if(af.length) L.push('AI FAMILY ('+af.length+'): '+af.map(a=>a.name||a.key).filter(Boolean).join(', ')); }catch(e){}
+    return L.join('\n');
+  }
+  // Step 3: Cuh proposes ONE action; user taps to run it (never auto-executed).
+  const ACTION_VIEWS=['home','clients','crm','inbox','websites','workflows','social','reminders','folders','news'];
+  function parseAction(text){
+    const m=(text||'').match(/(^|\n)\s*ACTION\s*(\{[\s\S]*\})\s*$/);
+    if(!m) return {clean:text,action:null};
+    let a=null; try{ a=JSON.parse(m[2]); }catch(e){ return {clean:text,action:null}; }
+    if(!a||!a.action) return {clean:text,action:null};
+    if(a.action==='open_page'&&!ACTION_VIEWS.includes(a.view)) return {clean:text.replace(m[0],'').trim(),action:null};
+    return {clean:text.replace(m[0],'').trim(),action:a};
+  }
+  function findFolderUrl(name){
+    let hit=null; const n=(name||'').toLowerCase();
+    (function walk(node){ (node&&node.children||[]).forEach(c=>{ if(!hit&&c.name&&c.name.toLowerCase().includes(n)) hit=c; if(c.children) walk(c); }); })(D.drive&&D.drive.tree||{});
+    return hit?(hit.url||driveSearchUrl(hit.name)):null;
+  }
+  window.runAction=(a)=>{
+    if(!a||!a.action) return;
+    try{ document.getElementById('cuhMini').classList.remove('open'); document.getElementById('cuhFab').style.display=''; }catch(e){}
+    try{ closeChat(); }catch(e){}
+    if(a.action==='open_page'){ go(a.view); }
+    else if(a.action==='open_folder'){ const u=findFolderUrl(a.name); window.open(u||(D.drive&&D.drive.rootUrl)||'#','_blank'); }
+    else if(a.action==='new_task'){ openChat(ACTION_VIEWS.includes(a.view)?a.view:'home', a.title||''); }
+  };
+  function actionBtn(a){ return a?`<button class="act-btn" onclick='runAction(${JSON.stringify(a).replace(/"/g,"&quot;").replace(/'/g,"&#39;")})'>▶ ${esc(a.label||'Do it')}</button>`:''; }
   function driveNodeAt(path){ let n=D.drive.tree; (path||[]).forEach(name=>{ const c=(n.children||[]).find(x=>x.name===name); if(c) n=c; }); return n; }
   window.driveGo=(name)=>{ const node=driveNodeAt(window.__drivePath); const c=(node.children||[]).find(x=>x.name===name); if(!c) return; if(c.children&&c.children.length){ window.__drivePath.push(name); go('folders'); } else { window.open(c.url||D.drive.rootUrl,'_blank'); } };
   window.driveUp=(i)=>{ window.__drivePath=window.__drivePath.slice(0,i); go('folders'); };
@@ -3539,7 +3617,7 @@
       <button class="ideabtn" onclick="window.open('${curUrl}','_blank')"><span class="i">📂</span>Open this folder in Google Drive</button>
       <div class="foldergrid">${body}</div>`;
   };
-  window.go=v=>{ window.curView=v; app.innerHTML=`<div class="view">${views[v]()}</div>`; window.scrollTo(0,0);
+  window.go=v=>{ window.curView=v; window.curClient=null; app.innerHTML=`<div class="view">${views[v]()}</div>`; window.scrollTo(0,0);
     document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('active',b.dataset.v===v));
     sheet.classList.remove('open'); if(v==='crm'&&window.loadCampaignStats){ window.loadCampaignStats(); window.loadInbox&&window.loadInbox('crm-inbox',true); window.loadCrmContacts&&window.loadCrmContacts(); } if(v==='inbox'&&window.loadInbox) window.loadInbox(); if(v==='home'&&window.loadHomeAttention) window.loadHomeAttention(); };
   window.filterCards=(inp,wrapId)=>{ const q=inp.value.toLowerCase(); const wrap=document.getElementById(wrapId);
@@ -3560,7 +3638,7 @@
   function renderThread(){
     const el=document.getElementById('cs-thread');
     if(!csThread.length){ el.innerHTML=`<div class="cs-empty"><h3 style="font-family:var(--display);color:var(--ink);margin-bottom:8px">Start with Cuh</h3><p>Type below. Pick your agent(s) and fill the task details so this chat is saved as an organized workflow.</p></div>`; return; }
-    el.innerHTML=csThread.map(m=>`<div class="msg ${m.r}">${esc(m.t)}</div>`).join('');
+    el.innerHTML=csThread.map(m=>`<div class="msg ${m.r}">${esc(m.t)}</div>`+(m.action?actionBtn(m.action):'')).join('');
     el.scrollTop=el.scrollHeight;
   }
   function renderSaved(){
@@ -3612,11 +3690,14 @@
     // history for the brain: map our thread roles to chat roles (skip sys notices)
     const history=csThread.filter(m=>m.r==='u'||m.r==='a').map(m=>({role:m.r==='u'?'user':'assistant',content:m.t}));
     const task={title:document.getElementById('cs-title').value,desc:document.getElementById('cs-desc').value,gprompt:document.getElementById('cs-gprompt').value,cat:document.getElementById('cs-cat').value,project:document.getElementById('cs-project').value,client:document.getElementById('cs-client').value};
+    const drive=wantsDrive(v)?{root:D.drive&&D.drive.rootUrl,folders:driveIndexLines()}:null;
+    const tok=window.bbcToken?await window.bbcToken():null;
     try{
-      const res=await fetch('/.netlify/functions/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({messages:history,agents:[...csAgents],task,scope:{mode:'dashboard'}})});
+      const res=await fetch('/.netlify/functions/chat',{method:'POST',headers:{'Content-Type':'application/json',...(tok?{'Authorization':'Bearer '+tok}:{})},body:JSON.stringify({messages:history,agents:[...csAgents],task,scope:{mode:'dashboard'},drive,context:liveSnapshot('dashboard')})});
       const d=await res.json();
       csThread.pop(); // remove the "thinking" notice
-      csThread.push({r:'a',t:d.reply||d.error||'(no reply)'});
+      const pa=parseAction(d.reply||d.error||'(no reply)');
+      csThread.push({r:'a',t:pa.clean,action:pa.action});
     }catch(e){
       csThread.pop();
       csThread.push({r:'a',t:"Couldn't reach the brain. Check the connection and try again."});
@@ -3624,19 +3705,26 @@
     csBusy=false; renderThread();
   };
 
-  /* ===== Compact page-scoped Cuh assistant ===== */
-  let miniThread=[]; let miniBusy=false; let miniView='home';
+  /* ===== Compact page-scoped assistant (Cuh for BBC, the client's AI inside a client CC) ===== */
+  let miniThread=[]; let miniBusy=false; let miniView='home'; let miniClient=null;
+  // Client souls available in-dashboard. key = soul sent to the brain; name = how it shows.
+  const CLIENT_AI={ cavalry:{name:'Ester',label:'Cavalry'} };
   function miniLabel(v){ return (CHAT_CTX[v]||CHAT_CTX.home).label; }
+  function miniAI(){ return (miniClient&&CLIENT_AI[miniClient])?CLIENT_AI[miniClient]:{name:'Cuh',label:miniLabel(miniView)}; }
   function renderMini(){
-    const el=document.getElementById('cm-thread');
-    if(!miniThread.length){ el.innerHTML=`<div class="cm-empty">Ask me anything about the <b>${esc(miniLabel(miniView))}</b> page — questions, what to do next, or a command. I'll keep it scoped here.</div>`; return; }
-    el.innerHTML=miniThread.map(m=>`<div class="msg ${m.r}">${esc(m.t)}</div>`).join('');
+    const el=document.getElementById('cm-thread'); const ai=miniAI();
+    if(!miniThread.length){ el.innerHTML=`<div class="cm-empty">Ask <b>${esc(ai.name)}</b> anything about <b>${esc(ai.label)}</b> — questions, what to do next, or a command. I'll keep it scoped here.</div>`; return; }
+    el.innerHTML=miniThread.map(m=>`<div class="msg ${m.r}">${esc(m.t)}</div>`+(m.action?actionBtn(m.action):'')).join('');
     el.scrollTop=el.scrollHeight;
   }
   window.openMini=(viewKey)=>{
     const v=viewKey||window.curView||'home';
-    if(miniView!==v){ miniView=v; miniThread=[]; } // new page => fresh scoped thread
-    document.getElementById('cm-scope').textContent='This page · '+miniLabel(v);
+    const cl=window.curClient||null;
+    if(miniView!==v||miniClient!==cl){ miniView=v; miniClient=cl; miniThread=[]; } // new page/client => fresh scoped thread
+    const ai=miniAI();
+    document.getElementById('cm-name').textContent=ai.name;
+    document.getElementById('cm-scope').textContent=(miniClient?'Client · ':'This page · ')+ai.label;
+    document.getElementById('cm-msg').setAttribute('placeholder','Ask '+ai.name+' about '+ai.label+'…');
     document.getElementById('cuhMini').classList.add('open');
     document.getElementById('cuhFab').style.display='none';
     renderMini(); setTimeout(()=>document.getElementById('cm-msg').focus(),120);
@@ -3646,15 +3734,23 @@
   window.miniSend=async()=>{
     if(miniBusy) return;
     const ta=document.getElementById('cm-msg'); const v=ta.value.trim(); if(!v) return;
+    const ai=miniAI();
     miniThread.push({r:'u',t:v}); ta.value=''; ta.style.height='auto';
-    miniThread.push({r:'sys',t:'Cuh is thinking…'}); renderMini();
+    miniThread.push({r:'sys',t:ai.name+' is thinking…'}); renderMini();
     miniBusy=true;
     const history=miniThread.filter(m=>m.r==='u'||m.r==='a').map(m=>({role:m.r==='u'?'user':'assistant',content:m.t}));
+    // BBC Cuh gets Drive + live data; a client soul (Ester) does NOT (brand purity).
+    const drive=(!miniClient&&wantsDrive(v))?{root:D.drive&&D.drive.rootUrl,folders:driveIndexLines()}:null;
+    const tok=window.bbcToken?await window.bbcToken():null;
+    const payload=miniClient
+      ? {messages:history,client:miniClient,scope:{mode:'page',page:ai.label}}
+      : {messages:history,agents:['Cuh'],scope:{mode:'page',page:miniLabel(miniView)},drive,context:liveSnapshot(miniView)};
     try{
-      const res=await fetch('/.netlify/functions/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({messages:history,agents:['Cuh'],scope:{mode:'page',page:miniLabel(miniView)}})});
+      const res=await fetch('/.netlify/functions/chat',{method:'POST',headers:{'Content-Type':'application/json',...(tok?{'Authorization':'Bearer '+tok}:{})},body:JSON.stringify(payload)});
       const d=await res.json();
       miniThread.pop();
-      miniThread.push({r:'a',t:d.reply||d.error||'(no reply)'});
+      const pa=parseAction(d.reply||d.error||'(no reply)');
+      miniThread.push({r:'a',t:pa.clean,action:pa.action});
     }catch(e){
       miniThread.pop();
       miniThread.push({r:'a',t:"Couldn't reach the brain. Try again in a sec."});
@@ -3696,6 +3792,11 @@
   }
   function showApp(){ document.body.classList.add('authed'); }
   function showGate(){ document.body.classList.remove('authed'); }
+
+  // Expose the logged-in user's access token so the brain can verify who's calling it.
+  window.bbcToken=async function(){
+    try{ var c=initClient(); if(!c) return null; var r=await c.auth.getSession(); return (r&&r.data&&r.data.session&&r.data.session.access_token)||null; }catch(e){ return null; }
+  };
 
   window.bbcLogout=async function(){
     var c=initClient(); if(c){ try{ await c.auth.signOut(); }catch(e){} }
