@@ -509,9 +509,43 @@
   .auth-foot{color:var(--muted);font-size:11px;margin-top:18px;}
   .hdr-logout{background:none;border:1px solid var(--line);color:var(--muted);border-radius:9px;font-size:11px;padding:6px 10px;cursor:pointer;font-family:var(--ui);min-height:32px;}
   .hdr-logout:hover{color:var(--ink);border-color:var(--gold);}
+
+  /* ===== UI/UX polish pass (2026-06-05) — navy/gold, additive ===== */
+  /* smooth page transitions */
+  @keyframes bbcViewIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+  #app .view{animation:bbcViewIn .24s cubic-bezier(.2,.7,.2,1)}
+  /* tactile panels/cards */
+  .panel,.card,.clientbox,.dashcard,.wfcat{transition:transform .15s ease,box-shadow .15s ease,border-color .15s ease}
+  .panel.tap:hover,.card:hover,.clientbox:hover{transform:translateY(-2px);box-shadow:0 10px 26px rgba(0,0,0,.34)}
+  .panel.tap:active,.card:active,.clientbox:active{transform:translateY(0)}
+  button{transition:transform .08s ease,filter .15s ease,background .15s ease}
+  button:active{transform:scale(.97)}
+  .nav button{transition:color .15s ease,background .15s ease}
+  /* toasts */
+  #bbc-toasts{position:fixed;left:50%;bottom:84px;transform:translateX(-50%);z-index:9999;display:flex;flex-direction:column;gap:8px;align-items:center;pointer-events:none;max-width:92vw}
+  .bbc-toast{pointer-events:auto;display:flex;align-items:center;gap:9px;background:#101a2b;border:1px solid #22324d;border-left:3px solid var(--gold);color:#F5F1EA;font-family:var(--ui);font-size:14px;padding:11px 15px;border-radius:11px;box-shadow:0 12px 34px rgba(0,0,0,.45);animation:bbcToastIn .25s cubic-bezier(.2,.7,.2,1);max-width:480px}
+  .bbc-toast.ok{border-left-color:#4ADE80}.bbc-toast.err{border-left-color:#EF6B6B}.bbc-toast.info{border-left-color:var(--gold)}
+  .bbc-toast .ti{font-size:15px}
+  .bbc-toast.hide{animation:bbcToastOut .2s ease forwards}
+  @keyframes bbcToastIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+  @keyframes bbcToastOut{to{opacity:0;transform:translateY(8px)}}
+  /* cmd-K command palette */
+  #bbc-cmdk{position:fixed;inset:0;z-index:10000;display:none;align-items:flex-start;justify-content:center;background:rgba(6,12,22,.62);backdrop-filter:blur(3px);padding-top:12vh}
+  #bbc-cmdk.open{display:flex;animation:bbcViewIn .16s ease}
+  .cmdk-box{width:min(560px,92vw);background:#0e1726;border:1px solid #2a3a52;border-radius:16px;box-shadow:0 24px 70px rgba(0,0,0,.6);overflow:hidden}
+  .cmdk-box input{width:100%;box-sizing:border-box;background:transparent;border:0;border-bottom:1px solid #22324d;color:#F5F1EA;font-family:var(--ui);font-size:16px;padding:16px 18px;outline:none}
+  .cmdk-list{max-height:46vh;overflow:auto;padding:6px}
+  .cmdk-item{display:flex;align-items:center;gap:11px;padding:11px 13px;border-radius:10px;cursor:pointer;color:#C9D3E0;font-size:14px}
+  .cmdk-item .ci{font-size:17px;width:22px;text-align:center}
+  .cmdk-item .csub{color:#8A97AC;font-size:12px;margin-left:auto}
+  .cmdk-item.sel,.cmdk-item:hover{background:#17233a;color:#F5F1EA}
+  .cmdk-hint{padding:9px 14px;border-top:1px solid #22324d;color:#6F7E92;font-size:11px;font-family:var(--mono,monospace);display:flex;gap:14px}
+  @media (prefers-reduced-motion:reduce){#app .view,.bbc-toast,#bbc-cmdk.open{animation:none}.panel,.card,.clientbox,button{transition:none}}
 </style>
 <!-- Supabase Auth (team login) -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<!-- ApexCharts (live dashboard charts, no build step) -->
+<script src="https://cdn.jsdelivr.net/npm/apexcharts@3.54.1"></script>
 <script>
   window.BBC_SUPABASE_URL = 'https://ctoeuikxoqlhnebgsygp.supabase.co';
   window.BBC_SUPABASE_KEY = 'sb_publishable_WnJ57fk-ymDuT2xtVZRcHg_khZCWgJL';
@@ -539,6 +573,7 @@
   <div class="b"><img src="favicon-light.svg" class="hdr-logo" alt="Balay ni Bruno &amp; Co.">BBC Command Center<small id="hdr-sub">OPERATING SYSTEM</small></div>
   <div style="display:flex;align-items:center;gap:11px">
     <div class="date" id="hdr-date">2026-06-02</div>
+    <button class="hdr-logout" onclick="window.openCmdK&&openCmdK()" aria-label="Quick jump" title="Quick jump (Ctrl/Cmd + K)" style="font-family:var(--mono,monospace)">⌘K</button>
     <button class="hdr-lock" onclick="go('bruno')" aria-label="Bruno page" title="Bruno page (private)">🔒</button>
     <button class="hdr-logout" id="hdr-logout" onclick="bbcLogout()">Sign out</button>
   </div>
@@ -2793,11 +2828,12 @@
       if(!r.ok) throw new Error((await r.text()).slice(0,140));
       await loadCalEntries(true);
       if(msg){ msg.textContent='Saved ✓ synced to all your devices'; msg.style.color='#4ADE80'; }
+      window.toast&&toast('Saved · synced to all devices','ok');
       calDay(key);
-    }catch(e){ if(msg){ msg.textContent='Could not save: '+String(e.message||e).slice(0,90); msg.style.color='#EF6B6B'; } }
+    }catch(e){ if(msg){ msg.textContent='Could not save: '+String(e.message||e).slice(0,90); msg.style.color='#EF6B6B'; } window.toast&&toast('Could not save entry','err'); }
   };
   window.delCalEntry=async(id,key)=>{
-    try{ await fetch('/.netlify/functions/calendar',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({delete:true,id:id})}); await loadCalEntries(true); calDay(key); }catch(e){}
+    try{ await fetch('/.netlify/functions/calendar',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({delete:true,id:id})}); await loadCalEntries(true); window.toast&&toast('Entry deleted','ok'); calDay(key); }catch(e){ window.toast&&toast('Could not delete','err'); }
   };
   window.editCalEntry=(key,id)=>{
     const e=(window.__calEntries||[]).find(x=>x.id==id); if(!e) return;
@@ -2944,6 +2980,8 @@
     <div style="display:flex;gap:8px;align-items:center;margin:0 0 8px"><a class="morelink" style="margin:0" href="${NOCODB_URL}" target="_blank" rel="noopener">↗ Edit in full NocoDB</a></div>
     <div class="sec" style="margin-top:2px">Action center</div>
     <div class="panelgrid" id="camp-tracker"><div class="panel"><span class="ptitle">Loading…</span><div class="gauge-sub">Reading your CRM + inbox.</div></div></div>
+    <div class="sec" style="margin-top:16px">Pipeline at a glance</div>
+    <div class="panel" style="display:block"><div id="crm-pipe" style="min-height:240px"><div class="gauge-sub">Loading chart…</div></div></div>
     <div class="sec" style="margin-top:16px">Inbox <span class="gauge-sub" style="font-weight:400">(tap to read)</span></div>
     <div id="crm-inbox"><div class="panel"><span class="ptitle">Loading inbox…</span></div></div>
     <div class="sec" style="margin-top:16px">Contacts <span class="gauge-sub" style="font-weight:400">(change Status with the dropdown · tap a name for thread + notes)</span></div>
@@ -3139,7 +3177,31 @@
       const sel=(r.Id!==undefined&&r.Id!==null)?`<select onclick="event.stopPropagation()" onchange="updateContactStatus(${JSON.stringify(r.Id)},this.value,this)" title="Change status (saves to NocoDB)" style="background:#0d1320;border:1px solid #2a3a52;color:#F5F1EA;border-radius:7px;padding:6px 8px;font-size:12px;min-height:34px;max-width:150px;cursor:pointer">${sopt}</select>`:`<span class="ocad">${esc(cur)}</span>`;
       return `<div class="opitem cc-row" data-search="${hay}" style="display:flex;align-items:center;gap:8px"><span class="odot" style="background:${sc};flex:0 0 auto"></span><span class="oname" onclick="openContact('${em}')" style="flex:1;cursor:pointer;min-width:0">${esc(r['First Name']||r.Organization||r.Email)}${(r.Organization&&r['First Name'])?' · '+esc(r.Organization):''}</span>${sel}</div>`;
     }).join('');
+    renderCrmPipe(cts);
   };
+  function renderCrmPipe(cts){
+    var el=document.getElementById('crm-pipe'); if(!el||typeof ApexCharts==='undefined') return;
+    var counts={}; (cts||[]).forEach(function(r){ var s=((r.Status||'')+'').trim()||'No status'; counts[s]=(counts[s]||0)+1; });
+    var COL={New:'#7C8AA5',Drafted:'#A78BFA',Emailed:'#60A5FA',Sent:'#38BDF8',Replied:'#34D399',Interested:'#4ADE80',Potential:'#D4AF37',Booked:'#22C55E','Bad Fit':'#EF6B6B','No status':'#3a4a63'};
+    var order=CRM_STATUSES.concat(Object.keys(counts).filter(function(k){return CRM_STATUSES.indexOf(k)<0;}));
+    var labels=[],series=[],colors=[];
+    order.forEach(function(k){ if(counts[k]){ labels.push(k); series.push(counts[k]); colors.push(COL[k]||'#5b6b85'); } });
+    if(!series.length){ el.innerHTML='<div class="gauge-sub">No contacts to chart yet.</div>'; return; }
+    try{ if(el.__chart){ el.__chart.destroy(); } }catch(e){}
+    el.innerHTML='';
+    try{
+      el.__chart=new ApexCharts(el,{
+        chart:{type:'donut',height:260,foreColor:'#C9D3E0',fontFamily:'inherit',animations:{speed:400}},
+        series:series,labels:labels,colors:colors,
+        legend:{position:'right',fontSize:'12px',labels:{colors:'#C9D3E0'}},
+        stroke:{colors:['#0e1726'],width:2},dataLabels:{enabled:true,style:{fontSize:'11px',fontWeight:600}},
+        plotOptions:{pie:{donut:{labels:{show:true,total:{show:true,label:'Leads',color:'#8A97AC',formatter:function(w){return w.globals.seriesTotals.reduce(function(a,b){return a+b;},0);}}}}}},
+        tooltip:{theme:'dark'},
+        responsive:[{breakpoint:560,options:{chart:{height:300},legend:{position:'bottom'}}}]
+      });
+      el.__chart.render();
+    }catch(e){ el.innerHTML='<div class="gauge-sub">Chart unavailable.</div>'; }
+  }
   window.filterContacts=(q)=>{ q=((q||'')+'').toLowerCase(); document.querySelectorAll('#crm-contacts .cc-row').forEach(el=>{ el.style.display=((el.dataset.search||'').includes(q))?'':'none'; }); };
   window.updateContactStatus=async(id,val,selEl)=>{
     const msg=document.getElementById('ct-status-msg');
@@ -3159,8 +3221,10 @@
       }
       if(msg && window.loadCrmContacts) window.loadCrmContacts(); // re-render underlying list only when editing from the detail sheet
       if(window.loadCampaignStats) window.loadCampaignStats();
+      window.toast&&toast('Status → '+(val||'cleared'),'ok');
     }catch(err){
       if(msg){ msg.textContent='Could not save: '+String(err.message||err).slice(0,80); msg.style.color='#EF6B6B'; }
+      window.toast&&toast('Status not saved','err');
     }finally{ if(selEl) selEl.disabled=false; }
   };
   window.loadHomeAttention=async()=>{
@@ -3798,6 +3862,63 @@
     wrap.querySelectorAll('.card,.wfrow,.clientbox,.opitem').forEach(c=>{ const hay=(c.dataset.search||c.textContent).toLowerCase(); c.style.display=hay.includes(q)?'':'none'; });
     wrap.querySelectorAll('.wfcat').forEach(p=>{ const any=[...p.querySelectorAll('.wfrow')].some(r=>r.style.display!=='none'); p.style.display=any?'':'none'; }); };
   document.querySelectorAll('.nav button').forEach(b=>b.onclick=()=>go(b.dataset.v));
+
+  /* ===== Toasts ===== */
+  window.toast=function(msg,type,ms){
+    var w=document.getElementById('bbc-toasts'); if(!w){ w=document.createElement('div'); w.id='bbc-toasts'; document.body.appendChild(w); }
+    var t=document.createElement('div'); t.className='bbc-toast '+(type||'info');
+    var ic=type==='ok'?'✓':type==='err'?'⚠':'•';
+    var s1=document.createElement('span'); s1.className='ti'; s1.textContent=ic;
+    var s2=document.createElement('span'); s2.textContent=msg;
+    t.appendChild(s1); t.appendChild(s2); w.appendChild(t);
+    setTimeout(function(){ t.classList.add('hide'); setTimeout(function(){ t.remove(); },220); }, ms||2600);
+  };
+
+  /* ===== Command palette (Ctrl/Cmd + K) ===== */
+  (function(){
+    var overlay=document.createElement('div'); overlay.id='bbc-cmdk';
+    overlay.innerHTML='<div class="cmdk-box"><input id="cmdk-in" placeholder="Jump to a page or client…" autocomplete="off" spellcheck="false"><div class="cmdk-list" id="cmdk-list"></div><div class="cmdk-hint"><span>↑↓ move</span><span>↵ open</span><span>esc close</span></div></div>';
+    document.body.appendChild(overlay);
+    var NAVCMDS=[
+      {ic:'🏠',label:'Home',sub:'overview',act:function(){go('home');}},
+      {ic:'📇',label:'CRM + Email',sub:'leads',act:function(){go('crm');}},
+      {ic:'📥',label:'Inbox',sub:'email',act:function(){go('inbox');}},
+      {ic:'🤝',label:'Clients',sub:'',act:function(){go('clients');}},
+      {ic:'🔄',label:'Workflows',sub:'to-do',act:function(){go('workflows');}},
+      {ic:'📱',label:'Social calendar',sub:'',act:function(){go('social');}},
+      {ic:'🌐',label:'Websites',sub:'',act:function(){go('websites');}},
+      {ic:'📁',label:'Drive folders',sub:'',act:function(){go('folders');}},
+      {ic:'✅',label:'Reminders',sub:'',act:function(){go('reminders');}},
+      {ic:'📰',label:'News',sub:'research',act:function(){go('news');}},
+      {ic:'🤖',label:'AI Family',sub:'',act:function(){go('more');}},
+      {ic:'💬',label:'Chat with Cuh',sub:'assistant',act:function(){window.openChat&&openChat(window.curView||'home');}}
+    ];
+    function allCmds(){ var a=NAVCMDS.slice(); (D.clients||[]).forEach(function(c,i){ a.push({ic:'•',label:c.name,sub:'client',act:function(){ window.clientCC&&clientCC(i); }}); }); return a; }
+    var sel=0, shown=[];
+    function esc(s){ return (s||'').replace(/[&<>]/g,function(m){return({'&':'&amp;','<':'&lt;','>':'&gt;'}[m]);}); }
+    function render(q){
+      q=(q||'').toLowerCase().trim();
+      shown=allCmds().filter(function(c){ return (c.label+' '+(c.sub||'')).toLowerCase().indexOf(q)>-1; });
+      sel=0; var list=document.getElementById('cmdk-list');
+      list.innerHTML=shown.length?shown.map(function(c,i){ return '<div class="cmdk-item'+(i===0?' sel':'')+'" data-i="'+i+'"><span class="ci">'+c.ic+'</span><span>'+esc(c.label)+'</span>'+(c.sub?'<span class="csub">'+esc(c.sub)+'</span>':'')+'</div>'; }).join(''):'<div class="cmdk-item"><span class="ci">∅</span><span>No match</span></div>';
+      [].slice.call(list.querySelectorAll('.cmdk-item[data-i]')).forEach(function(el){ el.onclick=function(){ exec(parseInt(el.dataset.i,10)); }; });
+    }
+    function exec(i){ var c=shown[i]; closeK(); if(c&&c.act){ try{ c.act(); }catch(e){} } }
+    function openK(){ overlay.classList.add('open'); var inp=document.getElementById('cmdk-in'); inp.value=''; render(''); setTimeout(function(){inp.focus();},10); }
+    function closeK(){ overlay.classList.remove('open'); }
+    function upd(){ var items=overlay.querySelectorAll('.cmdk-item[data-i]'); for(var i=0;i<items.length;i++) items[i].classList.toggle('sel',i===sel); var s=items[sel]; if(s) s.scrollIntoView({block:'nearest'}); }
+    window.openCmdK=openK;
+    overlay.addEventListener('click',function(e){ if(e.target===overlay) closeK(); });
+    document.getElementById('cmdk-in').addEventListener('input',function(e){ render(e.target.value); });
+    document.addEventListener('keydown',function(e){
+      if((e.ctrlKey||e.metaKey)&&(e.key==='k'||e.key==='K')){ e.preventDefault(); overlay.classList.contains('open')?closeK():openK(); return; }
+      if(!overlay.classList.contains('open')) return;
+      if(e.key==='Escape'){ closeK(); }
+      else if(e.key==='ArrowDown'){ e.preventDefault(); sel=Math.min(sel+1,shown.length-1); upd(); }
+      else if(e.key==='ArrowUp'){ e.preventDefault(); sel=Math.max(sel-1,0); upd(); }
+      else if(e.key==='Enter'){ e.preventDefault(); exec(sel); }
+    });
+  })();
 
   /* ---------- Full-screen Cuh chat ---------- */
   const CHAT_AGENTS=[{k:'Cuh',c:'#D4AF37',r:'all-around, your main AI'}].concat(D.aiFamily.filter(a=>a.key!=='Brunz').map(a=>({k:a.name.split(' ')[0],c:OWN[a.key]||'#7C8AA5',r:a.role})));
