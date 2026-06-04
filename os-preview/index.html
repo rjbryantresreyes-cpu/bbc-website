@@ -961,33 +961,51 @@
     "posts": {
       "2026-05-31": {
         "graphic": "Sunday Rest Day",
-        "posted": true
+        "posted": true,
+        "graphicFolder": "2026-05-31_Sunday_Rest_Day Posted",
+        "graphicSearch": "2026-05-31_Sunday_Rest_Day"
       },
       "2026-06-01": {
         "reel": "Segment 3",
-        "posted": true
+        "posted": true,
+        "reelFolder": "Segment 3 posted",
+        "reelSearch": "Segment%203"
       },
       "2026-06-02": {
         "graphic": "Cut the Silence",
         "reel": "Cut the Silence",
-        "posted": false
+        "posted": false,
+        "graphicFolder": "2026-06-02_Cut the Silence Posted",
+        "graphicSearch": "2026-06-02_Cut%20the%20Silence",
+        "reelFolder": "Cut the Silence Posted",
+        "reelSearch": "Cut%20the%20Silence"
       },
       "2026-06-03": {
         "graphic": "Ryan review",
         "reel": "Ryan review",
-        "posted": false
+        "posted": false,
+        "graphicFolder": "TPIC Ryan Review",
+        "graphicSearch": "TPIC%20Ryan%20Review",
+        "reelFolder": "TPIC Ryan Review Posted",
+        "reelSearch": "TPIC%20Ryan%20Review"
       },
       "2026-06-04": {
         "graphic": "4 Tasks Eating Your Week",
-        "posted": false
+        "posted": false,
+        "graphicFolder": "2026-06-04_4_Tasks_Eating_Your_Week",
+        "graphicSearch": "2026-06-04_4_Tasks_Eating_Your_Week"
       },
       "2026-06-05": {
         "reel": "Content Engine",
-        "posted": false
+        "posted": false,
+        "reelFolder": "Content Engine",
+        "reelSearch": "Content%20Engine"
       },
       "2026-06-06": {
         "graphic": "Workflow Menu",
-        "posted": false
+        "posted": false,
+        "graphicFolder": "2026-06-06_Saturday_Workflow_Menu",
+        "graphicSearch": "2026-06-06_Saturday_Workflow_Menu"
       }
     },
     "events": [
@@ -2757,8 +2775,9 @@
     const MON=['January','February','March','April','May','June','July','August','September','October','November','December'];
     const title=DOWS[dt.getDay()]+', '+MON[dt.getMonth()]+' '+dt.getDate();
     let rows='';
-    if(p.graphic) rows+=`<div class="kv"><b>Graphic:</b> <span>${esc(p.graphic)}${p.posted?' ✓ posted':''}</span></div>`;
-    if(p.reel) rows+=`<div class="kv"><b>Reel:</b> <span>${esc(p.reel)}${p.posted?' ✓ posted':''}</span></div>`;
+    const folderLink=(search,label)=>`<a href="https://drive.google.com/drive/search?q=${search}" target="_blank" rel="noopener" style="display:inline-block;margin-left:8px;padding:2px 8px;font-size:11px;border:1px solid var(--gold);color:var(--gold);border-radius:6px;text-decoration:none">📁 ${label}</a>`;
+    if(p.graphic) rows+=`<div class="kv"><b>Graphic:</b> <span>${esc(p.graphic)}${p.posted?' ✓ posted':''}${p.graphicSearch?folderLink(p.graphicSearch,'Open folder'):''}</span></div>`;
+    if(p.reel) rows+=`<div class="kv"><b>Reel:</b> <span>${esc(p.reel)}${p.posted?' ✓ posted':''}${p.reelSearch?folderLink(p.reelSearch,'Open folder'):''}</span></div>`;
     evs.forEach(e=>{ rows+=`<div class="kv"><b>Event:</b> <span>${esc(e.label)}</span></div>`; });
     if(!rows) rows='<div class="kv"><span>Nothing scheduled this day yet.</span></div>';
     openSheet(`<h3 style="font-family:var(--display);color:var(--ink);margin-bottom:4px">${esc(title)}</h3><div class="sec">Scheduled</div>${rows}<div class="sec">Plan</div><button class="ideabtn" onclick="closeSheet();openChat('social','Content for ${esc(title)} — ')"><span class="i">＋</span>Plan content for this day with Cuh</button>`);
@@ -3265,8 +3284,10 @@
         const post=C.posts[key]||{}; const evs=C.events.filter(e=>e.date===key);
         const slot=slotByDow[dt.getDay()];
         let body='';
-        if(post.graphic) body+=`<div class="mev mev-graphic ${post.posted?'posted':''}">▦ ${esc(post.graphic)}</div>`;
-        if(post.reel) body+=`<div class="mev mev-reel ${post.posted?'posted':''}">▶ ${esc(post.reel)}</div>`;
+        const gfxLink=post.graphicSearch?` <a href="https://drive.google.com/drive/search?q=${post.graphicSearch}" target="_blank" rel="noopener" onclick="event.stopPropagation()" title="Open Drive folder" style="margin-left:4px;color:var(--gold);text-decoration:none">📁</a>`:'';
+        const reelLink=post.reelSearch?` <a href="https://drive.google.com/drive/search?q=${post.reelSearch}" target="_blank" rel="noopener" onclick="event.stopPropagation()" title="Open Drive folder" style="margin-left:4px;color:var(--gold);text-decoration:none">📁</a>`:'';
+        if(post.graphic) body+=`<div class="mev mev-graphic ${post.posted?'posted':''}">▦ ${esc(post.graphic)}${gfxLink}</div>`;
+        if(post.reel) body+=`<div class="mev mev-reel ${post.posted?'posted':''}">▶ ${esc(post.reel)}${reelLink}</div>`;
         evs.forEach(e=>{ body+=`<div class="mev mev-event">🎉 ${esc(e.label)}<span class="mev-rem">+ make a content for this</span></div>`; });
         cellsHtml+=`<div class="mcell ${inMonth?'':'out'} ${isToday?'today':''}" onclick="calDay('${key}')" style="cursor:pointer">
           <div class="mcell-d"><span class="mcell-num">${dt.getDate()}</span>${inMonth&&slot?`<span class="mcell-slot">${esc(slot.slot)}</span>`:''}</div>
