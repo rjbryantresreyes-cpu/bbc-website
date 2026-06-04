@@ -592,7 +592,7 @@
 <div class="cuhmini" id="cuhMini">
   <div class="cm-head">
     <span class="cm-dot"></span>
-    <div class="cm-ttl">Cuh<span class="cm-scope" id="cm-scope">This page</span></div>
+    <div class="cm-ttl"><span id="cm-name">Cuh</span><span class="cm-scope" id="cm-scope">This page</span></div>
     <button class="cm-x" onclick="closeMini()" aria-label="Close">&times;</button>
   </div>
   <div class="cm-thread" id="cm-thread"></div>
@@ -2731,6 +2731,21 @@
   const pillStatus=s=>`<span class="pill p-${s==='active'?'active':s==='dev'?'dev':'concept'}">${s}</span>`;
 
   function openSheet(html){ sheetBody.innerHTML=html; sheet.classList.add('open'); }
+  window.closeSheet=()=>sheet.classList.remove('open');
+  // Calendar: tap a date -> day sheet with what's scheduled + plan action.
+  window.calDay=(key)=>{
+    const C=D.calendar||{}; const p=(C.posts&&C.posts[key])||{}; const evs=((C.events||[]).filter(e=>e.date===key));
+    const dt=new Date(key+'T00:00:00');
+    const DOWS=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+    const MON=['January','February','March','April','May','June','July','August','September','October','November','December'];
+    const title=DOWS[dt.getDay()]+', '+MON[dt.getMonth()]+' '+dt.getDate();
+    let rows='';
+    if(p.graphic) rows+=`<div class="kv"><b>Graphic:</b> <span>${esc(p.graphic)}${p.posted?' ✓ posted':''}</span></div>`;
+    if(p.reel) rows+=`<div class="kv"><b>Reel:</b> <span>${esc(p.reel)}${p.posted?' ✓ posted':''}</span></div>`;
+    evs.forEach(e=>{ rows+=`<div class="kv"><b>Event:</b> <span>${esc(e.label)}</span></div>`; });
+    if(!rows) rows='<div class="kv"><span>Nothing scheduled this day yet.</span></div>';
+    openSheet(`<h3 style="font-family:var(--display);color:var(--ink);margin-bottom:4px">${esc(title)}</h3><div class="sec">Scheduled</div>${rows}<div class="sec">Plan</div><button class="ideabtn" onclick="closeSheet();openChat('social','Content for ${esc(title)} — ')"><span class="i">＋</span>Plan content for this day with Cuh</button>`);
+  };
   sheet.onclick=e=>{ if(e.target===sheet) sheet.classList.remove('open'); };
 
   /* ---------- VIEWS ---------- */
@@ -3071,6 +3086,7 @@
       </div>
       <div class="sec">Team</div><div class="panel">${team}</div>
       <div class="gauge-sub" style="text-align:left;margin-top:10px">Cavalry's command center, scoped to Tre's real workflows. Live board data + Kenz's login access turn on in the final step.</div>`;
+    window.curClient='cavalry'; // the floating chatbot becomes Ester (Cavalry's AI) while in this view
     window.scrollTo(0,0); sheet.classList.remove('open');
   };
   window.clientCC=(i)=>{
@@ -3170,7 +3186,7 @@
         if(post.graphic) body+=`<div class="mev mev-graphic ${post.posted?'posted':''}">▦ ${esc(post.graphic)}</div>`;
         if(post.reel) body+=`<div class="mev mev-reel ${post.posted?'posted':''}">▶ ${esc(post.reel)}</div>`;
         evs.forEach(e=>{ body+=`<div class="mev mev-event">🎉 ${esc(e.label)}<span class="mev-rem">+ make a content for this</span></div>`; });
-        cellsHtml+=`<div class="mcell ${inMonth?'':'out'} ${isToday?'today':''}">
+        cellsHtml+=`<div class="mcell ${inMonth?'':'out'} ${isToday?'today':''}" onclick="calDay('${key}')" style="cursor:pointer">
           <div class="mcell-d"><span class="mcell-num">${dt.getDate()}</span>${inMonth&&slot?`<span class="mcell-slot">${esc(slot.slot)}</span>`:''}</div>
           ${body}</div>`;
       }
@@ -3584,7 +3600,7 @@
       <button class="ideabtn" onclick="window.open('${curUrl}','_blank')"><span class="i">📂</span>Open this folder in Google Drive</button>
       <div class="foldergrid">${body}</div>`;
   };
-  window.go=v=>{ window.curView=v; app.innerHTML=`<div class="view">${views[v]()}</div>`; window.scrollTo(0,0);
+  window.go=v=>{ window.curView=v; window.curClient=null; app.innerHTML=`<div class="view">${views[v]()}</div>`; window.scrollTo(0,0);
     document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('active',b.dataset.v===v));
     sheet.classList.remove('open'); if(v==='crm'&&window.loadCampaignStats){ window.loadCampaignStats(); window.loadInbox&&window.loadInbox('crm-inbox',true); window.loadCrmContacts&&window.loadCrmContacts(); } if(v==='inbox'&&window.loadInbox) window.loadInbox(); if(v==='home'&&window.loadHomeAttention) window.loadHomeAttention(); };
   window.filterCards=(inp,wrapId)=>{ const q=inp.value.toLowerCase(); const wrap=document.getElementById(wrapId);
@@ -3672,19 +3688,26 @@
     csBusy=false; renderThread();
   };
 
-  /* ===== Compact page-scoped Cuh assistant ===== */
-  let miniThread=[]; let miniBusy=false; let miniView='home';
+  /* ===== Compact page-scoped assistant (Cuh for BBC, the client's AI inside a client CC) ===== */
+  let miniThread=[]; let miniBusy=false; let miniView='home'; let miniClient=null;
+  // Client souls available in-dashboard. key = soul sent to the brain; name = how it shows.
+  const CLIENT_AI={ cavalry:{name:'Ester',label:'Cavalry'} };
   function miniLabel(v){ return (CHAT_CTX[v]||CHAT_CTX.home).label; }
+  function miniAI(){ return (miniClient&&CLIENT_AI[miniClient])?CLIENT_AI[miniClient]:{name:'Cuh',label:miniLabel(miniView)}; }
   function renderMini(){
-    const el=document.getElementById('cm-thread');
-    if(!miniThread.length){ el.innerHTML=`<div class="cm-empty">Ask me anything about the <b>${esc(miniLabel(miniView))}</b> page — questions, what to do next, or a command. I'll keep it scoped here.</div>`; return; }
+    const el=document.getElementById('cm-thread'); const ai=miniAI();
+    if(!miniThread.length){ el.innerHTML=`<div class="cm-empty">Ask <b>${esc(ai.name)}</b> anything about <b>${esc(ai.label)}</b> — questions, what to do next, or a command. I'll keep it scoped here.</div>`; return; }
     el.innerHTML=miniThread.map(m=>`<div class="msg ${m.r}">${esc(m.t)}</div>`+(m.action?actionBtn(m.action):'')).join('');
     el.scrollTop=el.scrollHeight;
   }
   window.openMini=(viewKey)=>{
     const v=viewKey||window.curView||'home';
-    if(miniView!==v){ miniView=v; miniThread=[]; } // new page => fresh scoped thread
-    document.getElementById('cm-scope').textContent='This page · '+miniLabel(v);
+    const cl=window.curClient||null;
+    if(miniView!==v||miniClient!==cl){ miniView=v; miniClient=cl; miniThread=[]; } // new page/client => fresh scoped thread
+    const ai=miniAI();
+    document.getElementById('cm-name').textContent=ai.name;
+    document.getElementById('cm-scope').textContent=(miniClient?'Client · ':'This page · ')+ai.label;
+    document.getElementById('cm-msg').setAttribute('placeholder','Ask '+ai.name+' about '+ai.label+'…');
     document.getElementById('cuhMini').classList.add('open');
     document.getElementById('cuhFab').style.display='none';
     renderMini(); setTimeout(()=>document.getElementById('cm-msg').focus(),120);
@@ -3694,14 +3717,19 @@
   window.miniSend=async()=>{
     if(miniBusy) return;
     const ta=document.getElementById('cm-msg'); const v=ta.value.trim(); if(!v) return;
+    const ai=miniAI();
     miniThread.push({r:'u',t:v}); ta.value=''; ta.style.height='auto';
-    miniThread.push({r:'sys',t:'Cuh is thinking…'}); renderMini();
+    miniThread.push({r:'sys',t:ai.name+' is thinking…'}); renderMini();
     miniBusy=true;
     const history=miniThread.filter(m=>m.r==='u'||m.r==='a').map(m=>({role:m.r==='u'?'user':'assistant',content:m.t}));
-    const drive=wantsDrive(v)?{root:D.drive&&D.drive.rootUrl,folders:driveIndexLines()}:null;
+    // BBC Cuh gets Drive + live data; a client soul (Ester) does NOT (brand purity).
+    const drive=(!miniClient&&wantsDrive(v))?{root:D.drive&&D.drive.rootUrl,folders:driveIndexLines()}:null;
     const tok=window.bbcToken?await window.bbcToken():null;
+    const payload=miniClient
+      ? {messages:history,client:miniClient,scope:{mode:'page',page:ai.label}}
+      : {messages:history,agents:['Cuh'],scope:{mode:'page',page:miniLabel(miniView)},drive,context:liveSnapshot(miniView)};
     try{
-      const res=await fetch('/.netlify/functions/chat',{method:'POST',headers:{'Content-Type':'application/json',...(tok?{'Authorization':'Bearer '+tok}:{})},body:JSON.stringify({messages:history,agents:['Cuh'],scope:{mode:'page',page:miniLabel(miniView)},drive,context:liveSnapshot(miniView)})});
+      const res=await fetch('/.netlify/functions/chat',{method:'POST',headers:{'Content-Type':'application/json',...(tok?{'Authorization':'Bearer '+tok}:{})},body:JSON.stringify(payload)});
       const d=await res.json();
       miniThread.pop();
       const pa=parseAction(d.reply||d.error||'(no reply)');
