@@ -1262,19 +1262,10 @@
           "name": "NPC-Portfolio-System"
         },
         {
-          "name": "08_KNOWLEDGE_BASE"
+          "name": ".claude"
         },
         {
-          "name": "07_MARKETING"
-        },
-        {
-          "name": "06_FINANCE"
-        },
-        {
-          "name": "05_OPERATIONS"
-        },
-        {
-          "name": "03_ARCHIVED_CLIENTS"
+          "name": "01_LEADS"
         },
         {
           "name": "02_ACTIVE_CLIENTS",
@@ -1283,13 +1274,13 @@
               "name": "4OCEAN"
             },
             {
-              "name": "WOODEN-WOODWORKS"
+              "name": "FIRST-CLASS-FINISHES"
             },
             {
               "name": "HOME-VISION-STUDIO"
             },
             {
-              "name": "FIRST-CLASS-FINISHES"
+              "name": "WOODEN-WOODWORKS"
             },
             {
               "name": "HI-UP-ROOFING"
@@ -1315,10 +1306,19 @@
           ]
         },
         {
-          "name": "01_LEADS"
+          "name": "03_ARCHIVED_CLIENTS"
         },
         {
-          "name": ".claude"
+          "name": "05_OPERATIONS"
+        },
+        {
+          "name": "06_FINANCE"
+        },
+        {
+          "name": "07_MARKETING"
+        },
+        {
+          "name": "08_KNOWLEDGE_BASE"
         },
         {
           "name": "BBC WEBSITE HTML"
@@ -1327,43 +1327,40 @@
           "name": "04_TEAM"
         },
         {
-          "name": "09_POTENTIAL CLIENTS"
-        },
-        {
           "name": "BBC_AI_FAMILY",
           "children": [
             {
-              "name": "BRUNZ"
-            },
-            {
-              "name": "WEBBY"
-            },
-            {
-              "name": "MAI"
-            },
-            {
-              "name": "KRIZ"
-            },
-            {
-              "name": "SONNY"
-            },
-            {
-              "name": "EMY"
+              "name": "CASEY"
             },
             {
               "name": "BOOGY"
             },
             {
-              "name": "CASEY"
+              "name": "EMY"
+            },
+            {
+              "name": "SONNY"
+            },
+            {
+              "name": "BRUNZ"
+            },
+            {
+              "name": "KRIZ"
+            },
+            {
+              "name": "MAI"
+            },
+            {
+              "name": "WEBBY"
             },
             {
               "name": "_TEMPLATE"
             },
             {
-              "name": "JENNY"
+              "name": "AGENT_PROFILES"
             },
             {
-              "name": "AGENT_PROFILES"
+              "name": "JENNY"
             },
             {
               "name": "_VAULT"
@@ -1390,6 +1387,9 @@
               "name": "_BRAND"
             }
           ]
+        },
+        {
+          "name": "09_POTENTIAL CLIENTS"
         },
         {
           "name": "Daryl BBC Folder"
@@ -2212,6 +2212,16 @@
       "path": "LEARNINGS"
     },
     {
+      "title": "emy upgrade email ai deep search",
+      "date": "2026-06-05",
+      "path": "LEARNINGS"
+    },
+    {
+      "title": "emy build prompt v1",
+      "date": "2026-06-05",
+      "path": "LEARNINGS"
+    },
+    {
       "title": "upc sticker sheet generation",
       "date": "2026-06-04",
       "path": "LEARNINGS"
@@ -2223,16 +2233,6 @@
     },
     {
       "title": "git off google drive corruption fix",
-      "date": "2026-06-04",
-      "path": "LEARNINGS"
-    },
-    {
-      "title": "email preview on dashboard",
-      "date": "2026-06-04",
-      "path": "LEARNINGS"
-    },
-    {
-      "title": "datesheet clickable calendar bug hunt",
       "date": "2026-06-04",
       "path": "LEARNINGS"
     }
@@ -2777,7 +2777,7 @@
   window.saveCalEntry=async(key)=>{
     const g=id=>document.getElementById(id), msg=g('ce-msg');
     const payload={ date:key, title:(g('ce-title')||{}).value||'', type:(g('ce-type')||{}).value||'', link:(g('ce-link')||{}).value||'', notes:(g('ce-notes')||{}).value||'' };
-    const idv=(g('ce-id')||{}).value; if(idv) payload.id=Number(idv);
+    const idv=(g('ce-id')||{}).value; if(idv) payload.id=idv;
     if(!payload.title && !payload.link && !payload.notes){ if(msg){ msg.textContent='Add a title, link, or note first.'; msg.style.color='#EF6B6B'; } return; }
     if(msg){ msg.textContent='Saving…'; msg.style.color='#C9A961'; }
     try{
@@ -2789,7 +2789,7 @@
     }catch(e){ if(msg){ msg.textContent='Could not save: '+String(e.message||e).slice(0,90); msg.style.color='#EF6B6B'; } }
   };
   window.delCalEntry=async(id,key)=>{
-    try{ await fetch('/.netlify/functions/calendar',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({delete:true,id:Number(id)})}); await loadCalEntries(true); calDay(key); }catch(e){}
+    try{ await fetch('/.netlify/functions/calendar',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({delete:true,id:id})}); await loadCalEntries(true); calDay(key); }catch(e){}
   };
   window.editCalEntry=(key,id)=>{
     const e=(window.__calEntries||[]).find(x=>x.id==id); if(!e) return;
@@ -2805,6 +2805,8 @@
   };
   // Calendar: tap a date -> day sheet with what's scheduled + add/edit your own entries (synced).
   window.calDay=(key)=>{
+    // make sure this device has the latest synced entries, then re-render the open day
+    if(typeof window.__calEntries==='undefined'){ loadCalEntries(true).then(()=>{ if(sheet.classList.contains('open')) calDay(key); }); }
     const C=D.calendar||{}; const p=(C.posts&&C.posts[key])||{}; const evs=((C.events||[]).filter(e=>e.date===key));
     const dt=new Date(key+'T00:00:00');
     const DOWS=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
@@ -2823,7 +2825,7 @@
     const lnk=u=>`<a href="${esc(u)}" target="_blank" rel="noopener" style="display:inline-block;margin-left:6px;padding:2px 8px;font-size:11px;border:1px solid var(--gold);color:var(--gold);border-radius:6px;text-decoration:none">📁 Open</a>`;
     const mineHtml=mine.map(e=>`<div class="kv" style="display:flex;justify-content:space-between;gap:10px;align-items:flex-start;border-bottom:1px solid #1b2740;padding-bottom:8px">
         <span style="flex:1"><b>${esc(e.type||'Post')}:</b> ${esc(e.title||'(untitled)')}${e.link?lnk(e.link):''}${e.notes?`<div class="gauge-sub" style="margin-top:3px;white-space:pre-wrap">${esc(e.notes)}</div>`:''}</span>
-        <span style="display:flex;gap:6px;flex:0 0 auto"><button onclick="editCalEntry('${key}',${e.id})" style="background:#1b2740;color:#C9A961;border:0;border-radius:7px;padding:6px 9px;font-size:12px;cursor:pointer;min-height:34px">Edit</button><button onclick="delCalEntry(${e.id},'${key}')" style="background:#1b2740;color:#EF6B6B;border:0;border-radius:7px;padding:6px 10px;font-size:12px;cursor:pointer;min-height:34px">✕</button></span></div>`).join('');
+        <span style="display:flex;gap:6px;flex:0 0 auto"><button onclick="editCalEntry('${key}','${e.id}')" style="background:#1b2740;color:#C9A961;border:0;border-radius:7px;padding:6px 9px;font-size:12px;cursor:pointer;min-height:34px">Edit</button><button onclick="delCalEntry('${e.id}','${key}')" style="background:#1b2740;color:#EF6B6B;border:0;border-radius:7px;padding:6px 10px;font-size:12px;cursor:pointer;min-height:34px">✕</button></span></div>`).join('');
     const form=`<div class="panel" style="display:block">
         <input id="ce-id" type="hidden" value="">
         <input id="ce-title" placeholder="Title (e.g. Cut the Silence)" style="${SEL};width:100%;box-sizing:border-box;margin-bottom:8px">
