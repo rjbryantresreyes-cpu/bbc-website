@@ -619,7 +619,7 @@
 <script type="application/json" id="bbc-data">
 {
   "meta": {
-    "updated": "2026-06-04",
+    "updated": "2026-06-05",
     "pendingCount": 9
   },
   "owners": {
@@ -2204,17 +2204,17 @@
       "path": "LEARNINGS"
     },
     {
+      "title": "git off google drive corruption fix",
+      "date": "2026-06-04",
+      "path": "LEARNINGS"
+    },
+    {
       "title": "email preview on dashboard",
       "date": "2026-06-04",
       "path": "LEARNINGS"
     },
     {
       "title": "datesheet clickable calendar bug hunt",
-      "date": "2026-06-04",
-      "path": "LEARNINGS"
-    },
-    {
-      "title": "crm email inbox system",
       "date": "2026-06-04",
       "path": "LEARNINGS"
     }
@@ -2772,7 +2772,22 @@
     const ship=D.workflows.reduce((n,w)=>n+ORDER.filter(a=>w.artifacts[a]).length,0);
     const dueToday=D.content.days.find(x=>x.d.includes('Jun 2'));
     const pending=D.content.days.filter(x=>!x.posted).length;
-    return `<div class="chat-box" onclick="openChat('home')" style="cursor:pointer">
+    /* Home opens AS an overview — one tappable tile per section of the command center */
+    const navIndex=[
+      {v:'crm',ic:'📇',t:'CRM + Email',d:'Leads, replies, send'},
+      {v:'inbox',ic:'📥',t:'Inbox',d:'Your rj@ email'},
+      {v:'clients',ic:'🤝',t:'Clients',d:D.clients.length+' active'},
+      {v:'workflows',ic:'🔄',t:'Workflows',d:'To-do + readiness'},
+      {v:'social',ic:'📱',t:'Social',d:'Calendar + links'},
+      {v:'websites',ic:'🌐',t:'Websites',d:(D.websitePages?D.websitePages.length:0)+' pages'},
+      {v:'folders',ic:'📁',t:'Drive',d:'Folders'},
+      {v:'reminders',ic:'✅',t:'Reminders',d:"What's due"},
+      {v:'news',ic:'📰',t:'News',d:'Research'},
+      {v:'more',ic:'🤖',t:'AI Family',d:'Team & systems'},
+    ].map(x=>`<div class="panel tap" onclick="go('${x.v}')" style="display:block;text-align:left"><div style="font-size:22px;line-height:1">${x.ic}</div><span class="ptitle" style="display:block;margin-top:6px">${x.t}</span><div class="gauge-sub" style="margin-top:2px">${esc(x.d)}</div></div>`).join('');
+    return `<h2 class="vt">Overview</h2><div class="vsub">Everything in one place. Tap any section to open it.</div>
+      <div class="panelgrid">${navIndex}</div>
+      <div class="chat-box" onclick="openChat('home')" style="cursor:pointer;margin-top:16px">
         <h3>Chat with Cuh</h3>
         <p>Your all-around AI for the whole dashboard. Tap to open full-screen chat, pick your agent(s), and save it as a task.</p>
         <div class="chat-in"><input placeholder="Ask Cuh anything..." readonly style="cursor:pointer"><button>Open chat</button></div>
@@ -2996,9 +3011,18 @@
       const inb=await (await fetch('/.netlify/functions/gmail-read?q='+encodeURIComponent('from:'+e+' OR to:'+e)+'&max=10')).json();
       const threads=inb.threads||[];
       const head=`<div style="margin-bottom:12px"><h3 style="font-family:var(--display,serif);color:#F5F1EA;margin:0">${esc(c['First Name']||c.Organization||c.Email)}</h3><div class="gauge-sub">${esc(c.Organization||'')}${c.Status?' · '+esc(c.Status):''}</div><div style="color:#8A97AC;font-size:12px;margin-top:2px">${esc(c.Email||'')}${c.Phone?' · '+esc(c.Phone):''}</div></div>`;
+      // editable Status — options come ONLY from statuses already present in the CRM (never invent one)
+      const SEL='background:#0d1320;border:1px solid #22324d;color:#F5F1EA;border-radius:9px;padding:10px 12px;font-size:14px;font-family:inherit;outline:none;min-height:44px';
+      const cur=((c.Status||'')+'').trim();
+      const sset=[...new Set((cts||[]).map(r=>((r.Status||'')+'').trim()).filter(Boolean))].sort();
+      if(cur && !sset.includes(cur)) sset.unshift(cur);
+      const opts=['<option value="">— set status —</option>'].concat(sset.map(s=>`<option ${s===cur?'selected':''}>${esc(s)}</option>`)).join('');
+      const statusEditor=(c.Id!==undefined&&c.Id!==null)
+        ? `<div class="panel" style="display:block;margin-bottom:12px"><span class="ptitle" style="color:#D4AF37">Status <span class="gauge-sub" style="font-weight:400">(saves to NocoDB)</span></span><div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:8px"><select id="ct-status" onchange="updateContactStatus(${JSON.stringify(c.Id)},this.value,this)" style="${SEL}">${opts}</select><span id="ct-status-msg" class="gauge-sub" style="flex:1;min-width:120px"></span></div></div>`
+        : '';
       const notes=c.Notes?`<div class="panel" style="display:block;margin-bottom:12px"><span class="ptitle" style="color:#D4AF37">Notes</span><div style="white-space:pre-wrap;color:#C9D3E0;font-size:13px;margin-top:6px">${esc(c.Notes)}</div></div>`:'';
       const tl=threads.length?threads.map(t=>`<div class="opitem" onclick="openThread('${t.id}')" style="cursor:pointer"><span class="odot" style="background:${t.unread?'#60A5FA':'#2a3a52'}"></span><span class="oname">${esc(t.subject||'(no subject)')}</span><span class="ocad">read</span></div>`).join(''):'<div class="gauge-sub">No email thread with this contact yet.</div>';
-      openSheet(`${head}${notes}<div class="sec" style="margin-top:0">Email thread (${threads.length})</div>${tl}<div style="margin-top:12px"><button onclick="go('crm');setTimeout(()=>{var t=document.getElementById('em-to');if(t){t.value='${esc(c.Email||'')}';t.scrollIntoView({behavior:'smooth'});}},250)" style="background:#D4AF37;color:#0f1520;border:0;font-weight:700;padding:10px 18px;border-radius:9px;cursor:pointer;min-height:44px">Email this contact</button></div>`);
+      openSheet(`${head}${statusEditor}${notes}<div class="sec" style="margin-top:0">Email thread (${threads.length})</div>${tl}<div style="margin-top:12px"><button onclick="go('crm');setTimeout(()=>{var t=document.getElementById('em-to');if(t){t.value='${esc(c.Email||'')}';t.scrollIntoView({behavior:'smooth'});}},250)" style="background:#D4AF37;color:#0f1520;border:0;font-weight:700;padding:10px 18px;border-radius:9px;cursor:pointer;min-height:44px">Email this contact</button></div>`);
     }catch(e){ openSheet('<div class="gauge-sub" style="padding:16px">'+esc(String(e).slice(0,120))+'</div>'); }
   };
   window.openThread=async(id)=>{
@@ -3024,6 +3048,22 @@
     }).join('');
   };
   window.filterContacts=(q)=>{ q=((q||'')+'').toLowerCase(); document.querySelectorAll('#crm-contacts .cc-row').forEach(el=>{ el.style.display=((el.dataset.search||'').includes(q))?'':'none'; }); };
+  window.updateContactStatus=async(id,val,selEl)=>{
+    const msg=document.getElementById('ct-status-msg');
+    if(msg){ msg.textContent='Saving…'; msg.style.color='#C9A961'; }
+    if(selEl) selEl.disabled=true;
+    try{
+      const r=await fetch('/.netlify/functions/nocodb?table=contacts',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({id:id,Status:val})});
+      if(!r.ok){ const e=await r.text(); throw new Error(e.slice(0,120)); }
+      // update the in-memory cache so the list + reopen reflect the new status without a reload
+      if(Array.isArray(window.__crmContacts)){ const rec=window.__crmContacts.find(x=>(x.Id??x.id)==id); if(rec) rec.Status=val; }
+      if(msg){ msg.textContent='Saved ✓'; msg.style.color='#4ADE80'; }
+      if(window.loadCrmContacts) window.loadCrmContacts();
+      if(window.loadCampaignStats) window.loadCampaignStats();
+    }catch(err){
+      if(msg){ msg.textContent='Could not save: '+String(err.message||err).slice(0,80); msg.style.color='#EF6B6B'; }
+    }finally{ if(selEl) selEl.disabled=false; }
+  };
   window.loadHomeAttention=async()=>{
     const el=document.getElementById('home-attn'); if(!el) return;
     try{
@@ -3134,18 +3174,43 @@
 
   const CIC={'Vidz Production':'🎬','Specialist AI':'🤖','Cowork Skills':'🧩','Rules as Workflows':'📜'};
   const CCOL={'Vidz Production':'#A78BFA','Specialist AI':'#EC4899','Cowork Skills':'#D4AF37','Rules as Workflows':'#60A5FA'};
+  // BBC AIs whose work drives social media — used to rank the Workflows to-do list social-first.
+  const WF_SOCIAL_OWN=new Set(['Sonny','Mai','Vidz','Raphy','Emy','Boogy']);
+  window.wfTodoToggle=(id,cb)=>{
+    let m={}; try{ m=JSON.parse(localStorage.getItem('bbc_wf_done')||'{}'); }catch{}
+    if(cb&&cb.checked) m[id]=1; else delete m[id];
+    localStorage.setItem('bbc_wf_done',JSON.stringify(m));
+    if(window.curView==='workflows') go('workflows'); // re-render: checked items drop to the bottom
+  };
   views.workflows=()=>{
     const cats=[...new Set(D.workflows.map(w=>w.cat))];
     const totalArt=D.workflows.reduce((n,w)=>n+ORDER.filter(a=>w.artifacts[a]).length,0);
 
-    /* Recommended next — finish what's closest to done, show the exact next artifact */
-    const ranked=[...D.workflows].filter(w=>pct(w)<100).sort((a,b)=>pct(b)-pct(a));
-    const recs=ranked.slice(0,3).map(w=>{
+    /* ⭐ To-do — ordered by SOCIAL-MEDIA importance first, then closest to done. Checkable + saved per device. */
+    const socialScore=w=>{
+      let s=0;
+      (w.owners||[]).forEach(o=>{ if(WF_SOCIAL_OWN.has(o)) s+=2; });
+      const txt=((w.title||'')+' '+(w.cat||'')+' '+(w.angle||'')+' '+(w.role||'')).toLowerCase();
+      if(/social|content|reel|caption|post|carousel|video|instagram|facebook|tiktok|youtube|audience|engagement/.test(txt)) s+=2;
+      return s;
+    };
+    const wfDone=(()=>{try{return JSON.parse(localStorage.getItem('bbc_wf_done')||'{}');}catch{return{};}})();
+    const todo=[...D.workflows].filter(w=>pct(w)<100).sort((a,b)=>{
+      const da=wfDone[a.id]?1:0, db=wfDone[b.id]?1:0; if(da!==db) return da-db;       // unchecked first
+      const ss=socialScore(b)-socialScore(a); if(ss) return ss;                         // social importance
+      return pct(b)-pct(a);                                                             // then closest to done
+    });
+    const openCount=todo.filter(w=>!wfDone[w.id]).length;
+    const recs=todo.slice(0,8).map(w=>{
       const p=pct(w), nextArt=ORDER.find(a=>!w.artifacts[a]), verb=p>0?'Next':'Start';
       const dots=w.owners.map(o=>`<span class="dot" style="background:${OWN[o]||'#888'}"></span>`).join('');
-      return `<div class="card recrow" onclick="wfSheet('${w.id}')" style="margin-bottom:8px">
-        <div class="row1"><span style="display:flex;gap:3px">${dots}</span><div class="nm" style="font-size:14px">${esc(w.title)}</div><span style="font-family:var(--mono);font-size:11px;color:var(--gold2)">${p}%</span></div>
-        <div class="meta" style="margin-top:7px">${verb}: create the <b>${nextArt?nextArt.toUpperCase():'—'}</b>${nextArt?' '+ICON[nextArt]:''} · ${esc(w.role)}</div></div>`;
+      const isSoc=socialScore(w)>0, dn=!!wfDone[w.id];
+      return `<div class="card recrow" style="margin-bottom:8px;display:flex;gap:10px;align-items:flex-start;${dn?'opacity:.5':''}">
+        <input type="checkbox" ${dn?'checked':''} onclick="event.stopPropagation();wfTodoToggle('${w.id}',this)" aria-label="Mark done" style="width:24px;height:24px;min-width:24px;margin-top:1px;accent-color:#D4AF37;cursor:pointer">
+        <div style="flex:1;min-width:0;cursor:pointer" onclick="wfSheet('${w.id}')">
+          <div class="row1"><span style="display:flex;gap:3px">${dots}</span><div class="nm" style="font-size:14px;${dn?'text-decoration:line-through':''}">${esc(w.title)}</div>${isSoc?'<span style="font-family:var(--mono);font-size:9px;color:#EC4899;border:1px solid #EC489955;border-radius:5px;padding:1px 5px;white-space:nowrap">SOCIAL</span>':''}<span style="font-family:var(--mono);font-size:11px;color:var(--gold2)">${p}%</span></div>
+          <div class="meta" style="margin-top:7px">${verb}: create the <b>${nextArt?nextArt.toUpperCase():'—'}</b>${nextArt?' '+ICON[nextArt]:''} · ${esc(w.role)}</div>
+        </div></div>`;
     }).join('');
 
     /* All categories, all details shown in boxes */
@@ -3173,8 +3238,8 @@
 
     return `<h2 class="vt">Workflows</h2><div class="vsub">${cats.length} categories · ${totalArt} of ${totalCells} artifacts shipped · ${totalCells-totalArt} gaps to fill. Tap any workflow for the full breakdown.</div>
       <input class="search" placeholder="Search all workflows..." oninput="filterCards(this,'wfwrap')">
-      <div class="sec">⭐ Recommended next</div>
-      <div class="gauge-sub" style="text-align:left;margin:-4px 0 10px">Closest to done — ship these to finish the set faster.</div>
+      <div class="sec">⭐ To-do — recommended next</div>
+      <div class="gauge-sub" style="text-align:left;margin:-4px 0 10px">${openCount} open · ordered by social-media importance, then closest to done. Tap the box to check one off (saved on this device). Tap the row for the full breakdown.</div>
       ${recs}
       <div class="sec">Readiness by category</div>
       <div id="wfwrap" class="wfgrid">${boxes}</div>
