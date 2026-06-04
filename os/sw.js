@@ -1,4 +1,4 @@
-const CACHE = 'bbc-cc-v11';
+const CACHE = 'bbc-cc-v12';
 const ASSETS = ['./manifest.webmanifest', './icon-192.png', './icon-512.png'];
 
 self.addEventListener('install', e => {

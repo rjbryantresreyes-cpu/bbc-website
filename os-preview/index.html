@@ -2927,6 +2927,8 @@
       <div class="clientgrid" id="cli">${cards}</div>`;
   };
   // CRM view — embeds the FULL NocoDB app (all tables, views, workflows) inside the dashboard.
+  // BBC CRM lead pipeline (documented schema) — offered as the status options everywhere status is editable.
+  const CRM_STATUSES=['New','Drafted','Emailed','Sent','Replied','Interested','Potential','Booked','Bad Fit'];
   const NOCODB_URL='https://app.nocodb.com/wryboloy/p0zn4yka8zr49iu';
   const NOCODB_SHARED='https://app.nocodb.com/base/5ceec4eb-5f5f-41a5-ad36-5054bcd46dcb';
   const EMIN='background:#0d1320;border:1px solid #22324d;color:#F5F1EA;border-radius:9px;padding:10px 12px;font-size:14px;font-family:inherit;outline:none';
@@ -3091,7 +3093,7 @@
       // editable Status — options come ONLY from statuses already present in the CRM (never invent one)
       const SEL='background:#0d1320;border:1px solid #22324d;color:#F5F1EA;border-radius:9px;padding:10px 12px;font-size:14px;font-family:inherit;outline:none;min-height:44px';
       const cur=((c.Status||'')+'').trim();
-      const sset=[...new Set((cts||[]).map(r=>((r.Status||'')+'').trim()).filter(Boolean))].sort();
+      const sset=[...new Set([...CRM_STATUSES, ...(cts||[]).map(r=>((r.Status||'')+'').trim()).filter(Boolean)])];
       if(cur && !sset.includes(cur)) sset.unshift(cur);
       const opts=['<option value="">— set status —</option>'].concat(sset.map(s=>`<option ${s===cur?'selected':''}>${esc(s)}</option>`)).join('');
       const statusEditor=(c.Id!==undefined&&c.Id!==null)
@@ -3118,8 +3120,8 @@
     if(!cts.length){ el.innerHTML='<div class="panel"><span class="ptitle">No contacts loaded</span></div>'; return; }
     const rank=r=>{ const s=((r.Status||'')+'').toLowerCase(); if(['interested','potential','replied','booked'].includes(s)) return 0; if(((r.Source||'')+'')==='Current Client') return 1; if(s==='emailed') return 2; return 3; };
     const sorted=[...cts].sort((a,b)=>rank(a)-rank(b));
-    // status options come only from values already in the CRM (never invent a status)
-    const STATUSES=[...new Set(cts.map(r=>((r.Status||'')+'').trim()).filter(Boolean))].sort();
+    // status options: the documented BBC pipeline + whatever already exists in the CRM
+    const STATUSES=[...new Set([...CRM_STATUSES, ...cts.map(r=>((r.Status||'')+'').trim()).filter(Boolean)])];
     el.innerHTML=sorted.map(r=>{ const em=((r.Email||'')+'').toLowerCase().trim(); if(!em) return '';
       const hay=esc((((r['First Name']||'')+' '+(r.Organization||'')+' '+em+' '+(r.Status||'')).toLowerCase()));
       const cur=((r.Status||'')+'').trim();

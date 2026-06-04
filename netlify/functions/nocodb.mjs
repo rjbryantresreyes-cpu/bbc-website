@@ -68,7 +68,7 @@ export default async (req) => {
     const text = await r.text();
     return new Response(text, {
       status: r.status,
-      headers: { "content-type": "application/json", "cache-control": "public, max-age=60" },
+      headers: { "content-type": "application/json", "cache-control": "public, max-age=10" },
     });
   } catch (e) {
     return json({ error: "NocoDB fetch failed", detail: String(e).slice(0, 200) }, 502);
