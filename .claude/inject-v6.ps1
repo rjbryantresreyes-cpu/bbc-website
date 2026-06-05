@@ -33,7 +33,7 @@ $pages = @(
   'newsletter.html', 'ai-family.html', 'demo.html', 'client-onboarding.html',
   'install-guide.html', 'portfolio-form.html', 'task-submission.html',
   '404.html',
-  'vi.html', 'kenz.html', 'krizza.html', 'al.html', 'daryl.html', 'ryan-c.html'
+  'vi.html', 'kenz.html', 'krizza.html', 'al.html', 'daryl.html', 'diego.html', 'ryan-c.html'
 )
 
 $cssLink   = '  <link rel="stylesheet" href="bbc-styles-v6.css" />'
