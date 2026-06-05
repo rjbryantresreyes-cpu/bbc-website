@@ -8,20 +8,16 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css">
 <style>
   :root{
-    --bg:#F3ECE0; --bg2:#FBF8F2; --card:#FFFFFF;
-    --ink:#2B2723; --muted:#857B6E; --soft:#A99E8E;
-    --walnut:#5E4329; --walnut2:#7A5836; --brass:#B08D4F; --brass-d:#977636;
-    --sage:#7E8B6D; --line:rgba(94,67,41,0.15); --line2:rgba(94,67,41,0.07);
-    --green:#5E8B6D; --amber:#C08A3E; --blue:#5E7790;
-    --serif:Georgia,'Times New Roman',serif;
-    --sans:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+    --bg:#F3ECE0;--bg2:#FBF8F2;--card:#FFFFFF;--ink:#2B2723;--muted:#857B6E;--soft:#A99E8E;
+    --walnut:#5E4329;--walnut2:#7A5836;--brass:#B08D4F;--brass-d:#977636;--sage:#7E8B6D;
+    --line:rgba(94,67,41,0.15);--line2:rgba(94,67,41,0.07);--green:#5E8B6D;--amber:#C08A3E;--blue:#5E7790;
+    --serif:Georgia,'Times New Roman',serif;--sans:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
     --shadow:0 6px 26px rgba(94,67,41,0.10);
   }
   *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
   body{font-family:var(--sans);background:var(--bg);color:var(--ink);min-height:100dvh;line-height:1.5;-webkit-font-smoothing:antialiased;padding-bottom:44px;}
   .wrap{max-width:1080px;margin:0 auto;padding:0 20px;}
   svg.i{width:1em;height:1em;stroke:currentColor;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;vertical-align:-0.12em;}
-
   .topbar{background:var(--bg2);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:20;}
   .topbar__in{max-width:1080px;margin:0 auto;padding:13px 20px;display:flex;align-items:center;justify-content:space-between;gap:12px;}
   .brand{display:flex;align-items:center;gap:12px;min-width:0;}
@@ -33,26 +29,21 @@
   .sync .pulse{width:7px;height:7px;border-radius:50%;background:var(--green);animation:pulse 2s infinite;}
   @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(94,139,109,.5)}70%{box-shadow:0 0 0 7px rgba(94,139,109,0)}100%{box-shadow:0 0 0 0 rgba(94,139,109,0)}}
   .out{font-size:12px;color:var(--muted);border:1px solid var(--line);border-radius:20px;padding:8px 13px;background:none;cursor:pointer;font-family:var(--sans);min-height:38px;}
-
   .hero{padding:28px 0 6px;}
   .hero .hi{font-family:var(--serif);font-size:clamp(23px,5vw,31px);font-weight:700;}
   .hero .hi em{color:var(--walnut);font-style:italic;}
-  .hero .tag{color:var(--muted);font-size:14px;margin-top:5px;}
-  .hero .tag b{color:var(--ink);}
-
+  .hero .tag{color:var(--muted);font-size:14px;margin-top:5px;}.hero .tag b{color:var(--ink);}
   .grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:18px;}
   .col-2{grid-column:1 / -1;}
-  @media(max-width:760px){ .grid{grid-template-columns:1fr;} }
-
+  @media(max-width:760px){.grid{grid-template-columns:1fr;}}
   .card{background:var(--card);border:1px solid var(--line2);border-radius:16px;padding:20px;box-shadow:var(--shadow);}
   .card.click{cursor:pointer;transition:transform .12s,box-shadow .12s;}
   .card.click:hover{transform:translateY(-2px);box-shadow:0 10px 32px rgba(94,67,41,0.13);}
   .card__hd{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:14px;}
   .card__ti{font-family:var(--serif);font-size:17px;font-weight:700;display:flex;align-items:center;gap:10px;}
   .card__ti .ic{width:32px;height:32px;border-radius:9px;background:rgba(176,141,79,0.13);color:var(--brass-d);display:flex;align-items:center;justify-content:center;font-size:17px;flex:none;}
-  .card__more{font-size:12px;color:var(--brass-d);text-decoration:none;font-weight:600;white-space:nowrap;}
-
-  .proj,.cli{display:flex;align-items:center;gap:12px;padding:11px 0;border-bottom:1px solid var(--line2);text-decoration:none;color:inherit;cursor:pointer;}
+  .card__more{font-size:12px;color:var(--brass-d);text-decoration:none;font-weight:600;white-space:nowrap;cursor:pointer;background:none;border:none;font-family:var(--sans);display:inline-flex;align-items:center;gap:4px;}
+  .proj,.cli{display:flex;align-items:center;gap:12px;padding:11px 0;border-bottom:1px solid var(--line2);color:inherit;cursor:pointer;}
   .proj:last-child,.cli:last-child{border-bottom:none;}
   .proj:hover .proj__nm,.cli:hover .cli__nm{color:var(--walnut);}
   .proj__main,.cli__main{flex:1;min-width:0;}
@@ -68,16 +59,13 @@
   .tag.builder{background:rgba(94,67,41,0.12);color:var(--walnut);}
   .tag.designer{background:rgba(126,139,109,0.18);color:#5d6b4f;}
   .tag.home{background:rgba(94,119,144,0.14);color:var(--blue);}
-
   .row{display:flex;gap:10px;padding:9px 0;border-bottom:1px solid var(--line2);font-size:13.5px;align-items:flex-start;}
   .row:last-child{border-bottom:none;}
   .dot{width:8px;height:8px;border-radius:50%;background:var(--brass);margin-top:6px;flex:none;}
-  .dot.g{background:var(--green);} .dot.a{background:var(--amber);}
-  .row b{color:var(--ink);} .row .sub{color:var(--muted);}
+  .dot.g{background:var(--green);}.dot.a{background:var(--amber);}
+  .row b{color:var(--ink);}.row .sub{color:var(--muted);}
   .card.krizza{background:linear-gradient(180deg,#FBF6EC,#FFFFFF);border-color:var(--line);}
   .badge-bbc{font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--brass-d);background:rgba(176,141,79,0.13);padding:3px 8px;border-radius:6px;font-weight:700;}
-
-  /* Showroom stepper */
   .steps{display:flex;gap:0;margin:8px 0 6px;}
   .step{flex:1;text-align:center;position:relative;padding:0 4px;}
   .step .ball{width:28px;height:28px;border-radius:50%;border:2px solid var(--line);background:#fff;margin:0 auto 8px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:var(--soft);position:relative;z-index:2;}
@@ -87,54 +75,66 @@
   .step.done::before,.step.now::before{background:var(--green);}
   .slab{font-size:11px;line-height:1.25;color:var(--muted);}
   .step.done .slab,.step.now .slab{color:var(--ink);font-weight:600;}
-
-  /* Drop zone (bigger) */
   .drop{border:2px dashed var(--line);border-radius:14px;padding:34px 16px;text-align:center;background:var(--bg2);cursor:pointer;transition:.15s;}
   .drop:hover,.drop.over{border-color:var(--brass);background:#FAF4E8;}
-  .drop .dic{color:var(--brass-d);}
-  .drop .t{font-weight:600;margin-top:9px;font-size:15px;}
-  .drop .s{font-size:12.5px;color:var(--muted);margin-top:3px;}
-  .drop input{display:none;}
-  .folderlink{display:inline-flex;align-items:center;gap:5px;font-size:12px;color:var(--brass-d);text-decoration:none;font-weight:600;margin-top:12px;}
-
-  /* Reminders / generic list with checkbox */
-  .chk{display:flex;align-items:flex-start;gap:10px;padding:9px 0;border-bottom:1px solid var(--line2);font-size:13.5px;}
+  .drop .dic{color:var(--brass-d);}.drop .t{font-weight:600;margin-top:9px;font-size:15px;}.drop .s{font-size:12.5px;color:var(--muted);margin-top:3px;}.drop input{display:none;}
+  .folderlink{display:inline-flex;align-items:center;gap:5px;font-size:12px;color:var(--brass-d);text-decoration:none;font-weight:600;cursor:pointer;}
+  .chk{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid var(--line2);font-size:13.5px;}
   .chk:last-child{border-bottom:none;}
-  .chk input{width:18px;height:18px;margin-top:1px;accent-color:var(--walnut);flex:none;cursor:pointer;}
+  .chk input[type=checkbox]{width:18px;height:18px;accent-color:var(--walnut);flex:none;cursor:pointer;}
   .chk.done label{text-decoration:line-through;color:var(--soft);}
-  .chk .meta{font-size:11.5px;color:var(--muted);}
-
+  .chk label{flex:1;}.chk .meta{font-size:11.5px;color:var(--muted);}
   /* Drawer */
   .scrim{position:fixed;inset:0;background:rgba(43,39,35,0.42);opacity:0;visibility:hidden;transition:.2s;z-index:40;}
   .scrim.open{opacity:1;visibility:visible;}
-  .drawer{position:fixed;top:0;right:0;height:100dvh;width:min(460px,94vw);background:var(--bg2);box-shadow:-12px 0 40px rgba(43,39,35,0.25);transform:translateX(100%);transition:transform .25s cubic-bezier(.4,0,.2,1);z-index:41;display:flex;flex-direction:column;}
+  .drawer{position:fixed;top:0;right:0;height:100dvh;width:min(470px,95vw);background:var(--bg2);box-shadow:-12px 0 40px rgba(43,39,35,0.25);transform:translateX(100%);transition:transform .25s cubic-bezier(.4,0,.2,1);z-index:41;display:flex;flex-direction:column;}
   .drawer.open{transform:translateX(0);}
-  @media(max-width:560px){ .drawer{width:100vw;top:auto;bottom:0;height:92dvh;border-radius:18px 18px 0 0;transform:translateY(100%);} .drawer.open{transform:translateY(0);} }
-  .dw-hd{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:18px 20px;border-bottom:1px solid var(--line);background:var(--card);}
+  @media(max-width:560px){.drawer{width:100vw;top:auto;bottom:0;height:92dvh;border-radius:18px 18px 0 0;transform:translateY(100%);}.drawer.open{transform:translateY(0);}}
+  .dw-hd{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 20px;border-bottom:1px solid var(--line);background:var(--card);}
   .dw-hd h2{font-family:var(--serif);font-size:19px;font-weight:700;}
   .dw-hd .x{width:36px;height:36px;border-radius:9px;border:1px solid var(--line);background:none;cursor:pointer;color:var(--muted);display:flex;align-items:center;justify-content:center;font-size:18px;flex:none;}
   .dw-body{flex:1;overflow-y:auto;padding:18px 20px 40px;}
-  .dw-sec{font-family:var(--mono,monospace);font-size:10.5px;letter-spacing:1.5px;text-transform:uppercase;color:var(--brass-d);margin:18px 0 9px;font-weight:700;}
+  .dw-sec{font-size:10.5px;letter-spacing:1.5px;text-transform:uppercase;color:var(--brass-d);margin:18px 0 8px;font-weight:700;}
   .dw-sec:first-child{margin-top:0;}
-  .kv{font-size:14px;margin-bottom:7px;} .kv b{color:var(--ink);} .kv span{color:var(--muted);}
+  label.fl{display:block;font-size:11.5px;color:var(--muted);margin:10px 0 4px;font-weight:600;}
+  .fin,.dw-body textarea,.fsel{width:100%;border:1px solid var(--line);border-radius:10px;background:var(--card);color:var(--ink);font-family:var(--sans);font-size:14px;padding:11px 12px;}
+  .dw-body textarea{min-height:80px;resize:vertical;}
+  .fin:focus,.dw-body textarea:focus,.fsel:focus{outline:none;border-color:var(--brass);}
+  .addrow{display:flex;gap:8px;margin-top:10px;}.addrow .fin{flex:1;}
+  .btn{background:var(--walnut);color:#fff;border:none;border-radius:10px;padding:0 16px;font-weight:600;font-size:14px;font-family:var(--sans);cursor:pointer;min-height:44px;display:inline-flex;align-items:center;justify-content:center;gap:7px;white-space:nowrap;}
+  .btn:hover{background:var(--walnut2);}.btn.ghost{background:none;border:1px solid var(--line);color:var(--walnut);}
+  .btn.block{width:100%;margin-top:12px;}
   .thumbs{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;}
   .thumb{aspect-ratio:1;border-radius:9px;background:var(--bg);border:1px solid var(--line2);display:flex;align-items:center;justify-content:center;color:var(--soft);font-size:20px;}
-  .addrow{display:flex;gap:8px;margin-top:10px;}
-  .addrow input,.dw-body textarea{flex:1;border:1px solid var(--line);border-radius:10px;background:var(--card);color:var(--ink);font-family:var(--sans);font-size:14px;padding:11px 12px;}
-  .dw-body textarea{width:100%;min-height:84px;resize:vertical;}
-  .addrow input:focus,.dw-body textarea:focus{outline:none;border-color:var(--brass);}
-  .btn{background:var(--walnut);color:#fff;border:none;border-radius:10px;padding:0 16px;font-weight:600;font-size:14px;font-family:var(--sans);cursor:pointer;min-height:44px;display:inline-flex;align-items:center;gap:7px;white-space:nowrap;}
-  .btn:hover{background:var(--walnut2);} .btn.ghost{background:none;border:1px solid var(--line);color:var(--walnut);}
   .cbtn{width:38px;height:38px;border-radius:9px;border:1px solid var(--line);background:var(--card);color:var(--brass-d);display:flex;align-items:center;justify-content:center;cursor:pointer;}
   .cbtn:hover{border-color:var(--brass);color:var(--walnut);}
-  .note-item{background:var(--card);border:1px solid var(--line2);border-radius:10px;padding:11px 13px;margin-bottom:8px;font-size:13.5px;}
+  .note-item{background:var(--card);border:1px solid var(--line2);border-radius:10px;padding:11px 13px;margin-bottom:8px;font-size:13.5px;display:flex;justify-content:space-between;gap:8px;}
   .note-item .when{font-size:11px;color:var(--soft);margin-top:4px;}
-  .del{color:#c0594a;background:none;border:none;cursor:pointer;font-size:12px;}
+  .del{color:#c0594a;background:none;border:none;cursor:pointer;font-size:12px;flex:none;align-self:flex-start;}
   .footnote{text-align:center;color:var(--soft);font-size:11.5px;margin-top:26px;line-height:1.6;}
+  .editstep{display:flex;gap:8px;align-items:center;margin-bottom:8px;}.editstep .fin{flex:1;}
+  /* Woody chat */
+  .woody-fab{position:fixed;bottom:20px;right:20px;z-index:45;background:var(--walnut);color:#fff;border:none;border-radius:30px;padding:13px 18px;font-family:var(--sans);font-weight:700;font-size:14px;cursor:pointer;box-shadow:0 10px 30px rgba(94,67,41,0.4);display:flex;align-items:center;gap:9px;}
+  .woody-fab:hover{background:var(--walnut2);}
+  .woody-fab .av{width:24px;height:24px;border-radius:50%;background:var(--brass);display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-weight:700;font-size:13px;}
+  .woody{position:fixed;bottom:20px;right:20px;width:min(380px,94vw);height:min(560px,80dvh);background:var(--bg2);border-radius:18px;box-shadow:0 20px 60px rgba(43,39,35,0.35);z-index:46;display:none;flex-direction:column;overflow:hidden;border:1px solid var(--line);}
+  .woody.open{display:flex;}
+  .woody-hd{background:var(--walnut);color:#fff;padding:14px 16px;display:flex;align-items:center;justify-content:space-between;gap:10px;}
+  .woody-hd .who{display:flex;align-items:center;gap:10px;}
+  .woody-hd .av{width:34px;height:34px;border-radius:50%;background:var(--brass);display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-weight:700;font-size:16px;}
+  .woody-hd .nm{font-weight:700;font-size:15px;}.woody-hd .st{font-size:11px;opacity:.85;}
+  .woody-hd .x{background:none;border:none;color:#fff;font-size:20px;cursor:pointer;opacity:.85;}
+  .woody-thread{flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:10px;}
+  .msg{max-width:82%;padding:10px 13px;border-radius:14px;font-size:13.5px;line-height:1.45;}
+  .msg.w{background:var(--card);border:1px solid var(--line2);align-self:flex-start;border-bottom-left-radius:4px;}
+  .msg.u{background:var(--walnut);color:#fff;align-self:flex-end;border-bottom-right-radius:4px;}
+  .woody-in{display:flex;gap:8px;padding:12px;border-top:1px solid var(--line);background:var(--card);}
+  .woody-in input{flex:1;border:1px solid var(--line);border-radius:20px;padding:11px 14px;font-family:var(--sans);font-size:14px;}
+  .woody-in input:focus{outline:none;border-color:var(--brass);}
+  .woody-in button{background:var(--walnut);color:#fff;border:none;border-radius:50%;width:42px;height:42px;cursor:pointer;flex:none;display:flex;align-items:center;justify-content:center;}
 </style>
 </head>
 <body>
-
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
   <symbol id="ic-cabinet" viewBox="0 0 24 24"><path d="M5 3h14v18H5z"/><path d="M12 3v18M5 12h14"/></symbol>
   <symbol id="ic-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
@@ -152,196 +152,161 @@
   <symbol id="ic-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
 </defs></svg>
 
-<div class="topbar">
-  <div class="topbar__in">
-    <div class="brand"><img src="wooden-woodworks-logo.png" alt="Wooden Woodworks"><div><div class="t">Wooden Woodworks</div><div class="s">Owner Dashboard</div></div></div>
-    <div class="tb-right"><span class="sync"><span class="pulse"></span>Updated just now</span><button class="out">Sign out</button></div>
-  </div>
-</div>
+<div class="topbar"><div class="topbar__in">
+  <div class="brand"><img src="wooden-woodworks-logo.png" alt="Wooden Woodworks"><div><div class="t">Wooden Woodworks</div><div class="s">Owner Dashboard</div></div></div>
+  <div class="tb-right"><span class="sync"><span class="pulse"></span>Synced to WW system</span><button class="out">Sign out</button></div>
+</div></div>
 
 <div class="wrap">
-  <div class="hero">
-    <div class="hi">Good morning, <em>Oscar &amp; Marla</em></div>
-    <div class="tag">Tap any card for the full details. <b>Crafted for the way you live.</b></div>
-  </div>
+  <div class="hero"><div class="hi">Good morning, <em>Oscar &amp; Marla</em></div><div class="tag">Tap any card to view and <b>edit</b> it. Your changes save to the WW system and reach Krizza.</div></div>
   <div class="grid" id="grid"></div>
-  <div class="footnote">Wooden Woodworks · Owner view · Sample data shown for layout.<br>Edits, uploads, tasks, and notes save to the system (NocoDB) when wired. Powered by Balay ni Bruno &amp; Co.</div>
+  <div class="footnote">Wooden Woodworks · Owner view · Sample data for layout.<br>Every edit, task, and note saves to the WW system (NocoDB) and syncs to Krizza's dashboard when wired. Powered by Balay ni Bruno &amp; Co.</div>
 </div>
 
 <div class="scrim" id="scrim" onclick="closeDrawer()"></div>
-<aside class="drawer" id="drawer" aria-hidden="true">
-  <div class="dw-hd"><h2 id="dwTitle">Details</h2><button class="x" onclick="closeDrawer()">&times;</button></div>
-  <div class="dw-body" id="dwBody"></div>
-</aside>
+<aside class="drawer" id="drawer"><div class="dw-hd"><h2 id="dwTitle">Details</h2><button class="x" onclick="closeDrawer()">&times;</button></div><div class="dw-body" id="dwBody"></div></aside>
+
+<!-- Woody chat -->
+<button class="woody-fab" id="woodyFab" onclick="toggleWoody()"><span class="av">W</span> Ask Woody</button>
+<div class="woody" id="woody">
+  <div class="woody-hd"><div class="who"><div class="av">W</div><div><div class="nm">Woody</div><div class="st">Your Wooden Woodworks AI</div></div></div><button class="x" onclick="toggleWoody()">&times;</button></div>
+  <div class="woody-thread" id="wThread"></div>
+  <div class="woody-in"><input id="wInput" placeholder="Ask Woody anything..." onkeydown="if(event.key==='Enter')wSend()"><button onclick="wSend()"><svg class="i"><use href="#ic-send"/></svg></button></div>
+</div>
 
 <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
 <script>
-/* ---------- sample data (replaced by NocoDB when wired) ---------- */
-var DB = {
+var DB={
   projects:[
-    {id:'p1',name:'Frameless Kitchen',loc:'Salado',status:'prod',sl:'In Production',client:'Hill Country Custom Homes',desc:'Full frameless European kitchen, painted shaker base with a stained walnut island. Finishing in-house.',timeline:[['Design','done'],['Build','now'],['Finishing',''],['Install','']],photos:3},
-    {id:'p2',name:'Master Bath Vanity',loc:'Waco',status:'finish',sl:'Finishing',client:'The Whitman Residence',desc:'Stained walnut double vanity, soft-close, in the spray booth this week.',timeline:[['Design','done'],['Build','done'],['Finishing','now'],['Install','']],photos:5},
-    {id:'p3',name:'Built-in Office Wall',loc:'Austin',status:'installed',sl:'Installed',client:'Verde Interior Studio',desc:'Painted shaker built-ins, floor to ceiling, installed and signed off.',timeline:[['Design','done'],['Build','done'],['Finishing','done'],['Install','done']],photos:8},
-    {id:'p4',name:'Showroom Cabinetry',loc:'Salado',status:'design',sl:'In Design',client:'Wooden Woodworks (own showroom)',desc:'Display cabinetry for the new Salado showroom. In design.',timeline:[['Design','now'],['Build',''],['Finishing',''],['Install','']],photos:0}
+    {id:'p1',name:'Frameless Kitchen',loc:'Salado',status:'prod',client:'Hill Country Custom Homes',desc:'Frameless European kitchen, painted shaker base with a stained walnut island. Finishing in-house.',timeline:[['Design','done'],['Build','now'],['Finishing',''],['Install','']],photos:3},
+    {id:'p2',name:'Master Bath Vanity',loc:'Waco',status:'finish',client:'The Whitman Residence',desc:'Stained walnut double vanity, soft-close, in the spray booth.',timeline:[['Design','done'],['Build','done'],['Finishing','now'],['Install','']],photos:5},
+    {id:'p3',name:'Built-in Office Wall',loc:'Austin',status:'installed',client:'Verde Interior Studio',desc:'Painted shaker built-ins, floor to ceiling, installed.',timeline:[['Design','done'],['Build','done'],['Finishing','done'],['Install','done']],photos:8},
+    {id:'p4',name:'Showroom Cabinetry',loc:'Salado',status:'design',client:'Wooden Woodworks',desc:'Display cabinetry for the new Salado showroom.',timeline:[['Design','now'],['Build',''],['Finishing',''],['Install','']],photos:0}
   ],
   clients:[
-    {id:'c1',name:'Hill Country Custom Homes',type:'builder',tl:'Builder',init:'HC',email:'office@hillcountryhomes.example',phone:'(254) 555-0142',comms:[['call','Discussed island finish','2 days ago'],['text','Sent updated timeline','4 days ago'],['email','Estimate approved','1 week ago']],projects:['p1'],notes:[['Prefers WhatsApp for quick questions.','last week']]},
-    {id:'c2',name:'Verde Interior Studio',type:'designer',tl:'Designer',init:'VI',email:'hello@verdestudio.example',phone:'(512) 555-0199',comms:[['email','Sent install photos','3 days ago']],projects:['p3'],notes:[['Repeat client, 3rd project. Loves clean lines.','this month']]},
-    {id:'c3',name:'The Whitman Residence',type:'home',tl:'Homeowner',init:'WR',email:'whitman@example.com',phone:'(254) 555-0177',comms:[['text','Confirmed install date','yesterday']],projects:['p2'],notes:[['Install next week, confirm with Marla.','yesterday']]},
-    {id:'c4',name:'Brazos Valley Builders',type:'builder',tl:'Builder',init:'BV',email:'jobs@brazosvalley.example',phone:'(254) 555-0120',comms:[['email','New project inquiry','this week']],projects:[],notes:[['New this month, high potential. B2B.','this week']]}
+    {id:'c1',name:'Hill Country Custom Homes',type:'builder',email:'office@hillcountryhomes.example',phone:'(254) 555-0142',comms:[['call','Discussed island finish','2 days ago'],['email','Estimate approved','1 week ago']],projects:['p1'],notes:[['Prefers WhatsApp for quick questions.','last week']]},
+    {id:'c2',name:'Verde Interior Studio',type:'designer',email:'hello@verdestudio.example',phone:'(512) 555-0199',comms:[['email','Sent install photos','3 days ago']],projects:['p3'],notes:[['Repeat client, loves clean lines.','this month']]},
+    {id:'c3',name:'The Whitman Residence',type:'home',email:'whitman@example.com',phone:'(254) 555-0177',comms:[['text','Confirmed install date','yesterday']],projects:['p2'],notes:[['Install next week, confirm with Marla.','yesterday']]},
+    {id:'c4',name:'Brazos Valley Builders',type:'builder',email:'jobs@brazosvalley.example',phone:'(254) 555-0120',comms:[['email','New project inquiry','this week']],projects:[],notes:[['New this month, high potential.','this week']]}
   ],
-  showroom:{steps:[
-    {name:'Site secured',status:'done',tasks:[['Lease signed',true],['Permits filed',true]]},
-    {name:'Build-out underway',status:'now',tasks:[['Framing complete',true],['Electrical rough-in',false],['Schedule interior build-out',false]]},
-    {name:'Showroom cabinetry',status:'',tasks:[['Finalize display layout',false]]},
-    {name:'Grand opening',status:'',tasks:[['Set opening date',false],['Plan launch content',false]]}
-  ]},
+  showroom:{steps:[{name:'Site secured',status:'done',tasks:[['Lease signed',true],['Permits filed',true]]},{name:'Build-out underway',status:'now',tasks:[['Framing complete',true],['Electrical rough-in',false],['Schedule interior build-out',false]]},{name:'Showroom cabinetry',status:'',tasks:[['Finalize display layout',false]]},{name:'Grand opening',status:'',tasks:[['Set opening date',false],['Plan launch content',false]]}]},
   team:[
-    {n:'Margie',r:'Finishing (paint + stain)',does:'Applies all paint and stain finishes. Our signature in-house finishing.',cur:'Whitman vanity in the spray booth',tasks:[['Whitman vanity finish',false],['Kitchen island stain',false]],notes:'Finishing timing affects shoot scheduling.'},
-    {n:'Thomas',r:'Installer / Assembler',does:'Field installation and assembly at job sites.',cur:'Office wall install (Austin) done',tasks:[['Austin office install',true],['Prep Waco install',false]],notes:'Experienced, reliable.'},
-    {n:'Lonnie & Elio',r:'New builders',does:'Cabinet building and assembly in the shop.',cur:'Ramping up on frameless boxes',tasks:[['Frameless box training',false]],notes:'New hires, ramping up.'},
-    {n:'Pablo',r:'Part-time shop support',does:'General shop support and overflow.',cur:'Shop support as needed',tasks:[],notes:'Part-time availability.'}
+    {n:'Margie',r:'Finishing (paint + stain)',does:'Applies all paint and stain finishes. Our in-house finishing.',cur:'Whitman vanity in the spray booth',tasks:[['Whitman vanity finish',false],['Kitchen island stain',false]],notes:'Finishing timing affects shoot scheduling.'},
+    {n:'Thomas',r:'Installer / Assembler',does:'Field installation and assembly at job sites.',cur:'Office wall install done',tasks:[['Austin office install',true],['Prep Waco install',false]],notes:'Experienced, reliable.'},
+    {n:'Lonnie & Elio',r:'New builders',does:'Cabinet building and assembly in the shop.',cur:'Ramping up on frameless boxes',tasks:[['Frameless box training',false]],notes:'New hires.'},
+    {n:'Pablo',r:'Part-time shop support',does:'General shop support and overflow.',cur:'Shop support as needed',tasks:[],notes:'Part-time.'}
   ],
-  krizza:{
-    tasks:[['Draft 4 reels for this week',false,'2 drafted, 2 in progress'],['Publish 2 Google Business posts',false,'Photos selected'],['Follow up new builder lead in HubSpot',true,'Logged + follow-up set'],['Marla review live on website',true,'Done, featured on case-study page']],
-    notes:[]
-  },
-  reminders:[
-    {t:'90-day review with BBC',d:'June 14',done:false},
-    {t:'Document showroom build progress',d:'ongoing',done:false},
-    {t:'Approve this week’s content',d:'today',done:false},
-    {t:'Process deposit invoice for Brazos Valley',d:'this week',done:false}
-  ],
-  instructions:[
-    {t:'Hold the Austin reel until the client approves the final photos.',d:'2 days ago'},
-    {t:'Post the Salado kitchen walkthrough on Friday morning.',d:'last week'}
-  ]
+  krizza:{tasks:[['Draft 4 reels for this week',false,'2 drafted, 2 in progress'],['Publish 2 Google Business posts',false,'Photos selected'],['Follow up new builder lead',true,'Logged + follow-up set'],['Marla review live on website',true,'Done']],notes:[]},
+  reminders:[{t:'90-day review with BBC',d:'June 14',done:false},{t:'Document showroom build progress',d:'ongoing',done:false},{t:'Approve this week’s content',d:'today',done:false},{t:'Process deposit invoice for Brazos Valley',d:'this week',done:false}],
+  instructions:[{t:'Hold the Austin reel until the client approves the final photos.',d:'2 days ago'},{t:'Post the Salado kitchen walkthrough Friday morning.',d:'last week'}]
 };
-
-var ICON={done:'✓'};
-function esc(s){return (s||'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
+var STAT={design:'In Design',prod:'In Production',finish:'Finishing',installed:'Installed'};
+function esc(s){return (s==null?'':''+s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
 function ic(id){return '<svg class="i"><use href="#'+id+'"/></svg>';}
-var notyf; try{notyf=new Notyf({duration:2400,position:{x:'center',y:'top'},types:[{type:'success',background:'#5E4329'}]});}catch(e){}
-function toast(m){ if(notyf) notyf.success(m); }
+function uid(){return 'x'+(Date.now()%100000)+Math.floor(Math.random()*0);}
+var notyf;try{notyf=new Notyf({duration:2400,position:{x:'center',y:'top'},types:[{type:'success',background:'#5E4329'}]});}catch(e){}
+function saved(m){if(notyf)notyf.success(m||'Saved to WW system, Krizza notified');}
+function val(id){var e=document.getElementById(id);return e?e.value:'';}
 
-/* ---------- render the cards ---------- */
-function pill(p){return '<span class="pill '+p.status+'">'+p.sl+'</span>';}
+function pill(p){return '<span class="pill '+p.status+'">'+STAT[p.status]+'</span>';}
 function renderGrid(){
   var g=document.getElementById('grid');
   var projRows=DB.projects.map(p=>`<div class="proj" onclick="openDrawer('project','${p.id}')"><div class="proj__main"><div class="proj__nm">${esc(p.name)}</div><div class="proj__meta">${esc(p.loc)} · ${esc(p.client)}</div></div>${pill(p)}</div>`).join('');
-  var cliRows=DB.clients.map(c=>`<div class="cli" onclick="openDrawer('client','${c.id}')"><div class="cli__av">${c.init}</div><div class="cli__main"><div class="cli__nm">${esc(c.name)} <span class="tag ${c.type}">${c.tl}</span></div><div class="cli__meta">${c.projects.length?esc(DB.projects.find(p=>p.id===c.projects[0]).name):'No active project'}</div></div></div>`).join('');
-  var stepHtml=DB.showroom.steps.map((s,i)=>`<div class="step ${s.status}"><div class="ball">${s.status==='done'?ICON.done:(i+1)}</div><div class="slab">${esc(s.name)}</div></div>`).join('');
-  var teamRows=DB.team.map((t,i)=>`<div class="proj" onclick="openDrawer('team','${i}')"><div class="proj__main"><div class="proj__nm">${esc(t.n)}</div><div class="proj__meta">${esc(t.r)}</div></div><span class="card__more">Details &rarr;</span></div>`).join('');
+  var cliRows=DB.clients.map(c=>`<div class="cli" onclick="openDrawer('client','${c.id}')"><div class="cli__av">${esc(c.name).slice(0,2).toUpperCase()}</div><div class="cli__main"><div class="cli__nm">${esc(c.name)} <span class="tag ${c.type}">${c.type==='home'?'Homeowner':c.type[0].toUpperCase()+c.type.slice(1)}</span></div><div class="cli__meta">${c.projects.length?esc(DB.projects.find(p=>p.id===c.projects[0])?.name||'Project'):'No active project'}</div></div></div>`).join('');
+  var stepHtml=DB.showroom.steps.map((s,i)=>`<div class="step ${s.status}"><div class="ball">${s.status==='done'?'✓':(i+1)}</div><div class="slab">${esc(s.name)}</div></div>`).join('');
+  var teamRows=DB.team.map((t,i)=>`<div class="proj" onclick="openDrawer('team','${i}')"><div class="proj__main"><div class="proj__nm">${esc(t.n)}</div><div class="proj__meta">${esc(t.r)}</div></div><span class="card__more">Edit &rarr;</span></div>`).join('');
   var krizDone=DB.krizza.tasks.filter(t=>t[1]).length;
-
   g.innerHTML=`
-    <div class="card col-2"><div class="card__hd"><div class="card__ti"><span class="ic">${ic('ic-cabinet')}</span>Current Projects</div><a class="card__more" href="#" onclick="event.preventDefault();toast('Opening projects folder')">All projects folder ${ic('ic-folder')}</a></div>${projRows}</div>
-
-    <div class="card col-2"><div class="card__hd"><div class="card__ti"><span class="ic">${ic('ic-briefcase')}</span>Clients <span class="badge-bbc" style="margin-left:4px">${DB.clients.length} active</span></div></div>${cliRows}</div>
-
-    <div class="card col-2 click" onclick="openDrawer('showroom')" style="background:linear-gradient(180deg,#FBF3E4,#FFFFFF);border-color:var(--line)"><div class="card__hd"><div class="card__ti"><span class="ic">${ic('ic-building')}</span>New Showroom</div><span class="badge-bbc">Opening before Sept 2026</span></div><div class="steps">${stepHtml}</div><div class="row" style="border:none;padding-top:12px"><span class="dot a"></span><div><b>Latest:</b> <span class="sub">Framing complete, interior build-out scheduled next month. Tap to manage build steps.</span></div></div></div>
-
-    <div class="card"><div class="card__hd"><div class="card__ti"><span class="ic">${ic('ic-users')}</span>Your Team</div></div>${teamRows}</div>
-
-    <div class="card krizza click" onclick="openDrawer('krizza')"><div class="card__hd"><div class="card__ti"><span class="ic">${ic('ic-clipboard')}</span>From Krizza</div><span class="badge-bbc">Your BBC team</span></div><div class="row"><span class="dot g"></span><div><b>${krizDone} of ${DB.krizza.tasks.length} tasks done this week</b><div class="sub">Tap to see tasks, request changes, or leave notes for Krizza</div></div></div><div class="row"><span class="dot"></span><div>Marla's Google review is now live on your case-study page</div></div></div>
-
+    <div class="card col-2"><div class="card__hd"><div class="card__ti"><span class="ic">${ic('ic-cabinet')}</span>Current Projects</div><button class="card__more" onclick="openDrawer('newproject')">${ic('ic-plus')} New project</button></div>${projRows}</div>
+    <div class="card col-2"><div class="card__hd"><div class="card__ti"><span class="ic">${ic('ic-briefcase')}</span>Clients <span class="badge-bbc" style="margin-left:4px">${DB.clients.length}</span></div><button class="card__more" onclick="openDrawer('newclient')">${ic('ic-plus')} New client</button></div>${cliRows}</div>
+    <div class="card col-2 click" onclick="openDrawer('showroom')" style="background:linear-gradient(180deg,#FBF3E4,#FFFFFF);border-color:var(--line)"><div class="card__hd"><div class="card__ti"><span class="ic">${ic('ic-building')}</span>New Showroom</div><span class="badge-bbc">Opening before Sept 2026</span></div><div class="steps">${stepHtml}</div><div class="row" style="border:none;padding-top:12px"><span class="dot a"></span><div><b>Tap to manage the build</b> <span class="sub">add, edit, or check off tasks for each step</span></div></div></div>
+    <div class="card"><div class="card__hd"><div class="card__ti"><span class="ic">${ic('ic-users')}</span>Your Team</div><button class="card__more" onclick="openDrawer('newteam')">${ic('ic-plus')} Add</button></div>${teamRows}</div>
+    <div class="card krizza click" onclick="openDrawer('krizza')"><div class="card__hd"><div class="card__ti"><span class="ic">${ic('ic-clipboard')}</span>From Krizza</div><span class="badge-bbc">Your BBC team</span></div><div class="row"><span class="dot g"></span><div><b>${krizDone} of ${DB.krizza.tasks.length} tasks done this week</b><div class="sub">Tap to request changes or leave notes for Krizza</div></div></div></div>
     <div class="card click" onclick="openDrawer('reminders')"><div class="card__hd"><div class="card__ti"><span class="ic">${ic('ic-clock')}</span>Reminders</div><span class="card__more">${DB.reminders.filter(r=>!r.done).length} open</span></div>${DB.reminders.slice(0,3).map(r=>`<div class="row"><span class="dot ${r.done?'g':'a'}"></span><div><b>${esc(r.t)}</b><div class="sub">${esc(r.d)}</div></div></div>`).join('')}</div>
-
     <div class="card click" onclick="openDrawer('instructions')"><div class="card__hd"><div class="card__ti"><span class="ic">${ic('ic-edit')}</span>Notes &amp; Instructions</div><span class="card__more">${DB.instructions.length} saved</span></div>${DB.instructions.slice(0,2).map(n=>`<div class="row"><span class="dot"></span><div><b>${esc(n.t)}</b><div class="sub">${esc(n.d)}</div></div></div>`).join('')}</div>
-
-    <div class="card col-2"><div class="card__hd"><div class="card__ti"><span class="ic">${ic('ic-upload')}</span>Drop Content for Krizza</div><a class="folderlink" href="#" onclick="event.preventDefault();toast('Opening shared content folder')" style="margin:0">${ic('ic-folder')} Shared folder</a></div>
-      <label class="drop" id="drop" for="ddrop"><div class="dic">${'<svg class="i" style="width:34px;height:34px"><use href="#ic-upload"/></svg>'}</div><div class="t">Drop photos, videos, or graphics here</div><div class="s">Goes straight to the folder Krizza edits from</div><input id="ddrop" type="file" multiple></label>
-    </div>`;
+    <div class="card col-2"><div class="card__hd"><div class="card__ti"><span class="ic">${ic('ic-upload')}</span>Drop Content for Krizza</div><span class="folderlink" onclick="saved('Opening shared content folder')">${ic('ic-folder')} Shared folder</span></div><label class="drop" id="drop" for="ddrop"><div class="dic"><svg class="i" style="width:34px;height:34px"><use href="#ic-upload"/></svg></div><div class="t">Drop photos, videos, or graphics here</div><div class="s">Goes straight to the folder Krizza edits from</div><input id="ddrop" type="file" multiple></label></div>`;
   wireDrop();
 }
-
-/* ---------- drawer ---------- */
-function openDrawer(type,id){
-  var t={project:'Project',client:'Client',showroom:'New Showroom',team:'Team Member',krizza:'Tasks for Krizza',reminders:'Reminders',instructions:'Notes & Instructions'}[type];
-  document.getElementById('dwTitle').textContent=t;
-  document.getElementById('dwBody').innerHTML=render[type](id);
-  document.getElementById('drawer').classList.add('open');
-  document.getElementById('scrim').classList.add('open');
-  document.body.style.overflow='hidden';
-}
+function openDrawer(type,id){var titles={project:'Edit Project',newproject:'New Project',client:'Edit Client',newclient:'New Client',showroom:'New Showroom Build',team:'Edit Team Member',newteam:'Add Team Member',krizza:'Tasks for Krizza',reminders:'Reminders',instructions:'Notes & Instructions'};document.getElementById('dwTitle').textContent=titles[type];document.getElementById('dwBody').innerHTML=render[type](id);document.getElementById('drawer').classList.add('open');document.getElementById('scrim').classList.add('open');document.body.style.overflow='hidden';}
 function closeDrawer(){document.getElementById('drawer').classList.remove('open');document.getElementById('scrim').classList.remove('open');document.body.style.overflow='';}
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeDrawer();});
-
-function checklist(arr,cb){return arr.map((x,i)=>`<div class="chk ${x[1]?'done':''}"><input type="checkbox" ${x[1]?'checked':''} onchange="${cb}(${i},this.checked)"><label>${esc(x[0])}</label></div>`).join('');}
+function fl(l){return '<label class="fl">'+l+'</label>';}
+function checklist(arr,cb,del){return arr.map((x,i)=>`<div class="chk ${x[1]?'done':''}"><input type="checkbox" ${x[1]?'checked':''} onchange="${cb}(${i},this.checked)"><label>${esc(x[0])}</label>${del?`<button class="del" onclick="${del}(${i})">remove</button>`:''}</div>`).join('');}
 
 var render={
   project:function(id){var p=DB.projects.find(x=>x.id===id);
-    return `<div class="dw-sec">Status</div><div>${pill(p)} <span class="kv" style="margin-left:6px"><span>${esc(p.loc)}</span></span></div>
-    <div class="dw-sec">Client who ordered it</div><div class="kv"><b>${esc(p.client)}</b></div>
-    <div class="dw-sec">Description</div><div class="kv"><span>${esc(p.desc)}</span></div>
-    <div class="dw-sec">Where we are</div><div class="steps">${p.timeline.map(s=>`<div class="step ${s[1]}"><div class="ball">${s[1]==='done'?ICON.done:''}</div><div class="slab">${esc(s[0])}</div></div>`).join('')}</div>
-    <div class="dw-sec">Photos &amp; videos</div><div class="thumbs">${Array.from({length:p.photos}).map(()=>'<div class="thumb">'+ic('ic-cabinet')+'</div>').join('')||'<div class="kv"><span>No media yet.</span></div>'}</div>
-    <label class="drop" style="margin-top:10px" onclick="toast('Media added to '+'${esc(p.name)}')"><div class="dic">${ic('ic-upload')}</div><div class="t">Add photos / videos</div></label>
-    <div class="dw-sec">Project folder</div><a class="btn ghost" href="#" onclick="event.preventDefault();toast('Opening ${esc(p.name)} folder')">${ic('ic-folder')} Open project folder</a>`;
+    return `${fl('Project name')}<input class="fin" id="pn" value="${esc(p.name)}">
+    ${fl('Location')}<input class="fin" id="ploc" value="${esc(p.loc)}">
+    ${fl('Status')}<select class="fsel" id="pst">${Object.keys(STAT).map(k=>`<option value="${k}" ${p.status===k?'selected':''}>${STAT[k]}</option>`).join('')}</select>
+    ${fl('Client who ordered it')}<input class="fin" id="pcl" value="${esc(p.client)}">
+    ${fl('Description')}<textarea id="pds">${esc(p.desc)}</textarea>
+    <button class="btn block" onclick="saveProject('${p.id}')">${ic('ic-send')} Save changes</button>
+    <div class="dw-sec">Where we are</div><div class="steps">${p.timeline.map((s,i)=>`<div class="step ${s[1]}" onclick="cycleStage('${p.id}',${i})" style="cursor:pointer"><div class="ball">${s[1]==='done'?'✓':''}</div><div class="slab">${esc(s[0])}</div></div>`).join('')}</div><div class="footnote" style="text-align:left">Tap a stage to move it forward.</div>
+    <div class="dw-sec">Photos &amp; videos</div><div class="thumbs">${Array.from({length:p.photos}).map(()=>'<div class="thumb">'+ic('ic-cabinet')+'</div>').join('')||'<div class="kv" style="color:var(--muted)">No media yet.</div>'}</div>
+    <label class="drop" style="margin-top:10px" onclick="DB.projects.find(x=>x.id==='${p.id}').photos++;openDrawer('project','${p.id}');saved('Media added')"><div class="dic">${ic('ic-upload')}</div><div class="t">Add photos / videos</div></label>
+    <div class="dw-sec">Folder</div><button class="btn ghost block" onclick="saved('Opening ${esc(p.name)} folder')">${ic('ic-folder')} Open project folder</button>
+    <button class="del" style="margin-top:16px" onclick="delProject('${p.id}')">Delete this project</button>`;
   },
+  newproject:function(){return `${fl('Project name')}<input class="fin" id="np_n" placeholder="e.g., Kitchen remodel">${fl('Location')}<input class="fin" id="np_l" placeholder="City">${fl('Status')}<select class="fsel" id="np_s">${Object.keys(STAT).map(k=>`<option value="${k}">${STAT[k]}</option>`).join('')}</select>${fl('Client')}<input class="fin" id="np_c" placeholder="Client name">${fl('Description')}<textarea id="np_d"></textarea><button class="btn block" onclick="addProject()">${ic('ic-plus')} Add project</button>`;},
   client:function(id){var c=DB.clients.find(x=>x.id===id);
-    return `<div class="dw-sec">${c.tl} · Contact</div>
-    <div style="display:flex;gap:8px;margin-bottom:6px"><a class="cbtn" href="tel:${c.phone}" onclick="toast('Calling ${esc(c.name)}')">${ic('ic-phone')}</a><a class="cbtn" href="#" onclick="event.preventDefault();toast('Texting ${esc(c.name)}')">${ic('ic-msg')}</a><a class="cbtn" href="mailto:${c.email}" onclick="toast('Emailing ${esc(c.name)}')">${ic('ic-mail')}</a></div>
-    <div class="kv"><span>${esc(c.email)} · ${esc(c.phone)}</span></div>
-    <div class="dw-sec">Recent calls, texts &amp; emails</div>${c.comms.map(m=>`<div class="row"><span class="dot ${m[0]==='call'?'a':(m[0]==='email'?'':'g')}"></span><div><b>${m[0][0].toUpperCase()+m[0].slice(1)}:</b> ${esc(m[1])}<div class="sub">${esc(m[2])}</div></div></div>`).join('')||'<div class="kv"><span>No recent activity.</span></div>'}
-    <div class="dw-sec">Projects for this client</div>${c.projects.map(pid=>{var p=DB.projects.find(x=>x.id===pid);return `<div class="proj" onclick="openDrawer('project','${p.id}')"><div class="proj__main"><div class="proj__nm">${esc(p.name)}</div><div class="proj__meta">${esc(p.desc).slice(0,60)}...</div></div>${pill(p)}</div>`;}).join('')||'<div class="kv"><span>No active projects yet.</span></div>'}
-    <div class="dw-sec">Notes</div><div id="cnotes">${c.notes.map(n=>`<div class="note-item">${esc(n[0])}<div class="when">${esc(n[1])}</div></div>`).join('')}</div>
-    <div class="addrow"><input id="cnote" placeholder="Add a note about this client..."><button class="btn" onclick="addClientNote('${c.id}')">${ic('ic-plus')}</button></div>`;
+    return `${fl('Client name')}<input class="fin" id="cn" value="${esc(c.name)}">
+    ${fl('Type')}<select class="fsel" id="ct"><option value="builder" ${c.type==='builder'?'selected':''}>Builder</option><option value="designer" ${c.type==='designer'?'selected':''}>Designer</option><option value="home" ${c.type==='home'?'selected':''}>Homeowner</option></select>
+    ${fl('Email')}<input class="fin" id="ce" value="${esc(c.email)}">${fl('Phone')}<input class="fin" id="cp" value="${esc(c.phone)}">
+    <button class="btn block" onclick="saveClient('${c.id}')">${ic('ic-send')} Save changes</button>
+    <div class="dw-sec">Contact</div><div style="display:flex;gap:8px"><span class="cbtn" onclick="saved('Calling ${esc(c.name)}')">${ic('ic-phone')}</span><span class="cbtn" onclick="saved('Texting ${esc(c.name)}')">${ic('ic-msg')}</span><span class="cbtn" onclick="saved('Emailing ${esc(c.name)}')">${ic('ic-mail')}</span></div>
+    <div class="dw-sec">Recent calls, texts &amp; emails</div>${c.comms.map(m=>`<div class="row"><span class="dot ${m[0]==='call'?'a':(m[0]==='email'?'':'g')}"></span><div><b>${m[0][0].toUpperCase()+m[0].slice(1)}:</b> ${esc(m[1])}<div class="sub">${esc(m[2])}</div></div></div>`).join('')||'<div style="color:var(--muted);font-size:13px">No recent activity.</div>'}
+    <div class="dw-sec">Projects for this client</div>${c.projects.map(pid=>{var p=DB.projects.find(x=>x.id===pid);return p?`<div class="proj" onclick="openDrawer('project','${p.id}')"><div class="proj__main"><div class="proj__nm">${esc(p.name)}</div></div>${pill(p)}</div>`:'';}).join('')||'<div style="color:var(--muted);font-size:13px">No active projects.</div>'}
+    <div class="dw-sec">Notes</div>${c.notes.map((n,i)=>`<div class="note-item"><div>${esc(n[0])}<div class="when">${esc(n[1])}</div></div><button class="del" onclick="delClientNote('${c.id}',${i})">x</button></div>`).join('')}
+    <div class="addrow"><input class="fin" id="cnote" placeholder="Add a note..."><button class="btn" onclick="addClientNote('${c.id}')">${ic('ic-plus')}</button></div>
+    <button class="del" style="margin-top:16px" onclick="delClient('${c.id}')">Delete this client</button>`;
   },
-  showroom:function(){
-    return DB.showroom.steps.map((s,si)=>`<div class="dw-sec">${s.status==='done'?'✓ ':(s.status==='now'?'● ':'')}${esc(s.name)}</div>
-      <div id="sstep${si}">${checklist(s.tasks,'sTask.bind(null,'+si+')')}</div>
-      <div class="addrow"><input id="stask${si}" placeholder="Add task or reminder for this step..."><button class="btn" onclick="addStepTask(${si})">${ic('ic-plus')}</button></div>`).join('')
-      +`<div class="footnote" style="text-align:left;margin-top:18px">You know the build best, add, edit, or check off tasks for each step as construction moves.</div>`;
-  },
+  newclient:function(){return `${fl('Client name')}<input class="fin" id="nc_n">${fl('Type')}<select class="fsel" id="nc_t"><option value="builder">Builder</option><option value="designer">Designer</option><option value="home">Homeowner</option></select>${fl('Email')}<input class="fin" id="nc_e">${fl('Phone')}<input class="fin" id="nc_p">${fl('First note (optional)')}<input class="fin" id="nc_note"><button class="btn block" onclick="addClient()">${ic('ic-plus')} Add client</button>`;},
+  showroom:function(){return DB.showroom.steps.map((s,si)=>`<div class="editstep"><input class="fin" value="${esc(s.name)}" onchange="DB.showroom.steps[${si}].name=this.value;saved('Step renamed')"><select class="fsel" style="width:auto" onchange="DB.showroom.steps[${si}].status=this.value;openDrawer('showroom');renderGrid();"><option value="" ${s.status===''?'selected':''}>Upcoming</option><option value="now" ${s.status==='now'?'selected':''}>Current</option><option value="done" ${s.status==='done'?'selected':''}>Done</option></select><button class="del" onclick="delStep(${si})">x</button></div><div id="ss${si}">${checklist(s.tasks,'sTask.bind(null,'+si+')','sTaskDel.bind(null,'+si+')')}</div><div class="addrow"><input class="fin" id="stask${si}" placeholder="Add task / reminder for this step..."><button class="btn" onclick="addStepTask(${si})">${ic('ic-plus')}</button></div><div style="height:14px"></div>`).join('')+`<button class="btn ghost block" onclick="addStep()">${ic('ic-plus')} Add a build step</button><div class="footnote" style="text-align:left;margin-top:14px">You know the build, edit step names, statuses, and tasks freely.</div>`;},
   team:function(i){var t=DB.team[i];
-    return `<div class="dw-sec">Role</div><div class="kv"><b>${esc(t.r)}</b></div>
-    <div class="dw-sec">What they do</div><div class="kv"><span>${esc(t.does)}</span></div>
-    <div class="dw-sec">Currently working on</div><div class="kv"><b>${esc(t.cur)}</b></div>
-    <div class="dw-sec">Tasks &amp; status</div><div id="tt${i}">${checklist(t.tasks,'tTask.bind(null,'+i+')')}</div>
-    <div class="addrow"><input id="ttask${i}" placeholder="Add a task..."><button class="btn" onclick="addTeamTask(${i})">${ic('ic-plus')}</button></div>
-    <div class="dw-sec">Notes</div><textarea id="tnote${i}" placeholder="Notes for ${esc(t.n)}...">${esc(t.notes)}</textarea>
-    <button class="btn" style="margin-top:10px" onclick="toast('Saved notes for ${esc(t.n)}')">${ic('ic-send')} Save notes</button>`;
+    return `${fl('Name')}<input class="fin" id="tn" value="${esc(t.n)}">${fl('Role')}<input class="fin" id="tr" value="${esc(t.r)}">${fl('What they do')}<textarea id="td">${esc(t.does)}</textarea>${fl('Currently working on')}<input class="fin" id="tc" value="${esc(t.cur)}">
+    <button class="btn block" onclick="saveTeam(${i})">${ic('ic-send')} Save changes</button>
+    <div class="dw-sec">Tasks &amp; status</div><div id="tt${i}">${checklist(t.tasks,'tTask.bind(null,'+i+')','tTaskDel.bind(null,'+i+')')}</div><div class="addrow"><input class="fin" id="ttask${i}" placeholder="Add a task..."><button class="btn" onclick="addTeamTask(${i})">${ic('ic-plus')}</button></div>
+    <div class="dw-sec">Notes</div><textarea id="tnote${i}">${esc(t.notes)}</textarea><button class="btn block" onclick="DB.team[${i}].notes=val('tnote${i}');saved('Notes saved')">${ic('ic-send')} Save notes</button>
+    <button class="del" style="margin-top:16px" onclick="delTeam(${i})">Remove this member</button>`;
   },
-  krizza:function(){
-    return `<div class="dw-sec">Request a new task for Krizza</div>
-    <div class="kv"><span>Need a new workflow, a change to the WW system, or a website update? Add it here and Krizza will handle it.</span></div>
-    <textarea id="kreq" placeholder="e.g., 'Add a new page to the website for the showroom', 'Set up a monthly builder newsletter'..."></textarea>
-    <button class="btn" style="margin-top:10px" onclick="addKrizzaTask()">${ic('ic-plus')} Send task to Krizza</button>
-    <div class="dw-sec">Krizza's current tasks</div><div id="ktasks">${DB.krizza.tasks.map((t,i)=>`<div class="chk ${t[1]?'done':''}"><input type="checkbox" ${t[1]?'checked':''} disabled><label>${esc(t[0])}<div class="meta">${esc(t[2]||'')}</div></label></div>`).join('')}</div>
-    <div class="dw-sec">Notes for Krizza</div><div id="knotes">${DB.krizza.notes.map(n=>`<div class="note-item">${esc(n[0])}<div class="when">${esc(n[1])}</div></div>`).join('')||'<div class="kv"><span>No notes yet.</span></div>'}</div>
-    <div class="addrow"><input id="knote" placeholder="Leave a note for Krizza..."><button class="btn" onclick="addKrizzaNote()">${ic('ic-plus')}</button></div>`;
-  },
-  reminders:function(){
-    return `<div class="dw-sec">All reminders</div><div id="rems">${DB.reminders.map((r,i)=>`<div class="chk ${r.done?'done':''}"><input type="checkbox" ${r.done?'checked':''} onchange="remToggle(${i},this.checked)"><label>${esc(r.t)}<div class="meta">${esc(r.d)}</div></label><button class="del" onclick="remDel(${i})">remove</button></div>`).join('')}</div>
-    <div class="addrow"><input id="newrem" placeholder="Add a reminder (an invoice to process, a callback...)"><button class="btn" onclick="addReminder()">${ic('ic-plus')}</button></div>`;
-  },
-  instructions:function(){
-    return `<div class="dw-sec">Add an instruction for BBC</div><textarea id="newinstr" placeholder="What should the BBC team do? Be specific..."></textarea>
-    <button class="btn" style="margin-top:10px" onclick="addInstruction()">${ic('ic-send')} Send to Krizza</button>
-    <div class="dw-sec">Previous instructions</div><div id="instrs">${DB.instructions.map(n=>`<div class="note-item">${esc(n.t)}<div class="when">${esc(n.d)}</div></div>`).join('')}</div>`;
-  }
+  newteam:function(){return `${fl('Name')}<input class="fin" id="nt_n">${fl('Role')}<input class="fin" id="nt_r" placeholder="e.g., Installer">${fl('What they do')}<textarea id="nt_d"></textarea><button class="btn block" onclick="addTeam()">${ic('ic-plus')} Add team member</button>`;},
+  krizza:function(){return `<div class="dw-sec">Request a new task for Krizza</div><div style="color:var(--muted);font-size:13px;margin-bottom:8px">Need a new workflow, a change to the WW system, or a website update? Add it here, Krizza handles it.</div><textarea id="kreq" placeholder="e.g., Add a showroom page to the website..."></textarea><button class="btn block" onclick="addKrizzaTask()">${ic('ic-plus')} Send task to Krizza</button>
+    <div class="dw-sec">Krizza's current tasks</div><div id="ktasks">${DB.krizza.tasks.map(t=>`<div class="chk ${t[1]?'done':''}"><input type="checkbox" ${t[1]?'checked':''} disabled><label>${esc(t[0])}<div class="meta">${esc(t[2]||'')}</div></label></div>`).join('')}</div>
+    <div class="dw-sec">Notes for Krizza</div>${DB.krizza.notes.map((n,i)=>`<div class="note-item"><div>${esc(n[0])}<div class="when">${esc(n[1])}</div></div><button class="del" onclick="DB.krizza.notes.splice(${i},1);openDrawer('krizza')">x</button></div>`).join('')||'<div style="color:var(--muted);font-size:13px">No notes yet.</div>'}<div class="addrow"><input class="fin" id="knote" placeholder="Leave a note for Krizza..."><button class="btn" onclick="addKrizzaNote()">${ic('ic-plus')}</button></div>`;},
+  reminders:function(){return `<div class="dw-sec">All reminders</div>${DB.reminders.map((r,i)=>`<div class="chk ${r.done?'done':''}"><input type="checkbox" ${r.done?'checked':''} onchange="DB.reminders[${i}].done=this.checked;renderGrid();saved()"><label>${esc(r.t)}<div class="meta">${esc(r.d)}</div></label><button class="del" onclick="DB.reminders.splice(${i},1);openDrawer('reminders');renderGrid()">remove</button></div>`).join('')}<div class="addrow"><input class="fin" id="newrem" placeholder="Add a reminder (an invoice to process, a callback...)"><button class="btn" onclick="addReminder()">${ic('ic-plus')}</button></div>`;},
+  instructions:function(){return `<div class="dw-sec">Add an instruction for BBC</div><textarea id="newinstr" placeholder="What should the BBC team do? Be specific..."></textarea><button class="btn block" onclick="addInstruction()">${ic('ic-send')} Send to Krizza</button><div class="dw-sec">Previous instructions</div>${DB.instructions.map((n,i)=>`<div class="note-item"><div>${esc(n.t)}<div class="when">${esc(n.d)}</div></div><button class="del" onclick="DB.instructions.splice(${i},1);openDrawer('instructions');renderGrid()">x</button></div>`).join('')}`;}
 };
+/* mutations */
+function saveProject(id){var p=DB.projects.find(x=>x.id===id);p.name=val('pn');p.loc=val('ploc');p.status=val('pst');p.client=val('pcl');p.desc=val('pds');renderGrid();saved();}
+function cycleStage(id,i){var t=DB.projects.find(x=>x.id===id).timeline,s=t[i][1];t[i][1]=s===''?'now':(s==='now'?'done':'');openDrawer('project',id);saved();}
+function delProject(id){DB.projects=DB.projects.filter(x=>x.id!==id);closeDrawer();renderGrid();saved('Project deleted, Krizza notified');}
+function addProject(){if(!val('np_n'))return;DB.projects.push({id:uid(),name:val('np_n'),loc:val('np_l'),status:val('np_s'),client:val('np_c'),desc:val('np_d'),timeline:[['Design',val('np_s')==='design'?'now':'done'],['Build',''],['Finishing',''],['Install','']],photos:0});closeDrawer();renderGrid();saved('Project added, Krizza notified');}
+function saveClient(id){var c=DB.clients.find(x=>x.id===id);c.name=val('cn');c.type=val('ct');c.email=val('ce');c.phone=val('cp');renderGrid();saved();}
+function delClient(id){DB.clients=DB.clients.filter(x=>x.id!==id);closeDrawer();renderGrid();saved('Client deleted');}
+function addClient(){if(!val('nc_n'))return;DB.clients.push({id:uid(),name:val('nc_n'),type:val('nc_t'),email:val('nc_e'),phone:val('nc_p'),comms:[],projects:[],notes:val('nc_note')?[[val('nc_note'),'just now']]:[]});closeDrawer();renderGrid();saved('Client added');}
+function addClientNote(id){var c=DB.clients.find(x=>x.id===id);if(!val('cnote'))return;c.notes.unshift([val('cnote'),'just now']);openDrawer('client',id);saved('Note added');}
+function delClientNote(id,i){DB.clients.find(x=>x.id===id).notes.splice(i,1);openDrawer('client',id);saved();}
+function sTask(si,i,ck){DB.showroom.steps[si].tasks[i][1]=ck;saved();}
+function sTaskDel(si,i){DB.showroom.steps[si].tasks.splice(i,1);openDrawer('showroom');saved();}
+function addStepTask(si){if(!val('stask'+si))return;DB.showroom.steps[si].tasks.push([val('stask'+si),false]);openDrawer('showroom');saved('Task added');}
+function delStep(si){DB.showroom.steps.splice(si,1);openDrawer('showroom');renderGrid();saved();}
+function addStep(){DB.showroom.steps.push({name:'New step',status:'',tasks:[]});openDrawer('showroom');renderGrid();saved('Build step added');}
+function tTask(i,j,ck){DB.team[i].tasks[j][1]=ck;saved();}
+function tTaskDel(i,j){DB.team[i].tasks.splice(j,1);openDrawer('team',i);saved();}
+function addTeamTask(i){if(!val('ttask'+i))return;DB.team[i].tasks.push([val('ttask'+i),false]);openDrawer('team',i);saved('Task added');}
+function saveTeam(i){var t=DB.team[i];t.n=val('tn');t.r=val('tr');t.does=val('td');t.cur=val('tc');renderGrid();saved();}
+function delTeam(i){DB.team.splice(i,1);closeDrawer();renderGrid();saved('Team member removed');}
+function addTeam(){if(!val('nt_n'))return;DB.team.push({n:val('nt_n'),r:val('nt_r'),does:val('nt_d'),cur:'',tasks:[],notes:''});closeDrawer();renderGrid();saved('Team member added');}
+function addKrizzaTask(){if(!val('kreq'))return;DB.krizza.tasks.unshift([val('kreq'),false,'New, from owners']);openDrawer('krizza');renderGrid();saved('Sent to Krizza');}
+function addKrizzaNote(){if(!val('knote'))return;DB.krizza.notes.unshift([val('knote'),'just now']);openDrawer('krizza');saved('Note added');}
+function addReminder(){if(!val('newrem'))return;DB.reminders.push({t:val('newrem'),d:'just now',done:false});openDrawer('reminders');renderGrid();saved('Reminder added');}
+function addInstruction(){if(!val('newinstr'))return;DB.instructions.unshift({t:val('newinstr'),d:'just now'});openDrawer('instructions');renderGrid();saved('Instruction sent to Krizza');}
+function wireDrop(){var d=document.getElementById('drop'),inp=document.getElementById('ddrop');if(!d)return;['dragover','dragenter'].forEach(ev=>d.addEventListener(ev,e=>{e.preventDefault();d.classList.add('over');}));['dragleave','drop'].forEach(ev=>d.addEventListener(ev,e=>{e.preventDefault();d.classList.remove('over');}));d.addEventListener('drop',e=>{var n=e.dataTransfer.files.length;if(n)saved(n+' file'+(n>1?'s':'')+" sent to Krizza’s folder");});inp.addEventListener('change',e=>{var n=e.target.files.length;if(n)saved(n+' file'+(n>1?'s':'')+" sent to Krizza’s folder");});}
 
-/* ---------- mutations (local now; NocoDB-backed when wired) ---------- */
-function addClientNote(id){var c=DB.clients.find(x=>x.id===id),v=document.getElementById('cnote').value.trim();if(!v)return;c.notes.unshift([v,'just now']);document.getElementById('dwBody').innerHTML=render.client(id);toast('Note added');}
-function sTask(si,i,ck){DB.showroom.steps[si].tasks[i][1]=ck;toast(ck?'Done':'Reopened');}
-function addStepTask(si){var v=document.getElementById('stask'+si).value.trim();if(!v)return;DB.showroom.steps[si].tasks.push([v,false]);document.getElementById('dwBody').innerHTML=render.showroom();toast('Task added');}
-function tTask(i,j,ck){DB.team[i].tasks[j][1]=ck;toast(ck?'Done':'Reopened');}
-function addTeamTask(i){var v=document.getElementById('ttask'+i).value.trim();if(!v)return;DB.team[i].tasks.push([v,false]);document.getElementById('dwBody').innerHTML=render.team(i);toast('Task added');}
-function addKrizzaTask(){var v=document.getElementById('kreq').value.trim();if(!v)return;DB.krizza.tasks.unshift([v,false,'New, from owners']);document.getElementById('dwBody').innerHTML=render.krizza();toast('Sent to Krizza');renderGrid();}
-function addKrizzaNote(){var v=document.getElementById('knote').value.trim();if(!v)return;DB.krizza.notes.unshift([v,'just now']);document.getElementById('dwBody').innerHTML=render.krizza();toast('Note added');}
-function remToggle(i,ck){DB.reminders[i].done=ck;toast(ck?'Done':'Reopened');}
-function remDel(i){DB.reminders.splice(i,1);document.getElementById('dwBody').innerHTML=render.reminders();renderGrid();toast('Reminder removed');}
-function addReminder(){var v=document.getElementById('newrem').value.trim();if(!v)return;DB.reminders.push({t:v,d:'just now',done:false});document.getElementById('dwBody').innerHTML=render.reminders();renderGrid();toast('Reminder added');}
-function addInstruction(){var v=document.getElementById('newinstr').value.trim();if(!v)return;DB.instructions.unshift({t:v,d:'just now'});document.getElementById('dwBody').innerHTML=render.instructions();renderGrid();toast('Instruction sent to Krizza');}
-
-function wireDrop(){var d=document.getElementById('drop'),inp=document.getElementById('ddrop');if(!d)return;
-  ['dragover','dragenter'].forEach(ev=>d.addEventListener(ev,e=>{e.preventDefault();d.classList.add('over');}));
-  ['dragleave','drop'].forEach(ev=>d.addEventListener(ev,e=>{e.preventDefault();d.classList.remove('over');}));
-  d.addEventListener('drop',e=>{var n=e.dataTransfer.files.length;if(n)toast(n+' file'+(n>1?'s':'')+" sent to Krizza’s folder");});
-  inp.addEventListener('change',e=>{var n=e.target.files.length;if(n)toast(n+' file'+(n>1?'s':'')+" sent to Krizza’s folder");});
-}
+/* Woody chat */
+function toggleWoody(){var w=document.getElementById('woody'),f=document.getElementById('woodyFab');var open=w.classList.toggle('open');f.style.display=open?'none':'flex';if(open&&!document.getElementById('wThread').children.length){wBot("Hi Oscar and Marla, I'm Woody, your Wooden Woodworks AI. Ask me about your projects, clients, content, or your team, or tell me what you need and I'll pass it to Krizza.");}}
+function wBot(t){var d=document.createElement('div');d.className='msg w';d.textContent=t;var th=document.getElementById('wThread');th.appendChild(d);th.scrollTop=th.scrollHeight;}
+function wSend(){var i=document.getElementById('wInput'),v=i.value.trim();if(!v)return;var u=document.createElement('div');u.className='msg u';u.textContent=v;var th=document.getElementById('wThread');th.appendChild(u);i.value='';th.scrollTop=th.scrollHeight;setTimeout(()=>wBot("Got it. I'll be fully connected to your WW system soon, then I can answer this live and take action for you. For now I've noted it for Krizza."),500);}
 renderGrid();
 </script>
 </body>
