@@ -88,6 +88,17 @@
   .cbtn{width:38px;height:38px;border-radius:9px;border:1px solid var(--line);background:var(--bg2);color:var(--brass-d);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:16px;}
   .cbtn:hover{border-color:var(--brass);color:var(--walnut);}
 
+  /* Showroom milestone stepper */
+  .steps{display:flex;gap:0;margin:8px 0 6px;}
+  .step{flex:1;text-align:center;position:relative;padding:0 4px;}
+  .step .ball{width:28px;height:28px;border-radius:50%;border:2px solid var(--line);background:#fff;margin:0 auto 8px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:var(--soft);position:relative;z-index:2;}
+  .step.done .ball{background:var(--green);border-color:var(--green);color:#fff;}
+  .step.now .ball{background:var(--brass);border-color:var(--brass);color:#fff;}
+  .step:not(:first-child)::before{content:"";position:absolute;left:-50%;top:13px;width:100%;height:2px;background:var(--line);z-index:1;}
+  .step.done::before,.step.now::before{background:var(--green);}
+  .slab{font-size:11px;line-height:1.25;color:var(--muted);}
+  .step.done .slab,.step.now .slab{color:var(--ink);font-weight:600;}
+
   /* Numbers */
   .nums{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
   .num{background:var(--bg2);border:1px solid var(--line2);border-radius:12px;padding:14px;text-align:center;}
@@ -138,6 +149,7 @@
   <symbol id="ic-briefcase" viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2M3 13h18"/></symbol>
   <symbol id="ic-phone" viewBox="0 0 24 24"><path d="M5 4h3l1.5 4-2 1.5a11 11 0 0 0 5 5l1.5-2 4 1.5v3a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></symbol>
   <symbol id="ic-msg" viewBox="0 0 24 24"><path d="M4 5h16a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H8l-4 3z"/></symbol>
+  <symbol id="ic-building" viewBox="0 0 24 24"><path d="M3 21V8l9-5 9 5v13"/><path d="M3 21h18M9 21v-5h6v5"/><path d="M8 11h0M12 11h0M16 11h0"/></symbol>
 </defs></svg>
 
 <div class="topbar">
@@ -222,6 +234,22 @@
         <div class="cli__main"><div class="cli__nm">Brazos Valley Builders <span class="tag builder">Builder</span></div><div class="cli__meta">Showroom Cabinetry · In Design · new this month</div></div>
         <div class="cli__act"><button class="cbtn" title="Call" onclick="toast('Calling Brazos Valley Builders')"><svg class="i"><use href="#ic-phone"/></svg></button><button class="cbtn" title="Message" onclick="toast('Message to Brazos Valley Builders')"><svg class="i"><use href="#ic-msg"/></svg></button></div>
       </div>
+    </div>
+
+    <!-- NEW SHOWROOM -->
+    <div class="card col-2" style="background:linear-gradient(180deg,#FBF3E4,#FFFFFF);border-color:var(--line);">
+      <div class="card__hd">
+        <div class="card__ti"><span class="ic"><svg class="i"><use href="#ic-building"/></svg></span>New Showroom</div>
+        <span class="badge-bbc">Opening before Sept 2026</span>
+      </div>
+      <div class="steps">
+        <div class="step done"><div class="ball">&check;</div><div class="slab">Site secured</div></div>
+        <div class="step now"><div class="ball">2</div><div class="slab">Build-out underway</div></div>
+        <div class="step"><div class="ball">3</div><div class="slab">Showroom cabinetry</div></div>
+        <div class="step"><div class="ball">4</div><div class="slab">Grand opening</div></div>
+      </div>
+      <div class="row" style="border:none;padding-top:14px"><span class="dot a"></span><div><b>Latest:</b> <span class="sub">Sample: framing complete, interior build-out scheduled for next month.</span></div></div>
+      <a class="folderlink" href="#"><svg class="i"><use href="#ic-upload"/></svg> Drop showroom progress photos, great content for the launch</a>
     </div>
 
     <!-- INVOICES -->
