@@ -3243,6 +3243,9 @@
     const sorted=[...cts].sort((a,b)=>rank(a)-rank(b));
     // status options: the documented BBC pipeline + whatever already exists in the CRM
     const STATUSES=[...new Set([...CRM_STATUSES, ...cts.map(r=>((r.Status||'')+'').trim()).filter(Boolean)])];
+    // Social DM tracking: 5 platform toggles per contact (NocoDB checkbox fields).
+    // Field names use BBC's spaced convention to match existing fields (Last Contact, Email Version, etc.)
+    const SOCIAL_PLATFORMS=[['IG','DM IG'],['FB','DM FB'],['LI','DM LinkedIn'],['TT','DM TikTok'],['X','DM X']];
     el.innerHTML=sorted.map(r=>{ const em=((r.Email||'')+'').toLowerCase().trim(); if(!em) return '';
       const hay=esc((((r['First Name']||'')+' '+(r.Organization||'')+' '+em+' '+(r.Status||'')).toLowerCase()));
       const cur=((r.Status||'')+'').trim();
@@ -3250,7 +3253,11 @@
       const sset=STATUSES.slice(); if(cur && !sset.includes(cur)) sset.unshift(cur);
       const sopt=['<option value="">— status —</option>'].concat(sset.map(s=>`<option ${s===cur?'selected':''}>${esc(s)}</option>`)).join('');
       const sel=(r.Id!==undefined&&r.Id!==null)?`<select onclick="event.stopPropagation()" onchange="updateContactStatus(${JSON.stringify(r.Id)},this.value,this)" title="Change status (saves to NocoDB)" style="background:#0d1320;border:1px solid #2a3a52;color:#F5F1EA;border-radius:7px;padding:6px 8px;font-size:12px;min-height:34px;max-width:150px;cursor:pointer">${sopt}</select>`:`<span class="ocad">${esc(cur)}</span>`;
-      return `<div class="opitem cc-row" data-search="${hay}" style="display:flex;align-items:center;gap:8px"><span class="odot" style="background:${sc};flex:0 0 auto"></span><span class="oname" onclick="openContact('${em}')" style="flex:1;cursor:pointer;min-width:0">${esc(r['First Name']||r.Organization||r.Email)}${(r.Organization&&r['First Name'])?' · '+esc(r.Organization):''}</span>${sel}</div>`;
+      const socialPills=(r.Id!==undefined&&r.Id!==null)?('<span class="dm-group" style="display:inline-flex;gap:3px;flex-wrap:wrap">'+SOCIAL_PLATFORMS.map(([lbl,fld])=>{
+        const on=!!r[fld];
+        return `<span class="dm-pill" data-on="${on?1:0}" onclick="event.stopPropagation();toggleContactSocial(${JSON.stringify(r.Id)},${JSON.stringify(fld)},this)" title="${esc(fld)} — click to toggle" style="cursor:pointer;font-size:10px;font-weight:700;letter-spacing:.3px;padding:4px 7px;border-radius:5px;background:${on?'#1F3557':'#0d1320'};color:${on?'#F5F1EA':'#5b6b85'};border:1px solid ${on?'#C9A961':'#2a3a52'};user-select:none;min-width:22px;text-align:center">${lbl}</span>`;
+      }).join('')+'</span>'):'';
+      return `<div class="opitem cc-row" data-search="${hay}" style="display:flex;align-items:center;gap:8px;flex-wrap:wrap"><span class="odot" style="background:${sc};flex:0 0 auto"></span><span class="oname" onclick="openContact('${em}')" style="flex:1;cursor:pointer;min-width:140px">${esc(r['First Name']||r.Organization||r.Email)}${(r.Organization&&r['First Name'])?' · '+esc(r.Organization):''}</span>${socialPills}${sel}</div>`;
     }).join('');
     renderCrmPipe(cts);
   };
@@ -3301,6 +3308,25 @@
       if(msg){ msg.textContent='Could not save: '+String(err.message||err).slice(0,80); msg.style.color='#EF6B6B'; }
       window.toast&&toast('Status not saved','err');
     }finally{ if(selEl) selEl.disabled=false; }
+  };
+  // Social DM toggle — PATCH NocoDB Contacts checkbox field, optimistic UI flip.
+  // Fails gracefully if the field doesn't exist yet in NocoDB (toast shows the NocoDB 422).
+  window.toggleContactSocial=async(id,field,el)=>{
+    const wasOn=el.getAttribute('data-on')==='1';
+    const next=!wasOn;
+    el.style.opacity='0.55';
+    try{
+      const r=await fetch('/.netlify/functions/nocodb-write?table=contacts&id='+encodeURIComponent(id),{method:'PATCH',headers:{'content-type':'application/json'},body:JSON.stringify({fields:{[field]:next}})});
+      if(!r.ok){ const e=await r.text(); throw new Error(e.slice(0,140)); }
+      el.setAttribute('data-on',next?'1':'0');
+      el.style.background=next?'#1F3557':'#0d1320';
+      el.style.color=next?'#F5F1EA':'#5b6b85';
+      el.style.borderColor=next?'#C9A961':'#2a3a52';
+      if(Array.isArray(window.__crmContacts)){ const rec=window.__crmContacts.find(x=>(x.Id??x.id)==id); if(rec) rec[field]=next; }
+      window.toast&&toast(field+' → '+(next?'messaged':'cleared'),'ok');
+    }catch(err){
+      window.toast&&toast('Could not save '+field+': '+String(err.message||err).slice(0,80),'err');
+    }finally{ el.style.opacity='1'; }
   };
   window.loadHomeAttention=async()=>{
     const el=document.getElementById('home-attn'); if(!el) return;
@@ -4142,7 +4168,7 @@
   document.getElementById('cs-files').addEventListener('change',e=>{ const box=document.getElementById('cs-previews'); box.innerHTML=''; [...e.target.files].forEach(f=>{ const url=URL.createObjectURL(f); box.insertAdjacentHTML('beforeend', f.type.startsWith('video')?`<video src="${url}" controls></video>`:`<img src="${url}" alt="">`); }); });
 
   /* PWA service worker — auto-update so deploys show without manual cache clears */
-  if(false){
+  if('serviceWorker' in navigator){
     navigator.serviceWorker.register('sw.js').then(reg=>{ reg.update&&reg.update(); }).catch(()=>{});
     let refreshing=false;
     navigator.serviceWorker.addEventListener('controllerchange',()=>{ if(refreshing) return; refreshing=true; location.reload(); });
