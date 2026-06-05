@@ -1297,10 +1297,19 @@
           "name": "NPC-Portfolio-System"
         },
         {
-          "name": ".claude"
+          "name": "08_KNOWLEDGE_BASE"
         },
         {
-          "name": "01_LEADS"
+          "name": "07_MARKETING"
+        },
+        {
+          "name": "06_FINANCE"
+        },
+        {
+          "name": "05_OPERATIONS"
+        },
+        {
+          "name": "03_ARCHIVED_CLIENTS"
         },
         {
           "name": "02_ACTIVE_CLIENTS",
@@ -1309,13 +1318,13 @@
               "name": "4OCEAN"
             },
             {
-              "name": "FIRST-CLASS-FINISHES"
+              "name": "WOODEN-WOODWORKS"
             },
             {
               "name": "HOME-VISION-STUDIO"
             },
             {
-              "name": "WOODEN-WOODWORKS"
+              "name": "FIRST-CLASS-FINISHES"
             },
             {
               "name": "HI-UP-ROOFING"
@@ -1341,19 +1350,10 @@
           ]
         },
         {
-          "name": "03_ARCHIVED_CLIENTS"
+          "name": "01_LEADS"
         },
         {
-          "name": "05_OPERATIONS"
-        },
-        {
-          "name": "06_FINANCE"
-        },
-        {
-          "name": "07_MARKETING"
-        },
-        {
-          "name": "08_KNOWLEDGE_BASE"
+          "name": ".claude"
         },
         {
           "name": "BBC WEBSITE HTML"
@@ -1362,40 +1362,43 @@
           "name": "04_TEAM"
         },
         {
+          "name": "09_POTENTIAL CLIENTS"
+        },
+        {
           "name": "BBC_AI_FAMILY",
           "children": [
             {
-              "name": "CASEY"
-            },
-            {
-              "name": "BOOGY"
-            },
-            {
-              "name": "EMY"
-            },
-            {
-              "name": "SONNY"
-            },
-            {
               "name": "BRUNZ"
-            },
-            {
-              "name": "KRIZ"
-            },
-            {
-              "name": "MAI"
             },
             {
               "name": "WEBBY"
             },
             {
+              "name": "MAI"
+            },
+            {
+              "name": "KRIZ"
+            },
+            {
+              "name": "SONNY"
+            },
+            {
+              "name": "EMY"
+            },
+            {
+              "name": "BOOGY"
+            },
+            {
+              "name": "CASEY"
+            },
+            {
               "name": "_TEMPLATE"
             },
             {
-              "name": "AGENT_PROFILES"
+              "name": "JENNY"
             },
             {
-              "name": "JENNY"
+              "name": "AGENT_PROFILES"
             },
             {
               "name": "_VAULT"
@@ -1422,9 +1425,6 @@
               "name": "_BRAND"
             }
           ]
-        },
-        {
-          "name": "09_POTENTIAL CLIENTS"
         },
         {
           "name": "Daryl BBC Folder"
@@ -1720,14 +1720,6 @@
       "noindex": false
     },
     {
-      "name": "How We Built a 3D Product Designer Customers Use in Their Browser",
-      "path": "how-we-built-3d-product-designer-free.html",
-      "group": "Insights / blog",
-      "purpose": "A client wanted an interactive 3D design center like a much bigger competitor. We studied how it was built, then made our own version with free tools. Spin it, change the finish, and view it in your room. No app fees.",
-      "status": "live",
-      "noindex": false
-    },
-    {
       "name": "How We Built a Custom AI Family for a Woodworking Business",
       "path": "how-we-built-woody-ai-family-wooden-woodworks.html",
       "group": "Insights / blog",
@@ -1860,14 +1852,6 @@
       "path": "ai-for-medical-clinics-phone-problem.html",
       "group": "Insights / blog",
       "purpose": "Missed calls, no-shows, overloaded front desks. The biggest operational drain in most medical clinics is not clinical â€” it is the phone. Here is what AI actually fixes.",
-      "status": "live",
-      "noindex": false
-    },
-    {
-      "name": "The BBC Content Engine: How One AI Family Runs Six Platforms Every Week",
-      "path": "content-engine.html",
-      "group": "Insights / blog",
-      "purpose": "An AI family that plans, designs, edits, and writes the content for Balay ni Bruno &amp; Co. each week. Mai, Raphy, Vidz, Sonny. Six platforms. Zero monthly tool cost. Every post approved by a human.",
       "status": "live",
       "noindex": false
     },
@@ -2263,6 +2247,11 @@
       "path": "LEARNINGS"
     },
     {
+      "title": "shopify cli theme push setup",
+      "date": "2026-06-05",
+      "path": "LEARNINGS"
+    },
+    {
       "title": "emy upgrade email ai deep search",
       "date": "2026-06-05",
       "path": "LEARNINGS"
@@ -2279,11 +2268,6 @@
     },
     {
       "title": "command center upgrade deep search",
-      "date": "2026-06-05",
-      "path": "LEARNINGS"
-    },
-    {
-      "title": "cabinet design center 3d recreate",
       "date": "2026-06-05",
       "path": "LEARNINGS"
     }
@@ -3216,7 +3200,7 @@
     if(msg){ msg.textContent='Saving…'; msg.style.color='#C9A961'; }
     if(selEl) selEl.disabled=true;
     try{
-      const r=await fetch('/.netlify/functions/nocodb?table=contacts',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({id:id,Status:val})});
+      const r=await fetch('/.netlify/functions/nocodb-write?table=contacts&id='+encodeURIComponent(id),{method:'PATCH',headers:{'content-type':'application/json'},body:JSON.stringify({fields:{Status:val}})});
       if(!r.ok){ const e=await r.text(); throw new Error(e.slice(0,120)); }
       // update the in-memory cache so the list + reopen reflect the new status without a reload
       if(Array.isArray(window.__crmContacts)){ const rec=window.__crmContacts.find(x=>(x.Id??x.id)==id); if(rec) rec.Status=val; }
