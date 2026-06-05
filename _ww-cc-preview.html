@@ -73,6 +73,26 @@
   .placeholder .ic{font-size:40px;color:var(--brass);opacity:.6;}
   .placeholder h2{font-family:var(--serif);font-size:22px;color:var(--ink);margin:14px 0 6px;}
   .placeholder .tag{font-size:13px;background:rgba(176,141,79,0.13);color:var(--brass-d);padding:5px 12px;border-radius:20px;display:inline-block;margin-top:10px;font-weight:600;}
+  /* Calendar */
+  .cal{background:var(--card);border:1px solid var(--line2);border-radius:14px;overflow:hidden;box-shadow:var(--shadow);}
+  .cal-hd,.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);}
+  .cal-hd{background:var(--bg2);border-bottom:1px solid var(--line);}
+  .cal-hd div{padding:9px 6px;text-align:center;font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;}
+  .cal-cell{min-height:88px;border-right:1px solid var(--line2);border-bottom:1px solid var(--line2);padding:6px;}
+  .cal-cell .dn{font-weight:700;color:var(--muted);font-size:11px;}
+  .cal-cell.dim{background:var(--bg2);}
+  .cal-cell.today{background:rgba(176,141,79,0.09);}
+  .cpost{font-size:10px;padding:3px 6px;border-radius:5px;margin-top:4px;color:#fff;font-weight:600;cursor:pointer;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+  .cpost.ig{background:#C13584;}.cpost.fb{background:#4267B2;}.cpost.tt{background:#222;}.cpost.yt{background:#C4302B;}.cpost.gbp{background:#4285F4;}
+  .leg{display:flex;gap:14px;flex-wrap:wrap;margin-top:14px;font-size:12px;color:var(--muted);}
+  .leg span{display:inline-flex;align-items:center;gap:6px;}.leg i{width:11px;height:11px;border-radius:3px;}
+  @media(max-width:640px){.cal-cell{min-height:62px;padding:4px;}.cpost{font-size:9px;}}
+  /* Kanban */
+  .kanban{display:flex;gap:12px;overflow-x:auto;padding-bottom:8px;}
+  .kcol{min-width:190px;flex:1;background:var(--bg2);border:1px solid var(--line2);border-radius:12px;padding:11px;}
+  .kcol h4{font-size:11px;text-transform:uppercase;letter-spacing:.5px;color:var(--brass-d);margin-bottom:9px;display:flex;justify-content:space-between;font-family:var(--sans);}
+  .kcard{background:var(--card);border:1px solid var(--line2);border-radius:9px;padding:11px;margin-bottom:8px;box-shadow:var(--shadow);}
+  .kcard .kt{font-weight:600;font-size:13px;}.kcard .km{font-size:11.5px;color:var(--muted);margin-top:3px;}
   .scrim2{position:fixed;inset:0;background:rgba(43,39,35,.4);z-index:30;display:none;}
   @media(max-width:860px){
     .side{position:fixed;left:0;top:0;z-index:31;transform:translateX(-100%);transition:transform .25s;}
@@ -186,6 +206,31 @@ var views={
     </div>`;
   },
   owners:function(){return `<div class="vhead"><h1>Owners Dashboard</h1><p>What Oscar &amp; Marla see and edit. Their changes flow to you here.</p></div><iframe class="ownerframe" src="_ww-owner-preview.html?embed=1"></iframe>`;},
+  social:function(){
+    var posts={3:[['Reel: island reveal','ig']],5:[['Carousel: 3 finishes','fb'],['GBP: new photos','gbp']],9:[['Reel: shop tour','tt']],12:[['Carousel: frameless vs face-frame','ig']],14:[['Reel: 90-day milestone','ig']],17:[['GBP post','gbp']],20:[['Walk-through: Austin office','yt']],24:[['Reel: finishing process','tt']],27:[['Carousel: showroom progress','fb']]};
+    var first=1,cells='';
+    for(var i=0;i<first;i++)cells+='<div class="cal-cell dim"></div>';
+    for(var d=1;d<=30;d++){var ps=(posts[d]||[]).map(p=>`<div class="cpost ${p[1]}" onclick="toast('${p[0].replace(/'/g,'')}')">${p[0]}</div>`).join('');cells+=`<div class="cal-cell ${d===5?'today':''}"><div class="dn">${d}</div>${ps}</div>`;}
+    var total=Math.ceil((first+30)/7)*7;for(var t=first+30;t<total;t++)cells+='<div class="cal-cell dim"></div>';
+    return `<div class="vhead"><h1>Social Calendar</h1><p>Content across Instagram, Facebook, TikTok, and YouTube.</p></div>
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px"><b style="font-family:var(--serif);font-size:18px">June 2026</b><button class="btn" onclick="toast('Opening the content composer')">${ic('ic-plus')} Add content</button></div>
+    <div class="cal"><div class="cal-hd"><div>Sun</div><div>Mon</div><div>Tue</div><div>Wed</div><div>Thu</div><div>Fri</div><div>Sat</div></div><div class="cal-grid">${cells}</div></div>
+    <div class="leg"><span><i style="background:#C13584"></i> Instagram</span><span><i style="background:#4267B2"></i> Facebook</span><span><i style="background:#222"></i> TikTok</span><span><i style="background:#C4302B"></i> YouTube</span><span><i style="background:#4285F4"></i> Google Profile</span></div>`;
+  },
+  reels:function(){
+    var stages=[['Ideas',[['Hidden Features: soft-close','From brand pillar'],['Showroom build update','Document the progress']]],['Scripting',[['Walk-through: Salado kitchen','Tre voiceover']]],['Filming',[['Finishing process','Margie in the spray booth']]],['Editing',[['Austin office reveal','CapCut + captions']]],['Approval',[['Frameless vs face-frame','Waiting on Marla']]],['Posted',[['90-day milestone','IG + TikTok']]]];
+    return `<div class="vhead"><h1>Reels Workflow</h1><p>Walk-throughs are WW's top content. Idea to posted, one board.</p></div>
+    <div style="margin-bottom:12px"><button class="btn" onclick="toast('New reel idea added')">${ic('ic-plus')} New reel</button></div>
+    <div class="kanban">${stages.map(s=>`<div class="kcol"><h4>${s[0]} <span>${s[1].length}</span></h4>${s[1].map(c=>`<div class="kcard"><div class="kt">${c[0]}</div><div class="km">${c[1]}</div></div>`).join('')}</div>`).join('')}</div>`;
+  },
+  houzz:function(){
+    var url='https://www.houzz.com/pro/webuser-882207478/wooden-woodworks-llc-custom-kitchen-cabinets';
+    return `<div class="vhead"><h1>Houzz</h1><p>WW's Houzz profile, where luxury builders and homeowners shop for cabinetry.</p></div>
+    <div class="stat-row"><div class="stat"><div class="v">—</div><div class="l">Profile views</div></div><div class="stat"><div class="v">—</div><div class="l">Ideabook saves</div></div><div class="stat"><div class="v">—</div><div class="l">Houzz leads</div></div><div class="stat"><div class="v">—</div><div class="l">Reviews</div></div></div>
+    <div class="card"><h3>${ic('ic-houzz')} Profile</h3><a href="${url}" target="_blank" rel="noopener" style="display:block;border-radius:10px;overflow:hidden;border:1px solid var(--line2);margin-bottom:12px"><img src="https://image.thum.io/get/width/900/crop/520/noanimate/${url}" alt="Wooden Woodworks on Houzz" loading="lazy" style="width:100%;display:block;background:var(--bg2)"></a><a href="${url}" target="_blank" rel="noopener" class="btn">${ic('ic-houzz')} View profile on Houzz</a><p style="color:var(--muted);font-size:13px;margin-top:10px">Live stats and leads sync once the Houzz connection is wired.</p></div>
+    <div class="card"><h3>${ic('ic-cabinet')} Projects to upload to Houzz</h3><div class="chk"><input type="checkbox"><label>Built-in Office Wall, Austin, installed</label></div><div class="chk"><input type="checkbox"><label>Master Bath Vanity, Waco</label></div><div class="chk"><input type="checkbox"><label>Frameless Kitchen, Salado</label></div></div>
+    <div class="card"><h3>${ic('ic-search')} Houzz leads &amp; inquiries</h3><p style="color:var(--muted);font-size:13px">New Houzz inquiries appear here when the connection is live. Respond within 24 hours, Houzz rewards fast responders.</p></div>`;
+  },
   placeholder:function(id){var p=PAGES.find(x=>x.id===id)||{name:'Page'};
     var blurb={projects:'Master list of every WW project with full detail, photos, and status.',clients:'All WW clients, builders, designers, and homeowners, with contact history.',reels:'The reel production workflow, idea to draft to approval to posted.',social:'A drag-drop content calendar across Instagram, Facebook, TikTok, and YouTube.',houzz:'The WW Houzz profile embedded, with project uploads and Houzz leads.',leads:'HubSpot builder pipeline, estimate follow-up so no lead goes cold.',seo:'Local Central Texas search, Google Business Profile posts, reviews, and rankings.',approvals:'Your approval queue, BBC work you OK before it reaches the owners.',brand:'WW brand guide, logo, voice, and content references.',team:'WW team and the BBC team serving the account, plus monthly reports.'};
     return `<div class="placeholder"><div class="ic">${ic(p.icon||'ic-cabinet')}</div><h2>${p.name}</h2><p>${blurb[id]||''}</p><div class="tag">Next to build</div></div>`;
