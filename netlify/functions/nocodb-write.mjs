@@ -28,11 +28,19 @@ const NOCODB_HOST = "https://app.nocodb.com";
 // Until RJ creates these in NocoDB, the keys below are placeholders. The function will return
 // a clear error if you call with a placeholder key.
 const WRITEABLE_TABLES = {
+  // Live BBC CRM Contacts table. The /os CRM page updates lead Status here.
+  // Guarded to PATCH-only below so the public endpoint can update existing leads
+  // but cannot create or delete contacts. (Enabled 2026-06-05 for the CRM status dropdown.)
+  contacts: "mjjs3wgl3705s9v",
   // Real tables — fill these in once they exist in NocoDB and you want them dashboard-editable.
   // dashboard_notes:      "TODO_table_id_after_creating_in_nocodb",
   // dashboard_checkboxes: "TODO_table_id_after_creating_in_nocodb",
   // dashboard_statuses:   "TODO_table_id_after_creating_in_nocodb",
 };
+
+// Tables that may ONLY be updated (PATCH), never created (POST) or removed (DELETE)
+// via this public proxy. Limits blast radius on the live CRM.
+const PATCH_ONLY_TABLES = ["contacts"];
 
 export default async (req) => {
   const json = (obj, status = 200) =>
@@ -70,6 +78,16 @@ export default async (req) => {
         error: `Table '${tkey}' has a placeholder id in WRITEABLE_TABLES. Replace the TODO_* string with the real NocoDB table id.`,
       },
       501
+    );
+  }
+
+  if (PATCH_ONLY_TABLES.includes(tkey) && method !== "PATCH") {
+    return json(
+      {
+        error: `Table '${tkey}' allows PATCH (update) only via this proxy, not ${method}.`,
+        hint: "Create/delete on this table must be done in NocoDB directly.",
+      },
+      405
     );
   }
 
