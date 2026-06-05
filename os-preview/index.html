@@ -1968,6 +1968,14 @@
       "noindex": false
     },
     {
+      "name": "Wooden Woodworks — Command Center",
+      "path": "_ww-cc-preview.html",
+      "group": "Insights / blog",
+      "purpose": "",
+      "status": "live",
+      "noindex": true
+    },
+    {
       "name": "Wooden Woodworks — Owner Dashboard",
       "path": "_ww-owner-preview.html",
       "group": "Insights / blog",
@@ -2268,6 +2276,11 @@
       "path": "LEARNINGS"
     },
     {
+      "title": "va profile intro video hero template",
+      "date": "2026-06-05",
+      "path": "LEARNINGS"
+    },
+    {
       "title": "upwork profile optimization",
       "date": "2026-06-05",
       "path": "LEARNINGS"
@@ -2279,11 +2292,6 @@
     },
     {
       "title": "session wrap 3d designer ww",
-      "date": "2026-06-05",
-      "path": "LEARNINGS"
-    },
-    {
-      "title": "os crm status write fix",
       "date": "2026-06-05",
       "path": "LEARNINGS"
     }
@@ -2412,10 +2420,6 @@
         {
           "name": "Handoffs, Project sync, device parity",
           "cad": "as needed"
-        },
-        {
-          "name": "Weekly System Update (Sat): run 'weekly update'",
-          "cad": "weekly"
         }
       ]
     }
@@ -3026,7 +3030,7 @@
       </div>
       <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px">
         <select id="em-from" style="${EMIN};min-width:210px"><option value="rj@balaynibruno.co">rj@balaynibruno.co</option></select>
-        <input id="em-to" placeholder="To (email address)" style="${EMIN};flex:1;min-width:180px">
+        <input id="em-to" placeholder="To (email address)" onchange="window.personalizeSendPanel&&personalizeSendPanel(this.value)" style="${EMIN};flex:1;min-width:180px">
       </div>
       <input id="em-subj" placeholder="Subject" style="${EMIN};width:100%;box-sizing:border-box;margin-bottom:8px">
       <textarea id="em-body" rows="7" placeholder="Write your email..." style="${EMIN};width:100%;box-sizing:border-box;resize:vertical;margin-bottom:10px"></textarea>
@@ -3052,7 +3056,11 @@
       const abCard=(name,col,d)=>`<div class="panel"><span class="ptitle" style="color:${col}">Version ${name}</span><div class="metric"><b>${d.rate}%</b> reply rate</div><div class="gauge-sub" style="margin-top:6px">${d.total} leads · ${d.sent} emailed · ${d.rep} replied</div></div>`;
       const today=new Date(); today.setHours(23,59,59,999);
       const due=list.filter(r=>{ const f=r['Follow Up']; if(!f) return false; const d=new Date(f); return !isNaN(d.getTime()) && d<=today && (((r['Campaign Step']||'')+'')!=='Done'); });
-      const dueRows=due.slice(0,12).map(r=>`<div class="opitem"><span class="odot" style="background:#EF6B6B"></span><span class="oname">${esc(r['First Name']||r.Email||'-')}${r.Organization?' · '+esc(r.Organization):''}</span><span class="ocad">${esc(r['Campaign Step']||'next')}</span></div>`).join('') || '<div class="gauge-sub">Nothing due right now.</div>';
+      const dueRows=due.slice(0,12).map(r=>{ const nx=window.seqNext(r['Campaign Step'],r['Email Version']); const lbl=nx?('send '+(window.TPL_LABEL[nx]||'next')):'sequence done';
+        const em=((r.Email||'')+'').replace(/'/g,'');
+        const click=nx?`onclick="loadNext('${em}','${nx}')" style="cursor:pointer"`:'';
+        return `<div class="opitem" ${click}><span class="odot" style="background:#EF6B6B"></span><span class="oname">${esc(r['First Name']||r.Email||'-')}${r.Organization?' · '+esc(r.Organization):''}</span><span class="ocad">${esc(lbl)}${nx?' →':''}</span></div>`;
+      }).join('') || '<div class="gauge-sub">Nothing due right now.</div>';
       const dueCard=`<div class="panel"><span class="ptitle" style="color:#EF6B6B">Follow-ups due (${due.length})</span>${dueRows}</div>`;
       // New replies: match inbox senders against your lead/client emails
       let repliesCard='<div class="panel"><span class="ptitle" style="color:#4ADE80">New replies</span><div class="gauge-sub">Checking inbox…</div></div>';
@@ -3097,9 +3105,55 @@
     if(!t) return;
     document.getElementById('em-subj').value=t.subject;
     document.getElementById('em-body').value=t.body;
-    const st=document.getElementById('em-status'); if(st) st.textContent='Template loaded. Fill in {{first_name}} and {{company}}.';
+    const tov=(document.getElementById('em-to').value||'').trim();
+    if(tov){ personalizeSendPanel(tov); }
+    const st=document.getElementById('em-status'); if(st) st.textContent=tov?'Template loaded + personalized. Review and send.':'Template loaded. Add the recipient (auto-fills their name + company).';
+  };
+  // ── Builder Welcome 5-email sequence metadata (template value -> version + step + next template) ──
+  window.SEQ_META={
+    intro_a:{ver:'A',step:'Intro sent',next:'hvs_a'},        intro_b:{ver:'B',step:'Intro sent',next:'hvs_b'},
+    hvs_a:{ver:'A',step:'HVS sent',next:'ww_a'},             hvs_b:{ver:'B',step:'HVS sent',next:'ww_b'},
+    ww_a:{ver:'A',step:'WW sent',next:'hiupfcf_a'},          ww_b:{ver:'B',step:'WW sent',next:'hiupfcf_b'},
+    hiupfcf_a:{ver:'A',step:'HiUp-FCF sent',next:'offer_a'}, hiupfcf_b:{ver:'B',step:'HiUp-FCF sent',next:'offer_b'},
+    offer_a:{ver:'A',step:'Offer sent',next:null},           offer_b:{ver:'B',step:'Offer sent',next:null}
+  };
+  window.TPL_LABEL={intro_a:'A1 Intro',intro_b:'B1 Intro',hvs_a:'A2 Home Vision Studio',hvs_b:'B2 Home Vision Studio',ww_a:'A3 Wooden Woodworks',ww_b:'B3 Wooden Woodworks',hiupfcf_a:'A4 Hi-Up + First Class',hiupfcf_b:'B4 Hi-Up + First Class',offer_a:'A5 Offer',offer_b:'B5 Offer'};
+  // Given a lead's current Campaign Step + Version, which template comes next?
+  window.seqNext=(step,ver)=>{ const v=(((ver||'A')+'').toUpperCase()==='B')?'b':'a';
+    const m={'Intro sent':'hvs_','HVS sent':'ww_','WW sent':'hiupfcf_','HiUp-FCF sent':'offer_'};
+    const base=m[((step||'')+'').trim()]; return base?base+v:null; };
+  function ymd(d){ return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'); }
+  // Personalize the open Send panel from a known contact (fills {{first_name}}/{{company}}).
+  window.personalizeSendPanel=(email)=>{
+    const cts=window.__crmContacts||[]; const e=((email||'')+'').toLowerCase().trim();
+    const c=cts.find(r=>((r.Email||'')+'').toLowerCase().trim()===e); if(!c) return;
+    const rep=(s)=>((s||'')+'').replace(/\{\{first_name\}\}/g,c['First Name']||'there').replace(/\{\{company\}\}/g,c.Organization||'your company').replace(/\{\{personal_note\}\}/g,'');
+    const sub=document.getElementById('em-subj'), bod=document.getElementById('em-body');
+    if(sub) sub.value=rep(sub.value); if(bod) bod.value=rep(bod.value);
+  };
+  // Load the next sequence email for a due lead into the Send panel, pre-personalized.
+  window.loadNext=(email,tplValue)=>{ go('crm');
+    setTimeout(()=>{ const sel=document.getElementById('em-template'); if(sel){ sel.value=tplValue; applyTemplate(); }
+      const to=document.getElementById('em-to'); if(to){ to.value=email; }
+      personalizeSendPanel(email);
+      if(to) to.scrollIntoView({behavior:'smooth'}); },250);
+  };
+  // After a send, stamp the lead: status, last-contact, +4-day follow-up, version + step.
+  window.stampLead=async(email,tplValue)=>{
+    try{
+      const cts=window.__crmContacts||[]; const e=((email||'')+'').toLowerCase().trim();
+      const c=cts.find(r=>((r.Email||'')+'').toLowerCase().trim()===e); if(!c||c.Id==null) return;
+      const today=new Date(); const meta=window.SEQ_META[tplValue];
+      const core={Status:'Emailed','Last Contact':ymd(today)};
+      if(meta){ core['Follow Up']= meta.next ? ymd(new Date(today.getTime()+4*86400000)) : null; }
+      await fetch('/.netlify/functions/nocodb-write?table=contacts&id='+encodeURIComponent(c.Id),{method:'PATCH',headers:{'content-type':'application/json'},body:JSON.stringify({fields:core})});
+      // best-effort: A/B + step (activates once those fields exist in NocoDB)
+      if(meta){ try{ await fetch('/.netlify/functions/nocodb-write?table=contacts&id='+encodeURIComponent(c.Id),{method:'PATCH',headers:{'content-type':'application/json'},body:JSON.stringify({fields:{'Email Version':meta.ver,'Campaign Step':meta.step}})}); }catch(_){} }
+      Object.assign(c,core); if(meta){ c['Email Version']=meta.ver; c['Campaign Step']=meta.step; }
+    }catch(_){}
   };
   window.sendEmail=async()=>{
+    const tpl=document.getElementById('em-template').value;
     const from=document.getElementById('em-from').value, to=document.getElementById('em-to').value.trim(), subject=document.getElementById('em-subj').value.trim(), body=document.getElementById('em-body').value.trim();
     const st=document.getElementById('em-status');
     if(!to||!subject||!body){ st.textContent='Fill in To, Subject, and the message first.'; return; }
@@ -3107,7 +3161,13 @@
     try{
       const res=await fetch('/.netlify/functions/send-email',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({from,to,subject,body})});
       const d=await res.json().catch(()=>({}));
-      if(res.ok&&d.ok){ st.textContent='Sent to '+to+' from '+from; document.getElementById('em-to').value='';document.getElementById('em-subj').value='';document.getElementById('em-body').value=''; }
+      if(res.ok&&d.ok){
+        st.textContent='Sent to '+to+'. Logging to CRM…';
+        await stampLead(to, tpl);
+        st.textContent='Sent to '+to+' · status set to Emailed'+(window.SEQ_META[tpl]&&window.SEQ_META[tpl].next?' · follow-up due in 4 days':'');
+        document.getElementById('em-to').value='';document.getElementById('em-subj').value='';document.getElementById('em-body').value='';document.getElementById('em-template').value='';
+        if(window.loadCampaignStats) loadCampaignStats(); if(window.loadCrmContacts) loadCrmContacts();
+      }
       else { st.textContent='Not sent — '+(d.error||'Gmail not connected yet (finish the App Password step).'); }
     }catch(e){ st.textContent='Email sending not wired yet (needs the Gmail App Password).'; }
   };
