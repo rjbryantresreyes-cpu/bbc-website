@@ -181,11 +181,27 @@
     .profile-hero__inner {
       max-width:var(--max-width); margin:0 auto;
       padding:var(--s5) var(--s4) var(--s4);
-      display:grid; grid-template-columns:auto 1fr;
+      display:grid; grid-template-columns:auto 1fr auto;
       gap:var(--s4); align-items:center;
       position:relative; z-index:1;
     }
-    @media (max-width:660px) { .profile-hero__inner { grid-template-columns:1fr; } }
+    /* ── VA intro video beside profile (reusable hero template block) ── */
+    .profile-hero__video {
+      width:240px; max-width:100%;
+      border-radius:var(--radius-lg); overflow:hidden;
+      background:#000; align-self:center;
+      border:3px solid rgba(26,122,138,0.35);
+      box-shadow:var(--shadow-lg);
+    }
+    .profile-hero__video video { display:block; width:100%; height:auto; background:#000; }
+    @media (max-width:1024px) {
+      .profile-hero__inner { grid-template-columns:auto 1fr; }
+      .profile-hero__video { grid-column:1 / -1; justify-self:center; margin-top:var(--s2); width:300px; }
+    }
+    @media (max-width:660px) {
+      .profile-hero__inner { grid-template-columns:1fr; }
+      .profile-hero__video { width:100%; max-width:300px; }
+    }
     .profile-avatar {
       width:130px; height:130px; border-radius:50%;
       display:flex; align-items:center; justify-content:center;
@@ -579,6 +595,13 @@
         <span class="stack-chip">Email Marketing</span>
       </div>
     </div>
+    <!-- VA intro video (reusable hero template block) -->
+    <div class="profile-hero__video">
+      <video controls playsinline preload="metadata" poster="videos/diego-intro-poster.jpg">
+        <source src="videos/diego-intro.mp4" type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
+    </div>
   </div>
 </section>
 
@@ -587,42 +610,12 @@
 <nav class="profile-nav" id="profile-nav">
   <div class="profile-nav__inner">
     <a href="#about"     class="profile-nav__link active">About</a>
-    <a href="#intro"     class="profile-nav__link">Intro</a>
     <a href="#work"      class="profile-nav__link">Work</a>
     <a href="#services"  class="profile-nav__link">Services &amp; Skills</a>
     <a href="#strategy"  class="profile-nav__link">Strategies</a>
     <a href="#tools"     class="profile-nav__link">Tools</a>
   </div>
 </nav>
-
-
-<!-- ════ MEET DIEGO, VIDEO INTRO ════ -->
-<section class="profile-section profile-section--alt" id="intro">
-  <div class="container">
-
-    <div class="section-header fade-in">
-      <span class="eyebrow">Meet Diego</span>
-      <h2>A Quick Hello</h2>
-      <div class="divider-bar"></div>
-      <p>Forty-five seconds with Diego, in his own words. The same introduction we shared on social.</p>
-    </div>
-
-    <div class="fade-in" style="display:flex;justify-content:center;">
-      <div style="width:100%;max-width:340px;border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow-lg);border:var(--border-warm);background:#000;">
-        <video
-          controls
-          playsinline
-          preload="metadata"
-          poster="videos/diego-intro-poster.jpg"
-          style="display:block;width:100%;height:auto;background:#000;">
-          <source src="videos/diego-intro.mp4" type="video/mp4" />
-          Your browser does not support the video tag. You can view Diego's introduction on our social channels.
-        </video>
-      </div>
-    </div>
-
-  </div>
-</section>
 
 
 <!-- ════ S1, ABOUT ════ -->
