@@ -22,7 +22,6 @@
   .wrap{max-width:1080px;margin:0 auto;padding:0 20px;}
   svg.i{width:1em;height:1em;stroke:currentColor;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;vertical-align:-0.12em;}
 
-  /* Top bar */
   .topbar{background:var(--bg2);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:20;}
   .topbar__in{max-width:1080px;margin:0 auto;padding:13px 20px;display:flex;align-items:center;justify-content:space-between;gap:12px;}
   .brand{display:flex;align-items:center;gap:12px;min-width:0;}
@@ -31,64 +30,54 @@
   .brand .s{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--brass-d);margin-top:1px;}
   .tb-right{display:flex;align-items:center;gap:10px;}
   .sync{display:inline-flex;align-items:center;gap:7px;font-size:11.5px;color:var(--green);background:rgba(94,139,109,0.12);border:1px solid rgba(94,139,109,0.25);padding:6px 11px;border-radius:20px;font-weight:600;}
-  .sync .pulse{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 0 0 rgba(94,139,109,.5);animation:pulse 2s infinite;}
+  .sync .pulse{width:7px;height:7px;border-radius:50%;background:var(--green);animation:pulse 2s infinite;}
   @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(94,139,109,.5)}70%{box-shadow:0 0 0 7px rgba(94,139,109,0)}100%{box-shadow:0 0 0 0 rgba(94,139,109,0)}}
   .out{font-size:12px;color:var(--muted);border:1px solid var(--line);border-radius:20px;padding:8px 13px;background:none;cursor:pointer;font-family:var(--sans);min-height:38px;}
 
-  /* Hero */
   .hero{padding:28px 0 6px;}
   .hero .hi{font-family:var(--serif);font-size:clamp(23px,5vw,31px);font-weight:700;}
   .hero .hi em{color:var(--walnut);font-style:italic;}
   .hero .tag{color:var(--muted);font-size:14px;margin-top:5px;}
   .hero .tag b{color:var(--ink);}
 
-  /* Grid */
   .grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:18px;}
   .col-2{grid-column:1 / -1;}
   @media(max-width:760px){ .grid{grid-template-columns:1fr;} }
 
   .card{background:var(--card);border:1px solid var(--line2);border-radius:16px;padding:20px;box-shadow:var(--shadow);}
+  .card.click{cursor:pointer;transition:transform .12s,box-shadow .12s;}
+  .card.click:hover{transform:translateY(-2px);box-shadow:0 10px 32px rgba(94,67,41,0.13);}
   .card__hd{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:14px;}
   .card__ti{font-family:var(--serif);font-size:17px;font-weight:700;display:flex;align-items:center;gap:10px;}
   .card__ti .ic{width:32px;height:32px;border-radius:9px;background:rgba(176,141,79,0.13);color:var(--brass-d);display:flex;align-items:center;justify-content:center;font-size:17px;flex:none;}
   .card__more{font-size:12px;color:var(--brass-d);text-decoration:none;font-weight:600;white-space:nowrap;}
 
-  /* Projects */
-  .proj-top{display:flex;gap:18px;align-items:center;flex-wrap:wrap;}
-  #projChart{width:130px;height:130px;flex:none;}
-  .proj-legend{flex:1;min-width:160px;display:grid;grid-template-columns:1fr 1fr;gap:7px 14px;}
-  .lg{display:flex;align-items:center;gap:8px;font-size:12.5px;color:var(--muted);}
-  .lg b{color:var(--ink);}
-  .lg .sw{width:10px;height:10px;border-radius:3px;flex:none;}
-  .proj{display:flex;align-items:center;gap:12px;padding:11px 0;border-bottom:1px solid var(--line2);text-decoration:none;color:inherit;}
-  .proj:last-child{border-bottom:none;}
-  .proj:hover .proj__nm{color:var(--walnut);}
-  .proj__main{flex:1;min-width:0;}
-  .proj__nm{font-weight:600;font-size:14px;}
-  .proj__meta{font-size:12px;color:var(--muted);margin-top:1px;}
-  .proj__folder{font-size:11px;color:var(--brass-d);margin-top:2px;display:inline-flex;align-items:center;gap:4px;}
+  .proj,.cli{display:flex;align-items:center;gap:12px;padding:11px 0;border-bottom:1px solid var(--line2);text-decoration:none;color:inherit;cursor:pointer;}
+  .proj:last-child,.cli:last-child{border-bottom:none;}
+  .proj:hover .proj__nm,.cli:hover .cli__nm{color:var(--walnut);}
+  .proj__main,.cli__main{flex:1;min-width:0;}
+  .proj__nm,.cli__nm{font-weight:600;font-size:14px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+  .proj__meta,.cli__meta{font-size:12px;color:var(--muted);margin-top:1px;}
   .pill{font-size:10.5px;font-weight:700;letter-spacing:.4px;text-transform:uppercase;padding:5px 10px;border-radius:20px;white-space:nowrap;}
   .pill.design{background:rgba(94,119,144,0.14);color:var(--blue);}
   .pill.prod{background:rgba(192,138,62,0.16);color:var(--amber);}
   .pill.finish{background:rgba(176,141,79,0.16);color:var(--brass-d);}
   .pill.installed{background:rgba(94,139,109,0.16);color:var(--green);}
-
-  /* Clients */
-  .cli{display:flex;align-items:center;gap:12px;padding:11px 0;border-bottom:1px solid var(--line2);}
-  .cli:last-child{border-bottom:none;}
   .cli__av{width:38px;height:38px;border-radius:10px;background:var(--bg2);border:1px solid var(--line2);display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-weight:700;font-size:14px;color:var(--walnut);flex:none;}
-  .cli__main{flex:1;min-width:0;}
-  .cli__nm{font-weight:600;font-size:14px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
-  .cli__meta{font-size:12px;color:var(--muted);margin-top:1px;}
   .tag{font-size:9.5px;font-weight:700;letter-spacing:.4px;text-transform:uppercase;padding:3px 8px;border-radius:6px;white-space:nowrap;}
   .tag.builder{background:rgba(94,67,41,0.12);color:var(--walnut);}
   .tag.designer{background:rgba(126,139,109,0.18);color:#5d6b4f;}
   .tag.home{background:rgba(94,119,144,0.14);color:var(--blue);}
-  .cli__act{display:flex;gap:6px;flex:none;}
-  .cbtn{width:38px;height:38px;border-radius:9px;border:1px solid var(--line);background:var(--bg2);color:var(--brass-d);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:16px;}
-  .cbtn:hover{border-color:var(--brass);color:var(--walnut);}
 
-  /* Showroom milestone stepper */
+  .row{display:flex;gap:10px;padding:9px 0;border-bottom:1px solid var(--line2);font-size:13.5px;align-items:flex-start;}
+  .row:last-child{border-bottom:none;}
+  .dot{width:8px;height:8px;border-radius:50%;background:var(--brass);margin-top:6px;flex:none;}
+  .dot.g{background:var(--green);} .dot.a{background:var(--amber);}
+  .row b{color:var(--ink);} .row .sub{color:var(--muted);}
+  .card.krizza{background:linear-gradient(180deg,#FBF6EC,#FFFFFF);border-color:var(--line);}
+  .badge-bbc{font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--brass-d);background:rgba(176,141,79,0.13);padding:3px 8px;border-radius:6px;font-weight:700;}
+
+  /* Showroom stepper */
   .steps{display:flex;gap:0;margin:8px 0 6px;}
   .step{flex:1;text-align:center;position:relative;padding:0 4px;}
   .step .ball{width:28px;height:28px;border-radius:50%;border:2px solid var(--line);background:#fff;margin:0 auto 8px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:var(--soft);position:relative;z-index:2;}
@@ -99,46 +88,55 @@
   .slab{font-size:11px;line-height:1.25;color:var(--muted);}
   .step.done .slab,.step.now .slab{color:var(--ink);font-weight:600;}
 
-  /* Numbers */
-  .nums{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
-  .num{background:var(--bg2);border:1px solid var(--line2);border-radius:12px;padding:14px;text-align:center;}
-  .num .v{font-family:var(--serif);font-size:23px;font-weight:700;color:var(--walnut);}
-  .num .l{font-size:11px;color:var(--muted);margin-top:3px;}
-  .note-inline{font-size:12px;color:var(--soft);margin-top:12px;font-style:italic;}
-
-  /* Lists */
-  .row{display:flex;gap:10px;padding:9px 0;border-bottom:1px solid var(--line2);font-size:13.5px;align-items:flex-start;}
-  .row:last-child{border-bottom:none;}
-  .dot{width:8px;height:8px;border-radius:50%;background:var(--brass);margin-top:6px;flex:none;}
-  .dot.g{background:var(--green);} .dot.a{background:var(--amber);}
-  .row b{color:var(--ink);} .row .sub{color:var(--muted);}
-
-  .card.krizza{background:linear-gradient(180deg,#FBF6EC,#FFFFFF);border-color:var(--line);}
-  .badge-bbc{font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--brass-d);background:rgba(176,141,79,0.13);padding:3px 8px;border-radius:6px;font-weight:700;}
-
-  /* Drop zone */
-  .drop{border:2px dashed var(--line);border-radius:14px;padding:24px 16px;text-align:center;background:var(--bg2);cursor:pointer;transition:.15s;}
+  /* Drop zone (bigger) */
+  .drop{border:2px dashed var(--line);border-radius:14px;padding:34px 16px;text-align:center;background:var(--bg2);cursor:pointer;transition:.15s;}
   .drop:hover,.drop.over{border-color:var(--brass);background:#FAF4E8;}
-  .drop .dic{font-size:26px;color:var(--brass-d);}
-  .drop .t{font-weight:600;margin-top:7px;font-size:14px;}
-  .drop .s{font-size:12px;color:var(--muted);margin-top:3px;}
+  .drop .dic{color:var(--brass-d);}
+  .drop .t{font-weight:600;margin-top:9px;font-size:15px;}
+  .drop .s{font-size:12.5px;color:var(--muted);margin-top:3px;}
   .drop input{display:none;}
   .folderlink{display:inline-flex;align-items:center;gap:5px;font-size:12px;color:var(--brass-d);text-decoration:none;font-weight:600;margin-top:12px;}
 
-  /* Instructions */
-  textarea.instr{width:100%;border:1px solid var(--line);border-radius:12px;background:var(--bg2);color:var(--ink);font-family:var(--sans);font-size:14px;padding:13px;min-height:92px;resize:vertical;}
-  textarea.instr:focus{outline:none;border-color:var(--brass);}
-  .send{margin-top:11px;background:var(--walnut);color:#fff;border:none;border-radius:11px;padding:12px 20px;font-weight:600;font-size:14px;font-family:var(--sans);cursor:pointer;min-height:46px;display:inline-flex;align-items:center;gap:8px;}
-  .send:hover{background:var(--walnut2);}
+  /* Reminders / generic list with checkbox */
+  .chk{display:flex;align-items:flex-start;gap:10px;padding:9px 0;border-bottom:1px solid var(--line2);font-size:13.5px;}
+  .chk:last-child{border-bottom:none;}
+  .chk input{width:18px;height:18px;margin-top:1px;accent-color:var(--walnut);flex:none;cursor:pointer;}
+  .chk.done label{text-decoration:line-through;color:var(--soft);}
+  .chk .meta{font-size:11.5px;color:var(--muted);}
+
+  /* Drawer */
+  .scrim{position:fixed;inset:0;background:rgba(43,39,35,0.42);opacity:0;visibility:hidden;transition:.2s;z-index:40;}
+  .scrim.open{opacity:1;visibility:visible;}
+  .drawer{position:fixed;top:0;right:0;height:100dvh;width:min(460px,94vw);background:var(--bg2);box-shadow:-12px 0 40px rgba(43,39,35,0.25);transform:translateX(100%);transition:transform .25s cubic-bezier(.4,0,.2,1);z-index:41;display:flex;flex-direction:column;}
+  .drawer.open{transform:translateX(0);}
+  @media(max-width:560px){ .drawer{width:100vw;top:auto;bottom:0;height:92dvh;border-radius:18px 18px 0 0;transform:translateY(100%);} .drawer.open{transform:translateY(0);} }
+  .dw-hd{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:18px 20px;border-bottom:1px solid var(--line);background:var(--card);}
+  .dw-hd h2{font-family:var(--serif);font-size:19px;font-weight:700;}
+  .dw-hd .x{width:36px;height:36px;border-radius:9px;border:1px solid var(--line);background:none;cursor:pointer;color:var(--muted);display:flex;align-items:center;justify-content:center;font-size:18px;flex:none;}
+  .dw-body{flex:1;overflow-y:auto;padding:18px 20px 40px;}
+  .dw-sec{font-family:var(--mono,monospace);font-size:10.5px;letter-spacing:1.5px;text-transform:uppercase;color:var(--brass-d);margin:18px 0 9px;font-weight:700;}
+  .dw-sec:first-child{margin-top:0;}
+  .kv{font-size:14px;margin-bottom:7px;} .kv b{color:var(--ink);} .kv span{color:var(--muted);}
+  .thumbs{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;}
+  .thumb{aspect-ratio:1;border-radius:9px;background:var(--bg);border:1px solid var(--line2);display:flex;align-items:center;justify-content:center;color:var(--soft);font-size:20px;}
+  .addrow{display:flex;gap:8px;margin-top:10px;}
+  .addrow input,.dw-body textarea{flex:1;border:1px solid var(--line);border-radius:10px;background:var(--card);color:var(--ink);font-family:var(--sans);font-size:14px;padding:11px 12px;}
+  .dw-body textarea{width:100%;min-height:84px;resize:vertical;}
+  .addrow input:focus,.dw-body textarea:focus{outline:none;border-color:var(--brass);}
+  .btn{background:var(--walnut);color:#fff;border:none;border-radius:10px;padding:0 16px;font-weight:600;font-size:14px;font-family:var(--sans);cursor:pointer;min-height:44px;display:inline-flex;align-items:center;gap:7px;white-space:nowrap;}
+  .btn:hover{background:var(--walnut2);} .btn.ghost{background:none;border:1px solid var(--line);color:var(--walnut);}
+  .cbtn{width:38px;height:38px;border-radius:9px;border:1px solid var(--line);background:var(--card);color:var(--brass-d);display:flex;align-items:center;justify-content:center;cursor:pointer;}
+  .cbtn:hover{border-color:var(--brass);color:var(--walnut);}
+  .note-item{background:var(--card);border:1px solid var(--line2);border-radius:10px;padding:11px 13px;margin-bottom:8px;font-size:13.5px;}
+  .note-item .when{font-size:11px;color:var(--soft);margin-top:4px;}
+  .del{color:#c0594a;background:none;border:none;cursor:pointer;font-size:12px;}
   .footnote{text-align:center;color:var(--soft);font-size:11.5px;margin-top:26px;line-height:1.6;}
 </style>
 </head>
 <body>
 
-<!-- inline Tabler-style icon symbols -->
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
-  <symbol id="ic-cabinet" viewBox="0 0 24 24"><path d="M5 3h14v18H5z"/><path d="M12 3v18M5 12h14"/><path d="M9 7.5v1M9 16v1M15 7.5v1M15 16v1"/></symbol>
-  <symbol id="ic-cash" viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="12" rx="2"/><circle cx="12" cy="12" r="2.5"/><path d="M6 9.5v5M18 9.5v5"/></symbol>
+  <symbol id="ic-cabinet" viewBox="0 0 24 24"><path d="M5 3h14v18H5z"/><path d="M12 3v18M5 12h14"/></symbol>
   <symbol id="ic-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
   <symbol id="ic-users" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><path d="M3 20c0-3 2.7-5 6-5s6 2 6 5"/><path d="M16 5.5a3 3 0 0 1 0 5.5M21 20c0-2.4-1.4-4.2-3.5-4.8"/></symbol>
   <symbol id="ic-clipboard" viewBox="0 0 24 24"><rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v1H9z"/><path d="M9 11h6M9 15h4"/></symbol>
@@ -149,199 +147,202 @@
   <symbol id="ic-briefcase" viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2M3 13h18"/></symbol>
   <symbol id="ic-phone" viewBox="0 0 24 24"><path d="M5 4h3l1.5 4-2 1.5a11 11 0 0 0 5 5l1.5-2 4 1.5v3a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></symbol>
   <symbol id="ic-msg" viewBox="0 0 24 24"><path d="M4 5h16a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H8l-4 3z"/></symbol>
-  <symbol id="ic-building" viewBox="0 0 24 24"><path d="M3 21V8l9-5 9 5v13"/><path d="M3 21h18M9 21v-5h6v5"/><path d="M8 11h0M12 11h0M16 11h0"/></symbol>
+  <symbol id="ic-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M4 7l8 6 8-6"/></symbol>
+  <symbol id="ic-building" viewBox="0 0 24 24"><path d="M3 21V8l9-5 9 5v13"/><path d="M3 21h18M9 21v-5h6v5"/></symbol>
+  <symbol id="ic-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
 </defs></svg>
 
 <div class="topbar">
   <div class="topbar__in">
-    <div class="brand">
-      <img src="wooden-woodworks-logo.png" alt="Wooden Woodworks">
-      <div><div class="t">Wooden Woodworks</div><div class="s">Owner Dashboard</div></div>
-    </div>
-    <div class="tb-right">
-      <span class="sync"><span class="pulse"></span><span id="syncT">Updated just now</span></span>
-      <button class="out">Sign out</button>
-    </div>
+    <div class="brand"><img src="wooden-woodworks-logo.png" alt="Wooden Woodworks"><div><div class="t">Wooden Woodworks</div><div class="s">Owner Dashboard</div></div></div>
+    <div class="tb-right"><span class="sync"><span class="pulse"></span>Updated just now</span><button class="out">Sign out</button></div>
   </div>
 </div>
 
 <div class="wrap">
   <div class="hero">
     <div class="hi">Good morning, <em>Oscar &amp; Marla</em></div>
-    <div class="tag">Here is where your business stands today. <b>Crafted for the way you live.</b></div>
+    <div class="tag">Tap any card for the full details. <b>Crafted for the way you live.</b></div>
   </div>
-
-  <div class="grid">
-
-    <!-- PROJECTS -->
-    <div class="card col-2">
-      <div class="card__hd">
-        <div class="card__ti"><span class="ic"><svg class="i"><use href="#ic-cabinet"/></svg></span>Current Projects</div>
-        <a class="card__more" href="#">View all &rarr;</a>
-      </div>
-      <div class="proj-top">
-        <div id="projChart"></div>
-        <div class="proj-legend">
-          <div class="lg"><span class="sw" style="background:#5E7790"></span><b>1</b> In Design</div>
-          <div class="lg"><span class="sw" style="background:#C08A3E"></span><b>1</b> In Production</div>
-          <div class="lg"><span class="sw" style="background:#B08D4F"></span><b>1</b> Finishing</div>
-          <div class="lg"><span class="sw" style="background:#5E8B6D"></span><b>1</b> Installed</div>
-        </div>
-      </div>
-      <div style="margin-top:6px">
-        <a class="proj" href="#">
-          <div class="proj__main"><div class="proj__nm">Frameless Kitchen</div><div class="proj__meta">Salado · luxury build · finishing in-house</div><span class="proj__folder"><svg class="i"><use href="#ic-folder"/></svg> Project folder</span></div>
-          <span class="pill prod">In Production</span>
-        </a>
-        <a class="proj" href="#">
-          <div class="proj__main"><div class="proj__nm">Master Bath Vanity</div><div class="proj__meta">Waco · stained walnut · spray booth</div><span class="proj__folder"><svg class="i"><use href="#ic-folder"/></svg> Project folder</span></div>
-          <span class="pill finish">Finishing</span>
-        </a>
-        <a class="proj" href="#">
-          <div class="proj__main"><div class="proj__nm">Built-in Office Wall</div><div class="proj__meta">Austin · painted shaker · installed</div><span class="proj__folder"><svg class="i"><use href="#ic-folder"/></svg> Project folder</span></div>
-          <span class="pill installed">Installed</span>
-        </a>
-        <a class="proj" href="#">
-          <div class="proj__main"><div class="proj__nm">Showroom Cabinetry</div><div class="proj__meta">Salado · new showroom · in design</div><span class="proj__folder"><svg class="i"><use href="#ic-folder"/></svg> Project folder</span></div>
-          <span class="pill design">In Design</span>
-        </a>
-      </div>
-    </div>
-
-    <!-- CLIENTS -->
-    <div class="card col-2">
-      <div class="card__hd">
-        <div class="card__ti"><span class="ic"><svg class="i"><use href="#ic-briefcase"/></svg></span>Clients <span class="badge-bbc" style="margin-left:4px">4 active</span></div>
-        <a class="card__more" href="#">View all &rarr;</a>
-      </div>
-      <div class="cli">
-        <div class="cli__av">HC</div>
-        <div class="cli__main"><div class="cli__nm">Hill Country Custom Homes <span class="tag builder">Builder</span></div><div class="cli__meta">Frameless Kitchen · In Production · last contact 2 days ago</div></div>
-        <div class="cli__act"><button class="cbtn" title="Call" onclick="toast('Calling Hill Country Custom Homes')"><svg class="i"><use href="#ic-phone"/></svg></button><button class="cbtn" title="Message" onclick="toast('Message to Hill Country Custom Homes')"><svg class="i"><use href="#ic-msg"/></svg></button></div>
-      </div>
-      <div class="cli">
-        <div class="cli__av">VI</div>
-        <div class="cli__main"><div class="cli__nm">Verde Interior Studio <span class="tag designer">Designer</span></div><div class="cli__meta">Office Built-ins · Installed · repeat client</div></div>
-        <div class="cli__act"><button class="cbtn" title="Call" onclick="toast('Calling Verde Interior Studio')"><svg class="i"><use href="#ic-phone"/></svg></button><button class="cbtn" title="Message" onclick="toast('Message to Verde Interior Studio')"><svg class="i"><use href="#ic-msg"/></svg></button></div>
-      </div>
-      <div class="cli">
-        <div class="cli__av">WR</div>
-        <div class="cli__main"><div class="cli__nm">The Whitman Residence <span class="tag home">Homeowner</span></div><div class="cli__meta">Master Bath Vanity · Finishing · install next week</div></div>
-        <div class="cli__act"><button class="cbtn" title="Call" onclick="toast('Calling the Whitman Residence')"><svg class="i"><use href="#ic-phone"/></svg></button><button class="cbtn" title="Message" onclick="toast('Message to the Whitman Residence')"><svg class="i"><use href="#ic-msg"/></svg></button></div>
-      </div>
-      <div class="cli">
-        <div class="cli__av">BV</div>
-        <div class="cli__main"><div class="cli__nm">Brazos Valley Builders <span class="tag builder">Builder</span></div><div class="cli__meta">Showroom Cabinetry · In Design · new this month</div></div>
-        <div class="cli__act"><button class="cbtn" title="Call" onclick="toast('Calling Brazos Valley Builders')"><svg class="i"><use href="#ic-phone"/></svg></button><button class="cbtn" title="Message" onclick="toast('Message to Brazos Valley Builders')"><svg class="i"><use href="#ic-msg"/></svg></button></div>
-      </div>
-    </div>
-
-    <!-- NEW SHOWROOM -->
-    <div class="card col-2" style="background:linear-gradient(180deg,#FBF3E4,#FFFFFF);border-color:var(--line);">
-      <div class="card__hd">
-        <div class="card__ti"><span class="ic"><svg class="i"><use href="#ic-building"/></svg></span>New Showroom</div>
-        <span class="badge-bbc">Opening before Sept 2026</span>
-      </div>
-      <div class="steps">
-        <div class="step done"><div class="ball">&check;</div><div class="slab">Site secured</div></div>
-        <div class="step now"><div class="ball">2</div><div class="slab">Build-out underway</div></div>
-        <div class="step"><div class="ball">3</div><div class="slab">Showroom cabinetry</div></div>
-        <div class="step"><div class="ball">4</div><div class="slab">Grand opening</div></div>
-      </div>
-      <div class="row" style="border:none;padding-top:14px"><span class="dot a"></span><div><b>Latest:</b> <span class="sub">Sample: framing complete, interior build-out scheduled for next month.</span></div></div>
-      <a class="folderlink" href="#"><svg class="i"><use href="#ic-upload"/></svg> Drop showroom progress photos, great content for the launch</a>
-    </div>
-
-    <!-- INVOICES -->
-    <div class="card">
-      <div class="card__hd"><div class="card__ti"><span class="ic"><svg class="i"><use href="#ic-cash"/></svg></span>Invoices</div></div>
-      <div class="nums">
-        <div class="num"><div class="v">$ —</div><div class="l">Outstanding</div></div>
-        <div class="num"><div class="v">$ —</div><div class="l">Paid this month</div></div>
-        <div class="num"><div class="v">—</div><div class="l">Open estimates</div></div>
-        <div class="num"><div class="v">—</div><div class="l">Awaiting deposit</div></div>
-      </div>
-      <div class="note-inline">You keep the numbers. We can sync from QuickBooks or you update these.</div>
-    </div>
-
-    <!-- REMINDERS -->
-    <div class="card">
-      <div class="card__hd"><div class="card__ti"><span class="ic"><svg class="i"><use href="#ic-clock"/></svg></span>Reminders</div></div>
-      <div class="row"><span class="dot a"></span><div><b>90-day review with BBC</b><div class="sub">June 14 · Krizza will send the agenda</div></div></div>
-      <div class="row"><span class="dot"></span><div><b>New showroom opening</b><div class="sub">Before September 2026 · document the progress</div></div></div>
-      <div class="row"><span class="dot g"></span><div><b>Approve this week's content</b><div class="sub">3 reels waiting in the BBC panel</div></div></div>
-    </div>
-
-    <!-- TEAM -->
-    <div class="card">
-      <div class="card__hd"><div class="card__ti"><span class="ic"><svg class="i"><use href="#ic-users"/></svg></span>Your Team</div><a class="card__more" href="#">Notes &rarr;</a></div>
-      <div class="row"><span class="dot"></span><div><b>Margie</b> <span class="sub">— finishing (paint + stain)</span></div></div>
-      <div class="row"><span class="dot"></span><div><b>Thomas</b> <span class="sub">— install crew</span></div></div>
-      <div class="row"><span class="dot a"></span><div><b>Lonnie &amp; Elio</b> <span class="sub">— new builders, ramping up</span></div></div>
-      <div class="row"><span class="dot"></span><div><b>Pablo</b> <span class="sub">— part-time shop support</span></div></div>
-    </div>
-
-    <!-- FROM KRIZZA -->
-    <div class="card krizza">
-      <div class="card__hd"><div class="card__ti"><span class="ic"><svg class="i"><use href="#ic-clipboard"/></svg></span>From Krizza</div><span class="badge-bbc">Your BBC team</span></div>
-      <div class="row"><span class="dot g"></span><div><b>Marla's Google review is now live</b><div class="sub">Featured on your case-study page on balaynibruno.co</div></div></div>
-      <div class="row"><span class="dot"></span><div><b>Content this week</b><div class="sub">Sample: 4 reels + 2 carousels drafted, awaiting approval</div></div></div>
-      <div class="row"><span class="dot"></span><div><b>Leads</b><div class="sub">Sample: new builder inquiries tracked in HubSpot</div></div></div>
-      <div class="row"><span class="dot"></span><div><b>Google Profile</b><div class="sub">Sample: 2 posts published, new project photos uploaded</div></div></div>
-    </div>
-
-    <!-- DROP CONTENT -->
-    <div class="card">
-      <div class="card__hd"><div class="card__ti"><span class="ic"><svg class="i"><use href="#ic-upload"/></svg></span>Drop Content for Krizza</div></div>
-      <label class="drop" id="drop" for="ddrop">
-        <div class="dic"><svg class="i" style="width:28px;height:28px"><use href="#ic-upload"/></svg></div>
-        <div class="t">Drop photos, videos, or graphics here</div>
-        <div class="s">Goes straight to the folder Krizza edits from</div>
-        <input id="ddrop" type="file" multiple>
-      </label>
-      <a class="folderlink" href="#"><svg class="i"><use href="#ic-folder"/></svg> Open the shared content folder</a>
-    </div>
-
-    <!-- INSTRUCTIONS -->
-    <div class="card">
-      <div class="card__hd"><div class="card__ti"><span class="ic"><svg class="i"><use href="#ic-edit"/></svg></span>Notes &amp; Instructions</div></div>
-      <textarea class="instr" id="instr" placeholder="Leave a note or instruction for your BBC team... (e.g., 'Post the Salado kitchen Friday', 'Hold the Austin reel until the client approves')"></textarea>
-      <button class="send" id="sendBtn"><svg class="i"><use href="#ic-send"/></svg> Send to Krizza</button>
-    </div>
-
-  </div>
-
-  <div class="footnote">Wooden Woodworks · Owner view · Sample data shown for layout.<br>Live data, uploads, and notes save to the system (NocoDB) when wired. Powered by Balay ni Bruno &amp; Co.</div>
+  <div class="grid" id="grid"></div>
+  <div class="footnote">Wooden Woodworks · Owner view · Sample data shown for layout.<br>Edits, uploads, tasks, and notes save to the system (NocoDB) when wired. Powered by Balay ni Bruno &amp; Co.</div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+<div class="scrim" id="scrim" onclick="closeDrawer()"></div>
+<aside class="drawer" id="drawer" aria-hidden="true">
+  <div class="dw-hd"><h2 id="dwTitle">Details</h2><button class="x" onclick="closeDrawer()">&times;</button></div>
+  <div class="dw-body" id="dwBody"></div>
+</aside>
+
 <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
 <script>
-  // Project status donut (ApexCharts)
-  try{
-    new ApexCharts(document.querySelector('#projChart'), {
-      chart:{type:'donut',height:130,width:130,animations:{enabled:true}},
-      series:[1,1,1,1], labels:['In Design','In Production','Finishing','Installed'],
-      colors:['#5E7790','#C08A3E','#B08D4F','#5E8B6D'],
-      legend:{show:false}, dataLabels:{enabled:false}, stroke:{width:2,colors:['#fff']},
-      plotOptions:{pie:{donut:{size:'66%',labels:{show:true,total:{show:true,label:'Projects',fontFamily:'Georgia',color:'#5E4329',formatter:()=>'4'}}}}},
-      tooltip:{enabled:true}
-    }).render();
-  }catch(e){ document.querySelector('#projChart').style.display='none'; }
+/* ---------- sample data (replaced by NocoDB when wired) ---------- */
+var DB = {
+  projects:[
+    {id:'p1',name:'Frameless Kitchen',loc:'Salado',status:'prod',sl:'In Production',client:'Hill Country Custom Homes',desc:'Full frameless European kitchen, painted shaker base with a stained walnut island. Finishing in-house.',timeline:[['Design','done'],['Build','now'],['Finishing',''],['Install','']],photos:3},
+    {id:'p2',name:'Master Bath Vanity',loc:'Waco',status:'finish',sl:'Finishing',client:'The Whitman Residence',desc:'Stained walnut double vanity, soft-close, in the spray booth this week.',timeline:[['Design','done'],['Build','done'],['Finishing','now'],['Install','']],photos:5},
+    {id:'p3',name:'Built-in Office Wall',loc:'Austin',status:'installed',sl:'Installed',client:'Verde Interior Studio',desc:'Painted shaker built-ins, floor to ceiling, installed and signed off.',timeline:[['Design','done'],['Build','done'],['Finishing','done'],['Install','done']],photos:8},
+    {id:'p4',name:'Showroom Cabinetry',loc:'Salado',status:'design',sl:'In Design',client:'Wooden Woodworks (own showroom)',desc:'Display cabinetry for the new Salado showroom. In design.',timeline:[['Design','now'],['Build',''],['Finishing',''],['Install','']],photos:0}
+  ],
+  clients:[
+    {id:'c1',name:'Hill Country Custom Homes',type:'builder',tl:'Builder',init:'HC',email:'office@hillcountryhomes.example',phone:'(254) 555-0142',comms:[['call','Discussed island finish','2 days ago'],['text','Sent updated timeline','4 days ago'],['email','Estimate approved','1 week ago']],projects:['p1'],notes:[['Prefers WhatsApp for quick questions.','last week']]},
+    {id:'c2',name:'Verde Interior Studio',type:'designer',tl:'Designer',init:'VI',email:'hello@verdestudio.example',phone:'(512) 555-0199',comms:[['email','Sent install photos','3 days ago']],projects:['p3'],notes:[['Repeat client, 3rd project. Loves clean lines.','this month']]},
+    {id:'c3',name:'The Whitman Residence',type:'home',tl:'Homeowner',init:'WR',email:'whitman@example.com',phone:'(254) 555-0177',comms:[['text','Confirmed install date','yesterday']],projects:['p2'],notes:[['Install next week, confirm with Marla.','yesterday']]},
+    {id:'c4',name:'Brazos Valley Builders',type:'builder',tl:'Builder',init:'BV',email:'jobs@brazosvalley.example',phone:'(254) 555-0120',comms:[['email','New project inquiry','this week']],projects:[],notes:[['New this month, high potential. B2B.','this week']]}
+  ],
+  showroom:{steps:[
+    {name:'Site secured',status:'done',tasks:[['Lease signed',true],['Permits filed',true]]},
+    {name:'Build-out underway',status:'now',tasks:[['Framing complete',true],['Electrical rough-in',false],['Schedule interior build-out',false]]},
+    {name:'Showroom cabinetry',status:'',tasks:[['Finalize display layout',false]]},
+    {name:'Grand opening',status:'',tasks:[['Set opening date',false],['Plan launch content',false]]}
+  ]},
+  team:[
+    {n:'Margie',r:'Finishing (paint + stain)',does:'Applies all paint and stain finishes. Our signature in-house finishing.',cur:'Whitman vanity in the spray booth',tasks:[['Whitman vanity finish',false],['Kitchen island stain',false]],notes:'Finishing timing affects shoot scheduling.'},
+    {n:'Thomas',r:'Installer / Assembler',does:'Field installation and assembly at job sites.',cur:'Office wall install (Austin) done',tasks:[['Austin office install',true],['Prep Waco install',false]],notes:'Experienced, reliable.'},
+    {n:'Lonnie & Elio',r:'New builders',does:'Cabinet building and assembly in the shop.',cur:'Ramping up on frameless boxes',tasks:[['Frameless box training',false]],notes:'New hires, ramping up.'},
+    {n:'Pablo',r:'Part-time shop support',does:'General shop support and overflow.',cur:'Shop support as needed',tasks:[],notes:'Part-time availability.'}
+  ],
+  krizza:{
+    tasks:[['Draft 4 reels for this week',false,'2 drafted, 2 in progress'],['Publish 2 Google Business posts',false,'Photos selected'],['Follow up new builder lead in HubSpot',true,'Logged + follow-up set'],['Marla review live on website',true,'Done, featured on case-study page']],
+    notes:[]
+  },
+  reminders:[
+    {t:'90-day review with BBC',d:'June 14',done:false},
+    {t:'Document showroom build progress',d:'ongoing',done:false},
+    {t:'Approve this week’s content',d:'today',done:false},
+    {t:'Process deposit invoice for Brazos Valley',d:'this week',done:false}
+  ],
+  instructions:[
+    {t:'Hold the Austin reel until the client approves the final photos.',d:'2 days ago'},
+    {t:'Post the Salado kitchen walkthrough on Friday morning.',d:'last week'}
+  ]
+};
 
-  // Toast feedback (Notyf) — mockups; real save = NocoDB write-back later
-  var notyf; try{ notyf=new Notyf({duration:2600,position:{x:'center',y:'top'},types:[{type:'success',background:'#5E4329'}]}); }catch(e){}
-  function toast(m){ if(notyf) notyf.success(m); }
+var ICON={done:'✓'};
+function esc(s){return (s||'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
+function ic(id){return '<svg class="i"><use href="#'+id+'"/></svg>';}
+var notyf; try{notyf=new Notyf({duration:2400,position:{x:'center',y:'top'},types:[{type:'success',background:'#5E4329'}]});}catch(e){}
+function toast(m){ if(notyf) notyf.success(m); }
 
-  var drop=document.getElementById('drop'), ddrop=document.getElementById('ddrop');
-  ;['dragover','dragenter'].forEach(ev=>drop.addEventListener(ev,e=>{e.preventDefault();drop.classList.add('over');}));
-  ;['dragleave','drop'].forEach(ev=>drop.addEventListener(ev,e=>{e.preventDefault();drop.classList.remove('over');}));
-  drop.addEventListener('drop',e=>{ const n=e.dataTransfer.files.length; if(n) toast(n+' file'+(n>1?'s':'')+' sent to Krizza’s folder'); });
-  ddrop.addEventListener('change',e=>{ const n=e.target.files.length; if(n) toast(n+' file'+(n>1?'s':'')+' sent to Krizza’s folder'); });
+/* ---------- render the cards ---------- */
+function pill(p){return '<span class="pill '+p.status+'">'+p.sl+'</span>';}
+function renderGrid(){
+  var g=document.getElementById('grid');
+  var projRows=DB.projects.map(p=>`<div class="proj" onclick="openDrawer('project','${p.id}')"><div class="proj__main"><div class="proj__nm">${esc(p.name)}</div><div class="proj__meta">${esc(p.loc)} · ${esc(p.client)}</div></div>${pill(p)}</div>`).join('');
+  var cliRows=DB.clients.map(c=>`<div class="cli" onclick="openDrawer('client','${c.id}')"><div class="cli__av">${c.init}</div><div class="cli__main"><div class="cli__nm">${esc(c.name)} <span class="tag ${c.type}">${c.tl}</span></div><div class="cli__meta">${c.projects.length?esc(DB.projects.find(p=>p.id===c.projects[0]).name):'No active project'}</div></div></div>`).join('');
+  var stepHtml=DB.showroom.steps.map((s,i)=>`<div class="step ${s.status}"><div class="ball">${s.status==='done'?ICON.done:(i+1)}</div><div class="slab">${esc(s.name)}</div></div>`).join('');
+  var teamRows=DB.team.map((t,i)=>`<div class="proj" onclick="openDrawer('team','${i}')"><div class="proj__main"><div class="proj__nm">${esc(t.n)}</div><div class="proj__meta">${esc(t.r)}</div></div><span class="card__more">Details &rarr;</span></div>`).join('');
+  var krizDone=DB.krizza.tasks.filter(t=>t[1]).length;
 
-  document.getElementById('sendBtn').addEventListener('click',()=>{
-    var t=document.getElementById('instr'); if(t.value.trim()){ toast('Note sent to Krizza'); t.value=''; } else { toast('Write a note first'); }
-  });
+  g.innerHTML=`
+    <div class="card col-2"><div class="card__hd"><div class="card__ti"><span class="ic">${ic('ic-cabinet')}</span>Current Projects</div><a class="card__more" href="#" onclick="event.preventDefault();toast('Opening projects folder')">All projects folder ${ic('ic-folder')}</a></div>${projRows}</div>
+
+    <div class="card col-2"><div class="card__hd"><div class="card__ti"><span class="ic">${ic('ic-briefcase')}</span>Clients <span class="badge-bbc" style="margin-left:4px">${DB.clients.length} active</span></div></div>${cliRows}</div>
+
+    <div class="card col-2 click" onclick="openDrawer('showroom')" style="background:linear-gradient(180deg,#FBF3E4,#FFFFFF);border-color:var(--line)"><div class="card__hd"><div class="card__ti"><span class="ic">${ic('ic-building')}</span>New Showroom</div><span class="badge-bbc">Opening before Sept 2026</span></div><div class="steps">${stepHtml}</div><div class="row" style="border:none;padding-top:12px"><span class="dot a"></span><div><b>Latest:</b> <span class="sub">Framing complete, interior build-out scheduled next month. Tap to manage build steps.</span></div></div></div>
+
+    <div class="card"><div class="card__hd"><div class="card__ti"><span class="ic">${ic('ic-users')}</span>Your Team</div></div>${teamRows}</div>
+
+    <div class="card krizza click" onclick="openDrawer('krizza')"><div class="card__hd"><div class="card__ti"><span class="ic">${ic('ic-clipboard')}</span>From Krizza</div><span class="badge-bbc">Your BBC team</span></div><div class="row"><span class="dot g"></span><div><b>${krizDone} of ${DB.krizza.tasks.length} tasks done this week</b><div class="sub">Tap to see tasks, request changes, or leave notes for Krizza</div></div></div><div class="row"><span class="dot"></span><div>Marla's Google review is now live on your case-study page</div></div></div>
+
+    <div class="card click" onclick="openDrawer('reminders')"><div class="card__hd"><div class="card__ti"><span class="ic">${ic('ic-clock')}</span>Reminders</div><span class="card__more">${DB.reminders.filter(r=>!r.done).length} open</span></div>${DB.reminders.slice(0,3).map(r=>`<div class="row"><span class="dot ${r.done?'g':'a'}"></span><div><b>${esc(r.t)}</b><div class="sub">${esc(r.d)}</div></div></div>`).join('')}</div>
+
+    <div class="card click" onclick="openDrawer('instructions')"><div class="card__hd"><div class="card__ti"><span class="ic">${ic('ic-edit')}</span>Notes &amp; Instructions</div><span class="card__more">${DB.instructions.length} saved</span></div>${DB.instructions.slice(0,2).map(n=>`<div class="row"><span class="dot"></span><div><b>${esc(n.t)}</b><div class="sub">${esc(n.d)}</div></div></div>`).join('')}</div>
+
+    <div class="card col-2"><div class="card__hd"><div class="card__ti"><span class="ic">${ic('ic-upload')}</span>Drop Content for Krizza</div><a class="folderlink" href="#" onclick="event.preventDefault();toast('Opening shared content folder')" style="margin:0">${ic('ic-folder')} Shared folder</a></div>
+      <label class="drop" id="drop" for="ddrop"><div class="dic">${'<svg class="i" style="width:34px;height:34px"><use href="#ic-upload"/></svg>'}</div><div class="t">Drop photos, videos, or graphics here</div><div class="s">Goes straight to the folder Krizza edits from</div><input id="ddrop" type="file" multiple></label>
+    </div>`;
+  wireDrop();
+}
+
+/* ---------- drawer ---------- */
+function openDrawer(type,id){
+  var t={project:'Project',client:'Client',showroom:'New Showroom',team:'Team Member',krizza:'Tasks for Krizza',reminders:'Reminders',instructions:'Notes & Instructions'}[type];
+  document.getElementById('dwTitle').textContent=t;
+  document.getElementById('dwBody').innerHTML=render[type](id);
+  document.getElementById('drawer').classList.add('open');
+  document.getElementById('scrim').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeDrawer(){document.getElementById('drawer').classList.remove('open');document.getElementById('scrim').classList.remove('open');document.body.style.overflow='';}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeDrawer();});
+
+function checklist(arr,cb){return arr.map((x,i)=>`<div class="chk ${x[1]?'done':''}"><input type="checkbox" ${x[1]?'checked':''} onchange="${cb}(${i},this.checked)"><label>${esc(x[0])}</label></div>`).join('');}
+
+var render={
+  project:function(id){var p=DB.projects.find(x=>x.id===id);
+    return `<div class="dw-sec">Status</div><div>${pill(p)} <span class="kv" style="margin-left:6px"><span>${esc(p.loc)}</span></span></div>
+    <div class="dw-sec">Client who ordered it</div><div class="kv"><b>${esc(p.client)}</b></div>
+    <div class="dw-sec">Description</div><div class="kv"><span>${esc(p.desc)}</span></div>
+    <div class="dw-sec">Where we are</div><div class="steps">${p.timeline.map(s=>`<div class="step ${s[1]}"><div class="ball">${s[1]==='done'?ICON.done:''}</div><div class="slab">${esc(s[0])}</div></div>`).join('')}</div>
+    <div class="dw-sec">Photos &amp; videos</div><div class="thumbs">${Array.from({length:p.photos}).map(()=>'<div class="thumb">'+ic('ic-cabinet')+'</div>').join('')||'<div class="kv"><span>No media yet.</span></div>'}</div>
+    <label class="drop" style="margin-top:10px" onclick="toast('Media added to '+'${esc(p.name)}')"><div class="dic">${ic('ic-upload')}</div><div class="t">Add photos / videos</div></label>
+    <div class="dw-sec">Project folder</div><a class="btn ghost" href="#" onclick="event.preventDefault();toast('Opening ${esc(p.name)} folder')">${ic('ic-folder')} Open project folder</a>`;
+  },
+  client:function(id){var c=DB.clients.find(x=>x.id===id);
+    return `<div class="dw-sec">${c.tl} · Contact</div>
+    <div style="display:flex;gap:8px;margin-bottom:6px"><a class="cbtn" href="tel:${c.phone}" onclick="toast('Calling ${esc(c.name)}')">${ic('ic-phone')}</a><a class="cbtn" href="#" onclick="event.preventDefault();toast('Texting ${esc(c.name)}')">${ic('ic-msg')}</a><a class="cbtn" href="mailto:${c.email}" onclick="toast('Emailing ${esc(c.name)}')">${ic('ic-mail')}</a></div>
+    <div class="kv"><span>${esc(c.email)} · ${esc(c.phone)}</span></div>
+    <div class="dw-sec">Recent calls, texts &amp; emails</div>${c.comms.map(m=>`<div class="row"><span class="dot ${m[0]==='call'?'a':(m[0]==='email'?'':'g')}"></span><div><b>${m[0][0].toUpperCase()+m[0].slice(1)}:</b> ${esc(m[1])}<div class="sub">${esc(m[2])}</div></div></div>`).join('')||'<div class="kv"><span>No recent activity.</span></div>'}
+    <div class="dw-sec">Projects for this client</div>${c.projects.map(pid=>{var p=DB.projects.find(x=>x.id===pid);return `<div class="proj" onclick="openDrawer('project','${p.id}')"><div class="proj__main"><div class="proj__nm">${esc(p.name)}</div><div class="proj__meta">${esc(p.desc).slice(0,60)}...</div></div>${pill(p)}</div>`;}).join('')||'<div class="kv"><span>No active projects yet.</span></div>'}
+    <div class="dw-sec">Notes</div><div id="cnotes">${c.notes.map(n=>`<div class="note-item">${esc(n[0])}<div class="when">${esc(n[1])}</div></div>`).join('')}</div>
+    <div class="addrow"><input id="cnote" placeholder="Add a note about this client..."><button class="btn" onclick="addClientNote('${c.id}')">${ic('ic-plus')}</button></div>`;
+  },
+  showroom:function(){
+    return DB.showroom.steps.map((s,si)=>`<div class="dw-sec">${s.status==='done'?'✓ ':(s.status==='now'?'● ':'')}${esc(s.name)}</div>
+      <div id="sstep${si}">${checklist(s.tasks,'sTask.bind(null,'+si+')')}</div>
+      <div class="addrow"><input id="stask${si}" placeholder="Add task or reminder for this step..."><button class="btn" onclick="addStepTask(${si})">${ic('ic-plus')}</button></div>`).join('')
+      +`<div class="footnote" style="text-align:left;margin-top:18px">You know the build best, add, edit, or check off tasks for each step as construction moves.</div>`;
+  },
+  team:function(i){var t=DB.team[i];
+    return `<div class="dw-sec">Role</div><div class="kv"><b>${esc(t.r)}</b></div>
+    <div class="dw-sec">What they do</div><div class="kv"><span>${esc(t.does)}</span></div>
+    <div class="dw-sec">Currently working on</div><div class="kv"><b>${esc(t.cur)}</b></div>
+    <div class="dw-sec">Tasks &amp; status</div><div id="tt${i}">${checklist(t.tasks,'tTask.bind(null,'+i+')')}</div>
+    <div class="addrow"><input id="ttask${i}" placeholder="Add a task..."><button class="btn" onclick="addTeamTask(${i})">${ic('ic-plus')}</button></div>
+    <div class="dw-sec">Notes</div><textarea id="tnote${i}" placeholder="Notes for ${esc(t.n)}...">${esc(t.notes)}</textarea>
+    <button class="btn" style="margin-top:10px" onclick="toast('Saved notes for ${esc(t.n)}')">${ic('ic-send')} Save notes</button>`;
+  },
+  krizza:function(){
+    return `<div class="dw-sec">Request a new task for Krizza</div>
+    <div class="kv"><span>Need a new workflow, a change to the WW system, or a website update? Add it here and Krizza will handle it.</span></div>
+    <textarea id="kreq" placeholder="e.g., 'Add a new page to the website for the showroom', 'Set up a monthly builder newsletter'..."></textarea>
+    <button class="btn" style="margin-top:10px" onclick="addKrizzaTask()">${ic('ic-plus')} Send task to Krizza</button>
+    <div class="dw-sec">Krizza's current tasks</div><div id="ktasks">${DB.krizza.tasks.map((t,i)=>`<div class="chk ${t[1]?'done':''}"><input type="checkbox" ${t[1]?'checked':''} disabled><label>${esc(t[0])}<div class="meta">${esc(t[2]||'')}</div></label></div>`).join('')}</div>
+    <div class="dw-sec">Notes for Krizza</div><div id="knotes">${DB.krizza.notes.map(n=>`<div class="note-item">${esc(n[0])}<div class="when">${esc(n[1])}</div></div>`).join('')||'<div class="kv"><span>No notes yet.</span></div>'}</div>
+    <div class="addrow"><input id="knote" placeholder="Leave a note for Krizza..."><button class="btn" onclick="addKrizzaNote()">${ic('ic-plus')}</button></div>`;
+  },
+  reminders:function(){
+    return `<div class="dw-sec">All reminders</div><div id="rems">${DB.reminders.map((r,i)=>`<div class="chk ${r.done?'done':''}"><input type="checkbox" ${r.done?'checked':''} onchange="remToggle(${i},this.checked)"><label>${esc(r.t)}<div class="meta">${esc(r.d)}</div></label><button class="del" onclick="remDel(${i})">remove</button></div>`).join('')}</div>
+    <div class="addrow"><input id="newrem" placeholder="Add a reminder (an invoice to process, a callback...)"><button class="btn" onclick="addReminder()">${ic('ic-plus')}</button></div>`;
+  },
+  instructions:function(){
+    return `<div class="dw-sec">Add an instruction for BBC</div><textarea id="newinstr" placeholder="What should the BBC team do? Be specific..."></textarea>
+    <button class="btn" style="margin-top:10px" onclick="addInstruction()">${ic('ic-send')} Send to Krizza</button>
+    <div class="dw-sec">Previous instructions</div><div id="instrs">${DB.instructions.map(n=>`<div class="note-item">${esc(n.t)}<div class="when">${esc(n.d)}</div></div>`).join('')}</div>`;
+  }
+};
+
+/* ---------- mutations (local now; NocoDB-backed when wired) ---------- */
+function addClientNote(id){var c=DB.clients.find(x=>x.id===id),v=document.getElementById('cnote').value.trim();if(!v)return;c.notes.unshift([v,'just now']);document.getElementById('dwBody').innerHTML=render.client(id);toast('Note added');}
+function sTask(si,i,ck){DB.showroom.steps[si].tasks[i][1]=ck;toast(ck?'Done':'Reopened');}
+function addStepTask(si){var v=document.getElementById('stask'+si).value.trim();if(!v)return;DB.showroom.steps[si].tasks.push([v,false]);document.getElementById('dwBody').innerHTML=render.showroom();toast('Task added');}
+function tTask(i,j,ck){DB.team[i].tasks[j][1]=ck;toast(ck?'Done':'Reopened');}
+function addTeamTask(i){var v=document.getElementById('ttask'+i).value.trim();if(!v)return;DB.team[i].tasks.push([v,false]);document.getElementById('dwBody').innerHTML=render.team(i);toast('Task added');}
+function addKrizzaTask(){var v=document.getElementById('kreq').value.trim();if(!v)return;DB.krizza.tasks.unshift([v,false,'New, from owners']);document.getElementById('dwBody').innerHTML=render.krizza();toast('Sent to Krizza');renderGrid();}
+function addKrizzaNote(){var v=document.getElementById('knote').value.trim();if(!v)return;DB.krizza.notes.unshift([v,'just now']);document.getElementById('dwBody').innerHTML=render.krizza();toast('Note added');}
+function remToggle(i,ck){DB.reminders[i].done=ck;toast(ck?'Done':'Reopened');}
+function remDel(i){DB.reminders.splice(i,1);document.getElementById('dwBody').innerHTML=render.reminders();renderGrid();toast('Reminder removed');}
+function addReminder(){var v=document.getElementById('newrem').value.trim();if(!v)return;DB.reminders.push({t:v,d:'just now',done:false});document.getElementById('dwBody').innerHTML=render.reminders();renderGrid();toast('Reminder added');}
+function addInstruction(){var v=document.getElementById('newinstr').value.trim();if(!v)return;DB.instructions.unshift({t:v,d:'just now'});document.getElementById('dwBody').innerHTML=render.instructions();renderGrid();toast('Instruction sent to Krizza');}
+
+function wireDrop(){var d=document.getElementById('drop'),inp=document.getElementById('ddrop');if(!d)return;
+  ['dragover','dragenter'].forEach(ev=>d.addEventListener(ev,e=>{e.preventDefault();d.classList.add('over');}));
+  ['dragleave','drop'].forEach(ev=>d.addEventListener(ev,e=>{e.preventDefault();d.classList.remove('over');}));
+  d.addEventListener('drop',e=>{var n=e.dataTransfer.files.length;if(n)toast(n+' file'+(n>1?'s':'')+" sent to Krizza’s folder");});
+  inp.addEventListener('change',e=>{var n=e.target.files.length;if(n)toast(n+' file'+(n>1?'s':'')+" sent to Krizza’s folder");});
+}
+renderGrid();
 </script>
 </body>
 </html>
