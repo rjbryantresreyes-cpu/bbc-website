@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-L6S574R0CE"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-L6S574R0CE');
+  </script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>How We Built a 3D Product Designer Customers Use in Their Browser | Balay ni Bruno &amp; Co.</title>
+  <meta name="description" content="A client wanted an interactive 3D design center like a much bigger competitor. We studied how it was built, then made our own version with free tools. Spin it, change the finish, and view it in your room. No app fees." />
+  <link rel="canonical" href="https://balaynibruno.co/how-we-built-3d-product-designer-free.html" />
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Balay ni Bruno &amp; Co." />
+  <meta property="og:title" content="How We Built a 3D Product Designer Customers Use in Their Browser | Balay ni Bruno &amp; Co." />
+  <meta property="og:description" content="A client wanted an interactive 3D design center like a much bigger competitor. We studied how it was built, then made our own with free tools. Spin it, change the finish, view it in your room." />
+  <meta property="og:url" content="https://balaynibruno.co/how-we-built-3d-product-designer-free.html" />
+  <meta property="og:image" content="https://balaynibruno.co/bbc-logo.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Lora:ital,wght@0,400;0,500;1,400;1,500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <script type="module" src="https://unpkg.com/@google/model-viewer@3.5.0/dist/model-viewer.min.js"></script>
+  <style>
+
+    :root {
+      --deep-blue:#1F3557; --mid-blue:#4B6FA5; --warm-blue:#6D8FC7;
+      --light-blue:#A8C0DC; --bg-primary:#F5F1EA; --bg-section:#EDE8DF;
+      --bg-card:#FDFAF6; --bg-dark:#1C2E47; --bg-footer:#172540;
+      --text-ink:#2A3040; --text-body:#4E5666; --text-muted:#888FA0;
+      --text-warm:#F5F1EA; --gold:#B8923E; --gold-pale:#E6CFA0;
+      --gold-warm:#D4A84B; --sage:#4E9E74;
+      --font-display:'Playfair Display',Georgia,serif;
+      --font-body:'Lora',Georgia,serif;
+      --font-ui:'DM Sans',system-ui,sans-serif;
+      --max-width:860px; --radius:16px; --radius-lg:24px;
+      --shadow-sm:0 3px 18px rgba(85,60,35,0.08);
+      --shadow-md:0 7px 36px rgba(85,60,35,0.11);
+      --shadow-lg:0 14px 56px rgba(85,60,35,0.14);
+      --border-card:1px solid rgba(85,60,35,0.09);
+      --border-warm:1px solid rgba(85,60,35,0.12);
+      --s1:0.5rem;--s2:1rem;--s3:1.5rem;--s4:2.5rem;--s5:4rem;
+    }
+
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{font-family:var(--font-body);color:var(--text-ink);background:var(--bg-primary);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+    body::after{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23n)' opacity='0.026'/%3E%3C/svg%3E");pointer-events:none;z-index:9999;mix-blend-mode:multiply}
+    h1,h2,h3,h4{font-family:var(--font-display);line-height:1.22;color:var(--deep-blue)}
+    h1{font-size:clamp(2rem,4.5vw,3.2rem);font-weight:700;line-height:1.14}
+    h2{font-size:clamp(1.3rem,2.5vw,1.9rem);font-weight:600;margin-top:2.5rem;margin-bottom:0.75rem}
+    h3{font-size:clamp(1rem,1.8vw,1.25rem);font-weight:600;margin-top:2rem;margin-bottom:0.5rem}
+    p{font-family:var(--font-body);font-size:1.05rem;line-height:1.9;color:var(--text-body);margin-bottom:1.2rem}
+    a{text-decoration:none}
+    ul,ol{margin:0 0 1.2rem 1.5rem;color:var(--text-body);font-family:var(--font-body);font-size:1.05rem;line-height:1.85}
+    li{margin-bottom:0.4rem}
+    .eyebrow{display:block;font-family:var(--font-ui);font-size:0.68rem;font-weight:600;letter-spacing:0.17em;text-transform:uppercase;color:var(--gold);margin-bottom:var(--s2)}
+    .container{max-width:var(--max-width);margin:0 auto;padding:0 var(--s4)}
+    @media(max-width:600px){.container{padding:0 var(--s2)}}
+    .nav{position:sticky;top:0;z-index:100;background:rgba(28,46,71,0.96);backdrop-filter:blur(10px);border-bottom:1px solid rgba(255,255,255,0.07);padding:1rem var(--s4)}
+    .nav__inner{max-width:var(--max-width);margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+    .nav__logo{font-family:var(--font-display);font-size:1rem;font-weight:600;color:#fff;letter-spacing:0.01em}
+    .nav__back{font-family:var(--font-ui);font-size:0.82rem;font-weight:500;color:rgba(245,241,234,0.6);transition:color 0.2s}
+    .nav__back:hover{color:var(--gold-pale)}
+    .article-hero{background:var(--bg-dark);padding:clamp(3rem,7vw,5.5rem) 0 clamp(2.5rem,5vw,4rem);position:relative;overflow:hidden}
+    .article-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 50% at 50% 0%,rgba(184,146,62,0.09),transparent 70%);pointer-events:none}
+    .article-hero .container{position:relative}
+    .article-meta{display:flex;align-items:center;gap:0.75rem;flex-wrap:wrap;margin-bottom:1.5rem}
+    .article-cat{font-family:var(--font-ui);font-size:0.72rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold-pale);background:rgba(184,146,62,0.12);border:1px solid rgba(184,146,62,0.22);border-radius:100px;padding:0.22rem 0.8rem}
+    .article-date{font-family:var(--font-ui);font-size:0.78rem;color:rgba(245,241,234,0.4)}
+    .article-hero h1{color:#fff;margin-bottom:1.2rem}
+    .article-hero .lead{font-family:var(--font-body);font-size:1.1rem;line-height:1.85;color:rgba(245,241,234,0.7);max-width:680px}
+    .article-body{padding:clamp(2.5rem,5vw,4.5rem) 0}
+    .article-body .container{max-width:760px}
+    .highlight-box{background:var(--bg-section);border-left:3px solid var(--gold);border-radius:0 var(--radius) var(--radius) 0;padding:1.25rem 1.5rem;margin:2rem 0}
+    .highlight-box p{margin:0;font-size:0.98rem}
+    .key-takeaway{background:var(--bg-dark);border-radius:var(--radius-lg);padding:2rem;margin:2.5rem 0}
+    .key-takeaway h3{color:#fff;margin-top:0;margin-bottom:1rem}
+    .key-takeaway ul{color:rgba(245,241,234,0.72);margin-left:1.2rem}
+    .key-takeaway li{margin-bottom:0.5rem;font-size:0.98rem}
+    .cta-section{background:var(--bg-dark);padding:clamp(3rem,6vw,5rem) 0;text-align:center;position:relative;overflow:hidden}
+    .cta-section::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 60% at 50% 100%,rgba(184,146,62,0.08),transparent 70%);pointer-events:none}
+    .cta-section h2{color:#fff;margin-top:0;margin-bottom:1rem}
+    .cta-section p{color:rgba(245,241,234,0.65);max-width:500px;margin:0 auto 2rem}
+    .btn-gold{display:inline-flex;align-items:center;gap:0.5rem;padding:0.9rem 2.2rem;background:var(--gold);color:#fff;border-radius:100px;font-family:var(--font-ui);font-size:0.9rem;font-weight:600;box-shadow:0 4px 20px rgba(184,146,62,0.3);transition:all 0.22s}
+    .btn-gold:hover{background:var(--gold-warm);transform:translateY(-2px);box-shadow:0 8px 30px rgba(184,146,62,0.4)}
+    .footer{background:var(--bg-footer);padding:2rem var(--s4);text-align:center}
+    .footer p{font-family:var(--font-ui);font-size:0.8rem;color:rgba(245,241,234,0.35);line-height:1.8}
+    .footer a{color:rgba(245,241,234,0.45)}
+    .footer a:hover{color:var(--gold-pale)}
+
+    /* ---- interactive 3D demo (BBC-branded) ---- */
+    .demo-wrap{background:linear-gradient(180deg,#20344f 0%,#1C2E47 100%);padding:clamp(2.5rem,5vw,4rem) 0;border-top:1px solid rgba(184,146,62,0.18);border-bottom:1px solid rgba(184,146,62,0.18)}
+    .demo-wrap .container{max-width:1040px}
+    .demo-head{text-align:center;margin-bottom:1.75rem}
+    .demo-head .eyebrow{color:var(--gold-pale)}
+    .demo-head h2{color:#fff;margin-top:0}
+    .demo-head p{color:rgba(245,241,234,0.7);max-width:560px;margin:0.5rem auto 0}
+    .demo-grid{display:grid;grid-template-columns:1fr;gap:1.25rem}
+    @media(min-width:860px){.demo-grid{grid-template-columns:1.6fr 1fr;align-items:start}}
+    model-viewer{width:100%;height:60vh;min-height:360px;background:radial-gradient(120% 90% at 50% 16%,#ffffff 0%,#efeae1 70%,#e7e1d6 100%);border-radius:var(--radius-lg);border:1px solid rgba(184,146,62,0.25)}
+    .demo-panel{background:rgba(253,250,246,0.97);border-radius:var(--radius-lg);padding:1.5rem;border:1px solid rgba(184,146,62,0.2)}
+    .demo-panel h3{margin:0 0 0.75rem;font-size:0.72rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--text-muted);font-family:var(--font-ui)}
+    .demo-panel h3:not(:first-child){margin-top:1.5rem}
+    .sw{display:flex;flex-wrap:wrap;gap:0.7rem}
+    .sw button{width:46px;height:46px;border-radius:12px;border:2px solid transparent;cursor:pointer;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08);position:relative;transition:.15s;padding:0}
+    .sw button[aria-pressed="true"]{border-color:var(--gold);transform:translateY(-2px)}
+    .sw button span{position:absolute;left:50%;bottom:-1.15rem;transform:translateX(-50%);font-size:0.6rem;white-space:nowrap;color:var(--text-muted);font-family:var(--font-ui)}
+    .demo-note{font-size:0.78rem;color:var(--text-muted);margin:1.25rem 0 0;line-height:1.6;font-family:var(--font-ui)}
+    [slot="ar-button"]{position:absolute;bottom:14px;right:14px;background:#fff;border:1px solid rgba(85,60,35,0.18);border-radius:100px;padding:0.6rem 1.1rem;font-size:0.8rem;font-weight:600;font-family:var(--font-ui);color:var(--deep-blue);cursor:pointer;box-shadow:var(--shadow-sm)}
+    </style>
+</head>
+<body>
+<nav class="nav"><div class="nav__inner"><a href="index.html" class="nav__logo">Balay ni Bruno &amp; Co.</a><a href="insights.html" class="nav__back">&#8592; Back to Insights</a></div></nav>
+<section class="article-hero">
+  <div class="container">
+    <div class="article-meta">
+      <span class="article-cat">How We Did It</span>
+      <span class="article-date">June 2026</span>
+    </div>
+    <h1>How We Built a 3D Product Designer Customers Can Use in Their Browser</h1>
+    <p class="lead">Wooden Woodworks, a custom cabinetry maker we work with, wanted the kind of interactive design center you see on much bigger brands. So we studied exactly how those pages are built, then made our own version with free tools. You can spin the product, change the finish, and even view it in your own room. Try it further down the page.</p>
+  </div>
+</section>
+<section class="article-body">
+  <div class="container">
+<p>Wooden Woodworks, a custom cabinetry maker in Central Texas we partner with, pointed us at a competitor's website. The competitor had a slick page where a shopper could pick a product, change its colors, and see it update on screen in real time. They asked a fair question. Can we have that too, and how much does something like that cost.</p>
+
+<p>So we did what we always do. We took the page apart to see how it really works, then we figured out the simplest, most affordable way to give our client the same thing. Here is what we found and what we built.</p>
+
+<h2>What the "expensive" version actually was</h2>
+
+<p>When we looked under the hood of that competitor's design center, there was no magic and no special paid platform. It was a 3D viewer built into their store using a free, open web technology, loading 3D models of their products. The only thing they paid for was hiring an outside studio once to build the 3D models of their products. The viewer itself, the part that lets you spin the product and change colors, was free.</p>
+
+<div class="highlight-box"><p>The big takeaway: the impressive part was free. The only real cost was making the 3D models, and that is something we can do in-house.</p></div>
+
+<h2>How we built ours</h2>
+
+<p>We put the whole thing together with three free pieces. First, we modeled the product in Blender, a free 3D program used across the film and game industry. Second, we displayed it on the web with a free tool from Google called model-viewer, which handles the spinning, the lighting, and the "view in your room" feature on phones. Third, we wired up the finish and hardware options so that tapping a swatch recolors the product instantly, the same way the big competitor's page does.</p>
+
+<p>Everything runs in a normal web browser. There is no monthly software fee, no per-view charge, and nothing extra to install for the visitor. It works on a phone, a tablet, and a desktop, and it drops the product into a real room through the phone's camera, which the competitor's page could not even do.</p>
+
+<h2>The final look</h2>
+
+<p>Below is a working version of what we built, styled in our own brand. Drag to spin it, tap a finish or a hardware option to change it, and on a phone you can tap "View in your room" to place it in your space using your camera.</p>
+  </div>
+</section>
+
+<section class="demo-wrap">
+  <div class="container">
+    <div class="demo-head">
+      <span class="eyebrow">Interactive Demo</span>
+      <h2>Spin it. Style it. See it in your room.</h2>
+      <p>Built fully in-house by Balay ni Bruno &amp; Co. with free, open tools.</p>
+    </div>
+    <div class="demo-grid">
+      <div style="position:relative;">
+        <model-viewer id="mv" src="assets/3d/cabinet-demo.glb" alt="Interactive 3D product demo"
+          camera-controls auto-rotate auto-rotate-delay="3000" rotation-per-second="14deg"
+          shadow-intensity="1" shadow-softness="0.9" exposure="1.0"
+          camera-orbit="-148deg 74deg 4.2m" min-camera-orbit="auto 50deg auto" field-of-view="30deg"
+          ar ar-modes="webxr scene-viewer quick-look" touch-action="pan-y">
+          <button slot="ar-button">View in your room</button>
+        </model-viewer>
+      </div>
+      <div class="demo-panel">
+        <h3>Finish</h3>
+        <div class="sw" id="bodySw"></div>
+        <h3>Hardware</h3>
+        <div class="sw" id="handleSw"></div>
+        <p class="demo-note">This exact experience can be built for your products and placed on your website with no monthly software fees.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="article-body" style="padding-top:clamp(2.5rem,5vw,4rem);">
+  <div class="container">
+<h2>Why this matters for a business</h2>
+
+<p>A product you can see in 3D and place in your own room removes the biggest reason people hesitate on a higher-priced purchase. They can picture it before they commit. The competitor used that to look like a premium brand. Now Wooden Woodworks has the same thing, and they own it outright. No platform can raise their rates or shut the feature off.</p>
+
+<p>This is how we work. We do not hand a client a stack of subscriptions and walk away. We study what the best in their space are doing, find the honest way to build it, and give them something they own. The fact that it cost almost nothing to run is the point.</p>
+    <div class="key-takeaway">
+      <h3>Key Takeaways</h3>
+      <ul>
+        <li>The "premium" 3D design centers on big brand sites use a free, open web viewer. The cost is in making the 3D models, not the technology.</li>
+        <li>We model products in Blender (free), show them with Google's model-viewer (free), and host the file on the existing site. No app fees.</li>
+        <li>It works on phone, tablet, and desktop, and adds "view in your room" AR that many paid pages do not have.</li>
+        <li>The client owns the whole thing. No subscription can raise the price or remove the feature.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="cta-section"><div class="container"><span class="eyebrow" style="color:rgba(245,241,234,0.45);">Work with BBC</span><h2>Want a 3D designer for your products?</h2><p>If you sell something people want to picture before they buy, we can build this for you and put it on your site. Let&#8217;s talk about what it looks like for your business.</p><a href="https://calendly.com/rj-balaynibruno/bbc-strategy-call" target="_blank" rel="noopener" class="btn-gold">Book a Strategy Call &#8599;</a></div></section>
+
+<!-- bbc-related-reads -->
+<section style="background:#EDE8DF;padding:clamp(2.5rem,5vw,4rem) 0;border-top:1px solid rgba(85,60,35,0.12);">
+  <div style="max-width:860px;margin:0 auto;padding:0 2.5rem;">
+    <span style="display:block;font-family:'DM Sans',system-ui,sans-serif;font-size:0.68rem;font-weight:700;letter-spacing:0.17em;text-transform:uppercase;color:#B8923E;margin-bottom:1.2rem;">Related Reads</span>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:1rem;">
+      <a href="how-we-built-ai-video-system-free.html" style="display:block;background:#FDFAF6;border:1px solid rgba(85,60,35,0.12);border-radius:16px;padding:1.2rem 1.35rem;box-shadow:0 3px 18px rgba(85,60,35,0.06);">
+        <span style="display:block;font-family:'DM Sans',system-ui,sans-serif;font-size:0.6rem;font-weight:700;letter-spacing:0.13em;text-transform:uppercase;color:#888FA0;margin-bottom:0.45rem;">AI &amp; Automation</span>
+        <span style="display:block;font-family:'Playfair Display',Georgia,serif;font-size:1.02rem;font-weight:600;color:#1F3557;line-height:1.34;">How We Built an AI Video System for $0 Per Video</span>
+      </a>
+      <a href="how-we-help.html" style="display:block;background:#1C2E47;border:1px solid rgba(184,146,62,0.3);border-radius:16px;padding:1.2rem 1.35rem;">
+        <span style="display:block;font-family:'DM Sans',system-ui,sans-serif;font-size:0.6rem;font-weight:700;letter-spacing:0.13em;text-transform:uppercase;color:#E6CFA0;margin-bottom:0.45rem;">Work With BBC</span>
+        <span style="display:block;font-family:'Playfair Display',Georgia,serif;font-size:1.02rem;font-weight:600;color:#fff;line-height:1.34;">See How We Help &rarr;</span>
+      </a>
+    </div>
+  </div>
+</section>
+<footer class="footer"><p><a href="index.html">Balay ni Bruno &amp; Co.</a> &nbsp;&bull;&nbsp; <a href="insights.html">Insights</a> &nbsp;&bull;&nbsp; <a href="mailto:admin@balaynibruno.co">admin@balaynibruno.co</a></p><p style="margin-top:0.4rem;">&copy; 2026 Balay ni Bruno &amp; Co. All rights reserved.</p></footer>
+
+<script>
+const FINISHES = [
+  ["Warm Oak","#9e7340"],["Honey","#c79a4e"],["Tobacco","#7a5230"],["Walnut","#5b3d28"],
+  ["Espresso","#3a2a20"],["Sienna","#9c5a35"],["Linen","#ece6db"],["Slate","#3f4347"]
+];
+const HARDWARE = [
+  ["Brass","#c69a4c",0.9,0.25],["Bronze","#7d5a36",0.85,0.35],
+  ["Copper","#a55a36",0.9,0.3],["Black","#1c1c1e",0.1,0.55],["Steel","#c8c9cc",0.95,0.2]
+];
+const mv = document.getElementById('mv');
+function findMat(n){ return mv.model && mv.model.materials.find(m=>m.name===n); }
+function build(id, items, apply){
+  const box = document.getElementById(id);
+  items.forEach(([name,hex],i)=>{
+    const b=document.createElement('button'); b.style.background=hex; b.title=name;
+    b.setAttribute('aria-pressed', i===0?'true':'false');
+    const s=document.createElement('span'); s.textContent=name; b.appendChild(s);
+    b.onclick=()=>{ [...box.children].forEach(c=>c.setAttribute('aria-pressed','false'));
+      b.setAttribute('aria-pressed','true'); apply(...items[i]); };
+    box.appendChild(b);
+  });
+}
+mv.addEventListener('load',()=>{
+  build('bodySw', FINISHES, (name,hex)=>{ const m=findMat('body'); if(m) m.pbrMetallicRoughness.setBaseColorFactor(hex); });
+  build('handleSw', HARDWARE, (name,hex,metal,rough)=>{ const m=findMat('handle');
+    if(m){ m.pbrMetallicRoughness.setBaseColorFactor(hex); m.pbrMetallicRoughness.setMetallicFactor(metal); m.pbrMetallicRoughness.setRoughnessFactor(rough); } });
+});
+</script>
+</body>
+</html>
