@@ -556,8 +556,8 @@
           <p class="profile-stat-label">Core Skills</p>
         </div>
         <div class="profile-stat">
-          <p class="profile-stat-num">6</p>
-          <p class="profile-stat-label">Services Offered</p>
+          <p class="profile-stat-num">4+</p>
+          <p class="profile-stat-label">Clients Served</p>
         </div>
         <div class="profile-stat">
           <p class="profile-stat-num">Full</p>
@@ -648,10 +648,11 @@
           support.
         </p>
         <p>
-          Today, Diego works as a video editor, graphic designer, social media manager, and
-          email marketing specialist. He creates short-form content, edits video, designs
-          brand-aligned graphics, and supports email campaigns, helping brands stay consistent
-          and visible across Facebook, Instagram, and YouTube.
+          Today, Diego works as a video editor, graphic designer, content creator, and SEO
+          writer. He has produced video edits and graphics for All Ryze, branding and a DJ
+          intro video for ESE Branding Designs, blog posts and SEO for Blackbelt, and handled
+          calling, video, and design for MJ Computer. Across all of it, he keeps brands
+          consistent and visible across Facebook, Instagram, and YouTube.
         </p>
       </div>
 
@@ -664,10 +665,11 @@
             <span class="skill-tag">Social Media Management</span>
             <span class="skill-tag">Email Marketing</span>
             <span class="skill-tag">Content Creation</span>
+            <span class="skill-tag">SEO &amp; Blog Writing</span>
             <span class="skill-tag">Short-Form Video</span>
             <span class="skill-tag">Brand Consistency</span>
             <span class="skill-tag">Customer Service</span>
-            <span class="skill-tag">Sales Support</span>
+            <span class="skill-tag">Calling &amp; Sales Support</span>
             <span class="skill-tag">Virtual Assistance</span>
           </div>
 
@@ -703,7 +705,10 @@
 <div class="pis-layout fade-in">
       <aside class="pis-client-panel">
         <p class="pis-panel-title">Filter by Client</p>
-        <button class="pis-client-btn active" data-client="ese"><strong>ESE Branding Designs</strong><span>Logo design, brand video</span></button>
+        <button class="pis-client-btn active" data-client="mjcomputer"><strong>MJ Computer</strong><span>Calling, video, design</span></button>
+        <button class="pis-client-btn" data-client="allryze"><strong>All Ryze</strong><span>Video editing, graphic design</span></button>
+        <button class="pis-client-btn" data-client="blackbelt"><strong>Blackbelt</strong><span>Blog posts, SEO</span></button>
+        <button class="pis-client-btn" data-client="ese"><strong>ESE Branding Designs</strong><span>Branding, DJ Toryn L video</span></button>
       </aside>
       <div class="pis-work-area" id="pisWorkArea"></div>
     </div>
@@ -754,6 +759,12 @@
         <div class="service-icon">✍️</div>
         <p class="service-title">Content Creation</p>
         <p class="service-desc">Short-form content, scripts, captions, and creative concepts that help brands stay active and visible online.</p>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon">🔍</div>
+        <p class="service-title">SEO &amp; Blog Content</p>
+        <p class="service-desc">Blog posts and SEO-aware writing that help brands rank higher and bring in steady organic traffic over time.</p>
       </div>
 
       <div class="service-card">
@@ -977,7 +988,7 @@ document.querySelectorAll('.fade-in').forEach(el=>new IntersectionObserver(e=>{e
 const navLinks=document.querySelectorAll('.profile-nav__link');
 document.querySelectorAll('section[id]').forEach(s=>new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){navLinks.forEach(l=>l.classList.remove('active'));const a=document.querySelector(`.profile-nav__link[href="#${x.target.id}"]`);if(a)a.classList.add('active');}});},{threshold:0.3,rootMargin:'-80px 0px -60% 0px'}).observe(s));
 // ── BBC PIS v3.0 ── //
-const pisData={ese:{name:'ESE Branding Designs',url:null,site:null,role:'Graphic Designer & Video Editor',desc:'Branding and creative support for ESE Branding Designs. Diego designed the brand logo and edited an introductory brand video.',tabs:['All Work','Design','Video'],sections:[{key:'Design',name:'Logo & Branding',icon:'🎨',desc:'Logo design and brand visual support for ESE Branding Designs.',items:['Logo design','Brand visuals'],link:null},{key:'Video',name:'Brand Video',icon:'🎬',desc:'Introductory brand video edited for ESE Branding Designs.',items:['Intro video','Video editing'],link:null}]}};
+const pisData={mjcomputer:{name:'MJ Computer',url:null,site:null,role:'Caller · Video Editor · Graphic Designer',desc:'Multi-role support for MJ Computer. Diego handled outbound calling and customer communication while also producing video edits and graphic design for the brand.',tabs:['All Work','Calling','Video','Design'],sections:[{key:'Calling',name:'Calling & Customer Support',icon:'📞',desc:'Outbound calling and customer communication support.',items:['Outbound calls','Customer support','Phone communication'],link:null},{key:'Video',name:'Video Editing',icon:'🎬',desc:'Video editing and short-form content for the brand.',items:['Video editing','Short-form content','Promotional clips'],link:null},{key:'Design',name:'Graphic Design',icon:'🎨',desc:'Graphic design and branded visual assets.',items:['Graphic design','Branded visuals','Marketing graphics'],link:null}]},allryze:{name:'All Ryze',url:null,site:null,role:'Video Editor & Graphic Designer',desc:'Creative production for All Ryze, a BBC client, under Ryan Bernaldez. Diego produced video edits, graphic design, and promotional marketing assets supporting engagement and outreach campaigns.',tabs:['All Work','Video','Design'],sections:[{key:'Video',name:'Video Editing',icon:'🎬',desc:'Video editing for promotional and marketing content.',items:['Promotional videos','Short-form edits','Campaign video'],link:null},{key:'Design',name:'Graphic Design',icon:'🎨',desc:'Graphic design, promotional visuals, and marketing assets.',items:['Promotional visuals','Marketing assets','Branded graphics'],link:null}]},blackbelt:{name:'Blackbelt',url:null,site:null,role:'Blog & SEO Writer',desc:'Content and search support for Blackbelt. Diego wrote blog posts and handled SEO to improve visibility and bring in organic traffic.',tabs:['All Work','Content','SEO'],sections:[{key:'Content',name:'Blog Writing',icon:'✍️',desc:'Blog posts and written content for the brand.',items:['Blog posts','Article writing','Content drafts'],link:null},{key:'SEO',name:'SEO',icon:'🔍',desc:'On-page SEO and content optimization for organic visibility.',items:['Keyword research','On-page SEO','Content optimization'],link:null}]},ese:{name:'ESE Branding Designs',url:null,site:null,role:'Video Editor & Brand Designer',desc:'Branding and video work for ESE Branding Designs, including the ESE Podcast logo, brand graphics, and the DJ Toryn L intro video.',tabs:['All Work','Branding','Video'],sections:[{key:'Branding',name:'Logo & Branding',icon:'🎨',desc:'Logo design and brand visuals, including the ESE Podcast logo.',items:['ESE Podcast logo','Brand graphics','Visual identity'],link:null},{key:'Video',name:'DJ Toryn L Intro Video',icon:'🎬',desc:'Intro video edited for DJ Toryn L under ESE Branding Designs.',items:['DJ Toryn L intro video','Video editing','Brand video'],link:null}]}};
 function pisRender(clientKey){
   const data=pisData[clientKey];
   const area=document.getElementById('pisWorkArea');
@@ -993,7 +1004,7 @@ function pisRender(clientKey){
   }
   build();
 }
-document.querySelectorAll('.pis-client-btn').forEach(btn=>btn.addEventListener('click',()=>{document.querySelectorAll('.pis-client-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');pisRender(btn.dataset.client);}));pisRender('ese');
+document.querySelectorAll('.pis-client-btn').forEach(btn=>btn.addEventListener('click',()=>{document.querySelectorAll('.pis-client-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');pisRender(btn.dataset.client);}));pisRender('mjcomputer');
 </script>
 
   <!-- v6.0 motion stack -->
