@@ -19,7 +19,6 @@
   svg.i{width:1em;height:1em;stroke:currentColor;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;vertical-align:-0.12em;}
 
   .app{display:flex;min-height:100dvh;}
-  /* Sidebar */
   .side{width:236px;flex:none;background:var(--bg2);border-right:1px solid var(--line);position:sticky;top:0;height:100dvh;overflow-y:auto;padding:16px 0;display:flex;flex-direction:column;}
   .side .brand{display:flex;align-items:center;gap:11px;padding:0 18px 14px;border-bottom:1px solid var(--line);margin-bottom:8px;}
   .side .brand img{height:34px;}
@@ -29,14 +28,12 @@
   .navlink{display:flex;align-items:center;gap:11px;padding:10px 18px;font-size:13.5px;color:var(--muted);cursor:pointer;border-left:3px solid transparent;}
   .navlink:hover{color:var(--ink);background:rgba(94,67,41,0.04);}
   .navlink.on{color:var(--walnut);border-left-color:var(--brass);background:rgba(176,141,79,0.1);font-weight:600;}
-  .navlink.locked{opacity:.4;pointer-events:none;}
   .navlink .ic{width:18px;display:flex;justify-content:center;font-size:16px;flex:none;}
   .nav-group{font-size:9.5px;letter-spacing:1.5px;text-transform:uppercase;color:var(--soft);padding:14px 18px 5px;font-weight:700;}
   .side .role{margin:10px 14px 4px;padding:11px;background:var(--card);border:1px solid var(--line2);border-radius:11px;}
   .side .role .lbl{font-size:9.5px;letter-spacing:1px;text-transform:uppercase;color:var(--soft);margin-bottom:6px;font-weight:700;}
   .side .role select{width:100%;border:1px solid var(--line);border-radius:8px;padding:8px;font-family:var(--sans);font-size:13px;background:var(--bg2);color:var(--ink);}
 
-  /* Main */
   .main{flex:1;min-width:0;display:flex;flex-direction:column;}
   .topbar{background:var(--bg2);border-bottom:1px solid var(--line);padding:13px 24px;display:flex;align-items:center;justify-content:space-between;gap:12px;position:sticky;top:0;z-index:10;}
   .topbar .menu{display:none;background:none;border:1px solid var(--line);border-radius:9px;width:40px;height:40px;cursor:pointer;font-size:18px;}
@@ -45,35 +42,87 @@
   .sync{display:inline-flex;align-items:center;gap:7px;font-size:11.5px;color:var(--green);background:rgba(94,139,109,0.12);border:1px solid rgba(94,139,109,0.25);padding:6px 11px;border-radius:20px;font-weight:600;}
   .sync .pulse{width:7px;height:7px;border-radius:50%;background:var(--green);animation:pulse 2s infinite;}
   @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(94,139,109,.5)}70%{box-shadow:0 0 0 7px rgba(94,139,109,0)}100%{box-shadow:0 0 0 0 rgba(94,139,109,0)}}
+  .editbtn{font-size:12.5px;color:#fff;background:var(--walnut);border:none;border-radius:20px;padding:9px 15px;cursor:pointer;font-weight:600;display:inline-flex;align-items:center;gap:6px;font-family:var(--sans);}
+  .editbtn.on{background:var(--green);}
   .out{font-size:12px;color:var(--muted);border:1px solid var(--line);border-radius:20px;padding:8px 13px;background:none;cursor:pointer;}
-  .view{flex:1;padding:24px;max-width:1000px;width:100%;margin:0 auto;}
-  iframe.ownerframe{width:100%;height:calc(100dvh - 120px);border:1px solid var(--line2);border-radius:14px;background:#fff;}
+  .view{flex:1;padding:24px;max-width:1040px;width:100%;margin:0 auto;}
 
-  .vhead{margin-bottom:18px;}
+  .vhead{margin-bottom:16px;}
   .vhead h1{font-family:var(--serif);font-size:24px;font-weight:700;}
   .vhead p{color:var(--muted);font-size:14px;margin-top:3px;}
-  .stat-row{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:20px;}
+
+  /* editable text */
+  .ced{outline:none;}
+  body.editing .ced{background:rgba(176,141,79,0.10);border-radius:5px;box-shadow:inset 0 0 0 1px rgba(176,141,79,0.35);padding:1px 5px;cursor:text;}
+  body.editing .ced:focus{box-shadow:inset 0 0 0 2px var(--brass);background:#fff;}
+
+  /* block wrapper */
+  .blk{position:relative;margin-bottom:16px;}
+  .blk-bar{display:none;}
+  body.editing .blk-bar{display:flex;gap:6px;justify-content:flex-end;margin-bottom:6px;}
+  .blk-bar button{background:var(--bg2);border:1px solid var(--line);border-radius:8px;width:32px;height:32px;cursor:pointer;font-size:14px;color:var(--muted);display:inline-flex;align-items:center;justify-content:center;}
+  .blk-bar button:hover{background:#fff;color:var(--ink);border-color:var(--brass);}
+  .blk-bar button.del:hover{color:#b5483a;border-color:#b5483a;}
+
+  .card{background:var(--card);border:1px solid var(--line2);border-radius:16px;padding:20px;box-shadow:var(--shadow);}
+  .card h3{font-family:var(--serif);font-size:16px;margin-bottom:12px;display:flex;align-items:center;gap:9px;}
+  .blk-section{display:flex;align-items:center;gap:12px;margin:6px 0 2px;}
+  .blk-section .sec-t{font-family:var(--serif);font-size:13px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--brass-d);}
+  .blk-section .ln{flex:1;height:1px;background:var(--line);}
+  .note p{color:var(--text-body,#4E5666);font-size:14px;line-height:1.7;}
+
+  .stat-row{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;}
   @media(max-width:640px){.stat-row{grid-template-columns:1fr 1fr;}}
-  .stat{background:var(--card);border:1px solid var(--line2);border-radius:13px;padding:15px;text-align:center;box-shadow:var(--shadow);}
+  .stat{background:var(--card);border:1px solid var(--line2);border-radius:13px;padding:15px;text-align:center;box-shadow:var(--shadow);position:relative;}
   .stat .v{font-family:var(--serif);font-size:24px;font-weight:700;color:var(--walnut);}
   .stat .l{font-size:11px;color:var(--muted);margin-top:3px;}
-  .card{background:var(--card);border:1px solid var(--line2);border-radius:16px;padding:20px;box-shadow:var(--shadow);margin-bottom:16px;}
-  .card h3{font-family:var(--serif);font-size:16px;margin-bottom:12px;display:flex;align-items:center;gap:9px;}
+
   .chk{display:flex;align-items:center;gap:11px;padding:10px 0;border-bottom:1px solid var(--line2);font-size:14px;}
   .chk:last-child{border-bottom:none;}
-  .chk input{width:18px;height:18px;accent-color:var(--walnut);flex:none;cursor:pointer;}
+  .chk input[type=checkbox]{width:18px;height:18px;accent-color:var(--walnut);flex:none;cursor:pointer;}
   .chk.done label{text-decoration:line-through;color:var(--soft);}
-  .chk label{flex:1;}.chk .area{font-size:10px;font-weight:700;letter-spacing:.4px;text-transform:uppercase;color:var(--brass-d);background:rgba(176,141,79,0.13);padding:3px 7px;border-radius:5px;}
+  .chk label{flex:1;}
+  .chk .area{font-size:10px;font-weight:700;letter-spacing:.4px;text-transform:uppercase;color:var(--brass-d);background:rgba(176,141,79,0.13);padding:3px 7px;border-radius:5px;}
+  .xmini{background:none;border:none;color:var(--soft);font-size:16px;cursor:pointer;display:none;}
+  body.editing .xmini{display:inline;}
+  body.editing .xmini:hover{color:#b5483a;}
   .addrow{display:flex;gap:8px;margin-top:12px;}
-  .addrow input{flex:1;border:1px solid var(--line);border-radius:10px;padding:11px 12px;font-family:var(--sans);font-size:16px;background:var(--bg2);}
+  .addrow input,.addrow select{flex:1;border:1px solid var(--line);border-radius:10px;padding:11px 12px;font-family:var(--sans);font-size:16px;background:var(--bg2);min-width:0;}
+  .addrow select{flex:none;width:34%;}
   .addrow input:focus{outline:none;border-color:var(--brass);}
-  .btn{background:var(--walnut);color:#fff;border:none;border-radius:10px;padding:0 16px;font-weight:600;font-size:14px;cursor:pointer;min-height:44px;display:inline-flex;align-items:center;gap:7px;font-family:var(--sans);}
+  .btn{background:var(--walnut);color:#fff;border:none;border-radius:10px;padding:0 16px;font-weight:600;font-size:14px;cursor:pointer;min-height:44px;display:inline-flex;align-items:center;justify-content:center;gap:7px;font-family:var(--sans);}
   .btn:hover{background:var(--walnut2);}
-  .placeholder{text-align:center;padding:60px 20px;color:var(--muted);}
-  .placeholder .ic{font-size:40px;color:var(--brass);opacity:.6;}
-  .placeholder h2{font-family:var(--serif);font-size:22px;color:var(--ink);margin:14px 0 6px;}
-  .placeholder .tag{font-size:13px;background:rgba(176,141,79,0.13);color:var(--brass-d);padding:5px 12px;border-radius:20px;display:inline-block;margin-top:10px;font-weight:600;}
-  /* Calendar */
+  .btn.ghost{background:none;color:var(--walnut);border:1px solid var(--line);}
+  .btn.ghost:hover{background:var(--bg2);}
+
+  .cardgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px;}
+  .mc{background:var(--card);border:1px solid var(--line2);border-radius:13px;padding:15px;box-shadow:var(--shadow);position:relative;}
+  .mc .mt{font-weight:600;font-size:14px;}
+  .mc .mm{font-size:12.5px;color:var(--muted);margin-top:4px;line-height:1.55;}
+  .mc .mtag{display:inline-block;font-size:10px;font-weight:700;letter-spacing:.4px;text-transform:uppercase;color:var(--brass-d);background:rgba(176,141,79,0.13);padding:3px 8px;border-radius:5px;margin-top:9px;}
+  .mc .xcorner,.kcard .xcorner{position:absolute;top:7px;right:8px;}
+
+  .kanban{display:flex;gap:12px;overflow-x:auto;padding-bottom:8px;}
+  .kcol{min-width:200px;flex:1;background:var(--bg2);border:1px solid var(--line2);border-radius:12px;padding:11px;}
+  .kcol h4{font-size:11px;text-transform:uppercase;letter-spacing:.5px;color:var(--brass-d);margin-bottom:9px;display:flex;justify-content:space-between;align-items:center;gap:6px;font-family:var(--sans);}
+  .kcard{background:var(--card);border:1px solid var(--line2);border-radius:9px;padding:11px;margin-bottom:8px;box-shadow:var(--shadow);position:relative;}
+  .kcard .kt{font-weight:600;font-size:13px;}
+  .kcard .km{font-size:11.5px;color:var(--muted);margin-top:3px;}
+  .kadd{width:100%;background:none;border:1px dashed var(--line);color:var(--muted);border-radius:8px;padding:8px;font-size:12px;cursor:pointer;}
+
+  table.tbl{width:100%;border-collapse:collapse;font-size:13.5px;}
+  table.tbl th,table.tbl td{text-align:left;padding:10px 10px;border-bottom:1px solid var(--line2);}
+  table.tbl th{font-size:11px;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);font-weight:700;}
+  table.tbl tr:last-child td{border-bottom:none;}
+  .tbl-wrap{overflow-x:auto;}
+
+  .links a{display:flex;align-items:center;gap:10px;padding:11px 13px;border:1px solid var(--line2);border-radius:11px;margin-bottom:8px;color:var(--walnut);font-weight:600;font-size:14px;background:var(--bg2);}
+  .links a:hover{border-color:var(--brass);}
+  .links .lkrow{display:flex;align-items:center;gap:8px;}
+
+  iframe.embed{width:100%;height:560px;border:1px solid var(--line2);border-radius:14px;background:#fff;}
+
+  /* calendar */
   .cal{background:var(--card);border:1px solid var(--line2);border-radius:14px;overflow:hidden;box-shadow:var(--shadow);}
   .cal-hd,.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);}
   .cal-hd{background:var(--bg2);border-bottom:1px solid var(--line);}
@@ -87,12 +136,15 @@
   .leg{display:flex;gap:14px;flex-wrap:wrap;margin-top:14px;font-size:12px;color:var(--muted);}
   .leg span{display:inline-flex;align-items:center;gap:6px;}.leg i{width:11px;height:11px;border-radius:3px;}
   @media(max-width:640px){.cal-cell{min-height:62px;padding:4px;}.cpost{font-size:9px;}}
-  /* Kanban */
-  .kanban{display:flex;gap:12px;overflow-x:auto;padding-bottom:8px;}
-  .kcol{min-width:190px;flex:1;background:var(--bg2);border:1px solid var(--line2);border-radius:12px;padding:11px;}
-  .kcol h4{font-size:11px;text-transform:uppercase;letter-spacing:.5px;color:var(--brass-d);margin-bottom:9px;display:flex;justify-content:space-between;font-family:var(--sans);}
-  .kcard{background:var(--card);border:1px solid var(--line2);border-radius:9px;padding:11px;margin-bottom:8px;box-shadow:var(--shadow);}
-  .kcard .kt{font-weight:600;font-size:13px;}.kcard .km{font-size:11.5px;color:var(--muted);margin-top:3px;}
+
+  /* add-block tray */
+  .addblock{margin-top:6px;text-align:center;display:none;}
+  body.editing .addblock{display:block;}
+  .addblock .open{background:none;border:1.5px dashed var(--brass);color:var(--brass-d);border-radius:12px;padding:13px 20px;font-weight:600;font-size:14px;cursor:pointer;width:100%;}
+  .tray{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:10px;}
+  .tray button{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:9px 13px;font-size:12.5px;cursor:pointer;color:var(--ink);}
+  .tray button:hover{border-color:var(--brass);background:var(--bg2);}
+
   .scrim2{position:fixed;inset:0;background:rgba(43,39,35,.4);z-index:30;display:none;}
   @media(max-width:860px){
     .side{position:fixed;left:0;top:0;z-index:31;transform:translateX(-100%);transition:transform .25s;}
@@ -100,7 +152,6 @@
     .scrim2.open{display:block;}
     .topbar .menu{display:block;}
   }
-  /* Woody */
   .woody-fab{position:fixed;bottom:18px;right:18px;z-index:25;background:var(--walnut);color:#fff;border:none;border-radius:30px;padding:12px 17px;font-weight:700;font-size:14px;cursor:pointer;box-shadow:0 10px 30px rgba(94,67,41,0.4);display:flex;align-items:center;gap:9px;}
   .woody-fab .av{width:24px;height:24px;border-radius:50%;background:var(--brass);display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-weight:700;font-size:13px;}
 </style>
@@ -118,7 +169,6 @@
   <symbol id="ic-check2" viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></symbol>
   <symbol id="ic-palette" viewBox="0 0 24 24"><path d="M12 3a9 9 0 1 0 0 18c1 0 1.5-.8 1.5-1.5 0-1.6 1-2.5 2.5-2.5h1A4 4 0 0 0 21 13c0-5-4-10-9-10z"/></symbol>
   <symbol id="ic-owner" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></symbol>
-  <symbol id="ic-send" viewBox="0 0 24 24"><path d="M4 12l16-7-7 16-2-7z"/></symbol>
   <symbol id="ic-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
 </defs></svg>
 
@@ -132,7 +182,7 @@
   <div class="main">
     <div class="topbar">
       <div style="display:flex;align-items:center;gap:12px"><button class="menu" onclick="toggleSide()">&#9776;</button><span class="ptitle" id="ptitle">Home</span></div>
-      <div class="right"><span class="sync"><span class="pulse"></span>Synced</span><button class="out">Sign out</button></div>
+      <div class="right"><span class="sync"><span class="pulse"></span>Synced</span><button class="editbtn" id="editbtn" onclick="toggleEdit()"><svg class="i"><use href="#ic-palette"/></svg>Customize</button></div>
     </div>
     <div class="view" id="view"></div>
   </div>
@@ -141,11 +191,12 @@
 
 <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
 <script>
-var notyf;try{notyf=new Notyf({duration:2200,position:{x:'center',y:'top'},types:[{type:'success',background:'#5E4329'}]});}catch(e){}
+var notyf;try{notyf=new Notyf({duration:2000,position:{x:'center',y:'top'},types:[{type:'success',background:'#5E4329'}]});}catch(e){}
 function toast(m){if(notyf)notyf.success(m);}
 function ic(id){return '<svg class="i"><use href="#'+id+'"/></svg>';}
+function esc(s){return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+function uid(){return 'b'+Date.now().toString(36)+Math.floor(Math.random()*1e4).toString(36);}
 
-/* pages: who can see them. owners only get 'owners'. */
 var PAGES=[
   {id:'home',name:'Home',icon:'ic-home',group:'Krizza'},
   {id:'owners',name:'Owners Dashboard',icon:'ic-owner',group:'Krizza',owner:true},
@@ -160,83 +211,277 @@ var PAGES=[
   {id:'brand',name:'Brand & Assets',icon:'ic-palette',group:'Ops'},
   {id:'team',name:'Team',icon:'ic-people',group:'Ops'}
 ];
-var ROLE='krizza';
-var krizzaTasks=[
-  {t:'Draft 4 reels for this week',a:'Content',done:false},
-  {t:'Publish 2 Google Business posts',a:'SEO',done:false},
-  {t:'Follow up new builder lead in HubSpot',a:'Leads',done:true},
-  {t:'Schedule the Salado kitchen walkthrough',a:'Social',done:false},
-  {t:'Upload Whitman project photos to Houzz',a:'Houzz',done:false},
-  {t:'Send monthly report to Oscar & Marla',a:'Ops',done:false},
-  {t:'Review owner-submitted content drops',a:'Content',done:false}
-];
+var ROLE='krizza',CUR='home',EDIT=false;
+var STORE_KEY='ww_cc_blocks_v1';
 
+/* ---------- default content (editable seeds, sample data) ---------- */
+function B(type,title,data){return {id:uid(),type:type,title:title,data:data};}
+function defaults(){return {
+  home:[
+    B('section','',{text:'Today'}),
+    B('stats','',{tiles:[{v:'5',l:'Open tasks'},{v:'4',l:'Active projects'},{v:'2',l:'Awaiting approval'},{v:'1',l:'New owner request'}]}),
+    B('checklist','My tasks',{items:[
+      {t:'Draft 4 reels for this week',a:'Content',done:false},
+      {t:'Publish 2 Google Business posts',a:'SEO',done:false},
+      {t:'Follow up new builder lead',a:'Leads',done:true},
+      {t:'Schedule the Salado kitchen walkthrough',a:'Social',done:false},
+      {t:'Upload project photos to Houzz',a:'Houzz',done:false},
+      {t:'Send monthly report to Oscar & Marla',a:'Ops',done:false}
+    ]}),
+    B('cards','From the owners',{items:[
+      {title:'Owner request',meta:'Add a showroom page to the website.',tag:'New'},
+      {title:'Owner note',meta:'Hold the Austin reel until the client approves the final photos.',tag:'Note'}
+    ]}),
+    B('note','',{text:'Owner edits and requests land here automatically. Make them official, then it syncs back to their dashboard.'})
+  ],
+  owners:[
+    B('embed','Owners dashboard (live mirror)',{url:'_ww-owner-preview.html?embed=1',height:620}),
+    B('note','',{text:'This is exactly what Oscar and Marla see and edit. Their changes show up on your Home page.'})
+  ],
+  projects:[
+    B('stats','',{tiles:[{v:'4',l:'Active'},{v:'1',l:'In finishing'},{v:'1',l:'Installing'},{v:'12',l:'Completed'}]}),
+    B('kanban','Project pipeline',{cols:[
+      {name:'Design',cards:[{t:'Frameless kitchen',m:'Salado, drawings in review'}]},
+      {name:'Building',cards:[{t:'Master bath vanity',m:'Waco'},{t:'Built-in office wall',m:'Austin'}]},
+      {name:'Finishing',cards:[{t:'Pantry + mudroom',m:'In the spray booth'}]},
+      {name:'Installing',cards:[{t:'Kitchen island',m:'Belton'}]},
+      {name:'Complete',cards:[{t:'Library shelving',m:'Temple, signed off'}]}
+    ]}),
+    B('note','',{text:'Click Customize to add a project, move it across stages, or add photos and notes per project.'})
+  ],
+  clients:[
+    B('cards','Clients',{items:[
+      {title:'Custom home builder',meta:'Repeat builder. 3 kitchens this year.',tag:'Builder'},
+      {title:'Interior designer',meta:'Specs WW for high-end remodels.',tag:'Designer'},
+      {title:'Homeowner, Salado',meta:'Frameless kitchen in progress.',tag:'Homeowner'},
+      {title:'Homeowner, Austin',meta:'Built-in office, install scheduled.',tag:'Homeowner'}
+    ]}),
+    B('note','',{text:'Add each client as a card. Keep their contact, the projects you have done, and notes in one place.'})
+  ],
+  reels:[
+    B('kanban','Reels workflow',{cols:[
+      {name:'Ideas',cards:[{t:'Hidden features: soft-close',m:'From a brand pillar'},{t:'Showroom build update',m:'Document the progress'}]},
+      {name:'Scripting',cards:[{t:'Walk-through: Salado kitchen',m:'Voiceover'}]},
+      {name:'Filming',cards:[{t:'Finishing process',m:'Margie in the spray booth'}]},
+      {name:'Editing',cards:[{t:'Austin office reveal',m:'Captions added'}]},
+      {name:'Approval',cards:[{t:'Frameless vs face-frame',m:'Waiting on Marla'}]},
+      {name:'Posted',cards:[{t:'90-day milestone',m:'IG + TikTok'}]}
+    ]}),
+    B('note','',{text:'Walk-throughs are WW’s top content. Drag an idea all the way to Posted.'})
+  ],
+  social:[
+    B('calendar','June 2026',{today:5,posts:{
+      3:[{t:'Reel: island reveal',plat:'ig'}],
+      5:[{t:'Carousel: 3 finishes',plat:'fb'},{t:'GBP: new photos',plat:'gbp'}],
+      9:[{t:'Reel: shop tour',plat:'tt'}],
+      12:[{t:'Carousel: frameless vs face-frame',plat:'ig'}],
+      14:[{t:'Reel: 90-day milestone',plat:'ig'}],
+      17:[{t:'GBP post',plat:'gbp'}],
+      20:[{t:'Walk-through: Austin office',plat:'yt'}],
+      24:[{t:'Reel: finishing process',plat:'tt'}],
+      27:[{t:'Carousel: showroom progress',plat:'fb'}]
+    }}),
+    B('note','',{text:'In Customize mode, tap any day to add a post and tap a post to edit or remove it.'})
+  ],
+  houzz:[
+    B('stats','',{tiles:[{v:'—',l:'Profile views'},{v:'—',l:'Ideabook saves'},{v:'—',l:'Houzz leads'},{v:'—',l:'Reviews'}]}),
+    B('links','Houzz profile',{items:[{label:'View Wooden Woodworks on Houzz',url:'https://www.houzz.com/pro/webuser-882207478/wooden-woodworks-llc-custom-kitchen-cabinets'}]}),
+    B('checklist','Projects to upload to Houzz',{items:[
+      {t:'Built-in office wall, Austin',a:'Ready',done:false},
+      {t:'Master bath vanity, Waco',a:'Photos',done:false},
+      {t:'Frameless kitchen, Salado',a:'After install',done:false}
+    ]}),
+    B('note','',{text:'New Houzz inquiries appear here when the connection is live. Respond within 24 hours, Houzz rewards fast responders.'})
+  ],
+  leads:[
+    B('stats','',{tiles:[{v:'6',l:'Open leads'},{v:'2',l:'Estimates out'},{v:'1',l:'Won this month'},{v:'—',l:'Pipeline value'}]}),
+    B('table','Builder pipeline',{cols:['Lead','Stage','Next step'],rows:[
+      ['Builder inquiry, Georgetown','New','Send intro + portfolio'],
+      ['Designer remodel, Austin','Estimate','Follow up on quote'],
+      ['Homeowner, Belton','Won','Schedule kickoff']
+    ]}),
+    B('note','',{text:'No lead goes cold. Log each one, set the next step, and follow up on time.'})
+  ],
+  seo:[
+    B('stats','',{tiles:[{v:'—',l:'Local rank'},{v:'4',l:'GBP posts / mo'},{v:'—',l:'New reviews'},{v:'—',l:'Calls from search'}]}),
+    B('checklist','This month',{items:[
+      {t:'4 Google Business posts',a:'GBP',done:false},
+      {t:'Ask 3 happy clients for a review',a:'Reviews',done:false},
+      {t:'Refresh service area keywords',a:'SEO',done:false}
+    ]}),
+    B('links','Quick links',{items:[
+      {label:'Google Business Profile',url:'https://business.google.com/'},
+      {label:'Google Search Console',url:'https://search.google.com/search-console'}
+    ]}),
+    B('note','',{text:'Central Texas local search is where WW gets found. Steady GBP posts and reviews move the needle.'})
+  ],
+  approvals:[
+    B('checklist','Approval queue',{items:[
+      {t:'Frameless vs face-frame reel',a:'Reel',done:false},
+      {t:'Showroom progress carousel',a:'Graphic',done:false},
+      {t:'June monthly report',a:'Report',done:false}
+    ]}),
+    B('note','',{text:'This is the work you OK before it reaches Oscar and Marla. Approve it here and it moves forward.'})
+  ],
+  brand:[
+    B('cards','Brand at a glance',{items:[
+      {title:'Voice',meta:'Warm, honest, expert. No hype. Speak like a trusted craftsman.',tag:'Tone'},
+      {title:'Tagline',meta:'Crafted for the way you live.',tag:'Line'},
+      {title:'Differentiator',meta:'In-house finishing. Full control of quality, start to finish.',tag:'Edge'}
+    ]}),
+    B('links','Brand assets',{items:[{label:'WW brand guide',url:'#'},{label:'Logo files',url:'#'}]}),
+    B('note','',{text:'Keep every post and page on-brand. When in doubt, warm and honest beats clever.'})
+  ],
+  team:[
+    B('cards','Wooden Woodworks team',{items:[
+      {title:'Oscar & Marla',meta:'Owners. Veteran-owned shop in Salado, Texas.',tag:'Owners'},
+      {title:'Margie',meta:'Finishing. The in-house finish that sets WW apart.',tag:'Finishing'},
+      {title:'Thomas',meta:'Build team.',tag:'Build'},
+      {title:'Lonnie & Elio',meta:'Build team, newest members.',tag:'Build'},
+      {title:'Pablo',meta:'Shop.',tag:'Shop'}
+    ]}),
+    B('cards','BBC team on the account',{items:[
+      {title:'Krizza',meta:'Account manager. Social, content, leads, and reporting.',tag:'BBC'}
+    ]}),
+    B('note','',{text:'Add monthly reports and team notes here.'})
+  ]
+};}
+
+/* ---------- store ---------- */
+var DB;
+function load(){try{var s=localStorage.getItem(STORE_KEY);if(s){var p=JSON.parse(s);if(p&&p.home)return p;}}catch(e){}return defaults();}
+function save(){try{localStorage.setItem(STORE_KEY,JSON.stringify(DB));}catch(e){}}
+DB=load();
+function pageBlocks(){return DB[CUR]||(DB[CUR]=[]);}
+function findBlock(id){return pageBlocks().find(function(b){return b.id===id;});}
+
+/* path get/set for inline edits */
+function setPath(o,path,val){var ks=path.split('.');var c=o;for(var i=0;i<ks.length-1;i++)c=c[ks[i]];c[ks[ks.length-1]]=val;}
+function edText(el){var b=findBlock(el.dataset.bid);if(!b)return;setPath(b,el.dataset.k,el.innerText.trim());save();}
+function ce(b,k,v,tag,cls){tag=tag||'span';cls=cls||'';return '<'+tag+' class="ced '+cls+'"'+(EDIT?' contenteditable="true"':'')+' data-bid="'+b.id+'" data-k="'+k+'" onblur="edText(this)">'+esc(v)+'</'+tag+'>';}
+
+/* ---------- block renderers ---------- */
+var R={
+  section:function(b){return '<div class="blk-section">'+ce(b,'data.text',b.data.text,'span','sec-t')+'<span class="ln"></span></div>';},
+  note:function(b){return '<div class="card note">'+ce(b,'data.text',b.data.text,'p','')+'</div>';},
+  stats:function(b){
+    var t=b.data.tiles.map(function(x,i){return '<div class="stat">'+(EDIT?'<button class="xmini" style="position:absolute;top:4px;right:7px" onclick="delItem(\''+b.id+'\',\'tiles\','+i+')">&times;</button>':'')+'<div class="v">'+ce(b,'data.tiles.'+i+'.v',x.v,'span','')+'</div><div class="l">'+ce(b,'data.tiles.'+i+'.l',x.l,'span','')+'</div></div>';}).join('');
+    return '<div class="stat-row">'+t+'</div>'+(EDIT?'<div style="text-align:center;margin-top:10px"><button class="btn ghost" onclick="addTile(\''+b.id+'\')">'+ic('ic-plus')+' Add tile</button></div>':'');
+  },
+  checklist:function(b){
+    var rows=b.data.items.map(function(x,i){return '<div class="chk '+(x.done?'done':'')+'"><input type="checkbox" '+(x.done?'checked':'')+' onchange="toggleChk(\''+b.id+'\','+i+',this.checked)"><label>'+ce(b,'data.items.'+i+'.t',x.t,'span','')+'</label>'+(x.a?'<span class="area">'+ce(b,'data.items.'+i+'.a',x.a,'span','')+'</span>':'')+'<button class="xmini" onclick="delItem(\''+b.id+'\',\'items\','+i+')">&times;</button></div>';}).join('');
+    return '<div class="card"><h3>'+ic('ic-check2')+ce(b,'title',b.title,'span','')+'</h3>'+rows+'<div class="addrow"><input id="ci_'+b.id+'" placeholder="Add an item..." onkeydown="if(event.key===\'Enter\')addChk(\''+b.id+'\')"><button class="btn" onclick="addChk(\''+b.id+'\')">'+ic('ic-plus')+'</button></div></div>';
+  },
+  cards:function(b){
+    var c=b.data.items.map(function(x,i){return '<div class="mc">'+(EDIT?'<button class="xmini xcorner" onclick="delItem(\''+b.id+'\',\'items\','+i+')">&times;</button>':'')+'<div class="mt">'+ce(b,'data.items.'+i+'.title',x.title,'span','')+'</div><div class="mm">'+ce(b,'data.items.'+i+'.meta',x.meta,'span','')+'</div>'+(x.tag!=null?'<span class="mtag">'+ce(b,'data.items.'+i+'.tag',x.tag,'span','')+'</span>':'')+'</div>';}).join('');
+    return '<div class="card"><h3>'+ic('ic-briefcase')+ce(b,'title',b.title,'span','')+'</h3><div class="cardgrid">'+c+'</div>'+(EDIT?'<div style="margin-top:12px"><button class="btn ghost" onclick="addCard(\''+b.id+'\')">'+ic('ic-plus')+' Add card</button></div>':'')+'</div>';
+  },
+  kanban:function(b){
+    var cols=b.data.cols.map(function(col,ci){
+      var cards=col.cards.map(function(c,xi){return '<div class="kcard">'+(EDIT?'<button class="xmini xcorner" onclick="delKCard(\''+b.id+'\','+ci+','+xi+')">&times;</button>':'')+'<div class="kt">'+ce(b,'data.cols.'+ci+'.cards.'+xi+'.t',c.t,'span','')+'</div><div class="km">'+ce(b,'data.cols.'+ci+'.cards.'+xi+'.m',c.m,'span','')+'</div></div>';}).join('');
+      return '<div class="kcol"><h4>'+ce(b,'data.cols.'+ci+'.name',col.name,'span','')+'<span>'+col.cards.length+'</span></h4>'+cards+'<button class="kadd" onclick="addKCard(\''+b.id+'\','+ci+')">'+ic('ic-plus')+' Add</button></div>';
+    }).join('');
+    return '<div class="card"><h3>'+ic('ic-film')+ce(b,'title',b.title,'span','')+'</h3><div class="kanban">'+cols+'</div>'+(EDIT?'<div style="margin-top:12px"><button class="btn ghost" onclick="addKCol(\''+b.id+'\')">'+ic('ic-plus')+' Add column</button></div>':'')+'</div>';
+  },
+  table:function(b){
+    var head='<tr>'+b.data.cols.map(function(c,ci){return '<th>'+ce(b,'data.cols.'+ci,c,'span','')+'</th>';}).join('')+(EDIT?'<th></th>':'')+'</tr>';
+    var rows=b.data.rows.map(function(row,ri){return '<tr>'+row.map(function(cell,ci){return '<td>'+ce(b,'data.rows.'+ri+'.'+ci,cell,'span','')+'</td>';}).join('')+(EDIT?'<td><button class="xmini" onclick="delRow(\''+b.id+'\','+ri+')">&times;</button></td>':'')+'</tr>';}).join('');
+    return '<div class="card"><h3>'+ic('ic-search')+ce(b,'title',b.title,'span','')+'</h3><div class="tbl-wrap"><table class="tbl"><thead>'+head+'</thead><tbody>'+rows+'</tbody></table></div>'+(EDIT?'<div style="margin-top:12px;display:flex;gap:8px"><button class="btn ghost" onclick="addRow(\''+b.id+'\')">'+ic('ic-plus')+' Row</button><button class="btn ghost" onclick="addCol(\''+b.id+'\')">'+ic('ic-plus')+' Column</button></div>':'')+'</div>';
+  },
+  links:function(b){
+    var rows=b.data.items.map(function(x,i){
+      if(EDIT)return '<div class="lkrow" style="margin-bottom:8px"><div style="flex:1;border:1px solid var(--line2);border-radius:11px;padding:9px 12px;background:var(--bg2)"><div>'+ce(b,'data.items.'+i+'.label',x.label,'span','')+'</div><div style="font-size:12px;color:var(--muted)">'+ce(b,'data.items.'+i+'.url',x.url,'span','')+'</div></div><button class="xmini" style="display:inline" onclick="delItem(\''+b.id+'\',\'items\','+i+')">&times;</button></div>';
+      return '<a href="'+esc(x.url)+'" target="_blank" rel="noopener">'+ic('ic-houzz')+esc(x.label)+'</a>';
+    }).join('');
+    return '<div class="card links"><h3>'+ic('ic-search')+ce(b,'title',b.title,'span','')+'</h3>'+rows+(EDIT?'<div style="margin-top:6px"><button class="btn ghost" onclick="addLink(\''+b.id+'\')">'+ic('ic-plus')+' Add link</button></div>':'')+'</div>';
+  },
+  calendar:function(b){
+    var posts=b.data.posts||{},today=b.data.today||0,first=1;
+    var cells='';for(var i=0;i<first;i++)cells+='<div class="cal-cell dim"></div>';
+    for(var d=1;d<=30;d++){
+      var ps=(posts[d]||[]).map(function(p,pi){return '<div class="cpost '+p.plat+'" onclick="'+(EDIT?'editPost(\''+b.id+'\','+d+','+pi+')':'toast(\''+esc(p.t).replace(/'/g,'')+'\')')+'">'+esc(p.t)+'</div>';}).join('');
+      cells+='<div class="cal-cell '+(d===today?'today':'')+'" '+(EDIT?'onclick="if(event.target.classList.contains(\'cal-cell\')||event.target.classList.contains(\'dn\'))addPost(\''+b.id+'\','+d+')"':'')+'><div class="dn">'+d+'</div>'+ps+'</div>';
+    }
+    var total=Math.ceil((first+30)/7)*7;for(var t=first+30;t<total;t++)cells+='<div class="cal-cell dim"></div>';
+    return '<div class="card" style="padding:0;overflow:visible"><div style="padding:16px 18px 0;display:flex;justify-content:space-between;align-items:center"><h3 style="margin:0">'+ic('ic-calendar')+ce(b,'title',b.title,'span','')+'</h3></div><div style="padding:14px 16px 18px"><div class="cal"><div class="cal-hd"><div>Sun</div><div>Mon</div><div>Tue</div><div>Wed</div><div>Thu</div><div>Fri</div><div>Sat</div></div><div class="cal-grid">'+cells+'</div></div><div class="leg"><span><i style="background:#C13584"></i> Instagram</span><span><i style="background:#4267B2"></i> Facebook</span><span><i style="background:#222"></i> TikTok</span><span><i style="background:#C4302B"></i> YouTube</span><span><i style="background:#4285F4"></i> Google Profile</span></div></div></div>';
+  },
+  embed:function(b){
+    return '<div class="card" style="padding:14px"><h3>'+ic('ic-owner')+ce(b,'title',b.title,'span','')+'</h3>'+(EDIT?'<div class="addrow" style="margin:0 0 10px"><input value="'+esc(b.data.url)+'" onblur="setEmbed(\''+b.id+'\',this.value)" placeholder="URL to embed"></div>':'')+'<iframe class="embed" src="'+esc(b.data.url)+'" style="height:'+(b.data.height||560)+'px"></iframe></div>';
+  }
+};
+
+/* ---------- render ---------- */
 function setRole(r){ROLE=r;renderNav();var first=ROLE==='owner'?'owners':'home';go(first);if(window.innerWidth<=860&&document.getElementById('side').classList.contains('open'))toggleSide();}
 function renderNav(){
   var groups={},nav=document.getElementById('nav');
-  var visible=PAGES.filter(p=>ROLE==='owner'?p.owner:true);
-  visible.forEach(p=>{(groups[p.group]=groups[p.group]||[]).push(p);});
-  nav.innerHTML=Object.keys(groups).map(g=>`<div class="nav-group">${g}</div>`+groups[g].map(p=>`<div class="navlink" data-id="${p.id}" onclick="go('${p.id}')"><span class="ic">${ic(p.icon)}</span>${p.name}</div>`).join('')).join('');
+  var visible=PAGES.filter(function(p){return ROLE==='owner'?p.owner:true;});
+  visible.forEach(function(p){(groups[p.group]=groups[p.group]||[]).push(p);});
+  nav.innerHTML=Object.keys(groups).map(function(g){return '<div class="nav-group">'+g+'</div>'+groups[g].map(function(p){return '<div class="navlink" data-id="'+p.id+'" onclick="go(\''+p.id+'\')"><span class="ic">'+ic(p.icon)+'</span>'+p.name+'</div>';}).join('');}).join('');
 }
 function go(id){
-  document.querySelectorAll('.navlink').forEach(n=>n.classList.toggle('on',n.dataset.id===id));
-  var p=PAGES.find(x=>x.id===id);
+  CUR=id;
+  document.querySelectorAll('.navlink').forEach(function(n){n.classList.toggle('on',n.dataset.id===id);});
+  var p=PAGES.find(function(x){return x.id===id;});
   document.getElementById('ptitle').textContent=p?p.name:'Home';
-  document.getElementById('view').innerHTML=(views[id]||views.placeholder)(id);
-  document.querySelector('.main').scrollTop=0;window.scrollTo(0,0);
+  render();
+  window.scrollTo(0,0);
 }
+function render(){
+  var p=PAGES.find(function(x){return x.id===CUR;})||{name:''};
+  var blocks=pageBlocks();
+  var html='<div class="vhead"><h1>'+p.name+'</h1></div>';
+  html+=blocks.map(function(b,i){
+    var bar=EDIT?'<div class="blk-bar"><button onclick="moveBlk(\''+b.id+'\',-1)" title="Move up">&#8593;</button><button onclick="moveBlk(\''+b.id+'\',1)" title="Move down">&#8595;</button><button class="del" onclick="delBlk(\''+b.id+'\')" title="Delete">&times;</button></div>':'';
+    return '<div class="blk">'+bar+(R[b.type]?R[b.type](b):'')+'</div>';
+  }).join('');
+  html+='<div class="addblock"><button class="open" onclick="toggleTray()">'+ic('ic-plus')+' Add a block</button><div class="tray" id="tray" style="display:none">'
+    +'<button onclick="addBlk(\'section\')">Section title</button>'
+    +'<button onclick="addBlk(\'note\')">Text note</button>'
+    +'<button onclick="addBlk(\'checklist\')">Checklist</button>'
+    +'<button onclick="addBlk(\'stats\')">Stat tiles</button>'
+    +'<button onclick="addBlk(\'cards\')">Cards</button>'
+    +'<button onclick="addBlk(\'kanban\')">Kanban board</button>'
+    +'<button onclick="addBlk(\'table\')">Table</button>'
+    +'<button onclick="addBlk(\'links\')">Links</button>'
+    +'<button onclick="addBlk(\'calendar\')">Calendar</button>'
+    +'<button onclick="addBlk(\'embed\')">Embed</button>'
+    +'</div></div>';
+  if(EDIT)html+='<div style="text-align:center;margin-top:18px"><button class="btn ghost" onclick="resetPage()">Reset this page to default</button></div>';
+  document.getElementById('view').innerHTML=html;
+}
+function toggleTray(){var t=document.getElementById('tray');t.style.display=t.style.display==='none'?'flex':'none';}
+function toggleEdit(){EDIT=!EDIT;document.body.classList.toggle('editing',EDIT);var b=document.getElementById('editbtn');b.classList.toggle('on',EDIT);b.innerHTML=EDIT?ic('ic-check2')+'Done':'<svg class="i"><use href="#ic-palette"/></svg>Customize';render();toast(EDIT?'Customize mode on':'Saved');}
 function toggleSide(){document.getElementById('side').classList.toggle('open');document.getElementById('scrim2').classList.toggle('open');}
 
-var views={
-  home:function(){
-    var done=krizzaTasks.filter(t=>t.done).length;
-    return `<div class="vhead"><h1>Welcome back, Krizza</h1><p>Your Wooden Woodworks command center. Here is everything on your plate today.</p></div>
-    <div class="stat-row">
-      <div class="stat"><div class="v">${krizzaTasks.length-done}</div><div class="l">Open tasks</div></div>
-      <div class="stat"><div class="v">4</div><div class="l">Active projects</div></div>
-      <div class="stat"><div class="v">2</div><div class="l">Awaiting approval</div></div>
-      <div class="stat"><div class="v">1</div><div class="l">New owner request</div></div>
-    </div>
-    <div class="card"><h3>${ic('ic-check2')} My tasks</h3><div id="ktasks">${krizzaTasks.map((t,i)=>`<div class="chk ${t.done?'done':''}"><input type="checkbox" ${t.done?'checked':''} onchange="krizzaTasks[${i}].done=this.checked;go('home');toast('Updated')"><label>${t.t}</label><span class="area">${t.a}</span></div>`).join('')}</div>
-      <div class="addrow"><input id="ktask" placeholder="Add a task..."><button class="btn" onclick="addKT()">${ic('ic-plus')} Add</button></div></div>
-    <div class="card"><h3>${ic('ic-owner')} From the owners</h3>
-      <div class="chk"><span class="area">New</span><label>Oscar &amp; Marla requested: "Add a showroom page to the website"</label></div>
-      <div class="chk"><span class="area">Note</span><label>"Hold the Austin reel until the client approves the final photos."</label></div>
-      <p style="color:var(--muted);font-size:13px;margin-top:10px">Owner edits and requests land here automatically. Make them official, then it syncs back to their dashboard.</p>
-    </div>`;
-  },
-  owners:function(){return `<div class="vhead"><h1>Owners Dashboard</h1><p>What Oscar &amp; Marla see and edit. Their changes flow to you here.</p></div><iframe class="ownerframe" src="_ww-owner-preview.html?embed=1"></iframe>`;},
-  social:function(){
-    var posts={3:[['Reel: island reveal','ig']],5:[['Carousel: 3 finishes','fb'],['GBP: new photos','gbp']],9:[['Reel: shop tour','tt']],12:[['Carousel: frameless vs face-frame','ig']],14:[['Reel: 90-day milestone','ig']],17:[['GBP post','gbp']],20:[['Walk-through: Austin office','yt']],24:[['Reel: finishing process','tt']],27:[['Carousel: showroom progress','fb']]};
-    var first=1,cells='';
-    for(var i=0;i<first;i++)cells+='<div class="cal-cell dim"></div>';
-    for(var d=1;d<=30;d++){var ps=(posts[d]||[]).map(p=>`<div class="cpost ${p[1]}" onclick="toast('${p[0].replace(/'/g,'')}')">${p[0]}</div>`).join('');cells+=`<div class="cal-cell ${d===5?'today':''}"><div class="dn">${d}</div>${ps}</div>`;}
-    var total=Math.ceil((first+30)/7)*7;for(var t=first+30;t<total;t++)cells+='<div class="cal-cell dim"></div>';
-    return `<div class="vhead"><h1>Social Calendar</h1><p>Content across Instagram, Facebook, TikTok, and YouTube.</p></div>
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px"><b style="font-family:var(--serif);font-size:18px">June 2026</b><button class="btn" onclick="toast('Opening the content composer')">${ic('ic-plus')} Add content</button></div>
-    <div class="cal"><div class="cal-hd"><div>Sun</div><div>Mon</div><div>Tue</div><div>Wed</div><div>Thu</div><div>Fri</div><div>Sat</div></div><div class="cal-grid">${cells}</div></div>
-    <div class="leg"><span><i style="background:#C13584"></i> Instagram</span><span><i style="background:#4267B2"></i> Facebook</span><span><i style="background:#222"></i> TikTok</span><span><i style="background:#C4302B"></i> YouTube</span><span><i style="background:#4285F4"></i> Google Profile</span></div>`;
-  },
-  reels:function(){
-    var stages=[['Ideas',[['Hidden Features: soft-close','From brand pillar'],['Showroom build update','Document the progress']]],['Scripting',[['Walk-through: Salado kitchen','Tre voiceover']]],['Filming',[['Finishing process','Margie in the spray booth']]],['Editing',[['Austin office reveal','CapCut + captions']]],['Approval',[['Frameless vs face-frame','Waiting on Marla']]],['Posted',[['90-day milestone','IG + TikTok']]]];
-    return `<div class="vhead"><h1>Reels Workflow</h1><p>Walk-throughs are WW's top content. Idea to posted, one board.</p></div>
-    <div style="margin-bottom:12px"><button class="btn" onclick="toast('New reel idea added')">${ic('ic-plus')} New reel</button></div>
-    <div class="kanban">${stages.map(s=>`<div class="kcol"><h4>${s[0]} <span>${s[1].length}</span></h4>${s[1].map(c=>`<div class="kcard"><div class="kt">${c[0]}</div><div class="km">${c[1]}</div></div>`).join('')}</div>`).join('')}</div>`;
-  },
-  houzz:function(){
-    var url='https://www.houzz.com/pro/webuser-882207478/wooden-woodworks-llc-custom-kitchen-cabinets';
-    return `<div class="vhead"><h1>Houzz</h1><p>WW's Houzz profile, where luxury builders and homeowners shop for cabinetry.</p></div>
-    <div class="stat-row"><div class="stat"><div class="v">—</div><div class="l">Profile views</div></div><div class="stat"><div class="v">—</div><div class="l">Ideabook saves</div></div><div class="stat"><div class="v">—</div><div class="l">Houzz leads</div></div><div class="stat"><div class="v">—</div><div class="l">Reviews</div></div></div>
-    <div class="card"><h3>${ic('ic-houzz')} Profile</h3><a href="${url}" target="_blank" rel="noopener" style="display:block;border-radius:10px;overflow:hidden;border:1px solid var(--line2);margin-bottom:12px"><img src="https://image.thum.io/get/width/900/crop/520/noanimate/${url}" alt="Wooden Woodworks on Houzz" loading="lazy" style="width:100%;display:block;background:var(--bg2)"></a><a href="${url}" target="_blank" rel="noopener" class="btn">${ic('ic-houzz')} View profile on Houzz</a><p style="color:var(--muted);font-size:13px;margin-top:10px">Live stats and leads sync once the Houzz connection is wired.</p></div>
-    <div class="card"><h3>${ic('ic-cabinet')} Projects to upload to Houzz</h3><div class="chk"><input type="checkbox"><label>Built-in Office Wall, Austin, installed</label></div><div class="chk"><input type="checkbox"><label>Master Bath Vanity, Waco</label></div><div class="chk"><input type="checkbox"><label>Frameless Kitchen, Salado</label></div></div>
-    <div class="card"><h3>${ic('ic-search')} Houzz leads &amp; inquiries</h3><p style="color:var(--muted);font-size:13px">New Houzz inquiries appear here when the connection is live. Respond within 24 hours, Houzz rewards fast responders.</p></div>`;
-  },
-  placeholder:function(id){var p=PAGES.find(x=>x.id===id)||{name:'Page'};
-    var blurb={projects:'Master list of every WW project with full detail, photos, and status.',clients:'All WW clients, builders, designers, and homeowners, with contact history.',reels:'The reel production workflow, idea to draft to approval to posted.',social:'A drag-drop content calendar across Instagram, Facebook, TikTok, and YouTube.',houzz:'The WW Houzz profile embedded, with project uploads and Houzz leads.',leads:'HubSpot builder pipeline, estimate follow-up so no lead goes cold.',seo:'Local Central Texas search, Google Business Profile posts, reviews, and rankings.',approvals:'Your approval queue, BBC work you OK before it reaches the owners.',brand:'WW brand guide, logo, voice, and content references.',team:'WW team and the BBC team serving the account, plus monthly reports.'};
-    return `<div class="placeholder"><div class="ic">${ic(p.icon||'ic-cabinet')}</div><h2>${p.name}</h2><p>${blurb[id]||''}</p><div class="tag">Next to build</div></div>`;
-  }
-};
-function addKT(){var v=document.getElementById('ktask').value.trim();if(!v)return;krizzaTasks.push({t:v,a:'New',done:false});go('home');toast('Task added');}
+/* ---------- mutations ---------- */
+function newBlock(type){
+  var d={section:{text:'New section'},note:{text:'Write something here.'},checklist:{items:[{t:'New item',a:'',done:false}]},
+    stats:{tiles:[{v:'0',l:'Label'}]},cards:{items:[{title:'New card',meta:'Details',tag:''}]},
+    kanban:{cols:[{name:'To do',cards:[{t:'New card',m:''}]},{name:'Doing',cards:[]},{name:'Done',cards:[]}]},
+    table:{cols:['Column A','Column B'],rows:[['','']]},links:{items:[{label:'New link',url:'https://'}]},
+    calendar:{today:0,posts:{}},embed:{url:'https://',height:480}};
+  return B(type,({checklist:'Checklist',cards:'Cards',kanban:'Board',table:'Table',links:'Links',calendar:'Calendar',embed:'Embed'}[type]||''),d[type]);
+}
+function addBlk(type){pageBlocks().push(newBlock(type));save();render();toast('Block added');}
+function delBlk(id){if(!confirm('Delete this block?'))return;DB[CUR]=pageBlocks().filter(function(b){return b.id!==id;});save();render();}
+function moveBlk(id,dir){var a=pageBlocks();var i=a.findIndex(function(b){return b.id===id;});var j=i+dir;if(j<0||j>=a.length)return;var t=a[i];a[i]=a[j];a[j]=t;save();render();}
+function resetPage(){if(!confirm('Reset this page back to the starter layout? Your changes on this page will be lost.'))return;DB[CUR]=defaults()[CUR]||[];save();render();toast('Page reset');}
+
+function toggleChk(id,i,v){findBlock(id).data.items[i].done=v;save();render();}
+function addChk(id){var el=document.getElementById('ci_'+id);var v=el.value.trim();if(!v)return;findBlock(id).data.items.push({t:v,a:'',done:false});save();render();}
+function delItem(id,key,i){findBlock(id).data[key].splice(i,1);save();render();}
+function addTile(id){findBlock(id).data.tiles.push({v:'0',l:'Label'});save();render();}
+function addCard(id){findBlock(id).data.items.push({title:'New card',meta:'Details',tag:''});save();render();}
+function addLink(id){findBlock(id).data.items.push({label:'New link',url:'https://'});save();render();}
+function addKCard(id,ci){findBlock(id).data.cols[ci].cards.push({t:'New card',m:''});save();render();}
+function delKCard(id,ci,xi){findBlock(id).data.cols[ci].cards.splice(xi,1);save();render();}
+function addKCol(id){var n=prompt('Column name','New column');if(n==null)return;findBlock(id).data.cols.push({name:n||'New',cards:[]});save();render();}
+function addRow(id){var b=findBlock(id);b.data.rows.push(b.data.cols.map(function(){return '';}));save();render();}
+function addCol(id){var b=findBlock(id);b.data.cols.push('Column');b.data.rows.forEach(function(r){r.push('');});save();render();}
+function delRow(id,ri){findBlock(id).data.rows.splice(ri,1);save();render();}
+function setEmbed(id,v){findBlock(id).data.url=v;save();render();}
+function addPost(id,day){var t=prompt('Post title');if(!t)return;var plat=(prompt('Platform: ig, fb, tt, yt, or gbp','ig')||'ig').toLowerCase();var b=findBlock(id);(b.data.posts[day]=b.data.posts[day]||[]).push({t:t,plat:plat});save();render();}
+function editPost(id,day,pi){var b=findBlock(id);var p=b.data.posts[day][pi];var t=prompt('Edit post (clear the box to remove it)',p.t);if(t==null)return;if(t.trim()===''){b.data.posts[day].splice(pi,1);if(!b.data.posts[day].length)delete b.data.posts[day];}else{p.t=t;}save();render();}
 
 renderNav();go('home');
 </script>
