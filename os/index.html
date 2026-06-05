@@ -640,6 +640,7 @@
 
 <nav class="nav" id="nav">
   <button data-v="home" class="active"><span class="i">🏠</span>Home</button>
+  <button data-v="board"><span class="i">🧩</span>My Board</button>
   <button data-v="clients"><span class="i">👥</span>Clients</button>
   <button data-v="crm"><span class="i">📇</span>CRM</button>
   <button data-v="inbox"><span class="i">📥</span>Inbox</button>
@@ -1297,19 +1298,10 @@
           "name": "NPC-Portfolio-System"
         },
         {
-          "name": "08_KNOWLEDGE_BASE"
+          "name": ".claude"
         },
         {
-          "name": "07_MARKETING"
-        },
-        {
-          "name": "06_FINANCE"
-        },
-        {
-          "name": "05_OPERATIONS"
-        },
-        {
-          "name": "03_ARCHIVED_CLIENTS"
+          "name": "01_LEADS"
         },
         {
           "name": "02_ACTIVE_CLIENTS",
@@ -1318,13 +1310,13 @@
               "name": "4OCEAN"
             },
             {
-              "name": "WOODEN-WOODWORKS"
+              "name": "FIRST-CLASS-FINISHES"
             },
             {
               "name": "HOME-VISION-STUDIO"
             },
             {
-              "name": "FIRST-CLASS-FINISHES"
+              "name": "WOODEN-WOODWORKS"
             },
             {
               "name": "HI-UP-ROOFING"
@@ -1350,10 +1342,19 @@
           ]
         },
         {
-          "name": "01_LEADS"
+          "name": "03_ARCHIVED_CLIENTS"
         },
         {
-          "name": ".claude"
+          "name": "05_OPERATIONS"
+        },
+        {
+          "name": "06_FINANCE"
+        },
+        {
+          "name": "07_MARKETING"
+        },
+        {
+          "name": "08_KNOWLEDGE_BASE"
         },
         {
           "name": "BBC WEBSITE HTML"
@@ -1362,43 +1363,40 @@
           "name": "04_TEAM"
         },
         {
-          "name": "09_POTENTIAL CLIENTS"
-        },
-        {
           "name": "BBC_AI_FAMILY",
           "children": [
             {
-              "name": "BRUNZ"
-            },
-            {
-              "name": "WEBBY"
-            },
-            {
-              "name": "MAI"
-            },
-            {
-              "name": "KRIZ"
-            },
-            {
-              "name": "SONNY"
-            },
-            {
-              "name": "EMY"
+              "name": "CASEY"
             },
             {
               "name": "BOOGY"
             },
             {
-              "name": "CASEY"
+              "name": "EMY"
+            },
+            {
+              "name": "SONNY"
+            },
+            {
+              "name": "BRUNZ"
+            },
+            {
+              "name": "KRIZ"
+            },
+            {
+              "name": "MAI"
+            },
+            {
+              "name": "WEBBY"
             },
             {
               "name": "_TEMPLATE"
             },
             {
-              "name": "JENNY"
+              "name": "AGENT_PROFILES"
             },
             {
-              "name": "AGENT_PROFILES"
+              "name": "JENNY"
             },
             {
               "name": "_VAULT"
@@ -1425,6 +1423,9 @@
               "name": "_BRAND"
             }
           ]
+        },
+        {
+          "name": "09_POTENTIAL CLIENTS"
         },
         {
           "name": "Daryl BBC Folder"
@@ -3220,9 +3221,20 @@
       const statusEditor=(c.Id!==undefined&&c.Id!==null)
         ? `<div class="panel" style="display:block;margin-bottom:12px"><span class="ptitle" style="color:#D4AF37">Status <span class="gauge-sub" style="font-weight:400">(saves to NocoDB)</span></span><div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:8px"><select id="ct-status" onchange="updateContactStatus(${JSON.stringify(c.Id)},this.value,this)" style="${SEL}">${opts}</select><span id="ct-status-msg" class="gauge-sub" style="flex:1;min-width:120px"></span></div></div>`
         : '';
+      // Social Outreach panel — 5 togglable platform pills (sized for touch on the detail sheet).
+      // Mirrors the CRM list pills exactly; toggling here lights them up in the list too.
+      const SOCIAL_PLATFORMS_SHEET=[['Instagram','DM IG'],['Facebook','DM FB'],['LinkedIn','DM LinkedIn'],['TikTok','DM TikTok'],['X','DM X']];
+      const socialEditor=(c.Id!==undefined&&c.Id!==null)
+        ? `<div class="panel" style="display:block;margin-bottom:12px"><span class="ptitle" style="color:#D4AF37">Social outreach <span class="gauge-sub" style="font-weight:400">(click to toggle — saves to NocoDB)</span></span><div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:10px">`
+          + SOCIAL_PLATFORMS_SHEET.map(([lbl,fld])=>{
+              const on=!!c[fld];
+              return `<span class="dm-pill" data-cid="${esc(String(c.Id))}" data-fld="${esc(fld)}" data-on="${on?1:0}" onclick="toggleContactSocial(${JSON.stringify(c.Id)},${JSON.stringify(fld)},this)" style="cursor:pointer;font-size:13px;font-weight:600;padding:8px 14px;border-radius:8px;background:${on?'#1F3557':'#0d1320'};color:${on?'#F5F1EA':'#8A97AC'};border:1px solid ${on?'#C9A961':'#22324d'};user-select:none;min-height:38px;display:inline-flex;align-items:center;gap:6px"><span style="font-size:11px;opacity:${on?1:0.6}">${on?'✓':'○'}</span>${lbl}</span>`;
+            }).join('')
+          + `</div></div>`
+        : '';
       const notes=c.Notes?`<div class="panel" style="display:block;margin-bottom:12px"><span class="ptitle" style="color:#D4AF37">Notes</span><div style="white-space:pre-wrap;color:#C9D3E0;font-size:13px;margin-top:6px">${esc(c.Notes)}</div></div>`:'';
       const tl=threads.length?threads.map(t=>`<div class="opitem" onclick="openThread('${t.id}')" style="cursor:pointer"><span class="odot" style="background:${t.unread?'#60A5FA':'#2a3a52'}"></span><span class="oname">${esc(t.subject||'(no subject)')}</span><span class="ocad">read</span></div>`).join(''):'<div class="gauge-sub">No email thread with this contact yet.</div>';
-      openSheet(`${head}${statusEditor}${notes}<div class="sec" style="margin-top:0">Email thread (${threads.length})</div>${tl}<div style="margin-top:12px"><button onclick="go('crm');setTimeout(()=>{var t=document.getElementById('em-to');if(t){t.value='${esc(c.Email||'')}';t.scrollIntoView({behavior:'smooth'});}},250)" style="background:#D4AF37;color:#0f1520;border:0;font-weight:700;padding:10px 18px;border-radius:9px;cursor:pointer;min-height:44px">Email this contact</button></div>`);
+      openSheet(`${head}${statusEditor}${socialEditor}${notes}<div class="sec" style="margin-top:0">Email thread (${threads.length})</div>${tl}<div style="margin-top:12px"><button onclick="go('crm');setTimeout(()=>{var t=document.getElementById('em-to');if(t){t.value='${esc(c.Email||'')}';t.scrollIntoView({behavior:'smooth'});}},250)" style="background:#D4AF37;color:#0f1520;border:0;font-weight:700;padding:10px 18px;border-radius:9px;cursor:pointer;min-height:44px">Email this contact</button></div>`);
     }catch(e){ openSheet('<div class="gauge-sub" style="padding:16px">'+esc(String(e).slice(0,120))+'</div>'); }
   };
   window.openThread=async(id)=>{
@@ -3255,7 +3267,7 @@
       const sel=(r.Id!==undefined&&r.Id!==null)?`<select onclick="event.stopPropagation()" onchange="updateContactStatus(${JSON.stringify(r.Id)},this.value,this)" title="Change status (saves to NocoDB)" style="background:#0d1320;border:1px solid #2a3a52;color:#F5F1EA;border-radius:7px;padding:6px 8px;font-size:12px;min-height:34px;max-width:150px;cursor:pointer">${sopt}</select>`:`<span class="ocad">${esc(cur)}</span>`;
       const socialPills=(r.Id!==undefined&&r.Id!==null)?('<span class="dm-group" style="display:inline-flex;gap:3px;flex-wrap:wrap">'+SOCIAL_PLATFORMS.map(([lbl,fld])=>{
         const on=!!r[fld];
-        return `<span class="dm-pill" data-on="${on?1:0}" onclick="event.stopPropagation();toggleContactSocial(${JSON.stringify(r.Id)},${JSON.stringify(fld)},this)" title="${esc(fld)} — click to toggle" style="cursor:pointer;font-size:10px;font-weight:700;letter-spacing:.3px;padding:4px 7px;border-radius:5px;background:${on?'#1F3557':'#0d1320'};color:${on?'#F5F1EA':'#5b6b85'};border:1px solid ${on?'#C9A961':'#2a3a52'};user-select:none;min-width:22px;text-align:center">${lbl}</span>`;
+        return `<span class="dm-pill" data-cid="${esc(String(r.Id))}" data-fld="${esc(fld)}" data-on="${on?1:0}" onclick="event.stopPropagation();toggleContactSocial(${JSON.stringify(r.Id)},${JSON.stringify(fld)},this)" title="${esc(fld)} — click to toggle" style="cursor:pointer;font-size:10px;font-weight:700;letter-spacing:.3px;padding:4px 7px;border-radius:5px;background:${on?'#1F3557':'#0d1320'};color:${on?'#F5F1EA':'#5b6b85'};border:1px solid ${on?'#C9A961':'#2a3a52'};user-select:none;min-width:22px;text-align:center">${lbl}</span>`;
       }).join('')+'</span>'):'';
       return `<div class="opitem cc-row" data-search="${hay}" style="display:flex;align-items:center;gap:8px;flex-wrap:wrap"><span class="odot" style="background:${sc};flex:0 0 auto"></span><span class="oname" onclick="openContact('${em}')" style="flex:1;cursor:pointer;min-width:140px">${esc(r['First Name']||r.Organization||r.Email)}${(r.Organization&&r['First Name'])?' · '+esc(r.Organization):''}</span>${socialPills}${sel}</div>`;
     }).join('');
@@ -3310,7 +3322,9 @@
     }finally{ if(selEl) selEl.disabled=false; }
   };
   // Social DM toggle — PATCH NocoDB Contacts checkbox field, optimistic UI flip.
-  // Fails gracefully if the field doesn't exist yet in NocoDB (toast shows the NocoDB 422).
+  // Syncs ALL pills (CRM list + detail sheet) showing the same contact+field so toggling
+  // from either surface lights up the other. Falls back gracefully if the NocoDB field
+  // doesn't exist yet (toast shows the 422).
   window.toggleContactSocial=async(id,field,el)=>{
     const wasOn=el.getAttribute('data-on')==='1';
     const next=!wasOn;
@@ -3318,10 +3332,14 @@
     try{
       const r=await fetch('/.netlify/functions/nocodb-write?table=contacts&id='+encodeURIComponent(id),{method:'PATCH',headers:{'content-type':'application/json'},body:JSON.stringify({fields:{[field]:next}})});
       if(!r.ok){ const e=await r.text(); throw new Error(e.slice(0,140)); }
-      el.setAttribute('data-on',next?'1':'0');
-      el.style.background=next?'#1F3557':'#0d1320';
-      el.style.color=next?'#F5F1EA':'#5b6b85';
-      el.style.borderColor=next?'#C9A961':'#2a3a52';
+      // sync EVERY pill in the DOM that points to the same contact+field (list AND detail sheet)
+      const sel='.dm-pill[data-cid="'+String(id).replace(/"/g,'\\"')+'"][data-fld="'+field.replace(/"/g,'\\"')+'"]';
+      document.querySelectorAll(sel).forEach(p=>{
+        p.setAttribute('data-on',next?'1':'0');
+        p.style.background=next?'#1F3557':'#0d1320';
+        p.style.color=next?'#F5F1EA':'#5b6b85';
+        p.style.borderColor=next?'#C9A961':'#2a3a52';
+      });
       if(Array.isArray(window.__crmContacts)){ const rec=window.__crmContacts.find(x=>(x.Id??x.id)==id); if(rec) rec[field]=next; }
       window.toast&&toast(field+' → '+(next?'messaged':'cleared'),'ok');
     }catch(err){
@@ -3956,10 +3974,13 @@
       <button class="ideabtn" onclick="window.open('${curUrl}','_blank')"><span class="i">📂</span>Open this folder in Google Drive</button>
       <div class="foldergrid">${body}</div>`;
   };
+  views.board=()=>`<h2 class="vt">My Board</h2><div class="vsub">Your space. Add anything, arrange it your way. Saved on this device.</div>
+    <div style="display:flex;justify-content:flex-end;margin-bottom:12px"><button id="board-edit" class="board-btn" onclick="window.Board&&Board.toggle()">🧩 Customize</button></div>
+    <div id="bbc-board-root"></div>`;
   window.go=v=>{ window.curView=v; window.curClient=null; window.__curClientSlug=null; app.innerHTML=`<div class="view">${views[v]()}</div>`; window.scrollTo(0,0);
     if(!window.__routing){ var __nh='#'+v; if(location.hash!==__nh){ try{ location.hash=__nh; }catch(e){} } }
     document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('active',b.dataset.v===v));
-    sheet.classList.remove('open'); if(v==='crm'&&window.loadCampaignStats){ window.loadCampaignStats(); window.loadInbox&&window.loadInbox('crm-inbox',true); window.loadCrmContacts&&window.loadCrmContacts(); } if(v==='inbox'&&window.loadInbox) window.loadInbox(); if(v==='home'&&window.loadHomeAttention) window.loadHomeAttention(); };
+    sheet.classList.remove('open'); if(v==='crm'&&window.loadCampaignStats){ window.loadCampaignStats(); window.loadInbox&&window.loadInbox('crm-inbox',true); window.loadCrmContacts&&window.loadCrmContacts(); } if(v==='inbox'&&window.loadInbox) window.loadInbox(); if(v==='home'&&window.loadHomeAttention) window.loadHomeAttention(); if(v==='board'&&window.Board) window.Board.render(); };
   window.filterCards=(inp,wrapId)=>{ const q=inp.value.toLowerCase(); const wrap=document.getElementById(wrapId);
     wrap.querySelectorAll('.card,.wfrow,.clientbox,.opitem').forEach(c=>{ const hay=(c.dataset.search||c.textContent).toLowerCase(); c.style.display=hay.includes(q)?'':'none'; });
     wrap.querySelectorAll('.wfcat').forEach(p=>{ const any=[...p.querySelectorAll('.wfrow')].some(r=>r.style.display!=='none'); p.style.display=any?'':'none'; }); };
@@ -3983,6 +4004,7 @@
     document.body.appendChild(overlay);
     var NAVCMDS=[
       {ic:'🏠',label:'Home',sub:'overview',act:function(){go('home');}},
+      {ic:'🧩',label:'My Board',sub:'your space',act:function(){go('board');}},
       {ic:'📇',label:'CRM + Email',sub:'leads',act:function(){go('crm');}},
       {ic:'📥',label:'Inbox',sub:'email',act:function(){go('inbox');}},
       {ic:'🤝',label:'Clients',sub:'',act:function(){go('clients');}},
@@ -4255,6 +4277,155 @@
 
   wireForm();
   checkSession();
+})();
+</script>
+
+<!-- ===== MY BOARD: editable block engine (additive, localStorage; auto-sync never touches it) ===== -->
+<style>
+  .board-btn{background:var(--gold);color:#0E1A2E;border:none;border-radius:20px;padding:9px 15px;font-weight:700;font-size:13px;cursor:pointer;font-family:var(--ui);min-height:40px;}
+  .board-btn.on{background:var(--green);}
+  #bbc-board-root .bced{outline:none;}
+  body.bk-editing #bbc-board-root .bced{background:rgba(212,175,55,0.10);border-radius:5px;box-shadow:inset 0 0 0 1px rgba(212,175,55,0.35);padding:1px 5px;cursor:text;}
+  body.bk-editing #bbc-board-root .bced:focus{box-shadow:inset 0 0 0 2px var(--gold);background:rgba(212,175,55,0.06);}
+  #bbc-board-root .bk{position:relative;margin-bottom:14px;}
+  #bbc-board-root .bk-bar{display:none;gap:6px;justify-content:flex-end;margin-bottom:6px;}
+  body.bk-editing #bbc-board-root .bk-bar{display:flex;}
+  #bbc-board-root .bk-bar button{background:var(--bg3);border:1px solid var(--line);border-radius:8px;width:32px;height:32px;color:var(--muted);cursor:pointer;font-size:14px;}
+  #bbc-board-root .bk-bar button:hover{color:var(--ink);border-color:var(--gold);}
+  #bbc-board-root .bk-bar button.del:hover{color:#ff6b5b;border-color:#ff6b5b;}
+  #bbc-board-root .bkcard{background:var(--bg2);border:1px solid var(--line);border-radius:14px;padding:16px;}
+  #bbc-board-root h3.bkh{font-family:var(--display);font-size:15px;margin:0 0 11px;color:var(--ink);display:flex;gap:8px;align-items:center;}
+  #bbc-board-root .bk-sec{display:flex;align-items:center;gap:12px;margin:6px 0 2px;}
+  #bbc-board-root .bk-sec .t{font-family:var(--mono);font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--gold2);}
+  #bbc-board-root .bk-sec .ln{flex:1;height:1px;background:var(--line);}
+  #bbc-board-root .bk-note p{color:var(--muted);font-size:13.5px;line-height:1.7;margin:0;}
+  #bbc-board-root .bk-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;}
+  @media(max-width:640px){#bbc-board-root .bk-stats{grid-template-columns:1fr 1fr;}}
+  #bbc-board-root .bk-stat{background:var(--bg2);border:1px solid var(--line);border-radius:12px;padding:14px;text-align:center;position:relative;}
+  #bbc-board-root .bk-stat .v{font-family:var(--display);font-size:22px;font-weight:700;color:var(--gold);}
+  #bbc-board-root .bk-stat .l{font-size:11px;color:var(--muted);margin-top:3px;}
+  #bbc-board-root .bk-chk{display:flex;align-items:center;gap:11px;padding:9px 0;border-bottom:1px solid var(--line);font-size:14px;color:var(--ink);}
+  #bbc-board-root .bk-chk:last-of-type{border-bottom:none;}
+  #bbc-board-root .bk-chk input[type=checkbox]{width:18px;height:18px;accent-color:var(--gold);flex:none;cursor:pointer;}
+  #bbc-board-root .bk-chk.done label{text-decoration:line-through;color:var(--muted);opacity:.7;}
+  #bbc-board-root .bk-chk label{flex:1;}
+  #bbc-board-root .bk-chk .tag{font-size:10px;font-weight:700;letter-spacing:.4px;text-transform:uppercase;color:var(--gold2);background:rgba(212,175,55,0.12);padding:3px 7px;border-radius:5px;}
+  #bbc-board-root .bkx{background:none;border:none;color:var(--muted);font-size:16px;cursor:pointer;display:none;}
+  body.bk-editing #bbc-board-root .bkx{display:inline;}
+  body.bk-editing #bbc-board-root .bkx:hover{color:#ff6b5b;}
+  #bbc-board-root .bk-add{display:flex;gap:8px;margin-top:12px;}
+  #bbc-board-root .bk-add input{flex:1;min-width:0;border:1px solid var(--line);border-radius:10px;padding:11px 12px;font-family:var(--ui);font-size:16px;background:var(--bg3);color:var(--ink);}
+  #bbc-board-root .bk-add input:focus{outline:none;border-color:var(--gold);}
+  #bbc-board-root .bkbtn{background:var(--gold);color:#0E1A2E;border:none;border-radius:10px;padding:0 15px;font-weight:700;font-size:14px;cursor:pointer;min-height:44px;display:inline-flex;align-items:center;justify-content:center;gap:6px;font-family:var(--ui);}
+  #bbc-board-root .bkbtn.ghost{background:none;color:var(--gold2);border:1px solid var(--line);}
+  #bbc-board-root .bk-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:10px;}
+  #bbc-board-root .bk-mc{background:var(--bg3);border:1px solid var(--line);border-radius:12px;padding:14px;position:relative;}
+  #bbc-board-root .bk-mc .mt{font-weight:600;font-size:14px;color:var(--ink);}
+  #bbc-board-root .bk-mc .mm{font-size:12.5px;color:var(--muted);margin-top:4px;line-height:1.5;}
+  #bbc-board-root .bk-mc .mtag{display:inline-block;font-size:10px;font-weight:700;letter-spacing:.4px;text-transform:uppercase;color:var(--gold2);background:rgba(212,175,55,0.12);padding:3px 8px;border-radius:5px;margin-top:9px;}
+  #bbc-board-root .bk-corner{position:absolute;top:7px;right:8px;}
+  #bbc-board-root .bk-kanban{display:flex;gap:10px;overflow-x:auto;padding-bottom:6px;}
+  #bbc-board-root .bk-kcol{min-width:190px;flex:1;background:var(--bg3);border:1px solid var(--line);border-radius:12px;padding:10px;}
+  #bbc-board-root .bk-kcol h4{font-family:var(--mono);font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--gold2);margin-bottom:8px;display:flex;justify-content:space-between;gap:6px;}
+  #bbc-board-root .bk-kcard{background:var(--bg2);border:1px solid var(--line);border-radius:9px;padding:10px;margin-bottom:8px;position:relative;}
+  #bbc-board-root .bk-kcard .kt{font-weight:600;font-size:13px;color:var(--ink);}
+  #bbc-board-root .bk-kcard .km{font-size:11.5px;color:var(--muted);margin-top:3px;}
+  #bbc-board-root .bk-kadd{width:100%;background:none;border:1px dashed var(--line);color:var(--muted);border-radius:8px;padding:7px;font-size:12px;cursor:pointer;}
+  #bbc-board-root table.bk-tbl{width:100%;border-collapse:collapse;font-size:13.5px;color:var(--ink);}
+  #bbc-board-root table.bk-tbl th,#bbc-board-root table.bk-tbl td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--line);}
+  #bbc-board-root table.bk-tbl th{font-family:var(--mono);font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--gold2);}
+  #bbc-board-root .bk-twrap{overflow-x:auto;}
+  #bbc-board-root .bk-links a{display:flex;align-items:center;gap:9px;padding:11px 13px;border:1px solid var(--line);border-radius:11px;margin-bottom:8px;color:var(--gold2);font-weight:600;font-size:14px;background:var(--bg3);text-decoration:none;word-break:break-all;}
+  #bbc-board-root .bk-links a:hover{border-color:var(--gold);}
+  #bbc-board-root .bk-cal{border:1px solid var(--line);border-radius:12px;overflow:hidden;}
+  #bbc-board-root .bk-cal .hd,#bbc-board-root .bk-cal .gr{display:grid;grid-template-columns:repeat(7,1fr);}
+  #bbc-board-root .bk-cal .hd{background:var(--bg3);}
+  #bbc-board-root .bk-cal .hd div{padding:8px 4px;text-align:center;font-family:var(--mono);font-size:9px;letter-spacing:1px;color:var(--muted);text-transform:uppercase;}
+  #bbc-board-root .bk-cal .cell{min-height:80px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);padding:5px;}
+  #bbc-board-root .bk-cal .cell .dn{font-size:11px;font-weight:700;color:var(--muted);}
+  #bbc-board-root .bk-cal .cell.dim{background:var(--bg3);}
+  #bbc-board-root .bk-cal .cp{font-size:10px;padding:3px 6px;border-radius:5px;margin-top:4px;color:#fff;font-weight:600;cursor:pointer;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+  #bbc-board-root .bk-cal .cp.ig{background:#C13584;}#bbc-board-root .bk-cal .cp.fb{background:#4267B2;}#bbc-board-root .bk-cal .cp.tt{background:#222;}#bbc-board-root .bk-cal .cp.yt{background:#C4302B;}#bbc-board-root .bk-cal .cp.gbp{background:#4285F4;}#bbc-board-root .bk-cal .cp.gen{background:var(--goldB);}
+  @media(max-width:640px){#bbc-board-root .bk-cal .cell{min-height:56px;padding:3px;}}
+  #bbc-board-root .bk-embed{width:100%;height:480px;border:1px solid var(--line);border-radius:12px;background:#fff;}
+  #bbc-board-root .bk-tray{display:none;text-align:center;margin-top:6px;}
+  body.bk-editing #bbc-board-root .bk-tray{display:block;}
+  #bbc-board-root .bk-tray .open{background:none;border:1.5px dashed var(--gold);color:var(--gold2);border-radius:12px;padding:13px 20px;font-weight:600;font-size:14px;cursor:pointer;width:100%;}
+  #bbc-board-root .bk-menu{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:10px;}
+  #bbc-board-root .bk-menu button{background:var(--bg2);border:1px solid var(--line);border-radius:10px;padding:9px 13px;font-size:12.5px;cursor:pointer;color:var(--ink);}
+  #bbc-board-root .bk-menu button:hover{border-color:var(--gold);background:var(--bg3);}
+</style>
+<script>
+(function(){
+  var KEY='bbc_os_board_v1',EDIT=false;
+  function esc(s){return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+  function uid(){return 'k'+Date.now().toString(36)+Math.floor(Math.random()*1e4).toString(36);}
+  function toast(m){if(window.toast)window.toast(m);}
+  function B(type,title,data){return{id:uid(),type:type,title:title,data:data};}
+  function defaults(){return[
+    B('section','',{text:'My focus'}),
+    B('note','',{text:'This board is yours. Hit Customize to add checklists, notes, tables, a mini calendar, links, cards, a kanban board, whatever helps you run the day. Everything saves on this device.'}),
+    B('checklist','Today',{items:[{t:'Pick the 3 things that matter most today',a:'Focus',done:false},{t:'Clear anything blocking the team',a:'Ops',done:false}]}),
+    B('stats','',{tiles:[{v:'0',l:'Set your own'},{v:'0',l:'metrics here'},{v:'0',l:'tap to edit'}]})
+  ];}
+  var DB;
+  function load(){try{var s=localStorage.getItem(KEY);if(s){var p=JSON.parse(s);if(Array.isArray(p))return p;}}catch(e){}return defaults();}
+  function save(){try{localStorage.setItem(KEY,JSON.stringify(DB));}catch(e){}}
+  function findB(id){return DB.find(function(b){return b.id===id;});}
+  function setPath(o,path,val){var ks=path.split('.');var c=o;for(var i=0;i<ks.length-1;i++)c=c[ks[i]];c[ks[ks.length-1]]=val;}
+  function edText(el){var b=findB(el.dataset.bid);if(!b)return;setPath(b,el.dataset.k,el.innerText.trim());save();}
+  function ce(b,k,v,tag,cls){tag=tag||'span';cls=cls||'';return '<'+tag+' class="bced '+cls+'"'+(EDIT?' contenteditable="true"':'')+' data-bid="'+b.id+'" data-k="'+k+'" onblur="Board._ed(this)">'+esc(v)+'</'+tag+'>';}
+
+  var R={
+    section:function(b){return '<div class="bk-sec"><span class="t">'+ce(b,'data.text',b.data.text)+'</span><span class="ln"></span></div>';},
+    note:function(b){return '<div class="bkcard bk-note">'+ce(b,'data.text',b.data.text,'p')+'</div>';},
+    stats:function(b){var t=b.data.tiles.map(function(x,i){return '<div class="bk-stat">'+(EDIT?'<button class="bkx" style="position:absolute;top:4px;right:7px" onclick="Board.delItem(\''+b.id+'\',\'tiles\','+i+')">&times;</button>':'')+'<div class="v">'+ce(b,'data.tiles.'+i+'.v',x.v)+'</div><div class="l">'+ce(b,'data.tiles.'+i+'.l',x.l)+'</div></div>';}).join('');return '<div class="bk-stats">'+t+'</div>'+(EDIT?'<div style="text-align:center;margin-top:10px"><button class="bkbtn ghost" onclick="Board.addTile(\''+b.id+'\')">+ Add tile</button></div>':'');},
+    checklist:function(b){var rows=b.data.items.map(function(x,i){return '<div class="bk-chk '+(x.done?'done':'')+'"><input type="checkbox" '+(x.done?'checked':'')+' onchange="Board.toggleChk(\''+b.id+'\','+i+',this.checked)"><label>'+ce(b,'data.items.'+i+'.t',x.t)+'</label>'+(x.a?'<span class="tag">'+ce(b,'data.items.'+i+'.a',x.a)+'</span>':'')+'<button class="bkx" onclick="Board.delItem(\''+b.id+'\',\'items\','+i+')">&times;</button></div>';}).join('');return '<div class="bkcard"><h3 class="bkh">✅ '+ce(b,'title',b.title)+'</h3>'+rows+'<div class="bk-add"><input id="bci_'+b.id+'" placeholder="Add an item..." onkeydown="if(event.key===\'Enter\')Board.addChk(\''+b.id+'\')"><button class="bkbtn" onclick="Board.addChk(\''+b.id+'\')">+</button></div></div>';},
+    cards:function(b){var c=b.data.items.map(function(x,i){return '<div class="bk-mc">'+(EDIT?'<button class="bkx bk-corner" onclick="Board.delItem(\''+b.id+'\',\'items\','+i+')">&times;</button>':'')+'<div class="mt">'+ce(b,'data.items.'+i+'.title',x.title)+'</div><div class="mm">'+ce(b,'data.items.'+i+'.meta',x.meta)+'</div>'+(x.tag!=null?'<span class="mtag">'+ce(b,'data.items.'+i+'.tag',x.tag)+'</span>':'')+'</div>';}).join('');return '<div class="bkcard"><h3 class="bkh">🗂️ '+ce(b,'title',b.title)+'</h3><div class="bk-grid">'+c+'</div>'+(EDIT?'<div style="margin-top:12px"><button class="bkbtn ghost" onclick="Board.addCard(\''+b.id+'\')">+ Add card</button></div>':'')+'</div>';},
+    kanban:function(b){var cols=b.data.cols.map(function(col,ci){var cards=col.cards.map(function(cd,xi){return '<div class="bk-kcard">'+(EDIT?'<button class="bkx bk-corner" onclick="Board.delKCard(\''+b.id+'\','+ci+','+xi+')">&times;</button>':'')+'<div class="kt">'+ce(b,'data.cols.'+ci+'.cards.'+xi+'.t',cd.t)+'</div><div class="km">'+ce(b,'data.cols.'+ci+'.cards.'+xi+'.m',cd.m)+'</div></div>';}).join('');return '<div class="bk-kcol"><h4>'+ce(b,'data.cols.'+ci+'.name',col.name)+'<span>'+col.cards.length+'</span></h4>'+cards+'<button class="bk-kadd" onclick="Board.addKCard(\''+b.id+'\','+ci+')">+ Add</button></div>';}).join('');return '<div class="bkcard"><h3 class="bkh">📋 '+ce(b,'title',b.title)+'</h3><div class="bk-kanban">'+cols+'</div>'+(EDIT?'<div style="margin-top:12px"><button class="bkbtn ghost" onclick="Board.addKCol(\''+b.id+'\')">+ Add column</button></div>':'')+'</div>';},
+    table:function(b){var head='<tr>'+b.data.cols.map(function(c,ci){return '<th>'+ce(b,'data.cols.'+ci,c)+'</th>';}).join('')+(EDIT?'<th></th>':'')+'</tr>';var rows=b.data.rows.map(function(row,ri){return '<tr>'+row.map(function(cell,ci){return '<td>'+ce(b,'data.rows.'+ri+'.'+ci,cell)+'</td>';}).join('')+(EDIT?'<td><button class="bkx" onclick="Board.delRow(\''+b.id+'\','+ri+')">&times;</button></td>':'')+'</tr>';}).join('');return '<div class="bkcard"><h3 class="bkh">📊 '+ce(b,'title',b.title)+'</h3><div class="bk-twrap"><table class="bk-tbl"><thead>'+head+'</thead><tbody>'+rows+'</tbody></table></div>'+(EDIT?'<div style="margin-top:12px;display:flex;gap:8px"><button class="bkbtn ghost" onclick="Board.addRow(\''+b.id+'\')">+ Row</button><button class="bkbtn ghost" onclick="Board.addCol(\''+b.id+'\')">+ Column</button></div>':'')+'</div>';},
+    links:function(b){var rows=b.data.items.map(function(x,i){if(EDIT)return '<div style="display:flex;align-items:center;gap:8px;margin-bottom:8px"><div style="flex:1;border:1px solid var(--line);border-radius:11px;padding:9px 12px;background:var(--bg3)"><div>'+ce(b,'data.items.'+i+'.label',x.label)+'</div><div style="font-size:12px;color:var(--muted)">'+ce(b,'data.items.'+i+'.url',x.url)+'</div></div><button class="bkx" style="display:inline" onclick="Board.delItem(\''+b.id+'\',\'items\','+i+')">&times;</button></div>';return '<a href="'+esc(x.url)+'" target="_blank" rel="noopener">🔗 '+esc(x.label)+'</a>';}).join('');return '<div class="bkcard bk-links"><h3 class="bkh">🔗 '+ce(b,'title',b.title)+'</h3>'+rows+(EDIT?'<div style="margin-top:6px"><button class="bkbtn ghost" onclick="Board.addLink(\''+b.id+'\')">+ Add link</button></div>':'')+'</div>';},
+    calendar:function(b){var posts=b.data.posts||{},today=b.data.today||0,first=1,cells='';for(var i=0;i<first;i++)cells+='<div class="cell dim"></div>';for(var d=1;d<=30;d++){var ps=(posts[d]||[]).map(function(p,pi){return '<div class="cp '+(p.plat||'gen')+'" onclick="'+(EDIT?'Board.editPost(\''+b.id+'\','+d+','+pi+')':'')+'">'+esc(p.t)+'</div>';}).join('');cells+='<div class="cell '+(d===today?'today':'')+'" '+(EDIT?'onclick="if(event.target.classList.contains(\'cell\')||event.target.classList.contains(\'dn\'))Board.addPost(\''+b.id+'\','+d+')"':'')+'><div class="dn">'+d+'</div>'+ps+'</div>';}var total=Math.ceil((first+30)/7)*7;for(var t=first+30;t<total;t++)cells+='<div class="cell dim"></div>';return '<div class="bkcard"><h3 class="bkh">📅 '+ce(b,'title',b.title)+'</h3><div class="bk-cal"><div class="hd"><div>Sun</div><div>Mon</div><div>Tue</div><div>Wed</div><div>Thu</div><div>Fri</div><div>Sat</div></div><div class="gr">'+cells+'</div></div></div>';},
+    embed:function(b){return '<div class="bkcard"><h3 class="bkh">🖼️ '+ce(b,'title',b.title)+'</h3>'+(EDIT?'<div class="bk-add" style="margin:0 0 10px"><input value="'+esc(b.data.url)+'" onblur="Board.setEmbed(\''+b.id+'\',this.value)" placeholder="URL to embed"></div>':'')+'<iframe class="bk-embed" src="'+esc(b.data.url)+'" style="height:'+(b.data.height||480)+'px"></iframe></div>';}
+  };
+
+  function render(){
+    var root=document.getElementById('bbc-board-root');if(!root)return;
+    var html=DB.map(function(b){var bar=EDIT?'<div class="bk-bar"><button onclick="Board.move(\''+b.id+'\',-1)">&#8593;</button><button onclick="Board.move(\''+b.id+'\',1)">&#8595;</button><button class="del" onclick="Board.del(\''+b.id+'\')">&times;</button></div>':'';return '<div class="bk">'+bar+(R[b.type]?R[b.type](b):'')+'</div>';}).join('');
+    html+='<div class="bk-tray"><button class="open" onclick="Board.tray()">+ Add a block</button><div class="bk-menu" id="bk-menu" style="display:none">'
+      +'<button onclick="Board.add(\'section\')">Section</button><button onclick="Board.add(\'note\')">Note</button><button onclick="Board.add(\'checklist\')">Checklist</button><button onclick="Board.add(\'stats\')">Stat tiles</button><button onclick="Board.add(\'cards\')">Cards</button><button onclick="Board.add(\'kanban\')">Kanban</button><button onclick="Board.add(\'table\')">Table</button><button onclick="Board.add(\'links\')">Links</button><button onclick="Board.add(\'calendar\')">Calendar</button><button onclick="Board.add(\'embed\')">Embed</button></div></div>';
+    if(EDIT)html+='<div style="text-align:center;margin-top:16px"><button class="bkbtn ghost" onclick="Board.reset()">Reset board to default</button></div>';
+    root.innerHTML=html;
+    var eb=document.getElementById('board-edit');if(eb){eb.classList.toggle('on',EDIT);eb.textContent=EDIT?'✓ Done':'🧩 Customize';}
+  }
+  function newBlock(type){var d={section:{text:'New section'},note:{text:'Write something here.'},checklist:{items:[{t:'New item',a:'',done:false}]},stats:{tiles:[{v:'0',l:'Label'}]},cards:{items:[{title:'New card',meta:'Details',tag:''}]},kanban:{cols:[{name:'To do',cards:[{t:'New card',m:''}]},{name:'Doing',cards:[]},{name:'Done',cards:[]}]},table:{cols:['Column A','Column B'],rows:[['','']]},links:{items:[{label:'New link',url:'https://'}]},calendar:{today:0,posts:{}},embed:{url:'https://',height:420}};return B(type,({checklist:'Checklist',cards:'Cards',kanban:'Board',table:'Table',links:'Links',calendar:'Calendar',embed:'Embed'}[type]||''),d[type]);}
+
+  window.Board={
+    render:render,
+    _ed:edText,
+    toggle:function(){EDIT=!EDIT;document.body.classList.toggle('bk-editing',EDIT);render();toast(EDIT?'Customize on':'Saved');},
+    tray:function(){var m=document.getElementById('bk-menu');m.style.display=m.style.display==='none'?'flex':'none';},
+    add:function(t){DB.push(newBlock(t));save();render();toast('Block added');},
+    del:function(id){if(!confirm('Delete this block?'))return;DB=DB.filter(function(b){return b.id!==id;});save();render();},
+    move:function(id,dir){var i=DB.findIndex(function(b){return b.id===id;});var j=i+dir;if(j<0||j>=DB.length)return;var t=DB[i];DB[i]=DB[j];DB[j]=t;save();render();},
+    reset:function(){if(!confirm('Reset your board to the starter layout? Your changes will be lost.'))return;DB=defaults();save();render();toast('Board reset');},
+    toggleChk:function(id,i,v){findB(id).data.items[i].done=v;save();render();},
+    addChk:function(id){var el=document.getElementById('bci_'+id);var v=el.value.trim();if(!v)return;findB(id).data.items.push({t:v,a:'',done:false});save();render();},
+    delItem:function(id,key,i){findB(id).data[key].splice(i,1);save();render();},
+    addTile:function(id){findB(id).data.tiles.push({v:'0',l:'Label'});save();render();},
+    addCard:function(id){findB(id).data.items.push({title:'New card',meta:'Details',tag:''});save();render();},
+    addLink:function(id){findB(id).data.items.push({label:'New link',url:'https://'});save();render();},
+    addKCard:function(id,ci){findB(id).data.cols[ci].cards.push({t:'New card',m:''});save();render();},
+    delKCard:function(id,ci,xi){findB(id).data.cols[ci].cards.splice(xi,1);save();render();},
+    addKCol:function(id){var n=prompt('Column name','New column');if(n==null)return;findB(id).data.cols.push({name:n||'New',cards:[]});save();render();},
+    addRow:function(id){var b=findB(id);b.data.rows.push(b.data.cols.map(function(){return '';}));save();render();},
+    addCol:function(id){var b=findB(id);b.data.cols.push('Column');b.data.rows.forEach(function(r){r.push('');});save();render();},
+    delRow:function(id,ri){findB(id).data.rows.splice(ri,1);save();render();},
+    setEmbed:function(id,v){findB(id).data.url=v;save();render();},
+    addPost:function(id,day){var t=prompt('Item title');if(!t)return;var plat=(prompt('Tag color: ig, fb, tt, yt, gbp, or gen','gen')||'gen').toLowerCase();var b=findB(id);(b.data.posts[day]=b.data.posts[day]||[]).push({t:t,plat:plat});save();render();},
+    editPost:function(id,day,pi){var b=findB(id);var p=b.data.posts[day][pi];var t=prompt('Edit item (clear to remove)',p.t);if(t==null)return;if(t.trim()===''){b.data.posts[day].splice(pi,1);if(!b.data.posts[day].length)delete b.data.posts[day];}else{p.t=t;}save();render();}
+  };
+  DB=load();
 })();
 </script>
 </body>
