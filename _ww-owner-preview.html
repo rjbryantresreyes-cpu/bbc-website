@@ -73,6 +73,21 @@
   .pill.finish{background:rgba(176,141,79,0.16);color:var(--brass-d);}
   .pill.installed{background:rgba(94,139,109,0.16);color:var(--green);}
 
+  /* Clients */
+  .cli{display:flex;align-items:center;gap:12px;padding:11px 0;border-bottom:1px solid var(--line2);}
+  .cli:last-child{border-bottom:none;}
+  .cli__av{width:38px;height:38px;border-radius:10px;background:var(--bg2);border:1px solid var(--line2);display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-weight:700;font-size:14px;color:var(--walnut);flex:none;}
+  .cli__main{flex:1;min-width:0;}
+  .cli__nm{font-weight:600;font-size:14px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+  .cli__meta{font-size:12px;color:var(--muted);margin-top:1px;}
+  .tag{font-size:9.5px;font-weight:700;letter-spacing:.4px;text-transform:uppercase;padding:3px 8px;border-radius:6px;white-space:nowrap;}
+  .tag.builder{background:rgba(94,67,41,0.12);color:var(--walnut);}
+  .tag.designer{background:rgba(126,139,109,0.18);color:#5d6b4f;}
+  .tag.home{background:rgba(94,119,144,0.14);color:var(--blue);}
+  .cli__act{display:flex;gap:6px;flex:none;}
+  .cbtn{width:38px;height:38px;border-radius:9px;border:1px solid var(--line);background:var(--bg2);color:var(--brass-d);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:16px;}
+  .cbtn:hover{border-color:var(--brass);color:var(--walnut);}
+
   /* Numbers */
   .nums{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
   .num{background:var(--bg2);border:1px solid var(--line2);border-radius:12px;padding:14px;text-align:center;}
@@ -120,6 +135,9 @@
   <symbol id="ic-edit" viewBox="0 0 24 24"><path d="M4 20h4l10-10-4-4L4 16z"/><path d="M13.5 6.5l4 4"/></symbol>
   <symbol id="ic-folder" viewBox="0 0 24 24"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></symbol>
   <symbol id="ic-send" viewBox="0 0 24 24"><path d="M4 12l16-7-7 16-2-7z"/></symbol>
+  <symbol id="ic-briefcase" viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2M3 13h18"/></symbol>
+  <symbol id="ic-phone" viewBox="0 0 24 24"><path d="M5 4h3l1.5 4-2 1.5a11 11 0 0 0 5 5l1.5-2 4 1.5v3a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></symbol>
+  <symbol id="ic-msg" viewBox="0 0 24 24"><path d="M4 5h16a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H8l-4 3z"/></symbol>
 </defs></svg>
 
 <div class="topbar">
@@ -175,6 +193,34 @@
           <div class="proj__main"><div class="proj__nm">Showroom Cabinetry</div><div class="proj__meta">Salado · new showroom · in design</div><span class="proj__folder"><svg class="i"><use href="#ic-folder"/></svg> Project folder</span></div>
           <span class="pill design">In Design</span>
         </a>
+      </div>
+    </div>
+
+    <!-- CLIENTS -->
+    <div class="card col-2">
+      <div class="card__hd">
+        <div class="card__ti"><span class="ic"><svg class="i"><use href="#ic-briefcase"/></svg></span>Clients <span class="badge-bbc" style="margin-left:4px">4 active</span></div>
+        <a class="card__more" href="#">View all &rarr;</a>
+      </div>
+      <div class="cli">
+        <div class="cli__av">HC</div>
+        <div class="cli__main"><div class="cli__nm">Hill Country Custom Homes <span class="tag builder">Builder</span></div><div class="cli__meta">Frameless Kitchen · In Production · last contact 2 days ago</div></div>
+        <div class="cli__act"><button class="cbtn" title="Call" onclick="toast('Calling Hill Country Custom Homes')"><svg class="i"><use href="#ic-phone"/></svg></button><button class="cbtn" title="Message" onclick="toast('Message to Hill Country Custom Homes')"><svg class="i"><use href="#ic-msg"/></svg></button></div>
+      </div>
+      <div class="cli">
+        <div class="cli__av">VI</div>
+        <div class="cli__main"><div class="cli__nm">Verde Interior Studio <span class="tag designer">Designer</span></div><div class="cli__meta">Office Built-ins · Installed · repeat client</div></div>
+        <div class="cli__act"><button class="cbtn" title="Call" onclick="toast('Calling Verde Interior Studio')"><svg class="i"><use href="#ic-phone"/></svg></button><button class="cbtn" title="Message" onclick="toast('Message to Verde Interior Studio')"><svg class="i"><use href="#ic-msg"/></svg></button></div>
+      </div>
+      <div class="cli">
+        <div class="cli__av">WR</div>
+        <div class="cli__main"><div class="cli__nm">The Whitman Residence <span class="tag home">Homeowner</span></div><div class="cli__meta">Master Bath Vanity · Finishing · install next week</div></div>
+        <div class="cli__act"><button class="cbtn" title="Call" onclick="toast('Calling the Whitman Residence')"><svg class="i"><use href="#ic-phone"/></svg></button><button class="cbtn" title="Message" onclick="toast('Message to the Whitman Residence')"><svg class="i"><use href="#ic-msg"/></svg></button></div>
+      </div>
+      <div class="cli">
+        <div class="cli__av">BV</div>
+        <div class="cli__main"><div class="cli__nm">Brazos Valley Builders <span class="tag builder">Builder</span></div><div class="cli__meta">Showroom Cabinetry · In Design · new this month</div></div>
+        <div class="cli__act"><button class="cbtn" title="Call" onclick="toast('Calling Brazos Valley Builders')"><svg class="i"><use href="#ic-phone"/></svg></button><button class="cbtn" title="Message" onclick="toast('Message to Brazos Valley Builders')"><svg class="i"><use href="#ic-msg"/></svg></button></div>
       </div>
     </div>
 
