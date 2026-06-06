@@ -61,8 +61,13 @@ export default async (req) => {
   }
 
   /* ---- READ ---- */
+  // NocoDB v2 caps each page at 100 records server-side regardless of `limit`.
+  // We accept `limit` (clamped to 1000) and `offset` (default 0). Callers must paginate
+  // via offset for full reads (e.g., bulk dedup). Bug fixed 2026-06-06 — prior version
+  // ignored offset entirely so paginated callers got the first page repeatedly.
   const limit = Math.min(parseInt(url.searchParams.get("limit") || "200", 10) || 200, 1000);
-  const api = `${recordsApi}?limit=${limit}`;
+  const offset = Math.max(parseInt(url.searchParams.get("offset") || "0", 10) || 0, 0);
+  const api = `${recordsApi}?limit=${limit}&offset=${offset}`;
   try {
     const r = await fetch(api, { headers: { "xc-token": token, "accept": "application/json" } });
     const text = await r.text();
