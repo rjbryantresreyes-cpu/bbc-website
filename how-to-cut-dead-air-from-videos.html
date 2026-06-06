@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-L6S574R0CE"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-L6S574R0CE');
+  </script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>How Do I Cut the Dead Air Out of My Videos Automatically? | Balay ni Bruno &amp; Co.</title>
+  <meta name="description" content="Recording is easy. Cutting every pause and silence is the slow part. Here is how we set up an AI to trim the dead air automatically and hand back a tight video the same day." />
+  <link rel="canonical" href="https://balaynibruno.co/how-to-cut-dead-air-from-videos.html" />
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Balay ni Bruno &amp; Co." />
+  <meta property="og:title" content="How Do I Cut the Dead Air Out of My Videos Automatically? | Balay ni Bruno &amp; Co." />
+  <meta property="og:description" content="Recording is easy. Cutting every pause and silence is the slow part. Here is how we set up an AI to trim the dead air automatically and hand back a tight video the same day." />
+  <meta property="og:url" content="https://balaynibruno.co/how-to-cut-dead-air-from-videos.html" />
+  <meta property="og:image" content="https://balaynibruno.co/bbc-logo.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Lora:ital,wght@0,400;0,500;1,400;1,500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --deep-blue:#1F3557; --mid-blue:#4B6FA5; --warm-blue:#6D8FC7;
+      --light-blue:#A8C0DC; --bg-primary:#F5F1EA; --bg-section:#EDE8DF;
+      --bg-card:#FDFAF6; --bg-dark:#1C2E47; --bg-footer:#172540;
+      --text-ink:#2A3040; --text-body:#4E5666; --text-muted:#888FA0;
+      --text-warm:#F5F1EA; --gold:#B8923E; --gold-pale:#E6CFA0;
+      --gold-warm:#D4A84B; --sage:#4E9E74;
+      --font-display:'Playfair Display',Georgia,serif;
+      --font-body:'Lora',Georgia,serif;
+      --font-ui:'DM Sans',system-ui,sans-serif;
+      --max-width:860px; --radius:16px; --radius-lg:24px;
+      --shadow-sm:0 3px 18px rgba(85,60,35,0.08);
+      --shadow-md:0 7px 36px rgba(85,60,35,0.11);
+      --shadow-lg:0 14px 56px rgba(85,60,35,0.14);
+      --border-card:1px solid rgba(85,60,35,0.09);
+      --border-warm:1px solid rgba(85,60,35,0.12);
+      --s1:0.5rem;--s2:1rem;--s3:1.5rem;--s4:2.5rem;--s5:4rem;
+    }
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{font-family:var(--font-body);color:var(--text-ink);background:var(--bg-primary);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+    body::after{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23n)' opacity='0.026'/%3E%3C/svg%3E");pointer-events:none;z-index:9999;mix-blend-mode:multiply}
+    h1,h2,h3,h4{font-family:var(--font-display);line-height:1.22;color:var(--deep-blue)}
+    h1{font-size:clamp(2rem,4.5vw,3.2rem);font-weight:700;line-height:1.14}
+    h2{font-size:clamp(1.3rem,2.5vw,1.9rem);font-weight:600;margin-top:2.5rem;margin-bottom:0.75rem}
+    h3{font-size:clamp(1rem,1.8vw,1.25rem);font-weight:600;margin-top:2rem;margin-bottom:0.5rem}
+    p{font-family:var(--font-body);font-size:1.05rem;line-height:1.9;color:var(--text-body);margin-bottom:1.2rem}
+    a{text-decoration:none}
+    ul,ol{margin:0 0 1.2rem 1.5rem;color:var(--text-body);font-family:var(--font-body);font-size:1.05rem;line-height:1.85}
+    li{margin-bottom:0.4rem}
+    .eyebrow{display:block;font-family:var(--font-ui);font-size:0.68rem;font-weight:600;letter-spacing:0.17em;text-transform:uppercase;color:var(--gold);margin-bottom:var(--s2)}
+    .container{max-width:var(--max-width);margin:0 auto;padding:0 var(--s4)}
+    @media(max-width:600px){.container{padding:0 var(--s2)}}
+    .nav{position:sticky;top:0;z-index:100;background:rgba(28,46,71,0.96);backdrop-filter:blur(10px);border-bottom:1px solid rgba(255,255,255,0.07);padding:1rem var(--s4)}
+    .nav__inner{max-width:var(--max-width);margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+    .nav__logo{font-family:var(--font-display);font-size:1rem;font-weight:600;color:#fff;letter-spacing:0.01em}
+    .nav__back{font-family:var(--font-ui);font-size:0.82rem;font-weight:500;color:rgba(245,241,234,0.6);transition:color 0.2s}
+    .nav__back:hover{color:var(--gold-pale)}
+    .article-hero{background:var(--bg-dark);padding:clamp(3rem,7vw,5.5rem) 0 clamp(2.5rem,5vw,4rem);position:relative;overflow:hidden}
+    .article-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 50% at 50% 0%,rgba(184,146,62,0.09),transparent 70%);pointer-events:none}
+    .article-hero .container{position:relative}
+    .article-meta{display:flex;align-items:center;gap:0.75rem;flex-wrap:wrap;margin-bottom:1.5rem}
+    .article-cat{font-family:var(--font-ui);font-size:0.72rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold-pale);background:rgba(184,146,62,0.12);border:1px solid rgba(184,146,62,0.22);border-radius:100px;padding:0.22rem 0.8rem}
+    .article-date{font-family:var(--font-ui);font-size:0.78rem;color:rgba(245,241,234,0.4)}
+    .article-hero h1{color:#fff;margin-bottom:1.2rem}
+    .article-hero .lead{font-family:var(--font-body);font-size:1.1rem;line-height:1.85;color:rgba(245,241,234,0.7);max-width:680px}
+    .article-body{padding:clamp(2.5rem,5vw,4.5rem) 0}
+    .article-body .container{max-width:760px}
+    .highlight-box{background:var(--bg-section);border-left:3px solid var(--gold);border-radius:0 var(--radius) var(--radius) 0;padding:1.25rem 1.5rem;margin:2rem 0}
+    .highlight-box p{margin:0;font-size:0.98rem}
+    .key-takeaway{background:var(--bg-dark);border-radius:var(--radius-lg);padding:2rem;margin:2.5rem 0}
+    .key-takeaway h3{color:#fff;margin-top:0;margin-bottom:1rem}
+    .key-takeaway ul{color:rgba(245,241,234,0.72);margin-left:1.2rem}
+    .key-takeaway li{margin-bottom:0.5rem;font-size:0.98rem}
+    .chart-caption{font-family:var(--font-ui);font-size:0.76rem;color:var(--text-muted);text-align:center;margin:0.4rem 0 0;font-style:normal}
+    .faq-q{font-family:var(--font-display);font-size:1.15rem;font-weight:600;color:var(--deep-blue);margin-top:1.75rem;margin-bottom:0.4rem}
+    .cta-section{background:var(--bg-dark);padding:clamp(3rem,6vw,5rem) 0;text-align:center;position:relative;overflow:hidden}
+    .cta-section::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 60% at 50% 100%,rgba(184,146,62,0.08),transparent 70%);pointer-events:none}
+    .cta-section h2{color:#fff;margin-top:0;margin-bottom:1rem}
+    .cta-section p{color:rgba(245,241,234,0.65);max-width:500px;margin:0 auto 2rem}
+    .btn-gold{display:inline-flex;align-items:center;gap:0.5rem;padding:0.9rem 2.2rem;background:var(--gold);color:#fff;border-radius:100px;font-family:var(--font-ui);font-size:0.9rem;font-weight:600;box-shadow:0 4px 20px rgba(184,146,62,0.3);transition:all 0.22s}
+    .btn-gold:hover{background:var(--gold-warm);transform:translateY(-2px);box-shadow:0 8px 30px rgba(184,146,62,0.4)}
+    .footer{background:var(--bg-footer);padding:2rem var(--s4);text-align:center}
+    .footer p{font-family:var(--font-ui);font-size:0.8rem;color:rgba(245,241,234,0.35);line-height:1.8}
+    .footer a{color:rgba(245,241,234,0.45)}
+    .footer a:hover{color:var(--gold-pale)}
+  </style>
+  <link rel="stylesheet" href="bbc-article-visuals.css" />
+  <!-- bbc-schema -->
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://balaynibruno.co/#organization",
+      "name": "Balay ni Bruno & Co.",
+      "url": "https://balaynibruno.co/",
+      "logo": "https://balaynibruno.co/bbc-logo.png",
+      "email": "admin@balaynibruno.co",
+      "telephone": "+63 935 663 0324",
+      "founder": { "@type": "Person", "name": "RJ Bryan Tres Reyes" },
+      "sameAs": [
+        "https://www.facebook.com/profile.php?id=61590006878673",
+        "https://www.instagram.com/balaynibruno/",
+        "https://www.tiktok.com/@balaynibruno.co",
+        "https://youtube.com/@balaynibruno"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://balaynibruno.co/#website",
+      "name": "Balay ni Bruno & Co.",
+      "url": "https://balaynibruno.co/",
+      "publisher": { "@id": "https://balaynibruno.co/#organization" }
+    },
+    {
+      "@type": "Article",
+      "headline": "How Do I Cut the Dead Air Out of My Videos Automatically?",
+      "description": "Recording is easy. Cutting every pause and silence is the slow part. Here is how we set up an AI to trim the dead air automatically and hand back a tight video the same day.",
+      "url": "https://balaynibruno.co/how-to-cut-dead-air-from-videos.html",
+      "mainEntityOfPage": "https://balaynibruno.co/how-to-cut-dead-air-from-videos.html",
+      "image": "https://balaynibruno.co/bbc-logo.png",
+      "author": { "@id": "https://balaynibruno.co/#organization" },
+      "publisher": { "@id": "https://balaynibruno.co/#organization" }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Can an AI really remove silence from my videos without touching my words?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Yes. The AI listens to the audio track and looks for moments where volume drops below normal speech level. Those moments, pauses, breath gaps, dead air at the start and end, get removed automatically. Your actual words are not touched at all. The result is a tighter video where everything you said is still there, just with the gaps closed." }
+        },
+        {
+          "@type": "Question",
+          "name": "How much shorter will my video be after the dead air is removed?",
+          "acceptedAnswer": { "@type": "Answer", "text": "It depends on your speaking style, but for most talking-head recordings you can expect the output to run 5 to 15 percent shorter than the original. A 22-minute recording we cleaned came out at just under 21 minutes, with the natural rhythm of the speaker still intact and no jarring cuts." }
+        },
+        {
+          "@type": "Question",
+          "name": "Do I have to edit anything myself, or does the AI handle the whole thing?",
+          "acceptedAnswer": { "@type": "Answer", "text": "You record and send us the file. The AI handles the analysis and the cutting. You get back a cleaned file. At Balay ni Bruno &amp; Co., this is part of the video support we build into partnerships, so there is no manual timeline editing on your side." }
+        }
+      ]
+    }
+  ]
+}
+  </script>
+</head>
+<body>
+<nav class="nav"><div class="nav__inner"><a href="index.html" class="nav__logo">Balay ni Bruno &amp; Co.</a><a href="insights.html" class="nav__back">&#8592; Back to Insights</a></div></nav>
+
+<section class="article-hero">
+  <div class="container">
+    <div class="article-meta">
+      <span class="article-cat">AI &amp; Automation</span>
+      <span class="article-date">June 2026</span>
+    </div>
+    <h1>How Do I Cut the Dead Air Out of My Videos Automatically?</h1>
+    <p class="lead">Recording is easy. Cutting every pause and silence is the slow part. Here is how we set up an AI to trim the dead air automatically and hand back a tight video the same day.</p>
+  </div>
+</section>
+
+<section class="article-body">
+  <div class="container">
+
+    <p>You hit record, you talk, you stop. That part takes twenty minutes. The part that actually slows you down is sitting in a timeline, scrubbing through every moment where you paused to think, every breath gap, every three seconds of silence at the start while you waited to begin. That work is tedious and it never gets faster.</p>
+
+    <p>At Balay ni Bruno &amp; Co., we use an AI that listens to a recording's audio track and does that cutting job automatically. No timeline. No scrubbing. You send the raw file and get back a cleaner, tighter version. Here is exactly how it works.</p>
+
+    <h2>What the AI Actually Does</h2>
+
+    <p>The tool listens to the audio. Anywhere it hears the volume drop below normal speech level, it marks that moment as silence. Then it cuts both the audio and the video together at every marked moment, so the picture and sound stay perfectly matched. What you get is a version with all the gaps closed but every word you said still in place.</p>
+
+    <div class="tip-box tip-box--note">
+      <span class="tip-box__icon">&#9432;</span>
+      <p class="tip-box__text"><strong>What it removes and what it keeps:</strong> The AI cuts pauses between sentences, dead air at the start and end of the recording, and breath gaps. It does not touch your words. If you said it, it stays. Only the gaps between what you said get trimmed.</p>
+    </div>
+
+    <p>The AI keeps a small buffer of natural-sounding space around each kept section, so the result does not feel rushed or robotic. Pauses get tightened, not erased entirely.</p>
+
+    <h2>The Kind of Recordings This Works Best For</h2>
+
+    <p>Most business owners who record their own clips fall into one of these categories, and all of them benefit from this process.</p>
+
+    <div class="before-after-compare">
+      <div class="before">
+        <h4>Without silence removal</h4>
+        <ul>
+          <li>Long pauses while you gathered your thoughts</li>
+          <li>Dead air at the start before you began speaking</li>
+          <li>Breath gaps between sentences</li>
+          <li>Awkward moments when you restarted a thought</li>
+          <li>Extra time at the end after you finished</li>
+        </ul>
+      </div>
+      <div class="after">
+        <h4>After the AI cleans it</h4>
+        <ul>
+          <li>Smooth, natural pacing with gaps closed</li>
+          <li>Starts right when you start speaking</li>
+          <li>Breath gaps trimmed to feel normal, not rushed</li>
+          <li>Transitions between thoughts feel intentional</li>
+          <li>Ends exactly when the content ends</li>
+        </ul>
+      </div>
+    </div>
+
+    <p>This works well for screen-share recordings, talking-head clips, podcast episodes, training videos, and Loom walkthroughs. Essentially any recording where a person is speaking and the pauses are unintentional, not part of the content.</p>
+
+    <h2>How Much Shorter Does It Get?</h2>
+
+    <p>The reduction depends on the speaker's natural style, but for most talking-head recordings the result runs 5 to 15 percent shorter than the original. We have found that this range holds consistently. The rhythm of the speaker survives, but the wasted space between thoughts disappears.</p>
+
+    <div class="stat-row">
+      <div class="stat-card">
+        <div class="stat-card__value">5&ndash;15%</div>
+        <div class="stat-card__label">Typical time saved per recording</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-card__value">1</div>
+        <div class="stat-card__label">Command to run the whole job</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-card__value">0</div>
+        <div class="stat-card__label">Manual timeline edits needed</div>
+      </div>
+    </div>
+    <p class="chart-caption">Based on our production use across client pitch recordings and founder talking-head clips. Typical result, not a guarantee for every recording.</p>
+
+    <p>As a real example from our own studio: a 22-minute client pitch screen-share came out at just under 21 minutes after the AI processed it. The reduction was modest in time but significant in feel. The recording went from something that needed editing to something that was ready to share.</p>
+
+    <h2>What the Process Looks Like From Your Side</h2>
+
+    <p>This is the full journey from raw recording to clean file. Your job is the first step. Everything after that happens on our side.</p>
+
+    <div class="step-flow step-flow--horizontal">
+      <div class="step">
+        <span class="step__num">1</span>
+        <div class="step__content">
+          <div class="step__title">You record</div>
+          <p class="step__desc">Record your clip however you normally do. Loom, phone camera, screen capture. Pauses are fine. That is the point.</p>
+        </div>
+      </div>
+      <div class="step">
+        <span class="step__num">2</span>
+        <div class="step__content">
+          <div class="step__title">We run the AI</div>
+          <p class="step__desc">The AI scans the audio, finds the gaps, and removes them. Audio and video stay in sync throughout.</p>
+        </div>
+      </div>
+      <div class="step">
+        <span class="step__num">3</span>
+        <div class="step__content">
+          <div class="step__title">We verify the output</div>
+          <p class="step__desc">We check the result at a few points to confirm no words were clipped and the pacing feels right.</p>
+        </div>
+      </div>
+      <div class="step">
+        <span class="step__num">4</span>
+        <div class="step__content">
+          <div class="step__title">You get the file back</div>
+          <p class="step__desc">A cleaned, tighter version lands in your shared folder. Ready to post or pass to the next step.</p>
+        </div>
+      </div>
+    </div>
+
+    <h2>What Can Go After This Step</h2>
+
+    <p>Removing the dead air is the foundation. Once that is done, the cleaned file can move through a full finishing process without any manual timeline work at any stage. Here is what the complete path can look like.</p>
+
+    <div class="roadmap">
+      <div class="roadmap-item">
+        <span class="roadmap-item__dot">A</span>
+        <div class="roadmap-item__body">
+          <div class="roadmap-item__title">Silence removed</div>
+          <p class="roadmap-item__desc">The AI cleans the raw recording. Pauses, gaps, and dead air are gone. Words are untouched.</p>
+        </div>
+      </div>
+      <div class="roadmap-item">
+        <span class="roadmap-item__dot">B</span>
+        <div class="roadmap-item__body">
+          <div class="roadmap-item__title">Captions added</div>
+          <p class="roadmap-item__desc">A transcription tool reads the cleaned audio and generates a caption file. Another tool burns it into the video.</p>
+        </div>
+      </div>
+      <div class="roadmap-item">
+        <span class="roadmap-item__dot">C</span>
+        <div class="roadmap-item__body">
+          <div class="roadmap-item__title">Format converted for social</div>
+          <p class="roadmap-item__desc">A horizontal recording gets converted to vertical (9:16) for Reels and Shorts, with a blurred background fill.</p>
+        </div>
+      </div>
+      <div class="roadmap-item">
+        <span class="roadmap-item__dot">D</span>
+        <div class="roadmap-item__body">
+          <div class="roadmap-item__title">Compressed for upload</div>
+          <p class="roadmap-item__desc">The final file is sized for the platform so it uploads cleanly and plays without buffering.</p>
+        </div>
+      </div>
+      <div class="roadmap-item">
+        <span class="roadmap-item__dot">E</span>
+        <div class="roadmap-item__body">
+          <div class="roadmap-item__title">Ready to post</div>
+          <p class="roadmap-item__desc">You get a finished, branded, caption-burned vertical video from one raw recording. No timeline editing at any step.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="highlight-box"><p>The win is not just the time saved on one clip. It is never having to sit in a video timeline removing pauses by hand again. That job moves to the AI, permanently.</p></div>
+
+    <h2>One Thing the AI Cannot Do</h2>
+
+    <p>This is important to say plainly. The AI acts on audio volume, which means it catches silence and pauses but it cannot catch filler words that run together with no gap, like "um um um" said quickly back to back. It also cannot judge whether a bad take was bad. If you said the wrong thing fluently and want that moment out, that still needs a human eye. For most recordings, those situations are the minority. The dead air is the majority, and that is what this handles.</p>
+
+    <div class="tip-box tip-box--tip">
+      <span class="tip-box__icon">&#10003;</span>
+      <p class="tip-box__text"><strong>Best use case:</strong> Talking-head recordings, screen-shares, podcast episodes, and training videos where the main problem is dead air and pauses, not wrong words. If your recording is mostly pauses and you want it tighter, this is the right tool.</p>
+    </div>
+
+    <h2>Why We Built This Into Our Work</h2>
+
+    <p>This is not a service we sell by itself. It is part of the video support inside a Balay ni Bruno &amp; Co. partnership. When a business works with us and they record their own clips, this is one of the things that happens on our side so they do not have to learn video editing to produce clean content. The recording is the hardest part. Everything after it should just happen.</p>
+
+    <h2>Common Questions</h2>
+
+    <p class="faq-q">Can an AI really remove silence from my videos without touching my words?</p>
+    <p>Yes. The AI listens to the audio track and looks for moments where volume drops below normal speech level. Those moments, pauses, breath gaps, dead air at the start and end, get removed automatically. Your actual words are not touched at all. The result is a tighter video where everything you said is still there, just with the gaps closed.</p>
+
+    <p class="faq-q">How much shorter will my video be after the dead air is removed?</p>
+    <p>It depends on your speaking style, but for most talking-head recordings you can expect the output to run 5 to 15 percent shorter than the original. A 22-minute recording we cleaned came out at just under 21 minutes, with the natural rhythm of the speaker still intact and no jarring cuts.</p>
+
+    <p class="faq-q">Do I have to edit anything myself, or does the AI handle the whole thing?</p>
+    <p>You record and send us the file. The AI handles the analysis and the cutting. You get back a cleaned file. At Balay ni Bruno &amp; Co., this is part of the video support we build into partnerships, so there is no manual timeline editing on your side.</p>
+
+    <div class="key-takeaway">
+      <h3>Key Takeaways</h3>
+      <ul>
+        <li>The AI listens to audio and cuts silence automatically. Your words are never touched.</li>
+        <li>Most talking-head recordings come out 5 to 15 percent shorter, with natural pacing preserved.</li>
+        <li>The cleaned file can go straight into captions, format conversion, and compression without any manual editing.</li>
+        <li>This works best for recordings where dead air is the main problem. Bad takes still need a human.</li>
+        <li>At Balay ni Bruno &amp; Co., this runs as part of the partnership. You record, we handle the rest.</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<section class="cta-section"><div class="container"><span class="eyebrow" style="color:rgba(245,241,234,0.45);">Work with BBC</span><h2>Want your recordings cleaned up automatically?</h2><p>Every process on this page is part of how we run a Balay ni Bruno &amp; Co. partnership. Let us talk about what this looks like for your business.</p><a href="https://calendly.com/rj-balaynibruno/bbc-strategy-call" target="_blank" rel="noopener" class="btn-gold">Book a Strategy Call &#8599;</a></div></section>
+
+<!-- bbc-related-reads -->
+<section style="background:#EDE8DF;padding:clamp(2.5rem,5vw,4rem) 0;border-top:1px solid rgba(85,60,35,0.12);">
+  <div style="max-width:860px;margin:0 auto;padding:0 2.5rem;">
+    <span style="display:block;font-family:'DM Sans',system-ui,sans-serif;font-size:0.68rem;font-weight:700;letter-spacing:0.17em;text-transform:uppercase;color:#B8923E;margin-bottom:1.2rem;">Related Reads</span>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:1rem;">
+      <a href="how-we-built-ai-video-system-free.html" style="display:block;background:#FDFAF6;border:1px solid rgba(85,60,35,0.12);border-radius:16px;padding:1.2rem 1.35rem;box-shadow:0 3px 18px rgba(85,60,35,0.06);">
+        <span style="display:block;font-family:'DM Sans',system-ui,sans-serif;font-size:0.6rem;font-weight:700;letter-spacing:0.13em;text-transform:uppercase;color:#888FA0;margin-bottom:0.45rem;">AI &amp; Automation</span>
+        <span style="display:block;font-family:'Playfair Display',Georgia,serif;font-size:1.02rem;font-weight:600;color:#1F3557;line-height:1.34;">How We Built an AI Video System for Free</span>
+      </a>
+      <a href="how-we-used-remotion-make-free-motion-graphics.html" style="display:block;background:#FDFAF6;border:1px solid rgba(85,60,35,0.12);border-radius:16px;padding:1.2rem 1.35rem;box-shadow:0 3px 18px rgba(85,60,35,0.06);">
+        <span style="display:block;font-family:'DM Sans',system-ui,sans-serif;font-size:0.6rem;font-weight:700;letter-spacing:0.13em;text-transform:uppercase;color:#888FA0;margin-bottom:0.45rem;">AI &amp; Automation</span>
+        <span style="display:block;font-family:'Playfair Display',Georgia,serif;font-size:1.02rem;font-weight:600;color:#1F3557;line-height:1.34;">How We Used Remotion to Make Free Motion Graphics</span>
+      </a>
+      <a href="ffmpeg-reels-business-video.html" style="display:block;background:#FDFAF6;border:1px solid rgba(85,60,35,0.12);border-radius:16px;padding:1.2rem 1.35rem;box-shadow:0 3px 18px rgba(85,60,35,0.06);">
+        <span style="display:block;font-family:'DM Sans',system-ui,sans-serif;font-size:0.6rem;font-weight:700;letter-spacing:0.13em;text-transform:uppercase;color:#888FA0;margin-bottom:0.45rem;">AI &amp; Automation</span>
+        <span style="display:block;font-family:'Playfair Display',Georgia,serif;font-size:1.02rem;font-weight:600;color:#1F3557;line-height:1.34;">FFmpeg for Business Video: How We Make Reels Without Editing Software</span>
+      </a>
+      <a href="how-we-help.html" style="display:block;background:#1C2E47;border:1px solid rgba(184,146,62,0.3);border-radius:16px;padding:1.2rem 1.35rem;">
+        <span style="display:block;font-family:'DM Sans',system-ui,sans-serif;font-size:0.6rem;font-weight:700;letter-spacing:0.13em;text-transform:uppercase;color:#E6CFA0;margin-bottom:0.45rem;">Work With BBC</span>
+        <span style="display:block;font-family:'Playfair Display',Georgia,serif;font-size:1.02rem;font-weight:600;color:#fff;line-height:1.34;">See How We Help &rarr;</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer class="footer"><p><a href="index.html">Balay ni Bruno &amp; Co.</a> &nbsp;&bull;&nbsp; <a href="insights.html">Insights</a> &nbsp;&bull;&nbsp; <a href="mailto:admin@balaynibruno.co">admin@balaynibruno.co</a></p><p style="margin-top:0.4rem;">&copy; 2026 Balay ni Bruno &amp; Co. All rights reserved.</p></footer>
+</body>
+</html>

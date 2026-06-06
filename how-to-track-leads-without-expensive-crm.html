@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-L6S574R0CE"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-L6S574R0CE');
+  </script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>How Do I Keep Track of My Leads Without Expensive Software? | Balay ni Bruno &amp; Co.</title>
+  <meta name="description" content="Leads slip through the cracks when they live in your inbox and your memory. Here is how we set up simple lead tracking that shows who is new, who is waiting, and who needs a follow-up, without a costly tool." />
+  <link rel="canonical" href="https://balaynibruno.co/how-to-track-leads-without-expensive-crm.html" />
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Balay ni Bruno &amp; Co." />
+  <meta property="og:title" content="How Do I Keep Track of My Leads Without Expensive Software? | Balay ni Bruno &amp; Co." />
+  <meta property="og:description" content="Leads slip through the cracks when they live in your inbox and your memory. Here is how we set up simple lead tracking that shows who is new, who is waiting, and who needs a follow-up, without a costly tool." />
+  <meta property="og:url" content="https://balaynibruno.co/how-to-track-leads-without-expensive-crm.html" />
+  <meta property="og:image" content="https://balaynibruno.co/bbc-logo.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Lora:ital,wght@0,400;0,500;1,400;1,500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --deep-blue:#1F3557; --mid-blue:#4B6FA5; --warm-blue:#6D8FC7;
+      --light-blue:#A8C0DC; --bg-primary:#F5F1EA; --bg-section:#EDE8DF;
+      --bg-card:#FDFAF6; --bg-dark:#1C2E47; --bg-footer:#172540;
+      --text-ink:#2A3040; --text-body:#4E5666; --text-muted:#888FA0;
+      --text-warm:#F5F1EA; --gold:#B8923E; --gold-pale:#E6CFA0;
+      --gold-warm:#D4A84B; --sage:#4E9E74;
+      --font-display:'Playfair Display',Georgia,serif;
+      --font-body:'Lora',Georgia,serif;
+      --font-ui:'DM Sans',system-ui,sans-serif;
+      --max-width:860px; --radius:16px; --radius-lg:24px;
+      --shadow-sm:0 3px 18px rgba(85,60,35,0.08);
+      --shadow-md:0 7px 36px rgba(85,60,35,0.11);
+      --shadow-lg:0 14px 56px rgba(85,60,35,0.14);
+      --border-card:1px solid rgba(85,60,35,0.09);
+      --border-warm:1px solid rgba(85,60,35,0.12);
+      --s1:0.5rem;--s2:1rem;--s3:1.5rem;--s4:2.5rem;--s5:4rem;
+    }
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{font-family:var(--font-body);color:var(--text-ink);background:var(--bg-primary);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+    body::after{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23n)' opacity='0.026'/%3E%3C/svg%3E");pointer-events:none;z-index:9999;mix-blend-mode:multiply}
+    h1,h2,h3,h4{font-family:var(--font-display);line-height:1.22;color:var(--deep-blue)}
+    h1{font-size:clamp(2rem,4.5vw,3.2rem);font-weight:700;line-height:1.14}
+    h2{font-size:clamp(1.3rem,2.5vw,1.9rem);font-weight:600;margin-top:2.5rem;margin-bottom:0.75rem}
+    h3{font-size:clamp(1rem,1.8vw,1.25rem);font-weight:600;margin-top:2rem;margin-bottom:0.5rem}
+    p{font-family:var(--font-body);font-size:1.05rem;line-height:1.9;color:var(--text-body);margin-bottom:1.2rem}
+    a{text-decoration:none}
+    ul,ol{margin:0 0 1.2rem 1.5rem;color:var(--text-body);font-family:var(--font-body);font-size:1.05rem;line-height:1.85}
+    li{margin-bottom:0.4rem}
+    .eyebrow{display:block;font-family:var(--font-ui);font-size:0.68rem;font-weight:600;letter-spacing:0.17em;text-transform:uppercase;color:var(--gold);margin-bottom:var(--s2)}
+    .container{max-width:var(--max-width);margin:0 auto;padding:0 var(--s4)}
+    @media(max-width:600px){.container{padding:0 var(--s2)}}
+    .nav{position:sticky;top:0;z-index:100;background:rgba(28,46,71,0.96);backdrop-filter:blur(10px);border-bottom:1px solid rgba(255,255,255,0.07);padding:1rem var(--s4)}
+    .nav__inner{max-width:var(--max-width);margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+    .nav__logo{font-family:var(--font-display);font-size:1rem;font-weight:600;color:#fff;letter-spacing:0.01em}
+    .nav__back{font-family:var(--font-ui);font-size:0.82rem;font-weight:500;color:rgba(245,241,234,0.6);transition:color 0.2s}
+    .nav__back:hover{color:var(--gold-pale)}
+    .article-hero{background:var(--bg-dark);padding:clamp(3rem,7vw,5.5rem) 0 clamp(2.5rem,5vw,4rem);position:relative;overflow:hidden}
+    .article-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 50% at 50% 0%,rgba(184,146,62,0.09),transparent 70%);pointer-events:none}
+    .article-hero .container{position:relative}
+    .article-meta{display:flex;align-items:center;gap:0.75rem;flex-wrap:wrap;margin-bottom:1.5rem}
+    .article-cat{font-family:var(--font-ui);font-size:0.72rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold-pale);background:rgba(184,146,62,0.12);border:1px solid rgba(184,146,62,0.22);border-radius:100px;padding:0.22rem 0.8rem}
+    .article-date{font-family:var(--font-ui);font-size:0.78rem;color:rgba(245,241,234,0.4)}
+    .article-hero h1{color:#fff;margin-bottom:1.2rem}
+    .article-hero .lead{font-family:var(--font-body);font-size:1.1rem;line-height:1.85;color:rgba(245,241,234,0.7);max-width:680px}
+    .article-body{padding:clamp(2.5rem,5vw,4.5rem) 0}
+    .article-body .container{max-width:760px}
+    .highlight-box{background:var(--bg-section);border-left:3px solid var(--gold);border-radius:0 var(--radius) var(--radius) 0;padding:1.25rem 1.5rem;margin:2rem 0}
+    .highlight-box p{margin:0;font-size:0.98rem}
+    .key-takeaway{background:var(--bg-dark);border-radius:var(--radius-lg);padding:2rem;margin:2.5rem 0}
+    .key-takeaway h3{color:#fff;margin-top:0;margin-bottom:1rem}
+    .key-takeaway ul{color:rgba(245,241,234,0.72);margin-left:1.2rem}
+    .key-takeaway li{margin-bottom:0.5rem;font-size:0.98rem}
+    .chart-caption{font-family:var(--font-ui);font-size:0.76rem;color:var(--text-muted);text-align:center;margin:0.4rem 0 0;font-style:normal}
+    .faq-q{font-family:var(--font-display);font-size:1.15rem;font-weight:600;color:var(--deep-blue);margin-top:1.75rem;margin-bottom:0.4rem}
+    .cta-section{background:var(--bg-dark);padding:clamp(3rem,6vw,5rem) 0;text-align:center;position:relative;overflow:hidden}
+    .cta-section::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 60% at 50% 100%,rgba(184,146,62,0.08),transparent 70%);pointer-events:none}
+    .cta-section h2{color:#fff;margin-top:0;margin-bottom:1rem}
+    .cta-section p{color:rgba(245,241,234,0.65);max-width:500px;margin:0 auto 2rem}
+    .btn-gold{display:inline-flex;align-items:center;gap:0.5rem;padding:0.9rem 2.2rem;background:var(--gold);color:#fff;border-radius:100px;font-family:var(--font-ui);font-size:0.9rem;font-weight:600;box-shadow:0 4px 20px rgba(184,146,62,0.3);transition:all 0.22s}
+    .btn-gold:hover{background:var(--gold-warm);transform:translateY(-2px);box-shadow:0 8px 30px rgba(184,146,62,0.4)}
+    .footer{background:var(--bg-footer);padding:2rem var(--s4);text-align:center}
+    .footer p{font-family:var(--font-ui);font-size:0.8rem;color:rgba(245,241,234,0.35);line-height:1.8}
+    .footer a{color:rgba(245,241,234,0.45)}
+    .footer a:hover{color:var(--gold-pale)}
+  </style>
+  <link rel="stylesheet" href="bbc-article-visuals.css" />
+  <!-- bbc-schema -->
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://balaynibruno.co/#organization",
+      "name": "Balay ni Bruno & Co.",
+      "url": "https://balaynibruno.co/",
+      "logo": "https://balaynibruno.co/bbc-logo.png",
+      "email": "admin@balaynibruno.co",
+      "telephone": "+63 935 663 0324",
+      "founder": { "@type": "Person", "name": "RJ Bryan Tres Reyes" },
+      "sameAs": [
+        "https://www.facebook.com/profile.php?id=61590006878673",
+        "https://www.instagram.com/balaynibruno/",
+        "https://www.tiktok.com/@balaynibruno.co",
+        "https://youtube.com/@balaynibruno"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://balaynibruno.co/#website",
+      "name": "Balay ni Bruno & Co.",
+      "url": "https://balaynibruno.co/",
+      "publisher": { "@id": "https://balaynibruno.co/#organization" }
+    },
+    {
+      "@type": "Article",
+      "headline": "How Do I Keep Track of My Leads Without Expensive Software?",
+      "description": "Leads slip through the cracks when they live in your inbox and your memory. Here is how we set up simple lead tracking that shows who is new, who is waiting, and who needs a follow-up, without a costly tool.",
+      "url": "https://balaynibruno.co/how-to-track-leads-without-expensive-crm.html",
+      "mainEntityOfPage": "https://balaynibruno.co/how-to-track-leads-without-expensive-crm.html",
+      "image": "https://balaynibruno.co/bbc-logo.png",
+      "author": { "@id": "https://balaynibruno.co/#organization" },
+      "publisher": { "@id": "https://balaynibruno.co/#organization" }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Do I need a paid CRM to track my leads?",
+          "acceptedAnswer": { "@type": "Answer", "text": "No. Most small businesses only need three pieces of information for each lead: where they are in the conversation, when you last reached out, and when to follow up next. A free or low-cost database handles this well without a monthly CRM subscription." }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I know which leads need a follow-up today?",
+          "acceptedAnswer": { "@type": "Answer", "text": "When you track a follow-up date for each lead, a simple report can surface anyone whose date has arrived. Instead of reading through all your notes every morning, you see a short list of exactly who needs to hear from you today." }
+        },
+        {
+          "@type": "Question",
+          "name": "What happens when a lead goes cold because I forgot to follow up?",
+          "acceptedAnswer": { "@type": "Answer", "text": "A warm lead goes cold because time passes without contact, not because the person lost interest. A follow-up date on every lead, surfaced in a simple report, is the fix. The lead does not fall through the cracks because the system reminds you before the gap gets too wide." }
+        }
+      ]
+    }
+  ]
+}
+  </script>
+</head>
+<body>
+<nav class="nav"><div class="nav__inner"><a href="index.html" class="nav__logo">Balay ni Bruno &amp; Co.</a><a href="insights.html" class="nav__back">&#8592; Back to Insights</a></div></nav>
+
+<section class="article-hero">
+  <div class="container">
+    <div class="article-meta">
+      <span class="article-cat">Operations</span>
+      <span class="article-date">June 2026</span>
+    </div>
+    <h1>How Do I Keep Track of My Leads Without Expensive Software?</h1>
+    <p class="lead">Leads slip through the cracks when they live in your inbox and your memory. Here is how we set up simple lead tracking that shows who is new, who is waiting, and who needs a follow-up today, without paying for a costly tool.</p>
+  </div>
+</section>
+
+<section class="article-body">
+  <div class="container">
+
+    <p>The most common way small business owners track leads is to remember them. A name saved in a contact. A note typed into a phone. A thread buried three screens deep in an inbox. It works until it does not, and by the time you realize a lead went cold, weeks have already passed.</p>
+
+    <p>At Balay ni Bruno &amp; Co., we set up something simpler: a short list of every lead, what stage they are at, when we last reached out, and when they are due for a follow-up. That is the whole system. No extra software. No monthly fee stacked on top of everything else. And because the follow-up date is right there, nothing slips quietly out of sight.</p>
+
+    <h2>The Real Problem Is Not the Tool. It Is the Gap.</h2>
+
+    <p>Most leads do not go cold because the person lost interest. They go cold because time passed and nobody reached out again. The owner meant to follow up, got busy, and the name moved further and further down the mental list until it disappeared entirely.</p>
+
+    <p>The fix is not a fancier system. It is a visible follow-up date on every lead, checked once a day. That is it. Everything else, the stages, the notes, the history, is just context around that one date.</p>
+
+    <div class="before-after-compare">
+      <div class="before">
+        <h4>Without a system</h4>
+        <ul>
+          <li>Leads live in your inbox, your memory, and a few scattered notes</li>
+          <li>You follow up when you remember, which is not always</li>
+          <li>Warm leads go cold during busy weeks</li>
+          <li>You have no clear picture of how many people are in conversation</li>
+          <li>You feel like leads "just fell off" but cannot say why</li>
+        </ul>
+      </div>
+      <div class="after">
+        <h4>With simple tracking</h4>
+        <ul>
+          <li>Every lead has a name, a stage, and a follow-up date</li>
+          <li>A short daily report tells you exactly who needs a message today</li>
+          <li>Nothing falls through because the date is the reminder</li>
+          <li>You can see at a glance how many people are active at each stage</li>
+          <li>Follow-ups happen on purpose, not by accident</li>
+        </ul>
+      </div>
+    </div>
+
+    <h2>Three Fields That Change Everything</h2>
+
+    <p>You do not need a dozen columns or a complex setup. The minimum that actually works is three pieces of information for each lead. Once these are in place, the rest of the system builds on top of them naturally.</p>
+
+    <div class="roadmap">
+      <div class="roadmap-item">
+        <span class="roadmap-item__dot">1</span>
+        <div class="roadmap-item__body">
+          <div class="roadmap-item__title">Stage</div>
+          <p class="roadmap-item__desc">Where is this person right now? New inquiry, had a call, sent a proposal, waiting on a decision. A simple label so you know at a glance where every lead sits in the conversation.</p>
+        </div>
+      </div>
+      <div class="roadmap-item">
+        <span class="roadmap-item__dot">2</span>
+        <div class="roadmap-item__body">
+          <div class="roadmap-item__title">Last contact</div>
+          <p class="roadmap-item__desc">The date you last reached out. This tells you how long the silence has been. A lead you touched yesterday is very different from a lead you touched three weeks ago.</p>
+        </div>
+      </div>
+      <div class="roadmap-item">
+        <span class="roadmap-item__dot">3</span>
+        <div class="roadmap-item__body">
+          <div class="roadmap-item__title">Follow-up date</div>
+          <p class="roadmap-item__body">The single most important field. When this date arrives, the lead appears in your daily list. You do not have to remember. The date does the remembering for you.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="tip-box tip-box--tip">
+      <span class="tip-box__icon">&#10003;</span>
+      <p class="tip-box__text"><strong>A rule that works well in practice:</strong> set the follow-up date four days after any outreach. Close enough to stay warm, far enough to give the person room to respond. After you send, log the date and move on. The system will bring you back to it.</p>
+    </div>
+
+    <h2>What a Typical Lead List Looks Like</h2>
+
+    <p>At any given time, a small service business is usually managing a handful of active conversations in different stages. The distribution is roughly the same across most businesses: a few fresh inquiries, a few mid-conversation leads being nurtured, and one or two ready to decide. Keeping these stages visible is what stops your leads from feeling like a mystery.</p>
+
+    <div class="stat-row">
+      <div class="stat-card">
+        <div class="stat-card__value">3</div>
+        <div class="stat-card__label">Typical fields needed</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-card__value">4 days</div>
+        <div class="stat-card__label">Typical follow-up gap</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-card__value">1 list</div>
+        <div class="stat-card__label">Daily check, morning</div>
+      </div>
+    </div>
+    <p class="chart-caption">Typical figures for a simple lead tracking setup. Actual numbers vary by business and volume.</p>
+
+    <p>The daily habit is simple: open the list, look at who has a follow-up date of today or earlier, send those messages, update the dates for the next round. The whole check takes a few minutes. But it is the difference between a warm list and a leaking one.</p>
+
+    <h2>How the Follow-Up Gets Surfaced Without Manual Work</h2>
+
+    <p>The part most people skip is the surfacing. You can have a perfectly organized list and still forget to check it. So the system needs to bring the right names to you, not wait for you to go looking. Here is how we do it.</p>
+
+    <div class="step-flow step-flow--horizontal">
+      <div class="step">
+        <span class="step__num">1</span>
+        <div class="step__content">
+          <div class="step__title">Lead is added</div>
+          <p class="step__desc">Name, stage, and a follow-up date go into the list. Takes about thirty seconds after any new conversation.</p>
+        </div>
+      </div>
+      <div class="step">
+        <span class="step__num">2</span>
+        <div class="step__content">
+          <div class="step__title">Date is tracked</div>
+          <p class="step__desc">After each outreach, the last-contact field is updated and a new follow-up date is set four days out.</p>
+        </div>
+      </div>
+      <div class="step">
+        <span class="step__num">3</span>
+        <div class="step__content">
+          <div class="step__title">Due leads surface</div>
+          <p class="step__desc">A simple report shows anyone whose follow-up date has arrived. No scanning needed. The list is already filtered.</p>
+        </div>
+      </div>
+      <div class="step">
+        <span class="step__num">4</span>
+        <div class="step__content">
+          <div class="step__title">Human sends</div>
+          <p class="step__desc">The team member reads the context, writes a personal message, and sends. The AI surfaces who. The person decides what to say.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="highlight-box"><p>The AI side of this is only about surfacing and organizing. It drafts when asked. It never sends on its own. Every message that leaves the studio is read and sent by a real person. That is the standard we hold for every partnership.</p></div>
+
+    <h2>What This Replaces (and What It Costs)</h2>
+
+    <p>Many small business owners are paying for a sales tool they do not fully use because the basic need, knowing who to call today, does not require that much infrastructure. The typical paid CRM for a small team runs anywhere from $30 to $100 a month. A simple tracking setup using a free database costs nothing extra per month.</p>
+
+    <div class="bar-chart">
+      <div class="bar-chart__row">
+        <span class="bar-chart__label">Paid CRM (starter)</span>
+        <div class="bar-chart__track"><div class="bar-chart__fill" style="width:50%"><span class="bar-chart__val">~$45/mo typical</span></div></div>
+      </div>
+      <div class="bar-chart__row">
+        <span class="bar-chart__label">Mid-tier CRM</span>
+        <div class="bar-chart__track"><div class="bar-chart__fill" style="width:75%"><span class="bar-chart__val">~$80/mo typical</span></div></div>
+      </div>
+      <div class="bar-chart__row">
+        <span class="bar-chart__label">Simple lead list</span>
+        <div class="bar-chart__track"><div class="bar-chart__fill bar-chart__fill--gold" style="width:7%"><span class="bar-chart__val">$0</span></div></div>
+      </div>
+    </div>
+    <p class="chart-caption">Typical monthly costs for lead tracking tools. Ranges are common market prices, shown for comparison only.</p>
+
+    <div class="tip-box tip-box--note">
+      <span class="tip-box__icon">&#9432;</span>
+      <p class="tip-box__text"><strong>If you already pay for a CRM</strong> and your team uses it consistently, that is the right call. This system is for businesses that are losing leads to the gap between "I should follow up" and "I actually did." The tool matters less than the habit.</p>
+    </div>
+
+    <h2>How This Fits Into a BBC Partnership</h2>
+
+    <p>This is not something Balay ni Bruno &amp; Co. sells as a standalone product. It is part of how we run operations inside a partnership. When a business works with us, we set up the lead list, the stage labels, the follow-up logic, and the daily surface as part of the operating system we build together. You get the system and the person who works it consistently on your behalf.</p>
+
+    <p>The result is a lead list that does not leak, not because you are more disciplined, but because the system is doing the remembering and the team is doing the follow-through.</p>
+
+    <h2>Common Questions</h2>
+
+    <p class="faq-q">Do I need a paid CRM to track my leads?</p>
+    <p>No. Most small businesses only need three pieces of information for each lead: where they are in the conversation, when you last reached out, and when to follow up next. A free or low-cost database handles this well without a monthly CRM subscription.</p>
+
+    <p class="faq-q">How do I know which leads need a follow-up today?</p>
+    <p>When you track a follow-up date for each lead, a simple report can surface anyone whose date has arrived. Instead of reading through all your notes every morning, you see a short list of exactly who needs to hear from you today.</p>
+
+    <p class="faq-q">What happens when a lead goes cold because I forgot to follow up?</p>
+    <p>A warm lead goes cold because time passes without contact, not because the person lost interest. A follow-up date on every lead, surfaced in a simple report, is the fix. The lead does not fall through the cracks because the system reminds you before the gap gets too wide.</p>
+
+    <div class="key-takeaway">
+      <h3>Key Takeaways</h3>
+      <ul>
+        <li>Leads go cold because of gaps in follow-up, not lack of interest. A date on every lead closes the gap.</li>
+        <li>Three fields cover most of what a small business needs: stage, last contact, and follow-up date.</li>
+        <li>The daily habit is checking who is due today, not scanning the whole list from scratch.</li>
+        <li>The AI surfaces who needs a message. A real person reads the context and writes it. That is the standard.</li>
+        <li>This does not require a paid tool. It requires a consistent system, which is what a BBC partnership provides.</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<section class="cta-section"><div class="container"><span class="eyebrow" style="color:rgba(245,241,234,0.45);">Work with BBC</span><h2>Want a lead system that never drops a name?</h2><p>Lead tracking and follow-up are part of how we run every BBC partnership. Let us talk about what this looks like for your business.</p><a href="https://calendly.com/rj-balaynibruno/bbc-strategy-call" target="_blank" rel="noopener" class="btn-gold">Book a Strategy Call &#8599;</a></div></section>
+
+<!-- bbc-related-reads -->
+<section style="background:#EDE8DF;padding:clamp(2.5rem,5vw,4rem) 0;border-top:1px solid rgba(85,60,35,0.12);">
+  <div style="max-width:860px;margin:0 auto;padding:0 2.5rem;">
+    <span style="display:block;font-family:'DM Sans',system-ui,sans-serif;font-size:0.68rem;font-weight:700;letter-spacing:0.17em;text-transform:uppercase;color:#B8923E;margin-bottom:1.2rem;">Related Reads</span>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:1rem;">
+      <a href="can-ai-find-leads-for-my-business.html" style="display:block;background:#FDFAF6;border:1px solid rgba(85,60,35,0.12);border-radius:16px;padding:1.2rem 1.35rem;box-shadow:0 3px 18px rgba(85,60,35,0.06);">
+        <span style="display:block;font-family:'DM Sans',system-ui,sans-serif;font-size:0.6rem;font-weight:700;letter-spacing:0.13em;text-transform:uppercase;color:#888FA0;margin-bottom:0.45rem;">Operations</span>
+        <span style="display:block;font-family:'Playfair Display',Georgia,serif;font-size:1.02rem;font-weight:600;color:#1F3557;line-height:1.34;">Can AI Find Leads for My Business?</span>
+      </a>
+      <a href="how-we-built-business-command-center.html" style="display:block;background:#FDFAF6;border:1px solid rgba(85,60,35,0.12);border-radius:16px;padding:1.2rem 1.35rem;box-shadow:0 3px 18px rgba(85,60,35,0.06);">
+        <span style="display:block;font-family:'DM Sans',system-ui,sans-serif;font-size:0.6rem;font-weight:700;letter-spacing:0.13em;text-transform:uppercase;color:#888FA0;margin-bottom:0.45rem;">Operations</span>
+        <span style="display:block;font-family:'Playfair Display',Georgia,serif;font-size:1.02rem;font-weight:600;color:#1F3557;line-height:1.34;">How We Run a Whole Business From One Screen</span>
+      </a>
+      <a href="how-to-automate-small-business-tasks.html" style="display:block;background:#FDFAF6;border:1px solid rgba(85,60,35,0.12);border-radius:16px;padding:1.2rem 1.35rem;box-shadow:0 3px 18px rgba(85,60,35,0.06);">
+        <span style="display:block;font-family:'DM Sans',system-ui,sans-serif;font-size:0.6rem;font-weight:700;letter-spacing:0.13em;text-transform:uppercase;color:#888FA0;margin-bottom:0.45rem;">Operations</span>
+        <span style="display:block;font-family:'Playfair Display',Georgia,serif;font-size:1.02rem;font-weight:600;color:#1F3557;line-height:1.34;">How to Automate Small Business Tasks</span>
+      </a>
+      <a href="how-we-help.html" style="display:block;background:#1C2E47;border:1px solid rgba(184,146,62,0.3);border-radius:16px;padding:1.2rem 1.35rem;">
+        <span style="display:block;font-family:'DM Sans',system-ui,sans-serif;font-size:0.6rem;font-weight:700;letter-spacing:0.13em;text-transform:uppercase;color:#E6CFA0;margin-bottom:0.45rem;">Work With BBC</span>
+        <span style="display:block;font-family:'Playfair Display',Georgia,serif;font-size:1.02rem;font-weight:600;color:#fff;line-height:1.34;">See How We Help &rarr;</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer class="footer"><p><a href="index.html">Balay ni Bruno &amp; Co.</a> &nbsp;&bull;&nbsp; <a href="insights.html">Insights</a> &nbsp;&bull;&nbsp; <a href="mailto:admin@balaynibruno.co">admin@balaynibruno.co</a></p><p style="margin-top:0.4rem;">&copy; 2026 Balay ni Bruno &amp; Co. All rights reserved.</p></footer>
+</body>
+</html>
