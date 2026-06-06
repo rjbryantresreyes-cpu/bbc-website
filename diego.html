@@ -568,11 +568,11 @@
           <p class="profile-stat-label">Years Experience</p>
         </div>
         <div class="profile-stat">
-          <p class="profile-stat-num">6</p>
+          <p class="profile-stat-num">10+</p>
           <p class="profile-stat-label">Core Skills</p>
         </div>
         <div class="profile-stat">
-          <p class="profile-stat-num">4+</p>
+          <p class="profile-stat-num">6+</p>
           <p class="profile-stat-label">Clients Served</p>
         </div>
         <div class="profile-stat">
@@ -641,11 +641,12 @@
           support.
         </p>
         <p>
-          Today, Diego works as a video editor, graphic designer, content creator, and SEO
-          writer. He has produced video edits and graphics for All Ryze, branding and a DJ
-          intro video for ESE Branding Designs, blog posts and SEO for Blackbelt, and handled
-          calling, video, and design for MJ Computer. Across all of it, he keeps brands
-          consistent and visible across Facebook, Instagram, and YouTube.
+          Today, Diego works across video, design, content, and marketing support. He has
+          handled email marketing, lead generation, CRM, and podcast editing for Exquisite
+          Sounds Entertainment; lead generation, cold calling, and creative for MG Computer
+          LLC; graphic design, blog, and SEO for Blackbelt Commerce; video editing and
+          thumbnails for a movie recap YouTube channel; and social media outreach for a real
+          estate client. He also produces video and graphics for All Ryze, a BBC client.
         </p>
       </div>
 
@@ -657,12 +658,15 @@
             <span class="skill-tag">Graphic Design</span>
             <span class="skill-tag">Social Media Management</span>
             <span class="skill-tag">Email Marketing</span>
+            <span class="skill-tag">Lead Generation</span>
+            <span class="skill-tag">CRM Management</span>
+            <span class="skill-tag">Cold Calling</span>
             <span class="skill-tag">Content Creation</span>
             <span class="skill-tag">SEO &amp; Blog Writing</span>
+            <span class="skill-tag">Podcast Editing</span>
             <span class="skill-tag">Short-Form Video</span>
             <span class="skill-tag">Brand Consistency</span>
             <span class="skill-tag">Customer Service</span>
-            <span class="skill-tag">Calling &amp; Sales Support</span>
             <span class="skill-tag">Virtual Assistance</span>
           </div>
 
@@ -698,10 +702,12 @@
 <div class="pis-layout fade-in">
       <aside class="pis-client-panel">
         <p class="pis-panel-title">Filter by Client</p>
-        <button class="pis-client-btn active" data-client="mjcomputer"><strong>MJ Computer</strong><span>Calling, video, design</span></button>
+        <button class="pis-client-btn active" data-client="exquisite"><strong>Exquisite Sounds Entertainment</strong><span>Marketing, CRM, video, podcast</span></button>
+        <button class="pis-client-btn" data-client="mgcomputer"><strong>MG Computer LLC</strong><span>Lead gen, cold calling, creative</span></button>
+        <button class="pis-client-btn" data-client="blackbelt"><strong>Blackbelt Commerce</strong><span>Design, blog, SEO</span></button>
+        <button class="pis-client-btn" data-client="movierecap"><strong>Movie Recap YouTube</strong><span>Video editing, thumbnails</span></button>
+        <button class="pis-client-btn" data-client="realestate"><strong>Real Estate (Confidential)</strong><span>Social outreach, lead gen</span></button>
         <button class="pis-client-btn" data-client="allryze"><strong>All Ryze</strong><span>Video editing, graphic design</span></button>
-        <button class="pis-client-btn" data-client="blackbelt"><strong>Blackbelt</strong><span>Blog posts, SEO</span></button>
-        <button class="pis-client-btn" data-client="ese"><strong>ESE Branding Designs</strong><span>Branding, DJ Toryn L video</span></button>
       </aside>
       <div class="pis-work-area" id="pisWorkArea"></div>
     </div>
@@ -758,6 +764,18 @@
         <div class="service-icon">🔍</div>
         <p class="service-title">SEO &amp; Blog Content</p>
         <p class="service-desc">Blog posts and SEO-aware writing that help brands rank higher and bring in steady organic traffic over time.</p>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon">🎯</div>
+        <p class="service-title">Lead Generation &amp; CRM</p>
+        <p class="service-desc">Outbound prospecting, lead generation, cold calling, and CRM/database management that keep the pipeline full and organized.</p>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon">🎙️</div>
+        <p class="service-title">Podcast Editing</p>
+        <p class="service-desc">Editing and cleaning up podcast episodes into polished, publish-ready audio and video content.</p>
       </div>
 
       <div class="service-card">
@@ -981,7 +999,7 @@ document.querySelectorAll('.fade-in').forEach(el=>new IntersectionObserver(e=>{e
 const navLinks=document.querySelectorAll('.profile-nav__link');
 document.querySelectorAll('section[id]').forEach(s=>new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){navLinks.forEach(l=>l.classList.remove('active'));const a=document.querySelector(`.profile-nav__link[href="#${x.target.id}"]`);if(a)a.classList.add('active');}});},{threshold:0.3,rootMargin:'-80px 0px -60% 0px'}).observe(s));
 // ── BBC PIS v3.0 ── //
-const pisData={mjcomputer:{name:'MJ Computer',url:null,site:null,role:'Caller · Video Editor · Graphic Designer',desc:'Multi-role support for MJ Computer. Diego handled outbound calling and customer communication while also producing video edits and graphic design for the brand.',tabs:['All Work','Calling','Video','Design'],sections:[{key:'Calling',name:'Calling & Customer Support',icon:'📞',desc:'Outbound calling and customer communication support.',items:['Outbound calls','Customer support','Phone communication'],link:null},{key:'Video',name:'Video Editing',icon:'🎬',desc:'Video editing and short-form content for the brand.',items:['Video editing','Short-form content','Promotional clips'],link:null},{key:'Design',name:'Graphic Design',icon:'🎨',desc:'Graphic design and branded visual assets.',items:['Graphic design','Branded visuals','Marketing graphics'],link:null}]},allryze:{name:'All Ryze',url:null,site:null,role:'Video Editor & Graphic Designer',desc:'Creative production for All Ryze, a BBC client, under Ryan Bernaldez. Diego produced video edits, graphic design, and promotional marketing assets supporting engagement and outreach campaigns.',tabs:['All Work','Video','Design'],sections:[{key:'Video',name:'Video Editing',icon:'🎬',desc:'Video editing for promotional and marketing content.',items:['Promotional videos','Short-form edits','Campaign video'],link:null},{key:'Design',name:'Graphic Design',icon:'🎨',desc:'Graphic design, promotional visuals, and marketing assets.',items:['Promotional visuals','Marketing assets','Branded graphics'],link:null}]},blackbelt:{name:'Blackbelt',url:null,site:null,role:'Blog & SEO Writer',desc:'Content and search support for Blackbelt. Diego wrote blog posts and handled SEO to improve visibility and bring in organic traffic.',tabs:['All Work','Content','SEO'],sections:[{key:'Content',name:'Blog Writing',icon:'✍️',desc:'Blog posts and written content for the brand.',items:['Blog posts','Article writing','Content drafts'],link:null},{key:'SEO',name:'SEO',icon:'🔍',desc:'On-page SEO and content optimization for organic visibility.',items:['Keyword research','On-page SEO','Content optimization'],link:null}]},ese:{name:'ESE Branding Designs',url:null,site:null,role:'Video Editor & Brand Designer',desc:'Branding and video work for ESE Branding Designs, including the ESE Podcast logo, brand graphics, and the DJ Toryn L intro video.',tabs:['All Work','Branding','Video'],sections:[{key:'Branding',name:'Logo & Branding',icon:'🎨',desc:'Logo design and brand visuals, including the ESE Podcast logo.',items:['ESE Podcast logo','Brand graphics','Visual identity'],link:null},{key:'Video',name:'DJ Toryn L Intro Video',icon:'🎬',desc:'Intro video edited for DJ Toryn L under ESE Branding Designs.',items:['DJ Toryn L intro video','Video editing','Brand video'],link:null}]}};
+const pisData={exquisite:{name:'Exquisite Sounds Entertainment',url:null,site:null,role:'Email Marketing · Lead Gen · CRM · Video Editor · Graphic Designer · Podcast Editor · Social Media Manager',desc:'Marketing and business support for Exquisite Sounds Entertainment across email marketing, lead generation, CRM, content creation, and brand development. Diego managed customer and prospect databases, supported outreach campaigns, created and edited promotional videos, designed social and marketing graphics, edited podcast content, and managed social platforms to grow engagement and brand visibility.',tabs:['All Work','Marketing','Creative','Podcast'],sections:[{key:'Marketing',name:'Marketing & CRM',icon:'📧',desc:'Email marketing, lead generation, and CRM/database management with outreach campaign support.',items:['Email marketing','Lead generation','CRM management','Outreach campaigns'],link:null},{key:'Creative',name:'Video & Graphic Design',icon:'🎬',desc:'Promotional video editing and graphic design for social and marketing, including the ESE Podcast logo and a DJ Toryn L intro video.',items:['Promotional videos','ESE Podcast logo','DJ Toryn L intro video','Social graphics'],link:null},{key:'Podcast',name:'Podcast & Social',icon:'🎙️',desc:'Podcast editing and social media management to grow engagement and brand visibility.',items:['Podcast editing','Social media management','Engagement','Brand development'],link:null}]},mgcomputer:{name:'MG Computer LLC',url:null,site:null,role:'Lead Generation Specialist · Cold Caller · Video Editor · Graphic Designer',desc:'Business development and marketing support for MG Computer LLC. Diego ran outbound prospecting, lead generation, and cold calling campaigns targeting manufacturers and local businesses, and managed creative projects including video editing and graphic design to enhance brand awareness and customer engagement.',tabs:['All Work','Outreach','Creative'],sections:[{key:'Outreach',name:'Lead Gen & Cold Calling',icon:'📞',desc:'Outbound prospecting, lead generation, and cold calling targeting manufacturers and local businesses.',items:['Outbound prospecting','Lead generation','Cold calling','Manufacturer outreach'],link:null},{key:'Creative',name:'Video & Graphic Design',icon:'🎨',desc:'Video editing and graphic design for digital marketing efforts.',items:['Video editing','Graphic design','Digital marketing assets','Brand awareness'],link:null}]},blackbelt:{name:'Blackbelt Commerce',url:null,site:null,role:'Graphic Designer · Blog & SEO Support',desc:'Graphic design, blog management, and SEO support for Blackbelt Commerce, a New York-based Shopify agency. Diego assisted with branded marketing assets, content publishing, and website optimization to improve visibility, engagement, and user experience.',tabs:['All Work','Design','SEO'],sections:[{key:'Design',name:'Graphic Design',icon:'🎨',desc:'Branded marketing assets for a New York-based Shopify agency.',items:['Branded assets','Marketing graphics','Visual content'],link:null},{key:'SEO',name:'Blog & SEO',icon:'🔍',desc:'Blog management, content publishing, and SEO/website optimization.',items:['Blog management','Content publishing','SEO optimization','Website UX'],link:null}]},movierecap:{name:'Movie Recap YouTube Channel',url:null,site:null,role:'Video Editor · Graphic Designer',desc:'Produced and edited movie recap videos for YouTube, turning source material into engaging long-form content optimized for audience retention. Diego designed thumbnails and graphics to support channel branding and improve video performance, and managed production workflows for a consistent publishing schedule.',tabs:['All Work','Video','Design'],sections:[{key:'Video',name:'Video Editing',icon:'🎬',desc:'Long-form movie recap editing optimized for audience retention.',items:['Long-form editing','Movie recaps','Audience retention','Production workflow'],link:null},{key:'Design',name:'Thumbnails & Branding',icon:'🖼️',desc:'Thumbnail design and graphics supporting channel branding and performance.',items:['Thumbnail design','Channel branding','Graphic assets'],link:null}]},realestate:{name:'Real Estate Business (Confidential)',url:null,site:null,role:'Social Media Outreach Specialist · Lead Generation',desc:'Managed social media outreach for a real estate client, engaging buyers, sellers, and prospects across platforms. Diego ran lead generation, relationship building, and follow-up communication to grow qualified opportunities and keep outreach consistent.',tabs:['All Work','Outreach','Lead Gen'],sections:[{key:'Outreach',name:'Social Media Outreach',icon:'📡',desc:'Outreach engaging buyers, sellers, and prospects across platforms.',items:['Buyer/seller outreach','Prospect engagement','Follow-up communication'],link:null},{key:'Lead Gen',name:'Lead Generation',icon:'🎯',desc:'Lead generation and relationship building to grow qualified opportunities.',items:['Lead generation','Relationship building','Qualified opportunities'],link:null}]},allryze:{name:'All Ryze',url:null,site:null,role:'Video Editor & Graphic Designer',desc:'Creative production for All Ryze, a BBC client, under Ryan Bernaldez. Diego produced video edits, graphic design, and promotional marketing assets supporting engagement and outreach campaigns.',tabs:['All Work','Video','Design'],sections:[{key:'Video',name:'Video Editing',icon:'🎬',desc:'Video editing for promotional and marketing content.',items:['Promotional videos','Short-form edits','Campaign video'],link:null},{key:'Design',name:'Graphic Design',icon:'🎨',desc:'Graphic design, promotional visuals, and marketing assets.',items:['Promotional visuals','Marketing assets','Branded graphics'],link:null}]}};
 function pisRender(clientKey){
   const data=pisData[clientKey];
   const area=document.getElementById('pisWorkArea');
@@ -997,7 +1015,7 @@ function pisRender(clientKey){
   }
   build();
 }
-document.querySelectorAll('.pis-client-btn').forEach(btn=>btn.addEventListener('click',()=>{document.querySelectorAll('.pis-client-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');pisRender(btn.dataset.client);}));pisRender('mjcomputer');
+document.querySelectorAll('.pis-client-btn').forEach(btn=>btn.addEventListener('click',()=>{document.querySelectorAll('.pis-client-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');pisRender(btn.dataset.client);}));pisRender('exquisite');
 </script>
 
   <!-- v6.0 motion stack -->
