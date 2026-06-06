@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, follow" />
+  <title>Elevate Clinics | A Growth Partnership Proposal from Balay ni Bruno &amp; Co.</title>
+  <meta name="description" content="A growth partnership proposal for Elevate Clinics, a brain injury and mental health group with six Texas locations. Intake automation, a content engine, per-location pages, social, and patient story video, run by one team." />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Lora:ital,wght@0,400;0,500;1,400;1,500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --deep-blue:   #1F3557;
+      --mid-blue:    #4B6FA5;
+      --warm-blue:   #6D8FC7;
+      --light-blue:  #A8C0DC;
+      --pale-blue:   #DDE8F2;
+
+      --bg-primary:  #F5F1EA;
+      --bg-section:  #EDE8DF;
+      --bg-card:     #FDFAF6;
+      --bg-dark:     #1C2E47;
+      --bg-footer:   #172540;
+
+      --neutral-100: #E8E2D6;
+      --neutral-200: #D5CEC3;
+      --neutral-300: #B8B1A6;
+
+      --text-ink:    #2A3040;
+      --text-body:   #4E5666;
+      --text-muted:  #888FA0;
+      --text-warm:   #F5F1EA;
+
+      --gold:        #B8923E;
+      --gold-pale:   #E6CFA0;
+      --gold-warm:   #D4A84B;
+      --sage:        #4E9E74;
+
+      --font-display:'Playfair Display', Georgia, serif;
+      --font-body:   'Lora', Georgia, serif;
+      --font-ui:     'DM Sans', system-ui, sans-serif;
+
+      --max-width:   1200px;
+      --radius-sm:   8px;
+      --radius:      16px;
+      --radius-lg:   24px;
+      --radius-xl:   32px;
+
+      --shadow-xs:   0 1px 6px  rgba(85,60,35,0.055);
+      --shadow-sm:   0 3px 18px rgba(85,60,35,0.08);
+      --shadow-md:   0 7px 36px rgba(85,60,35,0.11);
+      --shadow-lg:   0 14px 56px rgba(85,60,35,0.14);
+
+      --border-card: 1px solid rgba(85,60,35,0.09);
+      --border-warm: 1px solid rgba(85,60,35,0.12);
+      --border-dark: 1px solid rgba(255,255,255,0.07);
+
+      --s1: 0.5rem;  --s2: 1rem;   --s3: 1.5rem;
+      --s4: 2.5rem;  --s5: 4rem;   --s6: 6rem;  --s7: 9rem;
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-body);
+      color: var(--text-ink);
+      background: var(--bg-primary);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    body::after {
+      content: '';
+      position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23n)' opacity='0.026'/%3E%3C/svg%3E");
+      pointer-events: none; z-index: 9999; mix-blend-mode: multiply;
+    }
+
+    h1, h2, h3, h4 { font-family: var(--font-display); line-height: 1.22; color: var(--deep-blue); }
+    h1 { font-size: clamp(2.2rem, 4.8vw, 3.6rem); line-height: 1.16; font-weight: 700; }
+    h2 { font-size: clamp(1.7rem, 3vw, 2.6rem); line-height: 1.22; font-weight: 600; }
+    h3 { font-size: clamp(1.05rem, 1.6vw, 1.3rem); font-weight: 600; }
+    h4 { font-size: 0.95rem; font-family: var(--font-ui); font-weight: 700; }
+
+    p { font-family: var(--font-body); font-size: 1rem; line-height: 1.87; color: var(--text-body); }
+    p.lead { font-size: 1.08rem; line-height: 1.9; color: var(--text-ink); }
+    a { text-decoration: none; }
+
+    .eyebrow {
+      display: block;
+      font-family: var(--font-ui);
+      font-size: 0.68rem; font-weight: 600;
+      letter-spacing: 0.17em; text-transform: uppercase;
+      color: var(--warm-blue); margin-bottom: var(--s2);
+    }
+    .eyebrow--gold { color: var(--gold); }
+    .eyebrow--pale { color: rgba(245,241,234,0.5); }
+
+    .container { max-width: var(--max-width); margin: 0 auto; padding: 0 var(--s4); }
+    .container--narrow { max-width: 880px; }
+    .section        { padding: var(--s6) 0; }
+    .section--tight { padding: var(--s5) 0; }
+    .section--warm  { background: var(--bg-section); }
+    .section--card  { background: var(--bg-card); }
+    .section--dark  { background: var(--bg-dark); }
+    .section--cream { background: var(--bg-primary); }
+    .text-center    { text-align: center; }
+
+    .divider-bar {
+      width: 44px; height: 2.5px;
+      background: linear-gradient(90deg, var(--gold), var(--warm-blue));
+      border-radius: 2px; margin: var(--s3) auto; opacity: 0.8;
+    }
+    .divider-bar--left { margin-left: 0; }
+
+    .fade-in { opacity: 0; transform: translateY(22px); transition: opacity 0.65s ease, transform 0.65s ease; }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+    .btn {
+      display: inline-flex; align-items: center; gap: 0.45rem;
+      padding: 0.88rem 2rem; border-radius: 100px;
+      font-family: var(--font-ui); font-size: 0.86rem; font-weight: 600;
+      letter-spacing: 0.02em; cursor: pointer;
+      transition: all 0.3s ease; border: 1.5px solid transparent;
+      white-space: nowrap;
+    }
+    .btn-primary { background: var(--deep-blue); color: var(--text-warm); }
+    .btn-primary:hover { background: #243f64; transform: translateY(-2px); box-shadow: 0 10px 32px rgba(31,53,87,0.28); }
+    .btn-outline { background: transparent; color: var(--deep-blue); border-color: rgba(75,111,165,0.42); }
+    .btn-outline:hover { background: var(--deep-blue); color: var(--text-warm); border-color: var(--deep-blue); transform: translateY(-2px); }
+    .btn-ghost { background: transparent; color: var(--text-warm); border-color: rgba(245,241,234,0.28); }
+    .btn-ghost:hover { background: rgba(245,241,234,0.08); border-color: rgba(245,241,234,0.55); }
+    .header__cta .btn-ghost { color:var(--deep-blue); border-color:rgba(31,53,87,0.22); }
+    .header__cta .btn-ghost:hover { background:rgba(31,53,87,0.06); border-color:rgba(31,53,87,0.38); color:var(--deep-blue); }
+    .btn-gold { background: var(--gold); color: #fff; font-weight: 700; }
+    .btn-gold:hover { background: var(--gold-warm); transform: translateY(-2px); box-shadow: 0 10px 32px rgba(184,146,62,0.35); }
+    .btn-sm { padding: 0.62rem 1.35rem; font-size: 0.78rem; }
+
+    .site-header {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+      background: rgba(245,241,234,0.94);
+      backdrop-filter: blur(20px) saturate(1.2);
+      -webkit-backdrop-filter: blur(20px) saturate(1.2);
+      border-bottom: var(--border-warm);
+      transition: box-shadow 0.3s ease;
+    }
+    .site-header.scrolled { box-shadow: var(--shadow-sm); }
+
+    .header__inner {
+      max-width: var(--max-width); margin: 0 auto; padding: 0 var(--s4);
+      height: 68px; display: flex; align-items: center;
+      justify-content: space-between; gap: var(--s3);
+    }
+    .header__logo { display:flex; flex-direction:row; align-items:center; gap:0.6rem; }
+    .header__logo-name {
+      font-family: var(--font-display); font-size: 1.05rem; font-weight: 700;
+      color: var(--deep-blue); line-height: 1; letter-spacing: -0.01em;
+    }
+    .header__nav { display: flex; align-items: center; gap: 1.5rem; list-style: none; }
+    .header__nav a {
+      font-family: var(--font-ui); font-size: 0.78rem; font-weight: 500;
+      color: var(--text-body); transition: color 0.2s;
+      white-space: nowrap;
+    }
+    .header__nav a:hover, .header__nav a.active { color: var(--deep-blue); font-weight: 600; }
+    .header__cta { display: flex; align-items: center; gap: 0.9rem; flex-shrink: 0; }
+
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 8px; }
+    .hamburger span { display: block; width: 20px; height: 2px; background: var(--text-ink); border-radius: 2px; transition: all 0.25s ease; }
+
+    .mobile-menu {
+      display: none; flex-direction: column;
+      background: var(--bg-card); border-top: var(--border-warm);
+      padding: 1rem var(--s4) 1.5rem;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      font-family: var(--font-ui); font-size: 0.9rem; font-weight: 500;
+      color: var(--text-body); padding: 0.7rem 0;
+      border-bottom: var(--border-card); transition: color 0.2s;
+    }
+    .mobile-menu a:hover { color: var(--deep-blue); }
+    .mobile-menu a:last-of-type { border-bottom: none; }
+    .mobile-menu .mobile-cta { margin-top: 1rem; }
+
+    @media (max-width: 1024px) { .header__nav { display: none; } }
+    @media (max-width: 768px) { .header__cta .btn-gold { display: none; } .hamburger { display: flex; } }
+
+    .page-hero {
+      background: var(--bg-dark);
+      padding: calc(68px + 5.5rem) 0 5.5rem;
+      position: relative; overflow: hidden;
+    }
+    .page-hero::before {
+      content: '';
+      position: absolute; top: -100px; right: -100px;
+      width: 600px; height: 600px;
+      background: radial-gradient(ellipse at center, rgba(184,146,62,0.09) 0%, rgba(184,146,62,0.02) 45%, transparent 68%);
+      pointer-events: none;
+    }
+    .page-hero::after {
+      content: '';
+      position: absolute; bottom: -60px; left: -60px;
+      width: 400px; height: 400px;
+      background: radial-gradient(ellipse at center, rgba(109,143,199,0.06) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .page-hero__inner { position: relative; z-index: 1; max-width: 780px; }
+    .page-hero__eyebrow {
+      display: inline-flex; align-items: center; gap: 0.6rem;
+      font-family: var(--font-ui); font-size: 0.68rem; font-weight: 600;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--gold-pale); margin-bottom: 1.6rem;
+    }
+    .page-hero__eyebrow-dot {
+      width: 5px; height: 5px; border-radius: 50%;
+      background: var(--gold); opacity: 0.75; flex-shrink: 0;
+    }
+    .page-hero h1 { color: #fff; margin-bottom: 1.4rem; }
+    .page-hero h1 em { font-style: italic; color: var(--gold-pale); }
+    .page-hero p {
+      font-family: var(--font-body); font-size: 1.06rem;
+      line-height: 1.88; color: rgba(245,241,234,0.68);
+      max-width: 620px;
+    }
+    .hero-actions { display:flex; gap:1rem; flex-wrap:wrap; margin-top:2.2rem; }
+
+    /* ── INTRO GRID ───────────────────────────────────────────── */
+    .cs-intro-grid {
+      display: grid; grid-template-columns: 280px 1fr;
+      gap: var(--s5); align-items: center;
+    }
+    @media (max-width: 760px) { .cs-intro-grid { grid-template-columns: 1fr; gap: var(--s4); } }
+
+    .cs-logo-card {
+      background: var(--bg-card);
+      border: var(--border-card);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-sm);
+      padding: 2.4rem 2rem;
+      text-align: center;
+    }
+    .cs-logo-card__mark {
+      font-family: var(--font-display); font-weight: 700;
+      font-size: 1.9rem; color: var(--deep-blue); line-height: 1.1;
+    }
+    .cs-logo-card__mark em { font-style: italic; color: var(--gold); }
+    .cs-logo-card__sub {
+      font-family: var(--font-ui); font-size: 0.66rem; font-weight: 600;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--text-muted); margin-top: 0.6rem;
+    }
+    .cs-meta { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.5rem; }
+    .cs-meta__tag {
+      font-family: var(--font-ui); font-size: 0.7rem; font-weight: 600;
+      letter-spacing: 0.04em;
+      color: var(--mid-blue); background: rgba(75,111,165,0.08);
+      border: 1px solid rgba(75,111,165,0.16);
+      border-radius: 100px; padding: 0.3rem 0.85rem;
+    }
+    .cs-site-link {
+      display: inline-flex; align-items: center; gap: 0.35rem; margin-top: 1.5rem;
+      font-family: var(--font-ui); font-size: 0.82rem; font-weight: 600;
+      color: var(--mid-blue); transition: gap 0.2s, color 0.2s;
+    }
+    .cs-site-link:hover { color: var(--deep-blue); gap: 0.6rem; }
+
+    /* ── LOCATION CHIPS ───────────────────────────────────────── */
+    .loc-row { display:flex; flex-wrap:wrap; gap:0.6rem; justify-content:center; margin-top:var(--s4); }
+    .loc-chip {
+      font-family: var(--font-ui); font-size: 0.82rem; font-weight: 600;
+      color: var(--deep-blue); background: var(--bg-card);
+      border: var(--border-warm); border-radius: 100px;
+      padding: 0.55rem 1.25rem; box-shadow: var(--shadow-xs);
+    }
+    .loc-chip span { color: var(--gold); }
+
+    /* ── OPPORTUNITY CARDS ────────────────────────────────────── */
+    .opp-grid { display: grid; grid-template-columns: 1fr; gap: 1.4rem; margin-top: var(--s4); }
+    .opp-card {
+      display: grid; grid-template-columns: 64px 1fr; gap: 1.6rem;
+      background: var(--bg-card);
+      border: var(--border-warm);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-sm);
+      padding: 2rem 2.2rem;
+      position: relative;
+    }
+    @media (max-width: 640px) { .opp-card { grid-template-columns: 1fr; gap: 1rem; padding: 1.6rem 1.4rem; } }
+    .opp-card__num {
+      font-family: var(--font-display); font-weight: 700; font-size: 2.2rem;
+      color: var(--gold); line-height: 1;
+      display:flex; align-items:flex-start; justify-content:center;
+    }
+    .opp-card__priority {
+      position: absolute; top: 1.5rem; right: 1.6rem;
+      font-family: var(--font-ui); font-size: 0.62rem; font-weight: 700;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      padding: 0.28rem 0.7rem; border-radius: 100px;
+    }
+    .opp-card__priority--high { color: #fff; background: var(--gold); }
+    .opp-card__priority--med  { color: var(--mid-blue); background: rgba(75,111,165,0.12); border: 1px solid rgba(75,111,165,0.22); }
+    @media (max-width: 640px) { .opp-card__priority { position: static; display:inline-block; margin-bottom:0.5rem; } }
+    .opp-card h3 { color: var(--deep-blue); margin-bottom: 0.5rem; padding-right: 5rem; }
+    @media (max-width: 640px) { .opp-card h3 { padding-right: 0; } }
+    .opp-card p { font-size: 0.95rem; line-height: 1.78; }
+    .opp-card__result {
+      margin-top: 0.9rem; font-family: var(--font-body); font-style: italic;
+      font-size: 0.92rem; color: var(--text-ink);
+      border-left: 2.5px solid var(--gold-pale); padding-left: 0.95rem;
+    }
+    .opp-card__team { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.1rem; }
+    .opp-card__badge {
+      font-family: var(--font-ui); font-size: 0.72rem; font-weight: 600;
+      color: var(--deep-blue); background: rgba(184,146,62,0.1);
+      border: 1px solid rgba(184,146,62,0.22);
+      border-radius: 100px; padding: 0.32rem 0.85rem;
+    }
+
+    /* ── PARTNERSHIP / HOW IT WORKS ───────────────────────────── */
+    .how-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.25rem; margin-top: var(--s4); }
+    @media (max-width: 640px) { .how-grid { grid-template-columns: 1fr; } }
+    .how-item {
+      display: flex; align-items: flex-start; gap: 0.9rem;
+      padding: 1.4rem 1.6rem;
+      background: var(--bg-card); border: var(--border-card);
+      border-radius: var(--radius); box-shadow: var(--shadow-xs);
+    }
+    .how-item__dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; margin-top: 0.55rem; background: linear-gradient(135deg, var(--gold), var(--warm-blue)); }
+    .how-item h4 { font-family: var(--font-ui); font-size: 0.95rem; font-weight: 600; color: var(--deep-blue); margin-bottom: 0.3rem; }
+    .how-item p { font-size: 0.88rem; line-height: 1.7; }
+
+    .family-row { display:flex; flex-wrap:wrap; gap:0.7rem; justify-content:center; margin-top:var(--s4); }
+    .family-card {
+      background: var(--bg-card); border: var(--border-warm);
+      border-radius: var(--radius); box-shadow: var(--shadow-xs);
+      padding: 1rem 1.3rem; min-width: 150px; text-align:center;
+    }
+    .family-card__name { font-family: var(--font-display); font-size: 1.1rem; font-weight: 700; color: var(--deep-blue); }
+    .family-card__role { font-family: var(--font-ui); font-size: 0.72rem; color: var(--text-muted); margin-top: 0.25rem; line-height:1.45; }
+
+    /* ── ROADMAP ──────────────────────────────────────────────── */
+    .phase-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; margin-top: var(--s4); }
+    @media (max-width: 760px) { .phase-grid { grid-template-columns: 1fr; } }
+    .phase-card {
+      background: var(--bg-card); border: var(--border-warm);
+      border-radius: var(--radius-lg); box-shadow: var(--shadow-sm);
+      padding: 1.8rem 1.7rem;
+    }
+    .phase-card__tag {
+      font-family: var(--font-ui); font-size: 0.66rem; font-weight: 700;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 0.6rem;
+    }
+    .phase-card h3 { color: var(--deep-blue); margin-bottom: 0.8rem; }
+    .phase-card ul { list-style: none; display: flex; flex-direction: column; gap: 0.55rem; }
+    .phase-card li {
+      font-family: var(--font-body); font-size: 0.9rem; line-height: 1.6; color: var(--text-body);
+      padding-left: 1.2rem; position: relative;
+    }
+    .phase-card li::before { content: '+'; position: absolute; left: 0; color: var(--gold); font-weight: 700; }
+
+    /* ── CTA / FOOTER ─────────────────────────────────────────── */
+    .cta-section { background: var(--bg-dark); padding: var(--s6) 0; position: relative; overflow: hidden; }
+    .cta-section::before {
+      content: ''; position: absolute; top: -80px; right: -80px;
+      width: 500px; height: 500px;
+      background: radial-gradient(ellipse at center, rgba(184,146,62,0.08) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .cta-section__inner { position: relative; z-index: 1; text-align: center; max-width: 640px; margin: 0 auto; }
+    .cta-section h2 { color: #fff; margin-bottom: 1rem; }
+    .cta-section p { color: rgba(245,241,234,0.68); font-size: 1.06rem; line-height: 1.85; margin-bottom: 2.5rem; }
+    .cta-section__actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+    .site-footer { background: var(--bg-footer); padding: var(--s5) 0 var(--s4); border-top: 1px solid rgba(255,255,255,0.04); }
+    .footer__bottom { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.75rem; }
+    .footer__brand-name { font-family: var(--font-display); font-size: 1.05rem; font-weight: 700; color: var(--text-warm); }
+    .footer__copy { font-family: var(--font-ui); font-size: 0.74rem; color: rgba(245,241,234,0.4); }
+    .footer__copy a { color: rgba(245,241,234,0.55); }
+    .footer__tagline { font-family: var(--font-display); font-size: 0.78rem; font-style: italic; color: rgba(245,241,234,0.32); }
+    .footer__contact { font-family: var(--font-ui); font-size: 0.8rem; color: rgba(245,241,234,0.5); margin-top:0.4rem; }
+    .footer__contact a { color: rgba(245,241,234,0.7); }
+  </style>
+</head>
+<body>
+
+  <!-- ── HEADER ──────────────────────────────────────────────── -->
+  <header class="site-header" id="site-header">
+    <div class="header__inner">
+      <a href="index.html" class="header__logo">
+        <img src="bbc-logo.png" alt="Balay ni Bruno &amp; Co." style="height:42px; width:auto; display:block;">
+        <span class="header__logo-name">Balay ni Bruno &amp; Co.</span>
+      </a>
+      <nav>
+        <ul class="header__nav">
+          <li><a href="#who">Who They Are</a></li>
+          <li><a href="#opportunities">The Opportunities</a></li>
+          <li><a href="#partnership">The Partnership</a></li>
+          <li><a href="#roadmap">First 90 Days</a></li>
+          <li><a href="#talk">Let's Talk</a></li>
+        </ul>
+      </nav>
+      <div class="header__cta">
+        <a href="contact.html" class="btn btn-ghost btn-sm">Start a Conversation</a>
+        <a href="https://calendly.com/rj-balaynibruno/bbc-strategy-call" target="_blank" rel="noopener noreferrer" class="btn btn-gold btn-sm">Book a Call</a>
+      </div>
+      <button class="hamburger" id="hamburger" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <nav class="mobile-menu" id="mobile-menu">
+      <a href="#who">Who They Are</a>
+      <a href="#opportunities">The Opportunities</a>
+      <a href="#partnership">The Partnership</a>
+      <a href="#roadmap">First 90 Days</a>
+      <a href="#talk">Let's Talk</a>
+      <a href="https://calendly.com/rj-balaynibruno/bbc-strategy-call" target="_blank" rel="noopener noreferrer" class="btn btn-gold mobile-cta">Book a Call</a>
+    </nav>
+  </header>
+
+  <!-- ── HERO ────────────────────────────────────────────────── -->
+  <section class="page-hero">
+    <div class="container">
+      <div class="page-hero__inner fade-in">
+        <div class="page-hero__eyebrow">
+          <span class="page-hero__eyebrow-dot"></span>
+          A Growth Partnership Proposal
+        </div>
+        <h1>Elevate <em>Clinics</em></h1>
+        <p>Six clinics across Texas, real clinical depth in brain injury and mental health, and far more demand than the current systems can capture. This is a plan to fix that. One team that learns your practice, then carries the marketing and the patient intake load with you.</p>
+        <div class="hero-actions">
+          <a href="#opportunities" class="btn btn-gold">See the Five Opportunities</a>
+          <a href="#talk" class="btn btn-ghost">Let's Talk</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── WHO THEY ARE ────────────────────────────────────────── -->
+  <section class="section section--cream" id="who">
+    <div class="container">
+      <div class="cs-intro-grid">
+        <div class="fade-in">
+          <div class="cs-logo-card">
+            <div class="cs-logo-card__mark">Elevate <em>Clinics</em></div>
+            <div class="cs-logo-card__sub">Brain Injury &middot; Mental Health</div>
+          </div>
+        </div>
+        <div class="fade-in">
+          <span class="eyebrow eyebrow--gold">Who They Are</span>
+          <h2>Real Clinical Care, Across Six Texas Cities</h2>
+          <div class="divider-bar divider-bar--left"></div>
+          <p class="lead">Elevate Clinics is a brain injury and mental health group serving patients across Texas. The team works in psychiatry, neurology, neuropsychology, ketamine therapy, and recovery from concussion and traumatic brain injury, with telehealth and in person care.</p>
+          <p style="margin-top:1rem;">The care is strong. What holds it back is everything around the care: phone heavy intake, thin location pages, almost no patient education content, and social accounts that do not yet match the size of the practice. That gap is where new patients get lost. It is also the easiest part to fix.</p>
+          <div class="cs-meta">
+            <span class="cs-meta__tag">Psychiatry</span>
+            <span class="cs-meta__tag">Neurology</span>
+            <span class="cs-meta__tag">Neuropsychology</span>
+            <span class="cs-meta__tag">Ketamine Therapy</span>
+            <span class="cs-meta__tag">TBI &amp; Concussion</span>
+          </div>
+          <a href="https://elevateclinics.com" target="_blank" rel="noopener noreferrer" class="cs-site-link">elevateclinics.com &rarr;</a>
+        </div>
+      </div>
+      <div class="loc-row fade-in">
+        <span class="loc-chip"><span>&#9679;</span> Austin</span>
+        <span class="loc-chip"><span>&#9679;</span> Dallas</span>
+        <span class="loc-chip"><span>&#9679;</span> Fort Worth</span>
+        <span class="loc-chip"><span>&#9679;</span> Frisco</span>
+        <span class="loc-chip"><span>&#9679;</span> San Antonio</span>
+        <span class="loc-chip"><span>&#9679;</span> Bellaire</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── THE OPPORTUNITIES ───────────────────────────────────── -->
+  <section class="section section--warm" id="opportunities">
+    <div class="container">
+      <div class="text-center fade-in">
+        <span class="eyebrow eyebrow--gold">Where We See Room to Grow</span>
+        <h2>Five Opportunities, Ranked by Impact</h2>
+        <div class="divider-bar"></div>
+        <p style="max-width:640px; margin:1rem auto 0;">We looked at the website, the search results, the social accounts, and the way patients reach you today. These are the five moves that would bring the most new patients for the least friction, in order. There is also a sixth, built for the attorney referred side of the practice.</p>
+      </div>
+
+      <div class="opp-grid">
+
+        <!-- 1 -->
+        <article class="opp-card fade-in">
+          <div class="opp-card__num">1</div>
+          <div>
+            <span class="opp-card__priority opp-card__priority--high">High Impact</span>
+            <h3>Patient Intake &amp; Scheduling, Made Simple</h3>
+            <p>Right now a patient has to download a form, print it, fill it, and the practice has to chase the rest by phone across six locations. We replace that with a clean digital intake the patient finishes on their phone, that flows straight to your team, plus online booking and automatic appointment reminders. Less phone time, fewer no shows, and far fewer patients who give up before they ever book.</p>
+            <p class="opp-card__result">The result: the people who already want your care actually make it to the calendar, instead of getting lost in the paperwork.</p>
+            <div class="opp-card__team">
+              <span class="opp-card__badge">Kriz &middot; Intake &amp; Coordination</span>
+              <span class="opp-card__badge">Your BBC VA</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- 2 -->
+        <article class="opp-card fade-in">
+          <div class="opp-card__num">2</div>
+          <div>
+            <span class="opp-card__priority opp-card__priority--high">High Impact</span>
+            <h3>A Content Engine That Answers Real Questions</h3>
+            <p>People search before they call. They type things like concussion recovery, what is ketamine therapy, or signs of a brain injury. Today none of those searches lead to you. We build a steady stream of plain language articles and short videos that answer the exact questions your patients ask, so Elevate shows up at the moment someone is looking for help. Around eight to twelve pieces over the first three months, then a reliable rhythm after that.</p>
+            <p class="opp-card__result">The result: every clinic becomes easier to find on Google, and your expertise does the selling before a single call.</p>
+            <div class="opp-card__team">
+              <span class="opp-card__badge">Mai &middot; Content &amp; Marketing</span>
+              <span class="opp-card__badge">Sonny &middot; Social</span>
+              <span class="opp-card__badge">Your BBC VA</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- 3 -->
+        <article class="opp-card fade-in">
+          <div class="opp-card__num">3</div>
+          <div>
+            <span class="opp-card__priority opp-card__priority--med">Strong Value</span>
+            <h3>A Real Page for Each of the Six Locations</h3>
+            <p>A six city practice needs six strong local pages, each one built to rank for that city and to show the clinicians who work there. We create a dedicated page per location with the right local search terms, clinician bios, services offered there, directions, and the behind the scenes signals Google uses to rank local results. This is one of the fastest ways to win patients who search by city.</p>
+            <p class="opp-card__result">The result: someone searching brain injury clinic in Frisco or psychiatrist in Austin finds your clinic, not a competitor.</p>
+            <div class="opp-card__team">
+              <span class="opp-card__badge">Webby &middot; Website &amp; Local SEO</span>
+              <span class="opp-card__badge">Your BBC VA</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- 4 -->
+        <article class="opp-card fade-in">
+          <div class="opp-card__num">4</div>
+          <div>
+            <span class="opp-card__priority opp-card__priority--med">Strong Value</span>
+            <h3>Social Accounts That Match the Practice</h3>
+            <p>The accounts exist, but the posting is light and scattered across Instagram, Facebook, and TikTok. We bring them onto one calendar, build on the Elevate Essentials video idea you already started, and add short videos for YouTube. Warm, clear, trustworthy posts that show the people and the care, not stock photos. Everything is drafted for you and nothing goes out without your approval.</p>
+            <p class="opp-card__result">The result: when a patient or a referring doctor checks you out online, the practice looks as established as it actually is.</p>
+            <div class="opp-card__team">
+              <span class="opp-card__badge">Sonny &middot; Social</span>
+              <span class="opp-card__badge">Your BBC VA</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- 5 -->
+        <article class="opp-card fade-in">
+          <div class="opp-card__num">5</div>
+          <div>
+            <span class="opp-card__priority opp-card__priority--med">Strong Value</span>
+            <h3>A Patient Story &amp; Clinician Video Library</h3>
+            <p>Nothing builds trust in healthcare like a real story and a face. We build a library of short videos: anonymized patient recovery stories told with full privacy care, friendly clinician introductions, and simple explainers for treatments like ketamine therapy and concussion recovery. These work everywhere, on the website, on social, and in the reminder emails a nervous new patient reads before their first visit.</p>
+            <p class="opp-card__result">The result: a hesitant patient sees someone who got better and a doctor who feels human, and books with confidence.</p>
+            <div class="opp-card__team">
+              <span class="opp-card__badge">Sonny &middot; Video</span>
+              <span class="opp-card__badge">Mai &middot; Story &amp; Script</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- 6 - LOP -->
+        <article class="opp-card fade-in">
+          <div class="opp-card__num">6</div>
+          <div>
+            <span class="opp-card__priority opp-card__priority--med">Add On</span>
+            <h3>The Attorney Referred Side, Handled Cleanly</h3>
+            <p>For the brain injury cases that come through law firms, the work is mostly coordination: tracking referrals, keeping records and letters of protection organized, and staying in steady contact with each firm's case managers so nothing stalls. We build a simple tracking system for these cases and a calm outreach rhythm to your referral firms, so the relationship stays warm and the paperwork never falls behind. We have already gathered a starting list of thirty one Texas personal injury firms that work this model, ready to nurture when you give the word.</p>
+            <p class="opp-card__result">The result: a steadier flow of attorney referred cases, with the admin load carried by the partnership instead of your clinical staff.</p>
+            <div class="opp-card__team">
+              <span class="opp-card__badge">Kriz &middot; Case Tracking</span>
+              <span class="opp-card__badge">Your BBC VA &middot; Firm Outreach</span>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── THE PARTNERSHIP ─────────────────────────────────────── -->
+  <section class="section section--cream" id="partnership">
+    <div class="container container--narrow">
+      <div class="text-center fade-in">
+        <span class="eyebrow eyebrow--gold">How We Work Together</span>
+        <h2>You Hire One Team, Not Five Tools</h2>
+        <div class="divider-bar"></div>
+        <p style="margin-top:1rem;">This is not software you have to learn or a list of services you have to manage. You partner with Balay ni Bruno &amp; Co. and get a dedicated assistant who knows your practice, backed by a small family of trained AI helpers that make the work faster and more consistent. You talk to people. The helpers do the heavy lifting behind them.</p>
+      </div>
+
+      <div class="how-grid">
+        <div class="how-item fade-in">
+          <span class="how-item__dot"></span>
+          <div><h4>One point of contact</h4><p>A dedicated BBC assistant who learns Elevate and owns the work, so you are never managing a stack of vendors.</p></div>
+        </div>
+        <div class="how-item fade-in">
+          <span class="how-item__dot"></span>
+          <div><h4>Nothing goes out without you</h4><p>Every post, page, and email is drafted for review. You approve, then it ships. Full control, none of the hours.</p></div>
+        </div>
+        <div class="how-item fade-in">
+          <span class="how-item__dot"></span>
+          <div><h4>Built around healthcare</h4><p>Privacy first, careful language, and patient stories handled with the care a clinic requires.</p></div>
+        </div>
+        <div class="how-item fade-in">
+          <span class="how-item__dot"></span>
+          <div><h4>It grows with you</h4><p>Start with intake and content, add locations, social, and video as the practice expands. Steady and long term.</p></div>
+        </div>
+      </div>
+
+      <p class="text-center fade-in" style="font-family:var(--font-ui); font-size:0.7rem; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:var(--text-muted); margin:var(--s4) 0 0.4rem;">The AI Family Behind Your Assistant</p>
+      <div class="family-row fade-in">
+        <div class="family-card"><div class="family-card__name">Webby</div><div class="family-card__role">Website &amp; local SEO</div></div>
+        <div class="family-card"><div class="family-card__name">Mai</div><div class="family-card__role">Content &amp; marketing</div></div>
+        <div class="family-card"><div class="family-card__name">Sonny</div><div class="family-card__role">Social &amp; video</div></div>
+        <div class="family-card"><div class="family-card__name">Kriz</div><div class="family-card__role">Intake &amp; coordination</div></div>
+      </div>
+      <p class="text-center fade-in" style="max-width:560px; margin:1.5rem auto 0; font-size:0.9rem; color:var(--text-muted);">These helpers are part of the partnership. They are how one assistant does the work of a full marketing and intake team for your practice.</p>
+    </div>
+  </section>
+
+  <!-- ── ROADMAP ─────────────────────────────────────────────── -->
+  <section class="section section--warm" id="roadmap">
+    <div class="container">
+      <div class="text-center fade-in">
+        <span class="eyebrow eyebrow--gold">Where We Start</span>
+        <h2>A Simple First 90 Days</h2>
+        <div class="divider-bar"></div>
+        <p style="max-width:600px; margin:1rem auto 0;">We do not try to do everything at once. We start with the moves that bring patients fastest, then build out from there.</p>
+      </div>
+      <div class="phase-grid">
+        <div class="phase-card fade-in">
+          <div class="phase-card__tag">Weeks 1 to 3 &middot; Foundation</div>
+          <h3>Learn &amp; Fix the Leaks</h3>
+          <ul>
+            <li>Learn the practice, the locations, and the tone</li>
+            <li>Launch digital intake and online booking</li>
+            <li>Set up appointment reminders</li>
+            <li>Map the content and location plan</li>
+          </ul>
+        </div>
+        <div class="phase-card fade-in">
+          <div class="phase-card__tag">Weeks 4 to 8 &middot; Visibility</div>
+          <h3>Get Found</h3>
+          <ul>
+            <li>Build the six location pages</li>
+            <li>Publish the first patient education articles</li>
+            <li>Bring social onto one calendar</li>
+            <li>Film the first clinician and explainer videos</li>
+          </ul>
+        </div>
+        <div class="phase-card fade-in">
+          <div class="phase-card__tag">Weeks 9 to 12 &middot; Momentum</div>
+          <h3>Build the Rhythm</h3>
+          <ul>
+            <li>Steady weekly content and social posting</li>
+            <li>Grow the patient story video library</li>
+            <li>Start attorney referral outreach, if in scope</li>
+            <li>Review the numbers and tune what works</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CTA ─────────────────────────────────────────────────── -->
+  <section class="cta-section" id="talk">
+    <div class="container">
+      <div class="cta-section__inner fade-in">
+        <span class="eyebrow eyebrow--pale">The Next Step</span>
+        <h2>Let's Talk Through It Together</h2>
+        <p>This is a starting plan, not a final one. The best version comes from one conversation about what Elevate needs most right now. We will walk through these together, pick where to begin, and shape it around your practice.</p>
+        <div class="cta-section__actions">
+          <a href="https://calendly.com/rj-balaynibruno/bbc-strategy-call" target="_blank" rel="noopener noreferrer" class="btn btn-gold">Book a Call</a>
+          <a href="mailto:admin@balaynibruno.co?subject=Elevate%20Clinics%20Partnership" class="btn btn-ghost">Email Us</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FOOTER ─────────────────────────────────────────────── -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer__bottom">
+        <div>
+          <div class="footer__brand-name">Balay ni Bruno &amp; Co.</div>
+          <div class="footer__contact"><a href="mailto:admin@balaynibruno.co">admin@balaynibruno.co</a> &middot; +63 935 663 0324</div>
+        </div>
+        <div style="text-align:right;">
+          <p class="footer__copy">&copy; 2026 Balay ni Bruno &amp; Co. &middot; Prepared for Elevate Clinics</p>
+          <span class="footer__tagline">Built with intention.</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const header = document.getElementById('site-header');
+    window.addEventListener('scroll', () => {
+      header.classList.toggle('scrolled', window.scrollY > 20);
+    }, { passive: true });
+
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobile-menu');
+    hamburger.addEventListener('click', () => { mobileMenu.classList.toggle('open'); });
+    mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mobileMenu.classList.remove('open')));
+
+    const fadeEls = document.querySelectorAll('.fade-in');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) { entry.target.classList.add('visible'); observer.unobserve(entry.target); }
+      });
+    }, { threshold: 0.12 });
+    fadeEls.forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
