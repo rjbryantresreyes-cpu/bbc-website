@@ -3242,7 +3242,7 @@
         : '';
       // Social Outreach panel — 5 togglable platform pills (sized for touch on the detail sheet).
       // Mirrors the CRM list pills exactly; toggling here lights them up in the list too.
-      const SOCIAL_PLATFORMS_SHEET=[['Instagram','DM IG'],['Facebook','DM FB'],['LinkedIn','DM LinkedIn'],['TikTok','DM TikTok'],['X','DM X']];
+      const SOCIAL_PLATFORMS_SHEET=[['Instagram','DM Instagram'],['Facebook','DM FB'],['LinkedIn','DM LinkedIn'],['TikTok','DM TikTok']];
       const socialEditor=(c.Id!==undefined&&c.Id!==null)
         ? `<div class="panel" style="display:block;margin-bottom:12px"><span class="ptitle" style="color:#D4AF37">Social outreach <span class="gauge-sub" style="font-weight:400">(click to toggle — saves to NocoDB)</span></span><div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:10px">`
           + SOCIAL_PLATFORMS_SHEET.map(([lbl,fld])=>{
@@ -3276,7 +3276,7 @@
     const STATUSES=[...new Set([...CRM_STATUSES, ...cts.map(r=>((r.Status||'')+'').trim()).filter(Boolean)])];
     // Social DM tracking: 5 platform toggles per contact (NocoDB checkbox fields).
     // Field names use BBC's spaced convention to match existing fields (Last Contact, Email Version, etc.)
-    const SOCIAL_PLATFORMS=[['IG','DM IG'],['FB','DM FB'],['LI','DM LinkedIn'],['TT','DM TikTok'],['X','DM X']];
+    const SOCIAL_PLATFORMS=[['IG','DM Instagram'],['FB','DM FB'],['LI','DM LinkedIn'],['TT','DM TikTok']];
     el.innerHTML=sorted.map(r=>{ const em=((r.Email||'')+'').toLowerCase().trim(); if(!em) return '';
       const hay=esc((((r['First Name']||'')+' '+(r.Organization||'')+' '+em+' '+(r.Status||'')).toLowerCase()));
       const cur=((r.Status||'')+'').trim();
