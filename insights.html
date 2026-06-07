@@ -885,13 +885,13 @@
   <div class="container">
 
     <!-- Search + count -->
-    <div class="grid-topbar fade-in">
+    <div class="grid-topbar">
       <input class="grid-search" type="text" placeholder="Search insights..." />
       <span class="grid-count">Showing all 71 insights</span>
     </div>
 
     <!-- Filter pills -->
-        <div class="filter-pills fade-in">
+        <div class="filter-pills">
       <span class="filter-pill filter-pill--active" data-cat="all">All Insights</span>
       <span class="filter-pill" data-cat="ai">AI &amp; Automation</span>
       <span class="filter-pill" data-cat="marketing">Marketing</span>
@@ -903,7 +903,7 @@
     </div>
 
     <!-- Article grid -->
-    <div class="article-grid fade-in">
+    <div class="article-grid">
 
       <!-- method-framed + ops batch 2026-06-07 -->
       <article class="article-card" data-cat="marketing">
@@ -2015,7 +2015,7 @@
     entries.forEach(e => {
       if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
     });
-  }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+  }, { threshold: 0, rootMargin: '0px 0px -40px 0px' });
   fadeEls.forEach(el => io.observe(el));
 </script>
 
