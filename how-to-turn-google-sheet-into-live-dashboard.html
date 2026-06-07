@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-L6S574R0CE"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-L6S574R0CE');
+  </script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>How Do I Turn a Google Sheet Into a Live Dashboard? | Balay ni Bruno &amp; Co.</title>
+  <meta name="description" content="Your numbers already live in a spreadsheet. Here is how we turn a Google Sheet into a clean, always-current view you can open on your phone, with no new software." />
+  <link rel="canonical" href="https://balaynibruno.co/how-to-turn-google-sheet-into-live-dashboard.html" />
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Balay ni Bruno &amp; Co." />
+  <meta property="og:title" content="How Do I Turn a Google Sheet Into a Live Dashboard? | Balay ni Bruno &amp; Co." />
+  <meta property="og:description" content="Your numbers already live in a spreadsheet. Here is how we turn a Google Sheet into a clean, always-current view you can open on your phone, with no new software." />
+  <meta property="og:url" content="https://balaynibruno.co/how-to-turn-google-sheet-into-live-dashboard.html" />
+  <meta property="og:image" content="https://balaynibruno.co/bbc-logo.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Lora:ital,wght@0,400;0,500;1,400;1,500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --deep-blue:#1F3557; --mid-blue:#4B6FA5; --warm-blue:#6D8FC7;
+      --light-blue:#A8C0DC; --bg-primary:#F5F1EA; --bg-section:#EDE8DF;
+      --bg-card:#FDFAF6; --bg-dark:#1C2E47; --bg-footer:#172540;
+      --text-ink:#2A3040; --text-body:#4E5666; --text-muted:#888FA0;
+      --text-warm:#F5F1EA; --gold:#B8923E; --gold-pale:#E6CFA0;
+      --gold-warm:#D4A84B; --sage:#4E9E74;
+      --font-display:'Playfair Display',Georgia,serif;
+      --font-body:'Lora',Georgia,serif;
+      --font-ui:'DM Sans',system-ui,sans-serif;
+      --max-width:860px; --radius:16px; --radius-lg:24px;
+      --shadow-sm:0 3px 18px rgba(85,60,35,0.08);
+      --shadow-md:0 7px 36px rgba(85,60,35,0.11);
+      --shadow-lg:0 14px 56px rgba(85,60,35,0.14);
+      --border-card:1px solid rgba(85,60,35,0.09);
+      --border-warm:1px solid rgba(85,60,35,0.12);
+      --s1:0.5rem;--s2:1rem;--s3:1.5rem;--s4:2.5rem;--s5:4rem;
+    }
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{font-family:var(--font-body);color:var(--text-ink);background:var(--bg-primary);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+    body::after{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23n)' opacity='0.026'/%3E%3C/svg%3E");pointer-events:none;z-index:9999;mix-blend-mode:multiply}
+    h1,h2,h3,h4{font-family:var(--font-display);line-height:1.22;color:var(--deep-blue)}
+    h1{font-size:clamp(2rem,4.5vw,3.2rem);font-weight:700;line-height:1.14}
+    h2{font-size:clamp(1.3rem,2.5vw,1.9rem);font-weight:600;margin-top:2.5rem;margin-bottom:0.75rem}
+    h3{font-size:clamp(1rem,1.8vw,1.25rem);font-weight:600;margin-top:2rem;margin-bottom:0.5rem}
+    p{font-family:var(--font-body);font-size:1.05rem;line-height:1.9;color:var(--text-body);margin-bottom:1.2rem}
+    a{text-decoration:none}
+    ul,ol{margin:0 0 1.2rem 1.5rem;color:var(--text-body);font-family:var(--font-body);font-size:1.05rem;line-height:1.85}
+    li{margin-bottom:0.4rem}
+    .eyebrow{display:block;font-family:var(--font-ui);font-size:0.68rem;font-weight:600;letter-spacing:0.17em;text-transform:uppercase;color:var(--gold);margin-bottom:var(--s2)}
+    .container{max-width:var(--max-width);margin:0 auto;padding:0 var(--s4)}
+    @media(max-width:600px){.container{padding:0 var(--s2)}}
+    .nav{position:sticky;top:0;z-index:100;background:rgba(28,46,71,0.96);backdrop-filter:blur(10px);border-bottom:1px solid rgba(255,255,255,0.07);padding:1rem var(--s4)}
+    .nav__inner{max-width:var(--max-width);margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+    .nav__logo{font-family:var(--font-display);font-size:1rem;font-weight:600;color:#fff;letter-spacing:0.01em}
+    .nav__back{font-family:var(--font-ui);font-size:0.82rem;font-weight:500;color:rgba(245,241,234,0.6);transition:color 0.2s}
+    .nav__back:hover{color:var(--gold-pale)}
+    .article-hero{background:var(--bg-dark);padding:clamp(3rem,7vw,5.5rem) 0 clamp(2.5rem,5vw,4rem);position:relative;overflow:hidden}
+    .article-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 50% at 50% 0%,rgba(184,146,62,0.09),transparent 70%);pointer-events:none}
+    .article-hero .container{position:relative}
+    .article-meta{display:flex;align-items:center;gap:0.75rem;flex-wrap:wrap;margin-bottom:1.5rem}
+    .article-cat{font-family:var(--font-ui);font-size:0.72rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold-pale);background:rgba(184,146,62,0.12);border:1px solid rgba(184,146,62,0.22);border-radius:100px;padding:0.22rem 0.8rem}
+    .article-date{font-family:var(--font-ui);font-size:0.78rem;color:rgba(245,241,234,0.4)}
+    .article-hero h1{color:#fff;margin-bottom:1.2rem}
+    .article-hero .lead{font-family:var(--font-body);font-size:1.1rem;line-height:1.85;color:rgba(245,241,234,0.7);max-width:680px}
+    .article-body{padding:clamp(2.5rem,5vw,4.5rem) 0}
+    .article-body .container{max-width:760px}
+    .highlight-box{background:var(--bg-section);border-left:3px solid var(--gold);border-radius:0 var(--radius) var(--radius) 0;padding:1.25rem 1.5rem;margin:2rem 0}
+    .highlight-box p{margin:0;font-size:0.98rem}
+    .key-takeaway{background:var(--bg-dark);border-radius:var(--radius-lg);padding:2rem;margin:2.5rem 0}
+    .key-takeaway h3{color:#fff;margin-top:0;margin-bottom:1rem}
+    .key-takeaway ul{color:rgba(245,241,234,0.72);margin-left:1.2rem}
+    .key-takeaway li{margin-bottom:0.5rem;font-size:0.98rem}
+    .chart-caption{font-family:var(--font-ui);font-size:0.76rem;color:var(--text-muted);text-align:center;margin:0.4rem 0 0;font-style:normal}
+    .faq-q{font-family:var(--font-display);font-size:1.15rem;font-weight:600;color:var(--deep-blue);margin-top:1.75rem;margin-bottom:0.4rem}
+    .cta-section{background:var(--bg-dark);padding:clamp(3rem,6vw,5rem) 0;text-align:center;position:relative;overflow:hidden}
+    .cta-section::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 60% at 50% 100%,rgba(184,146,62,0.08),transparent 70%);pointer-events:none}
+    .cta-section h2{color:#fff;margin-top:0;margin-bottom:1rem}
+    .cta-section p{color:rgba(245,241,234,0.65);max-width:500px;margin:0 auto 2rem}
+    .btn-gold{display:inline-flex;align-items:center;gap:0.5rem;padding:0.9rem 2.2rem;background:var(--gold);color:#fff;border-radius:100px;font-family:var(--font-ui);font-size:0.9rem;font-weight:600;box-shadow:0 4px 20px rgba(184,146,62,0.3);transition:all 0.22s}
+    .btn-gold:hover{background:var(--gold-warm);transform:translateY(-2px);box-shadow:0 8px 30px rgba(184,146,62,0.4)}
+    .footer{background:var(--bg-footer);padding:2rem var(--s4);text-align:center}
+    .footer p{font-family:var(--font-ui);font-size:0.8rem;color:rgba(245,241,234,0.35);line-height:1.8}
+    .footer a{color:rgba(245,241,234,0.45)}
+    .footer a:hover{color:var(--gold-pale)}
+  </style>
+  <link rel="stylesheet" href="bbc-article-visuals.css" />
+  <!-- bbc-schema -->
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://balaynibruno.co/#organization",
+      "name": "Balay ni Bruno & Co.",
+      "url": "https://balaynibruno.co/",
+      "logo": "https://balaynibruno.co/bbc-logo.png",
+      "email": "admin@balaynibruno.co",
+      "telephone": "+63 935 663 0324",
+      "founder": { "@type": "Person", "name": "RJ Bryan Tres Reyes" },
+      "sameAs": [
+        "https://www.facebook.com/profile.php?id=61590006878673",
+        "https://www.instagram.com/balaynibruno/",
+        "https://www.tiktok.com/@balaynibruno.co",
+        "https://youtube.com/@balaynibruno"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://balaynibruno.co/#website",
+      "name": "Balay ni Bruno & Co.",
+      "url": "https://balaynibruno.co/",
+      "publisher": { "@id": "https://balaynibruno.co/#organization" }
+    },
+    {
+      "@type": "Article",
+      "headline": "How Do I Turn a Google Sheet Into a Live Dashboard?",
+      "description": "Your numbers already live in a spreadsheet. Here is how we turn a Google Sheet into a clean, always-current view you can open on your phone, with no new software.",
+      "url": "https://balaynibruno.co/how-to-turn-google-sheet-into-live-dashboard.html",
+      "mainEntityOfPage": "https://balaynibruno.co/how-to-turn-google-sheet-into-live-dashboard.html",
+      "image": "https://balaynibruno.co/bbc-logo.png",
+      "author": { "@id": "https://balaynibruno.co/#organization" },
+      "publisher": { "@id": "https://balaynibruno.co/#organization" }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Do I need to buy new software to make my Google Sheet into a dashboard?",
+          "acceptedAnswer": { "@type": "Answer", "text": "No. Google Sheets is free, and hosting a simple web view is free. The small routine that reads your sheet and updates the view is also free to run. You do not need a paid dashboard tool. The only cost is the time to set it up once." }
+        },
+        {
+          "@type": "Question",
+          "name": "How does the dashboard stay current without me updating it by hand?",
+          "acceptedAnswer": { "@type": "Answer", "text": "A small routine runs in the background on a schedule, reads the latest version of your Google Sheet, and rewrites the dashboard view automatically. When you open it on your phone, the numbers are already current. You do not touch anything between updates." }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I open this dashboard on my phone like a regular app?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Yes. The dashboard is a web page built to install on your home screen. On iPhone, tap Share then Add to Home Screen. On Android, tap the browser menu and choose Install or Add to Home Screen. After that it opens like any other app, full screen, no browser bar." }
+        }
+      ]
+    }
+  ]
+}
+  </script>
+</head>
+<body>
+<nav class="nav"><div class="nav__inner"><a href="index.html" class="nav__logo">Balay ni Bruno &amp; Co.</a><a href="insights.html" class="nav__back">&#8592; Back to Insights</a></div></nav>
+
+<section class="article-hero">
+  <div class="container">
+    <div class="article-meta">
+      <span class="article-cat">Operations</span>
+      <span class="article-date">June 2026</span>
+    </div>
+    <h1>How Do I Turn a Google Sheet Into a Live Dashboard?</h1>
+    <p class="lead">Your numbers already live in a spreadsheet. Here is how we turn a Google Sheet into a clean, always-current view you can open on your phone, with no new software, no monthly fee, and no manual updating.</p>
+  </div>
+</section>
+
+<section class="article-body">
+  <div class="container">
+
+    <p>Most small business owners already track what matters in a Google Sheet. The social calendar, the client list, the posting schedule, the lead tracker. The information is there. The problem is that opening a spreadsheet on your phone, scrolling across columns, and trying to read it on a small screen is not the same as having a clear view of where things stand.</p>
+
+    <p>We ran into this exact wall at Balay ni Bruno &amp; Co. Our social content calendar lived in a Google Sheet: one row per day, columns for the graphic and the video scheduled. The data was right. Getting a clear read on what was due today, what was coming up, and what still needed to be drafted was too slow.</p>
+
+    <p>So we added one thing between the Sheet and the phone: a small routine that reads the Sheet on a schedule and rewrites a clean web view. Open it and the calendar is already current. No refreshing. No scrolling across columns. No toggling between tabs.</p>
+
+    <h2>The Core Idea</h2>
+
+    <p>A Google Sheet already publishes its data if you allow it. A simple script can read that published data, parse the rows you care about, and write out a clean, readable page. Host that page for free and you have a dashboard that updates itself on its own schedule, without any manual work on your end.</p>
+
+    <p>That is the whole approach. No third-party dashboard tool. No paid subscription. Just the Sheet you already have, one small piece of code in the middle, and a free web host to show the result.</p>
+
+    <div class="before-after-compare">
+      <div class="before">
+        <h4>Before: the spreadsheet on the phone</h4>
+        <ul>
+          <li>Open the Sheet app, find the right tab</li>
+          <li>Scroll sideways across columns to find today's row</li>
+          <li>Zoom in to read small text in cells</li>
+          <li>Try to hold the week's picture in your head</li>
+          <li>Check again tomorrow, same steps</li>
+        </ul>
+      </div>
+      <div class="after">
+        <h4>After: a live view on the phone</h4>
+        <ul>
+          <li>Open the dashboard from your home screen</li>
+          <li>Today's items are at the top, clearly labeled</li>
+          <li>The week ahead is laid out in a clean list</li>
+          <li>Data is already current, no refresh needed</li>
+          <li>Takes seconds instead of minutes</li>
+        </ul>
+      </div>
+    </div>
+
+    <h2>How It Actually Works</h2>
+
+    <p>Here is the flow from the Sheet to the phone, broken into the three moving parts.</p>
+
+    <div class="step-flow step-flow--horizontal">
+      <div class="step">
+        <span class="step__num">1</span>
+        <div class="step__content">
+          <div class="step__title">Your Google Sheet</div>
+          <p class="step__desc">The Sheet is published as a data file anyone with the link can read. Your rows and columns stay exactly as they are. You keep editing the Sheet normally.</p>
+        </div>
+      </div>
+      <div class="step">
+        <span class="step__num">2</span>
+        <div class="step__content">
+          <div class="step__title">A small update routine</div>
+          <p class="step__desc">A short script fetches the Sheet's data on a schedule, picks the columns that matter (date, what is due, status), and rewrites a clean web page with the current picture.</p>
+        </div>
+      </div>
+      <div class="step">
+        <span class="step__num">3</span>
+        <div class="step__content">
+          <div class="step__title">The dashboard on your phone</div>
+          <p class="step__desc">A web page built to install like an app. Open it from your home screen and the current view is already there. Tap once, see everything that matters.</p>
+        </div>
+      </div>
+    </div>
+
+    <p>In our own setup, this runs on a schedule. Each time it runs it fetches the latest version of the Sheet, parses the rows for the current week and the week ahead, and updates the view. When we open it, the calendar is already current. The Sheet is still the place we edit. The dashboard is just the place we read.</p>
+
+    <div class="tip-box tip-box--tip">
+      <span class="tip-box__icon">&#10003;</span>
+      <p class="tip-box__text"><strong>One edit, two places.</strong> You only ever update the Sheet. The routine handles pulling the latest version into the view. Your VA or team can keep editing the Sheet the same way they always have, and the dashboard stays in sync on its own.</p>
+    </div>
+
+    <h2>What This Costs</h2>
+
+    <p>The short answer is nothing in new tools. Google Sheets is free. Hosting a simple web page is free (we use Netlify, which has a generous free tier). The script that reads the Sheet and rewrites the page is a short piece of code that runs on your own computer or on the free hosting layer. No new software license.</p>
+
+    <div class="stat-row">
+      <div class="stat-card">
+        <div class="stat-card__value">$0</div>
+        <div class="stat-card__label">Google Sheets</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-card__value">$0</div>
+        <div class="stat-card__label">Free web hosting</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-card__value">1x</div>
+        <div class="stat-card__label">Setup, runs itself after</div>
+      </div>
+    </div>
+    <p class="chart-caption">Typical cost breakdown for this setup. Costs shown are what we use at Balay ni Bruno &amp; Co.</p>
+
+    <p>Compare that to a paid dashboard tool. Most start at around $20 to $40 a month and require you to pull your data in through their own connection system, learn their interface, and stay dependent on their pricing. For data that already lives in a Sheet you control, that is usually the wrong direction.</p>
+
+    <div class="bar-chart">
+      <div class="bar-chart__row">
+        <span class="bar-chart__label">Paid dashboard tools</span>
+        <div class="bar-chart__track"><div class="bar-chart__fill" style="width:52%"><span class="bar-chart__val">~$20-40/mo</span></div></div>
+      </div>
+      <div class="bar-chart__row">
+        <span class="bar-chart__label">BI / reporting tools</span>
+        <div class="bar-chart__track"><div class="bar-chart__fill" style="width:75%"><span class="bar-chart__val">~$50-100/mo</span></div></div>
+      </div>
+      <div class="bar-chart__row">
+        <span class="bar-chart__label">Sheet-to-dashboard (this method)</span>
+        <div class="bar-chart__track"><div class="bar-chart__fill bar-chart__fill--gold" style="width:5%"><span class="bar-chart__val">$0</span></div></div>
+      </div>
+    </div>
+    <p class="chart-caption">Typical monthly cost comparison. Paid tool ranges are common market prices for small business tiers.</p>
+
+    <h2>What You Put in the Sheet</h2>
+
+    <p>The Sheet can be as simple or as detailed as what you actually track. In our case it has three core columns: the date, the graphic that is scheduled for that day, and the video. The script reads those columns, groups them by week, and shows them in the view. That is the whole thing.</p>
+
+    <p>For a client services business, the same idea works for a lead tracker (name, status, next follow-up date), a project tracker (client, milestone, due date), or a content calendar for multiple platforms. The structure in the Sheet drives what the dashboard shows. You define the columns, the script reads them.</p>
+
+    <div class="highlight-box"><p>The dashboard is not magic. It is just a better way to read the same data you already have. The Sheet is still where the truth lives. The dashboard is where you check the truth quickly.</p></div>
+
+    <h2>Installing It on Your Phone</h2>
+
+    <p>The dashboard is a web page built with one specific thing in mind: it should open like a real app, not like a website. Once it is hosted, installing it takes about ten seconds.</p>
+
+    <div class="roadmap">
+      <div class="roadmap-item">
+        <span class="roadmap-item__dot">1</span>
+        <div class="roadmap-item__body">
+          <div class="roadmap-item__title">Open the dashboard link in your phone browser</div>
+          <p class="roadmap-item__desc">The URL works in any browser. Safari on iPhone or Chrome on Android both work.</p>
+        </div>
+      </div>
+      <div class="roadmap-item">
+        <span class="roadmap-item__dot">2</span>
+        <div class="roadmap-item__body">
+          <div class="roadmap-item__title">Add it to your home screen</div>
+          <p class="roadmap-item__desc">On iPhone: tap the Share button, then "Add to Home Screen." On Android: tap the browser menu, then "Install" or "Add to Home Screen."</p>
+        </div>
+      </div>
+      <div class="roadmap-item">
+        <span class="roadmap-item__dot">3</span>
+        <div class="roadmap-item__body">
+          <div class="roadmap-item__title">Open it like any other app</div>
+          <p class="roadmap-item__desc">From now on, tap the icon on your home screen. It opens full screen, no browser bar, no extra navigation. Just the current view.</p>
+        </div>
+      </div>
+      <div class="roadmap-item">
+        <span class="roadmap-item__dot">4</span>
+        <div class="roadmap-item__body">
+          <div class="roadmap-item__title">The routine keeps it current</div>
+          <p class="roadmap-item__desc">On the schedule you set, the update routine reads your Sheet and refreshes what the dashboard shows. You do not touch anything between checks.</p>
+        </div>
+      </div>
+    </div>
+
+    <h2>Where This Fits in a BBC Partnership</h2>
+
+    <p>At Balay ni Bruno &amp; Co., this kind of system is part of how we run the work for our partners. Most businesses already have their data somewhere: a Sheet, a folder, a simple tracker. The gap is not that the data is missing. The gap is that reading it takes too many steps, so people stop checking, and small things fall through.</p>
+
+    <p>A live view that updates on its own closes that gap. Our team edits the Sheet. The routine keeps the dashboard current. The client opens one screen and sees where things stand. That is the operating standard we build into every BBC partnership.</p>
+
+    <div class="donut-row">
+      <div class="donut">
+        <div class="donut__ring" style="--pct:0"><div class="donut__hole">$0</div></div>
+        <div class="donut__label">New tools needed</div>
+      </div>
+      <div class="donut">
+        <div class="donut__ring donut__ring--sage" style="--pct:100"><div class="donut__hole">1x</div></div>
+        <div class="donut__label">One-time setup</div>
+      </div>
+      <div class="donut">
+        <div class="donut__ring donut__ring--blue" style="--pct:100"><div class="donut__hole">Auto</div></div>
+        <div class="donut__label">Updates itself</div>
+      </div>
+    </div>
+    <p class="chart-caption">This setup costs nothing new, sets up once, and updates on its own from that point forward.</p>
+
+    <h2>Common Questions</h2>
+
+    <p class="faq-q">Do I need to buy new software to make my Google Sheet into a dashboard?</p>
+    <p>No. Google Sheets is free, and hosting a simple web view is free. The small routine that reads your sheet and updates the view is also free to run. You do not need a paid dashboard tool. The only cost is the time to set it up once.</p>
+
+    <p class="faq-q">How does the dashboard stay current without me updating it by hand?</p>
+    <p>A small routine runs in the background on a schedule, reads the latest version of your Google Sheet, and rewrites the dashboard view automatically. When you open it on your phone, the numbers are already current. You do not touch anything between updates.</p>
+
+    <p class="faq-q">Can I open this dashboard on my phone like a regular app?</p>
+    <p>Yes. The dashboard is a web page built to install on your home screen. On iPhone, tap Share then Add to Home Screen. On Android, tap the browser menu and choose Install or Add to Home Screen. After that it opens like any other app, full screen, no browser bar.</p>
+
+    <div class="key-takeaway">
+      <h3>Key Takeaways</h3>
+      <ul>
+        <li>Your data is probably already in a Sheet. The gap is not the data, it is reading it quickly.</li>
+        <li>A small update routine between the Sheet and a web page closes that gap for free.</li>
+        <li>The routine reads the Sheet on a schedule and rewrites the view. You do not touch anything.</li>
+        <li>The result installs on your phone like an app and opens in one tap.</li>
+        <li>No paid tools, no new software, no manual updating once it is set up.</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<section class="cta-section"><div class="container"><span class="eyebrow" style="color:rgba(245,241,234,0.45);">Work with BBC</span><h2>Want a live view of your business on your phone?</h2><p>This is part of how we run BBC partnerships. Let us talk about what it looks like for your business.</p><a href="https://calendly.com/rj-balaynibruno/bbc-strategy-call" target="_blank" rel="noopener" class="btn-gold">Book a Strategy Call &#8599;</a></div></section>
+
+<!-- bbc-related-reads -->
+<section style="background:#EDE8DF;padding:clamp(2.5rem,5vw,4rem) 0;border-top:1px solid rgba(85,60,35,0.12);">
+  <div style="max-width:860px;margin:0 auto;padding:0 2.5rem;">
+    <span style="display:block;font-family:'DM Sans',system-ui,sans-serif;font-size:0.68rem;font-weight:700;letter-spacing:0.17em;text-transform:uppercase;color:#B8923E;margin-bottom:1.2rem;">Related Reads</span>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:1rem;">
+      <a href="how-we-built-business-command-center.html" style="display:block;background:#FDFAF6;border:1px solid rgba(85,60,35,0.12);border-radius:16px;padding:1.2rem 1.35rem;box-shadow:0 3px 18px rgba(85,60,35,0.06);">
+        <span style="display:block;font-family:'DM Sans',system-ui,sans-serif;font-size:0.6rem;font-weight:700;letter-spacing:0.13em;text-transform:uppercase;color:#888FA0;margin-bottom:0.45rem;">Operations</span>
+        <span style="display:block;font-family:'Playfair Display',Georgia,serif;font-size:1.02rem;font-weight:600;color:#1F3557;line-height:1.34;">How We Run a Whole Business From One Screen</span>
+      </a>
+      <a href="how-to-automate-small-business-tasks.html" style="display:block;background:#FDFAF6;border:1px solid rgba(85,60,35,0.12);border-radius:16px;padding:1.2rem 1.35rem;box-shadow:0 3px 18px rgba(85,60,35,0.06);">
+        <span style="display:block;font-family:'DM Sans',system-ui,sans-serif;font-size:0.6rem;font-weight:700;letter-spacing:0.13em;text-transform:uppercase;color:#888FA0;margin-bottom:0.45rem;">Operations</span>
+        <span style="display:block;font-family:'Playfair Display',Georgia,serif;font-size:1.02rem;font-weight:600;color:#1F3557;line-height:1.34;">How to Automate Small Business Tasks</span>
+      </a>
+      <a href="how-to-track-leads-without-expensive-crm.html" style="display:block;background:#FDFAF6;border:1px solid rgba(85,60,35,0.12);border-radius:16px;padding:1.2rem 1.35rem;box-shadow:0 3px 18px rgba(85,60,35,0.06);">
+        <span style="display:block;font-family:'DM Sans',system-ui,sans-serif;font-size:0.6rem;font-weight:700;letter-spacing:0.13em;text-transform:uppercase;color:#888FA0;margin-bottom:0.45rem;">Operations</span>
+        <span style="display:block;font-family:'Playfair Display',Georgia,serif;font-size:1.02rem;font-weight:600;color:#1F3557;line-height:1.34;">How to Track Leads Without an Expensive CRM</span>
+      </a>
+      <a href="how-we-help.html" style="display:block;background:#1C2E47;border:1px solid rgba(184,146,62,0.3);border-radius:16px;padding:1.2rem 1.35rem;">
+        <span style="display:block;font-family:'DM Sans',system-ui,sans-serif;font-size:0.6rem;font-weight:700;letter-spacing:0.13em;text-transform:uppercase;color:#E6CFA0;margin-bottom:0.45rem;">Work With BBC</span>
+        <span style="display:block;font-family:'Playfair Display',Georgia,serif;font-size:1.02rem;font-weight:600;color:#fff;line-height:1.34;">See How We Help &rarr;</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer class="footer"><p><a href="index.html">Balay ni Bruno &amp; Co.</a> &nbsp;&bull;&nbsp; <a href="insights.html">Insights</a> &nbsp;&bull;&nbsp; <a href="mailto:admin@balaynibruno.co">admin@balaynibruno.co</a></p><p style="margin-top:0.4rem;">&copy; 2026 Balay ni Bruno &amp; Co. All rights reserved.</p></footer>
+</body>
+</html>

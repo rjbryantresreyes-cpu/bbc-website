@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-L6S574R0CE"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-L6S574R0CE');
+  </script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>How Do I Set Up a Shopify Store That Actually Sells? | Balay ni Bruno &amp; Co.</title>
+  <meta name="description" content="A Shopify store is easy to open and hard to make sell. Here is the approach we use to set up a store with the structure, product pages, and trust signals that turn visits into orders." />
+  <link rel="canonical" href="https://balaynibruno.co/how-to-set-up-shopify-store-that-sells.html" />
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Balay ni Bruno &amp; Co." />
+  <meta property="og:title" content="How Do I Set Up a Shopify Store That Actually Sells? | Balay ni Bruno &amp; Co." />
+  <meta property="og:description" content="A Shopify store is easy to open and hard to make sell. Here is the approach we use to set up a store with the structure, product pages, and trust signals that turn visits into orders." />
+  <meta property="og:url" content="https://balaynibruno.co/how-to-set-up-shopify-store-that-sells.html" />
+  <meta property="og:image" content="https://balaynibruno.co/bbc-logo.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Lora:ital,wght@0,400;0,500;1,400;1,500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --deep-blue:#1F3557; --mid-blue:#4B6FA5; --warm-blue:#6D8FC7;
+      --light-blue:#A8C0DC; --bg-primary:#F5F1EA; --bg-section:#EDE8DF;
+      --bg-card:#FDFAF6; --bg-dark:#1C2E47; --bg-footer:#172540;
+      --text-ink:#2A3040; --text-body:#4E5666; --text-muted:#888FA0;
+      --text-warm:#F5F1EA; --gold:#B8923E; --gold-pale:#E6CFA0;
+      --gold-warm:#D4A84B; --sage:#4E9E74;
+      --font-display:'Playfair Display',Georgia,serif;
+      --font-body:'Lora',Georgia,serif;
+      --font-ui:'DM Sans',system-ui,sans-serif;
+      --max-width:860px; --radius:16px; --radius-lg:24px;
+      --shadow-sm:0 3px 18px rgba(85,60,35,0.08);
+      --shadow-md:0 7px 36px rgba(85,60,35,0.11);
+      --shadow-lg:0 14px 56px rgba(85,60,35,0.14);
+      --border-card:1px solid rgba(85,60,35,0.09);
+      --border-warm:1px solid rgba(85,60,35,0.12);
+      --s1:0.5rem;--s2:1rem;--s3:1.5rem;--s4:2.5rem;--s5:4rem;
+    }
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{font-family:var(--font-body);color:var(--text-ink);background:var(--bg-primary);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+    body::after{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23n)' opacity='0.026'/%3E%3C/svg%3E");pointer-events:none;z-index:9999;mix-blend-mode:multiply}
+    h1,h2,h3,h4{font-family:var(--font-display);line-height:1.22;color:var(--deep-blue)}
+    h1{font-size:clamp(2rem,4.5vw,3.2rem);font-weight:700;line-height:1.14}
+    h2{font-size:clamp(1.3rem,2.5vw,1.9rem);font-weight:600;margin-top:2.5rem;margin-bottom:0.75rem}
+    h3{font-size:clamp(1rem,1.8vw,1.25rem);font-weight:600;margin-top:2rem;margin-bottom:0.5rem}
+    p{font-family:var(--font-body);font-size:1.05rem;line-height:1.9;color:var(--text-body);margin-bottom:1.2rem}
+    a{text-decoration:none}
+    ul,ol{margin:0 0 1.2rem 1.5rem;color:var(--text-body);font-family:var(--font-body);font-size:1.05rem;line-height:1.85}
+    li{margin-bottom:0.4rem}
+    .eyebrow{display:block;font-family:var(--font-ui);font-size:0.68rem;font-weight:600;letter-spacing:0.17em;text-transform:uppercase;color:var(--gold);margin-bottom:var(--s2)}
+    .container{max-width:var(--max-width);margin:0 auto;padding:0 var(--s4)}
+    @media(max-width:600px){.container{padding:0 var(--s2)}}
+    .nav{position:sticky;top:0;z-index:100;background:rgba(28,46,71,0.96);backdrop-filter:blur(10px);border-bottom:1px solid rgba(255,255,255,0.07);padding:1rem var(--s4)}
+    .nav__inner{max-width:var(--max-width);margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+    .nav__logo{font-family:var(--font-display);font-size:1rem;font-weight:600;color:#fff;letter-spacing:0.01em}
+    .nav__back{font-family:var(--font-ui);font-size:0.82rem;font-weight:500;color:rgba(245,241,234,0.6);transition:color 0.2s}
+    .nav__back:hover{color:var(--gold-pale)}
+    .article-hero{background:var(--bg-dark);padding:clamp(3rem,7vw,5.5rem) 0 clamp(2.5rem,5vw,4rem);position:relative;overflow:hidden}
+    .article-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 50% at 50% 0%,rgba(184,146,62,0.09),transparent 70%);pointer-events:none}
+    .article-hero .container{position:relative}
+    .article-meta{display:flex;align-items:center;gap:0.75rem;flex-wrap:wrap;margin-bottom:1.5rem}
+    .article-cat{font-family:var(--font-ui);font-size:0.72rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold-pale);background:rgba(184,146,62,0.12);border:1px solid rgba(184,146,62,0.22);border-radius:100px;padding:0.22rem 0.8rem}
+    .article-date{font-family:var(--font-ui);font-size:0.78rem;color:rgba(245,241,234,0.4)}
+    .article-hero h1{color:#fff;margin-bottom:1.2rem}
+    .article-hero .lead{font-family:var(--font-body);font-size:1.1rem;line-height:1.85;color:rgba(245,241,234,0.7);max-width:680px}
+    .article-body{padding:clamp(2.5rem,5vw,4.5rem) 0}
+    .article-body .container{max-width:760px}
+    .highlight-box{background:var(--bg-section);border-left:3px solid var(--gold);border-radius:0 var(--radius) var(--radius) 0;padding:1.25rem 1.5rem;margin:2rem 0}
+    .highlight-box p{margin:0;font-size:0.98rem}
+    .key-takeaway{background:var(--bg-dark);border-radius:var(--radius-lg);padding:2rem;margin:2.5rem 0}
+    .key-takeaway h3{color:#fff;margin-top:0;margin-bottom:1rem}
+    .key-takeaway ul{color:rgba(245,241,234,0.72);margin-left:1.2rem}
+    .key-takeaway li{margin-bottom:0.5rem;font-size:0.98rem}
+    .chart-caption{font-family:var(--font-ui);font-size:0.76rem;color:var(--text-muted);text-align:center;margin:0.4rem 0 0;font-style:normal}
+    .faq-q{font-family:var(--font-display);font-size:1.15rem;font-weight:600;color:var(--deep-blue);margin-top:1.75rem;margin-bottom:0.4rem}
+    .cta-section{background:var(--bg-dark);padding:clamp(3rem,6vw,5rem) 0;text-align:center;position:relative;overflow:hidden}
+    .cta-section::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 60% at 50% 100%,rgba(184,146,62,0.08),transparent 70%);pointer-events:none}
+    .cta-section h2{color:#fff;margin-top:0;margin-bottom:1rem}
+    .cta-section p{color:rgba(245,241,234,0.65);max-width:500px;margin:0 auto 2rem}
+    .btn-gold{display:inline-flex;align-items:center;gap:0.5rem;padding:0.9rem 2.2rem;background:var(--gold);color:#fff;border-radius:100px;font-family:var(--font-ui);font-size:0.9rem;font-weight:600;box-shadow:0 4px 20px rgba(184,146,62,0.3);transition:all 0.22s}
+    .btn-gold:hover{background:var(--gold-warm);transform:translateY(-2px);box-shadow:0 8px 30px rgba(184,146,62,0.4)}
+    .footer{background:var(--bg-footer);padding:2rem var(--s4);text-align:center}
+    .footer p{font-family:var(--font-ui);font-size:0.8rem;color:rgba(245,241,234,0.35);line-height:1.8}
+    .footer a{color:rgba(245,241,234,0.45)}
+    .footer a:hover{color:var(--gold-pale)}
+  </style>
+  <link rel="stylesheet" href="bbc-article-visuals.css" />
+  <!-- bbc-schema -->
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://balaynibruno.co/#organization",
+      "name": "Balay ni Bruno & Co.",
+      "url": "https://balaynibruno.co/",
+      "logo": "https://balaynibruno.co/bbc-logo.png",
+      "email": "admin@balaynibruno.co",
+      "telephone": "+63 935 663 0324",
+      "founder": { "@type": "Person", "name": "RJ Bryan Tres Reyes" },
+      "sameAs": [
+        "https://www.facebook.com/profile.php?id=61590006878673",
+        "https://www.instagram.com/balaynibruno/",
+        "https://www.tiktok.com/@balaynibruno.co",
+        "https://youtube.com/@balaynibruno"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://balaynibruno.co/#website",
+      "name": "Balay ni Bruno & Co.",
+      "url": "https://balaynibruno.co/",
+      "publisher": { "@id": "https://balaynibruno.co/#organization" }
+    },
+    {
+      "@type": "Article",
+      "headline": "How Do I Set Up a Shopify Store That Actually Sells?",
+      "description": "A Shopify store is easy to open and hard to make sell. Here is the approach we use to set up a store with the structure, product pages, and trust signals that turn visits into orders.",
+      "url": "https://balaynibruno.co/how-to-set-up-shopify-store-that-sells.html",
+      "mainEntityOfPage": "https://balaynibruno.co/how-to-set-up-shopify-store-that-sells.html",
+      "image": "https://balaynibruno.co/bbc-logo.png",
+      "author": { "@id": "https://balaynibruno.co/#organization" },
+      "publisher": { "@id": "https://balaynibruno.co/#organization" }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Does a Shopify store work for businesses that sell high-consideration products?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Shopify works well for products that take longer to decide on, but the store has to do more work. High-consideration products need more context, stronger trust signals, and a browsing experience that guides the visitor toward a decision rather than dumping them in a raw catalog. The structure of the store matters more than with impulse purchases."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the biggest mistake businesses make when setting up Shopify?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Treating Shopify like a plain catalog. Most owners upload their products, pick a theme, and assume the store will sell. What actually sells is a guided experience: clear categories, well-written product pages, trust signals like photos and policies, and a path that matches how the buyer thinks. A catalog lists products. A store guides decisions."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do I need a developer to set up Shopify the right way?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Not always. Shopify's built-in tools handle a lot. But when your products are complex, when your buyers need guidance to choose, or when you want a browsing experience that goes beyond a standard theme, custom development becomes worth it. The question is whether the store's structure matches how your specific buyers make decisions. If it does not, no theme will fix it."
+          }
+        }
+      ]
+    }
+  ]
+}
+  </script>
+</head>
+<body>
+<nav class="nav"><div class="nav__inner"><a href="index.html" class="nav__logo">Balay ni Bruno &amp; Co.</a><a href="insights.html" class="nav__back">&#8592; Back to Insights</a></div></nav>
+
+<section class="article-hero">
+  <div class="container">
+    <div class="article-meta">
+      <span class="article-cat">Websites</span>
+      <span class="article-date">June 2026</span>
+    </div>
+    <h1>How Do I Set Up a Shopify Store That Actually Sells?</h1>
+    <p class="lead">Opening a Shopify store takes about an afternoon. Making it sell takes a lot more than that. The gap is almost always structure: how the products are organized, how each page earns trust, and whether the browsing experience matches how your buyer actually makes decisions.</p>
+  </div>
+</section>
+
+<section class="article-body">
+  <div class="container">
+
+    <p>Shopify is genuinely one of the best tools for selling things online. But the platform does not sell for you. It gives you a surface. What you put on that surface, and how you organize it, is what determines whether visitors browse and leave or browse and buy.</p>
+
+    <p>At Balay ni Bruno &amp; Co., we build and manage Shopify stores for clients across different industries. One thing stays consistent across all of them: the stores that sell are not the ones with the most products or the fanciest theme. They are the ones built around how the buyer thinks.</p>
+
+    <h2>The Problem With Most Shopify Setups</h2>
+
+    <p>Most first Shopify stores are built like a warehouse. You add your products, assign them to a category, pick a theme, and open the doors. That works fine if someone already knows exactly what they want and just needs to find it. It breaks down the moment your buyer is still deciding.</p>
+
+    <div class="before-after-compare">
+      <div class="before">
+        <h4>A store built like a warehouse</h4>
+        <ul>
+          <li>Products in generic categories with no curation</li>
+          <li>Pages that list specs but skip the "why this one" answer</li>
+          <li>No guidance for buyers who do not know what they need yet</li>
+          <li>Trust signals missing or buried at the bottom</li>
+          <li>Visitors leave to "think about it" and do not come back</li>
+        </ul>
+      </div>
+      <div class="after">
+        <h4>A store built like a decision guide</h4>
+        <ul>
+          <li>Products organized around how the buyer browses and chooses</li>
+          <li>Pages that answer the real question: "Is this the right one for me?"</li>
+          <li>Multiple entry points for different types of buyers</li>
+          <li>Trust signals (photos, policies, reviews) placed where doubt appears</li>
+          <li>A clear next step at every stage of the browsing journey</li>
+        </ul>
+      </div>
+    </div>
+
+    <h2>The 5 Layers That Actually Drive Sales</h2>
+
+    <p>When we set up or fix a Shopify store, we work through five layers. Each one builds on the last. Skip one and the store leaks at that point.</p>
+
+    <div class="roadmap">
+      <div class="roadmap-item">
+        <span class="roadmap-item__dot">1</span>
+        <div class="roadmap-item__body">
+          <div class="roadmap-item__title">Product organization that matches buyer thinking</div>
+          <p class="roadmap-item__desc">Group products the way buyers think about them, not the way a warehouse would sort them. A homeowner choosing tile does not think in SKUs. They think in styles: "something warm and earthy" or "clean and modern." When the store is organized around those mental categories, buyers find what fits them faster and with more confidence.</p>
+        </div>
+      </div>
+      <div class="roadmap-item">
+        <span class="roadmap-item__dot">2</span>
+        <div class="roadmap-item__body">
+          <div class="roadmap-item__title">Product pages that earn the decision</div>
+          <p class="roadmap-item__desc">A product page has one job: answer the question "Is this the right one for me?" That means more than a title and a price. It means showing the product in context, describing what makes it the right fit for a specific situation, and removing the common reasons people hesitate before adding to cart.</p>
+        </div>
+      </div>
+      <div class="roadmap-item">
+        <span class="roadmap-item__dot">3</span>
+        <div class="roadmap-item__body">
+          <div class="roadmap-item__title">Trust signals placed where doubt appears</div>
+          <p class="roadmap-item__desc">Trust is not a section at the bottom of the page. It is a response to a specific doubt your buyer has at a specific moment. "Can I return this if it looks different in person?" belongs near the add-to-cart button. A physical address or showroom mention belongs near the headline for a business people are trusting with a big purchase.</p>
+        </div>
+      </div>
+      <div class="roadmap-item">
+        <span class="roadmap-item__dot">4</span>
+        <div class="roadmap-item__body">
+          <div class="roadmap-item__title">Navigation built for multiple types of buyers</div>
+          <p class="roadmap-item__body">Not every buyer enters the same way. A homeowner just starting a renovation wants to browse by feel. A contractor already knows the spec they need. A designer wants to see the full range of a category efficiently. A well-built Shopify nav gives each of them a fast path to what matters to them, without confusion for the others.</p>
+        </div>
+      </div>
+      <div class="roadmap-item">
+        <span class="roadmap-item__dot">5</span>
+        <div class="roadmap-item__body">
+          <div class="roadmap-item__title">A clear next step on every page</div>
+          <p class="roadmap-item__desc">What should a visitor do when they finish reading a product page? Most Shopify stores leave that blank. We make sure every page ends with a decision point: add to cart, book a consultation, browse a related category. There is no dead end. Buyers who stay in motion are buyers who buy.</p>
+        </div>
+      </div>
+    </div>
+
+    <h2>When Standard Shopify Is Not Enough</h2>
+
+    <p>For most small businesses, Shopify's built-in tools and a good theme are enough to get selling. But some businesses have products that require more thought before a buyer commits. Interior design materials, for example, are exactly this kind of product. A homeowner choosing tile for their entire kitchen renovation is not making an impulse decision. They need to see how tiles work together, understand the difference between style directions, and feel confident before they order.</p>
+
+    <p>For businesses like this, a standard catalog browse falls short. A more curated browsing experience, one where products are grouped by design style or material character rather than just type, can make a significant difference in how far visitors get before they are ready to buy or book a consultation.</p>
+
+    <div class="tip-box tip-box--tip">
+      <span class="tip-box__icon">&#10003;</span>
+      <p class="tip-box__text"><strong>The question to ask yourself:</strong> Does my buyer need to understand something before they can commit? If the answer is yes, your store needs to teach as it sells. Product organization, page copy, and navigation all become more important than they are for a simple, one-click product.</p>
+    </div>
+
+    <h2>What Good Metadata Does for Your Store</h2>
+
+    <p>One of the less obvious parts of a well-built Shopify store is product metadata. This is the extra information attached to each product behind the scenes: material type, finish, size, style family, application. When metadata is set up carefully, the store can do things a plain catalog cannot.</p>
+
+    <div class="stat-row">
+      <div class="stat-card">
+        <div class="stat-card__value">1</div>
+        <div class="stat-card__label">Product, multiple views</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-card__value">6</div>
+        <div class="stat-card__label">Material categories, one store</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-card__value">3</div>
+        <div class="stat-card__label">Buyer types, one navigation</div>
+      </div>
+    </div>
+    <p class="chart-caption">Illustrates how a well-organized store serves multiple buyer types and browsing contexts without duplicating products. Numbers reflect the organizational approach, not a specific revenue figure.</p>
+
+    <p>With metadata in place, a single product can appear in multiple organized views: in its material category, in a curated style grouping, and on a page that compares it alongside similar options. The product does not duplicate. It is just visible in the right context for the right buyer at the right moment.</p>
+
+    <p>Without metadata, every new browsing experience requires adding new products or building new pages from scratch. With it, the store scales as you add products because the organization happens at the data level, not the page level.</p>
+
+    <h2>The Buyers Your Store Has to Serve</h2>
+
+    <p>Most Shopify stores are built with one imaginary buyer in mind: the person who already knows what they want and just needs to find it and check out. That buyer exists. But for most home improvement, interior design, or specialty product businesses, they are not the majority.</p>
+
+    <div class="bar-chart">
+      <div class="bar-chart__row">
+        <span class="bar-chart__label">Knows exactly what they want</span>
+        <div class="bar-chart__track"><div class="bar-chart__fill bar-chart__fill--muted" style="width:25%"><span class="bar-chart__val">minority</span></div></div>
+      </div>
+      <div class="bar-chart__row">
+        <span class="bar-chart__label">Has a direction, needs confirmation</span>
+        <div class="bar-chart__track"><div class="bar-chart__fill" style="width:55%"><span class="bar-chart__val">most common</span></div></div>
+      </div>
+      <div class="bar-chart__row">
+        <span class="bar-chart__label">Just starting, needs guidance</span>
+        <div class="bar-chart__track"><div class="bar-chart__fill bar-chart__fill--gold" style="width:35%"><span class="bar-chart__val">significant</span></div></div>
+      </div>
+    </div>
+    <p class="chart-caption">Rough representation of buyer readiness for high-consideration product categories. Percentages are illustrative of a general pattern, not measured data for any specific store.</p>
+
+    <p>The majority of buyers for complex or high-consideration products arrive with a direction, not a decision. They know they need tile for a kitchen renovation. They do not know which tile. A store that serves that buyer guides them from "I have a general idea" to "I am confident this is the right one." That journey is what the structure of the store makes possible or prevents.</p>
+
+    <div class="highlight-box"><p>Building a Shopify store that sells is not about adding more products. It is about making the buyer's path from "I am looking" to "I am buying" shorter and more confident at every step.</p></div>
+
+    <h2>Common Questions</h2>
+
+    <p class="faq-q">Does a Shopify store work for businesses that sell high-consideration products?</p>
+    <p>Yes. Shopify works well for products that take longer to decide on, but the store has to do more work. High-consideration products need more context, stronger trust signals, and a browsing experience that guides the visitor toward a decision rather than dropping them in a raw catalog. The structure of the store matters more than with impulse purchases.</p>
+
+    <p class="faq-q">What is the biggest mistake businesses make when setting up Shopify?</p>
+    <p>Treating Shopify like a plain catalog. Most owners upload their products, pick a theme, and assume the store will sell. What actually sells is a guided experience: clear categories, well-written product pages, trust signals like photos and policies, and a path that matches how the buyer thinks. A catalog lists products. A store guides decisions.</p>
+
+    <p class="faq-q">Do I need a developer to set up Shopify the right way?</p>
+    <p>Not always. Shopify's built-in tools handle a lot. But when your products are complex, when your buyers need guidance to choose, or when you want a browsing experience that goes beyond a standard theme, custom development becomes worth it. The question is whether the store's structure matches how your specific buyers make decisions. If it does not, no theme will fix it.</p>
+
+    <div class="key-takeaway">
+      <h3>Key Takeaways</h3>
+      <ul>
+        <li>A Shopify store that sells is organized around how the buyer thinks, not how a warehouse sorts inventory.</li>
+        <li>Product pages have one job: answer "Is this the right one for me?" Everything on the page should serve that answer.</li>
+        <li>Trust signals work best when placed where a specific doubt appears, not collected at the bottom of a page.</li>
+        <li>Good product metadata lets one store serve multiple types of buyers without duplicating products or building separate sites.</li>
+        <li>If your buyer needs to understand something before committing, your store needs to teach as it sells.</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<section class="cta-section"><div class="container"><span class="eyebrow" style="color:rgba(245,241,234,0.45);">Work with BBC</span><h2>Want a Shopify store built around how your buyers think?</h2><p>This approach is part of how we run Balay ni Bruno &amp; Co. partnerships. Let us talk about what it looks like for your store.</p><a href="https://calendly.com/rj-balaynibruno/bbc-strategy-call" target="_blank" rel="noopener" class="btn-gold">Book a Strategy Call &#8599;</a></div></section>
+
+<!-- bbc-related-reads -->
+<section style="background:#EDE8DF;padding:clamp(2.5rem,5vw,4rem) 0;border-top:1px solid rgba(85,60,35,0.12);">
+  <div style="max-width:860px;margin:0 auto;padding:0 2.5rem;">
+    <span style="display:block;font-family:'DM Sans',system-ui,sans-serif;font-size:0.68rem;font-weight:700;letter-spacing:0.17em;text-transform:uppercase;color:#B8923E;margin-bottom:1.2rem;">Related Reads</span>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:1rem;">
+      <a href="website-design-small-business-what-to-expect.html" style="display:block;background:#FDFAF6;border:1px solid rgba(85,60,35,0.12);border-radius:16px;padding:1.2rem 1.35rem;box-shadow:0 3px 18px rgba(85,60,35,0.06);">
+        <span style="display:block;font-family:'DM Sans',system-ui,sans-serif;font-size:0.6rem;font-weight:700;letter-spacing:0.13em;text-transform:uppercase;color:#888FA0;margin-bottom:0.45rem;">Websites</span>
+        <span style="display:block;font-family:'Playfair Display',Georgia,serif;font-size:1.02rem;font-weight:600;color:#1F3557;line-height:1.34;">Website Design for Small Business: What to Expect</span>
+      </a>
+      <a href="local-seo-small-business-guide.html" style="display:block;background:#FDFAF6;border:1px solid rgba(85,60,35,0.12);border-radius:16px;padding:1.2rem 1.35rem;box-shadow:0 3px 18px rgba(85,60,35,0.06);">
+        <span style="display:block;font-family:'DM Sans',system-ui,sans-serif;font-size:0.6rem;font-weight:700;letter-spacing:0.13em;text-transform:uppercase;color:#888FA0;margin-bottom:0.45rem;">SEO</span>
+        <span style="display:block;font-family:'Playfair Display',Georgia,serif;font-size:1.02rem;font-weight:600;color:#1F3557;line-height:1.34;">Local SEO for Small Business: A Plain-English Guide</span>
+      </a>
+      <a href="how-to-track-leads-without-expensive-crm.html" style="display:block;background:#FDFAF6;border:1px solid rgba(85,60,35,0.12);border-radius:16px;padding:1.2rem 1.35rem;box-shadow:0 3px 18px rgba(85,60,35,0.06);">
+        <span style="display:block;font-family:'DM Sans',system-ui,sans-serif;font-size:0.6rem;font-weight:700;letter-spacing:0.13em;text-transform:uppercase;color:#888FA0;margin-bottom:0.45rem;">Operations</span>
+        <span style="display:block;font-family:'Playfair Display',Georgia,serif;font-size:1.02rem;font-weight:600;color:#1F3557;line-height:1.34;">How to Track Leads Without an Expensive CRM</span>
+      </a>
+      <a href="how-we-help.html" style="display:block;background:#1C2E47;border:1px solid rgba(184,146,62,0.3);border-radius:16px;padding:1.2rem 1.35rem;">
+        <span style="display:block;font-family:'DM Sans',system-ui,sans-serif;font-size:0.6rem;font-weight:700;letter-spacing:0.13em;text-transform:uppercase;color:#E6CFA0;margin-bottom:0.45rem;">Work With BBC</span>
+        <span style="display:block;font-family:'Playfair Display',Georgia,serif;font-size:1.02rem;font-weight:600;color:#fff;line-height:1.34;">See How We Help &rarr;</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer class="footer"><p><a href="index.html">Balay ni Bruno &amp; Co.</a> &nbsp;&bull;&nbsp; <a href="insights.html">Insights</a> &nbsp;&bull;&nbsp; <a href="mailto:admin@balaynibruno.co">admin@balaynibruno.co</a></p><p style="margin-top:0.4rem;">&copy; 2026 Balay ni Bruno &amp; Co. All rights reserved.</p></footer>
+</body>
+</html>
