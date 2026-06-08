@@ -1,6 +1,14 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-L6S574R0CE"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-L6S574R0CE');
+  </script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Our Team | Balay ni Bruno &amp; Co.</title>
@@ -259,7 +267,9 @@
       font-family:var(--font-display); font-size:2rem; font-weight:700;
       color:var(--gold-pale);
       box-shadow:var(--shadow-sm);
+      overflow:hidden;
     }
+    .team-avatar img { width:100%; height:100%; object-fit:cover; border-radius:50%; }
     .team-avatar--bruno { background:linear-gradient(135deg, var(--deep-blue), var(--bg-dark)); border:3px solid rgba(184,146,62,0.3); }
     .founder-pill {
       display:inline-flex; align-items:center; gap:5px;
@@ -303,7 +313,7 @@
       box-shadow:var(--shadow-xs);
       overflow:hidden;
     }
-    .team-avatar-sm img { width:100%; height:100%; object-fit:cover; border-radius:50%; display:block; }
+    .team-avatar-sm img { width:100%; height:100%; object-fit:cover; border-radius:50%; }
     .team-card-name { font-family:var(--font-display); font-size:1.1rem; font-weight:600; color:var(--deep-blue); margin-bottom:0.15rem; }
     .team-card-role { font-family:var(--font-ui); font-size:0.75rem; color:var(--text-muted); }
     .team-card-desc { font-family:var(--font-body); font-size:0.875rem; line-height:1.8; color:var(--text-body); margin-bottom:1.1rem; flex:1; }
@@ -394,6 +404,42 @@
     .header__cta .btn-ghost:hover { background:rgba(31,53,87,0.06); border-color:rgba(31,53,87,0.38); color:var(--deep-blue); }
   </style>
   <link rel="stylesheet" href="bbc-styles-v6.css" />
+  <!-- bbc-schema -->
+  <script type="application/ld+json">
+{
+    "@context":  "https://schema.org",
+    "@graph":  [
+                   {
+                       "@type":  "Organization",
+                       "@id":  "https://balaynibruno.co/#organization",
+                       "name":  "Balay ni Bruno \u0026 Co.",
+                       "url":  "https://balaynibruno.co/",
+                       "logo":  "https://balaynibruno.co/bbc-logo.png",
+                       "email":  "admin@balaynibruno.co",
+                       "telephone":  "+63 935 663 0324",
+                       "founder":  {
+                                       "@type":  "Person",
+                                       "name":  "RJ Bryan Tres Reyes"
+                                   },
+                       "sameAs":  [
+                                      "https://www.facebook.com/profile.php?id=61590006878673",
+                                      "https://www.instagram.com/balaynibruno/",
+                                      "https://www.tiktok.com/@balaynibruno.co",
+                                      "https://youtube.com/@balaynibruno"
+                                  ]
+                   },
+                   {
+                       "@type":  "WebSite",
+                       "@id":  "https://balaynibruno.co/#website",
+                       "name":  "Balay ni Bruno \u0026 Co.",
+                       "url":  "https://balaynibruno.co/",
+                       "publisher":  {
+                                         "@id":  "https://balaynibruno.co/#organization"
+                                     }
+                   }
+               ]
+}
+  </script>
 </head>
 <body>
 
@@ -553,7 +599,7 @@
 
     <!-- Featured: Bruno -->
     <div class="team-featured fade-in">
-      <div class="team-avatar team-avatar--bruno">B</div>
+      <div class="team-avatar team-avatar--bruno"><img src="images/team/rj-bryan.jpg" alt="Bruno — RJ Bryan Tres Reyes" /></div>
       <div>
         <p class="founder-pill">&#9733; Founder &amp; Lead Strategist</p>
         <p class="team-featured-name">Bruno</p>
@@ -573,7 +619,7 @@
           <span class="skill-tag">Onboarding</span>
           <span class="skill-tag">AI &amp; Automation</span>
         </div>
-        <a href="team-member.html?id=bruno" class="view-profile">View Profile &rarr;</a>
+        <a href="about.html" class="view-profile">View Profile &rarr;</a>
       </div>
     </div>
 
@@ -637,7 +683,7 @@
       <!-- Ryan Crismin Bernaldez -->
       <div class="team-card">
         <div class="team-card-top">
-          <div class="team-avatar-sm"><img src="assets/ryan.jpg" alt="Ryan Crismin Bernaldez"></div>
+          <div class="team-avatar-sm" style="background:linear-gradient(135deg,#1E3A5F,#162B48);">RC</div>
           <div>
             <p class="team-card-name">Ryan Crismin Bernaldez</p>
             <p class="team-card-role">Operations &amp; Web Dev Lead + AI Content Creator</p>
@@ -647,8 +693,8 @@
           Ryan does two jobs at once. As Operations and Web Development Lead, he builds and
           optimizes client websites, runs local SEO and Google Search Console for First Class
           Finishes and Hi-Up Roofing, and leads the daily operations of the All Ryze team.
-          As AI Content Creator, he produces social media, AI video, and content for those same
-          clients using ChatGPT, HeyGen, and ElevenLabs. The systems side and the creative side,
+          As AI Content Creator, he produces social media, AI content, and video for clients
+          using ChatGPT, HeyGen, and ElevenLabs. The systems side and the creative side,
           together in one person.
         </p>
         <div class="team-card-skills">
@@ -697,7 +743,7 @@
       <!-- Kenz Lloyd D. Villaflores -->
       <div class="team-card">
         <div class="team-card-top">
-          <div class="team-avatar-sm" style="background:linear-gradient(135deg,#3D2A5A,#2A1D40);">KL</div>
+          <div class="team-avatar-sm" style="background:linear-gradient(135deg,#3D2A5A,#2A1D40);"><img src="images/team/kenz-villaflores.jpg" alt="Kenz Villaflores" /></div>
           <div>
             <p class="team-card-name">Kenz</p>
             <p class="team-card-role">Social Media Manager &amp; AI Operations Support</p>
@@ -729,7 +775,7 @@
       <!-- Daryl Agadia -->
       <div class="team-card">
         <div class="team-card-top">
-          <div class="team-avatar-sm" style="background:linear-gradient(135deg,#1A4A5A,#0F2E3A);">DA</div>
+          <div class="team-avatar-sm" style="background:linear-gradient(135deg,#1A4A5A,#0F2E3A);"><img src="images/team/daryl-agadia.jpg" alt="Daryl Agadia" /></div>
           <div>
             <p class="team-card-name">Daryl</p>
             <p class="team-card-role">Content Creator &amp; Marketing Support Specialist</p>
@@ -755,6 +801,36 @@
           <span class="skill-tag">Content Strategy</span>
         </div>
         <a href="daryl.html" class="view-profile">View Profile &rarr;</a>
+      </div>
+
+      <!-- Diego Tres Reyes -->
+      <div class="team-card">
+        <div class="team-card-top">
+          <div class="team-avatar-sm" style="background:linear-gradient(135deg,#5A4A2A,#3A2E18);"><img src="images/team/diego-tres-reyes.jpg" alt="Diego Tres Reyes" /></div>
+          <div>
+            <p class="team-card-name">Diego</p>
+            <p class="team-card-role">Email Marketing Specialist, Video Editor &amp; Content Creator</p>
+          </div>
+        </div>
+        <p class="team-card-desc">
+          Diego is a Filipino virtual assistant with five years of experience helping businesses
+          grow online. He started his career in Colorado in sales, customer service, and insurance,
+          then brought that client-first discipline into creative work. Today he edits video, designs
+          brand-aligned graphics, creates short-form content, and supports email campaigns, keeping
+          brands consistent and visible across Facebook, Instagram, and YouTube.
+        </p>
+        <div class="team-card-skills">
+          <span class="skill-tag">Video Editing</span>
+          <span class="skill-tag">Graphic Design</span>
+          <span class="skill-tag">Social Media Management</span>
+          <span class="skill-tag">Email Marketing</span>
+          <span class="skill-tag">Content Creation</span>
+          <span class="skill-tag">Short-Form Video</span>
+          <span class="skill-tag">Brand Consistency</span>
+          <span class="skill-tag">Customer Service</span>
+          <span class="skill-tag">Virtual Assistance</span>
+        </div>
+        <a href="diego.html" class="view-profile">View Profile &rarr;</a>
       </div>
 
     </div><!-- /team-grid -->
@@ -870,7 +946,7 @@
         <a href="https://youtube.com/@balaynibruno" target="_blank" rel="noopener noreferrer" class="footer__social" aria-label="YouTube">
           <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M21.6 7.2c-.2-.9-.9-1.6-1.8-1.8C18.2 5 12 5 12 5s-6.2 0-7.8.4c-.9.2-1.6.9-1.8 1.8C2 8.8 2 12 2 12s0 3.2.4 4.8c.2.9.9 1.6 1.8 1.8C5.8 19 12 19 12 19s6.2 0 7.8-.4c.9-.2 1.6-.9 1.8-1.8.4-1.6.4-4.8.4-4.8s0-3.2-.4-4.8zM10 15V9l5.2 3-5.2 3z"/></svg>
         </a>
-        <a href="https://www.google.com/search?q=Balay+ni+Bruno+%26+Co." target="_blank" rel="noopener noreferrer" class="footer__social" aria-label="Find us on Google">
+        <a href="https://share.google/FESMGRclQ5h9yK7jY" target="_blank" rel="noopener noreferrer" class="footer__social" aria-label="Find us on Google">
           <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 11v2.4h5.7c-.2 1.5-1.7 4.3-5.7 4.3-3.4 0-6.2-2.8-6.2-6.3s2.8-6.3 6.2-6.3c2 0 3.3.8 4 1.6l2.7-2.6C16.9 2.6 14.7 1.7 12 1.7 6.4 1.7 1.9 6.2 1.9 11.8s4.5 10.1 10.1 10.1c5.8 0 9.7-4.1 9.7-9.9 0-.7-.1-1.2-.2-1.7H12z"/></svg>
         </a>
       </div>
