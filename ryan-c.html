@@ -187,7 +187,9 @@
       background:linear-gradient(135deg,#1E3A5F,#162B48);
       border:3px solid rgba(184,146,62,0.28);
       flex-shrink:0; box-shadow:var(--shadow-md);
+      overflow:hidden;
     }
+    .profile-avatar img { width:100%; height:100%; object-fit:cover; border-radius:50%; display:block; }
     .profile-hero__name { font-family:var(--font-display); font-size:clamp(1.8rem,3.5vw,2.8rem); font-weight:700; color:#fff; margin-bottom:0.4rem; line-height:1.15; }
     .profile-hero__role { font-family:var(--font-body); font-size:1.05rem; color:rgba(245,241,234,0.65); margin-bottom:1rem; }
     .profile-pills { display:flex; flex-wrap:wrap; gap:0.5rem; }
@@ -710,7 +712,7 @@
     </a>
 
     <div class="profile-hero__top">
-      <div class="profile-avatar">RC</div>
+      <div class="profile-avatar"><img src="images/team/ryan-bernaldez.jpg" alt="Ryan Crismin Bernaldez" /></div>
       <div>
         <h1 class="profile-hero__name">Ryan Crismin Bernaldez</h1>
         <p class="profile-hero__role">Operations &amp; Web Dev Lead + AI Content Creator</p>
