@@ -38,9 +38,10 @@ const WRITEABLE_TABLES = {
   // dashboard_statuses:   "TODO_table_id_after_creating_in_nocodb",
 };
 
-// Tables that may ONLY be updated (PATCH), never created (POST) or removed (DELETE)
-// via this public proxy. Limits blast radius on the live CRM.
-const PATCH_ONLY_TABLES = ["contacts"];
+// Tables that may be created (POST) and updated (PATCH) but never DELETED via this
+// public proxy. Lets the dashboard/Emy add and update CRM leads, while still
+// protecting the live CRM from destructive deletes.
+const NO_DELETE_TABLES = ["contacts"];
 
 export default async (req) => {
   const json = (obj, status = 200) =>
@@ -81,11 +82,11 @@ export default async (req) => {
     );
   }
 
-  if (PATCH_ONLY_TABLES.includes(tkey) && method !== "PATCH") {
+  if (NO_DELETE_TABLES.includes(tkey) && method === "DELETE") {
     return json(
       {
-        error: `Table '${tkey}' allows PATCH (update) only via this proxy, not ${method}.`,
-        hint: "Create/delete on this table must be done in NocoDB directly.",
+        error: `Table '${tkey}' cannot be deleted via this proxy (create + update only).`,
+        hint: "Delete records in NocoDB directly if a record truly must be removed.",
       },
       405
     );
