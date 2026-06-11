@@ -2,5 +2,6 @@ User-agent: *
 Allow: /
 
 Disallow: /portfolio-form.html
+Disallow: /task-submission.html
 
 Sitemap: https://balaynibruno.co/sitemap.xml
