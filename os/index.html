@@ -2673,7 +2673,7 @@
       "path": "LEARNINGS"
     },
     {
-      "title": "client portfolio and location seo build",
+      "title": "client store dashboard as a service",
       "date": "2026-06-11",
       "path": "LEARNINGS"
     }
@@ -3836,6 +3836,8 @@
   window.clientCC=(i)=>{
     // Cavalry Group has its own standalone command center (the one Kenz uses) — always route there.
     if(D.clients[i] && D.clients[i].name==='Cavalry Group'){ window.location.href='/os/cavalry/'; return; }
+    // S. Riviere has its own live store dashboard hub — route straight there.
+    if(D.clients[i] && D.clients[i].name==='S. Riviere Hair Collection'){ window.location.href='/clients/sr/'; return; }
     const c=D.clients[i], col=cColor(c), folder=c.folder||CFOLDER[c.name];
     const hasSite=c.site&&c.site!=='-', siteUrl=hasSite?'https://'+c.site.replace(/^https?:\/\//,''):'';
     const isCav=c.name==='Cavalry Group';
