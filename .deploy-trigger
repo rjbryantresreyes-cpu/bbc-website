@@ -1,1 +1,1 @@
-﻿Deploy 2026-06-13 (c): CRM Send Email auto-fill now pulls First Name + Company from the FULL contact list. Root fix: nocodb reader auto-paginates past NocoDB 100-row cap (was only searching first 100 of 330). Dashboard no longer guesses company from the email.
+﻿Deploy 2026-06-13 (d): bump service worker v15->v16 to force browsers off stale cached /os and onto the auto-fill fix.
