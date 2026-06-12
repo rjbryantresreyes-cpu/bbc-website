@@ -3699,10 +3699,14 @@
       personalizeSendPanel(email);
       if(to) to.scrollIntoView({behavior:'smooth'}); },250);
   };
-  // After a send, stamp the lead: status, last-contact, +4-day follow-up, version + step.
+  // After a send, stamp the lead: status -> Emailed (moves it to the Emailed view), last-contact,
+  // +4-day follow-up, version + step. Loads the FULL contact list first so it never silently
+  // misses a lead (the old version did nothing if contacts weren't already loaded or were past #100).
   window.stampLead=async(email,tplValue)=>{
     try{
-      const cts=window.__crmContacts||[]; const e=((email||'')+'').toLowerCase().trim();
+      const e=((email||'')+'').toLowerCase().trim(); if(!e) return;
+      let cts=window.__crmContacts||[];
+      if(!cts.length){ try{ const r=await fetch('/.netlify/functions/nocodb?table=contacts&limit=2000'); const j=await r.json(); cts=j.list||[]; window.__crmContacts=cts; }catch(_){} }
       const c=cts.find(r=>((r.Email||'')+'').toLowerCase().trim()===e); if(!c||c.Id==null) return;
       const today=new Date(); const meta=window.SEQ_META[tplValue];
       const core={Status:'Emailed','Last Contact':ymd(today)};
