@@ -1,1 +1,1 @@
-﻿Deploy trigger 2026-06-13 (b): CRM Send Email - blank First Name now defaults to 'there' (Hi there). Code-only dashboard change; forces a Netlify build past the os/-only cost-saver.
+﻿Deploy 2026-06-13 (c): CRM Send Email auto-fill now pulls First Name + Company from the FULL contact list. Root fix: nocodb reader auto-paginates past NocoDB 100-row cap (was only searching first 100 of 330). Dashboard no longer guesses company from the email.

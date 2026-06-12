@@ -60,21 +60,39 @@ export default async (req) => {
     }
   }
 
-  /* ---- READ ---- */
-  // NocoDB v2 caps each page at 100 records server-side regardless of `limit`.
-  // We accept `limit` (clamped to 1000) and `offset` (default 0). Callers must paginate
-  // via offset for full reads (e.g., bulk dedup). Bug fixed 2026-06-06 — prior version
-  // ignored offset entirely so paginated callers got the first page repeatedly.
-  const limit = Math.min(parseInt(url.searchParams.get("limit") || "200", 10) || 200, 1000);
-  const offset = Math.max(parseInt(url.searchParams.get("offset") || "0", 10) || 0, 0);
-  const api = `${recordsApi}?limit=${limit}&offset=${offset}`;
+  /* ---- READ (auto-paginates so ONE call returns ALL records) ---- */
+  // NocoDB v2 caps each page at 100 records server-side regardless of `limit`. Prior versions
+  // returned only the first 100, so any lead past #100 (e.g. in a 330-row table) was invisible
+  // to the dashboard's contact lookup. We now loop pages of 100 (via offset) until we have
+  // `limit` rows or hit the last page, and return the combined list. Explicit `offset=` callers
+  // still get a single page (back-compat for paginated bulk readers). Fixed 2026-06-13.
+  const PAGE = 100;
+  const want = Math.min(parseInt(url.searchParams.get("limit") || "200", 10) || 200, 5000);
+  const hasOffset = url.searchParams.has("offset");
+  const startOffset = Math.max(parseInt(url.searchParams.get("offset") || "0", 10) || 0, 0);
   try {
-    const r = await fetch(api, { headers: { "xc-token": token, "accept": "application/json" } });
-    const text = await r.text();
-    return new Response(text, {
-      status: r.status,
-      headers: { "content-type": "application/json", "cache-control": "public, max-age=10" },
-    });
+    if (hasOffset) {
+      // single-page passthrough for explicit paginated callers
+      const r = await fetch(`${recordsApi}?limit=${Math.min(want, PAGE)}&offset=${startOffset}`, { headers: { "xc-token": token, "accept": "application/json" } });
+      const text = await r.text();
+      return new Response(text, { status: r.status, headers: { "content-type": "application/json", "cache-control": "public, max-age=10" } });
+    }
+    let all = [];
+    for (let off = 0; all.length < want; off += PAGE) {
+      const r = await fetch(`${recordsApi}?limit=${PAGE}&offset=${off}`, { headers: { "xc-token": token, "accept": "application/json" } });
+      if (!r.ok) {
+        const text = await r.text();
+        return new Response(text, { status: r.status, headers: { "content-type": "application/json", "cache-control": "no-store" } });
+      }
+      const data = await r.json();
+      const list = Array.isArray(data.list) ? data.list : [];
+      all = all.concat(list);
+      const lastPage = list.length < PAGE || (data.pageInfo && data.pageInfo.isLastPage);
+      if (lastPage) break;
+      if (off > 5000) break; // hard safety stop
+    }
+    if (all.length > want) all = all.slice(0, want);
+    return json({ list: all, pageInfo: { totalRows: all.length, isLastPage: true } });
   } catch (e) {
     return json({ error: "NocoDB fetch failed", detail: String(e).slice(0, 200) }, 502);
   }
