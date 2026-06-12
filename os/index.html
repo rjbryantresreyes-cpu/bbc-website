@@ -3699,13 +3699,15 @@
     // Make sure contacts are actually loaded — the old version silently did nothing if they weren't.
     if(!cts.length){ try{ const r=await fetch('/.netlify/functions/nocodb?table=contacts&limit=1000'); const j=await r.json(); cts=j.list||[]; window.__crmContacts=cts; }catch(_){} }
     const c=cts.find(r=>((r.Email||'')+'').toLowerCase().trim()===e);
-    let first,comp;
-    if(c){ first=c['First Name']||'there'; comp=c.Organization||'your company'; }
-    else { const g=guessFromEmail(e); first=g.first||'there'; comp=g.company||'your company'; }
+    const g=guessFromEmail(e);
+    // First name comes ONLY from a saved contact. No real name on file -> "Hi there".
+    const first=(c && (c['First Name']||'').trim()) ? c['First Name'].trim() : 'there';
+    // Company: saved contact's org if set, else a best-guess from the email domain, else generic.
+    const comp=(c && (c.Organization||'').trim()) ? c.Organization.trim() : (g.company || 'your company');
     const rep=(s)=>((s||'')+'').replace(/\{\{first_name\}\}/g,first).replace(/\{\{company\}\}/g,comp).replace(/\{\{personal_note\}\}/g,'');
     const sub=document.getElementById('em-subj'), bod=document.getElementById('em-body');
     if(sub) sub.value=rep(sub.value); if(bod) bod.value=rep(bod.value);
-    const st=document.getElementById('em-status'); if(st) st.textContent= c ? ('Filled in '+(c['First Name']||c.Organization||e)+' from your CRM. Review and send.') : 'Filled in the name + company from the email. Double-check, then send.';
+    const st=document.getElementById('em-status'); if(st) st.textContent= (c && (c['First Name']||'').trim()) ? ('Filled in '+c['First Name'].trim()+' from your CRM. Review and send.') : 'No name on file — using "Hi there". Company filled from the email. Review and send.';
   };
   // Load the next sequence email for a due lead into the Send panel, pre-personalized.
   window.loadNext=(email,tplValue)=>{ go('crm');
