@@ -655,7 +655,7 @@
 <script type="application/json" id="bbc-data">
 {
   "meta": {
-    "updated": "2026-06-12",
+    "updated": "2026-06-13",
     "pendingCount": 10
   },
   "owners": {
@@ -1339,13 +1339,13 @@
               "name": "4OCEAN"
             },
             {
-              "name": "FIRST-CLASS-FINISHES"
+              "name": "WOODEN-WOODWORKS"
             },
             {
               "name": "HOME-VISION-STUDIO"
             },
             {
-              "name": "WOODEN-WOODWORKS"
+              "name": "FIRST-CLASS-FINISHES"
             },
             {
               "name": "HI-UP-ROOFING"
@@ -1395,52 +1395,55 @@
           "name": "04_TEAM"
         },
         {
+          "name": "09_POTENTIAL CLIENTS"
+        },
+        {
           "name": "BBC_AI_FAMILY",
           "children": [
             {
-              "name": "CASEY"
-            },
-            {
-              "name": "BOOGY"
-            },
-            {
-              "name": "EMY"
-            },
-            {
-              "name": "SONNY"
-            },
-            {
               "name": "BRUNZ"
-            },
-            {
-              "name": "KRIZ"
-            },
-            {
-              "name": "MAI"
             },
             {
               "name": "WEBBY"
             },
             {
-              "name": "_TEMPLATE"
+              "name": "MAI"
             },
             {
-              "name": "AGENT_PROFILES"
+              "name": "KRIZ"
+            },
+            {
+              "name": "SONNY"
+            },
+            {
+              "name": "EMY"
+            },
+            {
+              "name": "BOOGY"
+            },
+            {
+              "name": "CASEY"
+            },
+            {
+              "name": "_TEMPLATE"
             },
             {
               "name": "JENNY"
             },
             {
+              "name": "AGENT_PROFILES"
+            },
+            {
               "name": "_VAULT"
             },
             {
-              "name": "LANA"
+              "name": "_HANDOFFS"
             },
             {
               "name": "VIDZ"
             },
             {
-              "name": "_HANDOFFS"
+              "name": "LANA"
             },
             {
               "name": "RAPHY"
@@ -1469,9 +1472,6 @@
           ]
         },
         {
-          "name": "09_POTENTIAL CLIENTS"
-        },
-        {
           "name": "Daryl BBC Folder"
         },
         {
@@ -1487,9 +1487,6 @@
           "name": "Bruno's Idea"
         },
         {
-          "name": ".agents"
-        },
-        {
           "name": "BBC Content",
           "url": "https://drive.google.com/drive/folders/1fxfMhnqjYzNjnplQC1nVx4LPRE77wgIK",
           "children": [
@@ -1500,13 +1497,13 @@
               "name": "BBC Bruno recordings"
             },
             {
-              "name": "Website Workflow Reel"
+              "name": "Tre 2"
             },
             {
               "name": "Tre 1"
             },
             {
-              "name": "Tre 2"
+              "name": "Website Workflow Reel"
             },
             {
               "name": "BBC Content Posting"
@@ -1515,6 +1512,9 @@
               "name": "BBC Graphic"
             }
           ]
+        },
+        {
+          "name": ".agents"
         },
         {
           "name": "WhatsApp Chat with Myself"
@@ -1529,10 +1529,10 @@
               "name": "_PENDING_DRAFT"
             },
             {
-              "name": "_TRENDING_IDEAS"
+              "name": "2026-05-29_google_ask_advisor"
             },
             {
-              "name": "2026-05-29_google_ask_advisor"
+              "name": "_TRENDING_IDEAS"
             },
             {
               "name": "2026-05-30_tpic_ryan_review"
@@ -2800,28 +2800,28 @@
       "path": "LEARNINGS"
     },
     {
+      "title": "mcp installs context7 replicate netlify nocodb",
+      "date": "2026-06-12",
+      "path": "LEARNINGS"
+    },
+    {
+      "title": "kenz activity keepalive timedoctor",
+      "date": "2026-06-12",
+      "path": "LEARNINGS"
+    },
+    {
       "title": "insights online stores category and ourwork split",
       "date": "2026-06-12",
       "path": "LEARNINGS"
     },
     {
-      "title": "sriviere shopify connection and editorial theme",
-      "date": "2026-06-11",
+      "title": "hubstaff og idle keepalive",
+      "date": "2026-06-12",
       "path": "LEARNINGS"
     },
     {
-      "title": "shy shopify ai tool deepdive",
-      "date": "2026-06-11",
-      "path": "LEARNINGS"
-    },
-    {
-      "title": "shopify full agent golive workflow",
-      "date": "2026-06-11",
-      "path": "LEARNINGS"
-    },
-    {
-      "title": "postiz install and linkedin gate",
-      "date": "2026-06-11",
+      "title": "fb reels batch5",
+      "date": "2026-06-12",
       "path": "LEARNINGS"
     }
   ],
@@ -3584,7 +3584,7 @@
       </div>
       <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px">
         <select id="em-from" style="${EMIN};min-width:210px"><option value="rj@balaynibruno.co">rj@balaynibruno.co</option></select>
-        <input id="em-to" placeholder="To (email address)" onchange="window.personalizeSendPanel&&personalizeSendPanel(this.value)" style="${EMIN};flex:1;min-width:180px">
+        <input id="em-to" placeholder="To (email address)" oninput="window.personalizeSendPanel&&personalizeSendPanel(this.value)" onchange="window.personalizeSendPanel&&personalizeSendPanel(this.value)" style="${EMIN};flex:1;min-width:180px">
       </div>
       <input id="em-subj" placeholder="Subject" style="${EMIN};width:100%;box-sizing:border-box;margin-bottom:8px">
       <textarea id="em-body" rows="7" placeholder="Write your email..." style="${EMIN};width:100%;box-sizing:border-box;resize:vertical;margin-bottom:10px"></textarea>
@@ -3678,12 +3678,34 @@
     const base=m[((step||'')+'').trim()]; return base?base+v:null; };
   function ymd(d){ return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'); }
   // Personalize the open Send panel from a known contact (fills {{first_name}}/{{company}}).
-  window.personalizeSendPanel=(email)=>{
-    const cts=window.__crmContacts||[]; const e=((email||'')+'').toLowerCase().trim();
-    const c=cts.find(r=>((r.Email||'')+'').toLowerCase().trim()===e); if(!c) return;
-    const rep=(s)=>((s||'')+'').replace(/\{\{first_name\}\}/g,c['First Name']||'there').replace(/\{\{company\}\}/g,c.Organization||'your company').replace(/\{\{personal_note\}\}/g,'');
+  // Fallback only: pull a likely first name + company straight from the email address
+  // (used when the pasted email isn't a saved contact yet, so the template still fills in).
+  window.guessFromEmail=(email)=>{
+    const e=((email||'')+'').toLowerCase().trim(); const at=e.indexOf('@'); if(at<1) return {first:'',company:''};
+    const local=e.slice(0,at), domain=e.slice(at+1);
+    const cap=(s)=>s? s.charAt(0).toUpperCase()+s.slice(1) : '';
+    const firstTok=(local.split(/[._\-+]/)[0]||'').replace(/[0-9]/g,'');
+    const first=firstTok.length>1?cap(firstTok):'';
+    const FREE=['gmail','yahoo','outlook','hotmail','icloud','aol','proton','protonmail','live','msn','gmx','ymail','me','mail'];
+    const host=domain.split('.')[0]||'';
+    const company=(host && !FREE.includes(host)) ? cap(host) : '';
+    return {first,company};
+  };
+  // Fill {{first_name}} + {{company}} in the loaded template. Pulls from the CRM when the email
+  // matches a saved contact; otherwise fills from the email address itself.
+  window.personalizeSendPanel=async(email)=>{
+    const e=((email||'')+'').toLowerCase().trim(); if(!e) return;
+    let cts=window.__crmContacts||[];
+    // Make sure contacts are actually loaded — the old version silently did nothing if they weren't.
+    if(!cts.length){ try{ const r=await fetch('/.netlify/functions/nocodb?table=contacts&limit=1000'); const j=await r.json(); cts=j.list||[]; window.__crmContacts=cts; }catch(_){} }
+    const c=cts.find(r=>((r.Email||'')+'').toLowerCase().trim()===e);
+    let first,comp;
+    if(c){ first=c['First Name']||'there'; comp=c.Organization||'your company'; }
+    else { const g=guessFromEmail(e); first=g.first||'there'; comp=g.company||'your company'; }
+    const rep=(s)=>((s||'')+'').replace(/\{\{first_name\}\}/g,first).replace(/\{\{company\}\}/g,comp).replace(/\{\{personal_note\}\}/g,'');
     const sub=document.getElementById('em-subj'), bod=document.getElementById('em-body');
     if(sub) sub.value=rep(sub.value); if(bod) bod.value=rep(bod.value);
+    const st=document.getElementById('em-status'); if(st) st.textContent= c ? ('Filled in '+(c['First Name']||c.Organization||e)+' from your CRM. Review and send.') : 'Filled in the name + company from the email. Double-check, then send.';
   };
   // Load the next sequence email for a due lead into the Send panel, pre-personalized.
   window.loadNext=(email,tplValue)=>{ go('crm');

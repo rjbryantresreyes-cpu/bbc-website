@@ -1,0 +1,1 @@
+﻿Deploy trigger 2026-06-13: CRM Send Email auto-fill fix (first name + company on template select). Forces a build because the change lives in os/index.html, which the cost-saver would otherwise skip.
