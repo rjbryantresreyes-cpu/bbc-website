@@ -281,6 +281,8 @@
 
     /* ── WORK GRID ───────────────────────────────────────────── */
     .work-grid-section { background: var(--bg-section); padding: var(--s7) 0; }
+    .work-section-title { font-family: 'Playfair Display', serif; font-size: clamp(1.6rem, 3.2vw, 2.2rem); color: #1F3557; margin: 0 0 .35rem; }
+    .work-section-sub { color: var(--text-muted); margin: 0 0 2rem; max-width: 62ch; font-size: 1.02rem; }
     .work-grid {
       display: grid; grid-template-columns: repeat(3, 1fr);
       gap: 2rem;
@@ -609,6 +611,8 @@
   <!-- ── WORK GRID ───────────────────────────────────────────── -->
   <section class="work-grid-section">
     <div class="container">
+      <h2 class="work-section-title">Current Clients</h2>
+      <p class="work-section-sub">The partnerships we are running right now.</p>
       <div class="work-grid">
 
         <!-- Wooden Woodworks -->
@@ -747,41 +751,83 @@
         </div>
 
         <!-- Sriviere Hair -->
-        <div class="work-card fade-in" data-category="branding">
+        <div class="work-card fade-in" data-category="branding web ecommerce">
           <div class="work-card__image">💇</div>
           <div class="work-card__body">
-            <span class="work-card__category">Brand + Social Content</span>
+            <span class="work-card__category">Editorial Online Store + Brand + AI</span>
             <h3>S. Riviere Hair Collection</h3>
-            <p>Developed a cohesive brand identity and social content strategy for this hair salon, warm, elevated, and on-brand at every touchpoint.</p>
+            <p>Designed a refined, editorial online store for this raw Indian hair collection, with her own AI helper guiding the brand voice and content. Warm, elevated, and accurate at every touchpoint, from the storefront to the story behind the hair.</p>
             <div class="work-card__team">
+              <span class="work-card__badge">Al · Store + Content</span>
               <span class="work-card__badge">Krizza · Brand</span>
-              <span class="work-card__badge">Al · Content Strategy</span>
             </div>
             <div class="work-card__tags">
+              <span class="work-card__tag">Website</span>
+              <span class="work-card__tag">E-Commerce</span>
               <span class="work-card__tag">Brand</span>
-              <span class="work-card__tag">Content</span>
-              <span class="work-card__tag">Creative</span>
+              <span class="work-card__tag">AI</span>
             </div>
             <a href="contact.html" class="work-card__link">View Details →</a>
           </div>
         </div>
 
-        <!-- Crown Limited Supply -->
-        <div class="work-card fade-in" data-category="operations branding">
-          <div class="work-card__image">👑</div>
+        <!-- DuDilagent AI -->
+        <div class="work-card fade-in" data-category="operations automation">
+          <div class="work-card__image" style="background:#1F3557;display:flex;align-items:center;justify-content:center;font-size:2.4rem;">🎯</div>
           <div class="work-card__body">
-            <span class="work-card__category">E-Commerce Operations + Content</span>
-            <h3>Crown Limited Supply</h3>
-            <p>Delivered e-commerce operations support, content management, and workflow organization for this supply brand. Kenz handled Shopify platform support, content posting, and CRM assistance, keeping the business backend running smoothly while the brand stayed visible and active online.</p>
+            <span class="work-card__category">Full Lead Generation</span>
+            <h3>DuDilagent AI</h3>
+            <p>DuDilagent is an AI platform that helps acquisition buyers research a business in minutes instead of weeks. We run their full lead generation, finding the right prospects, reaching out, qualifying interest, and handing over leads that are actually worth their team's time. Kenz and Daryl drive the day-to-day, so the pipeline stays full while the client stays focused on building and closing.</p>
             <div class="work-card__team">
-              <span class="work-card__badge">Kenz · Operations &amp; Content</span>
+              <span class="work-card__badge">Kenz · Lead Generation</span>
+              <span class="work-card__badge">Daryl · Lead Generation</span>
             </div>
             <div class="work-card__tags">
-              <span class="work-card__tag">E-Commerce</span>
-              <span class="work-card__tag">Shopify</span>
+              <span class="work-card__tag">Lead Generation</span>
+              <span class="work-card__tag">Outreach</span>
+              <span class="work-card__tag">Prospecting</span>
+              <span class="work-card__tag">Pipeline</span>
+            </div>
+            <a href="can-someone-handle-lead-generation-for-me.html" class="work-card__link">Read the story →</a>
+          </div>
+        </div>
+
+        <!-- SugarBabyCreative -->
+        <div class="work-card fade-in" data-category="operations branding">
+          <div class="work-card__image" style="background:#1F3557;display:flex;align-items:center;justify-content:center;font-size:2.4rem;">💫</div>
+          <div class="work-card__body">
+            <span class="work-card__category">Creator Management · Operations + Content + Engagement</span>
+            <h3>SugarBabyCreative</h3>
+            <p>A full-service creator management engagement. We run the operations and team management, create the content, and handle audience engagement and growth across platforms. One partner covering the whole back end so the brand stays active and growing while the day-to-day just works.</p>
+            <div class="work-card__team">
+              <span class="work-card__badge">Bruno · Ops, Content &amp; Engagement</span>
+            </div>
+            <div class="work-card__tags">
+              <span class="work-card__tag">Creator Management</span>
               <span class="work-card__tag">Operations</span>
-              <span class="work-card__tag">Content Management</span>
-              <span class="work-card__tag">CRM Support</span>
+              <span class="work-card__tag">Content Creation</span>
+              <span class="work-card__tag">Audience Engagement</span>
+              <span class="work-card__tag">Growth</span>
+            </div>
+            <a href="contact.html" class="work-card__link">View Details →</a>
+          </div>
+        </div>
+
+        <!-- Entropy Management -->
+        <div class="work-card fade-in" data-category="operations">
+          <div class="work-card__image" style="background:#1F3557;display:flex;align-items:center;justify-content:center;font-size:2.4rem;">⚙️</div>
+          <div class="work-card__body">
+            <span class="work-card__category">Operations &amp; Team Systems</span>
+            <h3>Entropy Management</h3>
+            <p>A digital audience engagement and creator management agency where RJ served as Operations Manager. He built the systems and standard operating procedures from the ground up, trained and managed the engagement team, and kept day-to-day operations running smoothly. This is where a lot of our operations and team-management playbook was first written.</p>
+            <div class="work-card__team">
+              <span class="work-card__badge">Bruno · Operations Manager</span>
+            </div>
+            <div class="work-card__tags">
+              <span class="work-card__tag">Operations Management</span>
+              <span class="work-card__tag">Team Training</span>
+              <span class="work-card__tag">SOP Development</span>
+              <span class="work-card__tag">Audience Engagement</span>
             </div>
             <a href="contact.html" class="work-card__link">View Details →</a>
           </div>
@@ -857,14 +903,15 @@
         <div class="work-card fade-in" data-category="branding websites operations">
           <div class="work-card__image" style="background:#fff;display:flex;align-items:center;justify-content:center;padding:16px;"><img src="assets/clients/aj-battle-logo.png" alt="AJ Battle Foundation logo" loading="lazy" style="max-width:100%;max-height:100%;object-fit:contain;" /></div>
           <div class="work-card__body">
-            <span class="work-card__category">Social Media + Design + Website Management</span>
+            <span class="work-card__category">Executive Support + Social + Design + Website</span>
             <h3>AJ Battle Foundation</h3>
-            <p>Long-term multi-year partnership supporting two interconnected brand ecosystems, a youth empowerment nonprofit and a real estate investment business. BBC handles social media management, content creation, graphic design, and website operations across Instagram, Facebook, TikTok, and YouTube. Visa leads social and content, Al handles design and operational support, keeping both brands consistent, active, and aligned with their growth mission.</p>
+            <p>Long-term, multi-year partnership supporting two connected brands, a youth empowerment nonprofit and a real estate investment business. Balay ni Bruno &amp; Co. handles social media, content, graphic design, and website operations across Instagram, Facebook, TikTok, and YouTube, and now supports the foundation's executive assistant work too, from scheduling and outreach to events and admin. We also built the foundation its own AI helper. Vi leads as executive assistant and social, with Al on design and operations, keeping both brands aligned with the foundation's mission to empower youth.</p>
             <div class="work-card__team">
-              <span class="work-card__badge">Visa · Social &amp; Content</span>
+              <span class="work-card__badge">Vi · Executive Assistant &amp; Social</span>
               <span class="work-card__badge">Al · Design &amp; Ops</span>
             </div>
             <div class="work-card__tags">
+              <span class="work-card__tag">Executive Support</span>
               <span class="work-card__tag">Social Media</span>
               <span class="work-card__tag">Graphic Design</span>
               <span class="work-card__tag">Website Management</span>
@@ -873,6 +920,29 @@
               <span class="work-card__tag">Real Estate</span>
             </div>
             <a href="contact.html" class="work-card__link">View Details →</a>
+          </div>
+        </div>
+
+        <!-- Blackbelt Commerce — content + VA partner -->
+        <div class="work-card fade-in" data-category="branding operations">
+          <div class="work-card__image" style="background:#1F3557;display:flex;align-items:center;justify-content:center;font-size:2.4rem;">🥋</div>
+          <div class="work-card__body">
+            <span class="work-card__category">Content + Podcast + Email for a Shopify Agency</span>
+            <h3>Blackbelt Commerce</h3>
+            <p>One of the most established Shopify Plus agencies in the world, and they trust us with their own brand. We handle their reels and graphics, edit their podcast (Beyond The Cart) and YouTube videos, run their social and email, build SEO blog posts, and put together case studies. When even a top Shopify expert outsources their content, that tells you something. We also stay in close contact as a referral partner.</p>
+            <div class="work-card__team">
+              <span class="work-card__badge">Bruno · Content, Video &amp; Podcast</span>
+              <span class="work-card__badge">Al · Social Media</span>
+              <span class="work-card__badge">Jade · Graphics &amp; SEO Blogs</span>
+            </div>
+            <div class="work-card__tags">
+              <span class="work-card__tag">Social Media</span>
+              <span class="work-card__tag">Podcast Editing</span>
+              <span class="work-card__tag">Video Editing</span>
+              <span class="work-card__tag">Email Marketing</span>
+              <span class="work-card__tag">Case Studies</span>
+            </div>
+            <a href="should-an-agency-outsource-its-own-content.html" class="work-card__link">Read the story →</a>
           </div>
         </div>
 
@@ -886,6 +956,75 @@
             <div style="margin-top:auto; padding-top:1rem;">
               <a href="https://calendly.com/rj-balaynibruno/bbc-strategy-call" target="_blank" rel="noopener noreferrer" class="work-card__link">Become a Client →</a>
             </div>
+          </div>
+        </div>
+
+      </div>
+
+      <h2 class="work-section-title" style="margin-top:var(--s6, 4rem);">Founding Clients</h2>
+      <p class="work-section-sub">Where we started. The clients who taught us the skills the whole studio runs on today.</p>
+      <div class="work-grid">
+
+        <!-- MNJ Insurance — Founding Client -->
+        <div class="work-card fade-in" data-category="branding automation">
+          <div class="work-card__image" style="background:#1F3557;display:flex;align-items:center;justify-content:center;font-size:2.4rem;">🛡️</div>
+          <div class="work-card__body">
+            <span class="work-card__category" style="background:rgba(184,146,62,0.12); color:var(--gold); border-color:rgba(184,146,62,0.3);">Founding Client · Graphic Design + Video</span>
+            <h3>MNJ Insurance Solutions</h3>
+            <p>Where it all began. MNJ Insurance, led by Julie Jennings, was the very first client. The work started with social media and brand graphics, then grew into video, the first videos ever made here, animated explainers and YouTube content. When the agency that made the introduction tried to end the relationship, the friendship continued anyway, and it is still going today. This is the gateway that grew into Balay ni Bruno &amp; Co.</p>
+            <div class="work-card__team">
+              <span class="work-card__badge">Bruno · Graphics &amp; Video</span>
+            </div>
+            <div class="work-card__tags">
+              <span class="work-card__tag">Graphic Design</span>
+              <span class="work-card__tag">Video Editing</span>
+              <span class="work-card__tag">Social Media</span>
+              <span class="work-card__tag">Founding Client</span>
+            </div>
+            <a href="how-balay-ni-bruno-started.html" class="work-card__link">Read the story →</a>
+          </div>
+        </div>
+
+        <!-- Crown Limited Supply — Foundational Client -->
+        <div class="work-card fade-in" data-category="branding automation operations">
+          <div class="work-card__image" style="background:#1F3557;display:flex;align-items:center;justify-content:center;font-size:2.4rem;">👑</div>
+          <div class="work-card__body">
+            <span class="work-card__category" style="background:rgba(184,146,62,0.12); color:var(--gold); border-color:rgba(184,146,62,0.3);">Foundational Client · Shopify + Email + Content</span>
+            <h3>Crown Limited Supply</h3>
+            <p>An anime merchandise brand, and where Balay ni Bruno &amp; Co. learned e-commerce. RJ started here as social media manager and content creator, then said yes when the owner offered to teach him Shopify. That became his first Shopify store, built and run end to end: redesign, product pages, uploads, fulfillment, and customer service. It is also where his first email campaigns (Klaviyo) and his first Amazon work began. One brand, three skills that now power the whole studio.</p>
+            <div class="work-card__team">
+              <span class="work-card__badge">Bruno · Shopify, Email &amp; Content</span>
+            </div>
+            <div class="work-card__tags">
+              <span class="work-card__tag">Shopify</span>
+              <span class="work-card__tag">Klaviyo Email</span>
+              <span class="work-card__tag">E-Commerce</span>
+              <span class="work-card__tag">Content</span>
+              <span class="work-card__tag">Anime</span>
+            </div>
+            <a href="can-a-va-learn-new-skills-as-you-grow.html" class="work-card__link">Read the story →</a>
+          </div>
+        </div>
+
+        <!-- Orbital SEO — foundational client -->
+        <div class="work-card fade-in" data-category="branding automation">
+          <div class="work-card__image" style="background:#1F3557;display:flex;align-items:center;justify-content:center;font-size:2.4rem;">🛰️</div>
+          <div class="work-card__body">
+            <span class="work-card__category" style="background:rgba(184,146,62,0.12); color:var(--gold); border-color:rgba(184,146,62,0.3);">Foundational Client · Social + Content + AI Images</span>
+            <h3>Orbital SEO</h3>
+            <p>An SEO agency, and a string of firsts for us. RJ and Kenz ran their social media and content across Twitter, Instagram, and Facebook to grow their reach. It was the first brand Twitter account we ever managed, and the first time we generated images with AI for a real brand. Two skills that are now part of how we serve every client started right here.</p>
+            <div class="work-card__team">
+              <span class="work-card__badge">Bruno · Social &amp; Content</span>
+              <span class="work-card__badge">Kenz · Content &amp; Graphics</span>
+            </div>
+            <div class="work-card__tags">
+              <span class="work-card__tag">Twitter / X</span>
+              <span class="work-card__tag">Social Media</span>
+              <span class="work-card__tag">Content</span>
+              <span class="work-card__tag">AI Images</span>
+              <span class="work-card__tag">SEO</span>
+            </div>
+            <a href="can-ai-create-the-images-for-my-social-media.html" class="work-card__link">Read the story →</a>
           </div>
         </div>
 
