@@ -3644,12 +3644,15 @@
       const abCard=(name,col,d)=>`<div class="panel"><span class="ptitle" style="color:${col}">Version ${name}</span><div class="metric"><b>${d.rate}%</b> reply rate</div><div class="gauge-sub" style="margin-top:6px">${d.total} leads · ${d.sent} emailed · ${d.rep} replied</div></div>`;
       const today=new Date(); today.setHours(23,59,59,999);
       const due=list.filter(r=>{ const f=r['Follow Up']; if(!f) return false; const d=new Date(f); return !isNaN(d.getTime()) && d<=today && (((r['Campaign Step']||'')+'')!=='Done'); });
-      const dueRows=due.slice(0,12).map(r=>{ const nx=window.seqNext(r['Campaign Step'],r['Email Version']); const lbl=nx?('send '+(window.TPL_LABEL[nx]||'next')):'sequence done';
+      // Stash the FULL record for every due contact, keyed by email. Clicking a Needs-Follow-Up item
+      // fills the email straight from this record (no second lookup, so it can't race or go stale).
+      window.__followupRecs={}; due.forEach(r=>{ const k=((r.Email||'')+'').toLowerCase().trim(); if(k) window.__followupRecs[k]=r; });
+      const dueRows=due.slice(0,30).map(r=>{ const nx=window.seqNext(r['Campaign Step'],r['Email Version']); const lbl=nx?('send '+(window.TPL_LABEL[nx]||'next')):'sequence done';
         const em=((r.Email||'')+'').replace(/'/g,'');
         const click=nx?`onclick="loadNext('${em}','${nx}')" style="cursor:pointer"`:'';
         return `<div class="opitem" ${click}><span class="odot" style="background:#EF6B6B"></span><span class="oname">${esc(r['First Name']||r.Email||'-')}${r.Organization?' · '+esc(r.Organization):''}</span><span class="ocad">${esc(lbl)}${nx?' →':''}</span></div>`;
       }).join('') || '<div class="gauge-sub">Nothing due right now.</div>';
-      const dueCard=`<div class="panel"><span class="ptitle" style="color:#EF6B6B">Follow-ups due (${due.length})</span>${dueRows}</div>`;
+      const dueCard=`<div class="panel"><span class="ptitle" style="color:#EF6B6B">Needs Follow-Up (${due.length})</span><div class="gauge-sub" style="margin:2px 0 6px">Click a name to open their next email, pre-filled and editable.</div>${dueRows}</div>`;
       // New replies: match inbox senders against your lead/client emails
       let repliesCard='<div class="panel"><span class="ptitle" style="color:#4ADE80">New replies</span><div class="gauge-sub">Checking inbox…</div></div>';
       try{
@@ -3735,10 +3738,11 @@
   // Merge the matching CRM contact's data into the loaded template. Pulls EVERY {{field}} from
   // the contact record; per-field fallback only when that field is genuinely empty/missing.
   // Works for intro, follow-up, and any template (they all share this path).
-  window.personalizeSendPanel=async(email)=>{
+  window.personalizeSendPanel=async(email, providedRec)=>{
     const e=((email||'')+'').toLowerCase().trim(); if(!e) return;
     const findIn=(list)=>(list||[]).find(r=>((r.Email||'')+'').toLowerCase().trim()===e);
-    let c=findIn(window.__crmContacts);
+    // A caller (e.g. Needs Follow-Up) can hand us the exact record so we skip the lookup entirely.
+    let c=providedRec||findIn(window.__crmContacts);
     // Not in the current cache (a just-created lead, the panel opened before contacts loaded, or the
     // cache went stale/partial after a throttled refresh)? FORCE a fresh full fetch and retry, so we
     // only ever fall back to "Hi there" after confirming the contact really isn't in the live CRM.
@@ -3769,12 +3773,21 @@
     if(bod) bod.value=rep(raw&&raw.body!=null ? raw.body : bod.value);
     const st=document.getElementById('em-status'); if(st) st.textContent= c ? ('Filled in '+(fld('First Name')||MAP.company)+' from your CRM. Review and send.') : 'That email isn\'t in your CRM yet — used "Hi there". Add them to Contacts (or check the email matches) to auto-fill.';
   };
-  // Load the next sequence email for a due lead into the Send panel, pre-personalized.
-  window.loadNext=(email,tplValue)=>{ go('crm');
-    setTimeout(()=>{ const sel=document.getElementById('em-template'); if(sel){ sel.value=tplValue; applyTemplate(); }
-      const to=document.getElementById('em-to'); if(to){ to.value=email; }
-      personalizeSendPanel(email);
-      if(to) to.scrollIntoView({behavior:'smooth'}); },250);
+  // Load the next sequence email for a due lead into the Send panel, pre-personalized + editable.
+  // Deterministic: switch to CRM, WAIT for the send panel to actually exist (instead of a fixed
+  // 250ms guess that loses the values if the view renders slowly), then load the template and fill
+  // the name/company straight from the stored Needs-Follow-Up record (no lookup, so it can't fail).
+  window.loadNext=async(email,tplValue)=>{
+    go('crm');
+    const e=((email||'')+'').toLowerCase().trim();
+    let sel, tries=0;
+    while(!(sel=document.getElementById('em-template')) && tries++<60){ await new Promise(r=>setTimeout(r,50)); }
+    if(!sel) return;
+    sel.value=tplValue; applyTemplate();
+    const to=document.getElementById('em-to'); if(to){ to.value=email; }
+    const rec=(window.__followupRecs&&window.__followupRecs[e])||null;
+    await personalizeSendPanel(email, rec);
+    if(to) to.scrollIntoView({behavior:'smooth'});
   };
   // After a send, stamp the lead: status -> Emailed (moves it to the Emailed view), last-contact,
   // +4-day follow-up, version + step. Loads the FULL contact list first so it never silently
