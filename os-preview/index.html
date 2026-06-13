@@ -3712,19 +3712,31 @@
     const m={'Intro sent':'hvs_','HVS sent':'ww_','WW sent':'hiupfcf_','HiUp-FCF sent':'offer_'};
     const base=m[((step||'')+'').trim()]; return base?base+v:null; };
   function ymd(d){ return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'); }
+  // One SHARED CRM-contacts loader. Concurrent callers await the SAME in-flight fetch (no duplicate
+  // hits), and a failed/empty response NEVER overwrites a good cached list. This kills the race where
+  // pasting a recipient AND picking a template fired two fetches at once and the empty/rate-limited
+  // one clobbered the data, so the last writer fell back to "Hi there".
+  window.__crmContactsP=null;
+  async function ensureContacts(){
+    if(Array.isArray(window.__crmContacts)&&window.__crmContacts.length) return window.__crmContacts;
+    if(!window.__crmContactsP){
+      window.__crmContactsP=(async()=>{
+        try{ const r=await fetch('/.netlify/functions/nocodb?table=contacts&limit=2000'); const j=await r.json(); const list=j.list||[]; if(list.length) window.__crmContacts=list; return window.__crmContacts||list; }
+        catch(_){ return window.__crmContacts||[]; }
+      })().finally(()=>{ window.__crmContactsP=null; });
+    }
+    return window.__crmContactsP;
+  }
   // Merge the matching CRM contact's data into the loaded template. Pulls EVERY {{field}} from
   // the contact record; per-field fallback only when that field is genuinely empty/missing.
   // Works for intro, follow-up, and any template (they all share this path).
   window.personalizeSendPanel=async(email)=>{
     const e=((email||'')+'').toLowerCase().trim(); if(!e) return;
-    let cts=window.__crmContacts||[];
-    const findC=()=>cts.find(r=>((r.Email||'')+'').toLowerCase().trim()===e);
-    let c=findC();
-    // If the lead isn't in the cached list (e.g. just created in the CRM), refetch LIVE and retry once
-    // so a brand-new contact still auto-fills instead of falling back to generic text.
-    if(!c){
-      try{ const r=await fetch('/.netlify/functions/nocodb?table=contacts&limit=2000'); const j=await r.json(); cts=j.list||cts; window.__crmContacts=cts; c=findC(); }catch(_){}
-    }
+    const findIn=(list)=>(list||[]).find(r=>((r.Email||'')+'').toLowerCase().trim()===e);
+    let c=findIn(window.__crmContacts);
+    // Not in the current cache (a just-created lead, or the panel opened before contacts loaded)?
+    // Load the full list via the shared loader and retry. A transient fetch miss never forces a fallback.
+    if(!c){ const list=await ensureContacts(); c=findIn(list); }
     // value of a contact field, trimmed; '' when missing/empty
     const fld=(k)=> (c && ((c[k]!==undefined&&c[k]!==null) ? (''+c[k]).trim() : '')) || '';
     // placeholder name (lowercase) -> resolved value. first_name/company get friendly fallbacks;
