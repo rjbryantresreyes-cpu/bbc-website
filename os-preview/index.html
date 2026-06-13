@@ -1576,7 +1576,7 @@
           "name": "_TEMP_BYBBA"
         },
         {
-          "name": ".playwright-mcp"
+          "name": "3D_LOT_VISUALIZER"
         }
       ]
     }
@@ -1825,6 +1825,14 @@
       "noindex": false
     },
     {
+      "name": "Can You See Your New Building Before It Is Built?",
+      "path": "how-we-build-walkable-3d-tours.html",
+      "group": "Insights / blog",
+      "purpose": "If you have a design from an architect or engineer, we can turn it into a 3D space you walk through in your browser. See your office or property before it is built. We do it in-house with free tools.",
+      "status": "live",
+      "noindex": false
+    },
+    {
       "name": "Cavalry Realty Group",
       "path": "cavalry-realty.html",
       "group": "Insights / blog",
@@ -2013,6 +2021,22 @@
       "path": "how-to-sell-custom-products-good-better-best-online.html",
       "group": "Insights / blog",
       "purpose": "When a product is custom and the price varies a lot, a quote-only page scares people off. Here is how three clear tiers let buyers pick their budget, feel in control, and arrive at a consultation already warm.",
+      "status": "live",
+      "noindex": false
+    },
+    {
+      "name": "How Do I Send My Own Branded Invoices to Clients?",
+      "path": "how-to-send-branded-invoices-to-clients.html",
+      "group": "Insights / blog",
+      "purpose": "How to send your own branded invoices instead of generic PayPal or Wise documents. Own the look, keep every invoice in one place, and send a link instead of an attachment.",
+      "status": "live",
+      "noindex": false
+    },
+    {
+      "name": "How Do I Set Up a Fiverr Profile That Actually Gets Me Clients?",
+      "path": "how-to-set-up-fiverr-to-land-clients.html",
+      "group": "Insights / blog",
+      "purpose": "How to set up a Fiverr profile that actually gets orders: why Fiverr is inbound, why you should run several gigs, what moves a gig in search, and how to spot the scam messages new sellers get.",
       "status": "live",
       "noindex": false
     },
@@ -2325,6 +2349,14 @@
       "path": "local-seo-small-business-guide.html",
       "group": "Insights / blog",
       "purpose": "Most small businesses are invisible on Google not because of their website but because of three things they have not set up yet. Here is what they are.",
+      "status": "live",
+      "noindex": false
+    },
+    {
+      "name": "Meet the Founder, RJ Bryan Tres Reyes",
+      "path": "founder.html",
+      "group": "Insights / blog",
+      "purpose": "Meet RJ Bryan Tres Reyes, the founder of Balay ni Bruno & Co. From a freelance designer to a multi-industry operator who builds AI systems, this is the background behind the studio.",
       "status": "live",
       "noindex": false
     },
@@ -2800,28 +2832,28 @@
       "path": "LEARNINGS"
     },
     {
+      "title": "skp to glb walkable 3d workflow",
+      "date": "2026-06-13",
+      "path": "LEARNINGS"
+    },
+    {
+      "title": "ojph daily engine locked",
+      "date": "2026-06-13",
+      "path": "LEARNINGS"
+    },
+    {
       "title": "libass windows font gotcha",
       "date": "2026-06-13",
       "path": "LEARNINGS"
     },
     {
-      "title": "high def video and company voice rules",
+      "title": "invoice system expansion",
       "date": "2026-06-13",
       "path": "LEARNINGS"
     },
     {
-      "title": "crm send email autofill fix",
+      "title": "hubstaff pat integration",
       "date": "2026-06-13",
-      "path": "LEARNINGS"
-    },
-    {
-      "title": "mcp installs context7 replicate netlify nocodb",
-      "date": "2026-06-12",
-      "path": "LEARNINGS"
-    },
-    {
-      "title": "kenz activity keepalive timedoctor",
-      "date": "2026-06-12",
       "path": "LEARNINGS"
     }
   ],
@@ -3657,6 +3689,9 @@
     };
     const t=TPL[document.getElementById('em-template').value];
     if(!t) return;
+    // Keep the RAW template (with {{first_name}}/{{company}} placeholders) so personalize can
+    // rebuild from it every time instead of destroying the placeholders on the first pass.
+    window.__emRaw={subject:t.subject, body:t.body};
     document.getElementById('em-subj').value=t.subject;
     document.getElementById('em-body').value=t.body;
     const tov=(document.getElementById('em-to').value||'').trim();
@@ -3689,7 +3724,12 @@
     const comp =(c && (c.Organization||'').trim()) ? c.Organization.trim() : 'your company';
     const rep=(s)=>((s||'')+'').replace(/\{\{first_name\}\}/g,first).replace(/\{\{company\}\}/g,comp).replace(/\{\{personal_note\}\}/g,'');
     const sub=document.getElementById('em-subj'), bod=document.getElementById('em-body');
-    if(sub) sub.value=rep(sub.value); if(bod) bod.value=rep(bod.value);
+    // Rebuild from the RAW template each time so this is non-destructive and order/timing independent:
+    // even if an earlier pass ran before the CRM finished loading (and fell back to "there"), this pass
+    // re-inserts the real first name from the placeholders. Falls back to current text if no template loaded.
+    const raw=window.__emRaw;
+    if(sub) sub.value=rep(raw&&raw.subject!=null ? raw.subject : sub.value);
+    if(bod) bod.value=rep(raw&&raw.body!=null ? raw.body : bod.value);
     const st=document.getElementById('em-status'); if(st) st.textContent= c ? ('Filled in '+(((c['First Name']||'').trim())||comp)+' from your CRM. Review and send.') : 'That email isn\'t in your CRM yet — used "Hi there". Add them to Contacts to auto-fill next time.';
   };
   // Load the next sequence email for a due lead into the Send panel, pre-personalized.
@@ -3795,7 +3835,7 @@
         : '';
       const notes=c.Notes?`<div class="panel" style="display:block;margin-bottom:12px"><span class="ptitle" style="color:#D4AF37">Notes</span><div style="white-space:pre-wrap;color:#C9D3E0;font-size:13px;margin-top:6px">${esc(c.Notes)}</div></div>`:'';
       const tl=threads.length?threads.map(t=>`<div class="opitem" onclick="openThread('${t.id}')" style="cursor:pointer"><span class="odot" style="background:${t.unread?'#60A5FA':'#2a3a52'}"></span><span class="oname">${esc(t.subject||'(no subject)')}</span><span class="ocad">read</span></div>`).join(''):'<div class="gauge-sub">No email thread with this contact yet.</div>';
-      openSheet(`${head}${statusEditor}${socialEditor}${notes}<div class="sec" style="margin-top:0">Email thread (${threads.length})</div>${tl}<div style="margin-top:12px"><button onclick="go('crm');setTimeout(()=>{var t=document.getElementById('em-to');if(t){t.value='${esc(c.Email||'')}';t.scrollIntoView({behavior:'smooth'});}},250)" style="background:#D4AF37;color:#0f1520;border:0;font-weight:700;padding:10px 18px;border-radius:9px;cursor:pointer;min-height:44px">Email this contact</button></div>`);
+      openSheet(`${head}${statusEditor}${socialEditor}${notes}<div class="sec" style="margin-top:0">Email thread (${threads.length})</div>${tl}<div style="margin-top:12px"><button onclick="go('crm');setTimeout(()=>{var t=document.getElementById('em-to');if(t){t.value='${esc(c.Email||'')}';t.scrollIntoView({behavior:'smooth'});}window.personalizeSendPanel&&personalizeSendPanel('${esc(c.Email||'')}');},250)" style="background:#D4AF37;color:#0f1520;border:0;font-weight:700;padding:10px 18px;border-radius:9px;cursor:pointer;min-height:44px">Email this contact</button></div>`);
     }catch(e){ openSheet('<div class="gauge-sub" style="padding:16px">'+esc(String(e).slice(0,120))+'</div>'); }
   };
   window.openThread=async(id)=>{
