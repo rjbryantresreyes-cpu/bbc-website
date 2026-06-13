@@ -1,0 +1,59 @@
+{
+  "meta": {
+    "name": "Demo Property",
+    "units": "meters",
+    "note": "Public demo lot for the walkable-tour insights page. Placeholder primitives only, no client data. x = east/west, z = north/south, y = up.",
+    "version": 1
+  },
+  "glb": null,
+  "lot": {
+    "width": 60,
+    "depth": 42,
+    "ground": "grass",
+    "fence": "perimeter"
+  },
+  "structures": [
+    {
+      "id": "office",
+      "type": "building",
+      "label": "Main Office",
+      "x": -12, "z": -4,
+      "w": 16, "d": 12,
+      "rotation": 0,
+      "floors": 2,
+      "floorHeight": 3.2,
+      "roof": "flat",
+      "color": "#d9cbb2",
+      "roofColor": "#5a5e66"
+    },
+    {
+      "id": "showroom",
+      "type": "building",
+      "label": "Showroom",
+      "x": 8, "z": -9,
+      "w": 9, "d": 7,
+      "rotation": 0,
+      "floors": 1,
+      "floorHeight": 3.6,
+      "roof": "gable",
+      "color": "#cfd2d6",
+      "roofColor": "#7c5a44"
+    }
+  ],
+  "vacantSlots": [
+    {
+      "id": "slot1",
+      "label": "Room to Expand",
+      "x": 15, "z": 8,
+      "w": 12, "d": 10
+    }
+  ],
+  "paths": [
+    { "from": [-12, 18], "to": [-12, 3], "width": 2.4 },
+    { "from": [-12, 9], "to": [8, 9], "width": 1.8 }
+  ],
+  "trees": [
+    { "x": -25, "z": 14 }, { "x": -21, "z": 16 }, { "x": 23, "z": -15 },
+    { "x": 26, "z": 13 }, { "x": 4, "z": 17 }, { "x": -27, "z": -13 }
+  ]
+}
