@@ -3712,25 +3712,44 @@
     const m={'Intro sent':'hvs_','HVS sent':'ww_','WW sent':'hiupfcf_','HiUp-FCF sent':'offer_'};
     const base=m[((step||'')+'').trim()]; return base?base+v:null; };
   function ymd(d){ return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'); }
-  // Fill {{first_name}} + {{company}} in the loaded template, pulled from the matching CRM contact.
-  // No first name on file -> "there" (reads "Hi there"). No company on file -> "your company".
+  // Merge the matching CRM contact's data into the loaded template. Pulls EVERY {{field}} from
+  // the contact record; per-field fallback only when that field is genuinely empty/missing.
+  // Works for intro, follow-up, and any template (they all share this path).
   window.personalizeSendPanel=async(email)=>{
     const e=((email||'')+'').toLowerCase().trim(); if(!e) return;
     let cts=window.__crmContacts||[];
-    // Make sure the FULL contact list is loaded (the reader now pages through ALL records, not just 100).
-    if(!cts.length){ try{ const r=await fetch('/.netlify/functions/nocodb?table=contacts&limit=2000'); const j=await r.json(); cts=j.list||[]; window.__crmContacts=cts; }catch(_){} }
-    const c=cts.find(r=>((r.Email||'')+'').toLowerCase().trim()===e);
-    const first=(c && (c['First Name']||'').trim()) ? c['First Name'].trim() : 'there';
-    const comp =(c && (c.Organization||'').trim()) ? c.Organization.trim() : 'your company';
-    const rep=(s)=>((s||'')+'').replace(/\{\{first_name\}\}/g,first).replace(/\{\{company\}\}/g,comp).replace(/\{\{personal_note\}\}/g,'');
+    const findC=()=>cts.find(r=>((r.Email||'')+'').toLowerCase().trim()===e);
+    let c=findC();
+    // If the lead isn't in the cached list (e.g. just created in the CRM), refetch LIVE and retry once
+    // so a brand-new contact still auto-fills instead of falling back to generic text.
+    if(!c){
+      try{ const r=await fetch('/.netlify/functions/nocodb?table=contacts&limit=2000'); const j=await r.json(); cts=j.list||cts; window.__crmContacts=cts; c=findC(); }catch(_){}
+    }
+    // value of a contact field, trimmed; '' when missing/empty
+    const fld=(k)=> (c && ((c[k]!==undefined&&c[k]!==null) ? (''+c[k]).trim() : '')) || '';
+    // placeholder name (lowercase) -> resolved value. first_name/company get friendly fallbacks;
+    // everything else falls back to empty (never generic), and unknown tokens are left untouched.
+    const MAP={
+      first_name:   fld('First Name')   || 'there',
+      company:      fld('Organization') || 'your company',
+      organization: fld('Organization') || 'your company',
+      phone:        fld('Phone'),
+      email:        c ? (fld('Email')||e) : e,
+      status:       fld('Status'),
+      personal_note:''
+    };
+    const rep=(s)=>((s||'')+'').replace(/\{\{\s*([a-z0-9_ ]+?)\s*\}\}/gi,(m,k)=>{
+      const key=(''+k).trim().toLowerCase().replace(/ /g,'_');
+      if(key in MAP) return MAP[key];                 // mapped field -> its value (or per-field fallback)
+      const direct=fld(k.trim());                     // also allow {{First Name}}-style exact field names
+      return direct!=='' ? direct : m;                // unknown + empty -> leave the token as-is
+    });
     const sub=document.getElementById('em-subj'), bod=document.getElementById('em-body');
-    // Rebuild from the RAW template each time so this is non-destructive and order/timing independent:
-    // even if an earlier pass ran before the CRM finished loading (and fell back to "there"), this pass
-    // re-inserts the real first name from the placeholders. Falls back to current text if no template loaded.
+    // Rebuild from the RAW template each time so this is non-destructive and order/timing independent.
     const raw=window.__emRaw;
     if(sub) sub.value=rep(raw&&raw.subject!=null ? raw.subject : sub.value);
     if(bod) bod.value=rep(raw&&raw.body!=null ? raw.body : bod.value);
-    const st=document.getElementById('em-status'); if(st) st.textContent= c ? ('Filled in '+(((c['First Name']||'').trim())||comp)+' from your CRM. Review and send.') : 'That email isn\'t in your CRM yet — used "Hi there". Add them to Contacts to auto-fill next time.';
+    const st=document.getElementById('em-status'); if(st) st.textContent= c ? ('Filled in '+(fld('First Name')||MAP.company)+' from your CRM. Review and send.') : 'That email isn\'t in your CRM yet — used "Hi there". Add them to Contacts (or check the email matches) to auto-fill.';
   };
   // Load the next sequence email for a due lead into the Send panel, pre-personalized.
   window.loadNext=(email,tplValue)=>{ go('crm');
