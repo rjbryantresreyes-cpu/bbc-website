@@ -3630,7 +3630,9 @@
     try{
       const res=await fetch('/.netlify/functions/nocodb?table=contacts&limit=1000');
       const data=await res.json();
-      window.__crmContacts=(data.list||[]);
+      // Only refresh the shared cache when this fetch actually returned rows, so a throttled/empty
+      // response never wipes a good contact list (which would break Send-panel auto-fill).
+      if((data.list||[]).length) window.__crmContacts=(data.list);
       const list=(data.list||[]).filter(r=>((r.Source||'')+'')!=='Current Client');
       const SENT=['Sent','Emailed','Replied','Interested','Potential','Bad Fit','Not Interested','Booked','Bounced'];
       const REPLIED=['Replied','Interested','Potential','Bad Fit','Not Interested','Booked'];
@@ -3717,8 +3719,11 @@
   // pasting a recipient AND picking a template fired two fetches at once and the empty/rate-limited
   // one clobbered the data, so the last writer fell back to "Hi there".
   window.__crmContactsP=null;
-  async function ensureContacts(){
-    if(Array.isArray(window.__crmContacts)&&window.__crmContacts.length) return window.__crmContacts;
+  async function ensureContacts(force){
+    // Return the cache only when it's populated AND we're not forcing a refresh. A forced call
+    // (used when a lookup misses) always hits the network, so a stale/partial cache can't make us
+    // wrongly conclude a contact "isn't in the CRM".
+    if(!force && Array.isArray(window.__crmContacts)&&window.__crmContacts.length) return window.__crmContacts;
     if(!window.__crmContactsP){
       window.__crmContactsP=(async()=>{
         try{ const r=await fetch('/.netlify/functions/nocodb?table=contacts&limit=2000'); const j=await r.json(); const list=j.list||[]; if(list.length) window.__crmContacts=list; return window.__crmContacts||list; }
@@ -3734,9 +3739,10 @@
     const e=((email||'')+'').toLowerCase().trim(); if(!e) return;
     const findIn=(list)=>(list||[]).find(r=>((r.Email||'')+'').toLowerCase().trim()===e);
     let c=findIn(window.__crmContacts);
-    // Not in the current cache (a just-created lead, or the panel opened before contacts loaded)?
-    // Load the full list via the shared loader and retry. A transient fetch miss never forces a fallback.
-    if(!c){ const list=await ensureContacts(); c=findIn(list); }
+    // Not in the current cache (a just-created lead, the panel opened before contacts loaded, or the
+    // cache went stale/partial after a throttled refresh)? FORCE a fresh full fetch and retry, so we
+    // only ever fall back to "Hi there" after confirming the contact really isn't in the live CRM.
+    if(!c){ const list=await ensureContacts(true); c=findIn(list); }
     // value of a contact field, trimmed; '' when missing/empty
     const fld=(k)=> (c && ((c[k]!==undefined&&c[k]!==null) ? (''+c[k]).trim() : '')) || '';
     // placeholder name (lowercase) -> resolved value. first_name/company get friendly fallbacks;
