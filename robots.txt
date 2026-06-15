@@ -3,5 +3,6 @@ Allow: /
 
 Disallow: /portfolio-form.html
 Disallow: /task-submission.html
+Disallow: /lot/
 
 Sitemap: https://balaynibruno.co/sitemap.xml

@@ -1,0 +1,14 @@
+{
+  "meta": {
+    "name": "My Lot",
+    "units": "meters",
+    "note": "RJ's private live preview. Loads the real engineer model (engineer_model.glb). Edit this file (or swap the glb) to change what shows here.",
+    "version": 1
+  },
+  "glb": "engineer_model.glb",
+  "lot": { "width": 100, "depth": 100, "ground": "grass", "fence": null },
+  "structures": [],
+  "vacantSlots": [],
+  "paths": [],
+  "trees": []
+}
