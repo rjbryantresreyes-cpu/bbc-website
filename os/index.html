@@ -4197,12 +4197,60 @@
 
   const CIC={'Vidz Production':'🎬','Specialist AI':'🤖','Cowork Skills':'🧩','Rules as Workflows':'📜'};
   const CCOL={'Vidz Production':'#A78BFA','Specialist AI':'#EC4899','Cowork Skills':'#D4AF37','Rules as Workflows':'#60A5FA'};
+
+  /* === BBC Dashboard write-back + notify (Phase 1) ====================================
+     Every editable surface calls window.notifyEdit({entity_type, entity_key, field, new_value}).
+     POSTs to /.netlify/functions/dashboard-edit -> Netlify Blobs + email RJ + Claude Code surface.
+     Debounced 3s so rapid edits coalesce. Silent fallback if offline. */
+  (function(){
+    var _t=null, _q=[];
+    function ed(){try{return localStorage.getItem('bbc_os_editor')||'rj';}catch(e){return 'rj';}}
+    function ow(){try{return localStorage.getItem('bbc_os_dashboard_owner')||'bbc';}catch(e){return 'bbc';}}
+    function flush(){
+      if(!_q.length)return;
+      var batch=_q.slice(); _q.length=0;
+      /* Coalesce: send one notify per (entity_type, entity_key, field) — keeps emails sane. */
+      var seen={}; batch.reverse().forEach(function(e){var k=e.entity_type+'|'+e.entity_key+'|'+e.field; if(!seen[k])seen[k]=e;});
+      Object.keys(seen).forEach(function(k){
+        var e=seen[k];
+        try{
+          fetch('/.netlify/functions/dashboard-edit',{
+            method:'POST',
+            headers:{'content-type':'application/json'},
+            body:JSON.stringify({
+              dashboard_owner:ow(), editor:ed(),
+              entity_type:e.entity_type, entity_key:e.entity_key, field:e.field,
+              new_value:String(e.new_value==null?'':e.new_value).slice(0,4000),
+              dashboard_url:location.href
+            }),
+            keepalive:true
+          }).catch(function(){});
+        }catch(_){}
+      });
+    }
+    window.notifyEdit=function(e){
+      if(!e||!e.entity_type||!e.entity_key||!e.field)return;
+      _q.push(e);
+      if(_t)clearTimeout(_t);
+      _t=setTimeout(flush, 3000);
+    };
+    /* Flush immediately if the user navigates away so we don't lose the last edit. */
+    window.addEventListener('beforeunload', flush);
+  })();
   // BBC AIs whose work drives social media — used to rank the Workflows to-do list social-first.
   const WF_SOCIAL_OWN=new Set(['Sonny','Mai','Vidz','Raphy','Emy','Boogy']);
   window.wfTodoToggle=(id,cb)=>{
     let m={}; try{ m=JSON.parse(localStorage.getItem('bbc_wf_done')||'{}'); }catch{}
+    const wasChecked = !!m[id];
     if(cb&&cb.checked) m[id]=1; else delete m[id];
     localStorage.setItem('bbc_wf_done',JSON.stringify(m));
+    const wf=(D.workflows||[]).find(w=>w.id===id);
+    if(window.notifyEdit) window.notifyEdit({
+      entity_type:'workflow_todo',
+      entity_key:id,
+      field:'done',
+      new_value:(cb&&cb.checked?'checked: ':'unchecked: ')+(wf?wf.title:id)
+    });
     if(window.curView==='workflows') go('workflows'); // re-render: checked items drop to the bottom
   };
   views.workflows=()=>{
@@ -4607,6 +4655,13 @@
     const all=wfLinks(), k=id+':'+a, v=url.trim();
     if(v) all[k]=v; else delete all[k];
     try{localStorage.setItem('bbc_wf_links',JSON.stringify(all));}catch(e){}
+    const wf=(D.workflows||[]).find(w=>w.id===id);
+    if(window.notifyEdit) window.notifyEdit({
+      entity_type:'workflow_link',
+      entity_key:id+':'+a,
+      field:a,
+      new_value:(v?'set: ':'cleared: ')+(wf?wf.title:id)+' — '+a+(v?' = '+v.slice(0,200):'')
+    });
     wfSheet(id);
   };
   window.wfSheet=id=>{ const w=D.workflows.find(x=>x.id===id);
@@ -4914,9 +4969,15 @@
   window.saveTask=()=>{
     const t=document.getElementById('cs-title').value.trim()||'Untitled task';
     const task={id:csEditingId||('t'+Date.now()),title:t,desc:document.getElementById('cs-desc').value,gprompt:document.getElementById('cs-gprompt').value,cat:document.getElementById('cs-cat').value,project:document.getElementById('cs-project').value,client:document.getElementById('cs-client').value,tags:document.getElementById('cs-tags').value,agents:[...csAgents],thread:csThread};
-    const all=csTasks(); const i=all.findIndex(x=>x.id===task.id); if(i>=0)all[i]=task; else all.unshift(task);
+    const all=csTasks(); const i=all.findIndex(x=>x.id===task.id); const isNew=(i<0); if(i>=0)all[i]=task; else all.unshift(task);
     try{localStorage.setItem('bbc_tasks',JSON.stringify(all));}catch(e){}
     csEditingId=task.id; renderSaved();
+    if(window.notifyEdit) window.notifyEdit({
+      entity_type:'task',
+      entity_key:task.id,
+      field:isNew?'created':'updated',
+      new_value:t+(task.cat?' ['+task.cat+']':'')+(task.client?' · client: '+task.client:'')
+    });
     const b=document.querySelector('.cs-save'); b.textContent='Saved ✓'; setTimeout(()=>b.textContent='Save task',1500);
   };
   document.getElementById('cs-msg').addEventListener('keydown',e=>{ if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();window.sendMsg();} });
