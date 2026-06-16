@@ -1535,16 +1535,20 @@ document.getElementById('onboarding-form').addEventListener('submit', async (e) 
   btnText.textContent = 'Submitting…';
   spinner.style.display = 'inline-block';
 
-  // Netlify Forms — send as FormData (multipart), more reliable than URL-encoded
+  // Netlify Forms — URL-encoded POST is the reliable AJAX pattern. Multipart
+  // FormData with no file upload is silently dropped by Netlify, which is why
+  // this form had 0 submissions. This matches the working contact form.
   const form = document.getElementById('onboarding-form');
   const formData = new FormData(form);
   // Ensure form-name is explicitly present
   formData.set('form-name', 'bbc-onboarding');
+  const body = new URLSearchParams(formData).toString();
 
   try {
     const res = await fetch('/client-onboarding.html', {
       method: 'POST',
-      body: formData
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body
     });
 
     if (res.ok) {
