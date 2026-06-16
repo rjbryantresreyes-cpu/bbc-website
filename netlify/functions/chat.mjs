@@ -7,7 +7,11 @@
 // WAVE 2 (next): Drive lookup via Groq's Google Workspace connectors OR Google Drive API — slots into TOOLS below.
 
 const GROQ_URL = "https://api.groq.com/openai/v1/chat/completions";
-const MODEL = "llama-3.3-70b-versatile"; // fast, free tier, good enough for routing + Q&A
+const MODEL = "llama-3.3-70b-versatile"; // Groq fallback model (free tier)
+// Primary brain = Claude (RJ's pick: Sonnet 4.6, the smartest dashboard brain). Used when
+// ANTHROPIC_API_KEY is set; otherwise we fall back to the free Groq/Llama brain. Either works.
+const ANTHROPIC_URL = "https://api.anthropic.com/v1/messages";
+const CLAUDE_MODEL = "claude-sonnet-4-6";
 
 // ===== Security: only logged-in /os users (Supabase) can use the BBC brain. =====
 const SUPABASE_URL = "https://ctoeuikxoqlhnebgsygp.supabase.co";
@@ -168,8 +172,9 @@ export default async (req) => {
   if (req.method === "OPTIONS") return new Response(null, { status: 204, headers: CORS });
   if (req.method !== "POST") return json({ error: "POST only" }, 405);
 
-  const key = process.env.GROQ_API_KEY;
-  if (!key) return json({ error: "GROQ_API_KEY not set in Netlify env.", reply: "My brain isn't connected yet — RJ needs to add the free Groq key in Netlify (Site configuration → Environment variables → GROQ_API_KEY)." }, 200);
+  const anthropicKey = process.env.ANTHROPIC_API_KEY;
+  const groqKey = process.env.GROQ_API_KEY;
+  if (!anthropicKey && !groqKey) return json({ error: "no LLM key set", reply: "My brain isn't connected yet — add ANTHROPIC_API_KEY (Claude, preferred) or GROQ_API_KEY in Netlify (Site configuration → Environment variables)." }, 200);
 
   // Rate limit per IP (backstop against quota abuse).
   const ip = req.headers.get("x-nf-client-connection-ip") || (req.headers.get("x-forwarded-for") || "").split(",")[0].trim() || "unknown";
@@ -191,26 +196,57 @@ export default async (req) => {
     if (!user) return json({ error: "unauthorized", reply: "Please sign in to /os to use Cuh." }, 401);
   }
   const history = Array.isArray(body.messages) ? body.messages.slice(-12) : [];
-  const messages = [
-    { role: "system", content: systemPrompt(body.agents, body.task, scope, client, drive, context) },
-    ...history.map(m => ({ role: m.role === "assistant" ? "assistant" : "user", content: String(m.content || "").slice(0, 6000) }))
-  ];
+  const system = systemPrompt(body.agents, body.task, scope, client, drive, context);
   // page-scoped chat = short + fast; dashboard chat = room to think
   const maxTokens = (scope && scope.mode === "page") ? 500 : 900;
 
   try {
-    const r = await fetch(GROQ_URL, {
-      method: "POST",
-      headers: { "Authorization": "Bearer " + key, "content-type": "application/json" },
-      body: JSON.stringify({ model: MODEL, messages, temperature: 0.5, max_tokens: maxTokens })
-    });
-    const data = await r.json();
-    if (!r.ok) {
-      return json({ error: "groq error", detail: (data && data.error && data.error.message) || r.status, reply: "Brain hiccup. " + ((data && data.error && data.error.message) || ("Groq returned " + r.status)) }, 200);
+    let reply;
+    if (anthropicKey) {
+      try {
+        reply = await callClaude(system, history, maxTokens, anthropicKey);
+      } catch (e) {
+        // Claude failed (bad key, rate limit, outage) — fall back to the free Groq brain so /os never goes dark.
+        if (groqKey) reply = await callGroq(system, history, maxTokens, groqKey);
+        else throw e;
+      }
+    } else {
+      reply = await callGroq(system, history, maxTokens, groqKey);
     }
-    const reply = (data.choices && data.choices[0] && data.choices[0].message && data.choices[0].message.content) || "(no reply)";
     return json({ reply });
   } catch (e) {
-    return json({ error: "fetch failed", detail: String(e).slice(0, 200), reply: "Couldn't reach the brain just now. Try again in a sec." }, 200);
+    return json({ error: "brain error", detail: String(e.message || e).slice(0, 200), reply: "Brain hiccup. " + String(e.message || e).slice(0, 150) }, 200);
   }
 };
+
+// ===== Claude (Anthropic Messages API) — primary brain. =====
+async function callClaude(system, history, maxTokens, key) {
+  const messages = history.map(m => ({ role: m.role === "assistant" ? "assistant" : "user", content: String(m.content || "").slice(0, 6000) }));
+  while (messages.length && messages[0].role !== "user") messages.shift(); // Anthropic requires the first message to be 'user'
+  if (!messages.length) messages.push({ role: "user", content: "Hello" });
+  const r = await fetch(ANTHROPIC_URL, {
+    method: "POST",
+    headers: { "x-api-key": key, "anthropic-version": "2023-06-01", "content-type": "application/json" },
+    body: JSON.stringify({ model: CLAUDE_MODEL, max_tokens: maxTokens, system, messages, output_config: { effort: "medium" } })
+  });
+  const data = await r.json();
+  if (!r.ok) throw new Error((data && data.error && data.error.message) || ("Anthropic " + r.status));
+  const text = (data.content || []).filter(b => b.type === "text").map(b => b.text).join("").trim();
+  return text || "(no reply)";
+}
+
+// ===== Groq (OpenAI-compatible, free) — fallback brain. =====
+async function callGroq(system, history, maxTokens, key) {
+  const messages = [
+    { role: "system", content: system },
+    ...history.map(m => ({ role: m.role === "assistant" ? "assistant" : "user", content: String(m.content || "").slice(0, 6000) }))
+  ];
+  const r = await fetch(GROQ_URL, {
+    method: "POST",
+    headers: { "Authorization": "Bearer " + key, "content-type": "application/json" },
+    body: JSON.stringify({ model: MODEL, messages, temperature: 0.5, max_tokens: maxTokens })
+  });
+  const data = await r.json();
+  if (!r.ok) throw new Error((data && data.error && data.error.message) || ("Groq " + r.status));
+  return (data.choices && data.choices[0] && data.choices[0].message && data.choices[0].message.content) || "(no reply)";
+}
