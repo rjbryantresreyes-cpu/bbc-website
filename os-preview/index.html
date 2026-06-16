@@ -640,16 +640,13 @@
 
 <nav class="nav" id="nav">
   <button data-v="home" class="active"><span class="i">🏠</span>Home</button>
-  <button data-v="board"><span class="i">🧩</span>My Board</button>
   <button data-v="clients"><span class="i">👥</span>Clients</button>
   <button data-v="crm"><span class="i">📇</span>CRM</button>
-  <button data-v="inbox"><span class="i">📥</span>Inbox</button>
   <button data-v="websites"><span class="i">🌐</span>Websites</button>
   <button data-v="workflows"><span class="i">🔄</span>Workflows</button>
   <button data-v="social"><span class="i">📱</span>Social</button>
   <button data-v="reminders"><span class="i">✅</span>Reminders</button>
   <button data-v="folders"><span class="i">📁</span>Folders</button>
-  <button data-v="news"><span class="i">📰</span>News</button>
 </nav>
 
 <script type="application/json" id="bbc-data">
@@ -1338,10 +1335,19 @@
           "name": "NPC-Portfolio-System"
         },
         {
-          "name": ".claude"
+          "name": "08_KNOWLEDGE_BASE"
         },
         {
-          "name": "01_LEADS"
+          "name": "07_MARKETING"
+        },
+        {
+          "name": "06_FINANCE"
+        },
+        {
+          "name": "05_OPERATIONS"
+        },
+        {
+          "name": "03_ARCHIVED_CLIENTS"
         },
         {
           "name": "02_ACTIVE_CLIENTS",
@@ -1350,13 +1356,13 @@
               "name": "4OCEAN"
             },
             {
-              "name": "FIRST-CLASS-FINISHES"
+              "name": "WOODEN-WOODWORKS"
             },
             {
               "name": "HOME-VISION-STUDIO"
             },
             {
-              "name": "WOODEN-WOODWORKS"
+              "name": "FIRST-CLASS-FINISHES"
             },
             {
               "name": "HI-UP-ROOFING"
@@ -1388,19 +1394,10 @@
           ]
         },
         {
-          "name": "03_ARCHIVED_CLIENTS"
+          "name": "01_LEADS"
         },
         {
-          "name": "05_OPERATIONS"
-        },
-        {
-          "name": "06_FINANCE"
-        },
-        {
-          "name": "07_MARKETING"
-        },
-        {
-          "name": "08_KNOWLEDGE_BASE"
+          "name": ".claude"
         },
         {
           "name": "BBC WEBSITE HTML"
@@ -1409,40 +1406,43 @@
           "name": "04_TEAM"
         },
         {
+          "name": "09_POTENTIAL CLIENTS"
+        },
+        {
           "name": "BBC_AI_FAMILY",
           "children": [
             {
-              "name": "CASEY"
-            },
-            {
-              "name": "BOOGY"
-            },
-            {
-              "name": "EMY"
-            },
-            {
-              "name": "SONNY"
-            },
-            {
               "name": "BRUNZ"
-            },
-            {
-              "name": "KRIZ"
-            },
-            {
-              "name": "MAI"
             },
             {
               "name": "WEBBY"
             },
             {
+              "name": "MAI"
+            },
+            {
+              "name": "KRIZ"
+            },
+            {
+              "name": "SONNY"
+            },
+            {
+              "name": "EMY"
+            },
+            {
+              "name": "BOOGY"
+            },
+            {
+              "name": "CASEY"
+            },
+            {
               "name": "_TEMPLATE"
             },
             {
-              "name": "AGENT_PROFILES"
+              "name": "JENNY"
             },
             {
-              "name": "JENNY"
+              "name": "AGENT_PROFILES"
             },
             {
               "name": "_VAULT"
@@ -1481,9 +1481,6 @@
               "name": "SHY"
             }
           ]
-        },
-        {
-          "name": "09_POTENTIAL CLIENTS"
         },
         {
           "name": "Daryl BBC Folder"
@@ -3620,7 +3617,6 @@
         return `<div class="sec">All your pages</div>
           <div class="panelgrid">
             <div class="panel tap" onclick="go('crm')"><span class="ptitle" style="color:#D4AF37">CRM + Email</span><div class="metric" id="home-crm-num"><b>…</b></div><div class="gauge-sub" style="margin-top:6px">Leads, replies, follow-ups, send</div></div>
-            <div class="panel tap" onclick="go('inbox')"><span class="ptitle" style="color:#60A5FA">Inbox</span><div class="metric" id="home-inbox-num">…</div><div class="gauge-sub" style="margin-top:6px">Your rj@ email, read-only</div></div>
             <div class="panel tap" onclick="go('reminders')"><span class="ptitle" style="color:#EF6B6B">Reminders</span><div class="metric"><b>Today</b></div><div class="gauge-sub" style="margin-top:6px">What's due + this week</div></div>
             <div class="panel tap" onclick="go('workflows')"><span class="ptitle">Workflow Readiness</span>${gauge(wfReady,ship+' of 80 artifacts')}<div class="gauge-sub">${gaps} gaps to ship</div></div>
             <div class="panel tap" onclick="go('social')"><span class="ptitle">This Week</span><div class="wkbars">${weekBars}</div><div class="gauge-sub">${weekPosted} of 7 posted</div></div>
@@ -4676,7 +4672,7 @@
     return L.join('\n');
   }
   // Step 3: Cuh proposes ONE action; user taps to run it (never auto-executed).
-  const ACTION_VIEWS=['home','clients','crm','inbox','websites','workflows','social','reminders','folders','news'];
+  const ACTION_VIEWS=['home','clients','crm','websites','workflows','social','reminders','folders'];
   function parseAction(text){
     const m=(text||'').match(/(^|\n)\s*ACTION\s*(\{[\s\S]*\})\s*$/);
     if(!m) return {clean:text,action:null};
@@ -4744,16 +4740,13 @@
     document.body.appendChild(overlay);
     var NAVCMDS=[
       {ic:'🏠',label:'Home',sub:'overview',act:function(){go('home');}},
-      {ic:'🧩',label:'My Board',sub:'your space',act:function(){go('board');}},
       {ic:'📇',label:'CRM + Email',sub:'leads',act:function(){go('crm');}},
-      {ic:'📥',label:'Inbox',sub:'email',act:function(){go('inbox');}},
       {ic:'🤝',label:'Clients',sub:'',act:function(){go('clients');}},
       {ic:'🔄',label:'Workflows',sub:'to-do',act:function(){go('workflows');}},
       {ic:'📱',label:'Social calendar',sub:'',act:function(){go('social');}},
       {ic:'🌐',label:'Websites',sub:'',act:function(){go('websites');}},
       {ic:'📁',label:'Drive folders',sub:'',act:function(){go('folders');}},
       {ic:'✅',label:'Reminders',sub:'',act:function(){go('reminders');}},
-      {ic:'📰',label:'News',sub:'research',act:function(){go('news');}},
       {ic:'🤖',label:'AI Family',sub:'',act:function(){go('more');}},
       {ic:'💬',label:'Chat with Cuh',sub:'assistant',act:function(){window.openChat&&openChat(window.curView||'home');}}
     ];
