@@ -1,34 +1,20 @@
-// Dashboard write-back + notification orchestrator.
+// Dashboard write-back + notification orchestrator (Phase 1, Blobs-backed).
 // Single endpoint clients/VAs/RJ hit when ANYTHING editable on /os/ changes.
 //
-// Flow:
-//   1. Validate body
-//   2. Write a row to NocoDB `dashboard_edits` (audit log + source of truth)
-//   3. Fire-and-forget notification email to the relevant person(s)
-//   4. Return { ok: true, id } so the dashboard can mark the local UI as synced
-//
 // POST /.netlify/functions/dashboard-edit
-//   body: {
-//     dashboard_owner: "bbc" | "ww" | "hvs" | "sr" | "ajb" | "tpic" | ...,
-//     editor:          "rj" | "krizza" | "beau" | "sonya" | "daryl" | "vi" | ...,
-//     entity_type:     "date_note" | "date_link" | "task" | "box" | ...,
-//     entity_key:      "2026-06-17" | "task:t_abc123" | "box:ww-monthly-revenue",
-//     field:           "note" | "graphic_link" | "title" | ...,
-//     new_value:       string,
-//     dashboard_url:   string  (the page the edit happened on, for the email)
-//   }
+//   body: { dashboard_owner, editor, entity_type, entity_key, field, new_value, dashboard_url }
 //
-// SAFETY:
-//   - Never auto-sends external emails. Only sends to RJ (and the owner VA when applicable).
-//   - Falls back gracefully if NocoDB or Gmail is down — never blocks the dashboard UX.
-//   - NocoDB token + Gmail App Password live ONLY in Netlify env, never in browser.
+// Storage: Netlify Blobs store "bbc-dashboard-edits".
+//   Key  = `${dashboard_owner}/${created_at_iso}_${rand}` (sortable by owner+time)
+//   Value = JSON of the edit + server-stamped fields
+//
+// Notification: emails RJ via send-email.mjs. Future: cc-VA per owner.
 
-const NOCODB_HOST = "https://app.nocodb.com";
-const NOCODB_EDITS_TABLE = process.env.NOCODB_EDITS_TABLE_ID || ""; // set after RJ creates the table in NocoDB
+import { getStore } from "@netlify/blobs";
+
+const STORE = "bbc-dashboard-edits";
 
 // Routing — who gets notified per dashboard_owner.
-// Always copies RJ. The owner VA gets the second notify (cc role).
-// Email addresses are not secret; they're already public on balaynibruno.co.
 const NOTIFY_ROUTING = {
   bbc:  { to: "rj@balaynibruno.co", cc: null },
   ww:   { to: "rj@balaynibruno.co", cc: null /* add VA when wired */ },
@@ -55,37 +41,32 @@ export default async (req) => {
     return json({ ok: false, error: "Missing one of: dashboard_owner, editor, entity_type, entity_key, field" }, 400);
   }
 
-  // 1) Write audit row to NocoDB. Non-blocking — if it fails, we still try to notify.
-  let nocodbId = null, nocodbError = null;
-  if (NOCODB_EDITS_TABLE && process.env.NOCODB_TOKEN) {
-    try {
-      const r = await fetch(`${NOCODB_HOST}/api/v2/tables/${NOCODB_EDITS_TABLE}/records`, {
-        method: "POST",
-        headers: {
-          "xc-token": process.env.NOCODB_TOKEN,
-          "content-type": "application/json",
-          accept: "application/json",
-        },
-        body: JSON.stringify({
-          dashboard_owner,
-          editor,
-          entity_type,
-          entity_key,
-          field,
-          new_value: String(new_value ?? "").slice(0, 4000),
-          notified_email: false,
-          notified_session: false,
-        }),
-      });
-      const data = await r.json().catch(() => ({}));
-      if (r.ok) nocodbId = data?.Id || data?.id || null;
-      else nocodbError = `nocodb ${r.status}: ${JSON.stringify(data).slice(0, 200)}`;
-    } catch (e) { nocodbError = String(e.message || e).slice(0, 200); }
-  } else {
-    nocodbError = "NOCODB_EDITS_TABLE_ID or NOCODB_TOKEN not configured";
-  }
+  const createdAt = new Date().toISOString();
+  const rand = Math.random().toString(36).slice(2, 8);
+  const key = `${dashboard_owner}/${createdAt}_${rand}`;
+  const record = {
+    key,
+    created_at: createdAt,
+    dashboard_owner,
+    editor,
+    entity_type,
+    entity_key,
+    field,
+    new_value: String(new_value ?? "").slice(0, 4000),
+    dashboard_url: dashboard_url || null,
+    notified_email: false,
+    notified_session: false,
+  };
 
-  // 2) Notify the right recipients. Always emails RJ. Always.
+  // 1) Write to Blobs. Strong consistency = next read sees it.
+  let blobsOk = false, blobsError = null;
+  try {
+    const store = getStore({ name: STORE, consistency: "strong" });
+    await store.set(key, JSON.stringify(record), { metadata: { dashboard_owner, editor, created_at: createdAt } });
+    blobsOk = true;
+  } catch (e) { blobsError = String(e.message || e).slice(0, 200); }
+
+  // 2) Notify the right recipients. Always RJ. Fire-and-forget but await once.
   const route = NOTIFY_ROUTING[dashboard_owner] || NOTIFY_ROUTING.bbc;
   const subject = `[BBC Dashboard] ${editor} edited ${entity_type} on ${dashboard_owner.toUpperCase()}`;
   const emailBody =
@@ -118,10 +99,18 @@ Open the dashboard: ${dashboard_url || "https://balaynibruno.co/os/"}
     if (!emailOk) emailError = data?.error || `send-email ${r.status}`;
   } catch (e) { emailError = String(e.message || e).slice(0, 200); }
 
+  // Mark notified_email true on success (best-effort; do not block response).
+  if (blobsOk && emailOk) {
+    try {
+      const store = getStore({ name: STORE, consistency: "strong" });
+      await store.set(key, JSON.stringify({ ...record, notified_email: true }), { metadata: { dashboard_owner, editor, created_at: createdAt, notified_email: "true" } });
+    } catch {}
+  }
+
   return json({
-    ok: !!nocodbId || emailOk,
-    nocodb_id: nocodbId,
-    nocodb_error: nocodbError,
+    ok: blobsOk || emailOk,
+    key: blobsOk ? key : null,
+    blobs_error: blobsError,
     email_sent: emailOk,
     email_error: emailError,
   });

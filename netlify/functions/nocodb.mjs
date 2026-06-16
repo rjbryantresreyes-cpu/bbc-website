@@ -10,7 +10,6 @@ const NOCODB_HOST = "https://app.nocodb.com";
 // Whitelisted tables (id from the NocoDB URL). Add more as the dashboard needs them.
 const TABLES = {
   contacts: "mjjs3wgl3705s9v", // Contacts table (Pipeline view: vw7khib7cust09ee)
-  dashboard_edits: process.env.NOCODB_EDITS_TABLE_ID || "", // set after RJ creates the table
 };
 
 // Fields the browser is allowed to write (everything else is rejected — safety).
