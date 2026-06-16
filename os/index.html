@@ -5102,7 +5102,39 @@
   ];}
   var DB;
   function load(){try{var s=localStorage.getItem(KEY);if(s){var p=JSON.parse(s);if(Array.isArray(p))return p;}}catch(e){}return defaults();}
-  function save(){try{localStorage.setItem(KEY,JSON.stringify(DB));}catch(e){}}
+
+  /* Identity — who is editing? Stored on this device. Default RJ. */
+  function editor(){try{return localStorage.getItem('bbc_os_editor')||'rj';}catch(e){return 'rj';}}
+  function dashOwner(){try{return localStorage.getItem('bbc_os_dashboard_owner')||'bbc';}catch(e){return 'bbc';}}
+
+  /* Write-back to NocoDB + notify (Phase 1 — debounced full-snapshot). Never blocks local save. */
+  var _saveTimer=null, _lastChange='Board updated';
+  function notifyBackend(){
+    if(!navigator.onLine)return;
+    try{
+      fetch('/.netlify/functions/dashboard-edit',{
+        method:'POST',
+        headers:{'content-type':'application/json'},
+        body:JSON.stringify({
+          dashboard_owner:dashOwner(),
+          editor:editor(),
+          entity_type:'board_snapshot',
+          entity_key:'my_board',
+          field:'state',
+          new_value:_lastChange+' · '+DB.length+' blocks',
+          dashboard_url:location.href
+        }),
+        keepalive:true
+      }).catch(function(){});
+    }catch(e){}
+  }
+  function save(changeHint){
+    try{localStorage.setItem(KEY,JSON.stringify(DB));}catch(e){}
+    if(changeHint)_lastChange=changeHint;
+    /* Debounce backend writes — multiple rapid saves coalesce into one notification per ~3s burst. */
+    if(_saveTimer)clearTimeout(_saveTimer);
+    _saveTimer=setTimeout(notifyBackend, 3000);
+  }
   function findB(id){return DB.find(function(b){return b.id===id;});}
   function setPath(o,path,val){var ks=path.split('.');var c=o;for(var i=0;i<ks.length-1;i++)c=c[ks[i]];c[ks[ks.length-1]]=val;}
   function edText(el){var b=findB(el.dataset.bid);if(!b)return;setPath(b,el.dataset.k,el.innerText.trim());save();}
