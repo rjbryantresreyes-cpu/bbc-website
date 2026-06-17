@@ -5073,6 +5073,9 @@
       localStorage.setItem('bbc_os_user_email', email || '');
     }catch(e){}
   }
+  /* Expose for testability + reuse by any other code that needs the resolved identity. */
+  window.bbcPersistIdentity = persistIdentity;
+  window.bbcResolveIdentity = resolveIdentity;
 
   // Expose the logged-in user's access token so the brain can verify who's calling it.
   window.bbcToken=async function(){
