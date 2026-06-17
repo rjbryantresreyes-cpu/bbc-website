@@ -1346,10 +1346,19 @@
           "name": "NPC-Portfolio-System"
         },
         {
-          "name": ".claude"
+          "name": "08_KNOWLEDGE_BASE"
         },
         {
-          "name": "01_LEADS"
+          "name": "07_MARKETING"
+        },
+        {
+          "name": "06_FINANCE"
+        },
+        {
+          "name": "05_OPERATIONS"
+        },
+        {
+          "name": "03_ARCHIVED_CLIENTS"
         },
         {
           "name": "02_ACTIVE_CLIENTS",
@@ -1358,13 +1367,13 @@
               "name": "4OCEAN"
             },
             {
-              "name": "FIRST-CLASS-FINISHES"
+              "name": "WOODEN-WOODWORKS"
             },
             {
               "name": "HOME-VISION-STUDIO"
             },
             {
-              "name": "WOODEN-WOODWORKS"
+              "name": "FIRST-CLASS-FINISHES"
             },
             {
               "name": "HI-UP-ROOFING"
@@ -1399,19 +1408,10 @@
           ]
         },
         {
-          "name": "03_ARCHIVED_CLIENTS"
+          "name": "01_LEADS"
         },
         {
-          "name": "05_OPERATIONS"
-        },
-        {
-          "name": "06_FINANCE"
-        },
-        {
-          "name": "07_MARKETING"
-        },
-        {
-          "name": "08_KNOWLEDGE_BASE"
+          "name": ".claude"
         },
         {
           "name": "BBC WEBSITE HTML"
@@ -1420,40 +1420,43 @@
           "name": "04_TEAM"
         },
         {
+          "name": "09_POTENTIAL CLIENTS"
+        },
+        {
           "name": "BBC_AI_FAMILY",
           "children": [
             {
-              "name": "CASEY"
-            },
-            {
-              "name": "BOOGY"
-            },
-            {
-              "name": "EMY"
-            },
-            {
-              "name": "SONNY"
-            },
-            {
               "name": "BRUNZ"
-            },
-            {
-              "name": "KRIZ"
-            },
-            {
-              "name": "MAI"
             },
             {
               "name": "WEBBY"
             },
             {
+              "name": "MAI"
+            },
+            {
+              "name": "KRIZ"
+            },
+            {
+              "name": "SONNY"
+            },
+            {
+              "name": "EMY"
+            },
+            {
+              "name": "BOOGY"
+            },
+            {
+              "name": "CASEY"
+            },
+            {
               "name": "_TEMPLATE"
             },
             {
-              "name": "AGENT_PROFILES"
+              "name": "JENNY"
             },
             {
-              "name": "JENNY"
+              "name": "AGENT_PROFILES"
             },
             {
               "name": "_VAULT"
@@ -1492,9 +1495,6 @@
               "name": "SHY"
             }
           ]
-        },
-        {
-          "name": "09_POTENTIAL CLIENTS"
         },
         {
           "name": "Daryl BBC Folder"
@@ -5036,6 +5036,47 @@
   function showApp(){ document.body.classList.add('authed'); }
   function showGate(){ document.body.classList.remove('authed'); }
 
+  /* === Phase 3 — multi-tenant identity from Supabase login ============================
+     Maps user email -> (editor, dashboard_owner) so dashboard-edit notifications route
+     to the right person automatically. Override per-device via localStorage if needed. */
+  var IDENTITY_MAP = {
+    /* RJ */
+    'rj@balaynibruno.co':         { editor:'rj',      owner:'bbc' },
+    'rjbryantresreyes@gmail.com': { editor:'rj',      owner:'bbc' },
+    /* BBC VAs */
+    'krizza@balaynibruno.co':     { editor:'krizza',  owner:'ww'  },
+    'krizza.bbc@gmail.com':       { editor:'krizza',  owner:'ww'  },
+    'daryl@balaynibruno.co':      { editor:'daryl',   owner:'bbc' },
+    'daryl.bbc@gmail.com':        { editor:'daryl',   owner:'bbc' },
+    'vi@balaynibruno.co':         { editor:'vi',      owner:'ajb' },
+    'vicarmelle@balaynibruno.co': { editor:'vi',      owner:'ajb' },
+    'ryan@balaynibruno.co':       { editor:'ryan',    owner:'bbc' },
+    /* Clients (when their logins are set up) */
+    'beau@homevisionstudio.com':  { editor:'beau',    owner:'hvs' },
+    'kari@homevisionstudio.com':  { editor:'kari',    owner:'hvs' },
+    'sonya@sriviere.com':         { editor:'sonya',   owner:'sr'  },
+    /* Add more here as VAs/clients log in. Unknown emails default to bbc + email-username editor. */
+  };
+  function resolveIdentity(email){
+    if(!email) return null;
+    var lc = email.toLowerCase();
+    if(IDENTITY_MAP[lc]) return IDENTITY_MAP[lc];
+    var user = lc.split('@')[0].replace(/[^a-z0-9]/g,'').slice(0,20);
+    return { editor: user || 'unknown', owner: 'bbc' };
+  }
+  function persistIdentity(email){
+    var id = resolveIdentity(email);
+    if(!id) return;
+    try{
+      localStorage.setItem('bbc_os_editor', id.editor);
+      localStorage.setItem('bbc_os_dashboard_owner', id.owner);
+      localStorage.setItem('bbc_os_user_email', email || '');
+    }catch(e){}
+  }
+  /* Expose for testability + reuse by any other code that needs the resolved identity. */
+  window.bbcPersistIdentity = persistIdentity;
+  window.bbcResolveIdentity = resolveIdentity;
+
   // Expose the logged-in user's access token so the brain can verify who's calling it.
   window.bbcToken=async function(){
     try{ var c=initClient(); if(!c) return null; var r=await c.auth.getSession(); return (r&&r.data&&r.data.session&&r.data.session.access_token)||null; }catch(e){ return null; }
@@ -5043,6 +5084,11 @@
 
   window.bbcLogout=async function(){
     var c=initClient(); if(c){ try{ await c.auth.signOut(); }catch(e){} }
+    try{
+      localStorage.removeItem('bbc_os_editor');
+      localStorage.removeItem('bbc_os_dashboard_owner');
+      localStorage.removeItem('bbc_os_user_email');
+    }catch(e){}
     showGate();
     var em=document.getElementById('auth-email'); if(em) em.value='';
     var pw=document.getElementById('auth-pass'); if(pw) pw.value='';
@@ -5057,7 +5103,11 @@
     }
     try{
       var r=await c.auth.getSession();
-      if(r&&r.data&&r.data.session){ showApp(); } else { showGate(); }
+      if(r&&r.data&&r.data.session){
+        var em = r.data.session.user && r.data.session.user.email;
+        persistIdentity(em);
+        showApp();
+      } else { showGate(); }
     }catch(e){ showGate(); }
   }
 
@@ -5077,7 +5127,7 @@
       try{
         var res=await c.auth.signInWithPassword({email:email,password:pass});
         if(res.error){ if(err) err.textContent=(res.error.message||'Wrong email or password.'); }
-        else { showApp(); }
+        else { persistIdentity(email); showApp(); }
       }catch(ex){ if(err) err.textContent='Something went wrong. Try again.'; }
       finally{ if(btn){ btn.disabled=false; btn.textContent='Sign In'; } }
     });
