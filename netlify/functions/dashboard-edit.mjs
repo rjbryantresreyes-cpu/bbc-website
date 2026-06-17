@@ -18,14 +18,18 @@ import { getStore } from "@netlify/blobs";
 const STORE = "bbc-dashboard-edits";
 
 // Routing — who gets notified per dashboard_owner.
-const NOTIFY_ROUTING = {
-  bbc:  { to: "rj@balaynibruno.co", cc: null },
-  ww:   { to: "rj@balaynibruno.co", cc: null /* add VA when wired */ },
-  hvs:  { to: "rj@balaynibruno.co", cc: null /* Beau later */ },
-  sr:   { to: "rj@balaynibruno.co", cc: null /* Sonya later */ },
-  ajb:  { to: "rj@balaynibruno.co", cc: null /* Vi later */ },
-  tpic: { to: "rj@balaynibruno.co", cc: null /* Ryan later */ },
-};
+// Reads env vars ROUTE_{TENANT}_TO + ROUTE_{TENANT}_CC so you can wire VA/client emails
+// in Netlify without code changes. Falls back to RJ if a tenant isn't set.
+// Multiple recipients: comma-separated, e.g. "krizza.bbc@gmail.com, rj@balaynibruno.co"
+const RJ_DEFAULT = "rj@balaynibruno.co";
+function envRoute(tenant) {
+  const T = tenant.toUpperCase();
+  const to = (process.env[`ROUTE_${T}_TO`] || RJ_DEFAULT).split(",").map(s => s.trim()).filter(Boolean);
+  const cc = (process.env[`ROUTE_${T}_CC`] || "").split(",").map(s => s.trim()).filter(Boolean);
+  return { to, cc };
+}
+const KNOWN_TENANTS = ["bbc", "ww", "hvs", "sr", "ajb", "tpic", "4ocean"];
+const NOTIFY_ROUTING = Object.fromEntries(KNOWN_TENANTS.map(t => [t, envRoute(t)]));
 
 /* Twilio WhatsApp send. Returns { ok, sid?, error? }.
    Silently returns { ok: false, error: 'not_configured' } when env vars are missing
@@ -122,22 +126,27 @@ ${entity_type} · ${field}
 "${String(new_value ?? "").slice(0, 250)}"
 ${dashboard_url || "https://balaynibruno.co/os/"}`;
 
-  // Run email + WhatsApp in parallel — total wall clock = slower of the two, not sum.
-  const [emailRes, waRes] = await Promise.all([
-    (async () => {
-      try {
-        const r = await fetch(new URL("/.netlify/functions/send-email", req.url), {
-          method: "POST",
-          headers: { "content-type": "application/json" },
-          body: JSON.stringify({ from: "rj@balaynibruno.co", to: route.to, subject, body: emailBody }),
-        });
-        const data = await r.json().catch(() => ({}));
-        return { ok: !!data?.ok, error: data?.ok ? null : (data?.error || `send-email ${r.status}`) };
-      } catch (e) { return { ok: false, error: String(e.message || e).slice(0, 200) }; }
-    })(),
-    sendWhatsApp(waBody),
-  ]);
-  const emailOk = emailRes.ok, emailError = emailRes.error;
+  // Resolve recipients: route.to is an array. Email once per recipient (Gmail SMTP
+  // doesn't multi-deliver cleanly across multiple to: addresses for our nodemailer config).
+  const recipients = [...(route.to || []), ...(route.cc || [])].filter(Boolean);
+  const uniqueRecipients = [...new Set(recipients)]; // dedupe in case env vars overlap
+
+  // Run email(s) + WhatsApp in parallel — total wall clock = slower of the slowest, not sum.
+  const emailJobs = uniqueRecipients.map(async (to) => {
+    try {
+      const r = await fetch(new URL("/.netlify/functions/send-email", req.url), {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({ from: "rj@balaynibruno.co", to, subject, body: emailBody }),
+      });
+      const data = await r.json().catch(() => ({}));
+      return { to, ok: !!data?.ok, error: data?.ok ? null : (data?.error || `send-email ${r.status}`) };
+    } catch (e) { return { to, ok: false, error: String(e.message || e).slice(0, 200) }; }
+  });
+  const [emailResults, waRes] = await Promise.all([Promise.all(emailJobs), sendWhatsApp(waBody)]);
+  const emailOk = emailResults.some(r => r.ok);
+  const emailError = emailOk ? null : (emailResults[0]?.error || "no recipients");
+  const emailRes = { ok: emailOk, error: emailError, results: emailResults };
   const waOk = waRes.ok, waError = waRes.error;
 
   // Mark notified flags on success (best-effort; do not block response).
@@ -153,7 +162,9 @@ ${dashboard_url || "https://balaynibruno.co/os/"}`;
     ok: blobsOk || emailOk || waOk,
     key: blobsOk ? key : null,
     blobs_error: blobsError,
+    routed_to: uniqueRecipients,
     email_sent: emailOk,
+    email_results: emailResults.map(r => ({ to: r.to, ok: r.ok })),
     email_error: emailError,
     whatsapp_sent: waOk,
     whatsapp_error: waError,
