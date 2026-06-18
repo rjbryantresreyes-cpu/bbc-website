@@ -672,6 +672,17 @@
   },
   "clients": [
     {
+      "name": "Dhes",
+      "owner": "Dhes",
+      "handler": "RJ",
+      "ai": "-",
+      "site": "-",
+      "industry": "Content partner — video editing + graphics (per project)",
+      "status": "active",
+      "notes": "Per-video content partner. His own dashboard at /clients/dhes/ with task list + a switchable request page (Reel / Graphic / Other). Share the request link so he submits new jobs. First jobs: Macquarie Locksmiths trial reel, Solar Galaxy.",
+      "folder": "DHES"
+    },
+    {
       "name": "S. Riviere Hair Collection",
       "owner": "Sonya Riviere",
       "handler": "Al",
@@ -1395,6 +1406,9 @@
             },
             {
               "name": "3R-DESIGN"
+            },
+            {
+              "name": "DHES"
             }
           ]
         },
@@ -2897,6 +2911,16 @@
       "path": "LEARNINGS"
     },
     {
+      "title": "whatsapp winui crash and laptop cleanup",
+      "date": "2026-06-18",
+      "path": "LEARNINGS"
+    },
+    {
+      "title": "warm lead proposal workflow",
+      "date": "2026-06-18",
+      "path": "LEARNINGS"
+    },
+    {
       "title": "ww website email and form fix",
       "date": "2026-06-17",
       "path": "LEARNINGS"
@@ -2908,16 +2932,6 @@
     },
     {
       "title": "whatsapp mcp install",
-      "date": "2026-06-17",
-      "path": "LEARNINGS"
-    },
-    {
-      "title": "whatsapp mcp failed to connect fix",
-      "date": "2026-06-17",
-      "path": "LEARNINGS"
-    },
-    {
-      "title": "voxcpm2 replaces elevenlabs",
       "date": "2026-06-17",
       "path": "LEARNINGS"
     }
@@ -3655,7 +3669,7 @@
   };
 
   const CFOLDER={'S. Riviere Hair Collection':'S-RIVIERE-HAIR-COLLECTION','4Ocean':'4OCEAN','Wooden Woodworks':'WOODEN-WOODWORKS','Home Vision Studio':'HOME-VISION-STUDIO','First Class Finishes':'FIRST-CLASS-FINISHES','Hi-Up Roofing':'HI-UP-ROOFING','AJ Battle Foundation':'AJ-BATTLE-FOUNDATION','All Ryze':'ALL-RYZE','Cavalry Group':'REAL_CAVALRY'};
-  const CCOLOR={'S. Riviere Hair Collection':'#C9A961','4Ocean':'#2D9CDB','Wooden Woodworks':'#A9744F','Home Vision Studio':'#6D8FC7','First Class Finishes':'#C0552E','Hi-Up Roofing':'#4A6FA5','AJ Battle Foundation':'#4E9E74','All Ryze':'#A855F7','Cavalry Group':'#7C8A5A'};
+  const CCOLOR={'Dhes':'#C9A24A','S. Riviere Hair Collection':'#C9A961','4Ocean':'#2D9CDB','Wooden Woodworks':'#A9744F','Home Vision Studio':'#6D8FC7','First Class Finishes':'#C0552E','Hi-Up Roofing':'#4A6FA5','AJ Battle Foundation':'#4E9E74','All Ryze':'#A855F7','Cavalry Group':'#7C8A5A'};
   const cColor=c=>CCOLOR[c.name]||'#D4AF37';
   views.clients=()=>{
     const cards=D.clients.map((c,i)=>{
@@ -4186,6 +4200,8 @@
     if(D.clients[i] && D.clients[i].name==='Cavalry Group'){ window.location.href='/os/cavalry/'; return; }
     // S. Riviere has its own live store dashboard hub — route straight there.
     if(D.clients[i] && D.clients[i].name==='S. Riviere Hair Collection'){ window.location.href='/clients/sr/'; return; }
+    // Dhes (content partner) has his own task + request dashboard.
+    if(D.clients[i] && D.clients[i].name==='Dhes'){ window.location.href='/clients/dhes/'; return; }
     const c=D.clients[i], col=cColor(c), folder=c.folder||CFOLDER[c.name];
     const hasSite=c.site&&c.site!=='-', siteUrl=hasSite?'https://'+c.site.replace(/^https?:\/\//,''):'';
     const isCav=c.name==='Cavalry Group';
