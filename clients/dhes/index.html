@@ -1,0 +1,140 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Dhes Dashboard · Balay ni Bruno &amp; Co.</title>
+<meta name="robots" content="noindex, nofollow">
+<style>
+:root{--gold:#C9A24A;--gold-soft:#e7d4a3;--cream:#FAFAF8;--ink:#2a2622;--muted:#7c736a;
+--card:#fff;--line:#ece6db;--shadow:0 1px 3px rgba(42,38,34,.06),0 8px 30px rgba(42,38,34,.05);
+--good:#5a8a6b;--warn:#c08a3e;--bad:#b5503f;--navy:#1F3557}
+html[data-theme="dark"]{--cream:#16130f;--ink:#f1e9da;--muted:#a89c89;--card:#1f1a14;--line:#322a20;
+--shadow:0 1px 3px rgba(0,0,0,.4),0 8px 30px rgba(0,0,0,.35);--gold:#d4af5e}
+*{box-sizing:border-box}
+body{margin:0;background:var(--cream);color:var(--ink);font-family:'Jost',system-ui,-apple-system,Segoe UI,sans-serif;font-weight:300;line-height:1.55;-webkit-font-smoothing:antialiased}
+.serif{font-family:'Cormorant Garamond',Georgia,'Times New Roman',serif}
+.wrap{max-width:1000px;margin:0 auto;padding:24px 18px 80px}
+a{color:inherit;text-decoration:none}
+header.top{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;flex-wrap:wrap;border-bottom:1px solid var(--line);padding-bottom:20px;margin-bottom:26px}
+.brand h1{font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:32px;letter-spacing:.5px;margin:0 0 2px}
+.brand .sub{color:var(--muted);font-size:13px;letter-spacing:.14em;text-transform:uppercase}
+.badges{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.badge{font-size:11px;letter-spacing:.08em;text-transform:uppercase;padding:5px 10px;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.badge.live{color:var(--good);border-color:var(--good)}
+.badge.bbc{color:var(--gold);border-color:var(--gold-soft)}
+.toggle{cursor:pointer;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:999px;width:42px;height:42px;font-size:18px;display:grid;place-items:center;box-shadow:var(--shadow)}
+.back{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:16px;display:inline-block}
+.back:hover{color:var(--gold)}
+.cta{display:flex;justify-content:space-between;align-items:center;gap:14px;background:linear-gradient(135deg,rgba(201,162,74,.16),rgba(201,162,74,.04));border:1px solid var(--gold-soft);border-radius:16px;padding:18px 22px;margin-bottom:26px;flex-wrap:wrap}
+.cta .ml{font-family:'Cormorant Garamond',Georgia,serif;font-size:20px;font-weight:600}
+.cta .md{color:var(--muted);font-size:13px;margin-top:2px}
+.btn{display:inline-block;cursor:pointer;border:none;border-radius:999px;padding:13px 26px;font-family:inherit;font-size:14px;letter-spacing:.03em;background:var(--gold);color:#fff;font-weight:500;box-shadow:0 4px 18px rgba(201,162,74,.3);white-space:nowrap}
+.btn:hover{filter:brightness(1.05)}
+section{margin:0 0 30px}
+.sec-h{font-family:'Cormorant Garamond',Georgia,serif;font-size:22px;font-weight:600;margin:0 0 4px;display:flex;align-items:center;gap:10px}
+.sec-h::before{content:"";width:22px;height:1px;background:var(--gold)}
+.sec-sub{color:var(--muted);font-size:13px;margin:0 0 16px}
+.kpis{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:30px}
+.kpi{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;box-shadow:var(--shadow)}
+.kpi .n{font-family:'Cormorant Garamond',Georgia,serif;font-size:34px;font-weight:600;line-height:1;color:var(--ink)}
+.kpi .l{color:var(--muted);font-size:12px;letter-spacing:.06em;text-transform:uppercase;margin-top:6px}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:6px 18px;box-shadow:var(--shadow);overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:13.5px}
+.tt,.tsub{overflow-wrap:anywhere}
+th,td{text-align:left;padding:12px 8px;border-bottom:1px solid var(--line);vertical-align:top}
+th{color:var(--muted);font-weight:500;letter-spacing:.05em;text-transform:uppercase;font-size:11px}
+tr:last-child td{border-bottom:0}
+.tt{font-weight:500;font-size:14px}
+.tsub{color:var(--muted);font-size:12.5px;margin-top:2px}
+.pill{display:inline-block;font-size:11px;padding:3px 9px;border-radius:999px;border:1px solid var(--line);color:var(--muted);white-space:nowrap}
+.pill.bad{color:var(--bad);border-color:var(--bad)}.pill.warn{color:var(--warn);border-color:var(--warn)}.pill.good{color:var(--good);border-color:var(--good)}
+.pill.info{color:var(--navy);border-color:#b9c6da}
+.typ{display:inline-block;font-size:11px;padding:3px 9px;border-radius:8px;background:rgba(201,162,74,.12);color:var(--gold);white-space:nowrap}
+.lnk{color:var(--gold);font-size:12.5px}
+.empty{color:var(--muted);font-size:13px;padding:16px 8px}
+.foot{margin-top:40px;padding-top:18px;border-top:1px solid var(--line);color:var(--muted);font-size:12px;text-align:center}
+@media(min-width:680px){.kpis{grid-template-columns:repeat(4,1fr)}.wrap{padding:32px 28px 90px}.brand h1{font-size:38px}}
+@media(max-width:560px){th.hide,td.hide{display:none}}
+</style></head><body><div class="wrap">
+
+<a class="back" href="/os/">&#8592; BBC Command Center</a>
+
+<header class="top">
+  <div class="brand">
+    <h1 class="serif">Dhes Dashboard</h1>
+    <div class="sub">Content partner &middot; BBC command</div>
+    <div class="badges"><span class="badge live">&#9679; Active</span><span class="badge bbc" id="hkpi"></span></div>
+  </div>
+  <button class="toggle" id="toggle" aria-label="Toggle dark mode">&#9789;</button>
+</header>
+
+<div class="cta">
+  <div>
+    <div class="ml serif">Need something made?</div>
+    <div class="md">Send a reel, a graphic or carousel, or any other task. Share this link with Dhes.</div>
+  </div>
+  <a class="btn" href="request.html">&#43; Send a request</a>
+</div>
+
+<div class="kpis">
+  <div class="kpi"><div class="n" id="k-pending">0</div><div class="l">Pending</div></div>
+  <div class="kpi"><div class="n" id="k-progress">0</div><div class="l">In progress</div></div>
+  <div class="kpi"><div class="n" id="k-delivered">0</div><div class="l">Delivered</div></div>
+  <div class="kpi"><div class="n" id="k-total">0</div><div class="l">Total</div></div>
+</div>
+
+<section>
+  <h2 class="sec-h serif">Tasks &amp; videos</h2>
+  <p class="sec-sub">Everything we are making for Dhes, with status. New requests land here.</p>
+  <div class="panel">
+    <table>
+      <thead><tr><th>Item</th><th>Type</th><th class="hide">Client</th><th>Status</th><th class="hide">Updated</th></tr></thead>
+      <tbody id="task-body"></tbody>
+    </table>
+  </div>
+</section>
+
+<div class="foot">Dhes Dashboard &middot; Built by Balay ni Bruno &amp; Co. &middot; Requests come in through the request page and are added here.</div>
+
+</div>
+<script>
+/* ── Dhes task list. Edit this array as work comes in / gets delivered.
+   status: 'pending' | 'progress' | 'delivered'  ── */
+const TASKS=[
+  {item:'Macquarie Locksmiths — Trial Reel "The 2am Lockout"', type:'Reel', client:'Macquarie Locksmiths', status:'progress', note:'Revising the close, stronger CTA + end screen', updated:'2026-06-17', link:''},
+  {item:'Solar Galaxy — Reel', type:'Reel', client:'Solar Galaxy', status:'pending', note:'Queued right after Macquarie', updated:'2026-06-17', link:''}
+];
+
+const ST={pending:{c:'warn',t:'Pending'},progress:{c:'info',t:'In progress'},delivered:{c:'good',t:'Delivered'}};
+const esc=s=>(s||'').replace(/[&<>"]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m]));
+
+(function render(){
+  const tb=document.getElementById('task-body');
+  let p=0,pr=0,d=0;
+  if(!TASKS.length){ tb.innerHTML='<tr><td colspan="5" class="empty">No tasks yet. New requests from Dhes show up here.</td></tr>'; }
+  else {
+    tb.innerHTML=TASKS.map(t=>{
+      if(t.status==='pending')p++; else if(t.status==='progress')pr++; else if(t.status==='delivered')d++;
+      const s=ST[t.status]||ST.pending;
+      const link=t.link?`<div><a class="lnk" href="${esc(t.link)}" target="_blank">View &#8599;</a></div>`:'';
+      return `<tr>
+        <td><div class="tt">${esc(t.item)}</div>${t.note?`<div class="tsub">${esc(t.note)}</div>`:''}${link}</td>
+        <td><span class="typ">${esc(t.type)}</span></td>
+        <td class="hide">${esc(t.client)||'—'}</td>
+        <td><span class="pill ${s.c}">${s.t}</span></td>
+        <td class="hide">${esc(t.updated)||'—'}</td>
+      </tr>`;
+    }).join('');
+  }
+  document.getElementById('k-pending').textContent=p;
+  document.getElementById('k-progress').textContent=pr;
+  document.getElementById('k-delivered').textContent=d;
+  document.getElementById('k-total').textContent=TASKS.length;
+  document.getElementById('hkpi').textContent=TASKS.length+' item'+(TASKS.length===1?'':'s')+' tracked';
+})();
+
+const tg=document.getElementById('toggle');
+function setT(m){document.documentElement.setAttribute('data-theme',m);if(tg)tg.innerHTML=m==='dark'?'&#9788;':'&#9789;';try{localStorage.setItem('dhes-theme',m)}catch(e){}}
+setT((()=>{try{return localStorage.getItem('dhes-theme')||'light'}catch(e){return 'light'}})());
+if(tg)tg.addEventListener('click',()=>setT(document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark'));
+</script>
+</body></html>

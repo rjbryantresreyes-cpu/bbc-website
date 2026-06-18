@@ -1,0 +1,247 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Send a Request · Dhes · Balay ni Bruno &amp; Co.</title>
+<meta name="robots" content="noindex, nofollow">
+<style>
+:root{--gold:#C9A24A;--gold-soft:#e7d4a3;--cream:#FAFAF8;--ink:#2a2622;--muted:#7c736a;
+--card:#fff;--line:#ece6db;--shadow:0 1px 3px rgba(42,38,34,.06),0 8px 30px rgba(42,38,34,.05);
+--good:#5a8a6b;--warn:#c08a3e;--bad:#b5503f;--navy:#1F3557}
+html[data-theme="dark"]{--cream:#16130f;--ink:#f1e9da;--muted:#a89c89;--card:#1f1a14;--line:#322a20;
+--shadow:0 1px 3px rgba(0,0,0,.4),0 8px 30px rgba(0,0,0,.35);--gold:#d4af5e}
+*{box-sizing:border-box}
+body{margin:0;background:var(--cream);color:var(--ink);font-family:'Jost',system-ui,-apple-system,Segoe UI,sans-serif;font-weight:300;line-height:1.55;-webkit-font-smoothing:antialiased}
+.serif{font-family:'Cormorant Garamond',Georgia,'Times New Roman',serif}
+.wrap{max-width:760px;margin:0 auto;padding:24px 18px 90px}
+a{color:inherit;text-decoration:none}
+.back{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:16px;display:inline-block}
+.back:hover{color:var(--gold)}
+header.top{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;flex-wrap:wrap;border-bottom:1px solid var(--line);padding-bottom:20px;margin-bottom:22px}
+.brand h1{font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:32px;letter-spacing:.5px;margin:0 0 2px}
+.brand .sub{color:var(--muted);font-size:13px;letter-spacing:.14em;text-transform:uppercase}
+.toggle{cursor:pointer;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:999px;width:42px;height:42px;font-size:18px;display:grid;place-items:center;box-shadow:var(--shadow)}
+.lead{background:var(--card);border:1px solid var(--line);border-left:3px solid var(--gold);border-radius:12px;padding:16px 18px;font-size:14px;color:var(--muted);margin-bottom:22px;box-shadow:var(--shadow)}
+.lead b{color:var(--ink);font-weight:500}
+.tabs{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:22px}
+.tab{text-align:center;cursor:pointer;padding:13px 8px;border:1px solid var(--line);border-radius:12px;background:var(--card);color:var(--muted);font-size:13.5px;letter-spacing:.03em;box-shadow:var(--shadow);transition:.15s}
+.tab .ic{display:block;font-size:19px;margin-bottom:5px}
+.tab.on{border-color:var(--gold);color:var(--ink);background:rgba(201,162,74,.1)}
+label.fl{display:block;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:15px 0 6px}
+label.fl .req{color:var(--gold)}
+.hint{font-size:12px;color:var(--muted);margin-top:5px}
+input.fi,select.fi,textarea.fi{width:100%;padding:11px 12px;border:1px solid var(--line);border-radius:10px;background:var(--cream);color:var(--ink);font-family:inherit;font-size:14px}
+textarea.fi{min-height:78px;resize:vertical;line-height:1.55}
+input.fi:focus,select.fi:focus,textarea.fi:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px rgba(201,162,74,.12)}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:540px){.row{grid-template-columns:1fr}.tabs{grid-template-columns:1fr}}
+input[type=file].file{width:100%;font-size:13.5px;color:var(--muted);padding:11px;background:var(--cream);border:1.5px dashed var(--gold-soft);border-radius:10px;cursor:pointer}
+input[type=file].file::file-selector-button{font-family:inherit;font-size:13px;font-weight:500;color:#fff;background:var(--navy);border:none;padding:8px 14px;border-radius:999px;margin-right:12px;cursor:pointer}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px;box-shadow:var(--shadow);margin-bottom:16px}
+.card h3{font-family:'Cormorant Garamond',Georgia,serif;font-size:19px;font-weight:600;margin:0 0 2px}
+.card .cs{font-size:12.5px;color:var(--muted);margin:0}
+.btn{display:inline-block;cursor:pointer;border:none;border-radius:999px;padding:14px 34px;font-family:inherit;font-size:15px;letter-spacing:.03em;background:var(--gold);color:#fff;font-weight:500;box-shadow:0 4px 18px rgba(201,162,74,.3)}
+.btn:hover{filter:brightness(1.05)}
+.submit-wrap{text-align:center;margin-top:24px}
+.foot{margin-top:40px;padding-top:18px;border-top:1px solid var(--line);color:var(--muted);font-size:12px;text-align:center}
+</style></head><body><div class="wrap">
+
+<a class="back" href="index.html">&#8592; Dhes dashboard</a>
+
+<header class="top">
+  <div class="brand"><h1 class="serif">Send a Request</h1><div class="sub">Dhes &middot; Balay ni Bruno &amp; Co.</div></div>
+  <button class="toggle" id="toggle" aria-label="Toggle dark mode">&#9789;</button>
+</header>
+
+<div class="lead">Hey Dhes. Pick what you want us to make below, fill in what you know, and send it. <b>Save this page</b> so you can drop a new request any time. One request per item. Videos go as a link, smaller images and files you can upload.</div>
+
+<div class="tabs">
+  <div class="tab on" id="tab-reel"    onclick="setTab('reel')"><span class="ic">&#127909;</span>Reel / Video</div>
+  <div class="tab"    id="tab-graphic" onclick="setTab('graphic')"><span class="ic">&#127912;</span>Graphic / Carousel</div>
+  <div class="tab"    id="tab-other"   onclick="setTab('other')"><span class="ic">&#128221;</span>Other task</div>
+</div>
+
+<!-- ================= REEL ================= -->
+<form id="form-reel" name="dhes-reel-brief" method="POST" action="thanks.html"
+      data-netlify="true" netlify-honeypot="bot-field" enctype="multipart/form-data">
+  <input type="hidden" name="form-name" value="dhes-reel-brief">
+  <input type="hidden" name="request-type" value="Reel / Video">
+  <p hidden><label>Skip: <input name="bot-field"></label></p>
+
+  <div class="card">
+    <h3>The basics</h3>
+    <label class="fl">Project name <span class="req">*</span></label>
+    <input class="fi" name="project-name" placeholder='e.g. Macquarie Locksmiths — Reel "The 2am Lockout"' required>
+    <label class="fl">End client / business</label>
+    <input class="fi" name="end-client" placeholder="e.g. Macquarie Locksmiths, North Ryde Sydney">
+    <div class="row">
+      <div><label class="fl">What are we making?</label><input class="fi" name="what-making" placeholder="e.g. 1 short vertical reel (9:16)"></div>
+      <div><label class="fl">Due / priority</label><input class="fi" name="due-priority" placeholder="e.g. Friday, or top priority"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>Footage &amp; files</h3>
+    <label class="fl">Video / footage link <span class="req">*</span></label>
+    <textarea class="fi" name="footage-link" placeholder="Paste the Drive, WeTransfer, Dropbox or YouTube link. Add more than one if needed." required></textarea>
+    <p class="hint">Please share videos as a link, not an upload. Make sure I can open it.</p>
+    <label class="fl">Upload images or reference files</label>
+    <input type="file" class="file" name="reference-files" multiple accept="image/*,.pdf,.doc,.docx,.txt,.zip,.svg">
+    <p class="hint">Logos, screenshots, reference frames, brand kit. Keep videos as links above.</p>
+    <label class="fl">Any other links</label>
+    <textarea class="fi" name="other-links" placeholder="Their website, a style reference, past examples"></textarea>
+  </div>
+
+  <div class="card">
+    <h3>The goal</h3>
+    <label class="fl">What should this video do?</label>
+    <textarea class="fi" name="goal" placeholder="e.g. Get local people to call when they are locked out. Watch-on-mute, phone-first."></textarea>
+    <label class="fl">Where is it going?</label>
+    <input class="fi" name="platforms" placeholder="e.g. Instagram, TikTok, Facebook, YouTube Shorts">
+  </div>
+
+  <div class="card">
+    <h3>The details</h3>
+    <div class="row">
+      <div><label class="fl">Voiceover needed?</label>
+        <select class="fi" name="voiceover"><option value="">— Select —</option><option>No, captions only</option><option>Yes</option><option>Not sure, your call</option></select></div>
+      <div><label class="fl">If yes, details</label><input class="fi" name="voiceover-details" placeholder="Script source, who voices it, tone"></div>
+    </div>
+    <label class="fl">On-screen / end screen</label>
+    <textarea class="fi" name="on-screen" placeholder="Logo, address, phone, website, the CTA wording you want"></textarea>
+    <label class="fl">Brand notes</label>
+    <textarea class="fi" name="brand-notes" placeholder='Colours, fonts, or just "no brand kit, use yours"'></textarea>
+    <label class="fl">Key terms / pronunciation</label>
+    <textarea class="fi" name="key-terms" placeholder='e.g. the key is "errebi", not "arby". Names, spelling.'></textarea>
+    <label class="fl">Style references (optional)</label>
+    <textarea class="fi" name="references" placeholder="Links or notes on the edit style you like"></textarea>
+  </div>
+
+  <div class="card">
+    <h3>Your details</h3>
+    <div class="row">
+      <div><label class="fl">Your name</label><input class="fi" name="from-name" value="Dhes"></div>
+      <div><label class="fl">Your email <span class="req">*</span></label><input class="fi" type="email" name="from-email" placeholder="So I can reply with the cut" required></div>
+    </div>
+    <label class="fl">Anything else</label>
+    <textarea class="fi" name="notes" placeholder="Anything I should know before I start"></textarea>
+  </div>
+
+  <div class="submit-wrap"><button class="btn" type="submit">Send the reel brief</button></div>
+</form>
+
+<!-- ================= GRAPHIC / CAROUSEL ================= -->
+<form id="form-graphic" name="dhes-graphic-brief" method="POST" action="thanks.html"
+      data-netlify="true" netlify-honeypot="bot-field" enctype="multipart/form-data" style="display:none">
+  <input type="hidden" name="form-name" value="dhes-graphic-brief">
+  <input type="hidden" name="request-type" value="Graphic / Carousel">
+  <p hidden><label>Skip: <input name="bot-field"></label></p>
+
+  <div class="card">
+    <h3>The basics</h3>
+    <label class="fl">Project name <span class="req">*</span></label>
+    <input class="fi" name="project-name" placeholder="e.g. Macquarie — 5-slide tips carousel" required>
+    <label class="fl">End client / business</label>
+    <input class="fi" name="end-client" placeholder="e.g. Macquarie Locksmiths">
+    <div class="row">
+      <div><label class="fl">Single or carousel? <span class="req">*</span></label>
+        <select class="fi" name="graphic-type" required onchange="document.getElementById('slide-count-wrap').style.display=this.value==='Carousel'?'block':'none'">
+          <option value="">— Select —</option><option>Single graphic</option><option>Carousel</option></select></div>
+      <div id="slide-count-wrap" style="display:none"><label class="fl">How many slides?</label><input class="fi" name="slide-count" placeholder="e.g. 5 slides"></div>
+    </div>
+    <label class="fl">Due / priority</label>
+    <input class="fi" name="due-priority" placeholder="e.g. by Friday">
+  </div>
+
+  <div class="card">
+    <h3>What goes on it</h3>
+    <label class="fl">What is it for / the goal?</label>
+    <textarea class="fi" name="goal" placeholder="e.g. Promote the 24/7 emergency service, build trust, announce an offer"></textarea>
+    <label class="fl">Headline &amp; text you want on it</label>
+    <textarea class="fi" name="copy" placeholder="Write the words you want on the graphic. For a carousel, you can list it slide by slide."></textarea>
+    <label class="fl">Where is it going / size</label>
+    <input class="fi" name="platforms" placeholder="e.g. Instagram 4:5, Facebook, a Story">
+  </div>
+
+  <div class="card">
+    <h3>Brand &amp; files</h3>
+    <label class="fl">Brand notes</label>
+    <textarea class="fi" name="brand-notes" placeholder='Colours, fonts, logo, or "no brand kit, use yours"'></textarea>
+    <label class="fl">Upload logo, photos or reference files</label>
+    <input type="file" class="file" name="reference-files" multiple accept="image/*,.pdf,.doc,.docx,.txt,.zip,.svg,.ai,.eps">
+    <p class="hint">Logo, product photos, brand kit, a screenshot of a style you like.</p>
+    <label class="fl">Reference links (optional)</label>
+    <textarea class="fi" name="references" placeholder="Links to their brand, a style you like, past graphics"></textarea>
+    <label class="fl">Key terms / spelling</label>
+    <textarea class="fi" name="key-terms" placeholder="Names, brand spelling, anything I could get wrong"></textarea>
+  </div>
+
+  <div class="card">
+    <h3>Your details</h3>
+    <div class="row">
+      <div><label class="fl">Your name</label><input class="fi" name="from-name" value="Dhes"></div>
+      <div><label class="fl">Your email <span class="req">*</span></label><input class="fi" type="email" name="from-email" placeholder="So I can reply" required></div>
+    </div>
+    <label class="fl">Anything else</label>
+    <textarea class="fi" name="notes" placeholder="Anything I should know"></textarea>
+  </div>
+
+  <div class="submit-wrap"><button class="btn" type="submit">Send the graphic brief</button></div>
+</form>
+
+<!-- ================= OTHER ================= -->
+<form id="form-other" name="dhes-other-task" method="POST" action="thanks.html"
+      data-netlify="true" netlify-honeypot="bot-field" enctype="multipart/form-data" style="display:none">
+  <input type="hidden" name="form-name" value="dhes-other-task">
+  <input type="hidden" name="request-type" value="Other task">
+  <p hidden><label>Skip: <input name="bot-field"></label></p>
+
+  <div class="card">
+    <h3>The task</h3>
+    <label class="fl">Task title <span class="req">*</span></label>
+    <input class="fi" name="project-name" placeholder="e.g. Write captions for 5 posts" required>
+    <label class="fl">End client / business</label>
+    <input class="fi" name="end-client" placeholder="Who is it for?">
+    <label class="fl">What do you need? <span class="req">*</span></label>
+    <textarea class="fi" name="task-details" style="min-height:130px" placeholder="Describe what you want us to do, in as much detail as you can." required></textarea>
+    <label class="fl">Due / priority</label>
+    <input class="fi" name="due-priority" placeholder="e.g. end of week">
+  </div>
+
+  <div class="card">
+    <h3>Links &amp; files</h3>
+    <label class="fl">Links</label>
+    <textarea class="fi" name="other-links" placeholder="Paste any links here — files, references, their website. One per line."></textarea>
+    <label class="fl">Upload files</label>
+    <input type="file" class="file" name="reference-files" multiple>
+    <p class="hint">Any images, documents or reference files. Keep large videos as a link above.</p>
+  </div>
+
+  <div class="card">
+    <h3>Your details</h3>
+    <div class="row">
+      <div><label class="fl">Your name</label><input class="fi" name="from-name" value="Dhes"></div>
+      <div><label class="fl">Your email <span class="req">*</span></label><input class="fi" type="email" name="from-email" placeholder="So I can reply" required></div>
+    </div>
+  </div>
+
+  <div class="submit-wrap"><button class="btn" type="submit">Send the request</button></div>
+</form>
+
+<div class="foot">Private request page for Dhes &middot; Built by Balay ni Bruno &amp; Co. &middot; Your request comes straight to RJ.</div>
+
+</div>
+<script>
+function setTab(which){
+  ['reel','graphic','other'].forEach(k=>{
+    document.getElementById('tab-'+k).classList.toggle('on', k===which);
+    document.getElementById('form-'+k).style.display = (k===which) ? 'block' : 'none';
+  });
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+// dark mode toggle
+const tg=document.getElementById('toggle');
+function setT(m){document.documentElement.setAttribute('data-theme',m);if(tg)tg.innerHTML=m==='dark'?'&#9788;':'&#9789;';try{localStorage.setItem('dhes-theme',m)}catch(e){}}
+setT((()=>{try{return localStorage.getItem('dhes-theme')||'light'}catch(e){return 'light'}})());
+if(tg)tg.addEventListener('click',()=>setT(document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark'));
+</script>
+</body></html>

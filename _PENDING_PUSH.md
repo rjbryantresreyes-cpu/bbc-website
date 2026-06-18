@@ -68,3 +68,18 @@ git push            # Netlify auto-deploys
 - ⚠️ Data is a baked snapshot (pulled 2026-06-11). Refresh: re-run `_SYSTEM/TOOLS/shopify/sr_dashboard_data.py` then `sr_dashboard_build.py`, re-stage to clients/sr/. Do NOT auto-deploy on refresh (DEPLOY COST DISCIPLINE).
 - ⚠️ Manage Products backend not wired — form works (downloads request + on-page queue); to auto-deliver from Sonya's phone wire Netlify Forms / Apps Script / NocoDB (see 06_DASHBOARD/_REQUESTS/README.md).
 - Source build: `_SYSTEM/TOOLS/shopify/sr_dashboard_build.py` (+ sr_dashboard_data.py).
+
+## ⏳ ADDED 2026-06-18 — Dhes client dashboard + request page (NEW)
+- **clients/dhes/index.html** — Dhes's main dashboard (BBC + RJ view): KPIs (pending/in-progress/delivered/total), a task+video table seeded with the real current jobs (Macquarie Locksmiths trial reel = in progress; Solar Galaxy = queued), dark-mode toggle, and a "Send a request" CTA. Edit the `TASKS` array as work comes in / gets delivered (status: pending|progress|delivered). noindex.
+- **clients/dhes/request.html** — the link to SHARE WITH DHES. Switchable 3-type request page: **Reel / Video**, **Graphic / Carousel**, **Other task**. Each is its own Netlify form with file upload + link fields. Form names: `dhes-reel-brief`, `dhes-graphic-brief`, `dhes-other-task`. Videos = paste link; images/files = upload. Submits → thanks.html. noindex.
+- **clients/dhes/thanks.html** — confirmation page after submit.
+- **/os SOURCE edited** (`BBC Operating System/03_AI_OPERATING_SYSTEM/COMMAND_CENTER/app/index.html`): added **Dhes** to the clients array (folder DHES, gold color) + routing special-case so clicking Dhes in /os Clients → `/clients/dhes/`. Ships when the dashboard sync next runs + deploys.
+- **Drive folder** `02_ACTIVE_CLIENTS/DHES/DHES_PROJECT_CONTEXT.md` created (client context + how to update his task list).
+- Removed superseded root `dhes-brief.html` + `dhes-brief-thanks.html` (replaced by the clients/dhes/ version).
+- ⚠️ AFTER PUSH: in Netlify dashboard → Forms, enable an **email notification to rj@balaynibruno.co** for the 3 `dhes-*` forms (one-time). Netlify only detects the forms after the first successful deploy.
+- Verified: mobile/desktop render clean (headless screenshots; right-edge clip is a capture artifact, confirmed against live contact.html). Mirrored to `BBC WEBSITE HTML\clients\dhes\`.
+
+## ⏳ ADDED 2026-06-16 — Design-templates insight page (NEW)
+- **update-brand-templates-without-a-designer.html** — NEW /insights page. "Can You Update Your Brand's Design Templates Without a Designer?" Anonymized capability page (we execute a brand's design templates in-house, swap copy + image, keep it exactly on-brand). Born from the Pine Crest Fabrics assessment workflow — NO client named, fully generic. Article + FAQPage schema, before/after + horizontal step-flow + cost-table (typical market ranges, labeled) + tool-stack + tip box + key takeaways. Category "Marketing". Plain English, no em-dashes, CTA = Book a Strategy Call. ✅ Verified mobile 375 clean, no h-overflow, no console errors.
+- **insights.html** — 1 new "Marketing" card added at top of grid; count bumped 88 → 89.
+- After push: delete `INSIGHTS_PAGE_ENGINE/PAGE_QUEUE/update-brand-templates-without-a-designer.page-intent.md`. Source learning: `LEARNINGS/2026-06-16_illustrator_com_automation.md`.
