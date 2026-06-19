@@ -3061,6 +3061,11 @@
       "path": "LEARNINGS"
     },
     {
+      "title": "html in canvas 3d assessment",
+      "date": "2026-06-19",
+      "path": "LEARNINGS"
+    },
+    {
       "title": "editable synced dashboard stack",
       "date": "2026-06-19",
       "path": "LEARNINGS"
@@ -3068,11 +3073,6 @@
     {
       "title": "dashboard blank after login merge conflict",
       "date": "2026-06-19",
-      "path": "LEARNINGS"
-    },
-    {
-      "title": "whatsapp winui crash and laptop cleanup",
-      "date": "2026-06-18",
       "path": "LEARNINGS"
     }
   ],
@@ -3859,9 +3859,11 @@
      device sees the same board. Optimistic UI: the screen updates first, then saves. */
   const BOARD_COLS=[{k:'todo',t:'To do'},{k:'doing',t:'Doing'},{k:'done',t:'Done'}];
   const CARDS_API='/.netlify/functions/cards';
-  let __cards=[];
+  // One board is on screen at a time (the main Board, or a client's), so a single
+  // state (__cards) + the active board key + container id is all we need.
+  let __cards=[], __boardKey='main', __boardEl='board-cols';
   async function loadCards(){
-    try{ const r=await fetch(CARDS_API+'?board=main',{cache:'no-store'}); const d=await r.json(); __cards=Array.isArray(d.list)?d.list:[]; }
+    try{ const r=await fetch(CARDS_API+'?board='+encodeURIComponent(__boardKey),{cache:'no-store'}); const d=await r.json(); __cards=Array.isArray(d.list)?d.list:[]; }
     catch(e){ __cards=[]; }
   }
   function cardHtml(c){
@@ -3870,7 +3872,7 @@
       <button class="kc-del" onclick="event.stopPropagation();delCard('${esc(String(c.id))}')" aria-label="Delete card">✕</button></div>`;
   }
   function renderBoard(){
-    const el=document.getElementById('board-cols'); if(!el) return;
+    const el=document.getElementById(__boardEl); if(!el) return;
     el.innerHTML=BOARD_COLS.map(col=>{
       const inCol=__cards.filter(c=>(c.column||'todo')===col.k).sort((a,b)=>(a.order??0)-(b.order??0));
       return `<div class="kcol"><div class="kcol-hd">${esc(col.t)} <span class="kcount">${inCol.length}</span></div>
@@ -3881,29 +3883,29 @@
   }
   function wireBoardDrag(){
     if(!window.Sortable) return;
-    document.querySelectorAll('#board-cols .kcards').forEach(el=>{
+    document.querySelectorAll('#'+__boardEl+' .kcards').forEach(el=>{
       if(el.__sortable) return; el.__sortable=true;
-      Sortable.create(el,{group:'bbc-board',animation:140,ghostClass:'sortable-ghost',chosenClass:'sortable-chosen',onEnd:saveBoardOrder});
+      Sortable.create(el,{group:'bbc-board-'+__boardEl,animation:140,ghostClass:'sortable-ghost',chosenClass:'sortable-chosen',onEnd:saveBoardOrder});
     });
   }
   async function saveBoardOrder(){
     const reorder=[];
-    document.querySelectorAll('#board-cols .kcards').forEach(col=>{
+    document.querySelectorAll('#'+__boardEl+' .kcards').forEach(col=>{
       const colk=col.dataset.col;
       [...col.querySelectorAll('.kcard')].forEach((el,idx)=>{ reorder.push({id:el.dataset.id,column:colk,order:idx}); });
     });
     const map=new Map(reorder.map(r=>[String(r.id),r]));
     __cards=__cards.map(c=>{ const r=map.get(String(c.id)); return r?{...c,column:r.column,order:r.order}:c; });
     // refresh column counts without disturbing the just-dropped DOM
-    document.querySelectorAll('#board-cols .kcol').forEach(col=>{ const k=col.querySelector('.kcards').dataset.col; const n=__cards.filter(c=>(c.column||'todo')===k).length; const badge=col.querySelector('.kcount'); if(badge) badge.textContent=n; });
+    document.querySelectorAll('#'+__boardEl+' .kcol').forEach(col=>{ const k=col.querySelector('.kcards').dataset.col; const n=__cards.filter(c=>(c.column||'todo')===k).length; const badge=col.querySelector('.kcount'); if(badge) badge.textContent=n; });
     try{ await fetch(CARDS_API,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({reorder})}); }
     catch(e){ window.toast&&toast('Could not save order','err'); }
   }
   window.addCard=async(col)=>{
     const title=(prompt('New card:')||'').trim(); if(!title) return;
-    const tmp={id:'tmp'+Date.now(),board:'main',column:col,title,notes:'',order:9999};
+    const tmp={id:'tmp'+Date.now(),board:__boardKey,column:col,title,notes:'',order:9999};
     __cards.push(tmp); renderBoard();
-    try{ const r=await fetch(CARDS_API,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({board:'main',column:col,title})}); const d=await r.json(); if(d.list)__cards=d.list; }
+    try{ const r=await fetch(CARDS_API,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({board:__boardKey,column:col,title})}); const d=await r.json(); if(d.list)__cards=d.list; }
     catch(e){ __cards=__cards.filter(c=>c.id!==tmp.id); window.toast&&toast('Could not save card','err'); }
     renderBoard();
   };
@@ -3923,8 +3925,10 @@
     catch(e){ window.toast&&toast('Could not delete','err'); }
   };
   window.refreshBoard=async()=>{ await loadCards(); renderBoard(); };
+  // Mount a board (main, or a client's) into a container element by id, then load+render it.
+  window.mountBoard=async(boardKey,elId)=>{ __boardKey=boardKey; __boardEl=elId||'board-cols'; await loadCards(); renderBoard(); };
   views.kanban=()=>{
-    setTimeout(async()=>{ await loadCards(); renderBoard(); },10);
+    setTimeout(()=>window.mountBoard('main','board-cols'),10);
     return `<h2 class="vt">Board</h2><div class="vsub">Add, edit, drag, and delete cards. Saved to the server — synced on every device.</div>
       <div style="display:flex;justify-content:flex-end;margin-bottom:8px"><button class="morelink" style="margin:0" onclick="refreshBoard()">↻ Refresh</button></div>
       <div class="kboard" id="board-cols"><div class="gauge-sub">Loading board…</div></div>`;
