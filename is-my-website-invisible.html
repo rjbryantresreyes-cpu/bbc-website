@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-L6S574R0CE"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-L6S574R0CE');
+  </script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Why Can't People Find My Website (and How Would I Even Know)? | Balay ni Bruno &amp; Co.</title>
+  <meta name="description" content="A website can be live but quietly invisible to customers. It can be set to private, hidden from Google, or only working when you are logged in. Here is how to check your own site in 60 seconds and what it means if it fails." />
+  <link rel="canonical" href="https://balaynibruno.co/is-my-website-invisible.html" />
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Balay ni Bruno &amp; Co." />
+  <meta property="og:title" content="Why Can't People Find My Website (and How Would I Even Know)? | Balay ni Bruno &amp; Co." />
+  <meta property="og:description" content="Your site can be live but quietly invisible to customers, set to private or hidden from Google without you knowing. Here is how to test it in 60 seconds." />
+  <meta property="og:url" content="https://balaynibruno.co/is-my-website-invisible.html" />
+  <meta property="og:image" content="https://balaynibruno.co/bbc-logo.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Lora:ital,wght@0,400;0,500;1,400;1,500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --deep-blue:#1F3557; --mid-blue:#4B6FA5; --warm-blue:#6D8FC7;
+      --light-blue:#A8C0DC; --bg-primary:#F5F1EA; --bg-section:#EDE8DF;
+      --bg-card:#FDFAF6; --bg-dark:#1C2E47; --bg-footer:#172540;
+      --text-ink:#2A3040; --text-body:#4E5666; --text-muted:#888FA0;
+      --text-warm:#F5F1EA; --gold:#B8923E; --gold-pale:#E6CFA0;
+      --gold-warm:#D4A84B; --sage:#4E9E74;
+      --font-display:'Playfair Display',Georgia,serif;
+      --font-body:'Lora',Georgia,serif;
+      --font-ui:'DM Sans',system-ui,sans-serif;
+      --max-width:860px; --radius:16px; --radius-lg:24px;
+      --shadow-sm:0 3px 18px rgba(85,60,35,0.08);
+      --shadow-md:0 7px 36px rgba(85,60,35,0.11);
+      --shadow-lg:0 14px 56px rgba(85,60,35,0.14);
+      --border-card:1px solid rgba(85,60,35,0.09);
+      --border-warm:1px solid rgba(85,60,35,0.12);
+      --s1:0.5rem;--s2:1rem;--s3:1.5rem;--s4:2.5rem;--s5:4rem;
+    }
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{font-family:var(--font-body);color:var(--text-ink);background:var(--bg-primary);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+    body::after{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23n)' opacity='0.026'/%3E%3C/svg%3E");pointer-events:none;z-index:9999;mix-blend-mode:multiply}
+    h1,h2,h3,h4{font-family:var(--font-display);line-height:1.22;color:var(--deep-blue)}
+    h1{font-size:clamp(2rem,4.5vw,3.2rem);font-weight:700;line-height:1.14}
+    h2{font-size:clamp(1.3rem,2.5vw,1.9rem);font-weight:600;margin-top:2.5rem;margin-bottom:0.75rem}
+    h3{font-size:clamp(1rem,1.8vw,1.25rem);font-weight:600;margin-top:2rem;margin-bottom:0.5rem}
+    p{font-family:var(--font-body);font-size:1.05rem;line-height:1.9;color:var(--text-body);margin-bottom:1.2rem}
+    a{text-decoration:none}
+    ul,ol{margin:0 0 1.2rem 1.5rem;color:var(--text-body);font-family:var(--font-body);font-size:1.05rem;line-height:1.85}
+    li{margin-bottom:0.4rem}
+    .eyebrow{display:block;font-family:var(--font-ui);font-size:0.68rem;font-weight:600;letter-spacing:0.17em;text-transform:uppercase;color:var(--gold);margin-bottom:var(--s2)}
+    .container{max-width:var(--max-width);margin:0 auto;padding:0 var(--s4)}
+    @media(max-width:600px){.container{padding:0 var(--s2)}}
+    .nav{position:sticky;top:0;z-index:100;background:rgba(28,46,71,0.96);backdrop-filter:blur(10px);border-bottom:1px solid rgba(255,255,255,0.07);padding:1rem var(--s4)}
+    .nav__inner{max-width:var(--max-width);margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+    .nav__logo{font-family:var(--font-display);font-size:1rem;font-weight:600;color:#fff;letter-spacing:0.01em}
+    .nav__back{font-family:var(--font-ui);font-size:0.82rem;font-weight:500;color:rgba(245,241,234,0.6);transition:color 0.2s}
+    .nav__back:hover{color:var(--gold-pale)}
+    .article-hero{background:var(--bg-dark);padding:clamp(3rem,7vw,5.5rem) 0 clamp(2.5rem,5vw,4rem);position:relative;overflow:hidden}
+    .article-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 50% at 50% 0%,rgba(184,146,62,0.09),transparent 70%);pointer-events:none}
+    .article-hero .container{position:relative}
+    .article-meta{display:flex;align-items:center;gap:0.75rem;flex-wrap:wrap;margin-bottom:1.5rem}
+    .article-cat{font-family:var(--font-ui);font-size:0.72rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold-pale);background:rgba(184,146,62,0.12);border:1px solid rgba(184,146,62,0.22);border-radius:100px;padding:0.22rem 0.8rem}
+    .article-date{font-family:var(--font-ui);font-size:0.78rem;color:rgba(245,241,234,0.4)}
+    .article-hero h1{color:#fff;margin-bottom:1.2rem}
+    .article-hero .lead{font-family:var(--font-body);font-size:1.1rem;line-height:1.85;color:rgba(245,241,234,0.7);max-width:680px}
+    .article-body{padding:clamp(2.5rem,5vw,4.5rem) 0}
+    .article-body .container{max-width:760px}
+    .highlight-box{background:var(--bg-section);border-left:3px solid var(--gold);border-radius:0 var(--radius) var(--radius) 0;padding:1.25rem 1.5rem;margin:2rem 0}
+    .highlight-box p{margin:0;font-size:0.98rem}
+    .key-takeaway{background:var(--bg-dark);border-radius:var(--radius-lg);padding:2rem;margin:2.5rem 0}
+    .key-takeaway h3{color:#fff;margin-top:0;margin-bottom:1rem}
+    .key-takeaway ul{color:rgba(245,241,234,0.72);margin-left:1.2rem}
+    .key-takeaway li{margin-bottom:0.5rem;font-size:0.98rem}
+    .chart-caption{font-family:var(--font-ui);font-size:0.76rem;color:var(--text-muted);text-align:center;margin:0.4rem 0 0;font-style:normal}
+    .faq-q{font-family:var(--font-display);font-size:1.15rem;font-weight:600;color:var(--deep-blue);margin-top:1.75rem;margin-bottom:0.4rem}
+    .cta-section{background:var(--bg-dark);padding:clamp(3rem,6vw,5rem) 0;text-align:center;position:relative;overflow:hidden}
+    .cta-section::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 60% at 50% 100%,rgba(184,146,62,0.08),transparent 70%);pointer-events:none}
+    .cta-section h2{color:#fff;margin-top:0;margin-bottom:1rem}
+    .cta-section p{color:rgba(245,241,234,0.65);max-width:500px;margin:0 auto 2rem}
+    .btn-gold{display:inline-flex;align-items:center;gap:0.5rem;padding:0.9rem 2.2rem;background:var(--gold);color:#fff;border-radius:100px;font-family:var(--font-ui);font-size:0.9rem;font-weight:600;box-shadow:0 4px 20px rgba(184,146,62,0.3);transition:all 0.22s}
+    .btn-gold:hover{background:var(--gold-warm);transform:translateY(-2px);box-shadow:0 8px 30px rgba(184,146,62,0.4)}
+    .footer{background:var(--bg-footer);padding:2rem var(--s4);text-align:center}
+    .footer p{font-family:var(--font-ui);font-size:0.8rem;color:rgba(245,241,234,0.35);line-height:1.8}
+    .footer a{color:rgba(245,241,234,0.45)}
+    .footer a:hover{color:var(--gold-pale)}
+  </style>
+  <link rel="stylesheet" href="bbc-article-visuals.css" />
+  <!-- bbc-schema -->
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://balaynibruno.co/#organization",
+      "name": "Balay ni Bruno & Co.",
+      "url": "https://balaynibruno.co/",
+      "logo": "https://balaynibruno.co/bbc-logo.png",
+      "email": "admin@balaynibruno.co",
+      "telephone": "+63 935 663 0324",
+      "founder": { "@type": "Person", "name": "RJ Bryan Tres Reyes" },
+      "sameAs": [
+        "https://www.facebook.com/profile.php?id=61590006878673",
+        "https://www.instagram.com/balaynibruno/",
+        "https://www.tiktok.com/@balaynibruno.co",
+        "https://youtube.com/@balaynibruno"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://balaynibruno.co/#website",
+      "name": "Balay ni Bruno & Co.",
+      "url": "https://balaynibruno.co/",
+      "publisher": { "@id": "https://balaynibruno.co/#organization" }
+    },
+    {
+      "@type": "Article",
+      "headline": "Why Can't People Find My Website (and How Would I Even Know)?",
+      "description": "A website can be live but quietly invisible to customers, set to private, hidden from Google, or only working when the owner is logged in. Here is how to check your own site in 60 seconds and what to do if it fails.",
+      "url": "https://balaynibruno.co/is-my-website-invisible.html",
+      "mainEntityOfPage": "https://balaynibruno.co/is-my-website-invisible.html",
+      "image": "https://balaynibruno.co/bbc-logo.png",
+      "author": { "@id": "https://balaynibruno.co/#organization" },
+      "publisher": { "@id": "https://balaynibruno.co/#organization" }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How do I know if my website is invisible to customers?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Open your own site in a private or incognito window, then open it on your phone using mobile data instead of your home wifi, then ask a friend to open it from their place. If any of those show a login screen, a holding page, or an error instead of your real site, your customers are hitting the same wall." }
+        },
+        {
+          "@type": "Question",
+          "name": "Why does my website work for me but not for other people?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Usually because you are logged in to the platform that builds your site, so it loads for you no matter what. New visitors are not logged in. If the site is set to private or password protected, you sail right through while everyone else gets stopped at the door." }
+        },
+        {
+          "@type": "Question",
+          "name": "What are the common reasons a website goes invisible without the owner noticing?",
+          "acceptedAnswer": { "@type": "Answer", "text": "The most common ones are: the site is switched to private, coming soon, or password protected on its builder; it was told to stay hidden from Google after launch and never switched back on; the domain or its security certificate quietly expired; or a setting tells search engines and visitors to keep out. Each one is easy to miss because the owner's own screen still looks fine." }
+        },
+        {
+          "@type": "Question",
+          "name": "Is fixing an invisible website hard or expensive?",
+          "acceptedAnswer": { "@type": "Answer", "text": "The fix is usually fast once someone spots the cause. The expensive part is the time before anyone notices, because every person who clicked your link and hit a wall is a lead you already lost. The real value is having someone watching so it gets caught early." }
+        },
+        {
+          "@type": "Question",
+          "name": "Can my site be live but still hidden from Google?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Yes. A site can load fine for anyone who has the link while still being told to stay out of Google's results. Many sites are set that way on purpose while they are being built, and the setting just never gets switched off after launch. So people who already know you can visit, but no new customer can find you through search." }
+        }
+      ]
+    }
+  ]
+}
+  </script>
+</head>
+<body>
+<nav class="nav"><div class="nav__inner"><a href="index.html" class="nav__logo">Balay ni Bruno &amp; Co.</a><a href="insights.html" class="nav__back">&#8592; Back to Insights</a></div></nav>
+
+<section class="article-hero">
+  <div class="container">
+    <div class="article-meta">
+      <span class="article-cat">Operations</span>
+      <span class="article-date">June 2026</span>
+    </div>
+    <h1>Why Can't People Find My Website (and How Would I Even Know)?</h1>
+    <p class="lead">Your website can be live, paid for, and looking perfect on your screen, while customers see nothing but a login screen or a holding page. It happens quietly, and the owner is almost always the last to find out. Here is how to check your own site in 60 seconds, and what it means if it fails.</p>
+  </div>
+</section>
+
+<section class="article-body">
+  <div class="container">
+
+    <p>Most business owners assume that if they can see their website, everyone can. That is the trap. The site can be live as a web address while being switched to "private" or "coming soon" on the tool that built it, so the moment a real visitor clicks your link, they hit a login box instead of your business. You never see that wall, because on your own computer the site loads just fine.</p>
+
+    <p>We ran into exactly this during a real outreach. A business had a proper website, but it was set to private on its builder, so every single visitor, even people they referred by hand, landed on a login screen. The owner had no idea. Their link looked like it worked, because for them it did. For everyone else, the door was locked.</p>
+
+    <h2>How a Website Goes Invisible Without You Knowing</h2>
+
+    <p>This is more common than it sounds, and it almost never throws an error in your face. Here are the usual ways a live site quietly disappears for customers.</p>
+
+    <div class="before-after-compare">
+      <div class="before">
+        <h4>Looks fine to the owner</h4>
+        <ul>
+          <li>The site loads on your computer</li>
+          <li>The web address still works for you</li>
+          <li>Everything looks normal on your screen</li>
+        </ul>
+      </div>
+      <div class="after">
+        <h4>What customers actually hit</h4>
+        <ul>
+          <li>A login box or password screen</li>
+          <li>A "coming soon" holding page</li>
+          <li>A page that is hidden from Google search</li>
+          <li>An expired address or a "not secure" warning</li>
+        </ul>
+      </div>
+    </div>
+
+    <p>The reason you do not catch it is simple. You are usually logged in to the tool that runs your site, so it always opens for you. New visitors are not logged in, so they get stopped at whatever wall is up. Same link, two completely different experiences.</p>
+
+    <h2>Test Your Own Site in 60 Seconds</h2>
+
+    <p>You do not need anything technical for this. Three quick checks tell you whether real customers can actually see your site. If any one of them fails, your customers are failing too.</p>
+
+    <div class="step-flow step-flow--horizontal">
+      <div class="step">
+        <span class="step__num">1</span>
+        <div class="step__content">
+          <div class="step__title">Open it in a private window</div>
+          <p class="step__desc">Use a private or incognito window so the browser forgets you are logged in. You see what a stranger sees.</p>
+        </div>
+      </div>
+      <div class="step">
+        <span class="step__num">2</span>
+        <div class="step__content">
+          <div class="step__title">Open it on your phone on mobile data</div>
+          <p class="step__desc">Turn off your home wifi and load the site on phone data. This is the network a real customer is on.</p>
+        </div>
+      </div>
+      <div class="step">
+        <span class="step__num">3</span>
+        <div class="step__content">
+          <div class="step__title">Ask a friend to open it</div>
+          <p class="step__desc">Send the link to someone who has never visited and ask what they see. A fresh person, a fresh device, the honest result.</p>
+        </div>
+      </div>
+    </div>
+
+    <p>If all three load your real site, you are clear. If any of them shows a login screen, a holding page, or an error, that is exactly what your customers are running into. The good news is that the cause is usually a single setting, and it is fast to fix once you know where to look.</p>
+
+    <div class="tip-box tip-box--note">
+      <span class="tip-box__icon">&#9432;</span>
+      <p class="tip-box__text"><strong>Quick tip:</strong> the most reliable check is the friend test. You can be logged in without realizing it, and even your own phone can remember a login. A friend on their own device, who has never visited, gives you the cleanest answer.</p>
+    </div>
+
+    <h2>The Quiet Settings That Cause It</h2>
+
+    <p>Most of these come from launch day and simply never got switched back. None of them look broken from the owner's chair. In plain terms, here is what tends to be going on behind the scenes.</p>
+
+    <div class="cost-table">
+      <table>
+        <thead>
+          <tr><th>What is set</th><th>What it does</th><th>Why it gets missed</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Site set to private or password protected</td><td class="cost--high">Visitors hit a login or holding screen</td><td>The owner is logged in, so it opens for them</td></tr>
+          <tr><td>Told to stay hidden from Google</td><td class="cost--high">No new customer can find you in search</td><td>The site still loads for anyone with the link</td></tr>
+          <tr><td>Web address or security certificate expired</td><td class="cost--high">A scary warning or a dead page</td><td>Renewal lapsed quietly in the background</td></tr>
+          <tr><td>It only works because you are logged in</td><td class="cost--high">Strangers cannot see what you see</td><td>Your own screen always looks perfect</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2>What "Fixed" Looks Like</h2>
+
+    <p>The before and after here is plain. Before, every visitor lands on a locked door and bounces. After, the same link opens the real, live business. We are not naming the case above or showing any private data, but the shape of it is the shape of all of these: a login wall on one side, a working site on the other, and usually one switch in between.</p>
+
+    <div class="tool-stack">
+      <span class="tool-stack__label">The flip we look for</span>
+      <span class="tool-badge">Login wall for every visitor</span>
+      <span class="tool-badge">Site hidden from search</span>
+      <span class="tool-badge tool-badge--gold">Live site, open to customers</span>
+    </div>
+
+    <div class="highlight-box"><p>The fix is usually fast once it is spotted. The cost of not spotting it is every lead who clicked your link and bounced off a locked door.</p></div>
+
+    <h2>Why We Are Telling You This</h2>
+
+    <p>This is not a one-off fix we sell, and it is not a gadget. It is the kind of thing a real partner catches before it costs you customers. When a business works with Balay ni Bruno &amp; Co., someone is actually watching the things that quietly break: the site that goes private, the address that lapses, the page that drops out of search. You should not have to find out from a customer who tells you your link is dead. You should have someone whose job is to make sure it never is.</p>
+
+    <h2>Common Questions</h2>
+
+    <p class="faq-q">How do I know if my website is invisible to customers?</p>
+    <p>Open your own site in a private or incognito window, then open it on your phone using mobile data instead of your home wifi, then ask a friend to open it from their place. If any of those show a login screen, a holding page, or an error instead of your real site, your customers are hitting the same wall.</p>
+
+    <p class="faq-q">Why does my website work for me but not for other people?</p>
+    <p>Usually because you are logged in to the platform that builds your site, so it loads for you no matter what. New visitors are not logged in. If the site is set to private or password protected, you sail right through while everyone else gets stopped at the door.</p>
+
+    <p class="faq-q">What are the common reasons a website goes invisible without the owner noticing?</p>
+    <p>The most common ones are: the site is switched to private, coming soon, or password protected on its builder; it was told to stay hidden from Google after launch and never switched back on; the web address or its security certificate quietly expired; or a setting tells search engines and visitors to keep out. Each one is easy to miss because the owner's own screen still looks fine.</p>
+
+    <p class="faq-q">Is fixing an invisible website hard or expensive?</p>
+    <p>The fix is usually fast once someone spots the cause. The expensive part is the time before anyone notices, because every person who clicked your link and hit a wall is a lead you already lost. The real value is having someone watching so it gets caught early.</p>
+
+    <p class="faq-q">Can my site be live but still hidden from Google?</p>
+    <p>Yes. A site can load fine for anyone who has the link while still being told to stay out of Google's results. Many sites are set that way on purpose while they are being built, and the setting just never gets switched off after launch. So people who already know you can visit, but no new customer can find you through search.</p>
+
+    <div class="key-takeaway">
+      <h3>Key Takeaways</h3>
+      <ul>
+        <li>A website can be live and paid for while still being invisible to customers, set to private, hidden from Google, or only working when you are logged in.</li>
+        <li>You are the last to notice because your own screen always looks fine. Check it the way a stranger would.</li>
+        <li>Run the 60 second test: private window, phone on mobile data, and a friend on their own device. If any one fails, customers are failing too.</li>
+        <li>The fix is usually fast. The real cost is the leads who bounced off a locked door before anyone caught it.</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<section class="cta-section"><div class="container"><span class="eyebrow" style="color:rgba(245,241,234,0.45);">Work with BBC</span><h2>Want someone watching so your site never quietly goes dark?</h2><p>Catching things like this before they cost you customers is part of how we run BBC partnerships. Let us talk about what that looks like for your business.</p><a href="https://calendly.com/rj-balaynibruno/bbc-strategy-call" target="_blank" rel="noopener" class="btn-gold">Book a Strategy Call &#8599;</a></div></section>
+
+<!-- bbc-related-reads -->
+<section style="background:#EDE8DF;padding:clamp(2.5rem,5vw,4rem) 0;border-top:1px solid rgba(85,60,35,0.12);">
+  <div style="max-width:860px;margin:0 auto;padding:0 2.5rem;">
+    <span style="display:block;font-family:'DM Sans',system-ui,sans-serif;font-size:0.68rem;font-weight:700;letter-spacing:0.17em;text-transform:uppercase;color:#B8923E;margin-bottom:1.2rem;">Related Reads</span>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:1rem;">
+      <a href="update-brand-templates-without-a-designer.html" style="display:block;background:#FDFAF6;border:1px solid rgba(85,60,35,0.12);border-radius:16px;padding:1.2rem 1.35rem;box-shadow:0 3px 18px rgba(85,60,35,0.06);">
+        <span style="display:block;font-family:'DM Sans',system-ui,sans-serif;font-size:0.6rem;font-weight:700;letter-spacing:0.13em;text-transform:uppercase;color:#888FA0;margin-bottom:0.45rem;">How We Did It</span>
+        <span style="display:block;font-family:'Playfair Display',Georgia,serif;font-size:1.02rem;font-weight:600;color:#1F3557;line-height:1.34;">Update Your Brand Templates Without a Designer</span>
+      </a>
+      <a href="how-we-document-every-process-as-content.html" style="display:block;background:#FDFAF6;border:1px solid rgba(85,60,35,0.12);border-radius:16px;padding:1.2rem 1.35rem;box-shadow:0 3px 18px rgba(85,60,35,0.06);">
+        <span style="display:block;font-family:'DM Sans',system-ui,sans-serif;font-size:0.6rem;font-weight:700;letter-spacing:0.13em;text-transform:uppercase;color:#888FA0;margin-bottom:0.45rem;">Content</span>
+        <span style="display:block;font-family:'Playfair Display',Georgia,serif;font-size:1.02rem;font-weight:600;color:#1F3557;line-height:1.34;">How We Turn Every Process Into Content</span>
+      </a>
+      <a href="how-we-built-ai-video-system-free.html" style="display:block;background:#FDFAF6;border:1px solid rgba(85,60,35,0.12);border-radius:16px;padding:1.2rem 1.35rem;box-shadow:0 3px 18px rgba(85,60,35,0.06);">
+        <span style="display:block;font-family:'DM Sans',system-ui,sans-serif;font-size:0.6rem;font-weight:700;letter-spacing:0.13em;text-transform:uppercase;color:#888FA0;margin-bottom:0.45rem;">AI &amp; Automation</span>
+        <span style="display:block;font-family:'Playfair Display',Georgia,serif;font-size:1.02rem;font-weight:600;color:#1F3557;line-height:1.34;">How We Built an AI Video System for Free</span>
+      </a>
+      <a href="how-we-help.html" style="display:block;background:#1C2E47;border:1px solid rgba(184,146,62,0.3);border-radius:16px;padding:1.2rem 1.35rem;">
+        <span style="display:block;font-family:'DM Sans',system-ui,sans-serif;font-size:0.6rem;font-weight:700;letter-spacing:0.13em;text-transform:uppercase;color:#E6CFA0;margin-bottom:0.45rem;">Work With BBC</span>
+        <span style="display:block;font-family:'Playfair Display',Georgia,serif;font-size:1.02rem;font-weight:600;color:#fff;line-height:1.34;">See How We Help &rarr;</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer class="footer"><p><a href="index.html">Balay ni Bruno &amp; Co.</a> &nbsp;&bull;&nbsp; <a href="insights.html">Insights</a> &nbsp;&bull;&nbsp; <a href="mailto:admin@balaynibruno.co">admin@balaynibruno.co</a></p><p style="margin-top:0.4rem;">&copy; 2026 Balay ni Bruno &amp; Co. All rights reserved.</p></footer>
+</body>
+</html>
