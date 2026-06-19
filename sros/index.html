@@ -367,5 +367,40 @@ window.sendSrEmail=async function(){
 /* PWA service worker for install */
 if('serviceWorker' in navigator){ window.addEventListener('load',function(){ navigator.serviceWorker.register('sw.js').then(function(r){ if(r.update)r.update(); }).catch(function(){}); }); }
 </script>
+
+<!-- ===== AI chat widget (Olivia) ===== -->
+<style>
+  #ai-fab{position:fixed;right:16px;bottom:16px;z-index:400;background:var(--ink,#2A2622);color:#fff;border:none;border-radius:24px;padding:11px 17px;font-size:14px;font-weight:600;cursor:pointer;box-shadow:0 8px 22px rgba(0,0,0,.25);font-family:inherit;display:flex;align-items:center;gap:7px;}
+  #ai-fab .dot{width:8px;height:8px;border-radius:50%;background:var(--gold,#B89B6E);}
+  #ai-panel{position:fixed;right:16px;bottom:74px;z-index:401;width:340px;max-width:calc(100vw - 32px);height:460px;max-height:calc(100dvh - 110px);background:var(--card,#fff);border:1px solid var(--line,rgba(0,0,0,.12));border-radius:16px;box-shadow:0 18px 50px rgba(0,0,0,.28);display:none;flex-direction:column;overflow:hidden;}
+  #ai-panel.open{display:flex;}
+  .ai-head{background:var(--ink,#2A2622);color:#fff;padding:12px 14px;display:flex;justify-content:space-between;align-items:center;font-weight:600;font-family:var(--serif,inherit);}
+  .ai-head button{background:none;border:none;color:#fff;font-size:20px;cursor:pointer;line-height:1;}
+  .ai-thread{flex:1;overflow:auto;padding:12px;display:flex;flex-direction:column;gap:8px;background:var(--bg2,#faf7f0);}
+  .ai-msg{max-width:86%;padding:9px 12px;border-radius:12px;font-size:14px;line-height:1.4;white-space:pre-wrap;word-break:break-word;}
+  .ai-msg.u{align-self:flex-end;background:var(--ink,#2A2622);color:#fff;border-bottom-right-radius:4px;}
+  .ai-msg.a{align-self:flex-start;background:var(--card,#fff);border:1px solid var(--line,rgba(0,0,0,.12));color:var(--ink,#2A2622);border-bottom-left-radius:4px;}
+  .ai-input{display:flex;gap:7px;padding:10px;border-top:1px solid var(--line,rgba(0,0,0,.1));background:var(--card,#fff);}
+  .ai-input textarea{flex:1;border:1px solid var(--line,rgba(0,0,0,.15));border-radius:10px;padding:9px;font-size:14px;font-family:inherit;resize:none;height:40px;background:var(--bg2,#fff);color:var(--ink,#2A2622);}
+  .ai-input button{background:var(--gold,#B89B6E);color:#2A2622;border:none;border-radius:10px;padding:0 14px;font-weight:700;cursor:pointer;font-family:inherit;}
+</style>
+<button id="ai-fab" onclick="aiToggle()"><span class="dot"></span>Ask Olivia</button>
+<div id="ai-panel">
+  <div class="ai-head"><span>Olivia</span><button onclick="aiToggle()" aria-label="Close">&times;</button></div>
+  <div class="ai-thread" id="ai-thread"></div>
+  <div class="ai-input"><textarea id="ai-msg" placeholder="Message Olivia..."></textarea><button onclick="aiSend()">Send</button></div>
+</div>
+<script>
+(function(){
+  var AI_NAME='Olivia', AI_CLIENT='olivia', _h=[], greeted=false;
+  window.aiToggle=function(){ var p=document.getElementById('ai-panel'); p.classList.toggle('open'); if(p.classList.contains('open')&&!greeted){ greeted=true; add('a','Hi, I am '+AI_NAME+'. Ask me anything about this dashboard or the business.'); var m=document.getElementById('ai-msg'); if(m)m.focus(); } };
+  function add(role,text){ var t=document.getElementById('ai-thread'); var d=document.createElement('div'); d.className='ai-msg '+role; d.textContent=text; t.appendChild(d); t.scrollTop=t.scrollHeight; return d; }
+  window.aiSend=async function(){ var el=document.getElementById('ai-msg'); var m=(el.value||'').trim(); if(!m)return; el.value=''; add('u',m); _h.push({role:'user',content:m}); var th=add('a','...');
+    try{ var r=await fetch('/.netlify/functions/chat',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({messages:_h.slice(-12),client:AI_CLIENT,scope:{mode:'dashboard'}})}); var d=await r.json(); var rep=(d&&d.reply)||'Sorry, no reply right now.'; th.textContent=rep; _h.push({role:'assistant',content:rep}); }catch(e){ th.textContent='Could not reach me right now. Try again in a moment.'; }
+  };
+  document.addEventListener('keydown',function(e){ if(e.target&&e.target.id==='ai-msg'&&e.key==='Enter'&&!e.shiftKey){ e.preventDefault(); window.aiSend(); } });
+})();
+</script>
+
 </body>
 </html>
