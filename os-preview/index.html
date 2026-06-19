@@ -4528,6 +4528,8 @@
     if(D.clients[i] && D.clients[i].name==='S. Riviere Hair Collection'){ window.location.href='/clients/sr/'; return; }
     // Dhes (content partner) has his own task + request dashboard.
     if(D.clients[i] && D.clients[i].name==='Dhes'){ window.location.href='/clients/dhes/'; return; }
+    // Wooden Woodworks has its own WW-branded Command Center with its own logins.
+    if(D.clients[i] && D.clients[i].name==='Wooden Woodworks'){ window.location.href='/wwos/'; return; }
     const _cc=D.clients[i]||{};
     // Past clients open their public story page on balaynibruno.co (new tab).
     if(_cc.category==='past' && _cc.link){ window.open(_cc.link,'_blank','noopener'); return; }
