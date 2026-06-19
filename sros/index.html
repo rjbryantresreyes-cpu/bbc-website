@@ -173,8 +173,9 @@ function go(v){
   var t={overview:'Overview',store:'Store',social:'Content & Social',crm:'CRM + Email',owner:'Owner Dashboard'}[v]||'';
   document.getElementById('ptitle').textContent=t;
   if(window.innerWidth<=860) closeSide();
+  if(v==='overview') setTimeout(async function(){ try{ var list=await loadCards('sr-pipeline'); var n=list.filter(function(c){return (c.column||'toedit')==='toedit';}).length; var el=document.getElementById('ov-new'); if(el) el.innerHTML='<div class="stat">'+n+'</div><div class="stat-l">video(s) waiting to edit — tap to open the pipeline</div>'; }catch(e){} },10);
   if(v==='social') setTimeout(function(){ mountBoard('sr-pipeline',PIPE_COLS,'pipe-board',true); },10);
-  if(v==='owner'){ setTimeout(function(){ mountBoard('sr-pipeline',PIPE_COLS,'owner-pipe',false); loadRequests(); },10); }
+  if(v==='owner'){ setTimeout(function(){ mountBoard('sr-pipeline',PIPE_COLS,'owner-pipe',false); },10); }
   if(v==='crm') setTimeout(initEmail,10);
 }
 function setView(r){ ROLE=r; renderNav(); go((NAV[r]||NAV.team)[0].v); }
@@ -197,6 +198,7 @@ views.overview=function(){
   ].map(function(x){return '<div class="card2 tap" onclick="go(\''+x.v+'\')"><div style="font-family:var(--serif);font-size:17px">'+x.t+'</div><div class="stat-l">'+x.d+'</div></div>';}).join('');
   return '<h2 class="vt">S. Riviere — Overview</h2><div class="vsub">Everything we run for Sonya, in one place. Data live from her Shopify store.</div>'+
     '<div class="grid">'+tiles+'</div>'+
+    '<div class="sec">From Sonya</div><div class="card2 tap" onclick="go(\'social\')" id="ov-new"><div class="stat-l">Checking for new videos…</div></div>'+
     '<div class="sec">Open a section</div><div class="grid">'+nav+'</div>'+
     '<div class="sec">Strategy</div><div class="note">Sonya films product videos &rarr; Daryl edits &rarr; we post to socials, build pages, run email campaigns, and grow the hair-extensions portfolio. The <b>Content &amp; Social</b> board tracks each video from edit to posted.</div>';
 };
@@ -269,18 +271,19 @@ views.owner=function(){
       '<div class="field"><label>Video link (Google Drive, Dropbox, WeTransfer…)</label><input id="rq-link" placeholder="Paste the link to your video"></div>'+
       '<button class="btn gold" onclick="submitRequest()">Send to the team</button>'+
       '<div class="stat-l" id="rq-msg" style="margin-top:8px"></div>'+
-    '</div>'+
-    '<div class="sec">Your recent requests</div><div id="rq-list" class="card2"><div class="stat-l">Loading…</div></div>';
+      '<div class="stat-l" style="margin-top:6px">Your video goes straight to our team and shows up under “To edit” in your posting status above.</div>'+
+    '</div>';
 };
 
 /* ---------- editable boards (cards.mjs, Netlify Blobs) ---------- */
 var PIPE_COLS=[{k:'toedit',t:'To edit'},{k:'editing',t:'Editing'},{k:'finished',t:'Finished'},{k:'approved',t:'Approved'},{k:'posted',t:'Posted'}];
 var _cards=[], _bkey='sr-pipeline', _bel='pipe-board', _bcols=PIPE_COLS, _editable=true, _seq=0;
 async function loadCards(key){ try{ var r=await fetch(CARDS_API+'?board='+encodeURIComponent(key),{cache:'no-store'}); var d=await r.json(); return Array.isArray(d.list)?d.list:[]; }catch(e){ return []; } }
+function linkify(s){ return esc(s).replace(/\n/g,'<br>').replace(/(https?:\/\/[^\s<]+)/g,'<a href="$1" target="_blank" rel="noopener" style="color:var(--gold-d)" onclick="event.stopPropagation()">$1</a>'); }
 function cardHtml(c){
   var del=_editable?'<button class="kc-del" onclick="event.stopPropagation();delCard(\''+esc(String(c.id))+'\')">✕</button>':'';
   var click=_editable?' onclick="editCard(\''+esc(String(c.id))+'\')"':'';
-  return '<div class="kcard '+(_editable?'drag':'')+'" data-id="'+esc(String(c.id))+'"'+click+'><div class="kt">'+esc(c.title)+'</div>'+(c.notes?'<div class="kn">'+esc(c.notes)+'</div>':'')+del+'</div>';
+  return '<div class="kcard '+(_editable?'drag':'')+'" data-id="'+esc(String(c.id))+'"'+click+'><div class="kt">'+esc(c.title)+'</div>'+(c.notes?'<div class="kn">'+linkify(c.notes)+'</div>':'')+del+'</div>';
 }
 function renderBoard(){
   var el=document.getElementById(_bel); if(!el) return;
@@ -304,15 +307,17 @@ window.submitRequest=async function(){
   var notes=(document.getElementById('rq-notes').value||'').trim();
   var link=(document.getElementById('rq-link').value||'').trim();
   var msg=document.getElementById('rq-msg');
-  if(!prod && !notes){ msg.textContent='Add a product name or instructions first.'; return; }
+  if(!prod && !notes && !link){ msg.textContent='Add a product name, instructions, or a video link first.'; return; }
   var body=(notes||'')+(link?('\nVideo: '+link):'');
   msg.textContent='Sending…';
-  try{ await fetch(CARDS_API,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({board:'sr-requests',column:'new',title:prod||'Request',notes:body})});
+  // Drops straight into the shared video pipeline as a new "To edit" task — saved on our server,
+  // synced to Daryl + RJ (team) and back to Sonya's posting-status board. Same cards engine, all devices.
+  try{ await fetch(CARDS_API,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({board:'sr-pipeline',column:'toedit',title:(prod||'New video'),notes:body})});
     document.getElementById('rq-prod').value='';document.getElementById('rq-notes').value='';document.getElementById('rq-link').value='';
-    msg.textContent='Sent to the team. Thank you!'; loadRequests();
+    msg.textContent='Sent to the team. Thank you! It is now in the pipeline below, in “To edit”.';
+    mountBoard('sr-pipeline',PIPE_COLS,'owner-pipe',false);
   }catch(e){ msg.textContent='Could not send. Try again.'; }
 };
-async function loadRequests(){ var el=document.getElementById('rq-list'); if(!el)return; var list=await loadCards('sr-requests'); if(!list.length){ el.innerHTML='<div class="stat-l">No requests yet.</div>'; return; } el.innerHTML='<table class="t"><tbody>'+list.slice().reverse().slice(0,10).map(function(c){ var st={new:'a',inprogress:'a',done:'g'}[c.column||'new']||'a'; return '<tr><td>'+esc(c.title)+'<div class="kn" style="color:var(--muted);font-size:12px">'+esc(c.notes||'')+'</div></td><td><span class="pill '+st+'">'+esc(c.column||'new')+'</span></td></tr>'; }).join('')+'</tbody></table>'; }
 
 /* ---------- email terminal ---------- */
 function initEmail(){}
