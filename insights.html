@@ -366,6 +366,69 @@
       background:var(--gold); color:#fff; border-color:var(--gold); font-weight:600;
     }
 
+    /* Two filter rows (topic + industry) */
+    .filter-row {
+      display:flex; align-items:flex-start; gap:0.85rem;
+      margin-bottom:0.85rem; flex-wrap:wrap;
+    }
+    .filter-row--industry {
+      margin-bottom:var(--s4);
+      padding-top:0.85rem;
+      border-top:1px dashed rgba(85,60,35,0.14);
+    }
+    .filter-row__label {
+      font-family:var(--font-ui); font-size:0.66rem; font-weight:600;
+      letter-spacing:0.12em; text-transform:uppercase;
+      color:var(--text-muted); white-space:nowrap;
+      padding-top:0.46rem; min-width:78px;
+    }
+    .filter-row .filter-pills { margin-bottom:0; flex:1; }
+    /* industry pills read as a distinct family (blue, not gold) */
+    .filter-pill--ind.filter-pill--active {
+      background:var(--deep-blue); color:#fff; border-color:var(--deep-blue);
+    }
+    .filter-pill--ind:hover { border-color:rgba(75,111,165,0.5); }
+    @media (max-width:560px) {
+      .filter-row { gap:0.5rem; }
+      .filter-row__label { min-width:0; font-size:0.6rem; padding-top:0; margin-bottom:0.1rem; }
+    }
+
+    /* Grouped "All Insights" view, category headers + see-more */
+    .cat-group-header {
+      grid-column:1 / -1;
+      display:flex; align-items:baseline; gap:0.7rem;
+      margin:0.6rem 0 0.1rem;
+      flex-wrap:wrap;
+    }
+    .cat-group-header:first-child { margin-top:0; }
+    .cat-group-header__name {
+      font-family:var(--font-display); font-size:1.3rem; font-weight:600;
+      color:var(--deep-blue); line-height:1.2;
+    }
+    .cat-group-header__count {
+      font-family:var(--font-ui); font-size:0.72rem; font-weight:500;
+      color:var(--text-muted); letter-spacing:0.02em;
+    }
+    .cat-group-header__rule { flex:1; height:1px; min-width:30px; background:rgba(85,60,35,0.12); align-self:center; }
+    .cat-see-more {
+      grid-column:1 / -1;
+      display:flex; justify-content:center;
+      margin:0.35rem 0 1.4rem;
+    }
+    .cat-see-more__btn {
+      font-family:var(--font-ui); font-size:0.78rem; font-weight:600;
+      color:var(--deep-blue);
+      background:var(--bg-card);
+      border:1.5px solid rgba(75,111,165,0.32);
+      border-radius:100px;
+      padding:0.6rem 1.6rem; cursor:pointer;
+      transition:all 0.2s;
+    }
+    .cat-see-more__btn:hover {
+      background:var(--deep-blue); color:#fff; border-color:var(--deep-blue);
+      transform:translateY(-1px);
+    }
+
     /* Article grid */
     .article-grid {
       display:grid;
@@ -887,26 +950,44 @@
     <!-- Search + count -->
     <div class="grid-topbar">
       <input class="grid-search" type="text" placeholder="Search insights..." />
-      <span class="grid-count">Showing all 78 insights</span>
+      <span class="grid-count">Showing all 80 insights</span>
     </div>
 
-    <!-- Filter pills -->
-        <div class="filter-pills">
-      <span class="filter-pill filter-pill--active" data-cat="all">All Insights</span>
-      <span class="filter-pill" data-cat="ai">AI &amp; Automation</span>
-      <span class="filter-pill" data-cat="marketing">Marketing</span>
-      <span class="filter-pill" data-cat="seo">SEO</span>
-      <span class="filter-pill" data-cat="websites">Websites</span>
-      <span class="filter-pill" data-cat="operations">Operations</span>
-      <span class="filter-pill" data-cat="casestudies">Case Studies</span>
-      <span class="filter-pill" data-cat="guides">Guides</span>
+    <!-- Filter pills, by type of work -->
+    <div class="filter-row">
+      <span class="filter-row__label">By topic</span>
+      <div class="filter-pills">
+        <span class="filter-pill filter-pill--active" data-cat="all">All Insights</span>
+        <span class="filter-pill" data-cat="ai">AI &amp; Automation</span>
+        <span class="filter-pill" data-cat="marketing">Marketing</span>
+        <span class="filter-pill" data-cat="seo">SEO</span>
+        <span class="filter-pill" data-cat="websites">Websites</span>
+        <span class="filter-pill" data-cat="operations">Operations</span>
+        <span class="filter-pill" data-cat="casestudies">Case Studies</span>
+        <span class="filter-pill" data-cat="guides">Guides</span>
+      </div>
+    </div>
+
+    <!-- Filter pills, by industry -->
+    <div class="filter-row filter-row--industry">
+      <span class="filter-row__label">By industry</span>
+      <div class="filter-pills filter-pills--industry">
+        <span class="filter-pill filter-pill--ind filter-pill--active" data-ind="all">All Industries</span>
+        <span class="filter-pill filter-pill--ind" data-ind="ecommerce">E-Commerce &amp; Retail</span>
+        <span class="filter-pill filter-pill--ind" data-ind="realestate">Real Estate</span>
+        <span class="filter-pill filter-pill--ind" data-ind="homeservices">Home Services &amp; Trades</span>
+        <span class="filter-pill filter-pill--ind" data-ind="healthcare">Healthcare &amp; Clinics</span>
+        <span class="filter-pill filter-pill--ind" data-ind="nonprofit">Nonprofits</span>
+        <span class="filter-pill filter-pill--ind" data-ind="proservices">Agencies &amp; Service Pros</span>
+        <span class="filter-pill filter-pill--ind" data-ind="general">Any Business</span>
+      </div>
     </div>
 
     <!-- Article grid -->
     <div class="article-grid">
 
       <!-- method-framed + ops batch 2026-06-07 -->
-      <article class="article-card" data-cat="marketing">
+      <article class="article-card" data-cat="marketing" data-industry="ecommerce">
         <div class="article-card__img" style="background:#A0502F url('images/insights/how-online-store-keeps-content-consistent.svg') center/cover no-repeat;">
           <span class="article-card__cat-pill">Marketing</span>
         </div>
@@ -918,7 +999,7 @@
         </div>
       </article>
 
-      <article class="article-card" data-cat="marketing">
+      <article class="article-card" data-cat="marketing" data-industry="nonprofit">
         <div class="article-card__img" style="background:#A0502F url('images/insights/how-nonprofit-grows-audience-online.svg') center/cover no-repeat;">
           <span class="article-card__cat-pill">Marketing</span>
         </div>
@@ -930,7 +1011,7 @@
         </div>
       </article>
 
-      <article class="article-card" data-cat="marketing">
+      <article class="article-card" data-cat="marketing" data-industry="realestate">
         <div class="article-card__img" style="background:#A0502F url('images/insights/how-real-estate-agent-stays-top-of-mind.svg') center/cover no-repeat;">
           <span class="article-card__cat-pill">Marketing</span>
         </div>
@@ -942,7 +1023,7 @@
         </div>
       </article>
 
-      <article class="article-card" data-cat="operations">
+      <article class="article-card" data-cat="operations" data-industry="general">
         <div class="article-card__img" style="background:#123F3F url('images/insights/how-to-keep-team-on-same-page-across-computers.svg') center/cover no-repeat;">
           <span class="article-card__cat-pill">Operations</span>
         </div>
@@ -954,7 +1035,7 @@
         </div>
       </article>
 
-      <article class="article-card" data-cat="operations">
+      <article class="article-card" data-cat="operations" data-industry="general">
         <div class="article-card__img" style="background:#123F3F url('images/insights/how-to-organize-business-files-to-find-anything.svg') center/cover no-repeat;">
           <span class="article-card__cat-pill">Operations</span>
         </div>
@@ -966,7 +1047,7 @@
         </div>
       </article>
 
-      <article class="article-card" data-cat="marketing">
+      <article class="article-card" data-cat="marketing" data-industry="ecommerce">
         <div class="article-card__img" style="background:#A0502F url('images/insights/how-to-write-product-descriptions-that-sell.svg') center/cover no-repeat;">
           <span class="article-card__cat-pill">Marketing</span>
         </div>
@@ -979,7 +1060,7 @@
       </article>
 
       <!-- marketing + ops + email batch 2026-06-07 -->
-      <article class="article-card" data-cat="operations">
+      <article class="article-card" data-cat="operations" data-industry="proservices">
         <div class="article-card__img" style="background:#123F3F url('images/insights/how-to-onboard-new-clients-without-back-and-forth.svg') center/cover no-repeat;">
           <span class="article-card__cat-pill">Operations</span>
         </div>
@@ -991,7 +1072,7 @@
         </div>
       </article>
 
-      <article class="article-card" data-cat="marketing">
+      <article class="article-card" data-cat="marketing" data-industry="general">
         <div class="article-card__img" style="background:#A0502F url('images/insights/how-to-plan-a-month-of-social-media.svg') center/cover no-repeat;">
           <span class="article-card__cat-pill">Marketing</span>
         </div>
@@ -1003,7 +1084,7 @@
         </div>
       </article>
 
-      <article class="article-card" data-cat="marketing">
+      <article class="article-card" data-cat="marketing" data-industry="general">
         <div class="article-card__img" style="background:#A0502F url('images/insights/how-to-turn-one-video-into-posts-for-every-platform.svg') center/cover no-repeat;">
           <span class="article-card__cat-pill">Marketing</span>
         </div>
@@ -1015,7 +1096,7 @@
         </div>
       </article>
 
-      <article class="article-card" data-cat="websites">
+      <article class="article-card" data-cat="websites" data-industry="general">
         <div class="article-card__img" style="background:#4B6FA5 url('images/insights/can-ai-keep-my-website-updated.svg') center/cover no-repeat;">
           <span class="article-card__cat-pill">Websites</span>
         </div>
@@ -1027,7 +1108,7 @@
         </div>
       </article>
 
-      <article class="article-card" data-cat="operations">
+      <article class="article-card" data-cat="operations" data-industry="ecommerce">
         <div class="article-card__img" style="background:#123F3F url('images/insights/how-to-make-product-label-barcode-sheets.svg') center/cover no-repeat;">
           <span class="article-card__cat-pill">Operations</span>
         </div>
@@ -1039,7 +1120,7 @@
         </div>
       </article>
 
-      <article class="article-card" data-cat="marketing">
+      <article class="article-card" data-cat="marketing" data-industry="general">
         <div class="article-card__img" style="background:#A0502F url('images/insights/how-to-write-a-month-of-newsletters.svg') center/cover no-repeat;">
           <span class="article-card__cat-pill">Email Marketing</span>
         </div>
@@ -1052,7 +1133,7 @@
       </article>
 
       <!-- industry + how-to batch 2026-06-07 -->
-      <article class="article-card" data-cat="seo">
+      <article class="article-card" data-cat="seo" data-industry="homeservices">
         <div class="article-card__img" style="background:#1A4A35 url('images/insights/how-roofing-company-gets-found-storm-damage.svg') center/cover no-repeat;">
           <span class="article-card__cat-pill">SEO</span>
         </div>
@@ -1064,7 +1145,7 @@
         </div>
       </article>
 
-      <article class="article-card" data-cat="seo">
+      <article class="article-card" data-cat="seo" data-industry="homeservices">
         <div class="article-card__img" style="background:#1A4A35 url('images/insights/how-local-contractor-ranks-nearby-towns.svg') center/cover no-repeat;">
           <span class="article-card__cat-pill">SEO</span>
         </div>
@@ -1076,7 +1157,7 @@
         </div>
       </article>
 
-      <article class="article-card" data-cat="websites">
+      <article class="article-card" data-cat="websites" data-industry="ecommerce">
         <div class="article-card__img" style="background:#4B6FA5 url('images/insights/how-to-set-up-shopify-store-that-sells.svg') center/cover no-repeat;">
           <span class="article-card__cat-pill">Websites</span>
         </div>
@@ -1088,7 +1169,7 @@
         </div>
       </article>
 
-      <article class="article-card" data-cat="operations">
+      <article class="article-card" data-cat="operations" data-industry="general">
         <div class="article-card__img" style="background:#123F3F url('images/insights/how-to-turn-google-sheet-into-live-dashboard.svg') center/cover no-repeat;">
           <span class="article-card__cat-pill">Operations</span>
         </div>
@@ -1100,7 +1181,7 @@
         </div>
       </article>
 
-      <article class="article-card" data-cat="operations">
+      <article class="article-card" data-cat="operations" data-industry="general">
         <div class="article-card__img" style="background:#123F3F url('images/insights/how-to-read-text-from-scanned-documents.svg') center/cover no-repeat;">
           <span class="article-card__cat-pill">AI &amp; Automation</span>
         </div>
@@ -1112,7 +1193,7 @@
         </div>
       </article>
 
-      <article class="article-card" data-cat="ai">
+      <article class="article-card" data-cat="ai" data-industry="general">
         <div class="article-card__img" style="background:#3D2760 url('images/insights/how-to-write-better-ai-prompts.svg') center/cover no-repeat;">
           <span class="article-card__cat-pill">AI &amp; Automation</span>
         </div>
@@ -1125,7 +1206,7 @@
       </article>
 
       <!-- workflows + services batch 2026-06-07 -->
-      <article class="article-card" data-cat="marketing">
+      <article class="article-card" data-cat="marketing" data-industry="general">
         <div class="article-card__img" style="background:#A0502F url('images/insights/how-to-cut-dead-air-from-videos.svg') center/cover no-repeat;">
           <span class="article-card__cat-pill">AI &amp; Automation</span>
         </div>
@@ -1137,7 +1218,7 @@
         </div>
       </article>
 
-      <article class="article-card" data-cat="marketing">
+      <article class="article-card" data-cat="marketing" data-industry="general">
         <div class="article-card__img" style="background:#A0502F url('images/insights/how-to-make-talking-head-screen-share-reel.svg') center/cover no-repeat;">
           <span class="article-card__cat-pill">AI &amp; Automation</span>
         </div>
@@ -1149,7 +1230,7 @@
         </div>
       </article>
 
-      <article class="article-card" data-cat="operations">
+      <article class="article-card" data-cat="operations" data-industry="general">
         <div class="article-card__img" style="background:#123F3F url('images/insights/how-to-track-leads-without-expensive-crm.svg') center/cover no-repeat;">
           <span class="article-card__cat-pill">Operations</span>
         </div>
@@ -1161,7 +1242,7 @@
         </div>
       </article>
 
-      <article class="article-card" data-cat="marketing">
+      <article class="article-card" data-cat="marketing" data-industry="general">
         <div class="article-card__img" style="background:#A0502F url('images/insights/how-to-collect-and-use-customer-reviews.svg') center/cover no-repeat;">
           <span class="article-card__cat-pill">Marketing</span>
         </div>
@@ -1173,7 +1254,7 @@
         </div>
       </article>
 
-      <article class="article-card" data-cat="operations">
+      <article class="article-card" data-cat="operations" data-industry="proservices">
         <div class="article-card__img" style="background:#123F3F url('images/insights/how-to-report-results-to-clients-fast.svg') center/cover no-repeat;">
           <span class="article-card__cat-pill">Operations</span>
         </div>
@@ -1185,7 +1266,7 @@
         </div>
       </article>
 
-      <article class="article-card" data-cat="operations">
+      <article class="article-card" data-cat="operations" data-industry="proservices">
         <div class="article-card__img" style="background:#123F3F url('images/insights/how-to-make-branded-proposals-quotes-fast.svg') center/cover no-repeat;">
           <span class="article-card__cat-pill">Operations</span>
         </div>
@@ -1198,7 +1279,7 @@
       </article>
 
       <!-- AI capability batch 2026-06-07 -->
-      <article class="article-card" data-cat="marketing">
+      <article class="article-card" data-cat="marketing" data-industry="general">
         <div class="article-card__img" style="background:#A0502F url('images/insights/can-ai-write-my-email-followups.svg') center/cover no-repeat;">
           <span class="article-card__cat-pill">Email Marketing</span>
         </div>
@@ -1210,7 +1291,7 @@
         </div>
       </article>
 
-      <article class="article-card" data-cat="marketing">
+      <article class="article-card" data-cat="marketing" data-industry="general">
         <div class="article-card__img" style="background:#A0502F url('images/insights/can-ai-find-leads-for-my-business.svg') center/cover no-repeat;">
           <span class="article-card__cat-pill">Lead Generation</span>
         </div>
@@ -1222,7 +1303,7 @@
         </div>
       </article>
 
-      <article class="article-card" data-cat="marketing">
+      <article class="article-card" data-cat="marketing" data-industry="general">
         <div class="article-card__img" style="background:#A0502F url('images/insights/can-ai-design-my-social-media-graphics.svg') center/cover no-repeat;">
           <span class="article-card__cat-pill">Design</span>
         </div>
@@ -1234,7 +1315,7 @@
         </div>
       </article>
 
-      <article class="article-card" data-cat="marketing">
+      <article class="article-card" data-cat="marketing" data-industry="general">
         <div class="article-card__img" style="background:#A0502F url('images/insights/can-ai-write-my-blog-posts.svg') center/cover no-repeat;">
           <span class="article-card__cat-pill">Content &amp; SEO</span>
         </div>
@@ -1246,7 +1327,7 @@
         </div>
       </article>
 
-      <article class="article-card" data-cat="operations">
+      <article class="article-card" data-cat="operations" data-industry="general">
         <div class="article-card__img" style="background:#123F3F url('images/insights/can-ai-take-notes-in-my-meetings.svg') center/cover no-repeat;">
           <span class="article-card__cat-pill">AI &amp; Automation</span>
         </div>
@@ -1258,7 +1339,7 @@
         </div>
       </article>
 
-      <article class="article-card" data-cat="operations">
+      <article class="article-card" data-cat="operations" data-industry="general">
         <div class="article-card__img" style="background:#123F3F url('images/insights/can-my-ai-see-my-screen-and-help.svg') center/cover no-repeat;">
           <span class="article-card__cat-pill">AI &amp; Automation</span>
         </div>
@@ -1271,7 +1352,7 @@
       </article>
 
       <!-- How We Did It — Business Command Center -->
-      <article class="article-card" data-cat="operations">
+      <article class="article-card" data-cat="operations" data-industry="proservices">
         <div class="article-card__img" style="background:#123F3F url('images/insights/how-we-built-business-command-center.svg') center/cover no-repeat;">
           <span class="article-card__cat-pill">How We Did It</span>
         </div>
@@ -1284,8 +1365,8 @@
       </article>
 
       <!-- Showroom & online store workflow series (June 2026) -->
-      <article class="article-card">
-        <div class="article-card__img" style="background:linear-gradient(135deg,#1F3557,#B8923E);">
+      <article class="article-card" data-cat="websites" data-industry="ecommerce">
+        <div class="article-card__img" style="background:#1F3557 url('images/insights/how-to-organize-large-product-catalog-customers-choose.svg') center/cover no-repeat;">
           <span class="article-card__cat-pill">Workflow</span>
         </div>
         <div class="article-card__body">
@@ -1296,8 +1377,8 @@
         </div>
       </article>
 
-      <article class="article-card">
-        <div class="article-card__img" style="background:linear-gradient(135deg,#1C2E47,#4B6FA5);">
+      <article class="article-card" data-cat="websites" data-industry="ecommerce">
+        <div class="article-card__img" style="background:#1C2E47 url('images/insights/how-showroom-sells-online-without-shopping-cart.svg') center/cover no-repeat;">
           <span class="article-card__cat-pill">Workflow</span>
         </div>
         <div class="article-card__body">
@@ -1308,8 +1389,8 @@
         </div>
       </article>
 
-      <article class="article-card">
-        <div class="article-card__img" style="background:linear-gradient(135deg,#0B1B33,#1F3557);">
+      <article class="article-card" data-cat="websites" data-industry="ecommerce">
+        <div class="article-card__img" style="background:#0B1B33 url('images/insights/how-to-redesign-online-store-into-guided-experience.svg') center/cover no-repeat;">
           <span class="article-card__cat-pill">Workflow</span>
         </div>
         <div class="article-card__body">
@@ -1320,8 +1401,8 @@
         </div>
       </article>
 
-      <article class="article-card">
-        <div class="article-card__img" style="background:linear-gradient(135deg,#2E6B4F,#1A4A35);">
+      <article class="article-card" data-cat="marketing" data-industry="ecommerce">
+        <div class="article-card__img" style="background:#2E6B4F url('images/insights/how-showroom-gets-pros-to-refer-clients.svg') center/cover no-repeat;">
           <span class="article-card__cat-pill">Workflow</span>
         </div>
         <div class="article-card__body">
@@ -1332,8 +1413,8 @@
         </div>
       </article>
 
-      <article class="article-card">
-        <div class="article-card__img" style="background:linear-gradient(135deg,#1C2E47,#B8923E);">
+      <article class="article-card" data-cat="websites" data-industry="proservices">
+        <div class="article-card__img" style="background:#1C2E47 url('images/insights/how-to-show-client-website-preview-link-that-never-dies.svg') center/cover no-repeat;">
           <span class="article-card__cat-pill">How We Did It</span>
         </div>
         <div class="article-card__body">
@@ -1344,8 +1425,8 @@
         </div>
       </article>
 
-      <article class="article-card">
-        <div class="article-card__img" style="background:linear-gradient(135deg,#1F3557,#6D8FC7);">
+      <article class="article-card" data-cat="websites" data-industry="ecommerce">
+        <div class="article-card__img" style="background:#1F3557 url('images/insights/how-to-sell-custom-products-good-better-best-online.svg') center/cover no-repeat;">
           <span class="article-card__cat-pill">Workflow</span>
         </div>
         <div class="article-card__body">
@@ -1356,8 +1437,8 @@
         </div>
       </article>
 
-      <article class="article-card">
-        <div class="article-card__img" style="background:linear-gradient(135deg,#172540,#2a3f5e);">
+      <article class="article-card" data-cat="websites" data-industry="ecommerce">
+        <div class="article-card__img" style="background:#172540 url('images/insights/how-to-add-products-without-breaking-store-design.svg') center/cover no-repeat;">
           <span class="article-card__cat-pill">Workflow</span>
         </div>
         <div class="article-card__body">
@@ -1369,7 +1450,7 @@
       </article>
 
       <!-- Card 0 — Live Demo -->
-      <article class="article-card" data-cat="ai">
+      <article class="article-card" data-cat="ai" data-industry="proservices">
         <div class="article-card__img" style="background:#3D2760 url('images/insights/demo.svg') center/cover no-repeat;">
           <span class="article-card__cat-pill">Live Demo</span>
         </div>
@@ -1382,7 +1463,7 @@
       </article>
 
       <!-- Case Study — Top Producer Investment Capital -->
-      <article class="article-card" data-cat="casestudies">
+      <article class="article-card" data-cat="casestudies" data-industry="realestate">
         <div class="article-card__img" style="background:#2a3f5e url('images/insights/top-producer-investment-capital.svg') center/cover no-repeat;">
           <span class="article-card__cat-pill">Case Study</span>
         </div>
@@ -1395,7 +1476,7 @@
       </article>
 
       <!-- Case Study — Cavalry Realty Group -->
-      <article class="article-card" data-cat="casestudies">
+      <article class="article-card" data-cat="casestudies" data-industry="realestate">
         <div class="article-card__img" style="background:#2a3f5e url('images/insights/cavalry-realty.svg') center/cover no-repeat;">
           <span class="article-card__cat-pill">Case Study</span>
         </div>
@@ -1408,7 +1489,7 @@
       </article>
 
       <!-- Workflow — Cut the Silence -->
-      <article class="article-card" data-cat="ai">
+      <article class="article-card" data-cat="ai" data-industry="general">
         <div class="article-card__img" style="background:#3D2760 url('images/insights/cut-the-silence.svg') center/cover no-repeat;">
           <span class="article-card__cat-pill">Workflow</span>
         </div>
@@ -1420,7 +1501,7 @@
         </div>
       </article>
 
-      <article class="article-card" data-cat="casestudies">
+      <article class="article-card" data-cat="casestudies" data-industry="homeservices">
         <div class="article-card__img" style="background:#2a3f5e url('images/insights/how-we-built-woody-ai-family-wooden-woodworks.svg') center/cover no-repeat;">
           <span class="article-card__cat-pill">Case Study</span>
         </div>
@@ -1432,7 +1513,7 @@
         </div>
       </article>
 
-      <article class="article-card" data-cat="websites">
+      <article class="article-card" data-cat="websites" data-industry="homeservices">
         <div class="article-card__img" style="background:#4B6FA5 url('images/insights/how-we-built-3d-product-designer-free.svg') center/cover no-repeat;">
           <span class="article-card__cat-pill">How We Did It</span>
         </div>
@@ -1444,7 +1525,7 @@
         </div>
       </article>
 
-      <article class="article-card" data-cat="ai">
+      <article class="article-card" data-cat="ai" data-industry="proservices">
         <div class="article-card__img" style="background:#3D2760 url('images/insights/how-we-built-ai-video-system-free.svg') center/cover no-repeat;">
           <span class="article-card__cat-pill">How We Did It</span>
         </div>
@@ -1456,7 +1537,7 @@
         </div>
       </article>
 
-      <article class="article-card" data-cat="ai">
+      <article class="article-card" data-cat="ai" data-industry="general">
         <div class="article-card__img" style="background:#3D2760 url('images/insights/what-is-an-ai-family-for-business.svg') center/cover no-repeat;">
           <span class="article-card__cat-pill">AI & Automation</span>
         </div>
@@ -1468,7 +1549,7 @@
         </div>
       </article>
 
-      <article class="article-card" data-cat="ai">
+      <article class="article-card" data-cat="ai" data-industry="general">
         <div class="article-card__img" style="background:#3D2760 url('images/insights/ai-reads-facebook-reels-for-you.svg') center/cover no-repeat;">
           <span class="article-card__cat-pill">AI & Automation</span>
         </div>
@@ -1480,7 +1561,7 @@
         </div>
       </article>
 
-      <article class="article-card" data-cat="operations">
+      <article class="article-card" data-cat="operations" data-industry="proservices">
         <div class="article-card__img" style="background:#123F3F url('images/insights/how-we-cut-ai-costs-1000-per-month.svg') center/cover no-repeat;">
           <span class="article-card__cat-pill">Operations</span>
         </div>
@@ -1492,7 +1573,7 @@
         </div>
       </article>
 
-      <article class="article-card" data-cat="ai">
+      <article class="article-card" data-cat="ai" data-industry="healthcare">
         <div class="article-card__img" style="background:#3D2760 url('images/insights/ai-for-medical-clinics-phone-problem.svg') center/cover no-repeat;">
           <span class="article-card__cat-pill">Industry Insights</span>
         </div>
@@ -1504,7 +1585,7 @@
         </div>
       </article>
 
-      <article class="article-card" data-cat="websites">
+      <article class="article-card" data-cat="websites" data-industry="proservices">
         <div class="article-card__img" style="background:#4B6FA5 url('images/insights/how-we-fixed-netlify-forms-5-deploy-failures.svg') center/cover no-repeat;">
           <span class="article-card__cat-pill">How We Did It</span>
         </div>
@@ -1516,7 +1597,7 @@
         </div>
       </article>
 
-      <article class="article-card" data-cat="operations">
+      <article class="article-card" data-cat="operations" data-industry="general">
         <div class="article-card__img" style="background:#123F3F url('images/insights/how-we-transcribed-96-minute-zoom-meeting-free.svg') center/cover no-repeat;">
           <span class="article-card__cat-pill">How We Did It</span>
         </div>
@@ -1528,7 +1609,7 @@
         </div>
       </article>
 
-      <article class="article-card" data-cat="operations">
+      <article class="article-card" data-cat="operations" data-industry="proservices">
         <div class="article-card__img" style="background:#123F3F url('images/insights/how-we-sync-two-pcs-one-ai-brain.svg') center/cover no-repeat;">
           <span class="article-card__cat-pill">How We Did It</span>
         </div>
@@ -1540,7 +1621,7 @@
         </div>
       </article>
 
-      <article class="article-card" data-cat="operations">
+      <article class="article-card" data-cat="operations" data-industry="proservices">
         <div class="article-card__img" style="background:#123F3F url('images/insights/how-we-structure-ai-so-clients-cant-break-it.svg') center/cover no-repeat;">
           <span class="article-card__cat-pill">Operations</span>
         </div>
@@ -1552,7 +1633,7 @@
         </div>
       </article>
 
-      <article class="article-card" data-cat="operations">
+      <article class="article-card" data-cat="operations" data-industry="proservices">
         <div class="article-card__img" style="background:#123F3F url('images/insights/how-we-onboard-va-without-paying-for-extra-email-seat.svg') center/cover no-repeat;">
           <span class="article-card__cat-pill">Operations</span>
         </div>
@@ -1564,7 +1645,7 @@
         </div>
       </article>
 
-      <article class="article-card" data-cat="ai">
+      <article class="article-card" data-cat="ai" data-industry="proservices">
         <div class="article-card__img" style="background:#3D2760 url('images/insights/building-ai-content-engine-daily-carousel.svg') center/cover no-repeat;">
           <span class="article-card__cat-pill">AI & Automation</span>
         </div>
@@ -1576,7 +1657,7 @@
         </div>
       </article>
 
-      <article class="article-card" data-cat="ai">
+      <article class="article-card" data-cat="ai" data-industry="proservices">
         <div class="article-card__img" style="background:#3D2760 url('images/insights/how-we-used-remotion-make-free-motion-graphics.svg') center/cover no-repeat;">
           <span class="article-card__cat-pill">How We Did It</span>
         </div>
@@ -1588,7 +1669,7 @@
         </div>
       </article>
 
-      <article class="article-card" data-cat="marketing">
+      <article class="article-card" data-cat="marketing" data-industry="general">
         <div class="article-card__img" style="background:#A0502F url('images/insights/how-we-document-every-process-as-content.svg') center/cover no-repeat;">
           <span class="article-card__cat-pill">Operations</span>
         </div>
@@ -1600,7 +1681,7 @@
         </div>
       </article>
 
-      <article class="article-card" data-cat="operations">
+      <article class="article-card" data-cat="operations" data-industry="general">
         <div class="article-card__img" style="background:#123F3F url('images/insights/how-we-set-up-free-remote-desktop-multiple-pcs.svg') center/cover no-repeat;">
           <span class="article-card__cat-pill">How We Did It</span>
         </div>
@@ -1612,7 +1693,7 @@
         </div>
       </article>
 
-      <article class="article-card" data-cat="ai">
+      <article class="article-card" data-cat="ai" data-industry="proservices">
         <div class="article-card__img" style="background:#3D2760 url('images/insights/ai-video-system-no-subscription-stack.svg') center/cover no-repeat;">
           <span class="article-card__cat-pill">AI & Automation</span>
         </div>
@@ -1624,7 +1705,7 @@
         </div>
       </article>
 
-      <article class="article-card" data-cat="websites">
+      <article class="article-card" data-cat="websites" data-industry="proservices">
         <div class="article-card__img" style="background:#4B6FA5 url('images/insights/how-we-clone-website-without-installing-anything.svg') center/cover no-repeat;">
           <span class="article-card__cat-pill">How We Did It</span>
         </div>
@@ -1636,7 +1717,7 @@
         </div>
       </article>
 
-      <article class="article-card" data-cat="operations">
+      <article class="article-card" data-cat="operations" data-industry="general">
         <div class="article-card__img" style="background:#123F3F url('images/insights/google-drive-sync-lock-fix.svg') center/cover no-repeat;">
           <span class="article-card__cat-pill">How We Did It</span>
         </div>
@@ -1648,7 +1729,7 @@
         </div>
       </article>
 
-      <article class="article-card" data-cat="websites">
+      <article class="article-card" data-cat="websites" data-industry="general">
         <div class="article-card__img" style="background:#4B6FA5 url('images/insights/how-we-embed-video-on-website-without-losing-viewers.svg') center/cover no-repeat;">
           <span class="article-card__cat-pill">How We Did It</span>
         </div>
@@ -1660,7 +1741,7 @@
         </div>
       </article>
 
-      <article class="article-card" data-cat="ai">
+      <article class="article-card" data-cat="ai" data-industry="proservices">
         <div class="article-card__img" style="background:#3D2760 url('images/insights/how-we-build-new-ai-by-teaching-siblings.svg') center/cover no-repeat;">
           <span class="article-card__cat-pill">AI & Automation</span>
         </div>
@@ -1672,7 +1753,7 @@
         </div>
       </article>
 
-      <article class="article-card" data-cat="marketing">
+      <article class="article-card" data-cat="marketing" data-industry="general">
         <div class="article-card__img" style="background:#A0502F url('images/insights/storytelling-framework-short-video-business.svg') center/cover no-repeat;">
           <span class="article-card__cat-pill">Content & Marketing</span>
         </div>
@@ -1684,7 +1765,7 @@
         </div>
       </article>
 
-      <article class="article-card" data-cat="marketing">
+      <article class="article-card" data-cat="marketing" data-industry="general">
         <div class="article-card__img" style="background:#A0502F url('images/insights/ffmpeg-reels-business-video.svg') center/cover no-repeat;">
           <span class="article-card__cat-pill">How We Did It</span>
         </div>
@@ -1696,7 +1777,7 @@
         </div>
       </article>
 
-      <article class="article-card" data-cat="marketing">
+      <article class="article-card" data-cat="marketing" data-industry="general">
         <div class="article-card__img" style="background:#A0502F url('images/insights/heygen-avatar-narration-business-video.svg') center/cover no-repeat;">
           <span class="article-card__cat-pill">AI & Automation</span>
         </div>
@@ -1708,7 +1789,7 @@
         </div>
       </article>
 
-      <article class="article-card" data-cat="marketing">
+      <article class="article-card" data-cat="marketing" data-industry="general">
         <div class="article-card__img" style="background:#A0502F url('images/insights/how-to-write-captions-any-business-owner-understands.svg') center/cover no-repeat;">
           <span class="article-card__cat-pill">Content & Marketing</span>
         </div>
@@ -1720,7 +1801,7 @@
         </div>
       </article>
 
-      <article class="article-card" data-cat="websites">
+      <article class="article-card" data-cat="websites" data-industry="proservices">
         <div class="article-card__img" style="background:#4B6FA5 url('images/insights/how-we-built-bbc-website-without-cms.svg') center/cover no-repeat;">
           <span class="article-card__cat-pill">How We Did It</span>
         </div>
@@ -1732,7 +1813,7 @@
         </div>
       </article>
 
-      <article class="article-card" data-cat="guides">
+      <article class="article-card" data-cat="guides" data-industry="general">
         <div class="article-card__img" style="background:#45233A url('images/insights/virtual-assistant-for-small-business.svg') center/cover no-repeat;">
           <span class="article-card__cat-pill">Small Business Guide</span>
         </div>
@@ -1744,7 +1825,7 @@
         </div>
       </article>
 
-      <article class="article-card" data-cat="guides">
+      <article class="article-card" data-cat="guides" data-industry="general">
         <div class="article-card__img" style="background:#45233A url('images/insights/social-media-management-small-business.svg') center/cover no-repeat;">
           <span class="article-card__cat-pill">Small Business Guide</span>
         </div>
@@ -1756,7 +1837,7 @@
         </div>
       </article>
 
-      <article class="article-card" data-cat="guides">
+      <article class="article-card" data-cat="guides" data-industry="general">
         <div class="article-card__img" style="background:#45233A url('images/insights/website-design-small-business-what-to-expect.svg') center/cover no-repeat;">
           <span class="article-card__cat-pill">Small Business Guide</span>
         </div>
@@ -1768,7 +1849,7 @@
         </div>
       </article>
 
-      <article class="article-card" data-cat="guides">
+      <article class="article-card" data-cat="guides" data-industry="general">
         <div class="article-card__img" style="background:#45233A url('images/insights/local-seo-small-business-guide.svg') center/cover no-repeat;">
           <span class="article-card__cat-pill">Small Business Guide</span>
         </div>
@@ -1780,7 +1861,7 @@
         </div>
       </article>
 
-      <article class="article-card" data-cat="guides">
+      <article class="article-card" data-cat="guides" data-industry="general">
         <div class="article-card__img" style="background:#45233A url('images/insights/how-to-automate-small-business-tasks.svg') center/cover no-repeat;">
           <span class="article-card__cat-pill">Small Business Guide</span>
         </div>
@@ -1792,7 +1873,7 @@
         </div>
       </article>
 
-      <article class="article-card" data-cat="guides">
+      <article class="article-card" data-cat="guides" data-industry="general">
         <div class="article-card__img" style="background:#45233A url('images/insights/ai-tools-small-business-no-tech-skills.svg') center/cover no-repeat;">
           <span class="article-card__cat-pill">Small Business Guide</span>
         </div>
@@ -1804,7 +1885,7 @@
         </div>
       </article>
 
-      <article class="article-card" data-cat="guides">
+      <article class="article-card" data-cat="guides" data-industry="general">
         <div class="article-card__img" style="background:#45233A url('images/insights/hire-social-media-manager-what-to-look-for.svg') center/cover no-repeat;">
           <span class="article-card__cat-pill">Small Business Guide</span>
         </div>
@@ -1816,7 +1897,7 @@
         </div>
       </article>
 
-      <article class="article-card" data-cat="guides">
+      <article class="article-card" data-cat="guides" data-industry="general">
         <div class="article-card__img" style="background:#45233A url('images/insights/how-much-does-a-website-cost.svg') center/cover no-repeat;">
           <span class="article-card__cat-pill">Small Business Guide</span>
         </div>
@@ -1828,7 +1909,7 @@
         </div>
       </article>
 
-      <article class="article-card" data-cat="guides">
+      <article class="article-card" data-cat="guides" data-industry="general">
         <div class="article-card__img" style="background:#45233A url('images/insights/content-creation-for-small-business.svg') center/cover no-repeat;">
           <span class="article-card__cat-pill">Small Business Guide</span>
         </div>
@@ -1840,7 +1921,7 @@
         </div>
       </article>
 
-      <article class="article-card" data-cat="guides">
+      <article class="article-card" data-cat="guides" data-industry="general">
         <div class="article-card__img" style="background:#45233A url('images/insights/small-business-operations-without-full-team.svg') center/cover no-repeat;">
           <span class="article-card__cat-pill">Small Business Guide</span>
         </div>
@@ -1852,7 +1933,7 @@
         </div>
       </article>
 
-      <article class="article-card" data-cat="guides">
+      <article class="article-card" data-cat="guides" data-industry="general">
         <div class="article-card__img" style="background:#45233A url('images/insights/virtual-assistant-cost-breakdown.svg') center/cover no-repeat;">
           <span class="article-card__cat-pill">Small Business Guide</span>
         </div>
@@ -1864,7 +1945,7 @@
         </div>
       </article>
 
-      <article class="article-card" data-cat="guides">
+      <article class="article-card" data-cat="guides" data-industry="general">
         <div class="article-card__img" style="background:#45233A url('images/insights/get-business-on-first-page-google.svg') center/cover no-repeat;">
           <span class="article-card__cat-pill">Small Business Guide</span>
         </div>
@@ -2105,34 +2186,106 @@
 </script>
 
 
-<!-- insights filter + search -->
+<!-- insights filter (topic + industry) + search + grouped "All" view -->
 <script>
   (function(){
-    var pills = Array.prototype.slice.call(document.querySelectorAll('.filter-pill'));
-    var cards = Array.prototype.slice.call(document.querySelectorAll('.article-card'));
-    var search = document.querySelector('.grid-search');
+    var grid    = document.querySelector('.article-grid');
+    var catPills = Array.prototype.slice.call(document.querySelectorAll('.filter-pill[data-cat]'));
+    var indPills = Array.prototype.slice.call(document.querySelectorAll('.filter-pill[data-ind]'));
+    var cards   = Array.prototype.slice.call(document.querySelectorAll('.article-card'));
+    var search  = document.querySelector('.grid-search');
     var countEl = document.querySelector('.grid-count');
-    var labels = {all:'insights', ai:'AI & Automation', marketing:'Marketing', seo:'SEO', websites:'Websites', operations:'Operations', casestudies:'case studies', guides:'guides'};
-    function activeCat(){ var a=document.querySelector('.filter-pill--active'); return a?a.getAttribute('data-cat'):'all'; }
+
+    var PER_GROUP = 3;
+    var CAT_ORDER = ['casestudies','ai','marketing','websites','seo','operations','guides'];
+    var CAT_LABEL = {ai:'AI & Automation', marketing:'Marketing', seo:'SEO', websites:'Websites', operations:'Operations', casestudies:'Case Studies', guides:'Guides'};
+    var IND_LABEL = {ecommerce:'E-Commerce & Retail', realestate:'Real Estate', homeservices:'Home Services & Trades', healthcare:'Healthcare & Clinics', nonprofit:'Nonprofits', proservices:'Agencies & Service Pros', general:'Any Business'};
+
+    // ── Build grouped layout once: reorder cards by category, inject headers + see-more ──
+    var buckets = {};
+    cards.forEach(function(c){
+      var cat = c.getAttribute('data-cat') || 'guides';
+      if(CAT_ORDER.indexOf(cat) === -1) cat = 'guides';
+      (buckets[cat] = buckets[cat] || []).push(c);
+    });
+    var headers = [], seeMores = [];
+    CAT_ORDER.forEach(function(cat){
+      var list = buckets[cat]; if(!list || !list.length) return;
+      // header
+      var h = document.createElement('div');
+      h.className = 'cat-group-header'; h.setAttribute('data-group', cat);
+      h.innerHTML = '<span class="cat-group-header__name">'+CAT_LABEL[cat]+'</span>'+
+                    '<span class="cat-group-header__count">'+list.length+' insight'+(list.length===1?'':'s')+'</span>'+
+                    '<span class="cat-group-header__rule"></span>';
+      grid.appendChild(h); headers.push(h);
+      // cards, tagged with position in group
+      list.forEach(function(c, idx){ c.setAttribute('data-gpos', idx); grid.appendChild(c); });
+      // see-more (only if more than PER_GROUP)
+      if(list.length > PER_GROUP){
+        var wrap = document.createElement('div');
+        wrap.className = 'cat-see-more'; wrap.setAttribute('data-group', cat);
+        var hidden = list.length - PER_GROUP;
+        wrap.innerHTML = '<button class="cat-see-more__btn" type="button">See '+hidden+' more in '+CAT_LABEL[cat]+' &rarr;</button>';
+        wrap.querySelector('button').addEventListener('click', function(){ setCat(cat); });
+        grid.appendChild(wrap); seeMores.push(wrap);
+      }
+    });
+
+    function activeCat(){ var a=document.querySelector('.filter-pill[data-cat].filter-pill--active'); return a?a.getAttribute('data-cat'):'all'; }
+    function activeInd(){ var a=document.querySelector('.filter-pill[data-ind].filter-pill--active'); return a?a.getAttribute('data-ind'):'all'; }
+    function setCat(cat){
+      catPills.forEach(function(x){ x.classList.toggle('filter-pill--active', x.getAttribute('data-cat')===cat); });
+      apply();
+      var gs = document.querySelector('.grid-section'); if(gs) gs.scrollIntoView({behavior:'smooth', block:'start'});
+    }
+
     function apply(){
-      var cat=activeCat();
-      var q=(search&&search.value?search.value:'').trim().toLowerCase();
-      var n=0;
+      var cat = activeCat(), ind = activeInd();
+      var q = (search && search.value ? search.value : '').trim().toLowerCase();
+      var grouped = (cat==='all' && ind==='all' && q==='');
+
+      headers.forEach(function(h){ h.style.display = grouped ? '' : 'none'; });
+      seeMores.forEach(function(s){ s.style.display = grouped ? '' : 'none'; });
+
+      var n = 0;
       cards.forEach(function(c){
-        var okCat = (cat==='all') || (c.getAttribute('data-cat')===cat);
-        var okQ = (q==='') || (c.textContent.toLowerCase().indexOf(q)!==-1);
-        var show = okCat && okQ;
+        var show;
+        if(grouped){
+          show = (parseInt(c.getAttribute('data-gpos'),10) < PER_GROUP);
+        } else {
+          var okCat = (cat==='all') || (c.getAttribute('data-cat')===cat);
+          var okInd = (ind==='all') || (c.getAttribute('data-industry')===ind);
+          var okQ   = (q==='') || (c.textContent.toLowerCase().indexOf(q)!==-1);
+          show = okCat && okInd && okQ;
+        }
         c.style.display = show ? '' : 'none';
-        if(show) n++;
+        if(show && !grouped) n++;
       });
+
       if(countEl){
-        if(cat==='all' && q===''){ countEl.textContent='Showing all '+n+' insights'; }
-        else { countEl.textContent='Showing '+n+' result'+(n===1?'':'s')+(cat!=='all'?(' in '+(labels[cat]||'')):'')+(q?(' for "'+search.value+'"'):''); }
+        if(grouped){
+          countEl.textContent = 'Showing all '+cards.length+' insights';
+        } else {
+          var bits = [];
+          if(cat!=='all') bits.push(CAT_LABEL[cat]);
+          if(ind!=='all') bits.push(IND_LABEL[ind]);
+          var where = bits.length ? (' in '+bits.join(' + ')) : '';
+          var forq = q ? (' for "'+search.value+'"') : '';
+          countEl.textContent = 'Showing '+n+' result'+(n===1?'':'s')+where+forq;
+        }
       }
     }
-    pills.forEach(function(p){
+
+    catPills.forEach(function(p){
       p.addEventListener('click', function(){
-        pills.forEach(function(x){ x.classList.remove('filter-pill--active'); });
+        catPills.forEach(function(x){ x.classList.remove('filter-pill--active'); });
+        p.classList.add('filter-pill--active');
+        apply();
+      });
+    });
+    indPills.forEach(function(p){
+      p.addEventListener('click', function(){
+        indPills.forEach(function(x){ x.classList.remove('filter-pill--active'); });
         p.classList.add('filter-pill--active');
         apply();
       });
