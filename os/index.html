@@ -817,6 +817,20 @@
       "folder": "Chris Branding"
     },
     {
+      "name": "SugarBabyCreative",
+      "owner": "SugarBabyCreative",
+      "handler": "RJ",
+      "ai": "-",
+      "site": "-",
+      "industry": "Creator management",
+      "status": "active",
+      "category": "active",
+      "invoice": true,
+      "invoiceSheet": "https://docs.google.com/spreadsheets/d/1g4qILqZsxbpY6CW5u8Ek3LKqIg3mr_fPdHfV2ZQzRlk/edit",
+      "notes": "Current full-service creator-management engagement (ops + team management, content, audience engagement & growth). Box opens invoicing: generate invoice + the live invoice sheet.",
+      "folder": ""
+    },
+    {
       "name": "Freccia Group (Rebekah)",
       "owner": "Rebekah Severi",
       "handler": "RJ",
@@ -893,6 +907,45 @@
       "link": "/top-producer-investment-capital",
       "notes": "Past client. Dedicated website page live on balaynibruno.co.",
       "folder": "TOP-PRODUCER-INVESTMENT-CAPITAL"
+    },
+    {
+      "name": "Blackbelt Commerce",
+      "owner": "-",
+      "handler": "-",
+      "ai": "-",
+      "site": "-",
+      "industry": "Shopify Plus agency (content/podcast partner)",
+      "status": "past",
+      "category": "past",
+      "link": "/should-an-agency-outsource-its-own-content",
+      "notes": "Content + email + podcast (Beyond The Cart) + YouTube + SEO partner; referral partner.",
+      "folder": ""
+    },
+    {
+      "name": "DuDilagent AI",
+      "owner": "-",
+      "handler": "-",
+      "ai": "-",
+      "site": "-",
+      "industry": "AI M&A due-diligence (lead gen)",
+      "status": "past",
+      "category": "past",
+      "link": "/can-someone-handle-lead-generation-for-me",
+      "notes": "Full lead generation; Kenz + Daryl drove day-to-day.",
+      "folder": ""
+    },
+    {
+      "name": "Entropy Management",
+      "owner": "-",
+      "handler": "-",
+      "ai": "-",
+      "site": "-",
+      "industry": "Creator management agency",
+      "status": "past",
+      "category": "past",
+      "link": "/our-work",
+      "notes": "RJ served as Operations Manager — built systems/SOPs, trained + managed the team. Where the ops/team-management playbook started.",
+      "folder": ""
     }
   ],
   "team": [
@@ -4345,6 +4398,27 @@
       <div class="panel" style="display:block;overflow-x:auto"><table class="ptable" style="min-width:560px"><thead><tr><th>Chapter</th><th>sp</th><th>s</th><th>sb</th><th>se</th><th>Music direction</th></tr></thead><tbody>${voiceRows}</tbody></table></div>
     </div>`;
   };
+  // SugarBabyCreative — invoicing hub: generate an invoice + open the live invoice sheet.
+  window.invoiceCC=(i)=>{
+    const c=D.clients[i]||{}, col='#D4AF37';
+    window.curView='clients'; window.curClient=null; window.__curClientSlug=window.__slug(c.name);
+    if(!window.__routing){ var __ch='#clients/'+window.__curClientSlug; if(location.hash!==__ch){ try{ location.hash=__ch; }catch(e){} } }
+    const sheet=c.invoiceSheet||'';
+    const panel=(ic,title,inner)=>`<div class="wfcat"><div class="wfcat-hd"><div class="wfcat-ic" style="background:${col}22;color:${col}">${ic}</div><div class="wfcat-nm">${esc(title)}</div></div>${inner}</div>`;
+    const kv=(k,v)=>`<div class="kv"><b>${k}:</b> <span>${esc(v||'—')}</span></div>`;
+    return app.innerHTML=`<div class="view">
+      <div class="morelink" style="margin-top:0;margin-bottom:14px" onclick="go('clients')">← All clients</div>
+      <div class="cc-hero" style="background:linear-gradient(135deg,${col}33,${col}0d);border:1px solid ${col}66">
+        <div class="cb-av" style="background:${col};color:#0A1422">${esc(c.name[0])}</div>
+        <div><div class="cc-nm">${esc(c.name)}</div><div class="cc-sub">${esc(c.industry)} · Handler ${esc(c.handler)} · Invoicing</div></div>
+      </div>
+      <div class="wfgrid">
+        ${panel('🧾','Invoice sheet',`<div class="kv"><span>The live invoice tracker for ${esc(c.name)}.</span></div>${sheet?`<a class="lnk" href="${esc(sheet)}" target="_blank" rel="noopener" style="margin-top:8px">Open invoice sheet ↗</a>`:'<div class="kv"><span>No sheet linked.</span></div>'}`)}
+        ${panel('＋','Generate an invoice',`<div class="kv"><span>Create a new branded invoice (Wise QR + pay link auto-included).</span></div><button class="ideabtn" style="margin-top:10px" onclick="openChat('clients','Generate a ${esc(c.name)} invoice — period: , amount: ','${esc(c.name)}')"><span class="i">＋</span>Generate ${esc(c.name)} invoice</button><div class="gauge-sub" style="text-align:left;margin-top:6px">Opens Cuh with the invoice request. Confirm the period + amount and it builds the branded PDF.</div>`)}
+        ${panel('ℹ️','Client',`${kv('Owner',c.owner)}${kv('Handler',c.handler)}${kv('Status',c.status)}<div class="sec" style="margin-top:10px">Notes</div><div class="kv"><span>${esc(c.notes)||'—'}</span></div>`)}
+      </div>
+    </div>`;
+  };
   window.clientCC=(i)=>{
     // Cavalry Group has its own standalone command center (the one Kenz uses) — always route there.
     if(D.clients[i] && D.clients[i].name==='Cavalry Group'){ window.location.href='/os/cavalry/'; return; }
@@ -4359,6 +4433,8 @@
     if(_cc.category==='prospect'){ return prospectCC(i); }
     // Nintellect (Chris) = video / narration production tracker.
     if(_cc.video || _cc.name==='Nintellect'){ return nintellectCC(i); }
+    // SugarBabyCreative = invoicing hub (generate invoice + the live invoice sheet).
+    if(_cc.invoice){ return invoiceCC(i); }
     const c=D.clients[i], col=cColor(c), folder=c.folder||CFOLDER[c.name];
     const hasSite=c.site&&c.site!=='-', siteUrl=hasSite?'https://'+c.site.replace(/^https?:\/\//,''):'';
     const isCav=c.name==='Cavalry Group';
