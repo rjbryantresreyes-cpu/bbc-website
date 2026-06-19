@@ -546,6 +546,26 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <!-- ApexCharts (live dashboard charts, no build step) -->
 <script src="https://cdn.jsdelivr.net/npm/apexcharts@3.54.1"></script>
+<!-- SortableJS (drag/drop for the editable Board, no build step) -->
+<script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.2/Sortable.min.js"></script>
+<style>
+  .kboard{display:flex;gap:12px;overflow-x:auto;padding-bottom:10px;-webkit-overflow-scrolling:touch;}
+  .kcol{flex:0 0 82%;max-width:320px;background:var(--bg2);border:1px solid var(--line,#22324d);border-radius:14px;padding:10px;display:flex;flex-direction:column;}
+  @media(min-width:760px){.kcol{flex:1 1 0;max-width:none;}}
+  .kcol-hd{font-weight:700;font-size:12px;color:var(--gold);margin:2px 4px 9px;display:flex;align-items:center;gap:7px;text-transform:uppercase;letter-spacing:.05em;}
+  .kcount{background:#22324d;color:#cdd8ea;border-radius:10px;padding:1px 8px;font-size:11px;}
+  .kcards{min-height:44px;display:flex;flex-direction:column;gap:8px;}
+  .kcard{position:relative;background:#0f1726;border:1px solid #25344c;border-radius:11px;padding:11px 30px 11px 12px;cursor:grab;}
+  .kcard:active{cursor:grabbing;}
+  .kc-title{font-size:14px;color:var(--ink);line-height:1.34;word-break:break-word;}
+  .kc-notes{font-size:12px;color:var(--muted);margin-top:4px;line-height:1.34;word-break:break-word;}
+  .kc-del{position:absolute;top:7px;right:7px;width:22px;height:22px;line-height:1;background:none;border:none;color:#5d6f8c;font-size:14px;cursor:pointer;border-radius:6px;}
+  .kc-del:hover{color:#EF6B6B;background:rgba(239,107,107,.12);}
+  .kadd{margin-top:9px;background:rgba(212,175,55,.10);border:1px dashed var(--gold2);color:var(--gold2);border-radius:10px;padding:9px;font-size:13px;font-weight:600;cursor:pointer;font-family:var(--ui);min-height:40px;}
+  .kadd:hover{background:rgba(212,175,55,.18);}
+  .sortable-ghost{opacity:.45;}
+  .sortable-chosen{box-shadow:0 8px 22px rgba(0,0,0,.4);}
+</style>
 <script>
   window.BBC_SUPABASE_URL = 'https://ctoeuikxoqlhnebgsygp.supabase.co';
   window.BBC_SUPABASE_KEY = 'sb_publishable_WnJ57fk-ymDuT2xtVZRcHg_khZCWgJL';
@@ -3735,6 +3755,7 @@
       {v:'crm',ic:'📇',t:'CRM + Email',d:'Leads, replies, send'},
       {v:'inbox',ic:'📥',t:'Inbox',d:'Your rj@ email'},
       {v:'clients',ic:'🤝',t:'Clients',d:D.clients.filter(c=>(c.category||'active')==='active').length+' active'},
+      {v:'kanban',ic:'🗂️',t:'Board',d:'Add · edit · drag cards'},
       {v:'workflows',ic:'🔄',t:'Workflows',d:'To-do + readiness'},
       {v:'social',ic:'📱',t:'Social',d:'Calendar + links'},
       {v:'websites',ic:'🌐',t:'Websites',d:(D.websitePages?D.websitePages.length:0)+' pages'},
@@ -3832,6 +3853,81 @@
       <div class="clientgrid" id="cli">${aHtml}</div>
       ${prospects.length?`<div class="sec" style="margin-top:18px">Prospects — interested, in the pipeline</div><div class="clientgrid">${pHtml}</div>`:''}
       ${past.length?`<div class="sec" style="margin-top:18px">Past clients — tap to open their story page</div><div class="clientgrid">${xHtml}</div>`:''}`;
+  };
+  /* ===== EDITABLE BOARD (Trello-style, synced via /.netlify/functions/cards) =====
+     Add / edit / delete / drag cards. Saved to Netlify Blobs server-side, so every
+     device sees the same board. Optimistic UI: the screen updates first, then saves. */
+  const BOARD_COLS=[{k:'todo',t:'To do'},{k:'doing',t:'Doing'},{k:'done',t:'Done'}];
+  const CARDS_API='/.netlify/functions/cards';
+  let __cards=[];
+  async function loadCards(){
+    try{ const r=await fetch(CARDS_API+'?board=main',{cache:'no-store'}); const d=await r.json(); __cards=Array.isArray(d.list)?d.list:[]; }
+    catch(e){ __cards=[]; }
+  }
+  function cardHtml(c){
+    return `<div class="kcard" data-id="${esc(String(c.id))}" onclick="editCard('${esc(String(c.id))}')">
+      <div class="kc-title">${esc(c.title)}</div>${c.notes?`<div class="kc-notes">${esc(c.notes)}</div>`:''}
+      <button class="kc-del" onclick="event.stopPropagation();delCard('${esc(String(c.id))}')" aria-label="Delete card">✕</button></div>`;
+  }
+  function renderBoard(){
+    const el=document.getElementById('board-cols'); if(!el) return;
+    el.innerHTML=BOARD_COLS.map(col=>{
+      const inCol=__cards.filter(c=>(c.column||'todo')===col.k).sort((a,b)=>(a.order??0)-(b.order??0));
+      return `<div class="kcol"><div class="kcol-hd">${esc(col.t)} <span class="kcount">${inCol.length}</span></div>
+        <div class="kcards" data-col="${col.k}">${inCol.map(cardHtml).join('')}</div>
+        <button class="kadd" onclick="addCard('${col.k}')">＋ Add card</button></div>`;
+    }).join('');
+    wireBoardDrag();
+  }
+  function wireBoardDrag(){
+    if(!window.Sortable) return;
+    document.querySelectorAll('#board-cols .kcards').forEach(el=>{
+      if(el.__sortable) return; el.__sortable=true;
+      Sortable.create(el,{group:'bbc-board',animation:140,ghostClass:'sortable-ghost',chosenClass:'sortable-chosen',onEnd:saveBoardOrder});
+    });
+  }
+  async function saveBoardOrder(){
+    const reorder=[];
+    document.querySelectorAll('#board-cols .kcards').forEach(col=>{
+      const colk=col.dataset.col;
+      [...col.querySelectorAll('.kcard')].forEach((el,idx)=>{ reorder.push({id:el.dataset.id,column:colk,order:idx}); });
+    });
+    const map=new Map(reorder.map(r=>[String(r.id),r]));
+    __cards=__cards.map(c=>{ const r=map.get(String(c.id)); return r?{...c,column:r.column,order:r.order}:c; });
+    // refresh column counts without disturbing the just-dropped DOM
+    document.querySelectorAll('#board-cols .kcol').forEach(col=>{ const k=col.querySelector('.kcards').dataset.col; const n=__cards.filter(c=>(c.column||'todo')===k).length; const badge=col.querySelector('.kcount'); if(badge) badge.textContent=n; });
+    try{ await fetch(CARDS_API,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({reorder})}); }
+    catch(e){ window.toast&&toast('Could not save order','err'); }
+  }
+  window.addCard=async(col)=>{
+    const title=(prompt('New card:')||'').trim(); if(!title) return;
+    const tmp={id:'tmp'+Date.now(),board:'main',column:col,title,notes:'',order:9999};
+    __cards.push(tmp); renderBoard();
+    try{ const r=await fetch(CARDS_API,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({board:'main',column:col,title})}); const d=await r.json(); if(d.list)__cards=d.list; }
+    catch(e){ __cards=__cards.filter(c=>c.id!==tmp.id); window.toast&&toast('Could not save card','err'); }
+    renderBoard();
+  };
+  window.editCard=async(id)=>{
+    const c=__cards.find(x=>String(x.id)===String(id)); if(!c) return;
+    const title=prompt('Edit card title:',c.title); if(title==null) return;
+    const notes=prompt('Notes (optional):',c.notes||'');
+    c.title=(title||'').trim()||c.title; if(notes!=null)c.notes=notes; renderBoard();
+    try{ const r=await fetch(CARDS_API,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({id,title:c.title,notes:c.notes})}); const d=await r.json(); if(d.list)__cards=d.list; }
+    catch(e){ window.toast&&toast('Could not save edit','err'); }
+    renderBoard();
+  };
+  window.delCard=async(id)=>{
+    if(!confirm('Delete this card?')) return;
+    __cards=__cards.filter(c=>String(c.id)!==String(id)); renderBoard();
+    try{ await fetch(CARDS_API,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({delete:true,id})}); }
+    catch(e){ window.toast&&toast('Could not delete','err'); }
+  };
+  window.refreshBoard=async()=>{ await loadCards(); renderBoard(); };
+  views.kanban=()=>{
+    setTimeout(async()=>{ await loadCards(); renderBoard(); },10);
+    return `<h2 class="vt">Board</h2><div class="vsub">Add, edit, drag, and delete cards. Saved to the server — synced on every device.</div>
+      <div style="display:flex;justify-content:flex-end;margin-bottom:8px"><button class="morelink" style="margin:0" onclick="refreshBoard()">↻ Refresh</button></div>
+      <div class="kboard" id="board-cols"><div class="gauge-sub">Loading board…</div></div>`;
   };
   // CRM view — embeds the FULL NocoDB app (all tables, views, workflows) inside the dashboard.
   // BBC CRM lead pipeline (documented schema) — offered as the status options everywhere status is editable.
@@ -5249,10 +5345,8 @@
   document.getElementById('cs-msg').addEventListener('keydown',e=>{ if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();window.sendMsg();} });
   document.getElementById('cs-files').addEventListener('change',e=>{ const box=document.getElementById('cs-previews'); box.innerHTML=''; [...e.target.files].forEach(f=>{ const url=URL.createObjectURL(f); box.insertAdjacentHTML('beforeend', f.type.startsWith('video')?`<video src="${url}" controls></video>`:`<img src="${url}" alt="">`); }); });
 
-  /* PWA service worker DISABLED on /os-preview — preview must always serve fresh (no cache). */
-  if('serviceWorker' in navigator){
-    navigator.serviceWorker.getRegistrations().then(rs=>rs.forEach(r=>r.unregister())).catch(()=>{});
-  }
+  /* PWA service worker DISABLED on /os-preview. */
+  if('serviceWorker' in navigator){ navigator.serviceWorker.getRegistrations().then(rs=>rs.forEach(r=>r.unregister())).catch(()=>{}); }
 
   /* ---- per-page URLs: hash routing so refresh / back-forward / bookmarks keep the page ---- */
   window.__slug=function(s){ return (s||'').toString().toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,''); };
