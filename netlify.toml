@@ -16,3 +16,14 @@
 [functions]
   directory = "netlify/functions"
   node_bundler = "esbuild"
+
+# Serve PWA manifests with the correct MIME type so the dashboards install on Android too.
+[[headers]]
+  for = "/wwos/manifest.webmanifest"
+  [headers.values]
+    Content-Type = "application/manifest+json"
+
+[[headers]]
+  for = "/os/manifest.webmanifest"
+  [headers.values]
+    Content-Type = "application/manifest+json"
