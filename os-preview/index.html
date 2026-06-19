@@ -3926,7 +3926,9 @@
   };
   window.refreshBoard=async()=>{ await loadCards(); renderBoard(); };
   // Mount a board (main, or a client's) into a container element by id, then load+render it.
-  window.mountBoard=async(boardKey,elId)=>{ __boardKey=boardKey; __boardEl=elId||'board-cols'; await loadCards(); renderBoard(); };
+  // __mountSeq guards against a race: if a newer mount started while we awaited, the stale one bails.
+  let __mountSeq=0;
+  window.mountBoard=async(boardKey,elId)=>{ const seq=++__mountSeq; __boardKey=boardKey; __boardEl=elId||'board-cols'; await loadCards(); if(seq!==__mountSeq) return; renderBoard(); };
   views.kanban=()=>{
     setTimeout(()=>window.mountBoard('main','board-cols'),10);
     return `<h2 class="vt">Board</h2><div class="vsub">Add, edit, drag, and delete cards. Saved to the server — synced on every device.</div>
@@ -4546,10 +4548,11 @@
       : (hasSite?`<a class="lnk" href="${siteUrl}" target="_blank">${esc(c.site)} ↗</a><div class="gauge-sub" style="text-align:left;margin-top:8px">Analytics + page list populate when we connect this client's site.</div>`:`<div class="kv"><span>No public site on file yet.</span></div>`);
     const website=panel('🌐','Website',webInner);
     const social=panel('📱','Social Media',`<div class="kv"><span>Content calendar + posting rhythm appear here once we load this client's social plan.</span></div><div class="gauge-sub" style="text-align:left;margin-top:6px">In setup.</div>`);
-    const reminders=panel('✅','Reminders & tasks',`<div class="kv"><span>Tasks and reminders for ${esc(c.name)} show here. Log them with Cuh below.</span></div><div class="gauge-sub" style="text-align:left;margin-top:6px">In setup.</div>`);
+    const reminders=panel('✅','Reminders',`<div class="kv"><span>This client's editable task board is right below — add, drag, and check things off there.</span></div>`);
     const drive=panel('📁','Drive folder',`<div class="kv"><span>${folder?'02_ACTIVE_CLIENTS / '+esc(folder):'Folder not mapped yet.'}</span></div>${folder?`<a class="lnk" onclick="openClientFolder('${folder.replace(/'/g,"\\'")}')" style="margin-top:8px;cursor:pointer">Open in Folders →</a>`:''}`);
     window.curView='clients'; window.curClient=null; window.__curClientSlug=window.__slug(c.name);
     if(!window.__routing){ var __ch='#clients/'+window.__curClientSlug; if(location.hash!==__ch){ try{ location.hash=__ch; }catch(e){} } }
+    setTimeout(()=>window.mountBoard('client:'+window.__curClientSlug,'client-board'),10);
     return app.innerHTML=`<div class="view">
       <div class="morelink" style="margin-top:0;margin-bottom:14px" onclick="go('clients')">← All clients</div>
       <div class="cc-hero" style="background:linear-gradient(135deg,${col}33,${col}0d);border:1px solid ${col}66">
@@ -4558,6 +4561,9 @@
       </div>
       <button class="ideabtn" onclick="openChat('clients','Work for ${esc(c.name)} — ','${esc(c.name)}')"><span class="i">＋</span>Log work for ${esc(c.name)}</button>
       <div class="wfgrid">${overview}${website}${social}${reminders}${drive}</div>
+      <div class="sec" style="margin-top:16px">Tasks — ${esc(c.name)}</div>
+      <div class="gauge-sub" style="text-align:left;margin:-2px 0 8px">Add, edit, drag, delete. Saved to the server — synced across your devices.</div>
+      <div class="kboard" id="client-board"><div class="gauge-sub">Loading tasks…</div></div>
       <div class="gauge-sub" style="text-align:left;margin-top:10px">${isCav?'Cavalry is the first full client command center — sections fill out as Kenz works the account.':'Re-souled clone of the BBC command center, scoped to '+esc(c.name)+'. Brand theming + live data apply as we connect this client.'} Login access + activity tracking for the handler turn on in the final step.</div>`;
   };
 
@@ -5349,12 +5355,8 @@
   document.getElementById('cs-msg').addEventListener('keydown',e=>{ if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();window.sendMsg();} });
   document.getElementById('cs-files').addEventListener('change',e=>{ const box=document.getElementById('cs-previews'); box.innerHTML=''; [...e.target.files].forEach(f=>{ const url=URL.createObjectURL(f); box.insertAdjacentHTML('beforeend', f.type.startsWith('video')?`<video src="${url}" controls></video>`:`<img src="${url}" alt="">`); }); });
 
-  /* PWA service worker — auto-update so deploys show without manual cache clears */
-  if(false){
-    navigator.serviceWorker.register('sw.js').then(reg=>{ reg.update&&reg.update(); }).catch(()=>{});
-    let refreshing=false;
-    navigator.serviceWorker.addEventListener('controllerchange',()=>{ if(refreshing) return; refreshing=true; location.reload(); });
-  }
+  /* PWA service worker DISABLED on /os-preview. */
+  if('serviceWorker' in navigator){ navigator.serviceWorker.getRegistrations().then(rs=>rs.forEach(r=>r.unregister())).catch(()=>{}); }
 
   /* ---- per-page URLs: hash routing so refresh / back-forward / bookmarks keep the page ---- */
   window.__slug=function(s){ return (s||'').toString().toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,''); };
