@@ -5,6 +5,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="robots" content="noindex, nofollow">
 <title>Wooden Woodworks — Command Center</title>
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#5E4329">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="WW Dashboard">
+<link rel="apple-touch-icon" href="ww-icon-180.png">
+<link rel="icon" type="image/png" href="ww-icon-192.png">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
@@ -539,6 +547,10 @@ renderNav();go('home');
   window.wwLogout=async function(){ var c=client(); if(c){ try{ await c.auth.signOut(); }catch(e){} } showGate(''); var p=document.getElementById('ww-pass'); if(p)p.value=''; };
   check();
 })();
+</script>
+<script>
+/* WW Dashboard PWA — register the service worker so it installs to the phone home screen */
+if('serviceWorker' in navigator){ window.addEventListener('load',function(){ navigator.serviceWorker.register('sw.js').then(function(r){ if(r.update) r.update(); }).catch(function(){}); }); }
 </script>
 </body>
 </html>

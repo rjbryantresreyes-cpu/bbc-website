@@ -1,0 +1,17 @@
+{
+  "name": "WW Dashboard",
+  "short_name": "WW Dashboard",
+  "description": "Wooden Woodworks Command Center",
+  "start_url": "/wwos/",
+  "scope": "/wwos/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#F3ECE0",
+  "theme_color": "#5E4329",
+  "icons": [
+    { "src": "/wwos/ww-icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/wwos/ww-icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "/wwos/ww-icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "maskable" },
+    { "src": "/wwos/ww-icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}
