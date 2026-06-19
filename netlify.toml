@@ -27,3 +27,8 @@
   for = "/os/manifest.webmanifest"
   [headers.values]
     Content-Type = "application/manifest+json"
+
+[[headers]]
+  for = "/sros/manifest.webmanifest"
+  [headers.values]
+    Content-Type = "application/manifest+json"

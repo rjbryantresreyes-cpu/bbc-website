@@ -1,0 +1,17 @@
+{
+  "name": "SR Dashboard",
+  "short_name": "SR Dashboard",
+  "description": "S. Riviere Hair Collection Command Center",
+  "start_url": "/sros/",
+  "scope": "/sros/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#F4EDE0",
+  "theme_color": "#2A2622",
+  "icons": [
+    { "src": "/sros/sr-icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/sros/sr-icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "/sros/sr-icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "maskable" },
+    { "src": "/sros/sr-icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

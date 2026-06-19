@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>S. Riviere — Command Center</title>
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#2A2622">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="SR Dashboard">
+<link rel="apple-touch-icon" href="sr-icon-180.png">
+<link rel="icon" type="image/png" href="sr-icon-192.png">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>
+  :root{
+    --bg:#F4EDE0;--bg2:#FBF6EC;--card:#FFFFFF;--ink:#2A2622;--muted:#857B6B;--soft:#A99E8B;
+    --gold:#B89B6E;--gold-d:#9C7F52;--line:rgba(42,38,34,0.13);--line2:rgba(42,38,34,0.06);
+    --green:#6E8B6D;--amber:#C0913E;--rose:#B06A6A;
+    --serif:Georgia,'Times New Roman',serif;--sans:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+    --shadow:0 6px 26px rgba(42,38,34,0.10);
+  }
+  *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+  body{font-family:var(--sans);background:var(--bg);color:var(--ink);min-height:100dvh;line-height:1.5;-webkit-font-smoothing:antialiased;}
+  /* ===== Login gate ===== */
+  #sr-gate{position:fixed;inset:0;z-index:9999;background:var(--bg);display:flex;align-items:center;justify-content:center;padding:24px;}
+  body.sr-authed #sr-gate{display:none;}
+  body:not(.sr-authed) .app{visibility:hidden;}
+  .sr-gate-card{background:var(--card);border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow);padding:36px 30px;max-width:370px;width:100%;text-align:center;}
+  .sr-gate-mono{font-family:var(--serif);font-weight:700;font-size:34px;color:var(--ink);letter-spacing:1px;}
+  .sr-gate-rule{width:64px;height:2px;background:var(--gold);margin:8px auto 4px;}
+  .sr-gate-card h1{font-family:var(--serif);color:var(--ink);font-size:18px;font-weight:400;letter-spacing:3px;text-transform:uppercase;margin-top:10px;}
+  .sr-gate-sub{color:var(--muted);font-size:12.5px;margin:6px 0 20px;letter-spacing:.5px;}
+  .sr-gate-card input{width:100%;border:1px solid var(--line);border-radius:10px;padding:12px;margin-bottom:10px;font-family:var(--sans);font-size:15px;background:var(--bg2);color:var(--ink);}
+  .sr-gate-card button{width:100%;background:var(--ink);color:#fff;border:none;border-radius:10px;padding:12px;font-size:14px;font-weight:600;letter-spacing:1px;text-transform:uppercase;cursor:pointer;font-family:var(--sans);min-height:46px;}
+  .sr-gate-card button:hover{background:#000;}
+  .sr-err{color:var(--rose);font-size:13px;margin-top:8px;min-height:16px;}
+  .sr-gate-foot{color:var(--soft);font-size:11px;margin-top:18px;letter-spacing:1px;}
+  /* ===== App shell ===== */
+  .app{display:flex;min-height:100dvh;}
+  .side{width:230px;flex:none;background:var(--bg2);border-right:1px solid var(--line);display:flex;flex-direction:column;position:sticky;top:0;height:100dvh;}
+  .brand{display:flex;align-items:center;gap:11px;padding:20px 18px 14px;}
+  .brand .mono{font-family:var(--serif);font-weight:700;font-size:22px;color:var(--ink);}
+  .brand .sub{font-size:9.5px;letter-spacing:1.5px;text-transform:uppercase;color:var(--soft);}
+  .nav{flex:1;padding:6px 0;overflow:auto;}
+  .navlink{display:flex;align-items:center;gap:11px;padding:11px 18px;font-size:14px;color:var(--muted);cursor:pointer;border-left:3px solid transparent;}
+  .navlink:hover{color:var(--ink);background:rgba(184,155,110,0.06);}
+  .navlink.on{color:var(--ink);border-left-color:var(--gold);background:rgba(184,155,110,0.12);font-weight:600;}
+  .navlink .ic{width:18px;text-align:center;}
+  .role{margin:8px 14px;padding:10px;background:var(--card);border:1px solid var(--line);border-radius:10px;}
+  .role .lbl{font-size:9px;letter-spacing:1px;text-transform:uppercase;color:var(--soft);margin-bottom:5px;}
+  .role select{width:100%;border:1px solid var(--line);border-radius:8px;padding:7px;font-size:13px;background:var(--bg2);color:var(--ink);font-family:var(--sans);}
+  .main{flex:1;min-width:0;display:flex;flex-direction:column;}
+  .topbar{display:flex;align-items:center;justify-content:space-between;padding:14px 22px;border-bottom:1px solid var(--line);background:var(--bg);position:sticky;top:0;z-index:50;}
+  .topbar .menu{display:none;background:none;border:none;font-size:22px;color:var(--ink);cursor:pointer;}
+  .ptitle{font-family:var(--serif);font-size:20px;}
+  .tb-right{display:flex;align-items:center;gap:10px;}
+  .who{font-size:11px;color:var(--soft);}
+  .tb-btn{background:none;border:1px solid var(--line);border-radius:8px;padding:7px 12px;font-size:12.5px;color:var(--ink);cursor:pointer;font-family:var(--sans);min-height:36px;}
+  .tb-btn:hover{border-color:var(--gold);}
+  .view{padding:22px;max-width:1100px;}
+  h2.vt{font-family:var(--serif);font-size:26px;font-weight:700;margin-bottom:2px;}
+  .vsub{color:var(--muted);font-size:13.5px;margin-bottom:18px;}
+  .sec{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--soft);font-weight:700;margin:20px 0 10px;}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;}
+  .card2{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;}
+  .stat{font-family:var(--serif);font-size:30px;font-weight:700;line-height:1;}
+  .stat-l{font-size:12px;color:var(--muted);margin-top:6px;}
+  .tap{cursor:pointer;transition:border-color .15s,transform .1s;}
+  .tap:hover{border-color:var(--gold);} .tap:active{transform:scale(.99);}
+  table.t{width:100%;border-collapse:collapse;font-size:13px;}
+  table.t th{text-align:left;color:var(--soft);font-size:10px;letter-spacing:.5px;text-transform:uppercase;padding:7px 8px;border-bottom:1px solid var(--line);}
+  table.t td{padding:8px;border-bottom:1px solid var(--line2);}
+  .pill{display:inline-block;font-size:10px;padding:2px 8px;border-radius:20px;font-weight:600;}
+  .pill.g{background:rgba(110,139,109,.15);color:var(--green);} .pill.a{background:rgba(192,145,62,.15);color:var(--amber);} .pill.r{background:rgba(176,106,106,.15);color:var(--rose);}
+  .lnk{display:inline-block;color:var(--gold-d);font-size:13px;font-weight:600;text-decoration:none;margin-top:6px;cursor:pointer;}
+  .note{background:rgba(184,155,110,0.08);border:1px dashed var(--gold);border-radius:12px;padding:14px;color:var(--muted);font-size:13px;}
+  .field{margin-bottom:10px;} .field label{display:block;font-size:11px;color:var(--muted);margin-bottom:4px;letter-spacing:.5px;}
+  .field input,.field select,.field textarea{width:100%;border:1px solid var(--line);border-radius:9px;padding:10px;font-size:14px;font-family:var(--sans);background:var(--bg2);color:var(--ink);}
+  .field textarea{min-height:90px;resize:vertical;}
+  .btn{background:var(--ink);color:#fff;border:none;border-radius:10px;padding:11px 18px;font-size:13px;font-weight:600;letter-spacing:.5px;cursor:pointer;font-family:var(--sans);min-height:44px;}
+  .btn:hover{background:#000;} .btn.gold{background:var(--gold);color:#2A2622;} .btn.gold:hover{background:var(--gold-d);color:#fff;}
+  /* kanban */
+  .kboard{display:flex;gap:12px;overflow-x:auto;padding-bottom:10px;-webkit-overflow-scrolling:touch;}
+  .kcol{flex:0 0 78%;max-width:280px;background:var(--bg2);border:1px solid var(--line);border-radius:14px;padding:10px;display:flex;flex-direction:column;}
+  @media(min-width:760px){.kcol{flex:1 1 0;max-width:none;}}
+  .kcol-hd{font-size:11px;letter-spacing:.5px;text-transform:uppercase;color:var(--gold-d);font-weight:700;margin:2px 4px 9px;display:flex;gap:6px;align-items:center;}
+  .kcount{background:rgba(42,38,34,.08);color:var(--muted);border-radius:10px;padding:1px 7px;font-size:11px;}
+  .kcards{min-height:30px;display:flex;flex-direction:column;gap:8px;}
+  .kcard{position:relative;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:10px 28px 10px 11px;}
+  .kcard.drag{cursor:grab;} .kcard .kt{font-size:13.5px;} .kcard .kn{font-size:12px;color:var(--muted);margin-top:3px;}
+  .kc-del{position:absolute;top:6px;right:6px;width:20px;height:20px;background:none;border:none;color:var(--soft);font-size:13px;cursor:pointer;border-radius:6px;}
+  .kc-del:hover{color:var(--rose);}
+  .kadd{margin-top:9px;background:rgba(184,155,110,.10);border:1px dashed var(--gold);color:var(--gold-d);border-radius:10px;padding:9px;font-size:13px;font-weight:600;cursor:pointer;min-height:40px;font-family:var(--sans);}
+  .sortable-ghost{opacity:.4;}
+  /* mobile */
+  .scrim{display:none;}
+  @media(max-width:860px){
+    .side{position:fixed;left:0;top:0;z-index:200;transform:translateX(-100%);transition:transform .2s;box-shadow:var(--shadow);}
+    .side.open{transform:translateX(0);}
+    .topbar .menu{display:block;}
+    .scrim.open{display:block;position:fixed;inset:0;background:rgba(0,0,0,.3);z-index:150;}
+    .view{padding:16px;}
+  }
+</style>
+<script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.2/Sortable.min.js"></script>
+</head>
+<body>
+
+<!-- ===== LOGIN GATE ===== -->
+<div id="sr-gate">
+  <div class="sr-gate-card">
+    <div class="sr-gate-mono">S<span style="color:var(--gold)">·</span>R</div>
+    <div class="sr-gate-rule"></div>
+    <h1>S. Riviere</h1>
+    <p class="sr-gate-sub">Command Center · private</p>
+    <form onsubmit="srLogin(event)">
+      <input id="sr-email" type="email" placeholder="Email" autocomplete="username" required>
+      <input id="sr-pass" type="password" placeholder="Password" autocomplete="current-password" required>
+      <button id="sr-btn" type="submit">Sign in</button>
+      <div class="sr-err" id="sr-err"></div>
+    </form>
+    <div class="sr-gate-foot">S. RIVIERE HAIR COLLECTION</div>
+  </div>
+</div>
+
+<div class="app">
+  <aside class="side" id="side">
+    <div class="brand"><div class="mono">S·R</div><div><div style="font-weight:600;font-size:14px">S. Riviere</div><div class="sub">Command Center</div></div></div>
+    <div class="role" id="role-box" style="display:none"><div class="lbl">Preview — view as</div>
+      <select id="roleSel" onchange="setView(this.value)"><option value="team">Team (full)</option><option value="owner">Sonya (owner)</option></select></div>
+    <nav class="nav" id="nav"></nav>
+  </aside>
+  <div class="scrim" id="scrim" onclick="toggleSide()"></div>
+  <div class="main">
+    <div class="topbar">
+      <div style="display:flex;align-items:center;gap:12px"><button class="menu" onclick="toggleSide()">&#9776;</button><span class="ptitle" id="ptitle">Overview</span></div>
+      <div class="tb-right"><span class="who" id="sr-who"></span><button class="tb-btn" onclick="srLogout()">Sign out</button></div>
+    </div>
+    <div class="view" id="view"></div>
+  </div>
+</div>
+
+<script>
+/* ============================ S. Riviere Command Center ============================ */
+var notyf=null;
+function toast(m,ok){ try{ alert(m); }catch(e){} }
+function esc(s){return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+var D={totals:{},lines:[],products:[],health:{},store:{}}, ROLE='team', CUR='', READY=false;
+var CARDS_API='/.netlify/functions/cards';
+
+async function loadData(){
+  try{ var r=await fetch('_srdata.json',{cache:'no-store'}); D=await r.json(); }catch(e){}
+}
+
+/* ---------- pages ---------- */
+var NAV={
+  team:[ {v:'overview',ic:'◉',t:'Overview'},{v:'store',ic:'▤',t:'Store (Shopify)'},{v:'social',ic:'▶',t:'Content & Social'},{v:'crm',ic:'✉',t:'CRM + Email'} ],
+  owner:[ {v:'owner',ic:'✧',t:'Owner Dashboard'} ]
+};
+function renderNav(){
+  var items=NAV[ROLE]||NAV.team;
+  document.getElementById('nav').innerHTML=items.map(function(x){
+    return '<div class="navlink" data-v="'+x.v+'" onclick="go(\''+x.v+'\')"><span class="ic">'+x.ic+'</span>'+x.t+'</div>';
+  }).join('');
+}
+function go(v){
+  CUR=v; var fn=views[v]; if(!fn){ v=(NAV[ROLE]||NAV.team)[0].v; fn=views[v]; CUR=v; }
+  document.getElementById('view').innerHTML=fn();
+  document.querySelectorAll('.navlink').forEach(function(n){n.classList.toggle('on',n.dataset.v===v);});
+  var t={overview:'Overview',store:'Store',social:'Content & Social',crm:'CRM + Email',owner:'Owner Dashboard'}[v]||'';
+  document.getElementById('ptitle').textContent=t;
+  if(window.innerWidth<=860) closeSide();
+  if(v==='social') setTimeout(function(){ mountBoard('sr-pipeline',PIPE_COLS,'pipe-board',true); },10);
+  if(v==='owner'){ setTimeout(function(){ mountBoard('sr-pipeline',PIPE_COLS,'owner-pipe',false); loadRequests(); },10); }
+  if(v==='crm') setTimeout(initEmail,10);
+}
+function setView(r){ ROLE=r; renderNav(); go((NAV[r]||NAV.team)[0].v); }
+function toggleSide(){ document.getElementById('side').classList.toggle('open'); document.getElementById('scrim').classList.toggle('open'); }
+function closeSide(){ document.getElementById('side').classList.remove('open'); document.getElementById('scrim').classList.remove('open'); }
+
+var views={};
+views.overview=function(){
+  var t=D.totals||{};
+  var tiles=[
+    {v:t.active||0,l:'Active products',go:'store'},
+    {v:t.units||0,l:'Units in stock',go:'store'},
+    {v:(D.low_stock_count||0),l:'Low / out of stock',go:'store'},
+    {v:t.collections||0,l:'Collections',go:'store'}
+  ].map(function(x){return '<div class="card2 tap" onclick="go(\''+x.go+'\')"><div class="stat">'+x.v+'</div><div class="stat-l">'+x.l+'</div></div>';}).join('');
+  var nav=[
+    {v:'store',t:'Store (Shopify)',d:'Catalog, inventory, health'},
+    {v:'social',t:'Content & Social',d:'Video pipeline + calendar'},
+    {v:'crm',t:'CRM + Email',d:'Leads + send campaigns'}
+  ].map(function(x){return '<div class="card2 tap" onclick="go(\''+x.v+'\')"><div style="font-family:var(--serif);font-size:17px">'+x.t+'</div><div class="stat-l">'+x.d+'</div></div>';}).join('');
+  return '<h2 class="vt">S. Riviere — Overview</h2><div class="vsub">Everything we run for Sonya, in one place. Data live from her Shopify store.</div>'+
+    '<div class="grid">'+tiles+'</div>'+
+    '<div class="sec">Open a section</div><div class="grid">'+nav+'</div>'+
+    '<div class="sec">Strategy</div><div class="note">Sonya films product videos &rarr; Daryl edits &rarr; we post to socials, build pages, run email campaigns, and grow the hair-extensions portfolio. The <b>Content &amp; Social</b> board tracks each video from edit to posted.</div>';
+};
+views.store=function(){
+  var t=D.totals||{}, h=D.health||{};
+  var lines=(D.lines||[]).map(function(l){return '<tr><td>'+esc(l.line)+'</td><td>'+l.count+'</td><td>'+(l.units||0)+'</td><td>$'+(l.min||0)+' – $'+(l.max||0)+'</td></tr>';}).join('');
+  var prod=(D.products||[]).slice(0,40).map(function(p){
+    var st=p.status==='active'?'<span class="pill g">active</span>':'<span class="pill a">'+esc(p.status)+'</span>';
+    return '<tr><td>'+esc(p.title)+'</td><td>'+esc(p.line||'')+'</td><td>'+st+'</td><td>'+(p.inv!=null?p.inv:'')+'</td></tr>';
+  }).join('');
+  var hrows=[
+    ['Variants without SKU',h.no_sku_variants,'a'],['Draft products',h.draft_products,'a'],
+    ['Duplicate launch pages',h.duplicate_launch_pages,'r'],['Hidden blog articles',h.hidden_blog_articles,'a']
+  ].map(function(x){return '<tr><td>'+x[0]+'</td><td><span class="pill '+x[2]+'">'+(x[1]||0)+'</span></td></tr>';}).join('');
+  return '<h2 class="vt">Store — Shopify</h2><div class="vsub">Live from srivierehair.com (read-only). Pulled '+esc((D.generated||'').slice(0,16))+'.</div>'+
+    '<div class="grid">'+
+      ['<div class="card2"><div class="stat">'+(t.products||0)+'</div><div class="stat-l">Products ('+(t.active||0)+' active · '+(t.draft||0)+' draft)</div></div>',
+       '<div class="card2"><div class="stat">'+(t.variants||0)+'</div><div class="stat-l">Variants</div></div>',
+       '<div class="card2"><div class="stat">'+(t.units||0)+'</div><div class="stat-l">Units in stock</div></div>',
+       '<div class="card2"><div class="stat">$'+(t.price_min||0)+'–$'+(t.price_max||0)+'</div><div class="stat-l">Price range</div></div>'].join('')+
+    '</div>'+
+    '<div class="sec">Product lines</div><div class="card2"><table class="t"><thead><tr><th>Line</th><th>Products</th><th>Units</th><th>Price</th></tr></thead><tbody>'+lines+'</tbody></table></div>'+
+    '<div class="sec">Inventory health (to-do for us)</div><div class="card2"><table class="t"><tbody>'+hrows+'</tbody></table></div>'+
+    '<div class="sec">Sales &amp; revenue</div><div class="note">Locked. Turning this on needs Sonya\'s one-tap approval for order access on the Shopify connection (no password shared). The moment she approves, revenue, orders, and best-sellers light up here.</div>'+
+    '<div class="sec">Catalog ('+(D.products||[]).length+' products)</div><div class="card2" style="overflow-x:auto"><table class="t"><thead><tr><th>Product</th><th>Line</th><th>Status</th><th>Inv</th></tr></thead><tbody>'+prod+'</tbody></table></div>';
+};
+views.social=function(){
+  return '<h2 class="vt">Content &amp; Social</h2><div class="vsub">Track every product video from edit to posted. Drag cards between stages. Synced across devices.</div>'+
+    '<div style="display:flex;justify-content:flex-end;margin-bottom:8px"><button class="tb-btn" onclick="mountBoard(\'sr-pipeline\',PIPE_COLS,\'pipe-board\',true)">&#8635; Refresh</button></div>'+
+    '<div class="kboard" id="pipe-board"><div class="vsub">Loading pipeline…</div></div>'+
+    '<div class="sec">Analytics</div><div class="note">Social analytics (followers, reach, engagement, top posts) light up once the Metricool login is connected. Building the panel ready to wire.</div>';
+};
+views.crm=function(){
+  var NOCO='https://app.nocodb.com';
+  return '<h2 class="vt">CRM + Email</h2><div class="vsub">All S. Riviere leads we generate, and the campaign sender.</div>'+
+    '<div class="sec">SR Leads (NocoDB)</div>'+
+    '<div class="note">Add the dedicated <b>S. Riviere Contacts</b> table in NocoDB, then share its view and I\'ll embed it right here (same as BBC\'s CRM). Until then, add leads directly in NocoDB. <a class="lnk" href="'+NOCO+'" target="_blank" rel="noopener">Open NocoDB &#8599;</a></div>'+
+    '<div class="sec">Send a campaign / email</div>'+
+    '<div class="card2">'+
+      '<div class="field"><label>From</label><select id="em-from"><option value="rj@balaynibruno.co">rj@balaynibruno.co</option><option value="info@srivierehair.com">info@srivierehair.com (wire SR sending first)</option></select></div>'+
+      '<div class="field"><label>To</label><input id="em-to" placeholder="recipient@email.com"></div>'+
+      '<div class="field"><label>Subject</label><input id="em-subj" placeholder="Subject"></div>'+
+      '<div class="field"><label>Message</label><textarea id="em-body" placeholder="Write your email…"></textarea></div>'+
+      '<button class="btn" onclick="sendSrEmail()">Send email</button>'+
+      '<div class="stat-l" id="em-msg" style="margin-top:8px"></div>'+
+      '<div class="stat-l" style="margin-top:6px">Note: sending as info@srivierehair.com needs Daryl to add SR\'s email login to the server first. Sending as rj@ works now.</div>'+
+    '</div>';
+};
+views.owner=function(){
+  var t=D.totals||{}, h=D.health||{};
+  var tiles=[
+    {v:t.active||0,l:'Active products'},{v:t.units||0,l:'Units in stock'},
+    {v:(D.low_stock_count||0),l:'Low / out of stock'},{v:t.collections||0,l:'Collections'}
+  ].map(function(x){return '<div class="card2"><div class="stat">'+x.v+'</div><div class="stat-l">'+x.l+'</div></div>';}).join('');
+  return '<h2 class="vt">Welcome back, Sonya</h2><div class="vsub">Your business at a glance. We handle the rest.</div>'+
+    '<div class="sec">Your store</div><div class="grid">'+tiles+'</div>'+
+    '<div class="note" style="margin-top:10px">Sales and revenue appear here once you approve order access on your Shopify connection (one tap, no password shared). Just say the word and we\'ll send it.</div>'+
+    '<div class="sec">Marketing — what we\'re doing</div>'+
+    '<div class="grid">'+
+      '<div class="card2"><div style="font-family:var(--serif);font-size:16px">CRM &amp; Leads</div><div class="stat-l">We\'re building your lead list and following up. Summary appears here as it grows.</div></div>'+
+      '<div class="card2"><div style="font-family:var(--serif);font-size:16px">Email campaigns</div><div class="stat-l">Campaigns to your customers, tracked here once they go out.</div></div>'+
+    '</div>'+
+    '<div class="sec">Your videos — posting status</div>'+
+    '<div class="vsub" style="margin-bottom:8px">Where each video is: edited by Daryl, finished, approved, posted.</div>'+
+    '<div class="kboard" id="owner-pipe"><div class="vsub">Loading…</div></div>'+
+    '<div class="sec">Send us a video or request</div>'+
+    '<div class="card2">'+
+      '<div class="field"><label>Product name</label><input id="rq-prod" placeholder="e.g. Raw Indian Single Donor — Wavy"></div>'+
+      '<div class="field"><label>What do you need? (instructions)</label><textarea id="rq-notes" placeholder="e.g. Edit this into a 30s reel, add the price, soft music…"></textarea></div>'+
+      '<div class="field"><label>Video link (Google Drive, Dropbox, WeTransfer…)</label><input id="rq-link" placeholder="Paste the link to your video"></div>'+
+      '<button class="btn gold" onclick="submitRequest()">Send to the team</button>'+
+      '<div class="stat-l" id="rq-msg" style="margin-top:8px"></div>'+
+    '</div>'+
+    '<div class="sec">Your recent requests</div><div id="rq-list" class="card2"><div class="stat-l">Loading…</div></div>';
+};
+
+/* ---------- editable boards (cards.mjs, Netlify Blobs) ---------- */
+var PIPE_COLS=[{k:'toedit',t:'To edit'},{k:'editing',t:'Editing'},{k:'finished',t:'Finished'},{k:'approved',t:'Approved'},{k:'posted',t:'Posted'}];
+var _cards=[], _bkey='sr-pipeline', _bel='pipe-board', _bcols=PIPE_COLS, _editable=true, _seq=0;
+async function loadCards(key){ try{ var r=await fetch(CARDS_API+'?board='+encodeURIComponent(key),{cache:'no-store'}); var d=await r.json(); return Array.isArray(d.list)?d.list:[]; }catch(e){ return []; } }
+function cardHtml(c){
+  var del=_editable?'<button class="kc-del" onclick="event.stopPropagation();delCard(\''+esc(String(c.id))+'\')">✕</button>':'';
+  var click=_editable?' onclick="editCard(\''+esc(String(c.id))+'\')"':'';
+  return '<div class="kcard '+(_editable?'drag':'')+'" data-id="'+esc(String(c.id))+'"'+click+'><div class="kt">'+esc(c.title)+'</div>'+(c.notes?'<div class="kn">'+esc(c.notes)+'</div>':'')+del+'</div>';
+}
+function renderBoard(){
+  var el=document.getElementById(_bel); if(!el) return;
+  el.innerHTML=_bcols.map(function(col){
+    var inc=_cards.filter(function(c){return (c.column||_bcols[0].k)===col.k;}).sort(function(a,b){return (a.order||0)-(b.order||0);});
+    var add=_editable?'<button class="kadd" onclick="addCard(\''+col.k+'\')">＋ Add</button>':'';
+    return '<div class="kcol"><div class="kcol-hd">'+esc(col.t)+' <span class="kcount">'+inc.length+'</span></div><div class="kcards" data-col="'+col.k+'">'+inc.map(cardHtml).join('')+'</div>'+add+'</div>';
+  }).join('');
+  if(_editable) wireDrag();
+}
+function wireDrag(){ if(!window.Sortable) return; document.querySelectorAll('#'+_bel+' .kcards').forEach(function(el){ if(el.__s)return; el.__s=true; Sortable.create(el,{group:'sr-'+_bel,animation:140,ghostClass:'sortable-ghost',onEnd:saveOrder}); }); }
+async function saveOrder(){ var ro=[]; document.querySelectorAll('#'+_bel+' .kcards').forEach(function(col){ var k=col.dataset.col; [].slice.call(col.querySelectorAll('.kcard')).forEach(function(el,i){ ro.push({id:el.dataset.id,column:k,order:i}); }); }); var m={}; ro.forEach(function(r){m[r.id]=r;}); _cards=_cards.map(function(c){var r=m[String(c.id)];return r?Object.assign({},c,{column:r.column,order:r.order}):c;}); document.querySelectorAll('#'+_bel+' .kcol').forEach(function(col){var k=col.querySelector('.kcards').dataset.col;var n=_cards.filter(function(c){return (c.column||_bcols[0].k)===k;}).length;var b=col.querySelector('.kcount');if(b)b.textContent=n;}); try{ await fetch(CARDS_API,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({reorder:ro})}); }catch(e){} }
+window.mountBoard=async function(key,cols,el,editable){ var seq=++_seq; _bkey=key;_bcols=cols;_bel=el;_editable=editable; var c=await loadCards(key); if(seq!==_seq)return; _cards=c; renderBoard(); };
+window.addCard=async function(col){ var title=(prompt('New card:')||'').trim(); if(!title)return; var tmp={id:'tmp'+Date.now(),board:_bkey,column:col,title:title,order:9999}; _cards.push(tmp); renderBoard(); try{ var r=await fetch(CARDS_API,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({board:_bkey,column:col,title:title})}); var d=await r.json(); if(d.list)_cards=d.list; }catch(e){ _cards=_cards.filter(function(c){return c.id!==tmp.id;}); } renderBoard(); };
+window.editCard=async function(id){ var c=_cards.find(function(x){return String(x.id)===String(id);}); if(!c)return; var title=prompt('Edit title:',c.title); if(title==null)return; var notes=prompt('Notes:',c.notes||''); c.title=(title||'').trim()||c.title; if(notes!=null)c.notes=notes; renderBoard(); try{ var r=await fetch(CARDS_API,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({id:id,title:c.title,notes:c.notes})}); var d=await r.json(); if(d.list)_cards=d.list; }catch(e){} renderBoard(); };
+window.delCard=async function(id){ if(!confirm('Delete this card?'))return; _cards=_cards.filter(function(c){return String(c.id)!==String(id);}); renderBoard(); try{ await fetch(CARDS_API,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({delete:true,id:id})}); }catch(e){} };
+
+/* ---------- owner requests (board sr-requests) ---------- */
+window.submitRequest=async function(){
+  var prod=(document.getElementById('rq-prod').value||'').trim();
+  var notes=(document.getElementById('rq-notes').value||'').trim();
+  var link=(document.getElementById('rq-link').value||'').trim();
+  var msg=document.getElementById('rq-msg');
+  if(!prod && !notes){ msg.textContent='Add a product name or instructions first.'; return; }
+  var body=(notes||'')+(link?('\nVideo: '+link):'');
+  msg.textContent='Sending…';
+  try{ await fetch(CARDS_API,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({board:'sr-requests',column:'new',title:prod||'Request',notes:body})});
+    document.getElementById('rq-prod').value='';document.getElementById('rq-notes').value='';document.getElementById('rq-link').value='';
+    msg.textContent='Sent to the team. Thank you!'; loadRequests();
+  }catch(e){ msg.textContent='Could not send. Try again.'; }
+};
+async function loadRequests(){ var el=document.getElementById('rq-list'); if(!el)return; var list=await loadCards('sr-requests'); if(!list.length){ el.innerHTML='<div class="stat-l">No requests yet.</div>'; return; } el.innerHTML='<table class="t"><tbody>'+list.slice().reverse().slice(0,10).map(function(c){ var st={new:'a',inprogress:'a',done:'g'}[c.column||'new']||'a'; return '<tr><td>'+esc(c.title)+'<div class="kn" style="color:var(--muted);font-size:12px">'+esc(c.notes||'')+'</div></td><td><span class="pill '+st+'">'+esc(c.column||'new')+'</span></td></tr>'; }).join('')+'</tbody></table>'; }
+
+/* ---------- email terminal ---------- */
+function initEmail(){}
+window.sendSrEmail=async function(){
+  var from=document.getElementById('em-from').value;
+  var to=(document.getElementById('em-to').value||'').trim();
+  var subject=(document.getElementById('em-subj').value||'').trim();
+  var bodyt=(document.getElementById('em-body').value||'').trim();
+  var msg=document.getElementById('em-msg');
+  if(!to||!subject){ msg.textContent='Add a recipient and subject.'; return; }
+  msg.textContent='Sending…';
+  try{ var r=await fetch('/.netlify/functions/send-email',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({from:from,to:to,subject:subject,body:bodyt})}); var d=await r.json(); msg.textContent=(d&&d.ok)?'Sent.':('Could not send: '+((d&&d.error)||'check setup')); }catch(e){ msg.textContent='Could not send.'; }
+};
+
+/* ============================ Auth gate (Supabase) ============================ */
+(function(){
+  var SB_URL='https://ctoeuikxoqlhnebgsygp.supabase.co';
+  var SB_KEY='sb_publishable_WnJ57fk-ymDuT2xtVZRcHg_khZCWgJL';
+  var SR_ROLES={
+    'daryl@balaynibruno.co':'team','daryl.bbc@gmail.com':'team',
+    'rj@balaynibruno.co':'team','rjbryantresreyes@gmail.com':'team',
+    'sonyariviere@gmail.com':'owner'
+  };
+  var sb=null;
+  function client(){ if(sb)return sb; if(!window.supabase||!window.supabase.createClient)return null; sb=window.supabase.createClient(SB_URL,SB_KEY); return sb; }
+  function showGate(m){ document.body.classList.remove('sr-authed'); var e=document.getElementById('sr-err'); if(e)e.textContent=m||''; }
+  async function reveal(email){
+    var role=SR_ROLES[(email||'').toLowerCase()];
+    if(!role){ var c=client(); if(c){ try{ await c.auth.signOut(); }catch(e){} } showGate('This login is not set up for the S. Riviere Command Center.'); return; }
+    if(!READY){ await loadData(); READY=true; }
+    document.body.classList.add('sr-authed');
+    ROLE=role; renderNav();
+    document.getElementById('role-box').style.display=(role==='team')?'none':'none'; // role switcher only for RJ below
+    if(email && email.toLowerCase().indexOf('rj@')===0 || email.toLowerCase()==='rjbryantresreyes@gmail.com'){ document.getElementById('role-box').style.display='block'; document.getElementById('roleSel').value=role; }
+    go((NAV[role]||NAV.team)[0].v);
+    var who=document.getElementById('sr-who'); if(who) who.textContent=email;
+  }
+  async function check(){ var c=client(); if(!c){ showGate('Login unavailable. Refresh.'); return; } try{ var r=await c.auth.getSession(); if(r&&r.data&&r.data.session){ reveal(r.data.session.user&&r.data.session.user.email); } else { showGate(''); } }catch(e){ showGate(''); } }
+  window.srLogin=async function(ev){ if(ev)ev.preventDefault(); var c=client(); var em=(document.getElementById('sr-email').value||'').trim(); var pw=document.getElementById('sr-pass').value||''; var btn=document.getElementById('sr-btn'); var err=document.getElementById('sr-err'); if(err)err.textContent=''; if(!c){ if(err)err.textContent='Login unavailable.'; return; } if(btn){btn.disabled=true;btn.textContent='Signing in…';} try{ var res=await c.auth.signInWithPassword({email:em,password:pw}); if(res.error){ if(err)err.textContent=res.error.message||'Wrong email or password.'; } else { reveal(em); } }catch(e){ if(err)err.textContent='Something went wrong.'; } finally{ if(btn){btn.disabled=false;btn.textContent='Sign in';} } };
+  window.srLogout=async function(){ var c=client(); if(c){ try{ await c.auth.signOut(); }catch(e){} } showGate(''); var p=document.getElementById('sr-pass'); if(p)p.value=''; };
+  renderNav();
+  check();
+})();
+</script>
+<script>
+/* PWA service worker for install */
+if('serviceWorker' in navigator){ window.addEventListener('load',function(){ navigator.serviceWorker.register('sw.js').then(function(r){ if(r.update)r.update(); }).catch(function(){}); }); }
+</script>
+</body>
+</html>
