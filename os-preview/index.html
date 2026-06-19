@@ -4523,7 +4523,7 @@
   };
   window.clientCC=(i)=>{
     // Cavalry Group has its own standalone command center (the one Kenz uses) — always route there.
-    if(D.clients[i] && D.clients[i].name==='Cavalry Group'){ window.location.href='/os/cavalry/'; return; }
+    if(D.clients[i] && D.clients[i].name==='Cavalry Group'){ window.location.href='/cros/'; return; }
     // S. Riviere has its own live store dashboard hub — route straight there.
     if(D.clients[i] && D.clients[i].name==='S. Riviere Hair Collection'){ window.location.href='/sros/'; return; }
     // Dhes (content partner) has his own task + request dashboard.
@@ -5357,12 +5357,8 @@
   document.getElementById('cs-msg').addEventListener('keydown',e=>{ if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();window.sendMsg();} });
   document.getElementById('cs-files').addEventListener('change',e=>{ const box=document.getElementById('cs-previews'); box.innerHTML=''; [...e.target.files].forEach(f=>{ const url=URL.createObjectURL(f); box.insertAdjacentHTML('beforeend', f.type.startsWith('video')?`<video src="${url}" controls></video>`:`<img src="${url}" alt="">`); }); });
 
-  /* PWA service worker — auto-update so deploys show without manual cache clears */
-  if(false){
-    navigator.serviceWorker.register('sw.js').then(reg=>{ reg.update&&reg.update(); }).catch(()=>{});
-    let refreshing=false;
-    navigator.serviceWorker.addEventListener('controllerchange',()=>{ if(refreshing) return; refreshing=true; location.reload(); });
-  }
+  /* PWA service worker DISABLED on /os-preview. */
+  if('serviceWorker' in navigator){ navigator.serviceWorker.getRegistrations().then(rs=>rs.forEach(r=>r.unregister())).catch(()=>{}); }
 
   /* ---- per-page URLs: hash routing so refresh / back-forward / bookmarks keep the page ---- */
   window.__slug=function(s){ return (s||'').toString().toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,''); };
