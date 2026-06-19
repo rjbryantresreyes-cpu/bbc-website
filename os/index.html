@@ -5396,6 +5396,23 @@
   function showApp(){ document.body.classList.add('authed'); }
   function showGate(){ document.body.classList.remove('authed'); }
 
+  // BBC team allowlist: ONLY BBC emails may enter /os (the internal dashboard). Client/owner
+  // logins (e.g. the Wooden Woodworks owners at /wwos) are denied here so they can never see
+  // BBC internals. Fail-safe: every @balaynibruno.co address passes (so no BBC teammate is ever
+  // locked out, even new ones), plus the known personal gmails BBC team members sign in with.
+  function bbcAllowed(email){
+    var e=(email||'').toLowerCase().trim();
+    if(/@balaynibruno\.co$/.test(e)) return true;
+    return ['rjbryantresreyes@gmail.com','krizza.bbc@gmail.com','krizzamaymanagase@gmail.com','daryl.bbc@gmail.com'].indexOf(e)>=0;
+  }
+  async function denyNonBBC(){
+    var c=initClient(); if(c){ try{ await c.auth.signOut(); }catch(e){} }
+    showGate();
+    var err=document.getElementById('auth-err'); if(err) err.textContent='This login is not authorized for the BBC Command Center.';
+    var pw=document.getElementById('auth-pass'); if(pw) pw.value='';
+  }
+  window.bbcAllowed=bbcAllowed; /* exposed for verification */
+
   /* === Phase 3 — multi-tenant identity from Supabase login ============================
      Maps user email -> (editor, dashboard_owner) so dashboard-edit notifications route
      to the right person automatically. Override per-device via localStorage if needed. */
@@ -5465,6 +5482,7 @@
       var r=await c.auth.getSession();
       if(r&&r.data&&r.data.session){
         var em = r.data.session.user && r.data.session.user.email;
+        if(!bbcAllowed(em)){ await denyNonBBC(); return; }
         persistIdentity(em);
         showApp();
       } else { showGate(); }
@@ -5487,7 +5505,11 @@
       try{
         var res=await c.auth.signInWithPassword({email:email,password:pass});
         if(res.error){ if(err) err.textContent=(res.error.message||'Wrong email or password.'); }
-        else { persistIdentity(email); showApp(); }
+        else {
+          var em2=(res.data&&res.data.user&&res.data.user.email)||email;
+          if(!bbcAllowed(em2)){ await denyNonBBC(); }
+          else { persistIdentity(email); showApp(); }
+        }
       }catch(ex){ if(err) err.textContent='Something went wrong. Try again.'; }
       finally{ if(btn){ btn.disabled=false; btn.textContent='Sign In'; } }
     });
