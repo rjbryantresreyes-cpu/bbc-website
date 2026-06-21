@@ -672,7 +672,7 @@
 <script type="application/json" id="bbc-data">
 {
   "meta": {
-    "updated": "2026-06-21",
+    "updated": "2026-06-22",
     "pendingCount": 17
   },
   "owners": {
@@ -3089,6 +3089,11 @@
       "path": "LEARNINGS"
     },
     {
+      "title": "remote control and team chat",
+      "date": "2026-06-21",
+      "path": "LEARNINGS"
+    },
+    {
       "title": "new tools mcps deep search",
       "date": "2026-06-21",
       "path": "LEARNINGS"
@@ -3105,11 +3110,6 @@
     },
     {
       "title": "nocodb free plan import limits",
-      "date": "2026-06-20",
-      "path": "LEARNINGS"
-    },
-    {
-      "title": "dashboard website sync strategy",
       "date": "2026-06-20",
       "path": "LEARNINGS"
     }
@@ -5454,9 +5454,27 @@
     const team=D.team.map(t=>`<div class="card"><div class="row1"><div class="av" style="background:linear-gradient(135deg,#2A4A6E,#1C3250);color:#F5F1EA">${esc(t.name[0])}</div><div class="nm" style="font-size:15px">${esc(t.name)}</div></div><div class="meta">${esc(t.role)}</div></div>`).join('');
     const sys=D.systems.map(s=>`<a class="lnk" title="${esc(s.path)}">🧩 ${esc(s.name)} <span style="opacity:.6">— ${esc(s.path)}</span></a>`).join('');
     return `<h2 class="vt">More</h2><div class="vsub">AI Family · Team · Systems</div>
+      <div class="tc-entry" onclick="go('team')">
+        <div class="tc-entry-ic">💬</div>
+        <div class="tc-entry-tx"><div class="nm">BBC Team Chat</div><div class="meta">Group chat for the whole crew. Saved on our system. The AI family can join too.</div></div>
+        <span class="tc-entry-arr">→</span>
+      </div>
       <div class="sec">AI Family (${D.aiFamily.length})</div>${ai}
       <div class="sec">Team (${D.team.length})</div>${team}
       <div class="sec">Systems &amp; SOPs</div>${sys}`;
+  };
+
+  /* ---------- BBC TEAM CHAT (group chat, synced on our system) ---------- */
+  views.team=()=>{
+    return `<h2 class="vt">Team Chat</h2><div class="vsub">Everyone behind the /os login, same room. Messages saved on BBC's own system.</div>
+      <div class="tc-wrap">
+        <div class="tc-channels" id="tc-channels"></div>
+        <div class="tc-stream" id="tc-stream"><div class="tc-empty">Loading messages…</div></div>
+        <div class="tc-compose">
+          <input id="tc-input" placeholder="Message the BBC crew…" autocomplete="off" onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();TeamChat.send();}">
+          <button onclick="TeamChat.send()">Send</button>
+        </div>
+      </div>`;
   };
 
   views.devices=()=>{
@@ -5629,7 +5647,7 @@
   window.go=v=>{ window.curView=v; window.curClient=null; window.__curClientSlug=null; app.innerHTML=`<div class="view">${views[v]()}</div>`; window.scrollTo(0,0);
     if(!window.__routing){ var __nh='#'+v; if(location.hash!==__nh){ try{ location.hash=__nh; }catch(e){} } }
     document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('active',b.dataset.v===v));
-    sheet.classList.remove('open'); if(v==='crm'&&window.loadCampaignStats){ window.loadCampaignStats(); window.loadInbox&&window.loadInbox('crm-inbox',true); window.loadCrmContacts&&window.loadCrmContacts(); } if(v==='inbox'&&window.loadInbox) window.loadInbox(); if(v==='home'&&window.loadHomeAttention) window.loadHomeAttention(); if(v==='board'&&window.Board) window.Board.render(); };
+    sheet.classList.remove('open'); if(v==='crm'&&window.loadCampaignStats){ window.loadCampaignStats(); window.loadInbox&&window.loadInbox('crm-inbox',true); window.loadCrmContacts&&window.loadCrmContacts(); } if(v==='inbox'&&window.loadInbox) window.loadInbox(); if(v==='home'&&window.loadHomeAttention) window.loadHomeAttention(); if(v==='board'&&window.Board) window.Board.render(); if(v==='team'&&window.TeamChat) window.TeamChat.enter(); };
   window.filterCards=(inp,wrapId)=>{ const q=inp.value.toLowerCase(); const wrap=document.getElementById(wrapId);
     wrap.querySelectorAll('.card,.wfrow,.clientbox,.opitem').forEach(c=>{ const hay=(c.dataset.search||c.textContent).toLowerCase(); c.style.display=hay.includes(q)?'':'none'; });
     wrap.querySelectorAll('.wfcat').forEach(p=>{ const any=[...p.querySelectorAll('.wfrow')].some(r=>r.style.display!=='none'); p.style.display=any?'':'none'; }); };
@@ -6001,6 +6019,118 @@
 
   wireForm();
   checkSession();
+})();
+</script>
+
+<!-- ===== BBC TEAM CHAT: group chat synced via Netlify Blobs (/.netlify/functions/team-chat) ===== -->
+<style>
+  .tc-entry{display:flex;align-items:center;gap:13px;background:linear-gradient(135deg,#1A2E47,#14253E);border:1px solid var(--gold);border-radius:14px;padding:15px;margin-bottom:16px;cursor:pointer;}
+  .tc-entry:active{transform:scale(.99);}
+  .tc-entry-ic{font-size:24px;line-height:1;}
+  .tc-entry-tx .nm{font-family:var(--display);font-size:16px;color:var(--ink);}
+  .tc-entry-tx .meta{font-size:12.5px;color:var(--muted);margin-top:2px;line-height:1.4;}
+  .tc-entry-arr{margin-left:auto;color:var(--gold2);font-size:18px;}
+  .tc-wrap{display:flex;flex-direction:column;height:calc(100dvh - 230px);min-height:340px;}
+  .tc-channels{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px;}
+  .tc-chan{background:var(--bg3);border:1px solid var(--line);border-radius:18px;padding:7px 14px;font-size:13px;color:var(--muted);cursor:pointer;font-family:var(--ui);min-height:36px;}
+  .tc-chan.on{background:var(--gold);color:#0A1422;border-color:var(--gold);font-weight:700;}
+  .tc-stream{flex:1;overflow-y:auto;display:flex;flex-direction:column;gap:10px;padding:6px 2px 10px;-webkit-overflow-scrolling:touch;}
+  .tc-empty{color:var(--muted);font-size:13.5px;text-align:center;margin:auto;padding:30px;}
+  .tc-day{align-self:center;font-family:var(--mono);font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold2);background:var(--bg2);border:1px solid var(--line);border-radius:10px;padding:3px 10px;margin:4px 0;}
+  .tc-msg{max-width:82%;display:flex;flex-direction:column;gap:3px;}
+  .tc-msg.mine{align-self:flex-end;align-items:flex-end;}
+  .tc-msg .who{font-size:11px;color:var(--gold2);font-family:var(--mono);padding:0 4px;}
+  .tc-msg .bub{background:var(--bg2);border:1px solid var(--line);border-radius:14px;padding:9px 13px;font-size:14.5px;line-height:1.45;color:var(--ink);white-space:pre-wrap;word-break:break-word;}
+  .tc-msg.mine .bub{background:linear-gradient(135deg,#244468,#1B3350);border-color:rgba(212,175,55,0.4);}
+  .tc-msg.ai .bub{background:rgba(212,175,55,0.10);border-color:rgba(212,175,55,0.35);}
+  .tc-msg .tm{font-size:10px;color:var(--muted);font-family:var(--mono);padding:0 4px;}
+  .tc-msg .del{font-size:10px;color:var(--muted);cursor:pointer;padding:0 4px;opacity:.55;}
+  .tc-msg .del:hover{color:#ff6b5b;opacity:1;}
+  .tc-compose{display:flex;gap:8px;padding-top:10px;border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom);}
+  .tc-compose input{flex:1;background:var(--bg3);border:1px solid var(--line);border-radius:12px;color:var(--ink);padding:13px;font-size:16px;font-family:var(--ui);}
+  .tc-compose input:focus{outline:none;border-color:var(--gold);}
+  .tc-compose button{background:var(--gold);color:#0A1422;border:none;border-radius:12px;padding:0 20px;font-weight:700;font-family:var(--ui);min-height:48px;min-width:64px;cursor:pointer;}
+</style>
+<script>
+(function(){
+  var API='/.netlify/functions/team-chat';
+  var CH=[{key:'team',label:'Team'},{key:'random',label:'Random'}]; // channels (add more anytime)
+  var NAMES={rj:'RJ',daryl:'Daryl',krizza:'Krizza',vi:'Vi',ryan:'Ryan',kenz:'Kenz',diego:'Diego',beau:'Beau',kari:'Kari',sonya:'Sonya'};
+  var state={chan:'team',last:0,poll:null,sending:false};
+
+  function me(){
+    var user='', name='';
+    try{ user=localStorage.getItem('bbc_os_editor')||''; }catch(e){}
+    if(!user){ try{ var em=localStorage.getItem('bbc_os_user_email')||''; user=em.split('@')[0].replace(/[^a-z0-9]/gi,'').toLowerCase(); }catch(e){} }
+    user=user||'unknown';
+    name=NAMES[user]||(user.charAt(0).toUpperCase()+user.slice(1));
+    return {user:user,name:name};
+  }
+  function esc(s){ return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];}); }
+  function dayLabel(ts){ var d=new Date(ts), n=new Date(); var same=d.toDateString()===n.toDateString();
+    var y=new Date(n.getTime()-864e5); if(d.toDateString()===y.toDateString()) return 'Yesterday';
+    return same?'Today':d.toLocaleDateString(undefined,{month:'short',day:'numeric'}); }
+  function timeLabel(ts){ return new Date(ts).toLocaleTimeString(undefined,{hour:'numeric',minute:'2-digit'}); }
+  var AI=['cuh','kriz','webby','mai','boogy','jenny','vidz','raphy','casey','sonny','emy','lana','sean','brunz','lc'];
+
+  function render(list){
+    var stream=document.getElementById('tc-stream'); if(!stream) return;
+    if(!list.length){ stream.innerHTML='<div class="tc-empty">No messages yet in #'+esc(state.chan)+'. Say hi to the crew 👋</div>'; return; }
+    var meU=me().user, html='', lastDay='';
+    list.forEach(function(m){
+      var d=dayLabel(m.ts); if(d!==lastDay){ html+='<div class="tc-day">'+esc(d)+'</div>'; lastDay=d; }
+      var mine=(m.user||'')===meU, isAI=AI.indexOf((m.user||'').toLowerCase())>=0;
+      var cls='tc-msg'+(mine?' mine':'')+(isAI?' ai':'');
+      var del=(mine||meU==='rj')?'<span class="del" onclick="TeamChat.del(\''+esc(m.id)+'\')">delete</span>':'';
+      html+='<div class="'+cls+'">'+
+        (mine?'':'<div class="who">'+esc(m.name||m.user)+'</div>')+
+        '<div class="bub">'+esc(m.text)+'</div>'+
+        '<div class="tm">'+timeLabel(m.ts)+(del?' · '+del:'')+'</div>'+
+      '</div>';
+    });
+    stream.innerHTML=html; stream.scrollTop=stream.scrollHeight;
+  }
+
+  function renderChannels(){
+    var wrap=document.getElementById('tc-channels'); if(!wrap) return;
+    wrap.innerHTML=CH.map(function(c){ return '<div class="tc-chan'+(c.key===state.chan?' on':'')+'" onclick="TeamChat.chan(\''+c.key+'\')">#'+esc(c.label)+'</div>'; }).join('');
+  }
+
+  function load(){
+    if(window.curView!=='team') return;
+    fetch(API+'?channel='+encodeURIComponent(state.chan)).then(function(r){return r.json();}).then(function(d){
+      if(window.curView!=='team') return;
+      var list=(d&&d.list)||[];
+      if(list.length) state.last=list[list.length-1].ts||state.last;
+      render(list);
+    }).catch(function(){
+      var stream=document.getElementById('tc-stream');
+      if(stream&&window.curView==='team') stream.innerHTML='<div class="tc-empty">Chat goes live when the site is deployed. (Backend: /.netlify/functions/team-chat)</div>';
+    });
+  }
+
+  var TeamChat={
+    enter:function(){
+      state.last=0; renderChannels(); load();
+      if(state.poll) clearInterval(state.poll);
+      state.poll=setInterval(function(){ if(window.curView!=='team'){ clearInterval(state.poll); state.poll=null; return; } load(); }, 4000);
+    },
+    chan:function(k){ state.chan=k; state.last=0; renderChannels();
+      var s=document.getElementById('tc-stream'); if(s) s.innerHTML='<div class="tc-empty">Loading…</div>'; load(); },
+    send:function(){
+      var inp=document.getElementById('tc-input'); if(!inp) return;
+      var text=(inp.value||'').trim(); if(!text||state.sending) return;
+      var m=me(); state.sending=true; inp.value='';
+      fetch(API,{method:'POST',headers:{'content-type':'application/json'},
+        body:JSON.stringify({channel:state.chan,user:m.user,name:m.name,text:text})})
+      .then(function(r){return r.json();}).then(function(d){ state.sending=false;
+        if(d&&d.error){ window.toast&&toast('Could not send: '+d.error,'err'); inp.value=text; return; } load();
+      }).catch(function(){ state.sending=false; inp.value=text; window.toast&&toast('Send failed (deploy needed).','err'); });
+    },
+    del:function(id){ fetch(API,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({delete:true,id:id})})
+      .then(function(){ load(); }).catch(function(){}); }
+  };
+  window.TeamChat=TeamChat;
 })();
 </script>
 
