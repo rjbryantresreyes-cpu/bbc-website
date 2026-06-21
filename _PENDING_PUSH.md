@@ -79,6 +79,14 @@ git push            # Netlify auto-deploys
 - ⚠️ AFTER PUSH: in Netlify dashboard → Forms, enable an **email notification to rj@balaynibruno.co** for the 3 `dhes-*` forms (one-time). Netlify only detects the forms after the first successful deploy.
 - Verified: mobile/desktop render clean (headless screenshots; right-edge clip is a capture artifact, confirmed against live contact.html). Mirrored to `BBC WEBSITE HTML\clients\dhes\`.
 
+## ⏳ ADDED 2026-06-21 — BBC Team Chat in /os (NEW)
+- **netlify/functions/team-chat.mjs** — NEW. Human-to-human group chat store on Netlify Blobs (same engine as cards.mjs, no token/DB). GET (list, optional ?channel + ?since), POST (send / delete). Caps to last 500 msgs. The AI family can read+post via the same endpoint. Data lives in BBC's own Netlify account = "saved on our system."
+- **os/index.html** — added `views.team` (chat UI: channel chips #Team/#Random, message stream, compose bar), a "BBC Team Chat" entry card at top of the More view, a `go('team')` hook, + the TeamChat style/script block (polls every 4s, attributes msgs to the logged-in `bbc_os_editor`, mine/others/AI bubble styles, delete by sender or RJ). Mobile-first (16px inputs, 48px send, 44px+ targets, 100dvh, safe-area inset).
+- **SOURCE also edited** (`BBC Operating System/03_AI_OPERATING_SYSTEM/COMMAND_CENTER/app/index.html`) — same 3 edits, so a dashboard sync can't wipe it. Repo + source in sync.
+- No env/setup needed: Netlify Blobs is built-in. Chat works the moment the site deploys.
+- ⚠️ NOT yet visually verified live — /os is login-gated + Blobs needs the Netlify runtime, and deploys are frozen. Verify mobile 375/768/1280 right after the batch deploys (open More → BBC Team Chat, send a test message from two devices).
+- ⏳ v2 ideas (later): per-client channels, @AI to ping Cuh into the thread, mirror messages to Drive for permanent archive, unread badge on the nav.
+
 ## ⏳ ADDED 2026-06-16 — Design-templates insight page (NEW)
 - **update-brand-templates-without-a-designer.html** — NEW /insights page. "Can You Update Your Brand's Design Templates Without a Designer?" Anonymized capability page (we execute a brand's design templates in-house, swap copy + image, keep it exactly on-brand). Born from the Pine Crest Fabrics assessment workflow — NO client named, fully generic. Article + FAQPage schema, before/after + horizontal step-flow + cost-table (typical market ranges, labeled) + tool-stack + tip box + key takeaways. Category "Marketing". Plain English, no em-dashes, CTA = Book a Strategy Call. ✅ Verified mobile 375 clean, no h-overflow, no console errors.
 - **insights.html** — 1 new "Marketing" card added at top of grid; count bumped 88 → 89.
