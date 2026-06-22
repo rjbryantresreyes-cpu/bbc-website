@@ -691,7 +691,17 @@ async function createVA(){
   }catch(e){toast('Failed.');}finally{btn.disabled=false;btn.textContent='Create login';}
 }
 
-if('serviceWorker' in navigator){navigator.serviceWorker.register('/chat/sw.js').catch(()=>{});}
+if('serviceWorker' in navigator){
+  navigator.serviceWorker.register('/chat/sw.js').then(reg=>{
+    reg.update();
+    // check for a new version whenever the app is opened / brought to the front
+    document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible')reg.update();});
+    setInterval(()=>reg.update(),120000);
+  }).catch(()=>{});
+  // when a new version takes over, refresh once so everyone auto-updates (no "close and reopen")
+  let __refreshing=false;
+  navigator.serviceWorker.addEventListener('controllerchange',()=>{if(__refreshing)return;__refreshing=true;location.reload();});
+}
 (async function(){const r=await sb.auth.getSession();if(r&&r.data&&r.data.session){await start();}else{showGate();}})();
 </script>
 </body>
