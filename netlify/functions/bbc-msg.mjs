@@ -159,6 +159,19 @@ export default async (req) => {
     // ---------- POST createConv ----------
     if (act === "createConv") {
       await upsertRoster();
+
+      // Self chat ("BBC Bruno" notes-to-your-own-devices). One per user.
+      if (body.type === "self") {
+        const convs = await readJ("convs", []);
+        const ex = convs.find(c => c.type === "self" && c.members.length === 1 && c.members[0] === meId);
+        if (ex) return json({ conversation: ex });
+        const sid = "c" + Date.now().toString(36) + Math.floor(Math.random() * 1e4).toString(36);
+        const self = { id: sid, type: "self", name: "BBC Bruno", members: [meId], createdBy: meId, lastTs: Date.now(), lastText: "" };
+        convs.push(self);
+        await js.setJSON("convs", convs);
+        return json({ conversation: self });
+      }
+
       let type = body.type === "group" ? "group" : "dm";
       let members = Array.isArray(body.members) ? body.members.map(String) : [];
       if (!members.includes(meId)) members.push(meId);
@@ -213,7 +226,8 @@ export default async (req) => {
 
       const ts = Date.now();
       const id = "m" + ts.toString(36) + Math.floor(Math.random() * 1e4).toString(36);
-      const msg = { id, conv: convId, user: meId, name: meName, text, file, ts };
+      const device = body.device ? String(body.device).slice(0, 20) : null; // for the BBC Bruno self-chat: which device this note is for
+      const msg = { id, conv: convId, user: meId, name: meName, text, file, device, ts };
       let msgs = await readJ("msgs:" + convId, []);
       msgs.push(msg);
       if (msgs.length > MAX_MSGS) msgs = msgs.slice(-MAX_MSGS);
