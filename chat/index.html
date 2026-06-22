@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1">
+<title>BBC Messenger</title>
+<meta name="description" content="Balay ni Bruno & Co. private team messenger.">
+<meta name="robots" content="noindex, nofollow">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#0E1A2E">
+<link rel="apple-touch-icon" href="icon-180.png">
+<link rel="icon" type="image/png" href="icon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0A1422; --bg2:#0E1A2E; --bg3:#15243C; --line:#23344f;
+    --ink:#EFF3F8; --muted:#8aa0bd; --gold:#D4AF37; --gold2:#caa64a; --green:#3CA66A;
+    --display:'Playfair Display',Georgia,serif; --ui:'DM Sans',system-ui,sans-serif;
+    --mono:ui-monospace,Menlo,monospace;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+  html,body{height:100%;}
+  body{font-family:var(--ui);background:var(--bg);color:var(--ink);overflow:hidden;}
+  button,input,textarea{font-family:inherit;color:inherit;}
+  .hide{display:none!important;}
+
+  /* ===== LOGIN GATE ===== */
+  #gate{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;padding:24px;background:radial-gradient(120% 80% at 50% 0%,#15243C,#0A1422);}
+  .gate-card{width:100%;max-width:360px;text-align:center;}
+  .gate-card img{width:64px;height:64px;border-radius:16px;margin-bottom:16px;}
+  .gate-card h1{font-family:var(--display);font-size:26px;font-weight:700;margin-bottom:4px;}
+  .gate-card .sub{color:var(--muted);font-size:14px;margin-bottom:24px;}
+  .gate-card input{width:100%;background:var(--bg3);border:1px solid var(--line);border-radius:12px;padding:14px;font-size:16px;margin-bottom:10px;}
+  .gate-card input:focus{outline:none;border-color:var(--gold);}
+  .gate-card button{width:100%;background:var(--gold);color:#0A1422;border:none;border-radius:12px;padding:14px;font-size:16px;font-weight:700;cursor:pointer;min-height:50px;}
+  .gate-card button:disabled{opacity:.6;}
+  .gate-err{color:#ff7a6b;font-size:13px;min-height:18px;margin-top:10px;}
+
+  /* ===== APP SHELL ===== */
+  #app{position:fixed;inset:0;display:flex;flex-direction:column;}
+  .topbar{display:flex;align-items:center;gap:10px;padding:calc(env(safe-area-inset-top) + 12px) 14px 12px;background:var(--bg2);border-bottom:1px solid var(--line);flex-shrink:0;}
+  .topbar .back{display:none;background:none;border:none;font-size:22px;color:var(--gold2);cursor:pointer;padding:2px 4px;}
+  .topbar .ttl{font-family:var(--display);font-size:19px;font-weight:700;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+  .topbar .sub{font-size:11px;color:var(--muted);font-weight:400;}
+  .iconbtn{background:var(--bg3);border:1px solid var(--line);border-radius:10px;width:40px;height:40px;font-size:18px;color:var(--ink);cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+
+  .body{flex:1;display:flex;min-height:0;}
+  /* List pane */
+  .listpane{width:340px;border-right:1px solid var(--line);display:flex;flex-direction:column;min-height:0;background:var(--bg);}
+  .list{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;}
+  .convrow{display:flex;align-items:center;gap:12px;padding:13px 14px;border-bottom:1px solid var(--line);cursor:pointer;}
+  .convrow:hover{background:var(--bg2);}
+  .convrow.active{background:var(--bg3);}
+  .av{width:46px;height:46px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:17px;color:#0A1422;}
+  .convrow .meta{flex:1;min-width:0;}
+  .convrow .nm{font-weight:600;font-size:15px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+  .convrow .last{font-size:13px;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;margin-top:2px;}
+  .convrow .when{font-size:10px;color:var(--muted);font-family:var(--mono);flex-shrink:0;align-self:flex-start;margin-top:3px;}
+  .empty{color:var(--muted);font-size:14px;text-align:center;padding:40px 24px;line-height:1.6;}
+
+  /* Chat pane */
+  .chatpane{flex:1;display:flex;flex-direction:column;min-height:0;background:var(--bg);}
+  .chathead{display:none;align-items:center;gap:10px;padding:10px 14px;background:var(--bg2);border-bottom:1px solid var(--line);flex-shrink:0;}
+  .chathead .back{background:none;border:none;font-size:22px;color:var(--gold2);cursor:pointer;padding:2px 6px;}
+  .chathead .nm{font-weight:700;font-size:16px;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+  .chathead .mem{font-size:11px;color:var(--muted);}
+  .stream{flex:1;overflow-y:auto;display:flex;flex-direction:column;gap:8px;padding:16px 14px;-webkit-overflow-scrolling:touch;}
+  .day{align-self:center;font-family:var(--mono);font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold2);background:var(--bg2);border:1px solid var(--line);border-radius:10px;padding:3px 11px;margin:6px 0;}
+  .msg{max-width:78%;display:flex;flex-direction:column;gap:2px;}
+  .msg.mine{align-self:flex-end;align-items:flex-end;}
+  .msg .who{font-size:11px;color:var(--gold2);font-family:var(--mono);padding:0 4px;}
+  .msg .bub{background:var(--bg3);border:1px solid var(--line);border-radius:15px;padding:9px 13px;font-size:15px;line-height:1.45;white-space:pre-wrap;word-break:break-word;}
+  .msg.mine .bub{background:linear-gradient(135deg,#244468,#1B3350);border-color:rgba(212,175,55,0.4);}
+  .msg .tm{font-size:10px;color:var(--muted);font-family:var(--mono);padding:0 4px;}
+  .msg img.shot{max-width:240px;max-height:280px;border-radius:12px;display:block;cursor:pointer;background:var(--bg2);}
+  .filechip{display:flex;align-items:center;gap:9px;background:var(--bg2);border:1px solid var(--line);border-radius:12px;padding:10px 12px;cursor:pointer;min-width:160px;}
+  .filechip .fi{font-size:20px;}
+  .filechip .fn{font-size:13px;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+  .filechip .fs{font-size:11px;color:var(--muted);}
+
+  .compose{display:flex;align-items:flex-end;gap:8px;padding:10px 12px calc(env(safe-area-inset-bottom) + 10px);border-top:1px solid var(--line);background:var(--bg2);flex-shrink:0;}
+  .compose .attach{background:var(--bg3);border:1px solid var(--line);border-radius:50%;width:44px;height:44px;font-size:20px;cursor:pointer;flex-shrink:0;}
+  .compose textarea{flex:1;background:var(--bg3);border:1px solid var(--line);border-radius:14px;padding:12px;font-size:16px;resize:none;max-height:120px;line-height:1.4;}
+  .compose textarea:focus{outline:none;border-color:var(--gold);}
+  .compose .send{background:var(--gold);color:#0A1422;border:none;border-radius:50%;width:44px;height:44px;font-size:19px;font-weight:700;cursor:pointer;flex-shrink:0;}
+  .nochat{flex:1;display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:14px;padding:30px;text-align:center;}
+
+  /* Sheet (new chat / new group) */
+  .sheet{position:fixed;inset:0;z-index:50;background:rgba(5,10,18,.6);display:none;align-items:flex-end;justify-content:center;}
+  .sheet.open{display:flex;}
+  .sheet-card{width:100%;max-width:460px;background:var(--bg2);border:1px solid var(--line);border-radius:20px 20px 0 0;padding:18px 16px calc(env(safe-area-inset-bottom) + 18px);max-height:80vh;display:flex;flex-direction:column;}
+  .sheet-card h3{font-family:var(--display);font-size:19px;margin-bottom:4px;}
+  .sheet-card .sx{color:var(--muted);font-size:13px;margin-bottom:14px;}
+  .people{overflow-y:auto;flex:1;}
+  .prow{display:flex;align-items:center;gap:12px;padding:11px 6px;border-bottom:1px solid var(--line);cursor:pointer;}
+  .prow .nm{flex:1;font-weight:600;font-size:15px;}
+  .prow .chk{width:22px;height:22px;border-radius:6px;border:2px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:13px;color:#0A1422;}
+  .prow.sel .chk{background:var(--gold);border-color:var(--gold);}
+  .sheet-actions{display:flex;gap:10px;margin-top:14px;}
+  .sheet-actions input{flex:1;background:var(--bg3);border:1px solid var(--line);border-radius:12px;padding:12px;font-size:16px;}
+  .sheet-actions button{background:var(--gold);color:#0A1422;border:none;border-radius:12px;padding:0 20px;font-weight:700;cursor:pointer;min-height:48px;}
+  .sheet-tabs{display:flex;gap:8px;margin-bottom:14px;}
+  .sheet-tabs button{flex:1;background:var(--bg3);border:1px solid var(--line);border-radius:10px;padding:10px;font-size:13px;font-weight:600;color:var(--muted);cursor:pointer;}
+  .sheet-tabs button.on{background:var(--gold);color:#0A1422;border-color:var(--gold);}
+  .lightbox{position:fixed;inset:0;z-index:80;background:rgba(0,0,0,.92);display:none;align-items:center;justify-content:center;padding:20px;}
+  .lightbox.open{display:flex;}
+  .lightbox img{max-width:100%;max-height:100%;border-radius:8px;}
+
+  @media(max-width:760px){
+    .listpane{width:100%;}
+    .body.in-chat .listpane{display:none;}
+    .body:not(.in-chat) .chatpane{display:none;}
+    .chathead{display:flex;}
+    .topbar .ttl{font-size:18px;}
+  }
+  @media(min-width:761px){
+    .topbar .back{display:none!important;}
+  }
+</style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div id="gate">
+  <div class="gate-card">
+    <img src="icon-192.png" alt="BBC">
+    <h1>BBC Messenger</h1>
+    <div class="sub">Balay ni Bruno &amp; Co. team chat. Sign in with your BBC account.</div>
+    <form id="loginForm">
+      <input id="email" type="email" placeholder="you@balaynibruno.co" autocomplete="username" required>
+      <input id="pass" type="password" placeholder="Password" autocomplete="current-password" required>
+      <button id="loginBtn" type="submit">Sign In</button>
+    </form>
+    <div class="gate-err" id="gateErr"></div>
+  </div>
+</div>
+
+<!-- APP -->
+<div id="app" class="hide">
+  <div class="topbar">
+    <button class="back" id="topBack" onclick="closeConv()">&larr;</button>
+    <div style="flex:1;min-width:0">
+      <div class="ttl" id="topTitle">BBC Messenger</div>
+      <div class="sub" id="topSub">Loading…</div>
+    </div>
+    <button class="iconbtn" id="newBtn" onclick="openSheet()" title="New chat">✎</button>
+    <button class="iconbtn" onclick="doLogout()" title="Sign out">⎋</button>
+  </div>
+
+  <div class="body" id="body">
+    <div class="listpane">
+      <div class="list" id="list"><div class="empty">Loading your chats…</div></div>
+    </div>
+    <div class="chatpane">
+      <div class="chathead" id="chatHead">
+        <button class="back" onclick="closeConv()">&larr;</button>
+        <div style="flex:1;min-width:0"><div class="nm" id="chNm"></div><div class="mem" id="chMem"></div></div>
+      </div>
+      <div class="stream" id="stream"><div class="nochat" id="noChat">Pick a chat on the left, or tap ✎ to start one.</div></div>
+      <div class="compose hide" id="compose">
+        <label class="attach" title="Attach">📎<input id="fileInput" type="file" style="display:none" onchange="pickedFile(this)"></label>
+        <textarea id="msgInput" rows="1" placeholder="Message…" oninput="autogrow(this)" onkeydown="if(event.key==='Enter'&&!event.shiftKey&&!isMobile()){event.preventDefault();sendMsg();}"></textarea>
+        <button class="send" onclick="sendMsg()">➤</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- NEW CHAT SHEET -->
+<div class="sheet" id="sheet" onclick="if(event.target===this)closeSheet()">
+  <div class="sheet-card">
+    <div class="sheet-tabs">
+      <button id="tabDM" class="on" onclick="setTab('dm')">Direct message</button>
+      <button id="tabGroup" onclick="setTab('group')">New group</button>
+    </div>
+    <h3 id="sheetTitle">Start a chat</h3>
+    <div class="sx" id="sheetSub">Tap a teammate to message them.</div>
+    <div class="people" id="people"></div>
+    <div class="sheet-actions hide" id="groupActions">
+      <input id="groupName" placeholder="Group name (e.g. BBC Team)">
+      <button onclick="createGroup()">Create</button>
+    </div>
+  </div>
+</div>
+
+<div class="lightbox" id="lightbox" onclick="this.classList.remove('open')"><img id="lightImg" alt=""></div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+const SB_URL='https://ctoeuikxoqlhnebgsygp.supabase.co';
+const SB_KEY='sb_publishable_WnJ57fk-ymDuT2xtVZRcHg_khZCWgJL';
+const API='/.netlify/functions/bbc-msg';
+const sb=window.supabase.createClient(SB_URL,SB_KEY);
+
+let ME=null, ROSTER=[], CONVS=[], CUR=null, lastTs=0, pollT=null, listT=null, selected=new Set(), tab='dm', pendingFile=null;
+const OWN=['#D4AF37','#4B6FA5','#3CA66A','#C77D52','#9B6FC7','#5AA9B5','#C75D7A','#7E9B3E'];
+function colorFor(id){let h=0;for(let i=0;i<(id||'').length;i++)h=(h*31+id.charCodeAt(i))&255;return OWN[h%OWN.length];}
+function initial(n){return (n||'?').trim().charAt(0).toUpperCase();}
+function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+function isMobile(){return window.matchMedia('(max-width:760px)').matches;}
+function autogrow(t){t.style.height='auto';t.style.height=Math.min(t.scrollHeight,120)+'px';}
+function isImg(t){return /^image\//.test(t||'');}
+
+function bbcAllowed(e){e=(e||'').toLowerCase().trim();return /@balaynibruno\.co$/.test(e)||['rjbryantresreyes@gmail.com','krizza.bbc@gmail.com','krizzamaymanagase@gmail.com','daryl.bbc@gmail.com'].indexOf(e)>=0;}
+
+async function token(){try{const r=await sb.auth.getSession();return r&&r.data&&r.data.session&&r.data.session.access_token||null;}catch(e){return null;}}
+async function api(qs,opts){
+  const t=await token(); if(!t){showGate();return null;}
+  const o=opts||{}; o.headers=Object.assign({'authorization':'Bearer '+t},o.headers||{});
+  if(o.body&&typeof o.body!=='string'){o.headers['content-type']='application/json';o.body=JSON.stringify(o.body);}
+  const r=await fetch(API+(qs||''),o);
+  if(r.status===401){showGate();return null;}
+  return r;
+}
+
+/* ---------- auth ---------- */
+function showGate(){document.getElementById('gate').classList.remove('hide');document.getElementById('app').classList.add('hide');}
+function showApp(){document.getElementById('gate').classList.add('hide');document.getElementById('app').classList.remove('hide');}
+document.getElementById('loginForm').addEventListener('submit',async e=>{
+  e.preventDefault();
+  const em=document.getElementById('email').value.trim(), pw=document.getElementById('pass').value;
+  const err=document.getElementById('gateErr'), btn=document.getElementById('loginBtn');
+  err.textContent=''; btn.disabled=true; btn.textContent='Signing in…';
+  if(!bbcAllowed(em)){err.textContent='That login is not on the BBC team.';btn.disabled=false;btn.textContent='Sign In';return;}
+  try{
+    const {error}=await sb.auth.signInWithPassword({email:em,password:pw});
+    if(error){err.textContent=error.message||'Wrong email or password.';}
+    else{await start();}
+  }catch(ex){err.textContent='Something went wrong. Try again.';}
+  finally{btn.disabled=false;btn.textContent='Sign In';}
+});
+async function doLogout(){try{await sb.auth.signOut();}catch(e){}stopPoll();showGate();}
+
+/* ---------- bootstrap ---------- */
+async function start(){
+  const r=await api('?action=bootstrap'); if(!r)return;
+  const d=await r.json(); if(d.error){return;}
+  ME=d.me; ROSTER=d.roster||[]; CONVS=d.conversations||[];
+  showApp();
+  document.getElementById('topSub').textContent='Signed in as '+ME.name;
+  renderList();
+  if(listT)clearInterval(listT);
+  listT=setInterval(refreshList,6000);
+}
+async function refreshList(){
+  const r=await api('?action=bootstrap'); if(!r)return; const d=await r.json(); if(d.error)return;
+  ROSTER=d.roster||ROSTER; CONVS=d.conversations||CONVS; renderList();
+}
+
+function convTitle(c){
+  if(c.type==='group')return c.name||'Group';
+  const other=c.members.find(m=>m!==ME.id);
+  const p=ROSTER.find(x=>x.id===other); return p?p.name:'Direct message';
+}
+function convSub(c){
+  if(c.type==='group'){return c.members.length+' members';}
+  return '';
+}
+function whenLabel(ts){if(!ts)return'';const d=new Date(ts),n=new Date();if(d.toDateString()===n.toDateString())return d.toLocaleTimeString(undefined,{hour:'numeric',minute:'2-digit'});const y=new Date(n-864e5);if(d.toDateString()===y.toDateString())return'Yesterday';return d.toLocaleDateString(undefined,{month:'short',day:'numeric'});}
+
+function renderList(){
+  const el=document.getElementById('list');
+  if(!CONVS.length){el.innerHTML='<div class="empty">No chats yet.<br>Tap ✎ above to message a teammate or start a group.</div>';return;}
+  el.innerHTML=CONVS.map(c=>{
+    const t=convTitle(c), col=c.type==='group'?'#caa64a':colorFor(c.members.find(m=>m!==ME.id)||c.id);
+    const av=c.type==='group'?'#':initial(t);
+    return `<div class="convrow ${CUR&&CUR.id===c.id?'active':''}" onclick="openConv('${c.id}')">
+      <div class="av" style="background:${col}">${esc(av)}</div>
+      <div class="meta"><div class="nm">${esc(t)}</div><div class="last">${esc(c.lastText||convSub(c)||'No messages yet')}</div></div>
+      <div class="when">${whenLabel(c.lastTs)}</div>
+    </div>`;
+  }).join('');
+}
+
+/* ---------- conversation ---------- */
+async function openConv(id){
+  CUR=CONVS.find(c=>c.id===id); if(!CUR)return;
+  lastTs=0; document.getElementById('compose').classList.remove('hide');
+  document.getElementById('noChat')&&(document.getElementById('noChat').style.display='none');
+  document.getElementById('chNm').textContent=convTitle(CUR);
+  document.getElementById('chMem').textContent=CUR.type==='group'?CUR.members.map(m=>{const p=ROSTER.find(x=>x.id===m);return p?p.name:'?';}).join(', '):'';
+  document.getElementById('body').classList.add('in-chat');
+  document.getElementById('topBack').style.display=isMobile()?'block':'none';
+  document.getElementById('stream').innerHTML='<div class="nochat">Loading…</div>';
+  renderList();
+  await loadMessages(true);
+  startPoll();
+}
+function closeConv(){CUR=null;stopPoll();document.getElementById('body').classList.remove('in-chat');document.getElementById('topBack').style.display='none';document.getElementById('compose').classList.add('hide');renderList();}
+
+let MSGS=[];
+async function loadMessages(full){
+  if(!CUR)return;
+  const r=await api('?action=messages&conv='+CUR.id+'&since='+(full?0:lastTs)); if(!r)return;
+  const d=await r.json(); if(d.error)return;
+  const incoming=d.messages||[];
+  if(full)MSGS=incoming; else if(incoming.length)MSGS=MSGS.concat(incoming);
+  if(MSGS.length)lastTs=MSGS[MSGS.length-1].ts;
+  if(full||incoming.length)renderStream();
+}
+function renderStream(){
+  const el=document.getElementById('stream');
+  if(!MSGS.length){el.innerHTML='<div class="nochat">No messages yet. Say hi 👋</div>';return;}
+  let html='',lastDay='';
+  MSGS.forEach(m=>{
+    const d=new Date(m.ts), dl=d.toLocaleDateString(undefined,{weekday:'short',month:'short',day:'numeric'});
+    if(dl!==lastDay){html+='<div class="day">'+esc(dl)+'</div>';lastDay=dl;}
+    const mine=m.user===ME.id;
+    let inner='';
+    if(m.text)inner+='<div class="bub">'+esc(m.text)+'</div>';
+    if(m.file){
+      if(isImg(m.file.type)) inner+='<img class="shot" data-fid="'+esc(m.file.id)+'" alt="'+esc(m.file.name)+'" onclick="openLight(this)">';
+      else inner+='<div class="filechip" onclick="downloadFile(\''+esc(m.file.id)+'\',\''+esc(m.file.name)+'\')"><span class="fi">📄</span><div><div class="fn">'+esc(m.file.name)+'</div><div class="fs">'+fmtSize(m.file.size)+' · tap to open</div></div></div>';
+    }
+    html+='<div class="msg'+(mine?' mine':'')+'">'+((!mine&&CUR.type==='group')?'<div class="who">'+esc(m.name)+'</div>':'')+inner+'<div class="tm">'+new Date(m.ts).toLocaleTimeString(undefined,{hour:'numeric',minute:'2-digit'})+'</div></div>';
+  });
+  el.innerHTML=html; el.scrollTop=el.scrollHeight;
+  el.querySelectorAll('img.shot[data-fid]').forEach(loadImg);
+}
+function fmtSize(b){if(!b)return'';if(b<1024)return b+' B';if(b<1048576)return (b/1024).toFixed(0)+' KB';return (b/1048576).toFixed(1)+' MB';}
+
+const fileCache={};
+async function fileBlobUrl(fid){
+  if(fileCache[fid])return fileCache[fid];
+  const r=await api('?action=file&id='+fid); if(!r||!r.ok)return null;
+  const b=await r.blob(); const u=URL.createObjectURL(b); fileCache[fid]=u; return u;
+}
+async function loadImg(img){const u=await fileBlobUrl(img.dataset.fid);if(u)img.src=u;}
+async function openLight(img){const u=img.src||await fileBlobUrl(img.dataset.fid);if(u){document.getElementById('lightImg').src=u;document.getElementById('lightbox').classList.add('open');}}
+async function downloadFile(fid,name){const u=await fileBlobUrl(fid);if(!u)return;const a=document.createElement('a');a.href=u;a.download=name||'file';document.body.appendChild(a);a.click();a.remove();}
+
+/* ---------- send ---------- */
+function pickedFile(inp){const f=inp.files&&inp.files[0];if(!f)return;if(f.size>8*1024*1024){alert('File too big (max 8 MB).');inp.value='';return;}pendingFile=f;document.getElementById('msgInput').placeholder='📎 '+f.name+' — add a note or send';}
+function fileToB64(f){return new Promise((res,rej)=>{const r=new FileReader();r.onload=()=>res(String(r.result).split(',')[1]);r.onerror=rej;r.readAsDataURL(f);});}
+let sending=false;
+async function sendMsg(){
+  if(!CUR||sending)return;
+  const inp=document.getElementById('msgInput'); const text=inp.value.trim();
+  if(!text&&!pendingFile)return;
+  sending=true;
+  const body={action:'send',conv:CUR.id,text:text};
+  if(pendingFile){body.file={name:pendingFile.name,type:pendingFile.type,dataB64:await fileToB64(pendingFile)};}
+  inp.value='';inp.placeholder='Message…';autogrow(inp);const sf=pendingFile;pendingFile=null;document.getElementById('fileInput').value='';
+  try{
+    const r=await api('',{method:'POST',body}); const d=r&&await r.json();
+    if(!r||!r.ok||(d&&d.error)){alert((d&&d.error)||'Could not send.');inp.value=text;pendingFile=sf;}
+    else{await loadMessages(false);refreshList();}
+  }catch(e){alert('Send failed.');inp.value=text;pendingFile=sf;}
+  finally{sending=false;}
+}
+
+/* ---------- polling ---------- */
+function startPoll(){stopPoll();pollT=setInterval(()=>{if(!CUR){stopPoll();return;}loadMessages(false);},3000);}
+function stopPoll(){if(pollT){clearInterval(pollT);pollT=null;}}
+
+/* ---------- new chat sheet ---------- */
+function openSheet(){selected.clear();setTab('dm');document.getElementById('sheet').classList.add('open');}
+function closeSheet(){document.getElementById('sheet').classList.remove('open');}
+function setTab(t){
+  tab=t; selected.clear();
+  document.getElementById('tabDM').classList.toggle('on',t==='dm');
+  document.getElementById('tabGroup').classList.toggle('on',t==='group');
+  document.getElementById('sheetTitle').textContent=t==='dm'?'Start a chat':'New group';
+  document.getElementById('sheetSub').textContent=t==='dm'?'Tap a teammate to message them.':'Pick people, name it, create.';
+  document.getElementById('groupActions').classList.toggle('hide',t!=='group');
+  renderPeople();
+}
+function renderPeople(){
+  const el=document.getElementById('people');
+  const others=ROSTER.filter(p=>p.id!==ME.id);
+  if(!others.length){el.innerHTML='<div class="empty">No teammates have signed in yet. When they log in once, they\'ll appear here.</div>';return;}
+  el.innerHTML=others.map(p=>`<div class="prow ${selected.has(p.id)?'sel':''}" onclick="pick('${p.id}')">
+    <div class="av" style="width:38px;height:38px;font-size:15px;background:${colorFor(p.id)}">${esc(initial(p.name))}</div>
+    <div class="nm">${esc(p.name)}</div>
+    ${tab==='group'?'<div class="chk">'+(selected.has(p.id)?'✓':'')+'</div>':'<span style="color:var(--gold2)">→</span>'}
+  </div>`).join('');
+}
+async function pick(id){
+  if(tab==='dm'){closeSheet();await startDM(id);}
+  else{if(selected.has(id))selected.delete(id);else selected.add(id);renderPeople();}
+}
+async function startDM(otherId){
+  const r=await api('',{method:'POST',body:{action:'createConv',type:'dm',members:[otherId]}});
+  const d=r&&await r.json(); if(!r||!r.ok||!d.conversation){alert((d&&d.error)||'Could not start chat.');return;}
+  if(!CONVS.find(c=>c.id===d.conversation.id))CONVS.unshift(d.conversation);
+  renderList(); openConv(d.conversation.id);
+}
+async function createGroup(){
+  const name=document.getElementById('groupName').value.trim();
+  if(!name){alert('Give the group a name.');return;}
+  if(!selected.size){alert('Pick at least one teammate.');return;}
+  const r=await api('',{method:'POST',body:{action:'createConv',type:'group',name:name,members:[...selected]}});
+  const d=r&&await r.json(); if(!r||!r.ok||!d.conversation){alert((d&&d.error)||'Could not create group.');return;}
+  document.getElementById('groupName').value=''; closeSheet();
+  if(!CONVS.find(c=>c.id===d.conversation.id))CONVS.unshift(d.conversation);
+  renderList(); openConv(d.conversation.id);
+}
+
+/* ---------- service worker ---------- */
+if('serviceWorker' in navigator){navigator.serviceWorker.register('/chat/sw.js').catch(()=>{});}
+
+/* ---------- boot ---------- */
+(async function(){
+  const r=await sb.auth.getSession();
+  if(r&&r.data&&r.data.session){await start();} else {showGate();}
+})();
+</script>
+</body>
+</html>
