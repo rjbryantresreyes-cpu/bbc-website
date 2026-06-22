@@ -363,6 +363,44 @@ export default async (req) => {
       return json({ ok: true, reactions: m.reactions });
     }
 
+    // ---------- POST editMsg (edit your own message) ----------
+    if (act === "editMsg") {
+      const convId = String(body.conv || ""), msgId = String(body.msgId || ""), text = String(body.text || "").slice(0, 8000);
+      if (!convId || !msgId) return json({ error: "conv, msgId required" }, 400);
+      if (!text.trim()) return json({ error: "empty" }, 400);
+      const convs = await readJ("convs", []);
+      const conv = convs.find(c => c.id === convId);
+      if (!conv || !conv.members.includes(meId)) return json({ error: "forbidden" }, 403);
+      const msgs = await readJ("msgs:" + convId, []);
+      const m = msgs.find(x => x.id === msgId);
+      if (!m) return json({ error: "no message" }, 404);
+      if (m.user !== meId) return json({ error: "you can only edit your own messages" }, 403);
+      m.text = text; m.edited = true;
+      if (msgs.length && msgs[msgs.length - 1].id === msgId) { conv.lastText = text.slice(0, 80); await js.setJSON("convs", convs); }
+      await js.setJSON("msgs:" + convId, msgs);
+      return json({ ok: true });
+    }
+
+    // ---------- POST deleteMsg (delete your own message; hub can delete any) ----------
+    if (act === "deleteMsg") {
+      const convId = String(body.conv || ""), msgId = String(body.msgId || "");
+      if (!convId || !msgId) return json({ error: "conv, msgId required" }, 400);
+      const convs = await readJ("convs", []);
+      const conv = convs.find(c => c.id === convId);
+      if (!conv || !conv.members.includes(meId)) return json({ error: "forbidden" }, 403);
+      let msgs = await readJ("msgs:" + convId, []);
+      const m = msgs.find(x => x.id === msgId);
+      if (!m) return json({ ok: true });
+      if (m.user !== meId && !meHub) return json({ error: "you can only delete your own messages" }, 403);
+      msgs = msgs.filter(x => x.id !== msgId);
+      await js.setJSON("msgs:" + convId, msgs);
+      const last = msgs[msgs.length - 1];
+      conv.lastText = last ? (last.file && !last.text ? "📎 " + last.file.name : (last.text || "").slice(0, 80)) : "";
+      if (last) conv.lastTs = last.ts;
+      await js.setJSON("convs", convs);
+      return json({ ok: true });
+    }
+
     // ---------- POST saveSub (store this user's push subscription) ----------
     if (act === "saveSub") {
       if (!body.subscription) return json({ error: "subscription required" }, 400);
