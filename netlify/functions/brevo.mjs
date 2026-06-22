@@ -90,7 +90,58 @@ export default async (req) => {
       return json(out);
     }
 
-    return json({ error: "Unknown action. Use add | move." }, 400);
+    if (action === "deal") {
+      const name = (body.name || "").trim();
+      if (!name) return json({ error: "deal name required" }, 400);
+      const attributes = {};
+      if (body.pipeline) attributes.pipeline = body.pipeline;
+      if (body.stage) attributes.deal_stage = body.stage;
+      if (body.amount != null && body.amount !== "") attributes.amount = Number(body.amount) || 0;
+      const payload = { name, attributes };
+      if (body.contactEmail) { try { const c = await bget(`/contacts/${encodeURIComponent(body.contactEmail.toLowerCase())}`); if (c.id) payload.linkedContactsIds = [c.id]; } catch {} }
+      const r = await fetch(`${API}/crm/deals`, { method: "POST", headers: H, body: JSON.stringify(payload) });
+      const t = await r.text();
+      return new Response(t || '{"ok":true}', { status: r.ok ? 200 : r.status, headers: { "content-type": "application/json", "cache-control": "no-store" } });
+    }
+
+    if (action === "deal-stage") {
+      if (!body.id || !body.stage) return json({ error: "id and stage required" }, 400);
+      const r = await fetch(`${API}/crm/deals/${body.id}`, { method: "PATCH", headers: H, body: JSON.stringify({ attributes: { deal_stage: body.stage } }) });
+      if (r.ok || r.status === 204) return json({ ok: true });
+      return json({ error: "move failed", detail: (await r.text()).slice(0, 150) }, r.status);
+    }
+
+    if (action === "task") {
+      const name = (body.name || "").trim();
+      if (!name) return json({ error: "task name required" }, 400);
+      let taskTypeId = body.taskTypeId;
+      if (!taskTypeId) { try { const tt = await bget(`/crm/tasktypes`); taskTypeId = (Array.isArray(tt) ? tt[0] : (tt.items || [])[0])?.id; } catch {} }
+      const payload = { name, date: body.date || new Date(Date.now() + 86400000).toISOString(), duration: 1800000 };
+      if (taskTypeId) payload.taskTypeId = taskTypeId;
+      if (body.contactEmail) { try { const c = await bget(`/contacts/${encodeURIComponent(body.contactEmail.toLowerCase())}`); if (c.id) payload.contactsIds = [c.id]; } catch {} }
+      const r = await fetch(`${API}/crm/tasks`, { method: "POST", headers: H, body: JSON.stringify(payload) });
+      const t = await r.text();
+      return new Response(t || '{"ok":true}', { status: r.ok ? 200 : r.status, headers: { "content-type": "application/json", "cache-control": "no-store" } });
+    }
+
+    if (action === "task-done") {
+      if (!body.id) return json({ error: "id required" }, 400);
+      const r = await fetch(`${API}/crm/tasks/${body.id}`, { method: "PATCH", headers: H, body: JSON.stringify({ done: body.done !== false }) });
+      if (r.ok || r.status === 204) return json({ ok: true });
+      return json({ error: "task update failed", detail: (await r.text()).slice(0, 150) }, r.status);
+    }
+
+    if (action === "company") {
+      const name = (body.name || "").trim();
+      if (!name) return json({ error: "company name required" }, 400);
+      const attributes = {};
+      if (body.domain) attributes.domain = body.domain;
+      const r = await fetch(`${API}/companies`, { method: "POST", headers: H, body: JSON.stringify({ name, attributes }) });
+      const t = await r.text();
+      return new Response(t || '{"ok":true}', { status: r.ok ? 200 : r.status, headers: { "content-type": "application/json", "cache-control": "no-store" } });
+    }
+
+    return json({ error: "Unknown action." }, 400);
   }
 
   /* ---------- READ ---------- */
@@ -133,7 +184,39 @@ export default async (req) => {
       const plan = (acct.plan || [])[0] || {};
       return json({ account: { email: acct.email, company: acct.companyName, plan: plan.type, credits: plan.credits }, campaigns });
     }
-    return json({ error: "Unknown action. Use lists | contacts | stats." }, 400);
+    if (action === "pipelines") {
+      let data; try { data = await bget(`/crm/pipeline/details`); } catch { data = []; }
+      const arr = Array.isArray(data) ? data : (data && (data.pipeline || data.id) ? [data] : []);
+      const pipelines = arr.map((p) => ({
+        id: p.pipeline || p.id,
+        name: p.pipeline_name || p.name || "Pipeline",
+        stages: (p.stages || []).map((s) => ({ id: s.id, name: s.name })),
+      }));
+      return json({ pipelines });
+    }
+    if (action === "deals") {
+      const data = await bget(`/crm/deals?limit=100&offset=0`);
+      const deals = (data.items || []).map((d) => ({
+        id: d.id,
+        name: d.attributes?.deal_name || d.attributes?.name || "(deal)",
+        stage: d.attributes?.deal_stage || "",
+        amount: Number(d.attributes?.amount) || 0,
+        pipeline: d.attributes?.pipeline || "",
+        contacts: d.linkedContactsIds || [],
+      }));
+      return json({ deals });
+    }
+    if (action === "tasks") {
+      const data = await bget(`/crm/tasks?limit=100`);
+      const tasks = (data.items || []).map((t) => ({ id: t.id, name: t.name, date: t.date, done: !!t.done }));
+      return json({ tasks });
+    }
+    if (action === "companies") {
+      const data = await bget(`/companies?limit=100`);
+      const companies = (data.items || []).map((c) => ({ id: c.id, name: c.attributes?.name || "(company)", domain: c.attributes?.domain || "" }));
+      return json({ companies });
+    }
+    return json({ error: "Unknown action." }, 400);
   } catch (e) {
     return json({ error: "Brevo fetch failed", detail: String(e).slice(0, 200) }, 502);
   }
