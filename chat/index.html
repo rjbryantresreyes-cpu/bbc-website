@@ -174,6 +174,7 @@
     </div>
     <div class="menu" id="menu">
       <button id="addVaBtn" class="hide" onclick="openAddVA()">Add a team member</button>
+      <button onclick="openProfile()">Edit profile</button>
       <button onclick="doLogout()">Sign out</button>
     </div>
     <div class="list" id="list"><div class="empty">Loading your chats…</div></div>
@@ -217,6 +218,23 @@
       <div class="seclabel">Existing team logins</div>
       <div class="scr-body" id="vaList"></div>
     </div>
+
+    <!-- PROFILE screen (change name + photo) -->
+    <div class="screen" id="profileScreen">
+      <div class="hd"><button class="back" onclick="closeScreen('profileScreen')">&larr;</button><div class="htitle"><div class="t">My profile</div></div></div>
+      <div class="form">
+        <div style="display:flex;justify-content:center;margin:8px 0 14px">
+          <label style="cursor:pointer;position:relative;display:inline-block">
+            <div id="pfAvatar" style="width:92px;height:92px;border-radius:50%;background:#1F3557;color:#fff;display:flex;align-items:center;justify-content:center;font-size:34px;overflow:hidden;background-size:cover;background-position:center">?</div>
+            <span style="position:absolute;bottom:0;right:0;background:#B8923E;color:#0f1520;border-radius:50%;width:30px;height:30px;display:flex;align-items:center;justify-content:center;font-size:14px">📷</span>
+            <input id="pfPhoto" type="file" accept="image/*" style="display:none" onchange="pfPicked(this)">
+          </label>
+        </div>
+        <input id="pfName" placeholder="Your name" maxlength="60">
+        <button class="primary" onclick="saveProfile()">Save profile</button>
+        <div class="note">Your name and photo show to your teammates in chat.</div>
+      </div>
+    </div>
   </div>
 
   <!-- CHAT PANE -->
@@ -234,8 +252,10 @@
       </div>
       <div class="stream" id="stream"></div>
       <div class="devbar hide" id="devbar"></div>
-      <div class="compose">
+      <div class="compose" style="position:relative">
+        <div id="emojiPop" style="display:none;position:absolute;bottom:62px;left:6px;z-index:60"></div>
         <div class="pill">
+          <button class="attach" type="button" title="Emoji" onclick="toggleEmoji(event)" style="background:none;border:0;cursor:pointer;font-size:20px">😊</button>
           <label class="attach" title="Attach">📎<input id="fileInput" type="file" style="display:none" onchange="pickedFile(this)"></label>
           <textarea id="msgInput" rows="1" placeholder="Type a message" oninput="autogrow(this)" onkeydown="if(event.key==='Enter'&&!event.shiftKey&&!isMobile()){event.preventDefault();sendMsg();}"></textarea>
         </div>
@@ -249,6 +269,7 @@
 <div class="toast" id="toast"></div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script type="module" src="https://cdn.jsdelivr.net/npm/emoji-picker-element@^1/index.js"></script>
 <script>
 const SB_URL='https://ctoeuikxoqlhnebgsygp.supabase.co';
 const SB_KEY='sb_publishable_WnJ57fk-ymDuT2xtVZRcHg_khZCWgJL';
@@ -262,6 +283,21 @@ const OWN=['#1F3557','#B8923E','#4B6FA5','#3CA66A','#C77D52','#9B6FC7','#5AA9B5'
 function colorFor(id){let h=0;for(let i=0;i<(id||'').length;i++)h=(h*31+id.charCodeAt(i))&255;return OWN[h%OWN.length];}
 function initial(n){return (n||'?').trim().charAt(0).toUpperCase();}
 function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+const VAPID_PUBLIC='BCH0CUF4vzVXyUUqDkwM1RPfFSJSe_VhiusU7hFXWKOn-sZn28UG1pZPF0oyJYTxifkTRyTUmPQ1amCjxCah-Fg';
+function urlB64ToUint8(b){const pad='='.repeat((4-b.length%4)%4);const s=(b+pad).replace(/-/g,'+').replace(/_/g,'/');const raw=atob(s);return Uint8Array.from([...raw].map(c=>c.charCodeAt(0)));}
+async function setupPush(){
+  try{
+    if(typeof Notification==='undefined'||!('serviceWorker' in navigator)||!('PushManager' in window))return;
+    let perm=Notification.permission;
+    if(perm==='default')perm=await Notification.requestPermission();
+    if(perm!=='granted')return;
+    const reg=await navigator.serviceWorker.ready;
+    let sub=await reg.pushManager.getSubscription();
+    if(!sub)sub=await reg.pushManager.subscribe({userVisibleOnly:true,applicationServerKey:urlB64ToUint8(VAPID_PUBLIC)});
+    await api(API,'',{method:'POST',body:{action:'saveSub',subscription:sub}});
+  }catch(e){}
+}
+function linkify(s){return String(s).replace(/(https?:\/\/[^\s<]+)/g,u=>{const drive=/drive\.google\.com|docs\.google\.com/.test(u);const label=drive?'📎 '+u.replace(/^https?:\/\//,'').slice(0,42)+(u.length>50?'…':''):u;return '<a href="'+u+'" target="_blank" rel="noopener" style="color:#7fb2f0;text-decoration:underline;word-break:break-all">'+label+'</a>';});}
 function isMobile(){return window.matchMedia('(max-width:899px)').matches;}
 function autogrow(t){t.style.height='auto';t.style.height=Math.min(t.scrollHeight,110)+'px';}
 function isImg(t){return /^image\//.test(t||'');}
@@ -304,6 +340,7 @@ async function start(){
   const d=await r.json(); if(d.error)return;
   ME=d.me; ROSTER=d.roster||[]; CONVS=d.conversations||[];
   showApp();
+  setupPush();
   document.getElementById('meSub').textContent=ME.hub?'Signed in as BBC Bruno':('Signed in as '+ME.name);
   document.getElementById('addVaBtn').classList.toggle('hide',!ME.hub);
   // BBC Bruno (the hub) always has a pinned self-chat to message his own devices.
@@ -313,7 +350,30 @@ async function start(){
   renderList();
   if(listT)clearInterval(listT); listT=setInterval(refreshList,6000);
 }
-async function refreshList(){const r=await api(API,'?action=bootstrap');if(!r)return;const d=await r.json();if(d.error)return;ROSTER=d.roster||ROSTER;CONVS=d.conversations||CONVS;renderList();}
+async function refreshList(){
+  const r=await api(API,'?action=bootstrap');if(!r)return;const d=await r.json();if(d.error)return;
+  ROSTER=d.roster||ROSTER;
+  const prev=window.__convSeen||{}; const next={}; const convs=d.conversations||[];
+  convs.forEach(c=>{ next[c.id]=c.lastTs||0; });
+  if(window.__convSeenInit){
+    convs.forEach(c=>{
+      // a conversation got a newer message than we last saw -> notify (skip the one you're looking at)
+      if((c.lastTs||0)>(prev[c.id]||0) && c.lastText && !(CUR&&c.id===CUR.id&&document.visibilityState==='visible')){
+        notify(convTitle(c), c.lastText);
+      }
+    });
+  }
+  window.__convSeen=next; window.__convSeenInit=true;
+  CONVS=convs; renderList();
+}
+function notify(title,body){
+  try{
+    if(typeof Notification==='undefined' || Notification.permission!=='granted') return;
+    if(document.visibilityState==='visible' && document.hasFocus()) return; // only when not actively looking
+    const n=new Notification(title||'BBC Messenger',{body:String(body||'').slice(0,120),tag:'bbcmsg',icon:'/chat/icon-192.png'});
+    n.onclick=()=>{ try{window.focus();}catch(e){} n.close(); };
+  }catch(e){}
+}
 async function ensureTeamGroup(){
   if(CONVS.find(c=>c.type==='group'&&(c.name||'')==='BBC Team'))return;
   const ids=ROSTER.filter(p=>p.id!==ME.id).map(p=>p.id);
@@ -343,11 +403,14 @@ function renderList(){
   const ordered=[...CONVS].sort((a,b)=>{if(a.type==='self')return -1;if(b.type==='self')return 1;return (b.lastTs||0)-(a.lastTs||0);});
   el.innerHTML=ordered.map(c=>{
     const self=c.type==='self',grp=c.type==='group',t=convTitle(c),dev=c.device||c.name||'';
-    const col=self?'#B8923E':(grp?'#B8923E':colorFor(c.members.find(m=>m!==ME.id)||c.id));
+    const other=(!self&&!grp)?c.members.find(m=>m!==ME.id):null;
+    const op=other?ROSTER.find(x=>x.id===other):null;
+    const col=self?'#B8923E':(grp?'#B8923E':colorFor(other||c.id));
     const avt=self?esc(initial(dev||'D')):(grp?'#':esc(initial(t)));
+    const avHtml=(op&&op.avatar)?'<img src="'+avaSrc(other)+'" alt="" style="width:100%;height:100%;object-fit:cover;border-radius:50%">':avt;
     const last=self?(c.lastText||('Notes & files for '+dev)):(c.lastText||'No messages yet');
     return `<div class="row ${CUR&&CUR.id===c.id?'active':''}" onclick="openConv('${c.id}')">
-      <div class="av" style="background:${col};width:50px;height:50px;font-size:19px">${avt}</div>
+      <div class="av" style="background:${col};width:50px;height:50px;font-size:19px;overflow:hidden">${avHtml}</div>
       <div class="mid"><div class="nm">${esc(t)}</div><div class="last">${esc(last)}</div></div>
       <div class="rt"><div class="when">${whenLabel(c.lastTs)}</div></div>
     </div>`;
@@ -362,8 +425,12 @@ async function openConv(id){
   document.getElementById('chatActive').classList.remove('hide');
   const t=convTitle(CUR),grp=CUR.type==='group',self=CUR.type==='self';
   document.getElementById('chNm').textContent=t;
-  document.getElementById('chAv').textContent=self?initial(CUR.device||CUR.name||'D'):(grp?'#':initial(t));
-  document.getElementById('chAv').style.background=(self||grp)?'#B8923E':colorFor(CUR.members.find(m=>m!==ME.id)||CUR.id);
+  const chOther=(!self&&!grp)?CUR.members.find(m=>m!==ME.id):null;
+  const chOp=chOther?ROSTER.find(x=>x.id===chOther):null;
+  const chAvEl=document.getElementById('chAv'); chAvEl.style.overflow='hidden';
+  if(chOp&&chOp.avatar){chAvEl.innerHTML='<img src="'+avaSrc(chOther)+'" alt="" style="width:100%;height:100%;object-fit:cover;border-radius:50%">';}
+  else{chAvEl.textContent=self?initial(CUR.device||CUR.name||'D'):(grp?'#':initial(t));}
+  chAvEl.style.background=(self||grp)?'#B8923E':colorFor(chOther||CUR.id);
   document.getElementById('chSub').textContent=self?'Your device note · syncs to all your devices':(grp?CUR.members.map(m=>{const p=ROSTER.find(x=>x.id===m);return p?p.name:(m===ME.id?'You':'');}).filter(Boolean).join(', '):'');
   const chAddBtn=document.getElementById('chAdd'); if(chAddBtn) chAddBtn.style.display=(grp&&ME.hub)?'':'none';
   document.getElementById('devbar').classList.add('hide');
@@ -379,8 +446,17 @@ async function loadMessages(full){
   const r=await api(API,'?action=messages&conv='+CUR.id+'&since='+(full?0:lastTs)); if(!r)return;
   const d=await r.json(); if(d.error)return;
   const inc=d.messages||[];
-  if(full)MSGS=inc; else if(inc.length)MSGS=MSGS.concat(inc);
-  if(MSGS.length)lastTs=MSGS[MSGS.length-1].ts;
+  if(full)MSGS=inc;
+  else if(inc.length){
+    inc.forEach(m=>{
+      const ci=m.clientId, byCid=ci?MSGS.findIndex(x=>x.clientId===ci):-1;
+      if(byCid>=0){MSGS[byCid]=m;return;}              // replace the optimistic temp with the real one
+      if(MSGS.some(x=>x.id===m.id))return;              // already have it (no duplicate appends)
+      MSGS.push(m);
+    });
+  }
+  MSGS.sort((a,b)=>(a.ts||0)-(b.ts||0));
+  const real=MSGS.filter(m=>!m.pending); if(real.length)lastTs=real[real.length-1].ts;
   if(full||inc.length)renderStream();
 }
 function renderStream(){
@@ -397,7 +473,7 @@ function renderStream(){
       if(isImg(m.file.type))inner+='<img class="shot" data-fid="'+esc(m.file.id)+'" alt="" onclick="openLight(this)">';
       else inner+='<div class="filechip" onclick="downloadFile(\''+esc(m.file.id)+'\',\''+esc(m.file.name)+'\')"><div class="fi">📄</div><div><div class="fn">'+esc(m.file.name)+'</div><div class="fs">'+fmtSize(m.file.size)+'</div></div></div>';
     }
-    if(m.text)inner+='<span class="tx">'+esc(m.text)+'</span>';
+    if(m.text)inner+='<span class="tx">'+linkify(esc(m.text))+'</span>';
     inner+='<span class="tm">'+new Date(m.ts).toLocaleTimeString(undefined,{hour:'numeric',minute:'2-digit'})+'</span>';
     html+='<div class="b '+(mine?'out':'in')+'">'+inner+'</div>';
   });
@@ -419,14 +495,18 @@ async function sendMsg(){
   const inp=document.getElementById('msgInput');const text=inp.value.trim();
   if(!text&&!pendingFile)return;
   sending=true;
-  const body={action:'send',conv:CUR.id,text:text};
+  const clientId='m'+Date.now().toString(36)+Math.random().toString(36).slice(2,8);
+  const body={action:'send',conv:CUR.id,text:text,clientId};
   if(CUR.type==='self' && selectedDevice && selectedDevice!=='All')body.device=selectedDevice;
-  if(pendingFile){body.file={name:pendingFile.name,type:pendingFile.type,dataB64:await fileToB64(pendingFile)};}
-  inp.value='';inp.placeholder='Type a message';autogrow(inp);const sf=pendingFile;pendingFile=null;document.getElementById('fileInput').value='';
+  const sf=pendingFile;
+  if(sf){body.file={name:sf.name,type:sf.type,dataB64:await fileToB64(sf)};}
+  inp.value='';inp.placeholder='Type a message';autogrow(inp);pendingFile=null;document.getElementById('fileInput').value='';
+  // optimistic: show the message instantly so the sender never re-taps (which caused the duplicates)
+  if(!sf){MSGS.push({id:clientId,clientId,user:ME.id,name:ME.name,text,ts:Date.now(),pending:true});renderStream();}
   try{const r=await api(API,'',{method:'POST',body});const d=r&&await r.json();
-    if(!r||!r.ok||(d&&d.error)){toast((d&&d.error)||'Could not send.');inp.value=text;pendingFile=sf;}
+    if(!r||!r.ok||(d&&d.error)){toast((d&&d.error)||'Could not send.');MSGS=MSGS.filter(m=>m.clientId!==clientId);renderStream();inp.value=text;pendingFile=sf;}
     else{await loadMessages(false);refreshList();}
-  }catch(e){toast('Send failed.');inp.value=text;pendingFile=sf;}finally{sending=false;}
+  }catch(e){toast('Send failed.');MSGS=MSGS.filter(m=>m.clientId!==clientId);renderStream();inp.value=text;pendingFile=sf;}finally{sending=false;}
 }
 
 /* ---------- polling ---------- */
@@ -487,6 +567,56 @@ async function addMemberDo(id,row){
   document.getElementById('chSub').textContent=CUR.members.map(m=>{const p=ROSTER.find(x=>x.id===m);return p?p.name:(m===ME.id?'You':'');}).filter(Boolean).join(', ');
   toast('Added to '+(CUR.name||'group')+'.');
 }
+/* ---------- profile (name + photo) ---------- */
+const avaSrc=(id)=>'/.netlify/functions/bbc-msg?action=avatar&id='+encodeURIComponent(id);
+let pfBlob=null;
+function openProfile(){
+  document.getElementById('menu').classList.remove('open');
+  document.getElementById('pfName').value=(ME&&ME.name)||'';
+  const av=document.getElementById('pfAvatar');
+  if(ME&&ME.avatar){av.style.backgroundImage='url('+avaSrc(ME.id)+'&t='+Date.now()+')';av.textContent='';}
+  else{av.style.backgroundImage='';av.textContent=initial(ME&&ME.name||'?');}
+  pfBlob=null; openScreen('profileScreen');
+}
+function pfPicked(inp){
+  const f=inp.files&&inp.files[0]; if(!f)return;
+  const reader=new FileReader();
+  reader.onload=e=>{const img=new Image();img.onload=()=>{
+    const max=300,scale=Math.min(1,max/Math.max(img.width,img.height));
+    const c=document.createElement('canvas');c.width=Math.round(img.width*scale)||max;c.height=Math.round(img.height*scale)||max;
+    c.getContext('2d').drawImage(img,0,0,c.width,c.height);
+    c.toBlob(b=>{pfBlob=b;const av=document.getElementById('pfAvatar');av.style.backgroundImage='url('+URL.createObjectURL(b)+')';av.textContent='';},'image/jpeg',0.82);
+  };img.src=e.target.result;};
+  reader.readAsDataURL(f);
+}
+function blobToB64(b){return new Promise((res,rej)=>{const r=new FileReader();r.onload=()=>res(String(r.result).split(',')[1]);r.onerror=rej;r.readAsDataURL(b);});}
+async function saveProfile(){
+  const name=document.getElementById('pfName').value.trim();
+  const body={action:'setProfile'};
+  if(name)body.name=name;
+  if(pfBlob){body.avatarB64=await blobToB64(pfBlob);body.avatarType='image/jpeg';}
+  try{
+    if(name){try{await sb.auth.updateUser({data:{display_name:name}});}catch(e){}}
+    const r=await api(API,'',{method:'POST',body});const d=r&&await r.json();
+    if(!r||!r.ok||(d&&d.error)){toast((d&&d.error)||'Could not save.');return;}
+    toast('Profile saved.'); closeScreen('profileScreen'); await start();
+  }catch(e){toast('Could not save.');}
+}
+/* ---------- emoji ---------- */
+let emojiReady=false;
+function toggleEmoji(e){
+  e&&e.stopPropagation();
+  const pop=document.getElementById('emojiPop'); if(!pop)return;
+  if(pop.style.display==='none'||!pop.style.display){
+    if(!emojiReady){
+      const p=document.createElement('emoji-picker');
+      p.addEventListener('emoji-click',ev=>{const inp=document.getElementById('msgInput');inp.value+=(ev.detail&&ev.detail.unicode||'');autogrow(inp);inp.focus();});
+      pop.appendChild(p); emojiReady=true;
+    }
+    pop.style.display='block';
+  } else pop.style.display='none';
+}
+document.addEventListener('click',ev=>{const pop=document.getElementById('emojiPop');if(pop&&pop.style.display==='block'&&!pop.contains(ev.target)&&!(ev.target.closest&&ev.target.closest('[title=Emoji]')))pop.style.display='none';});
 /* add VA (hub) */
 function openAddVA(){document.getElementById('menu').classList.remove('open');openScreen('addvaScreen');loadVAs();}
 async function loadVAs(){

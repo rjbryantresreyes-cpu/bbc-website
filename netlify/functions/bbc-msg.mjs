@@ -15,6 +15,17 @@
 //   POST markRead {conv}                -> { ok }
 
 import { getStore } from "@netlify/blobs";
+import webpush from "web-push";
+
+// Web Push (closed-app notifications). Needs VAPID_PUBLIC_KEY + VAPID_PRIVATE_KEY in Netlify env.
+let _vapidReady = false;
+function vapidInit() {
+  if (_vapidReady) return true;
+  const pub = process.env.VAPID_PUBLIC_KEY, priv = process.env.VAPID_PRIVATE_KEY;
+  if (!pub || !priv) return false;
+  try { webpush.setVapidDetails("mailto:admin@balaynibruno.co", pub, priv); _vapidReady = true; return true; }
+  catch { return false; }
+}
 
 const SUPABASE_URL = "https://ctoeuikxoqlhnebgsygp.supabase.co";
 const SUPABASE_KEY = "sb_publishable_WnJ57fk-ymDuT2xtVZRcHg_khZCWgJL"; // publishable, safe here
@@ -47,8 +58,8 @@ const CONTACT_EXCLUDE = new Set(["sonyariviere@gmail.com", "woodenwoodwork@gmail
 let _userCache = { ts: 0, users: null };
 function niceName(email, meta) {
   const em = (email || "").toLowerCase();
+  if (meta && (meta.display_name || meta.name || meta.full_name)) return String(meta.display_name || meta.name || meta.full_name);
   if (KNOWN[em]) return KNOWN[em];
-  if (meta && (meta.name || meta.full_name)) return String(meta.name || meta.full_name);
   const l = em.split("@")[0].replace(/[._-]+/g, " ");
   return l ? l.replace(/\b\w/g, m => m.toUpperCase()) : "Teammate";
 }
@@ -69,10 +80,11 @@ async function adminUsers() {
 function displayName(user) {
   const em = (user.email || "").toLowerCase();
   if (isHub(em)) return "BBC Bruno";
-  if (KNOWN[em]) return KNOWN[em];
   const meta = user.user_metadata || {};
+  if (meta.display_name) return String(meta.display_name);
   if (meta.full_name) return String(meta.full_name);
   if (meta.name) return String(meta.name);
+  if (KNOWN[em]) return KNOWN[em];
   if (em) { const l = em.split("@")[0].replace(/[._-]+/g, " "); return l.charAt(0).toUpperCase() + l.slice(1); }
   return "Someone";
 }
@@ -101,6 +113,25 @@ export default async (req) => {
     new Response(JSON.stringify(o), { status: s, headers: { "content-type": "application/json", "cache-control": "no-store", ...CORS } });
 
   if (req.method === "OPTIONS") return new Response(null, { status: 204, headers: CORS });
+
+  // Public: avatar images (internal team profile photos) — served without auth so <img src> works directly.
+  {
+    const u0 = new URL(req.url);
+    if (req.method === "GET" && u0.searchParams.get("action") === "avatar") {
+      const id = u0.searchParams.get("id");
+      if (id) {
+        try {
+          const fs0 = getStore(FSTORE), js0 = getStore(JSTORE);
+          const buf = await fs0.get("avatar:" + id, { type: "arrayBuffer" });
+          if (buf) {
+            const meta = (await js0.get("avatarmeta:" + id, { type: "json" })) || { type: "image/jpeg" };
+            return new Response(buf, { status: 200, headers: { "content-type": meta.type || "image/jpeg", "cache-control": "public, max-age=300", ...CORS } });
+          }
+        } catch {}
+      }
+      return json({ error: "no avatar" }, 404);
+    }
+  }
 
   const user = await verify(req);
   if (!user) return json({ error: "unauthorized", reply: "Please sign in." }, 401);
@@ -183,13 +214,16 @@ export default async (req) => {
       const convs = await readJ("convs", []);
       const mine = convs.filter(c => c.members.includes(meId)).sort((a, b) => (b.lastTs || 0) - (a.lastTs || 0));
       // hub (BBC Bruno) sees every VA; a VA only ever sees BBC Bruno.
+      const avaSet = new Set(roster.filter(p => p.avatar).map(p => p.id));
+      // a teammate's chosen name (set via setProfile) lives in the Blobs roster; prefer it.
+      const nameOf = (id, fallback) => { const p = roster.find(x => x.id === id); return (p && p.name) || fallback; };
       let rosterOut;
       if (meHub) {
         const all = await adminUsers(); // full team from Supabase (even those who haven't opened the app yet)
-        if (all && all.length) rosterOut = all.filter(u => !isHub(u.email) && !CONTACT_EXCLUDE.has(u.email)).map(u => ({ id: u.id, name: u.name }));
-        else rosterOut = roster.filter(p => !p.hub && p.id !== meId).map(p => ({ id: p.id, name: p.name })); // fallback: only those who've logged in
-      } else rosterOut = hub ? [{ id: hub.id, name: "BBC Bruno" }] : [];
-      return json({ me: { id: meId, name: meName, email: meEmail, hub: meHub }, roster: rosterOut, conversations: mine });
+        if (all && all.length) rosterOut = all.filter(u => !isHub(u.email) && !CONTACT_EXCLUDE.has(u.email)).map(u => ({ id: u.id, name: nameOf(u.id, u.name), avatar: avaSet.has(u.id) }));
+        else rosterOut = roster.filter(p => !p.hub && p.id !== meId).map(p => ({ id: p.id, name: p.name, avatar: avaSet.has(p.id) }));
+      } else rosterOut = hub ? [{ id: hub.id, name: "BBC Bruno", avatar: avaSet.has(hub.id) }] : [];
+      return json({ me: { id: meId, name: meName, email: meEmail, hub: meHub, avatar: avaSet.has(meId) }, roster: rosterOut, conversations: mine });
     }
 
     // ---------- GET messages ----------
@@ -264,6 +298,11 @@ export default async (req) => {
       if (!conv) return json({ error: "no conv" }, 404);
       if (!conv.members.includes(meId)) return json({ error: "forbidden" }, 403);
 
+      // Idempotency: ignore a repeat of the same client-generated id (double-tap / PWA retry / flaky network).
+      const clientId = body.clientId ? String(body.clientId).slice(0, 40) : null;
+      let msgs = await readJ("msgs:" + convId, []);
+      if (clientId) { const dup = msgs.find(m => m.clientId === clientId); if (dup) return json({ message: dup }); }
+
       const text = body.text != null ? String(body.text).slice(0, 8000) : "";
       let file = null;
       if (body.file && body.file.dataB64) {
@@ -282,8 +321,7 @@ export default async (req) => {
       const ts = Date.now();
       const id = "m" + ts.toString(36) + Math.floor(Math.random() * 1e4).toString(36);
       const device = body.device ? String(body.device).slice(0, 20) : null; // for the BBC Bruno self-chat: which device this note is for
-      const msg = { id, conv: convId, user: meId, name: meName, text, file, device, ts };
-      let msgs = await readJ("msgs:" + convId, []);
+      const msg = { id, conv: convId, user: meId, name: meName, text, file, device, ts, clientId };
       msgs.push(msg);
       if (msgs.length > MAX_MSGS) msgs = msgs.slice(-MAX_MSGS);
       await js.setJSON("msgs:" + convId, msgs);
@@ -291,7 +329,44 @@ export default async (req) => {
       conv.lastTs = ts;
       conv.lastText = file && !text ? "📎 " + file.name : text.slice(0, 80);
       await js.setJSON("convs", convs);
+
+      // best-effort push to the other members (closed-app notifications)
+      if (vapidInit()) {
+        const title = conv.type === "group" ? (conv.name || "BBC Team") : meName;
+        const bodyTxt = file && !text ? "📎 " + file.name : text.slice(0, 120);
+        await Promise.all(conv.members.filter(id => id !== meId).map(async (id) => {
+          const sub = await readJ("sub:" + id, null);
+          if (!sub) return;
+          try { await webpush.sendNotification(sub, JSON.stringify({ title, body: bodyTxt, url: "/chat/" })); }
+          catch (e) { if (e && e.statusCode === 410) { try { await js.delete("sub:" + id); } catch {} } }
+        }));
+      }
       return json({ message: msg });
+    }
+
+    // ---------- POST saveSub (store this user's push subscription) ----------
+    if (act === "saveSub") {
+      if (!body.subscription) return json({ error: "subscription required" }, 400);
+      await js.setJSON("sub:" + meId, body.subscription);
+      return json({ ok: true });
+    }
+
+    // ---------- POST setProfile (change display name + avatar) ----------
+    if (act === "setProfile") {
+      let roster = await readJ("roster", []);
+      let i = roster.findIndex(p => p.id === meId);
+      if (i === -1) { roster.push({ id: meId, name: meName, email: meEmail, hub: meHub, seen: Date.now() }); i = roster.length - 1; }
+      if (body.name) roster[i].name = String(body.name).slice(0, 60);
+      if (body.avatarB64) {
+        const bytes = Buffer.from(String(body.avatarB64), "base64");
+        if (bytes.length > 2 * 1024 * 1024) return json({ error: "avatar too big (max 2 MB)" }, 400);
+        const ab = bytes.buffer.slice(bytes.byteOffset, bytes.byteOffset + bytes.byteLength);
+        await fs.set("avatar:" + meId, ab);
+        await js.setJSON("avatarmeta:" + meId, { type: String(body.avatarType || "image/jpeg").slice(0, 40) });
+        roster[i].avatar = true;
+      }
+      await js.setJSON("roster", roster);
+      return json({ ok: true, name: roster[i].name, avatar: !!roster[i].avatar });
     }
 
     // ---------- POST addMember (add a contact to a group) ----------

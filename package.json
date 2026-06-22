@@ -5,6 +5,7 @@
   "description": "Serverless functions for the BBC Command Center (/os): NocoDB proxy + Gmail sender.",
   "dependencies": {
     "@netlify/blobs": "^8.1.0",
-    "nodemailer": "^6.9.16"
+    "nodemailer": "^6.9.16",
+    "web-push": "^3.6.7"
   }
 }
