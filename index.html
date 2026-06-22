@@ -2452,6 +2452,80 @@
   </section>
 
 
+  <section class="section section--warm" id="weekly-showcase">
+    <style>
+      #weekly-showcase .ws-head{max-width:700px;margin:0 auto 3rem;text-align:center}
+      #weekly-showcase .ws-head h2{margin:.5rem 0 0}
+      #weekly-showcase .ws-head p{margin-top:1rem}
+      .ws-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.4rem}
+      .ws-card{display:flex;flex-direction:column;background:var(--bg-card);border:1px solid rgba(31,53,87,.10);border-radius:var(--radius);padding:1.7rem 1.6rem;text-decoration:none;box-shadow:var(--shadow-xs);transition:transform .35s ease,box-shadow .35s ease,border-color .35s ease}
+      .ws-card:hover{transform:translateY(-5px);box-shadow:var(--shadow-md);border-color:rgba(184,146,62,.45)}
+      .ws-card__icon{font-size:1.9rem;line-height:1;margin-bottom:.9rem}
+      .ws-card__cat{font-family:var(--font-ui);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:.5rem}
+      .ws-card__title{font-family:var(--font-display);font-size:1.22rem;color:var(--deep-blue);line-height:1.25;margin:0 0 .6rem}
+      .ws-card__benefit{font-family:var(--font-body);font-size:.97rem;color:var(--text-body);line-height:1.55;margin:0 0 1.2rem;flex:1}
+      .ws-card__link{font-family:var(--font-ui);font-size:.9rem;font-weight:600;color:var(--deep-blue)}
+      .ws-card:hover .ws-card__link{color:var(--gold)}
+      .ws-foot{display:grid;grid-template-columns:1.5fr 1fr;gap:1.4rem;margin-top:1.4rem}
+      .ws-review{background:var(--bg-card);border:1px solid rgba(31,53,87,.10);border-left:4px solid var(--gold);border-radius:var(--radius);padding:1.7rem 1.8rem;box-shadow:var(--shadow-xs)}
+      .ws-review .review-stars{margin-bottom:.6rem}
+      .ws-review__quote{font-family:var(--font-body);font-style:italic;font-size:1.02rem;color:var(--text-ink);line-height:1.6;margin:0 0 .9rem}
+      .ws-review__author{font-family:var(--font-ui);font-size:.9rem;font-weight:600;color:var(--deep-blue)}
+      .ws-review__link{display:inline-block;margin-top:.7rem;font-family:var(--font-ui);font-size:.82rem;font-weight:600;color:var(--gold);text-decoration:none}
+      .ws-stat{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;background:var(--bg-dark);border-radius:var(--radius);padding:1.9rem 1.6rem;color:var(--text-warm)}
+      .ws-stat__num{font-family:var(--font-display);font-size:3.2rem;line-height:1;color:var(--gold-pale);font-weight:700}
+      .ws-stat__label{font-family:var(--font-body);font-size:.95rem;line-height:1.45;color:var(--text-warm);opacity:.9;margin:.5rem 0 1.2rem;max-width:240px}
+      @media(max-width:900px){.ws-grid{grid-template-columns:1fr}.ws-foot{grid-template-columns:1fr}}
+    </style>
+    <div class="container">
+      <!-- FEATURED:START (auto-generated weekly by _featured/build-featured.mjs from _featured/featured.json — do not hand-edit between these markers) -->
+      <div class="ws-head reveal-soft">
+        <span class="eyebrow eyebrow--gold">This Week at Balay ni Bruno &amp; Co.</span>
+        <h2>Workflows Worth Your Attention This Week</h2>
+        <div class="divider-bar"></div>
+        <p>Every week we build real systems for real business owners. Here are three from this week that could save you hours, no tech skills needed.</p>
+      </div>
+      <div class="ws-grid stagger-group">
+        <a class="ws-card stagger-item" href="can-ai-write-my-email-followups.html">
+          <div class="ws-card__icon">✉️</div>
+          <div class="ws-card__cat">AI &amp; Automation</div>
+          <h3 class="ws-card__title">Can AI write my email follow-ups?</h3>
+          <p class="ws-card__benefit">Stop leads going cold. Your AI drafts the follow-ups and sends them at the right time, so nobody slips through the cracks.</p>
+          <span class="ws-card__link">See how it works &rarr;</span>
+        </a>
+        <a class="ws-card stagger-item" href="can-ai-keep-my-website-updated.html">
+          <div class="ws-card__icon">🔄</div>
+          <div class="ws-card__cat">Websites</div>
+          <h3 class="ws-card__title">Can AI keep my website updated?</h3>
+          <p class="ws-card__benefit">A stale website is an invisible one. We set up your AI to keep pages fresh so Google keeps showing you to customers.</p>
+          <span class="ws-card__link">See how it works &rarr;</span>
+        </a>
+        <a class="ws-card stagger-item" href="how-to-turn-one-video-into-posts-for-every-platform.html">
+          <div class="ws-card__icon">🎬</div>
+          <div class="ws-card__cat">Marketing</div>
+          <h3 class="ws-card__title">One video, every platform</h3>
+          <p class="ws-card__benefit">Record once. Your AI turns that single video into posts shaped for Instagram, Facebook, TikTok, and more.</p>
+          <span class="ws-card__link">See how it works &rarr;</span>
+        </a>
+      </div>
+      <div class="ws-foot">
+        <div class="ws-review reveal-soft">
+          <div class="review-stars">★★★★★</div>
+          <p class="ws-review__quote">"I worked with RJ for about two years, and he helped me with social media, video editing, posting on my Instagram and Facebook account, as well as some help with websites and communicating with team members. He was quick to respond, very knowledgeable, and I enjoyed working with him."</p>
+          <div class="ws-review__author">&mdash; Ryan Tanel, Top Producer Investment Capital</div>
+          <a href="https://share.google/FESMGRclQ5h9yK7jY" target="_blank" rel="noopener noreferrer" class="ws-review__link">See it on Google &#8599;</a>
+        </div>
+        <div class="ws-stat reveal-soft">
+          <div class="ws-stat__num">101</div>
+          <div class="ws-stat__label">workflows &amp; guides published, and counting</div>
+          <a href="insights.html" class="btn btn-gold btn-sm">Browse the library &rarr;</a>
+        </div>
+      </div>
+      <!-- FEATURED:END -->
+    </div>
+  </section>
+
+
   <section class="section section--cream" id="founder">
     <div class="container">
       <div class="founder__grid">
@@ -2629,6 +2703,17 @@
           <li><a href="contact.html">Start a Conversation</a></li>
         </ul>
       </div>
+    </div>
+    <div style="border-top:1px solid rgba(255,255,255,0.08);margin-top:var(--s4);padding-top:var(--s3);">
+      <div class="footer__col-label">Areas We Serve</div>
+      <ul class="footer__links" style="flex-direction:row;flex-wrap:wrap;gap:0.5rem 1.3rem;">
+        <li><a href="business-support-texas.html">Texas</a></li>
+        <li><a href="business-support-georgia.html">Georgia</a></li>
+        <li><a href="business-support-california.html">California</a></li>
+        <li><a href="business-support-new-york.html">New York</a></li>
+        <li><a href="business-support-new-jersey.html">New Jersey</a></li>
+        <li><a href="business-support-florida.html">Florida</a></li>
+      </ul>
     </div>
     <div class="footer__bottom">
       <div class="footer__copyright">&copy; 2026 Balay ni Bruno &amp; Co. All rights reserved.</div>

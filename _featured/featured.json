@@ -1,0 +1,38 @@
+{
+  "week_label": "Week of June 22, 2026",
+  "headline": "Workflows Worth Your Attention This Week",
+  "intro": "Every week we build real systems for real business owners. Here are three from this week that could save you hours, no tech skills needed.",
+  "workflows": [
+    {
+      "icon": "✉️",
+      "category": "AI & Automation",
+      "title": "Can AI write my email follow-ups?",
+      "benefit": "Stop leads going cold. Your AI drafts the follow-ups and sends them at the right time, so nobody slips through the cracks.",
+      "url": "can-ai-write-my-email-followups.html"
+    },
+    {
+      "icon": "🔄",
+      "category": "Websites",
+      "title": "Can AI keep my website updated?",
+      "benefit": "A stale website is an invisible one. We set up your AI to keep pages fresh so Google keeps showing you to customers.",
+      "url": "can-ai-keep-my-website-updated.html"
+    },
+    {
+      "icon": "🎬",
+      "category": "Marketing",
+      "title": "One video, every platform",
+      "benefit": "Record once. Your AI turns that single video into posts shaped for Instagram, Facebook, TikTok, and more.",
+      "url": "how-to-turn-one-video-into-posts-for-every-platform.html"
+    }
+  ],
+  "review": {
+    "quote": "I worked with RJ for about two years, and he helped me with social media, video editing, posting on my Instagram and Facebook account, as well as some help with websites and communicating with team members. He was quick to respond, very knowledgeable, and I enjoyed working with him.",
+    "name": "Ryan Tanel",
+    "title": "Top Producer Investment Capital",
+    "url": "https://share.google/FESMGRclQ5h9yK7jY"
+  },
+  "stat": {
+    "number": "101",
+    "label": "workflows & guides published, and counting"
+  }
+}
