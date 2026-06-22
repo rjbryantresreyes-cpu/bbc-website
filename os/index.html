@@ -1557,9 +1557,6 @@
               "name": "ALL-RYZE"
             },
             {
-              "name": "PRIMEFLEX"
-            },
-            {
               "name": "REAL_CAVALRY"
             },
             {
@@ -2016,6 +2013,14 @@
       "path": "simple-dashboard-to-run-my-online-store.html",
       "group": "Insights / blog",
       "purpose": "Yes. We connect to your store and build one clean screen that shows your whole catalog at a glance: products, stock, and what is running low. You get an app you install on your phone, plus a simple way to request any change and we make it for you.",
+      "status": "live",
+      "noindex": false
+    },
+    {
+      "name": "Can I Have a Company Chat App Like WhatsApp, On My Own System?",
+      "path": "company-chat-app-like-whatsapp.html",
+      "group": "Insights / blog",
+      "purpose": "Yes. We built our own company messenger that works like WhatsApp. Your team sends messages and files in one private app, saved on your own system, on phone and desktop. Here is how it works.",
       "status": "live",
       "noindex": false
     },
@@ -5518,7 +5523,10 @@
       <div class="tc-wrap">
         <div class="tc-channels" id="tc-channels"></div>
         <div class="tc-stream" id="tc-stream"><div class="tc-empty">Loading messages…</div></div>
+        <div class="tc-pending" id="tc-pending" style="display:none"></div>
         <div class="tc-compose">
+          <input type="file" id="tc-file" style="display:none" accept="image/*,video/*,.pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.txt,.csv,.zip" onchange="TeamChat.pickFile(this)">
+          <button type="button" class="tc-attach" title="Attach a file" onclick="document.getElementById('tc-file').click()">📎</button>
           <input id="tc-input" placeholder="Message the BBC crew…" autocomplete="off" onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();TeamChat.send();}">
           <button onclick="TeamChat.send()">Send</button>
         </div>
@@ -6098,13 +6106,27 @@
   .tc-compose input{flex:1;background:var(--bg3);border:1px solid var(--line);border-radius:12px;color:var(--ink);padding:13px;font-size:16px;font-family:var(--ui);}
   .tc-compose input:focus{outline:none;border-color:var(--gold);}
   .tc-compose button{background:var(--gold);color:#0A1422;border:none;border-radius:12px;padding:0 20px;font-weight:700;font-family:var(--ui);min-height:48px;min-width:64px;cursor:pointer;}
+  .tc-attach{background:var(--bg3);border:1px solid var(--line);border-radius:12px;min-width:48px;min-height:48px;font-size:19px;cursor:pointer;color:var(--gold2);}
+  .tc-attach:active{transform:scale(.96);}
+  .tc-pending{display:flex;align-items:center;gap:8px;background:rgba(212,175,55,0.10);border:1px solid var(--line);border-radius:10px;padding:8px 12px;margin-bottom:8px;font-size:13px;color:var(--ink);}
+  .tc-pending .tcp-nm{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+  .tc-pending .tcp-x{cursor:pointer;color:var(--muted);font-size:14px;padding:0 4px;}
+  .tc-pending .tcp-x:hover{color:#ff6b5b;}
+  .tc-att{display:block;margin-bottom:4px;max-width:240px;border-radius:12px;}
+  .tc-att img{border-radius:12px;max-width:240px;max-height:280px;display:block;}
+  video.tc-att{width:240px;background:#000;}
+  .tc-att-file{display:flex;align-items:center;gap:10px;background:var(--bg2);border:1px solid var(--line);border-radius:12px;padding:10px 12px;margin-bottom:4px;text-decoration:none;max-width:260px;}
+  .tc-att-file .fi{font-size:22px;}
+  .tc-att-file .ft{display:flex;flex-direction:column;min-width:0;}
+  .tc-att-file .fn{color:var(--ink);font-size:13.5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+  .tc-att-file .fs{color:var(--muted);font-size:11px;}
 </style>
 <script>
 (function(){
   var API='/.netlify/functions/team-chat';
   var CH=[{key:'team',label:'Team'},{key:'random',label:'Random'}]; // channels (add more anytime)
   var NAMES={rj:'RJ',daryl:'Daryl',krizza:'Krizza',vi:'Vi',ryan:'Ryan',kenz:'Kenz',diego:'Diego',beau:'Beau',kari:'Kari',sonya:'Sonya'};
-  var state={chan:'team',last:0,poll:null,sending:false};
+  var state={chan:'team',last:0,poll:null,sending:false,pending:null};
 
   function me(){
     var user='', name='';
@@ -6121,6 +6143,20 @@
   function timeLabel(ts){ return new Date(ts).toLocaleTimeString(undefined,{hour:'numeric',minute:'2-digit'}); }
   var AI=['cuh','kriz','webby','mai','boogy','jenny','vidz','raphy','casey','sonny','emy','lana','sean','brunz','lc'];
 
+  function fmtSize(n){ n=+n||0; if(n<1024) return n+' B'; if(n<1048576) return (n/1024).toFixed(0)+' KB'; return (n/1048576).toFixed(1)+' MB'; }
+  function fileHtml(f){
+    var src=API+'?file='+encodeURIComponent(f.id), t=(f.type||'');
+    if(t.indexOf('image/')===0) return '<a class="tc-att" href="'+src+'" target="_blank" rel="noopener"><img src="'+src+'" alt="'+esc(f.name)+'" loading="lazy"></a>';
+    if(t.indexOf('video/')===0) return '<video class="tc-att" src="'+src+'" controls playsinline preload="metadata"></video>';
+    return '<a class="tc-att-file" href="'+src+'&dl=1"><span class="fi">📄</span><span class="ft"><span class="fn">'+esc(f.name)+'</span><span class="fs">'+fmtSize(f.size)+' · download</span></span></a>';
+  }
+  function renderPending(){
+    var el=document.getElementById('tc-pending'); if(!el) return;
+    if(!state.pending){ el.style.display='none'; el.innerHTML=''; return; }
+    el.style.display='flex';
+    el.innerHTML='<span class="tcp-ic">📎</span><span class="tcp-nm">'+esc(state.pending.name)+'</span><span class="tcp-x" onclick="TeamChat.clearFile()">✕</span>';
+  }
+
   function render(list){
     var stream=document.getElementById('tc-stream'); if(!stream) return;
     if(!list.length){ stream.innerHTML='<div class="tc-empty">No messages yet in #'+esc(state.chan)+'. Say hi to the crew 👋</div>'; return; }
@@ -6130,9 +6166,11 @@
       var mine=(m.user||'')===meU, isAI=AI.indexOf((m.user||'').toLowerCase())>=0;
       var cls='tc-msg'+(mine?' mine':'')+(isAI?' ai':'');
       var del=(mine||meU==='rj')?'<span class="del" onclick="TeamChat.del(\''+esc(m.id)+'\')">delete</span>':'';
+      var att=m.file?fileHtml(m.file):'';
+      var txt=m.text?('<div class="bub">'+esc(m.text)+'</div>'):'';
       html+='<div class="'+cls+'">'+
         (mine?'':'<div class="who">'+esc(m.name||m.user)+'</div>')+
-        '<div class="bub">'+esc(m.text)+'</div>'+
+        att+txt+
         '<div class="tm">'+timeLabel(m.ts)+(del?' · '+del:'')+'</div>'+
       '</div>';
     });
@@ -6165,12 +6203,24 @@
     },
     chan:function(k){ state.chan=k; state.last=0; renderChannels();
       var s=document.getElementById('tc-stream'); if(s) s.innerHTML='<div class="tc-empty">Loading…</div>'; load(); },
+    pickFile:function(input){
+      var f=input.files&&input.files[0]; if(!f) return;
+      if(f.size>4*1024*1024){ window.toast&&toast('File too big (max 4MB).','err'); input.value=''; return; }
+      var rd=new FileReader();
+      rd.onload=function(){ state.pending={name:f.name,type:f.type,size:f.size,data:rd.result}; renderPending(); };
+      rd.onerror=function(){ window.toast&&toast('Could not read that file.','err'); };
+      rd.readAsDataURL(f); input.value='';
+    },
+    clearFile:function(){ state.pending=null; renderPending(); },
     send:function(){
-      var inp=document.getElementById('tc-input'); if(!inp) return;
-      var text=(inp.value||'').trim(); if(!text||state.sending) return;
-      var m=me(); state.sending=true; inp.value='';
-      fetch(API,{method:'POST',headers:{'content-type':'application/json'},
-        body:JSON.stringify({channel:state.chan,user:m.user,name:m.name,text:text})})
+      var inp=document.getElementById('tc-input'); if(!inp||state.sending) return;
+      var text=(inp.value||'').trim(), p=state.pending;
+      if(!text&&!p) return;
+      var m=me(); state.sending=true;
+      var payload={channel:state.chan,user:m.user,name:m.name,text:text};
+      if(p){ payload.fileName=p.name; payload.fileType=p.type; payload.fileData=p.data; }
+      inp.value=''; state.pending=null; renderPending();
+      fetch(API,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(payload)})
       .then(function(r){return r.json();}).then(function(d){ state.sending=false;
         if(d&&d.error){ window.toast&&toast('Could not send: '+d.error,'err'); inp.value=text; return; } load();
       }).catch(function(){ state.sending=false; inp.value=text; window.toast&&toast('Send failed (deploy needed).','err'); });
