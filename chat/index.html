@@ -133,7 +133,8 @@
   .lightbox.open{display:flex;}
   .lightbox img{max-width:100%;max-height:100%;border-radius:8px;}
   .toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--navy);color:#fff;padding:11px 18px;border-radius:24px;font-size:14px;z-index:90;opacity:0;transition:opacity .2s;pointer-events:none;}
-  .b{position:relative;-webkit-user-select:none;user-select:none;}
+  .b{position:relative;}
+  .b .tx{-webkit-user-select:text;user-select:text;cursor:text;}
   .rx{display:flex;flex-wrap:wrap;gap:4px;margin-top:5px;}
   .rxchip{background:rgba(0,0,0,.06);border:1px solid #0000000f;border-radius:12px;padding:1px 7px;font-size:12px;cursor:pointer;line-height:1.7;}
   .b.out .rxchip{background:rgba(255,255,255,.22);border-color:#ffffff33;color:#fff;}
