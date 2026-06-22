@@ -1,6 +1,6 @@
 // BBC Messenger service worker — installable app shell only.
 // We deliberately do NOT cache API calls or messages (those must always be live).
-const SHELL = "bbc-chat-shell-v7";
+const SHELL = "bbc-chat-shell-v8";
 const ASSETS = ["/chat/", "/chat/index.html", "/chat/icon-192.png", "/chat/icon-512.png"];
 
 self.addEventListener("install", (e) => {
@@ -18,22 +18,34 @@ self.addEventListener("push", (e) => {
   let d = {};
   try { d = e.data ? e.data.json() : {}; } catch { d = { body: e.data && e.data.text() }; }
   const title = d.title || "BBC Messenger";
-  e.waitUntil(self.registration.showNotification(title, {
-    body: (d.body || "New message").slice(0, 140),
-    icon: "/chat/icon-192.png",
-    badge: "/chat/icon-192.png",
-    tag: d.tag || "bbcmsg",
-    data: { url: d.url || "/chat/" },
-  }));
+  e.waitUntil((async () => {
+    await self.registration.showNotification(title, {
+      body: (d.body || "New message").slice(0, 140),
+      icon: "/chat/icon-192.png",
+      badge: "/chat/icon-192.png",
+      tag: d.tag || ("bbcmsg-" + Date.now()),
+      renotify: true,
+      data: { url: d.url || "/chat/" },
+    });
+    // red number on the app icon = how many unread notifications are showing
+    try {
+      if (self.navigator && self.navigator.setAppBadge) {
+        const n = (await self.registration.getNotifications()).length;
+        await self.navigator.setAppBadge(n || 1);
+      }
+    } catch (_) {}
+  })());
 });
 
 self.addEventListener("notificationclick", (e) => {
   e.notification.close();
   const target = (e.notification.data && e.notification.data.url) || "/chat/";
-  e.waitUntil(self.clients.matchAll({ type: "window", includeUncontrolled: true }).then((cs) => {
+  e.waitUntil((async () => {
+    try { if (self.navigator && self.navigator.clearAppBadge) await self.navigator.clearAppBadge(); } catch (_) {}
+    const cs = await self.clients.matchAll({ type: "window", includeUncontrolled: true });
     for (const c of cs) { if (c.url.includes("/chat") && "focus" in c) return c.focus(); }
     if (self.clients.openWindow) return self.clients.openWindow(target);
-  }));
+  })());
 });
 
 self.addEventListener("fetch", (e) => {

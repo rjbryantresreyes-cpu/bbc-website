@@ -146,6 +146,8 @@
   .arow{display:flex;gap:4px;flex-wrap:wrap;border-top:1px solid #eee;padding-top:5px;justify-content:center;}
   .ra{font-size:13px;cursor:pointer;padding:6px 10px;border-radius:10px;color:var(--navy);white-space:nowrap;}
   .ra:active{background:#eee;}
+  .unread{background:#E24B4A;color:#fff;border-radius:11px;min-width:20px;height:20px;display:inline-flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;padding:0 6px;margin-top:5px;margin-left:auto;}
+  .row .rt{display:flex;flex-direction:column;align-items:flex-end;}
   .toast.show{opacity:1;}
 
   @media(max-width:899px){
@@ -388,6 +390,8 @@ async function refreshList(){
     });
   }
   window.__convSeen=next; window.__convSeenInit=true;
+  // the chat you're currently viewing stays read (don't badge it)
+  if(CUR){const oc=convs.find(c=>c.id===CUR.id);if(oc&&oc.unread){oc.unread=0;api(API,'',{method:'POST',body:{action:'markRead',conv:CUR.id}}).catch(()=>{});}}
   CONVS=convs; renderList();
 }
 function notify(title,body){
@@ -436,15 +440,23 @@ function renderList(){
     return `<div class="row ${CUR&&CUR.id===c.id?'active':''}" onclick="openConv('${c.id}')">
       <div class="av" style="background:${col};width:50px;height:50px;font-size:19px;overflow:hidden">${avHtml}</div>
       <div class="mid"><div class="nm">${esc(t)}</div><div class="last">${esc(last)}</div></div>
-      <div class="rt"><div class="when">${whenLabel(c.lastTs)}</div></div>
+      <div class="rt"><div class="when">${whenLabel(c.lastTs)}</div>${c.unread>0?'<div class="unread">'+(c.unread>99?'99+':c.unread)+'</div>':''}</div>
     </div>`;
   }).join('');
+  updateBadge();
+}
+function updateBadge(){
+  const total=(CONVS||[]).reduce((a,c)=>a+(c.unread||0),0);
+  try{ if(navigator.setAppBadge){ total>0?navigator.setAppBadge(total):(navigator.clearAppBadge&&navigator.clearAppBadge()); } }catch(e){}
 }
 
 /* ---------- conversation ---------- */
 async function openConv(id){
   CUR=CONVS.find(c=>c.id===id); if(!CUR)return;
   lastTs=0; MSGS=[];
+  // opening a chat marks it read -> clear its unread + the app-icon badge
+  if(CUR.unread){CUR.unread=0;updateBadge();}
+  api(API,'',{method:'POST',body:{action:'markRead',conv:CUR.id}}).catch(()=>{});
   document.getElementById('noChat').classList.add('hide');
   document.getElementById('chatActive').classList.remove('hide');
   const t=convTitle(CUR),grp=CUR.type==='group',self=CUR.type==='self';

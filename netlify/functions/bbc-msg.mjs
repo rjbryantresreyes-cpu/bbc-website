@@ -213,6 +213,17 @@ export default async (req) => {
       } catch { /* never block bootstrap on group ensure */ }
       const convs = await readJ("convs", []);
       const mine = convs.filter(c => c.members.includes(meId)).sort((a, b) => (b.lastTs || 0) - (a.lastTs || 0));
+      // unread per conversation (messages newer than the user's last-read mark, not sent by them)
+      const reads = await readJ("reads:" + meId, {});
+      const mineWithUnread = await Promise.all(mine.map(async (c) => {
+        const r = reads[c.id] || 0;
+        let unread = 0;
+        if ((c.lastTs || 0) > r && c.type !== "self") {
+          const ms = await readJ("msgs:" + c.id, []);
+          unread = ms.filter(m => (m.ts || 0) > r && m.user !== meId).length;
+        }
+        return { ...c, unread };
+      }));
       // FLAT TEAM DIRECTORY: every user sees every teammate (RJ shows as "BBC Bruno"); clients excluded.
       const avaSet = new Set(roster.filter(p => p.avatar).map(p => p.id));
       // a teammate's chosen name (set via setProfile) lives in the Blobs roster; prefer it.
@@ -226,7 +237,7 @@ export default async (req) => {
         rosterOut = roster.filter(p => p.id !== meId && !CONTACT_EXCLUDE.has((p.email || "").toLowerCase()))
           .map(p => ({ id: p.id, name: p.hub ? "BBC Bruno" : p.name, avatar: avaSet.has(p.id) }));
       }
-      return json({ me: { id: meId, name: meName, email: meEmail, hub: meHub, avatar: avaSet.has(meId) }, roster: rosterOut, conversations: mine });
+      return json({ me: { id: meId, name: meName, email: meEmail, hub: meHub, avatar: avaSet.has(meId) }, roster: rosterOut, conversations: mineWithUnread });
     }
 
     // ---------- GET messages ----------
@@ -398,6 +409,16 @@ export default async (req) => {
       conv.lastText = last ? (last.file && !last.text ? "📎 " + last.file.name : (last.text || "").slice(0, 80)) : "";
       if (last) conv.lastTs = last.ts;
       await js.setJSON("convs", convs);
+      return json({ ok: true });
+    }
+
+    // ---------- POST markRead (mark a conversation read up to now) ----------
+    if (act === "markRead") {
+      const convId = String(body.conv || "");
+      if (!convId) return json({ error: "conv required" }, 400);
+      const reads = await readJ("reads:" + meId, {});
+      reads[convId] = Date.now();
+      await js.setJSON("reads:" + meId, reads);
       return json({ ok: true });
     }
 
