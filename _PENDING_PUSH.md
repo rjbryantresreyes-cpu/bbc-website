@@ -12,6 +12,7 @@
 ---
 
 ## ✅ BUILT + STAGED (all done locally, just commit + push when credit's back)
+- **/os CRM page → Brevo (NEW, 2026-06-22)** — replaced the NocoDB CRM with a Brevo-powered CRM: list tabs + live counts (Active/Old/Possible/Ecommerce/Builder/Remodeler/Design), searchable contact list, inline editable **Status** dropdown (New/Contacted/Interested/Proposal/Won/Lost), and add-contact. New function `netlify/functions/brevo.mjs` (key server-side). Edited BOTH /os copies (repo `os/index.html` + Drive `COMMAND_CENTER/app/index.html`). JS validated. ⚠️ **At deploy: set Netlify env var `BREVO_API_KEY`** (Site settings → Environment variables) or the CRM page can't authenticate. Send-email panel kept; old NocoDB A/B tracker retired.
 - **our-work.html** — S. Riviere client card updated (editorial online store + Olivia AI). PLUS: AJ Battle card fixed (Visa→Vi, EA role, recent info). PLUS: NEW **MNJ Insurance founding-client card** (gold "Founding Client" treatment, links to the story page).
 - **how-balay-ni-bruno-started.html** — NEW founder origin-story page ("How Did Balay ni Bruno & Co. Start?"), centered on MNJ Insurance / Julie Jennings as the gateway client + the paycheck-vs-relationship story. Article+FAQPage schema, step-flow + takeaways, CTA. Category "Our Story".
 - **our-work.html (Crown Limited Supply card REFRAMED)** — was framed as Kenz ops support; now reframed to RJ's real founding story (his first Shopify + Klaviyo + Amazon, built/ran end-to-end), gold "Foundational Client" treatment, team badge Bruno, links to the new growth-story page. ⚠️ NOTE: removed the "Kenz · Operations & Content" badge per RJ's account — if Kenz also worked CLS, RJ to confirm and we add Kenz back.
@@ -79,13 +80,12 @@ git push            # Netlify auto-deploys
 - ⚠️ AFTER PUSH: in Netlify dashboard → Forms, enable an **email notification to rj@balaynibruno.co** for the 3 `dhes-*` forms (one-time). Netlify only detects the forms after the first successful deploy.
 - Verified: mobile/desktop render clean (headless screenshots; right-edge clip is a capture artifact, confirmed against live contact.html). Mirrored to `BBC WEBSITE HTML\clients\dhes\`.
 
-## ⏳ ADDED 2026-06-21 — BBC Team Chat in /os (NEW)
-- **netlify/functions/team-chat.mjs** — NEW. Human-to-human group chat store on Netlify Blobs (same engine as cards.mjs, no token/DB). GET (list, optional ?channel + ?since), POST (send / delete). Caps to last 500 msgs. The AI family can read+post via the same endpoint. Data lives in BBC's own Netlify account = "saved on our system."
-- **os/index.html** — added `views.team` (chat UI: channel chips #Team/#Random, message stream, compose bar), a "BBC Team Chat" entry card at top of the More view, a `go('team')` hook, + the TeamChat style/script block (polls every 4s, attributes msgs to the logged-in `bbc_os_editor`, mine/others/AI bubble styles, delete by sender or RJ). Mobile-first (16px inputs, 48px send, 44px+ targets, 100dvh, safe-area inset).
-- **SOURCE also edited** (`BBC Operating System/03_AI_OPERATING_SYSTEM/COMMAND_CENTER/app/index.html`) — same 3 edits, so a dashboard sync can't wipe it. Repo + source in sync.
-- No env/setup needed: Netlify Blobs is built-in. Chat works the moment the site deploys.
-- ⚠️ NOT yet visually verified live — /os is login-gated + Blobs needs the Netlify runtime, and deploys are frozen. Verify mobile 375/768/1280 right after the batch deploys (open More → BBC Team Chat, send a test message from two devices).
-- ⏳ v2 ideas (later): per-client channels, @AI to ping Cuh into the thread, mirror messages to Drive for permanent archive, unread badge on the nav.
+## ✅ LIVE 2026-06-22 — BBC Team Chat + Resources Apps section (DEPLOYED)
+- **netlify/functions/team-chat.mjs** — LIVE. Human-to-human group chat store on Netlify Blobs (same engine as cards.mjs, no token/DB). GET (list, ?channel + ?since), POST (send / delete). Caps 500 msgs. AI family can read+post via the same endpoint. Data in BBC's own Netlify = "saved on our system." Verified live: POST+GET round-trip works.
+- **os/index.html** — `views.team` chat UI + More-view entry + `go('team')` hook + TeamChat poll script (already shipped earlier by the dashboard-sync auto-commit; SOURCE `COMMAND_CENTER/app/index.html` carries it so syncs keep it).
+- **resources.html** — NEW "Apps & Dashboards" section: BBC Team Chat (→ os/#team), Command Center, client dashboards (WW/SR/Cavalry). Mirrored to `BBC WEBSITE HTML\`.
+- Deployed 2026-06-22 (commit 838b52b). The successful build confirmed **Netlify credit is back** as of this date.
+- ⏳ v2 ideas (later): per-client channels, @AI to ping Cuh into the thread, mirror messages to Drive for permanent archive, unread badge on the nav, push notifications.
 
 ## ⏳ ADDED 2026-06-16 — Design-templates insight page (NEW)
 - **update-brand-templates-without-a-designer.html** — NEW /insights page. "Can You Update Your Brand's Design Templates Without a Designer?" Anonymized capability page (we execute a brand's design templates in-house, swap copy + image, keep it exactly on-brand). Born from the Pine Crest Fabrics assessment workflow — NO client named, fully generic. Article + FAQPage schema, before/after + horizontal step-flow + cost-table (typical market ranges, labeled) + tool-stack + tip box + key takeaways. Category "Marketing". Plain English, no em-dashes, CTA = Book a Strategy Call. ✅ Verified mobile 375 clean, no h-overflow, no console errors.

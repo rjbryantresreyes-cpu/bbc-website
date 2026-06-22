@@ -4414,21 +4414,20 @@
   const NOCODB_URL='https://app.nocodb.com/wryboloy/p0zn4yka8zr49iu';
   const NOCODB_SHARED='https://app.nocodb.com/base/5ceec4eb-5f5f-41a5-ad36-5054bcd46dcb';
   const EMIN='background:#0d1320;border:1px solid #22324d;color:#F5F1EA;border-radius:9px;padding:10px 12px;font-size:14px;font-family:inherit;outline:none';
-  views.crm=()=>`<h2 class="vt">CRM + Email</h2><div class="vsub">Your CRM on top. Send email below. Both live.</div>
-    <div style="display:flex;gap:8px;align-items:center;margin:0 0 8px"><a class="morelink" style="margin:0" href="${NOCODB_URL}" target="_blank" rel="noopener">↗ Edit in full NocoDB</a></div>
-    <div class="sec" style="margin-top:2px">Action center</div>
-    <div class="panelgrid" id="camp-tracker"><div class="panel"><span class="ptitle">Loading…</span><div class="gauge-sub">Reading your CRM + inbox.</div></div></div>
-    <div class="sec" style="margin-top:16px">Pipeline at a glance</div>
-    <div class="panel" style="display:block"><div id="crm-pipe" style="min-height:240px"><div class="gauge-sub">Loading chart…</div></div></div>
-    <div class="sec" style="margin-top:16px">Inbox <span class="gauge-sub" style="font-weight:400">(tap to read)</span></div>
-    <div id="crm-inbox"><div class="panel"><span class="ptitle">Loading inbox…</span></div></div>
-    <div class="sec" style="margin-top:16px">Contacts <span class="gauge-sub" style="font-weight:400">(change Status with the dropdown · tap a name for thread + notes)</span></div>
-    <input id="crm-contact-search" placeholder="Search contacts by name, company, email..." oninput="filterContacts(this.value)" style="${EMIN};width:100%;box-sizing:border-box;margin-bottom:8px">
-    <div id="crm-contacts" style="max-height:360px;overflow:auto;border-radius:12px"><div class="panel"><span class="ptitle">Loading contacts…</span></div></div>
-    <div class="sec" style="margin-top:16px">Your CRM <span class="gauge-sub" style="font-weight:400">(view-only here — change Status in the Contacts list above, or tap ↗ Edit in full NocoDB)</span></div>
-    <div style="position:relative;width:100%;height:50vh;min-height:320px;border-radius:14px;overflow:hidden;background:#fff;box-shadow:0 6px 24px rgba(0,0,0,.28)">
-      <iframe src="${NOCODB_SHARED}" title="BBC CRM (NocoDB)" allow="clipboard-read; clipboard-write" style="width:100%;height:100%;border:0;display:block"></iframe>
+  views.crm=()=>`<h2 class="vt">CRM</h2><div class="vsub">Your leads and clients, organized. Tap a status to update it. Send email below.</div>
+    <div id="bcrm-tabs" style="display:flex;gap:8px;overflow-x:auto;padding-bottom:6px;margin:6px 0 10px"><div class="gauge-sub">Loading lists…</div></div>
+    <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:0 0 10px">
+      <input id="bcrm-q" placeholder="Search name, company, email" oninput="bcrmFilter()" style="${EMIN};flex:1;min-width:160px">
+      <button onclick="bcrmAddToggle()" style="background:#D4AF37;color:#0f1520;border:0;font-weight:700;padding:10px 16px;border-radius:9px;cursor:pointer;min-height:44px">+ Add contact</button>
     </div>
+    <div id="bcrm-add" style="display:none;gap:8px;flex-wrap:wrap;background:#0d1320;border:1px solid #22324d;border-radius:10px;padding:10px;margin-bottom:10px">
+      <input id="bcrm-name" placeholder="Name" style="${EMIN};width:130px">
+      <input id="bcrm-co" placeholder="Company" style="${EMIN};width:140px">
+      <input id="bcrm-em" placeholder="Email" style="${EMIN};width:170px">
+      <button onclick="bcrmAdd()" style="background:#2a6df0;color:#fff;border:0;font-weight:600;padding:10px 16px;border-radius:9px;cursor:pointer;min-height:44px">Save</button>
+    </div>
+    <div id="bcrm-toast" class="gauge-sub" style="margin:0 0 8px;color:#4ADE80;min-height:16px"></div>
+    <div id="bcrm-rows" style="max-height:460px;overflow:auto;border-radius:12px;border:1px solid #1a2436"><div class="panel"><span class="ptitle">Loading contacts…</span></div></div>
     <div class="sec" style="margin-top:16px">Send email</div>
     <div class="panel" style="display:block">
       <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px">
@@ -4461,6 +4460,57 @@
         <span id="em-status" class="gauge-sub" style="flex:1;min-width:140px"></span>
       </div>
     </div>`;
+  // ---- Brevo CRM (replaces NocoDB) ----
+  const BST={New:['#2a3346','#cdd6e6'],Contacted:['#13335c','#9fc4f4'],Interested:['#3d2f08','#f0c14b'],Proposal:['#241d4a','#b9b0f0'],Won:['#17340a','#9bd36a'],Lost:['#3a1212','#f29a9a']};
+  const BSTK=['New','Contacted','Interested','Proposal','Won','Lost'];
+  window.__bcrm={lists:[],cur:null};
+  window.loadBrevoCrm=async()=>{
+    const tabsEl=document.getElementById('bcrm-tabs'); if(!tabsEl) return;
+    try{
+      const j=await (await fetch('/.netlify/functions/brevo?action=lists')).json();
+      const lists=j.lists||[]; window.__bcrm.lists=lists;
+      if(!window.__bcrm.cur){ const act=lists.find(l=>/active/i.test(l.name)); window.__bcrm.cur=act?act.id:(lists[0]&&lists[0].id); }
+      tabsEl.innerHTML=lists.map(l=>`<div onclick="bcrmPick(${l.id})" style="white-space:nowrap;cursor:pointer;border-radius:9px;padding:7px 11px;font-size:13px;display:flex;gap:7px;align-items:center;border:${l.id===window.__bcrm.cur?'2px solid #D4AF37':'1px solid #22324d'};background:${l.id===window.__bcrm.cur?'#1c1407':'#0d1320'}">${esc(l.name)}<b style="font-weight:700">${(l.count||0).toLocaleString()}</b></div>`).join('')||'<div class="gauge-sub">No lists.</div>';
+      await bcrmLoadRows();
+    }catch(e){ tabsEl.innerHTML='<div class="gauge-sub">CRM loads on the live site (balaynibruno.co/os).</div>'; }
+  };
+  window.bcrmPick=(id)=>{ window.__bcrm.cur=id; window.loadBrevoCrm(); };
+  async function bcrmLoadRows(){
+    const box=document.getElementById('bcrm-rows'); if(!box) return; const id=window.__bcrm.cur;
+    box.innerHTML='<div class="panel"><span class="ptitle">Loading…</span></div>';
+    try{
+      const j=await (await fetch('/.netlify/functions/brevo?action=contacts&list='+id+'&limit=100')).json();
+      const cs=j.contacts||[];
+      window.__crmContacts=cs.map(c=>({Email:c.email,'First Name':(c.name||'').split(' ')[0],Organization:c.company,Status:c.status}));
+      box.innerHTML=cs.length?cs.map(bcrmRow).join(''):'<div class="panel"><span class="gauge-sub">No contacts in this list yet.</span></div>';
+      bcrmFilter();
+    }catch(e){ box.innerHTML='<div class="panel"><span class="gauge-sub">Contacts load on the live site.</span></div>'; }
+  }
+  function bcrmIni(n){ return ((n||'?').split(' ').filter(Boolean).slice(0,2).map(x=>x[0]).join('')||'?').toUpperCase(); }
+  function bcrmRow(c){
+    const nm=c.name||c.email.split('@')[0]; const st=BST[c.status]||BST.New; const sv=BSTK.includes(c.status)?c.status:'New';
+    const opt=BSTK.map(k=>`<option ${k===sv?'selected':''}>${k}</option>`).join('');
+    const sd=(nm+' '+(c.company||'')+' '+c.email).toLowerCase().replace(/"/g,'');
+    return `<div class="cc-row" data-search="${sd}" style="display:flex;align-items:center;gap:10px;padding:10px 8px;border-bottom:1px solid #1a2436">
+      <span style="width:30px;height:30px;border-radius:50%;background:#13335c;color:#9fc4f4;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;flex:none">${bcrmIni(nm)}</span>
+      <div style="min-width:0;flex:1"><div style="font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${esc(nm)}</div><div class="gauge-sub" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${esc(c.company||'')}${c.company?' · ':''}${esc(c.email)}</div></div>
+      <select onchange="bcrmStatus('${c.email.replace(/'/g,'')}',this)" style="border:0;border-radius:999px;padding:7px 10px;font-size:12px;font-weight:600;cursor:pointer;min-height:34px;background:${st[0]};color:${st[1]}">${opt}</select>
+    </div>`;
+  }
+  window.bcrmStatus=async(email,sel)=>{
+    const st=BST[sel.value]||BST.New; sel.style.background=st[0]; sel.style.color=st[1];
+    const t=document.getElementById('bcrm-toast'); if(t) t.textContent='Saving…';
+    try{ await fetch('/.netlify/functions/brevo',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({action:'status',email,status:sel.value})}); if(t) t.textContent='Saved '+email.split('@')[0]+' → '+sel.value; }
+    catch(e){ if(t) t.textContent='Could not save (live site only).'; }
+  };
+  window.bcrmFilter=()=>{ const q=((document.getElementById('bcrm-q')||{}).value||'').toLowerCase(); document.querySelectorAll('#bcrm-rows .cc-row').forEach(el=>{ el.style.display=(el.dataset.search||'').includes(q)?'':'none'; }); };
+  window.bcrmAddToggle=()=>{ const b=document.getElementById('bcrm-add'); if(b) b.style.display=b.style.display==='none'?'flex':'none'; };
+  window.bcrmAdd=async()=>{
+    const nm=(document.getElementById('bcrm-name').value||'').trim(), co=(document.getElementById('bcrm-co').value||'').trim(), em=(document.getElementById('bcrm-em').value||'').trim();
+    const t=document.getElementById('bcrm-toast'); if(!em||!em.includes('@')){ if(t)t.textContent='Enter a valid email.'; return; }
+    try{ await fetch('/.netlify/functions/brevo',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({action:'add',email:em,firstName:nm.split(' ')[0]||'',lastName:nm.split(' ').slice(1).join(' '),company:co,listId:window.__bcrm.cur})}); if(t)t.textContent='Added '+(nm||em); document.getElementById('bcrm-name').value='';document.getElementById('bcrm-co').value='';document.getElementById('bcrm-em').value=''; bcrmAddToggle(); bcrmLoadRows(); }
+    catch(e){ if(t)t.textContent='Could not add (live site only).'; }
+  };
   window.loadCampaignStats=async()=>{
     const board=document.getElementById('camp-tracker'); if(!board) return;
     try{
@@ -5647,7 +5697,7 @@
   window.go=v=>{ window.curView=v; window.curClient=null; window.__curClientSlug=null; app.innerHTML=`<div class="view">${views[v]()}</div>`; window.scrollTo(0,0);
     if(!window.__routing){ var __nh='#'+v; if(location.hash!==__nh){ try{ location.hash=__nh; }catch(e){} } }
     document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('active',b.dataset.v===v));
-    sheet.classList.remove('open'); if(v==='crm'&&window.loadCampaignStats){ window.loadCampaignStats(); window.loadInbox&&window.loadInbox('crm-inbox',true); window.loadCrmContacts&&window.loadCrmContacts(); } if(v==='inbox'&&window.loadInbox) window.loadInbox(); if(v==='home'&&window.loadHomeAttention) window.loadHomeAttention(); if(v==='board'&&window.Board) window.Board.render(); if(v==='team'&&window.TeamChat) window.TeamChat.enter(); };
+    sheet.classList.remove('open'); if(v==='crm'&&window.loadBrevoCrm){ window.loadBrevoCrm(); } if(v==='inbox'&&window.loadInbox) window.loadInbox(); if(v==='home'&&window.loadHomeAttention) window.loadHomeAttention(); if(v==='board'&&window.Board) window.Board.render(); if(v==='team'&&window.TeamChat) window.TeamChat.enter(); };
   window.filterCards=(inp,wrapId)=>{ const q=inp.value.toLowerCase(); const wrap=document.getElementById(wrapId);
     wrap.querySelectorAll('.card,.wfrow,.clientbox,.opitem').forEach(c=>{ const hay=(c.dataset.search||c.textContent).toLowerCase(); c.style.display=hay.includes(q)?'':'none'; });
     wrap.querySelectorAll('.wfcat').forEach(p=>{ const any=[...p.querySelectorAll('.wfrow')].some(r=>r.style.display!=='none'); p.style.display=any?'':'none'; }); };
