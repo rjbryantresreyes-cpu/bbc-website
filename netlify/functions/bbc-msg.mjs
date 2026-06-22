@@ -213,16 +213,19 @@ export default async (req) => {
       } catch { /* never block bootstrap on group ensure */ }
       const convs = await readJ("convs", []);
       const mine = convs.filter(c => c.members.includes(meId)).sort((a, b) => (b.lastTs || 0) - (a.lastTs || 0));
-      // hub (BBC Bruno) sees every VA; a VA only ever sees BBC Bruno.
+      // FLAT TEAM DIRECTORY: every user sees every teammate (RJ shows as "BBC Bruno"); clients excluded.
       const avaSet = new Set(roster.filter(p => p.avatar).map(p => p.id));
       // a teammate's chosen name (set via setProfile) lives in the Blobs roster; prefer it.
       const nameOf = (id, fallback) => { const p = roster.find(x => x.id === id); return (p && p.name) || fallback; };
       let rosterOut;
-      if (meHub) {
-        const all = await adminUsers(); // full team from Supabase (even those who haven't opened the app yet)
-        if (all && all.length) rosterOut = all.filter(u => !isHub(u.email) && !CONTACT_EXCLUDE.has(u.email)).map(u => ({ id: u.id, name: nameOf(u.id, u.name), avatar: avaSet.has(u.id) }));
-        else rosterOut = roster.filter(p => !p.hub && p.id !== meId).map(p => ({ id: p.id, name: p.name, avatar: avaSet.has(p.id) }));
-      } else rosterOut = hub ? [{ id: hub.id, name: "BBC Bruno", avatar: avaSet.has(hub.id) }] : [];
+      const all = await adminUsers(); // full team from Supabase (even those who haven't opened the app yet)
+      if (all && all.length) {
+        rosterOut = all.filter(u => u.id !== meId && !CONTACT_EXCLUDE.has(u.email))
+          .map(u => ({ id: u.id, name: isHub(u.email) ? "BBC Bruno" : nameOf(u.id, u.name), avatar: avaSet.has(u.id) }));
+      } else {
+        rosterOut = roster.filter(p => p.id !== meId && !CONTACT_EXCLUDE.has((p.email || "").toLowerCase()))
+          .map(p => ({ id: p.id, name: p.hub ? "BBC Bruno" : p.name, avatar: avaSet.has(p.id) }));
+      }
       return json({ me: { id: meId, name: meName, email: meEmail, hub: meHub, avatar: avaSet.has(meId) }, roster: rosterOut, conversations: mine });
     }
 
@@ -266,14 +269,7 @@ export default async (req) => {
       if (!members.includes(meId)) members.push(meId);
       members = [...new Set(members)];
 
-      // Hub-and-spoke: a VA can only ever start a DM with BBC Bruno (no groups, no VA-to-VA).
-      if (!meHub) {
-        const hub = await readJ("hub", null);
-        if (!hub) return json({ error: "BBC Bruno is not set up yet. Ask RJ to sign in once." }, 400);
-        type = "dm";
-        members = [meId, hub.id];
-      }
-
+      // Flat team: anyone can DM or group with anyone on the team.
       if (type === "dm" && members.length !== 2) return json({ error: "a DM needs exactly one other person" }, 400);
       if (type === "group" && members.length < 2) return json({ error: "pick at least one person" }, 400);
 

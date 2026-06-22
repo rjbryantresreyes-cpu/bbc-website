@@ -346,7 +346,7 @@ async function start(){
   // BBC Bruno (the hub) always has a pinned self-chat to message his own devices.
   if(ME.hub){ await ensureDevices(); await ensureTeamGroup(); }
   // A VA always has exactly one contact (BBC Bruno). Auto-open that chat so it feels direct.
-  if(!ME.hub && !CONVS.length && ROSTER.length){ await startDM(ROSTER[0].id,true); }
+  /* flat team: no auto-DM — everyone lands on their chat list (BBC Team group + contacts via ✎) */
   renderList();
   if(listT)clearInterval(listT); listT=setInterval(refreshList,6000);
 }
@@ -520,7 +520,7 @@ function openContacts(){
   document.getElementById('menu').classList.remove('open');
   const acts=document.getElementById('contactsActions');
   document.getElementById('contactsTitle').textContent=ME.hub?'New chat':'Contacts';
-  acts.innerHTML = ME.hub ? '<div class="scr-action" onclick="openGroup()"><div class="ic">👥</div>New group</div>' : '';
+  acts.innerHTML = '<div class="scr-action" onclick="openGroup()"><div class="ic">👥</div>New group</div>';
   const others=ROSTER.filter(p=>p.id!==ME.id);
   document.getElementById('contactsLabel').textContent=ME.hub?('Team ('+others.length+')'):'Contact';
   document.getElementById('people').innerHTML=others.length?others.map(p=>`<div class="scr-row" onclick="startDM('${p.id}')"><div class="av" style="background:${colorFor(p.id)}">${esc(initial(p.name))}</div><div class="nm">${esc(p.name)}</div></div>`).join('')
