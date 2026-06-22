@@ -198,6 +198,12 @@
       <div class="form"><button class="primary" onclick="createGroup()">Create group</button></div>
     </div>
 
+    <!-- ADD MEMBER screen (add a contact to the current group) -->
+    <div class="screen" id="addMemberScreen">
+      <div class="hd"><button class="back" onclick="closeScreen('addMemberScreen')">&larr;</button><div class="htitle"><div class="t">Add to group</div><div class="s">Anyone in your contacts</div></div></div>
+      <div class="scr-body" id="addMemberPeople"></div>
+    </div>
+
     <!-- ADD VA screen (hub only) -->
     <div class="screen" id="addvaScreen">
       <div class="hd"><button class="back" onclick="closeScreen('addvaScreen')">&larr;</button><div class="htitle"><div class="t">Add a team member</div></div></div>
@@ -224,6 +230,7 @@
         <button class="back" onclick="closeChat()">&larr;</button>
         <div class="av" id="chAv" style="background:var(--navy)"></div>
         <div class="htitle"><div class="t" id="chNm"></div><div class="s" id="chSub"></div></div>
+        <button class="back" id="chAdd" style="display:none;margin-left:auto" title="Add to group" onclick="openAddMember()">＋</button>
       </div>
       <div class="stream" id="stream"></div>
       <div class="devbar hide" id="devbar"></div>
@@ -358,6 +365,7 @@ async function openConv(id){
   document.getElementById('chAv').textContent=self?initial(CUR.device||CUR.name||'D'):(grp?'#':initial(t));
   document.getElementById('chAv').style.background=(self||grp)?'#B8923E':colorFor(CUR.members.find(m=>m!==ME.id)||CUR.id);
   document.getElementById('chSub').textContent=self?'Your device note · syncs to all your devices':(grp?CUR.members.map(m=>{const p=ROSTER.find(x=>x.id===m);return p?p.name:(m===ME.id?'You':'');}).filter(Boolean).join(', '):'');
+  const chAddBtn=document.getElementById('chAdd'); if(chAddBtn) chAddBtn.style.display=(grp&&ME.hub)?'':'none';
   document.getElementById('devbar').classList.add('hide');
   document.getElementById('app').classList.add('in-chat');
   document.getElementById('stream').innerHTML='';
@@ -459,6 +467,25 @@ async function createGroup(){
   const d=r&&await r.json(); if(!r||!r.ok||!d.conversation)return toast((d&&d.error)||'Could not create group.');
   if(!CONVS.find(c=>c.id===d.conversation.id))CONVS.unshift(d.conversation);
   closeScreen('groupScreen');closeScreen('contactsScreen');renderList();openConv(d.conversation.id);
+}
+/* add a contact to the current group */
+function openAddMember(){
+  if(!CUR||CUR.type!=='group')return;
+  const inGroup=new Set(CUR.members);
+  const cands=ROSTER.filter(p=>p.id!==ME.id&&!inGroup.has(p.id));
+  const el=document.getElementById('addMemberPeople');
+  el.innerHTML=cands.length?cands.map(p=>`<div class="scr-row" onclick="addMemberDo('${p.id}',this)"><div class="av" style="background:${colorFor(p.id)}">${esc(initial(p.name))}</div><div class="nm">${esc(p.name)}</div><div class="chk">＋</div></div>`).join(''):'<div class="empty" style="padding:20px">Everyone in your contacts is already in this group.</div>';
+  openScreen('addMemberScreen');
+}
+async function addMemberDo(id,row){
+  if(row)row.style.opacity='.5';
+  const r=await api(API,'',{method:'POST',body:{action:'addMember',conv:CUR.id,userId:id}});
+  const d=r&&await r.json();
+  if(!r||!r.ok||!d.conversation){toast((d&&d.error)||'Could not add.');if(row)row.style.opacity='1';return;}
+  const i=CONVS.findIndex(c=>c.id===d.conversation.id); if(i>=0)CONVS[i]=d.conversation; CUR=d.conversation;
+  if(row)row.remove();
+  document.getElementById('chSub').textContent=CUR.members.map(m=>{const p=ROSTER.find(x=>x.id===m);return p?p.name:(m===ME.id?'You':'');}).filter(Boolean).join(', ');
+  toast('Added to '+(CUR.name||'group')+'.');
 }
 /* add VA (hub) */
 function openAddVA(){document.getElementById('menu').classList.remove('open');openScreen('addvaScreen');loadVAs();}

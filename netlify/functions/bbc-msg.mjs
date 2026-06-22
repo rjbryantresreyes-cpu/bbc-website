@@ -157,6 +157,29 @@ export default async (req) => {
     if (req.method === "GET" && action === "bootstrap") {
       const roster = await upsertRoster();
       const hub = await readJ("hub", null);
+      // Ensure the shared "BBC Team" group exists and includes everyone on the team (hub + all VAs).
+      // Runs on every bootstrap, so new accounts (e.g. Krizza) auto-join the moment they first open the app.
+      try {
+        const all = await adminUsers();
+        const teamIds = (all && all.length)
+          ? [...new Set(all.filter(u => !CONTACT_EXCLUDE.has(u.email)).map(u => u.id))]
+          : null;
+        if (teamIds && teamIds.length) {
+          if (!teamIds.includes(meId)) teamIds.push(meId);
+          const convs0 = await readJ("convs", []);
+          let team = convs0.find(c => c.type === "group" && (c.name || "") === "BBC Team");
+          let changed = false;
+          if (!team) {
+            team = { id: "cteam" + Date.now().toString(36), type: "group", name: "BBC Team", members: teamIds, createdBy: meId, lastTs: Date.now(), lastText: "" };
+            convs0.push(team); changed = true;
+          } else {
+            const set = new Set(team.members);
+            for (const id of teamIds) if (!set.has(id)) { set.add(id); changed = true; }
+            if (changed) team.members = [...set];
+          }
+          if (changed) await js.setJSON("convs", convs0);
+        }
+      } catch { /* never block bootstrap on group ensure */ }
       const convs = await readJ("convs", []);
       const mine = convs.filter(c => c.members.includes(meId)).sort((a, b) => (b.lastTs || 0) - (a.lastTs || 0));
       // hub (BBC Bruno) sees every VA; a VA only ever sees BBC Bruno.
@@ -269,6 +292,22 @@ export default async (req) => {
       conv.lastText = file && !text ? "📎 " + file.name : text.slice(0, 80);
       await js.setJSON("convs", convs);
       return json({ message: msg });
+    }
+
+    // ---------- POST addMember (add a contact to a group) ----------
+    if (act === "addMember") {
+      const convId = String(body.conv || "");
+      const addId = String(body.userId || "");
+      if (!convId || !addId) return json({ error: "conv and userId required" }, 400);
+      const convs = await readJ("convs", []);
+      const conv = convs.find(c => c.id === convId);
+      if (!conv || conv.type !== "group") return json({ error: "no group" }, 404);
+      if (!conv.members.includes(meId)) return json({ error: "forbidden" }, 403);
+      if (!conv.members.includes(addId)) {
+        conv.members.push(addId);
+        await js.setJSON("convs", convs);
+      }
+      return json({ conversation: conv });
     }
 
     return json({ error: "unknown action" }, 400);
