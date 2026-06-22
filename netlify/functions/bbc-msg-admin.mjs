@@ -23,6 +23,13 @@ async function verify(req) {
   } catch { return null; }
 }
 
+async function findUserId(email, adminHeaders) {
+  const r = await fetch(SUPABASE_URL + "/auth/v1/admin/users?per_page=200", { headers: adminHeaders });
+  const d = await r.json();
+  const u = (d.users || []).find((x) => (x.email || "").toLowerCase() === email);
+  return u ? u.id : null;
+}
+
 export default async (req) => {
   const CORS = {
     "access-control-allow-origin": "*",
@@ -68,8 +75,38 @@ export default async (req) => {
         body: JSON.stringify({ email, password, email_confirm: true, user_metadata: { name } }),
       });
       const d = await r.json();
-      if (!r.ok) return json({ error: (d && (d.msg || d.message || d.error_description)) || "create failed" }, 502);
+      if (!r.ok) {
+        const msg = (d && (d.msg || d.message || d.error_description)) || "";
+        // user already exists -> reset their password instead of failing (idempotent)
+        if (r.status === 422 || /already|exist|registered/i.test(msg)) {
+          const id = await findUserId(email, adminHeaders);
+          if (id) {
+            const ur = await fetch(SUPABASE_URL + "/auth/v1/admin/users/" + id, {
+              method: "PUT", headers: adminHeaders,
+              body: JSON.stringify({ password, user_metadata: { name } }),
+            });
+            const ud = await ur.json();
+            if (ur.ok) return json({ ok: true, updated: true, user: { email, name } });
+            return json({ error: (ud && (ud.msg || ud.message)) || "reset failed" }, 502);
+          }
+        }
+        return json({ error: msg || "create failed" }, 502);
+      }
       return json({ ok: true, user: { email, name } });
+    }
+
+    if (body.action === "resetPassword") {
+      const email = String(body.email || "").trim().toLowerCase();
+      const password = String(body.password || "");
+      if (!email || password.length < 6) return json({ error: "email and password (min 6) required" }, 400);
+      const id = await findUserId(email, adminHeaders);
+      if (!id) return json({ error: "user not found" }, 404);
+      const ur = await fetch(SUPABASE_URL + "/auth/v1/admin/users/" + id, {
+        method: "PUT", headers: adminHeaders, body: JSON.stringify({ password }),
+      });
+      const ud = await ur.json();
+      if (ur.ok) return json({ ok: true, reset: true, email });
+      return json({ error: (ud && (ud.msg || ud.message)) || "reset failed" }, 502);
     }
 
     return json({ error: "unknown action" }, 400);
