@@ -340,6 +340,29 @@ export default async (req) => {
       return json({ message: msg });
     }
 
+    // ---------- POST react (add/remove an emoji reaction on a message) ----------
+    if (act === "react") {
+      const convId = String(body.conv || ""), msgId = String(body.msgId || ""), emoji = String(body.emoji || "").slice(0, 12);
+      if (!convId || !msgId || !emoji) return json({ error: "conv, msgId, emoji required" }, 400);
+      const convs = await readJ("convs", []);
+      const conv = convs.find(c => c.id === convId);
+      if (!conv || !conv.members.includes(meId)) return json({ error: "forbidden" }, 403);
+      const msgs = await readJ("msgs:" + convId, []);
+      const m = msgs.find(x => x.id === msgId);
+      if (!m) return json({ error: "no message" }, 404);
+      m.reactions = m.reactions || {};
+      const had = (m.reactions[emoji] || []).includes(meId);
+      // one reaction per person (WhatsApp-style): clear my other reactions on this message first
+      for (const k of Object.keys(m.reactions)) {
+        const idx = m.reactions[k].indexOf(meId);
+        if (idx >= 0) m.reactions[k].splice(idx, 1);
+        if (!m.reactions[k].length) delete m.reactions[k];
+      }
+      if (!had) { (m.reactions[emoji] = m.reactions[emoji] || []).push(meId); } // toggle off if same
+      await js.setJSON("msgs:" + convId, msgs);
+      return json({ ok: true, reactions: m.reactions });
+    }
+
     // ---------- POST saveSub (store this user's push subscription) ----------
     if (act === "saveSub") {
       if (!body.subscription) return json({ error: "subscription required" }, 400);

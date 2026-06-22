@@ -133,6 +133,14 @@
   .lightbox.open{display:flex;}
   .lightbox img{max-width:100%;max-height:100%;border-radius:8px;}
   .toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--navy);color:#fff;padding:11px 18px;border-radius:24px;font-size:14px;z-index:90;opacity:0;transition:opacity .2s;pointer-events:none;}
+  .b{position:relative;-webkit-user-select:none;user-select:none;}
+  .rx{display:flex;flex-wrap:wrap;gap:4px;margin-top:5px;}
+  .rxchip{background:rgba(0,0,0,.06);border:1px solid #0000000f;border-radius:12px;padding:1px 7px;font-size:12px;cursor:pointer;line-height:1.7;}
+  .b.out .rxchip{background:rgba(255,255,255,.22);border-color:#ffffff33;color:#fff;}
+  .rxchip.mine{background:var(--gold);color:#fff;border-color:transparent;}
+  #reactBar{position:fixed;z-index:88;background:#fff;border-radius:26px;box-shadow:0 10px 34px rgba(0,0,0,.28);padding:6px 8px;display:none;gap:2px;align-items:center;}
+  #reactBar span{font-size:24px;cursor:pointer;padding:3px 5px;border-radius:50%;line-height:1;}
+  #reactBar span:active{transform:scale(1.25);}
   .toast.show{opacity:1;}
 
   @media(max-width:899px){
@@ -267,6 +275,7 @@
 
 <div class="lightbox" id="lightbox" onclick="this.classList.remove('open')"><img id="lightImg" alt=""></div>
 <div class="toast" id="toast"></div>
+<div id="reactBar"></div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script type="module" src="https://cdn.jsdelivr.net/npm/emoji-picker-element@^1/index.js"></script>
@@ -457,11 +466,15 @@ async function loadMessages(full){
   }
   MSGS.sort((a,b)=>(a.ts||0)-(b.ts||0));
   const real=MSGS.filter(m=>!m.pending); if(real.length)lastTs=real[real.length-1].ts;
-  if(full||inc.length)renderStream();
+  if(full||inc.length)renderStream(!!full);
 }
-function renderStream(){
+function renderStream(force){
   const el=document.getElementById('stream');
+  const sig=MSGS.map(m=>m.id+(m.reactions?':'+JSON.stringify(m.reactions):'')+(m.pending?':p':'')).join('|');
+  if(!force&&sig===window.__msgSig)return;
+  window.__msgSig=sig;
   if(!MSGS.length){el.innerHTML='<div class="day">No messages yet</div>';return;}
+  const prevTop=el.scrollTop, nearBottom=(el.scrollHeight-prevTop-el.clientHeight)<90;
   let html='',lastDay='';
   MSGS.forEach(m=>{
     const dl=new Date(m.ts).toLocaleDateString(undefined,{weekday:'short',month:'short',day:'numeric'});
@@ -475,9 +488,13 @@ function renderStream(){
     }
     if(m.text)inner+='<span class="tx">'+linkify(esc(m.text))+'</span>';
     inner+='<span class="tm">'+new Date(m.ts).toLocaleTimeString(undefined,{hour:'numeric',minute:'2-digit'})+'</span>';
-    html+='<div class="b '+(mine?'out':'in')+'">'+inner+'</div>';
+    if(m.reactions&&Object.keys(m.reactions).length){
+      inner+='<div class="rx">'+Object.keys(m.reactions).map(e=>{const ids=m.reactions[e]||[];return ids.length?('<span class="rxchip'+(ids.indexOf(ME.id)>=0?' mine':'')+'" onclick="reactMsg(\''+m.id+'\',\''+e+'\')">'+e+' '+ids.length+'</span>'):'';}).join('')+'</div>';
+    }
+    html+='<div class="b '+(mine?'out':'in')+'" data-mid="'+m.id+'">'+inner+'</div>';
   });
-  el.innerHTML=html; el.scrollTop=el.scrollHeight;
+  el.innerHTML=html;
+  if(nearBottom||force)el.scrollTop=el.scrollHeight; else el.scrollTop=prevTop;
   el.querySelectorAll('img.shot[data-fid]').forEach(loadImg);
 }
 function fmtSize(b){if(!b)return'';if(b<1024)return b+' B';if(b<1048576)return (b/1024).toFixed(0)+' KB';return (b/1048576).toFixed(1)+' MB';}
@@ -510,7 +527,8 @@ async function sendMsg(){
 }
 
 /* ---------- polling ---------- */
-function startPoll(){stopPoll();pollT=setInterval(()=>{if(!CUR){stopPoll();return;}loadMessages(false);},3000);}
+let pollN=0;
+function startPoll(){stopPoll();pollN=0;pollT=setInterval(()=>{if(!CUR){stopPoll();return;}pollN++;loadMessages(pollN%4===0);},3000);}
 function stopPoll(){if(pollT){clearInterval(pollT);pollT=null;}}
 
 /* ---------- screens ---------- */
@@ -617,6 +635,43 @@ function toggleEmoji(e){
   } else pop.style.display='none';
 }
 document.addEventListener('click',ev=>{const pop=document.getElementById('emojiPop');if(pop&&pop.style.display==='block'&&!pop.contains(ev.target)&&!(ev.target.closest&&ev.target.closest('[title=Emoji]')))pop.style.display='none';});
+/* ---------- message reactions (long-press / right-click) ---------- */
+const REACTIONS=['👍','❤️','😂','😮','😢','🙏'];
+function showReactBar(mid,x,y){
+  const bar=document.getElementById('reactBar');
+  bar.innerHTML=REACTIONS.map(e=>'<span onclick="reactMsg(\''+mid+'\',\''+e+'\');hideReactBar()">'+e+'</span>').join('')+'<span onclick="reactPick(\''+mid+'\')">➕</span>';
+  bar.style.display='flex';
+  const bw=bar.offsetWidth||320, bh=bar.offsetHeight||46;
+  bar.style.left=Math.max(8,Math.min((x||innerWidth/2)-bw/2, innerWidth-bw-8))+'px';
+  bar.style.top=Math.max(8,(y||120)-bh-10)+'px';
+}
+function hideReactBar(){const b=document.getElementById('reactBar');if(b)b.style.display='none';}
+document.addEventListener('click',e=>{const b=document.getElementById('reactBar');if(b&&b.style.display==='flex'&&!b.contains(e.target))hideReactBar();});
+async function reactMsg(mid,emoji){
+  if(!CUR)return;
+  const m=MSGS.find(x=>x.id===mid);
+  if(m){m.reactions=m.reactions||{};const had=(m.reactions[emoji]||[]).indexOf(ME.id)>=0;Object.keys(m.reactions).forEach(k=>{const i=m.reactions[k].indexOf(ME.id);if(i>=0)m.reactions[k].splice(i,1);if(!m.reactions[k].length)delete m.reactions[k];});if(!had){(m.reactions[emoji]=m.reactions[emoji]||[]).push(ME.id);}renderStream(true);}
+  try{await api(API,'',{method:'POST',body:{action:'react',conv:CUR.id,msgId:mid,emoji}});}catch(e){}
+}
+let reactPicker=null;
+function reactPick(mid){
+  hideReactBar(); window.__rxFull=mid;
+  if(!reactPicker){
+    const wrap=document.createElement('div');wrap.id='rxPickWrap';wrap.style.cssText='position:fixed;z-index:89;left:50%;top:50%;transform:translate(-50%,-50%);display:none;box-shadow:0 12px 40px rgba(0,0,0,.35);border-radius:8px;overflow:hidden';
+    reactPicker=document.createElement('emoji-picker');
+    reactPicker.addEventListener('emoji-click',ev=>{if(window.__rxFull&&ev.detail&&ev.detail.unicode)reactMsg(window.__rxFull,ev.detail.unicode);wrap.style.display='none';});
+    wrap.appendChild(reactPicker);document.body.appendChild(wrap);
+    wrap.addEventListener('click',e=>{if(e.target===wrap)wrap.style.display='none';});
+  }
+  document.getElementById('rxPickWrap').style.display='block';
+}
+(function(){
+  let lpT=null;
+  document.addEventListener('contextmenu',e=>{const b=e.target.closest&&e.target.closest('.b[data-mid]');if(b){e.preventDefault();const r=b.getBoundingClientRect();showReactBar(b.dataset.mid,e.clientX,r.top);}});
+  document.addEventListener('touchstart',e=>{const b=e.target.closest&&e.target.closest('.b[data-mid]');if(!b)return;const mid=b.dataset.mid,r=b.getBoundingClientRect();lpT=setTimeout(()=>{try{navigator.vibrate&&navigator.vibrate(15);}catch(_){}showReactBar(mid,r.left+r.width/2,r.top);},450);},{passive:true});
+  const cancel=()=>{if(lpT){clearTimeout(lpT);lpT=null;}};
+  document.addEventListener('touchend',cancel);document.addEventListener('touchmove',cancel,{passive:true});
+})();
 /* add VA (hub) */
 function openAddVA(){document.getElementById('menu').classList.remove('open');openScreen('addvaScreen');loadVAs();}
 async function loadVAs(){
