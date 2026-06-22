@@ -35,8 +35,36 @@ const KNOWN = {
   "krizza.bbc@gmail.com": "Krizza", "krizza@balaynibruno.co": "Krizza", "krizzamaymanagase@gmail.com": "Krizza",
   "daryl.bbc@gmail.com": "Daryl", "daryl@balaynibruno.co": "Daryl",
   "vi@balaynibruno.co": "Vi", "vicarmelle@balaynibruno.co": "Vi",
-  "ryan@balaynibruno.co": "Ryan",
+  "ryan@balaynibruno.co": "Ryan", "kenz.bbc11@gmail.com": "Kenz",
+  "diego@balaynibruno.co": "Diego", "dexter@balaynibruno.co": "Dexter", "john@balaynibruno.co": "John",
 };
+
+// Clients + non-person accounts that must NOT appear in BBC Bruno's team contact list.
+const CONTACT_EXCLUDE = new Set(["sonyariviere@gmail.com", "woodenwoodwork@gmail.com", "admin@balaynibruno.co"]);
+
+// Pull the real team from Supabase (so BBC Bruno sees every VA even before they open the app).
+// Needs SUPABASE_SERVICE_ROLE_KEY (Netlify env). Cached 60s on the warm instance.
+let _userCache = { ts: 0, users: null };
+function niceName(email, meta) {
+  const em = (email || "").toLowerCase();
+  if (KNOWN[em]) return KNOWN[em];
+  if (meta && (meta.name || meta.full_name)) return String(meta.name || meta.full_name);
+  const l = em.split("@")[0].replace(/[._-]+/g, " ");
+  return l ? l.replace(/\b\w/g, m => m.toUpperCase()) : "Teammate";
+}
+async function adminUsers() {
+  const SK = process.env.SUPABASE_SERVICE_ROLE_KEY;
+  if (!SK) return null;
+  if (_userCache.users && Date.now() - _userCache.ts < 60000) return _userCache.users;
+  try {
+    const r = await fetch(SUPABASE_URL + "/auth/v1/admin/users?per_page=200", { headers: { apikey: SK, Authorization: "Bearer " + SK } });
+    if (!r.ok) return _userCache.users;
+    const d = await r.json();
+    const users = (d.users || []).map(u => ({ id: String(u.id), email: (u.email || "").toLowerCase(), name: niceName(u.email, u.user_metadata) }));
+    _userCache = { ts: Date.now(), users };
+    return users;
+  } catch { return _userCache.users; }
+}
 
 function displayName(user) {
   const em = (user.email || "").toLowerCase();
@@ -133,8 +161,11 @@ export default async (req) => {
       const mine = convs.filter(c => c.members.includes(meId)).sort((a, b) => (b.lastTs || 0) - (a.lastTs || 0));
       // hub (BBC Bruno) sees every VA; a VA only ever sees BBC Bruno.
       let rosterOut;
-      if (meHub) rosterOut = roster.filter(p => !p.hub && p.id !== meId).map(p => ({ id: p.id, name: p.name }));
-      else rosterOut = hub ? [{ id: hub.id, name: "BBC Bruno" }] : [];
+      if (meHub) {
+        const all = await adminUsers(); // full team from Supabase (even those who haven't opened the app yet)
+        if (all && all.length) rosterOut = all.filter(u => !isHub(u.email) && !CONTACT_EXCLUDE.has(u.email)).map(u => ({ id: u.id, name: u.name }));
+        else rosterOut = roster.filter(p => !p.hub && p.id !== meId).map(p => ({ id: p.id, name: p.name })); // fallback: only those who've logged in
+      } else rosterOut = hub ? [{ id: hub.id, name: "BBC Bruno" }] : [];
       return json({ me: { id: meId, name: meName, email: meEmail, hub: meHub }, roster: rosterOut, conversations: mine });
     }
 
@@ -160,13 +191,14 @@ export default async (req) => {
     if (act === "createConv") {
       await upsertRoster();
 
-      // Self chat ("BBC Bruno" notes-to-your-own-devices). One per user.
+      // Self chat — one thread per device (Plus / Tuff / Free) to message your own devices.
       if (body.type === "self") {
+        const device = body.device ? String(body.device).slice(0, 20) : "Notes";
         const convs = await readJ("convs", []);
-        const ex = convs.find(c => c.type === "self" && c.members.length === 1 && c.members[0] === meId);
+        const ex = convs.find(c => c.type === "self" && c.members.length === 1 && c.members[0] === meId && (c.device || c.name) === device);
         if (ex) return json({ conversation: ex });
         const sid = "c" + Date.now().toString(36) + Math.floor(Math.random() * 1e4).toString(36);
-        const self = { id: sid, type: "self", name: "BBC Bruno", members: [meId], createdBy: meId, lastTs: Date.now(), lastText: "" };
+        const self = { id: sid, type: "self", name: device, device, members: [meId], createdBy: meId, lastTs: Date.now(), lastText: "" };
         convs.push(self);
         await js.setJSON("convs", convs);
         return json({ conversation: self });

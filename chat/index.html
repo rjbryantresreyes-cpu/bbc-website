@@ -299,22 +299,26 @@ async function start(){
   document.getElementById('meSub').textContent=ME.hub?'Signed in as BBC Bruno':('Signed in as '+ME.name);
   document.getElementById('addVaBtn').classList.toggle('hide',!ME.hub);
   // BBC Bruno (the hub) always has a pinned self-chat to message his own devices.
-  if(ME.hub){ await ensureSelf(); }
+  if(ME.hub){ await ensureDevices(); }
   // A VA always has exactly one contact (BBC Bruno). Auto-open that chat so it feels direct.
   if(!ME.hub && !CONVS.length && ROSTER.length){ await startDM(ROSTER[0].id,true); }
   renderList();
   if(listT)clearInterval(listT); listT=setInterval(refreshList,6000);
 }
 async function refreshList(){const r=await api(API,'?action=bootstrap');if(!r)return;const d=await r.json();if(d.error)return;ROSTER=d.roster||ROSTER;CONVS=d.conversations||CONVS;renderList();}
-async function ensureSelf(){
-  let s=CONVS.find(c=>c.type==='self');
-  if(!s){const r=await api(API,'',{method:'POST',body:{action:'createConv',type:'self'}});const d=r&&await r.json();if(d&&d.conversation){s=d.conversation;if(!CONVS.find(c=>c.id===s.id))CONVS.push(s);}}
-  return s;
+async function ensureDevices(){
+  for(const dev of ['Plus','Tuff','Free']){
+    if(!CONVS.find(c=>c.type==='self'&&(c.device||c.name)===dev)){
+      const r=await api(API,'',{method:'POST',body:{action:'createConv',type:'self',device:dev}});
+      const d=r&&await r.json();
+      if(d&&d.conversation&&!CONVS.find(c=>c.id===d.conversation.id))CONVS.push(d.conversation);
+    }
+  }
 }
 function renderDevbar(){document.getElementById('devbar').innerHTML='<span class="lbl">For device:</span>'+DEVICES.map(d=>`<span class="devchip ${selectedDevice===d?'on':''}" onclick="pickDevice('${d}')">${d}</span>`).join('');}
 function pickDevice(d){selectedDevice=d;renderDevbar();}
 
-function convTitle(c){if(c.type==='self')return 'BBC Bruno (You)';if(c.type==='group')return c.name||'Group';const o=c.members.find(m=>m!==ME.id);const p=ROSTER.find(x=>x.id===o);return p?p.name:(ME.hub?'Teammate':'BBC Bruno');}
+function convTitle(c){if(c.type==='self')return '📱 '+(c.device||c.name||'Notes');if(c.type==='group')return c.name||'Group';const o=c.members.find(m=>m!==ME.id);const p=ROSTER.find(x=>x.id===o);return p?p.name:(ME.hub?'Teammate':'BBC Bruno');}
 function whenLabel(ts){if(!ts)return'';const d=new Date(ts),n=new Date();if(d.toDateString()===n.toDateString())return d.toLocaleTimeString(undefined,{hour:'numeric',minute:'2-digit'});const y=new Date(n-864e5);if(d.toDateString()===y.toDateString())return'Yesterday';return d.toLocaleDateString(undefined,{month:'numeric',day:'numeric'});}
 
 function renderList(){
@@ -322,13 +326,13 @@ function renderList(){
   if(!CONVS.length){el.innerHTML='<div class="empty">No chats yet.<br>'+(ME.hub?'Tap ✎ to message a teammate or start a group.':'Tap ✎ to message BBC Bruno.')+'</div>';return;}
   const ordered=[...CONVS].sort((a,b)=>{if(a.type==='self')return -1;if(b.type==='self')return 1;return (b.lastTs||0)-(a.lastTs||0);});
   el.innerHTML=ordered.map(c=>{
-    const self=c.type==='self',grp=c.type==='group',t=convTitle(c);
+    const self=c.type==='self',grp=c.type==='group',t=convTitle(c),dev=c.device||c.name||'';
     const col=self?'#B8923E':(grp?'#B8923E':colorFor(c.members.find(m=>m!==ME.id)||c.id));
-    const avt=self?'★':(grp?'#':esc(initial(t)));
-    const last=self?(c.lastText||'Send notes & files to your devices'):(c.lastText||'No messages yet');
+    const avt=self?esc(initial(dev||'D')):(grp?'#':esc(initial(t)));
+    const last=self?(c.lastText||('Notes & files for '+dev)):(c.lastText||'No messages yet');
     return `<div class="row ${CUR&&CUR.id===c.id?'active':''}" onclick="openConv('${c.id}')">
       <div class="av" style="background:${col};width:50px;height:50px;font-size:19px">${avt}</div>
-      <div class="mid"><div class="nm">${self?'📌 ':''}${esc(t)}</div><div class="last">${esc(last)}</div></div>
+      <div class="mid"><div class="nm">${esc(t)}</div><div class="last">${esc(last)}</div></div>
       <div class="rt"><div class="when">${whenLabel(c.lastTs)}</div></div>
     </div>`;
   }).join('');
@@ -342,13 +346,10 @@ async function openConv(id){
   document.getElementById('chatActive').classList.remove('hide');
   const t=convTitle(CUR),grp=CUR.type==='group',self=CUR.type==='self';
   document.getElementById('chNm').textContent=t;
-  document.getElementById('chAv').textContent=self?'★':(grp?'#':initial(t));
+  document.getElementById('chAv').textContent=self?initial(CUR.device||CUR.name||'D'):(grp?'#':initial(t));
   document.getElementById('chAv').style.background=(self||grp)?'#B8923E':colorFor(CUR.members.find(m=>m!==ME.id)||CUR.id);
-  document.getElementById('chSub').textContent=self?'Notes to your own devices · Plus · Tuff · Free':(grp?CUR.members.map(m=>{const p=ROSTER.find(x=>x.id===m);return p?p.name:(m===ME.id?'You':'');}).filter(Boolean).join(', '):'');
-  // device chips only on the BBC Bruno self-chat
-  selectedDevice='All';
-  const db=document.getElementById('devbar');
-  if(self){renderDevbar();db.classList.remove('hide');}else{db.classList.add('hide');}
+  document.getElementById('chSub').textContent=self?'Your device note · syncs to all your devices':(grp?CUR.members.map(m=>{const p=ROSTER.find(x=>x.id===m);return p?p.name:(m===ME.id?'You':'');}).filter(Boolean).join(', '):'');
+  document.getElementById('devbar').classList.add('hide');
   document.getElementById('app').classList.add('in-chat');
   document.getElementById('stream').innerHTML='';
   renderList();
