@@ -19,6 +19,11 @@ import { getStore } from "@netlify/blobs";
 const SUPABASE_URL = "https://ctoeuikxoqlhnebgsygp.supabase.co";
 const SUPABASE_KEY = "sb_publishable_WnJ57fk-ymDuT2xtVZRcHg_khZCWgJL"; // publishable, safe here
 
+// HUB-AND-SPOKE: RJ is the single hub, shown to everyone as "BBC Bruno".
+// VAs only ever see + message BBC Bruno; BBC Bruno sees + messages every VA.
+const HUB_EMAILS = new Set(["rjbryantresreyes@gmail.com", "rj@balaynibruno.co"]);
+const isHub = (email) => HUB_EMAILS.has((email || "").toLowerCase());
+
 const JSTORE = "bbc-msg";        // json: roster, convs index, per-conv message arrays
 const FSTORE = "bbc-msg-files";  // binary: uploaded files
 const MAX_FILE = 8 * 1024 * 1024; // 8 MB per file
@@ -35,6 +40,7 @@ const KNOWN = {
 
 function displayName(user) {
   const em = (user.email || "").toLowerCase();
+  if (isHub(em)) return "BBC Bruno";
   if (KNOWN[em]) return KNOWN[em];
   const meta = user.user_metadata || {};
   if (meta.full_name) return String(meta.full_name);
@@ -74,6 +80,7 @@ export default async (req) => {
   const meId = String(user.id);
   const meName = displayName(user);
   const meEmail = (user.email || "").toLowerCase();
+  const meHub = isHub(meEmail);
 
   let js, fs;
   try { js = getStore(JSTORE); fs = getStore(FSTORE); }
@@ -88,9 +95,10 @@ export default async (req) => {
   const upsertRoster = async () => {
     const roster = await readJ("roster", []);
     const i = roster.findIndex(p => p.id === meId);
-    const entry = { id: meId, name: meName, email: meEmail, seen: Date.now() };
+    const entry = { id: meId, name: meName, email: meEmail, hub: meHub, seen: Date.now() };
     if (i === -1) roster.push(entry); else roster[i] = { ...roster[i], ...entry };
     await js.setJSON("roster", roster);
+    if (meHub) await js.setJSON("hub", { id: meId, name: "BBC Bruno" }); // remember who BBC Bruno is
     return roster;
   };
 
@@ -120,9 +128,14 @@ export default async (req) => {
     // ---------- GET bootstrap ----------
     if (req.method === "GET" && action === "bootstrap") {
       const roster = await upsertRoster();
+      const hub = await readJ("hub", null);
       const convs = await readJ("convs", []);
       const mine = convs.filter(c => c.members.includes(meId)).sort((a, b) => (b.lastTs || 0) - (a.lastTs || 0));
-      return json({ me: { id: meId, name: meName, email: meEmail }, roster: roster.map(p => ({ id: p.id, name: p.name })), conversations: mine });
+      // hub (BBC Bruno) sees every VA; a VA only ever sees BBC Bruno.
+      let rosterOut;
+      if (meHub) rosterOut = roster.filter(p => !p.hub && p.id !== meId).map(p => ({ id: p.id, name: p.name }));
+      else rosterOut = hub ? [{ id: hub.id, name: "BBC Bruno" }] : [];
+      return json({ me: { id: meId, name: meName, email: meEmail, hub: meHub }, roster: rosterOut, conversations: mine });
     }
 
     // ---------- GET messages ----------
@@ -146,10 +159,19 @@ export default async (req) => {
     // ---------- POST createConv ----------
     if (act === "createConv") {
       await upsertRoster();
-      const type = body.type === "group" ? "group" : "dm";
+      let type = body.type === "group" ? "group" : "dm";
       let members = Array.isArray(body.members) ? body.members.map(String) : [];
       if (!members.includes(meId)) members.push(meId);
       members = [...new Set(members)];
+
+      // Hub-and-spoke: a VA can only ever start a DM with BBC Bruno (no groups, no VA-to-VA).
+      if (!meHub) {
+        const hub = await readJ("hub", null);
+        if (!hub) return json({ error: "BBC Bruno is not set up yet. Ask RJ to sign in once." }, 400);
+        type = "dm";
+        members = [meId, hub.id];
+      }
+
       if (type === "dm" && members.length !== 2) return json({ error: "a DM needs exactly one other person" }, 400);
       if (type === "group" && members.length < 2) return json({ error: "pick at least one person" }, 400);
 
