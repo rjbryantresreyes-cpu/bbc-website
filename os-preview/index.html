@@ -672,7 +672,7 @@
 <script type="application/json" id="bbc-data">
 {
   "meta": {
-    "updated": "2026-06-23",
+    "updated": "2026-06-24",
     "pendingCount": 17
   },
   "owners": {
@@ -1530,19 +1530,10 @@
           "name": "NPC-Portfolio-System"
         },
         {
-          "name": "08_KNOWLEDGE_BASE"
+          "name": ".claude"
         },
         {
-          "name": "07_MARKETING"
-        },
-        {
-          "name": "06_FINANCE"
-        },
-        {
-          "name": "05_OPERATIONS"
-        },
-        {
-          "name": "03_ARCHIVED_CLIENTS"
+          "name": "01_LEADS"
         },
         {
           "name": "02_ACTIVE_CLIENTS",
@@ -1551,13 +1542,13 @@
               "name": "4OCEAN"
             },
             {
-              "name": "WOODEN-WOODWORKS"
+              "name": "FIRST-CLASS-FINISHES"
             },
             {
               "name": "HOME-VISION-STUDIO"
             },
             {
-              "name": "FIRST-CLASS-FINISHES"
+              "name": "WOODEN-WOODWORKS"
             },
             {
               "name": "HI-UP-ROOFING"
@@ -1598,10 +1589,19 @@
           ]
         },
         {
-          "name": "01_LEADS"
+          "name": "03_ARCHIVED_CLIENTS"
         },
         {
-          "name": ".claude"
+          "name": "05_OPERATIONS"
+        },
+        {
+          "name": "06_FINANCE"
+        },
+        {
+          "name": "07_MARKETING"
+        },
+        {
+          "name": "08_KNOWLEDGE_BASE"
         },
         {
           "name": "BBC WEBSITE HTML"
@@ -1610,43 +1610,40 @@
           "name": "04_TEAM"
         },
         {
-          "name": "09_POTENTIAL CLIENTS"
-        },
-        {
           "name": "BBC_AI_FAMILY",
           "children": [
             {
-              "name": "BRUNZ"
-            },
-            {
-              "name": "WEBBY"
-            },
-            {
-              "name": "MAI"
-            },
-            {
-              "name": "KRIZ"
-            },
-            {
-              "name": "SONNY"
-            },
-            {
-              "name": "EMY"
+              "name": "CASEY"
             },
             {
               "name": "BOOGY"
             },
             {
-              "name": "CASEY"
+              "name": "EMY"
+            },
+            {
+              "name": "SONNY"
+            },
+            {
+              "name": "BRUNZ"
+            },
+            {
+              "name": "KRIZ"
+            },
+            {
+              "name": "MAI"
+            },
+            {
+              "name": "WEBBY"
             },
             {
               "name": "_TEMPLATE"
             },
             {
-              "name": "JENNY"
+              "name": "AGENT_PROFILES"
             },
             {
-              "name": "AGENT_PROFILES"
+              "name": "JENNY"
             },
             {
               "name": "_VAULT"
@@ -1693,6 +1690,9 @@
           ]
         },
         {
+          "name": "09_POTENTIAL CLIENTS"
+        },
+        {
           "name": "Daryl BBC Folder"
         },
         {
@@ -1737,6 +1737,9 @@
             },
             {
               "name": "Outro"
+            },
+            {
+              "name": "_TESTS"
             }
           ]
         },
@@ -1824,10 +1827,10 @@
           "name": "3D_LOT_VISUALIZER"
         },
         {
-          "name": "Chris Branding"
+          "name": "node_modules"
         },
         {
-          "name": "node_modules"
+          "name": "Chris Branding"
         },
         {
           "name": "_RJ_PRODUCTS"
@@ -3185,7 +3188,17 @@
       "path": "LEARNINGS"
     },
     {
+      "title": "tools page engine",
+      "date": "2026-06-23",
+      "path": "LEARNINGS"
+    },
+    {
       "title": "sriviere shopify scope upgrade and live push",
+      "date": "2026-06-23",
+      "path": "LEARNINGS"
+    },
+    {
+      "title": "musetalk install plus",
       "date": "2026-06-23",
       "path": "LEARNINGS"
     },
@@ -3197,16 +3210,6 @@
     {
       "title": "bbc messenger upgrade plan",
       "date": "2026-06-22",
-      "path": "LEARNINGS"
-    },
-    {
-      "title": "remote control and team chat",
-      "date": "2026-06-21",
-      "path": "LEARNINGS"
-    },
-    {
-      "title": "new tools mcps deep search",
-      "date": "2026-06-21",
       "path": "LEARNINGS"
     }
   ],
@@ -6197,6 +6200,14 @@
   .tc-att-file .ft{display:flex;flex-direction:column;min-width:0;}
   .tc-att-file .fn{color:var(--ink);font-size:13.5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
   .tc-att-file .fs{color:var(--muted);font-size:11px;}
+  .tc-link-card{display:flex;align-items:center;gap:11px;background:var(--bg2);border:1px solid rgba(212,175,55,0.30);border-radius:12px;padding:10px 12px;margin-bottom:4px;text-decoration:none;max-width:280px;}
+  .tc-link-card:active{transform:scale(.98);}
+  .tc-link-card .lc-ic{font-size:22px;flex:0 0 auto;}
+  .tc-link-card .lc-tx{display:flex;flex-direction:column;min-width:0;}
+  .tc-link-card .lc-t{color:var(--ink);font-size:13.5px;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+  .tc-link-card .lc-s{color:var(--gold2,#C9A961);font-size:11.5px;}
+  .tc-msg .bub a.tc-link{color:var(--gold2,#C9A961);text-decoration:underline;word-break:break-all;}
+  .tc-msg.mine .bub a.tc-link{color:#EBD9A6;}
 </style>
 <script>
 (function(){
@@ -6234,6 +6245,27 @@
     el.innerHTML='<span class="tcp-ic">📎</span><span class="tcp-nm">'+esc(state.pending.name)+'</span><span class="tcp-x" onclick="TeamChat.clearFile()">✕</span>';
   }
 
+  function driveMeta(u){
+    if(/\/folders\//.test(u)||/drive\.google\.com\/drive\//.test(u)) return {ic:'📁',t:'Shared Drive folder'};
+    if(/docs\.google\.com\/document/.test(u)) return {ic:'📝',t:'Google Doc'};
+    if(/docs\.google\.com\/spreadsheets/.test(u)) return {ic:'📊',t:'Google Sheet'};
+    if(/docs\.google\.com\/presentation/.test(u)) return {ic:'📽️',t:'Google Slides'};
+    return {ic:'📄',t:'Drive file'};
+  }
+  function linkify(text){
+    var s=esc(text);
+    return s.replace(/(https?:\/\/[^\s<]+)/g, function(u){
+      if(/(drive|docs)\.google\.com/.test(u)){
+        var dm=driveMeta(u);
+        return '<a class="tc-link-card" href="'+u+'" target="_blank" rel="noopener">'+
+          '<span class="lc-ic">'+dm.ic+'</span>'+
+          '<span class="lc-tx"><span class="lc-t">'+esc(dm.t)+'</span>'+
+          '<span class="lc-s">Open in Google Drive ↗</span></span></a>';
+      }
+      var disp=u.replace(/^https?:\/\//,''); if(disp.length>46) disp=disp.slice(0,44)+'…';
+      return '<a class="tc-link" href="'+u+'" target="_blank" rel="noopener">'+disp+'</a>';
+    });
+  }
   function render(list){
     var stream=document.getElementById('tc-stream'); if(!stream) return;
     if(!list.length){ stream.innerHTML='<div class="tc-empty">No messages yet in #'+esc(state.chan)+'. Say hi to the crew 👋</div>'; return; }
@@ -6244,7 +6276,7 @@
       var cls='tc-msg'+(mine?' mine':'')+(isAI?' ai':'');
       var del=(mine||meU==='rj')?'<span class="del" onclick="TeamChat.del(\''+esc(m.id)+'\')">delete</span>':'';
       var att=m.file?fileHtml(m.file):'';
-      var txt=m.text?('<div class="bub">'+esc(m.text)+'</div>'):'';
+      var txt=m.text?('<div class="bub">'+linkify(m.text)+'</div>'):'';
       html+='<div class="'+cls+'">'+
         (mine?'':'<div class="who">'+esc(m.name||m.user)+'</div>')+
         att+txt+
@@ -6272,6 +6304,21 @@
     });
   }
 
+  function handlePaste(e){
+    var items=(e.clipboardData&&e.clipboardData.items)||[];
+    for(var i=0;i<items.length;i++){
+      if(items[i].kind==='file' && items[i].type.indexOf('image/')===0){
+        var blob=items[i].getAsFile(); if(!blob) return;
+        if(blob.size>10*1024*1024){ window.toast&&toast('Pasted image is over 10MB — too big to send.','err'); e.preventDefault(); return; }
+        e.preventDefault();
+        var b=blob, rd=new FileReader();
+        rd.onload=function(){ var ext=(b.type.split('/')[1]||'png'); state.pending={name:'screenshot-'+Date.now()+'.'+ext, type:b.type, size:b.size, data:rd.result}; renderPending(); window.toast&&toast('Screenshot pasted — press Send to share.','ok'); };
+        rd.onerror=function(){ window.toast&&toast('Could not read the pasted image.','err'); };
+        rd.readAsDataURL(b);
+        return;
+      }
+    }
+  }
   var TeamChat={
     enter:function(){
       state.last=0; renderChannels(); load();
@@ -6282,7 +6329,7 @@
       var s=document.getElementById('tc-stream'); if(s) s.innerHTML='<div class="tc-empty">Loading…</div>'; load(); },
     pickFile:function(input){
       var f=input.files&&input.files[0]; if(!f) return;
-      if(f.size>4*1024*1024){ window.toast&&toast('File too big (max 4MB).','err'); input.value=''; return; }
+      if(f.size>10*1024*1024){ window.toast&&toast('That file is over 10MB — upload it to the shared Drive and paste the link here. It sends as a clickable card.','err'); input.value=''; return; }
       var rd=new FileReader();
       rd.onload=function(){ state.pending={name:f.name,type:f.type,size:f.size,data:rd.result}; renderPending(); };
       rd.onerror=function(){ window.toast&&toast('Could not read that file.','err'); };
@@ -6306,6 +6353,7 @@
       .then(function(){ load(); }).catch(function(){}); }
   };
   window.TeamChat=TeamChat;
+  (function(){ var pi=document.getElementById('tc-input'); if(pi) pi.addEventListener('paste', handlePaste); })();
 })();
 </script>
 
