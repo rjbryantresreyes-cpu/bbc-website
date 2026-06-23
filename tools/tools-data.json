@@ -1,0 +1,455 @@
+{
+  "meta": {
+    "title": "Tools We Use",
+    "tagline": "The real toolbox behind your partnership.",
+    "intro": "Every Balay ni Bruno & Co. partnership runs on a real, working set of tools. Some are our own AI team members. Some are the same platforms the biggest companies use. We put them together so you get the work done, without learning any of it yourself. Here is the honest list, grouped by what it does for your business.",
+    "masterPdf": "tools/downloads/bbc-tools-and-capabilities.pdf",
+    "updated": "2026-06-23"
+  },
+  "categories": [
+    {
+      "key": "ai-team",
+      "title": "Your AI Team",
+      "tagline": "A family of AI specialists, each trained for one job.",
+      "intro": "We built a team of AI helpers, each one good at a single thing. They do not replace the people in your partnership. They make the people faster, so more gets done for you. Here are the main ones.",
+      "tools": [
+        {
+          "slug": "brunz-head-ai",
+          "name": "Brunz, the Head AI",
+          "realTool": "Built on Claude",
+          "featured": true,
+          "what": "The brain that knows the whole business and keeps every other AI and task pointed in the right direction.",
+          "howWeUse": "Brunz holds the full picture of your account, plans the work, and hands the right job to the right specialist.",
+          "businessValue": "Nothing falls through the cracks. One mind tracks everything that is happening for you.",
+          "ownerValue": "You talk to one place and the whole team moves. No chasing, no repeating yourself."
+        },
+        {
+          "slug": "webby-website-ai",
+          "name": "Webby, the Website AI",
+          "realTool": "Built on Claude",
+          "featured": true,
+          "what": "The specialist that builds, updates, and looks after websites.",
+          "howWeUse": "Webby writes the pages, keeps them fast on phones, fixes things, and ships updates the same day you ask.",
+          "businessValue": "Your website stays current and professional without a developer on payroll.",
+          "ownerValue": "You ask for a change in plain words. It is done in minutes, not weeks."
+        },
+        {
+          "slug": "mai-marketing-ai",
+          "name": "Mai, the Marketing AI",
+          "realTool": "Built on Claude",
+          "featured": true,
+          "what": "The specialist that plans content and turns one idea into many posts.",
+          "howWeUse": "Mai maps your content for the week, writes it in your voice, and reshapes one piece into a reel, a carousel, a blog, and an email.",
+          "businessValue": "You stay visible everywhere without making everything from scratch.",
+          "ownerValue": "One idea becomes a week of content. You just approve it."
+        },
+        {
+          "slug": "sonny-social-ai",
+          "name": "Sonny, the Social Media AI",
+          "realTool": "Built on Claude",
+          "featured": true,
+          "what": "The specialist that writes posts the right way for each platform.",
+          "howWeUse": "Sonny checks what is working right now and writes captions and hashtags made to fit Instagram, Facebook, TikTok, and the rest.",
+          "businessValue": "Your posts feel native to each app, which is what the apps reward.",
+          "ownerValue": "You get ready-to-post captions. Copy, paste, done."
+        },
+        {
+          "slug": "vidz-video-ai",
+          "name": "Vidz, the Video AI",
+          "realTool": "Remotion + FFmpeg",
+          "featured": false,
+          "what": "The specialist that produces video from a script, in-house.",
+          "howWeUse": "Vidz builds finished videos from code, adds captions, cuts dead air, and pulls in stock footage.",
+          "businessValue": "You get a steady flow of video without paying per-video editing fees.",
+          "ownerValue": "Video shows up done. You do not touch an editor."
+        },
+        {
+          "slug": "lana-leadgen-ai",
+          "name": "Lana, the Lead Research AI",
+          "realTool": "Built on Claude",
+          "featured": false,
+          "what": "The specialist that finds and researches potential customers for you.",
+          "howWeUse": "Lana hunts for the right businesses or people, pulls their details, and hands a clean list to the team.",
+          "businessValue": "Your pipeline gets fed with real, researched prospects, not random names.",
+          "ownerValue": "You get a list of who to talk to, already done for you."
+        },
+        {
+          "slug": "raphy-design-ai",
+          "name": "Raphy, the Design AI",
+          "realTool": "Canva + FLUX",
+          "featured": false,
+          "what": "The specialist that handles graphics, photo edits, and brand visuals.",
+          "howWeUse": "Raphy makes the images, cleans up photos, generates new visuals, and keeps everything on brand.",
+          "businessValue": "Your visuals look consistent and professional across everything.",
+          "ownerValue": "You describe what you want. The image comes back finished."
+        },
+        {
+          "slug": "boogy-blog-ai",
+          "name": "Boogy, the Blog AI",
+          "realTool": "Built on Claude",
+          "featured": false,
+          "what": "The specialist that writes long blog posts that help you get found on Google.",
+          "howWeUse": "Boogy turns a video, an interview, or a topic into a full search-friendly article.",
+          "businessValue": "Your site earns search traffic over time instead of paying for every click.",
+          "ownerValue": "You get blog posts written for you, in your voice, ready to publish."
+        },
+        {
+          "slug": "emy-email-ai",
+          "name": "Emy, the Email AI",
+          "realTool": "Built on Claude + Brevo",
+          "featured": false,
+          "what": "The specialist that writes outreach, follow-ups, and newsletters.",
+          "howWeUse": "Emy drafts the emails, sets up the follow-up sequence, and keeps your list warm.",
+          "businessValue": "Leads get followed up every time, which is where most sales are won or lost.",
+          "ownerValue": "Your email keeps running even when you are busy with the actual work."
+        },
+        {
+          "slug": "shy-shopify-ai",
+          "name": "SHY, the Online Store AI",
+          "realTool": "Built on Claude + Shopify",
+          "featured": false,
+          "what": "The specialist that runs and updates online stores.",
+          "howWeUse": "SHY connects to your store, audits it, fixes products and pages, and keeps it selling.",
+          "businessValue": "Your store stays clean, current, and easy to buy from.",
+          "ownerValue": "You stop fighting with your store settings. You just ask for the change."
+        }
+      ]
+    },
+    {
+      "key": "websites",
+      "title": "Websites & Web Apps",
+      "tagline": "Fast, custom-built, and easy to change.",
+      "intro": "We hand-build websites and small web apps and host them where they load fast and update in seconds. No clunky page builder, no waiting weeks for a small change.",
+      "tools": [
+        {
+          "slug": "custom-coded-websites",
+          "name": "Custom-Coded Websites",
+          "realTool": "HTML, CSS, JavaScript",
+          "featured": true,
+          "what": "Websites built by hand instead of dragged together in a template tool.",
+          "howWeUse": "We write the code ourselves so the site is exactly what you need, with nothing slowing it down.",
+          "businessValue": "Faster pages and a site that does what you want, not what a template allows.",
+          "ownerValue": "Your site feels custom because it is, and changes are quick."
+        },
+        {
+          "slug": "netlify-hosting",
+          "name": "Instant Hosting & Updates",
+          "realTool": "Netlify",
+          "featured": true,
+          "what": "The service that puts your site online and pushes changes live almost instantly.",
+          "howWeUse": "We host your site here so an approved change is live in about a minute, with the old version kept as a safety net.",
+          "businessValue": "Updates are fast and safe. If anything looks off, we roll back instantly.",
+          "ownerValue": "You ask for a change and see it live the same day."
+        },
+        {
+          "slug": "mobile-first-testing",
+          "name": "Phone-First Checking",
+          "realTool": "Playwright",
+          "featured": true,
+          "what": "An automatic check that views every change on phone, tablet, and desktop sizes.",
+          "howWeUse": "Before anything goes live we screenshot it at phone, tablet, and laptop widths to make sure it looks right everywhere.",
+          "businessValue": "Most of your visitors are on phones. A broken phone layout loses customers, so we catch it first.",
+          "ownerValue": "Your site looks right on the device your customers actually use."
+        },
+        {
+          "slug": "smooth-motion",
+          "name": "Smooth Motion & Polish",
+          "realTool": "GSAP + Lenis",
+          "featured": false,
+          "what": "The animation tools that make pages scroll and move smoothly.",
+          "howWeUse": "We add tasteful motion so your site feels modern and considered, not stiff.",
+          "businessValue": "A polished site builds trust in the first few seconds.",
+          "ownerValue": "Your site feels high-end without you doing anything."
+        },
+        {
+          "slug": "design-quality-system",
+          "name": "Design Quality System",
+          "realTool": "Hallmark",
+          "featured": false,
+          "what": "A built-in checklist that keeps designs from looking cheap or generic.",
+          "howWeUse": "Every page is run against dozens of quality checks before it ships.",
+          "businessValue": "Your brand looks intentional, never like a quick AI template.",
+          "ownerValue": "You get design you would be proud to put your name on."
+        },
+        {
+          "slug": "walkable-3d",
+          "name": "Walkable 3D & Property Views",
+          "realTool": "Three.js + Blender",
+          "featured": false,
+          "what": "Interactive 3D you can move through, right in a web browser.",
+          "howWeUse": "We turn floor plans or property files into a 3D space your visitors can walk through online.",
+          "businessValue": "Buyers and clients can experience a space before it exists or before they visit.",
+          "ownerValue": "You show off a project in a way most competitors cannot."
+        }
+      ]
+    },
+    {
+      "key": "social",
+      "title": "Social Media & Content",
+      "tagline": "Posted consistently, made to fit each app.",
+      "intro": "We plan, make, and schedule the content that keeps your business visible, and we shape each post to fit the app it lands on.",
+      "tools": [
+        {
+          "slug": "social-scheduling",
+          "name": "One-Place Posting & Scheduling",
+          "realTool": "Postiz",
+          "featured": true,
+          "what": "A tool that schedules and posts to all your social accounts from one place.",
+          "howWeUse": "We line up your week of content and it posts to each platform automatically at the right times.",
+          "businessValue": "You stay consistent, which is what actually grows a following.",
+          "ownerValue": "Your accounts stay active even on your busiest weeks."
+        },
+        {
+          "slug": "content-engine",
+          "name": "The Content Engine",
+          "realTool": "Mai + Sonny + Vidz",
+          "featured": true,
+          "what": "Our system that turns one idea into a full set of posts across platforms.",
+          "howWeUse": "One topic becomes a carousel, a reel, captions for each app, and a blog, all in your voice.",
+          "businessValue": "You get more out of every idea, so content stops being a bottleneck.",
+          "ownerValue": "You approve one idea and a week of posts appears."
+        },
+        {
+          "slug": "trend-research",
+          "name": "Trend & Competitor Watching",
+          "realTool": "Social listening + research",
+          "featured": true,
+          "what": "We watch what is working right now in your space, including competitors' videos.",
+          "howWeUse": "Our AI reviews trending posts and reels and reports back what to try, with the why.",
+          "businessValue": "Your content rides what is already getting attention instead of guessing.",
+          "ownerValue": "You get fresh ideas that are proven to be working, handed to you."
+        },
+        {
+          "slug": "reading-images-text",
+          "name": "Reading Text From Images",
+          "realTool": "Surya OCR",
+          "featured": false,
+          "what": "A tool that pulls text out of screenshots, receipts, and posts.",
+          "howWeUse": "We use it to read screenshots and documents so nothing has to be retyped by hand.",
+          "businessValue": "Less manual data entry, fewer typos.",
+          "ownerValue": "You can send a screenshot and we just use it."
+        }
+      ]
+    },
+    {
+      "key": "video",
+      "title": "Video & Audio",
+      "tagline": "Studio-quality video, made in-house.",
+      "intro": "We produce video and audio ourselves instead of paying per clip. That means a steady, affordable flow of content for you.",
+      "tools": [
+        {
+          "slug": "programmatic-video",
+          "name": "In-House Video Production",
+          "realTool": "Remotion",
+          "featured": true,
+          "what": "A system that builds finished, branded video from a script.",
+          "howWeUse": "We turn a script into a polished video with your branding, captions, and motion, made repeatable.",
+          "businessValue": "Consistent video output without per-video editor costs.",
+          "ownerValue": "You get a stream of on-brand videos and never open editing software."
+        },
+        {
+          "slug": "video-editing",
+          "name": "Video Editing & Captions",
+          "realTool": "FFmpeg + Auto-Editor",
+          "featured": true,
+          "what": "The tools that trim, caption, and clean up video automatically.",
+          "howWeUse": "We cut dead air, burn in captions, and mix audio so videos are tight and watchable.",
+          "businessValue": "Tighter videos hold attention, which is the whole game on social.",
+          "ownerValue": "Your raw footage comes back as a finished, captioned clip."
+        },
+        {
+          "slug": "voice-cloning",
+          "name": "Your Voice, On Demand",
+          "realTool": "VoxCPM2",
+          "featured": true,
+          "what": "A tool that can create a clean voiceover in a chosen voice.",
+          "howWeUse": "We generate natural voiceovers for videos in-house, with no monthly voice subscription.",
+          "businessValue": "Narrated video at no extra per-use cost.",
+          "ownerValue": "You get professional voiceovers without recording every line yourself."
+        },
+        {
+          "slug": "stock-media",
+          "name": "Stock Footage, Photos & Music",
+          "realTool": "Pexels + Pixabay + Freesound",
+          "featured": false,
+          "what": "Libraries of free-to-use video, photos, and sound.",
+          "howWeUse": "We pull background footage, images, and music to fill out your videos legally and cleanly.",
+          "businessValue": "Polished video without expensive footage licenses.",
+          "ownerValue": "Your videos look produced, not homemade."
+        }
+      ]
+    },
+    {
+      "key": "design",
+      "title": "Graphic & Brand Design",
+      "tagline": "On-brand visuals, made and finished for you.",
+      "intro": "We create and finish the images your business needs, from social graphics to product shots to brand-new visuals, all kept on brand.",
+      "tools": [
+        {
+          "slug": "graphic-composition",
+          "name": "Graphic & Layout Design",
+          "realTool": "Canva",
+          "featured": true,
+          "what": "The tool we use to lay out finished, branded graphics.",
+          "howWeUse": "We compose carousels, posts, and brand layouts and keep your colors and fonts consistent.",
+          "businessValue": "Every graphic looks like it belongs to your brand.",
+          "ownerValue": "You get finished graphics, ready to post."
+        },
+        {
+          "slug": "image-generation",
+          "name": "Custom Image Generation",
+          "realTool": "FLUX via Replicate",
+          "featured": true,
+          "what": "AI that creates brand-new images from a description.",
+          "howWeUse": "When the right photo does not exist, we generate it to fit your content.",
+          "businessValue": "You are never stuck without the right visual.",
+          "ownerValue": "You describe an image and we make it from scratch."
+        },
+        {
+          "slug": "background-removal",
+          "name": "Photo Cleanup & Background Removal",
+          "realTool": "rembg",
+          "featured": true,
+          "what": "A tool that cleanly removes or replaces backgrounds in photos.",
+          "howWeUse": "We cut out products or people so they drop neatly into any design.",
+          "businessValue": "Clean product and team photos make everything look more professional.",
+          "ownerValue": "Send a messy photo, get back a clean one."
+        },
+        {
+          "slug": "photo-to-3d",
+          "name": "Turn a Photo Into 3D",
+          "realTool": "Hunyuan3D",
+          "featured": false,
+          "what": "A tool that builds a 3D model from a single product photo.",
+          "howWeUse": "We turn a flat product photo into a spinnable 3D model and multiple angles.",
+          "businessValue": "Show products from every side without a photo studio.",
+          "ownerValue": "One photo becomes a full 3D view of your product."
+        },
+        {
+          "slug": "design-automation",
+          "name": "Branded Design At Scale",
+          "realTool": "Adobe Illustrator automation",
+          "featured": false,
+          "what": "We run brand design templates automatically to produce many on-brand files fast.",
+          "howWeUse": "We swap text and images into a brand template and export finished files in bulk, hands-free.",
+          "businessValue": "Large batches of on-brand material without the hours.",
+          "ownerValue": "You get a whole set of materials, all matching, quickly."
+        }
+      ]
+    },
+    {
+      "key": "stores",
+      "title": "Online Stores (Shopify)",
+      "tagline": "We run your whole online store.",
+      "intro": "If you sell online, we connect to your store and run it, from products to pages to the look, so you can focus on the product instead of the settings.",
+      "tools": [
+        {
+          "slug": "shopify-management",
+          "name": "Full Online Store Management",
+          "realTool": "Shopify",
+          "featured": true,
+          "what": "We connect to your store and manage products, inventory, pages, and design.",
+          "howWeUse": "We audit the store, fix what is off, build a clean look, and keep it updated as you grow.",
+          "businessValue": "A store that is easy to buy from sells more, with less effort from you.",
+          "ownerValue": "You stop wrestling with store settings. You ask, we change it."
+        },
+        {
+          "slug": "store-dashboard",
+          "name": "Your Store Dashboard",
+          "realTool": "Custom dashboard + request queue",
+          "featured": true,
+          "what": "A simple dashboard where you can see your store and request changes.",
+          "howWeUse": "You submit a change from your phone, it lands in our queue, and we handle it.",
+          "businessValue": "A clear line between you and the work, with nothing lost in chat.",
+          "ownerValue": "You tap a button to request a change and track it, no tech needed."
+        }
+      ]
+    },
+    {
+      "key": "crm",
+      "title": "Customer Data, CRM & Email",
+      "tagline": "Your contacts organized, your follow-ups handled.",
+      "intro": "We keep your customers and leads organized in one place and make sure follow-up actually happens, because that is where most sales are won.",
+      "tools": [
+        {
+          "slug": "crm-email-platform",
+          "name": "Customer Database & Email",
+          "realTool": "Brevo",
+          "featured": true,
+          "what": "One place to hold your contacts and send organized email.",
+          "howWeUse": "We keep your leads and customers tidy and send newsletters, offers, and follow-ups from here.",
+          "businessValue": "Your contact list becomes an asset you can actually sell to.",
+          "ownerValue": "Your email stays organized and sending, without you managing it."
+        },
+        {
+          "slug": "contact-database",
+          "name": "Flexible Contact Database",
+          "realTool": "NocoDB",
+          "featured": true,
+          "what": "A spreadsheet-style database that holds leads, clients, and projects.",
+          "howWeUse": "We track every lead and client in a clean, searchable place that connects to the rest of the system.",
+          "businessValue": "Nothing about a customer gets lost. The whole history is in one place.",
+          "ownerValue": "You can see who is who and where they are at, anytime."
+        },
+        {
+          "slug": "crm-followup",
+          "name": "Lead Tracking & Follow-Up",
+          "realTool": "HubSpot + Emy",
+          "featured": false,
+          "what": "A system that tracks leads and makes sure none go cold.",
+          "howWeUse": "We log every lead and run the follow-ups so each one gets a real, timely reply.",
+          "businessValue": "Most sales are lost to slow or missing follow-up. We close that gap.",
+          "ownerValue": "Every lead gets followed up, even when you are heads-down on work."
+        }
+      ]
+    },
+    {
+      "key": "automation",
+      "title": "Automation & Research",
+      "tagline": "The behind-the-scenes work, handled.",
+      "intro": "These are the quiet tools that connect everything and do the repetitive work, so the team spends time on what actually matters to you.",
+      "tools": [
+        {
+          "slug": "workflow-automation",
+          "name": "Workflow Automation",
+          "realTool": "Make.com",
+          "featured": true,
+          "what": "A tool that connects your apps so tasks happen automatically.",
+          "howWeUse": "We wire your tools together so things like new leads, data, and notifications flow without anyone copying and pasting.",
+          "businessValue": "Repetitive work disappears, and fewer things get forgotten.",
+          "ownerValue": "Routine steps just happen on their own in the background."
+        },
+        {
+          "slug": "google-workspace",
+          "name": "Email, Calendar & Files",
+          "realTool": "Google Workspace",
+          "featured": true,
+          "what": "Your everyday email, calendar, and file storage, connected to the team.",
+          "howWeUse": "We work inside your Gmail, Calendar, and Drive so scheduling, files, and replies stay in sync.",
+          "businessValue": "Everything lives where you already keep it, organized.",
+          "ownerValue": "Your inbox and calendar get managed alongside everything else."
+        },
+        {
+          "slug": "whatsapp-ai",
+          "name": "WhatsApp Connected To Your AI",
+          "realTool": "WhatsApp connection",
+          "featured": true,
+          "what": "We connect WhatsApp so your AI can read and reply to messages.",
+          "howWeUse": "Messages can be read, searched, and drafted through your AI, so nothing sits unanswered.",
+          "businessValue": "Customer messages get handled quickly, where your customers already are.",
+          "ownerValue": "Your WhatsApp stops being a pile of unread messages."
+        },
+        {
+          "slug": "deep-research",
+          "name": "Deep Research",
+          "realTool": "Multi-source research",
+          "featured": false,
+          "what": "A way to research any question across many sources and check the facts.",
+          "howWeUse": "We run wide, fact-checked research before big decisions and hand you a clear summary.",
+          "businessValue": "Decisions get made on real information, not a guess.",
+          "ownerValue": "You get the short answer, with the homework already done."
+        }
+      ]
+    }
+  ]
+}

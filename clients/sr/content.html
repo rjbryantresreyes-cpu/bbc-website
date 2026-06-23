@@ -1,0 +1,113 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>Content & SEO · S. Riviere Hair</title><!-- Self-contained: no external requests. Swap to Cormorant Garamond + Jost when hosted. --><style>
+:root{--gold:#C9A24A;--gold-soft:#e7d4a3;--cream:#FAFAF8;--ink:#2a2622;--muted:#7c736a;
+--card:#fff;--line:#ece6db;--shadow:0 1px 3px rgba(42,38,34,.06),0 8px 30px rgba(42,38,34,.05);
+--good:#5a8a6b;--warn:#c08a3e;--bad:#b5503f}
+html[data-theme="dark"]{--cream:#16130f;--ink:#f1e9da;--muted:#a89c89;--card:#1f1a14;--line:#322a20;
+--shadow:0 1px 3px rgba(0,0,0,.4),0 8px 30px rgba(0,0,0,.35);--gold:#d4af5e}
+*{box-sizing:border-box}
+body{margin:0;background:var(--cream);color:var(--ink);font-family:'Jost',system-ui,-apple-system,Segoe UI,sans-serif;font-weight:300;line-height:1.55;-webkit-font-smoothing:antialiased}
+.serif{font-family:'Cormorant Garamond',Georgia,'Times New Roman',serif}
+.wrap{max-width:1100px;margin:0 auto;padding:24px 18px 80px}
+a{color:inherit;text-decoration:none}
+header.top{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;flex-wrap:wrap;border-bottom:1px solid var(--line);padding-bottom:20px;margin-bottom:28px}
+.brand h1{font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:30px;letter-spacing:.5px;margin:0 0 2px}
+.brand .sub{color:var(--muted);font-size:13px;letter-spacing:.14em;text-transform:uppercase}
+.badges{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.badge{font-size:11px;letter-spacing:.08em;text-transform:uppercase;padding:5px 10px;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.badge.live{color:var(--good);border-color:var(--good)}
+.badge.bbc{color:var(--gold);border-color:var(--gold-soft)}
+.toggle{cursor:pointer;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:999px;width:42px;height:42px;font-size:18px;display:grid;place-items:center;box-shadow:var(--shadow)}
+.back{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:16px;display:inline-block}
+.back:hover{color:var(--gold)}
+section{margin:0 0 34px}
+.sec-h{font-family:'Cormorant Garamond',Georgia,serif;font-size:22px;font-weight:600;margin:0 0 4px;display:flex;align-items:center;gap:10px}
+.sec-h::before{content:"";width:22px;height:1px;background:var(--gold)}
+.sec-sub{color:var(--muted);font-size:13px;margin:0 0 16px}
+.kpis{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.kpi{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;box-shadow:var(--shadow)}
+.kpi .n{font-family:'Cormorant Garamond',Georgia,serif;font-size:34px;font-weight:600;line-height:1;color:var(--ink)}
+.kpi .l{color:var(--muted);font-size:12px;letter-spacing:.06em;text-transform:uppercase;margin-top:6px}
+.kpi .d{font-size:12px;color:var(--muted);margin-top:6px}
+.kpi .d b{color:var(--gold);font-weight:500}
+.cards{display:grid;gap:14px}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px;box-shadow:var(--shadow)}
+.bar-row{display:grid;grid-template-columns:120px 1fr 64px;align-items:center;gap:10px;margin:9px 0;font-size:13px}
+.bar-track{background:var(--line);border-radius:999px;height:9px;overflow:hidden}
+.bar-fill{height:100%;background:linear-gradient(90deg,var(--gold-soft),var(--gold));border-radius:999px}
+.bar-row .v{text-align:right;color:var(--muted);font-variant-numeric:tabular-nums}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th,td{text-align:left;padding:9px 8px;border-bottom:1px solid var(--line)}
+th{color:var(--muted);font-weight:500;letter-spacing:.05em;text-transform:uppercase;font-size:11px}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
+.pill{display:inline-block;font-size:11px;padding:2px 8px;border-radius:999px;border:1px solid var(--line);color:var(--muted)}
+.pill.bad{color:var(--bad);border-color:var(--bad)}.pill.warn{color:var(--warn);border-color:var(--warn)}.pill.good{color:var(--good);border-color:var(--good)}
+.scroll{max-height:300px;overflow:auto;border:1px solid var(--line);border-radius:12px}
+.scroll table th{position:sticky;top:0;background:var(--card)}
+.tiers{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.tier{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;box-shadow:var(--shadow)}
+.tier .cap{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold)}
+.tier .rng{font-family:'Cormorant Garamond',Georgia,serif;font-size:24px;font-weight:600;margin:6px 0 2px}
+.tier .ds{font-size:12px;color:var(--muted)}
+.todo{list-style:none;margin:0;padding:0}
+.todo li{display:flex;gap:12px;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--line)}
+.todo li:last-child{border-bottom:0}
+.todo .ic{width:26px;height:26px;border-radius:8px;display:grid;place-items:center;font-size:13px;flex:0 0 auto;background:rgba(201,162,74,.12);color:var(--gold)}
+.todo .t{font-weight:500;font-size:14px}.todo .s{color:var(--muted);font-size:12.5px}
+.locked{position:relative;border-style:dashed}
+.lock-note{display:flex;gap:10px;align-items:center;background:rgba(201,162,74,.1);border:1px solid var(--gold-soft);color:var(--ink);border-radius:12px;padding:12px 14px;font-size:13px;margin-bottom:14px}
+.ghost{opacity:.45;filter:grayscale(.3)}
+.foot{margin-top:40px;padding-top:18px;border-top:1px solid var(--line);color:var(--muted);font-size:12px;text-align:center}
+.note{font-size:12px;color:var(--muted);margin-top:10px}
+.hub{display:grid;grid-template-columns:1fr;gap:14px}
+.hcard{display:block;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px;box-shadow:var(--shadow);transition:transform .15s,border-color .15s}
+.hcard:hover{transform:translateY(-2px);border-color:var(--gold-soft)}
+.hcard .ht{font-family:'Cormorant Garamond',Georgia,serif;font-size:22px;font-weight:600;margin:0 0 4px}
+.hcard .hd{color:var(--muted);font-size:13px}
+.hcard .arrow{color:var(--gold);font-size:13px;margin-top:12px;letter-spacing:.08em;text-transform:uppercase}
+.hcard.soon{opacity:.7}
+.hcard.soon:hover{transform:none}
+.tabs{display:flex;gap:8px;margin-bottom:18px}
+.tab{flex:1;text-align:center;cursor:pointer;padding:11px;border:1px solid var(--line);border-radius:12px;background:var(--card);color:var(--muted);font-size:13px;letter-spacing:.04em}
+.tab.on{border-color:var(--gold);color:var(--ink);background:rgba(201,162,74,.08)}
+label.fl{display:block;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:14px 0 6px}
+input.fi,select.fi,textarea.fi{width:100%;padding:11px 12px;border:1px solid var(--line);border-radius:10px;background:var(--cream);color:var(--ink);font-family:inherit;font-size:14px}
+textarea.fi{min-height:90px;resize:vertical}
+input.fi:focus,select.fi:focus,textarea.fi:focus{outline:none;border-color:var(--gold)}
+.drop{border:1.5px dashed var(--gold-soft);border-radius:12px;padding:22px;text-align:center;color:var(--muted);font-size:13px;cursor:pointer;background:rgba(201,162,74,.04)}
+.drop.over{border-color:var(--gold);background:rgba(201,162,74,.1)}
+.thumbs{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}
+.thumb{position:relative;width:74px;height:74px;border-radius:10px;overflow:hidden;border:1px solid var(--line)}
+.thumb img{width:100%;height:100%;object-fit:cover}
+.thumb .x{position:absolute;top:2px;right:2px;background:rgba(0,0,0,.6);color:#fff;border-radius:50%;width:18px;height:18px;font-size:11px;display:grid;place-items:center;cursor:pointer}
+.vrow{display:grid;grid-template-columns:1fr 1fr 1fr 30px;gap:8px;margin-bottom:8px;align-items:center}
+.vrow .x{cursor:pointer;color:var(--bad);text-align:center;font-size:16px}
+.btn{display:inline-block;cursor:pointer;border:none;border-radius:999px;padding:13px 26px;font-family:inherit;font-size:14px;letter-spacing:.04em;background:var(--gold);color:#fff;font-weight:500}
+.btn.ghost{background:transparent;border:1px solid var(--line);color:var(--ink);padding:9px 16px;font-size:13px}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+.req-item{display:flex;justify-content:space-between;gap:10px;align-items:center;padding:11px 12px;border:1px solid var(--line);border-radius:10px;margin-bottom:8px;font-size:13px;background:var(--card)}
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--ink);color:var(--cream);padding:12px 18px;border-radius:999px;font-size:13px;box-shadow:var(--shadow);opacity:0;transition:opacity .25s;pointer-events:none;z-index:50}
+.toast.show{opacity:1}
+.owner-link{display:flex;justify-content:space-between;align-items:center;gap:12px;background:rgba(201,162,74,.08);border:1px solid var(--gold-soft);border-radius:14px;padding:14px 18px;margin-bottom:22px}
+.owner-link .ml{font-family:'Cormorant Garamond',Georgia,serif;font-size:18px;font-weight:600}
+@media(min-width:680px){.kpis{grid-template-columns:repeat(3,1fr)}.wrap{padding:32px 28px 90px}.brand h1{font-size:38px}.hub{grid-template-columns:1fr 1fr}}
+@media(min-width:900px){.kpis{grid-template-columns:repeat(6,1fr)}.two{display:grid;grid-template-columns:1fr 1fr;gap:14px}}
+</style></head><body><div class="wrap">
+<a class="back" href="index.html">&#8592; My SR Dashboard</a>
+<header class="top"><div class="brand"><h1 class="serif">Content &amp; SEO</h1><div class="sub">Blog + search</div>
+<div class="badges"><span class="badge live">&#9679; Big opportunity</span></div></div>
+<button class="toggle" id="toggle" aria-label="Toggle dark mode">&#9789;</button></header>
+<section><h2 class="sec-h serif">The library is already written</h2><p class="sec-sub">A finished education library is sitting hidden. Publishing it is the fastest free-traffic win.</p>
+<div class="kpis"><div class="kpi"><div class="n">36</div><div class="l">Articles ready</div><div class="d"><b>all hidden</b></div></div><div class="kpi"><div class="n">1</div><div class="l">Blog</div><div class="d">Hair Maintenance &amp; Care</div></div><div class="kpi"><div class="n">23</div><div class="l">Pages</div><div class="d">10 are duplicates</div></div></div></section>
+<section><h2 class="sec-h serif">The plan</h2><ul class="todo">
+<li><div class="ic">&#9733;</div><div><div class="t">Publish the 36 hidden articles</div><div class="s">Topics: raw vs processed/remy/virgin, single vs mixed donor, washing/storage/heat/shedding care, temple sourcing + cuticle education, texture guides, before/after, true cost of cheap extensions. Review each for accuracy first (Sonya&rsquo;s rule), then publish + interlink.</div></div></li>
+<li><div class="ic">&#9776;</div><div><div class="t">Remove 10 duplicate &ldquo;Launch Page&rdquo; pages</div><div class="s">Cleans navigation and search.</div></div></li>
+<li><div class="ic">&#9998;</div><div><div class="t">Bi-weekly blog cadence</div><div class="s">Education-first topics for wig beginners (per the retainer).</div></div></li>
+</ul></section>
+<section><div class="panel locked"><div class="lock-note"><span>&#128274;</span><div>Publishing needs <b>content write access</b> (we have read-only today) plus Sonya&rsquo;s OK, since it changes her live store.</div></div></div></section>
+<div class="foot">Content &amp; SEO &middot; Built by Balay ni Bruno &amp; Co. &middot; Counts read from the live store (2026-06-11).</div>
+</div><script>
+const tg=document.getElementById('toggle');
+function setT(m){document.documentElement.setAttribute('data-theme',m);if(tg)tg.innerHTML=m==='dark'?'&#9788;':'&#9789;';try{localStorage.setItem('sr-dash-theme',m)}catch(e){}}
+setT((()=>{try{return localStorage.getItem('sr-dash-theme')||'light'}catch(e){return 'light'}})());
+if(tg)tg.addEventListener('click',()=>setT(document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark'));
+</script></body></html>
