@@ -148,6 +148,18 @@
   .ra:active{background:#eee;}
   .unread{background:#E24B4A;color:#fff;border-radius:11px;min-width:20px;height:20px;display:inline-flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;padding:0 6px;margin-top:5px;margin-left:auto;}
   .row .rt{display:flex;flex-direction:column;align-items:flex-end;}
+  .cfilter{display:flex;gap:6px;overflow-x:auto;padding:8px 12px;border-bottom:1px solid #f1eee8;background:#fff;}
+  .fchip{white-space:nowrap;font-size:13px;padding:5px 12px;border-radius:14px;background:#f1eee8;color:var(--navy);cursor:pointer;}
+  .fchip.on{background:var(--navy);color:#fff;}
+  .pinmark{font-size:11px;}
+  .ltag{font-size:10px;font-weight:700;color:#fff;border-radius:6px;padding:1px 6px;margin-left:4px;vertical-align:middle;}
+  #rowMenu{position:fixed;z-index:88;background:#fff;border-radius:12px;box-shadow:0 10px 34px rgba(0,0,0,.28);padding:6px;display:none;min-width:190px;}
+  .rm-item{padding:10px 12px;cursor:pointer;border-radius:8px;color:var(--navy);font-size:14px;}
+  .rm-item:active{background:#f1eee8;}
+  .rm-sec{font-size:11px;color:#8a8a8a;padding:6px 12px 2px;text-transform:uppercase;letter-spacing:.5px;}
+  .rm-labels{display:flex;flex-wrap:wrap;gap:5px;padding:4px 8px 6px;}
+  .rm-l{font-size:12px;color:#fff;border-radius:8px;padding:5px 10px;cursor:pointer;opacity:.85;}
+  .rm-l.on{outline:2px solid var(--navy);opacity:1;}
   .toast.show{opacity:1;}
 
   @media(max-width:899px){
@@ -192,7 +204,9 @@
       <button onclick="openProfile()">Edit profile</button>
       <button onclick="doLogout()">Sign out</button>
     </div>
+    <div class="cfilter" id="chatFilter"></div>
     <div class="list" id="list"><div class="empty">Loading your chats…</div></div>
+    <div id="rowMenu"></div>
     <button class="fab" onclick="openContacts()">✎</button>
 
     <!-- CONTACTS screen -->
@@ -229,6 +243,10 @@
         <input id="vaPass" placeholder="Temporary password (min 6)">
         <button class="primary" id="vaCreateBtn" onclick="createVA()">Create login</button>
         <div class="note">This makes their BBC Messenger login. Send them the email + password, they sign in and change nothing else. They will only see you (BBC Bruno) as a contact.</div>
+      </div>
+      <div class="form" style="border-top:1px solid #eee;margin-top:4px;padding-top:12px">
+        <button class="primary" onclick="importTeamPhotos()" style="background:#1F3557">Import team photos from website</button>
+        <div class="note">Sets profile photos for the team from their headshots on balaynibruno.co (Daryl, Diego, Kenz, Ryan). RJ + Krizza already set their own.</div>
       </div>
       <div class="seclabel">Existing team logins</div>
       <div class="scr-body" id="vaList"></div>
@@ -322,6 +340,20 @@ async function setupPush(){
     if(!sub)sub=await reg.pushManager.subscribe({userVisibleOnly:true,applicationServerKey:urlB64ToUint8(VAPID_PUBLIC)});
     await api(API,'',{method:'POST',body:{action:'saveSub',subscription:sub}});
   }catch(e){}
+}
+const TEAM_PHOTOS={
+ 'daryl@balaynibruno.co':'/images/team/daryl-agadia.jpg',
+ 'diego@balaynibruno.co':'/images/team/diego-tres-reyes.jpg',
+ 'kenz.bbc11@gmail.com':'/images/team/kenz-villaflores.jpg',
+ 'ryan@balaynibruno.co':'/images/team/ryan-bernaldez.jpg'
+};
+function imgToB64(blob){return new Promise((res,rej)=>{const img=new Image();const u=URL.createObjectURL(blob);img.onload=()=>{const max=300,sc=Math.min(1,max/Math.max(img.width,img.height));const c=document.createElement('canvas');c.width=Math.round(img.width*sc)||max;c.height=Math.round(img.height*sc)||max;c.getContext('2d').drawImage(img,0,0,c.width,c.height);URL.revokeObjectURL(u);c.toBlob(b=>{const fr=new FileReader();fr.onload=()=>res(String(fr.result).split(',')[1]);fr.onerror=rej;fr.readAsDataURL(b);},'image/jpeg',0.82);};img.onerror=rej;img.src=u;});}
+async function importTeamPhotos(){
+  toast('Importing team photos…');let done=0;
+  for(const email of Object.keys(TEAM_PHOTOS)){
+    try{const blob=await (await fetch(TEAM_PHOTOS[email])).blob();const b64=await imgToB64(blob);const r=await api(API,'',{method:'POST',body:{action:'setAvatarFor',email,avatarB64:b64,avatarType:'image/jpeg'}});const d=r&&await r.json();if(d&&d.ok)done++;}catch(e){}
+  }
+  toast('Set '+done+' team photos from the website');refreshList();
 }
 function linkify(s){return String(s).replace(/(https?:\/\/[^\s<]+)/g,u=>{const drive=/drive\.google\.com|docs\.google\.com/.test(u);const label=drive?'📎 '+u.replace(/^https?:\/\//,'').slice(0,42)+(u.length>50?'…':''):u;return '<a href="'+u+'" target="_blank" rel="noopener" style="color:#7fb2f0;text-decoration:underline;word-break:break-all">'+label+'</a>';});}
 function isMobile(){return window.matchMedia('(max-width:899px)').matches;}
@@ -425,10 +457,24 @@ function pickDevice(d){selectedDevice=d;renderDevbar();}
 function convTitle(c){if(c.type==='self')return '📱 '+(c.device||c.name||'Notes');if(c.type==='group')return c.name||'Group';const o=c.members.find(m=>m!==ME.id);const p=ROSTER.find(x=>x.id===o);return p?p.name:(ME.hub?'Teammate':'BBC Bruno');}
 function whenLabel(ts){if(!ts)return'';const d=new Date(ts),n=new Date();if(d.toDateString()===n.toDateString())return d.toLocaleTimeString(undefined,{hour:'numeric',minute:'2-digit'});const y=new Date(n-864e5);if(d.toDateString()===y.toDateString())return'Yesterday';return d.toLocaleDateString(undefined,{month:'numeric',day:'numeric'});}
 
+const LABELS=['Team','Clients','Leads','Admin'];
+const LABEL_COLORS={Team:'#3b82c4',Clients:'#2ca06a',Leads:'#c77d52',Admin:'#9b6fc7'};
+function renderFilterBar(){
+  const el=document.getElementById('chatFilter'); if(!el)return;
+  const f=window.__filter||'all';
+  const chips=[['all','All'],['pinned','📌']].concat(LABELS.map(l=>[l,l]));
+  el.innerHTML=chips.map(([k,lbl])=>`<span class="fchip${f===k?' on':''}" onclick="setFilter('${k}')">${lbl}</span>`).join('');
+}
+function setFilter(f){window.__filter=f;renderList();}
 function renderList(){
+  renderFilterBar();
   const el=document.getElementById('list');
-  if(!CONVS.length){el.innerHTML='<div class="empty">No chats yet.<br>'+(ME.hub?'Tap ✎ to message a teammate or start a group.':'Tap ✎ to message BBC Bruno.')+'</div>';return;}
-  const ordered=[...CONVS].sort((a,b)=>{if(a.type==='self')return -1;if(b.type==='self')return 1;return (b.lastTs||0)-(a.lastTs||0);});
+  const f=window.__filter||'all';
+  let list=[...CONVS];
+  if(f==='pinned')list=list.filter(c=>c.pinned);
+  else if(f!=='all')list=list.filter(c=>c.label===f);
+  if(!list.length){el.innerHTML='<div class="empty">'+(CONVS.length?'Nothing in this filter.':'No chats yet.<br>'+(ME.hub?'Tap ✎ to message a teammate or start a group.':'Tap ✎ to message BBC Bruno.'))+'</div>';updateBadge();return;}
+  const ordered=list.sort((a,b)=>{const sa=a.type==='self'?2:(a.pinned?1:0),sb=b.type==='self'?2:(b.pinned?1:0);if(sa!==sb)return sb-sa;return (b.lastTs||0)-(a.lastTs||0);});
   el.innerHTML=ordered.map(c=>{
     const self=c.type==='self',grp=c.type==='group',t=convTitle(c),dev=c.device||c.name||'';
     const other=(!self&&!grp)?c.members.find(m=>m!==ME.id):null;
@@ -437,14 +483,31 @@ function renderList(){
     const avt=self?esc(initial(dev||'D')):(grp?'#':esc(initial(t)));
     const avHtml=(op&&op.avatar)?'<img src="'+avaSrc(other)+'" alt="" style="width:100%;height:100%;object-fit:cover;border-radius:50%">':avt;
     const last=self?(c.lastText||('Notes & files for '+dev)):(c.lastText||'No messages yet');
-    return `<div class="row ${CUR&&CUR.id===c.id?'active':''}" onclick="openConv('${c.id}')">
+    const pin=c.pinned?'<span class="pinmark">📌</span>':'';
+    const ltag=c.label?'<span class="ltag" style="background:'+(LABEL_COLORS[c.label]||'#777')+'">'+esc(c.label)+'</span>':'';
+    return `<div class="row ${CUR&&CUR.id===c.id?'active':''}" data-cid="${c.id}" onclick="openConv('${c.id}')">
       <div class="av" style="background:${col};width:50px;height:50px;font-size:19px;overflow:hidden">${avHtml}</div>
-      <div class="mid"><div class="nm">${esc(t)}</div><div class="last">${esc(last)}</div></div>
+      <div class="mid"><div class="nm">${esc(t)} ${pin}${ltag}</div><div class="last">${esc(last)}</div></div>
       <div class="rt"><div class="when">${whenLabel(c.lastTs)}</div>${c.unread>0?'<div class="unread">'+(c.unread>99?'99+':c.unread)+'</div>':''}</div>
     </div>`;
   }).join('');
   updateBadge();
 }
+function showRowMenu(cid,x,y){
+  const c=CONVS.find(z=>z.id===cid); if(!c)return;
+  const m=document.getElementById('rowMenu');
+  let h='<div class="rm-item" onclick="togglePin(\''+cid+'\')">'+(c.pinned?'📌 Unpin':'📌 Pin to top')+'</div><div class="rm-sec">Label</div><div class="rm-labels">';
+  h+=LABELS.map(l=>'<span class="rm-l'+(c.label===l?' on':'')+'" style="background:'+(LABEL_COLORS[l])+'" onclick="setLabel(\''+cid+'\',\''+l+'\')">'+l+'</span>').join('');
+  h+='<span class="rm-l" style="background:#777" onclick="setLabel(\''+cid+'\',\'\')">None</span></div>';
+  m.innerHTML=h; m.style.display='block';
+  const mw=m.offsetWidth||210, mh=m.offsetHeight||150;
+  m.style.left=Math.max(8,Math.min((x||40),innerWidth-mw-8))+'px';
+  m.style.top=Math.max(8,Math.min((y||80),innerHeight-mh-8))+'px';
+}
+function hideRowMenu(){const m=document.getElementById('rowMenu');if(m)m.style.display='none';}
+document.addEventListener('click',e=>{const m=document.getElementById('rowMenu');if(m&&m.style.display==='block'&&!m.contains(e.target))hideRowMenu();});
+async function togglePin(cid){const c=CONVS.find(z=>z.id===cid);if(!c)return;c.pinned=!c.pinned;hideRowMenu();renderList();try{await api(API,'',{method:'POST',body:{action:'pinConv',conv:cid,pinned:c.pinned}});}catch(e){}}
+async function setLabel(cid,label){const c=CONVS.find(z=>z.id===cid);if(!c)return;c.label=label;hideRowMenu();renderList();try{await api(API,'',{method:'POST',body:{action:'labelConv',conv:cid,label}});}catch(e){}}
 function updateBadge(){
   const total=(CONVS||[]).reduce((a,c)=>a+(c.unread||0),0);
   try{ if(navigator.setAppBadge){ total>0?navigator.setAppBadge(total):(navigator.clearAppBadge&&navigator.clearAppBadge()); } }catch(e){}
@@ -452,6 +515,7 @@ function updateBadge(){
 
 /* ---------- conversation ---------- */
 async function openConv(id){
+  if(window.__suppressClick){window.__suppressClick=false;return;}
   CUR=CONVS.find(c=>c.id===id); if(!CUR)return;
   lastTs=0; MSGS=[];
   // opening a chat marks it read -> clear its unread + the app-icon badge
@@ -704,8 +768,8 @@ function reactPick(mid){
 }
 (function(){
   let lpT=null;
-  document.addEventListener('contextmenu',e=>{const sel=window.getSelection&&String(window.getSelection()||'');if(sel&&sel.trim())return;/* text selected -> let the browser's copy menu show */const b=e.target.closest&&e.target.closest('.b[data-mid]');if(b){e.preventDefault();const r=b.getBoundingClientRect();showReactBar(b.dataset.mid,e.clientX,r.top);}});
-  document.addEventListener('touchstart',e=>{const b=e.target.closest&&e.target.closest('.b[data-mid]');if(!b)return;const mid=b.dataset.mid,r=b.getBoundingClientRect();lpT=setTimeout(()=>{try{navigator.vibrate&&navigator.vibrate(15);}catch(_){}showReactBar(mid,r.left+r.width/2,r.top);},450);},{passive:true});
+  document.addEventListener('contextmenu',e=>{const sel=window.getSelection&&String(window.getSelection()||'');if(sel&&sel.trim())return;/* text selected -> let the browser's copy menu show */const b=e.target.closest&&e.target.closest('.b[data-mid]');if(b){e.preventDefault();const r=b.getBoundingClientRect();showReactBar(b.dataset.mid,e.clientX,r.top);return;}const row=e.target.closest&&e.target.closest('.row[data-cid]');if(row){e.preventDefault();showRowMenu(row.dataset.cid,e.clientX,e.clientY);}});
+  document.addEventListener('touchstart',e=>{const b=e.target.closest&&e.target.closest('.b[data-mid]');if(b){const mid=b.dataset.mid,r=b.getBoundingClientRect();lpT=setTimeout(()=>{try{navigator.vibrate&&navigator.vibrate(15);}catch(_){}showReactBar(mid,r.left+r.width/2,r.top);},450);return;}const row=e.target.closest&&e.target.closest('.row[data-cid]');if(row){const cid=row.dataset.cid,r=row.getBoundingClientRect();lpT=setTimeout(()=>{try{navigator.vibrate&&navigator.vibrate(15);}catch(_){}window.__suppressClick=true;showRowMenu(cid,r.left+30,r.top+12);},450);}},{passive:true});
   const cancel=()=>{if(lpT){clearTimeout(lpT);lpT=null;}};
   document.addEventListener('touchend',cancel);document.addEventListener('touchmove',cancel,{passive:true});
 })();

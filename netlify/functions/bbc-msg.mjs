@@ -215,6 +215,8 @@ export default async (req) => {
       const mine = convs.filter(c => c.members.includes(meId)).sort((a, b) => (b.lastTs || 0) - (a.lastTs || 0));
       // unread per conversation (messages newer than the user's last-read mark, not sent by them)
       const reads = await readJ("reads:" + meId, {});
+      const prefs = await readJ("prefs:" + meId, { pinned: {}, labels: {} });
+      const pinned = prefs.pinned || {}, labels = prefs.labels || {};
       const mineWithUnread = await Promise.all(mine.map(async (c) => {
         const r = reads[c.id] || 0;
         let unread = 0;
@@ -222,7 +224,7 @@ export default async (req) => {
           const ms = await readJ("msgs:" + c.id, []);
           unread = ms.filter(m => (m.ts || 0) > r && m.user !== meId).length;
         }
-        return { ...c, unread };
+        return { ...c, unread, pinned: !!pinned[c.id], label: labels[c.id] || "" };
       }));
       // FLAT TEAM DIRECTORY: every user sees every teammate (RJ shows as "BBC Bruno"); clients excluded.
       const avaSet = new Set(roster.filter(p => p.avatar).map(p => p.id));
@@ -412,6 +414,27 @@ export default async (req) => {
       return json({ ok: true });
     }
 
+    // ---------- POST pinConv / labelConv (per-user chat organization) ----------
+    if (act === "pinConv") {
+      const convId = String(body.conv || "");
+      if (!convId) return json({ error: "conv required" }, 400);
+      const prefs = await readJ("prefs:" + meId, { pinned: {}, labels: {} });
+      prefs.pinned = prefs.pinned || {};
+      if (body.pinned) prefs.pinned[convId] = true; else delete prefs.pinned[convId];
+      await js.setJSON("prefs:" + meId, prefs);
+      return json({ ok: true });
+    }
+    if (act === "labelConv") {
+      const convId = String(body.conv || "");
+      if (!convId) return json({ error: "conv required" }, 400);
+      const label = String(body.label || "").slice(0, 24);
+      const prefs = await readJ("prefs:" + meId, { pinned: {}, labels: {} });
+      prefs.labels = prefs.labels || {};
+      if (label) prefs.labels[convId] = label; else delete prefs.labels[convId];
+      await js.setJSON("prefs:" + meId, prefs);
+      return json({ ok: true });
+    }
+
     // ---------- POST markRead (mark a conversation read up to now) ----------
     if (act === "markRead") {
       const convId = String(body.conv || "");
@@ -445,6 +468,27 @@ export default async (req) => {
       }
       await js.setJSON("roster", roster);
       return json({ ok: true, name: roster[i].name, avatar: !!roster[i].avatar });
+    }
+
+    // ---------- POST setAvatarFor (hub sets a teammate's avatar, e.g. from the website) ----------
+    if (act === "setAvatarFor") {
+      if (!meHub) return json({ error: "hub only" }, 403);
+      const email = String(body.email || "").trim().toLowerCase();
+      if (!email || !body.avatarB64) return json({ error: "email + avatarB64 required" }, 400);
+      const all = await adminUsers();
+      const u = (all || []).find(x => x.email === email);
+      if (!u) return json({ error: "user not found: " + email }, 404);
+      const bytes = Buffer.from(String(body.avatarB64), "base64");
+      if (bytes.length > 2 * 1024 * 1024) return json({ error: "avatar too big (max 2 MB)" }, 400);
+      const ab = bytes.buffer.slice(bytes.byteOffset, bytes.byteOffset + bytes.byteLength);
+      await fs.set("avatar:" + u.id, ab);
+      await js.setJSON("avatarmeta:" + u.id, { type: String(body.avatarType || "image/jpeg").slice(0, 40) });
+      const roster = await readJ("roster", []);
+      const i = roster.findIndex(p => p.id === u.id);
+      if (i === -1) roster.push({ id: u.id, name: u.name, email, seen: Date.now(), avatar: true });
+      else roster[i].avatar = true;
+      await js.setJSON("roster", roster);
+      return json({ ok: true, email });
     }
 
     // ---------- POST addMember (add a contact to a group) ----------
