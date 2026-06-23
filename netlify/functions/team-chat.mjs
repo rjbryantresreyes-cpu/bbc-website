@@ -50,8 +50,20 @@ export default async (req) => {
 
   try {
     if (req.method === "GET") {
-      let list = await read();
       const url = new URL(req.url);
+      // serve a stored file attachment: /team-chat?file=<id>[&dl=1]
+      const fileId = url.searchParams.get("file");
+      if (fileId) {
+        try {
+          const res = await store.getWithMetadata("file:" + fileId, { type: "arrayBuffer" });
+          if (!res || !res.data) return new Response("not found", { status: 404, headers: CORS });
+          const meta = res.metadata || {};
+          const headers = { "content-type": String(meta.type || "application/octet-stream"), "cache-control": "public, max-age=31536000", ...CORS };
+          if (url.searchParams.get("dl")) headers["content-disposition"] = 'attachment; filename="' + String(meta.name || "file").replace(/[\r\n"]/g, "") + '"';
+          return new Response(res.data, { status: 200, headers });
+        } catch (e) { return new Response("file error", { status: 500, headers: CORS }); }
+      }
+      let list = await read();
       const channel = url.searchParams.get("channel");
       const since = Number(url.searchParams.get("since") || 0);
       if (channel) list = list.filter(m => (m.channel || "team") === channel);
@@ -73,12 +85,27 @@ export default async (req) => {
         return json({ ok: true });
       }
 
-      // append a new message
+      // append a new message (optionally with a small file attachment)
       const c = clean(body);
-      if (!c.text.trim()) return json({ error: "text required" }, 400);
       const ts = Date.now();
       const id = "m" + ts.toString(36) + Math.floor(Math.random() * 1e4).toString(36);
+      let file = null;
+      if (body.fileData && body.fileName) {
+        const mm = /^data:([^;]+);base64,(.*)$/s.exec(String(body.fileData));
+        if (mm) {
+          const buf = Buffer.from(mm[2], "base64");
+          if (buf.length > 10 * 1024 * 1024) return json({ error: "file too big (max 10MB) — share a Drive link instead" }, 413);
+          const fid = "f" + ts.toString(36) + Math.floor(Math.random() * 1e4).toString(36);
+          const ftype = String(body.fileType || mm[1] || "application/octet-stream").slice(0, 100);
+          const fname = String(body.fileName).slice(0, 200);
+          const ab = buf.buffer.slice(buf.byteOffset, buf.byteOffset + buf.byteLength);
+          await store.set("file:" + fid, ab, { metadata: { type: ftype, name: fname } });
+          file = { id: fid, name: fname, type: ftype, size: buf.length };
+        }
+      }
+      if (!c.text.trim() && !file) return json({ error: "text required" }, 400);
       const msg = { id, ...c, ts };
+      if (file) msg.file = file;
       list.push(msg);
       if (list.length > CAP) list = list.slice(-CAP); // trim old messages
       await store.setJSON(KEY, list);
