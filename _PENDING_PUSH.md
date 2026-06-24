@@ -93,14 +93,15 @@ git push            # Netlify auto-deploys
 - **insights.html** — 1 new "Marketing" card added at top of grid; count bumped 88 → 89.
 - After push: delete `INSIGHTS_PAGE_ENGINE/PAGE_QUEUE/update-brand-templates-without-a-designer.page-intent.md`. Source learning: `LEARNINGS/2026-06-16_illustrator_com_automation.md`.
 
-## ⏳ ADDED 2026-06-25 — Updated VA headshots across team pages (NEW)
+## ✅ DEPLOYED 2026-06-25 (commit 9766ce0) — Updated VA headshots across team pages
 - Source: Krizza's "Headshots" Google Drive folder (10 photos), copied to Drive `BBC VA Headshot\`. Converted to JPG (q90, square 1254px / portrait 1086x1448) into `images/team\`. Backup of the 5 prior photos in `images/team\_backup_2026-06-25\`.
 - **Photos swapped/added for 7 current members:** Bruno (`rj-bryan.jpg`), Ryan (`ryan-bernaldez.jpg`), Kenz (`kenz-villaflores.jpg`), Daryl (`daryl-agadia.jpg`), Diego (`diego-tres-reyes.jpg`) — same filenames, auto-update everywhere. **Vi (`vi.jpg`) + Krizza (`krizza.jpg`) were letter-avatars → converted to real `<img>`** in: `our-team.html`, `index.html` (home team grid), `vi.html`, `krizza.html`. Verified mobile 375 (avatars render, clean crop, no overflow).
 - **Staged but NOT placed on a card yet (need roles from RJ before building cards — Content Integrity):** `joshua.jpg`, `hazel.jpg`, `cuamag.jpg` are in `images/team\`. No name/role/bio = no card.
 - **Al** still has a card (`our-team.html` letter-avatar "A") but departed BBC 2026-06-12 and has no new headshot. DECISION NEEDED: remove the card or keep.
 - Mirrored all team images to `BBC WEBSITE HTML\images\team\`. NOT committed/pushed — goes out with the next batch on RJ's go.
 
-## ⏳ ADDED 2026-06-25 — Messenger (chat/) team avatars fix (NEW)
+## ✅ DEPLOYED 2026-06-25 (commit 9766ce0) — Messenger (chat/) team avatars fix
+## (still needs RJ to tap "Import team photos from website" once in the chat to populate avatars)
 - **Problem:** in the chat (`chat/index.html`, backend `netlify/functions/bbc-msg.mjs`), only Krizza showed a photo; everyone else was a letter. Avatars are stored server-side per Supabase user; only RJ + Krizza had set theirs, and the old "Import team photos" button (a) only mapped Daryl/Diego/Kenz/Ryan by email, (b) missed Vi, (c) used hardcoded emails.
 - **Fix:** `bbc-msg.mjs` `setAvatarFor` now accepts `{ id }` (preferred) as well as `{ email }` (back-compat). `chat/index.html` import now iterates the loaded `ROSTER`, matches each member by FIRST NAME against `TEAM_PHOTO_BY_NAME` (Bruno, Vi, Krizza, Ryan, Kenz, Daryl, Diego → `/images/team/*.jpg`), and sets the avatar by id. No emails needed; picks up new teammates by name; re-runnable to refresh.
 - **To make photos appear (needs deploy):** the fix + the new `images/team/*.jpg` must be live, then a HUB user (RJ) opens chat → settings → **Import team photos from website** once. (Can't be verified in the static preview — needs Supabase auth + the live function.)
