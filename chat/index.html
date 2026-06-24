@@ -246,7 +246,7 @@
       </div>
       <div class="form" style="border-top:1px solid #eee;margin-top:4px;padding-top:12px">
         <button class="primary" onclick="importTeamPhotos()" style="background:#1F3557">Import team photos from website</button>
-        <div class="note">Sets profile photos for the team from their headshots on balaynibruno.co (Daryl, Diego, Kenz, Ryan). RJ + Krizza already set their own.</div>
+        <div class="note">Sets profile photos for every teammate from their headshots on balaynibruno.co (matched by name: Bruno, Vi, Krizza, Ryan, Kenz, Daryl, Diego). Safe to run again any time photos are updated.</div>
       </div>
       <div class="seclabel">Existing team logins</div>
       <div class="scr-body" id="vaList"></div>
@@ -341,19 +341,27 @@ async function setupPush(){
     await api(API,'',{method:'POST',body:{action:'saveSub',subscription:sub}});
   }catch(e){}
 }
-const TEAM_PHOTOS={
- 'daryl@balaynibruno.co':'/images/team/daryl-agadia.jpg',
- 'diego@balaynibruno.co':'/images/team/diego-tres-reyes.jpg',
- 'kenz.bbc11@gmail.com':'/images/team/kenz-villaflores.jpg',
- 'ryan@balaynibruno.co':'/images/team/ryan-bernaldez.jpg'
+// Team headshots on the website, keyed by FIRST NAME (lowercase). We match each
+// roster member by name and set their avatar by id, so no emails are needed and
+// new teammates are picked up automatically once a photo with their name exists.
+const TEAM_PHOTO_BY_NAME={
+ 'bruno':'/images/team/rj-bryan.jpg',
+ 'vi':'/images/team/vi.jpg',
+ 'krizza':'/images/team/krizza.jpg',
+ 'ryan':'/images/team/ryan-bernaldez.jpg',
+ 'kenz':'/images/team/kenz-villaflores.jpg',
+ 'daryl':'/images/team/daryl-agadia.jpg',
+ 'diego':'/images/team/diego-tres-reyes.jpg'
 };
 function imgToB64(blob){return new Promise((res,rej)=>{const img=new Image();const u=URL.createObjectURL(blob);img.onload=()=>{const max=300,sc=Math.min(1,max/Math.max(img.width,img.height));const c=document.createElement('canvas');c.width=Math.round(img.width*sc)||max;c.height=Math.round(img.height*sc)||max;c.getContext('2d').drawImage(img,0,0,c.width,c.height);URL.revokeObjectURL(u);c.toBlob(b=>{const fr=new FileReader();fr.onload=()=>res(String(fr.result).split(',')[1]);fr.onerror=rej;fr.readAsDataURL(b);},'image/jpeg',0.82);};img.onerror=rej;img.src=u;});}
 async function importTeamPhotos(){
-  toast('Importing team photos…');let done=0;
-  for(const email of Object.keys(TEAM_PHOTOS)){
-    try{const blob=await (await fetch(TEAM_PHOTOS[email])).blob();const b64=await imgToB64(blob);const r=await api(API,'',{method:'POST',body:{action:'setAvatarFor',email,avatarB64:b64,avatarType:'image/jpeg'}});const d=r&&await r.json();if(d&&d.ok)done++;}catch(e){}
+  toast('Importing team photos…');let done=0,miss=0;
+  for(const p of (ROSTER||[])){
+    const key=String(p.name||'').toLowerCase().trim().split(/\s+/)[0];
+    const url=TEAM_PHOTO_BY_NAME[key]; if(!url)continue;
+    try{const blob=await (await fetch(url)).blob();const b64=await imgToB64(blob);const r=await api(API,'',{method:'POST',body:{action:'setAvatarFor',id:p.id,avatarB64:b64,avatarType:'image/jpeg'}});const d=r&&await r.json();if(d&&d.ok)done++;else miss++;}catch(e){miss++;}
   }
-  toast('Set '+done+' team photos from the website');refreshList();
+  toast('Set '+done+' team photos'+(miss?(' ('+miss+' failed)'):''));refreshList();
 }
 function linkify(s){return String(s).replace(/(https?:\/\/[^\s<]+)/g,u=>{const drive=/drive\.google\.com|docs\.google\.com/.test(u);const label=drive?'📎 '+u.replace(/^https?:\/\//,'').slice(0,42)+(u.length>50?'…':''):u;return '<a href="'+u+'" target="_blank" rel="noopener" style="color:#7fb2f0;text-decoration:underline;word-break:break-all">'+label+'</a>';});}
 function isMobile(){return window.matchMedia('(max-width:899px)').matches;}

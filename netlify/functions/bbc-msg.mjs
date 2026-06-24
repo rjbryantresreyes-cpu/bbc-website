@@ -471,13 +471,20 @@ export default async (req) => {
     }
 
     // ---------- POST setAvatarFor (hub sets a teammate's avatar, e.g. from the website) ----------
+    // Accepts either { id } (preferred — matches a roster member directly) or { email } (back-compat).
     if (act === "setAvatarFor") {
       if (!meHub) return json({ error: "hub only" }, 403);
+      if (!body.avatarB64) return json({ error: "avatarB64 required" }, 400);
+      const wantId = String(body.id || "").trim();
       const email = String(body.email || "").trim().toLowerCase();
-      if (!email || !body.avatarB64) return json({ error: "email + avatarB64 required" }, 400);
+      if (!wantId && !email) return json({ error: "id or email required" }, 400);
       const all = await adminUsers();
-      const u = (all || []).find(x => x.email === email);
-      if (!u) return json({ error: "user not found: " + email }, 404);
+      let u = wantId
+        ? (all || []).find(x => x.id === wantId)
+        : (all || []).find(x => x.email === email);
+      // If the admin list is unavailable but we were given a concrete id, fall back to it directly.
+      if (!u && wantId) u = { id: wantId, email: "", name: "" };
+      if (!u) return json({ error: "user not found: " + (wantId || email) }, 404);
       const bytes = Buffer.from(String(body.avatarB64), "base64");
       if (bytes.length > 2 * 1024 * 1024) return json({ error: "avatar too big (max 2 MB)" }, 400);
       const ab = bytes.buffer.slice(bytes.byteOffset, bytes.byteOffset + bytes.byteLength);
@@ -485,10 +492,10 @@ export default async (req) => {
       await js.setJSON("avatarmeta:" + u.id, { type: String(body.avatarType || "image/jpeg").slice(0, 40) });
       const roster = await readJ("roster", []);
       const i = roster.findIndex(p => p.id === u.id);
-      if (i === -1) roster.push({ id: u.id, name: u.name, email, seen: Date.now(), avatar: true });
+      if (i === -1) roster.push({ id: u.id, name: u.name, email: u.email || email, seen: Date.now(), avatar: true });
       else roster[i].avatar = true;
       await js.setJSON("roster", roster);
-      return json({ ok: true, email });
+      return json({ ok: true, id: u.id, email: u.email || email || undefined });
     }
 
     // ---------- POST addMember (add a contact to a group) ----------
