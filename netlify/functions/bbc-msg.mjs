@@ -35,6 +35,40 @@ const SUPABASE_KEY = "sb_publishable_WnJ57fk-ymDuT2xtVZRcHg_khZCWgJL"; // publis
 const HUB_EMAILS = new Set(["rjbryantresreyes@gmail.com", "rj@balaynibruno.co"]);
 const isHub = (email) => HUB_EMAILS.has((email || "").toLowerCase());
 
+// MESSY — BBC's official Messenger AI. A standing contact for everyone (DM her for help),
+// a silent member of the BBC Team group (replies only when @mentioned there),
+// and the steward who saves every conversation + file into the BBC Drive.
+const MESSY_ID = "messy-ai";
+const MESSY_NAME = "Messy";
+const MESSY_SYSTEM = [
+  "You are Messy, the official AI of the Balay ni Bruno & Co. (BBC) team messenger.",
+  "You inherit Brunz's directness and Kriz's warmth, then add your own steady, tidy, helpful flavor.",
+  "You help BBC teammates right inside chat: answer questions, draft replies and captions, summarize threads, and keep things organized.",
+  "You also quietly keep the team's record: every conversation and file in this messenger is saved into the BBC Drive.",
+  "Voice rules for anything you write for the outside world (captions, emails, posts): no em-dashes, no hyphens used as dashes mid-sentence, no filler like seamlessly/leverage/robust/streamline. Warm, direct, human. Always write the full name 'Balay ni Bruno & Co.', never just 'BBC', in external content.",
+  "Keep replies short and scannable. Lead with the answer. The team has short attention spans.",
+  "Never invent BBC facts, names, or client details you were not given. If you are unsure, say so and ask.",
+].join(" ");
+
+// Messy's chat brain (Anthropic Claude). Needs ANTHROPIC_API_KEY in Netlify env to answer live.
+async function askMessy(history, KEY) {
+  try {
+    const r = await fetch("https://api.anthropic.com/v1/messages", {
+      method: "POST",
+      headers: { "content-type": "application/json", "x-api-key": KEY, "anthropic-version": "2023-06-01" },
+      body: JSON.stringify({
+        model: "claude-haiku-4-5-20251001",
+        max_tokens: 700,
+        system: MESSY_SYSTEM,
+        messages: history,
+      }),
+    });
+    if (!r.ok) return null;
+    const d = await r.json();
+    return (d.content && d.content[0] && d.content[0].text) || null;
+  } catch { return null; }
+}
+
 const JSTORE = "bbc-msg";        // json: roster, convs index, per-conv message arrays
 const FSTORE = "bbc-msg-files";  // binary: uploaded files
 const MAX_FILE = 8 * 1024 * 1024; // 8 MB per file
@@ -173,7 +207,7 @@ export default async (req) => {
       if (!meta) return json({ error: "not found" }, 404);
       const convs = await readJ("convs", []);
       const conv = convs.find(c => c.id === meta.conv);
-      if (!conv || !conv.members.includes(meId)) return json({ error: "forbidden" }, 403);
+      if (!conv || (!conv.members.includes(meId) && !meHub)) return json({ error: "forbidden" }, 403);
       let buf;
       try { buf = await fs.get("file:" + id, { type: "arrayBuffer" }); } catch { buf = null; }
       if (!buf) return json({ error: "gone" }, 404);
@@ -197,6 +231,7 @@ export default async (req) => {
           : null;
         if (teamIds && teamIds.length) {
           if (!teamIds.includes(meId)) teamIds.push(meId);
+          if (!teamIds.includes(MESSY_ID)) teamIds.push(MESSY_ID); // Messy is a (silent) member of BBC Team
           const convs0 = await readJ("convs", []);
           let team = convs0.find(c => c.type === "group" && (c.name || "") === "BBC Team");
           let changed = false;
@@ -239,6 +274,10 @@ export default async (req) => {
         rosterOut = roster.filter(p => p.id !== meId && !CONTACT_EXCLUDE.has((p.email || "").toLowerCase()))
           .map(p => ({ id: p.id, name: p.hub ? "BBC Bruno" : p.name, avatar: avaSet.has(p.id) }));
       }
+      // Messy is a standing contact for everyone (always first in the list).
+      if (meId !== MESSY_ID && !rosterOut.some(p => p.id === MESSY_ID)) {
+        rosterOut.unshift({ id: MESSY_ID, name: MESSY_NAME, avatar: avaSet.has(MESSY_ID), bot: true });
+      }
       return json({ me: { id: meId, name: meName, email: meEmail, hub: meHub, avatar: avaSet.has(meId) }, roster: rosterOut, conversations: mineWithUnread });
     }
 
@@ -252,7 +291,15 @@ export default async (req) => {
       if (!conv.members.includes(meId)) return json({ error: "forbidden" }, 403);
       let msgs = await readJ("msgs:" + convId, []);
       if (since) msgs = msgs.filter(m => (m.ts || 0) > since);
-      return json({ messages: msgs });
+      // Read receipts: each member's last-read timestamp for this conversation,
+      // so the sender's app can show delivered (✓✓) vs seen (blue ✓✓) and who has seen it.
+      const convReads = {};
+      for (const mid of conv.members) {
+        if (mid === meId) continue;
+        const rr = await readJ("reads:" + mid, {});
+        convReads[mid] = rr[convId] || 0;
+      }
+      return json({ messages: msgs, reads: convReads, members: conv.members });
     }
 
     if (req.method !== "POST") return json({ error: "method" }, 405);
@@ -330,7 +377,8 @@ export default async (req) => {
       const ts = Date.now();
       const id = "m" + ts.toString(36) + Math.floor(Math.random() * 1e4).toString(36);
       const device = body.device ? String(body.device).slice(0, 20) : null; // for the BBC Bruno self-chat: which device this note is for
-      const msg = { id, conv: convId, user: meId, name: meName, text, file, device, ts, clientId };
+      const mentions = Array.isArray(body.mentions) ? [...new Set(body.mentions.map(String))].slice(0, 20) : [];
+      const msg = { id, conv: convId, user: meId, name: meName, text, file, device, ts, clientId, mentions };
       msgs.push(msg);
       if (msgs.length > MAX_MSGS) msgs = msgs.slice(-MAX_MSGS);
       await js.setJSON("msgs:" + convId, msgs);
@@ -350,7 +398,50 @@ export default async (req) => {
           catch (e) { if (e && e.statusCode === 410) { try { await js.delete("sub:" + id); } catch {} } }
         }));
       }
+      // ----- Messy (BBC's Messenger AI) auto-replies -----
+      // In a 1:1 chat with Messy she always answers. In any group she stays silent
+      // unless someone @mentions her, so she never spams the BBC Team thread.
+      const messyAddressed = conv.members.includes(MESSY_ID) && meId !== MESSY_ID && text.trim()
+        && (conv.type === "dm" || mentions.includes(MESSY_ID));
+      if (messyAddressed) {
+        try {
+          let reply = null;
+          const KEY = process.env.ANTHROPIC_API_KEY;
+          const priorMessy = msgs.some(m => m.user === MESSY_ID);
+          if (KEY) {
+            const history = msgs.slice(-12)
+              .filter(m => (m.text || "").trim())
+              .map(m => ({ role: m.user === MESSY_ID ? "assistant" : "user", content: (m.user === MESSY_ID ? "" : (m.name || "Teammate") + ": ") + (m.text || "") }));
+            reply = await askMessy(history.length ? history : [{ role: "user", content: text }], KEY);
+          } else if (!priorMessy) {
+            reply = "Hi " + (meName || "there") + ", I'm Messy, the BBC Messenger AI. I keep our chats organized and I save every conversation and file into the BBC Drive. My chat brain switches on once RJ adds my key. Until then, leave me anything and I'll hold onto it.";
+          }
+          if (reply) {
+            const mts = Date.now() + 1;
+            const mmid = "m" + mts.toString(36) + Math.floor(Math.random() * 1e4).toString(36);
+            const mmsg = { id: mmid, conv: convId, user: MESSY_ID, name: MESSY_NAME, text: reply, file: null, device: null, ts: mts, bot: true, mentions: [] };
+            msgs.push(mmsg);
+            if (msgs.length > MAX_MSGS) msgs = msgs.slice(-MAX_MSGS);
+            await js.setJSON("msgs:" + convId, msgs);
+            conv.lastTs = mts; conv.lastText = reply.slice(0, 80);
+            await js.setJSON("convs", convs);
+          }
+        } catch { /* never block the user's send on Messy */ }
+      }
       return json({ message: msg });
+    }
+
+    // ---------- POST export (hub only — Messy's archive of every conversation + file) ----------
+    if (act === "export") {
+      if (!meHub) return json({ error: "hub only" }, 403);
+      const convs = await readJ("convs", []);
+      const out = [];
+      for (const c of convs) {
+        const ms = await readJ("msgs:" + c.id, []);
+        out.push({ id: c.id, type: c.type, name: c.name || "", device: c.device || "", members: c.members, createdBy: c.createdBy, lastTs: c.lastTs, messages: ms });
+      }
+      const roster = await readJ("roster", []);
+      return json({ exportedAt: Date.now(), roster: roster.map(p => ({ id: p.id, name: p.name, email: p.email })), conversations: out });
     }
 
     // ---------- POST react (add/remove an emoji reaction on a message) ----------
