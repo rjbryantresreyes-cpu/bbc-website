@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-L6S574R0CE"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-L6S574R0CE');
+  </script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Can My Team's Chats, Files, and an AI Helper Live in One App? | Balay ni Bruno &amp; Co.</title>
+  <meta name="description" content="Team messages get scattered across apps and files go missing. Here is how we built one private team app that keeps every chat and file in one place, with an AI helper inside it." />
+  <link rel="canonical" href="https://balaynibruno.co/team-chat-and-ai-in-one-app.html" />
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Balay ni Bruno &amp; Co." />
+  <meta property="og:title" content="Can My Team's Chats, Files, and an AI Helper Live in One App? | Balay ni Bruno &amp; Co." />
+  <meta property="og:description" content="Team messages get scattered across apps and files go missing. Here is how we built one private team app that keeps every chat and file in one place, with an AI helper inside it." />
+  <meta property="og:url" content="https://balaynibruno.co/team-chat-and-ai-in-one-app.html" />
+  <meta property="og:image" content="https://balaynibruno.co/images/insights/team-chat-and-ai-in-one-app.svg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Lora:ital,wght@0,400;0,500;1,400;1,500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --deep-blue:#1F3557; --mid-blue:#4B6FA5; --warm-blue:#6D8FC7;
+      --light-blue:#A8C0DC; --bg-primary:#F5F1EA; --bg-section:#EDE8DF;
+      --bg-card:#FDFAF6; --bg-dark:#1C2E47; --bg-footer:#172540;
+      --text-ink:#2A3040; --text-body:#4E5666; --text-muted:#888FA0;
+      --text-warm:#F5F1EA; --gold:#B8923E; --gold-pale:#E6CFA0;
+      --gold-warm:#D4A84B; --sage:#4E9E74;
+      --font-display:'Playfair Display',Georgia,serif;
+      --font-body:'Lora',Georgia,serif;
+      --font-ui:'DM Sans',system-ui,sans-serif;
+      --max-width:860px; --radius:16px; --radius-lg:24px;
+      --shadow-sm:0 3px 18px rgba(85,60,35,0.08);
+      --shadow-md:0 7px 36px rgba(85,60,35,0.11);
+      --shadow-lg:0 14px 56px rgba(85,60,35,0.14);
+      --border-card:1px solid rgba(85,60,35,0.09);
+      --border-warm:1px solid rgba(85,60,35,0.12);
+      --s1:0.5rem;--s2:1rem;--s3:1.5rem;--s4:2.5rem;--s5:4rem;
+    }
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{font-family:var(--font-body);color:var(--text-ink);background:var(--bg-primary);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+    body::after{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23n)' opacity='0.026'/%3E%3C/svg%3E");pointer-events:none;z-index:9999;mix-blend-mode:multiply}
+    h1,h2,h3,h4{font-family:var(--font-display);line-height:1.22;color:var(--deep-blue)}
+    h1{font-size:clamp(2rem,4.5vw,3.2rem);font-weight:700;line-height:1.14}
+    h2{font-size:clamp(1.3rem,2.5vw,1.9rem);font-weight:600;margin-top:2.5rem;margin-bottom:0.75rem}
+    h3{font-size:clamp(1rem,1.8vw,1.25rem);font-weight:600;margin-top:2rem;margin-bottom:0.5rem}
+    p{font-family:var(--font-body);font-size:1.05rem;line-height:1.9;color:var(--text-body);margin-bottom:1.2rem}
+    a{text-decoration:none}
+    ul,ol{margin:0 0 1.2rem 1.5rem;color:var(--text-body);font-family:var(--font-body);font-size:1.05rem;line-height:1.85}
+    li{margin-bottom:0.4rem}
+    .eyebrow{display:block;font-family:var(--font-ui);font-size:0.68rem;font-weight:600;letter-spacing:0.17em;text-transform:uppercase;color:var(--gold);margin-bottom:var(--s2)}
+    .container{max-width:var(--max-width);margin:0 auto;padding:0 var(--s4)}
+    @media(max-width:600px){.container{padding:0 var(--s2)}}
+    .nav{position:sticky;top:0;z-index:100;background:rgba(28,46,71,0.96);backdrop-filter:blur(10px);border-bottom:1px solid rgba(255,255,255,0.07);padding:1rem var(--s4)}
+    .nav__inner{max-width:var(--max-width);margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+    .nav__logo{font-family:var(--font-display);font-size:1rem;font-weight:600;color:#fff;letter-spacing:0.01em}
+    .nav__back{font-family:var(--font-ui);font-size:0.82rem;font-weight:500;color:rgba(245,241,234,0.6);transition:color 0.2s}
+    .nav__back:hover{color:var(--gold-pale)}
+    .article-hero{background:var(--bg-dark);padding:clamp(3rem,7vw,5.5rem) 0 clamp(2.5rem,5vw,4rem);position:relative;overflow:hidden}
+    .article-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 50% at 50% 0%,rgba(184,146,62,0.09),transparent 70%);pointer-events:none}
+    .article-hero .container{position:relative}
+    .article-meta{display:flex;align-items:center;gap:0.75rem;flex-wrap:wrap;margin-bottom:1.5rem}
+    .article-cat{font-family:var(--font-ui);font-size:0.72rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold-pale);background:rgba(184,146,62,0.12);border:1px solid rgba(184,146,62,0.22);border-radius:100px;padding:0.22rem 0.8rem}
+    .article-date{font-family:var(--font-ui);font-size:0.78rem;color:rgba(245,241,234,0.4)}
+    .article-hero h1{color:#fff;margin-bottom:1.2rem}
+    .article-hero .lead{font-family:var(--font-body);font-size:1.1rem;line-height:1.85;color:rgba(245,241,234,0.7);max-width:680px}
+    .article-body{padding:clamp(2.5rem,5vw,4.5rem) 0}
+    .article-body .container{max-width:760px}
+    .highlight-box{background:var(--bg-section);border-left:3px solid var(--gold);border-radius:0 var(--radius) var(--radius) 0;padding:1.25rem 1.5rem;margin:2rem 0}
+    .highlight-box p{margin:0;font-size:0.98rem}
+    .key-takeaway{background:var(--bg-dark);border-radius:var(--radius-lg);padding:2rem;margin:2.5rem 0}
+    .key-takeaway h3{color:#fff;margin-top:0;margin-bottom:1rem}
+    .key-takeaway ul{color:rgba(245,241,234,0.72);margin-left:1.2rem}
+    .key-takeaway li{margin-bottom:0.5rem;font-size:0.98rem}
+    .chart-caption{font-family:var(--font-ui);font-size:0.76rem;color:var(--text-muted);text-align:center;margin:0.4rem 0 0;font-style:normal}
+    .faq-q{font-family:var(--font-display);font-size:1.15rem;font-weight:600;color:var(--deep-blue);margin-top:1.75rem;margin-bottom:0.4rem}
+    .cta-section{background:var(--bg-dark);padding:clamp(3rem,6vw,5rem) 0;text-align:center;position:relative;overflow:hidden}
+    .cta-section::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 60% at 50% 100%,rgba(184,146,62,0.08),transparent 70%);pointer-events:none}
+    .cta-section h2{color:#fff;margin-top:0;margin-bottom:1rem}
+    .cta-section p{color:rgba(245,241,234,0.65);max-width:500px;margin:0 auto 2rem}
+    .btn-gold{display:inline-flex;align-items:center;gap:0.5rem;padding:0.9rem 2.2rem;background:var(--gold);color:#fff;border-radius:100px;font-family:var(--font-ui);font-size:0.9rem;font-weight:600;box-shadow:0 4px 20px rgba(184,146,62,0.3);transition:all 0.22s}
+    .btn-gold:hover{background:var(--gold-warm);transform:translateY(-2px);box-shadow:0 8px 30px rgba(184,146,62,0.4)}
+    .footer{background:var(--bg-footer);padding:2rem var(--s4);text-align:center}
+    .footer p{font-family:var(--font-ui);font-size:0.8rem;color:rgba(245,241,234,0.35);line-height:1.8}
+    .footer a{color:rgba(245,241,234,0.45)}
+    .footer a:hover{color:var(--gold-pale)}
+  </style>
+  <link rel="stylesheet" href="bbc-article-visuals.css" />
+  <!-- bbc-schema -->
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://balaynibruno.co/#organization",
+      "name": "Balay ni Bruno & Co.",
+      "url": "https://balaynibruno.co/",
+      "logo": "https://balaynibruno.co/bbc-logo.png",
+      "email": "admin@balaynibruno.co",
+      "telephone": "+63 935 663 0324",
+      "founder": { "@type": "Person", "name": "RJ Bryan Tres Reyes" },
+      "sameAs": [
+        "https://www.facebook.com/profile.php?id=61590006878673",
+        "https://www.instagram.com/balaynibruno/",
+        "https://www.tiktok.com/@balaynibruno.co",
+        "https://youtube.com/@balaynibruno"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://balaynibruno.co/#website",
+      "name": "Balay ni Bruno & Co.",
+      "url": "https://balaynibruno.co/",
+      "publisher": { "@id": "https://balaynibruno.co/#organization" }
+    },
+    {
+      "@type": "Article",
+      "headline": "Can My Team's Chats, Files, and an AI Helper Live in One App?",
+      "description": "Team messages get scattered across apps and files go missing. Here is how we built one private team app that keeps every chat and file in one place, with an AI helper inside it.",
+      "url": "https://balaynibruno.co/team-chat-and-ai-in-one-app.html",
+      "mainEntityOfPage": "https://balaynibruno.co/team-chat-and-ai-in-one-app.html",
+      "image": "https://balaynibruno.co/images/insights/team-chat-and-ai-in-one-app.svg",
+      "author": { "@id": "https://balaynibruno.co/#organization" },
+      "publisher": { "@id": "https://balaynibruno.co/#organization" }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Why not just use WhatsApp or Messenger for the team?",
+          "acceptedAnswer": { "@type": "Answer", "text": "You can, and many teams do. The trouble is that the messages and files live on someone else's app, mixed in with personal chats, and there is no clean record you own. We built a private team app so the whole conversation history and every file stay in one place that the business owns, with an AI helper built in. At Balay ni Bruno & Co. this is how our own team works day to day." }
+        },
+        {
+          "@type": "Question",
+          "name": "What does the AI helper inside the app actually do?",
+          "acceptedAnswer": { "@type": "Answer", "text": "You message it like a teammate. It answers questions, drafts replies and captions, and catches you up on what you missed. It also quietly keeps the record by saving every conversation and file into one safe place, so nothing important lives only in the chat. You can talk to it one on one, or mention it in a group when you need it." }
+        },
+        {
+          "@type": "Question",
+          "name": "Is this something you can build for my business?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Yes. The app we use for our own team is the kind of system we set up for the businesses we partner with. The point is not the app itself, it is having your team's conversations, files, and an AI helper in one place you control. We start with a conversation about how your team works now and what would actually save you time." }
+        }
+      ]
+    }
+  ]
+}
+  </script>
+</head>
+<body>
+<nav class="nav"><div class="nav__inner"><a href="index.html" class="nav__logo">Balay ni Bruno &amp; Co.</a><a href="insights.html" class="nav__back">&#8592; Back to Insights</a></div></nav>
+
+<section class="article-hero">
+  <div class="container">
+    <div class="article-meta">
+      <span class="article-cat">How We Built It</span>
+      <span class="article-date">June 2026</span>
+    </div>
+    <h1>Can My Team's Chats, Files, and an AI Helper Live in One App?</h1>
+    <p class="lead">Team conversations get scattered across WhatsApp, Messenger, and email. Files go missing in the scroll. So we built our own private team app that keeps every chat and file in one place, with an AI helper named Messy sitting right inside it. Here is what it does and why it matters.</p>
+  </div>
+</section>
+
+<section class="article-body">
+  <div class="container">
+
+    <p>Most small teams run their day across three or four chat apps. A file gets sent in one, a decision happens in another, and a week later nobody can find either. The conversation is real, but the record is gone.</p>
+
+    <p>We hit the same wall ourselves. So instead of adding another app to the pile, we built one of our own: a private team messenger for Balay ni Bruno &amp; Co., with an AI helper built into it. This is the story of what we built, in plain terms, and why a setup like this helps any working team.</p>
+
+    <h2>The Problem With Chats Spread Across Apps</h2>
+
+    <p>It is not one big failure. It is a hundred small ones. Here is what that looks like in a normal week.</p>
+
+    <div class="before-after-compare">
+      <div class="before">
+        <h4>Chats spread across apps</h4>
+        <ul>
+          <li>Messages split between WhatsApp, Messenger, and email</li>
+          <li>Files buried somewhere in the scroll, sent one at a time</li>
+          <li>No way to know if someone actually read your message</li>
+          <li>The team's history lives on apps you do not control</li>
+          <li>When someone leaves, their chats and files leave too</li>
+        </ul>
+      </div>
+      <div class="after">
+        <h4>One app the business owns</h4>
+        <ul>
+          <li>Every conversation in one private place</li>
+          <li>Send a batch of photos or files at once, drag and drop</li>
+          <li>See when a message is delivered and who has read it</li>
+          <li>The full history is saved into your own storage</li>
+          <li>The record stays with the business, not the person</li>
+        </ul>
+      </div>
+    </div>
+
+    <p>The cost of scattered chats is quiet, but it is real. It is the ten minutes hunting for a file, the decision nobody can find, the new hire who has no history to read. One shared app removes all of it.</p>
+
+    <h2>What We Built</h2>
+
+    <p>It looks and feels like the messaging apps your team already knows, so there is nothing new to learn. Under the hood, it does the things that scattered chats never could.</p>
+
+    <div class="roadmap">
+      <div class="roadmap-item">
+        <span class="roadmap-item__dot">1</span>
+        <div class="roadmap-item__body">
+          <div class="roadmap-item__title">Send many photos and files at once</div>
+          <p class="roadmap-item__desc">Pick a batch from your phone or computer, or just drag them in. Paste a screenshot straight into the chat. No more sending one at a time.</p>
+        </div>
+      </div>
+      <div class="roadmap-item">
+        <span class="roadmap-item__dot">2</span>
+        <div class="roadmap-item__body">
+          <div class="roadmap-item__title">Know if a message was delivered and seen</div>
+          <p class="roadmap-item__desc">A clear mark shows when a message arrives and when it is read. In a group, you can see exactly who has seen it.</p>
+        </div>
+      </div>
+      <div class="roadmap-item">
+        <span class="roadmap-item__dot">3</span>
+        <div class="roadmap-item__body">
+          <div class="roadmap-item__title">Tag the right person</div>
+          <p class="roadmap-item__desc">Type the at sign and a name to pull a teammate into the moment, so the message that needs them does not get lost in the thread.</p>
+        </div>
+      </div>
+      <div class="roadmap-item">
+        <span class="roadmap-item__dot">4</span>
+        <div class="roadmap-item__body">
+          <div class="roadmap-item__title">Real faces, one private place</div>
+          <p class="roadmap-item__desc">Each teammate shows up with their real photo, and the whole thing is private to the team and owned by the business.</p>
+        </div>
+      </div>
+      <div class="roadmap-item">
+        <span class="roadmap-item__dot">5</span>
+        <div class="roadmap-item__body">
+          <div class="roadmap-item__title">An AI helper built in</div>
+          <p class="roadmap-item__desc">Messy lives inside the app. Message her for help, or pull her into a group when you need her.</p>
+        </div>
+      </div>
+    </div>
+
+    <h2>Meet Messy, the AI in the App</h2>
+
+    <p>Messy is our team's AI helper, and she lives right where the work happens. You talk to her like any other teammate. Two jobs make her worth having.</p>
+
+    <p><strong>She helps in the moment.</strong> Ask her a question and she answers. Ask her to draft a reply or a caption and she writes it. Ask her to catch you up on a busy thread and she sums it up. In a one on one chat she always replies. In a group she stays quiet until someone mentions her, so she never clutters the conversation.</p>
+
+    <p><strong>She keeps the record.</strong> This is the quiet superpower. Messy saves every conversation and every file into one safe place the business owns. Nothing important lives only in the chat. If you ever need to look back, it is all there, organized and yours.</p>
+
+    <div class="highlight-box"><p>The win is not that the team has another chat app. The win is that nothing falls through the cracks anymore. The conversation, the files, and the answers all live in one place you own.</p></div>
+
+    <h2>Why This Helps a Business Owner</h2>
+
+    <p>You do not have to care about how any of it was built. You care about what it removes from your day.</p>
+
+    <div class="step-flow step-flow--horizontal">
+      <div class="step">
+        <span class="step__num">1</span>
+        <div class="step__content">
+          <div class="step__title">Less hunting</div>
+          <p class="step__desc">Chats and files are in one place, so you stop searching three apps for one thing.</p>
+        </div>
+      </div>
+      <div class="step">
+        <span class="step__num">2</span>
+        <div class="step__content">
+          <div class="step__title">Fewer dropped balls</div>
+          <p class="step__desc">Seen marks and tags mean the message that needs action actually gets it.</p>
+        </div>
+      </div>
+      <div class="step">
+        <span class="step__num">3</span>
+        <div class="step__content">
+          <div class="step__title">A record you keep</div>
+          <p class="step__desc">When someone leaves or a question comes back, the history is still yours.</p>
+        </div>
+      </div>
+    </div>
+
+    <h2>What It Took to Build</h2>
+
+    <div class="stat-row">
+      <div class="stat-card">
+        <div class="stat-card__value">1 app</div>
+        <div class="stat-card__label">Chats, files, and AI in one place</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-card__value">Owned</div>
+        <div class="stat-card__label">The record stays with the business</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-card__value">In-house</div>
+        <div class="stat-card__label">Built and run by our own team</div>
+      </div>
+    </div>
+
+    <p>We did not buy this off a shelf. We built it the way we build for the businesses we partner with: start with how the team actually works, then make a tool that fits it. The AI helper is part of the same family of AI helpers we set up for our clients.</p>
+
+    <h2>What This Is Part Of</h2>
+
+    <p>This is not a product we sell on its own. The team app and Messy are how we work, and they are proof of what we can set up for a business we partner with. When you work with Balay ni Bruno &amp; Co., the goal is the same: get your team's conversations, files, and an AI helper into one place you control, so less falls through the cracks.</p>
+
+    <h2>Common Questions</h2>
+
+    <p class="faq-q">Why not just use WhatsApp or Messenger for the team?</p>
+    <p>You can, and many teams do. The trouble is that the messages and files live on someone else's app, mixed in with personal chats, and there is no clean record you own. We built a private team app so the whole conversation history and every file stay in one place that the business owns, with an AI helper built in. At Balay ni Bruno &amp; Co. this is how our own team works day to day.</p>
+
+    <p class="faq-q">What does the AI helper inside the app actually do?</p>
+    <p>You message it like a teammate. It answers questions, drafts replies and captions, and catches you up on what you missed. It also quietly keeps the record by saving every conversation and file into one safe place, so nothing important lives only in the chat. You can talk to it one on one, or mention it in a group when you need it.</p>
+
+    <p class="faq-q">Is this something you can build for my business?</p>
+    <p>Yes. The app we use for our own team is the kind of system we set up for the businesses we partner with. The point is not the app itself, it is having your team's conversations, files, and an AI helper in one place you control. We start with a conversation about how your team works now and what would actually save you time.</p>
+
+    <div class="key-takeaway">
+      <h3>Key Takeaways</h3>
+      <ul>
+        <li>Scattered chats across apps cost time and lose your record. One shared app fixes both.</li>
+        <li>We built our own private team app: many files at once, paste and drag in, delivered and seen marks, tagging, and real photos.</li>
+        <li>Messy, the AI helper, lives inside it. She helps in the moment and saves every chat and file into one place you own.</li>
+        <li>The app is owned by the business, so the history stays even when people come and go.</li>
+        <li>At Balay ni Bruno &amp; Co. this is how we work, and it is the kind of setup we build for the businesses we partner with.</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<section class="cta-section"><div class="container"><span class="eyebrow" style="color:rgba(245,241,234,0.45);">Work with BBC</span><h2>Want your team in one place?</h2><p>One app for your team's chats, files, and an AI helper. Let us talk about what that looks like for your business.</p><a href="https://calendly.com/rj-balaynibruno/bbc-strategy-call" target="_blank" rel="noopener" class="btn-gold">Book a Strategy Call &#8599;</a></div></section>
+
+<!-- bbc-related-reads -->
+<section style="background:#EDE8DF;padding:clamp(2.5rem,5vw,4rem) 0;border-top:1px solid rgba(85,60,35,0.12);">
+  <div style="max-width:860px;margin:0 auto;padding:0 2.5rem;">
+    <span style="display:block;font-family:'DM Sans',system-ui,sans-serif;font-size:0.68rem;font-weight:700;letter-spacing:0.17em;text-transform:uppercase;color:#B8923E;margin-bottom:1.2rem;">Related Reads</span>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:1rem;">
+      <a href="what-is-an-ai-family-for-business.html" style="display:block;background:#FDFAF6;border:1px solid rgba(85,60,35,0.12);border-radius:16px;padding:1.2rem 1.35rem;box-shadow:0 3px 18px rgba(85,60,35,0.06);">
+        <span style="display:block;font-family:'DM Sans',system-ui,sans-serif;font-size:0.6rem;font-weight:700;letter-spacing:0.13em;text-transform:uppercase;color:#888FA0;margin-bottom:0.45rem;">AI &amp; Automation</span>
+        <span style="display:block;font-family:'Playfair Display',Georgia,serif;font-size:1.02rem;font-weight:600;color:#1F3557;line-height:1.34;">What Is an AI Family for Business?</span>
+      </a>
+      <a href="how-we-built-business-command-center.html" style="display:block;background:#FDFAF6;border:1px solid rgba(85,60,35,0.12);border-radius:16px;padding:1.2rem 1.35rem;box-shadow:0 3px 18px rgba(85,60,35,0.06);">
+        <span style="display:block;font-family:'DM Sans',system-ui,sans-serif;font-size:0.6rem;font-weight:700;letter-spacing:0.13em;text-transform:uppercase;color:#888FA0;margin-bottom:0.45rem;">How We Did It</span>
+        <span style="display:block;font-family:'Playfair Display',Georgia,serif;font-size:1.02rem;font-weight:600;color:#1F3557;line-height:1.34;">How We Run a Whole Business From One Screen</span>
+      </a>
+      <a href="can-my-ai-see-my-screen-and-help.html" style="display:block;background:#FDFAF6;border:1px solid rgba(85,60,35,0.12);border-radius:16px;padding:1.2rem 1.35rem;box-shadow:0 3px 18px rgba(85,60,35,0.06);">
+        <span style="display:block;font-family:'DM Sans',system-ui,sans-serif;font-size:0.6rem;font-weight:700;letter-spacing:0.13em;text-transform:uppercase;color:#888FA0;margin-bottom:0.45rem;">AI &amp; How It Works</span>
+        <span style="display:block;font-family:'Playfair Display',Georgia,serif;font-size:1.02rem;font-weight:600;color:#1F3557;line-height:1.34;">Can My AI See My Screen and Help?</span>
+      </a>
+      <a href="how-we-help.html" style="display:block;background:#1C2E47;border:1px solid rgba(184,146,62,0.3);border-radius:16px;padding:1.2rem 1.35rem;">
+        <span style="display:block;font-family:'DM Sans',system-ui,sans-serif;font-size:0.6rem;font-weight:700;letter-spacing:0.13em;text-transform:uppercase;color:#E6CFA0;margin-bottom:0.45rem;">Work With BBC</span>
+        <span style="display:block;font-family:'Playfair Display',Georgia,serif;font-size:1.02rem;font-weight:600;color:#fff;line-height:1.34;">See How We Help &rarr;</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer class="footer"><p><a href="index.html">Balay ni Bruno &amp; Co.</a> &nbsp;&bull;&nbsp; <a href="insights.html">Insights</a> &nbsp;&bull;&nbsp; <a href="mailto:admin@balaynibruno.co">admin@balaynibruno.co</a></p><p style="margin-top:0.4rem;">&copy; 2026 Balay ni Bruno &amp; Co. All rights reserved.</p></footer>
+</body>
+</html>
