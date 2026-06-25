@@ -50,24 +50,31 @@ const MESSY_SYSTEM = [
   "Never invent BBC facts, names, or client details you were not given. If you are unsure, say so and ask.",
 ].join(" ");
 
-// Messy's chat brain (Anthropic Claude). Needs ANTHROPIC_API_KEY in Netlify env to answer live.
-async function askMessy(history, KEY) {
+// Messy's chat brain. Prefers Anthropic Claude (set ANTHROPIC_API_KEY), and falls back to
+// Groq (free, fast — already configured as GROQ_API_KEY) so she can answer live today.
+async function askMessy(history) {
+  const AKEY = process.env.ANTHROPIC_API_KEY, GKEY = process.env.GROQ_API_KEY;
   try {
-    const r = await fetch("https://api.anthropic.com/v1/messages", {
-      method: "POST",
-      headers: { "content-type": "application/json", "x-api-key": KEY, "anthropic-version": "2023-06-01" },
-      body: JSON.stringify({
-        model: "claude-haiku-4-5-20251001",
-        max_tokens: 700,
-        system: MESSY_SYSTEM,
-        messages: history,
-      }),
-    });
-    if (!r.ok) return null;
-    const d = await r.json();
-    return (d.content && d.content[0] && d.content[0].text) || null;
+    if (AKEY) {
+      const r = await fetch("https://api.anthropic.com/v1/messages", {
+        method: "POST",
+        headers: { "content-type": "application/json", "x-api-key": AKEY, "anthropic-version": "2023-06-01" },
+        body: JSON.stringify({ model: "claude-haiku-4-5-20251001", max_tokens: 700, system: MESSY_SYSTEM, messages: history }),
+      });
+      if (r.ok) { const d = await r.json(); return (d.content && d.content[0] && d.content[0].text) || null; }
+    }
+    if (GKEY) {
+      const r = await fetch("https://api.groq.com/openai/v1/chat/completions", {
+        method: "POST",
+        headers: { "content-type": "application/json", authorization: "Bearer " + GKEY },
+        body: JSON.stringify({ model: "llama-3.3-70b-versatile", max_tokens: 700, messages: [{ role: "system", content: MESSY_SYSTEM }, ...history] }),
+      });
+      if (r.ok) { const d = await r.json(); return (d.choices && d.choices[0] && d.choices[0].message && d.choices[0].message.content) || null; }
+    }
+    return null;
   } catch { return null; }
 }
+function messyHasBrain() { return !!(process.env.ANTHROPIC_API_KEY || process.env.GROQ_API_KEY); }
 
 const JSTORE = "bbc-msg";        // json: roster, convs index, per-conv message arrays
 const FSTORE = "bbc-msg-files";  // binary: uploaded files
@@ -406,14 +413,14 @@ export default async (req) => {
       if (messyAddressed) {
         try {
           let reply = null;
-          const KEY = process.env.ANTHROPIC_API_KEY;
           const priorMessy = msgs.some(m => m.user === MESSY_ID);
-          if (KEY) {
+          if (messyHasBrain()) {
             const history = msgs.slice(-12)
               .filter(m => (m.text || "").trim())
               .map(m => ({ role: m.user === MESSY_ID ? "assistant" : "user", content: (m.user === MESSY_ID ? "" : (m.name || "Teammate") + ": ") + (m.text || "") }));
-            reply = await askMessy(history.length ? history : [{ role: "user", content: text }], KEY);
-          } else if (!priorMessy) {
+            reply = await askMessy(history.length ? history : [{ role: "user", content: text }]);
+          }
+          if (!reply && !priorMessy) {
             reply = "Hi " + (meName || "there") + ", I'm Messy, the BBC Messenger AI. I keep our chats organized and I save every conversation and file into the BBC Drive. My chat brain switches on once RJ adds my key. Until then, leave me anything and I'll hold onto it.";
           }
           if (reply) {
