@@ -1,0 +1,10 @@
+﻿<svg viewBox="0 0 1600 900" xmlns="http://www.w3.org/2000/svg" width="1600" height="900"><defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1F3557"/><stop offset="1" stop-color="#1A5C3A"/></linearGradient><filter id="glow"><feGaussianBlur stdDeviation="18" result="b"/><feComposite in="SourceGraphic" in2="b" operator="over"/></filter></defs><rect width="1600" height="900" fill="url(#bg)"/><circle cx="1400" cy="150" r="260" fill="white" opacity="0.04"/><circle cx="200" cy="750" r="180" fill="white" opacity="0.04"/><g transform="translate(800 450)" opacity="0.9"><rect x="-120" y="-130" width="240" height="180" rx="28" fill="#FDFAF6" opacity="0.15"/>
+<rect x="-110" y="-120" width="240" height="180" rx="28" fill="#FDFAF6" opacity="0.12"/>
+<rect x="-130" y="-140" width="260" height="190" rx="32" fill="none" stroke="#D4A84B" stroke-width="5" opacity="0.8"/>
+<rect x="-110" y="-110" width="220" height="8" rx="4" fill="white" opacity="0.6"/>
+<rect x="-110" y="-88" width="160" height="8" rx="4" fill="white" opacity="0.4"/>
+<rect x="-110" y="-30" width="220" height="8" rx="4" fill="#D4A84B" opacity="0.8"/>
+<rect x="-110" y="-8" width="180" height="8" rx="4" fill="#D4A84B" opacity="0.5"/>
+<rect x="-10" y="60" width="140" height="8" rx="4" fill="white" opacity="0.5"/>
+<circle cx="120" cy="100" r="40" fill="#25D366" opacity="0.9"/>
+<path d="M120 80 a20 20 0 0 1 0 40 a20 20 0 0 1 -18 -10 L96 116 l6 -18 a20 20 0 0 1 -4 -8 a20 20 0 0 1 20 -20z" fill="white"/></g><rect x="80" y="820" width="220" height="4" rx="2" fill="#D4A84B" opacity="0.6"/></svg>

@@ -1,0 +1,8 @@
+﻿<svg viewBox="0 0 1600 900" xmlns="http://www.w3.org/2000/svg" width="1600" height="900"><defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1F3557"/><stop offset="1" stop-color="#2E1F3A"/></linearGradient><filter id="glow"><feGaussianBlur stdDeviation="18" result="b"/><feComposite in="SourceGraphic" in2="b" operator="over"/></filter></defs><rect width="1600" height="900" fill="url(#bg)"/><circle cx="1400" cy="150" r="260" fill="white" opacity="0.04"/><circle cx="200" cy="750" r="180" fill="white" opacity="0.04"/><g transform="translate(800 450)" opacity="0.9"><rect x="-150" y="40" width="80" height="80" rx="12" fill="white" opacity="0.15" stroke="white" stroke-width="3" stroke-opacity="0.4"/>
+<rect x="-40" y="-20" width="80" height="140" rx="12" fill="#D4A84B" opacity="0.25" stroke="#D4A84B" stroke-width="4"/>
+<rect x="70" y="-80" width="80" height="200" rx="12" fill="white" opacity="0.2" stroke="white" stroke-width="3" stroke-opacity="0.4"/>
+<text x="-110" y="140" font-family="system-ui" font-size="22" fill="white" text-anchor="middle" opacity="0.6">Good</text>
+<text x="0" y="140" font-family="system-ui" font-size="22" fill="#D4A84B" text-anchor="middle" font-weight="700">Better</text>
+<text x="110" y="140" font-family="system-ui" font-size="22" fill="white" text-anchor="middle" opacity="0.6">Best</text>
+<circle cx="0" cy="-40" r="20" fill="#D4A84B" opacity="0.9"/>
+<path d="M-8 -40 L-2 -34 L10 -48" stroke="white" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></g><rect x="80" y="820" width="220" height="4" rx="2" fill="#D4A84B" opacity="0.6"/></svg>

@@ -1,17 +1,19 @@
 {
   "meta": {
-    "updated": "2026-06-04",
-    "pendingCount": 7
+    "updated": "2026-06-27",
+    "pendingCount": 18
   },
   "calendar": {
     "label": "June 2026",
     "year": 2026,
     "monthIdx": 5,
-    "today": "2026-06-04",
+    "today": "2026-06-27",
     "posts": {
       "2026-05-31": {
         "graphic": "Sunday Rest Day",
-        "posted": true
+        "posted": true,
+        "graphicFolder": "2026-05-31_Sunday_Rest_Day Posted",
+        "graphicSearch": "2026-05-31_Sunday_Rest_Day"
       },
       "2026-06-01": {
         "posted": true,
@@ -33,7 +35,7 @@
         "reel": "Tasks Eating Your Week"
       },
       "2026-06-05": {
-        "posted": false,
+        "posted": true,
         "graphic": "Content Engine",
         "reel": "Content Engine"
       },
@@ -159,9 +161,27 @@
         "category": "BBC Segment Reels"
       },
       {
+        "name": "Segment 4",
+        "posted": true,
+        "raw": "Segment 4 Posted",
+        "category": "BBC Segment Reels"
+      },
+      {
+        "name": "BBC VA Series_ Tool & Person",
+        "posted": true,
+        "raw": "BBC VA Series_ Tool & Person Posted",
+        "category": "BBC VA Series Reels"
+      },
+      {
+        "name": "BBC VA Series_ Subscription Trap",
+        "posted": true,
+        "raw": "BBC VA Series_ Subscription Trap Posted",
+        "category": "BBC VA Series Reels"
+      },
+      {
         "name": "Tre 1 Final",
-        "posted": false,
-        "raw": "Tre 1 Final",
+        "posted": true,
+        "raw": "Tre 1 Final Posted",
         "category": "BBC Workflows Reels"
       },
       {
@@ -172,8 +192,8 @@
       },
       {
         "name": "Tre 2 Final",
-        "posted": false,
-        "raw": "Tre 2 Final",
+        "posted": true,
+        "raw": "Tre 2 Final Posted",
         "category": "BBC Workflows Reels"
       },
       {
@@ -184,8 +204,8 @@
       },
       {
         "name": "Content Engine",
-        "posted": false,
-        "raw": "Content Engine",
+        "posted": true,
+        "raw": "Content Engine Posted",
         "category": "BBC Workflows Reels"
       },
       {
@@ -193,6 +213,54 @@
         "posted": false,
         "raw": "Build Your AI Family",
         "category": "BBC Workflows Reels"
+      },
+      {
+        "name": "Marla Review",
+        "posted": true,
+        "raw": "Marla Review Posted",
+        "category": "BBC Workflows Reels"
+      },
+      {
+        "name": "AI Family Build",
+        "posted": false,
+        "raw": "AI Family Build",
+        "category": "BBC Workflows Reels"
+      },
+      {
+        "name": "2026-06-19 Losing Time (Friday Reel)",
+        "posted": true,
+        "raw": "2026-06-19 Losing Time (Friday Reel) Posted",
+        "category": "BBC Workflows Reels"
+      },
+      {
+        "name": "2026-06-26 25 Pages on Google",
+        "posted": false,
+        "raw": "2026-06-26 25 Pages on Google",
+        "category": "BBC Workflows Reels"
+      },
+      {
+        "name": "2026-06-24 Essence Bembry Review",
+        "posted": false,
+        "raw": "2026-06-24 Essence Bembry Review",
+        "category": "BBC Workflows Reels"
+      },
+      {
+        "name": "2026-06-23 Talk to Edit Site",
+        "posted": false,
+        "raw": "2026-06-23 Talk to Edit Site",
+        "category": "BBC Workflows Reels"
+      },
+      {
+        "name": "Krizza's Portfolio",
+        "posted": false,
+        "raw": "Krizza's Portfolio",
+        "category": "BBC Team Portfolio"
+      },
+      {
+        "name": "Diego's Portfolio",
+        "posted": true,
+        "raw": "Diego's Portfolio Posted",
+        "category": "BBC Team Portfolio"
       }
     ],
     "graphics": [
@@ -250,8 +318,68 @@
         "name": "2026-06-12_tre_2",
         "posted": false,
         "raw": "2026-06-12_tre_2"
+      },
+      {
+        "name": "WW Marla Review",
+        "posted": false,
+        "raw": "WW Marla Review"
+      },
+      {
+        "name": "2026-06-14_flagday",
+        "posted": false,
+        "raw": "2026-06-14_flagday"
+      },
+      {
+        "name": "2026-06-13_saturday_reflection",
+        "posted": false,
+        "raw": "2026-06-13_saturday_reflection"
+      },
+      {
+        "name": "2026-06-11_bottleneck",
+        "posted": false,
+        "raw": "2026-06-11_bottleneck"
+      },
+      {
+        "name": "2026-06-18_delegate_first",
+        "posted": false,
+        "raw": "2026-06-18_delegate_first"
+      },
+      {
+        "name": "2026-06-20_first_day_summer",
+        "posted": false,
+        "raw": "2026-06-20_first_day_summer"
+      },
+      {
+        "name": "2026-06-19_juneteenth",
+        "posted": false,
+        "raw": "2026-06-19_juneteenth"
+      },
+      {
+        "name": "2026-06-21_fathers_day",
+        "posted": false,
+        "raw": "2026-06-21_fathers_day"
+      },
+      {
+        "name": "2026-06-16_ai_family_build",
+        "posted": false,
+        "raw": "2026-06-16_ai_family_build"
+      },
+      {
+        "name": "2026-06-28 Sunday Rest Day",
+        "posted": false,
+        "raw": "2026-06-28 Sunday Rest Day"
+      },
+      {
+        "name": "2026-06-25 Knowledge Base Before AI",
+        "posted": false,
+        "raw": "2026-06-25 Knowledge Base Before AI"
+      },
+      {
+        "name": "2026-06-27 Workflow Menu",
+        "posted": false,
+        "raw": "2026-06-27 Workflow Menu"
       }
     ],
-    "queueDraftCount": 7
+    "queueDraftCount": 16
   }
 }
