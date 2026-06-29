@@ -320,7 +320,7 @@
           <button class="attach" type="button" title="Emoji" onclick="toggleEmoji(event)" style="background:none;border:0;cursor:pointer;font-size:20px">😊</button>
           <label class="attach" title="Photos">🖼️<input id="photoInput" type="file" accept="image/*" multiple style="display:none" onchange="pickedFiles(this)"></label>
           <label class="attach" title="Attach files">📎<input id="fileInput" type="file" multiple style="display:none" onchange="pickedFiles(this)"></label>
-          <textarea id="msgInput" rows="1" placeholder="Type a message" oninput="onCompose(this)" onkeydown="onComposeKey(event,this)" onpaste="onPaste(event)"></textarea>
+          <textarea id="msgInput" rows="1" placeholder="Type a message" oninput="onCompose(this)" onkeydown="onComposeKey(event,this)"></textarea>
         </div>
         <button class="send" onclick="sendMsg()">➤</button>
       </div>
@@ -328,7 +328,14 @@
   </div>
 </div>
 
-<div class="lightbox" id="lightbox" onclick="this.classList.remove('open')"><img id="lightImg" alt=""></div>
+<div class="lightbox" id="lightbox" onclick="if(event.target===this)this.classList.remove('open')">
+  <div style="position:fixed;top:calc(env(safe-area-inset-top) + 14px);right:14px;display:flex;gap:8px;z-index:81">
+    <button onclick="copyImage(event)" style="background:rgba(255,255,255,.16);color:#fff;border:none;border-radius:20px;padding:9px 15px;font-size:14px;font-weight:600;cursor:pointer">⧉ Copy</button>
+    <button onclick="downloadCurrentImg(event)" style="background:rgba(255,255,255,.16);color:#fff;border:none;border-radius:20px;padding:9px 15px;font-size:14px;font-weight:600;cursor:pointer">⭳ Save</button>
+    <button onclick="document.getElementById('lightbox').classList.remove('open')" style="background:rgba(255,255,255,.16);color:#fff;border:none;border-radius:50%;width:40px;height:40px;font-size:16px;cursor:pointer">✕</button>
+  </div>
+  <img id="lightImg" alt="">
+</div>
 <div class="toast" id="toast"></div>
 <div class="seenby" id="seenby"></div>
 <div id="reactBar"></div>
@@ -687,14 +694,33 @@ function renderStream(force){
     html+='<div class="b '+(mine?'out':'in')+'" data-mid="'+m.id+'">'+inner+'</div>';
   });
   el.innerHTML=html;
-  if(nearBottom||force)el.scrollTop=el.scrollHeight; else el.scrollTop=prevTop;
-  el.querySelectorAll('img.shot[data-fid]').forEach(loadImg);
+  const stick=nearBottom||force; window.__stickBottom=stick;
+  if(stick){el.scrollTop=el.scrollHeight;requestAnimationFrame(()=>{el.scrollTop=el.scrollHeight;});} else el.scrollTop=prevTop;
+  // images have no height until they load, which would bump the view to the middle —
+  // re-pin to the bottom as each one finishes so we always land on the newest message.
+  el.querySelectorAll('img.shot[data-fid]').forEach(img=>{img.onload=()=>{if(window.__stickBottom)el.scrollTop=el.scrollHeight;};loadImg(img);});
 }
 function fmtSize(b){if(!b)return'';if(b<1024)return b+' B';if(b<1048576)return (b/1024).toFixed(0)+' KB';return (b/1048576).toFixed(1)+' MB';}
 const fileCache={};
 async function fileBlobUrl(fid){if(fileCache[fid])return fileCache[fid];const r=await api(API,'?action=file&id='+fid);if(!r||!r.ok)return null;const b=await r.blob();const u=URL.createObjectURL(b);fileCache[fid]=u;return u;}
 async function loadImg(img){const u=await fileBlobUrl(img.dataset.fid);if(u)img.src=u;}
-async function openLight(img){const u=img.src||await fileBlobUrl(img.dataset.fid);if(u){document.getElementById('lightImg').src=u;document.getElementById('lightbox').classList.add('open');}}
+async function openLight(img){const u=img.src||await fileBlobUrl(img.dataset.fid);if(u){const li=document.getElementById('lightImg');li.src=u;li.dataset.fid=img.dataset.fid||'';document.getElementById('lightbox').classList.add('open');}}
+async function copyImage(e){
+  e&&e.stopPropagation();
+  const img=document.getElementById('lightImg'); if(!img||!img.src)return;
+  try{
+    // clipboard image write needs PNG in most browsers — convert first
+    const png=await new Promise((res,rej)=>{const im=new Image();im.onload=()=>{const c=document.createElement('canvas');c.width=im.naturalWidth;c.height=im.naturalHeight;c.getContext('2d').drawImage(im,0,0);c.toBlob(res,'image/png');};im.onerror=rej;im.src=img.src;});
+    if(navigator.clipboard&&window.ClipboardItem&&png){await navigator.clipboard.write([new ClipboardItem({'image/png':png})]);toast('Image copied');}
+    else toast('Copy not supported here — use Save');
+  }catch(err){toast('Could not copy — try Save');}
+}
+function downloadCurrentImg(e){
+  e&&e.stopPropagation();
+  const img=document.getElementById('lightImg');
+  if(img&&img.dataset.fid){downloadFile(img.dataset.fid,'image');}
+  else if(img&&img.src){const a=document.createElement('a');a.href=img.src;a.download='image';document.body.appendChild(a);a.click();a.remove();}
+}
 async function downloadFile(fid,name){const u=await fileBlobUrl(fid);if(!u)return;const a=document.createElement('a');a.href=u;a.download=name||'file';document.body.appendChild(a);a.click();a.remove();}
 
 /* ---------- send ---------- */
@@ -720,10 +746,15 @@ function renderAttach(){
 }
 function removeAttach(i){pendingFiles.splice(i,1);renderAttach();}
 function onPaste(e){
-  const items=(e.clipboardData&&e.clipboardData.items)||[];const imgs=[];
-  for(const it of items){if(it.kind==='file'&&/^image\//.test(it.type)){const f=it.getAsFile();if(f)imgs.push(f);}}
+  if(!CUR)return;                                  // only when a chat is open
+  const dt=e.clipboardData; if(!dt)return;
+  const imgs=[];
+  for(const it of (dt.items||[])){if(it.kind==='file'&&/^image\//.test(it.type||'')){const f=it.getAsFile();if(f)imgs.push(f);}}
+  if(!imgs.length && dt.files){for(const f of dt.files){if(/^image\//.test(f.type||''))imgs.push(f);}}  // some apps put the image in files, not items
   if(imgs.length){e.preventDefault();addFiles(imgs);toast(imgs.length+' image(s) attached');}
 }
+// listen everywhere (not just the text box), so a copied image pastes into the open chat no matter what is focused
+document.addEventListener('paste',onPaste);
 /* ----- @mention autocomplete ----- */
 function onCompose(t){autogrow(t);updateMentionPop(t);}
 function onComposeKey(e,t){

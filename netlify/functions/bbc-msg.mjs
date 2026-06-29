@@ -240,7 +240,10 @@ export default async (req) => {
           if (!teamIds.includes(meId)) teamIds.push(meId);
           if (!teamIds.includes(MESSY_ID)) teamIds.push(MESSY_ID); // Messy is a (silent) member of BBC Team
           const convs0 = await readJ("convs", []);
-          let team = convs0.find(c => c.type === "group" && (c.name || "") === "BBC Team");
+          // If duplicate "BBC Team" groups exist, target the populated one (most recent activity)
+          // so membership updates land where the history is, not on an empty twin.
+          let team = convs0.filter(c => c.type === "group" && (c.name || "") === "BBC Team")
+            .sort((a, b) => (b.lastTs || 0) - (a.lastTs || 0))[0];
           let changed = false;
           if (!team) {
             team = { id: "cteam" + Date.now().toString(36), type: "group", name: "BBC Team", members: teamIds, createdBy: meId, lastTs: Date.now(), lastText: "" };
@@ -254,7 +257,17 @@ export default async (req) => {
         }
       } catch { /* never block bootstrap on group ensure */ }
       const convs = await readJ("convs", []);
-      const mine = convs.filter(c => c.members.includes(meId)).sort((a, b) => (b.lastTs || 0) - (a.lastTs || 0));
+      let mine = convs.filter(c => c.members.includes(meId)).sort((a, b) => (b.lastTs || 0) - (a.lastTs || 0));
+      // Collapse accidental duplicate conversations so you never open an empty twin that "lost" its history.
+      // Keep the one with the most recent activity (the populated one). All "BBC Team" groups collapse to one.
+      {
+        const sig = (c) => (c.type === "group" && (c.name || "") === "BBC Team")
+          ? "group|BBC Team"
+          : c.type + "|" + (c.name || "") + "|" + [...c.members].sort().join(",");
+        const best = new Map();
+        for (const c of mine) { const k = sig(c); const prev = best.get(k); if (!prev || (c.lastTs || 0) > (prev.lastTs || 0)) best.set(k, c); }
+        mine = [...best.values()].sort((a, b) => (b.lastTs || 0) - (a.lastTs || 0));
+      }
       // unread per conversation (messages newer than the user's last-read mark, not sent by them)
       const reads = await readJ("reads:" + meId, {});
       const prefs = await readJ("prefs:" + meId, { pinned: {}, labels: {} });
@@ -345,6 +358,20 @@ export default async (req) => {
         const ms = [...members].sort().join(",");
         const ex = convs.find(c => c.type === "dm" && [...c.members].sort().join(",") === ms);
         if (ex) return json({ conversation: ex });
+      }
+      if (type === "group") {
+        // Don't create a second identical group (same name + members), and never a second "BBC Team".
+        const wantName = String(body.name || "Group").slice(0, 80);
+        const msG = [...members].sort().join(",");
+        const ex = convs.find(c => c.type === "group" && (c.name || "") === wantName &&
+          (wantName === "BBC Team" || [...c.members].sort().join(",") === msG));
+        if (ex) {
+          // make sure everyone requested is in it, then reuse it
+          const set = new Set(ex.members); let grew = false;
+          for (const m of members) if (!set.has(m)) { set.add(m); grew = true; }
+          if (grew) { ex.members = [...set]; await js.setJSON("convs", convs); }
+          return json({ conversation: ex });
+        }
       }
       const id = "c" + Date.now().toString(36) + Math.floor(Math.random() * 1e4).toString(36);
       const conv = { id, type, name: type === "group" ? String(body.name || "Group").slice(0, 80) : "", members, createdBy: meId, lastTs: Date.now(), lastText: "" };
