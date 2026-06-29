@@ -1,0 +1,141 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Logins Vault · Freccia Dashboard</title>
+<link rel="stylesheet" href="freccia.css">
+<script src="freccia-auth.js"></script>
+</head><body><div class="wrap">
+<a class="back" href="index.html">&#8592; Freccia Dashboard</a>
+<header class="top">
+  <div class="brand"><h1>&#128274; Logins Vault</h1><div class="sub">Freccia Construction &middot; <b>encrypted</b></div>
+    <div class="badges"><span class="badge amber">AES-256 · master password</span></div>
+  </div>
+  <button class="toggle" id="toggle" aria-label="Toggle dark mode">&#9789;</button>
+</header>
+
+<!-- GATE: set up or unlock -->
+<div id="gate" class="vault-gate">
+  <div class="pad">&#128274;</div>
+  <h2 id="gate-h" style="margin:8px 0 4px">Unlock the vault</h2>
+  <p class="sec-sub" id="gate-sub">Enter the master password to view Freccia's logins.</p>
+  <input class="fi" id="mpw" type="password" placeholder="Master password" style="text-align:center">
+  <input class="fi" id="mpw2" type="password" placeholder="Confirm master password" style="text-align:center;display:none;margin-top:10px">
+  <button class="btn" id="unlock" style="margin-top:14px;width:100%">Unlock</button>
+  <p class="sec-sub" id="gate-note" style="margin-top:14px">Nothing is stored in plain text. Credentials are encrypted on this device and can only be read with this password. Lose the password and the data cannot be recovered.</p>
+</div>
+
+<!-- VAULT (hidden until unlocked) -->
+<div id="vault" style="display:none">
+  <section>
+    <div class="sec-h" style="justify-content:space-between;display:flex">
+      <span style="display:flex;align-items:center;gap:10px">Credentials</span>
+    </div>
+    <div id="creds"></div>
+    <div class="panel" style="margin-top:6px">
+      <label class="fl">Add / update a login</label>
+      <input class="fi" id="f-svc" placeholder="Service (e.g. Go High Level)">
+      <div class="row2" style="margin-top:10px">
+        <input class="fi" id="f-user" placeholder="Username / email">
+        <input class="fi" id="f-pass" placeholder="Password">
+      </div>
+      <input class="fi" id="f-url" placeholder="Login URL (optional)" style="margin-top:10px">
+      <input class="fi" id="f-note" placeholder="Note (optional)" style="margin-top:10px">
+      <div style="display:flex;gap:10px;margin-top:12px">
+        <button class="btn" id="save-cred">Save login</button>
+        <button class="btn ghost" id="lock">&#128274; Lock vault</button>
+      </div>
+    </div>
+    <p class="sec-sub">v1 stores the encrypted vault on this device. Cross-device sync through a private backend is the next step. The "All Things Marketing" logins tab is the source until they're entered here.</p>
+  </section>
+</div>
+
+<div class="foot">Logins Vault &middot; Built by Balay ni Bruno &amp; Co. &middot; AES-256-GCM, key derived from your master password (PBKDF2, 250k). Plain text is never written to disk or the repo.</div>
+</div>
+<div class="toast" id="toast"></div>
+<script>
+const LS="frec-vault";
+let key=null, creds=[];
+
+const tg=document.getElementById('toggle');
+function setT(m){document.documentElement.setAttribute('data-theme',m);if(tg)tg.innerHTML=m==='dark'?'&#9788;':'&#9789;';try{localStorage.setItem('frec-theme',m)}catch(e){}}
+setT((()=>{try{return localStorage.getItem('frec-theme')||'light'}catch(e){return 'light'}})());
+if(tg)tg.addEventListener('click',()=>setT(document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark'));
+function toast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),1900);}
+
+const b64={enc:a=>btoa(String.fromCharCode(...new Uint8Array(a))),dec:s=>Uint8Array.from(atob(s),c=>c.charCodeAt(0))};
+const te=new TextEncoder(), td=new TextDecoder();
+async function deriveKey(pw,salt){
+  const km=await crypto.subtle.importKey('raw',te.encode(pw),'PBKDF2',false,['deriveKey']);
+  return crypto.subtle.deriveKey({name:'PBKDF2',salt,iterations:250000,hash:'SHA-256'},km,{name:'AES-GCM',length:256},false,['encrypt','decrypt']);
+}
+async function encryptVault(){
+  const iv=crypto.getRandomValues(new Uint8Array(12));
+  const ct=await crypto.subtle.encrypt({name:'AES-GCM',iv},key,te.encode(JSON.stringify(creds)));
+  const rec=JSON.parse(localStorage.getItem(LS));
+  rec.iv=b64.enc(iv);rec.ct=b64.enc(ct);
+  localStorage.setItem(LS,JSON.stringify(rec));
+}
+
+const exists=()=>!!localStorage.getItem(LS);
+function showGate(){
+  document.getElementById('vault').style.display='none';
+  document.getElementById('gate').style.display='block';
+  const setup=!exists();
+  document.getElementById('gate-h').textContent=setup?'Set up the vault':'Unlock the vault';
+  document.getElementById('gate-sub').textContent=setup?'Create a master password. You will need it every time.':'Enter the master password to view Freccia’s logins.';
+  document.getElementById('mpw2').style.display=setup?'block':'none';
+  document.getElementById('unlock').textContent=setup?'Create vault':'Unlock';
+}
+function showVault(){document.getElementById('gate').style.display='none';document.getElementById('vault').style.display='block';renderCreds();}
+
+document.getElementById('unlock').onclick=async()=>{
+  const pw=document.getElementById('mpw').value;if(!pw)return;
+  if(!exists()){
+    const pw2=document.getElementById('mpw2').value;
+    if(pw!==pw2){toast('Passwords do not match');return;}
+    const salt=crypto.getRandomValues(new Uint8Array(16));
+    localStorage.setItem(LS,JSON.stringify({salt:b64.enc(salt),iv:'',ct:''}));
+    key=await deriveKey(pw,salt);creds=[];await encryptVault();
+    toast('Vault created');showVault();return;
+  }
+  try{
+    const rec=JSON.parse(localStorage.getItem(LS));
+    key=await deriveKey(pw,b64.dec(rec.salt));
+    if(rec.ct){const pt=await crypto.subtle.decrypt({name:'AES-GCM',iv:b64.dec(rec.iv)},key,b64.dec(rec.ct));creds=JSON.parse(td.decode(pt));}
+    else creds=[];
+    showVault();
+  }catch(e){key=null;toast('Wrong password');}
+};
+document.getElementById('mpw').addEventListener('keydown',e=>{if(e.key==='Enter')document.getElementById('unlock').click();});
+
+function renderCreds(){
+  const box=document.getElementById('creds');box.innerHTML='';
+  if(!creds.length){box.innerHTML='<div class="panel" style="text-align:center;color:var(--muted)">No logins yet. Add Freccia’s logins below.</div>';return;}
+  creds.forEach((c,i)=>{
+    const el=document.createElement('div');el.className='cred';
+    el.innerHTML=`<div class="svc">${esc(c.svc)} <span class="del" data-i="${i}" style="float:right;color:var(--bad);cursor:pointer">&times;</span></div>
+      <div class="kv"><span>User</span><span><code>${esc(c.user||'')}</code> <span class="copy" data-v="${esc(c.user||'')}">copy</span></span></div>
+      <div class="kv"><span>Pass</span><span><code>${esc(c.pass||'')}</code> <span class="copy" data-v="${esc(c.pass||'')}">copy</span></span></div>
+      ${c.url?`<div class="kv"><span>URL</span><span><code>${esc(c.url)}</code></span></div>`:''}
+      ${c.note?`<div class="kv"><span>Note</span><span>${esc(c.note)}</span></div>`:''}`;
+    box.appendChild(el);
+  });
+  box.querySelectorAll('.copy').forEach(b=>b.onclick=()=>{navigator.clipboard.writeText(b.dataset.v);toast('Copied');});
+  box.querySelectorAll('.del').forEach(b=>b.onclick=async()=>{creds.splice(+b.dataset.i,1);await encryptVault();renderCreds();toast('Removed');});
+}
+function esc(s){return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
+
+document.getElementById('save-cred').onclick=async()=>{
+  const svc=document.getElementById('f-svc').value.trim();if(!svc){toast('Service name required');return;}
+  const rec={svc,user:document.getElementById('f-user').value.trim(),pass:document.getElementById('f-pass').value.trim(),
+    url:document.getElementById('f-url').value.trim(),note:document.getElementById('f-note').value.trim()};
+  const idx=creds.findIndex(c=>c.svc.toLowerCase()===svc.toLowerCase());
+  if(idx>=0)creds[idx]=rec;else creds.push(rec);
+  await encryptVault();renderCreds();
+  ['f-svc','f-user','f-pass','f-url','f-note'].forEach(id=>document.getElementById(id).value='');
+  toast('Saved (encrypted)');
+};
+document.getElementById('lock').onclick=()=>{key=null;creds=[];document.getElementById('mpw').value='';showGate();toast('Locked');};
+
+showGate();
+</script>
+</body></html>

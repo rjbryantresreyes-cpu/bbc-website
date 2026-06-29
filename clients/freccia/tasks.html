@@ -1,0 +1,108 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Tasks · Freccia Dashboard</title>
+<link rel="stylesheet" href="freccia.css">
+<script src="freccia-auth.js"></script>
+</head><body><div class="wrap">
+<a class="back" href="index.html">&#8592; Freccia Dashboard</a>
+<header class="top">
+  <div class="brand"><h1>Tasks Board</h1><div class="sub">Freccia Construction &middot; <b>editable</b></div>
+    <div class="badges"><span class="badge live" id="savestate">&#9679; Synced</span></div>
+  </div>
+  <button class="toggle" id="toggle" aria-label="Toggle dark mode">&#9789;</button>
+</header>
+
+<section>
+  <div class="panel">
+    <label class="fl">New task</label>
+    <div class="row2">
+      <input class="fi" id="ntext" placeholder="What needs doing for Freccia?">
+      <div style="display:grid;grid-template-columns:1fr auto;gap:10px">
+        <select class="fi" id="ncol"><option value="todo">To do</option><option value="doing">Doing</option><option value="done">Done</option></select>
+        <button class="btn" id="add">+ Add</button>
+      </div>
+    </div>
+    <input class="fi" id="nmeta" placeholder="Optional note (owner, category, date)" style="margin-top:10px">
+  </div>
+
+  <div class="cols" id="cols">
+    <div class="col" data-col="todo"><h3>To do <span class="ct" id="c-todo">0</span></h3><div class="list" id="l-todo"></div></div>
+    <div class="col" data-col="doing"><h3>Doing <span class="ct" id="c-doing">0</span></h3><div class="list" id="l-doing"></div></div>
+    <div class="col" data-col="done"><h3>Done <span class="ct" id="c-done">0</span></h3><div class="list" id="l-done"></div></div>
+  </div>
+  <p class="sec-sub" style="margin-top:14px">Tap the arrows to move a task. Tap &times; to remove. Everything saves automatically and the team is notified.</p>
+</section>
+
+<div class="foot">Tasks Board &middot; Built by Balay ni Bruno &amp; Co. &middot; Saved to our system (Netlify Blobs), shared across the team.</div>
+</div>
+<div class="toast" id="toast"></div>
+<script>
+const API="/.netlify/functions/freccia-tasks";
+const ORDER=["todo","doing","done"];
+const EDITOR=(()=>{try{return localStorage.getItem('bbc-editor')||'BBC'}catch(e){return 'BBC'}})();
+let board={columns:{todo:[],doing:[],done:[]}};
+
+const tg=document.getElementById('toggle');
+function setT(m){document.documentElement.setAttribute('data-theme',m);if(tg)tg.innerHTML=m==='dark'?'&#9788;':'&#9789;';try{localStorage.setItem('frec-theme',m)}catch(e){}}
+setT((()=>{try{return localStorage.getItem('frec-theme')||'light'}catch(e){return 'light'}})());
+if(tg)tg.addEventListener('click',()=>setT(document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark'));
+
+function toast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),1800);}
+function state(s){document.getElementById('savestate').innerHTML='&#9679; '+s;}
+function cacheLocal(){try{localStorage.setItem('frec-board',JSON.stringify(board))}catch(e){}}
+function uid(){return 't'+Math.random().toString(36).slice(2,9);}
+
+function render(){
+  ORDER.forEach(col=>{
+    const list=document.getElementById('l-'+col);const arr=board.columns[col]||[];
+    document.getElementById('c-'+col).textContent=arr.length;
+    list.innerHTML='';
+    arr.forEach((task,i)=>{
+      const el=document.createElement('div');el.className='task';
+      const ci=ORDER.indexOf(col);
+      const left=ci>0?`<span class="mv" data-act="left">&#8592;</span>`:'';
+      const right=ci<2?`<span class="mv" data-act="right">&#8594;</span>`:'';
+      el.innerHTML=`<div class="tx">${esc(task.text)}${task.meta?`<div class="meta">${esc(task.meta)}</div>`:''}
+        <div style="margin-top:7px;display:flex;gap:6px">${left}${right}</div></div>
+        <span class="del" title="Remove">&times;</span>`;
+      el.querySelector('.del').onclick=()=>{arr.splice(i,1);save();};
+      el.querySelectorAll('.mv').forEach(b=>b.onclick=()=>{
+        const dir=b.dataset.act==='left'?-1:1;const ni=ci+dir;if(ni<0||ni>2)return;
+        arr.splice(i,1);board.columns[ORDER[ni]].push(task);save();
+      });
+      list.appendChild(el);
+    });
+  });
+}
+function esc(s){return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
+
+async function save(){
+  cacheLocal();render();state('Saving…');
+  try{
+    const r=await fetch(API,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({board,editor:EDITOR})});
+    const d=await r.json();
+    if(d.ok){state('Synced');} else {state('Saved locally');toast('Saved on this device (cloud sync pending deploy)');}
+  }catch(e){state('Saved locally');}
+}
+
+document.getElementById('add').onclick=()=>{
+  const text=document.getElementById('ntext').value.trim();if(!text)return;
+  const col=document.getElementById('ncol').value;const meta=document.getElementById('nmeta').value.trim();
+  board.columns[col].push({id:uid(),text,meta});
+  document.getElementById('ntext').value='';document.getElementById('nmeta').value='';
+  save();toast('Task added');
+};
+document.getElementById('ntext').addEventListener('keydown',e=>{if(e.key==='Enter')document.getElementById('add').click();});
+
+async function load(){
+  // local cache first for instant paint, then cloud
+  try{const c=localStorage.getItem('frec-board');if(c)board=JSON.parse(c);}catch(e){}
+  render();
+  try{
+    const r=await fetch(API);const d=await r.json();
+    if(d.ok&&d.board&&d.board.columns){board=d.board;cacheLocal();render();state('Synced');}
+  }catch(e){state('Offline (local)');}
+}
+load();
+</script>
+</body></html>

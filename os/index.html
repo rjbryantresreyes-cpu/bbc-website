@@ -5569,7 +5569,7 @@
     // Wooden Woodworks has its own WW-branded Command Center with its own logins.
     if(D.clients[i] && D.clients[i].name==='Wooden Woodworks'){ window.location.href='/wwos/'; return; }
     // Freccia Construction — its own marketing dashboard hub (conversions, leads, tasks, vault).
-    if(D.clients[i] && /^Freccia Construction$/.test(D.clients[i].name||'')){ window.location.href='/clients/freccia/'; return; }
+    if(D.clients[i] && /^Freccia Construction( \(\d+\))?$/.test(D.clients[i].name||'')){ window.location.href='/clients/freccia/'; return; }
     const _cc=D.clients[i]||{};
     // Past clients open their public story page on balaynibruno.co (new tab).
     if(_cc.category==='past' && _cc.link){ window.open(_cc.link,'_blank','noopener'); return; }

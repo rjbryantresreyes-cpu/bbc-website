@@ -1,0 +1,52 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Leads · Freccia Dashboard</title>
+<link rel="stylesheet" href="freccia.css">
+<script src="freccia-auth.js"></script>
+</head><body><div class="wrap">
+<a class="back" href="index.html">&#8592; Freccia Dashboard</a>
+<header class="top">
+  <div class="brand"><h1>Leads Pipeline</h1><div class="sub">Freccia Construction &middot; <b>warm pipeline</b></div>
+    <div class="badges"><span class="badge live">&#9679; Dec 2025 – May 2026</span></div>
+  </div>
+  <button class="toggle" id="toggle" aria-label="Toggle dark mode">&#9789;</button>
+</header>
+
+<section>
+  <div class="kpis">
+    <div class="kpi"><div class="n" id="kc-res">0</div><div class="l">Residential</div></div>
+    <div class="kpi"><div class="n" id="kc-com">0</div><div class="l">Commercial</div></div>
+    <div class="kpi"><div class="n" id="kc-all">0</div><div class="l">Total tracked</div></div>
+  </div>
+  <p class="sec-sub" style="margin-top:12px">Names + dates as logged in "All Things Marketing." Detailed appt/proposal/signed status lives in the source sheet; Bob will work this list. Test rows and obvious spam are filtered out.</p>
+</section>
+
+<section>
+  <div class="sec-h">Residential</div>
+  <div class="scroll"><table><thead><tr><th>Name</th><th>Date</th></tr></thead><tbody id="res"></tbody></table></div>
+</section>
+
+<section>
+  <div class="sec-h">Commercial <span style="font-size:11px;color:var(--amber);font-weight:700;margin-left:6px">GROWTH LANE</span></div>
+  <div class="scroll"><table><thead><tr><th>Name</th><th>Date</th></tr></thead><tbody id="com"></tbody></table></div>
+</section>
+
+<div class="foot">Leads Pipeline &middot; Built by Balay ni Bruno &amp; Co. &middot; Source: "All Things Marketing" snapshot 2026-06-29.</div>
+</div>
+<script>
+const tg=document.getElementById('toggle');
+function setT(m){document.documentElement.setAttribute('data-theme',m);if(tg)tg.innerHTML=m==='dark'?'&#9788;':'&#9789;';try{localStorage.setItem('frec-theme',m)}catch(e){}}
+setT((()=>{try{return localStorage.getItem('frec-theme')||'light'}catch(e){return 'light'}})());
+if(tg)tg.addEventListener('click',()=>setT(document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark'));
+
+const RES=[["Chase Fishback","12/30/25"],["Daniel Scott","12/30/25"],["Cedric W","1/4/26"],["Ryan Jackson","1/8/26"],["Adam White","1/11/26"],["Wendy Lee","1/13/26"],["Aly Frick","1/18/26"],["Tina Amberboy","1/26/26"],["Christian Yanez","1/29/26"],["Cody Marting","1/29/26"],["Ermie Damico","1/30/26"],["Vanessa Rose","1/30/26"],["Nishant Sasidharan","1/31/26"],["Rossini Patrick","2/12/26"],["Michael Adams","2/11/26"],["Shea Scher","2/18/26"],["Issac Jing","2/20/26"],["Zyan Ali","2/20/26"],["Hector J Mendez","2/25/26"],["Jimmy Carey","2/26/26"],["Matt White","2/26/26"],["Jasmine Hartman","3/1/26"],["Morgan Machala","3/1/26"],["Rosangela Cepeda","3/5/26"],["Gloria Mueller","3/10/26"],["Shakti Kapoor","3/16/26"],["Ray Gordon","3/18/26"],["Ravi Vemulapalli","3/22/26"],["Nicole Higginbotham","3/23/26"],["Evan Hangliter","3/25/26"],["Ray Gordon","3/26/26"],["Caitlin Flanders","3/29/26"],["Shafighi","3/30/26"],["Jim Lecheler","3/31/26"],["Luis Reyes","4/8/26"],["Debbie Maysonave","4/13/26"],["Emily Mastellone","4/13/26"],["Emma Williams","4/15/26"],["Harsh Tiwari","4/23/26"],["Shirley Looney","5/7/26"],["Andre Kachkine","5/10/26"]];
+const COM=[["Elvin Leonard","1/7/26"],["Jonathan Jahant","1/13/26"],["Figueroa Adolfo","1/14/26"],["Katrina Bolton","1/22/26"],["Antwon Morgan","1/22/26"],["Jonni Torres","1/23/26"],["Chrisano Fernando","1/26/26"],["Kollins Reinhardt","2/1/26"],["Osvaldo Sánchez","2/3/26"],["J Zambo – ABC Commercial","2/10/26"],["Amirpasha Farahi","2/10/26"],["Susan Thompson","2/10/26"],["Ray Gordon","2/11/26"],["Gerardo Sanchez","2/11/26"],["Jaime Corralejo","2/17/26"],["Todd Pippin","2/18/26"],["Raj","2/19/26"],["Emily Smith","2/23/26"],["Graham Pavlik","2/23/26"],["Lori Fritz","2/24/26"],["Stephan Vetta","2/24/26"],["Akshay Kannoly","2/26/26"],["Desira Glenn","3/2/26"],["Qadar Abdel","3/4/26"],["Dawid Bednarek","3/4/26"],["Milosz Skrzypkowksi","3/10/26"],["Diana Tinoco","3/11/26"],["Zakiyah Mosley","3/12/26"],["Jonoah de Groot","3/12/26"],["Jason Anderson","3/12/26"],["Ashley Lee","3/16/26"],["Sasan Poshneh (Sam)","3/17/26"],["Erikson Ldeniesha","3/18/26"],["Sarah Friedberg","3/23/26"],["Bonnie Lambert","3/26/26"],["Ross Pelton","3/30/26"],["Ava Louise","4/1/26"],["Bruno Powell","4/3/26"],["Russell Clark","4/9/26"],["Yonjoo Bae","4/9/26"],["Todd Austin","4/28/26"],["Amanda Johnston","4/30/26"],["Julian Ann","5/6/26"],["Nannette Lorenz-Pardorla","5/7/26"],["Chad Liesman","5/7/26"],["Sean Grusd","5/8/26"]];
+const esc=s=>String(s).replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+const rows=a=>a.map(r=>`<tr><td>${esc(r[0])}</td><td>${r[1]}</td></tr>`).join('');
+document.getElementById('res').innerHTML=rows(RES);
+document.getElementById('com').innerHTML=rows(COM);
+document.getElementById('kc-res').textContent=RES.length;
+document.getElementById('kc-com').textContent=COM.length;
+document.getElementById('kc-all').textContent=RES.length+COM.length;
+</script>
+</body></html>

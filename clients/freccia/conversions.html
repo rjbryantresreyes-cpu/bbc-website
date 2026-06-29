@@ -1,0 +1,88 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Conversions · Freccia Dashboard</title>
+<link rel="stylesheet" href="freccia.css">
+<script src="freccia-auth.js"></script>
+</head><body><div class="wrap">
+<a class="back" href="index.html">&#8592; Freccia Dashboard</a>
+<header class="top">
+  <div class="brand"><h1>Conversions</h1><div class="sub">Freccia Construction &middot; <b>the scoreboard</b></div>
+    <div class="badges"><span class="badge live">&#9679; Dec 2025 – May 2026</span></div>
+  </div>
+  <button class="toggle" id="toggle" aria-label="Toggle dark mode">&#9789;</button>
+</header>
+
+<section>
+  <div class="kpis">
+    <div class="kpi"><div class="n">52</div><div class="l">Good leads YTD</div></div>
+    <div class="kpi"><div class="n">633</div><div class="l">Total leads YTD</div></div>
+    <div class="kpi"><div class="n">~50%</div><div class="l">Avg spam rate</div></div>
+    <div class="kpi"><div class="n">$793</div><div class="l">Cost / good lead</div></div>
+    <div class="kpi"><div class="n">$32.8k</div><div class="l">Paid spend</div></div>
+    <div class="kpi"><div class="n">11.6k</div><div class="l">Traffic</div></div>
+  </div>
+</section>
+
+<section>
+  <div class="sec-h">Good leads by month</div>
+  <p class="sec-sub">Goal is 15–20/mo. March was best (19) on a 30% spam rate. April collapsed (6) when ad spend was cut to $2,070.</p>
+  <div class="panel" id="chart"></div>
+</section>
+
+<section>
+  <div class="sec-h">Monthly totals</div>
+  <div class="panel" style="padding:0">
+    <table>
+      <thead><tr><th>Month</th><th class="num">Traffic</th><th class="num">Spend</th><th class="num">Total leads</th><th class="num">Good</th><th class="num">Spam</th><th class="num">$/good</th></tr></thead>
+      <tbody id="monthly"></tbody>
+    </table>
+  </div>
+</section>
+
+<section>
+  <div class="sec-h">Weekly tracker</div>
+  <p class="sec-sub">Every week. Spam rate is the number to crush.</p>
+  <div class="scroll">
+    <table>
+      <thead><tr><th>Week</th><th class="num">Traffic</th><th class="num">Spend</th><th class="num">Leads</th><th class="num">Good</th><th class="num">Spam</th><th class="num">$/good</th></tr></thead>
+      <tbody id="weekly"></tbody>
+    </table>
+  </div>
+</section>
+
+<div class="foot">Conversions &middot; Built by Balay ni Bruno &amp; Co. &middot; Source: "All Things Marketing" snapshot 2026-06-29.</div>
+</div>
+<script>
+const tg=document.getElementById('toggle');
+function setT(m){document.documentElement.setAttribute('data-theme',m);if(tg)tg.innerHTML=m==='dark'?'&#9788;':'&#9789;';try{localStorage.setItem('frec-theme',m)}catch(e){}}
+setT((()=>{try{return localStorage.getItem('frec-theme')||'light'}catch(e){return 'light'}})());
+if(tg)tg.addEventListener('click',()=>setT(document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark'));
+
+const MONTHLY=[
+  {m:"January",traffic:4300,spend:"$8,500",leads:94,good:11,spam:"55%",cpg:"$773"},
+  {m:"February",traffic:2000,spend:"$6,337",leads:132,good:13,spam:"54%",cpg:"$487"},
+  {m:"March",traffic:2073,spend:"$6,917",leads:276,good:19,spam:"30%",cpg:"$364"},
+  {m:"April",traffic:1453,spend:"$2,070",leads:124,good:6,spam:"60%",cpg:"$345"},
+];
+const WEEKLY=[
+  ["Dec 29–Jan 4",843,"$2,125",8,3,"0%","$708"],["Jan 5–11",835,"$2,125",12,1,"67%","$2,125"],
+  ["Jan 12–18",761,"$2,125",14,3,"50%","$708"],["Jan 19–25",1100,"$2,125",13,1,"67%","$2,125"],
+  ["Jan 26–Feb 1",1300,"$2,125",26,5,"38%","$425"],["Feb 2–8",1026,"$2,125",32,1,"67%","$2,125"],
+  ["Feb 9–15",722,"$2,125",28,2,"83%","$1,063"],["Feb 16–22",658,"$2,125",26,2,"75%","$1,063"],
+  ["Feb 23–Mar 1",563,"$2,125",46,6,"45%","$354"],["Mar 2–8",551,"$2,125",105,3,"25%","$708"],
+  ["Mar 9–15",636,"$2,125",98,5,"29%","$425"],["Mar 16–22",453,"$2,125",31,3,"67%","$708"],
+  ["Mar 23–29",299,"$2,125",29,6,"17%","$354"],["Mar 30–Apr 5",251,"$2,125",32,3,"50%","$708"],
+  ["Apr 6–12",316,"$612",34,2,"100%","$306"],["Apr 13–19",320,"$612",23,1,"50%","$612"],
+  ["Apr 20–26",386,"$612",18,0,"0%","$0"],["Apr 27–May 3",304,"$612",31,2,"50%","$306"],
+  ["May 4–10",275,"$612",27,3,"60%","$204"],
+];
+const spamClass=s=>{const n=parseInt(s);return n>=60?'bad':n>=40?'warn':'good';};
+document.getElementById('monthly').innerHTML=MONTHLY.map(r=>
+  `<tr><td>${r.m}</td><td class="num">${r.traffic.toLocaleString()}</td><td class="num">${r.spend}</td><td class="num">${r.leads}</td><td class="num"><b>${r.good}</b></td><td class="num"><span class="pill ${spamClass(r.spam)}">${r.spam}</span></td><td class="num">${r.cpg}</td></tr>`).join('');
+document.getElementById('weekly').innerHTML=WEEKLY.map(r=>
+  `<tr><td>${r[0]}</td><td class="num">${r[1].toLocaleString()}</td><td class="num">${r[2]}</td><td class="num">${r[3]}</td><td class="num">${r[4]}</td><td class="num"><span class="pill ${spamClass(r[5])}">${r[5]}</span></td><td class="num">${r[6]}</td></tr>`).join('');
+const max=Math.max(...MONTHLY.map(r=>r.good));
+document.getElementById('chart').innerHTML=MONTHLY.map(r=>
+  `<div class="bar-row"><span>${r.m}</span><span class="bar-track"><span class="bar-fill" style="width:${Math.round(r.good/max*100)}%"></span></span><span class="v">${r.good} good</span></div>`).join('');
+</script>
+</body></html>

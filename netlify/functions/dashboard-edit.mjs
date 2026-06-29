@@ -28,7 +28,7 @@ function envRoute(tenant) {
   const cc = (process.env[`ROUTE_${T}_CC`] || "").split(",").map(s => s.trim()).filter(Boolean);
   return { to, cc };
 }
-const KNOWN_TENANTS = ["bbc", "ww", "hvs", "sr", "ajb", "tpic", "4ocean"];
+const KNOWN_TENANTS = ["bbc", "ww", "hvs", "sr", "ajb", "tpic", "4ocean", "freccia"];
 const NOTIFY_ROUTING = Object.fromEntries(KNOWN_TENANTS.map(t => [t, envRoute(t)]));
 
 /* Twilio WhatsApp send. Returns { ok, sid?, error? }.

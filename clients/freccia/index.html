@@ -1,0 +1,58 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Freccia Dashboard · Balay ni Bruno &amp; Co.</title>
+<link rel="stylesheet" href="freccia.css">
+<script src="freccia-auth.js"></script>
+</head><body><div class="wrap">
+<header class="top">
+  <div class="brand">
+    <img src="freccia-logo.png" alt="Freccia Construction" style="height:44px;display:block;margin-bottom:9px" onerror="this.style.display='none'">
+    <h1>Marketing Dashboard</h1>
+    <div class="sub">Freccia Construction &middot; <b>built with Balay ni Bruno &amp; Co.</b></div>
+    <div class="badges"><span class="badge live">&#9679; Live</span><span class="badge amber" id="hkpi"></span></div>
+  </div>
+  <div class="tools">
+    <a class="lockbtn" href="vault.html"><span class="pad">&#128274;</span> Vault</a>
+    <button class="toggle" id="toggle" aria-label="Toggle dark mode">&#9789;</button>
+    <button class="toggle" onclick="window.frecLogout&&window.frecLogout()" title="Sign out" style="width:auto;padding:0 14px;font-size:13px;font-weight:600">Sign out</button>
+  </div>
+</header>
+
+<section>
+  <div class="sec-h">The scoreboard</div>
+  <p class="sec-sub">Pulled from Freccia's "All Things Marketing" (Dec 2025 → May 2026). #1 job = qualified leads.</p>
+  <div class="kpis">
+    <div class="kpi"><div class="n">52</div><div class="l">Good leads YTD</div><div class="d">res 22 &middot; comm 30</div></div>
+    <div class="kpi"><div class="n">~50%</div><div class="l">Avg spam rate</div><div class="d"><b>the pain</b> to kill</div></div>
+    <div class="kpi"><div class="n">$793</div><div class="l">Cost / good lead</div><div class="d">YTD avg</div></div>
+    <div class="kpi"><div class="n">$32.8k</div><div class="l">Paid spend</div><div class="d">Jan–Apr</div></div>
+    <div class="kpi"><div class="n">11.6k</div><div class="l">Site traffic</div><div class="d">YTD total</div></div>
+    <div class="kpi"><div class="n">~25%</div><div class="l">Close rate</div><div class="d">on qualified</div></div>
+  </div>
+</section>
+
+<section>
+  <div class="sec-h">Each sheet, its own page</div>
+  <p class="sec-sub">Everything from their marketing sheet, broken into pages. Add/edit tasks on the Tasks board.</p>
+  <div class="hub">
+    <a class="hcard" href="conversions.html"><div class="ht">Conversions</div><div class="hd">Weekly + monthly tracker: traffic, spend, leads, spam rate, cost per good lead.</div><div class="arrow">Live &#8594;</div></a>
+    <a class="hcard" href="leads.html"><div class="ht">Leads Pipeline</div><div class="hd">Residential + commercial leads with appointment, proposal, signed status.</div><div class="arrow">Live &#8594;</div></a>
+    <a class="hcard" href="tasks.html"><div class="ht">Tasks Board</div><div class="hd">Editable. Add, move, and remove tasks. Changes save and notify the team.</div><div class="arrow">Editable &#8594;</div></a>
+    <a class="hcard" href="vault.html"><div class="ht">&#128274; Logins Vault</div><div class="hd">Every Freccia login, encrypted. Unlocks only with the master password.</div><div class="arrow">Locked &#8594;</div></a>
+    <a class="hcard soon" href="email.html"><div class="ht">Email</div><div class="hd">Campaign + automated-workflow performance. Open rate, CTR, CTOR.</div><div class="arrow">In build &#8594;</div></a>
+    <a class="hcard soon" href="budgets.html"><div class="ht">Budgets</div><div class="hd">Ad spend + reviews software, budget vs paid by month.</div><div class="arrow">In build &#8594;</div></a>
+    <a class="hcard soon" href="calendar.html"><div class="ht">Content Calendar</div><div class="hd">Weekly plan: social, email, events, photography, deadlines.</div><div class="arrow">In build &#8594;</div></a>
+    <a class="hcard soon" href="goals.html"><div class="ht">Goals &amp; Messaging</div><div class="hd">Monthly lead targets + approved taglines by audience.</div><div class="arrow">In build &#8594;</div></a>
+  </div>
+</section>
+
+<div class="foot">Freccia Marketing Dashboard &middot; Built by Balay ni Bruno &amp; Co. &middot; Data snapshot from "All Things Marketing" (2026-06-29). Vault is encrypted; credentials never stored in plain text.</div>
+</div>
+<script>
+const tg=document.getElementById('toggle');
+function setT(m){document.documentElement.setAttribute('data-theme',m);if(tg)tg.innerHTML=m==='dark'?'&#9788;':'&#9789;';try{localStorage.setItem('frec-theme',m)}catch(e){}}
+setT((()=>{try{return localStorage.getItem('frec-theme')||'light'}catch(e){return 'light'}})());
+if(tg)tg.addEventListener('click',()=>setT(document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark'));
+document.getElementById('hkpi').textContent='52 good leads · ~50% spam to kill';
+</script>
+</body></html>
