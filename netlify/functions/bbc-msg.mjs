@@ -290,6 +290,19 @@ export default async (req) => {
       const reads = await readJ("reads:" + meId, {});
       const prefs = await readJ("prefs:" + meId, { pinned: {}, labels: {} });
       const pinned = prefs.pinned || {}, labels = prefs.labels || {};
+      // FLAT TEAM DIRECTORY: every user sees every teammate (RJ shows as "BBC Bruno"); clients excluded.
+      const avaSet = new Set(roster.filter(p => p.avatar).map(p => p.id));
+      // a teammate's chosen name (set via setProfile) lives in the Blobs roster; prefer it.
+      const nameOf = (id, fallback) => { const p = roster.find(x => x.id === id); return (p && p.name) || fallback; };
+      const all = await adminUsers(); // full team from Supabase (even those who haven't opened the app yet)
+      // Treat every hub id as one person, so a DM's "other" is the real teammate, never a stray hub id.
+      const isHubId = (id) => myIds.includes(id) || (all || []).some(u => u.id === id && isHub(u.email));
+      const resolveName = (id) => {
+        if (myIds.includes(id)) return meHub ? "BBC Bruno" : "You";
+        const u = (all || []).find(x => x.id === id);
+        if (u && isHub(u.email)) return "BBC Bruno";
+        return nameOf(id, (u && u.name) || "Teammate");
+      };
       const mineWithUnread = await Promise.all(mine.map(async (c) => {
         const r = reads[c.id] || 0;
         let unread = 0;
@@ -297,14 +310,14 @@ export default async (req) => {
           const ms = await readJ("msgs:" + c.id, []);
           unread = ms.filter(m => (m.ts || 0) > r && m.user !== meId).length;
         }
-        return { ...c, unread, pinned: !!pinned[c.id], label: labels[c.id] || "" };
+        // resolve a real display name + the "other person" (ignoring all hub ids) so DMs never read "Teammate"
+        let title = "", otherId = null, otherAvatar = false;
+        if (c.type === "self") title = "📱 " + (c.device || c.name || "Notes");
+        else if (c.type === "group") title = c.name || "Group";
+        else { otherId = c.members.find(m => !isHubId(m)) || c.members.find(m => m !== meId) || c.members[0]; title = resolveName(otherId); otherAvatar = avaSet.has(otherId); }
+        return { ...c, unread, pinned: !!pinned[c.id], label: labels[c.id] || "", title, otherId, otherAvatar };
       }));
-      // FLAT TEAM DIRECTORY: every user sees every teammate (RJ shows as "BBC Bruno"); clients excluded.
-      const avaSet = new Set(roster.filter(p => p.avatar).map(p => p.id));
-      // a teammate's chosen name (set via setProfile) lives in the Blobs roster; prefer it.
-      const nameOf = (id, fallback) => { const p = roster.find(x => x.id === id); return (p && p.name) || fallback; };
       let rosterOut;
-      const all = await adminUsers(); // full team from Supabase (even those who haven't opened the app yet)
       if (all && all.length) {
         rosterOut = all.filter(u => u.id !== meId && !CONTACT_EXCLUDE.has(u.email))
           .map(u => ({ id: u.id, name: isHub(u.email) ? "BBC Bruno" : nameOf(u.id, u.name), avatar: avaSet.has(u.id) }));
