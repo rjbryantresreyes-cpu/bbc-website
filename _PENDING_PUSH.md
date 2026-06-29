@@ -119,3 +119,5 @@ git push            # Netlify auto-deploys
 - **Fix:** `bbc-msg.mjs` `setAvatarFor` now accepts `{ id }` (preferred) as well as `{ email }` (back-compat). `chat/index.html` import now iterates the loaded `ROSTER`, matches each member by FIRST NAME against `TEAM_PHOTO_BY_NAME` (Bruno, Vi, Krizza, Ryan, Kenz, Daryl, Diego → `/images/team/*.jpg`), and sets the avatar by id. No emails needed; picks up new teammates by name; re-runnable to refresh.
 - **To make photos appear (needs deploy):** the fix + the new `images/team/*.jpg` must be live, then a HUB user (RJ) opens chat → settings → **Import team photos from website** once. (Can't be verified in the static preview — needs Supabase auth + the live function.)
 - Two files changed: `chat/index.html`, `netlify/functions/bbc-msg.mjs`. Not pushed.
+
+<!-- deploy-trigger 2026-06-30: publish Bruno vault seed button (os/index.html only — force build past the os/-skip rule). -->
