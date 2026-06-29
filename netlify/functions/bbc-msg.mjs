@@ -202,6 +202,19 @@ export default async (req) => {
     return roster;
   };
 
+  // The hub (RJ as "BBC Bruno") may sign in under more than one email, which means more than one
+  // Supabase user id. Conversations are keyed to whichever id created them, so treat ALL hub ids as
+  // one person: the hub sees + can open any chat that involves any hub identity. This is what makes
+  // chats survive logging out of one hub email and back in under another.
+  let myIds = [meId];
+  if (meHub) {
+    try {
+      const rl = await readJ("roster", []);
+      myIds = [...new Set([meId, ...rl.filter(p => p && p.hub).map(p => p.id)])];
+    } catch { myIds = [meId]; }
+  }
+  const inConv = (conv) => !!conv && Array.isArray(conv.members) && conv.members.some(id => myIds.includes(id));
+
   const url = new URL(req.url);
   const action = url.searchParams.get("action") || (req.method === "POST" ? null : "bootstrap");
 
@@ -214,7 +227,7 @@ export default async (req) => {
       if (!meta) return json({ error: "not found" }, 404);
       const convs = await readJ("convs", []);
       const conv = convs.find(c => c.id === meta.conv);
-      if (!conv || (!conv.members.includes(meId) && !meHub)) return json({ error: "forbidden" }, 403);
+      if (!conv || (!inConv(conv) && !meHub)) return json({ error: "forbidden" }, 403);
       let buf;
       try { buf = await fs.get("file:" + id, { type: "arrayBuffer" }); } catch { buf = null; }
       if (!buf) return json({ error: "gone" }, 404);
@@ -257,13 +270,18 @@ export default async (req) => {
         }
       } catch { /* never block bootstrap on group ensure */ }
       const convs = await readJ("convs", []);
-      let mine = convs.filter(c => c.members.includes(meId)).sort((a, b) => (b.lastTs || 0) - (a.lastTs || 0));
-      // Collapse accidental duplicate conversations so you never open an empty twin that "lost" its history.
-      // Keep the one with the most recent activity (the populated one). All "BBC Team" groups collapse to one.
+      let mine = convs.filter(inConv).sort((a, b) => (b.lastTs || 0) - (a.lastTs || 0));
+      // Collapse duplicate conversations so you never open an empty twin that "lost" its history.
+      // Any hub id counts as the same person ("hub"), so a DM you started under one hub email merges
+      // with the same DM under another. All "BBC Team" groups and same-device notes collapse to one.
+      // Keep the copy with the most recent activity (the populated one).
       {
-        const sig = (c) => (c.type === "group" && (c.name || "") === "BBC Team")
-          ? "group|BBC Team"
-          : c.type + "|" + (c.name || "") + "|" + [...c.members].sort().join(",");
+        const canon = (id) => myIds.includes(id) ? "hub" : id;
+        const sig = (c) => {
+          if (c.type === "group" && (c.name || "") === "BBC Team") return "group|BBC Team";
+          if (c.type === "self") return "self|" + (c.device || c.name || "");
+          return c.type + "|" + (c.name || "") + "|" + [...c.members].map(canon).sort().join(",");
+        };
         const best = new Map();
         for (const c of mine) { const k = sig(c); const prev = best.get(k); if (!prev || (c.lastTs || 0) > (prev.lastTs || 0)) best.set(k, c); }
         mine = [...best.values()].sort((a, b) => (b.lastTs || 0) - (a.lastTs || 0));
@@ -308,7 +326,7 @@ export default async (req) => {
       const convs = await readJ("convs", []);
       const conv = convs.find(c => c.id === convId);
       if (!conv) return json({ error: "no conv" }, 404);
-      if (!conv.members.includes(meId)) return json({ error: "forbidden" }, 403);
+      if (!inConv(conv)) return json({ error: "forbidden" }, 403);
       let msgs = await readJ("msgs:" + convId, []);
       if (since) msgs = msgs.filter(m => (m.ts || 0) > since);
       // Read receipts: each member's last-read timestamp for this conversation,
@@ -386,7 +404,7 @@ export default async (req) => {
       const convs = await readJ("convs", []);
       const conv = convs.find(c => c.id === convId);
       if (!conv) return json({ error: "no conv" }, 404);
-      if (!conv.members.includes(meId)) return json({ error: "forbidden" }, 403);
+      if (!inConv(conv)) return json({ error: "forbidden" }, 403);
 
       // Idempotency: ignore a repeat of the same client-generated id (double-tap / PWA retry / flaky network).
       const clientId = body.clientId ? String(body.clientId).slice(0, 40) : null;
@@ -484,7 +502,7 @@ export default async (req) => {
       if (!convId || !msgId || !emoji) return json({ error: "conv, msgId, emoji required" }, 400);
       const convs = await readJ("convs", []);
       const conv = convs.find(c => c.id === convId);
-      if (!conv || !conv.members.includes(meId)) return json({ error: "forbidden" }, 403);
+      if (!conv || !inConv(conv)) return json({ error: "forbidden" }, 403);
       const msgs = await readJ("msgs:" + convId, []);
       const m = msgs.find(x => x.id === msgId);
       if (!m) return json({ error: "no message" }, 404);
@@ -508,7 +526,7 @@ export default async (req) => {
       if (!text.trim()) return json({ error: "empty" }, 400);
       const convs = await readJ("convs", []);
       const conv = convs.find(c => c.id === convId);
-      if (!conv || !conv.members.includes(meId)) return json({ error: "forbidden" }, 403);
+      if (!conv || !inConv(conv)) return json({ error: "forbidden" }, 403);
       const msgs = await readJ("msgs:" + convId, []);
       const m = msgs.find(x => x.id === msgId);
       if (!m) return json({ error: "no message" }, 404);
@@ -525,7 +543,7 @@ export default async (req) => {
       if (!convId || !msgId) return json({ error: "conv, msgId required" }, 400);
       const convs = await readJ("convs", []);
       const conv = convs.find(c => c.id === convId);
-      if (!conv || !conv.members.includes(meId)) return json({ error: "forbidden" }, 403);
+      if (!conv || !inConv(conv)) return json({ error: "forbidden" }, 403);
       let msgs = await readJ("msgs:" + convId, []);
       const m = msgs.find(x => x.id === msgId);
       if (!m) return json({ ok: true });
@@ -631,7 +649,7 @@ export default async (req) => {
       const convs = await readJ("convs", []);
       const conv = convs.find(c => c.id === convId);
       if (!conv || conv.type !== "group") return json({ error: "no group" }, 404);
-      if (!conv.members.includes(meId)) return json({ error: "forbidden" }, 403);
+      if (!inConv(conv)) return json({ error: "forbidden" }, 403);
       if (!conv.members.includes(addId)) {
         conv.members.push(addId);
         await js.setJSON("convs", convs);
