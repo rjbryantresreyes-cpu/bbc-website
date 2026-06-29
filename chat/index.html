@@ -412,7 +412,7 @@ function isMobile(){return window.matchMedia('(max-width:899px)').matches;}
 function autogrow(t){t.style.height='auto';t.style.height=Math.min(t.scrollHeight,110)+'px';}
 function isImg(t){return /^image\//.test(t||'');}
 function toast(m){const e=document.getElementById('toast');e.textContent=m;e.classList.add('show');setTimeout(()=>e.classList.remove('show'),2200);}
-function bbcAllowed(e){e=(e||'').toLowerCase().trim();return /@balaynibruno\.co$/.test(e)||['rjbryantresreyes@gmail.com','krizza.bbc@gmail.com','krizzamaymanagase@gmail.com','daryl.bbc@gmail.com'].indexOf(e)>=0;}
+function bbcAllowed(e){e=(e||'').toLowerCase().trim();return /@balaynibruno\.co$/.test(e)||['rjbryantresreyes@gmail.com','krizza.bbc@gmail.com','krizzamaymanagase@gmail.com','daryl.bbc@gmail.com','john.bbc2297@gmail.com'].indexOf(e)>=0;}
 
 async function token(){try{const r=await sb.auth.getSession();return r&&r.data&&r.data.session&&r.data.session.access_token||null;}catch(e){return null;}}
 async function api(url,qs,opts){

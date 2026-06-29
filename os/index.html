@@ -6578,7 +6578,7 @@
   function bbcAllowed(email){
     var e=(email||'').toLowerCase().trim();
     if(/@balaynibruno\.co$/.test(e)) return true;
-    return ['rjbryantresreyes@gmail.com','krizza.bbc@gmail.com','krizzamaymanagase@gmail.com','daryl.bbc@gmail.com'].indexOf(e)>=0;
+    return ['rjbryantresreyes@gmail.com','krizza.bbc@gmail.com','krizzamaymanagase@gmail.com','daryl.bbc@gmail.com','john.bbc2297@gmail.com'].indexOf(e)>=0;
   }
   async function denyNonBBC(){
     var c=initClient(); if(c){ try{ await c.auth.signOut(); }catch(e){} }
@@ -6603,6 +6603,8 @@
     'vi@balaynibruno.co':         { editor:'vi',      owner:'ajb' },
     'vicarmelle@balaynibruno.co': { editor:'vi',      owner:'ajb' },
     'ryan@balaynibruno.co':       { editor:'ryan',    owner:'bbc' },
+    'john@balaynibruno.co':       { editor:'john',    owner:'bbc' },
+    'john.bbc2297@gmail.com':     { editor:'john',    owner:'bbc' },
     /* Clients (when their logins are set up) */
     'beau@homevisionstudio.com':  { editor:'beau',    owner:'hvs' },
     'kari@homevisionstudio.com':  { editor:'kari',    owner:'hvs' },

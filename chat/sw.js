@@ -1,6 +1,6 @@
 // BBC Messenger service worker — installable app shell only.
 // We deliberately do NOT cache API calls or messages (those must always be live).
-const SHELL = "bbc-chat-shell-v12";
+const SHELL = "bbc-chat-shell-v13";
 const ASSETS = ["/chat/", "/chat/index.html", "/chat/icon-192.png", "/chat/icon-512.png"];
 
 self.addEventListener("install", (e) => {

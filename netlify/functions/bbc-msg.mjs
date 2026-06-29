@@ -88,7 +88,7 @@ const KNOWN = {
   "daryl.bbc@gmail.com": "Daryl", "daryl@balaynibruno.co": "Daryl",
   "vi@balaynibruno.co": "Vi", "vicarmelle@balaynibruno.co": "Vi",
   "ryan@balaynibruno.co": "Ryan", "kenz.bbc11@gmail.com": "Kenz",
-  "diego@balaynibruno.co": "Diego", "dexter@balaynibruno.co": "Dexter", "john@balaynibruno.co": "John",
+  "diego@balaynibruno.co": "Diego", "dexter@balaynibruno.co": "Dexter", "john@balaynibruno.co": "John", "john.bbc2297@gmail.com": "John",
 };
 
 // Clients + non-person accounts that must NOT appear in BBC Bruno's team contact list.
