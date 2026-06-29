@@ -4,6 +4,19 @@
 <!-- deploy-trigger 2026-06-13d: force-refetch on lookup miss + don't clobber good cache + SW v17 (stop the few-minute revert). -->
 <!-- deploy-trigger 2026-06-14: Needs Follow-Up section; follow-up click fills name from the exact record (deterministic, no race); SW v18. -->
 # ⏳ PENDING PUSH — hold until Netlify credit is back
+
+## 🔐 BRUNO PASSWORD VAULT — STAGED 2026-06-29 (do not push alone; goes in the next batch)
+- **What:** RJ's personal encrypted password vault behind the 🔒 Bruno Page lock in /os. Zero-knowledge: passwords are encrypted/decrypted IN-BROWSER (WebCrypto PBKDF2 250k → AES-GCM 256) with RJ's MASTER password, which is never sent or stored. Server only ever holds the encrypted blob.
+- **Files:** NEW `netlify/functions/vault.mjs` (Netlify Blobs store `bbc-vault`, key per-owner; gated: valid /os Supabase token AND email ∈ {rj@balaynibruno.co, rjbryantresreyes@gmail.com} — RJ-only, even other BBC team can't read; refuses any non-encrypted payload). Frontend vault module + CSS + go() hook added to BOTH `os/index.html` (repo) AND the SOURCE `COMMAND_CENTER/app/index.html` (so the dashboard-sync mirror keeps it). Syntax verified (0 errors) + scoping verified on both copies.
+- **Behavior:** Unlock card on the Bruno Page → master password → first time creates the vault, after that decrypts it. Add/edit/delete entries (label, username, password [masked, show/copy], url, notes), each save re-encrypts the whole blob. "Lock" clears it from memory; leaving the page clears it.
+- **RJ enters his own passwords** in the browser — I never see them (zero-knowledge). Nothing was imported from any Drive file (respects the no-secrets-on-Drive rule).
+- ⚠️ **Verification:** code/syntax/scoping verified; the unlock + crypto + sync round-trip needs the live Netlify function + Supabase login, so it can only be confirmed on the deploy (preview tooling + login/function aren't available locally this session). After deploy: log into balaynibruno.co/os → 🔒 → set a master password → add one entry → reload → confirm it decrypts.
+- Marketing-sheets-as-slides idea: DEFERRED (RJ chose vault-only this round).
+
+# ⏳ PENDING PUSH — hold until Netlify credit is back
+
+> **STATUS 2026-06-26:** The "BUILT + STAGED" items below (Tools section, Brevo CRM, our-work, story pages) are already committed + LIVE — verified via `git ls-files` (tracked) and a clean `origin/master..HEAD` (nothing unpushed). This manifest is STALE. Deploys are flowing again (messenger v3 + Messy shipped 2026-06-26, commit e25c19a). Next time, trust the git sweep over this file. ⏳ Genuinely-open follow-ups now: set Netlify env `BREVO_API_KEY` (CRM page) + `ANTHROPIC_API_KEY` (Messy live answers); mirror Tools pages to `BBC WEBSITE HTML\` for Drive visibility.
+
 **Created:** 2026-06-11
 **Why holding:** Netlify production deploys are frozen (Pro plan credits exhausted 2026-06-10, ~199 deploys in 9 days). Do NOT push until credit/auto-recharge is restored. See [[project_netlify_deploy_cost_fix]] + LEARNINGS/2026-06-10_netlify_deploy_cost_and_tooling.md.
 
