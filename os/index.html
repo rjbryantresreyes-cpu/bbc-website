@@ -6132,6 +6132,26 @@
     window.vaultLock=function(){ key=null; data=null; salt=null; window.renderVault(); };
     window.vaultReveal=function(i){ var el=document.getElementById('vp'+i); if(el) el.textContent=el.getAttribute('data-real'); };
     window.vaultCopy=function(i){ if(navigator.clipboard){ navigator.clipboard.writeText(data[i].pass); window.toast&&toast('Password copied',''); } };
+    var SEED_APPS=[
+      {label:'Netlify',url:'https://app.netlify.com'},{label:'GitHub',url:'https://github.com'},{label:'Supabase',url:'https://supabase.com/dashboard'},
+      {label:'Google (Gmail / Drive / Workspace)',url:'https://accounts.google.com'},{label:'NocoDB',url:'https://app.nocodb.com'},{label:'Brevo',url:'https://app.brevo.com'},
+      {label:'Twilio',url:'https://console.twilio.com'},{label:'Anthropic (Claude)',url:'https://console.anthropic.com'},{label:'Groq',url:'https://console.groq.com'},
+      {label:'Replicate',url:'https://replicate.com'},{label:'ElevenLabs',url:'https://elevenlabs.io'},{label:'HeyGen',url:'https://app.heygen.com'},
+      {label:'OpenAI (ChatGPT)',url:'https://platform.openai.com'},{label:'NVIDIA Build',url:'https://build.nvidia.com'},{label:'Shopify',url:'https://admin.shopify.com'},
+      {label:'Canva',url:'https://canva.com'},{label:'Postiz',url:''},{label:'Metricool',url:'https://metricool.com'},{label:'Adobe (Illustrator)',url:'https://account.adobe.com'},
+      {label:'DaVinci Resolve',url:''},{label:'Slack (4Ocean)',url:'https://slack.com'},{label:'Asana (4Ocean)',url:'https://app.asana.com'},
+      {label:'WhatsApp',url:'https://web.whatsapp.com'},{label:'RustDesk',url:''},{label:'Wise',url:'https://wise.com'},{label:'PayPal',url:'https://paypal.com'},
+      {label:'Upwork',url:'https://upwork.com'},{label:'Fiverr',url:'https://fiverr.com'},{label:'OnlineJobs.ph',url:'https://onlinejobs.ph'},
+      {label:'Calendly',url:'https://calendly.com'},{label:'GoHighLevel',url:'https://app.gohighlevel.com'}
+    ];
+    window.vaultSeed=async function(){
+      if(!data) return;
+      var have={}; data.forEach(function(d){ have[String(d.label||'').toLowerCase()]=1; });
+      var added=0;
+      SEED_APPS.forEach(function(a){ if(!have[a.label.toLowerCase()]){ data.push({label:a.label,user:'',pass:'',url:a.url||'',notes:''}); added++; } });
+      if(!added){ window.toast&&toast('All those apps are already in your vault'); return; }
+      var ok=await saveBlob(); if(ok){ window.toast&&toast(added+' apps added — open each to fill its login'); window.renderVault(); }
+    };
     window.vaultAdd=function(){ if(!data) return; window.vaultEdit(data.length, true); };
     window.vaultDel=async function(i){ if(!confirm('Delete this entry?')) return; data.splice(i,1); await saveBlob(); window.renderVault(); };
     function vf(label,id,val){ return '<div class="fld"><label>'+label+'</label><input id="'+id+'" value="'+vesc(val)+'" autocomplete="off"></div>'; }
@@ -6169,7 +6189,8 @@
       }).join('') : '<p class="vault-sub">No passwords saved yet. Add your first one below.</p>';
       box.innerHTML='<div class="vault-hd"><span>&#128275; Password Vault ('+data.length+')</span><a class="vault-lock" onclick="vaultLock()">Lock</a></div>'+
         '<div class="vault-list">'+rows+'</div>'+
-        '<button class="vbtn vbtn-add" onclick="vaultAdd()">&#65291; Add password</button>';
+        '<button class="vbtn vbtn-add" onclick="vaultAdd()">&#65291; Add password</button>'+
+        '<button class="vbtn vbtn-add" onclick="vaultSeed()" style="margin-top:8px">&#10022; Add the apps I use (blank logins)</button>';
     };
   })();
 
