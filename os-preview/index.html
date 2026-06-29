@@ -241,6 +241,24 @@
   .bgate .err{color:#EF6B6B;font-size:12px;margin-top:9px;min-height:14px;}
   .brunolock{display:inline-block;margin-top:16px;font-size:12px;color:var(--muted);cursor:pointer;border:1px solid var(--line);padding:8px 13px;border-radius:9px;}
   .brunolock:hover{border-color:var(--gold);color:var(--gold);}
+  /* Bruno password vault (zero-knowledge) */
+  .vault-card{background:var(--bg2);border:1px solid var(--gold);border-radius:14px;padding:16px;margin-bottom:16px;}
+  .vault-hd{display:flex;justify-content:space-between;align-items:center;font-family:var(--display);font-size:16px;color:var(--ink);}
+  .vault-lock{font-size:12px;color:var(--gold2);cursor:pointer;font-family:var(--mono);}
+  .vault-sub{font-size:12.5px;color:var(--muted);margin:8px 0 12px;line-height:1.5;}
+  .vault-card input,.vault-card textarea,.vault-form input,.vault-form textarea{width:100%;background:var(--bg3);border:1px solid var(--line);border-radius:10px;color:var(--ink);padding:12px;font-size:16px;font-family:var(--ui);margin-bottom:10px;}
+  .vbtn{display:inline-block;border:none;border-radius:10px;padding:11px 18px;font-weight:700;font-family:var(--ui);font-size:14px;cursor:pointer;min-height:44px;}
+  .vbtn-gold{background:var(--gold);color:#0A1422;}
+  .vbtn-add{background:var(--bg3);color:var(--gold2);border:1px solid var(--line);width:100%;margin-top:10px;}
+  .vault-err{color:#ff6b5b;font-size:12.5px;margin-top:8px;min-height:16px;}
+  .vault-list{display:flex;flex-direction:column;gap:10px;margin:4px 0;}
+  .vault-row{display:flex;justify-content:space-between;gap:10px;background:var(--bg3);border:1px solid var(--line);border-radius:10px;padding:11px 13px;}
+  .vault-lbl{font-weight:600;color:var(--ink);font-size:14px;}
+  .vault-meta{font-size:12px;color:var(--muted);margin-top:2px;word-break:break-all;}
+  .vault-pw{font-family:var(--mono);font-size:13px;color:var(--ink);margin-top:4px;}
+  .vault-pw a,.vault-url,.vault-row-act a{font-size:11.5px;color:var(--gold2);cursor:pointer;font-family:var(--ui);}
+  .vault-row-act{display:flex;flex-direction:column;gap:6px;text-align:right;flex-shrink:0;}
+  .vault-url{display:inline-block;margin-top:4px;word-break:break-all;}
 
   /* FOLDERS browser */
   .crumbs{display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-size:12.5px;margin-bottom:13px;}
@@ -1884,9 +1902,6 @@
           "name": "_RJ_PRODUCTS"
         },
         {
-          "name": ".playwright-mcp"
-        },
-        {
           "name": "Dexter drops folder"
         },
         {
@@ -1903,6 +1918,9 @@
         },
         {
           "name": "4OCEAN"
+        },
+        {
+          "name": "_RJ_PERSONAL"
         }
       ]
     }
@@ -5550,6 +5568,8 @@
     if(D.clients[i] && D.clients[i].name==='Dhes'){ window.location.href='/clients/dhes/'; return; }
     // Wooden Woodworks has its own WW-branded Command Center with its own logins.
     if(D.clients[i] && D.clients[i].name==='Wooden Woodworks'){ window.location.href='/wwos/'; return; }
+    // Freccia Construction — its own marketing dashboard hub (conversions, leads, tasks, vault).
+    if(D.clients[i] && /^Freccia Construction$/.test(D.clients[i].name||'')){ window.location.href='/clients/freccia/'; return; }
     const _cc=D.clients[i]||{};
     // Past clients open their public story page on balaynibruno.co (new tab).
     if(_cc.category==='past' && _cc.link){ window.open(_cc.link,'_blank','noopener'); return; }
@@ -6059,6 +6079,7 @@
       return `<div class="wfcat"><div class="wfcat-hd"><div class="wfcat-ic" style="background:${g.color}22;color:${g.color}">§</div><div class="wfcat-nm">${esc(g.cat)}</div><span class="wfcat-pct">${g.items.length}</span></div>${rows}</div>`;
     }).join('');
     return `<h2 class="vt">Bruno Page</h2><div class="vsub">${P.groups.length} groups · ${total} rules & protocols · source: ${esc(P.source)}</div>
+      <div id="vaultCard" class="vault-card"></div>
       <button class="ideabtn" onclick="openChat('home','New protocol to add — ')"><span class="i">＋</span>Add a protocol</button>
       <input class="search" placeholder="Search rules & protocols..." oninput="filterCards(this,'brunowrap')">
       <div id="brunowrap" class="wfgrid">${boxes}</div>
@@ -6070,6 +6091,87 @@
     openSheet(`<h3>${esc(it.t)}</h3><div class="row1"><span class="pill p-dev">${esc(g.cat)}</span>${it.trig?` &middot; <span style="color:var(--gold2)">trigger: ${esc(it.trig)}</span>`:''}</div>
       <div class="sec">What it is</div><div class="kv"><span>${esc(it.s)}</span></div>
       <div class="sec">Source</div><div class="kv"><span>${esc(D.protocols.source)}</span></div>`); };
+
+  /* ---------- BRUNO PASSWORD VAULT (zero-knowledge: encrypt/decrypt in-browser only) ---------- */
+  (function(){
+    var API='/.netlify/functions/vault';
+    var key=null, data=null, salt=null;            // kept in memory ONLY while unlocked
+    var te=new TextEncoder(), td=new TextDecoder();
+    function b64(buf){ var b=new Uint8Array(buf), s=''; for(var i=0;i<b.length;i++) s+=String.fromCharCode(b[i]); return btoa(s); }
+    function unb64(s){ return Uint8Array.from(atob(s), function(c){return c.charCodeAt(0);}); }
+    function vesc(s){ return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];}); }
+    async function deriveKey(pw, saltBytes){
+      var base=await crypto.subtle.importKey('raw', te.encode(pw), 'PBKDF2', false, ['deriveKey']);
+      return crypto.subtle.deriveKey({name:'PBKDF2', salt:saltBytes, iterations:250000, hash:'SHA-256'}, base, {name:'AES-GCM', length:256}, false, ['encrypt','decrypt']);
+    }
+    async function tok(){ return window.bbcToken ? await window.bbcToken() : null; }
+    function vErr(m){ var e=document.getElementById('vault-err'); if(e) e.textContent=m||''; }
+    async function fetchBlob(){
+      var t=await tok(); if(!t) return {err:'login'};
+      try{ var r=await fetch(API,{headers:{Authorization:'Bearer '+t}}); if(r.status===401||r.status===403) return {err:'auth'}; var d=await r.json(); return {blob:d.blob||null}; }
+      catch(e){ return {err:'net'}; }
+    }
+    async function saveBlob(){
+      var t=await tok(); if(!t){ window.toast&&toast('Sign in to /os first','err'); return false; }
+      var iv=crypto.getRandomValues(new Uint8Array(12));
+      var ct=await crypto.subtle.encrypt({name:'AES-GCM', iv:iv}, key, te.encode(JSON.stringify(data)));
+      var r=await fetch(API,{method:'POST',headers:{Authorization:'Bearer '+t,'content-type':'application/json'},body:JSON.stringify({blob:{salt:b64(salt),iv:b64(iv),ct:b64(ct)}})});
+      if(!r.ok){ var e=await r.json().catch(function(){return{};}); window.toast&&toast('Vault save failed: '+(e.error||r.status),'err'); return false; }
+      return true;
+    }
+    window.vaultUnlock=async function(){
+      var inp=document.getElementById('vault-mpw'); if(!inp) return; var pw=inp.value; if(!pw){ vErr('Enter your master password.'); return; }
+      vErr('Unlocking...');
+      var res=await fetchBlob();
+      if(res.err==='login'||res.err==='auth'){ vErr('Sign in to /os first — your vault is tied to your login.'); return; }
+      if(res.err){ vErr('Could not reach the vault. Check your connection and try again.'); return; }
+      if(!res.blob){ salt=crypto.getRandomValues(new Uint8Array(16)); key=await deriveKey(pw,salt); data=[]; var ok=await saveBlob(); if(!ok){ key=null; data=null; salt=null; return; } inp.value=''; window.renderVault(); return; }
+      try{ salt=unb64(res.blob.salt); key=await deriveKey(pw,salt); var pt=await crypto.subtle.decrypt({name:'AES-GCM',iv:unb64(res.blob.iv)},key,unb64(res.blob.ct)); data=JSON.parse(td.decode(pt)); inp.value=''; window.renderVault(); }
+      catch(e){ key=null; data=null; salt=null; vErr('Wrong master password.'); }
+    };
+    window.vaultLock=function(){ key=null; data=null; salt=null; window.renderVault(); };
+    window.vaultReveal=function(i){ var el=document.getElementById('vp'+i); if(el) el.textContent=el.getAttribute('data-real'); };
+    window.vaultCopy=function(i){ if(navigator.clipboard){ navigator.clipboard.writeText(data[i].pass); window.toast&&toast('Password copied',''); } };
+    window.vaultAdd=function(){ if(!data) return; window.vaultEdit(data.length, true); };
+    window.vaultDel=async function(i){ if(!confirm('Delete this entry?')) return; data.splice(i,1); await saveBlob(); window.renderVault(); };
+    function vf(label,id,val){ return '<div class="fld"><label>'+label+'</label><input id="'+id+'" value="'+vesc(val)+'" autocomplete="off"></div>'; }
+    window.vaultEdit=function(i,isNew){
+      var d=data[i]||{label:'',user:'',pass:'',url:'',notes:''};
+      var html='<div class="vault-form"><h3>'+(isNew?'New password':'Edit password')+'</h3>'+
+        vf('Label','vf-label',d.label)+vf('Username / email','vf-user',d.user)+vf('Password','vf-pass',d.pass)+vf('Website (optional)','vf-url',d.url)+
+        '<div class="fld"><label>Notes (optional)</label><textarea id="vf-notes" rows="2">'+vesc(d.notes)+'</textarea></div>'+
+        '<div style="display:flex;gap:8px;margin-top:4px"><button class="vbtn vbtn-gold" onclick="vaultSaveEntry('+i+')">Save</button><button class="vbtn vbtn-add" style="width:auto;margin:0" onclick="window.closeSheet&&window.closeSheet()">Cancel</button></div></div>';
+      openSheet(html);
+    };
+    window.vaultSaveEntry=async function(i){
+      var g=function(id){ var e=document.getElementById(id); return e?e.value:''; };
+      var lbl=g('vf-label').trim(); if(!lbl){ alert('Label is required'); return; }
+      data[i]={label:lbl,user:g('vf-user'),pass:g('vf-pass'),url:g('vf-url').trim(),notes:g('vf-notes')};
+      var ok=await saveBlob(); if(ok){ window.closeSheet&&window.closeSheet(); window.renderVault(); }
+    };
+    window.renderVault=function(){
+      var box=document.getElementById('vaultCard'); if(!box) return;
+      if(!key||!data){
+        box.innerHTML='<div class="vault-hd"><span>&#128274; Password Vault</span></div>'+
+          '<p class="vault-sub">Your private logins, encrypted on your device. Only your master password opens it. Nothing is ever stored in plain text, not in the code, not on the server.</p>'+
+          '<input id="vault-mpw" type="password" placeholder="Master password" autocomplete="off" onkeydown="if(event.key===\'Enter\')vaultUnlock()">'+
+          '<button class="vbtn vbtn-gold" onclick="vaultUnlock()">Unlock vault</button>'+
+          '<div class="vault-err" id="vault-err"></div>';
+        return;
+      }
+      var rows = data.length ? data.map(function(d,i){
+        return '<div class="vault-row"><div class="vault-row-main"><div class="vault-lbl">'+vesc(d.label)+'</div>'+
+          (d.user?'<div class="vault-meta">'+vesc(d.user)+'</div>':'')+
+          '<div class="vault-pw"><span id="vp'+i+'" data-real="'+vesc(d.pass)+'">&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;</span> <a onclick="vaultReveal('+i+')">show</a> <a onclick="vaultCopy('+i+')">copy</a></div>'+
+          (d.url?'<a class="vault-url" href="'+vesc(d.url)+'" target="_blank" rel="noopener">'+vesc(d.url)+'</a>':'')+
+          (d.notes?'<div class="vault-meta">'+vesc(d.notes)+'</div>':'')+
+          '</div><div class="vault-row-act"><a onclick="vaultEdit('+i+',false)">edit</a><a onclick="vaultDel('+i+')">delete</a></div></div>';
+      }).join('') : '<p class="vault-sub">No passwords saved yet. Add your first one below.</p>';
+      box.innerHTML='<div class="vault-hd"><span>&#128275; Password Vault ('+data.length+')</span><a class="vault-lock" onclick="vaultLock()">Lock</a></div>'+
+        '<div class="vault-list">'+rows+'</div>'+
+        '<button class="vbtn vbtn-add" onclick="vaultAdd()">&#65291; Add password</button>';
+    };
+  })();
 
   /* ---------- SHEETS ---------- */
   function wfLinks(){ try{return JSON.parse(localStorage.getItem('bbc_wf_links')||'{}');}catch(e){return{};} }
@@ -6197,7 +6299,7 @@
   window.go=v=>{ window.curView=v; window.curClient=null; window.__curClientSlug=null; app.innerHTML=`<div class="view">${views[v]()}</div>`; window.scrollTo(0,0);
     if(!window.__routing){ var __nh='#'+v; if(location.hash!==__nh){ try{ location.hash=__nh; }catch(e){} } }
     document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('active',b.dataset.v===v));
-    sheet.classList.remove('open'); if(v==='crm'&&window.loadBrevoCrm){ window.loadBrevoCrm(); } if(v==='inbox'&&window.loadInbox) window.loadInbox(); if(v==='home'&&window.loadHomeAttention) window.loadHomeAttention(); if(v==='board'&&window.Board) window.Board.render(); if(v==='team'&&window.TeamChat) window.TeamChat.enter(); };
+    sheet.classList.remove('open'); if(v==='crm'&&window.loadBrevoCrm){ window.loadBrevoCrm(); } if(v==='inbox'&&window.loadInbox) window.loadInbox(); if(v==='home'&&window.loadHomeAttention) window.loadHomeAttention(); if(v==='board'&&window.Board) window.Board.render(); if(v==='team'&&window.TeamChat) window.TeamChat.enter(); if(v==='bruno'&&window.renderVault) window.renderVault(); };
   window.filterCards=(inp,wrapId)=>{ const q=inp.value.toLowerCase(); const wrap=document.getElementById(wrapId);
     wrap.querySelectorAll('.card,.wfrow,.clientbox,.opitem').forEach(c=>{ const hay=(c.dataset.search||c.textContent).toLowerCase(); c.style.display=hay.includes(q)?'':'none'; });
     wrap.querySelectorAll('.wfcat').forEach(p=>{ const any=[...p.querySelectorAll('.wfrow')].some(r=>r.style.display!=='none'); p.style.display=any?'':'none'; }); };
