@@ -130,6 +130,63 @@ async function adminUsers() {
   } catch { return _userCache.users; }
 }
 
+// One-time cleanup: remap EVERY conversation member to ONE canonical id per person (hub -> HUB_CANON,
+// each person -> their current live account id) so a VA's multiple/old accounts collapse to one chat.
+// Then merge same-signature conversations (lossless), and fold all hub device notes into one "Notes".
+// Backed up first; guarded by a flag so it runs once. Returns a small summary.
+async function mergeHubChats(js) {
+  const rd = async (k, d) => { try { return (await js.get(k, { type: "json", consistency: "strong" })) ?? d; } catch { return d; } };
+  const FLAG = "hubmerged_v4";
+  if (await rd(FLAG, 0)) return { skipped: true };
+  const convs0 = await rd("convs", []);
+  if (!convs0.length) { await js.setJSON(FLAG, Date.now()); return { empty: true }; }
+  await js.setJSON("convs_backup_" + FLAG, convs0);
+  const roster = await rd("roster", []);
+  const allU = (await adminUsers()) || [];
+  const rosterById = {}; for (const p of roster) rosterById[p.id] = p;
+  const emailOf = (id) => { const p = rosterById[id]; const u = allU.find(x => x.id === id); return ((p && p.email) || (u && u.email) || "").toLowerCase(); };
+  const nameOfId = (id) => { const p = rosterById[id]; const u = allU.find(x => x.id === id); return ((p && p.name) || (u && u.name) || "").trim().toLowerCase().split(/\s+/)[0]; };
+  const personKey = (id) => {
+    if (id === HUB_CANON) return "hub";
+    if (id === MESSY_ID) return "messy";
+    const e = emailOf(id);
+    if (isHub(e)) return "hub";
+    if (e && KNOWN[e]) return KNOWN[e].toLowerCase();
+    return nameOfId(id) || ("id:" + id);
+  };
+  const liveByPerson = {};
+  for (const u of allU) { const k = personKey(u.id); if (k && k !== "hub" && k !== "messy" && !liveByPerson[k]) liveByPerson[k] = u.id; }
+  const canon = (id) => { const k = personKey(id); if (k === "hub") return HUB_CANON; if (k === "messy") return MESSY_ID; return liveByPerson[k] || id; };
+  for (const c of convs0) if (Array.isArray(c.members)) c.members = [...new Set(c.members.map(canon))];
+  const sigOf = (c) =>
+    (c.type === "self" && c.members.length === 1 && c.members[0] === HUB_CANON) ? "self"
+      : (c.type === "group" && (c.name || "") === "BBC Team") ? "g|BBC Team"
+        : (c.type === "group") ? "g|" + (c.name || "") + "|" + [...c.members].sort().join(",")
+          : "dm|" + [...c.members].sort().join(",");
+  const groups = new Map();
+  for (const c of convs0) { const k = sigOf(c); if (!groups.has(k)) groups.set(k, []); groups.get(k).push(c); }
+  const keep = []; let mergedAway = 0;
+  for (const [k, list] of groups) {
+    if (list.length === 1) { keep.push(list[0]); continue; }
+    mergedAway += list.length - 1;
+    list.sort((a, b) => (b.lastTs || 0) - (a.lastTs || 0));
+    const primary = list[0];
+    let merged = [];
+    for (const c of list) { const ms = await rd("msgs:" + c.id, []); if (Array.isArray(ms)) merged = merged.concat(ms); }
+    const seen = new Set();
+    merged = merged.filter(m => m && m.id && !seen.has(m.id) && seen.add(m.id)).sort((a, b) => (a.ts || 0) - (b.ts || 0));
+    if (merged.length > MAX_MSGS) merged = merged.slice(-MAX_MSGS);
+    await js.setJSON("msgs:" + primary.id, merged);
+    const last = merged[merged.length - 1];
+    if (last) { primary.lastTs = last.ts; primary.lastText = last.file && !last.text ? "📎 " + last.file.name : (last.text || "").slice(0, 80); }
+    if (k === "self") { primary.type = "self"; primary.name = "Notes"; primary.device = null; }
+    keep.push(primary);
+  }
+  await js.setJSON("convs", keep);
+  await js.setJSON(FLAG, Date.now());
+  return { ok: true, mergedAway, total: keep.length };
+}
+
 function displayName(user) {
   const em = (user.email || "").toLowerCase();
   if (isHub(em)) return "BBC Bruno";
@@ -195,13 +252,15 @@ export default async (req) => {
       if (!process.env.SUPABASE_SERVICE_ROLE_KEY || svc !== process.env.SUPABASE_SERVICE_ROLE_KEY) return json({ error: "nope" }, 403);
       try {
         const jsd = getStore(JSTORE);
+        let ran = null;
+        if (u0.searchParams.get("run") === "1") ran = await mergeHubChats(jsd); // trigger the merge without a hub login
         const convs = (await jsd.get("convs", { type: "json" })) || [];
         const roster = (await jsd.get("roster", { type: "json" })) || [];
         const out = convs.map(c => ({ id: c.id, type: c.type, name: c.name || "", members: c.members, lastTs: c.lastTs }));
         const ros = roster.map(p => ({ id: p.id, name: p.name, email: p.email, hub: !!p.hub }));
         const flags = {};
-        for (const f of ["hubmerged_v1", "hubmerged_v2", "hubmerged_v3"]) flags[f] = (await jsd.get(f, { type: "json" })) || 0;
-        return json({ convs: out, roster: ros, flags });
+        for (const f of ["hubmerged_v1", "hubmerged_v2", "hubmerged_v3", "hubmerged_v4"]) flags[f] = (await jsd.get(f, { type: "json" })) || 0;
+        return json({ ran, convs: out, roster: ros, flags });
       } catch (e) { return json({ error: String(e.message || e) }, 500); }
     }
   }
@@ -282,79 +341,9 @@ export default async (req) => {
       const roster = await upsertRoster();
       const hub = await readJ("hub", null);
 
-      // ----- ONE-TIME hub merge: collapse RJ's two sign-in ids into HUB_CANON, combine duplicate
-      // conversations (one chat per person) and all device notes into a single self/notes chat.
-      // Lossless (messages are concatenated, never deleted), backed up, and runs once (guarded flag).
-      if (meHub) {
-        try {
-          const FLAG = "hubmerged_v3"; // merge by PERSON, normalized key (handles a VA having more than one account id)
-          const already = await readJ(FLAG, 0);
-          if (!already) {
-            const convs0 = await readJ("convs", []);
-            if (convs0.length) {
-              await js.setJSON("convs_backup_" + FLAG, convs0); // safety net before any rewrite
-              const hubSet = new Set(hubRealIds);
-              const allU = (await adminUsers()) || [];
-              const rosterById = {}; for (const p of roster) rosterById[p.id] = p;
-              // A stable "who is this" key so a person's multiple/old account ids group together.
-              // Normalized so the SAME person resolves to the SAME key whether we know them by
-              // email (KNOWN) or only by stored name. e.g. Ryan's old + new account both -> "ryan".
-              const personKey = (id) => {
-                if (hubSet.has(id) || id === HUB_CANON) return "hub";
-                if (id === MESSY_ID) return "messy";
-                const p = rosterById[id];
-                const u = allU.find(x => x.id === id);
-                const email = ((p && p.email) || (u && u.email) || "").toLowerCase();
-                if (email && KNOWN[email]) return KNOWN[email].toLowerCase();
-                const nm = ((p && p.name) || (u && u.name) || "").trim().toLowerCase().split(/\s+/)[0];
-                return nm || ("id:" + id);
-              };
-              // the person's CURRENT (live) account id, so the merged chat points at their working login
-              const liveByPerson = {};
-              for (const u of allU) {
-                const k = (u.email && KNOWN[u.email]) ? KNOWN[u.email].toLowerCase() : (u.name || "").trim().toLowerCase().split(/\s+/)[0];
-                if (k && !liveByPerson[k]) liveByPerson[k] = u.id;
-              }
-              // canonicalize every hub real id -> HUB_CANON
-              for (const c of convs0) if (Array.isArray(c.members)) c.members = [...new Set(c.members.map(m => hubSet.has(m) ? HUB_CANON : m))];
-              const sigOf = (c) => {
-                if (c.type === "self" && c.members.length === 1 && c.members[0] === HUB_CANON) return "self";
-                if (c.type === "group" && (c.name || "") === "BBC Team") return "g|BBC Team";
-                if (c.type === "group") return "g|" + (c.name || "") + "|" + [...c.members].sort().join(",");
-                const other = c.members.find(m => m !== HUB_CANON) || c.members[0];
-                return "dm|" + personKey(other);
-              };
-              const setOther = (c, k) => { // repoint a DM at the person's live id
-                if (!k.startsWith("dm|")) return;
-                const live = liveByPerson[k.slice(3)]; if (!live) return;
-                const other = c.members.find(m => m !== HUB_CANON);
-                if (other && other !== live) c.members = [...new Set(c.members.map(m => m === other ? live : m))];
-              };
-              const groups = new Map();
-              for (const c of convs0) { const k = sigOf(c); if (!groups.has(k)) groups.set(k, []); groups.get(k).push(c); }
-              const keep = [];
-              for (const [k, list] of groups) {
-                if (list.length === 1) { setOther(list[0], k); keep.push(list[0]); continue; }
-                list.sort((a, b) => (b.lastTs || 0) - (a.lastTs || 0));
-                const primary = list[0];
-                let merged = [];
-                for (const c of list) { const ms = await readJ("msgs:" + c.id, []); if (Array.isArray(ms)) merged = merged.concat(ms); }
-                const seen = new Set();
-                merged = merged.filter(m => m && m.id && !seen.has(m.id) && seen.add(m.id)).sort((a, b) => (a.ts || 0) - (b.ts || 0));
-                if (merged.length > MAX_MSGS) merged = merged.slice(-MAX_MSGS);
-                await js.setJSON("msgs:" + primary.id, merged);
-                const last = merged[merged.length - 1];
-                if (last) { primary.lastTs = last.ts; primary.lastText = last.file && !last.text ? "📎 " + last.file.name : (last.text || "").slice(0, 80); }
-                if (k === "self") { primary.type = "self"; primary.name = "Notes"; primary.device = null; }
-                setOther(primary, k);
-                keep.push(primary);
-              }
-              await js.setJSON("convs", keep);
-            }
-            await js.setJSON(FLAG, Date.now());
-          }
-        } catch { /* never block bootstrap on the merge; backup remains if it half-ran */ }
-      }
+      // ----- ONE-TIME merge: one canonical id per person, one chat per person, one self/notes chat.
+      // Lossless (messages concatenated, never deleted), backed up, runs once (guarded flag).
+      if (meHub) { try { await mergeHubChats(js); } catch { /* never block bootstrap on the merge */ } }
 
       // Ensure the shared "BBC Team" group exists and includes everyone on the team (hub + all VAs).
       // Runs on every bootstrap, so new accounts (e.g. Krizza) auto-join the moment they first open the app.
