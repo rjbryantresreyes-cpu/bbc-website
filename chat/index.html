@@ -162,33 +162,6 @@
   .rm-l.on{outline:2px solid var(--navy);opacity:1;}
   .toast.show{opacity:1;}
 
-  /* ===== read receipts (delivered / seen) ===== */
-  .b .tick{font-size:11px;margin-left:3px;letter-spacing:-2px;color:var(--muted);cursor:default;}
-  .b.out .tick{color:#9a8a5e;}
-  .b .tick.seen{color:#34a3ff;cursor:pointer;}
-  /* ===== @mentions ===== */
-  .b .mention{color:var(--navy);background:rgba(184,146,62,.22);border-radius:4px;padding:0 3px;font-weight:600;}
-  .b.out .mention{background:rgba(31,53,87,.14);}
-  #mentionPop{position:absolute;bottom:60px;left:10px;right:10px;max-height:210px;overflow-y:auto;background:#fff;border-radius:12px;box-shadow:0 10px 34px rgba(0,0,0,.22);z-index:62;display:none;}
-  #mentionPop .mrow{display:flex;align-items:center;gap:10px;padding:9px 12px;cursor:pointer;border-bottom:1px solid #f1eee8;}
-  #mentionPop .mrow:hover,#mentionPop .mrow.on{background:#f3efe7;}
-  #mentionPop .mrow .av{width:34px;height:34px;font-size:14px;overflow:hidden;}
-  #mentionPop .mrow .nm{font-weight:600;font-size:15px;color:var(--ink);}
-  /* ===== attachment preview strip (multi-file) ===== */
-  #attachStrip{display:none;gap:8px;padding:8px 12px 0;background:var(--cream);overflow-x:auto;flex-shrink:0;}
-  #attachStrip .ach{position:relative;flex-shrink:0;width:62px;height:62px;border-radius:10px;background:#fff;box-shadow:var(--shadow);display:flex;align-items:center;justify-content:center;overflow:hidden;}
-  #attachStrip .ach img{width:100%;height:100%;object-fit:cover;}
-  #attachStrip .ach .doc{font-size:13px;color:var(--navy);text-align:center;padding:4px;line-height:1.15;word-break:break-word;}
-  #attachStrip .ach .x{position:absolute;top:-6px;right:-6px;width:22px;height:22px;border-radius:50%;background:var(--navy);color:#fff;border:2px solid var(--cream);font-size:13px;cursor:pointer;display:flex;align-items:center;justify-content:center;line-height:1;}
-  /* drag-over hint */
-  .chatpane.dragging{outline:3px dashed var(--gold);outline-offset:-8px;}
-  .seenby{position:fixed;z-index:90;background:#fff;border-radius:12px;box-shadow:0 10px 34px rgba(0,0,0,.28);padding:8px 0;display:none;min-width:200px;max-width:280px;}
-  .seenby .sb-h{font-size:11px;letter-spacing:.6px;text-transform:uppercase;color:var(--muted);padding:4px 14px 8px;font-weight:700;}
-  .seenby .sb-r{display:flex;align-items:center;gap:10px;padding:7px 14px;}
-  .seenby .sb-r .av{width:30px;height:30px;font-size:13px;overflow:hidden;}
-  .seenby .sb-r .nm{font-size:14px;color:var(--ink);}
-  .seenby .sb-r .wh{margin-left:auto;font-size:11px;color:var(--muted);font-family:var(--mono);}
-
   @media(max-width:899px){
     .listpane{width:100%;border:none;}
     .chatpane{display:none;}
@@ -312,15 +285,12 @@
       </div>
       <div class="stream" id="stream"></div>
       <div class="devbar hide" id="devbar"></div>
-      <div id="attachStrip"></div>
       <div class="compose" style="position:relative">
         <div id="emojiPop" style="display:none;position:absolute;bottom:62px;left:6px;z-index:60"></div>
-        <div id="mentionPop"></div>
         <div class="pill">
           <button class="attach" type="button" title="Emoji" onclick="toggleEmoji(event)" style="background:none;border:0;cursor:pointer;font-size:20px">😊</button>
-          <label class="attach" title="Photos">🖼️<input id="photoInput" type="file" accept="image/*" multiple style="display:none" onchange="pickedFiles(this)"></label>
-          <label class="attach" title="Attach files">📎<input id="fileInput" type="file" multiple style="display:none" onchange="pickedFiles(this)"></label>
-          <textarea id="msgInput" rows="1" placeholder="Type a message" oninput="onCompose(this)" onkeydown="onComposeKey(event,this)"></textarea>
+          <label class="attach" title="Attach">📎<input id="fileInput" type="file" style="display:none" onchange="pickedFile(this)"></label>
+          <textarea id="msgInput" rows="1" placeholder="Type a message" oninput="autogrow(this)" onkeydown="if(event.key==='Enter'&&!event.shiftKey&&!isMobile()){event.preventDefault();sendMsg();}"></textarea>
         </div>
         <button class="send" onclick="sendMsg()">➤</button>
       </div>
@@ -328,16 +298,8 @@
   </div>
 </div>
 
-<div class="lightbox" id="lightbox" onclick="if(event.target===this)this.classList.remove('open')">
-  <div style="position:fixed;top:calc(env(safe-area-inset-top) + 14px);right:14px;display:flex;gap:8px;z-index:81">
-    <button onclick="copyImage(event)" style="background:rgba(255,255,255,.16);color:#fff;border:none;border-radius:20px;padding:9px 15px;font-size:14px;font-weight:600;cursor:pointer">⧉ Copy</button>
-    <button onclick="downloadCurrentImg(event)" style="background:rgba(255,255,255,.16);color:#fff;border:none;border-radius:20px;padding:9px 15px;font-size:14px;font-weight:600;cursor:pointer">⭳ Save</button>
-    <button onclick="document.getElementById('lightbox').classList.remove('open')" style="background:rgba(255,255,255,.16);color:#fff;border:none;border-radius:50%;width:40px;height:40px;font-size:16px;cursor:pointer">✕</button>
-  </div>
-  <img id="lightImg" alt="">
-</div>
+<div class="lightbox" id="lightbox" onclick="this.classList.remove('open')"><img id="lightImg" alt=""></div>
 <div class="toast" id="toast"></div>
-<div class="seenby" id="seenby"></div>
 <div id="reactBar"></div>
 <div id="editModal" style="display:none;position:fixed;inset:0;z-index:95;background:rgba(0,0,0,.5);align-items:center;justify-content:center;padding:18px">
   <div style="background:#fff;border-radius:16px;width:100%;max-width:520px;padding:18px;box-shadow:0 20px 60px rgba(0,0,0,.4)">
@@ -359,10 +321,7 @@ const API='/.netlify/functions/bbc-msg';
 const ADMIN='/.netlify/functions/bbc-msg-admin';
 const sb=window.supabase.createClient(SB_URL,SB_KEY);
 
-let ME=null, ROSTER=[], CONVS=[], CUR=null, MSGS=[], lastTs=0, pollT=null, listT=null, selected=new Set(), pendingFiles=[], sending=false, selectedDevice='All';
-let CONV_READS={}, CONV_MEMBERS=[];           // read receipts for the open conversation
-const MESSY_ID='messy-ai';
-function isMessy(id){return id===MESSY_ID;}
+let ME=null, ROSTER=[], CONVS=[], CUR=null, MSGS=[], lastTs=0, pollT=null, listT=null, selected=new Set(), pendingFile=null, sending=false, selectedDevice='All';
 const DEVICES=['All','Plus','Tuff','Free'];
 const OWN=['#1F3557','#B8923E','#4B6FA5','#3CA66A','#C77D52','#9B6FC7','#5AA9B5','#C75D7A'];
 function colorFor(id){let h=0;for(let i=0;i<(id||'').length;i++)h=(h*31+id.charCodeAt(i))&255;return OWN[h%OWN.length];}
@@ -395,9 +354,6 @@ const TEAM_PHOTO_BY_NAME={
  'diego':'/images/team/diego-tres-reyes.jpg'
 };
 function imgToB64(blob){return new Promise((res,rej)=>{const img=new Image();const u=URL.createObjectURL(blob);img.onload=()=>{const max=300,sc=Math.min(1,max/Math.max(img.width,img.height));const c=document.createElement('canvas');c.width=Math.round(img.width*sc)||max;c.height=Math.round(img.height*sc)||max;c.getContext('2d').drawImage(img,0,0,c.width,c.height);URL.revokeObjectURL(u);c.toBlob(b=>{const fr=new FileReader();fr.onload=()=>res(String(fr.result).split(',')[1]);fr.onerror=rej;fr.readAsDataURL(b);},'image/jpeg',0.82);};img.onerror=rej;img.src=u;});}
-async function maybeImportPhotos(){
-  try{ if(localStorage.getItem('bbc_photos_imported_v3'))return; await importTeamPhotos(); localStorage.setItem('bbc_photos_imported_v3','1'); }catch(e){}
-}
 async function importTeamPhotos(){
   toast('Importing team photos…');let done=0,miss=0;
   for(const p of (ROSTER||[])){
@@ -412,7 +368,7 @@ function isMobile(){return window.matchMedia('(max-width:899px)').matches;}
 function autogrow(t){t.style.height='auto';t.style.height=Math.min(t.scrollHeight,110)+'px';}
 function isImg(t){return /^image\//.test(t||'');}
 function toast(m){const e=document.getElementById('toast');e.textContent=m;e.classList.add('show');setTimeout(()=>e.classList.remove('show'),2200);}
-function bbcAllowed(e){e=(e||'').toLowerCase().trim();return /@balaynibruno\.co$/.test(e)||['rjbryantresreyes@gmail.com','krizza.bbc@gmail.com','krizzamaymanagase@gmail.com','daryl.bbc@gmail.com','daryl.ausan00@gmail.com','john.bbc2297@gmail.com','ryan17.bbc@gmail.com'].indexOf(e)>=0;}
+function bbcAllowed(e){e=(e||'').toLowerCase().trim();return /@balaynibruno\.co$/.test(e)||['rjbryantresreyes@gmail.com','krizza.bbc@gmail.com','krizzamaymanagase@gmail.com','daryl.bbc@gmail.com'].indexOf(e)>=0;}
 
 async function token(){try{const r=await sb.auth.getSession();return r&&r.data&&r.data.session&&r.data.session.access_token||null;}catch(e){return null;}}
 async function api(url,qs,opts){
@@ -454,7 +410,7 @@ async function start(){
   document.getElementById('meSub').textContent=ME.hub?'Signed in as BBC Bruno':('Signed in as '+ME.name);
   document.getElementById('addVaBtn').classList.toggle('hide',!ME.hub);
   // BBC Bruno (the hub) always has a pinned self-chat to message his own devices.
-  if(ME.hub){ await ensureDevices(); await ensureTeamGroup(); maybeImportPhotos(); }
+  if(ME.hub){ await ensureDevices(); await ensureTeamGroup(); }
   // A VA always has exactly one contact (BBC Bruno). Auto-open that chat so it feels direct.
   /* flat team: no auto-DM — everyone lands on their chat list (BBC Team group + contacts via ✎) */
   renderList();
@@ -506,7 +462,7 @@ async function ensureDevices(){
 function renderDevbar(){document.getElementById('devbar').innerHTML='<span class="lbl">For device:</span>'+DEVICES.map(d=>`<span class="devchip ${selectedDevice===d?'on':''}" onclick="pickDevice('${d}')">${d}</span>`).join('');}
 function pickDevice(d){selectedDevice=d;renderDevbar();}
 
-function convTitle(c){if(c.title)return c.title;if(c.type==='self')return '📱 '+(c.device||c.name||'Notes');if(c.type==='group')return c.name||'Group';const o=c.members.find(m=>m!==ME.id);const p=ROSTER.find(x=>x.id===o);return p?p.name:(ME.hub?'Teammate':'BBC Bruno');}
+function convTitle(c){if(c.type==='self')return '📱 '+(c.device||c.name||'Notes');if(c.type==='group')return c.name||'Group';const o=c.members.find(m=>m!==ME.id);const p=ROSTER.find(x=>x.id===o);return p?p.name:(ME.hub?'Teammate':'BBC Bruno');}
 function whenLabel(ts){if(!ts)return'';const d=new Date(ts),n=new Date();if(d.toDateString()===n.toDateString())return d.toLocaleTimeString(undefined,{hour:'numeric',minute:'2-digit'});const y=new Date(n-864e5);if(d.toDateString()===y.toDateString())return'Yesterday';return d.toLocaleDateString(undefined,{month:'numeric',day:'numeric'});}
 
 const LABELS=['Team','Clients','Leads','Admin'];
@@ -529,13 +485,11 @@ function renderList(){
   const ordered=list.sort((a,b)=>{const sa=a.type==='self'?2:(a.pinned?1:0),sb=b.type==='self'?2:(b.pinned?1:0);if(sa!==sb)return sb-sa;return (b.lastTs||0)-(a.lastTs||0);});
   el.innerHTML=ordered.map(c=>{
     const self=c.type==='self',grp=c.type==='group',t=convTitle(c),dev=c.device||c.name||'';
-    const other=(!self&&!grp)?(c.otherId||c.members.find(m=>m!==ME.id)):null;
+    const other=(!self&&!grp)?c.members.find(m=>m!==ME.id):null;
     const op=other?ROSTER.find(x=>x.id===other):null;
-    const hasAv=(c.otherAvatar)||(op&&op.avatar);
-    const messy=other&&isMessy(other);
-    const col=messy?'#1F3557':(self?'#B8923E':(grp?'#B8923E':colorFor(other||c.id)));
-    const avt=messy?'🤖':(self?esc(initial(dev||'D')):(grp?'#':esc(initial(t))));
-    const avHtml=hasAv?'<img src="'+avaSrc(other)+'" alt="" style="width:100%;height:100%;object-fit:cover;border-radius:50%">':avt;
+    const col=self?'#B8923E':(grp?'#B8923E':colorFor(other||c.id));
+    const avt=self?esc(initial(dev||'D')):(grp?'#':esc(initial(t)));
+    const avHtml=(op&&op.avatar)?'<img src="'+avaSrc(other)+'" alt="" style="width:100%;height:100%;object-fit:cover;border-radius:50%">':avt;
     const last=self?(c.lastText||('Notes & files for '+dev)):(c.lastText||'No messages yet');
     const pin=c.pinned?'<span class="pinmark">📌</span>':'';
     const ltag=c.label?'<span class="ltag" style="background:'+(LABEL_COLORS[c.label]||'#777')+'">'+esc(c.label)+'</span>':'';
@@ -579,16 +533,13 @@ async function openConv(id){
   document.getElementById('chatActive').classList.remove('hide');
   const t=convTitle(CUR),grp=CUR.type==='group',self=CUR.type==='self';
   document.getElementById('chNm').textContent=t;
-  const chOther=(!self&&!grp)?(CUR.otherId||CUR.members.find(m=>m!==ME.id)):null;
+  const chOther=(!self&&!grp)?CUR.members.find(m=>m!==ME.id):null;
   const chOp=chOther?ROSTER.find(x=>x.id===chOther):null;
-  const chHasAv=(CUR.otherAvatar)||(chOp&&chOp.avatar);
   const chAvEl=document.getElementById('chAv'); chAvEl.style.overflow='hidden';
-  const chMessy=chOther&&isMessy(chOther);
-  if(chHasAv){chAvEl.innerHTML='<img src="'+avaSrc(chOther)+'" alt="" style="width:100%;height:100%;object-fit:cover;border-radius:50%">';}
-  else{chAvEl.innerHTML='';chAvEl.textContent=chMessy?'🤖':(self?initial(CUR.device||CUR.name||'D'):(grp?'#':initial(t)));}
-  chAvEl.style.background=chMessy?'#1F3557':((self||grp)?'#B8923E':colorFor(chOther||CUR.id));
-  document.getElementById('chSub').textContent=chMessy?'BBC Messenger AI · here to help & keeps our records':(self?'Your device note · syncs to all your devices':(grp?CUR.members.map(m=>{const p=ROSTER.find(x=>x.id===m);return p?p.name:(m===ME.id?'You':'');}).filter(Boolean).join(', '):''));
-  CONV_READS={}; CONV_MEMBERS=CUR.members||[];
+  if(chOp&&chOp.avatar){chAvEl.innerHTML='<img src="'+avaSrc(chOther)+'" alt="" style="width:100%;height:100%;object-fit:cover;border-radius:50%">';}
+  else{chAvEl.textContent=self?initial(CUR.device||CUR.name||'D'):(grp?'#':initial(t));}
+  chAvEl.style.background=(self||grp)?'#B8923E':colorFor(chOther||CUR.id);
+  document.getElementById('chSub').textContent=self?'Your device note · syncs to all your devices':(grp?CUR.members.map(m=>{const p=ROSTER.find(x=>x.id===m);return p?p.name:(m===ME.id?'You':'');}).filter(Boolean).join(', '):'');
   const chAddBtn=document.getElementById('chAdd'); if(chAddBtn) chAddBtn.style.display=(grp&&ME.hub)?'':'none';
   document.getElementById('devbar').classList.add('hide');
   document.getElementById('app').classList.add('in-chat');
@@ -602,7 +553,6 @@ async function loadMessages(full){
   if(!CUR)return;
   const r=await api(API,'?action=messages&conv='+CUR.id+'&since='+(full?0:lastTs)); if(!r)return;
   const d=await r.json(); if(d.error)return;
-  if(d.reads)CONV_READS=d.reads; if(d.members)CONV_MEMBERS=d.members;
   const inc=d.messages||[];
   if(full)MSGS=inc;
   else if(inc.length){
@@ -617,62 +567,9 @@ async function loadMessages(full){
   const real=MSGS.filter(m=>!m.pending); if(real.length)lastTs=real[real.length-1].ts;
   if(full||inc.length)renderStream(!!full);
 }
-/* ---------- @mentions + read receipts (render helpers) ---------- */
-function mentionNames(){
-  const ids=(CONV_MEMBERS&&CONV_MEMBERS.length)?CONV_MEMBERS:(CUR?CUR.members:[]);
-  const names=[];
-  ids.forEach(id=>{ if(ME&&id===ME.id)return; if(isMessy(id)){names.push('Messy');return;} const p=ROSTER.find(x=>x.id===id); if(p&&p.name)names.push(p.name); });
-  return [...new Set(names)].filter(Boolean);
-}
-function nameToId(name){
-  const n=String(name||'').toLowerCase();
-  if(n==='messy')return MESSY_ID;
-  const ids=(CONV_MEMBERS&&CONV_MEMBERS.length)?CONV_MEMBERS:(CUR?CUR.members:[]);
-  for(const id of ids){const p=ROSTER.find(x=>x.id===id);if(p&&String(p.name).toLowerCase()===n)return id;}
-  return null;
-}
-function highlightMentions(escaped){
-  const names=mentionNames(); if(!names.length)return escaped;
-  const esced=names.map(n=>esc(n)).sort((a,b)=>b.length-a.length);
-  let out=escaped;
-  esced.forEach(n=>{const re=new RegExp('@'+n.replace(/[.*+?^${}()|[\]\\]/g,'\\$&'),'g');out=out.replace(re,'<span class="mention">@'+n+'</span>');});
-  return out;
-}
-function mentionIdsIn(text){
-  const ids=[]; const names=mentionNames();
-  names.forEach(n=>{ if(new RegExp('@'+n.replace(/[.*+?^${}()|[\]\\]/g,'\\$&'),'i').test(text)){const id=nameToId(n);if(id&&ids.indexOf(id)<0)ids.push(id);} });
-  return ids;
-}
-function ticksFor(m){
-  if(!ME||m.user!==ME.id)return '';
-  if(m.pending)return '<span class="tick" title="Sending">🕓</span>';
-  if(CUR&&CUR.type==='self')return '';
-  const others=(CONV_MEMBERS||[]).filter(id=>id!==ME.id&&!isMessy(id));
-  if(!others.length)return '<span class="tick" title="Sent">✓✓</span>';
-  const seen=others.filter(id=>(CONV_READS[id]||0)>=m.ts);
-  if(seen.length)return '<span class="tick seen" title="Seen" onclick="showSeenBy(\''+m.id+'\',event)">✓✓</span>';
-  return '<span class="tick" title="Delivered">✓✓</span>';
-}
-function showSeenBy(mid,e){
-  e&&e.stopPropagation();
-  const m=MSGS.find(x=>x.id===mid); if(!m)return;
-  const others=(CONV_MEMBERS||[]).filter(id=>id!==ME.id&&!isMessy(id));
-  const seen=others.filter(id=>(CONV_READS[id]||0)>=m.ts);
-  const box=document.getElementById('seenby');
-  let h='<div class="sb-h">Seen by</div>';
-  if(!seen.length)h+='<div class="sb-r"><div class="nm" style="color:var(--muted)">No one yet</div></div>';
-  else h+=seen.map(id=>{const p=ROSTER.find(x=>x.id===id);const nm=p?p.name:'Teammate';const av=(p&&p.avatar)?'<img src="'+avaSrc(id)+'" style="width:100%;height:100%;object-fit:cover;border-radius:50%">':esc(initial(nm));return '<div class="sb-r"><div class="av" style="background:'+colorFor(id)+'">'+av+'</div><div class="nm">'+esc(nm)+'</div><div class="wh">'+whenLabel(CONV_READS[id]||0)+'</div></div>';}).join('');
-  box.innerHTML=h; box.style.display='block';
-  const bw=box.offsetWidth||220,bh=box.offsetHeight||120;
-  const x=(e&&e.clientX)||innerWidth/2, y=(e&&e.clientY)||innerHeight/2;
-  box.style.left=Math.max(8,Math.min(x-bw/2,innerWidth-bw-8))+'px';
-  box.style.top=Math.max(8,y-bh-10)+'px';
-}
-document.addEventListener('click',e=>{const b=document.getElementById('seenby');if(b&&b.style.display==='block'&&!b.contains(e.target)&&!(e.target.closest&&e.target.closest('.tick.seen')))b.style.display='none';});
-
 function renderStream(force){
   const el=document.getElementById('stream');
-  const sig=MSGS.map(m=>m.id+':'+(m.text||'')+(m.edited?'·e':'')+(m.reactions?':'+JSON.stringify(m.reactions):'')+(m.pending?':p':'')).join('|')+'|R'+JSON.stringify(CONV_READS);
+  const sig=MSGS.map(m=>m.id+':'+(m.text||'')+(m.edited?'·e':'')+(m.reactions?':'+JSON.stringify(m.reactions):'')+(m.pending?':p':'')).join('|');
   if(!force&&sig===window.__msgSig)return;
   window.__msgSig=sig;
   if(!MSGS.length){el.innerHTML='<div class="day">No messages yet</div>';return;}
@@ -688,158 +585,45 @@ function renderStream(force){
       if(isImg(m.file.type))inner+='<img class="shot" data-fid="'+esc(m.file.id)+'" alt="" onclick="openLight(this)">';
       else inner+='<div class="filechip" onclick="downloadFile(\''+esc(m.file.id)+'\',\''+esc(m.file.name)+'\')"><div class="fi">📄</div><div><div class="fn">'+esc(m.file.name)+'</div><div class="fs">'+fmtSize(m.file.size)+'</div></div></div>';
     }
-    if(m.text)inner+='<span class="tx">'+highlightMentions(linkify(esc(m.text)))+'</span>';
-    inner+='<span class="tm">'+(m.edited?'edited · ':'')+new Date(m.ts).toLocaleTimeString(undefined,{hour:'numeric',minute:'2-digit'})+ticksFor(m)+'</span>';
+    if(m.text)inner+='<span class="tx">'+linkify(esc(m.text))+'</span>';
+    inner+='<span class="tm">'+(m.edited?'edited · ':'')+new Date(m.ts).toLocaleTimeString(undefined,{hour:'numeric',minute:'2-digit'})+'</span>';
     if(m.reactions&&Object.keys(m.reactions).length){
       inner+='<div class="rx">'+Object.keys(m.reactions).map(e=>{const ids=m.reactions[e]||[];return ids.length?('<span class="rxchip'+(ids.indexOf(ME.id)>=0?' mine':'')+'" onclick="reactMsg(\''+m.id+'\',\''+e+'\')">'+e+' '+ids.length+'</span>'):'';}).join('')+'</div>';
     }
     html+='<div class="b '+(mine?'out':'in')+'" data-mid="'+m.id+'">'+inner+'</div>';
   });
   el.innerHTML=html;
-  const stick=nearBottom||force; window.__stickBottom=stick;
-  if(stick){el.scrollTop=el.scrollHeight;requestAnimationFrame(()=>{el.scrollTop=el.scrollHeight;});} else el.scrollTop=prevTop;
-  // images have no height until they load, which would bump the view to the middle —
-  // re-pin to the bottom as each one finishes so we always land on the newest message.
-  el.querySelectorAll('img.shot[data-fid]').forEach(img=>{img.onload=()=>{if(window.__stickBottom)el.scrollTop=el.scrollHeight;};loadImg(img);});
+  if(nearBottom||force)el.scrollTop=el.scrollHeight; else el.scrollTop=prevTop;
+  el.querySelectorAll('img.shot[data-fid]').forEach(loadImg);
 }
 function fmtSize(b){if(!b)return'';if(b<1024)return b+' B';if(b<1048576)return (b/1024).toFixed(0)+' KB';return (b/1048576).toFixed(1)+' MB';}
 const fileCache={};
 async function fileBlobUrl(fid){if(fileCache[fid])return fileCache[fid];const r=await api(API,'?action=file&id='+fid);if(!r||!r.ok)return null;const b=await r.blob();const u=URL.createObjectURL(b);fileCache[fid]=u;return u;}
 async function loadImg(img){const u=await fileBlobUrl(img.dataset.fid);if(u)img.src=u;}
-async function openLight(img){const u=img.src||await fileBlobUrl(img.dataset.fid);if(u){const li=document.getElementById('lightImg');li.src=u;li.dataset.fid=img.dataset.fid||'';document.getElementById('lightbox').classList.add('open');}}
-async function copyImage(e){
-  e&&e.stopPropagation();
-  const img=document.getElementById('lightImg'); if(!img||!img.src)return;
-  try{
-    // clipboard image write needs PNG in most browsers — convert first
-    const png=await new Promise((res,rej)=>{const im=new Image();im.onload=()=>{const c=document.createElement('canvas');c.width=im.naturalWidth;c.height=im.naturalHeight;c.getContext('2d').drawImage(im,0,0);c.toBlob(res,'image/png');};im.onerror=rej;im.src=img.src;});
-    if(navigator.clipboard&&window.ClipboardItem&&png){await navigator.clipboard.write([new ClipboardItem({'image/png':png})]);toast('Image copied');}
-    else toast('Copy not supported here — use Save');
-  }catch(err){toast('Could not copy — try Save');}
-}
-function downloadCurrentImg(e){
-  e&&e.stopPropagation();
-  const img=document.getElementById('lightImg');
-  if(img&&img.dataset.fid){downloadFile(img.dataset.fid,'image');}
-  else if(img&&img.src){const a=document.createElement('a');a.href=img.src;a.download='image';document.body.appendChild(a);a.click();a.remove();}
-}
+async function openLight(img){const u=img.src||await fileBlobUrl(img.dataset.fid);if(u){document.getElementById('lightImg').src=u;document.getElementById('lightbox').classList.add('open');}}
 async function downloadFile(fid,name){const u=await fileBlobUrl(fid);if(!u)return;const a=document.createElement('a');a.href=u;a.download=name||'file';document.body.appendChild(a);a.click();a.remove();}
 
 /* ---------- send ---------- */
+function pickedFile(inp){const f=inp.files&&inp.files[0];if(!f)return;if(f.size>8*1024*1024){toast('File too big (max 8 MB).');inp.value='';return;}pendingFile=f;document.getElementById('msgInput').placeholder='📎 '+f.name;}
 function fileToB64(f){return new Promise((res,rej)=>{const r=new FileReader();r.onload=()=>res(String(r.result).split(',')[1]);r.onerror=rej;r.readAsDataURL(f);});}
-/* ----- attachments: multiple photos/files, paste, drag-drop ----- */
-function addFiles(list){
-  const arr=Array.from(list||[]);let skipped=0;
-  arr.forEach(f=>{ if(f.size>8*1024*1024){skipped++;return;} pendingFiles.push(f); });
-  if(pendingFiles.length>10){pendingFiles=pendingFiles.slice(0,10);toast('Up to 10 at a time.');}
-  if(skipped)toast(skipped+' file(s) skipped (max 8 MB each).');
-  renderAttach();
-}
-function pickedFiles(inp){addFiles(inp.files);inp.value='';}
-function renderAttach(){
-  const strip=document.getElementById('attachStrip');if(!strip)return;
-  if(!pendingFiles.length){strip.style.display='none';strip.innerHTML='';return;}
-  strip.style.display='flex';
-  strip.innerHTML=pendingFiles.map((f,i)=>{
-    const isImage=/^image\//.test(f.type);
-    const inner=isImage?'<img src="'+URL.createObjectURL(f)+'" alt="">':'<div class="doc">📄<br>'+esc((f.name||'file').slice(0,12))+'</div>';
-    return '<div class="ach">'+inner+'<span class="x" onclick="removeAttach('+i+')">✕</span></div>';
-  }).join('');
-}
-function removeAttach(i){pendingFiles.splice(i,1);renderAttach();}
-function onPaste(e){
-  if(!CUR)return;                                  // only when a chat is open
-  const dt=e.clipboardData; if(!dt)return;
-  const imgs=[];
-  for(const it of (dt.items||[])){if(it.kind==='file'&&/^image\//.test(it.type||'')){const f=it.getAsFile();if(f)imgs.push(f);}}
-  if(!imgs.length && dt.files){for(const f of dt.files){if(/^image\//.test(f.type||''))imgs.push(f);}}  // some apps put the image in files, not items
-  if(imgs.length){e.preventDefault();addFiles(imgs);toast(imgs.length+' image(s) attached');}
-}
-// listen everywhere (not just the text box), so a copied image pastes into the open chat no matter what is focused
-document.addEventListener('paste',onPaste);
-/* ----- @mention autocomplete ----- */
-function onCompose(t){autogrow(t);updateMentionPop(t);}
-function onComposeKey(e,t){
-  const pop=document.getElementById('mentionPop');
-  if(pop&&pop.style.display==='block'){
-    const rows=[...pop.querySelectorAll('.mrow')];
-    let idx=rows.findIndex(r=>r.classList.contains('on'));
-    if(e.key==='ArrowDown'){e.preventDefault();idx=Math.min(rows.length-1,idx+1);rows.forEach((r,j)=>r.classList.toggle('on',j===idx));return;}
-    if(e.key==='ArrowUp'){e.preventDefault();idx=Math.max(0,idx-1);rows.forEach((r,j)=>r.classList.toggle('on',j===idx));return;}
-    if(e.key==='Enter'||e.key==='Tab'){const r=rows[idx<0?0:idx];if(r){e.preventDefault();r.click();return;}}
-    if(e.key==='Escape'){hideMentionPop();return;}
-  }
-  if(e.key==='Enter'&&!e.shiftKey&&!isMobile()){e.preventDefault();sendMsg();}
-}
-function curMentionToken(t){
-  const v=t.value,pos=t.selectionStart||v.length,upto=v.slice(0,pos);
-  const m=upto.match(/(^|\s)@([^\s@]*)$/);
-  return m?{q:m[2],start:pos-m[2].length-1,end:pos}:null;
-}
-function updateMentionPop(t){
-  const tok=curMentionToken(t),pop=document.getElementById('mentionPop');
-  if(!tok){hideMentionPop();return;}
-  const q=tok.q.toLowerCase();
-  const names=mentionNames().filter(n=>n.toLowerCase().indexOf(q)>=0).slice(0,8);
-  if(!names.length){hideMentionPop();return;}
-  pop.innerHTML=names.map((n,j)=>{
-    const id=nameToId(n),p=ROSTER.find(x=>x.id===id);
-    const av=isMessy(id)?'🤖':((p&&p.avatar)?'<img src="'+avaSrc(id)+'" style="width:100%;height:100%;object-fit:cover;border-radius:50%">':esc(initial(n)));
-    const bg=isMessy(id)?'#1F3557':colorFor(id||n);
-    return '<div class="mrow'+(j===0?' on':'')+'" onclick="pickMention(\''+encodeURIComponent(n)+'\')"><div class="av" style="background:'+bg+'">'+av+'</div><div class="nm">'+esc(n)+'</div></div>';
-  }).join('');
-  pop.style.display='block';
-}
-function hideMentionPop(){const p=document.getElementById('mentionPop');if(p)p.style.display='none';}
-function pickMention(encName){
-  const n=decodeURIComponent(encName),t=document.getElementById('msgInput'),tok=curMentionToken(t);
-  if(!tok){hideMentionPop();return;}
-  const v=t.value,ins='@'+n+' ';
-  t.value=v.slice(0,tok.start)+ins+v.slice(tok.end);
-  const np=tok.start+ins.length;t.setSelectionRange(np,np);
-  hideMentionPop();autogrow(t);t.focus();
-}
 async function sendMsg(){
   if(!CUR||sending)return;
-  const inp=document.getElementById('msgInput');
-  const text=inp.value.trim();
-  const files=pendingFiles.slice();
-  if(!text&&!files.length)return;
+  const inp=document.getElementById('msgInput');const text=inp.value.trim();
+  if(!text&&!pendingFile)return;
   sending=true;
-  const mentions=text?mentionIdsIn(text):[];
-  const dev=(CUR.type==='self'&&selectedDevice&&selectedDevice!=='All')?selectedDevice:null;
-  inp.value='';inp.placeholder='Type a message';autogrow(inp);pendingFiles=[];renderAttach();
-  document.getElementById('fileInput').value='';document.getElementById('photoInput').value='';hideMentionPop();
-  const restore=()=>{inp.value=text;pendingFiles=files;renderAttach();};
-  try{
-    if(!files.length){
-      const clientId='m'+Date.now().toString(36)+Math.random().toString(36).slice(2,8);
-      MSGS.push({id:clientId,clientId,user:ME.id,name:ME.name,text,mentions,ts:Date.now(),pending:true});renderStream();
-      const body={action:'send',conv:CUR.id,text,clientId,mentions};if(dev)body.device=dev;
-      const r=await api(API,'',{method:'POST',body});const d=r&&await r.json();
-      if(!r||!r.ok||(d&&d.error)){toast((d&&d.error)||'Could not send.');MSGS=MSGS.filter(m=>m.clientId!==clientId);renderStream();restore();return;}
-    }else{
-      // WhatsApp-style: the first attachment carries the typed text, the rest send on their own.
-      for(let i=0;i<files.length;i++){
-        const f=files[i];
-        const clientId='m'+Date.now().toString(36)+i+Math.random().toString(36).slice(2,6);
-        const body={action:'send',conv:CUR.id,text:i===0?text:'',clientId,mentions:i===0?mentions:[],file:{name:f.name,type:f.type||'application/octet-stream',dataB64:await fileToB64(f)}};
-        if(dev)body.device=dev;
-        const r=await api(API,'',{method:'POST',body});const d=r&&await r.json();
-        if(!r||!r.ok||(d&&d.error))toast((d&&d.error)||('Could not send '+f.name));
-      }
-    }
-    await loadMessages(false);refreshList();
-  }catch(e){toast('Send failed.');restore();}
-  finally{sending=false;}
+  const clientId='m'+Date.now().toString(36)+Math.random().toString(36).slice(2,8);
+  const body={action:'send',conv:CUR.id,text:text,clientId};
+  if(CUR.type==='self' && selectedDevice && selectedDevice!=='All')body.device=selectedDevice;
+  const sf=pendingFile;
+  if(sf){body.file={name:sf.name,type:sf.type,dataB64:await fileToB64(sf)};}
+  inp.value='';inp.placeholder='Type a message';autogrow(inp);pendingFile=null;document.getElementById('fileInput').value='';
+  // optimistic: show the message instantly so the sender never re-taps (which caused the duplicates)
+  if(!sf){MSGS.push({id:clientId,clientId,user:ME.id,name:ME.name,text,ts:Date.now(),pending:true});renderStream();}
+  try{const r=await api(API,'',{method:'POST',body});const d=r&&await r.json();
+    if(!r||!r.ok||(d&&d.error)){toast((d&&d.error)||'Could not send.');MSGS=MSGS.filter(m=>m.clientId!==clientId);renderStream();inp.value=text;pendingFile=sf;}
+    else{await loadMessages(false);refreshList();}
+  }catch(e){toast('Send failed.');MSGS=MSGS.filter(m=>m.clientId!==clientId);renderStream();inp.value=text;pendingFile=sf;}finally{sending=false;}
 }
-/* drag-and-drop files onto the chat */
-(function(){
-  const pane=document.getElementById('chatPane');if(!pane)return;
-  ['dragenter','dragover'].forEach(ev=>pane.addEventListener(ev,e=>{if(!CUR)return;e.preventDefault();pane.classList.add('dragging');}));
-  pane.addEventListener('dragleave',e=>{if(e.target===pane)pane.classList.remove('dragging');});
-  pane.addEventListener('drop',e=>{e.preventDefault();pane.classList.remove('dragging');if(!CUR)return;const f=e.dataTransfer&&e.dataTransfer.files;if(f&&f.length)addFiles(f);});
-})();
 
 /* ---------- polling ---------- */
 let pollN=0;

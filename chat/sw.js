@@ -1,6 +1,6 @@
 // BBC Messenger service worker — installable app shell only.
 // We deliberately do NOT cache API calls or messages (those must always be live).
-const SHELL = "bbc-chat-shell-v17";
+const SHELL = "bbc-chat-shell-v9";
 const ASSETS = ["/chat/", "/chat/index.html", "/chat/icon-192.png", "/chat/icon-512.png"];
 
 self.addEventListener("install", (e) => {
@@ -53,16 +53,8 @@ self.addEventListener("fetch", (e) => {
   // Never cache the API or auth — always go to network so messages are live.
   if (url.pathname.includes("/.netlify/functions/") || url.hostname.includes("supabase")) return;
   if (e.request.method !== "GET") return;
-  if (!url.pathname.startsWith("/chat/")) return;
-  // The app HTML is network-first so new versions (allowlist, features) ALWAYS load when online;
-  // fall back to cache only when offline. Icons/other shell files stay cache-first for speed.
-  const isDoc = e.request.mode === "navigate" || url.pathname === "/chat/" || url.pathname.endsWith("/chat/index.html");
-  if (isDoc) {
-    e.respondWith(
-      fetch(e.request).then((r) => { const c = r.clone(); caches.open(SHELL).then((s) => s.put(e.request, c)); return r; })
-        .catch(() => caches.match(e.request))
-    );
-  } else {
+  // App shell: cache-first for our own static files, network for everything else.
+  if (url.pathname.startsWith("/chat/")) {
     e.respondWith(caches.match(e.request).then((hit) => hit || fetch(e.request)));
   }
 });

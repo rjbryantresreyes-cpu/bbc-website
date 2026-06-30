@@ -1,0 +1,902 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-L6S574R0CE"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-L6S574R0CE');</script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Free File Converter — Images, Video, Audio, Docs | Balay ni Bruno &amp; Co.</title>
+  <meta name="description" content="Convert any file to any format, free. Images, video, audio, PDFs, documents. Drag and drop multiple files at once. No sign-up, no watermark. Built by Balay ni Bruno &amp; Co." />
+  <link rel="canonical" href="https://balaynibruno.co/file-converter" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Balay ni Bruno &amp; Co." />
+  <meta property="og:title" content="Free File Converter — Images, Video, Audio, Docs" />
+  <meta property="og:description" content="Convert any file to any format, free. Images, video, audio, PDFs. Batch convert multiple files at once. No sign-up." />
+  <meta property="og:url" content="https://balaynibruno.co/file-converter" />
+  <meta property="og:image" content="https://balaynibruno.co/bbc-logo.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Lora:ital,wght@0,400;0,500;1,400;1,500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --deep-blue:#1F3557; --mid-blue:#4B6FA5; --warm-blue:#6D8FC7;
+      --light-blue:#A8C0DC; --pale-blue:#DDE8F2;
+      --bg-primary:#F5F1EA; --bg-section:#EDE8DF; --bg-card:#FDFAF6;
+      --bg-dark:#1C2E47; --bg-footer:#172540;
+      --neutral-100:#E8E2D6; --neutral-200:#D5CEC3; --neutral-300:#B8B1A6;
+      --text-ink:#2A3040; --text-body:#4E5666; --text-muted:#888FA0; --text-warm:#F5F1EA;
+      --gold:#B8923E; --gold-pale:#E6CFA0; --gold-warm:#D4A84B; --sage:#4E9E74;
+      --red:#C0392B; --amber:#E67E22;
+      --font-display:'Playfair Display',Georgia,serif;
+      --font-body:'Lora',Georgia,serif;
+      --font-ui:'DM Sans',system-ui,sans-serif;
+      --max-width:1200px;
+      --radius-sm:8px; --radius:16px; --radius-lg:24px;
+      --shadow-xs:0 1px 6px rgba(85,60,35,0.055);
+      --shadow-sm:0 3px 18px rgba(85,60,35,0.08);
+      --shadow-md:0 7px 36px rgba(85,60,35,0.11);
+      --border-card:1px solid rgba(85,60,35,0.09);
+      --border-warm:1px solid rgba(85,60,35,0.12);
+      --border-dark:1px solid rgba(255,255,255,0.07);
+      --s1:.5rem; --s2:1rem; --s3:1.5rem; --s4:2.5rem; --s5:4rem; --s6:6rem;
+    }
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{font-family:var(--font-body);color:var(--text-ink);background:var(--bg-primary);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+    body::after{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23n)' opacity='0.026'/%3E%3C/svg%3E");pointer-events:none;z-index:9999;mix-blend-mode:multiply}
+    h1,h2,h3,h4{font-family:var(--font-display);line-height:1.22;color:var(--deep-blue)}
+    h1{font-size:clamp(2.2rem,4.8vw,3.6rem);line-height:1.16;font-weight:700}
+    h2{font-size:clamp(1.7rem,3vw,2.6rem);font-weight:600}
+    h3{font-size:clamp(1.05rem,1.6vw,1.3rem);font-weight:600}
+    p{font-family:var(--font-body);font-size:1rem;line-height:1.87;color:var(--text-body)}
+    a{text-decoration:none}
+    .eyebrow{display:block;font-family:var(--font-ui);font-size:.68rem;font-weight:600;letter-spacing:.17em;text-transform:uppercase;color:var(--warm-blue);margin-bottom:var(--s2)}
+    .eyebrow--gold{color:var(--gold)}
+    .container{max-width:var(--max-width);margin:0 auto;padding:0 var(--s4)}
+    .section{padding:var(--s6) 0}
+    .section--tight{padding:var(--s5) 0}
+    .section--warm{background:var(--bg-section)}
+    .section--dark{background:var(--bg-dark)}
+    .text-center{text-align:center}
+    .divider-bar{width:44px;height:2.5px;background:linear-gradient(90deg,var(--gold),var(--warm-blue));border-radius:2px;margin:var(--s3) auto;opacity:.8}
+    .divider-bar--left{margin-left:0}
+    .fade-in{opacity:0;transform:translateY(22px);transition:opacity .65s ease,transform .65s ease}
+    .fade-in.visible{opacity:1;transform:translateY(0)}
+
+    /* BUTTONS */
+    .btn{display:inline-flex;align-items:center;gap:.45rem;padding:.88rem 2rem;border-radius:100px;font-family:var(--font-ui);font-size:.86rem;font-weight:600;letter-spacing:.02em;cursor:pointer;transition:all .3s ease;border:1.5px solid transparent;white-space:nowrap}
+    .btn-primary{background:var(--deep-blue);color:var(--text-warm)}
+    .btn-primary:hover{background:#243f64;transform:translateY(-2px);box-shadow:0 10px 32px rgba(31,53,87,.28)}
+    .btn-gold{background:var(--gold);color:#fff;font-weight:700}
+    .btn-gold:hover{background:var(--gold-warm);transform:translateY(-2px);box-shadow:0 10px 32px rgba(184,146,62,.35)}
+    .btn-ghost{background:transparent;color:var(--text-warm);border-color:rgba(245,241,234,.28)}
+    .btn-ghost:hover{background:rgba(245,241,234,.08);border-color:rgba(245,241,234,.55)}
+    .btn-outline{background:transparent;color:var(--deep-blue);border-color:rgba(75,111,165,.42)}
+    .btn-outline:hover{background:var(--deep-blue);color:var(--text-warm)}
+    .btn-sm{padding:.62rem 1.35rem;font-size:.78rem}
+    .header__cta .btn-ghost{color:var(--deep-blue);border-color:rgba(31,53,87,.22)}
+    .header__cta .btn-ghost:hover{background:rgba(31,53,87,.06);color:var(--deep-blue)}
+
+    /* HEADER */
+    .site-header{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(245,241,234,.94);backdrop-filter:blur(20px) saturate(1.2);-webkit-backdrop-filter:blur(20px) saturate(1.2);border-bottom:var(--border-warm);transition:box-shadow .3s ease}
+    .site-header.scrolled{box-shadow:var(--shadow-sm)}
+    .header__inner{max-width:var(--max-width);margin:0 auto;padding:0 var(--s4);height:68px;display:flex;align-items:center;justify-content:space-between;gap:var(--s3)}
+    .header__logo{display:flex;align-items:center;gap:.6rem}
+    .header__logo-name{font-family:var(--font-display);font-size:1.05rem;font-weight:700;color:var(--deep-blue);line-height:1}
+    .header__nav{display:flex;align-items:center;gap:1.5rem;list-style:none}
+    .header__nav a{font-family:var(--font-ui);font-size:.78rem;font-weight:500;color:var(--text-body);transition:color .2s;white-space:nowrap}
+    .header__nav a:hover{color:var(--deep-blue);font-weight:600}
+    .header__cta{display:flex;align-items:center;gap:.9rem;flex-shrink:0}
+    .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:8px}
+    .hamburger span{display:block;width:20px;height:2px;background:var(--text-ink);border-radius:2px;transition:all .25s ease}
+    .mobile-menu{display:none;flex-direction:column;background:var(--bg-card);border-top:var(--border-warm);padding:1rem var(--s4) 1.5rem}
+    .mobile-menu.open{display:flex}
+    .mobile-menu a{font-family:var(--font-ui);font-size:.9rem;font-weight:500;color:var(--text-body);padding:.7rem 0;border-bottom:var(--border-card);transition:color .2s}
+    .mobile-menu a:hover{color:var(--deep-blue)}
+    .mobile-menu a:last-of-type{border-bottom:none}
+    .mobile-menu .mobile-cta{margin-top:1rem}
+    @media(max-width:1024px){.header__nav{display:none}}
+    @media(max-width:768px){.header__cta .btn-gold{display:none}.hamburger{display:flex}}
+
+    /* HERO */
+    .page-hero{background:var(--bg-dark);padding:calc(68px + 5rem) 0 5rem;position:relative;overflow:hidden}
+    .page-hero::before{content:'';position:absolute;top:-100px;right:-80px;width:550px;height:550px;background:radial-gradient(ellipse at center,rgba(184,146,62,.09) 0%,rgba(184,146,62,.02) 45%,transparent 68%);pointer-events:none}
+    .page-hero::after{content:'';position:absolute;bottom:-60px;left:-60px;width:380px;height:380px;background:radial-gradient(ellipse at center,rgba(109,143,199,.07) 0%,transparent 65%);pointer-events:none}
+    .page-hero__inner{position:relative;z-index:1;max-width:800px}
+    .page-hero__eyebrow{display:inline-flex;align-items:center;gap:.6rem;font-family:var(--font-ui);font-size:.68rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--gold-pale);margin-bottom:1.6rem}
+    .page-hero__eyebrow-dot{width:5px;height:5px;border-radius:50%;background:var(--gold);opacity:.75;flex-shrink:0}
+    .page-hero h1{color:#fff;margin-bottom:1.2rem}
+    .page-hero h1 em{font-style:italic;color:var(--gold-pale)}
+    .page-hero p{font-family:var(--font-body);font-size:1.06rem;line-height:1.88;color:rgba(245,241,234,.68);max-width:600px;margin-bottom:1.8rem}
+    .type-pills{display:flex;flex-wrap:wrap;gap:.55rem}
+    .type-pill{display:inline-flex;align-items:center;gap:.35rem;font-family:var(--font-ui);font-size:.72rem;font-weight:600;border-radius:100px;padding:.32rem .85rem;border:1px solid}
+    .type-pill--img{color:#7EC8A4;border-color:rgba(126,200,164,.3);background:rgba(126,200,164,.07)}
+    .type-pill--doc{color:#89B4F7;border-color:rgba(137,180,247,.3);background:rgba(137,180,247,.07)}
+    .type-pill--vid{color:#CF9FFF;border-color:rgba(207,159,255,.3);background:rgba(207,159,255,.07)}
+    .type-pill--aud{color:#FFB86C;border-color:rgba(255,184,108,.3);background:rgba(255,184,108,.07)}
+    .type-pill--vec{color:#E6CFA0;border-color:rgba(230,207,160,.3);background:rgba(230,207,160,.07)}
+
+    /* ── CONVERTER ─────────────────────────────────────────────── */
+    .converter-wrap{padding:var(--s6) 0;background:var(--bg-primary)}
+
+    /* Drop zone */
+    .drop-zone{border:2.5px dashed rgba(75,111,165,.32);border-radius:var(--radius-lg);padding:4rem 2rem;text-align:center;cursor:pointer;transition:all .25s ease;background:rgba(109,143,199,.025);position:relative;margin-bottom:var(--s3)}
+    .drop-zone:hover,.drop-zone.dragover{border-color:var(--mid-blue);background:rgba(109,143,199,.06)}
+    .drop-zone.has-files{padding:1.6rem 2rem;border-style:solid;border-color:rgba(75,111,165,.22)}
+    .drop-zone input[type="file"]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
+    .drop-zone__icon{width:60px;height:60px;margin:0 auto 1.2rem;background:var(--pale-blue);border-radius:50%;display:flex;align-items:center;justify-content:center}
+    .drop-zone__icon svg{width:28px;height:28px;fill:var(--mid-blue)}
+    .drop-zone__title{font-family:var(--font-display);font-size:1.3rem;font-weight:600;color:var(--deep-blue);margin-bottom:.4rem}
+    .drop-zone__sub{font-family:var(--font-ui);font-size:.82rem;color:var(--text-muted);line-height:1.7}
+    .drop-zone.has-files .drop-zone__icon{width:36px;height:36px;margin:0 auto .5rem}
+    .drop-zone.has-files .drop-zone__icon svg{width:17px;height:17px}
+    .drop-zone.has-files .drop-zone__title{font-size:.92rem}
+    .drop-zone.has-files .drop-zone__sub{font-size:.76rem}
+
+    /* File queue */
+    .queue{background:var(--bg-card);border:var(--border-warm);border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow-sm)}
+    .queue__header{display:grid;grid-template-columns:1fr auto auto auto;gap:1rem;padding:.75rem 1.4rem;background:var(--bg-section);border-bottom:var(--border-warm);align-items:center}
+    .queue__header span{font-family:var(--font-ui);font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text-muted)}
+    .queue__list{list-style:none}
+    .queue-item{display:grid;grid-template-columns:44px 1fr auto auto auto;gap:.85rem;padding:1rem 1.4rem;align-items:center;border-bottom:var(--border-card);transition:background .2s;animation:slideIn .25s ease}
+    .queue-item:last-child{border-bottom:none}
+    .queue-item:hover{background:rgba(109,143,199,.03)}
+    @keyframes slideIn{from{opacity:0;transform:translateX(-8px)}to{opacity:1;transform:translateX(0)}}
+    .queue-item__icon{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+    .qi--img{background:rgba(126,200,164,.12)}
+    .qi--doc{background:rgba(137,180,247,.12)}
+    .qi--vid{background:rgba(207,159,255,.12)}
+    .qi--aud{background:rgba(255,184,108,.12)}
+    .qi--vec{background:rgba(230,207,160,.12)}
+    .qi--unknown{background:var(--neutral-100)}
+    .queue-item__icon svg{width:18px;height:18px}
+    .queue-item__info{min-width:0}
+    .queue-item__name{font-family:var(--font-ui);font-size:.86rem;font-weight:600;color:var(--text-ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .queue-item__meta{font-family:var(--font-ui);font-size:.72rem;color:var(--text-muted);display:flex;align-items:center;gap:.5rem;margin-top:.1rem}
+    .qi-type-badge{font-family:var(--font-ui);font-size:.62rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;border-radius:4px;padding:.15rem .4rem}
+    .qi-type-badge--img{color:#4E9E74;background:rgba(78,158,116,.1)}
+    .qi-type-badge--doc{color:#4B6FA5;background:rgba(75,111,165,.1)}
+    .qi-type-badge--vid{color:#8B5CF6;background:rgba(139,92,246,.1)}
+    .qi-type-badge--aud{color:#D97706;background:rgba(217,119,6,.1)}
+    .qi-type-badge--vec{color:#B8923E;background:rgba(184,146,62,.1)}
+    .qi-arrow{font-family:var(--font-ui);font-size:.8rem;color:var(--text-muted);flex-shrink:0}
+    .qi-select{font-family:var(--font-ui);font-size:.84rem;font-weight:600;color:var(--deep-blue);background:var(--bg-primary);border:1.5px solid rgba(75,111,165,.28);border-radius:8px;padding:.45rem .8rem;cursor:pointer;transition:border-color .2s;min-width:100px}
+    .qi-select:focus{outline:none;border-color:var(--mid-blue)}
+    .qi-status{width:28px;height:28px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+    .qi-status svg{width:18px;height:18px}
+    .qi-remove{background:none;border:none;cursor:pointer;color:var(--neutral-300);padding:4px;border-radius:6px;transition:all .2s;display:flex;align-items:center;justify-content:center}
+    .qi-remove:hover{color:var(--red);background:rgba(192,57,43,.08)}
+    .qi-remove svg{width:16px;height:16px;fill:currentColor}
+
+    /* Status states */
+    .qi-status--idle svg{fill:var(--neutral-200)}
+    .qi-status--converting .qi-spinner{animation:spin .8s linear infinite}
+    .qi-status--done svg{fill:var(--sage)}
+    .qi-status--error svg{fill:var(--red)}
+    @keyframes spin{to{transform:rotate(360deg)}}
+    .qi-spinner-circle{fill:none;stroke:var(--mid-blue);stroke-width:2;stroke-dasharray:50;stroke-dashoffset:50;animation:spinDash 1s linear infinite}
+    @keyframes spinDash{to{stroke-dashoffset:0}}
+
+    /* Queue footer */
+    .queue__footer{padding:1.2rem 1.4rem;background:var(--bg-section);border-top:var(--border-warm);display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+    .queue__count{font-family:var(--font-ui);font-size:.8rem;color:var(--text-muted)}
+    .queue__actions{display:flex;align-items:center;gap:.75rem;flex-wrap:wrap}
+
+    #btn-convert-all{padding:.85rem 2rem;font-size:.88rem;border-radius:10px;background:var(--deep-blue);color:#fff;border:none;cursor:pointer;font-family:var(--font-ui);font-weight:700;letter-spacing:.02em;transition:all .3s ease;display:flex;align-items:center;gap:.45rem}
+    #btn-convert-all:hover:not(:disabled){background:#243f64;transform:translateY(-1px);box-shadow:0 8px 28px rgba(31,53,87,.28)}
+    #btn-convert-all:disabled{opacity:.5;cursor:not-allowed;transform:none}
+    #btn-convert-all svg{width:16px;height:16px;fill:#fff}
+
+    #btn-download-all{padding:.85rem 2rem;font-size:.88rem;border-radius:10px;background:var(--sage);color:#fff;border:none;cursor:pointer;font-family:var(--font-ui);font-weight:700;letter-spacing:.02em;transition:all .3s ease;display:none;align-items:center;gap:.45rem}
+    #btn-download-all:hover{background:#3e8a63;transform:translateY(-1px);box-shadow:0 8px 22px rgba(78,158,116,.3)}
+    #btn-download-all svg{width:16px;height:16px;fill:#fff}
+    #btn-download-all.show{display:flex}
+
+    #btn-clear{background:none;border:none;cursor:pointer;font-family:var(--font-ui);font-size:.78rem;color:var(--text-muted);text-decoration:underline;padding:.4rem;transition:color .2s}
+    #btn-clear:hover{color:var(--red)}
+
+    /* Download buttons inline */
+    .qi-download{display:none;align-items:center;gap:.3rem;background:var(--sage);color:#fff;border:none;border-radius:6px;padding:.35rem .75rem;font-family:var(--font-ui);font-size:.72rem;font-weight:700;cursor:pointer;text-decoration:none;white-space:nowrap;transition:all .2s;flex-shrink:0}
+    .qi-download:hover{background:#3e8a63}
+    .qi-download svg{width:12px;height:12px;fill:#fff}
+    .qi-download.show{display:flex}
+
+    /* Error inline */
+    .qi-error-msg{font-family:var(--font-ui);font-size:.72rem;color:var(--red);display:none;margin-top:.2rem}
+    .qi-error-msg.show{display:block}
+
+    /* Empty state */
+    .queue-empty{padding:2.5rem;text-align:center;color:var(--text-muted);font-family:var(--font-ui);font-size:.84rem}
+
+    /* Global error */
+    .global-error{display:none;background:rgba(192,57,43,.06);border:1px solid rgba(192,57,43,.22);border-radius:var(--radius-sm);padding:1rem 1.2rem;margin-bottom:var(--s3);align-items:center;gap:.7rem}
+    .global-error.show{display:flex}
+    .global-error svg{width:16px;height:16px;fill:var(--red);flex-shrink:0}
+    .global-error p{font-family:var(--font-ui);font-size:.82rem;color:var(--red);margin:0}
+
+    /* Supported formats reference */
+    .formats-ref{padding:var(--s5) 0;background:var(--bg-section)}
+    .formats-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:1.2rem;margin-top:var(--s4)}
+    .format-category{background:var(--bg-card);border:var(--border-warm);border-radius:var(--radius);padding:1.4rem}
+    .format-category__label{font-family:var(--font-ui);font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:.75rem;display:flex;align-items:center;gap:.5rem}
+    .format-category ul{list-style:none;display:flex;flex-direction:column;gap:.35rem}
+    .format-category ul li{font-family:var(--font-ui);font-size:.78rem;color:var(--text-body)}
+    .format-category ul li strong{color:var(--text-ink)}
+
+    /* CTA */
+    .cta-section{padding:var(--s6) 0;background:var(--bg-dark);text-align:center}
+    .cta-section h2{color:#fff;margin-bottom:1rem}
+    .cta-section p{color:rgba(245,241,234,.72);max-width:56ch;margin:0 auto 2rem;font-size:1.05rem}
+
+    /* FOOTER */
+    .site-footer{background:var(--bg-footer);color:var(--text-warm);padding:var(--s4) 0 0}
+    .footer-social-strip{border-bottom:var(--border-dark);padding:1.2rem 0;display:flex;align-items:center;justify-content:center;gap:2rem;flex-wrap:wrap}
+    .footer-social-strip__label{font-family:var(--font-ui);font-size:.74rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(245,241,234,.38)}
+    .footer__socials{display:flex;gap:.6rem}
+    .footer__social{width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.05);border:var(--border-dark);display:flex;align-items:center;justify-content:center;transition:background .2s}
+    .footer__social:hover{background:rgba(255,255,255,.1)}
+    .footer__social svg{width:15px;height:15px;fill:rgba(245,241,234,.55)}
+    .footer__grid{display:grid;grid-template-columns:2fr 1fr 1fr 1.5fr;gap:var(--s4);padding:var(--s4) 0}
+    .footer__brand-name{font-family:var(--font-display);font-size:1.1rem;font-weight:700;color:#fff;margin-bottom:.25rem}
+    .footer__brand-sub{font-family:var(--font-ui);font-size:.7rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:.9rem}
+    .footer__brand-desc{font-family:var(--font-body);font-size:.84rem;color:rgba(245,241,234,.45);line-height:1.75}
+    .footer__col-title{font-family:var(--font-ui);font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(245,241,234,.35);margin-bottom:1rem}
+    .footer__links{list-style:none;display:flex;flex-direction:column;gap:.6rem}
+    .footer__links a{font-family:var(--font-ui);font-size:.82rem;color:rgba(245,241,234,.55);transition:color .2s}
+    .footer__links a:hover{color:rgba(245,241,234,.9)}
+    .footer__bottom{border-top:var(--border-dark);padding:1.2rem 0;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.75rem}
+    .footer__copy{font-family:var(--font-ui);font-size:.76rem;color:rgba(245,241,234,.28)}
+    .footer__copy a{color:rgba(245,241,234,.38)}
+    .footer__tagline{font-family:var(--font-display);font-size:.78rem;font-style:italic;color:rgba(245,241,234,.22)}
+
+    /* RESPONSIVE */
+    @media(max-width:960px){
+      .formats-grid{grid-template-columns:repeat(3,1fr)}
+      .footer__grid{grid-template-columns:1fr 1fr;gap:var(--s3)}
+    }
+    @media(max-width:700px){
+      .container{padding:0 1.25rem}
+      .queue__header{display:none}
+      .queue-item{grid-template-columns:38px 1fr auto;gap:.6rem}
+      .qi-arrow,.queue-item__meta .qi-type-badge{display:none}
+      .qi-select{min-width:80px;font-size:.78rem}
+      .formats-grid{grid-template-columns:1fr 1fr}
+      .footer__grid{grid-template-columns:1fr}
+      .queue__footer{flex-direction:column;align-items:stretch}
+      .queue__actions{flex-direction:column}
+      #btn-convert-all,#btn-download-all{width:100%;justify-content:center}
+    }
+    @media(max-width:420px){
+      .formats-grid{grid-template-columns:1fr}
+      .type-pills{gap:.4rem}
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="site-header" id="site-header">
+    <div class="header__inner">
+      <a href="index.html" class="header__logo">
+        <span class="header__logo-name">Balay ni Bruno &amp; Co.</span>
+      </a>
+      <nav><ul class="header__nav">
+        <li><a href="about.html">Our Story</a></li>
+        <li><a href="how-it-works.html">How It Works</a></li>
+        <li><a href="how-we-help.html">How We Help</a></li>
+        <li><a href="our-team.html">Our Team</a></li>
+        <li><a href="our-work.html">Our Work</a></li>
+        <li><a href="insights.html">Insights</a></li>
+        <li><a href="resources.html">Resources</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul></nav>
+      <div class="header__cta">
+        <a href="contact.html" class="btn btn-ghost btn-sm">Contact</a>
+        <a href="https://calendly.com/rj-balaynibruno/bbc-strategy-call" target="_blank" rel="noopener noreferrer" class="btn btn-gold btn-sm">Book a Call</a>
+      </div>
+      <button class="hamburger" id="hamburger" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <nav class="mobile-menu" id="mobile-menu">
+      <a href="about.html">Our Story</a>
+      <a href="how-it-works.html">How It Works</a>
+      <a href="how-we-help.html">How We Help</a>
+      <a href="our-work.html">Our Work</a>
+      <a href="resources.html">Resources</a>
+      <a href="contact.html">Contact</a>
+      <a href="https://calendly.com/rj-balaynibruno/bbc-strategy-call" target="_blank" rel="noopener noreferrer" class="btn btn-gold mobile-cta">Book a Call</a>
+    </nav>
+  </header>
+
+  <!-- HERO -->
+  <section class="page-hero">
+    <div class="container">
+      <div class="page-hero__inner">
+        <div class="page-hero__eyebrow">
+          <span class="page-hero__eyebrow-dot"></span>
+          Free Tool &middot; Balay ni Bruno &amp; Co.
+        </div>
+        <h1>Convert <em>any file</em> to any format.</h1>
+        <p>Images, video, audio, PDFs, documents. Drop multiple files at once, pick the format for each, and convert them all in one go. Free, no sign-up, no watermark.</p>
+        <div class="type-pills">
+          <span class="type-pill type-pill--img">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>
+            Images
+          </span>
+          <span class="type-pill type-pill--doc">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+            Documents
+          </span>
+          <span class="type-pill type-pill--vid">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M17 10.5V7c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h12c.55 0 1-.45 1-1v-3.5l4 4v-11l-4 4z"/></svg>
+            Video
+          </span>
+          <span class="type-pill type-pill--aud">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg>
+            Audio
+          </span>
+          <span class="type-pill type-pill--vec">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M9.4 16.6L4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0l4.6-4.6-4.6-4.6L16 6l6 6-6 6-1.4-1.4z"/></svg>
+            PDF &amp; Vector
+          </span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONVERTER -->
+  <section class="converter-wrap">
+    <div class="container">
+
+      <!-- Global error -->
+      <div class="global-error" id="global-error">
+        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
+        <p id="global-error-msg">Something went wrong. Please try again.</p>
+      </div>
+
+      <!-- Drop zone -->
+      <div class="drop-zone fade-in" id="drop-zone">
+        <div class="drop-zone__icon">
+          <svg viewBox="0 0 24 24"><path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM14 13v4h-4v-4H7l5-5 5 5h-3z"/></svg>
+        </div>
+        <div class="drop-zone__title">Drop your files here</div>
+        <div class="drop-zone__sub">
+          or click to browse &nbsp;&middot;&nbsp; Any file type &nbsp;&middot;&nbsp;
+          Images up to 50 MB &nbsp;&middot;&nbsp; Audio up to 200 MB &nbsp;&middot;&nbsp; Video up to 500 MB
+        </div>
+        <input type="file" id="file-input" multiple accept="*/*" />
+      </div>
+
+      <!-- Queue (hidden until files added) -->
+      <div id="queue-wrap" style="display:none">
+        <div class="queue fade-in visible">
+          <div class="queue__header">
+            <span>File</span>
+            <span style="text-align:right">Convert to</span>
+            <span></span>
+            <span></span>
+          </div>
+          <ul class="queue__list" id="queue-list">
+            <li class="queue-empty" id="queue-empty">No files yet. Drop some above.</li>
+          </ul>
+          <div class="queue__footer">
+            <span class="queue__count" id="queue-count">0 files ready</span>
+            <div class="queue__actions">
+              <button id="btn-clear" type="button">Clear all</button>
+              <button id="btn-download-all" type="button">
+                <svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+                Download All as ZIP
+              </button>
+              <button id="btn-convert-all" type="button" disabled>
+                <svg viewBox="0 0 24 24"><path d="M19 8l-4 4h3c0 3.31-2.69 6-6 6-1.01 0-1.97-.25-2.8-.7l-1.46 1.46C8.97 19.54 10.43 20 12 20c4.42 0 8-3.58 8-8h3l-4-4zM6 12c0-3.31 2.69-6 6-6 1.01 0 1.97.25 2.8.7l1.46-1.46C15.03 4.46 13.57 4 12 4c-4.42 0-8 3.58-8 8H1l4 4 4-4H6z"/></svg>
+                <span id="btn-convert-label">Convert</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SUPPORTED FORMATS REFERENCE -->
+  <section class="formats-ref">
+    <div class="container fade-in">
+      <span class="eyebrow eyebrow--gold text-center">What converts to what</span>
+      <h2 class="text-center">Supported formats</h2>
+      <div class="divider-bar"></div>
+      <div class="formats-grid">
+
+        <div class="format-category">
+          <div class="format-category__label" style="color:#4E9E74">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="#4E9E74"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>
+            Images
+          </div>
+          <ul>
+            <li><strong>JPG / JPEG</strong> → PNG, WEBP, GIF, BMP, PDF, ICO</li>
+            <li><strong>PNG</strong> → JPG, WEBP, GIF, BMP, PDF, ICO</li>
+            <li><strong>WEBP</strong> → JPG, PNG, GIF, BMP, PDF</li>
+            <li><strong>GIF</strong> → JPG, PNG, WEBP, MP4</li>
+            <li><strong>BMP / TIFF</strong> → JPG, PNG, WEBP, PDF</li>
+            <li><strong>HEIC / HEIF</strong> → JPG, PNG, WEBP</li>
+          </ul>
+        </div>
+
+        <div class="format-category">
+          <div class="format-category__label" style="color:#4B6FA5">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="#4B6FA5"><path d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+            Documents
+          </div>
+          <ul>
+            <li><strong>DOCX / DOC</strong> → PDF, TXT</li>
+            <li><strong>PPTX / PPT</strong> → PDF</li>
+            <li><strong>XLSX / XLS</strong> → PDF, CSV</li>
+            <li><strong>TXT / RTF</strong> → PDF, DOCX</li>
+            <li><strong>ODT</strong> → PDF, DOCX, TXT</li>
+          </ul>
+        </div>
+
+        <div class="format-category">
+          <div class="format-category__label" style="color:#B8923E">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="#B8923E"><path d="M9.4 16.6L4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0l4.6-4.6-4.6-4.6L16 6l6 6-6 6-1.4-1.4z"/></svg>
+            PDF &amp; Vector
+          </div>
+          <ul>
+            <li><strong>PDF</strong> → EPS, PNG, JPG, DOCX</li>
+            <li><strong>SVG</strong> → PNG, PDF, EPS, JPG</li>
+            <li><strong>EPS</strong> → PNG, JPG, PDF</li>
+          </ul>
+        </div>
+
+        <div class="format-category">
+          <div class="format-category__label" style="color:#8B5CF6">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="#8B5CF6"><path d="M17 10.5V7c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h12c.55 0 1-.45 1-1v-3.5l4 4v-11l-4 4z"/></svg>
+            Video
+          </div>
+          <ul>
+            <li><strong>MP4</strong> → WEBM, AVI, MOV, GIF, MP3</li>
+            <li><strong>MOV</strong> → MP4, WEBM, AVI, GIF, MP3</li>
+            <li><strong>AVI</strong> → MP4, WEBM, MOV, GIF, MP3</li>
+            <li><strong>WEBM</strong> → MP4, AVI, MOV, GIF, MP3</li>
+            <li><strong>MKV / FLV / WMV</strong> → MP4, WEBM, MP3</li>
+          </ul>
+        </div>
+
+        <div class="format-category">
+          <div class="format-category__label" style="color:#D97706">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="#D97706"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg>
+            Audio
+          </div>
+          <ul>
+            <li><strong>MP3</strong> → WAV, FLAC, OGG, AAC, M4A</li>
+            <li><strong>WAV</strong> → MP3, FLAC, OGG, AAC, M4A</li>
+            <li><strong>FLAC</strong> → MP3, WAV, OGG, AAC</li>
+            <li><strong>OGG / AAC / M4A</strong> → MP3, WAV, FLAC</li>
+            <li><strong>WMA</strong> → MP3, WAV, FLAC, OGG</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section">
+    <div class="container fade-in">
+      <h2>Need someone to handle files for you?</h2>
+      <p>This tool handles conversions. We handle the whole project. From print production to content creation, BBC takes it off your plate.</p>
+      <a href="https://calendly.com/rj-balaynibruno/bbc-strategy-call" target="_blank" rel="noopener noreferrer" class="btn btn-gold">Book a Call with Balay ni Bruno &amp; Co.</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="footer-social-strip">
+      <span class="footer-social-strip__label">Follow Balay ni Bruno &amp; Co.</span>
+      <div class="footer__socials">
+        <a href="https://www.facebook.com/profile.php?id=61590006878673" target="_blank" rel="noopener noreferrer" class="footer__social" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M13.5 21v-7h2.5l.5-3h-3V9c0-.9.3-1.5 1.6-1.5H17V5.1c-.3 0-1.3-.1-2.4-.1-2.4 0-4.1 1.5-4.1 4.1V11H8v3h2.5v7h3z"/></svg></a>
+        <a href="https://www.instagram.com/balaynibruno/" target="_blank" rel="noopener noreferrer" class="footer__social" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2.2c3.2 0 3.6 0 4.8.1 1.2.1 1.8.2 2.2.4.6.2 1 .5 1.4.9.4.4.7.9.9 1.4.2.4.4 1 .4 2.2.1 1.2.1 1.6.1 4.8s0 3.6-.1 4.8c-.1 1.2-.2 1.8-.4 2.2-.2.6-.5 1-.9 1.4-.4.4-.9.7-1.4.9-.4.2-1 .4-2.2.4-1.2.1-1.6.1-4.8.1s-3.6 0-4.8-.1c-1.2-.1-1.8-.2-2.2-.4-.6-.2-1-.5-1.4-.9-.4-.4-.7-.9-.9-1.4-.2-.4-.4-1-.4-2.2-.1-1.2-.1-1.6-.1-4.8s0-3.6.1-4.8c.1-1.2.2-1.8.4-2.2.2-.6.5-1 .9-1.4.4-.4.9-.7 1.4-.9.4-.2 1-.4 2.2-.4 1.2-.1 1.6-.1 4.8-.1zm0 3.5c-3.5 0-6.3 2.8-6.3 6.3s2.8 6.3 6.3 6.3 6.3-2.8 6.3-6.3-2.8-6.3-6.3-6.3zm0 10.4c-2.3 0-4.1-1.8-4.1-4.1s1.8-4.1 4.1-4.1 4.1 1.8 4.1 4.1-1.8 4.1-4.1 4.1zm6.4-10.6c-.8 0-1.5.7-1.5 1.5s.7 1.5 1.5 1.5 1.5-.7 1.5-1.5-.7-1.5-1.5-1.5z"/></svg></a>
+        <a href="https://www.tiktok.com/@balaynibruno.co" target="_blank" rel="noopener noreferrer" class="footer__social" aria-label="TikTok"><svg viewBox="0 0 24 24"><path d="M19.6 6.3c-1.3-.3-2.4-1.1-3.1-2.2-.4-.5-.6-1.1-.7-1.7H12.6v13.2c-.1 1.5-1.3 2.6-2.8 2.6-1.5 0-2.7-1.2-2.7-2.7 0-1.5 1.2-2.7 2.7-2.7.2 0 .5 0 .7.1V9.5c-.2 0-.5 0-.7 0-3.2 0-5.7 2.6-5.7 5.7s2.6 5.7 5.7 5.7 5.7-2.6 5.7-5.7v-6.7c1.2.8 2.6 1.3 4 1.3V6.6c-.2 0-.5 0-.7-.1z"/></svg></a>
+        <a href="https://youtube.com/@balaynibruno" target="_blank" rel="noopener noreferrer" class="footer__social" aria-label="YouTube"><svg viewBox="0 0 24 24"><path d="M21.6 7.2c-.2-.9-.9-1.6-1.8-1.8C18.2 5 12 5 12 5s-6.2 0-7.8.4c-.9.2-1.6.9-1.8 1.8C2 8.8 2 12 2 12s0 3.2.4 4.8c.2.9.9 1.6 1.8 1.8C5.8 19 12 19 12 19s6.2 0 7.8-.4c.9-.2 1.6-.9 1.8-1.8.4-1.6.4-4.8.4-4.8s0-3.2-.4-4.8zM10 15V9l5.2 3-5.2 3z"/></svg></a>
+        <a href="https://share.google/FESMGRclQ5h9yK7jY" target="_blank" rel="noopener noreferrer" class="footer__social" aria-label="Google"><svg viewBox="0 0 24 24"><path d="M12 11v2.4h5.7c-.2 1.5-1.7 4.3-5.7 4.3-3.4 0-6.2-2.8-6.2-6.3s2.8-6.3 6.2-6.3c2 0 3.3.8 4 1.6l2.7-2.6C16.9 2.6 14.7 1.7 12 1.7 6.4 1.7 1.9 6.2 1.9 11.8s4.5 10.1 10.1 10.1c5.8 0 9.7-4.1 9.7-9.9 0-.7-.1-1.2-.2-1.7H12z"/></svg></a>
+      </div>
+    </div>
+    <div class="container">
+      <div class="footer__grid">
+        <div>
+          <div class="footer__brand-name">Balay ni Bruno &amp; Co.</div>
+          <div class="footer__brand-sub">Family-Built Operation</div>
+          <p class="footer__brand-desc">A family-built operation. Whatever your business needs, powered by a custom AI family member built for each client. Real collaboration, thoughtful systems, long-term care.</p>
+        </div>
+        <div>
+          <div class="footer__col-title">Operation</div>
+          <ul class="footer__links">
+            <li><a href="about.html">Our Story</a></li>
+            <li><a href="our-team.html">Our Team</a></li>
+            <li><a href="how-it-works.html">How It Works</a></li>
+            <li><a href="how-we-help.html">How We Help</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer__col-title">Work</div>
+          <ul class="footer__links">
+            <li><a href="our-work.html">Our Work</a></li>
+            <li><a href="insights.html">Insights</a></li>
+            <li><a href="resources.html">Resources</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer__col-title">Get In Touch</div>
+          <ul class="footer__links">
+            <li><a href="mailto:admin@balaynibruno.co">admin@balaynibruno.co</a></li>
+            <li><a href="https://calendly.com/rj-balaynibruno/bbc-strategy-call" target="_blank" rel="noopener noreferrer">Schedule a Discovery Call</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <p class="footer__copy">&copy; 2026 Balay ni Bruno &amp; Co. &middot; <a href="#">Privacy</a></p>
+        <span class="footer__tagline">Built with intention.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // ── CONFIG ────────────────────────────────────────────────────
+    const CONVERTER_ENDPOINT = 'https://tools.balaynibruno.co/convert';
+    const BATCH_ENDPOINT     = 'https://tools.balaynibruno.co/convert-batch';
+
+    // Size limits in MB per category
+    const SIZE_LIMITS = { image: 50, document: 50, vector: 50, audio: 200, video: 500 };
+
+    // ── FORMAT MAP ────────────────────────────────────────────────
+    // ext → { category, color, label, outputs[] }
+    const FORMAT_MAP = {
+      // Images
+      jpg:  { cat:'image',    label:'Image',     outputs:['PNG','WEBP','GIF','BMP','PDF','ICO'] },
+      jpeg: { cat:'image',    label:'Image',     outputs:['PNG','WEBP','GIF','BMP','PDF','ICO'] },
+      png:  { cat:'image',    label:'Image',     outputs:['JPG','WEBP','GIF','BMP','PDF','ICO'] },
+      webp: { cat:'image',    label:'Image',     outputs:['JPG','PNG','GIF','BMP','PDF'] },
+      gif:  { cat:'image',    label:'GIF',       outputs:['MP4','WEBP','PNG','JPG'] },
+      bmp:  { cat:'image',    label:'Image',     outputs:['JPG','PNG','WEBP','PDF'] },
+      tiff: { cat:'image',    label:'Image',     outputs:['JPG','PNG','WEBP','PDF'] },
+      tif:  { cat:'image',    label:'Image',     outputs:['JPG','PNG','WEBP','PDF'] },
+      ico:  { cat:'image',    label:'Icon',      outputs:['PNG','JPG','WEBP'] },
+      heic: { cat:'image',    label:'Image',     outputs:['JPG','PNG','WEBP'] },
+      heif: { cat:'image',    label:'Image',     outputs:['JPG','PNG','WEBP'] },
+      // Vector / PDF
+      svg:  { cat:'vector',   label:'Vector',    outputs:['PNG','PDF','EPS','JPG'] },
+      pdf:  { cat:'vector',   label:'PDF',       outputs:['EPS','PNG','JPG','DOCX'] },
+      eps:  { cat:'vector',   label:'Vector',    outputs:['PNG','JPG','PDF'] },
+      ai:   { cat:'vector',   label:'Vector',    outputs:['PDF','EPS','PNG'] },
+      // Documents
+      docx: { cat:'document', label:'Word',      outputs:['PDF','TXT'] },
+      doc:  { cat:'document', label:'Word',      outputs:['PDF','TXT'] },
+      pptx: { cat:'document', label:'PPT',       outputs:['PDF'] },
+      ppt:  { cat:'document', label:'PPT',       outputs:['PDF'] },
+      xlsx: { cat:'document', label:'Excel',     outputs:['PDF','CSV'] },
+      xls:  { cat:'document', label:'Excel',     outputs:['PDF','CSV'] },
+      txt:  { cat:'document', label:'Text',      outputs:['PDF','DOCX'] },
+      rtf:  { cat:'document', label:'RTF',       outputs:['PDF','DOCX','TXT'] },
+      odt:  { cat:'document', label:'Doc',       outputs:['PDF','DOCX','TXT'] },
+      csv:  { cat:'document', label:'CSV',       outputs:['PDF','XLSX'] },
+      // Video
+      mp4:  { cat:'video',    label:'Video',     outputs:['WEBM','AVI','MOV','GIF','MP3','MKV'] },
+      mov:  { cat:'video',    label:'Video',     outputs:['MP4','WEBM','AVI','GIF','MP3'] },
+      avi:  { cat:'video',    label:'Video',     outputs:['MP4','WEBM','MOV','GIF','MP3'] },
+      webm: { cat:'video',    label:'Video',     outputs:['MP4','AVI','MOV','GIF','MP3'] },
+      mkv:  { cat:'video',    label:'Video',     outputs:['MP4','WEBM','AVI','MP3'] },
+      flv:  { cat:'video',    label:'Video',     outputs:['MP4','WEBM','AVI','MP3'] },
+      wmv:  { cat:'video',    label:'Video',     outputs:['MP4','WEBM','AVI','MP3'] },
+      // Audio
+      mp3:  { cat:'audio',    label:'Audio',     outputs:['WAV','FLAC','OGG','AAC','M4A'] },
+      wav:  { cat:'audio',    label:'Audio',     outputs:['MP3','FLAC','OGG','AAC','M4A'] },
+      flac: { cat:'audio',    label:'Audio',     outputs:['MP3','WAV','OGG','AAC'] },
+      ogg:  { cat:'audio',    label:'Audio',     outputs:['MP3','WAV','FLAC','AAC'] },
+      aac:  { cat:'audio',    label:'Audio',     outputs:['MP3','WAV','FLAC','OGG'] },
+      m4a:  { cat:'audio',    label:'Audio',     outputs:['MP3','WAV','FLAC','OGG'] },
+      wma:  { cat:'audio',    label:'Audio',     outputs:['MP3','WAV','FLAC','OGG'] },
+    };
+
+    const CAT_COLORS = {
+      image:    { bg:'rgba(126,200,164,.12)', icon:'#4E9E74', badge:'qi-type-badge--img', icon_cls:'qi--img' },
+      document: { bg:'rgba(137,180,247,.12)', icon:'#4B6FA5', badge:'qi-type-badge--doc', icon_cls:'qi--doc' },
+      vector:   { bg:'rgba(230,207,160,.12)', icon:'#B8923E', badge:'qi-type-badge--vec', icon_cls:'qi--vec' },
+      video:    { bg:'rgba(207,159,255,.12)', icon:'#8B5CF6', badge:'qi-type-badge--vid', icon_cls:'qi--vid' },
+      audio:    { bg:'rgba(255,184,108,.12)', icon:'#D97706', badge:'qi-type-badge--aud', icon_cls:'qi--aud' },
+    };
+
+    const CAT_SVGS = {
+      image:    '<svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>',
+      document: '<svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>',
+      vector:   '<svg viewBox="0 0 24 24"><path d="M9.4 16.6L4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0l4.6-4.6-4.6-4.6L16 6l6 6-6 6-1.4-1.4z"/></svg>',
+      video:    '<svg viewBox="0 0 24 24"><path d="M17 10.5V7c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h12c.55 0 1-.45 1-1v-3.5l4 4v-11l-4 4z"/></svg>',
+      audio:    '<svg viewBox="0 0 24 24"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg>',
+      unknown:  '<svg viewBox="0 0 24 24"><path d="M6 2c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6H6zm7 7V3.5L18.5 9H13z"/></svg>',
+    };
+
+    // ── STATE ─────────────────────────────────────────────────────
+    let files = []; // { id, file, ext, info, selectedOutput, status, downloadURL, errorMsg }
+    let nextId = 0;
+
+    // ── DOM REFS ──────────────────────────────────────────────────
+    const dropZone      = document.getElementById('drop-zone');
+    const fileInput     = document.getElementById('file-input');
+    const queueWrap     = document.getElementById('queue-wrap');
+    const queueList     = document.getElementById('queue-list');
+    const queueCount    = document.getElementById('queue-count');
+    const btnConvertAll = document.getElementById('btn-convert-all');
+    const btnConvertLbl = document.getElementById('btn-convert-label');
+    const btnDownloadAll= document.getElementById('btn-download-all');
+    const btnClear      = document.getElementById('btn-clear');
+    const globalError   = document.getElementById('global-error');
+    const globalErrMsg  = document.getElementById('global-error-msg');
+
+    // ── HELPERS ───────────────────────────────────────────────────
+    function getExt(name) { return (name.split('.').pop() || '').toLowerCase(); }
+
+    function formatBytes(b) {
+      if (b < 1024) return b + ' B';
+      if (b < 1048576) return (b/1024).toFixed(1) + ' KB';
+      return (b/1048576).toFixed(1) + ' MB';
+    }
+
+    function getInfo(ext) {
+      return FORMAT_MAP[ext] || { cat:'unknown', label: ext.toUpperCase() || 'File', outputs:[] };
+    }
+
+    function getSizeLimit(cat) { return (SIZE_LIMITS[cat] || 50) * 1024 * 1024; }
+
+    function hideGlobalError() { globalError.classList.remove('show'); }
+    function showGlobalError(msg) { globalErrMsg.textContent = msg; globalError.classList.add('show'); }
+
+    // ── ADD FILES ─────────────────────────────────────────────────
+    function addFiles(newFiles) {
+      hideGlobalError();
+      for (const f of newFiles) {
+        const ext  = getExt(f.name);
+        const info = getInfo(ext);
+        if (info.outputs.length === 0) {
+          showGlobalError('"' + f.name + '" is not a supported file type. Check the formats list below.');
+          continue;
+        }
+        const limit = getSizeLimit(info.cat);
+        if (f.size > limit) {
+          showGlobalError('"' + f.name + '" is too large (' + formatBytes(f.size) + '). Max for ' + info.cat + ' is ' + (limit/1048576) + ' MB.');
+          continue;
+        }
+        const id = nextId++;
+        files.push({ id, file: f, ext, info, selectedOutput: info.outputs[0], status: 'idle', downloadURL: null, errorMsg: '' });
+      }
+      renderQueue();
+    }
+
+    // ── RENDER QUEUE ──────────────────────────────────────────────
+    function renderQueue() {
+      if (files.length === 0) {
+        queueWrap.style.display = 'none';
+        dropZone.classList.remove('has-files');
+        btnConvertAll.disabled = true;
+        btnDownloadAll.classList.remove('show');
+        return;
+      }
+      queueWrap.style.display = 'block';
+      dropZone.classList.add('has-files');
+
+      // Count stats
+      const pending  = files.filter(f => f.status === 'idle').length;
+      const done     = files.filter(f => f.status === 'done').length;
+      const errors   = files.filter(f => f.status === 'error').length;
+      const running  = files.filter(f => f.status === 'converting').length;
+
+      queueCount.textContent = files.length + ' file' + (files.length !== 1 ? 's' : '') +
+        (done > 0 ? ' · ' + done + ' converted' : '') +
+        (errors > 0 ? ' · ' + errors + ' failed' : '');
+
+      btnConvertAll.disabled = pending === 0 || running > 0;
+      btnConvertLbl.textContent = running > 0
+        ? 'Converting...'
+        : 'Convert ' + pending + ' file' + (pending !== 1 ? 's' : '');
+
+      if (done > 0 && pending === 0 && running === 0) {
+        btnDownloadAll.classList.add('show');
+      } else {
+        btnDownloadAll.classList.remove('show');
+      }
+
+      // Build list HTML
+      queueList.innerHTML = '';
+      for (const item of files) {
+        const colors = item.info.cat !== 'unknown' ? CAT_COLORS[item.info.cat] : null;
+        const iconSvg = CAT_SVGS[item.info.cat] || CAT_SVGS.unknown;
+        const iconCls = colors ? colors.icon_cls : 'qi--unknown';
+        const iconColor = colors ? colors.icon : '#888';
+        const badgeCls = colors ? colors.badge : '';
+
+        // Format select options
+        const opts = item.info.outputs.map(o =>
+          `<option value="${o}" ${o === item.selectedOutput ? 'selected' : ''}>${o}</option>`
+        ).join('');
+
+        // Status icon
+        let statusHTML = '';
+        if (item.status === 'idle') {
+          statusHTML = `<div class="qi-status qi-status--idle"><svg viewBox="0 0 24 24" style="fill:#D5CEC3"><circle cx="12" cy="12" r="8"/></svg></div>`;
+        } else if (item.status === 'converting') {
+          statusHTML = `<div class="qi-status qi-status--converting"><svg viewBox="0 0 24 24" width="22" height="22"><circle class="qi-spinner-circle" cx="12" cy="12" r="9"/></svg></div>`;
+        } else if (item.status === 'done') {
+          statusHTML = `<div class="qi-status qi-status--done"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></div>`;
+        } else if (item.status === 'error') {
+          statusHTML = `<div class="qi-status qi-status--error"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg></div>`;
+        }
+
+        // Download button
+        const dlShow = item.status === 'done' ? 'show' : '';
+        const outName = item.file.name.replace(new RegExp('\\.'+item.ext+'$','i'), '') + '.' + item.selectedOutput.toLowerCase();
+        const dlHref = item.downloadURL || '#';
+
+        const li = document.createElement('li');
+        li.className = 'queue-item';
+        li.dataset.id = item.id;
+        li.innerHTML = `
+          <div class="queue-item__icon ${iconCls}" style="color:${iconColor}">${iconSvg.replace('<svg ', `<svg fill="${iconColor}" `)}</div>
+          <div class="queue-item__info">
+            <div class="queue-item__name">${escHtml(item.file.name)}</div>
+            <div class="queue-item__meta">
+              <span class="qi-type-badge ${badgeCls}">${item.info.label}</span>
+              ${formatBytes(item.file.size)}
+              ${item.status === 'error' ? '<span class="qi-error-msg show">' + escHtml(item.errorMsg) + '</span>' : ''}
+            </div>
+          </div>
+          <span class="qi-arrow">→</span>
+          <select class="qi-select" data-id="${item.id}" ${item.status === 'converting' ? 'disabled' : ''}>${opts}</select>
+          ${statusHTML}
+          <a href="${dlHref}" download="${outName}" class="qi-download ${dlShow}" data-id="${item.id}">
+            <svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+            ${item.selectedOutput}
+          </a>
+          <button class="qi-remove" data-id="${item.id}" title="Remove" ${item.status === 'converting' ? 'disabled' : ''}>
+            <svg viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+          </button>
+        `;
+        queueList.appendChild(li);
+      }
+
+      // Bind per-row events
+      queueList.querySelectorAll('.qi-select').forEach(sel => {
+        sel.addEventListener('change', e => {
+          const id = parseInt(e.target.dataset.id);
+          const item = files.find(f => f.id === id);
+          if (item) { item.selectedOutput = e.target.value; renderQueue(); }
+        });
+      });
+      queueList.querySelectorAll('.qi-remove').forEach(btn => {
+        btn.addEventListener('click', e => {
+          const id = parseInt(e.currentTarget.dataset.id);
+          files = files.filter(f => f.id !== id);
+          renderQueue();
+        });
+      });
+    }
+
+    function escHtml(s) {
+      return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+    }
+
+    // ── DROP ZONE ─────────────────────────────────────────────────
+    dropZone.addEventListener('dragover', e => { e.preventDefault(); dropZone.classList.add('dragover'); });
+    dropZone.addEventListener('dragleave', () => dropZone.classList.remove('dragover'));
+    dropZone.addEventListener('drop', e => {
+      e.preventDefault();
+      dropZone.classList.remove('dragover');
+      addFiles(Array.from(e.dataTransfer.files));
+    });
+    fileInput.addEventListener('change', e => {
+      if (e.target.files.length) { addFiles(Array.from(e.target.files)); fileInput.value = ''; }
+    });
+
+    btnClear.addEventListener('click', () => {
+      files = [];
+      renderQueue();
+      hideGlobalError();
+    });
+
+    // ── CONVERT ───────────────────────────────────────────────────
+    async function convertOne(item) {
+      item.status = 'converting';
+      renderQueue();
+
+      const formData = new FormData();
+      formData.append('file', item.file);
+      formData.append('format', item.selectedOutput.toLowerCase());
+
+      try {
+        const res = await fetch(CONVERTER_ENDPOINT, { method: 'POST', body: formData });
+
+        if (!res.ok) {
+          let msg = 'Conversion failed.';
+          try { const d = await res.json(); msg = d.error || msg; } catch {}
+          throw new Error(msg);
+        }
+
+        const blob = await res.blob();
+        if (item.downloadURL) URL.revokeObjectURL(item.downloadURL);
+        item.downloadURL = URL.createObjectURL(blob);
+        item.status = 'done';
+      } catch (err) {
+        item.status = 'error';
+        item.errorMsg = err.message || 'Failed. Please try again.';
+      }
+      renderQueue();
+    }
+
+    btnConvertAll.addEventListener('click', async () => {
+      hideGlobalError();
+      const pending = files.filter(f => f.status === 'idle');
+      if (!pending.length) return;
+
+      if (!CONVERTER_ENDPOINT) {
+        showGlobalError('The converter backend is not yet live. Check back soon or contact admin@balaynibruno.co.');
+        return;
+      }
+
+      // Convert concurrently (max 3 at a time)
+      const CONCURRENCY = 3;
+      let i = 0;
+      async function runNext() {
+        if (i >= pending.length) return;
+        const item = pending[i++];
+        await convertOne(item);
+        await runNext();
+      }
+      await Promise.all(Array.from({ length: Math.min(CONCURRENCY, pending.length) }, runNext));
+    });
+
+    // ── DOWNLOAD ALL AS ZIP ───────────────────────────────────────
+    btnDownloadAll.addEventListener('click', async () => {
+      const done = files.filter(f => f.status === 'done' && f.downloadURL);
+      if (!done.length) return;
+
+      // Simple approach: download each individually in sequence
+      // Full ZIP would require JSZip — keeping this dependency-free
+      for (const item of done) {
+        const a = document.createElement('a');
+        const ext = item.selectedOutput.toLowerCase();
+        a.href = item.downloadURL;
+        a.download = item.file.name.replace(new RegExp('\\.'+item.ext+'$','i'), '') + '.' + ext;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        await new Promise(r => setTimeout(r, 200)); // small delay between triggers
+      }
+    });
+
+    // ── HEADER ────────────────────────────────────────────────────
+    const header = document.getElementById('site-header');
+    window.addEventListener('scroll', () => { header.classList.toggle('scrolled', window.scrollY > 20); }, { passive: true });
+    document.getElementById('hamburger').addEventListener('click', () => {
+      document.getElementById('mobile-menu').classList.toggle('open');
+    });
+
+    // Fade-in
+    const fadeEls = document.querySelectorAll('.fade-in');
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+    }, { threshold: 0.1 });
+    fadeEls.forEach(el => obs.observe(el));
+
+    // Initial render
+    renderQueue();
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.0.42/dist/lenis.min.js"></script>
+  <script src="bbc-motion.js"></script>
+
+</body>
+</html>

@@ -4,19 +4,6 @@
 <!-- deploy-trigger 2026-06-13d: force-refetch on lookup miss + don't clobber good cache + SW v17 (stop the few-minute revert). -->
 <!-- deploy-trigger 2026-06-14: Needs Follow-Up section; follow-up click fills name from the exact record (deterministic, no race); SW v18. -->
 # ⏳ PENDING PUSH — hold until Netlify credit is back
-
-## 🔐 BRUNO PASSWORD VAULT — STAGED 2026-06-29 (do not push alone; goes in the next batch)
-- **What:** RJ's personal encrypted password vault behind the 🔒 Bruno Page lock in /os. Zero-knowledge: passwords are encrypted/decrypted IN-BROWSER (WebCrypto PBKDF2 250k → AES-GCM 256) with RJ's MASTER password, which is never sent or stored. Server only ever holds the encrypted blob.
-- **Files:** NEW `netlify/functions/vault.mjs` (Netlify Blobs store `bbc-vault`, key per-owner; gated: valid /os Supabase token AND email ∈ {rj@balaynibruno.co, rjbryantresreyes@gmail.com} — RJ-only, even other BBC team can't read; refuses any non-encrypted payload). Frontend vault module + CSS + go() hook added to BOTH `os/index.html` (repo) AND the SOURCE `COMMAND_CENTER/app/index.html` (so the dashboard-sync mirror keeps it). Syntax verified (0 errors) + scoping verified on both copies.
-- **Behavior:** Unlock card on the Bruno Page → master password → first time creates the vault, after that decrypts it. Add/edit/delete entries (label, username, password [masked, show/copy], url, notes), each save re-encrypts the whole blob. "Lock" clears it from memory; leaving the page clears it.
-- **RJ enters his own passwords** in the browser — I never see them (zero-knowledge). Nothing was imported from any Drive file (respects the no-secrets-on-Drive rule).
-- ⚠️ **Verification:** code/syntax/scoping verified; the unlock + crypto + sync round-trip needs the live Netlify function + Supabase login, so it can only be confirmed on the deploy (preview tooling + login/function aren't available locally this session). After deploy: log into balaynibruno.co/os → 🔒 → set a master password → add one entry → reload → confirm it decrypts.
-- Marketing-sheets-as-slides idea: DEFERRED (RJ chose vault-only this round).
-
-# ⏳ PENDING PUSH — hold until Netlify credit is back
-
-> **STATUS 2026-06-26:** The "BUILT + STAGED" items below (Tools section, Brevo CRM, our-work, story pages) are already committed + LIVE — verified via `git ls-files` (tracked) and a clean `origin/master..HEAD` (nothing unpushed). This manifest is STALE. Deploys are flowing again (messenger v3 + Messy shipped 2026-06-26, commit e25c19a). Next time, trust the git sweep over this file. ⏳ Genuinely-open follow-ups now: set Netlify env `BREVO_API_KEY` (CRM page) + `ANTHROPIC_API_KEY` (Messy live answers); mirror Tools pages to `BBC WEBSITE HTML\` for Drive visibility.
-
 **Created:** 2026-06-11
 **Why holding:** Netlify production deploys are frozen (Pro plan credits exhausted 2026-06-10, ~199 deploys in 9 days). Do NOT push until credit/auto-recharge is restored. See [[project_netlify_deploy_cost_fix]] + LEARNINGS/2026-06-10_netlify_deploy_cost_and_tooling.md.
 
@@ -105,19 +92,3 @@ git push            # Netlify auto-deploys
 - **update-brand-templates-without-a-designer.html** — NEW /insights page. "Can You Update Your Brand's Design Templates Without a Designer?" Anonymized capability page (we execute a brand's design templates in-house, swap copy + image, keep it exactly on-brand). Born from the Pine Crest Fabrics assessment workflow — NO client named, fully generic. Article + FAQPage schema, before/after + horizontal step-flow + cost-table (typical market ranges, labeled) + tool-stack + tip box + key takeaways. Category "Marketing". Plain English, no em-dashes, CTA = Book a Strategy Call. ✅ Verified mobile 375 clean, no h-overflow, no console errors.
 - **insights.html** — 1 new "Marketing" card added at top of grid; count bumped 88 → 89.
 - After push: delete `INSIGHTS_PAGE_ENGINE/PAGE_QUEUE/update-brand-templates-without-a-designer.page-intent.md`. Source learning: `LEARNINGS/2026-06-16_illustrator_com_automation.md`.
-
-## ✅ DEPLOYED 2026-06-25 (commit 9766ce0) — Updated VA headshots across team pages
-- Source: Krizza's "Headshots" Google Drive folder (10 photos), copied to Drive `BBC VA Headshot\`. Converted to JPG (q90, square 1254px / portrait 1086x1448) into `images/team\`. Backup of the 5 prior photos in `images/team\_backup_2026-06-25\`.
-- **Photos swapped/added for 7 current members:** Bruno (`rj-bryan.jpg`), Ryan (`ryan-bernaldez.jpg`), Kenz (`kenz-villaflores.jpg`), Daryl (`daryl-agadia.jpg`), Diego (`diego-tres-reyes.jpg`) — same filenames, auto-update everywhere. **Vi (`vi.jpg`) + Krizza (`krizza.jpg`) were letter-avatars → converted to real `<img>`** in: `our-team.html`, `index.html` (home team grid), `vi.html`, `krizza.html`. Verified mobile 375 (avatars render, clean crop, no overflow).
-- **Staged but NOT placed on a card yet (need roles from RJ before building cards — Content Integrity):** `joshua.jpg`, `hazel.jpg`, `cuamag.jpg` are in `images/team\`. No name/role/bio = no card.
-- **Al** still has a card (`our-team.html` letter-avatar "A") but departed BBC 2026-06-12 and has no new headshot. DECISION NEEDED: remove the card or keep.
-- Mirrored all team images to `BBC WEBSITE HTML\images\team\`. NOT committed/pushed — goes out with the next batch on RJ's go.
-
-## ✅ DEPLOYED 2026-06-25 (commit 9766ce0) — Messenger (chat/) team avatars fix
-## (still needs RJ to tap "Import team photos from website" once in the chat to populate avatars)
-- **Problem:** in the chat (`chat/index.html`, backend `netlify/functions/bbc-msg.mjs`), only Krizza showed a photo; everyone else was a letter. Avatars are stored server-side per Supabase user; only RJ + Krizza had set theirs, and the old "Import team photos" button (a) only mapped Daryl/Diego/Kenz/Ryan by email, (b) missed Vi, (c) used hardcoded emails.
-- **Fix:** `bbc-msg.mjs` `setAvatarFor` now accepts `{ id }` (preferred) as well as `{ email }` (back-compat). `chat/index.html` import now iterates the loaded `ROSTER`, matches each member by FIRST NAME against `TEAM_PHOTO_BY_NAME` (Bruno, Vi, Krizza, Ryan, Kenz, Daryl, Diego → `/images/team/*.jpg`), and sets the avatar by id. No emails needed; picks up new teammates by name; re-runnable to refresh.
-- **To make photos appear (needs deploy):** the fix + the new `images/team/*.jpg` must be live, then a HUB user (RJ) opens chat → settings → **Import team photos from website** once. (Can't be verified in the static preview — needs Supabase auth + the live function.)
-- Two files changed: `chat/index.html`, `netlify/functions/bbc-msg.mjs`. Not pushed.
-
-<!-- deploy-trigger 2026-06-30: publish Bruno vault seed button (os/index.html only — force build past the os/-skip rule). -->
