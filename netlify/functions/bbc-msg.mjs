@@ -267,7 +267,7 @@ export default async (req) => {
       // Lossless (messages are concatenated, never deleted), backed up, and runs once (guarded flag).
       if (meHub) {
         try {
-          const FLAG = "hubmerged_v2"; // v2: merge by PERSON (handles a VA having more than one account id)
+          const FLAG = "hubmerged_v3"; // merge by PERSON, normalized key (handles a VA having more than one account id)
           const already = await readJ(FLAG, 0);
           if (!already) {
             const convs0 = await readJ("convs", []);
@@ -277,21 +277,23 @@ export default async (req) => {
               const allU = (await adminUsers()) || [];
               const rosterById = {}; for (const p of roster) rosterById[p.id] = p;
               // A stable "who is this" key so a person's multiple/old account ids group together.
+              // Normalized so the SAME person resolves to the SAME key whether we know them by
+              // email (KNOWN) or only by stored name. e.g. Ryan's old + new account both -> "ryan".
               const personKey = (id) => {
                 if (hubSet.has(id) || id === HUB_CANON) return "hub";
                 if (id === MESSY_ID) return "messy";
                 const p = rosterById[id];
                 const u = allU.find(x => x.id === id);
                 const email = ((p && p.email) || (u && u.email) || "").toLowerCase();
-                if (email && KNOWN[email]) return "k:" + KNOWN[email].toLowerCase();
+                if (email && KNOWN[email]) return KNOWN[email].toLowerCase();
                 const nm = ((p && p.name) || (u && u.name) || "").trim().toLowerCase().split(/\s+/)[0];
-                return nm ? "n:" + nm : "id:" + id;
+                return nm || ("id:" + id);
               };
               // the person's CURRENT (live) account id, so the merged chat points at their working login
               const liveByPerson = {};
               for (const u of allU) {
-                const k = (u.email && KNOWN[u.email]) ? "k:" + KNOWN[u.email].toLowerCase() : "n:" + (u.name || "").trim().toLowerCase().split(/\s+/)[0];
-                if (!liveByPerson[k]) liveByPerson[k] = u.id;
+                const k = (u.email && KNOWN[u.email]) ? KNOWN[u.email].toLowerCase() : (u.name || "").trim().toLowerCase().split(/\s+/)[0];
+                if (k && !liveByPerson[k]) liveByPerson[k] = u.id;
               }
               // canonicalize every hub real id -> HUB_CANON
               for (const c of convs0) if (Array.isArray(c.members)) c.members = [...new Set(c.members.map(m => hubSet.has(m) ? HUB_CANON : m))];
