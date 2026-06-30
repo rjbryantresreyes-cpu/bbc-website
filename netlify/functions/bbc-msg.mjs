@@ -186,6 +186,26 @@ export default async (req) => {
     }
   }
 
+  // TEMP diagnostic (service-key gated, no login). Lets Claude inspect the real conversation
+  // records to fix the de-dup precisely. Remove after. Call: GET ?action=debugdump  header x-svc: <service key>
+  {
+    const u0 = new URL(req.url);
+    if (u0.searchParams.get("action") === "debugdump") {
+      const svc = req.headers.get("x-svc") || "";
+      if (!process.env.SUPABASE_SERVICE_ROLE_KEY || svc !== process.env.SUPABASE_SERVICE_ROLE_KEY) return json({ error: "nope" }, 403);
+      try {
+        const jsd = getStore(JSTORE);
+        const convs = (await jsd.get("convs", { type: "json" })) || [];
+        const roster = (await jsd.get("roster", { type: "json" })) || [];
+        const out = convs.map(c => ({ id: c.id, type: c.type, name: c.name || "", members: c.members, lastTs: c.lastTs }));
+        const ros = roster.map(p => ({ id: p.id, name: p.name, email: p.email, hub: !!p.hub }));
+        const flags = {};
+        for (const f of ["hubmerged_v1", "hubmerged_v2", "hubmerged_v3"]) flags[f] = (await jsd.get(f, { type: "json" })) || 0;
+        return json({ convs: out, roster: ros, flags });
+      } catch (e) { return json({ error: String(e.message || e) }, 500); }
+    }
+  }
+
   const user = await verify(req);
   if (!user) return json({ error: "unauthorized", reply: "Please sign in." }, 401);
 
