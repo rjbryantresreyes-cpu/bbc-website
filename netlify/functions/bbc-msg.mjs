@@ -91,8 +91,17 @@ const KNOWN = {
   "diego@balaynibruno.co": "Diego", "dexter@balaynibruno.co": "Dexter", "john@balaynibruno.co": "John", "john.bbc2297@gmail.com": "John",
 };
 
-// Clients + non-person accounts that must NOT appear in BBC Bruno's team contact list.
-const CONTACT_EXCLUDE = new Set(["sonyariviere@gmail.com", "woodenwoodwork@gmail.com", "admin@balaynibruno.co"]);
+// Clients + non-person accounts that must NOT appear in BBC Bruno's team contact list,
+// and must never get into the BBC team messenger. BBC team = everyone else with a login.
+const CONTACT_EXCLUDE = new Set(["sonyariviere@gmail.com", "woodenwoodwork@gmail.com", "admin@balaynibruno.co", "rseveri@frecciagroup.com", "rebekahseveri@gmail.com"]);
+const CLIENT_DOMAINS = /@(frecciagroup\.com|homevisionstudio\.com|sriviere\.com|woodenwoodwork)/i;
+// A client (not BBC team): in the exclude list or on a client domain. @balaynibruno.co is always BBC.
+const isClient = (email) => {
+  const e = (email || "").toLowerCase().trim();
+  if (!e) return false;
+  if (/@balaynibruno\.co$/.test(e)) return false;
+  return CONTACT_EXCLUDE.has(e) || CLIENT_DOMAINS.test(e);
+};
 
 // Pull the real team from Supabase (so BBC Bruno sees every VA even before they open the app).
 // Needs SUPABASE_SERVICE_ROLE_KEY (Netlify env). Cached 60s on the warm instance.
@@ -181,6 +190,8 @@ export default async (req) => {
   const meName = displayName(user);
   const meEmail = (user.email || "").toLowerCase();
   const meHub = isHub(meEmail);
+  // Clients never belong in the BBC team messenger (defense in depth behind the app's login gate).
+  if (isClient(meEmail)) return json({ error: "This account is not on the BBC team." }, 403);
 
   let js, fs;
   try { js = getStore(JSTORE); fs = getStore(FSTORE); }
@@ -208,10 +219,12 @@ export default async (req) => {
   // chats survive logging out of one hub email and back in under another.
   let myIds = [meId];
   if (meHub) {
-    try {
-      const rl = await readJ("roster", []);
-      myIds = [...new Set([meId, ...rl.filter(p => p && p.hub).map(p => p.id)])];
-    } catch { myIds = [meId]; }
+    const ids = new Set([meId]);
+    // every id ever flagged hub in the roster
+    try { const rl = await readJ("roster", []); rl.filter(p => p && p.hub).forEach(p => ids.add(p.id)); } catch {}
+    // AND every Supabase account whose email is a hub email (covers ids that never opened the app / aren't in the roster)
+    try { const au = await adminUsers(); (au || []).filter(u => isHub(u.email)).forEach(u => ids.add(u.id)); } catch {}
+    myIds = [...ids];
   }
   const inConv = (conv) => !!conv && Array.isArray(conv.members) && conv.members.some(id => myIds.includes(id));
 
@@ -247,7 +260,7 @@ export default async (req) => {
       try {
         const all = await adminUsers();
         const teamIds = (all && all.length)
-          ? [...new Set(all.filter(u => !CONTACT_EXCLUDE.has(u.email)).map(u => u.id))]
+          ? [...new Set(all.filter(u => !isClient(u.email)).map(u => u.id))]
           : null;
         if (teamIds && teamIds.length) {
           if (!teamIds.includes(meId)) teamIds.push(meId);
@@ -271,20 +284,15 @@ export default async (req) => {
       } catch { /* never block bootstrap on group ensure */ }
       const convs = await readJ("convs", []);
       let mine = convs.filter(inConv).sort((a, b) => (b.lastTs || 0) - (a.lastTs || 0));
-      // Collapse duplicate conversations so you never open an empty twin that "lost" its history.
-      // Any hub id counts as the same person ("hub"), so a DM you started under one hub email merges
-      // with the same DM under another. All "BBC Team" groups and same-device notes collapse to one.
-      // Keep the copy with the most recent activity (the populated one).
+      // SAFE de-dup: only collapse duplicate "BBC Team" groups (a known auto-created twin), keeping the
+      // populated one. NEVER merge DMs or device notes — that risked hiding real chats, so we don't.
       {
-        const canon = (id) => myIds.includes(id) ? "hub" : id;
-        const sig = (c) => {
-          if (c.type === "group" && (c.name || "") === "BBC Team") return "group|BBC Team";
-          if (c.type === "self") return "self|" + (c.device || c.name || "");
-          return c.type + "|" + (c.name || "") + "|" + [...c.members].map(canon).sort().join(",");
-        };
-        const best = new Map();
-        for (const c of mine) { const k = sig(c); const prev = best.get(k); if (!prev || (c.lastTs || 0) > (prev.lastTs || 0)) best.set(k, c); }
-        mine = [...best.values()].sort((a, b) => (b.lastTs || 0) - (a.lastTs || 0));
+        const teams = mine.filter(c => c.type === "group" && (c.name || "") === "BBC Team")
+          .sort((a, b) => (b.lastTs || 0) - (a.lastTs || 0));
+        if (teams.length > 1) {
+          const keepId = teams[0].id;
+          mine = mine.filter(c => !(c.type === "group" && (c.name || "") === "BBC Team") || c.id === keepId);
+        }
       }
       // unread per conversation (messages newer than the user's last-read mark, not sent by them)
       const reads = await readJ("reads:" + meId, {});
@@ -297,12 +305,18 @@ export default async (req) => {
       const all = await adminUsers(); // full team from Supabase (even those who haven't opened the app yet)
       // Treat every hub id as one person, so a DM's "other" is the real teammate, never a stray hub id.
       const isHubId = (id) => myIds.includes(id) || (all || []).some(u => u.id === id && isHub(u.email));
-      const resolveName = (id) => {
+      const firstName = (s) => String(s || "").trim().split(/\s+/)[0] || "";
+      // Clean display name: hub -> "BBC Bruno", known email -> our short name, else first name only (no "Daryl Ausan00").
+      const displayNameFor = (id, emailHint) => {
         if (myIds.includes(id)) return meHub ? "BBC Bruno" : "You";
         const u = (all || []).find(x => x.id === id);
-        if (u && isHub(u.email)) return "BBC Bruno";
-        return nameOf(id, (u && u.name) || "Teammate");
+        const e = (emailHint || (u && u.email) || "").toLowerCase();
+        if (e && isHub(e)) return "BBC Bruno";
+        if (e && KNOWN[e]) return KNOWN[e];
+        const p = roster.find(x => x.id === id);
+        return firstName(p && p.name) || firstName(u && u.name) || firstName(e.split("@")[0]) || "Teammate";
       };
+      const resolveName = (id) => displayNameFor(id);
       const mineWithUnread = await Promise.all(mine.map(async (c) => {
         const r = reads[c.id] || 0;
         let unread = 0;
@@ -319,11 +333,11 @@ export default async (req) => {
       }));
       let rosterOut;
       if (all && all.length) {
-        rosterOut = all.filter(u => u.id !== meId && !CONTACT_EXCLUDE.has(u.email))
-          .map(u => ({ id: u.id, name: isHub(u.email) ? "BBC Bruno" : nameOf(u.id, u.name), avatar: avaSet.has(u.id) }));
+        rosterOut = all.filter(u => u.id !== meId && !isClient(u.email))
+          .map(u => ({ id: u.id, name: displayNameFor(u.id, u.email), avatar: avaSet.has(u.id) }));
       } else {
-        rosterOut = roster.filter(p => p.id !== meId && !CONTACT_EXCLUDE.has((p.email || "").toLowerCase()))
-          .map(p => ({ id: p.id, name: p.hub ? "BBC Bruno" : p.name, avatar: avaSet.has(p.id) }));
+        rosterOut = roster.filter(p => p.id !== meId && !isClient(p.email))
+          .map(p => ({ id: p.id, name: p.hub ? "BBC Bruno" : firstName(p.name), avatar: avaSet.has(p.id) }));
       }
       // Messy is a standing contact for everyone (always first in the list).
       if (meId !== MESSY_ID && !rosterOut.some(p => p.id === MESSY_ID)) {
