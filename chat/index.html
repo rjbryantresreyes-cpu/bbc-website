@@ -462,7 +462,7 @@ async function start(){
   document.getElementById('meSub').textContent=ME.hub?'Signed in as BBC Bruno':('Signed in as '+ME.name);
   document.getElementById('addVaBtn').classList.toggle('hide',!ME.hub);
   // BBC Bruno (the hub) always has a pinned self-chat to message his own devices.
-  if(ME.hub){ await ensureDevices(); await ensureTeamGroup(); maybeImportPhotos(); }
+  if(ME.hub){ await ensureSelfNote(); await ensureTeamGroup(); maybeImportPhotos(); }
   // A VA always has exactly one contact (BBC Bruno). Auto-open that chat so it feels direct.
   /* flat team: no auto-DM — everyone lands on their chat list (BBC Team group + contacts via ✎) */
   renderList();
@@ -502,14 +502,12 @@ async function ensureTeamGroup(){
   const d=r&&await r.json();
   if(d&&d.conversation&&!CONVS.find(c=>c.id===d.conversation.id))CONVS.push(d.conversation);
 }
-async function ensureDevices(){
-  for(const dev of ['Plus','Tuff','Free']){
-    if(!CONVS.find(c=>c.type==='self'&&(c.device||c.name)===dev)){
-      const r=await api(API,'',{method:'POST',body:{action:'createConv',type:'self',device:dev}});
-      const d=r&&await r.json();
-      if(d&&d.conversation&&!CONVS.find(c=>c.id===d.conversation.id))CONVS.push(d.conversation);
-    }
-  }
+async function ensureSelfNote(){
+  // ONE notes-to-self chat (combined), not one per device.
+  if(CONVS.find(c=>c.type==='self'))return;
+  const r=await api(API,'',{method:'POST',body:{action:'createConv',type:'self'}});
+  const d=r&&await r.json();
+  if(d&&d.conversation&&!CONVS.find(c=>c.id===d.conversation.id))CONVS.push(d.conversation);
 }
 function renderDevbar(){document.getElementById('devbar').innerHTML='<span class="lbl">For device:</span>'+DEVICES.map(d=>`<span class="devchip ${selectedDevice===d?'on':''}" onclick="pickDevice('${d}')">${d}</span>`).join('');}
 function pickDevice(d){selectedDevice=d;renderDevbar();}
@@ -655,7 +653,7 @@ function ticksFor(m){
   if(!ME||m.user!==ME.id)return '';
   if(m.pending)return '<span class="tick" title="Sending">🕓</span>';
   if(CUR&&CUR.type==='self')return '';
-  const others=(CONV_MEMBERS||[]).filter(id=>id!==ME.id&&!isMessy(id));
+  const others=(CONV_MEMBERS||[]).filter(id=>id!==ME.id&&id!=='hub'&&!isMessy(id));
   if(!others.length)return '<span class="tick" title="Sent">✓✓</span>';
   const seen=others.filter(id=>(CONV_READS[id]||0)>=m.ts);
   if(seen.length)return '<span class="tick seen" title="Seen" onclick="showSeenBy(\''+m.id+'\',event)">✓✓</span>';
@@ -664,7 +662,7 @@ function ticksFor(m){
 function showSeenBy(mid,e){
   e&&e.stopPropagation();
   const m=MSGS.find(x=>x.id===mid); if(!m)return;
-  const others=(CONV_MEMBERS||[]).filter(id=>id!==ME.id&&!isMessy(id));
+  const others=(CONV_MEMBERS||[]).filter(id=>id!==ME.id&&id!=='hub'&&!isMessy(id));
   const seen=others.filter(id=>(CONV_READS[id]||0)>=m.ts);
   const box=document.getElementById('seenby');
   let h='<div class="sb-h">Seen by</div>';

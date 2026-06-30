@@ -34,6 +34,9 @@ const SUPABASE_KEY = "sb_publishable_WnJ57fk-ymDuT2xtVZRcHg_khZCWgJL"; // publis
 // VAs only ever see + message BBC Bruno; BBC Bruno sees + messages every VA.
 const HUB_EMAILS = new Set(["rjbryantresreyes@gmail.com", "rj@balaynibruno.co"]);
 const isHub = (email) => HUB_EMAILS.has((email || "").toLowerCase());
+// One canonical id for the hub no matter which hub email signs in. All of RJ's conversations are
+// keyed to this, so there is exactly one chat per person and one self/notes chat, fully synced.
+const HUB_CANON = "hub";
 
 // MESSY — BBC's official Messenger AI. A standing contact for everyone (DM her for help),
 // a silent member of the BBC Team group (replies only when @mentioned there),
@@ -218,15 +221,18 @@ export default async (req) => {
   // one person: the hub sees + can open any chat that involves any hub identity. This is what makes
   // chats survive logging out of one hub email and back in under another.
   let myIds = [meId];
+  let hubRealIds = [];
   if (meHub) {
-    const ids = new Set([meId]);
+    const ids = new Set([meId, HUB_CANON]);
     // every id ever flagged hub in the roster
     try { const rl = await readJ("roster", []); rl.filter(p => p && p.hub).forEach(p => ids.add(p.id)); } catch {}
     // AND every Supabase account whose email is a hub email (covers ids that never opened the app / aren't in the roster)
     try { const au = await adminUsers(); (au || []).filter(u => isHub(u.email)).forEach(u => ids.add(u.id)); } catch {}
     myIds = [...ids];
+    hubRealIds = myIds.filter(x => x !== HUB_CANON); // the real Supabase ids (used to rewrite -> HUB_CANON)
   }
   const inConv = (conv) => !!conv && Array.isArray(conv.members) && conv.members.some(id => myIds.includes(id));
+  const asHub = (id) => (meHub && id === meId) ? HUB_CANON : id; // store the hub's own membership as the canonical id
 
   const url = new URL(req.url);
   const action = url.searchParams.get("action") || (req.method === "POST" ? null : "bootstrap");
@@ -255,6 +261,55 @@ export default async (req) => {
     if (req.method === "GET" && action === "bootstrap") {
       const roster = await upsertRoster();
       const hub = await readJ("hub", null);
+
+      // ----- ONE-TIME hub merge: collapse RJ's two sign-in ids into HUB_CANON, combine duplicate
+      // conversations (one chat per person) and all device notes into a single self/notes chat.
+      // Lossless (messages are concatenated, never deleted), backed up, and runs once (guarded flag).
+      if (meHub) {
+        try {
+          const FLAG = "hubmerged_v1";
+          const already = await readJ(FLAG, 0);
+          if (!already) {
+            const convs0 = await readJ("convs", []);
+            if (convs0.length) {
+              await js.setJSON("convs_backup_" + FLAG, convs0); // safety net before any rewrite
+              const hubSet = new Set(hubRealIds);
+              // canonicalize every hub real id -> HUB_CANON in all member lists
+              for (const c of convs0) {
+                if (Array.isArray(c.members)) c.members = [...new Set(c.members.map(m => hubSet.has(m) ? HUB_CANON : m))];
+              }
+              // group conversations that are really the same chat
+              const sigOf = (c) => {
+                if (c.type === "self" && c.members.length === 1 && c.members[0] === HUB_CANON) return "self";        // ALL hub notes -> one
+                if (c.type === "group" && (c.name || "") === "BBC Team") return "g|BBC Team";
+                if (c.type === "group") return "g|" + (c.name || "") + "|" + [...c.members].sort().join(",");
+                return c.type + "|" + [...c.members].sort().join(",");                                                 // dm / self(non-hub)
+              };
+              const groups = new Map();
+              for (const c of convs0) { const k = sigOf(c); if (!groups.has(k)) groups.set(k, []); groups.get(k).push(c); }
+              const keep = [];
+              for (const [k, list] of groups) {
+                if (list.length === 1) { keep.push(list[0]); continue; }
+                list.sort((a, b) => (b.lastTs || 0) - (a.lastTs || 0));
+                const primary = list[0];
+                let merged = [];
+                for (const c of list) { const ms = await readJ("msgs:" + c.id, []); if (Array.isArray(ms)) merged = merged.concat(ms); }
+                const seen = new Set();
+                merged = merged.filter(m => m && m.id && !seen.has(m.id) && seen.add(m.id)).sort((a, b) => (a.ts || 0) - (b.ts || 0));
+                if (merged.length > MAX_MSGS) merged = merged.slice(-MAX_MSGS);
+                await js.setJSON("msgs:" + primary.id, merged);
+                const last = merged[merged.length - 1];
+                if (last) { primary.lastTs = last.ts; primary.lastText = last.file && !last.text ? "📎 " + last.file.name : (last.text || "").slice(0, 80); }
+                if (k === "self") { primary.type = "self"; primary.name = "Notes"; primary.device = null; }
+                keep.push(primary);
+              }
+              await js.setJSON("convs", keep);
+            }
+            await js.setJSON(FLAG, Date.now());
+          }
+        } catch { /* never block bootstrap on the merge; backup remains if it half-ran */ }
+      }
+
       // Ensure the shared "BBC Team" group exists and includes everyone on the team (hub + all VAs).
       // Runs on every bootstrap, so new accounts (e.g. Krizza) auto-join the moment they first open the app.
       try {
@@ -295,7 +350,7 @@ export default async (req) => {
         }
       }
       // unread per conversation (messages newer than the user's last-read mark, not sent by them)
-      const reads = await readJ("reads:" + meId, {});
+      const reads = await readJ("reads:" + asHub(meId), {});
       const prefs = await readJ("prefs:" + meId, { pinned: {}, labels: {} });
       const pinned = prefs.pinned || {}, labels = prefs.labels || {};
       // FLAT TEAM DIRECTORY: every user sees every teammate (RJ shows as "BBC Bruno"); clients excluded.
@@ -360,7 +415,7 @@ export default async (req) => {
       // so the sender's app can show delivered (✓✓) vs seen (blue ✓✓) and who has seen it.
       const convReads = {};
       for (const mid of conv.members) {
-        if (mid === meId) continue;
+        if (mid === meId || (meHub && mid === HUB_CANON)) continue; // don't count myself
         const rr = await readJ("reads:" + mid, {});
         convReads[mid] = rr[convId] || 0;
       }
@@ -376,14 +431,14 @@ export default async (req) => {
     if (act === "createConv") {
       await upsertRoster();
 
-      // Self chat — one thread per device (Plus / Tuff / Free) to message your own devices.
+      // Self chat — ONE notes-to-self thread per person (the hub keeps a single "Notes" chat).
       if (body.type === "self") {
-        const device = body.device ? String(body.device).slice(0, 20) : "Notes";
+        const meKey = asHub(meId); // hub -> HUB_CANON, so there is only ever one hub self chat
         const convs = await readJ("convs", []);
-        const ex = convs.find(c => c.type === "self" && c.members.length === 1 && c.members[0] === meId && (c.device || c.name) === device);
+        const ex = convs.find(c => c.type === "self" && c.members.length === 1 && c.members[0] === meKey);
         if (ex) return json({ conversation: ex });
         const sid = "c" + Date.now().toString(36) + Math.floor(Math.random() * 1e4).toString(36);
-        const self = { id: sid, type: "self", name: device, device, members: [meId], createdBy: meId, lastTs: Date.now(), lastText: "" };
+        const self = { id: sid, type: "self", name: "Notes", device: null, members: [meKey], createdBy: meId, lastTs: Date.now(), lastText: "" };
         convs.push(self);
         await js.setJSON("convs", convs);
         return json({ conversation: self });
@@ -391,7 +446,7 @@ export default async (req) => {
 
       let type = body.type === "group" ? "group" : "dm";
       let members = Array.isArray(body.members) ? body.members.map(String) : [];
-      if (!members.includes(meId)) members.push(meId);
+      if (!members.includes(asHub(meId))) members.push(asHub(meId)); // hub joins as the canonical id
       members = [...new Set(members)];
 
       // Flat team: anyone can DM or group with anyone on the team.
@@ -609,9 +664,10 @@ export default async (req) => {
     if (act === "markRead") {
       const convId = String(body.conv || "");
       if (!convId) return json({ error: "conv required" }, 400);
-      const reads = await readJ("reads:" + meId, {});
+      const rk = "reads:" + asHub(meId);
+      const reads = await readJ(rk, {});
       reads[convId] = Date.now();
-      await js.setJSON("reads:" + meId, reads);
+      await js.setJSON(rk, reads);
       return json({ ok: true });
     }
 
