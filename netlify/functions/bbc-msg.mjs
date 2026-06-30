@@ -87,7 +87,7 @@ const KNOWN = {
   "krizza.bbc@gmail.com": "Krizza", "krizza@balaynibruno.co": "Krizza", "krizzamaymanagase@gmail.com": "Krizza",
   "daryl.bbc@gmail.com": "Daryl", "daryl@balaynibruno.co": "Daryl",
   "vi@balaynibruno.co": "Vi", "vicarmelle@balaynibruno.co": "Vi",
-  "ryan@balaynibruno.co": "Ryan", "kenz.bbc11@gmail.com": "Kenz",
+  "ryan@balaynibruno.co": "Ryan", "ryan17.bbc@gmail.com": "Ryan", "kenz.bbc11@gmail.com": "Kenz",
   "diego@balaynibruno.co": "Diego", "dexter@balaynibruno.co": "Dexter", "john@balaynibruno.co": "John", "john.bbc2297@gmail.com": "John",
 };
 
