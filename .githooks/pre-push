@@ -1,0 +1,50 @@
+#!/usr/bin/env bash
+# BBC pre-push guard — stops a stale/old copy of the repo from clobbering the live site.
+# Install once per clone:  git config core.hooksPath .githooks
+#
+# It does two things:
+#   1) Refuses to push if your branch is BEHIND origin/master (pull --rebase first).
+#   2) Refuses to push changes to the CORE live files (messenger + dashboard) unless you
+#      confirm on purpose with:  BBC_ALLOW_CORE=1 git push
+#      (This is what would have stopped the accidental revert of the whole messenger.)
+
+set -e
+git fetch -q origin master 2>/dev/null || true
+
+LOCAL=$(git rev-parse HEAD 2>/dev/null)
+REMOTE=$(git rev-parse origin/master 2>/dev/null || echo "")
+BASE=$(git merge-base HEAD origin/master 2>/dev/null || echo "")
+
+# 1) Behind check — your copy is missing commits that are already live.
+if [ -n "$REMOTE" ] && [ "$LOCAL" != "$REMOTE" ] && [ "$BASE" != "$REMOTE" ] && [ "$BASE" = "$LOCAL" ]; then
+  echo ""
+  echo "  BBC PUSH BLOCKED: your copy is BEHIND the live site (origin/master)."
+  echo "  Someone pushed after you last pulled. Get current first:"
+  echo "      git pull --rebase origin master"
+  echo "  then push again."
+  echo ""
+  exit 1
+fi
+
+# 2) Protected core files — the live messenger + command center. Rarely touched by VAs.
+if [ "$BBC_ALLOW_CORE" != "1" ]; then
+  RANGE="origin/master..HEAD"
+  [ -z "$REMOTE" ] && RANGE="HEAD"
+  PROTECTED=$(git diff --name-only $RANGE 2>/dev/null | grep -E '^(chat/|netlify/functions/bbc-msg\.mjs|os/index\.html|os-preview/index\.html)' || true)
+  if [ -n "$PROTECTED" ]; then
+    echo ""
+    echo "  BBC PUSH BLOCKED: this push changes PROTECTED core files:"
+    echo "$PROTECTED" | sed 's/^/        /'
+    echo ""
+    echo "  These run the live BBC Messenger + Command Center for the whole team."
+    echo "  If you did NOT mean to change them, you probably committed from an old copy."
+    echo "    Undo just those files:  git checkout origin/master -- <file>   then re-commit + push."
+    echo ""
+    echo "  If the change IS intentional (RJ/Claude editing the messenger on purpose), re-run:"
+    echo "      BBC_ALLOW_CORE=1 git push"
+    echo ""
+    exit 1
+  fi
+fi
+
+exit 0
