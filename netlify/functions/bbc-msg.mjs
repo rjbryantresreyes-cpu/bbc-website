@@ -267,29 +267,52 @@ export default async (req) => {
       // Lossless (messages are concatenated, never deleted), backed up, and runs once (guarded flag).
       if (meHub) {
         try {
-          const FLAG = "hubmerged_v1";
+          const FLAG = "hubmerged_v2"; // v2: merge by PERSON (handles a VA having more than one account id)
           const already = await readJ(FLAG, 0);
           if (!already) {
             const convs0 = await readJ("convs", []);
             if (convs0.length) {
               await js.setJSON("convs_backup_" + FLAG, convs0); // safety net before any rewrite
               const hubSet = new Set(hubRealIds);
-              // canonicalize every hub real id -> HUB_CANON in all member lists
-              for (const c of convs0) {
-                if (Array.isArray(c.members)) c.members = [...new Set(c.members.map(m => hubSet.has(m) ? HUB_CANON : m))];
+              const allU = (await adminUsers()) || [];
+              const rosterById = {}; for (const p of roster) rosterById[p.id] = p;
+              // A stable "who is this" key so a person's multiple/old account ids group together.
+              const personKey = (id) => {
+                if (hubSet.has(id) || id === HUB_CANON) return "hub";
+                if (id === MESSY_ID) return "messy";
+                const p = rosterById[id];
+                const u = allU.find(x => x.id === id);
+                const email = ((p && p.email) || (u && u.email) || "").toLowerCase();
+                if (email && KNOWN[email]) return "k:" + KNOWN[email].toLowerCase();
+                const nm = ((p && p.name) || (u && u.name) || "").trim().toLowerCase().split(/\s+/)[0];
+                return nm ? "n:" + nm : "id:" + id;
+              };
+              // the person's CURRENT (live) account id, so the merged chat points at their working login
+              const liveByPerson = {};
+              for (const u of allU) {
+                const k = (u.email && KNOWN[u.email]) ? "k:" + KNOWN[u.email].toLowerCase() : "n:" + (u.name || "").trim().toLowerCase().split(/\s+/)[0];
+                if (!liveByPerson[k]) liveByPerson[k] = u.id;
               }
-              // group conversations that are really the same chat
+              // canonicalize every hub real id -> HUB_CANON
+              for (const c of convs0) if (Array.isArray(c.members)) c.members = [...new Set(c.members.map(m => hubSet.has(m) ? HUB_CANON : m))];
               const sigOf = (c) => {
-                if (c.type === "self" && c.members.length === 1 && c.members[0] === HUB_CANON) return "self";        // ALL hub notes -> one
+                if (c.type === "self" && c.members.length === 1 && c.members[0] === HUB_CANON) return "self";
                 if (c.type === "group" && (c.name || "") === "BBC Team") return "g|BBC Team";
                 if (c.type === "group") return "g|" + (c.name || "") + "|" + [...c.members].sort().join(",");
-                return c.type + "|" + [...c.members].sort().join(",");                                                 // dm / self(non-hub)
+                const other = c.members.find(m => m !== HUB_CANON) || c.members[0];
+                return "dm|" + personKey(other);
+              };
+              const setOther = (c, k) => { // repoint a DM at the person's live id
+                if (!k.startsWith("dm|")) return;
+                const live = liveByPerson[k.slice(3)]; if (!live) return;
+                const other = c.members.find(m => m !== HUB_CANON);
+                if (other && other !== live) c.members = [...new Set(c.members.map(m => m === other ? live : m))];
               };
               const groups = new Map();
               for (const c of convs0) { const k = sigOf(c); if (!groups.has(k)) groups.set(k, []); groups.get(k).push(c); }
               const keep = [];
               for (const [k, list] of groups) {
-                if (list.length === 1) { keep.push(list[0]); continue; }
+                if (list.length === 1) { setOther(list[0], k); keep.push(list[0]); continue; }
                 list.sort((a, b) => (b.lastTs || 0) - (a.lastTs || 0));
                 const primary = list[0];
                 let merged = [];
@@ -301,6 +324,7 @@ export default async (req) => {
                 const last = merged[merged.length - 1];
                 if (last) { primary.lastTs = last.ts; primary.lastText = last.file && !last.text ? "📎 " + last.file.name : (last.text || "").slice(0, 80); }
                 if (k === "self") { primary.type = "self"; primary.name = "Notes"; primary.device = null; }
+                setOther(primary, k);
                 keep.push(primary);
               }
               await js.setJSON("convs", keep);
