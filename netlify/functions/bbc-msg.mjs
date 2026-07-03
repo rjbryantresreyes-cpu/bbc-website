@@ -324,6 +324,19 @@ export default async (req) => {
     try { const au = await adminUsers(); (au || []).filter(u => isHub(u.email)).forEach(u => ids.add(u.id)); } catch {}
     myIds = [...ids];
     hubRealIds = myIds.filter(x => x !== HUB_CANON); // the real Supabase ids (used to rewrite -> HUB_CANON)
+  } else {
+    // A teammate can have several logins for the SAME person (e.g. Krizza forgot a password and got a
+    // fresh account, so she has both krizza@balaynibruno.co and krizzamaymanagase@gmail.com). Treat EVERY
+    // account whose email is a KNOWN alias of this person as one identity, so she sees + keeps all her
+    // chats no matter which of her emails she signs in with. Read-time only; sends still use her live id.
+    const myName = KNOWN[meEmail];
+    if (myName) {
+      const aliasEmails = new Set(Object.keys(KNOWN).filter(k => KNOWN[k] === myName));
+      const ids = new Set([meId]);
+      try { for (const p of await readJ("roster", [])) if (p && aliasEmails.has((p.email || "").toLowerCase())) ids.add(p.id); } catch {}
+      try { for (const u of (await adminUsers()) || []) if (aliasEmails.has((u.email || "").toLowerCase())) ids.add(u.id); } catch {}
+      myIds = [...ids];
+    }
   }
   const inConv = (conv) => !!conv && Array.isArray(conv.members) && conv.members.some(id => myIds.includes(id));
   const asHub = (id) => (meHub && id === meId) ? HUB_CANON : id; // store the hub's own membership as the canonical id
