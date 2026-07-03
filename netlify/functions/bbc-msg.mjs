@@ -136,7 +136,7 @@ async function adminUsers() {
 // Backed up first; guarded by a flag so it runs once. Returns a small summary.
 async function mergeHubChats(js) {
   const rd = async (k, d) => { try { return (await js.get(k, { type: "json", consistency: "strong" })) ?? d; } catch { return d; } };
-  const FLAG = "hubmerged_v4";
+  const FLAG = "hubmerged_v5";
   if (await rd(FLAG, 0)) return { skipped: true };
   const convs0 = await rd("convs", []);
   if (!convs0.length) { await js.setJSON(FLAG, Date.now()); return { empty: true }; }
@@ -155,6 +155,11 @@ async function mergeHubChats(js) {
     return nameOfId(id) || ("id:" + id);
   };
   const liveByPerson = {};
+  // Prefer the account each person most RECENTLY signed in with (roster 'seen'), so their
+  // consolidated chat lands on the identity they actually use now (e.g. Krizza on her active email),
+  // not on whichever old account Supabase happens to list first.
+  const rosterBySeen = [...roster].sort((a, b) => (b.seen || 0) - (a.seen || 0));
+  for (const p of rosterBySeen) { const k = personKey(p.id); if (k && k !== "hub" && k !== "messy" && !liveByPerson[k]) liveByPerson[k] = p.id; }
   for (const u of allU) { const k = personKey(u.id); if (k && k !== "hub" && k !== "messy" && !liveByPerson[k]) liveByPerson[k] = u.id; }
   const canon = (id) => { const k = personKey(id); if (k === "hub") return HUB_CANON; if (k === "messy") return MESSY_ID; return liveByPerson[k] || id; };
   for (const c of convs0) if (Array.isArray(c.members)) c.members = [...new Set(c.members.map(canon))];
@@ -321,7 +326,10 @@ export default async (req) => {
 
       // ----- ONE-TIME merge: one canonical id per person, one chat per person, one self/notes chat.
       // Lossless (messages concatenated, never deleted), backed up, runs once (guarded flag).
-      if (meHub) { try { await mergeHubChats(js); } catch { /* never block bootstrap on the merge */ } }
+      // Fire on ANY teammate's bootstrap (not just the hub) so a VA whose chats got split across
+      // several logins (e.g. Krizza across her 3 emails) recovers her full history the moment SHE
+      // reopens the app, without waiting for BBC Bruno to sign in first. Safe: global, lossless, guarded.
+      try { await mergeHubChats(js); } catch { /* never block bootstrap on the merge */ }
 
       // Ensure the shared "BBC Team" group exists and includes everyone on the team (hub + all VAs).
       // Runs on every bootstrap, so new accounts (e.g. Krizza) auto-join the moment they first open the app.
