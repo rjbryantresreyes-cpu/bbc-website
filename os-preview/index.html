@@ -413,6 +413,28 @@
 .artrow-ic.tapic:active{transform:scale(.9);}
 .wfimp{display:inline-flex;align-items:center;justify-content:center;min-width:20px;height:18px;padding:0 5px;border-radius:5px;font-size:10px;font-weight:800;cursor:pointer;margin-right:2px;flex:none;-webkit-tap-highlight-color:transparent;transition:transform .08s;}
 .wfimp:active{transform:scale(.86);}
+.wfcat2{margin-bottom:24px;}
+.wfcard{background:#0d1320;border:1px solid #1a2436;border-radius:14px;padding:15px 16px;margin-bottom:12px;}
+.wfcard-top{display:flex;align-items:center;gap:9px;}
+.wfcard-nm{flex:1;min-width:0;font-size:16px;font-weight:700;color:#F5F1EA;line-height:1.3;}
+.wfcard-pct{font-family:var(--mono);font-size:13px;color:#D4AF37;font-weight:700;white-space:nowrap;}
+.wfcard-meta{font-size:11.5px;color:#8a98ad;margin:7px 0 0;display:flex;align-items:center;gap:6px;flex-wrap:wrap;}
+.wfcard-dots{display:inline-flex;gap:3px;}
+.wfcard-desc{font-size:13.5px;line-height:1.55;color:#c3cfdd;margin:9px 0 13px;font-style:italic;}
+.wfcard-list{display:flex;flex-direction:column;gap:7px;}
+.wfck{display:flex;align-items:center;gap:11px;padding:10px 12px;background:#0a0f1a;border:1px solid #1c2740;border-radius:10px;}
+.wfck.on{background:rgba(74,222,128,0.07);border-color:#2c5e3a;}
+.wfck-box{width:26px;height:26px;min-width:26px;border-radius:7px;border:1.6px solid #3a4a63;display:flex;align-items:center;justify-content:center;cursor:pointer;font-weight:800;font-size:14px;color:#4ADE80;transition:transform .08s;-webkit-tap-highlight-color:transparent;}
+.wfck.on .wfck-box{background:rgba(74,222,128,0.18);border-color:#4ADE80;}
+.wfck-box:active{transform:scale(.86);}
+.wfck-lbl{flex:1;min-width:0;font-size:14px;color:#e6edf5;font-weight:500;}
+.wfck.on .wfck-lbl{color:#9bd6ac;}
+.wfck-st{font-family:var(--mono);font-size:9.5px;text-transform:uppercase;letter-spacing:.06em;color:#7C8AA5;white-space:nowrap;}
+.wfck.on .wfck-st{color:#4ADE80;}
+.wfck-link{font-family:var(--mono);font-size:10px;color:#60A5FA;background:none;border:none;cursor:pointer;white-space:nowrap;text-decoration:none;padding:0;}
+.wfck-link.add{color:#6f7f96;}
+.wfcard-bar{height:5px;background:#0a0f1a;border-radius:3px;overflow:hidden;margin-top:13px;}
+.wfcard-bar i{display:block;height:100%;background:linear-gradient(90deg,#D4AF37,#4ADE80);}
   .mxr-pct{font-family:var(--mono);font-size:10px;color:var(--gold2);text-align:center;}
   .mxbar{height:4px;background:var(--bg3);border-radius:3px;overflow:hidden;margin-top:6px;}
   .mxbar i{display:block;height:100%;background:linear-gradient(90deg,var(--goldB),var(--green));border-radius:3px;}
@@ -4933,49 +4955,7 @@
       <div class="gauge-sub" style="text-align:left;margin:-4px 0 10px">Live from rj@balaynibruno.co + WhatsApp. Tap a client box for their requests, tasks and important emails. Refreshes every time you open the dashboard.</div>
       <div class="panelgrid">${homeClients.map(c=>{const cslug=c.slug||window.__slug(c.name);return `<div class="panel tap" onclick="clientMail('${cslug}')" style="display:block;text-align:left"><span class="ptitle" style="display:block">${esc(c.name)}</span><div class="gauge-sub" id="ctbadge-${cslug}" style="margin-top:4px">📧 Tap for emails &amp; tasks</div></div>`;}).join('')}</div>
       <div class="sec">All sections</div>
-      <div class="panelgrid">${navIndex}</div>
-      <div class="chat-box" onclick="openChat('home')" style="cursor:pointer;margin-top:16px">
-        <h3>Chat with Cuh</h3>
-        <p>Your all-around AI for the whole dashboard. Tap to open full-screen chat, pick your agent(s), and save it as a task.</p>
-        <div class="chat-in"><input placeholder="Ask Cuh anything..." readonly style="cursor:pointer"><button>Open chat</button></div>
-        <div class="soon-note">LIVE · WHOLE-DASHBOARD CHAT · THE 💬 BUTTON ON ANY PAGE = THAT PAGE ONLY</div>
-      </div>
-      <div class="sec">Needs your attention</div>
-      <div class="panel" style="display:block" id="home-attn"><div class="gauge-sub">Checking your CRM, inbox, and schedule…</div></div>
-      ${(()=>{
-        const gaps=80-ship;
-        const wfReady=Math.round(ship/80*100);
-        const weekPosted=D.content.days.filter(x=>x.posted).length;
-        const activeClients=D.clients.filter(c=>(c.category||'active')==='active');
-        const clientsNoAI=activeClients.filter(c=>c.ai==='-').length;
-        const gauge=(p,sub)=>{const r=74,c=Math.PI*r,len=(p/100)*c;return `<svg viewBox="0 0 180 116" style="width:100%;max-width:210px;display:block;margin:0 auto"><path d="M16 100 A ${r} ${r} 0 0 1 164 100" fill="none" stroke="#22324d" stroke-width="15" stroke-linecap="round"/><path d="M16 100 A ${r} ${r} 0 0 1 164 100" fill="none" stroke="#D4AF37" stroke-width="15" stroke-linecap="round" stroke-dasharray="${len} ${c}"/><text x="90" y="88" text-anchor="middle" font-family="Playfair Display,serif" font-size="36" font-weight="700" fill="#F5F1EA">${p}%</text><text x="90" y="108" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" fill="#C9A961">${sub}</text></svg>`;};
-        const weekBars=D.content.days.map(x=>{const has=(x.graphic&&x.graphic!=='-')||(x.reel&&x.reel!=='-');const h=x.posted?100:(has?68:22);const col=x.posted?'#4ADE80':(has?'#D4AF37':'#2a3a52');return `<div class="wb"><div class="bar" style="height:${h}%;background:${col}"></div><div class="lbl">${esc(x.d.split(' ')[0][0])}</div></div>`;}).join('');
-        const grp=g=>D.websitePages.filter(p=>p.group===g).length;
-        const webRows=`<tr><td>Main pages</td><td>${grp('Main pages')}</td></tr><tr><td>VA profiles</td><td>${grp('VA profiles (noindex)')}</td></tr><tr><td>Internal</td><td>${grp('Internal (noindex)')}</td></tr><tr><td>Open tasks</td><td>${D.websiteTasks.length}</td></tr>`;
-        const attn=[{l:'Workflow gaps',v:gaps,m:80},{l:'Posts pending',v:pending,m:7},{l:'Website tasks',v:D.websiteTasks.length,m:10},{l:'Clients w/o AI',v:clientsNoAI,m:activeClients.length}];
-        const attnBars=attn.map(a=>{const r=a.v/a.m;const col=r>0.66?'#EF6B6B':(r>0.33?'#D4AF37':'#4ADE80');const w=Math.max(8,Math.round(r*100));return `<div class="hbar"><span class="hl">${a.l}</span><div class="htrack"><i style="width:${w}%;background:${col}"></i></div><span class="hv">${a.v}</span></div>`;}).join('');
-        const clientRows=activeClients.map(c=>`<tr><td>${esc(c.name)}</td><td>${esc(c.handler)}</td><td>${c.ai!=='-'?'AI ✓':'—'}</td></tr>`).join('');
-        return `<div class="sec">All your pages</div>
-          <div class="panelgrid">
-            <div class="panel tap" onclick="go('crm')"><span class="ptitle" style="color:#D4AF37">CRM + Email</span><div class="metric" id="home-crm-num"><b>…</b></div><div class="gauge-sub" style="margin-top:6px">Leads, replies, follow-ups, send</div></div>
-            <div class="panel tap" onclick="go('reminders')"><span class="ptitle" style="color:#EF6B6B">Reminders</span><div class="metric"><b>Today</b></div><div class="gauge-sub" style="margin-top:6px">What's due + this week</div></div>
-            <div class="panel tap" onclick="go('workflows')"><span class="ptitle">Workflow Readiness</span>${gauge(wfReady,ship+' of 80 artifacts')}<div class="gauge-sub">${gaps} gaps to ship</div></div>
-            <div class="panel tap" onclick="go('social')"><span class="ptitle">This Week</span><div class="wkbars">${weekBars}</div><div class="gauge-sub">${weekPosted} of 7 posted</div></div>
-            <div class="panel tap" onclick="go('websites')"><span class="ptitle">Websites</span><table class="ptable">${webRows}</table></div>
-            <div class="panel"><span class="ptitle">Needs Attention</span>${attnBars}</div>
-            <div class="panel tap" onclick="go('clients')"><span class="ptitle">Clients (${activeClients.length})</span><table class="ptable">${clientRows}</table></div>
-            <div class="panel tap" onclick="go('devices')"><span class="ptitle">Team & Devices</span><div class="metric"><b>${D.devices.length}</b> devices</div><div class="gauge-sub" style="margin-top:8px">Who's online + what they're working on (live when login is wired).</div></div>
-          </div>`;
-      })()}
-      ${(()=>{
-        const cc={daily:'#D4AF37',weekly:'#60A5FA',monthly:'#7C8AA5','as needed':'#7C8AA5',active:'#4ADE80'};
-        const boxes=D.ops.map(o=>{
-          const rows=o.items.map(it=>`<div class="opitem"><span class="odot" style="background:${cc[it.cad]||'#7C8AA5'}"></span><span class="oname">${esc(it.name)}</span><span class="ocad">${esc(it.cad)}</span></div>`).join('');
-          return `<div class="panel"><span class="ptitle" style="color:${o.color}">${esc(o.area)}</span>${rows}</div>`;
-        }).join('');
-        return `<div class="sec">Operations — what needs attention</div><div class="panelgrid">${boxes}</div>`;
-      })()}
-      <a class="morelink" onclick="go('more')">AI Family · Team · Systems →</a>`;
+      <div class="panelgrid">${navIndex}</div>`;
   };
 
   const CFOLDER={'S. Riviere Hair Collection':'S-RIVIERE-HAIR-COLLECTION','4Ocean':'4OCEAN','Wooden Woodworks':'WOODEN-WOODWORKS','Home Vision Studio':'HOME-VISION-STUDIO','First Class Finishes':'FIRST-CLASS-FINISHES','Hi-Up Roofing':'HI-UP-ROOFING','AJ Battle Foundation':'AJ-BATTLE-FOUNDATION','All Ryze':'ALL-RYZE','Cavalry Group':'REAL_CAVALRY'};
@@ -5902,38 +5882,47 @@
         </div></div>`;
     }).join('');
 
-    /* All categories, all details shown in boxes */
+    /* FULL-WIDTH checklist cards — one card per workflow, stacked vertically, grouped by category.
+       Each card: name + description + a LABELED checklist (real text, not just icons) you tick off. */
+    const WF_ART_LABEL={graphic:'Graphic / carousel',video:'Video / reel',page:'Insights page',email:'Email marketing',social:'Posted to social',zip:'Download pack'};
     const boxes=cats.map(cat=>{
       const list=D.workflows.filter(w=>w.cat===cat).sort((a,b)=>{ const r=WF_IMPACT_RANK[wfImpact(a)]-WF_IMPACT_RANK[wfImpact(b)]; return r||pct(b)-pct(a); });
       const avg=Math.round(list.reduce((s,w)=>s+pct(w),0)/list.length);
       const ic=CIC[cat]||'📦', col=CCOL[cat]||'#D4AF37';
-      const head=`<div class="mxhead"><span class="mxh-sp">Workflow</span>${ORDER.map(a=>`<span class="mxh-c" title="${a}">${ICON[a]}</span>`).join('')}<span class="mxh-p">%</span></div>`;
-      const rows=list.map(w=>{
+      const cards=list.map(w=>{
+        const p=pct(w), im=wfImpact(w);
         const dots=w.owners.map(o=>`<span class="dot" style="background:${OWN[o]||'#888'}"></span>`).join('');
-        const cells=ORDER.map(a=>`<span class="mxcell tapcell ${w.artifacts[a]?'on':'off'}" role="button" title="Tap to ${w.artifacts[a]?'clear':'check'} ${a}" onclick="wfArtToggle('${w.id}','${a}',event)">${w.artifacts[a]?'✓':''}</span>`).join('');
-        const p=pct(w);
-        return `<div class="wfrow" data-search="${esc((w.title+' '+w.owners.join(' ')+' '+w.angle+' '+w.role).toLowerCase())}" onclick="wfSheet('${w.id}')">
-          <div class="mxrow"><span class="mxr-nm"><span class="mxr-dots">${dots}</span>${(()=>{const im=wfImpact(w);return `<span class="wfimp" onclick="wfImpactCycle('${w.id}',event)" title="Impact: ${WF_IMPACT_LABEL[im]} — tap to change" style="background:${WF_IMPACT_COL[im]}22;color:${WF_IMPACT_COL[im]};border:1px solid ${WF_IMPACT_COL[im]}66">${im==='high'?'★':im==='med'?'●':'○'}</span>`;})()}<span class="nmtxt">${esc(w.title)}</span></span>${cells}<span class="mxr-pct">${p}%</span></div>
-          <div class="mxbar"><i style="width:${p}%"></i></div></div>`;
+        const checklist=ORDER.map(a=>{
+          const on=w.artifacts[a], link=wfLinkGet(w.id,a);
+          return `<div class="wfck ${on?'on':''}">
+            <span class="wfck-box" role="button" title="Tap to ${on?'uncheck':'check'} ${WF_ART_LABEL[a]||a}" onclick="wfArtToggle('${w.id}','${a}',event)">${on?'✓':''}</span>
+            <span class="wfck-lbl">${WF_ART_LABEL[a]||a}</span>
+            <span class="wfck-st">${on?'done':'to do'}</span>
+            ${link?`<a class="wfck-link" href="${esc(link)}" target="_blank" rel="noopener" onclick="event.stopPropagation()">view ↗</a>`:`<button class="wfck-link add" onclick="event.stopPropagation();wfEditLink('${w.id}','${a}')">+ link / note</button>`}
+          </div>`;
+        }).join('');
+        return `<div class="wfcard" data-search="${esc((w.title+' '+w.owners.join(' ')+' '+w.angle+' '+w.role).toLowerCase())}">
+          <div class="wfcard-top">
+            <span class="wfimp" onclick="wfImpactCycle('${w.id}',event)" title="Impact: ${WF_IMPACT_LABEL[im]} — tap to change" style="background:${WF_IMPACT_COL[im]}22;color:${WF_IMPACT_COL[im]};border:1px solid ${WF_IMPACT_COL[im]}66">${im==='high'?'★':im==='med'?'●':'○'}</span>
+            <span class="wfcard-nm">${esc(w.title)}</span>
+            <span class="wfcard-pct">${p}%</span>
+          </div>
+          <div class="wfcard-meta"><span class="wfcard-dots">${dots}</span>${esc(w.owners.join(', '))}${w.role?' · '+esc(w.role):''}</div>
+          ${w.angle?`<div class="wfcard-desc">${esc(w.angle)}</div>`:''}
+          <div class="wfcard-list">${checklist}</div>
+          <div class="wfcard-bar"><i style="width:${p}%"></i></div>
+        </div>`;
       }).join('');
-      return `<div class="wfcat">
-        <div class="wfcat-hd"><div class="wfcat-ic" style="background:${col}22;color:${col}">${ic}</div><div class="wfcat-nm">${esc(cat)}</div><span class="wfcat-pct">${list.length} · ${avg}%</span></div>
-        <div class="bar wfcat-bar"><i style="width:${avg}%"></i></div>
-        ${head}${rows}</div>`;
+      return `<div class="wfcat2">
+        <div class="wfcat-hd"><div class="wfcat-ic" style="background:${col}22;color:${col}">${ic}</div><div class="wfcat-nm">${esc(cat)}</div><span class="wfcat-pct">${list.length} workflow${list.length>1?'s':''} · ${avg}%</span></div>
+        ${cards}</div>`;
     }).join('');
 
     const totalCells=D.workflows.length*ORDER.length;
-    const legend=`<div class="mxlegend"><span class="lg"><span class="mxcell on" style="width:17px;height:17px;font-size:10px">✓</span> shipped</span><span class="lg"><span class="mxcell off" style="width:17px;height:17px"></span> gap to fill</span><span class="lg" style="font-family:var(--mono);font-size:10px">${ORDER.map(a=>ICON[a]+' '+a).join('  ·  ')}</span></div>`;
 
-    return `<h2 class="vt">Workflows</h2><div class="vsub">${cats.length} categories · ${totalArt} of ${totalCells} artifacts shipped · ${totalCells-totalArt} gaps to fill. Tap a deliverable cell (${ORDER.map(a=>ICON[a]).join(' ')}) to check it off — saves to every device. Tap a workflow name for the full breakdown.</div>
+    return `<h2 class="vt">Workflows</h2><div class="vsub">Every workflow we've built, as a checklist. ${D.workflows.length} workflows in ${cats.length} categories · ${totalArt} of ${totalCells} steps done. Tick each step as you finish it — page, email marketing, reel, and more — and it saves to every device. Tap the ★ badge to change a workflow's impact. Add a link or note on any step.</div>
       <input class="search" placeholder="Search all workflows..." oninput="filterCards(this,'wfwrap')">
-      <div class="sec">⭐ To-do — recommended next</div>
-      <div class="gauge-sub" style="text-align:left;margin:-4px 0 10px">${openCount} open · ordered by social-media importance, then closest to done. Tap the box to check one off (saved on this device). Tap the row for the full breakdown.</div>
-      ${recs}
-      <div class="sec">All workflows — highest impact first</div>
-      <div class="gauge-sub" style="text-align:left;margin:-4px 0 10px">Ordered by business impact (★ high · ● medium · ○ low). Tap the impact badge on any workflow to change its rank — saves everywhere. Tap a deliverable cell to check it off.</div>
-      <div id="wfwrap" class="wfgrid">${boxes}</div>
-      ${legend}
+      <div id="wfwrap">${boxes}</div>
       ${(()=>{
         const ins=D.insights;
         if(!ins||!Array.isArray(ins.cats)||!ins.cats.length) return '';
@@ -6614,8 +6603,8 @@
     document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('active',b.dataset.v===v));
     sheet.classList.remove('open'); if(v==='crm'&&window.loadBrevoCrm){ window.loadBrevoCrm(); } if(v==='inbox'&&window.loadInbox) window.loadInbox(); if(v==='home'&&window.loadHomeAttention) window.loadHomeAttention(); if(v==='home'&&window.loadClientTasks) window.loadClientTasks(); if(v==='home'&&window.loadMeetings) window.loadMeetings(); if(v==='board'&&window.Board) window.Board.render(); if(v==='team'&&window.TeamChat) window.TeamChat.enter(); if(v==='bruno'&&window.renderVault) window.renderVault(); };
   window.filterCards=(inp,wrapId)=>{ const q=inp.value.toLowerCase(); const wrap=document.getElementById(wrapId);
-    wrap.querySelectorAll('.card,.wfrow,.clientbox,.opitem').forEach(c=>{ const hay=(c.dataset.search||c.textContent).toLowerCase(); c.style.display=hay.includes(q)?'':'none'; });
-    wrap.querySelectorAll('.wfcat').forEach(p=>{ const any=[...p.querySelectorAll('.wfrow')].some(r=>r.style.display!=='none'); p.style.display=any?'':'none'; }); };
+    wrap.querySelectorAll('.card,.wfrow,.wfcard,.clientbox,.opitem').forEach(c=>{ const hay=(c.dataset.search||c.textContent).toLowerCase(); c.style.display=hay.includes(q)?'':'none'; });
+    wrap.querySelectorAll('.wfcat,.wfcat2').forEach(p=>{ const any=[...p.querySelectorAll('.wfrow,.wfcard')].some(r=>r.style.display!=='none'); p.style.display=any?'':'none'; }); };
   document.querySelectorAll('.nav button').forEach(b=>b.onclick=()=>go(b.dataset.v));
 
   /* ===== Toasts ===== */
