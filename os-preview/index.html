@@ -405,6 +405,14 @@
   .mxcell{width:22px;height:22px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:11px;margin:0 auto;font-weight:700;}
   .mxcell.on{background:rgba(74,222,128,0.16);border:1px solid var(--green);color:var(--green);}
   .mxcell.off{background:var(--bg3);border:1px solid #3a4658;}
+.mxcell.tapcell{cursor:pointer;transition:transform .08s,box-shadow .12s;-webkit-tap-highlight-color:transparent;}
+.mxcell.tapcell:hover{box-shadow:0 0 0 2px rgba(212,175,55,.35);}
+.mxcell.tapcell:active{transform:scale(.86);}
+.artrow-ic.tapic{cursor:pointer;-webkit-tap-highlight-color:transparent;transition:transform .08s;}
+.artrow-ic.tapic:hover{box-shadow:0 0 0 2px rgba(212,175,55,.35);}
+.artrow-ic.tapic:active{transform:scale(.9);}
+.wfimp{display:inline-flex;align-items:center;justify-content:center;min-width:20px;height:18px;padding:0 5px;border-radius:5px;font-size:10px;font-weight:800;cursor:pointer;margin-right:2px;flex:none;-webkit-tap-highlight-color:transparent;transition:transform .08s;}
+.wfimp:active{transform:scale(.86);}
   .mxr-pct{font-family:var(--mono);font-size:10px;color:var(--gold2);text-align:center;}
   .mxbar{height:4px;background:var(--bg3);border-radius:3px;overflow:hidden;margin-top:6px;}
   .mxbar i{display:block;height:100%;background:linear-gradient(90deg,var(--goldB),var(--green));border-radius:3px;}
@@ -690,8 +698,8 @@
 <script type="application/json" id="bbc-data">
 {
   "meta": {
-    "updated": "2026-06-30",
-    "pendingCount": 17
+    "updated": "2026-07-04",
+    "pendingCount": 21
   },
   "owners": {
     "Vidz": "#A78BFA",
@@ -1034,7 +1042,7 @@
       "folder": "_JOB_APPLICATIONS"
     },
     {
-      "name": "Freccia Construction",
+      "name": "Greenlight Go Logistics",
       "owner": "-",
       "handler": "-",
       "ai": "-",
@@ -1043,7 +1051,7 @@
       "status": "active",
       "category": "active",
       "notes": "Folder on Drive; details to confirm.",
-      "folder": "FRECCIA-CONSTRUCTION"
+      "folder": "GREENLIGHT-GO-LOGISTICS"
     }
   ],
   "team": [
@@ -1647,7 +1655,7 @@
               "name": "_JOB_APPLICATIONS"
             },
             {
-              "name": "FRECCIA-CONSTRUCTION"
+              "name": "GREENLIGHT-GO-LOGISTICS"
             }
           ]
         },
@@ -1838,6 +1846,18 @@
             },
             {
               "name": "2026-06-20_welcome_freccia"
+            },
+            {
+              "name": "2026-07-02_write_posts_customers_understand"
+            },
+            {
+              "name": "2026-07-03_reel_content_comprehension"
+            },
+            {
+              "name": "2026-07-04_reel_brief_builder"
+            },
+            {
+              "name": "2026-07-04_reel_founder_plans_va_executes"
             }
           ]
         },
@@ -1921,6 +1941,18 @@
         },
         {
           "name": "_RJ_PERSONAL"
+        },
+        {
+          "name": ".playwright-mcp"
+        },
+        {
+          "name": ".playwright-mcp (1)"
+        },
+        {
+          "name": "_ARCHIVE"
+        },
+        {
+          "name": "Signatures"
         }
       ]
     }
@@ -2357,6 +2389,22 @@
       "path": "freccia-construction.html",
       "group": "Insights / blog",
       "purpose": "A new partnership with Freccia Construction, a custom home builder in Austin, Texas. Balay ni Bruno &amp; Co. runs their short-form social, LinkedIn, website support, and a custom in-house AI helper.",
+      "status": "live",
+      "noindex": false
+    },
+    {
+      "name": "Free File Converter — Images, Video, Audio, Docs",
+      "path": "file-converter.html",
+      "group": "Insights / blog",
+      "purpose": "Convert any file to any format, free. Images, video, audio, PDFs, documents. Drag and drop multiple files at once. No sign-up, no watermark. Built by Balay ni Bruno &amp; Co.",
+      "status": "live",
+      "noindex": false
+    },
+    {
+      "name": "Free PDF to EPS / Print-Ready Converter",
+      "path": "pdf-to-eps-converter.html",
+      "group": "Insights / blog",
+      "purpose": "Convert PDF files to EPS or print-ready PDF format for free. No sign-up. No watermark. Built by Balay ni Bruno &amp; Co. for business owners who need print files fast.",
       "status": "live",
       "noindex": false
     },
@@ -3608,28 +3656,28 @@
       "path": "LEARNINGS"
     },
     {
-      "title": "ghl connection deep dive",
-      "date": "2026-06-30",
+      "title": "fable5 repos deep dive",
+      "date": "2026-07-03",
       "path": "LEARNINGS"
     },
     {
-      "title": "shopify nav scope workaround",
-      "date": "2026-06-28",
+      "title": "brevo deliverability and automation gotchas",
+      "date": "2026-07-03",
       "path": "LEARNINGS"
     },
     {
-      "title": "hvs design center card pattern",
-      "date": "2026-06-28",
+      "title": "pdf toolkit install",
+      "date": "2026-07-02",
       "path": "LEARNINGS"
     },
     {
-      "title": "gemini scale swap prompt pattern",
-      "date": "2026-06-28",
+      "title": "drewscampfire blender science viz study",
+      "date": "2026-07-02",
       "path": "LEARNINGS"
     },
     {
-      "title": "sriviere page editability and darkmode",
-      "date": "2026-06-27",
+      "title": "brevo automation enrollment gotchas",
+      "date": "2026-07-02",
       "path": "LEARNINGS"
     }
   ],
@@ -3765,6 +3813,7 @@
     "graphic",
     "video",
     "page",
+    "email",
     "social",
     "zip"
   ],
@@ -3772,7 +3821,8 @@
     "graphic": "▦",
     "video": "▶",
     "page": "▤",
-    "social": "✉",
+    "email": "✉",
+    "social": "◉",
     "zip": "⬇"
   },
   "workflows": [
@@ -4212,6 +4262,30 @@
       "name": "2026-06-20_welcome_freccia",
       "date": "2026-06-20",
       "slug": "welcome_freccia",
+      "posted": false
+    },
+    {
+      "name": "2026-07-02_write_posts_customers_understand",
+      "date": "2026-07-02",
+      "slug": "write_posts_customers_understand",
+      "posted": false
+    },
+    {
+      "name": "2026-07-03_reel_content_comprehension",
+      "date": "2026-07-03",
+      "slug": "reel_content_comprehension",
+      "posted": false
+    },
+    {
+      "name": "2026-07-04_reel_brief_builder",
+      "date": "2026-07-04",
+      "slug": "reel_brief_builder",
+      "posted": false
+    },
+    {
+      "name": "2026-07-04_reel_founder_plans_va_executes",
+      "date": "2026-07-04",
+      "slug": "reel_founder_plans_va_executes",
       "posted": false
     }
   ],
@@ -4666,6 +4740,65 @@
 <script>
   const D = JSON.parse(document.getElementById('bbc-data').textContent);
   const OWN=D.owners, ORDER=D.artifactOrder, ICON=D.artifactIcon;
+  /* ===== WORKFLOW SHARED STATE — cross-device + system, two-way sync =====
+     One shared box (Netlify Blobs via /.netlify/functions/workflows). RJ taps a deliverable
+     on the dashboard OR a BBC script auto-checks it after generating the asset; both write the
+     same box, so every device shows the same ticks. localStorage is the offline fallback. */
+  const WF_EP='/.netlify/functions/workflows';
+  window.__wfState={artifacts:{},links:{},extra:[],priority:{}};
+  const wfArtKey=(id,a)=>id+':'+a;
+  const wfLocalArts=()=>{try{return JSON.parse(localStorage.getItem('bbc_wf_arts')||'{}');}catch(e){return{};}};
+  const wfLocalArtsSave=m=>{try{localStorage.setItem('bbc_wf_arts',JSON.stringify(m));}catch(e){}};
+  function wfApplyState(){
+    const S=window.__wfState||{}, ov=Object.assign({}, wfLocalArts(), S.artifacts||{});
+    (S.extra||[]).forEach(w=>{ if(!D.workflows.find(x=>x.id===w.id)){ w.artifacts=w.artifacts||{}; D.workflows.push(w); } });
+    D.workflows.forEach(w=>{ w.artifacts=w.artifacts||{}; ORDER.forEach(a=>{ const k=wfArtKey(w.id,a); if(k in ov) w.artifacts[a]=!!ov[k]; else if(!(a in w.artifacts)) w.artifacts[a]=false; }); });
+  }
+  async function wfLoadState(){
+    try{ const r=await fetch(WF_EP,{cache:'no-store'}); if(r.ok){ const d=await r.json(); if(d&&d.ok) window.__wfState={artifacts:d.artifacts||{},links:d.links||{},extra:d.extra||[],priority:d.priority||{}}; } }catch(e){}
+    wfApplyState();
+    if(window.curView==='workflows'&&typeof go==='function') go('workflows');
+  }
+  window.wfArtToggle=function(id,a,ev){
+    if(ev&&ev.stopPropagation) ev.stopPropagation();
+    const w=D.workflows.find(x=>x.id===id); if(!w) return;
+    const nv=!w.artifacts[a]; w.artifacts[a]=nv;
+    const k=wfArtKey(id,a);
+    (window.__wfState.artifacts=window.__wfState.artifacts||{})[k]=nv;
+    const lm=wfLocalArts(); lm[k]=nv; wfLocalArtsSave(lm);
+    fetch(WF_EP,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({op:'setArtifact',id:id,artifact:a,value:nv})}).catch(()=>{});
+    if(window.notifyEdit) window.notifyEdit({entity_type:'workflow_artifact',entity_key:k,field:a,new_value:(nv?'shipped: ':'cleared: ')+w.title+' — '+a});
+    const sheetOpen=document.getElementById('sheet')&&document.getElementById('sheet').classList.contains('open');
+    if(window.curView==='workflows'&&typeof go==='function') go('workflows');
+    if(sheetOpen&&window.wfSheet) window.wfSheet(id);
+  };
+  /* ---- workflow IMPACT (most impactful first) — editable tier, synced ---- */
+  const WF_SOCIAL_OWN_SET=new Set(['Sonny','Mai','Vidz','Raphy','Emy','Boogy']);
+  const WF_IMPACT_RANK={high:0,med:1,low:2};
+  const wfLocalPrio=()=>{try{return JSON.parse(localStorage.getItem('bbc_wf_prio')||'{}');}catch(e){return{};}};
+  function wfImpactDefault(w){
+    // transparent heuristic (no invented content): business-usable + BBC-marketing = higher impact
+    let s=0; const t=((w.title||'')+' '+(w.cat||'')+' '+(w.angle||'')+' '+(w.role||'')+' '+(w.audience||'')).toLowerCase();
+    if(/business owner|small business|client|agenc/.test(t)) s+=2;
+    if((w.owners||[]).some(o=>WF_SOCIAL_OWN_SET.has(o))) s+=1;
+    if(/content|engine|ai family|website|carousel|reel|campaign|email|funnel|lead|portfolio|review|sell|offer/.test(t)) s+=1;
+    return s>=3?'high':(s>=1?'med':'low');
+  }
+  function wfImpact(w){ const st=(window.__wfState&&window.__wfState.priority)||{}, lo=wfLocalPrio(); return st[w.id]||lo[w.id]||wfImpactDefault(w); }
+  window.wfImpactCycle=function(id,ev){
+    if(ev&&ev.stopPropagation) ev.stopPropagation();
+    const w=D.workflows.find(x=>x.id===id); if(!w) return;
+    const cur=wfImpact(w), nx=cur==='high'?'med':(cur==='med'?'low':'high');
+    (window.__wfState.priority=window.__wfState.priority||{})[id]=nx;
+    const lo=wfLocalPrio(); lo[id]=nx; try{localStorage.setItem('bbc_wf_prio',JSON.stringify(lo));}catch(e){}
+    fetch(WF_EP,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({op:'setPriority',id:id,level:nx})}).catch(()=>{});
+    if(window.notifyEdit) window.notifyEdit({entity_type:'workflow_priority',entity_key:id,field:'impact',new_value:nx+': '+w.title});
+    if(window.curView==='workflows'&&typeof go==='function') go('workflows');
+  };
+  const WF_IMPACT_LABEL={high:'HIGH IMPACT',med:'MEDIUM',low:'LOW'};
+  const WF_IMPACT_COL={high:'#4ADE80',med:'#D4AF37',low:'#7C8AA5'};
+  wfApplyState();               // seed from local overrides for the first paint
+  setTimeout(wfLoadState,0);    // then pull the shared store + re-render
   const app=document.getElementById('app');
   const sheet=document.getElementById('sheet'), sheetBody=document.getElementById('sheet-body');
   document.getElementById('hdr-date').textContent='AUDIT '+D.meta.updated;
@@ -4772,7 +4905,34 @@
       {v:'news',ic:'📰',t:'News',d:'Research'},
       {v:'more',ic:'🤖',t:'AI Family',d:'Team & systems'},
     ].map(x=>`<div class="panel tap" onclick="go('${x.v}')" style="display:block;text-align:left"><div style="font-size:22px;line-height:1">${x.ic}</div><span class="ptitle" style="display:block;margin-top:6px">${x.t}</span><div class="gauge-sub" style="margin-top:2px">${esc(x.d)}</div></div>`).join('');
-    return `<h2 class="vt">Overview</h2><div class="vsub">Everything in one place. Tap any section to open it.</div>
+    const homeClients=D.clients.filter(c=>(c.category||'active')==='active');
+    return `<h2 class="vt">Home</h2><div class="vsub">Everything in one place. Tap any section to open it.</div>
+      <div class="sec">Meetings &amp; Interviews</div>
+      <div class="panel" id="home-meetings" style="display:block"><div class="gauge-sub">Loading your calendar…</div></div>
+      <div class="sec">Client tasks needing attention — from WhatsApp + email</div>
+      <div class="panel" id="home-client-tasks" style="display:block"><div class="gauge-sub">Checking WhatsApp + email…</div></div>
+      <div class="sec">Upcoming interviews &amp; calls</div>
+      ${(()=>{
+        // Edit this list to add/remove interviews. status: 'confirmed' or 'pending'.
+        const IV=[
+          {who:'Edward — Dogument / PettiChat',when:'Wed Jul 8, 5:00 PM PH',status:'confirmed',link:'https://meet.google.com/zvw-abmw-swe',note:'Video call. Send MEET brief before.'},
+          {who:'Jena — Pine Crest Fabrics (VA role)',when:'Week of Jul 6 — time not set',status:'pending',link:'',note:'She proposed the week of Jul 6. Reply to book a slot.'}
+        ];
+        const pill=s=>s==='confirmed'
+          ?'<span class="pill" style="background:rgba(74,222,128,.16);color:#4ADE80">confirmed</span>'
+          :'<span class="pill" style="background:rgba(212,175,55,.18);color:#D4AF37">to book</span>';
+        const cards=IV.map(v=>`<div class="panel" style="display:block;text-align:left">
+          <div style="display:flex;gap:8px;align-items:flex-start;justify-content:space-between"><span class="ptitle" style="flex:1">${esc(v.who)}</span>${pill(v.status)}</div>
+          <div class="gauge-sub" style="margin-top:6px;color:#F5F1EA">${esc(v.when)}</div>
+          <div class="gauge-sub" style="margin-top:4px">${esc(v.note)}</div>
+          ${v.link?`<a href="${esc(v.link)}" target="_blank" rel="noopener" style="display:inline-block;margin-top:8px;color:#60A5FA;font-size:12px;word-break:break-all">Join Google Meet ↗</a>`:''}
+        </div>`).join('');
+        return `<div class="panelgrid">${cards}</div>`;
+      })()}
+      <div class="sec">Client updates — tap a client for their tasks + emails</div>
+      <div class="gauge-sub" style="text-align:left;margin:-4px 0 10px">Live from rj@balaynibruno.co + WhatsApp. Tap a client box for their requests, tasks and important emails. Refreshes every time you open the dashboard.</div>
+      <div class="panelgrid">${homeClients.map(c=>{const cslug=c.slug||window.__slug(c.name);return `<div class="panel tap" onclick="clientMail('${cslug}')" style="display:block;text-align:left"><span class="ptitle" style="display:block">${esc(c.name)}</span><div class="gauge-sub" id="ctbadge-${cslug}" style="margin-top:4px">📧 Tap for emails &amp; tasks</div></div>`;}).join('')}</div>
+      <div class="sec">All sections</div>
       <div class="panelgrid">${navIndex}</div>
       <div class="chat-box" onclick="openChat('home')" style="cursor:pointer;margin-top:16px">
         <h3>Chat with Cuh</h3>
@@ -4952,6 +5112,7 @@
   const CTAB='white-space:nowrap;cursor:pointer;padding:9px 13px;font-size:13px;color:#8a98ad;border:0;background:transparent;border-bottom:2px solid transparent';
   views.crm=()=>`<h2 class="vt">CRM</h2><div class="vsub">Your whole pipeline, contacts, tasks and campaigns — live from Brevo.</div>
     <div style="display:flex;gap:4px;overflow-x:auto;border-bottom:1px solid #1a2436;margin:6px 0 14px">
+      <button id="ct-emailwf" class="crmtab" onclick="crmTab('emailwf')" style="${CTAB}">Email Workflows</button>
       <button id="ct-pipeline" class="crmtab" onclick="crmTab('pipeline')" style="${CTAB}">Pipeline</button>
       <button id="ct-contacts" class="crmtab" onclick="crmTab('contacts')" style="${CTAB}">Contacts</button>
       <button id="ct-tasks" class="crmtab" onclick="crmTab('tasks')" style="${CTAB}">Tasks</button>
@@ -4959,7 +5120,8 @@
       <button id="ct-companies" class="crmtab" onclick="crmTab('companies')" style="${CTAB}">Companies</button>
       <button id="ct-stats" class="crmtab" onclick="crmTab('stats')" style="${CTAB}">Stats</button>
     </div>
-    <div id="cv-pipeline" class="crmv"></div>
+    <div id="cv-emailwf" class="crmv"></div>
+    <div id="cv-pipeline" class="crmv" style="display:none"></div>
     <div id="cv-contacts" class="crmv" style="display:none"></div>
     <div id="cv-tasks" class="crmv" style="display:none"></div>
     <div id="cv-campaigns" class="crmv" style="display:none"></div>
@@ -4969,7 +5131,7 @@
   // ---- Brevo CRM: full multi-tab app (Pipeline/Contacts/Tasks/Campaigns/Companies/Stats) ----
   const BST={New:['#2a3346','#cdd6e6'],Contacted:['#13335c','#9fc4f4'],Interested:['#3d2f08','#f0c14b'],Proposal:['#241d4a','#b9b0f0'],Won:['#17340a','#9bd36a'],Lost:['#3a1212','#f29a9a']};
   const BSTK=['New','Contacted','Interested','Proposal','Won','Lost'];
-  window.__crm={tab:'pipeline',lists:null,listsCur:null,pipeline:null,drag:null};
+  window.__crm={tab:'emailwf',lists:null,listsCur:null,pipeline:null,drag:null};
   const crmMoney=n=>'$'+(Number(n)||0).toLocaleString();
   const crmGet=async(q)=>{ try{ return await (await fetch('/.netlify/functions/brevo?action='+q)).json(); }catch(e){ return {error:String(e)}; } };
   const crmPost=async(b)=>{ try{ return await (await fetch('/.netlify/functions/brevo',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(b)})).json(); }catch(e){ return {error:String(e)}; } };
@@ -4977,11 +5139,51 @@
   window.loadBrevoCrm=()=>crmTab(window.__crm.tab||'pipeline');
   window.crmTab=(t)=>{
     window.__crm.tab=t;
-    ['pipeline','contacts','tasks','campaigns','companies','stats'].forEach(x=>{
+    ['emailwf','pipeline','contacts','tasks','campaigns','companies','stats'].forEach(x=>{
       const v=document.getElementById('cv-'+x); if(v) v.style.display=x===t?'':'none';
       const b=document.getElementById('ct-'+x); if(b){ b.style.color=x===t?'#F5F1EA':'#8a98ad'; b.style.borderBottom=x===t?'2px solid #D4AF37':'2px solid transparent'; }
     });
-    ({pipeline:crmPipeline,contacts:crmContacts,tasks:crmTasks,campaigns:crmCampaigns,companies:crmCompanies,stats:crmStats}[t]||(()=>{}))();
+    ({emailwf:crmEmailwf,pipeline:crmPipeline,contacts:crmContacts,tasks:crmTasks,campaigns:crmCampaigns,companies:crmCompanies,stats:crmStats}[t]||(()=>{}))();
+  };
+  // EMAIL WORKFLOWS — lead lists + drip status (which email each lead is on), like the workflow checkboxes
+  window.crmEmailwf=async()=>{
+    const el=document.getElementById('cv-emailwf'); if(!el) return;
+    el.innerHTML='<div class="gauge-sub">Loading email workflows…</div>';
+    const [lj,cj]=await Promise.all([
+      crmGet('lists'),
+      (async()=>{ try{ return await (await fetch('/.netlify/functions/campaign-status')).json(); }catch(e){ return {error:String(e)}; } })()
+    ]);
+    const L=lj.lists||[];
+    const listBoxes=L.length
+      ? `<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:8px;margin-bottom:16px">${L.map(l=>`<div style="border-radius:12px;padding:11px 13px;background:#0d1320;border:1px solid #1d2a40"><div class="gauge-sub">${esc(l.name)}</div><div style="font-size:22px;font-weight:700;margin-top:2px">${(l.count||0).toLocaleString()}</div></div>`).join('')}</div>`
+      : '<div class="panel"><span class="gauge-sub">Lead list counts load on the live site (Brevo).</span></div>';
+    let campHtml;
+    if(cj&&cj.ok&&(cj.campaigns||[]).length){
+      campHtml=cj.campaigns.map(c=>{
+        const maxStep=(c.steps||[]).length||4, reached=c.stepReached||{}, at=c.stepAt||{};
+        const maxCount=Math.max(1,...Object.keys(reached).map(k=>reached[k]||0));
+        const funnel=(c.steps||[]).map(s=>{
+          const rc=reached[s.step]||0, w=Math.round(rc/maxCount*100);
+          return `<div style="margin-bottom:9px"><div style="display:flex;justify-content:space-between;font-size:12.5px;gap:8px"><span style="min-width:0"><b>Email ${s.step}</b> · ${esc(s.subject)}</span><span class="gauge-sub" style="white-space:nowrap">${rc} reached · ${at[s.step]||0} here now</span></div><div style="height:8px;background:#0d1320;border-radius:4px;overflow:hidden;margin-top:3px"><div style="height:100%;width:${w}%;background:#D4AF37"></div></div></div>`;
+        }).join('');
+        const leadRows=(c.leads||[]).slice(0,300).map(l=>{
+          let boxes='';for(let s=1;s<=maxStep;s++)boxes+=`<span class="mxcell ${s<=l.step?'on':'off'}" title="Email ${s}" style="width:19px;height:19px;font-size:9px">${s<=l.step?'✓':s}</span>`;
+          return `<div class="wfrow" data-search="${esc(l.email.toLowerCase())}"><div class="mxrow" style="grid-template-columns:1fr repeat(${maxStep},22px) 42px"><span class="mxr-nm"><span class="nmtxt" style="font-size:12px">${esc(l.email)}</span></span>${boxes}<span class="mxr-pct">${Math.round(l.step/maxStep*100)}%</span></div></div>`;
+        }).join('');
+        return `<div class="wfcat"><div class="wfcat-hd"><div class="wfcat-ic" style="background:#D4AF3722;color:#D4AF37">✉</div><div class="wfcat-nm">${esc(c.name)}</div><span class="wfcat-pct">${(c.leads||[]).length} leads · every ${c.gapDays}d</span></div>
+          <div class="sec" style="margin-top:10px">Where the leads are in the sequence</div>${funnel}
+          <div class="sec">Each lead — which email they're on</div>
+          <input class="search" placeholder="Search a lead's email…" oninput="filterCards(this,'ewf-${esc(c.key)}')">
+          <div id="ewf-${esc(c.key)}">${leadRows||'<div class="gauge-sub">No leads in this sequence yet.</div>'}</div></div>`;
+      }).join('');
+    } else if(cj&&cj.empty){
+      campHtml='<div class="panel"><span class="gauge-sub">No campaign run pushed yet. It fills in after the next daily send (the engine pushes its status automatically).</span></div>';
+    } else {
+      campHtml='<div class="panel"><span class="gauge-sub">Email-sequence status shows on the live site once the campaign engine has pushed its latest run.</span></div>';
+    }
+    el.innerHTML=`<div class="vsub" style="margin-bottom:10px">${(cj&&cj.updated)?('Updated '+new Date(cj.updated).toLocaleString()):'Live from Brevo + the campaign engine'}</div>
+      <div class="sec">Lead lists — how many on each</div>${listBoxes}
+      <div class="sec">Email marketing workflows — lead status by email step</div>${campHtml}`;
   };
   // PIPELINE
   window.crmPipeline=async()=>{
@@ -5668,7 +5870,9 @@
     if(window.curView==='workflows') go('workflows'); // re-render: checked items drop to the bottom
   };
   views.workflows=()=>{
-    const cats=[...new Set(D.workflows.map(w=>w.cat))];
+    /* categories ordered by IMPACT — the ones with the most high-impact workflows first */
+    const catImpact=c=>{ const l=D.workflows.filter(w=>w.cat===c); return l.reduce((s,w)=>s+(3-WF_IMPACT_RANK[wfImpact(w)]),0)/(l.length||1); };
+    const cats=[...new Set(D.workflows.map(w=>w.cat))].sort((a,b)=>catImpact(b)-catImpact(a));
     const totalArt=D.workflows.reduce((n,w)=>n+ORDER.filter(a=>w.artifacts[a]).length,0);
 
     /* ⭐ To-do — ordered by SOCIAL-MEDIA importance first, then closest to done. Checkable + saved per device. */
@@ -5700,16 +5904,16 @@
 
     /* All categories, all details shown in boxes */
     const boxes=cats.map(cat=>{
-      const list=D.workflows.filter(w=>w.cat===cat);
+      const list=D.workflows.filter(w=>w.cat===cat).sort((a,b)=>{ const r=WF_IMPACT_RANK[wfImpact(a)]-WF_IMPACT_RANK[wfImpact(b)]; return r||pct(b)-pct(a); });
       const avg=Math.round(list.reduce((s,w)=>s+pct(w),0)/list.length);
       const ic=CIC[cat]||'📦', col=CCOL[cat]||'#D4AF37';
       const head=`<div class="mxhead"><span class="mxh-sp">Workflow</span>${ORDER.map(a=>`<span class="mxh-c" title="${a}">${ICON[a]}</span>`).join('')}<span class="mxh-p">%</span></div>`;
       const rows=list.map(w=>{
         const dots=w.owners.map(o=>`<span class="dot" style="background:${OWN[o]||'#888'}"></span>`).join('');
-        const cells=ORDER.map(a=>`<span class="mxcell ${w.artifacts[a]?'on':'off'}" title="${a}">${w.artifacts[a]?'✓':''}</span>`).join('');
+        const cells=ORDER.map(a=>`<span class="mxcell tapcell ${w.artifacts[a]?'on':'off'}" role="button" title="Tap to ${w.artifacts[a]?'clear':'check'} ${a}" onclick="wfArtToggle('${w.id}','${a}',event)">${w.artifacts[a]?'✓':''}</span>`).join('');
         const p=pct(w);
         return `<div class="wfrow" data-search="${esc((w.title+' '+w.owners.join(' ')+' '+w.angle+' '+w.role).toLowerCase())}" onclick="wfSheet('${w.id}')">
-          <div class="mxrow"><span class="mxr-nm"><span class="mxr-dots">${dots}</span><span class="nmtxt">${esc(w.title)}</span></span>${cells}<span class="mxr-pct">${p}%</span></div>
+          <div class="mxrow"><span class="mxr-nm"><span class="mxr-dots">${dots}</span>${(()=>{const im=wfImpact(w);return `<span class="wfimp" onclick="wfImpactCycle('${w.id}',event)" title="Impact: ${WF_IMPACT_LABEL[im]} — tap to change" style="background:${WF_IMPACT_COL[im]}22;color:${WF_IMPACT_COL[im]};border:1px solid ${WF_IMPACT_COL[im]}66">${im==='high'?'★':im==='med'?'●':'○'}</span>`;})()}<span class="nmtxt">${esc(w.title)}</span></span>${cells}<span class="mxr-pct">${p}%</span></div>
           <div class="mxbar"><i style="width:${p}%"></i></div></div>`;
       }).join('');
       return `<div class="wfcat">
@@ -5721,12 +5925,13 @@
     const totalCells=D.workflows.length*ORDER.length;
     const legend=`<div class="mxlegend"><span class="lg"><span class="mxcell on" style="width:17px;height:17px;font-size:10px">✓</span> shipped</span><span class="lg"><span class="mxcell off" style="width:17px;height:17px"></span> gap to fill</span><span class="lg" style="font-family:var(--mono);font-size:10px">${ORDER.map(a=>ICON[a]+' '+a).join('  ·  ')}</span></div>`;
 
-    return `<h2 class="vt">Workflows</h2><div class="vsub">${cats.length} categories · ${totalArt} of ${totalCells} artifacts shipped · ${totalCells-totalArt} gaps to fill. Tap any workflow for the full breakdown.</div>
+    return `<h2 class="vt">Workflows</h2><div class="vsub">${cats.length} categories · ${totalArt} of ${totalCells} artifacts shipped · ${totalCells-totalArt} gaps to fill. Tap a deliverable cell (${ORDER.map(a=>ICON[a]).join(' ')}) to check it off — saves to every device. Tap a workflow name for the full breakdown.</div>
       <input class="search" placeholder="Search all workflows..." oninput="filterCards(this,'wfwrap')">
       <div class="sec">⭐ To-do — recommended next</div>
       <div class="gauge-sub" style="text-align:left;margin:-4px 0 10px">${openCount} open · ordered by social-media importance, then closest to done. Tap the box to check one off (saved on this device). Tap the row for the full breakdown.</div>
       ${recs}
-      <div class="sec">Readiness by category</div>
+      <div class="sec">All workflows — highest impact first</div>
+      <div class="gauge-sub" style="text-align:left;margin:-4px 0 10px">Ordered by business impact (★ high · ● medium · ○ low). Tap the impact badge on any workflow to change its rank — saves everywhere. Tap a deliverable cell to check it off.</div>
       <div id="wfwrap" class="wfgrid">${boxes}</div>
       ${legend}
       ${(()=>{
@@ -6195,15 +6400,18 @@
   })();
 
   /* ---------- SHEETS ---------- */
-  function wfLinks(){ try{return JSON.parse(localStorage.getItem('bbc_wf_links')||'{}');}catch(e){return{};} }
+  function wfLinks(){ const local=(()=>{try{return JSON.parse(localStorage.getItem('bbc_wf_links')||'{}');}catch(e){return{};}})(); return Object.assign({}, local, (window.__wfState&&window.__wfState.links)||{}); }
   function wfLinkGet(id,a){ return wfLinks()[id+':'+a]||''; }
   window.wfEditLink=(id,a)=>{
     const cur=wfLinkGet(id,a);
     const url=prompt('Paste the link for '+a.toUpperCase()+' — to view or edit the asset (Drive file, YouTube, page URL).\nLeave blank to remove.', cur);
     if(url===null) return;
-    const all=wfLinks(), k=id+':'+a, v=url.trim();
-    if(v) all[k]=v; else delete all[k];
-    try{localStorage.setItem('bbc_wf_links',JSON.stringify(all));}catch(e){}
+    const k=id+':'+a, v=url.trim();
+    let local={}; try{local=JSON.parse(localStorage.getItem('bbc_wf_links')||'{}');}catch(e){}
+    if(v) local[k]=v; else delete local[k];
+    try{localStorage.setItem('bbc_wf_links',JSON.stringify(local));}catch(e){}
+    window.__wfState.links=window.__wfState.links||{}; if(v) window.__wfState.links[k]=v; else delete window.__wfState.links[k];
+    fetch(WF_EP,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({op:'setLink',id:id,artifact:a,url:v})}).catch(()=>{});
     const wf=(D.workflows||[]).find(w=>w.id===id);
     if(window.notifyEdit) window.notifyEdit({
       entity_type:'workflow_link',
@@ -6219,13 +6427,13 @@
       const act = link
         ? `<a class="artlink" href="${esc(link)}" target="_blank" rel="noopener">View / Edit ↗</a><button class="artlink-edit" onclick="wfEditLink('${id}','${a}')" title="Change link">✎</button>`
         : `<button class="artlink-add" onclick="wfEditLink('${id}','${a}')">🔗 Add link</button>`;
-      return `<div class="artrow ${on?'on':''}"><span class="artrow-ic">${on?'✔':ICON[a]}</span><span class="artrow-nm">${a}<span class="artrow-st ${on?'':'off'}">${on?'shipped':'gap'}</span></span><span class="artrow-act">${act}</span></div>`;
+      return `<div class="artrow ${on?'on':''}"><span class="artrow-ic tapic" role="button" title="Tap to mark ${a} ${on?'not done':'done'}" onclick="wfArtToggle('${id}','${a}',event)">${on?'✔':'○'}</span><span class="artrow-nm">${a}<span class="artrow-st ${on?'':'off'}">${on?'shipped':'gap'}</span></span><span class="artrow-act">${act}</span></div>`;
     }).join('');
     openSheet(`<h3>${esc(w.title)}</h3><div class="row1">${w.owners.map(o=>`<span class="dot" style="background:${OWN[o]||'#888'}"></span>${o}`).join(' ')} · ${esc(w.cat)}</div>
       <div class="bar"><i style="width:${pct(w)}%"></i></div>
       <div class="sec">What it is</div><div class="kv"><span>${esc(w.role)}</span></div>
       <div class="sec">The angle</div><div class="angle">"${esc(w.angle)}"</div><div class="kv" style="margin-top:8px"><span>Audience: ${esc(w.audience)}</span></div>
-      <div class="sec">Content readiness (${pct(w)}%) · tap a link to view or edit</div><div class="artrows">${arts}</div>
+      <div class="sec">Content readiness (${pct(w)}%) · tap the ○/✔ to check a deliverable off (syncs everywhere) · tap a link to view or edit</div><div class="artrows">${arts}</div>
       <div class="sec">Ship the gaps</div><div class="kv"><span>Run WORKFLOW_CONTENT_FLOW.md: graphic → video → page → social → zip. Each shipped artifact lights a cell.</span></div>`);
   };
   window.clientSheet=i=>{ const c=D.clients[i];
@@ -6239,6 +6447,90 @@
   };
   window.aiSheet=key=>{ const a=D.aiFamily.find(x=>x.key===key);
     openSheet(`<h3>${esc(a.name)}</h3><div class="row1">${pillStatus(a.status)}</div><div class="sec">Role</div><div class="kv"><span>${esc(a.role)}</span></div>`);
+  };
+
+  /* ---------- CLIENT EMAIL (Home → tap a client box) ----------
+     Live from rj@balaynibruno.co via the read-only gmail-read function. Categorized per client
+     by their domain + name. Some clients email from a personal address — add it to the query
+     map when RJ gives it. */
+  function clientMailQuery(c){
+    const dom=(c.site||'').replace(/^https?:\/\//,'').replace(/^www\./,'').split('/')[0].trim();
+    const nameKey=(c.name||'').split(' ')[0].replace(/[^A-Za-z0-9]/g,'');
+    const parts=[]; if(dom&&dom!=='-') parts.push('from:'+dom); if(nameKey) parts.push('"'+nameKey+'"');
+    return 'in:inbox ('+(parts.join(' OR ')||('"'+(c.name||'')+'"'))+')';
+  }
+  window.clientMail=async(slug)=>{
+    const c=D.clients.find(x=>x.slug===slug)||D.clients.find(x=>window.__slug(x.name)===slug); if(!c) return;
+    openSheet(`<h3>${esc(c.name)}</h3><div class="row1">Requests, tasks &amp; important emails</div><div id="cmail-tasks"><div class="gauge-sub">Loading tasks…</div></div><div class="sec">Important emails · rj@balaynibruno.co</div><div id="cmail-list" class="gauge-sub">Searching your inbox for messages from ${esc(c.name)}…</div>`);
+    window.__curClientMailSlug=slug;
+    (async()=>{ const tel=document.getElementById('cmail-tasks'); if(!tel) return; const tasks=(await fetchClientTasks()).filter(t=>t.clientSlug===slug&&t.status!=='dismissed'); const open=tasks.filter(t=>t.status==='open'); tel.innerHTML=`<div class="sec">Requests &amp; tasks (${open.length} open · from WhatsApp + email)</div>`+(tasks.length?tasks.map(clientTaskSheetRow).join(''):'<div class="gauge-sub">No tasks synced from WhatsApp or email yet.</div>'); })();
+    try{
+      const r=await fetch('/.netlify/functions/gmail-read?max=15&q='+encodeURIComponent(clientMailQuery(c)));
+      const d=await r.json();
+      const items=d.threads||[];
+      const el=document.getElementById('cmail-list'); if(!el) return;
+      if(d.error){ el.innerHTML='Inbox connection needs the live site (Gmail is wired server-side). Works on balaynibruno.co/os.'; return; }
+      if(!items.length){ el.innerHTML='No recent emails found from '+esc(c.name)+'. Some clients email from a personal address — tell me the address and I\'ll track it for this client.'; return; }
+      const rows=items.map(t=>`<div class="artrow" onclick="clientMailThread('${t.id}','${slug}')" style="cursor:pointer;display:block;padding:10px 8px">
+        <div class="oname" style="font-weight:600;${t.unread?'color:#F5F1EA':''}">${t.unread?'🔵 ':''}${esc(t.subject||'(no subject)')}</div>
+        <div class="gauge-sub" style="margin-top:2px">${esc((t.from||'').replace(/<.*/,''))} · ${esc(t.date||'')}</div>
+        <div class="gauge-sub" style="margin-top:3px">${esc((t.snippet||'').slice(0,150))}</div></div>`).join('');
+      el.outerHTML='<div class="artrows">'+rows+'</div>';
+    }catch(e){ const el=document.getElementById('cmail-list'); if(el) el.innerHTML='Could not load email (needs the live site / Gmail connection).'; }
+  };
+  window.clientMailThread=async(threadId,slug)=>{
+    const c=D.clients.find(x=>x.slug===slug)||{};
+    openSheet('<div class="sec">Loading message…</div>');
+    try{
+      const r=await fetch('/.netlify/functions/gmail-read?threadId='+encodeURIComponent(threadId));
+      const d=await r.json();
+      const msgs=d.messages||[];
+      const body=msgs.map(m=>`<div class="panel" style="display:block;margin-bottom:8px"><div class="row1"><b>${esc((m.from||'').replace(/<.*/,''))}</b></div><div class="gauge-sub">${esc(m.subject||'')} · ${esc(m.date||'')}</div><div class="kv" style="white-space:pre-wrap;margin-top:6px">${esc((m.body||'').slice(0,4000))}</div></div>`).join('');
+      openSheet(`<h3>${esc((msgs[0]&&msgs[0].subject)||'Email')}</h3><button class="ideabtn" onclick="clientMail('${slug}')" style="margin-bottom:8px"><span class="i">←</span>Back to ${esc(c.name||'client')} emails</button>${body||'<div class="gauge-sub">Empty thread.</div>'}`);
+    }catch(e){ openSheet('<div class="sec">Could not load the message.</div>'); }
+  };
+
+  /* ---------- CLIENT TASKS (two-way sync: WhatsApp + email -> dashboard) ----------
+     Written by the sync routine (Claude reads WhatsApp+email, extracts tasks). Shown here per client;
+     check one off -> saved everywhere; the sync also auto-closes ones it sees resolved in chat/email. */
+  window.__clientTasks=null;
+  async function fetchClientTasks(force){ if(window.__clientTasks&&!force) return window.__clientTasks; try{ const d=await (await fetch('/.netlify/functions/client-tasks')).json(); window.__clientTasks=(d&&d.ok)?(d.tasks||[]):[]; }catch(e){ if(!window.__clientTasks) window.__clientTasks=[]; } return window.__clientTasks; }
+  const CT_ICON=s=>s==='whatsapp'?'💬':s==='email'?'📧':'📝';
+  function clientTaskSheetRow(t){ const on=t.status==='done'; return `<div class="artrow ${on?'on':''}" style="align-items:flex-start"><span class="artrow-ic tapic" role="button" onclick="clientTaskDone('${t.id}',event)" title="Mark ${on?'not done':'done'}">${on?'✔':'○'}</span><span class="artrow-nm" style="white-space:normal">${CT_ICON(t.source)} ${esc(t.text)}<span class="artrow-st ${on?'':'off'}">${on?'done':esc(t.source)}</span></span><span class="artrow-act"><button class="artlink-add" onclick="clientTaskDismiss('${t.id}',event)">Dismiss</button></span></div>`; }
+  function clientTaskHomeRow(t){ return `<div class="opitem" style="align-items:flex-start;gap:9px"><span onclick="clientTaskDone('${t.id}',event)" title="Mark done" style="width:20px;height:20px;border-radius:5px;border:1.5px solid #3a4a63;cursor:pointer;flex:none;margin-top:1px"></span><span class="oname" style="flex:1;white-space:normal;cursor:pointer" onclick="clientMail('${t.clientSlug}')">${CT_ICON(t.source)} <b>${esc(t.client)}</b> — ${esc(t.text)}</span><span class="ocad" onclick="clientTaskDismiss('${t.id}',event)" style="cursor:pointer" title="Dismiss">✕</span></div>`; }
+  function renderClientTasks(){
+    const tasks=window.__clientTasks||[]; const open=tasks.filter(t=>t.status==='open');
+    const byC={}; open.forEach(t=>{ byC[t.clientSlug]=(byC[t.clientSlug]||0)+1; });
+    document.querySelectorAll('[id^="ctbadge-"]').forEach(el=>{ const slug=el.id.slice(8); const n=byC[slug]||0; el.innerHTML=n?('🔴 '+n+' open task'+(n>1?'s':'')+' · tap for tasks + emails'):'📧 Tap for emails &amp; tasks'; });
+    const el=document.getElementById('home-client-tasks'); if(el){ el.innerHTML=open.length?open.slice(0,25).map(clientTaskHomeRow).join(''):'<div class="gauge-sub">No open client tasks. All caught up. 👍</div>'; }
+  }
+  window.loadClientTasks=async()=>{ await fetchClientTasks(true); renderClientTasks(); };
+  function clientTaskAfter(){ const sheetOpen=document.getElementById('sheet').classList.contains('open'); if(sheetOpen&&window.__curClientMailSlug) clientMail(window.__curClientMailSlug); if(window.curView==='home') renderClientTasks(); }
+  window.clientTaskDone=(id,ev)=>{ if(ev&&ev.stopPropagation)ev.stopPropagation(); const t=(window.__clientTasks||[]).find(x=>x.id===id); if(t)t.status='done'; fetch('/.netlify/functions/client-tasks',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({op:'resolve',id})}).catch(()=>{}); if(window.notifyEdit)window.notifyEdit({entity_type:'client_task',entity_key:id,field:'status',new_value:'done: '+((t&&t.client)||id)}); clientTaskAfter(); };
+  window.clientTaskDismiss=(id,ev)=>{ if(ev&&ev.stopPropagation)ev.stopPropagation(); const t=(window.__clientTasks||[]).find(x=>x.id===id); if(t)t.status='dismissed'; fetch('/.netlify/functions/client-tasks',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({op:'dismiss',id})}).catch(()=>{}); clientTaskAfter(); };
+
+  /* ---------- MEETINGS & INTERVIEWS (Home) — fed from Google Calendar by the sync ---------- */
+  window.openMeet=(ev)=>{ if(ev&&ev.preventDefault)ev.preventDefault(); try{ window.open('http://localhost:8765','_blank'); }catch(e){} if(window.toast) toast('MEET is your local meeting app. Send me the client details and I\'ll load the brief before the call.','info',6000); };
+  window.loadMeetings=async()=>{
+    const el=document.getElementById('home-meetings'); if(!el) return;
+    let ms=[]; try{ const d=await (await fetch('/.netlify/functions/meetings')).json(); ms=(d&&d.ok)?(d.meetings||[]):[]; }catch(e){}
+    const up=ms.filter(m=>m.status!=='done');
+    if(!up.length){ el.innerHTML='<div class="gauge-sub">No upcoming meetings or interviews. When one is scheduled it shows here with a prep link. Say "sync" to pull your calendar.</div>'; return; }
+    const now=Date.now();
+    el.innerHTML=up.map(m=>{
+      const t=m.startISO?new Date(m.startISO).getTime():0;
+      const soon=t&&(t-now)<86400000&&(t-now)>-3600000;
+      const ic=m.type==='interview'?'🎤':'📅';
+      const join=m.link?`<a href="${esc(m.link)}" target="_blank" rel="noopener" style="color:#60A5FA;text-decoration:none;font-weight:600">Join ↗</a> · `:'';
+      return `<div class="opitem" style="align-items:flex-start;gap:9px;${soon?'background:#1c1407;border-radius:9px;padding:9px;margin-bottom:6px':''}">
+        <span style="font-size:18px;flex:none;margin-top:1px">${ic}</span>
+        <div style="flex:1;min-width:0">
+          <div class="oname" style="font-weight:600;white-space:normal">${esc(m.title)}${soon?' <span style="color:#D4AF37;font-size:11px;font-weight:700">• SOON</span>':''}<span style="font-family:var(--mono);font-size:9px;color:#8a98ad;border:1px solid #33415588;border-radius:5px;padding:1px 5px;margin-left:6px">${m.type==='interview'?'INTERVIEW':'MEETING'}</span></div>
+          <div class="gauge-sub" style="margin-top:2px">${esc(m.whenText||'')}${m.withWho?' · with '+esc(m.withWho):''}</div>
+          ${m.notes?`<div class="gauge-sub" style="margin-top:2px">${esc(m.notes)}</div>`:''}
+          <div class="gauge-sub" style="margin-top:4px">${join}<a onclick="openMeet(event)" style="cursor:pointer;color:#C9A961" title="Open MEET to prep">Prep in MEET →</a></div>
+        </div></div>`;
+    }).join('');
   };
 
   /* ---------- ROUTER ---------- */
@@ -6320,7 +6612,7 @@
   window.go=v=>{ window.curView=v; window.curClient=null; window.__curClientSlug=null; app.innerHTML=`<div class="view">${views[v]()}</div>`; window.scrollTo(0,0);
     if(!window.__routing){ var __nh='#'+v; if(location.hash!==__nh){ try{ location.hash=__nh; }catch(e){} } }
     document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('active',b.dataset.v===v));
-    sheet.classList.remove('open'); if(v==='crm'&&window.loadBrevoCrm){ window.loadBrevoCrm(); } if(v==='inbox'&&window.loadInbox) window.loadInbox(); if(v==='home'&&window.loadHomeAttention) window.loadHomeAttention(); if(v==='board'&&window.Board) window.Board.render(); if(v==='team'&&window.TeamChat) window.TeamChat.enter(); if(v==='bruno'&&window.renderVault) window.renderVault(); };
+    sheet.classList.remove('open'); if(v==='crm'&&window.loadBrevoCrm){ window.loadBrevoCrm(); } if(v==='inbox'&&window.loadInbox) window.loadInbox(); if(v==='home'&&window.loadHomeAttention) window.loadHomeAttention(); if(v==='home'&&window.loadClientTasks) window.loadClientTasks(); if(v==='home'&&window.loadMeetings) window.loadMeetings(); if(v==='board'&&window.Board) window.Board.render(); if(v==='team'&&window.TeamChat) window.TeamChat.enter(); if(v==='bruno'&&window.renderVault) window.renderVault(); };
   window.filterCards=(inp,wrapId)=>{ const q=inp.value.toLowerCase(); const wrap=document.getElementById(wrapId);
     wrap.querySelectorAll('.card,.wfrow,.clientbox,.opitem').forEach(c=>{ const hay=(c.dataset.search||c.textContent).toLowerCase(); c.style.display=hay.includes(q)?'':'none'; });
     wrap.querySelectorAll('.wfcat').forEach(p=>{ const any=[...p.querySelectorAll('.wfrow')].some(r=>r.style.display!=='none'); p.style.display=any?'':'none'; }); };
@@ -6555,7 +6847,9 @@
     } finally { window.__routing=false; }
   };
   window.addEventListener('hashchange', window.applyHash);
-  window.applyHash(); // boot to the URL's page (or home if none)
+  /* RJ: the dashboard ALWAYS opens on Home, regardless of the last page / bookmarked hash. */
+  try{ if(location.hash && location.hash!=='#home') history.replaceState(null,'',location.pathname+location.search); }catch(e){}
+  if(typeof window.go==='function') window.go('home'); else window.applyHash();
 </script>
 
 <!-- ===== BBC /os Auth Controller (Supabase) ===== -->
@@ -6578,7 +6872,7 @@
   function bbcAllowed(email){
     var e=(email||'').toLowerCase().trim();
     if(/@balaynibruno\.co$/.test(e)) return true;
-    return ['rjbryantresreyes@gmail.com','krizza.bbc@gmail.com','krizzamaymanagase@gmail.com','daryl.bbc@gmail.com'].indexOf(e)>=0;
+    return ['rjbryantresreyes@gmail.com','krizza.bbc@gmail.com','krizzamaymanagase@gmail.com','daryl.bbc@gmail.com','john.bbc2297@gmail.com'].indexOf(e)>=0;
   }
   async function denyNonBBC(){
     var c=initClient(); if(c){ try{ await c.auth.signOut(); }catch(e){} }
@@ -6603,6 +6897,8 @@
     'vi@balaynibruno.co':         { editor:'vi',      owner:'ajb' },
     'vicarmelle@balaynibruno.co': { editor:'vi',      owner:'ajb' },
     'ryan@balaynibruno.co':       { editor:'ryan',    owner:'bbc' },
+    'john@balaynibruno.co':       { editor:'john',    owner:'bbc' },
+    'john.bbc2297@gmail.com':     { editor:'john',    owner:'bbc' },
     /* Clients (when their logins are set up) */
     'beau@homevisionstudio.com':  { editor:'beau',    owner:'hvs' },
     'kari@homevisionstudio.com':  { editor:'kari',    owner:'hvs' },

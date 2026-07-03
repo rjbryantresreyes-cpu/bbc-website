@@ -169,3 +169,12 @@ git push            # Netlify auto-deploys
 - Two files changed: `chat/index.html`, `netlify/functions/bbc-msg.mjs`. Not pushed.
 
 <!-- deploy-trigger 2026-06-30: publish Bruno vault seed button (os/index.html only — force build past the os/-skip rule). -->
+
+## 📅 ADDED 2026-07-04 (part 5) — Home page: "Upcoming interviews & calls" card — STAGED
+- **What RJ asked:** his upcoming interviews should show on the /os dashboard (alongside calendar + reminders), and go out with the next deploy batch.
+- **os/index.html + SOURCE `COMMAND_CENTER/app/index.html`** (both edited, in sync): new **"Upcoming interviews & calls"** section on the **Home** view, right under the client-tasks panel. Renders from a small inline `IV` array (easy to edit — add/remove a line per interview). Each card shows who · when (PH time) · a status pill (green "confirmed" / gold "to book") · a note · a "Join Google Meet" link when present. Uses existing `panel`/`panelgrid`/`ptitle`/`pill` classes, matches the dashboard style, mobile-safe (word-break on the link).
+- **Seeded with 2 real items:** Edward (Dogument / PettiChat) — Wed Jul 8, 5:00 PM PH, Meet https://meet.google.com/zvw-abmw-swe (confirmed); Jena (Pine Crest Fabrics VA role) — week of Jul 6, time not set (to book).
+- **Follow-on (optional):** make it live-driven from Google Calendar (pull events tagged interview) instead of the inline array, so it updates itself. Inline array is the reliable v1.
+- Pattern matches the existing Home-view IIFE blocks (`${(()=>{...})()}`); `esc()` in scope. Static-preview render not screenshot-verified (Home sits behind the team login gate) — low risk, isolated additive block.
+
+<!-- deploy-trigger 2026-07-04e: Home page "Upcoming interviews & calls" card (os/index.html + SOURCE). -->

@@ -698,8 +698,8 @@
 <script type="application/json" id="bbc-data">
 {
   "meta": {
-    "updated": "2026-06-30",
-    "pendingCount": 17
+    "updated": "2026-07-04",
+    "pendingCount": 21
   },
   "owners": {
     "Vidz": "#A78BFA",
@@ -1042,7 +1042,7 @@
       "folder": "_JOB_APPLICATIONS"
     },
     {
-      "name": "Freccia Construction",
+      "name": "Greenlight Go Logistics",
       "owner": "-",
       "handler": "-",
       "ai": "-",
@@ -1051,7 +1051,7 @@
       "status": "active",
       "category": "active",
       "notes": "Folder on Drive; details to confirm.",
-      "folder": "FRECCIA-CONSTRUCTION"
+      "folder": "GREENLIGHT-GO-LOGISTICS"
     }
   ],
   "team": [
@@ -1655,7 +1655,7 @@
               "name": "_JOB_APPLICATIONS"
             },
             {
-              "name": "FRECCIA-CONSTRUCTION"
+              "name": "GREENLIGHT-GO-LOGISTICS"
             }
           ]
         },
@@ -1846,6 +1846,18 @@
             },
             {
               "name": "2026-06-20_welcome_freccia"
+            },
+            {
+              "name": "2026-07-02_write_posts_customers_understand"
+            },
+            {
+              "name": "2026-07-03_reel_content_comprehension"
+            },
+            {
+              "name": "2026-07-04_reel_brief_builder"
+            },
+            {
+              "name": "2026-07-04_reel_founder_plans_va_executes"
             }
           ]
         },
@@ -1929,6 +1941,18 @@
         },
         {
           "name": "_RJ_PERSONAL"
+        },
+        {
+          "name": ".playwright-mcp"
+        },
+        {
+          "name": ".playwright-mcp (1)"
+        },
+        {
+          "name": "_ARCHIVE"
+        },
+        {
+          "name": "Signatures"
         }
       ]
     }
@@ -2365,6 +2389,22 @@
       "path": "freccia-construction.html",
       "group": "Insights / blog",
       "purpose": "A new partnership with Freccia Construction, a custom home builder in Austin, Texas. Balay ni Bruno &amp; Co. runs their short-form social, LinkedIn, website support, and a custom in-house AI helper.",
+      "status": "live",
+      "noindex": false
+    },
+    {
+      "name": "Free File Converter — Images, Video, Audio, Docs",
+      "path": "file-converter.html",
+      "group": "Insights / blog",
+      "purpose": "Convert any file to any format, free. Images, video, audio, PDFs, documents. Drag and drop multiple files at once. No sign-up, no watermark. Built by Balay ni Bruno &amp; Co.",
+      "status": "live",
+      "noindex": false
+    },
+    {
+      "name": "Free PDF to EPS / Print-Ready Converter",
+      "path": "pdf-to-eps-converter.html",
+      "group": "Insights / blog",
+      "purpose": "Convert PDF files to EPS or print-ready PDF format for free. No sign-up. No watermark. Built by Balay ni Bruno &amp; Co. for business owners who need print files fast.",
       "status": "live",
       "noindex": false
     },
@@ -3616,28 +3656,28 @@
       "path": "LEARNINGS"
     },
     {
-      "title": "ghl connection deep dive",
-      "date": "2026-06-30",
+      "title": "fable5 repos deep dive",
+      "date": "2026-07-03",
       "path": "LEARNINGS"
     },
     {
-      "title": "shopify nav scope workaround",
-      "date": "2026-06-28",
+      "title": "brevo deliverability and automation gotchas",
+      "date": "2026-07-03",
       "path": "LEARNINGS"
     },
     {
-      "title": "hvs design center card pattern",
-      "date": "2026-06-28",
+      "title": "pdf toolkit install",
+      "date": "2026-07-02",
       "path": "LEARNINGS"
     },
     {
-      "title": "gemini scale swap prompt pattern",
-      "date": "2026-06-28",
+      "title": "drewscampfire blender science viz study",
+      "date": "2026-07-02",
       "path": "LEARNINGS"
     },
     {
-      "title": "sriviere page editability and darkmode",
-      "date": "2026-06-27",
+      "title": "brevo automation enrollment gotchas",
+      "date": "2026-07-02",
       "path": "LEARNINGS"
     }
   ],
@@ -4223,6 +4263,30 @@
       "date": "2026-06-20",
       "slug": "welcome_freccia",
       "posted": false
+    },
+    {
+      "name": "2026-07-02_write_posts_customers_understand",
+      "date": "2026-07-02",
+      "slug": "write_posts_customers_understand",
+      "posted": false
+    },
+    {
+      "name": "2026-07-03_reel_content_comprehension",
+      "date": "2026-07-03",
+      "slug": "reel_content_comprehension",
+      "posted": false
+    },
+    {
+      "name": "2026-07-04_reel_brief_builder",
+      "date": "2026-07-04",
+      "slug": "reel_brief_builder",
+      "posted": false
+    },
+    {
+      "name": "2026-07-04_reel_founder_plans_va_executes",
+      "date": "2026-07-04",
+      "slug": "reel_founder_plans_va_executes",
+      "posted": false
     }
   ],
   "insights": {
@@ -4713,6 +4777,7 @@
   const WF_IMPACT_RANK={high:0,med:1,low:2};
   const wfLocalPrio=()=>{try{return JSON.parse(localStorage.getItem('bbc_wf_prio')||'{}');}catch(e){return{};}};
   function wfImpactDefault(w){
+    // transparent heuristic (no invented content): business-usable + BBC-marketing = higher impact
     let s=0; const t=((w.title||'')+' '+(w.cat||'')+' '+(w.angle||'')+' '+(w.role||'')+' '+(w.audience||'')).toLowerCase();
     if(/business owner|small business|client|agenc/.test(t)) s+=2;
     if((w.owners||[]).some(o=>WF_SOCIAL_OWN_SET.has(o))) s+=1;
@@ -4842,8 +4907,28 @@
     ].map(x=>`<div class="panel tap" onclick="go('${x.v}')" style="display:block;text-align:left"><div style="font-size:22px;line-height:1">${x.ic}</div><span class="ptitle" style="display:block;margin-top:6px">${x.t}</span><div class="gauge-sub" style="margin-top:2px">${esc(x.d)}</div></div>`).join('');
     const homeClients=D.clients.filter(c=>(c.category||'active')==='active');
     return `<h2 class="vt">Home</h2><div class="vsub">Everything in one place. Tap any section to open it.</div>
+      <div class="sec">Meetings &amp; Interviews</div>
+      <div class="panel" id="home-meetings" style="display:block"><div class="gauge-sub">Loading your calendar…</div></div>
       <div class="sec">Client tasks needing attention — from WhatsApp + email</div>
       <div class="panel" id="home-client-tasks" style="display:block"><div class="gauge-sub">Checking WhatsApp + email…</div></div>
+      <div class="sec">Upcoming interviews &amp; calls</div>
+      ${(()=>{
+        // Edit this list to add/remove interviews. status: 'confirmed' or 'pending'.
+        const IV=[
+          {who:'Edward — Dogument / PettiChat',when:'Wed Jul 8, 5:00 PM PH',status:'confirmed',link:'https://meet.google.com/zvw-abmw-swe',note:'Video call. Send MEET brief before.'},
+          {who:'Jena — Pine Crest Fabrics (VA role)',when:'Week of Jul 6 — time not set',status:'pending',link:'',note:'She proposed the week of Jul 6. Reply to book a slot.'}
+        ];
+        const pill=s=>s==='confirmed'
+          ?'<span class="pill" style="background:rgba(74,222,128,.16);color:#4ADE80">confirmed</span>'
+          :'<span class="pill" style="background:rgba(212,175,55,.18);color:#D4AF37">to book</span>';
+        const cards=IV.map(v=>`<div class="panel" style="display:block;text-align:left">
+          <div style="display:flex;gap:8px;align-items:flex-start;justify-content:space-between"><span class="ptitle" style="flex:1">${esc(v.who)}</span>${pill(v.status)}</div>
+          <div class="gauge-sub" style="margin-top:6px;color:#F5F1EA">${esc(v.when)}</div>
+          <div class="gauge-sub" style="margin-top:4px">${esc(v.note)}</div>
+          ${v.link?`<a href="${esc(v.link)}" target="_blank" rel="noopener" style="display:inline-block;margin-top:8px;color:#60A5FA;font-size:12px;word-break:break-all">Join Google Meet ↗</a>`:''}
+        </div>`).join('');
+        return `<div class="panelgrid">${cards}</div>`;
+      })()}
       <div class="sec">Client updates — tap a client for their tasks + emails</div>
       <div class="gauge-sub" style="text-align:left;margin:-4px 0 10px">Live from rj@balaynibruno.co + WhatsApp. Tap a client box for their requests, tasks and important emails. Refreshes every time you open the dashboard.</div>
       <div class="panelgrid">${homeClients.map(c=>{const cslug=c.slug||window.__slug(c.name);return `<div class="panel tap" onclick="clientMail('${cslug}')" style="display:block;text-align:left"><span class="ptitle" style="display:block">${esc(c.name)}</span><div class="gauge-sub" id="ctbadge-${cslug}" style="margin-top:4px">📧 Tap for emails &amp; tasks</div></div>`;}).join('')}</div>
@@ -6424,6 +6509,30 @@
   window.clientTaskDone=(id,ev)=>{ if(ev&&ev.stopPropagation)ev.stopPropagation(); const t=(window.__clientTasks||[]).find(x=>x.id===id); if(t)t.status='done'; fetch('/.netlify/functions/client-tasks',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({op:'resolve',id})}).catch(()=>{}); if(window.notifyEdit)window.notifyEdit({entity_type:'client_task',entity_key:id,field:'status',new_value:'done: '+((t&&t.client)||id)}); clientTaskAfter(); };
   window.clientTaskDismiss=(id,ev)=>{ if(ev&&ev.stopPropagation)ev.stopPropagation(); const t=(window.__clientTasks||[]).find(x=>x.id===id); if(t)t.status='dismissed'; fetch('/.netlify/functions/client-tasks',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({op:'dismiss',id})}).catch(()=>{}); clientTaskAfter(); };
 
+  /* ---------- MEETINGS & INTERVIEWS (Home) — fed from Google Calendar by the sync ---------- */
+  window.openMeet=(ev)=>{ if(ev&&ev.preventDefault)ev.preventDefault(); try{ window.open('http://localhost:8765','_blank'); }catch(e){} if(window.toast) toast('MEET is your local meeting app. Send me the client details and I\'ll load the brief before the call.','info',6000); };
+  window.loadMeetings=async()=>{
+    const el=document.getElementById('home-meetings'); if(!el) return;
+    let ms=[]; try{ const d=await (await fetch('/.netlify/functions/meetings')).json(); ms=(d&&d.ok)?(d.meetings||[]):[]; }catch(e){}
+    const up=ms.filter(m=>m.status!=='done');
+    if(!up.length){ el.innerHTML='<div class="gauge-sub">No upcoming meetings or interviews. When one is scheduled it shows here with a prep link. Say "sync" to pull your calendar.</div>'; return; }
+    const now=Date.now();
+    el.innerHTML=up.map(m=>{
+      const t=m.startISO?new Date(m.startISO).getTime():0;
+      const soon=t&&(t-now)<86400000&&(t-now)>-3600000;
+      const ic=m.type==='interview'?'🎤':'📅';
+      const join=m.link?`<a href="${esc(m.link)}" target="_blank" rel="noopener" style="color:#60A5FA;text-decoration:none;font-weight:600">Join ↗</a> · `:'';
+      return `<div class="opitem" style="align-items:flex-start;gap:9px;${soon?'background:#1c1407;border-radius:9px;padding:9px;margin-bottom:6px':''}">
+        <span style="font-size:18px;flex:none;margin-top:1px">${ic}</span>
+        <div style="flex:1;min-width:0">
+          <div class="oname" style="font-weight:600;white-space:normal">${esc(m.title)}${soon?' <span style="color:#D4AF37;font-size:11px;font-weight:700">• SOON</span>':''}<span style="font-family:var(--mono);font-size:9px;color:#8a98ad;border:1px solid #33415588;border-radius:5px;padding:1px 5px;margin-left:6px">${m.type==='interview'?'INTERVIEW':'MEETING'}</span></div>
+          <div class="gauge-sub" style="margin-top:2px">${esc(m.whenText||'')}${m.withWho?' · with '+esc(m.withWho):''}</div>
+          ${m.notes?`<div class="gauge-sub" style="margin-top:2px">${esc(m.notes)}</div>`:''}
+          <div class="gauge-sub" style="margin-top:4px">${join}<a onclick="openMeet(event)" style="cursor:pointer;color:#C9A961" title="Open MEET to prep">Prep in MEET →</a></div>
+        </div></div>`;
+    }).join('');
+  };
+
   /* ---------- ROUTER ---------- */
   /* Chat context per page — opening Cuh from a page auto-files the task under that area */
   const CHAT_CTX={
@@ -6503,7 +6612,7 @@
   window.go=v=>{ window.curView=v; window.curClient=null; window.__curClientSlug=null; app.innerHTML=`<div class="view">${views[v]()}</div>`; window.scrollTo(0,0);
     if(!window.__routing){ var __nh='#'+v; if(location.hash!==__nh){ try{ location.hash=__nh; }catch(e){} } }
     document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('active',b.dataset.v===v));
-    sheet.classList.remove('open'); if(v==='crm'&&window.loadBrevoCrm){ window.loadBrevoCrm(); } if(v==='inbox'&&window.loadInbox) window.loadInbox(); if(v==='home'&&window.loadHomeAttention) window.loadHomeAttention(); if(v==='home'&&window.loadClientTasks) window.loadClientTasks(); if(v==='board'&&window.Board) window.Board.render(); if(v==='team'&&window.TeamChat) window.TeamChat.enter(); if(v==='bruno'&&window.renderVault) window.renderVault(); };
+    sheet.classList.remove('open'); if(v==='crm'&&window.loadBrevoCrm){ window.loadBrevoCrm(); } if(v==='inbox'&&window.loadInbox) window.loadInbox(); if(v==='home'&&window.loadHomeAttention) window.loadHomeAttention(); if(v==='home'&&window.loadClientTasks) window.loadClientTasks(); if(v==='home'&&window.loadMeetings) window.loadMeetings(); if(v==='board'&&window.Board) window.Board.render(); if(v==='team'&&window.TeamChat) window.TeamChat.enter(); if(v==='bruno'&&window.renderVault) window.renderVault(); };
   window.filterCards=(inp,wrapId)=>{ const q=inp.value.toLowerCase(); const wrap=document.getElementById(wrapId);
     wrap.querySelectorAll('.card,.wfrow,.clientbox,.opitem').forEach(c=>{ const hay=(c.dataset.search||c.textContent).toLowerCase(); c.style.display=hay.includes(q)?'':'none'; });
     wrap.querySelectorAll('.wfcat').forEach(p=>{ const any=[...p.querySelectorAll('.wfrow')].some(r=>r.style.display!=='none'); p.style.display=any?'':'none'; }); };
