@@ -1,0 +1,78 @@
+{
+  "op": "bulk",
+  "_note": "First client-sync run (2026-07-04) — extracted from rj@balaynibruno.co inbox. Push after deploy: node client-task.mjs bulk \"$(cat client_tasks_seed.json | jq -c .tasks)\"  (or POST this whole object to /.netlify/functions/client-tasks).",
+  "tasks": [
+    {
+      "clientSlug": "freccia-construction",
+      "client": "Freccia (Rebekah)",
+      "source": "email",
+      "text": "Search Console flagged pages not getting indexed on frecciagroup.com — review the reasons Rebekah forwarded and fix.",
+      "ts": "2026-07-03T16:39:51Z",
+      "ref": "Fwd: New reasons prevent pages from being indexed on frecciagroup.com"
+    },
+    {
+      "clientSlug": "freccia-construction",
+      "client": "Freccia (Rebekah)",
+      "source": "email",
+      "text": "Send Rebekah the ad-engagement proof (a click is not a working landing page) she can show Thrive / use to ask for a refund.",
+      "ts": "2026-07-01T21:50:14Z",
+      "ref": "Re: Problem with Ads"
+    },
+    {
+      "clientSlug": "freccia-construction",
+      "client": "Freccia (Rebekah)",
+      "source": "email",
+      "text": "Build Freccia's 2 marketing emails into GHL as drafts, signed from Josh Clements (sales@frecciagroup.com), replies routed to Rebekah.",
+      "ts": "2026-07-01T20:15:52Z",
+      "ref": "Re: (email marketing plan)"
+    },
+    {
+      "clientSlug": "freccia-construction",
+      "client": "Freccia (Rebekah)",
+      "source": "email",
+      "text": "Collect Freccia's assets + access from Thrive during the transition (Julio is confirming access to the item list).",
+      "ts": "2026-07-01T21:19:56Z",
+      "ref": "Re: Previous Company - Thrive"
+    },
+    {
+      "clientSlug": "freccia-construction",
+      "client": "Freccia (Rebekah)",
+      "source": "email",
+      "text": "Update the client review wording: change 'Rebecca' to 'Rebekah' so the timeline is accurate.",
+      "ts": "2026-07-03T15:19:06Z",
+      "ref": "Re: Freccia progress report for July 2"
+    },
+    {
+      "clientSlug": "freccia-construction",
+      "client": "Freccia (Rebekah)",
+      "source": "email",
+      "text": "Make sure the Freccia site always shows the official number 512-551-8660 (not a call-tracking number).",
+      "ts": "2026-06-30T01:40:07Z",
+      "ref": "Re: Freccia progress report for June 30"
+    },
+    {
+      "clientSlug": "jr-signing-services",
+      "client": "JR Signing Services",
+      "source": "email",
+      "text": "Apply JR's brief corrections to the LinkedIn outreach plan (Jasmine approved the approach, sent a corrections brief).",
+      "ts": "2026-07-01T23:25:17Z",
+      "ref": "Re: Our LinkedIn outreach plan for JR Signing"
+    },
+    {
+      "clientSlug": "jr-signing-services",
+      "client": "JR Signing Services",
+      "source": "email",
+      "text": "Reply to Jasmine on Greenlight Go Logistics: what you need from her to start, and whether cold calling is separate (she offered ~2 hrs/day).",
+      "ts": "2026-07-02T05:37:39Z",
+      "ref": "Re: For your review: JR Signing Services outreach scripts"
+    },
+    {
+      "clientSlug": "jr-signing-services",
+      "client": "JR Signing Services",
+      "source": "email",
+      "text": "Wire JR's Setmore booking link into the outreach (creds shared; note: per-claim limit is $1M).",
+      "ts": "2026-07-02T23:36:17Z",
+      "ref": "Re: Confirmed: all 5 action items done"
+    }
+  ]
+}
