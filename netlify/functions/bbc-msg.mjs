@@ -136,7 +136,7 @@ async function adminUsers() {
 // Backed up first; guarded by a flag so it runs once. Returns a small summary.
 async function mergeHubChats(js) {
   const rd = async (k, d) => { try { return (await js.get(k, { type: "json", consistency: "strong" })) ?? d; } catch { return d; } };
-  const FLAG = "hubmerged_v5";
+  const FLAG = "hubmerged_v6";
   if (await rd(FLAG, 0)) return { skipped: true };
   const convs0 = await rd("convs", []);
   if (!convs0.length) { await js.setJSON(FLAG, Date.now()); return { empty: true }; }
