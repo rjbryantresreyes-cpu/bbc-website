@@ -248,6 +248,38 @@ export default async (req) => {
     }
   }
 
+  // ---- TEMP diagnostic (read-only, nonce-gated, no message contents). Remove after Krizza recovery verified. ----
+  {
+    const u1 = new URL(req.url);
+    if (req.method === "GET" && u1.searchParams.get("action") === "diag" && u1.searchParams.get("k") === "diag-7f3k9-krz-0704") {
+      try {
+        const js1 = getStore(JSTORE);
+        const rd = async (k, d) => { try { return (await js1.get(k, { type: "json", consistency: "strong" })) ?? d; } catch { return d; } };
+        const au = await adminUsers();
+        const roster = await rd("roster", []);
+        const convs = await rd("convs", []);
+        const rosterById = {}; for (const p of roster) rosterById[p.id] = p;
+        const emailOf = (id) => { const p = rosterById[id]; const u = (au || []).find(x => x.id === id); return ((p && p.email) || (u && u.email) || "").toLowerCase(); };
+        const nameOf = (id) => { const p = rosterById[id]; const u = (au || []).find(x => x.id === id); return ((p && p.name) || (u && u.name) || ""); };
+        const keyOf = (id) => { if (id === HUB_CANON) return "hub"; if (id === MESSY_ID) return "messy"; const e = emailOf(id); if (isHub(e)) return "hub"; if (e && KNOWN[e]) return KNOWN[e].toLowerCase(); return (nameOf(id).trim().toLowerCase().split(/\s+/)[0]) || ("id:" + id); };
+        const convOut = [];
+        for (const c of convs) {
+          const ms = await rd("msgs:" + c.id, []);
+          convOut.push({ id: c.id, type: c.type, name: c.name || null, lastTs: c.lastTs || 0, msgCount: Array.isArray(ms) ? ms.length : 0, members: (c.members || []).map(m => ({ id: m, email: emailOf(m), key: keyOf(m) })) });
+        }
+        return json({
+          serviceKey: !!process.env.SUPABASE_SERVICE_ROLE_KEY,
+          adminUsersCount: au ? au.length : null,
+          adminUsers: (au || []).map(u => ({ id: u.id, email: u.email, key: keyOf(u.id) })),
+          flags: { v4: await rd("hubmerged_v4", 0), v5: await rd("hubmerged_v5", 0), v6: await rd("hubmerged_v6", 0) },
+          roster: roster.map(p => ({ id: p.id, email: p.email, name: p.name, seen: p.seen || 0 })),
+          convCount: convs.length,
+          convs: convOut,
+        });
+      } catch (e) { return json({ diagError: String(e.message || e).slice(0, 300) }, 500); }
+    }
+  }
+
   const user = await verify(req);
   if (!user) return json({ error: "unauthorized", reply: "Please sign in." }, 401);
 
