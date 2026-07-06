@@ -233,10 +233,16 @@ export default async (req) => {
   {
     const u0 = new URL(req.url);
     if (req.method === "GET" && u0.searchParams.get("action") === "avatar") {
-      const id = u0.searchParams.get("id");
+      let id = u0.searchParams.get("id");
       if (id) {
         try {
           const fs0 = getStore(FSTORE), js0 = getStore(JSTORE);
+          // The hub's membership is the canonical "hub" id; serve RJ's real photo for it.
+          if (id === HUB_CANON) {
+            const roster0 = (await js0.get("roster", { type: "json" })) || [];
+            const hubReal = roster0.filter(p => p && p.hub && p.avatar)[0];
+            if (hubReal) id = hubReal.id;
+          }
           const buf = await fs0.get("avatar:" + id, { type: "arrayBuffer" });
           if (buf) {
             const meta = (await js0.get("avatarmeta:" + id, { type: "json" })) || { type: "image/jpeg" };
@@ -424,11 +430,14 @@ export default async (req) => {
       // a teammate's chosen name (set via setProfile) lives in the Blobs roster; prefer it.
       const nameOf = (id, fallback) => { const p = roster.find(x => x.id === id); return (p && p.name) || fallback; };
       const all = await adminUsers(); // full team from Supabase (even those who haven't opened the app yet)
-      // Treat every hub id as one person, so a DM's "other" is the real teammate, never a stray hub id.
-      const isHubId = (id) => myIds.includes(id) || (all || []).some(u => u.id === id && isHub(u.email));
+      // Treat every hub id (incl. the canonical "hub") as one person: BBC Bruno.
+      const isHubId = (id) => id === HUB_CANON || myIds.includes(id) || (all || []).some(u => u.id === id && isHub(u.email));
       const firstName = (s) => String(s || "").trim().split(/\s+/)[0] || "";
+      // the hub's real avatar id (so VAs see RJ's photo even though his membership is the canonical "hub")
+      const hubAvatarId = [...roster.filter(p => p && p.hub).map(p => p.id), ...((all || []).filter(u => isHub(u.email)).map(u => u.id))].find(id => avaSet.has(id)) || null;
       // Clean display name: hub -> "BBC Bruno", known email -> our short name, else first name only (no "Daryl Ausan00").
       const displayNameFor = (id, emailHint) => {
+        if (id === HUB_CANON) return "BBC Bruno";                 // the merged hub identity
         if (myIds.includes(id)) return meHub ? "BBC Bruno" : "You";
         const u = (all || []).find(x => x.id === id);
         const e = (emailHint || (u && u.email) || "").toLowerCase();
@@ -449,7 +458,7 @@ export default async (req) => {
         let title = "", otherId = null, otherAvatar = false;
         if (c.type === "self") title = "📱 " + (c.device || c.name || "Notes");
         else if (c.type === "group") title = c.name || "Group";
-        else { otherId = c.members.find(m => !isHubId(m)) || c.members.find(m => m !== meId) || c.members[0]; title = resolveName(otherId); otherAvatar = avaSet.has(otherId); }
+        else { otherId = c.members.find(m => !isHubId(m)) || c.members.find(m => m !== meId) || c.members[0]; title = resolveName(otherId); otherAvatar = avaSet.has(otherId) || (otherId === HUB_CANON && !!hubAvatarId); }
         return { ...c, unread, pinned: !!pinned[c.id], label: labels[c.id] || "", title, otherId, otherAvatar };
       }));
       let rosterOut;

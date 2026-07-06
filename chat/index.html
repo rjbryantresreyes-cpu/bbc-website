@@ -386,6 +386,7 @@ async function setupPush(){
 // roster member by name and set their avatar by id, so no emails are needed and
 // new teammates are picked up automatically once a photo with their name exists.
 const TEAM_PHOTO_BY_NAME={
+ 'bbc':'/images/team/rj-bryan.jpg',
  'bruno':'/images/team/rj-bryan.jpg',
  'vi':'/images/team/vi.jpg',
  'krizza':'/images/team/krizza.jpg',
@@ -396,7 +397,7 @@ const TEAM_PHOTO_BY_NAME={
 };
 function imgToB64(blob){return new Promise((res,rej)=>{const img=new Image();const u=URL.createObjectURL(blob);img.onload=()=>{const max=300,sc=Math.min(1,max/Math.max(img.width,img.height));const c=document.createElement('canvas');c.width=Math.round(img.width*sc)||max;c.height=Math.round(img.height*sc)||max;c.getContext('2d').drawImage(img,0,0,c.width,c.height);URL.revokeObjectURL(u);c.toBlob(b=>{const fr=new FileReader();fr.onload=()=>res(String(fr.result).split(',')[1]);fr.onerror=rej;fr.readAsDataURL(b);},'image/jpeg',0.82);};img.onerror=rej;img.src=u;});}
 async function maybeImportPhotos(){
-  try{ if(localStorage.getItem('bbc_photos_imported_v3'))return; await importTeamPhotos(); localStorage.setItem('bbc_photos_imported_v3','1'); }catch(e){}
+  try{ if(localStorage.getItem('bbc_photos_imported_v4'))return; await importTeamPhotos(); localStorage.setItem('bbc_photos_imported_v4','1'); }catch(e){}
 }
 async function importTeamPhotos(){
   toast('Importing team photos…');let done=0,miss=0;
