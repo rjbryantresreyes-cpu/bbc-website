@@ -435,6 +435,19 @@
 .wfck-link.add{color:#6f7f96;}
 .wfcard-bar{height:5px;background:#0a0f1a;border-radius:3px;overflow:hidden;margin-top:13px;}
 .wfcard-bar i{display:block;height:100%;background:linear-gradient(90deg,#D4AF37,#4ADE80);}
+.wfmx{margin-top:8px;overflow-x:auto;-webkit-overflow-scrolling:touch;}
+.wfmxh{display:grid;gap:5px;align-items:end;padding:2px 6px 6px;min-width:300px;border-bottom:1px solid #1a2436;}
+.wfmxh-nm{font-family:var(--mono);font-size:9px;letter-spacing:.05em;color:#8a98ad;}
+.wfmxh-c{font-family:var(--mono);font-size:8px;color:#8a98ad;text-align:center;line-height:1.1;white-space:nowrap;overflow:hidden;}
+.wfmxh-p{font-family:var(--mono);font-size:9px;color:#8a98ad;text-align:right;}
+.wfmxr{display:grid;gap:5px;align-items:center;padding:9px 6px;border-top:1px solid #141c2b;min-width:300px;}
+.wfmxr:first-of-type{border-top:none;}
+.wfmxr-nm{display:flex;align-items:center;gap:6px;min-width:0;cursor:pointer;}
+.wfmxr-dots{display:inline-flex;gap:3px;flex:none;}
+.wfmxr-t{font-size:13px;font-weight:600;color:#e6edf5;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.wfmxr-nm:hover .wfmxr-t{color:#fff;}
+.wfmxr-p{font-family:var(--mono);font-size:11px;font-weight:700;color:#D4AF37;text-align:right;}
+.wfmx .mxcell{margin:0;}
   .mxr-pct{font-family:var(--mono);font-size:10px;color:var(--gold2);text-align:center;}
   .mxbar{height:4px;background:var(--bg3);border-radius:3px;overflow:hidden;margin-top:6px;}
   .mxbar i{display:block;height:100%;background:linear-gradient(90deg,var(--goldB),var(--green));border-radius:3px;}
@@ -3547,6 +3560,11 @@
       "path": "LEARNINGS"
     },
     {
+      "title": "deep dive new tools",
+      "date": "2026-07-06",
+      "path": "LEARNINGS"
+    },
+    {
       "title": "fable5 repos deep dive",
       "date": "2026-07-03",
       "path": "LEARNINGS"
@@ -3563,11 +3581,6 @@
     },
     {
       "title": "drewscampfire blender science viz study",
-      "date": "2026-07-02",
-      "path": "LEARNINGS"
-    },
-    {
-      "title": "brevo automation enrollment gotchas",
       "date": "2026-07-02",
       "path": "LEARNINGS"
     }
@@ -4643,6 +4656,8 @@
 <script>
   const D = JSON.parse(document.getElementById('bbc-data').textContent);
   const OWN=D.owners, ORDER=D.artifactOrder, ICON=D.artifactIcon;
+  /* Keep the calendar on the REAL current month so it never gets stuck on an old month (was showing June). */
+  try{ var __now=new Date(), __MF=['January','February','March','April','May','June','July','August','September','October','November','December']; if(D.calendar){ D.calendar.year=__now.getFullYear(); D.calendar.monthIdx=__now.getMonth(); D.calendar.label=__MF[__now.getMonth()]+' '+__now.getFullYear(); D.calendar.today=__now.getFullYear()+'-'+String(__now.getMonth()+1).padStart(2,'0')+'-'+String(__now.getDate()).padStart(2,'0'); } }catch(e){}
   /* ===== WORKFLOW SHARED STATE — cross-device + system, two-way sync =====
      One shared box (Netlify Blobs via /.netlify/functions/workflows). RJ taps a deliverable
      on the dashboard OR a BBC script auto-checks it after generating the asset; both write the
@@ -5769,42 +5784,35 @@
     /* FULL-WIDTH checklist cards — one card per workflow, stacked vertically, grouped by category.
        Each card: name + description + a LABELED checklist (real text, not just icons) you tick off. */
     const WF_ART_LABEL={graphic:'Graphic / carousel',video:'Video / reel',page:'Insights page',email:'Email marketing',social:'Posted to social',zip:'Download pack'};
+    const WF_SHORT={graphic:'Graphic',video:'Video',page:'Page',email:'Email',social:'Social',zip:'Zip'};
+    const gridCols=`minmax(90px,1fr) repeat(${ORDER.length},26px) 38px`;
     const boxes=cats.map(cat=>{
       const list=D.workflows.filter(w=>w.cat===cat).sort((a,b)=>{ const r=WF_IMPACT_RANK[wfImpact(a)]-WF_IMPACT_RANK[wfImpact(b)]; return r||pct(b)-pct(a); });
       const avg=Math.round(list.reduce((s,w)=>s+pct(w),0)/list.length);
       const ic=CIC[cat]||'📦', col=CCOL[cat]||'#D4AF37';
-      const cards=list.map(w=>{
+      const header=`<div class="wfmxh" style="grid-template-columns:${gridCols}"><span class="wfmxh-nm">WORKFLOW</span>${ORDER.map(a=>`<span class="wfmxh-c" title="${esc(WF_ART_LABEL[a])}">${WF_SHORT[a]||a}</span>`).join('')}<span class="wfmxh-p">%</span></div>`;
+      const rows=list.map(w=>{
         const p=pct(w), im=wfImpact(w);
         const dots=w.owners.map(o=>`<span class="dot" style="background:${OWN[o]||'#888'}"></span>`).join('');
-        const checklist=ORDER.map(a=>{
-          const on=w.artifacts[a], link=wfLinkGet(w.id,a);
-          return `<div class="wfck ${on?'on':''}">
-            <span class="wfck-box" role="button" title="Tap to ${on?'uncheck':'check'} ${WF_ART_LABEL[a]||a}" onclick="wfArtToggle('${w.id}','${a}',event)">${on?'✓':''}</span>
-            <span class="wfck-lbl">${WF_ART_LABEL[a]||a}</span>
-            <span class="wfck-st">${on?'done':'to do'}</span>
-            ${link?`<a class="wfck-link" href="${esc(link)}" target="_blank" rel="noopener" onclick="event.stopPropagation()">view ↗</a>`:`<button class="wfck-link add" onclick="event.stopPropagation();wfEditLink('${w.id}','${a}')">+ link / note</button>`}
-          </div>`;
-        }).join('');
-        return `<div class="wfcard" data-search="${esc((w.title+' '+w.owners.join(' ')+' '+w.angle+' '+w.role).toLowerCase())}">
-          <div class="wfcard-top">
+        const cells=ORDER.map(a=>`<span class="mxcell tapcell ${w.artifacts[a]?'on':'off'}" role="button" title="${esc(WF_ART_LABEL[a])} — tap to ${w.artifacts[a]?'clear':'check'}" onclick="wfArtToggle('${w.id}','${a}',event)" style="width:24px;height:24px;font-size:12px">${w.artifacts[a]?'✓':''}</span>`).join('');
+        return `<div class="wfrow wfmxr" data-search="${esc((w.title+' '+w.owners.join(' ')+' '+w.angle+' '+w.role).toLowerCase())}" style="grid-template-columns:${gridCols}">
+          <span class="wfmxr-nm" onclick="wfSheet('${w.id}')" title="${esc(w.angle||w.role||'')}">
             <span class="wfimp" onclick="wfImpactCycle('${w.id}',event)" title="Impact: ${WF_IMPACT_LABEL[im]} — tap to change" style="background:${WF_IMPACT_COL[im]}22;color:${WF_IMPACT_COL[im]};border:1px solid ${WF_IMPACT_COL[im]}66">${im==='high'?'★':im==='med'?'●':'○'}</span>
-            <span class="wfcard-nm">${esc(w.title)}</span>
-            <span class="wfcard-pct">${p}%</span>
-          </div>
-          <div class="wfcard-meta"><span class="wfcard-dots">${dots}</span>${esc(w.owners.join(', '))}${w.role?' · '+esc(w.role):''}</div>
-          ${w.angle?`<div class="wfcard-desc">${esc(w.angle)}</div>`:''}
-          <div class="wfcard-list">${checklist}</div>
-          <div class="wfcard-bar"><i style="width:${p}%"></i></div>
+            <span class="wfmxr-dots">${dots}</span><span class="wfmxr-t">${esc(w.title)}</span>
+          </span>
+          ${cells}
+          <span class="wfmxr-p">${p}%</span>
         </div>`;
       }).join('');
       return `<div class="wfcat2">
         <div class="wfcat-hd"><div class="wfcat-ic" style="background:${col}22;color:${col}">${ic}</div><div class="wfcat-nm">${esc(cat)}</div><span class="wfcat-pct">${list.length} workflow${list.length>1?'s':''} · ${avg}%</span></div>
-        ${cards}</div>`;
+        <div class="wfmx">${header}${rows}</div>
+      </div>`;
     }).join('');
 
     const totalCells=D.workflows.length*ORDER.length;
 
-    return `<h2 class="vt">Workflows</h2><div class="vsub">Every workflow we've built, as a checklist. ${D.workflows.length} workflows in ${cats.length} categories · ${totalArt} of ${totalCells} steps done. Tick each step as you finish it — page, email marketing, reel, and more — and it saves to every device. Tap the ★ badge to change a workflow's impact. Add a link or note on any step.</div>
+    return `<h2 class="vt">Workflows</h2><div class="vsub">Every workflow we've built. ${D.workflows.length} workflows in ${cats.length} categories · ${totalArt} of ${totalCells} steps done. Tick the boxes on the right as you finish each step (Graphic · Video · Page · Email · Social · Zip) — saves to every device. Tap a workflow name for the full breakdown + links. Tap the ★ to change its impact.</div>
       <input class="search" placeholder="Search all workflows..." oninput="filterCards(this,'wfwrap')">
       <div id="wfwrap">${boxes}</div>
       ${(()=>{
