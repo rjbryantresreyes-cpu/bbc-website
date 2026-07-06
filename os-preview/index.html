@@ -344,6 +344,30 @@
   .wshot{width:100%;border-radius:10px;border:1px solid var(--line);display:block;background:var(--bg3);min-height:60px;}
   .wshot.sm{height:118px;object-fit:cover;object-position:top;}
   .pagemap{display:flex;align-items:center;gap:8px;min-width:max-content;padding-bottom:6px;}
+  /* Site Map & Health */
+  .sm-sum{display:flex;flex-wrap:wrap;gap:8px;margin:2px 0 12px;}
+  .sm-stat{font-size:11.5px;color:var(--muted);background:var(--bg3);border:1px solid var(--line);border-radius:8px;padding:5px 10px;}
+  .sm-stat b{color:var(--ink);font-size:13px;}
+  .sm-stat.ok b{color:#4ADE80;} .sm-stat.warn b{color:#E0B341;} .sm-stat.bad b{color:#EF6B6B;} .sm-stat.muted b{color:var(--muted);}
+  .sm-issues{background:rgba(224,179,65,0.08);border:1px solid rgba(224,179,65,0.3);border-radius:10px;padding:11px 13px;margin-bottom:14px;font-size:12px;}
+  .sm-issues.ok{background:rgba(74,222,128,0.07);border-color:rgba(74,222,128,0.3);}
+  .sm-issues>b{display:block;margin-bottom:5px;color:var(--gold2);font-size:12px;}
+  .sm-issues.ok>b{color:#4ADE80;}
+  .sm-iss{color:var(--muted);margin-top:4px;line-height:1.55;word-break:break-word;}
+  .sm-iss b{display:inline;color:var(--ink);font-size:11.5px;}
+  .sm-hub{margin-bottom:16px;}
+  .sm-hub-hd{display:flex;justify-content:space-between;align-items:baseline;gap:8px;border-bottom:1px solid var(--line);padding-bottom:5px;margin-bottom:4px;}
+  .sm-hub-nm{font-family:var(--display);font-size:14px;color:var(--ink);}
+  .sm-hub-meta{font-family:var(--mono);font-size:9px;letter-spacing:.04em;text-transform:uppercase;color:var(--gold2);text-align:right;}
+  .sm-row{display:flex;align-items:center;gap:9px;padding:8px 2px;border-bottom:1px solid rgba(159,176,199,0.08);text-decoration:none;}
+  .sm-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
+  .sm-nm{flex:1;font-size:13px;color:var(--ink);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;}
+  .sm-cat{font-family:var(--mono);font-size:8.5px;color:var(--gold2);text-transform:uppercase;margin-left:6px;}
+  .sm-chips{display:flex;gap:4px;flex-shrink:0;}
+  .sm-chip{font-family:var(--mono);font-size:8px;padding:2px 6px;border-radius:6px;letter-spacing:.3px;text-transform:uppercase;white-space:nowrap;}
+  .sm-chip.muted{background:rgba(159,176,199,0.15);color:var(--muted);}
+  .sm-chip.warn{background:rgba(224,179,65,0.15);color:#E0B341;}
+  .sm-chip.bad{background:rgba(239,107,107,0.15);color:#EF6B6B;}
   .mapnode{background:var(--bg2);border:1px solid var(--line);border-radius:8px;padding:8px 12px;font-size:12px;white-space:nowrap;color:var(--ink);}
   .maparrow{color:var(--gold2);font-size:13px;}
 
@@ -435,19 +459,6 @@
 .wfck-link.add{color:#6f7f96;}
 .wfcard-bar{height:5px;background:#0a0f1a;border-radius:3px;overflow:hidden;margin-top:13px;}
 .wfcard-bar i{display:block;height:100%;background:linear-gradient(90deg,#D4AF37,#4ADE80);}
-.wfmx{margin-top:8px;overflow-x:auto;-webkit-overflow-scrolling:touch;}
-.wfmxh{display:grid;gap:5px;align-items:end;padding:2px 6px 6px;min-width:300px;border-bottom:1px solid #1a2436;}
-.wfmxh-nm{font-family:var(--mono);font-size:9px;letter-spacing:.05em;color:#8a98ad;}
-.wfmxh-c{font-family:var(--mono);font-size:8px;color:#8a98ad;text-align:center;line-height:1.1;white-space:nowrap;overflow:hidden;}
-.wfmxh-p{font-family:var(--mono);font-size:9px;color:#8a98ad;text-align:right;}
-.wfmxr{display:grid;gap:5px;align-items:center;padding:9px 6px;border-top:1px solid #141c2b;min-width:300px;}
-.wfmxr:first-of-type{border-top:none;}
-.wfmxr-nm{display:flex;align-items:center;gap:6px;min-width:0;cursor:pointer;}
-.wfmxr-dots{display:inline-flex;gap:3px;flex:none;}
-.wfmxr-t{font-size:13px;font-weight:600;color:#e6edf5;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-.wfmxr-nm:hover .wfmxr-t{color:#fff;}
-.wfmxr-p{font-family:var(--mono);font-size:11px;font-weight:700;color:#D4AF37;text-align:right;}
-.wfmx .mxcell{margin:0;}
   .mxr-pct{font-family:var(--mono);font-size:10px;color:var(--gold2);text-align:center;}
   .mxbar{height:4px;background:var(--bg3);border-radius:3px;overflow:hidden;margin-top:6px;}
   .mxbar i{display:block;height:100%;background:linear-gradient(90deg,var(--goldB),var(--green));border-radius:3px;}
@@ -733,8 +744,8 @@
 <script type="application/json" id="bbc-data">
 {
   "meta": {
-    "updated": "2026-07-06",
-    "pendingCount": 21
+    "updated": "2026-07-07",
+    "pendingCount": 22
   },
   "owners": {
     "Vidz": "#A78BFA",
@@ -1795,6 +1806,9 @@
             },
             {
               "name": "2026-07-04_reel_brief_builder"
+            },
+            {
+              "name": "2026-07-06_bbc_reel_brand_story"
             }
           ]
         },
@@ -1845,9 +1859,6 @@
         },
         {
           "name": "_RJ_PERSONAL"
-        },
-        {
-          "name": ".playwright-mcp"
         },
         {
           "name": ".playwright-mcp (1)"
@@ -3560,6 +3571,16 @@
       "path": "LEARNINGS"
     },
     {
+      "title": "ww portfolio site system",
+      "date": "2026-07-07",
+      "path": "LEARNINGS"
+    },
+    {
+      "title": "free voice cloning tools",
+      "date": "2026-07-07",
+      "path": "LEARNINGS"
+    },
+    {
       "title": "deep dive new tools",
       "date": "2026-07-06",
       "path": "LEARNINGS"
@@ -3572,16 +3593,6 @@
     {
       "title": "brevo deliverability and automation gotchas",
       "date": "2026-07-03",
-      "path": "LEARNINGS"
-    },
-    {
-      "title": "pdf toolkit install",
-      "date": "2026-07-02",
-      "path": "LEARNINGS"
-    },
-    {
-      "title": "drewscampfire blender science viz study",
-      "date": "2026-07-02",
       "path": "LEARNINGS"
     }
   ],
@@ -4191,6 +4202,12 @@
       "date": "2026-07-04",
       "slug": "reel_brief_builder",
       "posted": false
+    },
+    {
+      "name": "2026-07-06_bbc_reel_brand_story",
+      "date": "2026-07-06",
+      "slug": "bbc_reel_brand_story",
+      "posted": false
     }
   ],
   "insights": {
@@ -4649,6 +4666,2222 @@
         ]
       }
     ]
+  },
+  "siteMap": {
+    "total": 192,
+    "summary": {
+      "total": 192,
+      "inSitemap": 157,
+      "notSearchable": 26,
+      "orphans": 2,
+      "noindex": 21,
+      "missingDesc": 0
+    },
+    "hubs": [
+      {
+        "key": "nav",
+        "label": "Home & Navigation",
+        "host": "site nav",
+        "pages": [
+          {
+            "name": "AI Family",
+            "path": "ai-family.html",
+            "cat": "",
+            "inSitemap": true,
+            "indexable": true,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 2,
+            "noindex": false
+          },
+          {
+            "name": "Balay ni Bruno &amp; Co. | A Team You Can Actually Grow With",
+            "path": "index.html",
+            "cat": "",
+            "inSitemap": true,
+            "indexable": true,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 184,
+            "noindex": false
+          },
+          {
+            "name": "BBC Insider | Newsletter &amp; Free Resources",
+            "path": "newsletter.html",
+            "cat": "",
+            "inSitemap": true,
+            "indexable": true,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 5,
+            "noindex": false
+          },
+          {
+            "name": "Contact",
+            "path": "contact.html",
+            "cat": "",
+            "inSitemap": true,
+            "indexable": true,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 69,
+            "noindex": false
+          },
+          {
+            "name": "Forms &amp; Resources",
+            "path": "resources.html",
+            "cat": "",
+            "inSitemap": true,
+            "indexable": false,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 54,
+            "noindex": true
+          },
+          {
+            "name": "How It Works",
+            "path": "how-it-works.html",
+            "cat": "",
+            "inSitemap": true,
+            "indexable": true,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 64,
+            "noindex": false
+          },
+          {
+            "name": "Insights",
+            "path": "insights.html",
+            "cat": "",
+            "inSitemap": true,
+            "indexable": true,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 181,
+            "noindex": false
+          },
+          {
+            "name": "Our Story",
+            "path": "about.html",
+            "cat": "",
+            "inSitemap": true,
+            "indexable": true,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 67,
+            "noindex": false
+          },
+          {
+            "name": "Our Team",
+            "path": "our-team.html",
+            "cat": "",
+            "inSitemap": true,
+            "indexable": true,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 64,
+            "noindex": false
+          },
+          {
+            "name": "Our Work",
+            "path": "our-work.html",
+            "cat": "",
+            "inSitemap": true,
+            "indexable": true,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 82,
+            "noindex": false
+          },
+          {
+            "name": "Tools We Use",
+            "path": "tools.html",
+            "cat": "",
+            "inSitemap": true,
+            "indexable": true,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 73,
+            "noindex": false
+          },
+          {
+            "name": "Whatever Your Business Needs",
+            "path": "how-we-help.html",
+            "cat": "",
+            "inSitemap": true,
+            "indexable": true,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 147,
+            "noindex": false
+          }
+        ],
+        "count": 12
+      },
+      {
+        "key": "work",
+        "label": "Client Work (case studies)",
+        "host": "our-work",
+        "pages": [
+          {
+            "name": "Can a Virtual Assistant Learn New Skills As My Business Grows?",
+            "path": "can-a-va-learn-new-skills-as-you-grow.html",
+            "cat": "",
+            "inSitemap": false,
+            "indexable": true,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 2,
+            "noindex": false
+          },
+          {
+            "name": "Can AI Create the Images for My Brand's Social Media?",
+            "path": "can-ai-create-the-images-for-my-social-media.html",
+            "cat": "",
+            "inSitemap": false,
+            "indexable": true,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 1,
+            "noindex": false
+          },
+          {
+            "name": "Can Someone Handle Lead Generation for My Business?",
+            "path": "can-someone-handle-lead-generation-for-me.html",
+            "cat": "",
+            "inSitemap": false,
+            "indexable": true,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 2,
+            "noindex": false
+          },
+          {
+            "name": "Cavalry Realty Group",
+            "path": "cavalry-realty.html",
+            "cat": "Case Studies",
+            "inSitemap": true,
+            "indexable": true,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 3,
+            "noindex": false
+          },
+          {
+            "name": "Freccia Construction",
+            "path": "freccia-construction.html",
+            "cat": "",
+            "inSitemap": true,
+            "indexable": true,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 2,
+            "noindex": false
+          },
+          {
+            "name": "How Did Balay ni Bruno &amp; Co. Start?",
+            "path": "how-balay-ni-bruno-started.html",
+            "cat": "",
+            "inSitemap": false,
+            "indexable": true,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 3,
+            "noindex": false
+          },
+          {
+            "name": "Should My Agency Outsource Its Own Content and Email?",
+            "path": "should-an-agency-outsource-its-own-content.html",
+            "cat": "",
+            "inSitemap": false,
+            "indexable": true,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 1,
+            "noindex": false
+          },
+          {
+            "name": "Top Producer Investment Capital",
+            "path": "top-producer-investment-capital.html",
+            "cat": "Case Studies",
+            "inSitemap": true,
+            "indexable": true,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 3,
+            "noindex": false
+          },
+          {
+            "name": "Wooden Woodworks",
+            "path": "wooden-woodworks.html",
+            "cat": "",
+            "inSitemap": true,
+            "indexable": true,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 2,
+            "noindex": false
+          }
+        ],
+        "count": 9
+      },
+      {
+        "key": "insights",
+        "label": "Insights",
+        "host": "insights",
+        "pages": [
+          {
+            "name": "AI Tools That Actually Help Small Business Owners (No Technical Background Needed)",
+            "path": "ai-tools-small-business-no-tech-skills.html",
+            "cat": "Guides",
+            "inSitemap": true,
+            "indexable": true,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 8,
+            "noindex": false
+          },
+          {
+            "name": "Can AI Design My Social Media Graphics in My Brand?",
+            "path": "can-ai-design-my-social-media-graphics.html",
+            "cat": "Marketing",
+            "inSitemap": true,
+            "indexable": true,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 2,
+            "noindex": false
+          },
+          {
+            "name": "Can AI Find New Leads for My Business While I Work?",
+            "path": "can-ai-find-leads-for-my-business.html",
+            "cat": "Marketing",
+            "inSitemap": true,
+            "indexable": true,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 4,
+            "noindex": false
+          },
+          {
+            "name": "Can AI Help Create Better Product Photos for My Business?",
+            "path": "can-ai-improve-my-product-photos.html",
+            "cat": "Online Stores",
+            "inSitemap": false,
+            "indexable": true,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 1,
+            "noindex": false
+          },
+          {
+            "name": "Can AI Keep My Website Updated for Me?",
+            "path": "can-ai-keep-my-website-updated.html",
+            "cat": "Websites",
+            "inSitemap": true,
+            "indexable": true,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 2,
+            "noindex": false
+          },
+          {
+            "name": "Can AI Sort My Inbox Every Morning?",
+            "path": "can-ai-sort-my-inbox-every-morning.html",
+            "cat": "Operations",
+            "inSitemap": true,
+            "indexable": true,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 1,
+            "noindex": false
+          },
+          {
+            "name": "Can AI Take Notes and Action Items From My Meetings?",
+            "path": "can-ai-take-notes-in-my-meetings.html",
+            "cat": "Operations",
+            "inSitemap": true,
+            "indexable": true,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 1,
+            "noindex": false
+          },
+          {
+            "name": "Can AI Watch a Video or Read a Link and Tell Me What Is In It?",
+            "path": "can-ai-tell-me-whats-in-a-video-or-link.html",
+            "cat": "AI",
+            "inSitemap": true,
+            "indexable": true,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 1,
+            "noindex": false
+          },
+          {
+            "name": "Can AI Write and Send My Email Follow-Ups So Leads Stop Going Cold?",
+            "path": "can-ai-write-my-email-followups.html",
+            "cat": "Marketing",
+            "inSitemap": true,
+            "indexable": true,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 4,
+            "noindex": false
+          },
+          {
+            "name": "Can AI Write Captions That Match What Is Trending Right Now?",
+            "path": "can-ai-write-captions-that-match-whats-trending.html",
+            "cat": "Marketing",
+            "inSitemap": true,
+            "indexable": true,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 1,
+            "noindex": false
+          },
+          {
+            "name": "Can AI Write the Blog Posts That Bring Customers to My Website?",
+            "path": "can-ai-write-my-blog-posts.html",
+            "cat": "Marketing",
+            "inSitemap": true,
+            "indexable": true,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 1,
+            "noindex": false
+          },
+          {
+            "name": "Can I Edit My Website Without a Developer?",
+            "path": "edit-your-website-without-a-developer.html",
+            "cat": "AI",
+            "inSitemap": true,
+            "indexable": true,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 5,
+            "noindex": false
+          },
+          {
+            "name": "Can I Get a Simple Dashboard to See and Run My Online Store?",
+            "path": "simple-dashboard-to-run-my-online-store.html",
+            "cat": "Online Stores",
+            "inSitemap": false,
+            "indexable": true,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 1,
+            "noindex": false
+          },
+          {
+            "name": "Can I Have a Company Chat App Like WhatsApp, On My Own System?",
+            "path": "company-chat-app-like-whatsapp.html",
+            "cat": "Operations",
+            "inSitemap": true,
+            "indexable": true,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 1,
+            "noindex": false
+          },
+          {
+            "name": "Can I Redesign My Online Store Without Taking It Offline?",
+            "path": "redesign-online-store-without-taking-it-offline.html",
+            "cat": "Online Stores",
+            "inSitemap": false,
+            "indexable": true,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 5,
+            "noindex": false
+          },
+          {
+            "name": "Can I Use WhatsApp to Manage My Client Messages?",
+            "path": "whatsapp-for-business-client-messages.html",
+            "cat": "Operations",
+            "inSitemap": false,
+            "indexable": true,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 1,
+            "noindex": false
+          },
+          {
+            "name": "Can My AI Read and Reply to My Business WhatsApp Messages?",
+            "path": "connect-whatsapp-to-your-business-ai.html",
+            "cat": "AI",
+            "inSitemap": true,
+            "indexable": true,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 3,
+            "noindex": false
+          },
+          {
+            "name": "Can My AI See My Screen and Do Tasks With Me?",
+            "path": "can-my-ai-see-my-screen-and-help.html",
+            "cat": "Operations",
+            "inSitemap": true,
+            "indexable": true,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 2,
+            "noindex": false
+          },
+          {
+            "name": "Can My Online Store Have a Light and Dark Mode Customers Can Switch?",
+            "path": "online-store-light-and-dark-mode.html",
+            "cat": "Online Stores",
+            "inSitemap": false,
+            "indexable": true,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 1,
+            "noindex": false
+          },
+          {
+            "name": "Can My Team's Chats, Files, and an AI Helper Live in One App?",
+            "path": "team-chat-and-ai-in-one-app.html",
+            "cat": "",
+            "inSitemap": true,
+            "indexable": true,
+            "orphan": true,
+            "hasDesc": true,
+            "inbound": 0,
+            "noindex": false
+          },
+          {
+            "name": "Can Someone Make All the Changes to My Shopify Store for Me?",
+            "path": "manage-my-shopify-store-for-me.html",
+            "cat": "Online Stores",
+            "inSitemap": false,
+            "indexable": true,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 5,
+            "noindex": false
+          },
+          {
+            "name": "Can Someone Manage My Shopify Store Without Me Sharing My Password?",
+            "path": "manage-shopify-store-without-sharing-password.html",
+            "cat": "Online Stores",
+            "inSitemap": false,
+            "indexable": true,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 1,
+            "noindex": false
+          },
+          {
+            "name": "Can Someone Rebuild and Run My Whole Online Store for Me?",
+            "path": "ai-rebuild-and-run-my-shopify-store.html",
+            "cat": "Online Stores",
+            "inSitemap": false,
+            "indexable": true,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 1,
+            "noindex": false
+          },
+          {
+            "name": "Can You See Your New Building Before It Is Built?",
+            "path": "how-we-build-walkable-3d-tours.html",
+            "cat": "Websites",
+            "inSitemap": false,
+            "indexable": true,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 1,
+            "noindex": false
+          },
+          {
+            "name": "Can You Update Your Brand's Design Templates Without a Designer?",
+            "path": "update-brand-templates-without-a-designer.html",
+            "cat": "Marketing",
+            "inSitemap": false,
+            "indexable": true,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 9,
+            "noindex": false
+          },
+          {
+            "name": "Content Creation for Small Business: What Works, What Does Not, and What to Do First",
+            "path": "content-creation-for-small-business.html",
+            "cat": "Guides",
+            "inSitemap": true,
+            "indexable": true,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 21,
+            "noindex": false
+          },
+          {
+            "name": "Elevate Brain Injury &amp; Mental Health | Heighten Your Recovery",
+            "path": "elevate-home-concept.html",
+            "cat": "",
+            "inSitemap": true,
+            "indexable": false,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 0,
+            "noindex": true
+          },
+          {
+            "name": "Elevate Clinics | A Growth Partnership Proposal from Balay ni Bruno &amp; Co.",
+            "path": "elevate-clinics.html",
+            "cat": "",
+            "inSitemap": true,
+            "indexable": false,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 0,
+            "noindex": true
+          },
+          {
+            "name": "Free File Converter — Images, Video, Audio, Docs",
+            "path": "file-converter.html",
+            "cat": "",
+            "inSitemap": true,
+            "indexable": true,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 1,
+            "noindex": false
+          },
+          {
+            "name": "Google Drive Locked Our Folders Mid-Script and Did Not Tell Us Why",
+            "path": "google-drive-sync-lock-fix.html",
+            "cat": "Operations",
+            "inSitemap": true,
+            "indexable": true,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 3,
+            "noindex": false
+          },
+          {
+            "name": "Home Vision Studio | Client Partnership",
+            "path": "home-vision-studio.html",
+            "cat": "",
+            "inSitemap": true,
+            "indexable": false,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 0,
+            "noindex": true
+          },
+          {
+            "name": "How Can I Make My Work Laptop's Battery Last Longer?",
+            "path": "one-tap-battery-mode-for-your-work-laptop.html",
+            "cat": "Guides",
+            "inSitemap": true,
+            "indexable": true,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 1,
+            "noindex": false
+          },
+          {
+            "name": "How Do I Add New Products Without Breaking My Store's Design?",
+            "path": "how-to-add-products-without-breaking-store-design.html",
+            "cat": "",
+            "inSitemap": true,
+            "indexable": true,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 6,
+            "noindex": false
+          },
+          {
+            "name": "How Do I Ask AI the Right Way to Get What I Actually Want?",
+            "path": "how-to-write-better-ai-prompts.html",
+            "cat": "AI",
+            "inSitemap": true,
+            "indexable": true,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 1,
+            "noindex": false
+          },
+          {
+            "name": "How Do I Cut the Dead Air Out of My Videos Automatically?",
+            "path": "how-to-cut-dead-air-from-videos.html",
+            "cat": "Marketing",
+            "inSitemap": true,
+            "indexable": true,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 1,
+            "noindex": false
+          },
+          {
+            "name": "How Do I Get More Customer Reviews and Actually Use Them?",
+            "path": "how-to-collect-and-use-customer-reviews.html",
+            "cat": "Marketing",
+            "inSitemap": true,
+            "indexable": true,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 1,
+            "noindex": false
+          },
+          {
+            "name": "How Do I Get My Small Business Found on Google?",
+            "path": "how-to-get-your-business-found-on-google.html",
+            "cat": "SEO",
+            "inSitemap": true,
+            "indexable": true,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 3,
+            "noindex": false
+          },
+          {
+            "name": "How Do I Get Notified When My Team or Client Changes Something in My Dashboard?",
+            "path": "get-notified-when-team-edits-dashboard.html",
+            "cat": "Operations",
+            "inSitemap": true,
+            "indexable": true,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 1,
+            "noindex": false
+          },
+          {
+            "name": "How Do I Give a Client a Website Preview Link That Never Breaks?",
+            "path": "how-to-show-client-website-preview-link-that-never-dies.html",
+            "cat": "",
+            "inSitemap": true,
+            "indexable": true,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 2,
+            "noindex": false
+          },
+          {
+            "name": "How Do I Keep My Team on the Same Page Across Different Computers?",
+            "path": "how-to-keep-team-on-same-page-across-computers.html",
+            "cat": "Operations",
+            "inSitemap": true,
+            "indexable": true,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 2,
+            "noindex": false
+          },
+          {
+            "name": "How Do I Keep Track of My Leads Without Expensive Software?",
+            "path": "how-to-track-leads-without-expensive-crm.html",
+            "cat": "Operations",
+            "inSitemap": true,
+            "indexable": true,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 8,
+            "noindex": false
+          },
+          {
+            "name": "How Do I Know If My Marketing Is Actually Working?",
+            "path": "how-do-i-know-if-my-marketing-is-working.html",
+            "cat": "Marketing",
+            "inSitemap": true,
+            "indexable": true,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 1,
+            "noindex": false
+          },
+          {
+            "name": "How Do I Make a Talking-Head and Screen-Share Reel Fast?",
+            "path": "how-to-make-talking-head-screen-share-reel.html",
+            "cat": "Marketing",
+            "inSitemap": true,
+            "indexable": true,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 1,
+            "noindex": false
+          },
+          {
+            "name": "How Do I Make Branded Proposals and Quotes Fast?",
+            "path": "how-to-make-branded-proposals-quotes-fast.html",
+            "cat": "Operations",
+            "inSitemap": true,
+            "indexable": true,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 2,
+            "noindex": false
+          },
+          {
+            "name": "How Do I Make Product Label and Barcode Sheets Fast?",
+            "path": "how-to-make-product-label-barcode-sheets.html",
+            "cat": "Operations",
+            "inSitemap": true,
+            "indexable": true,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 1,
+            "noindex": false
+          },
+          {
+            "name": "How Do I Onboard a New Client Without All the Back and Forth?",
+            "path": "how-to-onboard-new-clients-without-back-and-forth.html",
+            "cat": "Operations",
+            "inSitemap": true,
+            "indexable": true,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 1,
+            "noindex": false
+          },
+          {
+            "name": "How Do I Organize a Huge Product Catalog So Customers Can Actually Choose?",
+            "path": "how-to-organize-large-product-catalog-customers-choose.html",
+            "cat": "",
+            "inSitemap": true,
+            "indexable": true,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 7,
+            "noindex": false
+          },
+          {
+            "name": "How Do I Organize My Business Files So I Can Find Anything Fast?",
+            "path": "how-to-organize-business-files-to-find-anything.html",
+            "cat": "Operations",
+            "inSitemap": true,
+            "indexable": true,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 2,
+            "noindex": false
+          },
+          {
+            "name": "How Do I Plan a Whole Month of Social Media in One Sitting?",
+            "path": "how-to-plan-a-month-of-social-media.html",
+            "cat": "Marketing",
+            "inSitemap": true,
+            "indexable": true,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 6,
+            "noindex": false
+          },
+          {
+            "name": "How Do I Pull Text Out of Scanned Documents and Photos?",
+            "path": "how-to-read-text-from-scanned-documents.html",
+            "cat": "Operations",
+            "inSitemap": true,
+            "indexable": true,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 1,
+            "noindex": false
+          },
+          {
+            "name": "How Do I Sell Custom Products With Good, Better, Best Pricing Online?",
+            "path": "how-to-sell-custom-products-good-better-best-online.html",
+            "cat": "",
+            "inSitemap": true,
+            "indexable": true,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 3,
+            "noindex": false
+          },
+          {
+            "name": "How Do I Send My Own Branded Invoices to Clients?",
+            "path": "how-to-send-branded-invoices-to-clients.html",
+            "cat": "Operations",
+            "inSitemap": false,
+            "indexable": true,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 1,
+            "noindex": false
+          },
+          {
+            "name": "How Do I Set Up a Fiverr Profile That Actually Gets Me Clients?",
+            "path": "how-to-set-up-fiverr-to-land-clients.html",
+            "cat": "Guides",
+            "inSitemap": false,
+            "indexable": true,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 1,
+            "noindex": false
+          },
+          {
+            "name": "How Do I Set Up a Shopify Store That Actually Sells?",
+            "path": "how-to-set-up-shopify-store-that-sells.html",
+            "cat": "Websites",
+            "inSitemap": true,
+            "indexable": true,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 2,
+            "noindex": false
+          },
+          {
+            "name": "How Do I Show Clients Results Without Spending Hours on Reports?",
+            "path": "how-to-report-results-to-clients-fast.html",
+            "cat": "Operations",
+            "inSitemap": true,
+            "indexable": true,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 1,
+            "noindex": false
+          },
+          {
+            "name": "How Do I Show My Products Online Without a Shopping Cart?",
+            "path": "website-that-shows-products-without-a-cart.html",
+            "cat": "Online Stores",
+            "inSitemap": false,
+            "indexable": true,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 1,
+            "noindex": false
+          },
+          {
+            "name": "How Do I Take Discontinued Products Off My Website?",
+            "path": "remove-discontinued-products-from-website.html",
+            "cat": "AI",
+            "inSitemap": true,
+            "indexable": true,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 1,
+            "noindex": false
+          },
+          {
+            "name": "How Do I Turn a Flat Online Store Into a Guided Design Experience?",
+            "path": "how-to-redesign-online-store-into-guided-experience.html",
+            "cat": "",
+            "inSitemap": true,
+            "indexable": true,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 8,
+            "noindex": false
+          },
+          {
+            "name": "How Do I Turn a Google Sheet Into a Live Dashboard?",
+            "path": "how-to-turn-google-sheet-into-live-dashboard.html",
+            "cat": "Operations",
+            "inSitemap": true,
+            "indexable": true,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 1,
+            "noindex": false
+          },
+          {
+            "name": "How Do I Turn One Video Into Posts for Every Platform?",
+            "path": "how-to-turn-one-video-into-posts-for-every-platform.html",
+            "cat": "Marketing",
+            "inSitemap": true,
+            "indexable": true,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 7,
+            "noindex": false
+          },
+          {
+            "name": "How Do I Write a Month of Email Newsletters Without the Blank Page?",
+            "path": "how-to-write-a-month-of-newsletters.html",
+            "cat": "Marketing",
+            "inSitemap": true,
+            "indexable": true,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 1,
+            "noindex": false
+          },
+          {
+            "name": "How Do I Write Product Descriptions That Actually Sell?",
+            "path": "how-to-write-product-descriptions-that-sell.html",
+            "cat": "Marketing",
+            "inSitemap": true,
+            "indexable": true,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 1,
+            "noindex": false
+          },
+          {
+            "name": "How Does a Local Contractor Show Up on Google in Nearby Towns?",
+            "path": "how-local-contractor-ranks-nearby-towns.html",
+            "cat": "SEO",
+            "inSitemap": true,
+            "indexable": true,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 1,
+            "noindex": false
+          },
+          {
+            "name": "How Does a Nonprofit Grow Its Audience and Supporters Online?",
+            "path": "how-nonprofit-grows-audience-online.html",
+            "cat": "Marketing",
+            "inSitemap": true,
+            "indexable": true,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 1,
+            "noindex": false
+          },
+          {
+            "name": "How Does a Real Estate Agent Stay Top of Mind and Win More Listings?",
+            "path": "how-real-estate-agent-stays-top-of-mind.html",
+            "cat": "Marketing",
+            "inSitemap": true,
+            "indexable": true,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 1,
+            "noindex": false
+          },
+          {
+            "name": "How Does a Roofing Company Get Found by Storm Damage Customers?",
+            "path": "how-roofing-company-gets-found-storm-damage.html",
+            "cat": "SEO",
+            "inSitemap": true,
+            "indexable": true,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 1,
+            "noindex": false
+          },
+          {
+            "name": "How Does a Showroom Get Builders and Designers to Refer Their Clients?",
+            "path": "how-showroom-gets-pros-to-refer-clients.html",
+            "cat": "",
+            "inSitemap": true,
+            "indexable": true,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 2,
+            "noindex": false
+          },
+          {
+            "name": "How Does a Showroom Sell Online Without a Shopping Cart?",
+            "path": "how-showroom-sells-online-without-shopping-cart.html",
+            "cat": "",
+            "inSitemap": true,
+            "indexable": true,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 5,
+            "noindex": false
+          },
+          {
+            "name": "How Does an Online Store Keep Its Content Fresh and Consistent?",
+            "path": "how-online-store-keeps-content-consistent.html",
+            "cat": "Marketing",
+            "inSitemap": true,
+            "indexable": true,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 1,
+            "noindex": false
+          },
+          {
+            "name": "How Much Does a Business Website Actually Cost? A Transparent Breakdown",
+            "path": "how-much-does-a-website-cost.html",
+            "cat": "Guides",
+            "inSitemap": true,
+            "indexable": true,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 3,
+            "noindex": false
+          },
+          {
+            "name": "How Much Does a Virtual Assistant Cost? A Transparent Breakdown",
+            "path": "virtual-assistant-cost-breakdown.html",
+            "cat": "Guides",
+            "inSitemap": true,
+            "indexable": true,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 3,
+            "noindex": false
+          },
+          {
+            "name": "How Social Media Management Actually Works for a Small Business",
+            "path": "social-media-management-small-business.html",
+            "cat": "Guides",
+            "inSitemap": true,
+            "indexable": true,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 21,
+            "noindex": false
+          },
+          {
+            "name": "How to Automate the Tasks That Are Eating Your Day",
+            "path": "how-to-automate-small-business-tasks.html",
+            "cat": "Guides",
+            "inSitemap": true,
+            "indexable": true,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 14,
+            "noindex": false
+          },
+          {
+            "name": "How to Get Your Business on the First Page of Google Without Paying for Ads",
+            "path": "get-business-on-first-page-google.html",
+            "cat": "Guides",
+            "inSitemap": true,
+            "indexable": true,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 4,
+            "noindex": false
+          },
+          {
+            "name": "How to Organize Your Small Business Operations Without Hiring a Full Team",
+            "path": "small-business-operations-without-full-team.html",
+            "cat": "Guides",
+            "inSitemap": true,
+            "indexable": true,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 8,
+            "noindex": false
+          },
+          {
+            "name": "How We Build a New AI in One Session by Teaching It Everything Its Siblings Already Know",
+            "path": "how-we-build-new-ai-by-teaching-siblings.html",
+            "cat": "AI",
+            "inSitemap": true,
+            "indexable": true,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 4,
+            "noindex": false
+          },
+          {
+            "name": "How We Built a 3D Product Designer Customers Use in Their Browser",
+            "path": "how-we-built-3d-product-designer-free.html",
+            "cat": "Websites",
+            "inSitemap": true,
+            "indexable": true,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 3,
+            "noindex": false
+          },
+          {
+            "name": "How We Built a Custom AI Family for a Woodworking Business",
+            "path": "how-we-built-woody-ai-family-wooden-woodworks.html",
+            "cat": "Case Studies",
+            "inSitemap": true,
+            "indexable": true,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 4,
+            "noindex": false
+          },
+          {
+            "name": "How We Built a Daily Content Engine That Goes from Trend to Post-Ready in One Sentence",
+            "path": "building-ai-content-engine-daily-carousel.html",
+            "cat": "AI",
+            "inSitemap": true,
+            "indexable": true,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 6,
+            "noindex": false
+          },
+          {
+            "name": "How We Built an AI Video System That Costs $0 Per Video",
+            "path": "how-we-built-ai-video-system-free.html",
+            "cat": "AI",
+            "inSitemap": true,
+            "indexable": true,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 16,
+            "noindex": false
+          },
+          {
+            "name": "How We Built and Maintain a Full Business Website Without a CMS or Monthly Hosting Fee",
+            "path": "how-we-built-bbc-website-without-cms.html",
+            "cat": "Websites",
+            "inSitemap": true,
+            "indexable": true,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 6,
+            "noindex": false
+          },
+          {
+            "name": "How We Clone Any Client Website in Three Modes Without Extra Software",
+            "path": "how-we-clone-website-without-installing-anything.html",
+            "cat": "Websites",
+            "inSitemap": true,
+            "indexable": true,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 4,
+            "noindex": false
+          },
+          {
+            "name": "How We Embed Video on a Website Without Sending Viewers to YouTube or Google Drive",
+            "path": "how-we-embed-video-on-website-without-losing-viewers.html",
+            "cat": "Websites",
+            "inSitemap": true,
+            "indexable": true,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 1,
+            "noindex": false
+          },
+          {
+            "name": "How We Found Over $1,000 Per Month in AI Cost Savings Without Downgrading Anything",
+            "path": "how-we-cut-ai-costs-1000-per-month.html",
+            "cat": "Operations",
+            "inSitemap": true,
+            "indexable": true,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 4,
+            "noindex": false
+          },
+          {
+            "name": "How We Gave Our VA a Professional Business Email for $0 Extra Per Month",
+            "path": "how-we-onboard-va-without-paying-for-extra-email-seat.html",
+            "cat": "Operations",
+            "inSitemap": true,
+            "indexable": true,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 3,
+            "noindex": false
+          },
+          {
+            "name": "How We Layer a Talking Avatar Over Any Silent Video Without Reshooting",
+            "path": "heygen-avatar-narration-business-video.html",
+            "cat": "Marketing",
+            "inSitemap": true,
+            "indexable": true,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 2,
+            "noindex": false
+          },
+          {
+            "name": "How We Run a Whole Business From One Screen (Our Command Center)",
+            "path": "how-we-built-business-command-center.html",
+            "cat": "Operations",
+            "inSitemap": true,
+            "indexable": true,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 15,
+            "noindex": false
+          },
+          {
+            "name": "How We Run One AI Brain Across Two Computers for Free",
+            "path": "how-we-sync-two-pcs-one-ai-brain.html",
+            "cat": "Operations",
+            "inSitemap": true,
+            "indexable": true,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 4,
+            "noindex": false
+          },
+          {
+            "name": "How We Structure a Client AI So They Can Personalize It Without Breaking It",
+            "path": "how-we-structure-ai-so-clients-cant-break-it.html",
+            "cat": "Operations",
+            "inSitemap": true,
+            "indexable": true,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 4,
+            "noindex": false
+          },
+          {
+            "name": "How We Transcribed a 96-Minute Client Meeting for Free With No Cloud and No Subscription",
+            "path": "how-we-transcribed-96-minute-zoom-meeting-free.html",
+            "cat": "Operations",
+            "inSitemap": true,
+            "indexable": true,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 1,
+            "noindex": false
+          },
+          {
+            "name": "How We Use Code to Generate Professional Motion Graphic Videos for Free",
+            "path": "how-we-used-remotion-make-free-motion-graphics.html",
+            "cat": "AI",
+            "inSitemap": true,
+            "indexable": true,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 6,
+            "noindex": false
+          },
+          {
+            "name": "How We Write Social Media Captions That Any Business Owner Can Understand",
+            "path": "how-to-write-captions-any-business-owner-understands.html",
+            "cat": "Marketing",
+            "inSitemap": true,
+            "indexable": true,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 8,
+            "noindex": false
+          },
+          {
+            "name": "Local SEO for Small Business: What Actually Moves the Needle",
+            "path": "local-seo-small-business-guide.html",
+            "cat": "Guides",
+            "inSitemap": true,
+            "indexable": true,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 6,
+            "noindex": false
+          },
+          {
+            "name": "Most Agencies Give You a List of AI Subscriptions. We Built You an AI You Own.",
+            "path": "ai-video-system-no-subscription-stack.html",
+            "cat": "AI",
+            "inSitemap": true,
+            "indexable": true,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 6,
+            "noindex": false
+          },
+          {
+            "name": "Most Clinics Do Not Have a Doctor Problem. They Have a Phone Problem.",
+            "path": "ai-for-medical-clinics-phone-problem.html",
+            "cat": "AI",
+            "inSitemap": true,
+            "indexable": true,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 1,
+            "noindex": false
+          },
+          {
+            "name": "Privacy Policy",
+            "path": "privacy.html",
+            "cat": "",
+            "inSitemap": true,
+            "indexable": true,
+            "orphan": true,
+            "hasDesc": true,
+            "inbound": 0,
+            "noindex": false
+          },
+          {
+            "name": "The Daily Carousel Workflow",
+            "path": "workflow-daily-carousel.html",
+            "cat": "",
+            "inSitemap": true,
+            "indexable": true,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 2,
+            "noindex": false
+          },
+          {
+            "name": "The Exact FFmpeg Commands We Use to Produce Every Business Reel",
+            "path": "ffmpeg-reels-business-video.html",
+            "cat": "Marketing",
+            "inSitemap": true,
+            "indexable": true,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 6,
+            "noindex": false
+          },
+          {
+            "name": "The Storytelling Framework We Use to Structure Every Business Short Video",
+            "path": "storytelling-framework-short-video-business.html",
+            "cat": "Marketing",
+            "inSitemap": true,
+            "indexable": true,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 2,
+            "noindex": false
+          },
+          {
+            "name": "We Broke Netlify Forms Five Times Before It Worked. Here Is What We Learned.",
+            "path": "how-we-fixed-netlify-forms-5-deploy-failures.html",
+            "cat": "Websites",
+            "inSitemap": true,
+            "indexable": true,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 3,
+            "noindex": false
+          },
+          {
+            "name": "We Set Up Free Remote Desktop Across All Our Business Computers in One Session",
+            "path": "how-we-set-up-free-remote-desktop-multiple-pcs.html",
+            "cat": "Operations",
+            "inSitemap": true,
+            "indexable": true,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 3,
+            "noindex": false
+          },
+          {
+            "name": "We Stopped Making Time for Content. We Just Started Recording the Work.",
+            "path": "how-we-document-every-process-as-content.html",
+            "cat": "Marketing",
+            "inSitemap": true,
+            "indexable": true,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 9,
+            "noindex": false
+          },
+          {
+            "name": "We Taught Our AI to Watch Facebook Reels and Tell Us What Is Working",
+            "path": "ai-reads-facebook-reels-for-you.html",
+            "cat": "AI",
+            "inSitemap": true,
+            "indexable": true,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 2,
+            "noindex": false
+          },
+          {
+            "name": "Website Design for Small Business: What to Expect and What to Ask",
+            "path": "website-design-small-business-what-to-expect.html",
+            "cat": "Guides",
+            "inSitemap": true,
+            "indexable": true,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 15,
+            "noindex": false
+          },
+          {
+            "name": "What a Virtual Assistant Actually Does (And When Your Business Is Ready for One)",
+            "path": "virtual-assistant-for-small-business.html",
+            "cat": "Guides",
+            "inSitemap": true,
+            "indexable": true,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 8,
+            "noindex": false
+          },
+          {
+            "name": "What Is an AI Family and Why Your Business Needs One Instead of One AI",
+            "path": "what-is-an-ai-family-for-business.html",
+            "cat": "AI",
+            "inSitemap": true,
+            "indexable": true,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 24,
+            "noindex": false
+          },
+          {
+            "name": "What Is the Best Email Platform for a Small Business?",
+            "path": "best-email-platform-for-small-business.html",
+            "cat": "Marketing",
+            "inSitemap": false,
+            "indexable": true,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 1,
+            "noindex": false
+          },
+          {
+            "name": "What to Look For When Hiring a Social Media Manager",
+            "path": "hire-social-media-manager-what-to-look-for.html",
+            "cat": "Guides",
+            "inSitemap": true,
+            "indexable": true,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 3,
+            "noindex": false
+          },
+          {
+            "name": "Why Can't People Find My Website (and How Would I Even Know)?",
+            "path": "is-my-website-invisible.html",
+            "cat": "Operations",
+            "inSitemap": true,
+            "indexable": true,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 1,
+            "noindex": false
+          },
+          {
+            "name": "Wooden Woodworks — Command Center",
+            "path": "_ww-cc-preview.html",
+            "cat": "",
+            "inSitemap": false,
+            "indexable": false,
+            "orphan": false,
+            "hasDesc": false,
+            "inbound": 0,
+            "noindex": true
+          },
+          {
+            "name": "Wooden Woodworks — Owner Dashboard",
+            "path": "_ww-owner-preview.html",
+            "cat": "",
+            "inSitemap": false,
+            "indexable": false,
+            "orphan": false,
+            "hasDesc": false,
+            "inbound": 0,
+            "noindex": true
+          }
+        ],
+        "count": 111
+      },
+      {
+        "key": "tools",
+        "label": "Tools",
+        "host": "tools",
+        "pages": [
+          {
+            "name": "Boogy, the Blog AI",
+            "path": "tool-boogy-blog-ai.html",
+            "cat": "",
+            "inSitemap": true,
+            "indexable": true,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 1,
+            "noindex": false
+          },
+          {
+            "name": "Branded Design At Scale",
+            "path": "tool-design-automation.html",
+            "cat": "",
+            "inSitemap": true,
+            "indexable": true,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 1,
+            "noindex": false
+          },
+          {
+            "name": "Brunz, the Head AI",
+            "path": "tool-brunz-head-ai.html",
+            "cat": "",
+            "inSitemap": true,
+            "indexable": true,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 10,
+            "noindex": false
+          },
+          {
+            "name": "Custom Image Generation",
+            "path": "tool-image-generation.html",
+            "cat": "",
+            "inSitemap": true,
+            "indexable": true,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 5,
+            "noindex": false
+          },
+          {
+            "name": "Custom-Coded Websites",
+            "path": "tool-custom-coded-websites.html",
+            "cat": "",
+            "inSitemap": true,
+            "indexable": true,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 6,
+            "noindex": false
+          },
+          {
+            "name": "Customer Database &amp; Email",
+            "path": "tool-crm-email-platform.html",
+            "cat": "",
+            "inSitemap": true,
+            "indexable": true,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 3,
+            "noindex": false
+          },
+          {
+            "name": "Deep Research",
+            "path": "tool-deep-research.html",
+            "cat": "",
+            "inSitemap": true,
+            "indexable": true,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 4,
+            "noindex": false
+          },
+          {
+            "name": "Design Quality System",
+            "path": "tool-design-quality-system.html",
+            "cat": "",
+            "inSitemap": true,
+            "indexable": true,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 1,
+            "noindex": false
+          },
+          {
+            "name": "Email, Calendar &amp; Files",
+            "path": "tool-google-workspace.html",
+            "cat": "",
+            "inSitemap": true,
+            "indexable": true,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 4,
+            "noindex": false
+          },
+          {
+            "name": "Emy, the Email AI",
+            "path": "tool-emy-email-ai.html",
+            "cat": "",
+            "inSitemap": true,
+            "indexable": true,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 1,
+            "noindex": false
+          },
+          {
+            "name": "Flexible Contact Database",
+            "path": "tool-contact-database.html",
+            "cat": "",
+            "inSitemap": true,
+            "indexable": true,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 3,
+            "noindex": false
+          },
+          {
+            "name": "Full Online Store Management",
+            "path": "tool-shopify-management.html",
+            "cat": "",
+            "inSitemap": true,
+            "indexable": true,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 2,
+            "noindex": false
+          },
+          {
+            "name": "Graphic &amp; Layout Design",
+            "path": "tool-graphic-composition.html",
+            "cat": "",
+            "inSitemap": true,
+            "indexable": true,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 5,
+            "noindex": false
+          },
+          {
+            "name": "In-House Video Production",
+            "path": "tool-programmatic-video.html",
+            "cat": "",
+            "inSitemap": true,
+            "indexable": true,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 4,
+            "noindex": false
+          },
+          {
+            "name": "Instant Hosting &amp; Updates",
+            "path": "tool-netlify-hosting.html",
+            "cat": "",
+            "inSitemap": true,
+            "indexable": true,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 6,
+            "noindex": false
+          },
+          {
+            "name": "Lana, the Lead Research AI",
+            "path": "tool-lana-leadgen-ai.html",
+            "cat": "",
+            "inSitemap": true,
+            "indexable": true,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 1,
+            "noindex": false
+          },
+          {
+            "name": "Lead Tracking &amp; Follow-Up",
+            "path": "tool-crm-followup.html",
+            "cat": "",
+            "inSitemap": true,
+            "indexable": true,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 3,
+            "noindex": false
+          },
+          {
+            "name": "Mai, the Marketing AI",
+            "path": "tool-mai-marketing-ai.html",
+            "cat": "",
+            "inSitemap": true,
+            "indexable": true,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 10,
+            "noindex": false
+          },
+          {
+            "name": "One-Place Posting &amp; Scheduling",
+            "path": "tool-social-scheduling.html",
+            "cat": "",
+            "inSitemap": true,
+            "indexable": true,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 4,
+            "noindex": false
+          },
+          {
+            "name": "Phone-First Checking",
+            "path": "tool-mobile-first-testing.html",
+            "cat": "",
+            "inSitemap": true,
+            "indexable": true,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 6,
+            "noindex": false
+          },
+          {
+            "name": "Photo Cleanup &amp; Background Removal",
+            "path": "tool-background-removal.html",
+            "cat": "",
+            "inSitemap": true,
+            "indexable": true,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 5,
+            "noindex": false
+          },
+          {
+            "name": "Raphy, the Design AI",
+            "path": "tool-raphy-design-ai.html",
+            "cat": "",
+            "inSitemap": true,
+            "indexable": true,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 1,
+            "noindex": false
+          },
+          {
+            "name": "Reading Text From Images",
+            "path": "tool-reading-images-text.html",
+            "cat": "",
+            "inSitemap": true,
+            "indexable": true,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 4,
+            "noindex": false
+          },
+          {
+            "name": "SHY, the Online Store AI",
+            "path": "tool-shy-shopify-ai.html",
+            "cat": "",
+            "inSitemap": true,
+            "indexable": true,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 1,
+            "noindex": false
+          },
+          {
+            "name": "Smooth Motion &amp; Polish",
+            "path": "tool-smooth-motion.html",
+            "cat": "",
+            "inSitemap": true,
+            "indexable": true,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 4,
+            "noindex": false
+          },
+          {
+            "name": "Sonny, the Social Media AI",
+            "path": "tool-sonny-social-ai.html",
+            "cat": "",
+            "inSitemap": true,
+            "indexable": true,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 4,
+            "noindex": false
+          },
+          {
+            "name": "Stock Footage, Photos &amp; Music",
+            "path": "tool-stock-media.html",
+            "cat": "",
+            "inSitemap": true,
+            "indexable": true,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 4,
+            "noindex": false
+          },
+          {
+            "name": "The Content Engine",
+            "path": "tool-content-engine.html",
+            "cat": "",
+            "inSitemap": true,
+            "indexable": true,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 4,
+            "noindex": false
+          },
+          {
+            "name": "Trend &amp; Competitor Watching",
+            "path": "tool-trend-research.html",
+            "cat": "",
+            "inSitemap": true,
+            "indexable": true,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 4,
+            "noindex": false
+          },
+          {
+            "name": "Turn a Photo Into 3D",
+            "path": "tool-photo-to-3d.html",
+            "cat": "",
+            "inSitemap": true,
+            "indexable": true,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 4,
+            "noindex": false
+          },
+          {
+            "name": "Video Editing &amp; Captions",
+            "path": "tool-video-editing.html",
+            "cat": "",
+            "inSitemap": true,
+            "indexable": true,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 4,
+            "noindex": false
+          },
+          {
+            "name": "Vidz, the Video AI",
+            "path": "tool-vidz-video-ai.html",
+            "cat": "",
+            "inSitemap": true,
+            "indexable": true,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 1,
+            "noindex": false
+          },
+          {
+            "name": "Walkable 3D &amp; Property Views",
+            "path": "tool-walkable-3d.html",
+            "cat": "",
+            "inSitemap": true,
+            "indexable": true,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 1,
+            "noindex": false
+          },
+          {
+            "name": "Webby, the Website AI",
+            "path": "tool-webby-website-ai.html",
+            "cat": "",
+            "inSitemap": true,
+            "indexable": true,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 10,
+            "noindex": false
+          },
+          {
+            "name": "WhatsApp Connected To Your AI",
+            "path": "tool-whatsapp-ai.html",
+            "cat": "",
+            "inSitemap": true,
+            "indexable": true,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 4,
+            "noindex": false
+          },
+          {
+            "name": "Workflow Automation",
+            "path": "tool-workflow-automation.html",
+            "cat": "",
+            "inSitemap": true,
+            "indexable": true,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 4,
+            "noindex": false
+          },
+          {
+            "name": "Your Store Dashboard",
+            "path": "tool-store-dashboard.html",
+            "cat": "",
+            "inSitemap": true,
+            "indexable": true,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 2,
+            "noindex": false
+          },
+          {
+            "name": "Your Voice, On Demand",
+            "path": "tool-voice-cloning.html",
+            "cat": "",
+            "inSitemap": true,
+            "indexable": true,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 4,
+            "noindex": false
+          }
+        ],
+        "count": 38
+      },
+      {
+        "key": "geo",
+        "label": "Location pages",
+        "host": "footer · Areas We Serve",
+        "pages": [
+          {
+            "name": "Virtual Assistant &amp; Business Support for California Businesses",
+            "path": "business-support-california.html",
+            "cat": "",
+            "inSitemap": false,
+            "indexable": true,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 6,
+            "noindex": false
+          },
+          {
+            "name": "Virtual Assistant &amp; Business Support for Florida Businesses",
+            "path": "business-support-florida.html",
+            "cat": "",
+            "inSitemap": false,
+            "indexable": true,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 6,
+            "noindex": false
+          },
+          {
+            "name": "Virtual Assistant &amp; Business Support for Georgia Businesses",
+            "path": "business-support-georgia.html",
+            "cat": "",
+            "inSitemap": false,
+            "indexable": true,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 6,
+            "noindex": false
+          },
+          {
+            "name": "Virtual Assistant &amp; Business Support for New Jersey Businesses",
+            "path": "business-support-new-jersey.html",
+            "cat": "",
+            "inSitemap": false,
+            "indexable": true,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 6,
+            "noindex": false
+          },
+          {
+            "name": "Virtual Assistant &amp; Business Support for New York Businesses",
+            "path": "business-support-new-york.html",
+            "cat": "",
+            "inSitemap": false,
+            "indexable": true,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 6,
+            "noindex": false
+          },
+          {
+            "name": "Virtual Assistant &amp; Business Support for Texas Businesses",
+            "path": "business-support-texas.html",
+            "cat": "",
+            "inSitemap": false,
+            "indexable": true,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 6,
+            "noindex": false
+          }
+        ],
+        "count": 6
+      },
+      {
+        "key": "team",
+        "label": "Team profiles",
+        "host": "our-team",
+        "pages": [
+          {
+            "name": "Al Carmelle Managase | Shopify Developer &amp; Creative Support Specialist · BBC",
+            "path": "al.html",
+            "cat": "",
+            "inSitemap": true,
+            "indexable": false,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 1,
+            "noindex": true
+          },
+          {
+            "name": "Daryl Agadia | Content Creator &amp; Marketing Support Specialist · BBC",
+            "path": "daryl.html",
+            "cat": "",
+            "inSitemap": true,
+            "indexable": false,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 1,
+            "noindex": true
+          },
+          {
+            "name": "Diego Tres Reyes | Email Marketing Specialist, Video Editor &amp; Content Creator · BBC",
+            "path": "diego.html",
+            "cat": "",
+            "inSitemap": true,
+            "indexable": false,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 1,
+            "noindex": true
+          },
+          {
+            "name": "Kenz Lloyd D. Villaflores | Social Media Manager &amp; AI Operations Support · BBC",
+            "path": "kenz.html",
+            "cat": "",
+            "inSitemap": true,
+            "indexable": false,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 1,
+            "noindex": true
+          },
+          {
+            "name": "Krizza Managase | Social Media Manager &amp; Client Operations · BBC",
+            "path": "krizza.html",
+            "cat": "",
+            "inSitemap": true,
+            "indexable": false,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 1,
+            "noindex": true
+          },
+          {
+            "name": "Meet the Founder, RJ Bryan Tres Reyes",
+            "path": "founder.html",
+            "cat": "",
+            "inSitemap": false,
+            "indexable": true,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 3,
+            "noindex": false
+          },
+          {
+            "name": "Ryan Crismin Bernaldez | Operations &amp; Web Dev Lead + AI Content Creator · BBC",
+            "path": "ryan-c.html",
+            "cat": "",
+            "inSitemap": true,
+            "indexable": false,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 1,
+            "noindex": true
+          },
+          {
+            "name": "Vi Carmelle Tres Reyes | E-Commerce &amp; Social Media Specialist · BBC",
+            "path": "vi.html",
+            "cat": "",
+            "inSitemap": true,
+            "indexable": false,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 1,
+            "noindex": true
+          }
+        ],
+        "count": 8
+      },
+      {
+        "key": "intern",
+        "label": "Internal / utility",
+        "host": "direct link",
+        "pages": [
+          {
+            "name": "AI Setup Guide",
+            "path": "install-guide.html",
+            "cat": "",
+            "inSitemap": false,
+            "indexable": false,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 0,
+            "noindex": true
+          },
+          {
+            "name": "Master Client Onboarding Form",
+            "path": "client-onboarding.html",
+            "cat": "",
+            "inSitemap": true,
+            "indexable": false,
+            "orphan": false,
+            "hasDesc": false,
+            "inbound": 1,
+            "noindex": true
+          },
+          {
+            "name": "NPC Portfolio Submission",
+            "path": "portfolio-form.html",
+            "cat": "",
+            "inSitemap": false,
+            "indexable": false,
+            "orphan": false,
+            "hasDesc": false,
+            "inbound": 1,
+            "noindex": true
+          },
+          {
+            "name": "Page Not Found",
+            "path": "404.html",
+            "cat": "",
+            "inSitemap": false,
+            "indexable": false,
+            "orphan": false,
+            "hasDesc": false,
+            "inbound": 0,
+            "noindex": true
+          },
+          {
+            "name": "See It in Action",
+            "path": "demo.html",
+            "cat": "AI",
+            "inSitemap": false,
+            "indexable": false,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 1,
+            "noindex": true
+          },
+          {
+            "name": "Sonya — S. Riviere Hair Questionnaire",
+            "path": "questionnaire-sonya.html",
+            "cat": "",
+            "inSitemap": false,
+            "indexable": false,
+            "orphan": false,
+            "hasDesc": false,
+            "inbound": 0,
+            "noindex": true
+          },
+          {
+            "name": "Sonya — Website Build Questions",
+            "path": "questionnaire-sonya-website.html",
+            "cat": "",
+            "inSitemap": false,
+            "indexable": false,
+            "orphan": false,
+            "hasDesc": false,
+            "inbound": 0,
+            "noindex": true
+          },
+          {
+            "name": "Task Submission",
+            "path": "task-submission.html",
+            "cat": "",
+            "inSitemap": false,
+            "indexable": false,
+            "orphan": false,
+            "hasDesc": false,
+            "inbound": 1,
+            "noindex": true
+          }
+        ],
+        "count": 8
+      }
+    ],
+    "issues": {
+      "orphans": [
+        "team-chat-and-ai-in-one-app.html",
+        "privacy.html"
+      ],
+      "notInSitemap": [
+        "can-a-va-learn-new-skills-as-you-grow.html",
+        "can-ai-create-the-images-for-my-social-media.html",
+        "can-someone-handle-lead-generation-for-me.html",
+        "how-balay-ni-bruno-started.html",
+        "should-an-agency-outsource-its-own-content.html",
+        "can-ai-improve-my-product-photos.html",
+        "simple-dashboard-to-run-my-online-store.html",
+        "redesign-online-store-without-taking-it-offline.html",
+        "whatsapp-for-business-client-messages.html",
+        "online-store-light-and-dark-mode.html",
+        "manage-my-shopify-store-for-me.html",
+        "manage-shopify-store-without-sharing-password.html",
+        "ai-rebuild-and-run-my-shopify-store.html",
+        "how-we-build-walkable-3d-tours.html",
+        "update-brand-templates-without-a-designer.html",
+        "how-to-send-branded-invoices-to-clients.html",
+        "how-to-set-up-fiverr-to-land-clients.html",
+        "website-that-shows-products-without-a-cart.html",
+        "best-email-platform-for-small-business.html",
+        "business-support-california.html",
+        "business-support-florida.html",
+        "business-support-georgia.html",
+        "business-support-new-jersey.html",
+        "business-support-new-york.html",
+        "business-support-texas.html",
+        "founder.html"
+      ],
+      "missingDesc": []
+    }
   }
 }
 </script>
@@ -4656,8 +6889,6 @@
 <script>
   const D = JSON.parse(document.getElementById('bbc-data').textContent);
   const OWN=D.owners, ORDER=D.artifactOrder, ICON=D.artifactIcon;
-  /* Keep the calendar on the REAL current month so it never gets stuck on an old month (was showing June). */
-  try{ var __now=new Date(), __MF=['January','February','March','April','May','June','July','August','September','October','November','December']; if(D.calendar){ D.calendar.year=__now.getFullYear(); D.calendar.monthIdx=__now.getMonth(); D.calendar.label=__MF[__now.getMonth()]+' '+__now.getFullYear(); D.calendar.today=__now.getFullYear()+'-'+String(__now.getMonth()+1).padStart(2,'0')+'-'+String(__now.getDate()).padStart(2,'0'); } }catch(e){}
   /* ===== WORKFLOW SHARED STATE — cross-device + system, two-way sync =====
      One shared box (Netlify Blobs via /.netlify/functions/workflows). RJ taps a deliverable
      on the dashboard OR a BBC script auto-checks it after generating the asset; both write the
@@ -5784,35 +8015,42 @@
     /* FULL-WIDTH checklist cards — one card per workflow, stacked vertically, grouped by category.
        Each card: name + description + a LABELED checklist (real text, not just icons) you tick off. */
     const WF_ART_LABEL={graphic:'Graphic / carousel',video:'Video / reel',page:'Insights page',email:'Email marketing',social:'Posted to social',zip:'Download pack'};
-    const WF_SHORT={graphic:'Graphic',video:'Video',page:'Page',email:'Email',social:'Social',zip:'Zip'};
-    const gridCols=`minmax(90px,1fr) repeat(${ORDER.length},26px) 38px`;
     const boxes=cats.map(cat=>{
       const list=D.workflows.filter(w=>w.cat===cat).sort((a,b)=>{ const r=WF_IMPACT_RANK[wfImpact(a)]-WF_IMPACT_RANK[wfImpact(b)]; return r||pct(b)-pct(a); });
       const avg=Math.round(list.reduce((s,w)=>s+pct(w),0)/list.length);
       const ic=CIC[cat]||'📦', col=CCOL[cat]||'#D4AF37';
-      const header=`<div class="wfmxh" style="grid-template-columns:${gridCols}"><span class="wfmxh-nm">WORKFLOW</span>${ORDER.map(a=>`<span class="wfmxh-c" title="${esc(WF_ART_LABEL[a])}">${WF_SHORT[a]||a}</span>`).join('')}<span class="wfmxh-p">%</span></div>`;
-      const rows=list.map(w=>{
+      const cards=list.map(w=>{
         const p=pct(w), im=wfImpact(w);
         const dots=w.owners.map(o=>`<span class="dot" style="background:${OWN[o]||'#888'}"></span>`).join('');
-        const cells=ORDER.map(a=>`<span class="mxcell tapcell ${w.artifacts[a]?'on':'off'}" role="button" title="${esc(WF_ART_LABEL[a])} — tap to ${w.artifacts[a]?'clear':'check'}" onclick="wfArtToggle('${w.id}','${a}',event)" style="width:24px;height:24px;font-size:12px">${w.artifacts[a]?'✓':''}</span>`).join('');
-        return `<div class="wfrow wfmxr" data-search="${esc((w.title+' '+w.owners.join(' ')+' '+w.angle+' '+w.role).toLowerCase())}" style="grid-template-columns:${gridCols}">
-          <span class="wfmxr-nm" onclick="wfSheet('${w.id}')" title="${esc(w.angle||w.role||'')}">
+        const checklist=ORDER.map(a=>{
+          const on=w.artifacts[a], link=wfLinkGet(w.id,a);
+          return `<div class="wfck ${on?'on':''}">
+            <span class="wfck-box" role="button" title="Tap to ${on?'uncheck':'check'} ${WF_ART_LABEL[a]||a}" onclick="wfArtToggle('${w.id}','${a}',event)">${on?'✓':''}</span>
+            <span class="wfck-lbl">${WF_ART_LABEL[a]||a}</span>
+            <span class="wfck-st">${on?'done':'to do'}</span>
+            ${link?`<a class="wfck-link" href="${esc(link)}" target="_blank" rel="noopener" onclick="event.stopPropagation()">view ↗</a>`:`<button class="wfck-link add" onclick="event.stopPropagation();wfEditLink('${w.id}','${a}')">+ link / note</button>`}
+          </div>`;
+        }).join('');
+        return `<div class="wfcard" data-search="${esc((w.title+' '+w.owners.join(' ')+' '+w.angle+' '+w.role).toLowerCase())}">
+          <div class="wfcard-top">
             <span class="wfimp" onclick="wfImpactCycle('${w.id}',event)" title="Impact: ${WF_IMPACT_LABEL[im]} — tap to change" style="background:${WF_IMPACT_COL[im]}22;color:${WF_IMPACT_COL[im]};border:1px solid ${WF_IMPACT_COL[im]}66">${im==='high'?'★':im==='med'?'●':'○'}</span>
-            <span class="wfmxr-dots">${dots}</span><span class="wfmxr-t">${esc(w.title)}</span>
-          </span>
-          ${cells}
-          <span class="wfmxr-p">${p}%</span>
+            <span class="wfcard-nm">${esc(w.title)}</span>
+            <span class="wfcard-pct">${p}%</span>
+          </div>
+          <div class="wfcard-meta"><span class="wfcard-dots">${dots}</span>${esc(w.owners.join(', '))}${w.role?' · '+esc(w.role):''}</div>
+          ${w.angle?`<div class="wfcard-desc">${esc(w.angle)}</div>`:''}
+          <div class="wfcard-list">${checklist}</div>
+          <div class="wfcard-bar"><i style="width:${p}%"></i></div>
         </div>`;
       }).join('');
       return `<div class="wfcat2">
         <div class="wfcat-hd"><div class="wfcat-ic" style="background:${col}22;color:${col}">${ic}</div><div class="wfcat-nm">${esc(cat)}</div><span class="wfcat-pct">${list.length} workflow${list.length>1?'s':''} · ${avg}%</span></div>
-        <div class="wfmx">${header}${rows}</div>
-      </div>`;
+        ${cards}</div>`;
     }).join('');
 
     const totalCells=D.workflows.length*ORDER.length;
 
-    return `<h2 class="vt">Workflows</h2><div class="vsub">Every workflow we've built. ${D.workflows.length} workflows in ${cats.length} categories · ${totalArt} of ${totalCells} steps done. Tick the boxes on the right as you finish each step (Graphic · Video · Page · Email · Social · Zip) — saves to every device. Tap a workflow name for the full breakdown + links. Tap the ★ to change its impact.</div>
+    return `<h2 class="vt">Workflows</h2><div class="vsub">Every workflow we've built, as a checklist. ${D.workflows.length} workflows in ${cats.length} categories · ${totalArt} of ${totalCells} steps done. Tick each step as you finish it — page, email marketing, reel, and more — and it saves to every device. Tap the ★ badge to change a workflow's impact. Add a link or note on any step.</div>
       <input class="search" placeholder="Search all workflows..." oninput="filterCards(this,'wfwrap')">
       <div id="wfwrap">${boxes}</div>
       ${(()=>{
@@ -6037,13 +8275,44 @@
     const flows=(D.websiteWorkflows||[]).map(x=>`<div class="opitem"><span class="odot" style="background:#A78BFA"></span><span class="oname">${esc(x.n)} <span style="color:var(--muted)">— ${esc(x.d)}</span></span></div>`).join('');
     const tools=(D.websiteTools||[]).map(x=>`<div class="opitem"><span class="odot" style="background:#2DD4BF"></span><span class="oname">${esc(x.n)} <span style="color:var(--muted)">— ${esc(x.d)}</span></span></div>`).join('');
 
+    /* Site Map & Health — full page graph + SEO health, grouped by host */
+    const smHtml=(function(){
+      const SM=D.siteMap; if(!SM||!SM.hubs) return '<div class="panel"><div class="meta">Run the dashboard sync to build the site map.</div></div>';
+      const s=SM.summary||{}, iss=SM.issues||{};
+      const dot=p=> p.orphan?'#EF6B6B' : ((p.indexable&&!p.inSitemap&&p.path!=='index.html')||(p.indexable&&!p.hasDesc)?'#E0B341' : (!p.indexable?'#7C8AA5':'#4ADE80'));
+      const chips=p=>[ !p.indexable?'<span class="sm-chip muted">noindex</span>':'',
+        (p.indexable&&!p.inSitemap&&p.path!=='index.html')?'<span class="sm-chip warn">not in sitemap</span>':'',
+        p.orphan?'<span class="sm-chip bad">orphan</span>':'',
+        (p.indexable&&!p.hasDesc)?'<span class="sm-chip warn">no description</span>':'' ].join('');
+      const sum='<div class="sm-sum">'+
+        '<span class="sm-stat"><b>'+(SM.total||0)+'</b> pages</span>'+
+        '<span class="sm-stat ok"><b>'+(s.inSitemap||0)+'</b> in sitemap</span>'+
+        '<span class="sm-stat '+(s.notSearchable?'warn':'')+'"><b>'+(s.notSearchable||0)+'</b> not searchable</span>'+
+        '<span class="sm-stat '+(s.orphans?'bad':'')+'"><b>'+(s.orphans||0)+'</b> orphaned</span>'+
+        '<span class="sm-stat muted"><b>'+(s.noindex||0)+'</b> noindex</span></div>';
+      const issList=(label,arr)=> arr&&arr.length? '<div class="sm-iss"><b>'+label+':</b> '+arr.slice(0,15).map(esc).join(', ')+(arr.length>15?' +'+(arr.length-15)+' more':'')+'</div>':'';
+      const anyIssue=(iss.orphans&&iss.orphans.length)||(iss.notInSitemap&&iss.notInSitemap.length)||(iss.missingDesc&&iss.missingDesc.length);
+      const issues=anyIssue?
+        '<div class="sm-issues"><b>Needs attention (say the word and I fix these)</b>'+
+          issList('Orphaned, nothing links to them',iss.orphans)+
+          issList('Not in sitemap, invisible to Google',iss.notInSitemap)+
+          issList('Missing description',iss.missingDesc)+'</div>':
+        '<div class="sm-issues ok"><b>All healthy</b><div class="sm-iss">Every indexable page is in the sitemap and linked. Nothing orphaned.</div></div>';
+      const hubs=SM.hubs.map(function(h){
+        const rows=h.pages.map(function(p){
+          return '<a class="sm-row" href="'+pageUrl(p)+'" target="_blank" rel="noopener"><span class="sm-dot" style="background:'+dot(p)+'"></span><span class="sm-nm">'+esc(p.name)+(p.cat?' <span class="sm-cat">'+esc(p.cat)+'</span>':'')+'</span><span class="sm-chips">'+chips(p)+'</span></a>';
+        }).join('');
+        return '<div class="sm-hub"><div class="sm-hub-hd"><span class="sm-hub-nm">'+esc(h.label)+'</span><span class="sm-hub-meta">hosted by '+esc(h.host)+' · '+h.count+'</span></div>'+rows+'</div>';
+      }).join('');
+      return sum+issues+'<div class="sm-wrap">'+hubs+'</div>';
+    })();
+
     return `<h2 class="vt">Websites</h2><div class="vsub">BBC's web operation — site, deploys, pages, workflows.</div>
       ${hero}${kpis}
       ${netlify}
       ${connect}
       ${todo}
-      <div class="sec">Page map (main nav flow)</div><div class="cal-scroll"><div class="pagemap">${map}</div></div>
-      <div class="sec">All pages (${D.websitePages.length})</div>${pagesByGroup}
+      <div class="sec">Site Map &amp; Health</div>${smHtml}
       <div class="sec">Website workflows</div><div class="panel">${flows}</div>
       <div class="sec">Tools (team + Claude)</div><div class="panel">${tools}</div>`;
   };

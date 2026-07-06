@@ -178,3 +178,5 @@ git push            # Netlify auto-deploys
 - Pattern matches the existing Home-view IIFE blocks (`${(()=>{...})()}`); `esc()` in scope. Static-preview render not screenshot-verified (Home sits behind the team login gate) — low risk, isolated additive block.
 
 <!-- deploy-trigger 2026-07-04e: Home page "Upcoming interviews & calls" card (os/index.html + SOURCE). -->
+
+<!-- deploy-trigger 2026-07-07: Site Map & Health view in /os Websites (page graph + SEO health). -->
