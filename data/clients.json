@@ -1,18 +1,6 @@
 {
-  "_note": "Canonical source of truth for BBC clients. Edit here; sync-dashboard.mjs writes /os. Categories: active | prospect | past.",
+  "_note": "Canonical source of truth for BBC clients. Edit HERE; sync-dashboard.mjs writes /os from this. Categories: active | of | prospect | past. Folder auto-add is OFF, so a client only appears when added here.",
   "active": [
-    {
-      "name": "Dhes",
-      "owner": "Dhes",
-      "handler": "Diego",
-      "ai": "-",
-      "site": "-",
-      "industry": "Content partner - video editing + graphics (per project)",
-      "status": "active",
-      "notes": "Per-video content partner, now under Diego. Own dashboard at /clients/dhes/ with task list + switchable request page (Reel / Graphic / Other). First jobs: Macquarie Locksmiths trial reel, Solar Galaxy.",
-      "folder": "DHES",
-      "slug": "dhes"
-    },
     {
       "name": "S. Riviere Hair Collection",
       "owner": "Sonya Riviere",
@@ -62,27 +50,16 @@
       "slug": "home-vision-studio"
     },
     {
-      "name": "First Class Finishes",
+      "name": "First Class Finishes & Hi-Up Roofing",
       "owner": "-",
       "handler": "Ryan C.",
       "ai": "-",
       "site": "firstclass-finishes.com",
-      "industry": "Commercial painting + roofing, Texas",
+      "industry": "Commercial painting + roofing + storm-damage roofing, Texas",
       "status": "active",
+      "notes": "Combined account (Ryan C.). First Class Finishes = commercial painting + roofing (firstclass-finishes.com); Hi-Up Roofing = storm-damage roofing + insurance SEO (hi-uproofing.com).",
       "folder": "FIRST-CLASS-FINISHES",
       "slug": "first-class-finishes"
-    },
-    {
-      "name": "Hi-Up Roofing",
-      "owner": "-",
-      "handler": "Ryan C.",
-      "ai": "-",
-      "site": "hi-uproofing.com",
-      "industry": "Roofing, storm damage",
-      "status": "active",
-      "notes": "Insurance SEO, storm damage.",
-      "folder": "HI-UP-ROOFING",
-      "slug": "hi-up-roofing"
     },
     {
       "name": "AJ Battle Foundation",
@@ -95,18 +72,6 @@
       "notes": "Solely handled by Vi now (was Al). Sister business to Sonya. Coordinate carefully.",
       "folder": "AJ-BATTLE-FOUNDATION",
       "slug": "aj-battle-foundation"
-    },
-    {
-      "name": "All Ryze",
-      "owner": "-",
-      "handler": "Kenz / Daryl",
-      "ai": "-",
-      "site": "-",
-      "industry": "Digital audience engagement & growth management agency",
-      "status": "active",
-      "notes": "NEVER use adult-platform language. Describe as a digital audience engagement and growth management agency.",
-      "folder": "ALL-RYZE",
-      "slug": "all-ryze"
     },
     {
       "name": "Cavalry Group",
@@ -133,44 +98,43 @@
       "slug": "3r-design"
     },
     {
-      "name": "Nintellect",
-      "owner": "Chris",
-      "handler": "Diego",
-      "ai": "-",
-      "site": "-",
-      "industry": "Video / narration production (Captain Bramble series)",
+      "name": "Freccia Construction",
+      "owner": "Rebekah Severi",
+      "handler": "RJ / Ryan",
+      "ai": "Bob",
+      "site": "frecciagroup.com",
+      "industry": "Custom home builder (Austin, TX)",
       "status": "active",
-      "notes": "Chris's brand. Narrated video series (Captain Bramble), Nintendo-adjacent storytelling. ElevenLabs Multilingual v2 voiceover (Captain Bramble voice) + per-chapter music direction. Diego handling. Assets in Drive: Chris Branding/ (transparent logo + voice-over direction).",
-      "folder": "Chris Branding",
-      "slug": "nintellect",
-      "video": true
+      "notes": "Active client (signed). Website + marketing emails (GHL) + social. Sole approver: Rebekah. Contacts: rseveri@frecciagroup.com (cc wseveri, jclements, accounting). AI = Bob.",
+      "folder": "FRECCIA-CONSTRUCTION",
+      "slug": "freccia-construction"
     },
+    {
+      "name": "JR Signing Services",
+      "owner": "Jasmine Brown",
+      "handler": "Daryl / RJ",
+      "ai": "-",
+      "site": "jrsigningservices.com",
+      "industry": "TX notary signing agency",
+      "status": "active",
+      "notes": "Active client. LinkedIn outreach + GoHighLevel CRM. Contacts: Jasmine Brown + Anthony, jrsigningservices@gmail.com, (832) 387-4648.",
+      "folder": "JR-SIGNING-SERVICES",
+      "slug": "jr-signing-services"
+    }
+  ],
+  "of": [
     {
       "name": "SugarBabyCreative",
       "owner": "SugarBabyCreative",
       "handler": "RJ",
       "ai": "-",
       "site": "-",
-      "industry": "Creator management",
+      "industry": "Creator management (OF)",
       "status": "active",
-      "notes": "Current full-service creator-management engagement (ops + team management, content, audience engagement & growth). Box opens invoicing: generate invoice + the live invoice sheet.",
+      "notes": "OF / creator management. Full-service engagement (ops + team management, content, audience engagement & growth). Box opens invoicing: generate invoice + the live invoice sheet.",
       "slug": "sugarbabycreative",
       "invoice": true,
       "invoiceSheet": "https://docs.google.com/spreadsheets/d/1g4qILqZsxbpY6CW5u8Ek3LKqIg3mr_fPdHfV2ZQzRlk/edit"
-    }
-  ],
-  "prospect": [
-    {
-      "name": "Freccia Group (Rebekah)",
-      "owner": "Rebekah Severi",
-      "handler": "RJ",
-      "ai": "-",
-      "site": "frecciagroup.com",
-      "industry": "Custom home builder (Austin, TX)",
-      "status": "prospect",
-      "notes": "Warm lead. Branded proposal emailed Jun 18, awaiting reply. $10/hr; client buys Claude Pro. Contacts: rseveri@frecciagroup.com (cc wseveri, jclements).",
-      "slug": "freccia-group-rebekah",
-      "link": "mailto:rseveri@frecciagroup.com"
     },
     {
       "name": "Echoed Past Jewelry Co. (Rosemarie)",
@@ -178,14 +142,86 @@
       "handler": "Becky / RJ",
       "ai": "-",
       "site": "-",
-      "industry": "Handmade jewelry (new business)",
-      "status": "prospect",
-      "notes": "Interested lead. Wants full Shopify store, domain, social (IG/TikTok/FB/Pinterest), Shopify POS, farmers-market QR/signage, SEO. Referred via Beau / HVS circle. Working with Becky. Contact: rosemarie@homevisionstudio.com.",
+      "industry": "OF / creator (also handmade jewelry)",
+      "status": "active",
+      "notes": "OF / creator (Rosemarie). Also has a handmade-jewelry side business (Echoed Past): Shopify store, domain, social, POS, SEO. Referred via Beau / HVS circle. Working with Becky. Contact: rosemarie@homevisionstudio.com.",
       "slug": "echoed-past-jewelry-co-rosemarie",
       "link": "mailto:rosemarie@homevisionstudio.com"
     }
   ],
+  "prospect": [
+    {
+      "name": "Greenlight Go Logistics",
+      "owner": "Jasmine Brown",
+      "handler": "RJ",
+      "ai": "-",
+      "site": "-",
+      "industry": "Logistics (Jasmine's 2nd business)",
+      "status": "prospect",
+      "notes": "HOT prospect (JR Signing upsell). Wants help landing direct clients; RJ sent a proposal; ~2 hrs/day discussed. Contact: Jasmine Brown, jrsigningservices@gmail.com, (832) 387-4648.",
+      "slug": "greenlight-go-logistics",
+      "link": "mailto:jrsigningservices@gmail.com",
+      "folder": "GREENLIGHT-GO-LOGISTICS"
+    },
+    {
+      "name": "Edward Davidson — Dogument / Barklish",
+      "owner": "Edward Davidson",
+      "handler": "RJ",
+      "ai": "-",
+      "site": "dogument.co.uk",
+      "industry": "AI pet product (dog collar / PettiChat)",
+      "status": "prospect",
+      "notes": "HOT prospect. AI dog collar (Barklish / PettiChat). Brief approved, reel sent; call Wed Jul 8, 5PM PH. Contact: edward@dogument.co.uk, +44 7469 432 782. Folder: _PROSPECTS/EDWARD-DAVIDSON-PET-COLLAR.",
+      "slug": "edward-dogument",
+      "link": "mailto:edward@dogument.co.uk"
+    },
+    {
+      "name": "Callie Russo Designs",
+      "owner": "Callie Russo",
+      "handler": "-",
+      "ai": "-",
+      "site": "-",
+      "industry": "Design",
+      "status": "prospect",
+      "notes": "Prospect. Folder on Drive: _PROSPECTS/CALLIE-RUSSO-DESIGNS. Details to confirm.",
+      "slug": "callie-russo-designs"
+    },
+    {
+      "name": "Chris (Nintellect / Captain Bramble)",
+      "owner": "Chris",
+      "handler": "Diego",
+      "ai": "-",
+      "site": "-",
+      "industry": "Video / narration production (Captain Bramble series)",
+      "status": "prospect",
+      "notes": "Prospect (not a signed client). Chris's brand: narrated video series (Captain Bramble), Nintendo-adjacent storytelling. ElevenLabs Multilingual v2 voiceover + per-chapter music direction. Prospect folder: _PROSPECTS/CHRIS. Assets: Chris Branding/.",
+      "slug": "chris-nintellect"
+    },
+    {
+      "name": "Macquarie Locksmiths",
+      "owner": "-",
+      "handler": "Diego",
+      "ai": "-",
+      "site": "-",
+      "industry": "Locksmith services",
+      "status": "prospect",
+      "notes": "Prospect. Trial reel done (via Diego). Folder on Drive: _PROSPECTS/MACQUARIE-LOCKSMITHS.",
+      "slug": "macquarie-locksmiths"
+    }
+  ],
   "past": [
+    {
+      "name": "All Ryze",
+      "owner": "-",
+      "handler": "Kenz / Daryl",
+      "ai": "-",
+      "site": "-",
+      "industry": "Digital audience engagement & growth management agency",
+      "status": "past",
+      "notes": "Part-time now, moved to past/old clients. NEVER use adult-platform language. Describe as a digital audience engagement and growth management agency.",
+      "folder": "ALL-RYZE",
+      "slug": "all-ryze"
+    },
     {
       "name": "MNJ Insurance Solutions",
       "owner": "Julie Jennings",
