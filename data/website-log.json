@@ -1,0 +1,163 @@
+{
+  "updated": "2026-07-06T10:59:21.048Z",
+  "lastDeploy": {
+    "hash": "c755087",
+    "date": "2026-07-06",
+    "subject": "/os: Vault prefill + Protocols condensed + Reminders + DURABLE clients fix",
+    "kind": "dashboard"
+  },
+  "insightsCount": 106,
+  "changes": [
+    {
+      "hash": "c755087",
+      "date": "2026-07-06",
+      "subject": "/os: Vault prefill + Protocols condensed + Reminders + DURABLE clients fix",
+      "kind": "dashboard"
+    },
+    {
+      "hash": "d73c8b4",
+      "date": "2026-07-04",
+      "subject": "/os Clients cleanup (per RJ)",
+      "kind": "dashboard"
+    },
+    {
+      "hash": "ea2cbad",
+      "date": "2026-07-04",
+      "subject": "/os Workflow page redesign + Home cleanup (per RJ)",
+      "kind": "page"
+    },
+    {
+      "hash": "126b9ca",
+      "date": "2026-07-04",
+      "subject": "Insights: 3 new capability pages (the true content gaps from the audit)",
+      "kind": "page"
+    },
+    {
+      "hash": "4f8bd2d",
+      "date": "2026-07-04",
+      "subject": "/os Home: Meetings & Interviews card (Google Calendar) + meetings.mjs store",
+      "kind": "dashboard"
+    },
+    {
+      "hash": "6924617",
+      "date": "2026-07-04",
+      "subject": "Messenger: unify a VA's multiple logins into one identity (durable fix)",
+      "kind": "fix"
+    },
+    {
+      "hash": "c1aa904",
+      "date": "2026-07-04",
+      "subject": "TEMP: nonce-gated read-only diagnostic to inspect Krizza conv records (remove after)",
+      "kind": "update"
+    },
+    {
+      "hash": "99aa987",
+      "date": "2026-07-04",
+      "subject": "/os upgrade batch: Workflow tracker checkboxes + impact ordering, Home client tasks/email, CRM Email Workflows, two-way client sync",
+      "kind": "dashboard"
+    },
+    {
+      "hash": "4a542d0",
+      "date": "2026-07-04",
+      "subject": "Messenger: re-run merge (v6) to fold Krizza's new krizza@balaynibruno.co login in",
+      "kind": "update"
+    },
+    {
+      "hash": "bf38cc2",
+      "date": "2026-07-04",
+      "subject": "Messenger: recover split VA chats (v5 merge, active-account canonical, VA-triggered)",
+      "kind": "update"
+    },
+    {
+      "hash": "d36035b",
+      "date": "2026-07-01",
+      "subject": "Remove temp debug diagnostic (merge verified working)",
+      "kind": "fix"
+    },
+    {
+      "hash": "50a829f",
+      "date": "2026-07-01",
+      "subject": "Merge v4: canonical id per person across ALL chats; runnable via diagnostic",
+      "kind": "update"
+    },
+    {
+      "hash": "d2d155a",
+      "date": "2026-07-01",
+      "subject": "TEMP: service-key-gated debugdump to inspect conv records (remove after)",
+      "kind": "fix"
+    },
+    {
+      "hash": "4847895",
+      "date": "2026-07-01",
+      "subject": "Normalize person key (email/name resolve the same); merge flag v3",
+      "kind": "update"
+    },
+    {
+      "hash": "1ba0e89",
+      "date": "2026-07-01",
+      "subject": "Merge duplicate VA chats by PERSON, not id (handles multiple/old accounts)",
+      "kind": "update"
+    },
+    {
+      "hash": "850d572",
+      "date": "2026-07-01",
+      "subject": "Messenger: one identity for the hub, merge duplicate chats into one each",
+      "kind": "update"
+    },
+    {
+      "hash": "52c3db5",
+      "date": "2026-07-01",
+      "subject": "Keep pre-push hook LF so it runs on all devices",
+      "kind": "update"
+    },
+    {
+      "hash": "5a1971f",
+      "date": "2026-07-01",
+      "subject": "Add shared pre-push guard: block stale-copy pushes + protect core messenger/dashboard files",
+      "kind": "dashboard"
+    },
+    {
+      "hash": "98c5d9b",
+      "date": "2026-07-01",
+      "subject": "Connect file-converter: Resources card + sitemap entry",
+      "kind": "update"
+    },
+    {
+      "hash": "9ec852d",
+      "date": "2026-07-01",
+      "subject": "Restore file-converter.html (salvaged from 0825d81 stale-revert)",
+      "kind": "fix"
+    },
+    {
+      "hash": "22aae7f",
+      "date": "2026-07-01",
+      "subject": "Merge: keep current messenger/photos/insights/os; salvage file-converter.html separately (0825d81 was a stale-clone revert)",
+      "kind": "page"
+    },
+    {
+      "hash": "e659b02",
+      "date": "2026-07-01",
+      "subject": "Messenger: all VAs can log in (block clients only) + clean first names + chat-restore",
+      "kind": "client"
+    },
+    {
+      "hash": "0825d81",
+      "date": "2026-07-01",
+      "subject": "Add Universal File Converter tool + update Resources page",
+      "kind": "page"
+    },
+    {
+      "hash": "901031a",
+      "date": "2026-06-30",
+      "subject": "Messenger SW: network-first for app HTML (no more stale-version lockouts)",
+      "kind": "update"
+    },
+    {
+      "hash": "2c819c7",
+      "date": "2026-06-30",
+      "subject": "Add Daryl (daryl.ausan00@gmail.com) to BBC Messenger",
+      "kind": "update"
+    }
+  ],
+  "note": "History from git. The Websites page also runs a live broken-page check when you open it."
+}

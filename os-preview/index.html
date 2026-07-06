@@ -5960,6 +5960,24 @@
   };
   const pageUrl=p=>{ if(p.path==='index.html') return 'https://balaynibruno.co'; return 'https://balaynibruno.co/'+p.path.replace('.html','').replace(/\/$/,''); };
   const shot=(url,w,h)=>`https://image.thum.io/get/width/${w}/crop/${h}/noanimate/${url}`;
+  const WEB_KIND_COL={page:'#4E9E74',dashboard:'#D4AF37',fix:'#EF6B6B',client:'#EC4899',update:'#7C8AA5'};
+  window.loadWebsiteLog=async()=>{
+    const el=document.getElementById('web-changes'); if(!el) return;
+    let d=null; try{ d=await (await fetch('/data/website-log.json?_='+Date.now(),{cache:'no-store'})).json(); }catch(e){}
+    if(!d||!d.changes){ el.innerHTML='<div class="gauge-sub">Change history shows on the live site. Auto-deploy: GitHub → Netlify.</div>'; return; }
+    const head=`<div class="deprow"><span class="dot" style="background:var(--green)"></span><span><b>Auto-deploy active</b> · GitHub → Netlify · ${d.insightsCount||0} insight pages live</span><span class="when">updated ${new Date(d.updated).toLocaleDateString()}</span></div>`;
+    const rows=d.changes.slice(0,20).map(c=>`<div class="deprow"><span class="dot" style="background:${WEB_KIND_COL[c.kind]||'#7C8AA5'}"></span><span style="color:var(--muted)">${esc(c.subject)}</span><span class="when">${esc(c.date)}</span></div>`).join('');
+    el.innerHTML=head+rows;
+  };
+  window.checkBrokenPages=async()=>{
+    const el=document.getElementById('web-health'); if(!el) return;
+    if(!/balaynibruno\.co/.test(location.hostname)){ el.innerHTML='<div class="gauge-sub">The live broken-page check runs on balaynibruno.co/os (it fetches the real pages). Skipped in local preview.</div>'; return; }
+    const pages=['/','/insights.html','/contact.html','/our-team.html','/how-we-help.html','/resources.html','/start.html','/sitemap.xml','/can-ai-sort-my-inbox-every-morning.html','/can-ai-tell-me-whats-in-a-video-or-link.html','/can-ai-write-captions-that-match-whats-trending.html'];
+    const results=await Promise.all(pages.map(async p=>{ try{ const r=await fetch(p,{method:'HEAD',cache:'no-store'}); return {p,ok:r.ok,status:r.status}; }catch(e){ return {p,ok:false,status:'ERR'}; } }));
+    const bad=results.filter(r=>!r.ok);
+    if(!bad.length){ el.innerHTML='<div class="deprow"><span class="dot" style="background:var(--green)"></span><span><b>All checked pages are live</b> · '+results.length+' pages checked, 0 broken</span></div>'; return; }
+    el.innerHTML='<div class="deprow"><span class="dot" style="background:#EF6B6B"></span><span><b>'+bad.length+' broken page'+(bad.length>1?'s':'')+' found</b> — fix before/after deploy</span></div>'+bad.map(b=>`<div class="deprow"><span class="dot" style="background:#EF6B6B"></span><span style="color:#F29A9A">${esc(b.p)} → ${esc(b.status)}</span></div>`).join('');
+  };
   views.websites=()=>{
     const N=D.netlify||{};
     const pageGaps=D.workflows.filter(w=>!w.artifacts.page);
@@ -5976,13 +5994,12 @@
       <div class="kpi"><div class="n gold">${pageGaps.length}</div><div class="l">Pages to make</div></div>
       <div class="kpi"><div class="n green">✓</div><div class="l">Auto-deploy</div></div></div>`;
 
-    /* Netlify */
-    const depRows=(N.recent||[]).map(d=>`<div class="deprow"><span class="dot" style="background:#3a4658"></span><span style="color:var(--muted)">${esc(d.msg)}</span><span class="when">${esc(d.when)}</span></div>`).join('');
-    const netlify=`<div class="sec">Netlify — deploys <span class="preview-tag">· sample until token wired</span></div>
-      <div class="panel">
-        <div class="deprow"><span class="dot" style="background:var(--green)"></span><span><b>Auto-deploy active</b> · GitHub → Netlify</span><span class="when">${esc(N.branch||'master')}</span></div>
-        ${depRows}
-        <div class="gauge-sub" style="text-align:left;margin-top:10px">Connect your Netlify token to show live deploy status, build logs, and one-tap rollback.</div></div>`;
+    /* Live change + deploy tracker (history from data/website-log.json, generated at each deploy) +
+       a live broken-page check that runs when this view opens. */
+    const netlify=`<div class="sec">Recent changes &amp; deploys</div>
+      <div class="panel" id="web-changes"><div class="gauge-sub">Loading history…</div></div>
+      <div class="sec">Site health — broken pages</div>
+      <div class="panel" id="web-health"><div class="gauge-sub">Checking pages…</div></div>`;
 
     /* connect cards */
     const connect=`<div class="sec">Connect to unlock</div>
@@ -6522,7 +6539,7 @@
   window.go=v=>{ window.curView=v; window.curClient=null; window.__curClientSlug=null; app.innerHTML=`<div class="view">${views[v]()}</div>`; window.scrollTo(0,0);
     if(!window.__routing){ var __nh='#'+v; if(location.hash!==__nh){ try{ location.hash=__nh; }catch(e){} } }
     document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('active',b.dataset.v===v));
-    sheet.classList.remove('open'); if(v==='crm'&&window.loadBrevoCrm){ window.loadBrevoCrm(); } if(v==='inbox'&&window.loadInbox) window.loadInbox(); if(v==='home'&&window.loadHomeAttention) window.loadHomeAttention(); if(v==='home'&&window.loadClientTasks) window.loadClientTasks(); if(v==='home'&&window.loadMeetings) window.loadMeetings(); if(v==='board'&&window.Board) window.Board.render(); if(v==='team'&&window.TeamChat) window.TeamChat.enter(); if(v==='bruno'&&window.renderVault) window.renderVault(); };
+    sheet.classList.remove('open'); if(v==='crm'&&window.loadBrevoCrm){ window.loadBrevoCrm(); } if(v==='inbox'&&window.loadInbox) window.loadInbox(); if(v==='home'&&window.loadHomeAttention) window.loadHomeAttention(); if(v==='home'&&window.loadClientTasks) window.loadClientTasks(); if(v==='home'&&window.loadMeetings) window.loadMeetings(); if(v==='websites'&&window.loadWebsiteLog){ window.loadWebsiteLog(); window.checkBrokenPages(); } if(v==='board'&&window.Board) window.Board.render(); if(v==='team'&&window.TeamChat) window.TeamChat.enter(); if(v==='bruno'&&window.renderVault) window.renderVault(); };
   window.filterCards=(inp,wrapId)=>{ const q=inp.value.toLowerCase(); const wrap=document.getElementById(wrapId);
     wrap.querySelectorAll('.card,.wfrow,.wfcard,.clientbox,.opitem').forEach(c=>{ const hay=(c.dataset.search||c.textContent).toLowerCase(); c.style.display=hay.includes(q)?'':'none'; });
     wrap.querySelectorAll('.wfcat,.wfcat2').forEach(p=>{ const any=[...p.querySelectorAll('.wfrow,.wfcard')].some(r=>r.style.display!=='none'); p.style.display=any?'':'none'; }); };
