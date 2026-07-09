@@ -6,6 +6,26 @@
 <!-- deploy-trigger 2026-07-04: Workflows page — clickable deliverable checkboxes + shared two-way sync store (os/index.html + new function). -->
 # ⏳ PENDING PUSH — hold until Netlify credit is back
 
+## 🖼️ LIVE BUILDS PORTFOLIO HUB — new page — STAGED 2026-07-10
+- **What RJ asked:** "check if there's any other git repo we can make as a portfolio like dashboard." Answer: built a **Live Builds** hub that collects our portfolio-worthy standalone builds as clickable cards with real screenshots, each opening the actual live site.
+- **NEW `live-builds.html`** (built from the about.html scaffold, so nav/footer/tokens/JS match the site 1:1). Sections: hero, **Websites & Stores** grid (6 real live builds), **Dashboards & Tools** (3 private "demo on request" cards, no public link), CTA.
+  - 6 cards, each = real screenshot (`assets/portfolio/pf-*.jpeg`, captured via Playwright at 1280x800) + "Open live site ↗" overlay + "Explore the build →" link opening the actual URL:
+    - 3R Design → https://3r-design-preview.netlify.app
+    - Wooden Woodworks → https://ww-portfolio-preview.netlify.app
+    - S. Riviere Hair → https://sriviere-hair-preview.netlify.app
+    - Home Vision Studio → https://bbc-hvs-redesign-preview.netlify.app
+    - Cavalry Realty Group → https://gleeful-halva-5fdfd3.netlify.app
+    - The BBC Playbook → https://bbc-playbook-preview.netlify.app
+  - Private (no public link, "Demo on request"): BBC Command Center (/os), Client Store Dashboard, 3D Property Walkthrough — these run real client data so they stay private.
+  - **Why screenshots not live iframes:** Cavalry sends `X-Frame-Options: deny` (can't embed) and HVS/Playbook use scroll-fade animations that render blank in a static iframe. Static screenshots are consistent + reliable; the live link still opens the real site.
+- **Connected (everything-connected rule):** added a **"See Live Builds" banner** near the top of `our-work.html` (Our Work is in the global nav) + a **"Live Builds"** link in the footer Company column on both pages + a Live Builds entry in live-builds.html's own mobile nav. Click-path works from the normal entry point.
+- **Consent (RJ 2026-07-10):** approved HVS, WW, S. Riviere to show publicly. 3R (already a live client site) + BBC Playbook (ours) included too. **Cavalry held out** — card removed, screenshot kept at `assets/portfolio/pf-cavalry.jpeg`, re-add when RJ clears it. Page now has **5 cards**. `noindex` **removed** — index-ready on deploy.
+- **Verified locally (headless, 1280 + 375):** 0 JS errors; 6 images load (0 broken); no horizontal overflow at either width; fade-in reveals fire on real scroll; CTA tap target 56px. Screenshots: `.playwright-mcp/lb-final-desktop2.jpeg` + `lb-final-mobile.jpeg`.
+- ⚠️ **Follow-ups (do in the deploy batch):**
+  1. **Cavalry** — re-add its card once RJ approves showing it.
+  2. **/os tile** — add a "Live Builds" quick link on the /os Command Center (optional; nav path already works).
+  3. Add `live-builds.html` to `sitemap.xml` + consider a main-nav entry.
+
 ## 🔄 WORKFLOWS DASHBOARD — clickable deliverable checkboxes + two-way sync — STAGED 2026-07-04
 - **What RJ asked:** on /os → Workflows, every workflow shows checkboxes for each deliverable (page, email marketing, reel, carousel, social). RJ can tap to check/uncheck in real time; state syncs to EVERY device AND to the whole system (two-way: when a BBC script finishes an asset it auto-checks the same box). New workflows auto-appear.
 - **NEW `netlify/functions/workflows.mjs`** — shared state store on **Netlify Blobs** (same zero-config engine as cards.mjs/team-chat.mjs; no token/DB). Single source of truth. Ops: `setArtifact` (flip one checkbox), `setLink`, `addWorkflow` (register a brand-new workflow at runtime — auto-appears on every dashboard, no HTML edit), `removeWorkflow`, `bulk` (mass import, e.g. Emmy's master list). GET returns `{artifacts,links,extra,updated}`. Syntax verified (node --check OK).
@@ -180,3 +200,11 @@ git push            # Netlify auto-deploys
 <!-- deploy-trigger 2026-07-04e: Home page "Upcoming interviews & calls" card (os/index.html + SOURCE). -->
 
 <!-- deploy-trigger 2026-07-07: Site Map & Health view in /os Websites (page graph + SEO health). -->
+
+## 📄 ADDED 2026-07-10 — D5 nightly insight-page routine — STAGED
+- **NEW `can-ai-keep-me-organized-and-remind-me.html`** — "Can AI Keep My Business Organized and Remind Me of Things?" STAGED 2026-07-10 by D5 insight-page routine. Grounded in Kriz's real capability set (`BBC_AI_FAMILY/KRIZ/` — daily tracker, reminders engine, bills/important-dates trackers, idea inbox, cross-AI pending) + the global per-device reminder engine rule (stays silent unless something is due; corrections stick). Category Operations. Article + FAQPage schema, step-flow + roadmap + tip-box visuals, CTA, related-reads, footer. No em-dashes, no invented facts.
+- **insights.html** — 1 new Operations card added at top of `.article-grid`; count bumped 104 → 105.
+- **sitemap.xml** — new `<url>` entry added for the slug.
+- Mirrored to `BBC WEBSITE HTML\can-ai-keep-me-organized-and-remind-me.html`.
+- Duplicate-guard: grepped `insights.html` + globbed root slugs for "remind"/"organized"/"reminder" — no existing page covers this exact question. Clear to build.
+- Row 1 of `C:\BBC\routines\insight-pages\topics_backlog.md` flipped to ✅ with this slug.
