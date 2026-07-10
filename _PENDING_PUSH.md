@@ -6,6 +6,18 @@
 <!-- deploy-trigger 2026-07-04: Workflows page — clickable deliverable checkboxes + shared two-way sync store (os/index.html + new function). -->
 # ⏳ PENDING PUSH — hold until Netlify credit is back
 
+## 🧾 OUR WORK clients refresh + Live Builds hero fix — STAGED 2026-07-11 (deploy together)
+- **live-builds.html hero fix:** the "Live Builds You Can" line was invisible (global `h1{color:deep-blue}` won on the navy hero). Added `color:#fff` to `.pf-hero__title`. Now readable.
+- **our-work.html — Current vs Past rebuilt + logos on white** (RJ asked to update who's current/old + logos on white bg):
+  - **CURRENT (11):** Freccia, Wooden Woodworks, Cavalry Realty, First Class Finishes, Home Vision Studio, Hi-Up Roofing, S. Riviere Hair, DuDilagent AI, All Ryze, AJ Battle Foundation, Blackbelt Commerce (+ Coming Soon placeholder).
+  - **PAST (new section, 3):** Top Producer Investment Capital, 4Ocean (ended 2026-07-07), Entropy Management.
+  - **Founding Clients** section left unchanged (MNJ, Crown, Orbital — intentional emoji/gold design).
+  - **Classification basis:** each card's own copy (present tense = current, past tense/ended = past) + client CLAUDE.md. **RJ REVIEW before deploy** — bump anyone if I misjudged (esp. Blackbelt/DuDilagent/Cavalry, which weren't in the maintained active-retainer list but read as active).
+  - **De-duped:** 4Ocean (was 2×) and DuDilagent (was 2×) → 1 each. **Dropped SugarBabyCreative** entirely (brand-safety hold — adult-adjacent; RJ can override).
+  - **All Current+Past logo cells now white background.** Real logos: Freccia, WW, Cavalry, TPIC, First Class Finishes, Home Vision, Hi-Up, AJ Battle. Clean text wordmarks on white (no logo file, couldn't cleanly source): S. Riviere, DuDilagent, All Ryze, Blackbelt, Entropy, 4Ocean.
+  - **Not added:** JR Signing Services (past per CLAUDE.md but no card/logo — didn't invent one).
+- Mirrored to `BBC WEBSITE HTML\`. Verified: Current(12)/Past(3)/Founding(3) render, names correct, 0 dupes, 6/6 sections balanced.
+
 ## 🖼️ LIVE BUILDS PORTFOLIO HUB — new page — STAGED 2026-07-10
 - **What RJ asked:** "check if there's any other git repo we can make as a portfolio like dashboard." Answer: built a **Live Builds** hub that collects our portfolio-worthy standalone builds as clickable cards with real screenshots, each opening the actual live site.
 - **NEW `live-builds.html`** (built from the about.html scaffold, so nav/footer/tokens/JS match the site 1:1). Sections: hero, **Websites & Stores** grid (6 real live builds), **Dashboards & Tools** (3 private "demo on request" cards, no public link), CTA.
@@ -208,3 +220,11 @@ git push            # Netlify auto-deploys
 - Mirrored to `BBC WEBSITE HTML\can-ai-keep-me-organized-and-remind-me.html`.
 - Duplicate-guard: grepped `insights.html` + globbed root slugs for "remind"/"organized"/"reminder" — no existing page covers this exact question. Clear to build.
 - Row 1 of `C:\BBC\routines\insight-pages\topics_backlog.md` flipped to ✅ with this slug.
+
+## 📄 ADDED 2026-07-10 (run 2) — D5 nightly insight-page routine — STAGED
+- **NEW `can-ai-write-captions-that-sound-like-my-brand.html`** — "Can AI Write My Captions So They Sound Like MY Brand, Not Generic?" STAGED 2026-07-10 by D5 insight-page routine. Grounded in Sonny's Master Caption Workflow (`BBC_AI_FAMILY/SONNY/SONNY_KNOWLEDGE_BASE/SONNY_CAPTION_WORKFLOW.md` — brand voice non-negotiables, quality checklist, cross-machine drift pitfall) + the global Client Brand Purity Rule (brand-voice firewall concept, no DNA bleed between brands). Distinct angle from the two existing caption pages (jargon-free plain English; trending tie-ins) — this one is specifically brand-voice consistency. Category Marketing. Article + FAQPage schema, step-flow + before/after + tip-box visuals, CTA, related-reads, footer. No em-dashes, no invented facts.
+- **insights.html** — 1 new Marketing card added at top of `.article-grid`; count bumped 105 → 106.
+- **sitemap.xml** — new `<url>` entry added for the slug.
+- Mirrored to `BBC WEBSITE HTML\can-ai-write-captions-that-sound-like-my-brand.html`.
+- Duplicate-guard: grepped `insights.html` + globbed root slugs for caption/content-related terms; read both adjacent caption pages in full to confirm they cover jargon-translation and trending tie-ins, not brand-voice consistency. Row 3 of the backlog (`how-to-turn-my-work-into-content-that-markets-me`) was found to duplicate the already-live `how-we-document-every-process-as-content.html` (same PROCESS-AS-CONTENT rule, same core question) — marked `~ COVERED`, skipped, not built.
+- Row 2 of `C:\BBC\routines\insight-pages\topics_backlog.md` flipped to ✅ with this slug; Row 3 flipped to `~ COVERED`.
