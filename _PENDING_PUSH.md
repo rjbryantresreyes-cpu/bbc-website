@@ -238,3 +238,13 @@ git push            # Netlify auto-deploys
 - Mirrored to `BBC WEBSITE HTML\can-ai-write-captions-that-sound-like-my-brand.html`.
 - Duplicate-guard: grepped `insights.html` + globbed root slugs for caption/content-related terms; read both adjacent caption pages in full to confirm they cover jargon-translation and trending tie-ins, not brand-voice consistency. Row 3 of the backlog (`how-to-turn-my-work-into-content-that-markets-me`) was found to duplicate the already-live `how-we-document-every-process-as-content.html` (same PROCESS-AS-CONTENT rule, same core question) — marked `~ COVERED`, skipped, not built.
 - Row 2 of `C:\BBC\routines\insight-pages\topics_backlog.md` flipped to ✅ with this slug; Row 3 flipped to `~ COVERED`.
+
+## 📄 ADDED 2026-07-11 — Reviews routine: Sonya + Essence client pages + wiring — STAGED
+Reviews routine: Sonya + Essence client pages + wiring. Staged, awaiting Netlify batch deploy.
+- **NEW `s-riviere-hair-collection.html`** — ACTIVE client story for S. Riviere Hair Collection (Sonya Riviere, luxury hair extension + wig brand, DTC on Shopify). Cloned from `top-producer-investment-capital.html` (identical head styles, header, footer, scripts). Sections: hero, who-they-are, what-we-do (Shopify store, product system/pages, social content, email marketing, SEO), verbatim Google review, CTA. Gold monogram circles ("SR") instead of logo/photo images (no broken img refs). No founding year/city/website/socials (unverified). No em-dashes.
+- **NEW `essence-bembry.html`** — PAST client story (founder of several businesses, 4+ year partnership). Lean testimonial-led page: hero, "The Work" (websites, spreadsheets, social media, staying organized — strictly from her review), verbatim Google review, CTA. Gold monogram ("EB"). No invented business names/industry/city/website/socials. No em-dashes.
+- **our-work.html** — S. Riviere work card "View Details" link repointed from `contact.html` → `s-riviere-hair-collection.html`. (No Essence card created — she has no brand/logo, a fabricated card would break Content Integrity.)
+- **insights.html** — 2 new Case Study cards added after the Top Producer card (S. Riviere + Essence Bembry), solid `#2a3f5e` card backgrounds (no missing SVG refs).
+- **sitemap.xml** — 2 new `<url>` entries added (both `.html`, priority 0.7).
+- **index.html** — NOT changed. Home reviews grid (Ryan Tanel, Sonya, Marla) already links to the Google URL; left at 3 cards (a 4th would leave a lone card on row 2).
+- Both new pages + all edits mirrored to `BBC WEBSITE HTML\`. Review link on both pages/cards = https://share.google/FESMGRclQ5h9yK7jY. Not pushed/deployed.
