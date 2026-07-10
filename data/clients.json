@@ -26,18 +26,6 @@
       "slug": "wooden-woodworks"
     },
     {
-      "name": "4Ocean",
-      "owner": "4Ocean",
-      "handler": "BBC",
-      "ai": "-",
-      "site": "4ocean.com",
-      "industry": "Ocean-cleanup ecommerce",
-      "status": "active",
-      "notes": "Slack + Asana = 4Ocean only. Product accuracy non-negotiable. Hopeful tone only.",
-      "folder": "4OCEAN",
-      "slug": "4ocean"
-    },
-    {
       "name": "Home Vision Studio",
       "owner": "Beau",
       "handler": "RJ",
@@ -306,6 +294,19 @@
       "notes": "RJ served as Operations Manager — built systems/SOPs, trained + managed the team. Where the ops/team-management playbook started.",
       "slug": "entropy-management",
       "link": "/our-work"
+    },
+    {
+      "name": "4Ocean",
+      "owner": "4Ocean",
+      "handler": "BBC",
+      "ai": "-",
+      "site": "4ocean.com",
+      "industry": "Ocean-cleanup ecommerce",
+      "status": "past",
+      "notes": "Season ended 2026-07-07 as their team evolved. Case study live at /4ocean.html.",
+      "folder": "4OCEAN",
+      "slug": "4ocean",
+      "link": "/4ocean.html"
     }
   ]
 }
