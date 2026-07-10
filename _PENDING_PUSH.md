@@ -6,6 +6,16 @@
 <!-- deploy-trigger 2026-07-04: Workflows page — clickable deliverable checkboxes + shared two-way sync store (os/index.html + new function). -->
 # ⏳ PENDING PUSH — hold until Netlify credit is back
 
+## 🩺 SITE DIAGNOSTIC SWEEP — STAGED 2026-07-11 (deploy together)
+Deep-dive audit of core pages. Auto-fixed the clear factual/stale items:
+- **Copyright year:** `© 2025` → `© 2026` sitewide (**46 html files** had the stale year — how-it-works, our-work, tools + 43 others).
+- **Our Work founding cards → white:** MNJ, Crown, Orbital converted from navy emoji tiles to clean wordmark-on-white (matches the rest).
+- **Al (departed 2026-06-12) removed from current-client credits** on our-work.html: S. Riviere `Al · Store + Content` → **Daryl** (he took it over); dropped Al's badge on Home Vision, AJ Battle, Blackbelt (kept the remaining real credits, did NOT invent a replacement).
+- **Clean:** no broken internal links or missing images on the 12 core pages.
+- ⚠️ **NEEDS RJ (didn't auto-edit — would require inventing facts):**
+  1. **our-team.html roster is stale** — still shows **Al** (departed) and links `al.html`; shows **"Diego"** (diego.html — I can't verify who this is); and is **missing John** (joined 2026-06-30, no john.html profile). Needs your call + John's bio/photo before I edit the team page.
+  2. **"Live Builds" is not in the global nav/footer** — only on our-work.html + live-builds.html. Reachable via Our Work, but if you want it in the main nav across all ~100 pages, say so (big mechanical batch).
+
 ## 🧾 OUR WORK clients refresh + Live Builds hero fix — STAGED 2026-07-11 (deploy together)
 - **live-builds.html hero fix:** the "Live Builds You Can" line was invisible (global `h1{color:deep-blue}` won on the navy hero). Added `color:#fff` to `.pf-hero__title`. Now readable.
 - **our-work.html — Current vs Past rebuilt + logos on white** (RJ asked to update who's current/old + logos on white bg):
