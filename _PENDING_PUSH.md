@@ -199,7 +199,8 @@ git push            # Netlify auto-deploys
 ## ✅ DEPLOYED 2026-06-25 (commit 9766ce0) — Updated VA headshots across team pages
 - Source: Krizza's "Headshots" Google Drive folder (10 photos), copied to Drive `BBC VA Headshot\`. Converted to JPG (q90, square 1254px / portrait 1086x1448) into `images/team\`. Backup of the 5 prior photos in `images/team\_backup_2026-06-25\`.
 - **Photos swapped/added for 7 current members:** Bruno (`rj-bryan.jpg`), Ryan (`ryan-bernaldez.jpg`), Kenz (`kenz-villaflores.jpg`), Daryl (`daryl-agadia.jpg`), Diego (`diego-tres-reyes.jpg`) — same filenames, auto-update everywhere. **Vi (`vi.jpg`) + Krizza (`krizza.jpg`) were letter-avatars → converted to real `<img>`** in: `our-team.html`, `index.html` (home team grid), `vi.html`, `krizza.html`. Verified mobile 375 (avatars render, clean crop, no overflow).
-- **Staged but NOT placed on a card yet (need roles from RJ before building cards — Content Integrity):** `joshua.jpg`, `hazel.jpg`, `cuamag.jpg` are in `images/team\`. No name/role/bio = no card.
+- **SHIPPED 2026-07-11 (commit a52cdd1, LIVE):** `cuamag.jpg` = **John** (Content Creator & Marketing Support) — card + `john.html` live. **Dexter** (Senior Graphic Designer & Video Editor) — card + `dexter.html` live with 3 non-client Selected Work images (`images/dexter/`). **Al removed** (departed 2026-06-12; card gone, al.html was untracked, sitemap already clean).
+- **STILL pending role from RJ (Content Integrity — no card until roles given):** `joshua.jpg`, `hazel.jpg` in `images/team\`. Hazel = Future Head of Medical VA Team (onboarding) per roster; Joshua = unknown. No confirmed name/role/bio = no card.
 - **Al** still has a card (`our-team.html` letter-avatar "A") but departed BBC 2026-06-12 and has no new headshot. DECISION NEEDED: remove the card or keep.
 - Mirrored all team images to `BBC WEBSITE HTML\images\team\`. NOT committed/pushed — goes out with the next batch on RJ's go.
 
