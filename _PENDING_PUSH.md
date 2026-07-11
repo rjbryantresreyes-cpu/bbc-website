@@ -4,9 +4,21 @@
 <!-- deploy-trigger 2026-06-13d: force-refetch on lookup miss + don't clobber good cache + SW v17 (stop the few-minute revert). -->
 <!-- deploy-trigger 2026-06-14: Needs Follow-Up section; follow-up click fills name from the exact record (deterministic, no race); SW v18. -->
 <!-- deploy-trigger 2026-07-04: Workflows page — clickable deliverable checkboxes + shared two-way sync store (os/index.html + new function). -->
-# ⏳ PENDING PUSH — hold until Netlify credit is back
+# ✅ SHIPPED & LIVE — reconciled 2026-07-11 (end-of-week deploy)
 
-## 🩺 SITE DIAGNOSTIC SWEEP — STAGED 2026-07-11 (deploy together)
+**The whole batch below is DEPLOYED. `origin/master` == `HEAD`, working tree clean, Netlify built it, live pages verified 200** (homepage, /os, sitemap with the 5 added slugs, our-team John+Dexter, the newly-wired insight pages). The Netlify credit freeze is clear again. Everything under the old "STAGED / PENDING PUSH" headings has shipped — treat the git sweep as truth, not the stage labels below (kept for history).
+
+**Genuinely-open follow-ups (config/verify, NOT deploys — RJ's call, do NOT block the week):**
+- **Netlify env vars** (RJ sets in Site settings, secrets never in repo): `BREVO_API_KEY` (CRM page auth), `ANTHROPIC_API_KEY` (Messy live answers).
+- **Password vault** — verify unlock round-trip on live: /os → 🔒 → set master password → add one entry → reload → confirms decrypt.
+- **Cavalry Live-Builds card** — re-add its card on live-builds.html once RJ approves showing it publicly (screenshot already saved).
+- **/os "Live Builds" tile** (optional; nav path already works) + confirm `live-builds.html` in sitemap.
+- **Team page** — Diego/Dexter/Hazel/Joshua: confirm real hires → add to CLAUDE.md roster (or pull). John+Dexter cards already live.
+- **WhatsApp two-way client sync** — activates when `/bbc-sync` runs in a session with the WhatsApp MCP loaded (email half already live).
+
+---
+
+## (history — all SHIPPED) 🩺 SITE DIAGNOSTIC SWEEP — STAGED 2026-07-11 (deploy together)
 Deep-dive audit of core pages. Auto-fixed the clear factual/stale items:
 - **Copyright year:** `© 2025` → `© 2026` sitewide (**46 html files** had the stale year — how-it-works, our-work, tools + 43 others).
 - **Our Work founding cards → white:** MNJ, Crown, Orbital converted from navy emoji tiles to clean wordmark-on-white (matches the rest).
