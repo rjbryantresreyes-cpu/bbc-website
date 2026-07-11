@@ -4,3 +4,4 @@ Thumbs.db
 
 # internal tooling, never deploy publicly
 _SYSTEM/
+reel.finished
