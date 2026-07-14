@@ -1,9 +1,13 @@
-/* BBC Tools section generator
+/* BBC Tools section generator  (v2 — rich, SEO-optimized tool pages)
  * Reads tools/tools-data.json and writes:
  *   - tools.html              (the collection / landing page)
- *   - tool-<slug>.html        (one page per tool)
+ *   - tool-<slug>.html        (one rich page per tool)
  * Shared head/header/footer are harvested from our-work.html at build time
  * so this section can never drift from the rest of the site.
+ *
+ * Rich per-tool fields (all optional, graceful fallback to the base fields):
+ *   heroSub, whatLong, steps:[{t,d}], finishedProduct:{intro,items:[]},
+ *   searchIntent:{heading,body,phrases:[]}, faqs:[{q,a}], keywords:[], proof
  *
  * Run:  node _tools/build-tools.mjs
  */
@@ -15,7 +19,8 @@ const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const DATA = JSON.parse(readFileSync(join(ROOT, 'tools', 'tools-data.json'), 'utf8'));
 const SKELETON = readFileSync(join(ROOT, 'our-work.html'), 'utf8');
 
-const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+const esc = (s) => String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+const jstr = (s) => JSON.stringify(String(s == null ? '' : s));
 
 /* ---- harvest shared fragments from the skeleton page ---- */
 function slice(html, startRe, endTag) {
@@ -40,6 +45,7 @@ if (!HEADER.includes('tools.html')) {
 
 /* ---- tools-section specific CSS (appended into <head>) ---- */
 const TOOLS_CSS = `
+  <link rel="stylesheet" href="bbc-article-visuals.css" />
   <style>
     /* ===== BBC Tools section ===== */
     .tools-hero{background:var(--bg-dark);color:var(--text-warm);padding:clamp(5rem,11vw,8rem) 0 clamp(3rem,7vw,5rem);}
@@ -85,30 +91,62 @@ const TOOLS_CSS = `
     /* ---- single tool page ---- */
     .tp-hero{background:var(--bg-dark);color:var(--text-warm);padding:clamp(5rem,10vw,7rem) 0 clamp(2.5rem,6vw,4rem);}
     .tp-hero .back-link{color:rgba(245,241,234,.7);}
+    .tp-crumb{font-family:var(--font-ui);font-size:.8rem;color:rgba(245,241,234,.55);margin-bottom:.4rem;}
+    .tp-crumb a{color:rgba(245,241,234,.7);}
     .tp-hero__icon{width:64px;height:64px;border-radius:16px;background:linear-gradient(135deg,var(--gold),var(--gold-warm));color:#fff;display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-weight:600;font-size:1.7rem;margin:1.2rem 0 1.1rem;}
     .tp-hero h1{font-family:var(--font-display);font-weight:600;font-size:clamp(2.1rem,5vw,3.2rem);color:#fff;margin:0 0 .5rem;}
+    .tp-hero__sub{font-family:var(--font-body);font-size:clamp(1.05rem,2.2vw,1.28rem);line-height:1.55;color:rgba(245,241,234,.82);max-width:60ch;margin:.4rem 0 1rem;}
     .tp-hero__credit{font-family:var(--font-ui);font-size:.82rem;font-weight:500;letter-spacing:.05em;text-transform:uppercase;color:var(--gold-pale);}
     .tp-section{padding:clamp(2.2rem,5vw,3.4rem) 0;border-bottom:var(--border-warm);}
     .tp-section:nth-of-type(even){background:var(--bg-section);}
     .tp-section .eyebrow{color:var(--gold);}
     .tp-section h2{font-family:var(--font-display);font-weight:600;font-size:clamp(1.4rem,3vw,2rem);color:var(--text-ink);margin:.4rem 0 .8rem;}
     .tp-section p{font-family:var(--font-body);font-size:1.1rem;line-height:1.65;color:var(--text-body);max-width:66ch;}
+    .tp-section p + p{margin-top:1rem;}
+
+    /* two-column value cards */
+    .tp-value-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;margin-top:1rem;}
+    @media(max-width:720px){.tp-value-grid{grid-template-columns:1fr;}}
+    .tp-value-card{background:var(--bg-card);border:var(--border-card);border-radius:var(--radius);padding:1.6rem 1.5rem;box-shadow:var(--shadow-xs);}
+    .tp-value-card h3{font-family:var(--font-display);font-weight:600;font-size:1.15rem;color:var(--deep-blue);margin:0 0 .5rem;}
+    .tp-value-card p{font-size:1.02rem;margin:0;}
+
+    /* finished-product list */
+    .tp-deliverables{list-style:none;padding:0;margin:1.2rem 0 0;display:grid;gap:.7rem;max-width:60ch;}
+    .tp-deliverables li{position:relative;padding:.85rem 1rem .85rem 2.6rem;background:var(--bg-card);border:var(--border-card);border-radius:12px;font-family:var(--font-body);font-size:1.02rem;color:var(--text-body);}
+    .tp-deliverables li::before{content:'\\2713';position:absolute;left:.95rem;top:50%;transform:translateY(-50%);width:22px;height:22px;border-radius:50%;background:var(--gold);color:#fff;font-size:.78rem;display:flex;align-items:center;justify-content:center;}
+
+    /* search-intent box */
+    .tp-search{background:linear-gradient(135deg,rgba(31,53,87,.05),rgba(184,146,62,.06));border:1px solid rgba(184,146,62,.28);border-radius:var(--radius);padding:1.8rem 1.7rem;}
+    .tp-search h2{margin-top:0;}
+    .tp-search__phrases{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1.2rem;}
+    .tp-search__phrases span{font-family:var(--font-ui);font-size:.82rem;color:var(--deep-blue);background:var(--bg-card);border:1px solid rgba(31,53,87,.18);border-radius:999px;padding:.4rem .9rem;}
+
     .tp-download{display:flex;flex-wrap:wrap;align-items:center;gap:1rem;background:var(--bg-card);border:var(--border-card);border-radius:var(--radius);padding:1.5rem 1.6rem;box-shadow:var(--shadow-sm);}
     .tp-download p{margin:0;font-size:1rem;}
     .tp-related{padding:clamp(2.5rem,5vw,4rem) 0;background:var(--bg-section);}
+    .tp-faq .faq-q{font-family:var(--font-display);font-size:1.18rem;font-weight:600;color:var(--deep-blue);margin-top:1.75rem;margin-bottom:.4rem;}
+    .tp-faq p{font-size:1.05rem;}
   </style>
 `;
 
 /* ---- page builder ---- */
-function buildHead({ title, desc, canonical }) {
-  return HEAD
+function buildHead({ title, desc, canonical, keywords, jsonld }) {
+  let h = HEAD
     .replace(/<title>[\s\S]*?<\/title>/, `<title>${esc(title)} | Balay ni Bruno &amp; Co.</title>`)
     .replace(/<meta name="description"[^>]*>/, `<meta name="description" content="${esc(desc)}" />`)
     .replace(/<link rel="canonical"[^>]*>/, `<link rel="canonical" href="${canonical}" />`)
     .replace(/<meta property="og:title"[^>]*>/, `<meta property="og:title" content="${esc(title)}, Balay ni Bruno &amp; Co." />`)
     .replace(/<meta property="og:description"[^>]*>/, `<meta property="og:description" content="${esc(desc)}" />`)
-    .replace(/<meta property="og:url"[^>]*>/, `<meta property="og:url" content="${canonical}" />`)
-    .replace('</head>', TOOLS_CSS + '</head>');
+    .replace(/<meta property="og:url"[^>]*>/, `<meta property="og:url" content="${canonical}" />`);
+  if (keywords && keywords.length) {
+    const kw = `<meta name="keywords" content="${esc(keywords.join(', '))}" />`;
+    h = /<meta name="keywords"[^>]*>/.test(h)
+      ? h.replace(/<meta name="keywords"[^>]*>/, kw)
+      : h.replace('</head>', `  ${kw}\n</head>`);
+  }
+  h = h.replace('</head>', TOOLS_CSS + (jsonld ? `  <script type="application/ld+json">\n${jsonld}\n  </script>\n` : '') + '</head>');
+  return h;
 }
 function page({ head, main }) {
   return `<!DOCTYPE html>\n<html lang="en">\n${head}\n<body>\n${HEADER}\n${main}\n${FOOTER_AND_SCRIPTS}\n</body>\n</html>\n`;
@@ -194,10 +232,68 @@ ${blocks}
   const head = buildHead({
     title: 'Tools We Use',
     desc: DATA.meta.tagline + ' Every tool behind a Balay ni Bruno & Co. partnership, grouped by what it does for your business.',
-    canonical: 'https://balaynibruno.co/tools.html'
+    canonical: 'https://balaynibruno.co/tools.html',
+    keywords: ['virtual assistant tools', 'AI marketing agency tools', 'Balay ni Bruno tools', 'small business AI tools']
   });
   writeFileSync(join(ROOT, 'tools.html'), page({ head, main }));
   return 1;
+}
+
+/* ===== JSON-LD graph for a tool page ===== */
+function toolSchema(t, canonical) {
+  const nodes = [
+    {
+      '@type': 'Organization',
+      '@id': 'https://balaynibruno.co/#organization',
+      name: 'Balay ni Bruno & Co.',
+      url: 'https://balaynibruno.co/',
+      logo: 'https://balaynibruno.co/bbc-logo.png',
+      email: 'admin@balaynibruno.co',
+      telephone: '+63 935 663 0324',
+      founder: { '@type': 'Person', name: 'RJ Bryan Tres Reyes' },
+      sameAs: [
+        'https://www.facebook.com/profile.php?id=61590006878673',
+        'https://www.instagram.com/balaynibruno/',
+        'https://www.tiktok.com/@balaynibruno.co',
+        'https://youtube.com/@balaynibruno'
+      ]
+    },
+    {
+      '@type': 'WebSite',
+      '@id': 'https://balaynibruno.co/#website',
+      name: 'Balay ni Bruno & Co.',
+      url: 'https://balaynibruno.co/',
+      publisher: { '@id': 'https://balaynibruno.co/#organization' }
+    },
+    {
+      '@type': 'Service',
+      name: `${t.name} — ${t.realTool}`,
+      serviceType: t.cat.title,
+      description: (t.whatLong || t.what),
+      provider: { '@id': 'https://balaynibruno.co/#organization' },
+      areaServed: 'Worldwide',
+      url: canonical
+    },
+    {
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Tools We Use', item: 'https://balaynibruno.co/tools.html' },
+        { '@type': 'ListItem', position: 2, name: t.cat.title, item: 'https://balaynibruno.co/tools.html#' + t.cat.key },
+        { '@type': 'ListItem', position: 3, name: t.name, item: canonical }
+      ]
+    }
+  ];
+  if (t.faqs && t.faqs.length) {
+    nodes.push({
+      '@type': 'FAQPage',
+      mainEntity: t.faqs.map(f => ({
+        '@type': 'Question',
+        name: f.q,
+        acceptedAnswer: { '@type': 'Answer', text: f.a }
+      }))
+    });
+  }
+  return JSON.stringify({ '@context': 'https://schema.org', '@graph': nodes }, null, 2);
 }
 
 /* ===== single tool pages ===== */
@@ -213,11 +309,57 @@ function buildToolPage(t) {
     </div>
   </section>` : '';
 
+  /* --- optional rich blocks --- */
+  const heroSub = t.heroSub ? `<p class="tp-hero__sub">${esc(t.heroSub)}</p>` : '';
+
+  const whatBody = (t.whatLong || t.what)
+    .split('\n\n').map(p => `<p>${esc(p)}</p>`).join('\n      ');
+
+  const stepsBlock = (t.steps && t.steps.length) ? `
+      <div class="step-flow" style="margin-top:1.4rem;">
+        ${t.steps.map((s, i) => `<div class="step"><span class="step__num">${i + 1}</span><div class="step__content"><p class="step__title">${esc(s.t)}</p><p class="step__desc">${esc(s.d)}</p></div></div>`).join('\n        ')}
+      </div>` : '';
+
+  const finishedBlock = (t.finishedProduct && t.finishedProduct.items && t.finishedProduct.items.length) ? `
+  <section class="tp-section">
+    <div class="container">
+      <span class="eyebrow eyebrow--gold">What you get</span>
+      <h2>The finished product you can expect</h2>
+      ${t.finishedProduct.intro ? `<p>${esc(t.finishedProduct.intro)}</p>` : ''}
+      <ul class="tp-deliverables">
+        ${t.finishedProduct.items.map(it => `<li>${esc(it)}</li>`).join('\n        ')}
+      </ul>
+    </div>
+  </section>` : '';
+
+  const searchBlock = (t.searchIntent) ? `
+  <section class="tp-section">
+    <div class="container">
+      <div class="tp-search">
+        <span class="eyebrow eyebrow--gold">Looking to hire this skill?</span>
+        <h2>${esc(t.searchIntent.heading || `Need a team that actually knows ${t.realTool}?`)}</h2>
+        <p>${esc(t.searchIntent.body)}</p>
+        ${(t.searchIntent.phrases && t.searchIntent.phrases.length) ? `<div class="tp-search__phrases">${t.searchIntent.phrases.map(p => `<span>${esc(p)}</span>`).join('')}</div>` : ''}
+      </div>
+    </div>
+  </section>` : '';
+
+  const faqBlock = (t.faqs && t.faqs.length) ? `
+  <section class="tp-section tp-faq">
+    <div class="container">
+      <span class="eyebrow eyebrow--gold">Common questions</span>
+      <h2>What business owners ask us about this</h2>
+      ${t.faqs.map(f => `<p class="faq-q">${esc(f.q)}</p>\n      <p>${esc(f.a)}</p>`).join('\n      ')}
+    </div>
+  </section>` : '';
+
   const main = `  <section class="tp-hero">
     <div class="container">
+      <p class="tp-crumb"><a href="tools.html">Tools</a> &rsaquo; <a href="tools.html#${t.cat.key}">${esc(t.cat.title)}</a> &rsaquo; ${esc(t.name)}</p>
       <a href="tools.html" class="back-link">&larr; Back to Tools</a>
       <div class="tp-hero__icon">${esc(initials(t.name))}</div>
       <h1>${esc(t.name)}</h1>
+      ${heroSub}
       <span class="tp-hero__credit">${esc(t.realTool)} &middot; ${esc(t.cat.title)}</span>
     </div>
   </section>
@@ -226,7 +368,7 @@ function buildToolPage(t) {
     <div class="container">
       <span class="eyebrow eyebrow--gold">What it is</span>
       <h2>${esc(t.name)}, in plain words</h2>
-      <p>${esc(t.what)}</p>
+      ${whatBody}
     </div>
   </section>
 
@@ -234,26 +376,21 @@ function buildToolPage(t) {
     <div class="container">
       <span class="eyebrow eyebrow--gold">How we use it</span>
       <h2>How Balay ni Bruno &amp; Co. puts it to work</h2>
-      <p>${esc(t.howWeUse)}</p>
+      <p>${esc(t.howWeUse)}</p>${stepsBlock}
     </div>
   </section>
-
+${finishedBlock}
   <section class="tp-section">
     <div class="container">
-      <span class="eyebrow eyebrow--gold">How it helps your business</span>
-      <h2>What it does for the business</h2>
-      <p>${esc(t.businessValue)}</p>
+      <span class="eyebrow eyebrow--gold">Why it matters</span>
+      <h2>What it does for you and the business</h2>
+      <div class="tp-value-grid">
+        <div class="tp-value-card"><h3>For your business</h3><p>${esc(t.businessValue)}</p></div>
+        <div class="tp-value-card"><h3>For you, the owner</h3><p>${esc(t.ownerValue)}</p></div>
+      </div>
     </div>
   </section>
-
-  <section class="tp-section">
-    <div class="container">
-      <span class="eyebrow eyebrow--gold">How it helps you</span>
-      <h2>What it means for you as the owner</h2>
-      <p>${esc(t.ownerValue)}</p>
-    </div>
-  </section>
-
+${searchBlock}${faqBlock}
   <section class="tp-section">
     <div class="container">
       <div class="tp-download">
@@ -275,10 +412,14 @@ function buildToolPage(t) {
   </section>
 ${relatedHtml}`;
 
+  const canonical = `https://balaynibruno.co/tool-${t.slug}.html`;
+  const desc = t.metaDesc || `${t.what} How Balay ni Bruno & Co. uses ${t.realTool} for your business.`;
   const head = buildHead({
-    title: t.name,
-    desc: `${t.what} How Balay ni Bruno & Co. uses ${t.realTool} for your business.`,
-    canonical: `https://balaynibruno.co/tool-${t.slug}.html`
+    title: t.seoTitle || t.name,
+    desc,
+    canonical,
+    keywords: t.keywords,
+    jsonld: toolSchema(t, canonical)
   });
   writeFileSync(join(ROOT, `tool-${t.slug}.html`), page({ head, main }));
 }
@@ -293,7 +434,7 @@ function buildMasterDoc() {
     const tools = c.tools.map(t => `
       <div class="doc-tool">
         <h3>${esc(t.name)} <span class="doc-tool__credit">${esc(t.realTool)}</span></h3>
-        <div class="doc-row"><span class="doc-label">What it is</span><p>${esc(t.what)}</p></div>
+        <div class="doc-row"><span class="doc-label">What it is</span><p>${esc(t.whatLong || t.what)}</p></div>
         <div class="doc-row"><span class="doc-label">How we use it</span><p>${esc(t.howWeUse)}</p></div>
         <div class="doc-row"><span class="doc-label">For your business</span><p>${esc(t.businessValue)}</p></div>
         <div class="doc-row"><span class="doc-label">For you, the owner</span><p>${esc(t.ownerValue)}</p></div>

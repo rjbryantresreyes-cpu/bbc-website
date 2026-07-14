@@ -11,13 +11,13 @@
   </script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Flexible Contact Database | Balay ni Bruno &amp; Co.</title>
-  <meta name="description" content="A spreadsheet-style database that holds leads, clients, and projects. How Balay ni Bruno &amp; Co. uses NocoDB for your business." />
+  <title>NocoDB Database VA | Contact &amp; Client Tracking | Balay ni Bruno &amp; Co.</title>
+  <meta name="description" content="We track every lead, client, and project in one clean NocoDB database. Hire a VA to keep your customer records searchable and in one place." />
   <link rel="canonical" href="https://balaynibruno.co/tool-contact-database.html" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Balay ni Bruno &amp; Co." />
-  <meta property="og:title" content="Flexible Contact Database, Balay ni Bruno &amp; Co." />
-  <meta property="og:description" content="A spreadsheet-style database that holds leads, clients, and projects. How Balay ni Bruno &amp; Co. uses NocoDB for your business." />
+  <meta property="og:title" content="NocoDB Database VA | Contact &amp; Client Tracking, Balay ni Bruno &amp; Co." />
+  <meta property="og:description" content="We track every lead, client, and project in one clean NocoDB database. Hire a VA to keep your customer records searchable and in one place." />
   <meta property="og:url" content="https://balaynibruno.co/tool-contact-database.html" />
   <meta property="og:image" content="https://balaynibruno.co/bbc-logo.png" />
   <meta name="twitter:card" content="summary_large_image" />
@@ -536,7 +536,9 @@
                ]
 }
   </script>
+  <meta name="keywords" content="NocoDB VA, hire a CRM manager, contact database management, client tracking VA, lead database help, customer records VA, data organization VA" />
 
+  <link rel="stylesheet" href="bbc-article-visuals.css" />
   <style>
     /* ===== BBC Tools section ===== */
     .tools-hero{background:var(--bg-dark);color:var(--text-warm);padding:clamp(5rem,11vw,8rem) 0 clamp(3rem,7vw,5rem);}
@@ -582,18 +584,149 @@
     /* ---- single tool page ---- */
     .tp-hero{background:var(--bg-dark);color:var(--text-warm);padding:clamp(5rem,10vw,7rem) 0 clamp(2.5rem,6vw,4rem);}
     .tp-hero .back-link{color:rgba(245,241,234,.7);}
+    .tp-crumb{font-family:var(--font-ui);font-size:.8rem;color:rgba(245,241,234,.55);margin-bottom:.4rem;}
+    .tp-crumb a{color:rgba(245,241,234,.7);}
     .tp-hero__icon{width:64px;height:64px;border-radius:16px;background:linear-gradient(135deg,var(--gold),var(--gold-warm));color:#fff;display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-weight:600;font-size:1.7rem;margin:1.2rem 0 1.1rem;}
     .tp-hero h1{font-family:var(--font-display);font-weight:600;font-size:clamp(2.1rem,5vw,3.2rem);color:#fff;margin:0 0 .5rem;}
+    .tp-hero__sub{font-family:var(--font-body);font-size:clamp(1.05rem,2.2vw,1.28rem);line-height:1.55;color:rgba(245,241,234,.82);max-width:60ch;margin:.4rem 0 1rem;}
     .tp-hero__credit{font-family:var(--font-ui);font-size:.82rem;font-weight:500;letter-spacing:.05em;text-transform:uppercase;color:var(--gold-pale);}
     .tp-section{padding:clamp(2.2rem,5vw,3.4rem) 0;border-bottom:var(--border-warm);}
     .tp-section:nth-of-type(even){background:var(--bg-section);}
     .tp-section .eyebrow{color:var(--gold);}
     .tp-section h2{font-family:var(--font-display);font-weight:600;font-size:clamp(1.4rem,3vw,2rem);color:var(--text-ink);margin:.4rem 0 .8rem;}
     .tp-section p{font-family:var(--font-body);font-size:1.1rem;line-height:1.65;color:var(--text-body);max-width:66ch;}
+    .tp-section p + p{margin-top:1rem;}
+
+    /* two-column value cards */
+    .tp-value-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;margin-top:1rem;}
+    @media(max-width:720px){.tp-value-grid{grid-template-columns:1fr;}}
+    .tp-value-card{background:var(--bg-card);border:var(--border-card);border-radius:var(--radius);padding:1.6rem 1.5rem;box-shadow:var(--shadow-xs);}
+    .tp-value-card h3{font-family:var(--font-display);font-weight:600;font-size:1.15rem;color:var(--deep-blue);margin:0 0 .5rem;}
+    .tp-value-card p{font-size:1.02rem;margin:0;}
+
+    /* finished-product list */
+    .tp-deliverables{list-style:none;padding:0;margin:1.2rem 0 0;display:grid;gap:.7rem;max-width:60ch;}
+    .tp-deliverables li{position:relative;padding:.85rem 1rem .85rem 2.6rem;background:var(--bg-card);border:var(--border-card);border-radius:12px;font-family:var(--font-body);font-size:1.02rem;color:var(--text-body);}
+    .tp-deliverables li::before{content:'\2713';position:absolute;left:.95rem;top:50%;transform:translateY(-50%);width:22px;height:22px;border-radius:50%;background:var(--gold);color:#fff;font-size:.78rem;display:flex;align-items:center;justify-content:center;}
+
+    /* search-intent box */
+    .tp-search{background:linear-gradient(135deg,rgba(31,53,87,.05),rgba(184,146,62,.06));border:1px solid rgba(184,146,62,.28);border-radius:var(--radius);padding:1.8rem 1.7rem;}
+    .tp-search h2{margin-top:0;}
+    .tp-search__phrases{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1.2rem;}
+    .tp-search__phrases span{font-family:var(--font-ui);font-size:.82rem;color:var(--deep-blue);background:var(--bg-card);border:1px solid rgba(31,53,87,.18);border-radius:999px;padding:.4rem .9rem;}
+
     .tp-download{display:flex;flex-wrap:wrap;align-items:center;gap:1rem;background:var(--bg-card);border:var(--border-card);border-radius:var(--radius);padding:1.5rem 1.6rem;box-shadow:var(--shadow-sm);}
     .tp-download p{margin:0;font-size:1rem;}
     .tp-related{padding:clamp(2.5rem,5vw,4rem) 0;background:var(--bg-section);}
+    .tp-faq .faq-q{font-family:var(--font-display);font-size:1.18rem;font-weight:600;color:var(--deep-blue);margin-top:1.75rem;margin-bottom:.4rem;}
+    .tp-faq p{font-size:1.05rem;}
   </style>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://balaynibruno.co/#organization",
+      "name": "Balay ni Bruno & Co.",
+      "url": "https://balaynibruno.co/",
+      "logo": "https://balaynibruno.co/bbc-logo.png",
+      "email": "admin@balaynibruno.co",
+      "telephone": "+63 935 663 0324",
+      "founder": {
+        "@type": "Person",
+        "name": "RJ Bryan Tres Reyes"
+      },
+      "sameAs": [
+        "https://www.facebook.com/profile.php?id=61590006878673",
+        "https://www.instagram.com/balaynibruno/",
+        "https://www.tiktok.com/@balaynibruno.co",
+        "https://youtube.com/@balaynibruno"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://balaynibruno.co/#website",
+      "name": "Balay ni Bruno & Co.",
+      "url": "https://balaynibruno.co/",
+      "publisher": {
+        "@id": "https://balaynibruno.co/#organization"
+      }
+    },
+    {
+      "@type": "Service",
+      "name": "Flexible Contact Database — NocoDB",
+      "serviceType": "Customer Data, CRM & Email",
+      "description": "NocoDB is a spreadsheet-style database that holds your leads, clients, and projects in one place. It looks as friendly as a spreadsheet but works like a real system, so records connect to each other and nothing floats off on its own. Think of it as the memory of your business that does not depend on any one person remembering.\n\nWhere a spreadsheet gets messy fast, this stays organized as it grows. Every contact has a full history, and the whole thing plugs into the rest of your setup so your email and follow-ups can pull from the same source.\n\nIt also means you are never locked into guessing who someone is or where a job stands. You open it, you search, you see.",
+      "provider": {
+        "@id": "https://balaynibruno.co/#organization"
+      },
+      "areaServed": "Worldwide",
+      "url": "https://balaynibruno.co/tool-contact-database.html"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Tools We Use",
+          "item": "https://balaynibruno.co/tools.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Customer Data, CRM & Email",
+          "item": "https://balaynibruno.co/tools.html#crm"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Flexible Contact Database",
+          "item": "https://balaynibruno.co/tool-contact-database.html"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How is this different from a spreadsheet?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "It starts as easy as a spreadsheet but stays organized as you grow. Records connect to each other, it does not break when it gets big, and it can feed your other tools, which a plain spreadsheet cannot."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is NocoDB expensive?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "NocoDB is open source and free to run, which is part of why we like it for small businesses. The value we add is the setup and the ongoing upkeep so it stays clean and useful."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I still see and use it myself?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. It is your database. You can open it and search anytime. We handle the upkeep so it stays organized, but you always have full access."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What if I already have data in another tool?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "We bring it in for you. We import what you have, clean out duplicates and errors, and build the structure around your real records."
+          }
+        }
+      ]
+    }
+  ]
+}
+  </script>
 </head>
 <body>
 <header class="site-header" id="site-header">
@@ -610,6 +743,7 @@
           <li><a href="how-we-help.html">How We Help</a></li>
           <li><a href="our-team.html">Our Team</a></li>
           <li><a href="our-work.html" class="active">Our Work</a></li>
+        <li><a href="tools.html">Tools</a></li>
           <li><a href="insights.html">Insights</a></li>
           <li><a href="contact.html">Contact</a></li>
         </ul>
@@ -629,6 +763,7 @@
       <a href="how-we-help.html">How We Help</a>
       <a href="our-team.html">Our Team</a>
       <a href="our-work.html" class="active">Our Work</a>
+    <a href="tools.html">Tools</a>
       <a href="insights.html">Insights</a>
       <a href="contact.html">Contact</a>
       <a href="https://calendly.com/rj-balaynibruno/bbc-strategy-call" target="_blank" rel="noopener noreferrer" class="btn btn-gold mobile-cta">Book a Call</a>
@@ -636,9 +771,11 @@
   </header>
   <section class="tp-hero">
     <div class="container">
+      <p class="tp-crumb"><a href="tools.html">Tools</a> &rsaquo; <a href="tools.html#crm">Customer Data, CRM &amp; Email</a> &rsaquo; Flexible Contact Database</p>
       <a href="tools.html" class="back-link">&larr; Back to Tools</a>
       <div class="tp-hero__icon">F</div>
       <h1>Flexible Contact Database</h1>
+      <p class="tp-hero__sub">We keep every lead, client, and project in one clean, searchable database you can check anytime.</p>
       <span class="tp-hero__credit">NocoDB &middot; Customer Data, CRM &amp; Email</span>
     </div>
   </section>
@@ -647,7 +784,9 @@
     <div class="container">
       <span class="eyebrow eyebrow--gold">What it is</span>
       <h2>Flexible Contact Database, in plain words</h2>
-      <p>A spreadsheet-style database that holds leads, clients, and projects.</p>
+      <p>NocoDB is a spreadsheet-style database that holds your leads, clients, and projects in one place. It looks as friendly as a spreadsheet but works like a real system, so records connect to each other and nothing floats off on its own. Think of it as the memory of your business that does not depend on any one person remembering.</p>
+      <p>Where a spreadsheet gets messy fast, this stays organized as it grows. Every contact has a full history, and the whole thing plugs into the rest of your setup so your email and follow-ups can pull from the same source.</p>
+      <p>It also means you are never locked into guessing who someone is or where a job stands. You open it, you search, you see.</p>
     </div>
   </section>
 
@@ -655,26 +794,66 @@
     <div class="container">
       <span class="eyebrow eyebrow--gold">How we use it</span>
       <h2>How Balay ni Bruno &amp; Co. puts it to work</h2>
-      <p>We track every lead and client in a clean, searchable place that connects to the rest of the system.</p>
+      <p>We set up and maintain your database so every lead and client has a clean record, and we keep it updated as things change. New contact, new note, new project stage, it all goes in the right place. We connect it to the rest of your system so your contacts, your email, and your follow-ups are all reading from one source instead of drifting apart.</p>
+      <div class="step-flow" style="margin-top:1.4rem;">
+        <div class="step"><span class="step__num">1</span><div class="step__content"><p class="step__title">Build the structure</p><p class="step__desc">We set up tables for leads, clients, and projects that fit how your business actually runs.</p></div></div>
+        <div class="step"><span class="step__num">2</span><div class="step__content"><p class="step__title">Load your records</p><p class="step__desc">We bring in existing contacts and clean them up so each one is complete and correct.</p></div></div>
+        <div class="step"><span class="step__num">3</span><div class="step__content"><p class="step__title">Keep it current</p><p class="step__desc">As deals and projects move, we update records so the database always reflects reality.</p></div></div>
+        <div class="step"><span class="step__num">4</span><div class="step__content"><p class="step__title">Connect the pieces</p><p class="step__desc">We link it to your email and follow-up tools so everything reads from the same place.</p></div></div>
+        <div class="step"><span class="step__num">5</span><div class="step__content"><p class="step__title">Make it searchable</p><p class="step__desc">We organize and label so you can find any customer and their full history in seconds.</p></div></div>
+      </div>
     </div>
   </section>
 
   <section class="tp-section">
     <div class="container">
-      <span class="eyebrow eyebrow--gold">How it helps your business</span>
-      <h2>What it does for the business</h2>
-      <p>Nothing about a customer gets lost. The whole history is in one place.</p>
+      <span class="eyebrow eyebrow--gold">What you get</span>
+      <h2>The finished product you can expect</h2>
+      <p>You end up with one organized home for every customer, where nothing gets lost and everyone's history is right there.</p>
+      <ul class="tp-deliverables">
+        <li>A single clean database for leads, clients, and projects</li>
+        <li>Full history on every contact in one place</li>
+        <li>Records that stay updated as your work moves</li>
+        <li>A searchable view so you can find anyone in seconds</li>
+        <li>A source of truth the rest of your tools can pull from</li>
+      </ul>
+    </div>
+  </section>
+  <section class="tp-section">
+    <div class="container">
+      <span class="eyebrow eyebrow--gold">Why it matters</span>
+      <h2>What it does for you and the business</h2>
+      <div class="tp-value-grid">
+        <div class="tp-value-card"><h3>For your business</h3><p>Nothing about a customer gets lost. The whole relationship and history sits in one place your team can trust.</p></div>
+        <div class="tp-value-card"><h3>For you, the owner</h3><p>You can see who is who and where every lead or project stands, anytime you open it.</p></div>
+      </div>
     </div>
   </section>
 
   <section class="tp-section">
     <div class="container">
-      <span class="eyebrow eyebrow--gold">How it helps you</span>
-      <h2>What it means for you as the owner</h2>
-      <p>You can see who is who and where they are at, anytime.</p>
+      <div class="tp-search">
+        <span class="eyebrow eyebrow--gold">Looking to hire this skill?</span>
+        <h2>Tired of customer info scattered everywhere?</h2>
+        <p>If you searched for a better way to track leads and clients, or a VA to organize your customer records, this is it. We build the clean database and we keep it clean, so you always know who is who and where they stand.</p>
+        <div class="tp-search__phrases"><span>organize my client list</span><span>hire a VA to track leads</span><span>customer database for small business</span><span>keep client records in one place</span><span>NocoDB setup and management</span></div>
+      </div>
     </div>
   </section>
-
+  <section class="tp-section tp-faq">
+    <div class="container">
+      <span class="eyebrow eyebrow--gold">Common questions</span>
+      <h2>What business owners ask us about this</h2>
+      <p class="faq-q">How is this different from a spreadsheet?</p>
+      <p>It starts as easy as a spreadsheet but stays organized as you grow. Records connect to each other, it does not break when it gets big, and it can feed your other tools, which a plain spreadsheet cannot.</p>
+      <p class="faq-q">Is NocoDB expensive?</p>
+      <p>NocoDB is open source and free to run, which is part of why we like it for small businesses. The value we add is the setup and the ongoing upkeep so it stays clean and useful.</p>
+      <p class="faq-q">Can I still see and use it myself?</p>
+      <p>Yes. It is your database. You can open it and search anytime. We handle the upkeep so it stays organized, but you always have full access.</p>
+      <p class="faq-q">What if I already have data in another tool?</p>
+      <p>We bring it in for you. We import what you have, clean out duplicates and errors, and build the structure around your real records.</p>
+    </div>
+  </section>
   <section class="tp-section">
     <div class="container">
       <div class="tp-download">
@@ -699,8 +878,9 @@
     <div class="container">
       <span class="eyebrow eyebrow--gold">More in Customer Data, CRM &amp; Email</span>
       <div class="tool-grid" style="margin-top:1.4rem;">
-        <a class="tool-card" href="tool-crm-email-platform.html"><span class="tool-card__icon">C</span><h3>Customer Database &amp; Email</h3><span class="tool-card__credit">Brevo</span><p>One place to hold your contacts and send organized email.</p><span class="tool-card__link">See how we use it &rarr;</span></a>
-        <a class="tool-card" href="tool-crm-followup.html"><span class="tool-card__icon">L</span><h3>Lead Tracking &amp; Follow-Up</h3><span class="tool-card__credit">HubSpot + Emy</span><p>A system that tracks leads and makes sure none go cold.</p><span class="tool-card__link">See how we use it &rarr;</span></a>
+        <a class="tool-card" href="tool-crm-email-platform.html"><span class="tool-card__icon">C</span><h3>Customer Database &amp; Email</h3><span class="tool-card__credit">Brevo</span><p></p><span class="tool-card__link">See how we use it &rarr;</span></a>
+        <a class="tool-card" href="tool-crm-followup.html"><span class="tool-card__icon">L</span><h3>Lead Tracking &amp; Follow-Up</h3><span class="tool-card__credit">HubSpot + Emy</span><p></p><span class="tool-card__link">See how we use it &rarr;</span></a>
+        <a class="tool-card" href="tool-gohighlevel-crm.html"><span class="tool-card__icon">A</span><h3>All-In-One CRM (GoHighLevel)</h3><span class="tool-card__credit">GoHighLevel</span><p></p><span class="tool-card__link">See how we use it &rarr;</span></a>
       </div>
     </div>
   </section>
@@ -746,6 +926,8 @@
           <div class="footer__col-title">Work</div>
           <ul class="footer__links">
             <li><a href="our-work.html">Our Work</a></li>
+            <li><a href="live-builds.html">Live Builds</a></li>
+        <li><a href="tools.html">Tools</a></li>
             <li><a href="insights.html">Insights</a></li>
             <li><a href="resources.html">Forms &amp; Resources</a></li>
             <li><a href="contact.html">Contact</a></li>

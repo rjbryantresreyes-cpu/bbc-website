@@ -11,13 +11,13 @@
   </script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Trend &amp; Competitor Watching | Balay ni Bruno &amp; Co.</title>
-  <meta name="description" content="We watch what is working right now in your space, including competitors' videos. How Balay ni Bruno &amp; Co. uses Social listening + research for your business." />
+  <title>Trend &amp; Competitor Research For Your Content | Balay ni Bruno &amp; Co.</title>
+  <meta name="description" content="We watch what is working in your space right now, including competitors' videos, and hand you fresh, proven content ideas with the why." />
   <link rel="canonical" href="https://balaynibruno.co/tool-trend-research.html" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Balay ni Bruno &amp; Co." />
-  <meta property="og:title" content="Trend &amp; Competitor Watching, Balay ni Bruno &amp; Co." />
-  <meta property="og:description" content="We watch what is working right now in your space, including competitors' videos. How Balay ni Bruno &amp; Co. uses Social listening + research for your business." />
+  <meta property="og:title" content="Trend &amp; Competitor Research For Your Content, Balay ni Bruno &amp; Co." />
+  <meta property="og:description" content="We watch what is working in your space right now, including competitors' videos, and hand you fresh, proven content ideas with the why." />
   <meta property="og:url" content="https://balaynibruno.co/tool-trend-research.html" />
   <meta property="og:image" content="https://balaynibruno.co/bbc-logo.png" />
   <meta name="twitter:card" content="summary_large_image" />
@@ -536,7 +536,9 @@
                ]
 }
   </script>
+  <meta name="keywords" content="social media trend research, competitor research, content ideas service, social media VA, hire someone to find content ideas, trending reels research, what to post on social media" />
 
+  <link rel="stylesheet" href="bbc-article-visuals.css" />
   <style>
     /* ===== BBC Tools section ===== */
     .tools-hero{background:var(--bg-dark);color:var(--text-warm);padding:clamp(5rem,11vw,8rem) 0 clamp(3rem,7vw,5rem);}
@@ -582,18 +584,149 @@
     /* ---- single tool page ---- */
     .tp-hero{background:var(--bg-dark);color:var(--text-warm);padding:clamp(5rem,10vw,7rem) 0 clamp(2.5rem,6vw,4rem);}
     .tp-hero .back-link{color:rgba(245,241,234,.7);}
+    .tp-crumb{font-family:var(--font-ui);font-size:.8rem;color:rgba(245,241,234,.55);margin-bottom:.4rem;}
+    .tp-crumb a{color:rgba(245,241,234,.7);}
     .tp-hero__icon{width:64px;height:64px;border-radius:16px;background:linear-gradient(135deg,var(--gold),var(--gold-warm));color:#fff;display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-weight:600;font-size:1.7rem;margin:1.2rem 0 1.1rem;}
     .tp-hero h1{font-family:var(--font-display);font-weight:600;font-size:clamp(2.1rem,5vw,3.2rem);color:#fff;margin:0 0 .5rem;}
+    .tp-hero__sub{font-family:var(--font-body);font-size:clamp(1.05rem,2.2vw,1.28rem);line-height:1.55;color:rgba(245,241,234,.82);max-width:60ch;margin:.4rem 0 1rem;}
     .tp-hero__credit{font-family:var(--font-ui);font-size:.82rem;font-weight:500;letter-spacing:.05em;text-transform:uppercase;color:var(--gold-pale);}
     .tp-section{padding:clamp(2.2rem,5vw,3.4rem) 0;border-bottom:var(--border-warm);}
     .tp-section:nth-of-type(even){background:var(--bg-section);}
     .tp-section .eyebrow{color:var(--gold);}
     .tp-section h2{font-family:var(--font-display);font-weight:600;font-size:clamp(1.4rem,3vw,2rem);color:var(--text-ink);margin:.4rem 0 .8rem;}
     .tp-section p{font-family:var(--font-body);font-size:1.1rem;line-height:1.65;color:var(--text-body);max-width:66ch;}
+    .tp-section p + p{margin-top:1rem;}
+
+    /* two-column value cards */
+    .tp-value-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;margin-top:1rem;}
+    @media(max-width:720px){.tp-value-grid{grid-template-columns:1fr;}}
+    .tp-value-card{background:var(--bg-card);border:var(--border-card);border-radius:var(--radius);padding:1.6rem 1.5rem;box-shadow:var(--shadow-xs);}
+    .tp-value-card h3{font-family:var(--font-display);font-weight:600;font-size:1.15rem;color:var(--deep-blue);margin:0 0 .5rem;}
+    .tp-value-card p{font-size:1.02rem;margin:0;}
+
+    /* finished-product list */
+    .tp-deliverables{list-style:none;padding:0;margin:1.2rem 0 0;display:grid;gap:.7rem;max-width:60ch;}
+    .tp-deliverables li{position:relative;padding:.85rem 1rem .85rem 2.6rem;background:var(--bg-card);border:var(--border-card);border-radius:12px;font-family:var(--font-body);font-size:1.02rem;color:var(--text-body);}
+    .tp-deliverables li::before{content:'\2713';position:absolute;left:.95rem;top:50%;transform:translateY(-50%);width:22px;height:22px;border-radius:50%;background:var(--gold);color:#fff;font-size:.78rem;display:flex;align-items:center;justify-content:center;}
+
+    /* search-intent box */
+    .tp-search{background:linear-gradient(135deg,rgba(31,53,87,.05),rgba(184,146,62,.06));border:1px solid rgba(184,146,62,.28);border-radius:var(--radius);padding:1.8rem 1.7rem;}
+    .tp-search h2{margin-top:0;}
+    .tp-search__phrases{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1.2rem;}
+    .tp-search__phrases span{font-family:var(--font-ui);font-size:.82rem;color:var(--deep-blue);background:var(--bg-card);border:1px solid rgba(31,53,87,.18);border-radius:999px;padding:.4rem .9rem;}
+
     .tp-download{display:flex;flex-wrap:wrap;align-items:center;gap:1rem;background:var(--bg-card);border:var(--border-card);border-radius:var(--radius);padding:1.5rem 1.6rem;box-shadow:var(--shadow-sm);}
     .tp-download p{margin:0;font-size:1rem;}
     .tp-related{padding:clamp(2.5rem,5vw,4rem) 0;background:var(--bg-section);}
+    .tp-faq .faq-q{font-family:var(--font-display);font-size:1.18rem;font-weight:600;color:var(--deep-blue);margin-top:1.75rem;margin-bottom:.4rem;}
+    .tp-faq p{font-size:1.05rem;}
   </style>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://balaynibruno.co/#organization",
+      "name": "Balay ni Bruno & Co.",
+      "url": "https://balaynibruno.co/",
+      "logo": "https://balaynibruno.co/bbc-logo.png",
+      "email": "admin@balaynibruno.co",
+      "telephone": "+63 935 663 0324",
+      "founder": {
+        "@type": "Person",
+        "name": "RJ Bryan Tres Reyes"
+      },
+      "sameAs": [
+        "https://www.facebook.com/profile.php?id=61590006878673",
+        "https://www.instagram.com/balaynibruno/",
+        "https://www.tiktok.com/@balaynibruno.co",
+        "https://youtube.com/@balaynibruno"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://balaynibruno.co/#website",
+      "name": "Balay ni Bruno & Co.",
+      "url": "https://balaynibruno.co/",
+      "publisher": {
+        "@id": "https://balaynibruno.co/#organization"
+      }
+    },
+    {
+      "@type": "Service",
+      "name": "Trend & Competitor Watching — Social listening + research",
+      "serviceType": "Social Media & Content",
+      "description": "This is how we keep your content from being a guess. We watch what is working right now in your space, including the videos and posts your competitors are putting out. Then we report back on what to try and, just as important, why it is working. You get ideas that are already earning attention, rather than starting from a blank page every week.",
+      "provider": {
+        "@id": "https://balaynibruno.co/#organization"
+      },
+      "areaServed": "Worldwide",
+      "url": "https://balaynibruno.co/tool-trend-research.html"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Tools We Use",
+          "item": "https://balaynibruno.co/tools.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Social Media & Content",
+          "item": "https://balaynibruno.co/tools.html#social"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Trend & Competitor Watching",
+          "item": "https://balaynibruno.co/tool-trend-research.html"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How do you know what is trending in my industry?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "We watch the posts, reels, and competitor content in your space and look for what is repeatedly pulling attention. Our AI helps review a lot of content quickly, and we translate the patterns into ideas that fit your brand."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Are you just copying my competitors?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. We study what is working and why, then shape ideas that fit your voice and your customers. Copying a post rarely works. Understanding what made it land is what you can actually reuse."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Will these ideas actually work for my business?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "We can never promise a specific result, but ideas built on what is already earning attention have a far better chance than guessing. You still approve every idea before it becomes a post."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How often do you do this research?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "It depends on your plan and how fast your space moves, but trend watching works best as an ongoing habit rather than a one-time report. We build it into the rhythm of your content."
+          }
+        }
+      ]
+    }
+  ]
+}
+  </script>
 </head>
 <body>
 <header class="site-header" id="site-header">
@@ -610,6 +743,7 @@
           <li><a href="how-we-help.html">How We Help</a></li>
           <li><a href="our-team.html">Our Team</a></li>
           <li><a href="our-work.html" class="active">Our Work</a></li>
+        <li><a href="tools.html">Tools</a></li>
           <li><a href="insights.html">Insights</a></li>
           <li><a href="contact.html">Contact</a></li>
         </ul>
@@ -629,6 +763,7 @@
       <a href="how-we-help.html">How We Help</a>
       <a href="our-team.html">Our Team</a>
       <a href="our-work.html" class="active">Our Work</a>
+    <a href="tools.html">Tools</a>
       <a href="insights.html">Insights</a>
       <a href="contact.html">Contact</a>
       <a href="https://calendly.com/rj-balaynibruno/bbc-strategy-call" target="_blank" rel="noopener noreferrer" class="btn btn-gold mobile-cta">Book a Call</a>
@@ -636,9 +771,11 @@
   </header>
   <section class="tp-hero">
     <div class="container">
+      <p class="tp-crumb"><a href="tools.html">Tools</a> &rsaquo; <a href="tools.html#social">Social Media &amp; Content</a> &rsaquo; Trend &amp; Competitor Watching</p>
       <a href="tools.html" class="back-link">&larr; Back to Tools</a>
       <div class="tp-hero__icon">T</div>
       <h1>Trend &amp; Competitor Watching</h1>
+      <p class="tp-hero__sub">We watch what is getting attention in your space right now and hand you fresh ideas that are already proven to work.</p>
       <span class="tp-hero__credit">Social listening + research &middot; Social Media &amp; Content</span>
     </div>
   </section>
@@ -647,7 +784,7 @@
     <div class="container">
       <span class="eyebrow eyebrow--gold">What it is</span>
       <h2>Trend &amp; Competitor Watching, in plain words</h2>
-      <p>We watch what is working right now in your space, including competitors' videos.</p>
+      <p>This is how we keep your content from being a guess. We watch what is working right now in your space, including the videos and posts your competitors are putting out. Then we report back on what to try and, just as important, why it is working. You get ideas that are already earning attention, rather than starting from a blank page every week.</p>
     </div>
   </section>
 
@@ -655,26 +792,65 @@
     <div class="container">
       <span class="eyebrow eyebrow--gold">How we use it</span>
       <h2>How Balay ni Bruno &amp; Co. puts it to work</h2>
-      <p>Our AI reviews trending posts and reels and reports back what to try, with the why.</p>
+      <p>Our AI reviews trending posts and reels in your niche and pulls out the patterns worth borrowing, then we translate them into ideas that fit your brand. We hand you the what and the why, so you are not just copying, you understand what makes it land.</p>
+      <div class="step-flow" style="margin-top:1.4rem;">
+        <div class="step"><span class="step__num">1</span><div class="step__content"><p class="step__title">Watch your space</p><p class="step__desc">We track trending posts, reels, and competitor content in your industry to see what is pulling attention right now.</p></div></div>
+        <div class="step"><span class="step__num">2</span><div class="step__content"><p class="step__title">Spot the patterns</p><p class="step__desc">We look past the single viral post and find the format, hook, or angle that is actually doing the work.</p></div></div>
+        <div class="step"><span class="step__num">3</span><div class="step__content"><p class="step__title">Explain the why</p><p class="step__desc">We tell you not just what to try but why it is working, so the idea makes sense for your brand and audience.</p></div></div>
+        <div class="step"><span class="step__num">4</span><div class="step__content"><p class="step__title">Shape it for you</p><p class="step__desc">We turn each trend into an idea that fits your voice and your customers, not a copy of someone else's post.</p></div></div>
+        <div class="step"><span class="step__num">5</span><div class="step__content"><p class="step__title">Hand you the shortlist</p><p class="step__desc">You get a short list of fresh, proven ideas ready to hand to the content side and put into your calendar.</p></div></div>
+      </div>
     </div>
   </section>
 
   <section class="tp-section">
     <div class="container">
-      <span class="eyebrow eyebrow--gold">How it helps your business</span>
-      <h2>What it does for the business</h2>
-      <p>Your content rides what is already getting attention instead of guessing.</p>
+      <span class="eyebrow eyebrow--gold">What you get</span>
+      <h2>The finished product you can expect</h2>
+      <p>Here is what a round of trend watching gives you:</p>
+      <ul class="tp-deliverables">
+        <li>A short list of content ideas that are already earning attention in your space</li>
+        <li>A plain explanation of why each one is working</li>
+        <li>A read on what your competitors are doing and where the openings are</li>
+        <li>Ideas shaped to fit your brand, ready to hand to the content side</li>
+      </ul>
+    </div>
+  </section>
+  <section class="tp-section">
+    <div class="container">
+      <span class="eyebrow eyebrow--gold">Why it matters</span>
+      <h2>What it does for you and the business</h2>
+      <div class="tp-value-grid">
+        <div class="tp-value-card"><h3>For your business</h3><p>Your content rides attention that already exists instead of guessing, so more of what you post has a real chance to land.</p></div>
+        <div class="tp-value-card"><h3>For you, the owner</h3><p>You get fresh ideas that are proven to be working, handed to you, instead of staring at a blank calendar.</p></div>
+      </div>
     </div>
   </section>
 
   <section class="tp-section">
     <div class="container">
-      <span class="eyebrow eyebrow--gold">How it helps you</span>
-      <h2>What it means for you as the owner</h2>
-      <p>You get fresh ideas that are proven to be working, handed to you.</p>
+      <div class="tp-search">
+        <span class="eyebrow eyebrow--gold">Looking to hire this skill?</span>
+        <h2>Never sure what to post next?</h2>
+        <p>Staring at a blank calendar is where most content plans stall. Watching trends and competitors properly takes time you would rather spend running your business. If you want someone to bring you fresh ideas that are already proven, this is the research we do for you.</p>
+        <div class="tp-search__phrases"><span>hire someone to find content ideas for me</span><span>what should I post on social media</span><span>competitor social media research</span><span>find trending content in my industry</span></div>
+      </div>
     </div>
   </section>
-
+  <section class="tp-section tp-faq">
+    <div class="container">
+      <span class="eyebrow eyebrow--gold">Common questions</span>
+      <h2>What business owners ask us about this</h2>
+      <p class="faq-q">How do you know what is trending in my industry?</p>
+      <p>We watch the posts, reels, and competitor content in your space and look for what is repeatedly pulling attention. Our AI helps review a lot of content quickly, and we translate the patterns into ideas that fit your brand.</p>
+      <p class="faq-q">Are you just copying my competitors?</p>
+      <p>No. We study what is working and why, then shape ideas that fit your voice and your customers. Copying a post rarely works. Understanding what made it land is what you can actually reuse.</p>
+      <p class="faq-q">Will these ideas actually work for my business?</p>
+      <p>We can never promise a specific result, but ideas built on what is already earning attention have a far better chance than guessing. You still approve every idea before it becomes a post.</p>
+      <p class="faq-q">How often do you do this research?</p>
+      <p>It depends on your plan and how fast your space moves, but trend watching works best as an ongoing habit rather than a one-time report. We build it into the rhythm of your content.</p>
+    </div>
+  </section>
   <section class="tp-section">
     <div class="container">
       <div class="tp-download">
@@ -699,9 +875,9 @@
     <div class="container">
       <span class="eyebrow eyebrow--gold">More in Social Media &amp; Content</span>
       <div class="tool-grid" style="margin-top:1.4rem;">
-        <a class="tool-card" href="tool-social-scheduling.html"><span class="tool-card__icon">O</span><h3>One-Place Posting &amp; Scheduling</h3><span class="tool-card__credit">Postiz</span><p>A tool that schedules and posts to all your social accounts from one place.</p><span class="tool-card__link">See how we use it &rarr;</span></a>
-        <a class="tool-card" href="tool-content-engine.html"><span class="tool-card__icon">C</span><h3>The Content Engine</h3><span class="tool-card__credit">Mai + Sonny + Vidz</span><p>Our system that turns one idea into a full set of posts across platforms.</p><span class="tool-card__link">See how we use it &rarr;</span></a>
-        <a class="tool-card" href="tool-reading-images-text.html"><span class="tool-card__icon">R</span><h3>Reading Text From Images</h3><span class="tool-card__credit">Surya OCR</span><p>A tool that pulls text out of screenshots, receipts, and posts.</p><span class="tool-card__link">See how we use it &rarr;</span></a>
+        <a class="tool-card" href="tool-social-scheduling.html"><span class="tool-card__icon">O</span><h3>One-Place Posting &amp; Scheduling</h3><span class="tool-card__credit">Metricool</span><p></p><span class="tool-card__link">See how we use it &rarr;</span></a>
+        <a class="tool-card" href="tool-content-engine.html"><span class="tool-card__icon">C</span><h3>The Content Engine</h3><span class="tool-card__credit">Mai + Sonny + Vidz</span><p></p><span class="tool-card__link">See how we use it &rarr;</span></a>
+        <a class="tool-card" href="tool-reading-images-text.html"><span class="tool-card__icon">R</span><h3>Reading Text From Images</h3><span class="tool-card__credit">Surya OCR</span><p></p><span class="tool-card__link">See how we use it &rarr;</span></a>
       </div>
     </div>
   </section>
@@ -747,6 +923,8 @@
           <div class="footer__col-title">Work</div>
           <ul class="footer__links">
             <li><a href="our-work.html">Our Work</a></li>
+            <li><a href="live-builds.html">Live Builds</a></li>
+        <li><a href="tools.html">Tools</a></li>
             <li><a href="insights.html">Insights</a></li>
             <li><a href="resources.html">Forms &amp; Resources</a></li>
             <li><a href="contact.html">Contact</a></li>

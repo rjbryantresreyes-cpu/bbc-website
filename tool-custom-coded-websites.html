@@ -11,13 +11,13 @@
   </script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Custom-Coded Websites | Balay ni Bruno &amp; Co.</title>
-  <meta name="description" content="Websites built by hand instead of dragged together in a template tool. How Balay ni Bruno &amp; Co. uses HTML, CSS, JavaScript for your business." />
+  <title>Custom-Coded Websites Built by Hand for You | Balay ni Bruno &amp; Co.</title>
+  <meta name="description" content="We build websites by hand with clean code, so your site is fast, custom, and does exactly what your business needs. Talk to a real studio." />
   <link rel="canonical" href="https://balaynibruno.co/tool-custom-coded-websites.html" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Balay ni Bruno &amp; Co." />
-  <meta property="og:title" content="Custom-Coded Websites, Balay ni Bruno &amp; Co." />
-  <meta property="og:description" content="Websites built by hand instead of dragged together in a template tool. How Balay ni Bruno &amp; Co. uses HTML, CSS, JavaScript for your business." />
+  <meta property="og:title" content="Custom-Coded Websites Built by Hand for You, Balay ni Bruno &amp; Co." />
+  <meta property="og:description" content="We build websites by hand with clean code, so your site is fast, custom, and does exactly what your business needs. Talk to a real studio." />
   <meta property="og:url" content="https://balaynibruno.co/tool-custom-coded-websites.html" />
   <meta property="og:image" content="https://balaynibruno.co/bbc-logo.png" />
   <meta name="twitter:card" content="summary_large_image" />
@@ -536,7 +536,9 @@
                ]
 }
   </script>
+  <meta name="keywords" content="custom coded website, hand coded website for small business, hire a custom website developer, custom website VA for small business, fast loading website build, no template website design, website developer for hire" />
 
+  <link rel="stylesheet" href="bbc-article-visuals.css" />
   <style>
     /* ===== BBC Tools section ===== */
     .tools-hero{background:var(--bg-dark);color:var(--text-warm);padding:clamp(5rem,11vw,8rem) 0 clamp(3rem,7vw,5rem);}
@@ -582,18 +584,149 @@
     /* ---- single tool page ---- */
     .tp-hero{background:var(--bg-dark);color:var(--text-warm);padding:clamp(5rem,10vw,7rem) 0 clamp(2.5rem,6vw,4rem);}
     .tp-hero .back-link{color:rgba(245,241,234,.7);}
+    .tp-crumb{font-family:var(--font-ui);font-size:.8rem;color:rgba(245,241,234,.55);margin-bottom:.4rem;}
+    .tp-crumb a{color:rgba(245,241,234,.7);}
     .tp-hero__icon{width:64px;height:64px;border-radius:16px;background:linear-gradient(135deg,var(--gold),var(--gold-warm));color:#fff;display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-weight:600;font-size:1.7rem;margin:1.2rem 0 1.1rem;}
     .tp-hero h1{font-family:var(--font-display);font-weight:600;font-size:clamp(2.1rem,5vw,3.2rem);color:#fff;margin:0 0 .5rem;}
+    .tp-hero__sub{font-family:var(--font-body);font-size:clamp(1.05rem,2.2vw,1.28rem);line-height:1.55;color:rgba(245,241,234,.82);max-width:60ch;margin:.4rem 0 1rem;}
     .tp-hero__credit{font-family:var(--font-ui);font-size:.82rem;font-weight:500;letter-spacing:.05em;text-transform:uppercase;color:var(--gold-pale);}
     .tp-section{padding:clamp(2.2rem,5vw,3.4rem) 0;border-bottom:var(--border-warm);}
     .tp-section:nth-of-type(even){background:var(--bg-section);}
     .tp-section .eyebrow{color:var(--gold);}
     .tp-section h2{font-family:var(--font-display);font-weight:600;font-size:clamp(1.4rem,3vw,2rem);color:var(--text-ink);margin:.4rem 0 .8rem;}
     .tp-section p{font-family:var(--font-body);font-size:1.1rem;line-height:1.65;color:var(--text-body);max-width:66ch;}
+    .tp-section p + p{margin-top:1rem;}
+
+    /* two-column value cards */
+    .tp-value-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;margin-top:1rem;}
+    @media(max-width:720px){.tp-value-grid{grid-template-columns:1fr;}}
+    .tp-value-card{background:var(--bg-card);border:var(--border-card);border-radius:var(--radius);padding:1.6rem 1.5rem;box-shadow:var(--shadow-xs);}
+    .tp-value-card h3{font-family:var(--font-display);font-weight:600;font-size:1.15rem;color:var(--deep-blue);margin:0 0 .5rem;}
+    .tp-value-card p{font-size:1.02rem;margin:0;}
+
+    /* finished-product list */
+    .tp-deliverables{list-style:none;padding:0;margin:1.2rem 0 0;display:grid;gap:.7rem;max-width:60ch;}
+    .tp-deliverables li{position:relative;padding:.85rem 1rem .85rem 2.6rem;background:var(--bg-card);border:var(--border-card);border-radius:12px;font-family:var(--font-body);font-size:1.02rem;color:var(--text-body);}
+    .tp-deliverables li::before{content:'\2713';position:absolute;left:.95rem;top:50%;transform:translateY(-50%);width:22px;height:22px;border-radius:50%;background:var(--gold);color:#fff;font-size:.78rem;display:flex;align-items:center;justify-content:center;}
+
+    /* search-intent box */
+    .tp-search{background:linear-gradient(135deg,rgba(31,53,87,.05),rgba(184,146,62,.06));border:1px solid rgba(184,146,62,.28);border-radius:var(--radius);padding:1.8rem 1.7rem;}
+    .tp-search h2{margin-top:0;}
+    .tp-search__phrases{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1.2rem;}
+    .tp-search__phrases span{font-family:var(--font-ui);font-size:.82rem;color:var(--deep-blue);background:var(--bg-card);border:1px solid rgba(31,53,87,.18);border-radius:999px;padding:.4rem .9rem;}
+
     .tp-download{display:flex;flex-wrap:wrap;align-items:center;gap:1rem;background:var(--bg-card);border:var(--border-card);border-radius:var(--radius);padding:1.5rem 1.6rem;box-shadow:var(--shadow-sm);}
     .tp-download p{margin:0;font-size:1rem;}
     .tp-related{padding:clamp(2.5rem,5vw,4rem) 0;background:var(--bg-section);}
+    .tp-faq .faq-q{font-family:var(--font-display);font-size:1.18rem;font-weight:600;color:var(--deep-blue);margin-top:1.75rem;margin-bottom:.4rem;}
+    .tp-faq p{font-size:1.05rem;}
   </style>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://balaynibruno.co/#organization",
+      "name": "Balay ni Bruno & Co.",
+      "url": "https://balaynibruno.co/",
+      "logo": "https://balaynibruno.co/bbc-logo.png",
+      "email": "admin@balaynibruno.co",
+      "telephone": "+63 935 663 0324",
+      "founder": {
+        "@type": "Person",
+        "name": "RJ Bryan Tres Reyes"
+      },
+      "sameAs": [
+        "https://www.facebook.com/profile.php?id=61590006878673",
+        "https://www.instagram.com/balaynibruno/",
+        "https://www.tiktok.com/@balaynibruno.co",
+        "https://youtube.com/@balaynibruno"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://balaynibruno.co/#website",
+      "name": "Balay ni Bruno & Co.",
+      "url": "https://balaynibruno.co/",
+      "publisher": {
+        "@id": "https://balaynibruno.co/#organization"
+      }
+    },
+    {
+      "@type": "Service",
+      "name": "Custom-Coded Websites — HTML, CSS, JavaScript",
+      "serviceType": "Websites & Web Apps",
+      "description": "Most website builders hand you a template and ask you to squeeze your business into it. We do the opposite. We write the code ourselves in the plain building blocks of the web, so every page is shaped around what you actually need. Nothing extra is loading in the background to slow it down.",
+      "provider": {
+        "@id": "https://balaynibruno.co/#organization"
+      },
+      "areaServed": "Worldwide",
+      "url": "https://balaynibruno.co/tool-custom-coded-websites.html"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Tools We Use",
+          "item": "https://balaynibruno.co/tools.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Websites & Web Apps",
+          "item": "https://balaynibruno.co/tools.html#websites"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Custom-Coded Websites",
+          "item": "https://balaynibruno.co/tool-custom-coded-websites.html"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Is a custom-coded website better than a website builder?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "For many businesses, yes. Builders are quick to start but often load slowly and limit what you can do. A hand-built site is faster and shaped around your needs. The tradeoff is that it takes a studio like ours to build and update it, which is exactly what we are here for."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Will I be able to update the site myself?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "You do not have to. Most of our clients prefer to send us the change and see it live the same day. If you want a section you can edit yourself, tell us up front and we can plan for it."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How long does a custom website take to build?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "It depends on how many pages you need and how ready your content is. A focused site moves faster than a large one. We give you an honest timeline once we understand the scope."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do I own the website when it is done?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. It is your site and your content. We build it, host it, and support it, but it belongs to your business."
+          }
+        }
+      ]
+    }
+  ]
+}
+  </script>
 </head>
 <body>
 <header class="site-header" id="site-header">
@@ -610,6 +743,7 @@
           <li><a href="how-we-help.html">How We Help</a></li>
           <li><a href="our-team.html">Our Team</a></li>
           <li><a href="our-work.html" class="active">Our Work</a></li>
+        <li><a href="tools.html">Tools</a></li>
           <li><a href="insights.html">Insights</a></li>
           <li><a href="contact.html">Contact</a></li>
         </ul>
@@ -629,6 +763,7 @@
       <a href="how-we-help.html">How We Help</a>
       <a href="our-team.html">Our Team</a>
       <a href="our-work.html" class="active">Our Work</a>
+    <a href="tools.html">Tools</a>
       <a href="insights.html">Insights</a>
       <a href="contact.html">Contact</a>
       <a href="https://calendly.com/rj-balaynibruno/bbc-strategy-call" target="_blank" rel="noopener noreferrer" class="btn btn-gold mobile-cta">Book a Call</a>
@@ -636,9 +771,11 @@
   </header>
   <section class="tp-hero">
     <div class="container">
+      <p class="tp-crumb"><a href="tools.html">Tools</a> &rsaquo; <a href="tools.html#websites">Websites &amp; Web Apps</a> &rsaquo; Custom-Coded Websites</p>
       <a href="tools.html" class="back-link">&larr; Back to Tools</a>
       <div class="tp-hero__icon">C</div>
       <h1>Custom-Coded Websites</h1>
+      <p class="tp-hero__sub">A website built by hand for your business, not dragged together from a template someone else already used a thousand times.</p>
       <span class="tp-hero__credit">HTML, CSS, JavaScript &middot; Websites &amp; Web Apps</span>
     </div>
   </section>
@@ -647,7 +784,7 @@
     <div class="container">
       <span class="eyebrow eyebrow--gold">What it is</span>
       <h2>Custom-Coded Websites, in plain words</h2>
-      <p>Websites built by hand instead of dragged together in a template tool.</p>
+      <p>Most website builders hand you a template and ask you to squeeze your business into it. We do the opposite. We write the code ourselves in the plain building blocks of the web, so every page is shaped around what you actually need. Nothing extra is loading in the background to slow it down.</p>
     </div>
   </section>
 
@@ -655,26 +792,65 @@
     <div class="container">
       <span class="eyebrow eyebrow--gold">How we use it</span>
       <h2>How Balay ni Bruno &amp; Co. puts it to work</h2>
-      <p>We write the code ourselves so the site is exactly what you need, with nothing slowing it down.</p>
+      <p>When you come to us, we start from your goals and your brand, then build the pages by hand. That means your site can do the specific things you want instead of only what a template allows, and it stays light and quick because we are not carrying a pile of features you will never use.</p>
+      <div class="step-flow" style="margin-top:1.4rem;">
+        <div class="step"><span class="step__num">1</span><div class="step__content"><p class="step__title">We learn your business</p><p class="step__desc">We sit with what you sell, who you serve, and what a visitor should do on your site.</p></div></div>
+        <div class="step"><span class="step__num">2</span><div class="step__content"><p class="step__title">We build the pages by hand</p><p class="step__desc">We write clean code for each page so the layout, speed, and features match your goals.</p></div></div>
+        <div class="step"><span class="step__num">3</span><div class="step__content"><p class="step__title">We check every screen size</p><p class="step__desc">We view each page at phone, tablet, and laptop widths before anyone else sees it.</p></div></div>
+        <div class="step"><span class="step__num">4</span><div class="step__content"><p class="step__title">We publish and stay on</p><p class="step__desc">We put it live and keep making the small changes you ask for as your business grows.</p></div></div>
+      </div>
     </div>
   </section>
 
   <section class="tp-section">
     <div class="container">
-      <span class="eyebrow eyebrow--gold">How it helps your business</span>
-      <h2>What it does for the business</h2>
-      <p>Faster pages and a site that does what you want, not what a template allows.</p>
+      <span class="eyebrow eyebrow--gold">What you get</span>
+      <h2>The finished product you can expect</h2>
+      <p>You end up with a website that is truly yours, quick to load and easy for us to update.</p>
+      <ul class="tp-deliverables">
+        <li>A hand-built website shaped around your business, not a reused template</li>
+        <li>Fast-loading pages with nothing slowing them down</li>
+        <li>Clean code that is easy for us to change later</li>
+        <li>A layout that looks right on phone, tablet, and desktop</li>
+        <li>A studio you can message when you want something changed</li>
+      </ul>
+    </div>
+  </section>
+  <section class="tp-section">
+    <div class="container">
+      <span class="eyebrow eyebrow--gold">Why it matters</span>
+      <h2>What it does for you and the business</h2>
+      <div class="tp-value-grid">
+        <div class="tp-value-card"><h3>For your business</h3><p>Faster pages and a site that does exactly what you want lead to more visitors who stay and take action. A custom build also grows with you instead of boxing you in.</p></div>
+        <div class="tp-value-card"><h3>For you, the owner</h3><p>Your site feels custom because it is, and when you want a change, you ask us and it gets done.</p></div>
+      </div>
     </div>
   </section>
 
   <section class="tp-section">
     <div class="container">
-      <span class="eyebrow eyebrow--gold">How it helps you</span>
-      <h2>What it means for you as the owner</h2>
-      <p>Your site feels custom because it is, and changes are quick.</p>
+      <div class="tp-search">
+        <span class="eyebrow eyebrow--gold">Looking to hire this skill?</span>
+        <h2>Looking for someone to build your website the right way?</h2>
+        <p>You do not need to learn how to code or wrestle with a builder. Balay ni Bruno &amp; Co. builds the site for you and stays on to keep it current. You bring the business and the vision, we handle the hands-on work.</p>
+        <div class="tp-search__phrases"><span>hire a custom website developer</span><span>custom website for small business</span><span>someone to build my website</span><span>hand coded website help</span><span>website developer near me</span></div>
+      </div>
     </div>
   </section>
-
+  <section class="tp-section tp-faq">
+    <div class="container">
+      <span class="eyebrow eyebrow--gold">Common questions</span>
+      <h2>What business owners ask us about this</h2>
+      <p class="faq-q">Is a custom-coded website better than a website builder?</p>
+      <p>For many businesses, yes. Builders are quick to start but often load slowly and limit what you can do. A hand-built site is faster and shaped around your needs. The tradeoff is that it takes a studio like ours to build and update it, which is exactly what we are here for.</p>
+      <p class="faq-q">Will I be able to update the site myself?</p>
+      <p>You do not have to. Most of our clients prefer to send us the change and see it live the same day. If you want a section you can edit yourself, tell us up front and we can plan for it.</p>
+      <p class="faq-q">How long does a custom website take to build?</p>
+      <p>It depends on how many pages you need and how ready your content is. A focused site moves faster than a large one. We give you an honest timeline once we understand the scope.</p>
+      <p class="faq-q">Do I own the website when it is done?</p>
+      <p>Yes. It is your site and your content. We build it, host it, and support it, but it belongs to your business.</p>
+    </div>
+  </section>
   <section class="tp-section">
     <div class="container">
       <div class="tp-download">
@@ -699,9 +875,9 @@
     <div class="container">
       <span class="eyebrow eyebrow--gold">More in Websites &amp; Web Apps</span>
       <div class="tool-grid" style="margin-top:1.4rem;">
-        <a class="tool-card" href="tool-netlify-hosting.html"><span class="tool-card__icon">I</span><h3>Instant Hosting &amp; Updates</h3><span class="tool-card__credit">Netlify</span><p>The service that puts your site online and pushes changes live almost instantly.</p><span class="tool-card__link">See how we use it &rarr;</span></a>
-        <a class="tool-card" href="tool-mobile-first-testing.html"><span class="tool-card__icon">P</span><h3>Phone-First Checking</h3><span class="tool-card__credit">Playwright</span><p>An automatic check that views every change on phone, tablet, and desktop sizes.</p><span class="tool-card__link">See how we use it &rarr;</span></a>
-        <a class="tool-card" href="tool-smooth-motion.html"><span class="tool-card__icon">S</span><h3>Smooth Motion &amp; Polish</h3><span class="tool-card__credit">GSAP + Lenis</span><p>The animation tools that make pages scroll and move smoothly.</p><span class="tool-card__link">See how we use it &rarr;</span></a>
+        <a class="tool-card" href="tool-netlify-hosting.html"><span class="tool-card__icon">I</span><h3>Instant Hosting &amp; Updates</h3><span class="tool-card__credit">Netlify</span><p></p><span class="tool-card__link">See how we use it &rarr;</span></a>
+        <a class="tool-card" href="tool-mobile-first-testing.html"><span class="tool-card__icon">P</span><h3>Phone-First Checking</h3><span class="tool-card__credit">Playwright</span><p></p><span class="tool-card__link">See how we use it &rarr;</span></a>
+        <a class="tool-card" href="tool-smooth-motion.html"><span class="tool-card__icon">S</span><h3>Smooth Motion &amp; Polish</h3><span class="tool-card__credit">GSAP + Lenis</span><p></p><span class="tool-card__link">See how we use it &rarr;</span></a>
       </div>
     </div>
   </section>
@@ -747,6 +923,8 @@
           <div class="footer__col-title">Work</div>
           <ul class="footer__links">
             <li><a href="our-work.html">Our Work</a></li>
+            <li><a href="live-builds.html">Live Builds</a></li>
+        <li><a href="tools.html">Tools</a></li>
             <li><a href="insights.html">Insights</a></li>
             <li><a href="resources.html">Forms &amp; Resources</a></li>
             <li><a href="contact.html">Contact</a></li>

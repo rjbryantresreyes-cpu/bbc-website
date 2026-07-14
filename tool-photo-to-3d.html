@@ -11,13 +11,13 @@
   </script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Turn a Photo Into 3D | Balay ni Bruno &amp; Co.</title>
-  <meta name="description" content="A tool that builds a 3D model from a single product photo. How Balay ni Bruno &amp; Co. uses Hunyuan3D for your business." />
+  <title>Turn a Product Photo Into 3D | Balay ni Bruno &amp; Co.</title>
+  <meta name="description" content="One photo becomes a spinnable 3D view of your product. Show every angle without a photo studio, handled by our design assistants." />
   <link rel="canonical" href="https://balaynibruno.co/tool-photo-to-3d.html" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Balay ni Bruno &amp; Co." />
-  <meta property="og:title" content="Turn a Photo Into 3D, Balay ni Bruno &amp; Co." />
-  <meta property="og:description" content="A tool that builds a 3D model from a single product photo. How Balay ni Bruno &amp; Co. uses Hunyuan3D for your business." />
+  <meta property="og:title" content="Turn a Product Photo Into 3D, Balay ni Bruno &amp; Co." />
+  <meta property="og:description" content="One photo becomes a spinnable 3D view of your product. Show every angle without a photo studio, handled by our design assistants." />
   <meta property="og:url" content="https://balaynibruno.co/tool-photo-to-3d.html" />
   <meta property="og:image" content="https://balaynibruno.co/bbc-logo.png" />
   <meta name="twitter:card" content="summary_large_image" />
@@ -536,7 +536,9 @@
                ]
 }
   </script>
+  <meta name="keywords" content="photo to 3D, hire a graphic design assistant, 3D product model, product visualization VA, spinnable product view, 3D from a photo, ecommerce product 3D" />
 
+  <link rel="stylesheet" href="bbc-article-visuals.css" />
   <style>
     /* ===== BBC Tools section ===== */
     .tools-hero{background:var(--bg-dark);color:var(--text-warm);padding:clamp(5rem,11vw,8rem) 0 clamp(3rem,7vw,5rem);}
@@ -582,18 +584,149 @@
     /* ---- single tool page ---- */
     .tp-hero{background:var(--bg-dark);color:var(--text-warm);padding:clamp(5rem,10vw,7rem) 0 clamp(2.5rem,6vw,4rem);}
     .tp-hero .back-link{color:rgba(245,241,234,.7);}
+    .tp-crumb{font-family:var(--font-ui);font-size:.8rem;color:rgba(245,241,234,.55);margin-bottom:.4rem;}
+    .tp-crumb a{color:rgba(245,241,234,.7);}
     .tp-hero__icon{width:64px;height:64px;border-radius:16px;background:linear-gradient(135deg,var(--gold),var(--gold-warm));color:#fff;display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-weight:600;font-size:1.7rem;margin:1.2rem 0 1.1rem;}
     .tp-hero h1{font-family:var(--font-display);font-weight:600;font-size:clamp(2.1rem,5vw,3.2rem);color:#fff;margin:0 0 .5rem;}
+    .tp-hero__sub{font-family:var(--font-body);font-size:clamp(1.05rem,2.2vw,1.28rem);line-height:1.55;color:rgba(245,241,234,.82);max-width:60ch;margin:.4rem 0 1rem;}
     .tp-hero__credit{font-family:var(--font-ui);font-size:.82rem;font-weight:500;letter-spacing:.05em;text-transform:uppercase;color:var(--gold-pale);}
     .tp-section{padding:clamp(2.2rem,5vw,3.4rem) 0;border-bottom:var(--border-warm);}
     .tp-section:nth-of-type(even){background:var(--bg-section);}
     .tp-section .eyebrow{color:var(--gold);}
     .tp-section h2{font-family:var(--font-display);font-weight:600;font-size:clamp(1.4rem,3vw,2rem);color:var(--text-ink);margin:.4rem 0 .8rem;}
     .tp-section p{font-family:var(--font-body);font-size:1.1rem;line-height:1.65;color:var(--text-body);max-width:66ch;}
+    .tp-section p + p{margin-top:1rem;}
+
+    /* two-column value cards */
+    .tp-value-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;margin-top:1rem;}
+    @media(max-width:720px){.tp-value-grid{grid-template-columns:1fr;}}
+    .tp-value-card{background:var(--bg-card);border:var(--border-card);border-radius:var(--radius);padding:1.6rem 1.5rem;box-shadow:var(--shadow-xs);}
+    .tp-value-card h3{font-family:var(--font-display);font-weight:600;font-size:1.15rem;color:var(--deep-blue);margin:0 0 .5rem;}
+    .tp-value-card p{font-size:1.02rem;margin:0;}
+
+    /* finished-product list */
+    .tp-deliverables{list-style:none;padding:0;margin:1.2rem 0 0;display:grid;gap:.7rem;max-width:60ch;}
+    .tp-deliverables li{position:relative;padding:.85rem 1rem .85rem 2.6rem;background:var(--bg-card);border:var(--border-card);border-radius:12px;font-family:var(--font-body);font-size:1.02rem;color:var(--text-body);}
+    .tp-deliverables li::before{content:'\2713';position:absolute;left:.95rem;top:50%;transform:translateY(-50%);width:22px;height:22px;border-radius:50%;background:var(--gold);color:#fff;font-size:.78rem;display:flex;align-items:center;justify-content:center;}
+
+    /* search-intent box */
+    .tp-search{background:linear-gradient(135deg,rgba(31,53,87,.05),rgba(184,146,62,.06));border:1px solid rgba(184,146,62,.28);border-radius:var(--radius);padding:1.8rem 1.7rem;}
+    .tp-search h2{margin-top:0;}
+    .tp-search__phrases{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1.2rem;}
+    .tp-search__phrases span{font-family:var(--font-ui);font-size:.82rem;color:var(--deep-blue);background:var(--bg-card);border:1px solid rgba(31,53,87,.18);border-radius:999px;padding:.4rem .9rem;}
+
     .tp-download{display:flex;flex-wrap:wrap;align-items:center;gap:1rem;background:var(--bg-card);border:var(--border-card);border-radius:var(--radius);padding:1.5rem 1.6rem;box-shadow:var(--shadow-sm);}
     .tp-download p{margin:0;font-size:1rem;}
     .tp-related{padding:clamp(2.5rem,5vw,4rem) 0;background:var(--bg-section);}
+    .tp-faq .faq-q{font-family:var(--font-display);font-size:1.18rem;font-weight:600;color:var(--deep-blue);margin-top:1.75rem;margin-bottom:.4rem;}
+    .tp-faq p{font-size:1.05rem;}
   </style>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://balaynibruno.co/#organization",
+      "name": "Balay ni Bruno & Co.",
+      "url": "https://balaynibruno.co/",
+      "logo": "https://balaynibruno.co/bbc-logo.png",
+      "email": "admin@balaynibruno.co",
+      "telephone": "+63 935 663 0324",
+      "founder": {
+        "@type": "Person",
+        "name": "RJ Bryan Tres Reyes"
+      },
+      "sameAs": [
+        "https://www.facebook.com/profile.php?id=61590006878673",
+        "https://www.instagram.com/balaynibruno/",
+        "https://www.tiktok.com/@balaynibruno.co",
+        "https://youtube.com/@balaynibruno"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://balaynibruno.co/#website",
+      "name": "Balay ni Bruno & Co.",
+      "url": "https://balaynibruno.co/",
+      "publisher": {
+        "@id": "https://balaynibruno.co/#organization"
+      }
+    },
+    {
+      "@type": "Service",
+      "name": "Turn a Photo Into 3D — Hunyuan3D",
+      "serviceType": "Graphic & Brand Design",
+      "description": "This is a tool that builds a 3D model from a single product photo. Instead of booking a studio to shoot every angle, we start with one clear photo and create a version you can rotate and view from different sides. It is a newer capability, so results vary by product, and we are always honest about what will work well. When it fits, it gives your product a richer, more interactive feel.",
+      "provider": {
+        "@id": "https://balaynibruno.co/#organization"
+      },
+      "areaServed": "Worldwide",
+      "url": "https://balaynibruno.co/tool-photo-to-3d.html"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Tools We Use",
+          "item": "https://balaynibruno.co/tools.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Graphic & Brand Design",
+          "item": "https://balaynibruno.co/tools.html#design"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Turn a Photo Into 3D",
+          "item": "https://balaynibruno.co/tool-photo-to-3d.html"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Does this work for any product?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "It works best for products with clear, solid shapes. Very complex or transparent items are harder, and we will tell you honestly whether yours is a good fit before we start."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How many photos do I need to send?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Often just one clear, well-lit photo is enough to begin. If more angles would improve the result, we will ask for them."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Will it look exactly like my product?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "It gets close, and we refine it against the real item, but this is a newer capability so results vary. We are upfront about what to expect for your specific product."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Where can I use the 3D result?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "You can use the angles in your listings, posts, and content, and a spinnable view on your site where it fits. We help you put it where it adds the most value."
+          }
+        }
+      ]
+    }
+  ]
+}
+  </script>
 </head>
 <body>
 <header class="site-header" id="site-header">
@@ -610,6 +743,7 @@
           <li><a href="how-we-help.html">How We Help</a></li>
           <li><a href="our-team.html">Our Team</a></li>
           <li><a href="our-work.html" class="active">Our Work</a></li>
+        <li><a href="tools.html">Tools</a></li>
           <li><a href="insights.html">Insights</a></li>
           <li><a href="contact.html">Contact</a></li>
         </ul>
@@ -629,6 +763,7 @@
       <a href="how-we-help.html">How We Help</a>
       <a href="our-team.html">Our Team</a>
       <a href="our-work.html" class="active">Our Work</a>
+    <a href="tools.html">Tools</a>
       <a href="insights.html">Insights</a>
       <a href="contact.html">Contact</a>
       <a href="https://calendly.com/rj-balaynibruno/bbc-strategy-call" target="_blank" rel="noopener noreferrer" class="btn btn-gold mobile-cta">Book a Call</a>
@@ -636,9 +771,11 @@
   </header>
   <section class="tp-hero">
     <div class="container">
+      <p class="tp-crumb"><a href="tools.html">Tools</a> &rsaquo; <a href="tools.html#design">Graphic &amp; Brand Design</a> &rsaquo; Turn a Photo Into 3D</p>
       <a href="tools.html" class="back-link">&larr; Back to Tools</a>
       <div class="tp-hero__icon">T</div>
       <h1>Turn a Photo Into 3D</h1>
+      <p class="tp-hero__sub">We turn a single flat product photo into a spinnable 3D model with multiple angles.</p>
       <span class="tp-hero__credit">Hunyuan3D &middot; Graphic &amp; Brand Design</span>
     </div>
   </section>
@@ -647,7 +784,7 @@
     <div class="container">
       <span class="eyebrow eyebrow--gold">What it is</span>
       <h2>Turn a Photo Into 3D, in plain words</h2>
-      <p>A tool that builds a 3D model from a single product photo.</p>
+      <p>This is a tool that builds a 3D model from a single product photo. Instead of booking a studio to shoot every angle, we start with one clear photo and create a version you can rotate and view from different sides. It is a newer capability, so results vary by product, and we are always honest about what will work well. When it fits, it gives your product a richer, more interactive feel.</p>
     </div>
   </section>
 
@@ -655,26 +792,64 @@
     <div class="container">
       <span class="eyebrow eyebrow--gold">How we use it</span>
       <h2>How Balay ni Bruno &amp; Co. puts it to work</h2>
-      <p>We turn a flat product photo into a spinnable 3D model and multiple angles.</p>
+      <p>We take a clear product photo and generate a 3D model from it, then pull multiple angles or a spinnable view you can use online. We check the result against the real product and refine where we can. For products with simpler shapes it works especially well, and we will tell you upfront how well yours is likely to turn out.</p>
+      <div class="step-flow" style="margin-top:1.4rem;">
+        <div class="step"><span class="step__num">1</span><div class="step__content"><p class="step__title">Share a clear photo</p><p class="step__desc">You send one good, well-lit shot of the product.</p></div></div>
+        <div class="step"><span class="step__num">2</span><div class="step__content"><p class="step__title">Build the 3D model</p><p class="step__desc">We generate a rotatable 3D version from that single photo.</p></div></div>
+        <div class="step"><span class="step__num">3</span><div class="step__content"><p class="step__title">Pull the angles</p><p class="step__desc">We capture multiple views or a spinnable version for your use.</p></div></div>
+        <div class="step"><span class="step__num">4</span><div class="step__content"><p class="step__title">Review and refine</p><p class="step__desc">We check it against the real product and adjust where we can.</p></div></div>
+      </div>
     </div>
   </section>
 
   <section class="tp-section">
     <div class="container">
-      <span class="eyebrow eyebrow--gold">How it helps your business</span>
-      <h2>What it does for the business</h2>
-      <p>Show products from every side without a photo studio.</p>
+      <span class="eyebrow eyebrow--gold">What you get</span>
+      <h2>The finished product you can expect</h2>
+      <p>What you actually receive from us:</p>
+      <ul class="tp-deliverables">
+        <li>A 3D model built from your product photo</li>
+        <li>Multiple angles of the product to use in content</li>
+        <li>A spinnable view for your website or posts, where it fits</li>
+        <li>An honest read on how well your product suits this</li>
+      </ul>
+    </div>
+  </section>
+  <section class="tp-section">
+    <div class="container">
+      <span class="eyebrow eyebrow--gold">Why it matters</span>
+      <h2>What it does for you and the business</h2>
+      <div class="tp-value-grid">
+        <div class="tp-value-card"><h3>For your business</h3><p>Show products from every side without a photo studio, giving shoppers the confidence that comes from seeing the whole thing.</p></div>
+        <div class="tp-value-card"><h3>For you, the owner</h3><p>One photo becomes a full 3D view of your product, no studio and no complicated setup on your end.</p></div>
+      </div>
     </div>
   </section>
 
   <section class="tp-section">
     <div class="container">
-      <span class="eyebrow eyebrow--gold">How it helps you</span>
-      <h2>What it means for you as the owner</h2>
-      <p>One photo becomes a full 3D view of your product.</p>
+      <div class="tp-search">
+        <span class="eyebrow eyebrow--gold">Looking to hire this skill?</span>
+        <h2>Want to show your product from every side?</h2>
+        <p>Online shoppers want to see a product fully before they buy. We help you show more angles from a single photo, so your listings feel richer without a full studio shoot.</p>
+        <div class="tp-search__phrases"><span>turn my product photo into 3D</span><span>show my product from all angles</span><span>3D product view for my store</span><span>product visualization from one photo</span><span>interactive product images</span></div>
+      </div>
     </div>
   </section>
-
+  <section class="tp-section tp-faq">
+    <div class="container">
+      <span class="eyebrow eyebrow--gold">Common questions</span>
+      <h2>What business owners ask us about this</h2>
+      <p class="faq-q">Does this work for any product?</p>
+      <p>It works best for products with clear, solid shapes. Very complex or transparent items are harder, and we will tell you honestly whether yours is a good fit before we start.</p>
+      <p class="faq-q">How many photos do I need to send?</p>
+      <p>Often just one clear, well-lit photo is enough to begin. If more angles would improve the result, we will ask for them.</p>
+      <p class="faq-q">Will it look exactly like my product?</p>
+      <p>It gets close, and we refine it against the real item, but this is a newer capability so results vary. We are upfront about what to expect for your specific product.</p>
+      <p class="faq-q">Where can I use the 3D result?</p>
+      <p>You can use the angles in your listings, posts, and content, and a spinnable view on your site where it fits. We help you put it where it adds the most value.</p>
+    </div>
+  </section>
   <section class="tp-section">
     <div class="container">
       <div class="tp-download">
@@ -699,9 +874,9 @@
     <div class="container">
       <span class="eyebrow eyebrow--gold">More in Graphic &amp; Brand Design</span>
       <div class="tool-grid" style="margin-top:1.4rem;">
-        <a class="tool-card" href="tool-graphic-composition.html"><span class="tool-card__icon">G</span><h3>Graphic &amp; Layout Design</h3><span class="tool-card__credit">Canva</span><p>The tool we use to lay out finished, branded graphics.</p><span class="tool-card__link">See how we use it &rarr;</span></a>
-        <a class="tool-card" href="tool-image-generation.html"><span class="tool-card__icon">C</span><h3>Custom Image Generation</h3><span class="tool-card__credit">FLUX via Replicate</span><p>AI that creates brand-new images from a description.</p><span class="tool-card__link">See how we use it &rarr;</span></a>
-        <a class="tool-card" href="tool-background-removal.html"><span class="tool-card__icon">P</span><h3>Photo Cleanup &amp; Background Removal</h3><span class="tool-card__credit">rembg</span><p>A tool that cleanly removes or replaces backgrounds in photos.</p><span class="tool-card__link">See how we use it &rarr;</span></a>
+        <a class="tool-card" href="tool-graphic-composition.html"><span class="tool-card__icon">G</span><h3>Graphic &amp; Layout Design</h3><span class="tool-card__credit">Canva</span><p></p><span class="tool-card__link">See how we use it &rarr;</span></a>
+        <a class="tool-card" href="tool-image-generation.html"><span class="tool-card__icon">C</span><h3>Custom Image Generation</h3><span class="tool-card__credit">FLUX via Replicate</span><p></p><span class="tool-card__link">See how we use it &rarr;</span></a>
+        <a class="tool-card" href="tool-background-removal.html"><span class="tool-card__icon">P</span><h3>Photo Cleanup &amp; Background Removal</h3><span class="tool-card__credit">rembg</span><p></p><span class="tool-card__link">See how we use it &rarr;</span></a>
       </div>
     </div>
   </section>
@@ -747,6 +922,8 @@
           <div class="footer__col-title">Work</div>
           <ul class="footer__links">
             <li><a href="our-work.html">Our Work</a></li>
+            <li><a href="live-builds.html">Live Builds</a></li>
+        <li><a href="tools.html">Tools</a></li>
             <li><a href="insights.html">Insights</a></li>
             <li><a href="resources.html">Forms &amp; Resources</a></li>
             <li><a href="contact.html">Contact</a></li>

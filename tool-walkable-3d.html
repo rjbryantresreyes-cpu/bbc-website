@@ -11,13 +11,13 @@
   </script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Walkable 3D &amp; Property Views | Balay ni Bruno &amp; Co.</title>
-  <meta name="description" content="Interactive 3D you can move through, right in a web browser. How Balay ni Bruno &amp; Co. uses Three.js + Blender for your business." />
+  <title>Walkable 3D Property Views in the Browser | Balay ni Bruno &amp; Co.</title>
+  <meta name="description" content="We turn floor plans and property files into a 3D space your visitors can walk through online, right in their browser, no app needed." />
   <link rel="canonical" href="https://balaynibruno.co/tool-walkable-3d.html" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Balay ni Bruno &amp; Co." />
-  <meta property="og:title" content="Walkable 3D &amp; Property Views, Balay ni Bruno &amp; Co." />
-  <meta property="og:description" content="Interactive 3D you can move through, right in a web browser. How Balay ni Bruno &amp; Co. uses Three.js + Blender for your business." />
+  <meta property="og:title" content="Walkable 3D Property Views in the Browser, Balay ni Bruno &amp; Co." />
+  <meta property="og:description" content="We turn floor plans and property files into a 3D space your visitors can walk through online, right in their browser, no app needed." />
   <meta property="og:url" content="https://balaynibruno.co/tool-walkable-3d.html" />
   <meta property="og:image" content="https://balaynibruno.co/bbc-logo.png" />
   <meta name="twitter:card" content="summary_large_image" />
@@ -536,7 +536,9 @@
                ]
 }
   </script>
+  <meta name="keywords" content="walkable 3D property tour, 3D floor plan for website, hire a 3D website developer, virtual property walkthrough for small business, interactive 3D website, browser 3D tour, custom website VA for small business" />
 
+  <link rel="stylesheet" href="bbc-article-visuals.css" />
   <style>
     /* ===== BBC Tools section ===== */
     .tools-hero{background:var(--bg-dark);color:var(--text-warm);padding:clamp(5rem,11vw,8rem) 0 clamp(3rem,7vw,5rem);}
@@ -582,18 +584,149 @@
     /* ---- single tool page ---- */
     .tp-hero{background:var(--bg-dark);color:var(--text-warm);padding:clamp(5rem,10vw,7rem) 0 clamp(2.5rem,6vw,4rem);}
     .tp-hero .back-link{color:rgba(245,241,234,.7);}
+    .tp-crumb{font-family:var(--font-ui);font-size:.8rem;color:rgba(245,241,234,.55);margin-bottom:.4rem;}
+    .tp-crumb a{color:rgba(245,241,234,.7);}
     .tp-hero__icon{width:64px;height:64px;border-radius:16px;background:linear-gradient(135deg,var(--gold),var(--gold-warm));color:#fff;display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-weight:600;font-size:1.7rem;margin:1.2rem 0 1.1rem;}
     .tp-hero h1{font-family:var(--font-display);font-weight:600;font-size:clamp(2.1rem,5vw,3.2rem);color:#fff;margin:0 0 .5rem;}
+    .tp-hero__sub{font-family:var(--font-body);font-size:clamp(1.05rem,2.2vw,1.28rem);line-height:1.55;color:rgba(245,241,234,.82);max-width:60ch;margin:.4rem 0 1rem;}
     .tp-hero__credit{font-family:var(--font-ui);font-size:.82rem;font-weight:500;letter-spacing:.05em;text-transform:uppercase;color:var(--gold-pale);}
     .tp-section{padding:clamp(2.2rem,5vw,3.4rem) 0;border-bottom:var(--border-warm);}
     .tp-section:nth-of-type(even){background:var(--bg-section);}
     .tp-section .eyebrow{color:var(--gold);}
     .tp-section h2{font-family:var(--font-display);font-weight:600;font-size:clamp(1.4rem,3vw,2rem);color:var(--text-ink);margin:.4rem 0 .8rem;}
     .tp-section p{font-family:var(--font-body);font-size:1.1rem;line-height:1.65;color:var(--text-body);max-width:66ch;}
+    .tp-section p + p{margin-top:1rem;}
+
+    /* two-column value cards */
+    .tp-value-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;margin-top:1rem;}
+    @media(max-width:720px){.tp-value-grid{grid-template-columns:1fr;}}
+    .tp-value-card{background:var(--bg-card);border:var(--border-card);border-radius:var(--radius);padding:1.6rem 1.5rem;box-shadow:var(--shadow-xs);}
+    .tp-value-card h3{font-family:var(--font-display);font-weight:600;font-size:1.15rem;color:var(--deep-blue);margin:0 0 .5rem;}
+    .tp-value-card p{font-size:1.02rem;margin:0;}
+
+    /* finished-product list */
+    .tp-deliverables{list-style:none;padding:0;margin:1.2rem 0 0;display:grid;gap:.7rem;max-width:60ch;}
+    .tp-deliverables li{position:relative;padding:.85rem 1rem .85rem 2.6rem;background:var(--bg-card);border:var(--border-card);border-radius:12px;font-family:var(--font-body);font-size:1.02rem;color:var(--text-body);}
+    .tp-deliverables li::before{content:'\2713';position:absolute;left:.95rem;top:50%;transform:translateY(-50%);width:22px;height:22px;border-radius:50%;background:var(--gold);color:#fff;font-size:.78rem;display:flex;align-items:center;justify-content:center;}
+
+    /* search-intent box */
+    .tp-search{background:linear-gradient(135deg,rgba(31,53,87,.05),rgba(184,146,62,.06));border:1px solid rgba(184,146,62,.28);border-radius:var(--radius);padding:1.8rem 1.7rem;}
+    .tp-search h2{margin-top:0;}
+    .tp-search__phrases{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1.2rem;}
+    .tp-search__phrases span{font-family:var(--font-ui);font-size:.82rem;color:var(--deep-blue);background:var(--bg-card);border:1px solid rgba(31,53,87,.18);border-radius:999px;padding:.4rem .9rem;}
+
     .tp-download{display:flex;flex-wrap:wrap;align-items:center;gap:1rem;background:var(--bg-card);border:var(--border-card);border-radius:var(--radius);padding:1.5rem 1.6rem;box-shadow:var(--shadow-sm);}
     .tp-download p{margin:0;font-size:1rem;}
     .tp-related{padding:clamp(2.5rem,5vw,4rem) 0;background:var(--bg-section);}
+    .tp-faq .faq-q{font-family:var(--font-display);font-size:1.18rem;font-weight:600;color:var(--deep-blue);margin-top:1.75rem;margin-bottom:.4rem;}
+    .tp-faq p{font-size:1.05rem;}
   </style>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://balaynibruno.co/#organization",
+      "name": "Balay ni Bruno & Co.",
+      "url": "https://balaynibruno.co/",
+      "logo": "https://balaynibruno.co/bbc-logo.png",
+      "email": "admin@balaynibruno.co",
+      "telephone": "+63 935 663 0324",
+      "founder": {
+        "@type": "Person",
+        "name": "RJ Bryan Tres Reyes"
+      },
+      "sameAs": [
+        "https://www.facebook.com/profile.php?id=61590006878673",
+        "https://www.instagram.com/balaynibruno/",
+        "https://www.tiktok.com/@balaynibruno.co",
+        "https://youtube.com/@balaynibruno"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://balaynibruno.co/#website",
+      "name": "Balay ni Bruno & Co.",
+      "url": "https://balaynibruno.co/",
+      "publisher": {
+        "@id": "https://balaynibruno.co/#organization"
+      }
+    },
+    {
+      "@type": "Service",
+      "name": "Walkable 3D & Property Views — Three.js + Blender",
+      "serviceType": "Websites & Web Apps",
+      "description": "Three.js and Blender let us build interactive 3D that runs right in a web browser, with no app to download. We can take a floor plan or a property file and turn it into a space your visitors move through online. It is a way to let people experience a place before it is built or before they visit in person.",
+      "provider": {
+        "@id": "https://balaynibruno.co/#organization"
+      },
+      "areaServed": "Worldwide",
+      "url": "https://balaynibruno.co/tool-walkable-3d.html"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Tools We Use",
+          "item": "https://balaynibruno.co/tools.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Websites & Web Apps",
+          "item": "https://balaynibruno.co/tools.html#websites"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Walkable 3D & Property Views",
+          "item": "https://balaynibruno.co/tool-walkable-3d.html"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Do visitors need to download an app to view the 3D?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. The walkthrough runs right in the web browser on your site. Visitors just click and start moving through the space."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What do you need from me to build it?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Floor plans or property files are the usual starting point. The more detail you can share about the space, the more accurate we can make the walkthrough."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can this work for a property that is not built yet?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. That is one of the best uses. We can build the space from the plans so buyers or clients can walk through it before construction is finished."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Will the 3D work on a phone?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "We build it to run on phone, tablet, and desktop, and we check each size before it goes live so it works where your visitors are."
+          }
+        }
+      ]
+    }
+  ]
+}
+  </script>
 </head>
 <body>
 <header class="site-header" id="site-header">
@@ -610,6 +743,7 @@
           <li><a href="how-we-help.html">How We Help</a></li>
           <li><a href="our-team.html">Our Team</a></li>
           <li><a href="our-work.html" class="active">Our Work</a></li>
+        <li><a href="tools.html">Tools</a></li>
           <li><a href="insights.html">Insights</a></li>
           <li><a href="contact.html">Contact</a></li>
         </ul>
@@ -629,6 +763,7 @@
       <a href="how-we-help.html">How We Help</a>
       <a href="our-team.html">Our Team</a>
       <a href="our-work.html" class="active">Our Work</a>
+    <a href="tools.html">Tools</a>
       <a href="insights.html">Insights</a>
       <a href="contact.html">Contact</a>
       <a href="https://calendly.com/rj-balaynibruno/bbc-strategy-call" target="_blank" rel="noopener noreferrer" class="btn btn-gold mobile-cta">Book a Call</a>
@@ -636,9 +771,11 @@
   </header>
   <section class="tp-hero">
     <div class="container">
+      <p class="tp-crumb"><a href="tools.html">Tools</a> &rsaquo; <a href="tools.html#websites">Websites &amp; Web Apps</a> &rsaquo; Walkable 3D &amp; Property Views</p>
       <a href="tools.html" class="back-link">&larr; Back to Tools</a>
       <div class="tp-hero__icon">W</div>
       <h1>Walkable 3D &amp; Property Views</h1>
+      <p class="tp-hero__sub">We turn floor plans or property files into a 3D space your visitors can walk through online, right in their browser.</p>
       <span class="tp-hero__credit">Three.js + Blender &middot; Websites &amp; Web Apps</span>
     </div>
   </section>
@@ -647,7 +784,7 @@
     <div class="container">
       <span class="eyebrow eyebrow--gold">What it is</span>
       <h2>Walkable 3D &amp; Property Views, in plain words</h2>
-      <p>Interactive 3D you can move through, right in a web browser.</p>
+      <p>Three.js and Blender let us build interactive 3D that runs right in a web browser, with no app to download. We can take a floor plan or a property file and turn it into a space your visitors move through online. It is a way to let people experience a place before it is built or before they visit in person.</p>
     </div>
   </section>
 
@@ -655,26 +792,65 @@
     <div class="container">
       <span class="eyebrow eyebrow--gold">How we use it</span>
       <h2>How Balay ni Bruno &amp; Co. puts it to work</h2>
-      <p>We turn floor plans or property files into a 3D space your visitors can walk through online.</p>
+      <p>You send us the floor plans or property files, and we shape them into a 3D space we drop onto your website. Visitors can look around and move through it on their own. It works for a home that is still being built, a venue you want to show off, or any space that is easier to understand by walking through it than by looking at photos.</p>
+      <div class="step-flow" style="margin-top:1.4rem;">
+        <div class="step"><span class="step__num">1</span><div class="step__content"><p class="step__title">You send the plans</p><p class="step__desc">You give us floor plans, property files, or drawings of the space.</p></div></div>
+        <div class="step"><span class="step__num">2</span><div class="step__content"><p class="step__title">We build the 3D space</p><p class="step__desc">We shape the plans into an accurate space visitors can move through.</p></div></div>
+        <div class="step"><span class="step__num">3</span><div class="step__content"><p class="step__title">We put it on your site</p><p class="step__desc">We add the walkthrough to your website so it runs in the browser, no app needed.</p></div></div>
+        <div class="step"><span class="step__num">4</span><div class="step__content"><p class="step__title">We check it on every screen</p><p class="step__desc">We confirm it works on phone, tablet, and desktop before it goes live.</p></div></div>
+      </div>
     </div>
   </section>
 
   <section class="tp-section">
     <div class="container">
-      <span class="eyebrow eyebrow--gold">How it helps your business</span>
-      <h2>What it does for the business</h2>
-      <p>Buyers and clients can experience a space before it exists or before they visit.</p>
+      <span class="eyebrow eyebrow--gold">What you get</span>
+      <h2>The finished product you can expect</h2>
+      <p>You get an interactive space your visitors can explore on their own, right on your website.</p>
+      <ul class="tp-deliverables">
+        <li>A 3D space built from your floor plans or property files</li>
+        <li>A walkthrough that runs in the browser with no app to install</li>
+        <li>A way to show a space before it is built or visited</li>
+        <li>A viewer that works on phone, tablet, and desktop</li>
+        <li>An experience most of your competitors cannot offer</li>
+      </ul>
+    </div>
+  </section>
+  <section class="tp-section">
+    <div class="container">
+      <span class="eyebrow eyebrow--gold">Why it matters</span>
+      <h2>What it does for you and the business</h2>
+      <div class="tp-value-grid">
+        <div class="tp-value-card"><h3>For your business</h3><p>Buyers and clients can experience a space before it exists or before they visit, which helps them decide faster and sets you apart from competitors who only show photos.</p></div>
+        <div class="tp-value-card"><h3>For you, the owner</h3><p>You show off a project in a way most competitors cannot, and your visitors get to explore it on their own time.</p></div>
+      </div>
     </div>
   </section>
 
   <section class="tp-section">
     <div class="container">
-      <span class="eyebrow eyebrow--gold">How it helps you</span>
-      <h2>What it means for you as the owner</h2>
-      <p>You show off a project in a way most competitors cannot.</p>
+      <div class="tp-search">
+        <span class="eyebrow eyebrow--gold">Looking to hire this skill?</span>
+        <h2>Want to show a space before it is built or visited?</h2>
+        <p>Building interactive 3D is not something you need to learn. Send Balay ni Bruno &amp; Co. your floor plans or property files and we turn them into a walkthrough your visitors can explore, right on your site.</p>
+        <div class="tp-search__phrases"><span>hire a 3D website developer</span><span>walkable 3D property tour for small business</span><span>turn floor plans into 3D</span><span>virtual walkthrough for my website</span><span>interactive 3D property view</span></div>
+      </div>
     </div>
   </section>
-
+  <section class="tp-section tp-faq">
+    <div class="container">
+      <span class="eyebrow eyebrow--gold">Common questions</span>
+      <h2>What business owners ask us about this</h2>
+      <p class="faq-q">Do visitors need to download an app to view the 3D?</p>
+      <p>No. The walkthrough runs right in the web browser on your site. Visitors just click and start moving through the space.</p>
+      <p class="faq-q">What do you need from me to build it?</p>
+      <p>Floor plans or property files are the usual starting point. The more detail you can share about the space, the more accurate we can make the walkthrough.</p>
+      <p class="faq-q">Can this work for a property that is not built yet?</p>
+      <p>Yes. That is one of the best uses. We can build the space from the plans so buyers or clients can walk through it before construction is finished.</p>
+      <p class="faq-q">Will the 3D work on a phone?</p>
+      <p>We build it to run on phone, tablet, and desktop, and we check each size before it goes live so it works where your visitors are.</p>
+    </div>
+  </section>
   <section class="tp-section">
     <div class="container">
       <div class="tp-download">
@@ -699,9 +875,9 @@
     <div class="container">
       <span class="eyebrow eyebrow--gold">More in Websites &amp; Web Apps</span>
       <div class="tool-grid" style="margin-top:1.4rem;">
-        <a class="tool-card" href="tool-custom-coded-websites.html"><span class="tool-card__icon">C</span><h3>Custom-Coded Websites</h3><span class="tool-card__credit">HTML, CSS, JavaScript</span><p>Websites built by hand instead of dragged together in a template tool.</p><span class="tool-card__link">See how we use it &rarr;</span></a>
-        <a class="tool-card" href="tool-netlify-hosting.html"><span class="tool-card__icon">I</span><h3>Instant Hosting &amp; Updates</h3><span class="tool-card__credit">Netlify</span><p>The service that puts your site online and pushes changes live almost instantly.</p><span class="tool-card__link">See how we use it &rarr;</span></a>
-        <a class="tool-card" href="tool-mobile-first-testing.html"><span class="tool-card__icon">P</span><h3>Phone-First Checking</h3><span class="tool-card__credit">Playwright</span><p>An automatic check that views every change on phone, tablet, and desktop sizes.</p><span class="tool-card__link">See how we use it &rarr;</span></a>
+        <a class="tool-card" href="tool-custom-coded-websites.html"><span class="tool-card__icon">C</span><h3>Custom-Coded Websites</h3><span class="tool-card__credit">HTML, CSS, JavaScript</span><p></p><span class="tool-card__link">See how we use it &rarr;</span></a>
+        <a class="tool-card" href="tool-netlify-hosting.html"><span class="tool-card__icon">I</span><h3>Instant Hosting &amp; Updates</h3><span class="tool-card__credit">Netlify</span><p></p><span class="tool-card__link">See how we use it &rarr;</span></a>
+        <a class="tool-card" href="tool-mobile-first-testing.html"><span class="tool-card__icon">P</span><h3>Phone-First Checking</h3><span class="tool-card__credit">Playwright</span><p></p><span class="tool-card__link">See how we use it &rarr;</span></a>
       </div>
     </div>
   </section>
@@ -747,6 +923,8 @@
           <div class="footer__col-title">Work</div>
           <ul class="footer__links">
             <li><a href="our-work.html">Our Work</a></li>
+            <li><a href="live-builds.html">Live Builds</a></li>
+        <li><a href="tools.html">Tools</a></li>
             <li><a href="insights.html">Insights</a></li>
             <li><a href="resources.html">Forms &amp; Resources</a></li>
             <li><a href="contact.html">Contact</a></li>

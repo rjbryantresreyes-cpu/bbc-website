@@ -11,13 +11,13 @@
   </script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Vidz, the Video AI | Balay ni Bruno &amp; Co.</title>
-  <meta name="description" content="The specialist that produces video from a script, in-house. How Balay ni Bruno &amp; Co. uses Remotion + FFmpeg for your business." />
+  <title>Steady Video Without Per-Edit Fees, Done by a VA Team | Balay ni Bruno &amp; Co.</title>
+  <meta name="description" content="Vidz is the video AI at Balay ni Bruno &amp; Co. that builds finished videos from a script, adds captions, and cuts dead air." />
   <link rel="canonical" href="https://balaynibruno.co/tool-vidz-video-ai.html" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Balay ni Bruno &amp; Co." />
-  <meta property="og:title" content="Vidz, the Video AI, Balay ni Bruno &amp; Co." />
-  <meta property="og:description" content="The specialist that produces video from a script, in-house. How Balay ni Bruno &amp; Co. uses Remotion + FFmpeg for your business." />
+  <meta property="og:title" content="Steady Video Without Per-Edit Fees, Done by a VA Team, Balay ni Bruno &amp; Co." />
+  <meta property="og:description" content="Vidz is the video AI at Balay ni Bruno &amp; Co. that builds finished videos from a script, adds captions, and cuts dead air." />
   <meta property="og:url" content="https://balaynibruno.co/tool-vidz-video-ai.html" />
   <meta property="og:image" content="https://balaynibruno.co/bbc-logo.png" />
   <meta name="twitter:card" content="summary_large_image" />
@@ -536,7 +536,9 @@
                ]
 }
   </script>
+  <meta name="keywords" content="VA who makes video content, hire an AI video assistant, done-for-you video for small business, social video without an editor, captioned reels made for me, video content on a budget, hire someone to make my reels, steady video without per video fees" />
 
+  <link rel="stylesheet" href="bbc-article-visuals.css" />
   <style>
     /* ===== BBC Tools section ===== */
     .tools-hero{background:var(--bg-dark);color:var(--text-warm);padding:clamp(5rem,11vw,8rem) 0 clamp(3rem,7vw,5rem);}
@@ -582,18 +584,112 @@
     /* ---- single tool page ---- */
     .tp-hero{background:var(--bg-dark);color:var(--text-warm);padding:clamp(5rem,10vw,7rem) 0 clamp(2.5rem,6vw,4rem);}
     .tp-hero .back-link{color:rgba(245,241,234,.7);}
+    .tp-crumb{font-family:var(--font-ui);font-size:.8rem;color:rgba(245,241,234,.55);margin-bottom:.4rem;}
+    .tp-crumb a{color:rgba(245,241,234,.7);}
     .tp-hero__icon{width:64px;height:64px;border-radius:16px;background:linear-gradient(135deg,var(--gold),var(--gold-warm));color:#fff;display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-weight:600;font-size:1.7rem;margin:1.2rem 0 1.1rem;}
     .tp-hero h1{font-family:var(--font-display);font-weight:600;font-size:clamp(2.1rem,5vw,3.2rem);color:#fff;margin:0 0 .5rem;}
+    .tp-hero__sub{font-family:var(--font-body);font-size:clamp(1.05rem,2.2vw,1.28rem);line-height:1.55;color:rgba(245,241,234,.82);max-width:60ch;margin:.4rem 0 1rem;}
     .tp-hero__credit{font-family:var(--font-ui);font-size:.82rem;font-weight:500;letter-spacing:.05em;text-transform:uppercase;color:var(--gold-pale);}
     .tp-section{padding:clamp(2.2rem,5vw,3.4rem) 0;border-bottom:var(--border-warm);}
     .tp-section:nth-of-type(even){background:var(--bg-section);}
     .tp-section .eyebrow{color:var(--gold);}
     .tp-section h2{font-family:var(--font-display);font-weight:600;font-size:clamp(1.4rem,3vw,2rem);color:var(--text-ink);margin:.4rem 0 .8rem;}
     .tp-section p{font-family:var(--font-body);font-size:1.1rem;line-height:1.65;color:var(--text-body);max-width:66ch;}
+    .tp-section p + p{margin-top:1rem;}
+
+    /* two-column value cards */
+    .tp-value-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;margin-top:1rem;}
+    @media(max-width:720px){.tp-value-grid{grid-template-columns:1fr;}}
+    .tp-value-card{background:var(--bg-card);border:var(--border-card);border-radius:var(--radius);padding:1.6rem 1.5rem;box-shadow:var(--shadow-xs);}
+    .tp-value-card h3{font-family:var(--font-display);font-weight:600;font-size:1.15rem;color:var(--deep-blue);margin:0 0 .5rem;}
+    .tp-value-card p{font-size:1.02rem;margin:0;}
+
+    /* finished-product list */
+    .tp-deliverables{list-style:none;padding:0;margin:1.2rem 0 0;display:grid;gap:.7rem;max-width:60ch;}
+    .tp-deliverables li{position:relative;padding:.85rem 1rem .85rem 2.6rem;background:var(--bg-card);border:var(--border-card);border-radius:12px;font-family:var(--font-body);font-size:1.02rem;color:var(--text-body);}
+    .tp-deliverables li::before{content:'\2713';position:absolute;left:.95rem;top:50%;transform:translateY(-50%);width:22px;height:22px;border-radius:50%;background:var(--gold);color:#fff;font-size:.78rem;display:flex;align-items:center;justify-content:center;}
+
+    /* search-intent box */
+    .tp-search{background:linear-gradient(135deg,rgba(31,53,87,.05),rgba(184,146,62,.06));border:1px solid rgba(184,146,62,.28);border-radius:var(--radius);padding:1.8rem 1.7rem;}
+    .tp-search h2{margin-top:0;}
+    .tp-search__phrases{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1.2rem;}
+    .tp-search__phrases span{font-family:var(--font-ui);font-size:.82rem;color:var(--deep-blue);background:var(--bg-card);border:1px solid rgba(31,53,87,.18);border-radius:999px;padding:.4rem .9rem;}
+
     .tp-download{display:flex;flex-wrap:wrap;align-items:center;gap:1rem;background:var(--bg-card);border:var(--border-card);border-radius:var(--radius);padding:1.5rem 1.6rem;box-shadow:var(--shadow-sm);}
     .tp-download p{margin:0;font-size:1rem;}
     .tp-related{padding:clamp(2.5rem,5vw,4rem) 0;background:var(--bg-section);}
+    .tp-faq .faq-q{font-family:var(--font-display);font-size:1.18rem;font-weight:600;color:var(--deep-blue);margin-top:1.75rem;margin-bottom:.4rem;}
+    .tp-faq p{font-size:1.05rem;}
   </style>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://balaynibruno.co/#organization",
+      "name": "Balay ni Bruno & Co.",
+      "url": "https://balaynibruno.co/",
+      "logo": "https://balaynibruno.co/bbc-logo.png",
+      "email": "admin@balaynibruno.co",
+      "telephone": "+63 935 663 0324",
+      "founder": {
+        "@type": "Person",
+        "name": "RJ Bryan Tres Reyes"
+      },
+      "sameAs": [
+        "https://www.facebook.com/profile.php?id=61590006878673",
+        "https://www.instagram.com/balaynibruno/",
+        "https://www.tiktok.com/@balaynibruno.co",
+        "https://youtube.com/@balaynibruno"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://balaynibruno.co/#website",
+      "name": "Balay ni Bruno & Co.",
+      "url": "https://balaynibruno.co/",
+      "publisher": {
+        "@id": "https://balaynibruno.co/#organization"
+      }
+    },
+    {
+      "@type": "Service",
+      "name": "Vidz, the Video AI — Remotion + FFmpeg",
+      "serviceType": "Your AI Team",
+      "description": "Vidz is the video AI at Balay ni Bruno & Co., built on Remotion and FFmpeg. Vidz produces finished videos from a script, adds captions, cuts dead air, and pulls in stock footage, all in-house. That means you get a steady flow of video without paying per-video editing fees. It is a real production tool that our team runs for you, not a template app.",
+      "provider": {
+        "@id": "https://balaynibruno.co/#organization"
+      },
+      "areaServed": "Worldwide",
+      "url": "https://balaynibruno.co/tool-vidz-video-ai.html"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Tools We Use",
+          "item": "https://balaynibruno.co/tools.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Your AI Team",
+          "item": "https://balaynibruno.co/tools.html#ai-team"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Vidz, the Video AI",
+          "item": "https://balaynibruno.co/tool-vidz-video-ai.html"
+        }
+      ]
+    }
+  ]
+}
+  </script>
 </head>
 <body>
 <header class="site-header" id="site-header">
@@ -610,6 +706,7 @@
           <li><a href="how-we-help.html">How We Help</a></li>
           <li><a href="our-team.html">Our Team</a></li>
           <li><a href="our-work.html" class="active">Our Work</a></li>
+        <li><a href="tools.html">Tools</a></li>
           <li><a href="insights.html">Insights</a></li>
           <li><a href="contact.html">Contact</a></li>
         </ul>
@@ -629,6 +726,7 @@
       <a href="how-we-help.html">How We Help</a>
       <a href="our-team.html">Our Team</a>
       <a href="our-work.html" class="active">Our Work</a>
+    <a href="tools.html">Tools</a>
       <a href="insights.html">Insights</a>
       <a href="contact.html">Contact</a>
       <a href="https://calendly.com/rj-balaynibruno/bbc-strategy-call" target="_blank" rel="noopener noreferrer" class="btn btn-gold mobile-cta">Book a Call</a>
@@ -636,9 +734,11 @@
   </header>
   <section class="tp-hero">
     <div class="container">
+      <p class="tp-crumb"><a href="tools.html">Tools</a> &rsaquo; <a href="tools.html#ai-team">Your AI Team</a> &rsaquo; Vidz, the Video AI</p>
       <a href="tools.html" class="back-link">&larr; Back to Tools</a>
       <div class="tp-hero__icon">V</div>
       <h1>Vidz, the Video AI</h1>
+      <p class="tp-hero__sub">Hand over a script and get a finished, captioned video without paying an editor per clip.</p>
       <span class="tp-hero__credit">Remotion + FFmpeg &middot; Your AI Team</span>
     </div>
   </section>
@@ -647,7 +747,7 @@
     <div class="container">
       <span class="eyebrow eyebrow--gold">What it is</span>
       <h2>Vidz, the Video AI, in plain words</h2>
-      <p>The specialist that produces video from a script, in-house.</p>
+      <p>Vidz is the video AI at Balay ni Bruno &amp; Co., built on Remotion and FFmpeg. Vidz produces finished videos from a script, adds captions, cuts dead air, and pulls in stock footage, all in-house. That means you get a steady flow of video without paying per-video editing fees. It is a real production tool that our team runs for you, not a template app.</p>
     </div>
   </section>
 
@@ -655,26 +755,52 @@
     <div class="container">
       <span class="eyebrow eyebrow--gold">How we use it</span>
       <h2>How Balay ni Bruno &amp; Co. puts it to work</h2>
-      <p>Vidz builds finished videos from code, adds captions, cuts dead air, and pulls in stock footage.</p>
+      <p>We write or shape the script, then Vidz builds the video with captions and clean cuts, adding stock footage where it helps. Your human partner reviews the final cut for pacing and brand, then delivers it to you finished and ready to post.</p>
+      <div class="step-flow" style="margin-top:1.4rem;">
+        <div class="step"><span class="step__num">1</span><div class="step__content"><p class="step__title">Start with a script</p><p class="step__desc">A short script or a piece of content to build from.</p></div></div>
+        <div class="step"><span class="step__num">2</span><div class="step__content"><p class="step__title">Vidz builds the video</p><p class="step__desc">The video is produced in-house, frame by frame.</p></div></div>
+        <div class="step"><span class="step__num">3</span><div class="step__content"><p class="step__title">Add captions and cuts</p><p class="step__desc">Captions get burned in and dead air gets trimmed.</p></div></div>
+        <div class="step"><span class="step__num">4</span><div class="step__content"><p class="step__title">Pull in footage</p><p class="step__desc">Stock clips get added where they make the video stronger.</p></div></div>
+        <div class="step"><span class="step__num">5</span><div class="step__content"><p class="step__title">Review and deliver</p><p class="step__desc">Your partner checks the cut and hands you the finished file.</p></div></div>
+      </div>
     </div>
   </section>
 
   <section class="tp-section">
     <div class="container">
-      <span class="eyebrow eyebrow--gold">How it helps your business</span>
-      <h2>What it does for the business</h2>
-      <p>You get a steady flow of video without paying per-video editing fees.</p>
+      <span class="eyebrow eyebrow--gold">What you get</span>
+      <h2>The finished product you can expect</h2>
+      <p>You get finished video ready to post, without the per-clip editor bill.</p>
+      <ul class="tp-deliverables">
+        <li>A finished video built from your script</li>
+        <li>Burned-in captions for muted viewing</li>
+        <li>Dead air trimmed for tight pacing</li>
+        <li>Stock footage added where it helps</li>
+        <li>A steady flow of video without per-video fees</li>
+      </ul>
+    </div>
+  </section>
+  <section class="tp-section">
+    <div class="container">
+      <span class="eyebrow eyebrow--gold">Why it matters</span>
+      <h2>What it does for you and the business</h2>
+      <div class="tp-value-grid">
+        <div class="tp-value-card"><h3>For your business</h3><p>You get a steady flow of video without paying per-video editing fees. Consistency without the cost that usually comes with it.</p></div>
+        <div class="tp-value-card"><h3>For you, the owner</h3><p>Video shows up done. You do not touch an editor.</p></div>
+      </div>
     </div>
   </section>
 
   <section class="tp-section">
     <div class="container">
-      <span class="eyebrow eyebrow--gold">How it helps you</span>
-      <h2>What it means for you as the owner</h2>
-      <p>Video shows up done. You do not touch an editor.</p>
+      <div class="tp-search">
+        <span class="eyebrow eyebrow--gold">Looking to hire this skill?</span>
+        <h2>Want steady video without paying an editor every time?</h2>
+        <p>You do not need to learn video editing or pay per clip to stay consistent. You can hire the partnership at Balay ni Bruno &amp; Co. and get finished video as part of the work. Our video tool builds it in-house and our people make sure it lands before you see it.</p>
+        <div class="tp-search__phrases"><span>VA who makes video</span><span>hire an AI video assistant</span><span>done-for-you social video</span><span>video without an editor</span></div>
+      </div>
     </div>
   </section>
-
   <section class="tp-section">
     <div class="container">
       <div class="tp-download">
@@ -699,9 +825,9 @@
     <div class="container">
       <span class="eyebrow eyebrow--gold">More in Your AI Team</span>
       <div class="tool-grid" style="margin-top:1.4rem;">
-        <a class="tool-card" href="tool-brunz-head-ai.html"><span class="tool-card__icon">B</span><h3>Brunz, the Head AI</h3><span class="tool-card__credit">Built on Claude</span><p>The brain that knows the whole business and keeps every other AI and task pointed in the right direction.</p><span class="tool-card__link">See how we use it &rarr;</span></a>
-        <a class="tool-card" href="tool-webby-website-ai.html"><span class="tool-card__icon">W</span><h3>Webby, the Website AI</h3><span class="tool-card__credit">Built on Claude</span><p>The specialist that builds, updates, and looks after websites.</p><span class="tool-card__link">See how we use it &rarr;</span></a>
-        <a class="tool-card" href="tool-mai-marketing-ai.html"><span class="tool-card__icon">M</span><h3>Mai, the Marketing AI</h3><span class="tool-card__credit">Built on Claude</span><p>The specialist that plans content and turns one idea into many posts.</p><span class="tool-card__link">See how we use it &rarr;</span></a>
+        <a class="tool-card" href="tool-brunz-head-ai.html"><span class="tool-card__icon">B</span><h3>Brunz, the Head AI</h3><span class="tool-card__credit">Built on Claude</span><p></p><span class="tool-card__link">See how we use it &rarr;</span></a>
+        <a class="tool-card" href="tool-webby-website-ai.html"><span class="tool-card__icon">W</span><h3>Webby, the Website AI</h3><span class="tool-card__credit">Built on Claude</span><p></p><span class="tool-card__link">See how we use it &rarr;</span></a>
+        <a class="tool-card" href="tool-mai-marketing-ai.html"><span class="tool-card__icon">M</span><h3>Mai, the Marketing AI</h3><span class="tool-card__credit">Built on Claude</span><p></p><span class="tool-card__link">See how we use it &rarr;</span></a>
       </div>
     </div>
   </section>
@@ -747,6 +873,8 @@
           <div class="footer__col-title">Work</div>
           <ul class="footer__links">
             <li><a href="our-work.html">Our Work</a></li>
+            <li><a href="live-builds.html">Live Builds</a></li>
+        <li><a href="tools.html">Tools</a></li>
             <li><a href="insights.html">Insights</a></li>
             <li><a href="resources.html">Forms &amp; Resources</a></li>
             <li><a href="contact.html">Contact</a></li>

@@ -536,7 +536,9 @@
                ]
 }
   </script>
+  <meta name="keywords" content="virtual assistant tools, AI marketing agency tools, Balay ni Bruno tools, small business AI tools" />
 
+  <link rel="stylesheet" href="bbc-article-visuals.css" />
   <style>
     /* ===== BBC Tools section ===== */
     .tools-hero{background:var(--bg-dark);color:var(--text-warm);padding:clamp(5rem,11vw,8rem) 0 clamp(3rem,7vw,5rem);}
@@ -582,17 +584,42 @@
     /* ---- single tool page ---- */
     .tp-hero{background:var(--bg-dark);color:var(--text-warm);padding:clamp(5rem,10vw,7rem) 0 clamp(2.5rem,6vw,4rem);}
     .tp-hero .back-link{color:rgba(245,241,234,.7);}
+    .tp-crumb{font-family:var(--font-ui);font-size:.8rem;color:rgba(245,241,234,.55);margin-bottom:.4rem;}
+    .tp-crumb a{color:rgba(245,241,234,.7);}
     .tp-hero__icon{width:64px;height:64px;border-radius:16px;background:linear-gradient(135deg,var(--gold),var(--gold-warm));color:#fff;display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-weight:600;font-size:1.7rem;margin:1.2rem 0 1.1rem;}
     .tp-hero h1{font-family:var(--font-display);font-weight:600;font-size:clamp(2.1rem,5vw,3.2rem);color:#fff;margin:0 0 .5rem;}
+    .tp-hero__sub{font-family:var(--font-body);font-size:clamp(1.05rem,2.2vw,1.28rem);line-height:1.55;color:rgba(245,241,234,.82);max-width:60ch;margin:.4rem 0 1rem;}
     .tp-hero__credit{font-family:var(--font-ui);font-size:.82rem;font-weight:500;letter-spacing:.05em;text-transform:uppercase;color:var(--gold-pale);}
     .tp-section{padding:clamp(2.2rem,5vw,3.4rem) 0;border-bottom:var(--border-warm);}
     .tp-section:nth-of-type(even){background:var(--bg-section);}
     .tp-section .eyebrow{color:var(--gold);}
     .tp-section h2{font-family:var(--font-display);font-weight:600;font-size:clamp(1.4rem,3vw,2rem);color:var(--text-ink);margin:.4rem 0 .8rem;}
     .tp-section p{font-family:var(--font-body);font-size:1.1rem;line-height:1.65;color:var(--text-body);max-width:66ch;}
+    .tp-section p + p{margin-top:1rem;}
+
+    /* two-column value cards */
+    .tp-value-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;margin-top:1rem;}
+    @media(max-width:720px){.tp-value-grid{grid-template-columns:1fr;}}
+    .tp-value-card{background:var(--bg-card);border:var(--border-card);border-radius:var(--radius);padding:1.6rem 1.5rem;box-shadow:var(--shadow-xs);}
+    .tp-value-card h3{font-family:var(--font-display);font-weight:600;font-size:1.15rem;color:var(--deep-blue);margin:0 0 .5rem;}
+    .tp-value-card p{font-size:1.02rem;margin:0;}
+
+    /* finished-product list */
+    .tp-deliverables{list-style:none;padding:0;margin:1.2rem 0 0;display:grid;gap:.7rem;max-width:60ch;}
+    .tp-deliverables li{position:relative;padding:.85rem 1rem .85rem 2.6rem;background:var(--bg-card);border:var(--border-card);border-radius:12px;font-family:var(--font-body);font-size:1.02rem;color:var(--text-body);}
+    .tp-deliverables li::before{content:'\2713';position:absolute;left:.95rem;top:50%;transform:translateY(-50%);width:22px;height:22px;border-radius:50%;background:var(--gold);color:#fff;font-size:.78rem;display:flex;align-items:center;justify-content:center;}
+
+    /* search-intent box */
+    .tp-search{background:linear-gradient(135deg,rgba(31,53,87,.05),rgba(184,146,62,.06));border:1px solid rgba(184,146,62,.28);border-radius:var(--radius);padding:1.8rem 1.7rem;}
+    .tp-search h2{margin-top:0;}
+    .tp-search__phrases{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1.2rem;}
+    .tp-search__phrases span{font-family:var(--font-ui);font-size:.82rem;color:var(--deep-blue);background:var(--bg-card);border:1px solid rgba(31,53,87,.18);border-radius:999px;padding:.4rem .9rem;}
+
     .tp-download{display:flex;flex-wrap:wrap;align-items:center;gap:1rem;background:var(--bg-card);border:var(--border-card);border-radius:var(--radius);padding:1.5rem 1.6rem;box-shadow:var(--shadow-sm);}
     .tp-download p{margin:0;font-size:1rem;}
     .tp-related{padding:clamp(2.5rem,5vw,4rem) 0;background:var(--bg-section);}
+    .tp-faq .faq-q{font-family:var(--font-display);font-size:1.18rem;font-weight:600;color:var(--deep-blue);margin-top:1.75rem;margin-bottom:.4rem;}
+    .tp-faq p{font-size:1.05rem;}
   </style>
 </head>
 <body>
@@ -610,6 +637,7 @@
           <li><a href="how-we-help.html">How We Help</a></li>
           <li><a href="our-team.html">Our Team</a></li>
           <li><a href="our-work.html" class="active">Our Work</a></li>
+        <li><a href="tools.html">Tools</a></li>
           <li><a href="insights.html">Insights</a></li>
           <li><a href="contact.html">Contact</a></li>
         </ul>
@@ -629,6 +657,7 @@
       <a href="how-we-help.html">How We Help</a>
       <a href="our-team.html">Our Team</a>
       <a href="our-work.html" class="active">Our Work</a>
+    <a href="tools.html">Tools</a>
       <a href="insights.html">Insights</a>
       <a href="contact.html">Contact</a>
       <a href="https://calendly.com/rj-balaynibruno/bbc-strategy-call" target="_blank" rel="noopener noreferrer" class="btn btn-gold mobile-cta">Book a Call</a>
@@ -660,70 +689,70 @@
           <span class="tool-card__icon">B</span>
           <h3>Brunz, the Head AI</h3>
           <span class="tool-card__credit">Built on Claude</span>
-          <p>The brain that knows the whole business and keeps every other AI and task pointed in the right direction.</p>
+          <p></p>
           <span class="tool-card__link">See how we use it &rarr;</span>
         </a>
         <a class="tool-card" href="tool-webby-website-ai.html" data-cat="ai-team">
           <span class="tool-card__icon">W</span>
           <h3>Webby, the Website AI</h3>
           <span class="tool-card__credit">Built on Claude</span>
-          <p>The specialist that builds, updates, and looks after websites.</p>
+          <p></p>
           <span class="tool-card__link">See how we use it &rarr;</span>
         </a>
         <a class="tool-card" href="tool-mai-marketing-ai.html" data-cat="ai-team">
           <span class="tool-card__icon">M</span>
           <h3>Mai, the Marketing AI</h3>
           <span class="tool-card__credit">Built on Claude</span>
-          <p>The specialist that plans content and turns one idea into many posts.</p>
+          <p></p>
           <span class="tool-card__link">See how we use it &rarr;</span>
         </a>
         <a class="tool-card" href="tool-sonny-social-ai.html" data-cat="ai-team">
           <span class="tool-card__icon">S</span>
           <h3>Sonny, the Social Media AI</h3>
           <span class="tool-card__credit">Built on Claude</span>
-          <p>The specialist that writes posts the right way for each platform.</p>
+          <p></p>
           <span class="tool-card__link">See how we use it &rarr;</span>
         </a>
         <a class="tool-card is-hidden" href="tool-vidz-video-ai.html" data-cat="ai-team">
           <span class="tool-card__icon">V</span>
           <h3>Vidz, the Video AI</h3>
           <span class="tool-card__credit">Remotion + FFmpeg</span>
-          <p>The specialist that produces video from a script, in-house.</p>
+          <p></p>
           <span class="tool-card__link">See how we use it &rarr;</span>
         </a>
         <a class="tool-card is-hidden" href="tool-lana-leadgen-ai.html" data-cat="ai-team">
           <span class="tool-card__icon">L</span>
           <h3>Lana, the Lead Research AI</h3>
           <span class="tool-card__credit">Built on Claude</span>
-          <p>The specialist that finds and researches potential customers for you.</p>
+          <p></p>
           <span class="tool-card__link">See how we use it &rarr;</span>
         </a>
         <a class="tool-card is-hidden" href="tool-raphy-design-ai.html" data-cat="ai-team">
           <span class="tool-card__icon">R</span>
           <h3>Raphy, the Design AI</h3>
           <span class="tool-card__credit">Canva + FLUX</span>
-          <p>The specialist that handles graphics, photo edits, and brand visuals.</p>
+          <p></p>
           <span class="tool-card__link">See how we use it &rarr;</span>
         </a>
         <a class="tool-card is-hidden" href="tool-boogy-blog-ai.html" data-cat="ai-team">
           <span class="tool-card__icon">B</span>
           <h3>Boogy, the Blog AI</h3>
           <span class="tool-card__credit">Built on Claude</span>
-          <p>The specialist that writes long blog posts that help you get found on Google.</p>
+          <p></p>
           <span class="tool-card__link">See how we use it &rarr;</span>
         </a>
         <a class="tool-card is-hidden" href="tool-emy-email-ai.html" data-cat="ai-team">
           <span class="tool-card__icon">E</span>
           <h3>Emy, the Email AI</h3>
           <span class="tool-card__credit">Built on Claude + Brevo</span>
-          <p>The specialist that writes outreach, follow-ups, and newsletters.</p>
+          <p></p>
           <span class="tool-card__link">See how we use it &rarr;</span>
         </a>
         <a class="tool-card is-hidden" href="tool-shy-shopify-ai.html" data-cat="ai-team">
           <span class="tool-card__icon">S</span>
           <h3>SHY, the Online Store AI</h3>
           <span class="tool-card__credit">Built on Claude + Shopify</span>
-          <p>The specialist that runs and updates online stores.</p>
+          <p></p>
           <span class="tool-card__link">See how we use it &rarr;</span>
         </a>
         </div>
@@ -742,42 +771,42 @@
           <span class="tool-card__icon">C</span>
           <h3>Custom-Coded Websites</h3>
           <span class="tool-card__credit">HTML, CSS, JavaScript</span>
-          <p>Websites built by hand instead of dragged together in a template tool.</p>
+          <p></p>
           <span class="tool-card__link">See how we use it &rarr;</span>
         </a>
         <a class="tool-card" href="tool-netlify-hosting.html" data-cat="websites">
           <span class="tool-card__icon">I</span>
           <h3>Instant Hosting &amp; Updates</h3>
           <span class="tool-card__credit">Netlify</span>
-          <p>The service that puts your site online and pushes changes live almost instantly.</p>
+          <p></p>
           <span class="tool-card__link">See how we use it &rarr;</span>
         </a>
         <a class="tool-card" href="tool-mobile-first-testing.html" data-cat="websites">
           <span class="tool-card__icon">P</span>
           <h3>Phone-First Checking</h3>
           <span class="tool-card__credit">Playwright</span>
-          <p>An automatic check that views every change on phone, tablet, and desktop sizes.</p>
+          <p></p>
           <span class="tool-card__link">See how we use it &rarr;</span>
         </a>
         <a class="tool-card" href="tool-smooth-motion.html" data-cat="websites">
           <span class="tool-card__icon">S</span>
           <h3>Smooth Motion &amp; Polish</h3>
           <span class="tool-card__credit">GSAP + Lenis</span>
-          <p>The animation tools that make pages scroll and move smoothly.</p>
+          <p></p>
           <span class="tool-card__link">See how we use it &rarr;</span>
         </a>
         <a class="tool-card is-hidden" href="tool-design-quality-system.html" data-cat="websites">
           <span class="tool-card__icon">D</span>
           <h3>Design Quality System</h3>
           <span class="tool-card__credit">Hallmark</span>
-          <p>A built-in checklist that keeps designs from looking cheap or generic.</p>
+          <p></p>
           <span class="tool-card__link">See how we use it &rarr;</span>
         </a>
         <a class="tool-card is-hidden" href="tool-walkable-3d.html" data-cat="websites">
           <span class="tool-card__icon">W</span>
           <h3>Walkable 3D &amp; Property Views</h3>
           <span class="tool-card__credit">Three.js + Blender</span>
-          <p>Interactive 3D you can move through, right in a web browser.</p>
+          <p></p>
           <span class="tool-card__link">See how we use it &rarr;</span>
         </a>
         </div>
@@ -795,29 +824,29 @@
         <a class="tool-card" href="tool-social-scheduling.html" data-cat="social">
           <span class="tool-card__icon">O</span>
           <h3>One-Place Posting &amp; Scheduling</h3>
-          <span class="tool-card__credit">Postiz</span>
-          <p>A tool that schedules and posts to all your social accounts from one place.</p>
+          <span class="tool-card__credit">Metricool</span>
+          <p></p>
           <span class="tool-card__link">See how we use it &rarr;</span>
         </a>
         <a class="tool-card" href="tool-content-engine.html" data-cat="social">
           <span class="tool-card__icon">C</span>
           <h3>The Content Engine</h3>
           <span class="tool-card__credit">Mai + Sonny + Vidz</span>
-          <p>Our system that turns one idea into a full set of posts across platforms.</p>
+          <p></p>
           <span class="tool-card__link">See how we use it &rarr;</span>
         </a>
         <a class="tool-card" href="tool-trend-research.html" data-cat="social">
           <span class="tool-card__icon">T</span>
           <h3>Trend &amp; Competitor Watching</h3>
           <span class="tool-card__credit">Social listening + research</span>
-          <p>We watch what is working right now in your space, including competitors' videos.</p>
+          <p></p>
           <span class="tool-card__link">See how we use it &rarr;</span>
         </a>
         <a class="tool-card" href="tool-reading-images-text.html" data-cat="social">
           <span class="tool-card__icon">R</span>
           <h3>Reading Text From Images</h3>
           <span class="tool-card__credit">Surya OCR</span>
-          <p>A tool that pulls text out of screenshots, receipts, and posts.</p>
+          <p></p>
           <span class="tool-card__link">See how we use it &rarr;</span>
         </a>
         </div>
@@ -835,31 +864,39 @@
           <span class="tool-card__icon">I</span>
           <h3>In-House Video Production</h3>
           <span class="tool-card__credit">Remotion</span>
-          <p>A system that builds finished, branded video from a script.</p>
+          <p></p>
           <span class="tool-card__link">See how we use it &rarr;</span>
         </a>
         <a class="tool-card" href="tool-video-editing.html" data-cat="video">
           <span class="tool-card__icon">V</span>
           <h3>Video Editing &amp; Captions</h3>
           <span class="tool-card__credit">FFmpeg + Auto-Editor</span>
-          <p>The tools that trim, caption, and clean up video automatically.</p>
+          <p></p>
           <span class="tool-card__link">See how we use it &rarr;</span>
         </a>
         <a class="tool-card" href="tool-voice-cloning.html" data-cat="video">
           <span class="tool-card__icon">Y</span>
           <h3>Your Voice, On Demand</h3>
           <span class="tool-card__credit">VoxCPM2</span>
-          <p>A tool that can create a clean voiceover in a chosen voice.</p>
+          <p></p>
           <span class="tool-card__link">See how we use it &rarr;</span>
         </a>
         <a class="tool-card" href="tool-stock-media.html" data-cat="video">
           <span class="tool-card__icon">S</span>
           <h3>Stock Footage, Photos &amp; Music</h3>
           <span class="tool-card__credit">Pexels + Pixabay + Freesound</span>
-          <p>Libraries of free-to-use video, photos, and sound.</p>
+          <p></p>
+          <span class="tool-card__link">See how we use it &rarr;</span>
+        </a>
+        <a class="tool-card is-hidden" href="tool-avatar-video.html" data-cat="video">
+          <span class="tool-card__icon">A</span>
+          <h3>AI Spokesperson &amp; Avatar Video</h3>
+          <span class="tool-card__credit">HeyGen + MuseTalk</span>
+          <p></p>
           <span class="tool-card__link">See how we use it &rarr;</span>
         </a>
         </div>
+      <div class="cat-more"><button class="cat-more__btn" data-cat="video">See all 5 tools &darr;</button></div>
       </div>
     </section>
     <section class="cat-block" id="design">
@@ -874,35 +911,35 @@
           <span class="tool-card__icon">G</span>
           <h3>Graphic &amp; Layout Design</h3>
           <span class="tool-card__credit">Canva</span>
-          <p>The tool we use to lay out finished, branded graphics.</p>
+          <p></p>
           <span class="tool-card__link">See how we use it &rarr;</span>
         </a>
         <a class="tool-card" href="tool-image-generation.html" data-cat="design">
           <span class="tool-card__icon">C</span>
           <h3>Custom Image Generation</h3>
           <span class="tool-card__credit">FLUX via Replicate</span>
-          <p>AI that creates brand-new images from a description.</p>
+          <p></p>
           <span class="tool-card__link">See how we use it &rarr;</span>
         </a>
         <a class="tool-card" href="tool-background-removal.html" data-cat="design">
           <span class="tool-card__icon">P</span>
           <h3>Photo Cleanup &amp; Background Removal</h3>
           <span class="tool-card__credit">rembg</span>
-          <p>A tool that cleanly removes or replaces backgrounds in photos.</p>
+          <p></p>
           <span class="tool-card__link">See how we use it &rarr;</span>
         </a>
         <a class="tool-card" href="tool-photo-to-3d.html" data-cat="design">
           <span class="tool-card__icon">T</span>
           <h3>Turn a Photo Into 3D</h3>
           <span class="tool-card__credit">Hunyuan3D</span>
-          <p>A tool that builds a 3D model from a single product photo.</p>
+          <p></p>
           <span class="tool-card__link">See how we use it &rarr;</span>
         </a>
         <a class="tool-card is-hidden" href="tool-design-automation.html" data-cat="design">
           <span class="tool-card__icon">B</span>
           <h3>Branded Design At Scale</h3>
           <span class="tool-card__credit">Adobe Illustrator automation</span>
-          <p>We run brand design templates automatically to produce many on-brand files fast.</p>
+          <p></p>
           <span class="tool-card__link">See how we use it &rarr;</span>
         </a>
         </div>
@@ -921,14 +958,14 @@
           <span class="tool-card__icon">F</span>
           <h3>Full Online Store Management</h3>
           <span class="tool-card__credit">Shopify</span>
-          <p>We connect to your store and manage products, inventory, pages, and design.</p>
+          <p></p>
           <span class="tool-card__link">See how we use it &rarr;</span>
         </a>
         <a class="tool-card" href="tool-store-dashboard.html" data-cat="stores">
           <span class="tool-card__icon">Y</span>
           <h3>Your Store Dashboard</h3>
           <span class="tool-card__credit">Custom dashboard + request queue</span>
-          <p>A simple dashboard where you can see your store and request changes.</p>
+          <p></p>
           <span class="tool-card__link">See how we use it &rarr;</span>
         </a>
         </div>
@@ -946,21 +983,28 @@
           <span class="tool-card__icon">C</span>
           <h3>Customer Database &amp; Email</h3>
           <span class="tool-card__credit">Brevo</span>
-          <p>One place to hold your contacts and send organized email.</p>
+          <p></p>
           <span class="tool-card__link">See how we use it &rarr;</span>
         </a>
         <a class="tool-card" href="tool-contact-database.html" data-cat="crm">
           <span class="tool-card__icon">F</span>
           <h3>Flexible Contact Database</h3>
           <span class="tool-card__credit">NocoDB</span>
-          <p>A spreadsheet-style database that holds leads, clients, and projects.</p>
+          <p></p>
           <span class="tool-card__link">See how we use it &rarr;</span>
         </a>
         <a class="tool-card" href="tool-crm-followup.html" data-cat="crm">
           <span class="tool-card__icon">L</span>
           <h3>Lead Tracking &amp; Follow-Up</h3>
           <span class="tool-card__credit">HubSpot + Emy</span>
-          <p>A system that tracks leads and makes sure none go cold.</p>
+          <p></p>
+          <span class="tool-card__link">See how we use it &rarr;</span>
+        </a>
+        <a class="tool-card" href="tool-gohighlevel-crm.html" data-cat="crm">
+          <span class="tool-card__icon">A</span>
+          <h3>All-In-One CRM (GoHighLevel)</h3>
+          <span class="tool-card__credit">GoHighLevel</span>
+          <p></p>
           <span class="tool-card__link">See how we use it &rarr;</span>
         </a>
         </div>
@@ -978,31 +1022,46 @@
           <span class="tool-card__icon">W</span>
           <h3>Workflow Automation</h3>
           <span class="tool-card__credit">Make.com</span>
-          <p>A tool that connects your apps so tasks happen automatically.</p>
+          <p></p>
           <span class="tool-card__link">See how we use it &rarr;</span>
         </a>
         <a class="tool-card" href="tool-google-workspace.html" data-cat="automation">
           <span class="tool-card__icon">E</span>
           <h3>Email, Calendar &amp; Files</h3>
           <span class="tool-card__credit">Google Workspace</span>
-          <p>Your everyday email, calendar, and file storage, connected to the team.</p>
+          <p></p>
           <span class="tool-card__link">See how we use it &rarr;</span>
         </a>
         <a class="tool-card" href="tool-whatsapp-ai.html" data-cat="automation">
           <span class="tool-card__icon">W</span>
           <h3>WhatsApp Connected To Your AI</h3>
           <span class="tool-card__credit">WhatsApp connection</span>
-          <p>We connect WhatsApp so your AI can read and reply to messages.</p>
+          <p></p>
           <span class="tool-card__link">See how we use it &rarr;</span>
         </a>
         <a class="tool-card" href="tool-deep-research.html" data-cat="automation">
           <span class="tool-card__icon">D</span>
           <h3>Deep Research</h3>
           <span class="tool-card__credit">Multi-source research</span>
-          <p>A way to research any question across many sources and check the facts.</p>
+          <p></p>
+          <span class="tool-card__link">See how we use it &rarr;</span>
+        </a>
+        <a class="tool-card is-hidden" href="tool-lead-generation.html" data-cat="automation">
+          <span class="tool-card__icon">L</span>
+          <h3>Local Lead Generation</h3>
+          <span class="tool-card__credit">Google Maps data + permit records</span>
+          <p></p>
+          <span class="tool-card__link">See how we use it &rarr;</span>
+        </a>
+        <a class="tool-card is-hidden" href="tool-seo-analytics-reporting.html" data-cat="automation">
+          <span class="tool-card__icon">S</span>
+          <h3>SEO &amp; Analytics Reporting</h3>
+          <span class="tool-card__credit">Google Search Console + Analytics</span>
+          <p></p>
           <span class="tool-card__link">See how we use it &rarr;</span>
         </a>
         </div>
+      <div class="cat-more"><button class="cat-more__btn" data-cat="automation">See all 6 tools &darr;</button></div>
       </div>
     </section>
 
@@ -1072,6 +1131,8 @@
           <div class="footer__col-title">Work</div>
           <ul class="footer__links">
             <li><a href="our-work.html">Our Work</a></li>
+            <li><a href="live-builds.html">Live Builds</a></li>
+        <li><a href="tools.html">Tools</a></li>
             <li><a href="insights.html">Insights</a></li>
             <li><a href="resources.html">Forms &amp; Resources</a></li>
             <li><a href="contact.html">Contact</a></li>

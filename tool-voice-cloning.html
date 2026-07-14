@@ -11,13 +11,13 @@
   </script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Your Voice, On Demand | Balay ni Bruno &amp; Co.</title>
-  <meta name="description" content="A tool that can create a clean voiceover in a chosen voice. How Balay ni Bruno &amp; Co. uses VoxCPM2 for your business." />
+  <title>Video Voiceovers On Demand, No Subscription | Balay ni Bruno &amp; Co.</title>
+  <meta name="description" content="We generate natural voiceovers for your videos in-house, with no monthly voice subscription. Narrated content without recording every line yourself." />
   <link rel="canonical" href="https://balaynibruno.co/tool-voice-cloning.html" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Balay ni Bruno &amp; Co." />
-  <meta property="og:title" content="Your Voice, On Demand, Balay ni Bruno &amp; Co." />
-  <meta property="og:description" content="A tool that can create a clean voiceover in a chosen voice. How Balay ni Bruno &amp; Co. uses VoxCPM2 for your business." />
+  <meta property="og:title" content="Video Voiceovers On Demand, No Subscription, Balay ni Bruno &amp; Co." />
+  <meta property="og:description" content="We generate natural voiceovers for your videos in-house, with no monthly voice subscription. Narrated content without recording every line yourself." />
   <meta property="og:url" content="https://balaynibruno.co/tool-voice-cloning.html" />
   <meta property="og:image" content="https://balaynibruno.co/bbc-logo.png" />
   <meta name="twitter:card" content="summary_large_image" />
@@ -536,7 +536,9 @@
                ]
 }
   </script>
+  <meta name="keywords" content="voiceover for videos, hire someone to make voiceovers, video narration VA, voiceover for social media, in-house voiceover, narrated video content" />
 
+  <link rel="stylesheet" href="bbc-article-visuals.css" />
   <style>
     /* ===== BBC Tools section ===== */
     .tools-hero{background:var(--bg-dark);color:var(--text-warm);padding:clamp(5rem,11vw,8rem) 0 clamp(3rem,7vw,5rem);}
@@ -582,18 +584,149 @@
     /* ---- single tool page ---- */
     .tp-hero{background:var(--bg-dark);color:var(--text-warm);padding:clamp(5rem,10vw,7rem) 0 clamp(2.5rem,6vw,4rem);}
     .tp-hero .back-link{color:rgba(245,241,234,.7);}
+    .tp-crumb{font-family:var(--font-ui);font-size:.8rem;color:rgba(245,241,234,.55);margin-bottom:.4rem;}
+    .tp-crumb a{color:rgba(245,241,234,.7);}
     .tp-hero__icon{width:64px;height:64px;border-radius:16px;background:linear-gradient(135deg,var(--gold),var(--gold-warm));color:#fff;display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-weight:600;font-size:1.7rem;margin:1.2rem 0 1.1rem;}
     .tp-hero h1{font-family:var(--font-display);font-weight:600;font-size:clamp(2.1rem,5vw,3.2rem);color:#fff;margin:0 0 .5rem;}
+    .tp-hero__sub{font-family:var(--font-body);font-size:clamp(1.05rem,2.2vw,1.28rem);line-height:1.55;color:rgba(245,241,234,.82);max-width:60ch;margin:.4rem 0 1rem;}
     .tp-hero__credit{font-family:var(--font-ui);font-size:.82rem;font-weight:500;letter-spacing:.05em;text-transform:uppercase;color:var(--gold-pale);}
     .tp-section{padding:clamp(2.2rem,5vw,3.4rem) 0;border-bottom:var(--border-warm);}
     .tp-section:nth-of-type(even){background:var(--bg-section);}
     .tp-section .eyebrow{color:var(--gold);}
     .tp-section h2{font-family:var(--font-display);font-weight:600;font-size:clamp(1.4rem,3vw,2rem);color:var(--text-ink);margin:.4rem 0 .8rem;}
     .tp-section p{font-family:var(--font-body);font-size:1.1rem;line-height:1.65;color:var(--text-body);max-width:66ch;}
+    .tp-section p + p{margin-top:1rem;}
+
+    /* two-column value cards */
+    .tp-value-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;margin-top:1rem;}
+    @media(max-width:720px){.tp-value-grid{grid-template-columns:1fr;}}
+    .tp-value-card{background:var(--bg-card);border:var(--border-card);border-radius:var(--radius);padding:1.6rem 1.5rem;box-shadow:var(--shadow-xs);}
+    .tp-value-card h3{font-family:var(--font-display);font-weight:600;font-size:1.15rem;color:var(--deep-blue);margin:0 0 .5rem;}
+    .tp-value-card p{font-size:1.02rem;margin:0;}
+
+    /* finished-product list */
+    .tp-deliverables{list-style:none;padding:0;margin:1.2rem 0 0;display:grid;gap:.7rem;max-width:60ch;}
+    .tp-deliverables li{position:relative;padding:.85rem 1rem .85rem 2.6rem;background:var(--bg-card);border:var(--border-card);border-radius:12px;font-family:var(--font-body);font-size:1.02rem;color:var(--text-body);}
+    .tp-deliverables li::before{content:'\2713';position:absolute;left:.95rem;top:50%;transform:translateY(-50%);width:22px;height:22px;border-radius:50%;background:var(--gold);color:#fff;font-size:.78rem;display:flex;align-items:center;justify-content:center;}
+
+    /* search-intent box */
+    .tp-search{background:linear-gradient(135deg,rgba(31,53,87,.05),rgba(184,146,62,.06));border:1px solid rgba(184,146,62,.28);border-radius:var(--radius);padding:1.8rem 1.7rem;}
+    .tp-search h2{margin-top:0;}
+    .tp-search__phrases{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1.2rem;}
+    .tp-search__phrases span{font-family:var(--font-ui);font-size:.82rem;color:var(--deep-blue);background:var(--bg-card);border:1px solid rgba(31,53,87,.18);border-radius:999px;padding:.4rem .9rem;}
+
     .tp-download{display:flex;flex-wrap:wrap;align-items:center;gap:1rem;background:var(--bg-card);border:var(--border-card);border-radius:var(--radius);padding:1.5rem 1.6rem;box-shadow:var(--shadow-sm);}
     .tp-download p{margin:0;font-size:1rem;}
     .tp-related{padding:clamp(2.5rem,5vw,4rem) 0;background:var(--bg-section);}
+    .tp-faq .faq-q{font-family:var(--font-display);font-size:1.18rem;font-weight:600;color:var(--deep-blue);margin-top:1.75rem;margin-bottom:.4rem;}
+    .tp-faq p{font-size:1.05rem;}
   </style>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://balaynibruno.co/#organization",
+      "name": "Balay ni Bruno & Co.",
+      "url": "https://balaynibruno.co/",
+      "logo": "https://balaynibruno.co/bbc-logo.png",
+      "email": "admin@balaynibruno.co",
+      "telephone": "+63 935 663 0324",
+      "founder": {
+        "@type": "Person",
+        "name": "RJ Bryan Tres Reyes"
+      },
+      "sameAs": [
+        "https://www.facebook.com/profile.php?id=61590006878673",
+        "https://www.instagram.com/balaynibruno/",
+        "https://www.tiktok.com/@balaynibruno.co",
+        "https://youtube.com/@balaynibruno"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://balaynibruno.co/#website",
+      "name": "Balay ni Bruno & Co.",
+      "url": "https://balaynibruno.co/",
+      "publisher": {
+        "@id": "https://balaynibruno.co/#organization"
+      }
+    },
+    {
+      "@type": "Service",
+      "name": "Your Voice, On Demand — VoxCPM2",
+      "serviceType": "Video & Audio",
+      "description": "This is how we add narration to a video without you sitting in front of a microphone for every clip. We generate a clean, natural-sounding voiceover in-house, which means there is no per-use fee and no monthly voice subscription eating into your budget. It lets us narrate a steady flow of videos affordably, so narration becomes something you always have rather than a treat you save for special posts.",
+      "provider": {
+        "@id": "https://balaynibruno.co/#organization"
+      },
+      "areaServed": "Worldwide",
+      "url": "https://balaynibruno.co/tool-voice-cloning.html"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Tools We Use",
+          "item": "https://balaynibruno.co/tools.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Video & Audio",
+          "item": "https://balaynibruno.co/tools.html#video"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Your Voice, On Demand",
+          "item": "https://balaynibruno.co/tool-voice-cloning.html"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Is this my actual voice?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "By default we generate a clean, natural voiceover for the narration. If you want it to sound like you specifically, that is a separate conversation about recording and setting up your own voice, and we will be upfront about what that involves."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does it sound robotic?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The voiceovers sound natural and are meant to blend into the video. If a particular line does not land well, we regenerate it until it sounds right."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is there a monthly cost for this?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. We generate the voiceovers in-house, so there is no separate voice subscription or per-use fee added to your partnership."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What languages or accents can you do?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "We work primarily in clear, natural English for narration. If you need something specific, ask us first and we will tell you honestly whether it fits."
+          }
+        }
+      ]
+    }
+  ]
+}
+  </script>
 </head>
 <body>
 <header class="site-header" id="site-header">
@@ -610,6 +743,7 @@
           <li><a href="how-we-help.html">How We Help</a></li>
           <li><a href="our-team.html">Our Team</a></li>
           <li><a href="our-work.html" class="active">Our Work</a></li>
+        <li><a href="tools.html">Tools</a></li>
           <li><a href="insights.html">Insights</a></li>
           <li><a href="contact.html">Contact</a></li>
         </ul>
@@ -629,6 +763,7 @@
       <a href="how-we-help.html">How We Help</a>
       <a href="our-team.html">Our Team</a>
       <a href="our-work.html" class="active">Our Work</a>
+    <a href="tools.html">Tools</a>
       <a href="insights.html">Insights</a>
       <a href="contact.html">Contact</a>
       <a href="https://calendly.com/rj-balaynibruno/bbc-strategy-call" target="_blank" rel="noopener noreferrer" class="btn btn-gold mobile-cta">Book a Call</a>
@@ -636,9 +771,11 @@
   </header>
   <section class="tp-hero">
     <div class="container">
+      <p class="tp-crumb"><a href="tools.html">Tools</a> &rsaquo; <a href="tools.html#video">Video &amp; Audio</a> &rsaquo; Your Voice, On Demand</p>
       <a href="tools.html" class="back-link">&larr; Back to Tools</a>
       <div class="tp-hero__icon">Y</div>
       <h1>Your Voice, On Demand</h1>
+      <p class="tp-hero__sub">We create clean, natural voiceovers for your videos in-house, so you do not have to record every line yourself.</p>
       <span class="tp-hero__credit">VoxCPM2 &middot; Video &amp; Audio</span>
     </div>
   </section>
@@ -647,7 +784,7 @@
     <div class="container">
       <span class="eyebrow eyebrow--gold">What it is</span>
       <h2>Your Voice, On Demand, in plain words</h2>
-      <p>A tool that can create a clean voiceover in a chosen voice.</p>
+      <p>This is how we add narration to a video without you sitting in front of a microphone for every clip. We generate a clean, natural-sounding voiceover in-house, which means there is no per-use fee and no monthly voice subscription eating into your budget. It lets us narrate a steady flow of videos affordably, so narration becomes something you always have rather than a treat you save for special posts.</p>
     </div>
   </section>
 
@@ -655,26 +792,64 @@
     <div class="container">
       <span class="eyebrow eyebrow--gold">How we use it</span>
       <h2>How Balay ni Bruno &amp; Co. puts it to work</h2>
-      <p>We generate natural voiceovers for videos in-house, with no monthly voice subscription.</p>
+      <p>We write or take your script and generate the voiceover in-house, then drop it into the video with music and captions. Because it is done on our side, you get narrated video without booking recording time or paying a voice service each month.</p>
+      <div class="step-flow" style="margin-top:1.4rem;">
+        <div class="step"><span class="step__num">1</span><div class="step__content"><p class="step__title">Lock the script</p><p class="step__desc">We finalize the words so the narration says exactly what you want.</p></div></div>
+        <div class="step"><span class="step__num">2</span><div class="step__content"><p class="step__title">Generate the voiceover</p><p class="step__desc">We create a clean, natural voiceover in-house, no recording session needed.</p></div></div>
+        <div class="step"><span class="step__num">3</span><div class="step__content"><p class="step__title">Mix it into the video</p><p class="step__desc">We lay the voiceover under the visuals with a music bed and captions.</p></div></div>
+        <div class="step"><span class="step__num">4</span><div class="step__content"><p class="step__title">Deliver the narrated clip</p><p class="step__desc">You get a finished, narrated video ready to post.</p></div></div>
+      </div>
     </div>
   </section>
 
   <section class="tp-section">
     <div class="container">
-      <span class="eyebrow eyebrow--gold">How it helps your business</span>
-      <h2>What it does for the business</h2>
-      <p>Narrated video at no extra per-use cost.</p>
+      <span class="eyebrow eyebrow--gold">What you get</span>
+      <h2>The finished product you can expect</h2>
+      <p>What this adds to your videos:</p>
+      <ul class="tp-deliverables">
+        <li>A clean, natural-sounding voiceover on your script</li>
+        <li>Narration mixed under the visuals with music</li>
+        <li>No monthly voice subscription and no per-use fee</li>
+        <li>A finished, narrated video ready to post</li>
+      </ul>
+    </div>
+  </section>
+  <section class="tp-section">
+    <div class="container">
+      <span class="eyebrow eyebrow--gold">Why it matters</span>
+      <h2>What it does for you and the business</h2>
+      <div class="tp-value-grid">
+        <div class="tp-value-card"><h3>For your business</h3><p>You can put out narrated video regularly without a per-use cost or a monthly voice bill. Narration makes content clearer and more professional.</p></div>
+        <div class="tp-value-card"><h3>For you, the owner</h3><p>You get professional-sounding voiceovers without recording every line yourself or booking studio time.</p></div>
+      </div>
     </div>
   </section>
 
   <section class="tp-section">
     <div class="container">
-      <span class="eyebrow eyebrow--gold">How it helps you</span>
-      <h2>What it means for you as the owner</h2>
-      <p>You get professional voiceovers without recording every line yourself.</p>
+      <div class="tp-search">
+        <span class="eyebrow eyebrow--gold">Looking to hire this skill?</span>
+        <h2>Want narrated videos without recording them yourself?</h2>
+        <p>If you have looked for someone to add a voiceover to your content so you do not have to record every line, this is the part of the partnership that covers it. We generate the narration in-house and build it right into the video.</p>
+        <div class="tp-search__phrases"><span>hire someone to do voiceovers for my videos</span><span>add narration to my video content</span><span>voiceover for social media videos</span><span>video narration without recording myself</span><span>affordable voiceover for business</span></div>
+      </div>
     </div>
   </section>
-
+  <section class="tp-section tp-faq">
+    <div class="container">
+      <span class="eyebrow eyebrow--gold">Common questions</span>
+      <h2>What business owners ask us about this</h2>
+      <p class="faq-q">Is this my actual voice?</p>
+      <p>By default we generate a clean, natural voiceover for the narration. If you want it to sound like you specifically, that is a separate conversation about recording and setting up your own voice, and we will be upfront about what that involves.</p>
+      <p class="faq-q">Does it sound robotic?</p>
+      <p>The voiceovers sound natural and are meant to blend into the video. If a particular line does not land well, we regenerate it until it sounds right.</p>
+      <p class="faq-q">Is there a monthly cost for this?</p>
+      <p>No. We generate the voiceovers in-house, so there is no separate voice subscription or per-use fee added to your partnership.</p>
+      <p class="faq-q">What languages or accents can you do?</p>
+      <p>We work primarily in clear, natural English for narration. If you need something specific, ask us first and we will tell you honestly whether it fits.</p>
+    </div>
+  </section>
   <section class="tp-section">
     <div class="container">
       <div class="tp-download">
@@ -699,9 +874,9 @@
     <div class="container">
       <span class="eyebrow eyebrow--gold">More in Video &amp; Audio</span>
       <div class="tool-grid" style="margin-top:1.4rem;">
-        <a class="tool-card" href="tool-programmatic-video.html"><span class="tool-card__icon">I</span><h3>In-House Video Production</h3><span class="tool-card__credit">Remotion</span><p>A system that builds finished, branded video from a script.</p><span class="tool-card__link">See how we use it &rarr;</span></a>
-        <a class="tool-card" href="tool-video-editing.html"><span class="tool-card__icon">V</span><h3>Video Editing &amp; Captions</h3><span class="tool-card__credit">FFmpeg + Auto-Editor</span><p>The tools that trim, caption, and clean up video automatically.</p><span class="tool-card__link">See how we use it &rarr;</span></a>
-        <a class="tool-card" href="tool-stock-media.html"><span class="tool-card__icon">S</span><h3>Stock Footage, Photos &amp; Music</h3><span class="tool-card__credit">Pexels + Pixabay + Freesound</span><p>Libraries of free-to-use video, photos, and sound.</p><span class="tool-card__link">See how we use it &rarr;</span></a>
+        <a class="tool-card" href="tool-programmatic-video.html"><span class="tool-card__icon">I</span><h3>In-House Video Production</h3><span class="tool-card__credit">Remotion</span><p></p><span class="tool-card__link">See how we use it &rarr;</span></a>
+        <a class="tool-card" href="tool-video-editing.html"><span class="tool-card__icon">V</span><h3>Video Editing &amp; Captions</h3><span class="tool-card__credit">FFmpeg + Auto-Editor</span><p></p><span class="tool-card__link">See how we use it &rarr;</span></a>
+        <a class="tool-card" href="tool-stock-media.html"><span class="tool-card__icon">S</span><h3>Stock Footage, Photos &amp; Music</h3><span class="tool-card__credit">Pexels + Pixabay + Freesound</span><p></p><span class="tool-card__link">See how we use it &rarr;</span></a>
       </div>
     </div>
   </section>
@@ -747,6 +922,8 @@
           <div class="footer__col-title">Work</div>
           <ul class="footer__links">
             <li><a href="our-work.html">Our Work</a></li>
+            <li><a href="live-builds.html">Live Builds</a></li>
+        <li><a href="tools.html">Tools</a></li>
             <li><a href="insights.html">Insights</a></li>
             <li><a href="resources.html">Forms &amp; Resources</a></li>
             <li><a href="contact.html">Contact</a></li>
