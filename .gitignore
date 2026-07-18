@@ -5,3 +5,8 @@ Thumbs.db
 # internal tooling, never deploy publicly
 _SYSTEM/
 reel.finished
+
+# YouTube long-form episodes: video.mp4 files are >100MB (GitHub hard limit) and
+# don't belong on the Netlify CDN (bandwidth). Host on YouTube + embed instead.
+# Kept on disk locally; never committed. (Blocked the repo 2026-07-18.)
+social-media/youtube/
