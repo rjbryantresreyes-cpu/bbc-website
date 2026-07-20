@@ -4,6 +4,25 @@
 <!-- deploy-trigger 2026-06-13d: force-refetch on lookup miss + don't clobber good cache + SW v17 (stop the few-minute revert). -->
 <!-- deploy-trigger 2026-06-14: Needs Follow-Up section; follow-up click fills name from the exact record (deterministic, no race); SW v18. -->
 <!-- deploy-trigger 2026-07-04: Workflows page — clickable deliverable checkboxes + shared two-way sync store (os/index.html + new function). -->
+# 🟡 STAGED 2026-07-21 — Wooden Woodworks dead-domain fix (ship in next batch)
+
+**What:** WW's site was recorded as `woodenwoodworksllc.com`, which does **not resolve at all** (NXDOMAIN, confirmed by DNS lookup). The live site is **`woodenwoodworks.com`** (Netlify, GA4 `G-SKDFK7S3YM`).
+
+**Files changed (3):**
+- `data/clients.json` line 21
+- `os/index.html` line 797
+- `os-preview/index.html` line 797  ← both Command Center copies kept in sync per the rule
+
+**Drive mirror also corrected (3 files)** per the mirror rule — `BBC WEBSITE HTML\data\clients.json`, `os\index.html`, `os-preview\index.html`. The mirror had drifted from the repo (different line ordering in clients.json), so these were surgical single-value edits, not overwrites.
+
+**Verified:** `clients.json` parses; zero occurrences of the dead domain remain in the repo or the mirror; new value present in all six files.
+
+⚠️ **Flagged, not touched — needs RJ's call:** `BBC WEBSITE HTML\os\index 5.03.47 PM.html` is a stray timestamped backup copy sitting inside the website mirror (still carries the old domain). It looks like accidental cruft from a manual save. Recommend deleting it, but it is a deletion so it is RJ's call, not an auto-fix.
+**Risk:** none to layout or behaviour, a data-value correction only. No responsive re-check needed (no visual change).
+**Found by:** the 2026-07-21 website-analytics audit (`C:\BBC\routines\client-care\site_analytics.py`), which live-probes every site BBC manages.
+
+---
+
 # ✅ SHIPPED & LIVE — reconciled 2026-07-11 (end-of-week deploy)
 
 **The whole batch below is DEPLOYED. `origin/master` == `HEAD`, working tree clean, Netlify built it, live pages verified 200** (homepage, /os, sitemap with the 5 added slugs, our-team John+Dexter, the newly-wired insight pages). The Netlify credit freeze is clear again. Everything under the old "STAGED / PENDING PUSH" headings has shipped — treat the git sweep as truth, not the stage labels below (kept for history).
