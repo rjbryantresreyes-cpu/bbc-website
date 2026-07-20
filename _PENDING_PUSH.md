@@ -4,7 +4,16 @@
 <!-- deploy-trigger 2026-06-13d: force-refetch on lookup miss + don't clobber good cache + SW v17 (stop the few-minute revert). -->
 <!-- deploy-trigger 2026-06-14: Needs Follow-Up section; follow-up click fills name from the exact record (deterministic, no race); SW v18. -->
 <!-- deploy-trigger 2026-07-04: Workflows page — clickable deliverable checkboxes + shared two-way sync store (os/index.html + new function). -->
-# 🟡 STAGED 2026-07-21 — Wooden Woodworks dead-domain fix (ship in next batch)
+# ✅ SHIPPED 2026-07-21 — Wooden Woodworks dead-domain fix (commit 79f8b8e)
+
+**Deployed and verified live:** `balaynibruno.co/data/clients.json` now serves `woodenwoodworks.com`;
+/os, /os-preview, and / all return 200; the WW site itself returns 200. `origin/master == HEAD`.
+Push required `BBC_ALLOW_CORE=1` (the core-file guard fired on os/index.html + os-preview/index.html);
+overridden only after confirming the changes were forward-moving, not an old copy.
+Batch also carried pending dashboard-sync output (learnings refresh, updated date 07-17 -> 07-20,
+removed .playwright-mcp entry) — internal /os data only.
+
+<details><summary>original staging note</summary>
 
 **What:** WW's site was recorded as `woodenwoodworksllc.com`, which does **not resolve at all** (NXDOMAIN, confirmed by DNS lookup). The live site is **`woodenwoodworks.com`** (Netlify, GA4 `G-SKDFK7S3YM`).
 
@@ -18,6 +27,8 @@
 **Verified:** `clients.json` parses; zero occurrences of the dead domain remain in the repo or the mirror; new value present in all six files.
 
 ⚠️ **Flagged, not touched — needs RJ's call:** `BBC WEBSITE HTML\os\index 5.03.47 PM.html` is a stray timestamped backup copy sitting inside the website mirror (still carries the old domain). It looks like accidental cruft from a manual save. Recommend deleting it, but it is a deletion so it is RJ's call, not an auto-fix.
+
+</details>
 **Risk:** none to layout or behaviour, a data-value correction only. No responsive re-check needed (no visual change).
 **Found by:** the 2026-07-21 website-analytics audit (`C:\BBC\routines\client-care\site_analytics.py`), which live-probes every site BBC manages.
 
