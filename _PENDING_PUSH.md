@@ -4,6 +4,18 @@
 <!-- deploy-trigger 2026-06-13d: force-refetch on lookup miss + don't clobber good cache + SW v17 (stop the few-minute revert). -->
 <!-- deploy-trigger 2026-06-14: Needs Follow-Up section; follow-up click fills name from the exact record (deterministic, no race); SW v18. -->
 <!-- deploy-trigger 2026-07-04: Workflows page — clickable deliverable checkboxes + shared two-way sync store (os/index.html + new function). -->
+<!-- deploy-trigger 2026-07-21: New 5-star Google review from Rebekah Severi (Freccia). -->
+
+# 🟡 STAGED 2026-07-21 — New review: Rebekah Severi / Freccia Construction (5★)
+
+**Deploy at BBC eodr (the one daily deploy).** New verbatim Google review added sitewide.
+**Files changed (2):**
+- `freccia-construction.html` — added "What Bekah Said" review section (full verbatim quote, 5 stars, links to Google).
+- `index.html` — homepage reviews grid now leads with Rebekah/Freccia; curated to the 3 active-client reviews (Freccia, S. Riviere, Wooden Woodworks). Ryan Tanel (past) still on his own page + the "Read all reviews on Google" button.
+Ledger updated: `C:\BBC\routines\reviews\known_reviews.json` (rebekah-severi-freccia, processed).
+Mirror both changed files to `BBC WEBSITE HTML\` before/with the push. Verify 375/768/1280.
+
+
 # ✅ SHIPPED 2026-07-21 — Wooden Woodworks dead-domain fix (commit 79f8b8e)
 
 **Deployed and verified live:** `balaynibruno.co/data/clients.json` now serves `woodenwoodworks.com`;
@@ -291,3 +303,7 @@ Reviews routine: Sonya + Essence client pages + wiring. Staged, awaiting Netlify
 - **sitemap.xml** — 2 new `<url>` entries added (both `.html`, priority 0.7).
 - **index.html** — NOT changed. Home reviews grid (Ryan Tanel, Sonya, Marla) already links to the Google URL; left at 3 cards (a 4th would leave a lone card on row 2).
 - Both new pages + all edits mirrored to `BBC WEBSITE HTML\`. Review link on both pages/cards = https://share.google/FESMGRclQ5h9yK7jY. Not pushed/deployed.
+
+# 🟡 STAGED 2026-07-21 (reviews routine) — Freccia connected to insights hub
+- `insights.html` — added the Freccia Construction case-study card (was missing from the hub; other 4 review pages already there). EVERYTHING-CONNECTED fix.
+- `social-media/review-freccia-construction/` — hosted reel + 5 slides + story + caption for the scheduled Metricool posts (reel 08-09, story 08-10, carousel 08-11). Ships with this deploy so Metricool can fetch by URL.
