@@ -5,6 +5,27 @@
 <!-- deploy-trigger 2026-06-14: Needs Follow-Up section; follow-up click fills name from the exact record (deterministic, no race); SW v18. -->
 <!-- deploy-trigger 2026-07-04: Workflows page — clickable deliverable checkboxes + shared two-way sync store (os/index.html + new function). -->
 <!-- deploy-trigger 2026-07-21: New 5-star Google review from Rebekah Severi (Freccia). -->
+<!-- deploy-trigger 2026-07-22: New client onboarded — BILT 2 Travel added across the site. -->
+
+# 🟡 STAGED 2026-07-22 — New client: BILT 2 Travel (Dwight Campbell)
+
+**Deploy at BBC eodr (the one daily deploy).** New client onboarding — BILT 2 Travel added to every client surface. NOTE: welcome carousel + story are already SCHEDULED on Metricool for Jul 25 (CT) and reference `social-media/welcome-bilt2travel/` media, which goes live with this deploy (Metricool fetches at publish, saveExternalMediaFiles:false). This deploy MUST ship before Jul 25 or the scheduled post has no media.
+
+**New files (3 + media):**
+- `bilt-2-travel.html` — new dedicated client/case page (cloned from freccia-construction.html, purple logo card).
+- `assets/clients/bilt-logo.png`, `assets/clients/bilt-avatar.png` — client logo assets.
+- `social-media/welcome-bilt2travel/` — slide_01..05.png + story.png + reel.mp4 (welcome carousel/story/reel media Metricool serves; reel has music bed + burned subtitles).
+
+**Changed files (7):**
+- `data/clients.json` — BILT moved from `prospect` → `active` (handler John, AI BILL); stale prospect entry removed.
+- `os/index.html` + `os-preview/index.html` — BILT block promoted to `category:active` (both Command Center copies in sync; core-file guard will fire → `BBC_ALLOW_CORE=1` after confirming forward-moving).
+- `our-work.html` — BILT `.work-card` added to Current Clients grid (first card).
+- `index.html` — BILT `.work-preview-card` added to homepage Recent Work strip (first card).
+- `john.html` — BILT named under John's "Content For" (John = BILT's VA).
+- `sitemap.xml` — `bilt-2-travel.html` URL added.
+
+Mirror changed files to `BBC WEBSITE HTML\` with the push. Verify 375/768/1280 on bilt-2-travel.html + our-work.html.
+
 
 # 🟡 STAGED 2026-07-21 — New review: Rebekah Severi / Freccia Construction (5★)
 
