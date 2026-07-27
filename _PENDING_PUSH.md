@@ -7,7 +7,13 @@
 <!-- deploy-trigger 2026-07-21: New 5-star Google review from Rebekah Severi (Freccia). -->
 <!-- deploy-trigger 2026-07-22: New client onboarded — BILT 2 Travel added across the site. -->
 
-# 🟡 STAGED 2026-07-22 — New client: BILT 2 Travel (Dwight Campbell)
+# ✅ SHIPPED 2026-07-22 — New client: BILT 2 Travel (Dwight Campbell) (commit ce6be1f)
+
+**Deployed and verified live 2026-07-28 (BBC EODR):** `balaynibruno.co/bilt-2-travel` returns 200,
+`/os` and `/insights` return 200, `origin/master == HEAD`. Marker corrected at the 2026-07-28 EODR —
+this block sat marked 🟡 STAGED for six days after it had already shipped.
+
+<details><summary>original staging note</summary>
 
 **Deploy at BBC eodr (the one daily deploy).** New client onboarding — BILT 2 Travel added to every client surface. NOTE: welcome carousel + story are already SCHEDULED on Metricool for Jul 25 (CT) and reference `social-media/welcome-bilt2travel/` media, which goes live with this deploy (Metricool fetches at publish, saveExternalMediaFiles:false). This deploy MUST ship before Jul 25 or the scheduled post has no media.
 
@@ -26,8 +32,15 @@
 
 Mirror changed files to `BBC WEBSITE HTML\` with the push. Verify 375/768/1280 on bilt-2-travel.html + our-work.html.
 
+</details>
 
-# 🟡 STAGED 2026-07-21 — New review: Rebekah Severi / Freccia Construction (5★)
+
+# ✅ SHIPPED 2026-07-21 — New review: Rebekah Severi / Freccia Construction (5★) (commit 13b9dfe)
+
+**Deployed and verified live 2026-07-28 (BBC EODR):** review is live sitewide; `origin/master == HEAD`.
+Marker corrected at the 2026-07-28 EODR — this block sat marked 🟡 STAGED after it had already shipped.
+
+<details><summary>original staging note</summary>
 
 **Deploy at BBC eodr (the one daily deploy).** New verbatim Google review added sitewide.
 **Files changed (2):**
@@ -35,6 +48,23 @@ Mirror changed files to `BBC WEBSITE HTML\` with the push. Verify 375/768/1280 o
 - `index.html` — homepage reviews grid now leads with Rebekah/Freccia; curated to the 3 active-client reviews (Freccia, S. Riviere, Wooden Woodworks). Ryan Tanel (past) still on his own page + the "Read all reviews on Google" button.
 Ledger updated: `C:\BBC\routines\reviews\known_reviews.json` (rebekah-severi-freccia, processed).
 Mirror both changed files to `BBC WEBSITE HTML\` before/with the push. Verify 375/768/1280.
+
+</details>
+
+
+# 🟠 NEEDS RJ'S CALL — `how-we-build-walkable-3d.html` (orphan, uncommitted since 2026-07-25)
+
+Found at the 2026-07-28 EODR. A finished insight page sitting **untracked** in the repo:
+- Title: "How We Build Walkable 3D From a Phone" — six workflows in one video.
+- Canonical claims `https://balaynibruno.co/how-we-build-walkable-3d`, which currently **404s**.
+- **Not connected to anything:** no `insights.html` card, no `sitemap.xml` entry, no inbound link.
+- It is a **different page** from the live `how-we-build-walkable-3d-tours.html` ("Can You See Your
+  New Building Before It Is Built?", 200 OK, in sitemap, carded on /insights). Same subject, different angle.
+
+**Not shipped at this EODR on purpose.** Per EVERYTHING-CONNECTED, an unlinked page should not go live,
+and publishing a second near-topic page risks splitting SEO against the live `-tours` page.
+**RJ's call:** (a) connect it — add the /insights card + sitemap entry, differentiate it from `-tours`,
+then ship; or (b) discard it as a superseded draft. Either way it should not stay untracked.
 
 
 # ✅ SHIPPED 2026-07-21 — Wooden Woodworks dead-domain fix (commit 79f8b8e)
