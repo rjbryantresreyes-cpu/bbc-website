@@ -62,18 +62,6 @@
       "slug": "aj-battle-foundation"
     },
     {
-      "name": "Cavalry Group",
-      "owner": "Tre",
-      "handler": "Kenz",
-      "ai": "Ester",
-      "site": "callthecavalrygroup.com",
-      "industry": "Real estate",
-      "status": "active",
-      "notes": "Kenz works this account. Two website builds: A-Beal and B-Military. Main contact: Tre.",
-      "folder": "REAL_CAVALRY",
-      "slug": "cavalry-group"
-    },
-    {
       "name": "3r Design",
       "owner": "-",
       "handler": "Becky / RJ",
@@ -211,6 +199,18 @@
     }
   ],
   "past": [
+    {
+      "name": "Cavalry Group",
+      "owner": "Tre",
+      "handler": "Kenz",
+      "ai": "Ester",
+      "site": "callthecavalrygroup.com",
+      "industry": "Real estate",
+      "status": "past",
+      "notes": "Real-estate client, offboarded 2026-08-01 (Tre ended the engagement). Ended on good terms - Tre is referring other real-estate agents to BBC. Handler was Kenz; AI Ester. Builds: A-Beal, B-Military.",
+      "folder": "REAL_CAVALRY",
+      "slug": "cavalry-group"
+    },
     {
       "name": "All Ryze",
       "owner": "-",
