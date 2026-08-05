@@ -9409,6 +9409,8 @@
   const EMIN='background:#0d1320;border:1px solid #22324d;color:#F5F1EA;border-radius:9px;padding:10px 12px;font-size:14px;font-family:inherit;outline:none';
   const CTAB='white-space:nowrap;cursor:pointer;padding:9px 13px;font-size:13px;color:#8a98ad;border:0;background:transparent;border-bottom:2px solid transparent';
   views.crm=()=>`<h2 class="vt">CRM</h2><div class="vsub">Your whole pipeline, contacts, tasks and campaigns — live from Brevo.</div>
+    <div class="hm-card" style="margin-bottom:14px"><div class="hm-ct">Performance — leads &amp; campaign results</div>
+      <div id="crm-perf"><div class="gauge-sub" style="text-align:left">Loading live numbers…</div></div></div>
     <div style="display:flex;gap:4px;overflow-x:auto;border-bottom:1px solid #1a2436;margin:6px 0 14px">
       <button id="ct-emailwf" class="crmtab" onclick="crmTab('emailwf')" style="${CTAB}">Email Workflows</button>
       <button id="ct-pipeline" class="crmtab" onclick="crmTab('pipeline')" style="${CTAB}">Pipeline</button>
@@ -10351,6 +10353,9 @@
 
     return `<h2 class="vt">Social Media</h2><div class="vsub">Quick post · idea box · mark posted · calendar · analytics</div>
 
+      <div class="hm-card" style="margin-bottom:6px"><div class="hm-ct">📅 Scheduled on Metricool — <b id="soc-mc-total">…</b> posts</div>
+        <div id="soc-mc-cal"><div class="gauge-sub" style="text-align:left">Loading the Metricool calendar…</div></div></div>
+
       <div class="sec">🚀 Quick post — opens composer in a new tab</div>
       <div class="composer-grid">${composerHtml}</div>
 
@@ -10977,6 +10982,52 @@
     hmRenderCharts(F);
   };
 
+  async function hmGet(){ if(window.__hm) return window.__hm; try{ const r=await fetch('home-metrics.json?t='+Date.now(),{cache:'no-store'}); if(r.ok){ const j=await r.json(); if(j&&j.email){ window.__hm=j; return j; } } }catch(e){} return HM_FALLBACK; }
+  window.loadCrmPerf=async()=>{
+    const el=document.getElementById('crm-perf'); if(!el) return;
+    const F=await hmGet(); const nf=n=>Number(n||0).toLocaleString('en-US');
+    const srcCol=['#4ADE80','#C9A961','#C0552E'];
+    const chips=(F.leads&&F.leads.sources||[]).map((s,i)=>`<div style="flex:1;min-width:120px;background:#16253c;border:1px solid var(--line);border-left:3px solid ${srcCol[i%3]};border-radius:10px;padding:10px 12px">
+      <div style="font-family:var(--display);font-size:22px;color:var(--ink)">${nf(s.count)}</div><div class="gauge-sub" style="text-align:left;margin-top:2px">${esc(s.name)}</div></div>`).join('');
+    const bar=(v,c)=>`<div style="flex:1;height:7px;background:#0e1a2e;border-radius:5px;overflow:hidden"><div style="width:${Math.min(100,v)}%;height:100%;background:${c}"></div></div>`;
+    const rows=(F.email&&F.email.campaigns||[]).map(c=>`<div style="display:grid;grid-template-columns:1.4fr .7fr 1.2fr 1.2fr;gap:8px;align-items:center;padding:7px 0;border-top:1px solid #1a2436">
+      <div style="min-width:0"><div style="color:var(--ink);font-size:13px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${esc(c.name)}</div><div class="gauge-sub" style="text-align:left">${esc(c.date)} · ${nf(c.sent)} sent</div></div>
+      <div class="gauge-sub" style="text-align:left"></div>
+      <div style="display:flex;align-items:center;gap:6px">${bar(c.open,'#D4AF37')}<span style="font-family:var(--mono);font-size:11px;color:#D4AF37;width:38px;text-align:right">${c.open}%</span></div>
+      <div style="display:flex;align-items:center;gap:6px">${bar(c.click,'#60A5FA')}<span style="font-family:var(--mono);font-size:11px;color:#60A5FA;width:38px;text-align:right">${c.click}%</span></div>
+    </div>`).join('');
+    el.innerHTML=`<div style="display:flex;gap:9px;flex-wrap:wrap;margin-bottom:12px">${chips}</div>
+      <div style="display:grid;grid-template-columns:1.4fr .7fr 1.2fr 1.2fr;gap:8px;color:var(--muted);font-size:10px;text-transform:uppercase;letter-spacing:.05em"><div>Campaign</div><div></div><div>Open rate</div><div>Click rate</div></div>
+      ${rows||'<div class="gauge-sub" style="text-align:left;margin-top:8px">No recent campaigns.</div>'}
+      <div class="gauge-sub" style="text-align:left;margin-top:10px">Audience ${nf(F.email&&F.email.contacts)} contacts · ${nf(F.email&&F.email.sentToDate)} emails sent to date${F.email&&F.email.avgOpen?' · avg open '+F.email.avgOpen+'%':''}. Updated ${esc(F.updated||'today')}.</div>`;
+  };
+
+  const NET_COLOR={facebook:'#1877F2',instagram:'#E1306C',tiktok:'#25F4EE',youtube:'#FF0000',threads:'#B5B5B5',gmb:'#4285F4',linkedin:'#0A66C2'};
+  window.loadSocialCalendar=async()=>{
+    const el=document.getElementById('soc-mc-cal'); if(!el) return;
+    let cal=null; try{ const r=await fetch('social-calendar.json?t='+Date.now(),{cache:'no-store'}); if(r.ok) cal=await r.json(); }catch(e){}
+    const tot=document.getElementById('soc-mc-total'); if(tot) tot.textContent=(cal&&cal.total)||0;
+    if(!cal||!cal.days||!Object.keys(cal.days).length){ el.innerHTML='<div class="gauge-sub" style="text-align:left">No scheduled posts found. Run a BBC SODR/EODR to refresh.</div>'; return; }
+    const keys=Object.keys(cal.days).sort(); const first=new Date(keys[0]+'T00:00:00'), last=new Date(keys[keys.length-1]+'T00:00:00');
+    const iso=d=>d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+    const gridStart=new Date(first); gridStart.setDate(first.getDate()-first.getDay());
+    const maxC=Math.max(...Object.values(cal.days).map(d=>d.count));
+    const MON=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    let cells='';
+    for(let dt=new Date(gridStart); dt<=last; dt.setDate(dt.getDate()+1)){
+      const k=iso(dt), day=cal.days[k], inRange=dt>=first&&dt<=last;
+      const c=day?day.count:0; const alpha=c?(0.22+0.6*(c/maxC)):0;
+      const dots=day?day.networks.slice(0,7).map(n=>`<span style="width:5px;height:5px;border-radius:50%;background:${NET_COLOR[n]||'#888'};display:inline-block"></span>`).join(''):'';
+      cells+=`<div title="${k}${day?': '+c+' posts · '+day.networks.join(', '):''}" style="aspect-ratio:1;border-radius:7px;border:1px solid ${c?'rgba(212,175,55,.25)':'#1a2740'};background:${c?`rgba(212,175,55,${alpha})`:'#0e1a2e'};opacity:${inRange?1:.35};padding:4px;display:flex;flex-direction:column;justify-content:space-between;min-height:44px">
+        <div style="font-size:10px;color:${dt.getMonth()===first.getMonth()||dt.getMonth()===last.getMonth()?'#cdd6e6':'#6F7E92'}">${dt.getDate()}${dt.getDate()===1?' '+MON[dt.getMonth()]:''}</div>
+        ${c?`<div style="display:flex;justify-content:space-between;align-items:flex-end;gap:2px"><span style="display:flex;gap:2px;flex-wrap:wrap;max-width:60%">${dots}</span><b style="font-size:12px;color:#F5F1EA">${c}</b></div>`:''}</div>`;
+    }
+    const dow=['S','M','T','W','T','F','S'].map(x=>`<div style="text-align:center;font-size:9px;color:#6F7E92;letter-spacing:.05em">${x}</div>`).join('');
+    el.innerHTML=`<div style="display:grid;grid-template-columns:repeat(7,1fr);gap:5px;margin-bottom:4px">${dow}</div>
+      <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:5px">${cells}</div>
+      <div class="gauge-sub" style="text-align:left;margin-top:9px">${esc(cal.windowLabel||'')} · gold = scheduled, dots = networks. <a href="https://app.metricool.com/planner/calendar?blogId=6344379&userId=4888313" target="_blank" rel="noopener" style="color:#C9A961">Open in Metricool ↗</a></div>`;
+  };
+
   /* ---------- ROUTER ---------- */
   /* Chat context per page — opening Cuh from a page auto-files the task under that area */
   const CHAT_CTX={
@@ -11056,7 +11107,7 @@
   window.go=v=>{ window.curView=v; window.curClient=null; window.__curClientSlug=null; app.innerHTML=`<div class="view">${views[v]()}</div>`; window.scrollTo(0,0);
     if(!window.__routing){ var __nh='#'+v; if(location.hash!==__nh){ try{ location.hash=__nh; }catch(e){} } }
     document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('active',b.dataset.v===v));
-    sheet.classList.remove('open'); if(v==='crm'&&window.loadBrevoCrm){ window.loadBrevoCrm(); } if(v==='inbox'&&window.loadInbox) window.loadInbox(); if(v==='home'&&window.loadHomeAttention) window.loadHomeAttention(); if(v==='home'&&window.loadClientTasks) window.loadClientTasks(); if(v==='home'&&window.loadMeetings) window.loadMeetings(); if(v==='home'&&window.loadHomeMetrics) window.loadHomeMetrics(); if(v==='websites'&&window.loadWebsiteLog){ window.loadWebsiteLog(); window.checkBrokenPages(); } if(v==='board'&&window.Board) window.Board.render(); if(v==='team'&&window.TeamChat) window.TeamChat.enter(); if(v==='bruno'&&window.renderVault) window.renderVault(); };
+    sheet.classList.remove('open'); if(v==='crm'&&window.loadBrevoCrm){ window.loadBrevoCrm(); } if(v==='crm'&&window.loadCrmPerf) window.loadCrmPerf(); if(v==='social'&&window.loadSocialCalendar) window.loadSocialCalendar(); if(v==='inbox'&&window.loadInbox) window.loadInbox(); if(v==='home'&&window.loadHomeAttention) window.loadHomeAttention(); if(v==='home'&&window.loadClientTasks) window.loadClientTasks(); if(v==='home'&&window.loadMeetings) window.loadMeetings(); if(v==='home'&&window.loadHomeMetrics) window.loadHomeMetrics(); if(v==='websites'&&window.loadWebsiteLog){ window.loadWebsiteLog(); window.checkBrokenPages(); } if(v==='board'&&window.Board) window.Board.render(); if(v==='team'&&window.TeamChat) window.TeamChat.enter(); if(v==='bruno'&&window.renderVault) window.renderVault(); };
   window.filterCards=(inp,wrapId)=>{ const q=inp.value.toLowerCase(); const wrap=document.getElementById(wrapId);
     wrap.querySelectorAll('.card,.wfrow,.wfcard,.clientbox,.opitem').forEach(c=>{ const hay=(c.dataset.search||c.textContent).toLowerCase(); c.style.display=hay.includes(q)?'':'none'; });
     wrap.querySelectorAll('.wfcat,.wfcat2').forEach(p=>{ const any=[...p.querySelectorAll('.wfrow,.wfcard')].some(r=>r.style.display!=='none'); p.style.display=any?'':'none'; }); };

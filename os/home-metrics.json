@@ -2,37 +2,72 @@
   "updated": "2026-08-06",
   "source": "Brevo API + Metricool API (pulled live). Refreshed on BBC SODR + EODR.",
   "email": {
-    "contacts": 2869,
-    "sentToDate": 2567,
-    "creditsLeft": 235,
-    "avgOpen": 11.2,
+    "contacts": 2867,
+    "sentToDate": 2609,
+    "creditsLeft": 135,
+    "avgOpen": 18.2,
     "campaigns": [
-      { "date": "2026-08-06", "name": "Workflow Newsletter", "open": 24.0, "click": 0.0, "sent": 25 },
-      { "date": "2026-07-28", "name": "Reviews Shoutout", "open": 5.3, "click": 68.4, "sent": 38 },
-      { "date": "2026-07-16", "name": "Review Request", "open": 12.5, "click": 12.5, "sent": 16 },
-      { "date": "2026-07-14", "name": "Reviews Shoutout", "open": 2.9, "click": 14.3, "sent": 36 }
+      {
+        "date": "2026-08-06",
+        "name": "Workflow Newsletter",
+        "open": 52.0,
+        "click": 16.0,
+        "sent": 25
+      },
+      {
+        "date": "2026-07-28",
+        "name": "Reviews Shoutout",
+        "open": 5.3,
+        "click": 68.4,
+        "sent": 38
+      },
+      {
+        "date": "2026-07-16",
+        "name": "Review Request",
+        "open": 12.5,
+        "click": 12.5,
+        "sent": 16
+      },
+      {
+        "date": "2026-07-14",
+        "name": "Reviews Shoutout",
+        "open": 2.9,
+        "click": 14.3,
+        "sent": 36
+      }
     ]
   },
   "leads": {
     "sources": [
-      { "name": "Brevo audience", "count": 2869 },
-      { "name": "JRSS roster", "count": 1800 },
-      { "name": "Austin permits", "count": 176 }
+      {
+        "name": "Brevo audience",
+        "count": 2867
+      },
+      {
+        "name": "JRSS roster",
+        "count": 1800
+      },
+      {
+        "name": "Austin permits",
+        "count": 175
+      }
     ]
   },
   "social": {
-    "scheduled": 219,
-    "days": 35,
-    "windowLabel": "Jul 28 to Aug 31",
+    "scheduled": 263,
+    "days": 43,
+    "windowLabel": "2026-08-04 to 2026-09-15",
     "byNetwork": {
-      "facebook": 219,
-      "instagram": 219,
-      "tiktok": 73,
-      "youtube": 73,
-      "threads": 73,
-      "gmb": 73,
-      "linkedin": 73
+      "facebook": 263,
+      "gmb": 88,
+      "instagram": 263,
+      "linkedin": 88,
+      "threads": 88,
+      "tiktok": 88,
+      "youtube": 88
     }
   },
-  "sites": { "tracked": 11 }
+  "sites": {
+    "tracked": 11
+  }
 }
