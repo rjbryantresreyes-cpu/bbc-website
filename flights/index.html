@@ -100,6 +100,7 @@
 </style>
 </head>
 <body>
+<!-- impeccable-disable marquee -- intentional travel deals / flash-news ticker requested by the owner; has prefers-reduced-motion fallback -->
 <div class="ticker"><div class="track" id="ticker">Loading the cheapest fares…</div></div>
 <div class="hero">
   <div class="wrap">
@@ -171,6 +172,8 @@ const DEST=[
   {c:"Iloilo",code:"ILO",ctry:"Philippines",fl:"🇵🇭",r:"ph",kw:"iloilo",bl:"City of love"},
   {c:"Bacolod",code:"BCD",ctry:"Philippines",fl:"🇵🇭",r:"ph",kw:"bacolod",bl:"City of smiles"},
   {c:"Cagayan de Oro",code:"CGY",ctry:"Philippines",fl:"🇵🇭",r:"ph",kw:"cagayan+de+oro,river",bl:"Adventure capital"},
+  {c:"Zamboanga",code:"ZAM",ctry:"Philippines",fl:"🇵🇭",r:"ph",kw:"zamboanga,philippines",bl:"Asia's Latin City"},
+  {c:"Pagadian",code:"PAG",ctry:"Philippines",fl:"🇵🇭",r:"ph",kw:"pagadian,zamboanga",bl:"Gateway to the South"},
 ];
 const REGIONS=[{k:"all",label:"All",fl:"⭐"},{k:"sale",label:"On Sale",fl:"🔥"},{k:"ph",label:"Local PH",fl:"🇵🇭"},{k:"dream",label:"Dream ♥",fl:"💛"},{k:"asia",label:"Asia",fl:"🌏"},{k:"eu",label:"Europe",fl:"🇪🇺"},{k:"am",label:"Americas",fl:"🌎"},{k:"me",label:"Middle East",fl:"🕌"},{k:"oce",label:"Oceania",fl:"🏝️"},{k:"saved",label:"Saved ♥",fl:"❤️"}];
 const lockOf=s=>{let h=0;for(const ch of String(s))h=(h*31+ch.charCodeAt(0))>>>0;return h%997+1;};
@@ -183,7 +186,7 @@ function boot(){
     DATA=d;cur=d.currency||"PHP";sym=CUR[cur]||"₱";
     d.routes.forEach(r=>routeMap[r.origin+"|"+r.dest]=r);
     let origins=[...new Set(d.routes.map(r=>r.origin))];
-    if(origins.includes("MNL"))origins=["MNL",...origins.filter(o=>o!=="MNL")];
+    if(origins.includes("CEB"))origins=["CEB",...origins.filter(o=>o!=="CEB")];  // Cebu = priority origin
     $("#home").innerHTML=origins.map(o=>`<option value="${o}">${o==="MNL"?"Manila (MNL)":o==="CEB"?"Cebu (CEB)":o}</option>`).join("");
     home=origins[0]||"MNL";
     $("#home").value=home;
