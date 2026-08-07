@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Flights ni Bruno &amp; Co. — cheap flight watch</title>
+<meta name="description" content="A daily-updated database of the cheapest flights from the Philippines and beyond. Balay ni Bruno & Co.">
+<style>
+  :root{
+    --navy:#12233f;--navy-2:#1c3a66;--navy-3:#274b80;--gold:#C79A45;--gold-2:#e0bd6e;--gold-soft:#f0dcae;
+    --cream:#F7F3EC;--ink:#152238;--muted:#71798a;--line:#e8e3d8;--ok:#1f8a5b;--hot:#e0552f;
+    --card:#fff;--bg:#f2f0ec;--r:20px;--r-sm:13px;--shadow:0 10px 34px rgba(18,35,63,.13);--shadow-sm:0 4px 14px rgba(18,35,63,.09);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.5;-webkit-font-smoothing:antialiased;padding-bottom:env(safe-area-inset-bottom)}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 18px}
+  a{color:inherit;text-decoration:none}
+  .ticker{background:var(--navy);color:#fff;font-size:12.5px;padding:8px 0;overflow:hidden;white-space:nowrap;border-bottom:1px solid rgba(255,255,255,.08)}
+  .ticker .track{display:inline-block;padding-left:100%;animation:tick 34s linear infinite}
+  .ticker b{color:var(--gold-2)}.ticker .dot{color:var(--gold);margin:0 14px}
+  @keyframes tick{to{transform:translateX(-100%)}}
+  @media(prefers-reduced-motion:reduce){.ticker .track{animation:none;padding-left:0}}
+  .hero{position:relative;background:radial-gradient(1200px 340px at 78% -10%,rgba(199,154,69,.28),transparent 60%),linear-gradient(150deg,var(--navy),var(--navy-2) 60%,var(--navy-3));color:#fff;padding:26px 0 92px;overflow:hidden}
+  .hero::after{content:"✈";position:absolute;right:6%;top:24px;font-size:120px;opacity:.06;transform:rotate(18deg)}
+  .topbar{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+  .brand{display:flex;align-items:center;gap:11px;font-weight:800}
+  .brand .mark{width:38px;height:38px;border-radius:11px;background:linear-gradient(140deg,var(--gold-2),var(--gold));display:grid;place-items:center;font-size:20px;color:#231a06;box-shadow:0 5px 14px rgba(0,0,0,.28)}
+  .brand h1{font-size:18px}.brand span{color:var(--gold-2)}
+  .pills{display:flex;align-items:center;gap:9px;flex-wrap:wrap}
+  .pill{display:flex;align-items:center;gap:7px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.16);padding:7px 12px;border-radius:999px;font-size:13px;font-weight:600;cursor:pointer;color:#fff}
+  .pill select{background:transparent;border:none;color:#fff;font-weight:700;font-size:13px;cursor:pointer;font-family:inherit}
+  .pill select option{color:#000}
+  .hero-copy{margin-top:22px;max-width:640px}
+  .hero-copy h2{font-size:30px;line-height:1.15;font-weight:800;letter-spacing:-.4px}
+  .hero-copy h2 em{color:var(--gold-2);font-style:normal}
+  .hero-copy p{margin-top:8px;color:#c4d1e6;font-size:14.5px}
+  .fresh{background:var(--card);border-radius:var(--r);box-shadow:var(--shadow);border:1px solid var(--line);margin-top:-46px;position:relative;z-index:5;padding:13px 18px;text-align:center;font-size:13px;color:var(--muted)}
+  .fresh b{color:var(--navy)}
+  section{padding:24px 0 4px}
+  .sec-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px}
+  .sec-head h3{font-size:20px;font-weight:800;letter-spacing:-.2px;display:flex;align-items:center;gap:9px}
+  .sec-head .from{font-size:13px;color:var(--muted);font-weight:600}.sec-head .from b{color:var(--navy)}
+  .tabs{display:flex;gap:8px;overflow-x:auto;padding-bottom:6px}.tabs::-webkit-scrollbar{display:none}
+  .tab{flex:0 0 auto;border:1px solid var(--line);background:#fff;color:var(--ink);padding:9px 16px;border-radius:999px;font-size:13.5px;font-weight:700;cursor:pointer;box-shadow:var(--shadow-sm)}
+  .tab.on{background:var(--navy);color:#fff;border-color:var(--navy)}.tab .fl{margin-right:6px}
+  .rail{display:flex;gap:14px;overflow-x:auto;padding:4px 2px 16px;scroll-snap-type:x mandatory}.rail::-webkit-scrollbar{height:0}
+  .deal{flex:0 0 235px;scroll-snap-align:start;border-radius:var(--r-sm);overflow:hidden;position:relative;height:150px;box-shadow:var(--shadow-sm);cursor:pointer;background:var(--navy-2)}
+  .deal .img{position:absolute;inset:0;background-size:cover;background-position:center}
+  .deal .scrim{position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,20,38,.05),rgba(10,20,38,.82))}
+  .deal .body{position:absolute;left:0;right:0;bottom:0;padding:12px 13px;color:#fff}
+  .deal .city{font-weight:800;font-size:16px;display:flex;align-items:center;gap:7px}.deal .ctry{font-size:12px;color:#d9e2f0;margin-top:1px}
+  .deal .pr{position:absolute;top:10px;right:10px;background:rgba(255,255,255,.95);color:var(--navy);font-weight:900;font-size:14px;padding:4px 10px;border-radius:999px;box-shadow:0 3px 8px rgba(0,0,0,.2)}
+  .deal .tagfire{position:absolute;top:10px;left:10px;background:var(--hot);color:#fff;font-size:10.5px;font-weight:800;padding:3px 8px;border-radius:999px;text-transform:uppercase;letter-spacing:.4px}
+  .grid-dest{display:grid;grid-template-columns:repeat(auto-fill,minmax(232px,1fr));gap:16px}
+  .dcard{background:var(--card);border-radius:var(--r-sm);overflow:hidden;box-shadow:var(--shadow-sm);cursor:pointer;border:1px solid var(--line);position:relative}
+  .dcard .ph{height:150px;position:relative;background:linear-gradient(140deg,var(--navy-2),var(--navy-3))}
+  .dcard .ph .img{position:absolute;inset:0;background-size:cover;background-position:center}
+  .dcard .ph .scrim{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0),rgba(10,20,38,.5))}
+  .dcard .heart{position:absolute;top:9px;right:9px;width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,.9);display:grid;place-items:center;font-size:15px;cursor:pointer;z-index:3;color:#c2c8d0;border:none}
+  .dcard .heart.on{color:var(--hot)}
+  .dcard .flag{position:absolute;left:11px;bottom:9px;font-size:13px;color:#fff;font-weight:800;display:flex;align-items:center;gap:7px;text-shadow:0 1px 4px rgba(0,0,0,.5)}.dcard .flag .fl{font-size:18px}
+  .dcard .info{padding:11px 13px 13px}
+  .dcard .ctry{font-size:12px;color:var(--muted);font-weight:600}.dcard .blurb{font-size:12px;color:var(--muted);margin-top:2px;height:16px;overflow:hidden}
+  .dcard .fare{display:flex;align-items:baseline;justify-content:space-between;margin-top:9px}
+  .dcard .fare .from{font-size:11px;color:var(--muted);font-weight:600}.dcard .fare .amt{font-size:19px;font-weight:900;color:var(--navy)}
+  .dcard .fare .amt.na{font-size:12px;color:#b9bfc9;font-weight:700}
+  .dcard .badge{display:inline-flex;align-items:center;gap:4px;font-size:10.5px;font-weight:800;padding:2px 7px;border-radius:999px;margin-top:6px}
+  .dcard .badge.ns{background:#e6f5ee;color:var(--ok)}.dcard .badge.sale{background:var(--hot);color:#fff}
+  .empty{text-align:center;color:var(--muted);padding:30px;font-size:14px}
+  .back{display:inline-flex;align-items:center;gap:7px;background:#fff;border:1px solid var(--line);border-radius:999px;padding:9px 16px;font-size:13.5px;font-weight:700;cursor:pointer;box-shadow:var(--shadow-sm);margin:18px 0 4px}
+  #detailView,#dbView{display:none}
+  .dhead{background:var(--card);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow-sm);padding:18px;margin-top:12px;display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap}
+  .dhead h3{font-size:22px;font-weight:900;color:var(--navy)}.dhead .sub{font-size:13px;color:var(--muted);margin-top:3px}
+  .dhead .big{font-size:26px;font-weight:900;color:var(--navy)}.dhead .big small{font-size:12px;color:var(--muted);font-weight:700}
+  .salebar{background:linear-gradient(135deg,#fff3ee,#ffe6dc);border:1px solid #f4c3ae;border-radius:12px;padding:11px 15px;margin-top:12px;font-weight:800;color:#a8371a}
+  .hist svg{background:#fbfaf6;border:1px solid var(--line);border-radius:10px;margin-top:12px}
+  .rcard{background:var(--card);border:1px solid var(--line);border-radius:var(--r-sm);box-shadow:var(--shadow-sm);padding:15px 16px;margin-bottom:12px;display:flex;gap:14px;align-items:center}
+  .rcard .main{flex:1;min-width:0}
+  .airline{font-weight:800;font-size:14.5px;color:var(--navy)}
+  .times{display:flex;align-items:center;gap:12px;margin-top:9px}.times .t{font-size:20px;font-weight:800}.times small{font-size:11px;color:var(--muted);font-weight:700}
+  .times .path{flex:1;display:flex;flex-direction:column;align-items:center;color:var(--muted);gap:3px;min-width:74px}
+  .times .path .ln{width:100%;height:2px;background:var(--line);position:relative}
+  .times .path .ln::after{content:"✈";position:absolute;right:-2px;top:-9px;font-size:11px;color:var(--gold)}
+  .times .path .lbl{font-size:11px;font-weight:700}
+  .rsub{margin-top:8px;font-size:12.5px;color:var(--muted)}.rsub .ns{color:var(--ok);font-weight:800}
+  .rprice{text-align:right}.rprice .amt{font-size:22px;font-weight:900;color:var(--navy)}.rprice .cur{font-size:12px;color:var(--muted);font-weight:700}
+  .gnote{text-align:center;font-size:12.5px;color:var(--muted);margin:16px 2px}
+  .gnote a{color:var(--navy-3);font-weight:700;text-decoration:underline}
+  .db-toolbar{display:flex;gap:10px;justify-content:space-between;flex-wrap:wrap;margin-bottom:14px}
+  .db-toolbar input{max-width:340px;border:1px solid var(--line);border-radius:11px;padding:11px 13px;font-size:15px}
+  .db-table{background:var(--card);border:1px solid var(--line);border-radius:var(--r-sm);box-shadow:var(--shadow-sm);overflow:hidden}
+  .db-row{display:grid;grid-template-columns:2fr 1fr 1fr 1.3fr auto;gap:10px;align-items:center;padding:13px 16px;border-bottom:1px solid var(--line);cursor:pointer;font-size:13.5px}
+  .db-row:last-child{border-bottom:none}.db-row:hover{background:#faf8f3}
+  .db-row.head{background:#f6f4ef;font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.4px;color:var(--muted);cursor:default}
+  .db-route{font-weight:800;color:var(--navy);display:flex;align-items:center;gap:8px}.db-route .fl{font-size:17px}.db-route small{color:var(--muted);font-weight:600}
+  .db-latest{font-weight:900;color:var(--navy)}.db-low{color:var(--ok);font-weight:800}
+  .db-go{background:var(--navy);color:#fff;border:none;border-radius:999px;padding:6px 12px;font-size:12px;font-weight:700;cursor:pointer}
+  footer{padding:34px 0 46px;text-align:center;color:var(--muted);font-size:12px;margin-top:20px}footer b{color:var(--navy)}
+  @media(max-width:560px){.hero-copy h2{font-size:24px}.db-row{grid-template-columns:1.6fr 1fr 1fr auto}.db-col-low{display:none}}
+</style>
+</head>
+<body>
+<div class="ticker"><div class="track" id="ticker">Loading the cheapest fares…</div></div>
+<div class="hero">
+  <div class="wrap">
+    <div class="topbar">
+      <div class="brand"><div class="mark">✈</div><h1>Flights ni Bruno <span>&amp; Co.</span></h1></div>
+      <div class="pills">
+        <button class="pill" id="navData">📊 Full database</button>
+        <div class="pill">📍 From <select id="home"><option value="MNL">Manila (MNL)</option><option value="CEB">Cebu (CEB)</option></select></div>
+      </div>
+    </div>
+    <div class="hero-copy"><h2>The cheapest flights, <em>already found.</em></h2>
+      <p>A database of the lowest fares we track daily, so you never have to check five sites. Local and international.</p></div>
+  </div>
+</div>
+<div class="wrap">
+  <div class="fresh" id="fresh">Loading…</div>
+  <div id="discoverView">
+    <section><div class="sec-head"><h3>🔥 Cheapest right now</h3><div class="from">from <b id="fromLbl">Manila</b></div></div>
+      <div class="rail" id="dealsRail"></div></section>
+    <section><div class="sec-head"><h3>Browse destinations</h3></div>
+      <div class="tabs" id="regionTabs"></div><div style="height:14px"></div>
+      <div class="grid-dest" id="destGrid"></div></section>
+  </div>
+  <div id="detailView"><button class="back" id="backD">← Back</button><div id="detail"></div></div>
+  <div id="dbView"><button class="back" id="backDb">← Back</button>
+    <section style="padding-top:16px"><div class="sec-head"><h3>📊 Fares database</h3><div class="from" id="dbTotals"></div></div>
+      <div class="db-toolbar"><input id="dbFilter" placeholder="Filter by city, country or code…"></div>
+      <div id="dbWrap"></div></section></div>
+</div>
+<footer>A daily-updated flight-deal database. Built by <b>Balay ni Bruno &amp; Co.</b> · prices are a daily snapshot, tap a route to see options.</footer>
+<script>
+const $=s=>document.querySelector(s);
+const CUR={PHP:"₱",USD:"$",EUR:"€",GBP:"£"};
+let DATA=null,routeMap={},home="MNL",region="all",sym="₱",cur="PHP";
+let saved=JSON.parse(localStorage.getItem("fnb_saved")||"[]");
+const DEST=[
+  {c:"Tokyo",code:"TYO",ctry:"Japan",fl:"🇯🇵",r:"asia",kw:"tokyo,japan",bl:"Neon nights"},
+  {c:"Singapore",code:"SIN",ctry:"Singapore",fl:"🇸🇬",r:"asia",kw:"singapore,marina",bl:"Garden city"},
+  {c:"Seoul",code:"ICN",ctry:"South Korea",fl:"🇰🇷",r:"asia",kw:"seoul,korea",bl:"K-culture capital"},
+  {c:"Bangkok",code:"BKK",ctry:"Thailand",fl:"🇹🇭",r:"asia",kw:"bangkok,temple",bl:"Street food heaven"},
+  {c:"Bali",code:"DPS",ctry:"Indonesia",fl:"🇮🇩",r:"asia",kw:"bali,beach",bl:"Island of the gods",dream:1},
+  {c:"Hong Kong",code:"HKG",ctry:"Hong Kong",fl:"🇭🇰",r:"asia",kw:"hong+kong,skyline",bl:"Skyline & dim sum"},
+  {c:"Taipei",code:"TPE",ctry:"Taiwan",fl:"🇹🇼",r:"asia",kw:"taipei,taiwan",bl:"Night markets"},
+  {c:"Osaka",code:"KIX",ctry:"Japan",fl:"🇯🇵",r:"asia",kw:"osaka,castle",bl:"Kitchen of Japan"},
+  {c:"Dubai",code:"DXB",ctry:"UAE",fl:"🇦🇪",r:"me",kw:"dubai,desert",bl:"Desert future city",dream:1},
+  {c:"Doha",code:"DOH",ctry:"Qatar",fl:"🇶🇦",r:"me",kw:"doha,qatar",bl:"Gulf gateway"},
+  {c:"Istanbul",code:"IST",ctry:"Türkiye",fl:"🇹🇷",r:"me",kw:"istanbul,mosque",bl:"Two continents",dream:1},
+  {c:"Paris",code:"CDG",ctry:"France",fl:"🇫🇷",r:"eu",kw:"paris,eiffel",bl:"City of light",dream:1},
+  {c:"London",code:"LHR",ctry:"United Kingdom",fl:"🇬🇧",r:"eu",kw:"london,bigben",bl:"Timeless & grand"},
+  {c:"Rome",code:"FCO",ctry:"Italy",fl:"🇮🇹",r:"eu",kw:"rome,colosseum",bl:"Ancient wonders",dream:1},
+  {c:"Barcelona",code:"BCN",ctry:"Spain",fl:"🇪🇸",r:"eu",kw:"barcelona,gaudi",bl:"Gaudí & tapas"},
+  {c:"Amsterdam",code:"AMS",ctry:"Netherlands",fl:"🇳🇱",r:"eu",kw:"amsterdam,canal",bl:"Canals & bikes"},
+  {c:"Santorini",code:"JTR",ctry:"Greece",fl:"🇬🇷",r:"eu",kw:"santorini,white",bl:"Blue domes",dream:1},
+  {c:"Zurich",code:"ZRH",ctry:"Switzerland",fl:"🇨🇭",r:"eu",kw:"zurich,alps",bl:"Alpine calm"},
+  {c:"New York",code:"JFK",ctry:"USA",fl:"🇺🇸",r:"am",kw:"new+york,manhattan",bl:"The big apple",dream:1},
+  {c:"Los Angeles",code:"LAX",ctry:"USA",fl:"🇺🇸",r:"am",kw:"los+angeles",bl:"Sun & screens"},
+  {c:"Vancouver",code:"YVR",ctry:"Canada",fl:"🇨🇦",r:"am",kw:"vancouver,mountain",bl:"Sea meets mountains"},
+  {c:"Cancún",code:"CUN",ctry:"Mexico",fl:"🇲🇽",r:"am",kw:"cancun,beach",bl:"Caribbean blue",dream:1},
+  {c:"Sydney",code:"SYD",ctry:"Australia",fl:"🇦🇺",r:"oce",kw:"sydney,opera",bl:"Harbour city",dream:1},
+  {c:"Auckland",code:"AKL",ctry:"New Zealand",fl:"🇳🇿",r:"oce",kw:"auckland",bl:"City of sails"},
+  {c:"Maldives",code:"MLE",ctry:"Maldives",fl:"🇲🇻",r:"asia",kw:"maldives,overwater",bl:"Overwater dream",dream:1},
+  {c:"Cebu",code:"CEB",ctry:"Philippines",fl:"🇵🇭",r:"ph",kw:"cebu,island",bl:"Island hopping"},
+  {c:"Boracay",code:"MPH",ctry:"Philippines",fl:"🇵🇭",r:"ph",kw:"boracay,beach",bl:"White beach",dream:1},
+  {c:"Palawan",code:"PPS",ctry:"Philippines",fl:"🇵🇭",r:"ph",kw:"palawan,el+nido",bl:"Underground river",dream:1},
+  {c:"Coron",code:"USU",ctry:"Philippines",fl:"🇵🇭",r:"ph",kw:"coron,lagoon",bl:"Island lagoons",dream:1},
+  {c:"Siargao",code:"IAO",ctry:"Philippines",fl:"🇵🇭",r:"ph",kw:"siargao,surf",bl:"Surf island",dream:1},
+  {c:"Bohol",code:"TAG",ctry:"Philippines",fl:"🇵🇭",r:"ph",kw:"bohol,chocolate+hills",bl:"Chocolate hills"},
+  {c:"Davao",code:"DVO",ctry:"Philippines",fl:"🇵🇭",r:"ph",kw:"davao,mount+apo",bl:"Durian & Mt Apo"},
+  {c:"Iloilo",code:"ILO",ctry:"Philippines",fl:"🇵🇭",r:"ph",kw:"iloilo",bl:"City of love"},
+  {c:"Bacolod",code:"BCD",ctry:"Philippines",fl:"🇵🇭",r:"ph",kw:"bacolod",bl:"City of smiles"},
+  {c:"Cagayan de Oro",code:"CGY",ctry:"Philippines",fl:"🇵🇭",r:"ph",kw:"cagayan+de+oro,river",bl:"Adventure capital"},
+];
+const REGIONS=[{k:"all",label:"All",fl:"⭐"},{k:"sale",label:"On Sale",fl:"🔥"},{k:"ph",label:"Local PH",fl:"🇵🇭"},{k:"dream",label:"Dream ♥",fl:"💛"},{k:"asia",label:"Asia",fl:"🌏"},{k:"eu",label:"Europe",fl:"🇪🇺"},{k:"am",label:"Americas",fl:"🌎"},{k:"me",label:"Middle East",fl:"🕌"},{k:"oce",label:"Oceania",fl:"🏝️"},{k:"saved",label:"Saved ♥",fl:"❤️"}];
+const lockOf=s=>{let h=0;for(const ch of String(s))h=(h*31+ch.charCodeAt(0))>>>0;return h%997+1;};
+const img=(kw,seed)=>`https://loremflickr.com/480/300/${kw}?lock=${lockOf(seed||kw)}`;
+const meta=code=>DEST.find(d=>d.code===code)||{c:code,ctry:"",fl:"✈"};
+const rt=code=>routeMap[home+"|"+code];
+
+function boot(){
+  fetch("data.json?"+Date.now()).then(r=>r.json()).then(d=>{
+    DATA=d;cur=d.currency||"PHP";sym=CUR[cur]||"₱";
+    d.routes.forEach(r=>routeMap[r.origin+"|"+r.dest]=r);
+    let origins=[...new Set(d.routes.map(r=>r.origin))];
+    if(origins.includes("MNL"))origins=["MNL",...origins.filter(o=>o!=="MNL")];
+    $("#home").innerHTML=origins.map(o=>`<option value="${o}">${o==="MNL"?"Manila (MNL)":o==="CEB"?"Cebu (CEB)":o}</option>`).join("");
+    home=origins[0]||"MNL";
+    $("#home").value=home;
+    $("#fromLbl").textContent=($("#home").selectedOptions[0]||{}).text?.replace(/\s*\(.+\)/,"")||home;
+    renderFresh();renderTabs();renderGrid();renderDeals();ticker();
+  }).catch(e=>{$("#fresh").innerHTML="Could not load the flight database.";});
+}
+function renderFresh(){
+  const n=DATA.routes.filter(r=>r.cheapest).length;
+  let when="";if(DATA.generated_at){const dd=new Date(DATA.generated_at);when=dd.toLocaleString(undefined,{month:"short",day:"numeric",hour:"2-digit",minute:"2-digit"});}
+  $("#fresh").innerHTML=`🗄️ <b>${n}</b> routes tracked · prices are a snapshot auto-updated daily${when?` · last update <b>${when}</b>`:""}`;
+}
+$("#home").addEventListener("change",()=>{home=$("#home").value;$("#fromLbl").textContent=$("#home").selectedOptions[0].text.replace(/\s*\(.+\)/,"");renderGrid();renderDeals();ticker();});
+$("#navData").onclick=showDb;$("#backDb").onclick=showDiscover;$("#backD").onclick=showDiscover;
+$("#dbFilter")&&$("#dbFilter").addEventListener("input",renderDb);
+
+function renderTabs(){
+  $("#regionTabs").innerHTML=REGIONS.map(r=>`<button class="tab ${r.k===region?'on':''}" data-r="${r.k}"><span class="fl">${r.fl}</span>${r.label}</button>`).join("");
+  $("#regionTabs").querySelectorAll(".tab").forEach(b=>b.onclick=()=>{region=b.dataset.r;renderTabs();renderGrid();});
+}
+function filtered(){
+  if(region==="all")return DEST;
+  if(region==="dream")return DEST.filter(d=>d.dream);
+  if(region==="saved")return DEST.filter(d=>saved.includes(d.code));
+  if(region==="sale")return DEST.filter(d=>{const r=rt(d.code);return r&&r.sale&&r.sale.is_sale;});
+  return DEST.filter(d=>d.r===region);
+}
+function renderGrid(){
+  const list=filtered();
+  if(!list.length){$("#destGrid").innerHTML=`<div class="empty">${region==="sale"?"No sales in the database right now. We flag a route when its fare drops below normal.":region==="saved"?"No saved destinations yet. Tap ♥ on any card.":"Nothing here yet."}</div>`;return;}
+  $("#destGrid").innerHTML=list.map(d=>{
+    const r=rt(d.code),isSaved=saved.includes(d.code);
+    let fare=`<span class="amt na">no data</span>`,badge="";
+    if(r&&r.cheapest){fare=`<span class="amt">${sym}${r.cheapest}</span>`;
+      if(r.sale&&r.sale.is_sale)badge+=`<span class="badge sale">🔥 SALE −${r.sale.pct}%</span>`;
+      if(r.nonstop)badge+=`<span class="badge ns">Nonstop</span>`;}
+    return `<div class="dcard" data-code="${d.code}">
+      <div class="ph"><div class="img" style="background-image:url('${img(d.kw,d.code)}')"></div><div class="scrim"></div>
+      <button class="heart ${isSaved?'on':''}" data-heart="${d.code}">${isSaved?'♥':'♡'}</button>
+      <div class="flag"><span class="fl">${d.fl}</span>${d.c}</div></div>
+      <div class="info"><div class="ctry">${d.ctry}</div><div class="blurb">${d.bl}</div>
+      <div class="fare"><span class="from">from</span>${fare}</div>${badge}</div></div>`;
+  }).join("");
+  $("#destGrid").querySelectorAll(".dcard").forEach(el=>el.onclick=e=>{if(e.target.closest(".heart"))return;openDetail(el.dataset.code);});
+  $("#destGrid").querySelectorAll(".heart").forEach(h=>h.onclick=e=>{e.stopPropagation();const c=h.dataset.heart;saved=saved.includes(c)?saved.filter(x=>x!==c):[...saved,c];localStorage.setItem("fnb_saved",JSON.stringify(saved));renderGrid();});
+}
+function renderDeals(){
+  const withP=DEST.map(d=>({d,r:rt(d.code)})).filter(x=>x.r&&x.r.cheapest).sort((a,b)=>a.r.cheapest-b.r.cheapest).slice(0,8);
+  if(!withP.length){$("#dealsRail").innerHTML=`<div class="empty" style="padding:14px">No fares yet for ${home}. The daily update is still gathering.</div>`;return;}
+  const lo=withP[0].r.cheapest;
+  $("#dealsRail").innerHTML=withP.map(({d,r})=>`<div class="deal" data-code="${d.code}">
+    <div class="img" style="background-image:url('${img(d.kw,d.code)}')"></div><div class="scrim"></div>
+    ${(r.sale&&r.sale.is_sale)?'<span class="tagfire">🔥 Sale</span>':(r.cheapest<=lo*1.1?'<span class="tagfire">🔥 Hot</span>':'')}
+    <div class="pr">${sym}${r.cheapest}</div>
+    <div class="body"><div class="city"><span>${d.fl}</span>${d.c}</div><div class="ctry">${d.ctry}${r.nonstop?' · nonstop':''}</div></div></div>`).join("");
+  $("#dealsRail").querySelectorAll(".deal").forEach(el=>el.onclick=()=>openDetail(el.dataset.code));
+}
+function ticker(){
+  const withP=DEST.map(d=>({d,r:rt(d.code)})).filter(x=>x.r&&x.r.cheapest).sort((a,b)=>a.r.cheapest-b.r.cheapest).slice(0,7);
+  const nm=$("#home").selectedOptions[0].text.replace(/\s*\(.+\)/,"");
+  let msg=withP.length?`✈ Cheapest from ${nm}: `+withP.map(({d,r})=>`<b>${d.c} ${sym}${r.cheapest}</b>`).join('<span class="dot">•</span>'):"Gathering the cheapest fares…";
+  $("#ticker").innerHTML=(msg+' <span class="dot">•</span> ').repeat(2);
+}
+function showDiscover(){$("#detailView").style.display="none";$("#dbView").style.display="none";$("#discoverView").style.display="block";}
+function showDetail(){$("#discoverView").style.display="none";$("#dbView").style.display="none";$("#detailView").style.display="block";window.scrollTo({top:0,behavior:"smooth"});}
+function showDb(){$("#discoverView").style.display="none";$("#detailView").style.display="none";$("#dbView").style.display="block";window.scrollTo({top:0,behavior:"smooth"});renderDb();}
+
+function spark(hist){
+  const pts=hist.map(h=>h.price);if(pts.length<1)return"";
+  const lo=Math.min(...pts),hi=Math.max(...pts),W=260,H=52,p=6;
+  const path=hist.map((h,i)=>{const x=hist.length>1?p+i*(W-2*p)/(hist.length-1):W/2;const y=hi>lo?H-p-(h.price-lo)/(hi-lo)*(H-2*p):H/2;return `${x.toFixed(1)},${y.toFixed(1)}`;}).join(" ");
+  return `<svg width="${W}" height="${H}"><polyline points="${path}" fill="none" stroke="#1c3a66" stroke-width="2"/></svg>`;
+}
+function openDetail(code){
+  const d=meta(code),r=rt(code);showDetail();
+  if(!r||!r.cheapest){$("#detail").innerHTML=`<div class="dhead"><div><h3>${d.fl} ${d.c}</h3><div class="sub">${home} → ${code}</div></div></div><div class="empty">No fares gathered for this route yet. The daily update will fill it in.</div>`;return;}
+  const dt=r.date?new Date(r.date).toLocaleDateString(undefined,{weekday:"short",month:"short",day:"numeric"}):"";
+  const saleBar=(r.sale&&r.sale.is_sale)?`<div class="salebar">🔥 SEAT SALE −${r.sale.pct}% — this is well below the normal fare for this route.</div>`:"";
+  const lo=r.history&&r.history.length?Math.min(...r.history.map(h=>h.price)):r.cheapest;
+  let flights="";
+  if(r.flights&&r.flights.length){
+    flights=`<div class="sec-head" style="margin:22px 2px 10px"><h3 style="font-size:16px">Flights on ${r.flights_date?new Date(r.flights_date).toLocaleDateString(undefined,{month:"short",day:"numeric"}):dt}</h3></div>`+
+    r.flights.map(f=>{const air=(f.airlines||[]).join(", ")||"Flight";const stop=f.stops===0?`<span class="ns">Nonstop</span>`:`${f.stops} stop${f.stops>1?"s":""}${(f.layovers||[]).length?` · ${f.layovers.map(l=>l.airport).join(", ")}`:""}`;
+      return `<div class="rcard"><div class="main"><div class="airline">${air}</div>
+        <div class="times"><div><div class="t">${f.dep_time||""}</div><small>${f.origin||home}</small></div>
+        <div class="path"><div class="lbl">${f.total_duration_h||""}</div><div class="ln"></div><div class="lbl">${stop}</div></div>
+        <div style="text-align:right"><div class="t">${f.arr_time||""}${f.overnight?' <span style="color:var(--hot);font-weight:800">+1</span>':''}</div><small>${f.destination||code}</small></div></div>
+        <div class="rsub">${f.dep_date||""}${f.carbon_kg?` · 🌱 ${f.carbon_kg}kg`:""}</div></div>
+        <div class="rprice"><div class="amt">${sym}${f.price}</div><div class="cur">${cur}</div></div></div>`;}).join("");
+  }else{
+    flights=`<div class="gnote">Flight-by-flight details refresh with the daily update. For now, the cheapest tracked fare is shown above.</div>`;
+  }
+  $("#detail").innerHTML=`<div class="dhead">
+      <div><h3>${d.fl} ${d.c}</h3><div class="sub">${d.ctry} · ${home} → ${code}${r.nonstop?" · nonstop available":""}</div></div>
+      <div style="text-align:right"><div class="big">${sym}${r.cheapest}</div><div class="sub">cheapest tracked${dt?` · around ${dt}`:""}</div></div>
+    </div>
+    ${saleBar}
+    ${r.history&&r.history.length>1?`<div class="hist"><div style="font-size:12px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin:14px 2px 0">Price history</div>${spark(r.history)}<div class="sub" style="margin-top:6px;color:var(--muted);font-size:12.5px">Lowest seen <b style="color:var(--ok)">${sym}${lo}</b> across ${r.history.length} checks</div></div>`:""}
+    ${flights}
+    <div class="gnote">To book, search this route on <a href="https://www.google.com/travel/flights?q=Flights%20to%20${code}%20from%20${home}" target="_blank" rel="noopener">Google Flights</a> or the airline. Prices here are a daily snapshot, not a live booking.</div>`;
+}
+function renderDb(){
+  let rows=DATA.routes.filter(r=>r.cheapest);
+  const q=($("#dbFilter").value||"").trim().toLowerCase();
+  if(q)rows=rows.filter(r=>{const m=meta(r.dest);return r.dest.toLowerCase().includes(q)||r.origin.toLowerCase().includes(q)||m.c.toLowerCase().includes(q)||(m.ctry||"").toLowerCase().includes(q);});
+  rows.sort((a,b)=>a.cheapest-b.cheapest);
+  $("#dbTotals").innerHTML=`<b>${rows.length}</b> routes`;
+  const head=`<div class="db-row head"><div>Route</div><div>Cheapest</div><div class="db-col-low">Lowest seen</div><div>Checks</div><div></div></div>`;
+  const body=rows.map(r=>{const m=meta(r.dest);const lo=r.history&&r.history.length?Math.min(...r.history.map(h=>h.price)):r.cheapest;
+    return `<div class="db-row" data-code="${r.dest}" data-o="${r.origin}"><div class="db-route"><span class="fl">${m.fl}</span>${m.c} <small>${r.origin}→${r.dest}</small></div>
+      <div class="db-latest">${sym}${r.cheapest}${(r.sale&&r.sale.is_sale)?' 🔥':''}</div><div class="db-low">${sym}${lo}</div>
+      <div>${(r.history||[]).length}</div><button class="db-go">Open</button></div>`;}).join("");
+  $("#dbWrap").innerHTML=`<div class="db-table">${head}${body}</div>`;
+  $("#dbWrap").querySelectorAll(".db-row[data-code]").forEach(el=>el.onclick=()=>{home=el.dataset.o;$("#home").value=home;openDetail(el.dataset.code);});
+}
+boot();
+</script>
+</body>
+</html>

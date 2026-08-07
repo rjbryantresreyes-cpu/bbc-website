@@ -6,6 +6,14 @@
 <!-- deploy-trigger 2026-07-04: Workflows page — clickable deliverable checkboxes + shared two-way sync store (os/index.html + new function). -->
 <!-- deploy-trigger 2026-07-21: New 5-star Google review from Rebekah Severi (Freccia). -->
 <!-- deploy-trigger 2026-07-22: New client onboarded — BILT 2 Travel added across the site. -->
+<!-- deploy-trigger 2026-08-08: Flights ni Bruno & Co. — new /flights page (daily flight-deal database, static, reads flights/data.json). -->
+
+# 🟡 STAGED 2026-08-08 — Flights ni Bruno & Co. (`/flights`)
+
+**Deploy at BBC eodr.** A daily-updated cheapest-fares database (local PH + international), family-facing, at `balaynibruno.co/flights`. Static site; data comes from `flights/data.json`, which the PC's daily job (`C:\BBC\flights-ni-bruno\daily_update.py`, scheduled 8AM) regenerates via `export_db.py`. No backend needed on Netlify — the app just reads the JSON.
+
+**New files:** `flights/index.html`, `flights/data.json`.
+**After deploy:** verify `balaynibruno.co/flights` returns 200 and loads the deals grid. Data refreshes each day the PC runs the daily job; it goes live on the next deploy.
 
 # ✅ SHIPPED 2026-07-22 — New client: BILT 2 Travel (Dwight Campbell) (commit ce6be1f)
 

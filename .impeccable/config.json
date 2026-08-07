@@ -1,0 +1,26 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "marquee",
+        "value": "*",
+        "files": [
+          "flights/index.html"
+        ],
+        "createdAt": "2026-08-07T16:09:35.543Z",
+        "reason": "Intentional travel deals/flash-news ticker requested by RJ; has prefers-reduced-motion fallback"
+      },
+      {
+        "rule": "marquee",
+        "value": "*",
+        "files": [
+          "C:\\BBC\\bbc-website\\flights\\index.html"
+        ],
+        "createdAt": "2026-08-07T16:33:22.688Z",
+        "reason": "Intentional travel deals/flash-news ticker requested by RJ; prefers-reduced-motion fallback present"
+      }
+    ]
+  }
+}
