@@ -2,6 +2,19 @@
   "_note": "Canonical source of truth for BBC clients. Edit HERE; sync-dashboard.mjs writes /os from this. Categories: active | of | prospect | past. Folder auto-add is OFF, so a client only appears when added here.",
   "active": [
     {
+      "name": "Cherry Sage",
+      "owner": "Beverly Cherry",
+      "handler": "RJ",
+      "ai": "Cherry Sage AI",
+      "site": "cherrysage.com",
+      "industry": "Psychic, numerology & tarot readings (phone) — B2C, international",
+      "status": "active",
+      "notes": "Signed 2026-08-11, started 2026-08-12. Full partnership ($2000/mo): website redesign + SEO/AI-visibility (she lost search rankings after a site migration — her #1 need), social, email, funnels, and her own Cherry Sage AI (built in Claude). Brand: professional, trustworthy, warm, some mystical elements but NEVER witchy/voodoo/fortune-telling; established high-profile look. Owner Beverly Cherry (sole decision-maker), cherry38@cherrysage.com, WhatsApp, very hands-on. Also on build list: online status indicator (green/orange/red).",
+      "slug": "cherry-sage",
+      "link": "/cherry-sage",
+      "folder": "CHERRY-SAGE"
+    },
+    {
       "name": "S. Riviere Hair Collection",
       "owner": "Sonya Riviere",
       "handler": "Daryl",
@@ -32,8 +45,8 @@
       "ai": "Homie",
       "site": "homevisionstudio.com",
       "industry": "Shopify store, design centers",
-      "status": "active",
-      "notes": "Handled by RJ directly (Al no longer working). Shopify build. Homie = BBC's all-in-one AI for HVS.",
+      "status": "hold",
+      "notes": "ON HOLD (paused) since 2026-08-12 — daily client-care routines paused. Kept listed as current publicly. Handled by RJ directly. Shopify build. Homie = BBC's all-in-one AI for HVS.",
       "folder": "HOME-VISION-STUDIO",
       "slug": "home-vision-studio"
     },
@@ -44,8 +57,8 @@
       "ai": "-",
       "site": "firstclass-finishes.com",
       "industry": "Commercial painting + roofing + storm-damage roofing, Texas",
-      "status": "active",
-      "notes": "Combined account (Ryan C.). First Class Finishes = commercial painting + roofing (firstclass-finishes.com); Hi-Up Roofing = storm-damage roofing + insurance SEO (hi-uproofing.com).",
+      "status": "hold",
+      "notes": "ON HOLD (paused) since 2026-08-12 — daily client-care routines paused. Kept listed as current publicly. Combined account (Ryan C.). First Class Finishes = commercial painting + roofing (firstclass-finishes.com); Hi-Up Roofing = storm-damage roofing + insurance SEO (hi-uproofing.com).",
       "folder": "FIRST-CLASS-FINISHES",
       "slug": "first-class-finishes"
     },
