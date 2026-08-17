@@ -186,6 +186,10 @@
 <input type="hidden" name="form-name" value="optimism-message-approval">
 <p style="display:none;"><label>Leave this empty: <input name="bot-field"></label></p>
 
+<!-- Filled in by script at submit. Declared statically so Netlify registers and stores them. -->
+<input type="hidden" name="WHAT CHANGED" id="whatChanged" value="">
+<textarea name="MESSAGES HE ADDED" id="addedAgg" style="display:none"></textarea>
+
 <h2 class="sec"><span class="n">1.</span> What we need from you</h2>
 <p class="lede">Six answers. These are the gaps we will not fill in ourselves, because guessing on your offer or your numbers is how a business gets in trouble.</p>
 
@@ -468,7 +472,7 @@ Optimism Consulting Firm LLC</textarea>
       card.innerHTML =
         '<div class="tag"><span class="num">Your message ' + extra + '</span>' +
         '<span class="when">Section ' + sec + ' · added by you</span></div>' +
-        '<textarea name="Added by client ' + extra + ' (section ' + sec + ')" ' +
+        '<textarea data-added="Section ' + sec + '" ' +
         'placeholder="Write it however you would say it. Tell us when it should go out too."></textarea>';
       box.appendChild(card);
       var newTa = card.querySelector('textarea');
@@ -483,19 +487,33 @@ Optimism Consulting Firm LLC</textarea>
     btn.disabled = true;
     btn.textContent = 'Sending...';
 
-    var fd = new FormData(form);
-    fd.set('form-name', 'optimism-message-approval');
-
-    // Mark each message approved or edited so RJ can see at a glance what changed.
+    // Summarise what he touched into one static field, so RJ sees it at a glance.
+    var editedList = [], keptList = [];
     cards.forEach(function(card){
       var ta = card.querySelector('textarea[data-orig]');
       if(!ta) return;
-      var changed = ta.value.trim() !== ta.dataset.original.trim();
-      fd.set(ta.getAttribute('name') + ' — STATUS', changed ? 'EDITED BY CLIENT' : 'APPROVED AS WRITTEN');
-      if(changed){
-        fd.set(ta.getAttribute('name') + ' — ORIGINAL', ta.dataset.original);
+      var label = ta.getAttribute('name');
+      if(ta.value.trim() !== ta.dataset.original.trim()){
+        editedList.push(label + '\n   WAS: ' + ta.dataset.original.trim());
+      } else {
+        keptList.push(label);
       }
     });
+    document.getElementById('whatChanged').value =
+      (editedList.length
+        ? 'HE CHANGED ' + editedList.length + ':\n' + editedList.join('\n')
+        : 'He changed nothing. Every message approved exactly as written.') +
+      '\n\nAPPROVED AS WRITTEN: ' + (keptList.length ? keptList.join(', ') : 'none');
+
+    // Roll any messages he wrote himself into one static field too.
+    var added = [];
+    document.querySelectorAll('textarea[data-added]').forEach(function(t){
+      if(t.value.trim()) added.push('[' + t.getAttribute('data-added') + '] ' + t.value.trim());
+    });
+    document.getElementById('addedAgg').value = added.length ? added.join('\n\n') : '';
+
+    var fd = new FormData(form);
+    fd.set('form-name', 'optimism-message-approval');
 
     try{
       var res = await fetch(window.location.pathname, { method:'POST', body: fd });
