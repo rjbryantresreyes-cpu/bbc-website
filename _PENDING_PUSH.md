@@ -366,3 +366,13 @@ Reviews routine: Sonya + Essence client pages + wiring. Staged, awaiting Netlify
 # 🟡 STAGED 2026-07-21 (reviews routine) — Freccia connected to insights hub
 - `insights.html` — added the Freccia Construction case-study card (was missing from the hub; other 4 review pages already there). EVERYTHING-CONNECTED fix.
 - `social-media/review-freccia-construction/` — hosted reel + 5 slides + story + caption for the scheduled Metricool posts (reel 08-09, story 08-10, carousel 08-11). Ships with this deploy so Metricool can fetch by URL.
+
+# 🟡 STAGED 2026-08-18 — Optimism Consulting message approval page
+- **NEW `optimism-messages.html`** → live at `/optimism-messages`. Client-facing approval page for Optimism Consulting (OShun Jones). Replaces the PDF approach so OShun can answer and edit in place instead of describing changes back to us.
+- Contains all 14 follow-up messages (speed-to-lead, said-yes-didn't-pay close, booked-didn't-close nurture, cold reactivation) as editable prefilled textareas, plus the 6 open questions only OShun can answer (sender identity, 3 selling points, price wording, the 13,000 figure, deadline/bonus, team routing).
+- Auto-flags any message he edits and submits BOTH his version and the original, so we can see exactly what changed. Per-section "add your own message" button.
+- Netlify Forms: `name="optimism-message-approval"`, honeypot, POST to `window.location.pathname` with raw FormData (per the 2026-05-28 forms gotchas doc). `noindex,nofollow` since it carries their offer + pricing.
+- Optimism-branded (charcoal #1a1a1a + gold #a9790a, from their own site CSS), NOT BBC colors. Client Brand Purity.
+- Verified 375 / 768 / 1280: no horizontal overflow, no inner scrolling, touch targets 53-56px. Edit-detection + add-message + payload construction all tested in Playwright.
+- Mirrored to `BBC WEBSITE HTML\` and the client folder `_PROSPECTS\OPTIMISM-CONSULTING\`.
+- **AFTER DEPLOY, two manual steps in Netlify:** (1) confirm Forms detection is ON, (2) add the email notification for this form to rj@balaynibruno.co. Without step 2 the answers land in the Netlify dashboard only, not RJ's inbox.

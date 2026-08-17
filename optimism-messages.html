@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Optimism Consulting — Approve Your Messages</title>
+<style>
+  :root{
+    --bg:#f6f3ec; --panel:#ffffff; --line:#e4dfd4; --ink:#1b1915;
+    --muted:#5e5a51; --gold:#a9790a; --gold-deep:#8a6208; --gold-bright:#fbce1f;
+    --charcoal:#1a1a1a; --green:#1e7a3e; --green-bg:#eaf5ed;
+    --radius:14px;
+  }
+  *{box-sizing:border-box;}
+  html{-webkit-text-size-adjust:100%;}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+    font-size:16px; line-height:1.55;
+    padding-bottom:env(safe-area-inset-bottom);
+  }
+  .wrap{max-width:760px;margin:0 auto;padding:16px 16px 64px;}
+
+  header{
+    background:var(--charcoal); color:#f4f2ee;
+    padding:26px 22px; border-radius:var(--radius); margin-bottom:20px;
+  }
+  header .eyebrow{
+    font-size:12px; letter-spacing:.16em; text-transform:uppercase;
+    color:var(--gold-bright); font-weight:700; margin-bottom:10px;
+  }
+  header h1{font-size:26px;line-height:1.15;margin:0 0 10px;font-weight:800;letter-spacing:-.01em;}
+  header p{margin:0;color:#c4bfb5;font-size:15px;}
+
+  .intro{
+    background:#fbf3da; border:1.5px solid var(--gold);
+    border-radius:var(--radius); padding:18px 20px; margin-bottom:26px;
+  }
+  .intro h2{margin:0 0 8px;font-size:18px;font-weight:800;}
+  .intro p{margin:0 0 8px;}
+  .intro p:last-child{margin-bottom:0;}
+
+  h2.sec{
+    font-size:20px; margin:38px 0 6px; padding-bottom:8px;
+    border-bottom:2px solid var(--gold); font-weight:800; letter-spacing:-.01em;
+  }
+  h2.sec .n{color:var(--gold-deep);}
+  .lede{color:var(--muted);font-size:15px;margin:0 0 18px;}
+
+  /* question blocks */
+  .q{
+    background:var(--panel); border:1px solid var(--line);
+    border-radius:12px; padding:16px 18px; margin-bottom:14px;
+  }
+  .q label.qt{display:block;font-weight:700;margin-bottom:4px;font-size:16px;}
+  .q .why{color:var(--muted);font-size:14px;margin:0 0 12px;}
+
+  input[type=text], textarea{
+    width:100%; font:inherit; font-size:16px; color:var(--ink);
+    background:#fffdf8; border:1.5px solid var(--line); border-radius:10px;
+    padding:12px 13px; line-height:1.5; -webkit-appearance:none;
+  }
+  textarea{resize:vertical; min-height:96px;}
+  input[type=text]:focus, textarea:focus{
+    outline:none; border-color:var(--gold); background:#fff;
+    box-shadow:0 0 0 3px rgba(169,121,10,.14);
+  }
+  .q input[type=text]{margin-bottom:8px;}
+  .q input[type=text]:last-child{margin-bottom:0;}
+
+  /* message cards */
+  .msg{
+    background:var(--panel); border:1px solid var(--line);
+    border-radius:12px; padding:16px 18px; margin-bottom:14px;
+  }
+  .msg .tag{
+    display:flex;flex-wrap:wrap;gap:8px;justify-content:space-between;align-items:baseline;
+    margin-bottom:10px;padding-bottom:9px;border-bottom:1px solid var(--line);
+  }
+  .msg .num{font-weight:800;color:var(--gold-deep);font-size:16px;}
+  .msg .when{
+    color:var(--muted);font-size:12px;text-transform:uppercase;
+    letter-spacing:.07em;font-weight:700;
+  }
+  .msg .subj{font-size:14px;color:var(--muted);margin:0 0 10px;}
+  .msg .subj b{color:var(--ink);}
+  .msg textarea{min-height:64px;}
+  .edited{
+    display:none; margin-top:9px; font-size:14px; font-weight:700;
+    color:var(--gold-deep);
+  }
+  .msg.is-edited .edited{display:block;}
+  .msg.is-edited{border-color:var(--gold);}
+
+  .hint{
+    font-size:13px;color:var(--muted);margin-top:8px;
+  }
+
+  .note{
+    background:#f1eee7;border:1px solid var(--line);border-radius:11px;
+    padding:14px 16px;margin:16px 0;font-size:14px;color:var(--muted);
+  }
+  .note b{color:var(--ink);}
+  .note.ok{background:var(--green-bg);border-color:#c6e2ce;}
+  .note.ok b{color:var(--green);}
+
+  .hold{
+    background:var(--charcoal);color:#ddd8ce;border-radius:11px;
+    padding:14px 16px;margin:16px 0;font-size:14px;
+  }
+  .hold b{color:var(--gold-bright);}
+
+  /* add-your-own */
+  button.add{
+    display:block;width:100%;min-height:48px;font:inherit;font-size:16px;font-weight:700;
+    color:var(--gold-deep);background:#fff;border:1.5px dashed var(--gold);
+    border-radius:11px;padding:13px;cursor:pointer;margin-top:6px;
+  }
+  button.add:hover{background:#fffaf0;}
+
+  /* submit */
+  .submit-card{
+    background:var(--charcoal);border-radius:var(--radius);
+    padding:22px;margin-top:34px;color:#f4f2ee;
+  }
+  .submit-card h2{margin:0 0 6px;font-size:20px;font-weight:800;color:#fff;}
+  .submit-card p{margin:0 0 16px;color:#bdb8ae;font-size:15px;}
+  .submit-card label.qt{display:block;font-weight:700;margin-bottom:6px;color:#f4f2ee;}
+  .submit-card input[type=text], .submit-card textarea{
+    background:#262626;border-color:#3a3a3a;color:#f4f2ee;margin-bottom:14px;
+  }
+  .submit-card input[type=text]:focus, .submit-card textarea:focus{
+    background:#2d2d2d;border-color:var(--gold-bright);
+    box-shadow:0 0 0 3px rgba(251,206,31,.18);
+  }
+  button.send{
+    width:100%;min-height:54px;font:inherit;font-size:17px;font-weight:800;
+    color:#1a1a1a;background:var(--gold-bright);border:0;border-radius:11px;
+    padding:15px;cursor:pointer;letter-spacing:.01em;
+  }
+  button.send:hover{background:#ffd944;}
+  button.send:disabled{opacity:.6;cursor:default;}
+
+  .done{
+    display:none;background:var(--green-bg);border:1.5px solid #b6d9c1;
+    border-radius:var(--radius);padding:26px 22px;text-align:center;margin-top:20px;
+  }
+  .done h2{margin:0 0 8px;color:var(--green);font-size:22px;}
+  .done p{margin:0;color:var(--ink);}
+
+  .err{
+    display:none;background:#fdecea;border:1.5px solid #f5c2bd;color:#a5271a;
+    border-radius:11px;padding:13px 15px;margin-top:14px;font-size:15px;
+  }
+
+  footer{
+    margin-top:34px;padding-top:18px;border-top:1px solid var(--line);
+    font-size:14px;color:var(--muted);text-align:center;
+  }
+
+  @media (min-width:768px){
+    .wrap{padding:32px 24px 80px;}
+    header{padding:34px 30px;}
+    header h1{font-size:32px;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="eyebrow">For your approval</div>
+  <h1>Your Follow Up Messages</h1>
+  <p>Every message your leads will receive. Nothing sends until you approve it here.</p>
+</header>
+
+<div class="intro">
+  <h2>How this works</h2>
+  <p>Every message below sits in a box you can type in. If a message is good as it is, leave it alone. If you want it changed, <b>just edit the text right in the box</b>. We use exactly what you leave there.</p>
+  <p>You can also add your own messages at the bottom of any section.</p>
+  <p style="margin-top:10px"><b>Start with Section 1.</b> Those are the answers only you can give, and your texting cannot go live without them.</p>
+</div>
+
+<form name="optimism-message-approval" netlify data-netlify="true" netlify-honeypot="bot-field" method="POST" id="approvalForm" novalidate>
+<input type="hidden" name="form-name" value="optimism-message-approval">
+<p style="display:none;"><label>Leave this empty: <input name="bot-field"></label></p>
+
+<h2 class="sec"><span class="n">1.</span> What we need from you</h2>
+<p class="lede">Six answers. These are the gaps we will not fill in ourselves, because guessing on your offer or your numbers is how a business gets in trouble.</p>
+
+<div class="q">
+  <label class="qt" for="qA">A. Who are these messages coming from?</label>
+  <p class="why">Right now some say OShun and some say the team. Pick one. Your name pulls better on a first text, but it means replies come to you.</p>
+  <input type="text" id="qA" name="A. Who messages come from" placeholder="Your answer">
+</div>
+
+<div class="q">
+  <label class="qt" for="qB1">B. What are the three things included in the offer?</label>
+  <p class="why">We have "full credit repair across all three bureaus, 3 months, up to 3 people." We need your three real selling points, in your words. These go in every email.</p>
+  <input type="text" id="qB1" name="B1. Selling point 1" placeholder="Selling point 1">
+  <input type="text" name="B2. Selling point 2" placeholder="Selling point 2">
+  <input type="text" name="B3. Selling point 3" placeholder="Selling point 3">
+</div>
+
+<div class="q">
+  <label class="qt" for="qC">C. Confirm how we say the price.</label>
+  <p class="why">You told us to lead with the split payment of $200 on the discounted $415 offer. So the messages say $200 to start and send the 1 of 2 link, with the $215 link following after. Confirm that is right, and tell us if a lead should ever see the full $415 or the $300 same day price instead.</p>
+  <textarea id="qC" name="C. Price wording" placeholder="Your answer"></textarea>
+</div>
+
+<div class="q">
+  <label class="qt" for="qD">D. Can you back up the 13,000 people figure?</label>
+  <p class="why">It is in message 7. In your industry a number you cannot prove is a real problem, not a small one. If you can stand behind it, it stays. If not, tell us and we pull it.</p>
+  <textarea id="qD" name="D. 13000 figure verification" placeholder="Your answer"></textarea>
+</div>
+
+<div class="q">
+  <label class="qt" for="qE">E. Do you want a deadline or a bonus on the last message?</label>
+  <p class="why">Message 8 is the last call. It works harder with something real attached, like a price that goes back up, or a bonus. If you would rather not, say so and we send it straight with no deadline.</p>
+  <textarea id="qE" name="E. Deadline or bonus" placeholder="Your answer"></textarea>
+</div>
+
+<div class="q">
+  <label class="qt" for="qF">F. Names and emails of the people handling replies.</label>
+  <p class="why">When a lead replies, it has to land on a real person fast. Right now nobody is assigned, which is a big part of why leads went cold in the first place.</p>
+  <textarea id="qF" name="F. Team names and emails" placeholder="Name, email, one per line"></textarea>
+</div>
+
+<div class="note">
+  <b>About the wording in the boxes.</b> Anything in double curly braces like {{first name}} fills in automatically per person, so leave those exactly as they are. Everything else is yours to change.
+</div>
+
+<h2 class="sec"><span class="n">2.</span> New lead comes in</h2>
+<p class="lede">This is the big one. Right now a new lead gets logged and your team gets a notification, but nobody actually messages the lead. That is why 4,678 of them were never contacted. These go out within seconds, day or night.</p>
+
+<div class="msg" data-msg>
+  <div class="tag"><span class="num">Message 1</span><span class="when">Instantly · Text</span></div>
+  <textarea name="Message 1" data-orig>Hi {{first name}}, thanks for reaching out to Optimism Consulting! I'm the team's assistant, here to point you in the right direction. Quick question so I can help fastest, what are you looking to work on right now, growing your income, building your team, or scaling what you've already got going?</textarea>
+  <div class="edited">You changed this one. We will use your version.</div>
+</div>
+
+<div class="msg" data-msg>
+  <div class="tag"><span class="num">Message 2</span><span class="when">After they answer · Text</span></div>
+  <textarea name="Message 2" data-orig>Got it. And roughly, what's your business bringing in monthly right now?</textarea>
+  <div class="edited">You changed this one. We will use your version.</div>
+</div>
+
+<div class="msg" data-msg>
+  <div class="tag"><span class="num">Message 3</span><span class="when">If they say $25K+ a month · Text</span></div>
+  <textarea name="Message 3" data-orig>That's exactly who we help. Let's get you on a quick call, here's my calendar: {{your booking link}}</textarea>
+  <div class="edited">You changed this one. We will use your version.</div>
+</div>
+
+<div class="msg" data-msg>
+  <div class="tag"><span class="num">Message 4</span><span class="when">If they say under $25K a month · Text</span></div>
+  <textarea name="Message 4" data-orig>Got it, appreciate you sharing that. We've got resources built for exactly where you're at right now, I'll send those over and keep you posted as you grow.</textarea>
+  <div class="edited">You changed this one. We will use your version.</div>
+</div>
+
+<div class="note">
+  <b>Why message 4 matters.</b> Instead of throwing away everyone under your ideal size, they go into a slower track and stay on your list. Some of them grow into buyers. None of them get burned by a hard pitch they were not ready for.
+</div>
+
+<div id="add-2"></div>
+<button type="button" class="add" data-add="2">+ Add another message to this section</button>
+
+<h2 class="sec"><span class="n">3.</span> Said yes, never paid</h2>
+<p class="lede">Nine people told you they were in and never crossed the line. Four messages over five days to close them. Highest value list in the account, so this one runs first.</p>
+
+<div class="msg" data-msg>
+  <div class="tag"><span class="num">Message 5</span><span class="when">Day 0 · Text</span></div>
+  <textarea name="Message 5" data-orig>Hey {{first name}}, it's OShun with Optimism Consulting. You were all set to start fixing your credit and we never got you across the line. Still want it handled? I can lock in your spot today. Reply YES and I'll send the link. Reply STOP to opt out.</textarea>
+  <div class="edited">You changed this one. We will use your version.</div>
+</div>
+
+<div class="msg tall" data-msg>
+  <div class="tag"><span class="num">Message 6</span><span class="when">Day 0 · Email</span></div>
+  <p class="subj"><b>Subject:</b> {{first name}}, let's finish what we started</p>
+  <textarea name="Message 6" data-orig>Hi {{first name}},
+
+You reached out to get your credit fixed, and we were right there. Let's finish it.
+
+Here's what you get:
+- [your selling point 1 from question B]
+- [your selling point 2 from question B]
+- [your selling point 3 from question B]
+
+You can start today for $200, and the second half follows once we're underway.
+
+Grab your spot here: {{your 1 of 2 payment link}}
+
+Any question at all, just reply to this email or text me. We've got you.
+
+OShun
+Optimism Consulting Firm LLC
+
+Results are individual and not guaranteed. You have the right to dispute inaccurate items on your report yourself, for free.</textarea>
+  <div class="edited">You changed this one. We will use your version.</div>
+</div>
+
+<div class="msg" data-msg>
+  <div class="tag"><span class="num">Message 7</span><span class="when">Day 2 · Text</span></div>
+  <textarea name="Message 7" data-orig>{{first name}}, quick one. We've helped 13,000+ people clean up their credit and get funded. Your spot is still open and you can start at $200 today, but I can't hold it much longer. Want the link? Reply STOP to opt out.</textarea>
+  <div class="edited">You changed this one. We will use your version.</div>
+</div>
+
+<div class="msg" data-msg>
+  <div class="tag"><span class="num">Message 8</span><span class="when">Day 4 · Text</span></div>
+  <textarea name="Message 8" data-orig>Last call {{first name}}. I'm closing out this round of the discounted rate today. [your deadline or bonus from question E] If now's not the time, no worries, just reply LATER and I'll check back. Otherwise reply YES and let's get you started. Reply STOP to opt out.</textarea>
+  <div class="edited">You changed this one. We will use your version.</div>
+</div>
+
+<div class="note">
+  <b>What happens when they reply.</b> YES gets the payment link straight away and moves them to payment pending. LATER pauses everything and brings them back in 30 days instead of dropping them. STOP removes them immediately. A real question goes to a person, not a robot.
+</div>
+
+<div id="add-3"></div>
+<button type="button" class="add" data-add="3">+ Add another message to this section</button>
+
+<h2 class="sec"><span class="n">4.</span> Booked a call, never closed</h2>
+<p class="lede">People who got on your calendar and did not buy. A slow drip, not a hard sell, so you stay in front of them without wearing them out.</p>
+
+<div class="msg" data-msg>
+  <div class="tag"><span class="num">Message 9</span><span class="when">On booking · Text</span></div>
+  <textarea name="Message 9" data-orig>Hi {{first name}}, you're confirmed for {{time}} with Optimism Consulting. Reply here anytime if you need to move it.</textarea>
+  <div class="edited">You changed this one. We will use your version.</div>
+</div>
+
+<div class="msg" data-msg>
+  <div class="tag"><span class="num">Message 10</span><span class="when">Next day, if they no showed · Text</span></div>
+  <textarea name="Message 10" data-orig>Hi {{first name}}, looks like we missed you. No worries, want to grab a new time? {{your booking link}}</textarea>
+  <div class="edited">You changed this one. We will use your version.</div>
+</div>
+
+<div class="msg" data-msg>
+  <div class="tag"><span class="num">Message 11</span><span class="when">Day 12 · Text</span></div>
+  <textarea name="Message 11" data-orig>Hi {{first name}}, still here whenever you're ready to pick this back up. Here's your link: {{your booking link}}</textarea>
+  <div class="edited">You changed this one. We will use your version.</div>
+</div>
+
+<div class="msg" data-msg>
+  <div class="tag"><span class="num">Message 12</span><span class="when">Day 21 · Text</span></div>
+  <textarea name="Message 12" data-orig>Hi {{first name}}, no pressure at all, just wanted to check in and see where things stand. If now's a better time to talk, I'm here: {{your booking link}}</textarea>
+  <div class="edited">You changed this one. We will use your version.</div>
+</div>
+
+<div class="q">
+  <label class="qt" for="qStory">There is a fifth one we have not written yet.</label>
+  <p class="why">Day 5, an email in your voice about the mental shift that happens before someone scales. You said that is the content that works best for you. We would rather you tell us the story than invent one. A few lines here is enough and we will shape it.</p>
+  <textarea id="qStory" name="Day 5 story in your voice" placeholder="A few lines, however it comes out"></textarea>
+</div>
+
+<div id="add-4"></div>
+<button type="button" class="add" data-add="4">+ Add another message to this section</button>
+
+<h2 class="sec"><span class="n">5.</span> Old leads, waking them back up</h2>
+<p class="lede">Over 3,000 people who went quiet. Written and ready, but switched off for now.</p>
+
+<div class="msg" data-msg>
+  <div class="tag"><span class="num">Message 13</span><span class="when">Text</span></div>
+  <textarea name="Message 13" data-orig>Hi {{first name}}, it's been a while since we last connected at Optimism Consulting. Still working on growing your business? We've got some new ways we're helping owners scale, want me to send details? Reply STOP to opt out.</textarea>
+  <div class="edited">You changed this one. We will use your version.</div>
+</div>
+
+<div class="msg tall" data-msg>
+  <div class="tag"><span class="num">Message 14</span><span class="when">Email</span></div>
+  <p class="subj"><b>Subject:</b> Still working on where you left off?</p>
+  <textarea name="Message 14" data-orig>Hi {{first name}},
+
+It's been a while since we last connected. Wanted to reach out personally, we've kept building since then, and we're helping business owners scale past exactly the kind of ceiling you were looking to break through.
+
+If that's still something you're working toward, I'd love to reconnect: {{your booking link}}
+
+If the timing's just not right, no worries at all, just reply and let me know and we'll take you off the list.
+
+OShun
+Optimism Consulting Firm LLC</textarea>
+  <div class="edited">You changed this one. We will use your version.</div>
+</div>
+
+<div class="hold">
+  <b>Why these two wait.</b> Sending three thousand emails from a brand new setup is the fastest way to get your email address blocked everywhere, and once that happens it is slow and expensive to undo. We build the volume up gradually over the first few weeks, clean the dead addresses out first, then send these in small batches, newest contacts first. Roughly three to four weeks out.
+</div>
+
+<div id="add-5"></div>
+<button type="button" class="add" data-add="5">+ Add another message to this section</button>
+
+<h2 class="sec"><span class="n">6.</span> Two things built in on purpose</h2>
+
+<div class="note ok">
+  <b>Every text can be stopped.</b> Each one gives people a way out. That is not optional, it is what keeps your phone number from being shut down by the carriers. It costs you almost nothing, because someone who opts out was never going to buy.
+</div>
+
+<div class="note ok">
+  <b>Nothing promises a result.</b> No message says we guarantee anything about someone's credit. Every email carries the line about results being individual and people having the right to dispute things themselves for free. In your industry that line is what keeps you clean.
+</div>
+
+<div class="submit-card">
+  <h2>Anything else</h2>
+  <p>A whole sequence we are missing, a message you want gone, anything at all.</p>
+  <label class="qt" for="anything">Your notes</label>
+  <textarea id="anything" name="Anything else" placeholder="Optional"></textarea>
+  <label class="qt" for="who">Your name</label>
+  <input type="text" id="who" name="Submitted by" placeholder="OShun Jones">
+  <button type="submit" class="send" id="sendBtn">Send this to RJ</button>
+  <div class="err" id="errBox"></div>
+</div>
+
+</form>
+
+<div class="done" id="doneBox">
+  <h2>Got it, thank you</h2>
+  <p>Your answers are with RJ. Anything you changed goes in exactly as you wrote it. We will file the texting registration and come back to you when it is live.</p>
+</div>
+
+<footer>
+  Nothing on this page sends to anyone until you approve it.<br>
+  Balay ni Bruno &amp; Co. &nbsp;·&nbsp; rj@balaynibruno.co &nbsp;·&nbsp; WhatsApp +63 935 663 0324
+</footer>
+
+</div>
+
+<script>
+(function(){
+  var form = document.getElementById('approvalForm');
+  var btn = document.getElementById('sendBtn');
+  var errBox = document.getElementById('errBox');
+  var doneBox = document.getElementById('doneBox');
+
+  // Grow a box to fit its text, so nothing has to be scrolled inside a small window.
+  function fit(ta){
+    ta.style.height = 'auto';
+    ta.style.height = (ta.scrollHeight + 4) + 'px';
+  }
+
+  // Remember the original wording of every message, then flag the ones OShun edits.
+  var cards = document.querySelectorAll('[data-msg]');
+  cards.forEach(function(card){
+    var ta = card.querySelector('textarea[data-orig]');
+    if(!ta) return;
+    ta.dataset.original = ta.value;
+    fit(ta);
+    ta.addEventListener('input', function(){
+      fit(ta);
+      card.classList.toggle('is-edited', ta.value.trim() !== ta.dataset.original.trim());
+    });
+  });
+
+  // Re-fit on rotate or resize, since wrapping changes with width.
+  var rt;
+  window.addEventListener('resize', function(){
+    clearTimeout(rt);
+    rt = setTimeout(function(){
+      document.querySelectorAll('textarea[data-orig]').forEach(fit);
+    }, 150);
+  });
+
+  // Let him add his own messages to any section.
+  var extra = 0;
+  document.querySelectorAll('button.add').forEach(function(b){
+    b.addEventListener('click', function(){
+      extra++;
+      var sec = b.getAttribute('data-add');
+      var box = document.getElementById('add-' + sec);
+      var card = document.createElement('div');
+      card.className = 'msg';
+      card.innerHTML =
+        '<div class="tag"><span class="num">Your message ' + extra + '</span>' +
+        '<span class="when">Section ' + sec + ' · added by you</span></div>' +
+        '<textarea name="Added by client ' + extra + ' (section ' + sec + ')" ' +
+        'placeholder="Write it however you would say it. Tell us when it should go out too."></textarea>';
+      box.appendChild(card);
+      var newTa = card.querySelector('textarea');
+      newTa.addEventListener('input', function(){ fit(newTa); });
+      newTa.focus();
+    });
+  });
+
+  form.addEventListener('submit', async function(e){
+    e.preventDefault();
+    errBox.style.display = 'none';
+    btn.disabled = true;
+    btn.textContent = 'Sending...';
+
+    var fd = new FormData(form);
+    fd.set('form-name', 'optimism-message-approval');
+
+    // Mark each message approved or edited so RJ can see at a glance what changed.
+    cards.forEach(function(card){
+      var ta = card.querySelector('textarea[data-orig]');
+      if(!ta) return;
+      var changed = ta.value.trim() !== ta.dataset.original.trim();
+      fd.set(ta.getAttribute('name') + ' — STATUS', changed ? 'EDITED BY CLIENT' : 'APPROVED AS WRITTEN');
+      if(changed){
+        fd.set(ta.getAttribute('name') + ' — ORIGINAL', ta.dataset.original);
+      }
+    });
+
+    try{
+      var res = await fetch(window.location.pathname, { method:'POST', body: fd });
+      if(!res.ok) throw new Error('Status ' + res.status);
+      form.style.display = 'none';
+      doneBox.style.display = 'block';
+      window.scrollTo({ top:0, behavior:'smooth' });
+    }catch(err){
+      btn.disabled = false;
+      btn.textContent = 'Send this to RJ';
+      errBox.textContent = 'That did not go through. Try once more, or text RJ on WhatsApp at +63 935 663 0324 and he will sort it.';
+      errBox.style.display = 'block';
+    }
+  });
+})();
+</script>
+</body>
+</html>
