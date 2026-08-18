@@ -1327,6 +1327,61 @@
       color: rgba(245,241,234,0.45);
     }
 
+    /* Featured proof strip under the reviews */
+    .proof-strip {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin: 1.5rem 0 2.25rem;
+    }
+    @media (max-width: 720px) { .proof-strip { grid-template-columns: 1fr; } }
+    .proof-strip__card {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      padding: 1.4rem 1.5rem;
+      min-height: 44px;
+      background: linear-gradient(180deg, rgba(245,230,200,0.05) 0%, rgba(245,230,200,0.02) 100%);
+      border: 1px solid rgba(255,255,255,0.09);
+      border-radius: 18px;
+      text-decoration: none;
+      transition: border-color 0.22s, transform 0.22s, background 0.22s;
+    }
+    .proof-strip__card:hover,
+    .proof-strip__card:focus-visible {
+      border-color: rgba(184,146,62,0.45);
+      background: linear-gradient(180deg, rgba(245,230,200,0.08) 0%, rgba(245,230,200,0.03) 100%);
+      transform: translateY(-2px);
+    }
+    .proof-strip__card--audio { border-left: 3px solid var(--gold, #B8923E); }
+    .proof-strip__tag {
+      font-family: var(--font-ui);
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: #E6CFA0;
+    }
+    .proof-strip__quote {
+      font-family: var(--font-display);
+      font-size: 1.06rem;
+      line-height: 1.42;
+      font-style: italic;
+      color: rgba(245,241,234,0.92);
+    }
+    .proof-strip__who {
+      font-family: var(--font-ui);
+      font-size: 0.72rem;
+      color: rgba(245,241,234,0.45);
+    }
+    .proof-strip__go {
+      font-family: var(--font-ui);
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #E6CFA0;
+      margin-top: 0.2rem;
+    }
+
     .real__row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.75rem; }
     @media (max-width: 720px) { .real__row { grid-template-columns: 1fr; } }
 
@@ -2369,6 +2424,21 @@
           </div>
         </a>
       </div>
+      <div class="proof-strip reveal-soft">
+        <a class="proof-strip__card proof-strip__card--audio" href="the-fourth-marketing-company.html">
+          <span class="proof-strip__tag">Recorded client call &nbsp;&bull;&nbsp; 32 sec</span>
+          <span class="proof-strip__quote">&ldquo;You guys are the fourth marketing team in a year and a half.&rdquo;</span>
+          <span class="proof-strip__who">Rebekah Severi, Freccia Construction</span>
+          <span class="proof-strip__go">Hear what she said &rarr;</span>
+        </a>
+        <a class="proof-strip__card" href="what-ongoing-support-actually-looks-like.html">
+          <span class="proof-strip__tag">Behind the scenes</span>
+          <span class="proof-strip__quote">One real Tuesday with one real client, with the actual times on it.</span>
+          <span class="proof-strip__who">What ongoing support actually looks like</span>
+          <span class="proof-strip__go">See the day &rarr;</span>
+        </a>
+      </div>
+
       <div class="text-center reveal-soft" style="margin-bottom:3.5rem;">
         <a href="https://share.google/FESMGRclQ5h9yK7jY" target="_blank" rel="noopener noreferrer" class="btn btn-gold btn-sm">Read all our reviews on Google &rarr;</a>
       </div>

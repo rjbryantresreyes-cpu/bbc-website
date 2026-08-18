@@ -8,7 +8,24 @@
 <!-- deploy-trigger 2026-07-22: New client onboarded — BILT 2 Travel added across the site. -->
 <!-- deploy-trigger 2026-08-08: Flights ni Bruno & Co. — new /flights page (daily flight-deal database, static, reads flights/data.json). -->
 
-# 🟡 STAGED 2026-08-08 — Flights ni Bruno & Co. (`/flights`)
+# 🟡 STAGED 2026-08-19 — Freccia client-care batch (2 pages + audio clip + social media)
+
+**Two new Client Care pages** built from the recorded 18 Aug 2026 Freccia call:
+
+- `what-ongoing-support-actually-looks-like.html` — one real Tuesday with Freccia, message by message, using the two meeting screenshots RJ took (`assets/support/freccia-meeting-1.jpg`, `-2.jpg`).
+- `the-fourth-marketing-company.html` — built around a 32.8s audio clip of Rebekah Severi saying we were her fourth marketing team in 18 months. Audio at `assets/audio/rebekah-severi-fourth-marketing-company.mp3`.
+
+**Consent + safety notes (important):** RJ asked her for permission on the recorded call at `[1:24:21]` and said he would omit the previous companies' names. The published clip has that section physically cut out, verified by re-transcribing the final mp3 (no "Max", "Connect", "Utah", "Texas", "Oak", "Interactive"). **No former agency is named anywhere on either page.** Consent covers AUDIO only, so no face-on video was published. Her reply on the recording is faint and was never transcribable with confidence, so a written "yes" from her is still worth getting.
+
+**Wired in (click-path verified):** `insights.html` (2 cards, top of grid), `index.html` (new `.proof-strip` under the reviews grid), `freccia-construction.html` (2 cards under her Google review), `our-work.html` (clip link on the Freccia card), `sitemap.xml`.
+
+**Social media staged for Metricool:** `social-media/the-fourth-marketing-company/` (7 slides + story + `reel.mp4` audiogram with burned captions + music bed + `clip.mp3`) and `social-media/what-ongoing-support-actually-looks-like/` (7 slides + story). Metricool fetches these by live URL at publish time, so this deploy must land before the scheduled posts.
+
+**After deploy:** confirm both pages return 200 and the audio player loads.
+
+# ✅ SHIPPED 2026-08-08 — Flights ni Bruno & Co. (`/flights`)
+
+**Verified live 2026-08-19:** `balaynibruno.co/flights` returns 200 (301 → 200 directory redirect). This block sat marked 🟡 STAGED for eleven days after it had already shipped.
 
 **Deploy at BBC eodr.** A daily-updated cheapest-fares database (local PH + international), family-facing, at `balaynibruno.co/flights`. Static site; data comes from `flights/data.json`, which the PC's daily job (`C:\BBC\flights-ni-bruno\daily_update.py`, scheduled 8AM) regenerates via `export_db.py`. No backend needed on Netlify — the app just reads the JSON.
 
