@@ -1,3 +1,28 @@
+# 🟡 STAGED 2026-08-19b — Open Source page + four public repos
+
+Four internal tools extracted, genericised, secret-scrubbed and published as public
+MIT repos, plus a new `/open-source` page pointing at them.
+
+**Repos published (all live, public, README rendering):**
+- `windows-client-workspaces` — one isolated Windows account per client
+- `client-care-reports` — Playwright site check + branded HTML health report
+- `claude-brain-sync` — Claude Code config sync across machines
+- `job-radar` — six-source job aggregator, five need no API key
+
+**Sanitisation done before publishing:** hardcoded Brevo API key removed (now env-var
+only, no fallback), Adzuna secrets path parameterised, all client names and internal
+`C:\BBC` paths stripped from code, BBC identity removed from the report template.
+Verified by regex sweep for secret patterns and client names. BBC's actual job-radar
+lane weights stay private; only a neutral `config.example.json` ships.
+
+**New file:** `open-source.html`
+**Changed:** `tools.html` (hero button), `index.html` / `contact.html` / `newsletter.html`
+/ `privacy.html` / `resources.html` (footer Resources link), `sitemap.xml`.
+
+**Not browser-verified:** preview tooling was blocked this session, so the page was
+validated statically (tag balance, link resolution, no fixed widths, 44px targets)
+rather than at 375/768/1280. Worth a quick phone check after deploy.
+
 <!-- deploy-trigger 2026-06-13: force build to publish CRM follow-up first-name fix (os/index.html). -->
 <!-- deploy-trigger 2026-06-13b: dynamic full-field contact merge + live refetch on cache miss. -->
 <!-- deploy-trigger 2026-06-13c: shared contact loader fixes concurrency race (paste+template) -> Hi there. -->

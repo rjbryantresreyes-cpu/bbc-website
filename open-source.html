@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-L6S574R0CE"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-L6S574R0CE');
+  </script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Open Source | Balay ni Bruno &amp; Co.</title>
+  <meta name="description" content="Tools we built to run our own studio, cleaned up and given away. Free, MIT licensed, and genuinely in daily use here." />
+  <link rel="canonical" href="https://balaynibruno.co/open-source.html" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Balay ni Bruno &amp; Co." />
+  <meta property="og:title" content="Open Source | Balay ni Bruno &amp; Co." />
+  <meta property="og:description" content="Tools we built to run our own studio, cleaned up and given away. Free, MIT licensed, and genuinely in daily use here." />
+  <meta property="og:url" content="https://balaynibruno.co/open-source.html" />
+  <meta property="og:image" content="https://balaynibruno.co/bbc-logo.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Lora:ital,wght@0,400;0,500;1,400;1,500&family=DM+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --deep-blue:#1F3557; --mid-blue:#4B6FA5; --warm-blue:#6D8FC7;
+      --bg-primary:#F5F1EA; --bg-section:#EDE8DF; --bg-card:#FDFAF6;
+      --bg-dark:#1C2E47; --bg-footer:#172540;
+      --text-ink:#2A3040; --text-body:#4E5666; --text-muted:#888FA0;
+      --gold:#B8923E; --gold-pale:#E6CFA0; --gold-warm:#D4A84B; --sage:#4E9E74;
+      --font-display:'Playfair Display',Georgia,serif;
+      --font-body:'Lora',Georgia,serif;
+      --font-ui:'DM Sans',system-ui,sans-serif;
+      --font-mono:'JetBrains Mono',ui-monospace,monospace;
+      --max-width:980px; --radius:16px; --radius-lg:24px;
+      --shadow-sm:0 3px 18px rgba(85,60,35,0.08);
+      --shadow-md:0 7px 36px rgba(85,60,35,0.11);
+      --border-card:1px solid rgba(85,60,35,0.09);
+      --s2:1rem;--s4:2.5rem;
+    }
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{font-family:var(--font-body);color:var(--text-ink);background:var(--bg-primary);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+    body::after{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23n)' opacity='0.026'/%3E%3C/svg%3E");pointer-events:none;z-index:9999;mix-blend-mode:multiply}
+    h1,h2,h3,h4{font-family:var(--font-display);line-height:1.22;color:var(--deep-blue)}
+    h1{font-size:clamp(2rem,4.5vw,3.2rem);font-weight:700;line-height:1.14}
+    h2{font-size:clamp(1.3rem,2.5vw,1.9rem);font-weight:600}
+    p{font-size:1.05rem;line-height:1.9;color:var(--text-body);margin-bottom:1.2rem}
+    a{text-decoration:none}
+    .eyebrow{display:block;font-family:var(--font-ui);font-size:0.68rem;font-weight:600;letter-spacing:0.17em;text-transform:uppercase;color:var(--gold);margin-bottom:var(--s2)}
+    .container{max-width:var(--max-width);margin:0 auto;padding:0 var(--s4)}
+    @media(max-width:600px){.container{padding:0 var(--s2)}}
+    .nav{position:sticky;top:0;z-index:100;background:rgba(28,46,71,0.96);backdrop-filter:blur(10px);border-bottom:1px solid rgba(255,255,255,0.07);padding:1rem var(--s4)}
+    .nav__inner{max-width:var(--max-width);margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+    .nav__logo{font-family:var(--font-display);font-size:1rem;font-weight:600;color:#fff}
+    .nav__back{font-family:var(--font-ui);font-size:0.82rem;font-weight:500;color:rgba(245,241,234,0.6);transition:color 0.2s}
+    .nav__back:hover{color:var(--gold-pale)}
+
+    .hero{background:var(--bg-dark);padding:clamp(3rem,7vw,5.5rem) 0 clamp(2.5rem,5vw,4rem);position:relative;overflow:hidden}
+    .hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 50% at 50% 0%,rgba(184,146,62,0.09),transparent 70%);pointer-events:none}
+    .hero .container{position:relative}
+    .hero h1{color:#fff;margin-bottom:1.2rem}
+    .hero .lead{font-size:1.1rem;line-height:1.85;color:rgba(245,241,234,0.7);max-width:660px;margin-bottom:0}
+
+    .body-sec{padding:clamp(2.5rem,5vw,4rem) 0}
+    .intro{max-width:720px}
+
+    .repos{display:grid;grid-template-columns:repeat(auto-fit,minmax(310px,1fr));gap:1.25rem;margin-top:2.5rem}
+    .repo{background:var(--bg-card);border:var(--border-card);border-radius:var(--radius-lg);padding:1.6rem 1.7rem;box-shadow:var(--shadow-sm);display:flex;flex-direction:column;transition:transform .22s,box-shadow .22s,border-color .22s}
+    .repo:hover{transform:translateY(-3px);box-shadow:var(--shadow-md);border-color:rgba(184,146,62,0.35)}
+    .repo__name{font-family:var(--font-mono);font-size:1rem;font-weight:600;color:var(--deep-blue);margin-bottom:0.55rem;word-break:break-word}
+    .repo__what{font-family:var(--font-body);font-size:0.97rem;line-height:1.78;color:var(--text-body);margin-bottom:1rem;flex:1}
+    .repo__meta{display:flex;flex-wrap:wrap;gap:0.4rem;margin-bottom:1.05rem}
+    .tag{font-family:var(--font-ui);font-size:0.66rem;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:var(--text-muted);background:var(--bg-section);border:1px solid rgba(85,60,35,0.1);border-radius:100px;padding:0.2rem 0.62rem}
+    .tag--live{color:#2F6B4F;background:rgba(78,158,116,0.12);border-color:rgba(78,158,116,0.3)}
+    .repo__link{font-family:var(--font-ui);font-size:0.86rem;font-weight:600;color:var(--gold);align-self:flex-start;min-height:44px;display:inline-flex;align-items:center}
+    .repo__link:hover{color:var(--gold-warm)}
+
+    .why{background:var(--bg-section);border-left:3px solid var(--gold);border-radius:0 var(--radius) var(--radius) 0;padding:1.4rem 1.6rem;margin:2.5rem 0;max-width:760px}
+    .why p{margin:0;font-size:0.99rem}
+    .why p + p{margin-top:0.85rem}
+
+    .cta-section{background:var(--bg-dark);padding:clamp(3rem,6vw,5rem) 0;text-align:center;position:relative;overflow:hidden}
+    .cta-section::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 60% at 50% 100%,rgba(184,146,62,0.08),transparent 70%);pointer-events:none}
+    .cta-section .container{position:relative}
+    .cta-section h2{color:#fff;margin-bottom:1rem}
+    .cta-section p{color:rgba(245,241,234,0.65);max-width:520px;margin:0 auto 2rem}
+    .btn-gold{display:inline-flex;align-items:center;gap:0.5rem;padding:0.9rem 2.2rem;background:var(--gold);color:#fff;border-radius:100px;font-family:var(--font-ui);font-size:0.9rem;font-weight:600;box-shadow:0 4px 20px rgba(184,146,62,0.3);transition:all 0.22s;min-height:44px}
+    .btn-gold:hover{background:var(--gold-warm);transform:translateY(-2px)}
+    .footer{background:var(--bg-footer);padding:2rem var(--s4);text-align:center}
+    .footer p{font-family:var(--font-ui);font-size:0.8rem;color:rgba(245,241,234,0.35);line-height:1.8}
+    .footer a{color:rgba(245,241,234,0.45)}
+    .footer a:hover{color:var(--gold-pale)}
+  </style>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://balaynibruno.co/#organization",
+      "name": "Balay ni Bruno & Co.",
+      "url": "https://balaynibruno.co/",
+      "logo": "https://balaynibruno.co/bbc-logo.png",
+      "email": "admin@balaynibruno.co",
+      "founder": { "@type": "Person", "name": "RJ Bryan Tres Reyes" }
+    },
+    {
+      "@type": "CollectionPage",
+      "name": "Open Source",
+      "description": "Tools built to run Balay ni Bruno & Co., cleaned up and released under the MIT licence.",
+      "url": "https://balaynibruno.co/open-source.html",
+      "publisher": { "@id": "https://balaynibruno.co/#organization" }
+    }
+  ]
+}
+  </script>
+</head>
+<body>
+<nav class="nav"><div class="nav__inner"><a href="index.html" class="nav__logo">Balay ni Bruno &amp; Co.</a><a href="insights.html" class="nav__back">&#8592; Back to Insights</a></div></nav>
+
+<section class="hero">
+  <div class="container">
+    <span class="eyebrow" style="color:var(--gold-pale);">Open Source</span>
+    <h1>Tools we built for ourselves, given away</h1>
+    <p class="lead">Everything here runs our studio every day. None of it was built to be a product, which is exactly why it is worth reading. Free, MIT licensed, no sign-up.</p>
+  </div>
+</section>
+
+<section class="body-sec">
+  <div class="container">
+    <div class="intro">
+      <p>Running a small studio for several clients at once creates a specific set of problems. Your machine ends up holding seven clients' logins. Your notes and settings drift apart across three computers. A client's website breaks quietly and you find out when they do.</p>
+      <p>We solved each of these with something small and boring, then kept using it for months. These are those tools, with the client names taken out and the rough edges documented rather than hidden.</p>
+    </div>
+
+    <div class="repos">
+
+      <article class="repo">
+        <div class="repo__name">windows-client-workspaces</div>
+        <p class="repo__what">One isolated Windows account per client, created in a single command. Separate desktop, separate browser profile, separate app logins, and an explicit deny so a client workspace can never read another client's credentials. Heavy folders land on your biggest drive instead of filling up C:.</p>
+        <div class="repo__meta"><span class="tag">PowerShell</span><span class="tag">Windows</span><span class="tag tag--live">In daily use</span></div>
+        <a class="repo__link" href="https://github.com/rjbryantresreyes-cpu/windows-client-workspaces" target="_blank" rel="noopener">View on GitHub &#8599;</a>
+      </article>
+
+      <article class="repo">
+        <div class="repo__name">client-care-reports</div>
+        <p class="repo__what">Check a client's website every morning with Playwright, then send them a branded HTML health report. Measurement and judgement are kept deliberately separate, so the report engine can never invent a number it did not measure.</p>
+        <div class="repo__meta"><span class="tag">Python</span><span class="tag">Playwright</span><span class="tag tag--live">In daily use</span></div>
+        <a class="repo__link" href="https://github.com/rjbryantresreyes-cpu/client-care-reports" target="_blank" rel="noopener">View on GitHub &#8599;</a>
+      </article>
+
+      <article class="repo">
+        <div class="repo__name">claude-brain-sync</div>
+        <p class="repo__what">Keep one Claude Code configuration in sync across every machine you work on. A shared folder, robocopy, and newer-file-wins. Deliberately does not sync credentials or session history, and explains why.</p>
+        <div class="repo__meta"><span class="tag">PowerShell</span><span class="tag">Claude Code</span><span class="tag tag--live">In daily use</span></div>
+        <a class="repo__link" href="https://github.com/rjbryantresreyes-cpu/claude-brain-sync" target="_blank" rel="noopener">View on GitHub &#8599;</a>
+      </article>
+
+      <article class="repo">
+        <div class="repo__name">job-radar</div>
+        <p class="repo__what">Pull remote job listings from six sources in one command, dedupe against everything already seen, rank against lanes you define, and write one spreadsheet. Five of the six sources need no API key. It reads listings and never applies to anything.</p>
+        <div class="repo__meta"><span class="tag">Python</span><span class="tag">No API key</span><span class="tag tag--live">In daily use</span></div>
+        <a class="repo__link" href="https://github.com/rjbryantresreyes-cpu/job-radar" target="_blank" rel="noopener">View on GitHub &#8599;</a>
+      </article>
+
+    </div>
+
+    <div class="why">
+      <p><strong>Why give these away?</strong> Because the useful part of a small tool is rarely the code. It is the two hours somebody already lost finding out that removing inheritance from a Windows folder strips every permission on it, or that a cloud drive picks a different letter in every user account.</p>
+      <p>Those lessons are written into the READMEs rather than left as scar tissue in a private repo. If one of them saves you an afternoon, that is the whole point.</p>
+    </div>
+
+    <p style="max-width:720px;">A fair warning: these are studio tools, not products. They do one job on one setup and they will need editing to fit yours. The READMEs are honest about what each one does not do.</p>
+  </div>
+</section>
+
+<section class="cta-section">
+  <div class="container">
+    <span class="eyebrow" style="color:rgba(245,241,234,0.45);">Work with Balay ni Bruno &amp; Co.</span>
+    <h2>Rather we ran it for you?</h2>
+    <p>This is the kind of thing we build in the background while running the day to day. Let us look at what your business keeps doing by hand.</p>
+    <a href="https://calendly.com/rj-balaynibruno/bbc-strategy-call" target="_blank" rel="noopener" class="btn-gold">Book a Strategy Call &#8599;</a>
+  </div>
+</section>
+
+<footer class="footer"><p><a href="index.html">Balay ni Bruno &amp; Co.</a> &nbsp;&bull;&nbsp; <a href="insights.html">Insights</a> &nbsp;&bull;&nbsp; <a href="https://github.com/rjbryantresreyes-cpu" target="_blank" rel="noopener">GitHub</a> &nbsp;&bull;&nbsp; <a href="mailto:admin@balaynibruno.co">admin@balaynibruno.co</a></p><p style="margin-top:0.4rem;">&copy; 2026 Balay ni Bruno &amp; Co. All rights reserved.</p></footer>
+</body>
+</html>
