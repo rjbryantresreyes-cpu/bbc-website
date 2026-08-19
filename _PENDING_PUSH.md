@@ -1,4 +1,6 @@
-# 🟡 STAGED 2026-08-19b — Open Source page + four public repos
+# ✅ SHIPPED 2026-08-19b — Open Source page + four public repos
+
+**Verified live 2026-08-20 (BBC EODR):** `balaynibruno.co/open-source` returns 200. Shipped in commits 22ac6be + d443042.
 
 Four internal tools extracted, genericised, secret-scrubbed and published as public
 MIT repos, plus a new `/open-source` page pointing at them.
@@ -33,7 +35,9 @@ rather than at 375/768/1280. Worth a quick phone check after deploy.
 <!-- deploy-trigger 2026-07-22: New client onboarded — BILT 2 Travel added across the site. -->
 <!-- deploy-trigger 2026-08-08: Flights ni Bruno & Co. — new /flights page (daily flight-deal database, static, reads flights/data.json). -->
 
-# 🟡 STAGED 2026-08-19 — Freccia client-care batch (2 pages + audio clip + social media)
+# ✅ SHIPPED 2026-08-19 — Freccia client-care batch (2 pages + audio clip + social media)
+
+**Verified live 2026-08-20 (BBC EODR):** both `/the-fourth-marketing-company` and `/what-ongoing-support-actually-looks-like` return 200. Shipped through commit d1b505f.
 
 **Two new Client Care pages** built from the recorded 18 Aug 2026 Freccia call:
 
