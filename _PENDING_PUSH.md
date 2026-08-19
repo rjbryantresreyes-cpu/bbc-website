@@ -422,3 +422,16 @@ Reviews routine: Sonya + Essence client pages + wiring. Staged, awaiting Netlify
 - Verified 375 / 768 / 1280: no horizontal overflow, no inner scrolling, touch targets 53-56px. Edit-detection + add-message + payload construction all tested in Playwright.
 - Mirrored to `BBC WEBSITE HTML\` and the client folder `_PROSPECTS\OPTIMISM-CONSULTING\`.
 - **AFTER DEPLOY, two manual steps in Netlify:** (1) confirm Forms detection is ON, (2) add the email notification for this form to rj@balaynibruno.co. Without step 2 the answers land in the Netlify dashboard only, not RJ's inbox.
+
+# 🟡 STAGED 2026-08-20 — Case Studies page + Q4 closing campaign proof asset
+- **NEW `case-studies.html`** → will be live at `/case-studies`. "What We Actually Built" — a client-by-client account of current partnerships, a Special Projects section, and the founding clients who taught us the skills.
+- Content sourced ONLY from already-approved copy on `our-work.html` plus facts verified in the Drive this session. No invented metrics. Includes an explicit note stating we do not publish numbers we cannot stand behind.
+- Sections: 12 current clients (Cherry Sage, BILT 2 Travel, Freccia, Wooden Woodworks, First Class Finishes, Home Vision Studio, Hi-Up Roofing, S. Riviere, AJ Battle, JR Signing, Optimism Consulting, All Ryze) · 10 special projects (per-client AI helpers, 3D cabinet configurator, JRSS billing reconciliation, GHL onboarding + agreement automation, daily website health reports, Cherry Sage availability light, instant quote calculator, per-client lead engines, GSC/GA4 auto-reporting, client dashboards) · 6 founding/past clients.
+- **`our-work.html`** — added a "Case Studies · Special Projects" banner directly under the existing Live Builds banner, linking to `/case-studies`. EVERYTHING-CONNECTED: the page is reachable by clicking, not just by deep link.
+- Verified 375 / 768 / 1280: no horizontal overflow at any width, body 17px, CTA touch targets 56-57px, Google Fonts loaded. Dead `.stats` CSS block removed.
+- Mirrored to `BBC WEBSITE HTML\`.
+- **WHY IT MATTERS FOR THE DEPLOY ORDER:** this page is the proof asset linked from touch 2 of the Q4 closing email campaign (`C:\BBC\bbc-email-campaign\closing_campaign.py`). Touch 1 of that campaign does NOT reference it, so the campaign can start before this deploys, but the page must be live within 7 days of campaign go-live or touch 2 sends a dead link.
+
+---
+## ✅ MANIFEST RECONCILED 2026-08-20
+Verified with `git ls-files` that the following earlier STAGED entries are already committed AND pushed to origin/master, so they are LIVE and no longer pending: Freccia insights-hub card, Optimism Consulting message approval page (`optimism-messages.html`), S. Riviere (`s-riviere-hair-collection.html`) and Essence Bembry (`essence-bembry.html`) client pages. Their entries above are kept for the change record only. The only genuinely pending item at this timestamp was the Case Studies page, which ships in this commit.

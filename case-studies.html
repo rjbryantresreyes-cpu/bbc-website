@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Client Work &amp; Special Projects | Balay ni Bruno &amp; Co.</title>
+<meta name="description" content="What Balay ni Bruno &amp; Co. actually built for the businesses we partner with. Real websites, real systems, real AI helpers, and the special projects behind them.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Lora:ital,wght@0,400;0,500;1,400&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#F5F1EA; --navy:#1F3557; --gold:#B8923E;
+    --ink:#22303f; --muted:#5d6b7a; --line:#e2dbcd; --white:#fffdf9;
+    --maxw:1080px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--cream); color:var(--ink);
+    font-family:'DM Sans',system-ui,-apple-system,'Segoe UI',sans-serif;
+    font-size:17px; line-height:1.7; -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:var(--maxw); margin:0 auto; padding:0 24px}
+
+  /* ---- header ---- */
+  header{background:var(--navy); color:var(--cream); padding:72px 0 64px; text-align:center}
+  header .eyebrow{
+    font-size:12px; letter-spacing:.22em; text-transform:uppercase;
+    color:var(--gold); font-weight:700; margin-bottom:22px;
+  }
+  header h1{
+    font-family:'Playfair Display',Georgia,serif; font-weight:600;
+    font-size:clamp(34px,6vw,58px); line-height:1.12; margin-bottom:20px;
+  }
+  header p{
+    font-family:'Lora',Georgia,serif; font-size:clamp(17px,2.4vw,20px);
+    color:#d8dfe9; max-width:660px; margin:0 auto; line-height:1.65;
+  }
+  .rule{width:56px;height:3px;background:var(--gold);margin:30px auto 0;border-radius:2px}
+
+  /* ---- section ---- */
+  section{padding:64px 0}
+  section.alt{background:var(--white); border-top:1px solid var(--line); border-bottom:1px solid var(--line)}
+  .sec-head{margin-bottom:38px; max-width:720px}
+  .sec-head .kicker{
+    font-size:11px; letter-spacing:.2em; text-transform:uppercase;
+    color:var(--gold); font-weight:700; margin-bottom:12px;
+  }
+  .sec-head h2{
+    font-family:'Playfair Display',Georgia,serif; font-weight:600;
+    font-size:clamp(26px,4vw,38px); line-height:1.2; color:var(--navy); margin-bottom:14px;
+  }
+  .sec-head p{color:var(--muted); font-family:'Lora',Georgia,serif; font-size:18px}
+
+  /* ---- client cards ---- */
+  .grid{display:grid; grid-template-columns:1fr; gap:22px}
+  @media(min-width:760px){ .grid{grid-template-columns:1fr 1fr} }
+
+  .card{
+    background:var(--white); border:1px solid var(--line); border-radius:14px;
+    padding:28px; display:flex; flex-direction:column;
+  }
+  .card .name{
+    font-family:'Playfair Display',Georgia,serif; font-weight:600;
+    font-size:23px; color:var(--navy); margin-bottom:6px;
+  }
+  .card .role{
+    font-size:12px; letter-spacing:.12em; text-transform:uppercase;
+    color:var(--gold); font-weight:700; margin-bottom:16px;
+  }
+  .card p{color:var(--muted); font-size:16px; margin-bottom:16px}
+  .card .built{
+    background:var(--cream); border-radius:10px;
+    padding:16px 18px; margin:0 0 18px;
+  }
+  .card .built strong{
+    display:block; font-size:11px; letter-spacing:.14em; text-transform:uppercase;
+    color:var(--gold); margin-bottom:6px;
+  }
+  .card .built span{font-size:15px; color:var(--ink)}
+  .tags{display:flex; flex-wrap:wrap; gap:7px; margin-top:auto}
+  .tag{
+    background:var(--cream); border:1px solid var(--line); color:var(--muted);
+    font-size:12px; padding:5px 11px; border-radius:99px; white-space:nowrap;
+  }
+
+  /* ---- special projects ---- */
+  .sp{
+    background:var(--white); border:1px solid var(--line);
+    border-radius:12px; padding:26px 28px; margin-bottom:18px;
+  }
+  .sp::before{
+    content:""; display:block; width:28px; height:2px;
+    background:var(--gold); border-radius:2px; margin-bottom:16px;
+  }
+  .sp h3{
+    font-family:'Playfair Display',Georgia,serif; font-weight:600;
+    font-size:20px; color:var(--navy); margin-bottom:4px;
+  }
+  .sp .who{
+    font-size:12px; letter-spacing:.1em; text-transform:uppercase;
+    color:var(--gold); font-weight:700; margin-bottom:12px;
+  }
+  .sp p{color:var(--muted); font-size:16px}
+
+  /* ---- note ---- */
+  .note{
+    background:var(--white); border:1px dashed var(--line);
+    border-radius:12px; padding:22px 26px; margin-top:32px;
+  }
+  .note p{color:var(--muted); font-size:15px; font-style:italic; font-family:'Lora',Georgia,serif}
+
+  /* ---- cta ---- */
+  .cta{background:var(--navy); color:var(--cream); text-align:center; padding:70px 0}
+  .cta h2{
+    font-family:'Playfair Display',Georgia,serif; font-weight:600;
+    font-size:clamp(26px,4.4vw,40px); margin-bottom:16px;
+  }
+  .cta p{color:#d8dfe9; max-width:560px; margin:0 auto 30px; font-family:'Lora',Georgia,serif; font-size:18px}
+  .btn{
+    display:inline-block; background:var(--gold); color:#20304a;
+    font-weight:700; font-size:16px; padding:15px 38px; border-radius:99px;
+    text-decoration:none; letter-spacing:.02em;
+  }
+  footer{background:#16253d; color:#93a3b8; text-align:center; padding:32px 0; font-size:14px}
+  footer a{color:var(--gold); text-decoration:none}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <div class="eyebrow">Balay ni Bruno &amp; Co.</div>
+    <h1>What We Actually Built</h1>
+    <p>Not a list of services. The real websites, stores, systems and AI helpers we built for the businesses we partner with, and the special projects that came out of knowing their work well.</p>
+    <div class="rule"></div>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="kicker">The partnerships running right now</div>
+      <h2>Current Clients</h2>
+      <p>Every one of these is live work, happening this week. What they came to us with, and what we built.</p>
+    </div>
+
+    <div class="grid">
+
+      <div class="card">
+        <div class="name">Cherry Sage</div>
+        <div class="role">Website · SEO · Content · Email · AI</div>
+        <p>An honest readings practice with more than ten years of trust behind it, but the search visibility had gone quiet.</p>
+        <div class="built">
+          <strong>What we built</strong>
+          <span>Getting her found again in search, a full website redesign, and we carry her content and email. She also gets her own Cherry Sage AI, plus a live availability light on the site so visitors always know if she is free.</span>
+        </div>
+        <div class="tags"><span class="tag">Website</span><span class="tag">SEO</span><span class="tag">Content</span><span class="tag">Email</span><span class="tag">AI</span></div>
+      </div>
+
+      <div class="card">
+        <div class="name">BILT 2 Travel</div>
+        <div class="role">Content · Brand · Website · Email · AI</div>
+        <p>A travel-rewards education brand teaching everyday people to travel more for less using credit card rewards responsibly.</p>
+        <div class="built">
+          <strong>What we built</strong>
+          <span>We carry their content, brand identity, website and email, and built them their own in-house AI helper, BILL. The whole engine points at one thing: selling the e-book.</span>
+        </div>
+        <div class="tags"><span class="tag">Content</span><span class="tag">Brand</span><span class="tag">Website</span><span class="tag">Email</span><span class="tag">AI</span></div>
+      </div>
+
+      <div class="card">
+        <div class="name">Freccia Construction</div>
+        <div class="role">Social · Reels · LinkedIn · Website · AI</div>
+        <p>A custom home builder in Austin, Texas with beautiful work and a quiet online presence.</p>
+        <div class="built">
+          <strong>What we built</strong>
+          <span>We run their short-form social across Instagram, Facebook, YouTube Shorts and TikTok, build their weekly LinkedIn presence, support the website, and are building their own AI helper, Bob. Their new site is live at frecciaconstruction.com.</span>
+        </div>
+        <div class="tags"><span class="tag">Social Media</span><span class="tag">Reels</span><span class="tag">LinkedIn</span><span class="tag">Website</span><span class="tag">AI</span></div>
+      </div>
+
+      <div class="card">
+        <div class="name">Wooden Woodworks</div>
+        <div class="role">Website · Brand · Design</div>
+        <p>Veteran-owned custom cabinetry in Salado, Texas. The craft was excellent. The digital presence did not match it.</p>
+        <div class="built">
+          <strong>What we built</strong>
+          <span>A warm, hand-crafted digital presence that reflects the actual quality of the woodwork. Full website design, brand identity and visual system, their own Woody AI, and a 3D cabinet configurator so customers can see a piece before it is built.</span>
+        </div>
+        <div class="tags"><span class="tag">Website</span><span class="tag">Brand</span><span class="tag">Design</span><span class="tag">3D</span><span class="tag">AI</span></div>
+      </div>
+
+      <div class="card">
+        <div class="name">First Class Finishes</div>
+        <div class="role">Website · Local SEO · Google · Content</div>
+        <p>A Central Texas commercial painting and property maintenance company that deserved to be easier to find.</p>
+        <div class="built">
+          <strong>What we built</strong>
+          <span>The website, local SEO and internal linking, Google Business Profile, Search Console and indexing, and GA4 event tracking, plus AI-assisted short-form content, AI avatar videos and graphics for their social channels.</span>
+        </div>
+        <div class="tags"><span class="tag">Website</span><span class="tag">Local SEO</span><span class="tag">Google Business</span><span class="tag">GA4</span><span class="tag">AI Content</span></div>
+      </div>
+
+      <div class="card">
+        <div class="name">Home Vision Studio</div>
+        <div class="role">Website · Content · Design</div>
+        <p>Interior design and home products, selling through Shopify.</p>
+        <div class="built">
+          <strong>What we built</strong>
+          <span>Designed and built a portfolio site that showcases their architectural vision work, with a clean editorial layout and a real content strategy behind it. They also get a daily website health report, sent automatically every morning.</span>
+        </div>
+        <div class="tags"><span class="tag">Website</span><span class="tag">Content</span><span class="tag">Design</span><span class="tag">Reporting</span></div>
+      </div>
+
+      <div class="card">
+        <div class="name">Hi-Up Roofing</div>
+        <div class="role">Website · AI Content · Social · Design</div>
+        <p>An established Central Texas roofing business, strong on the ground, thin online.</p>
+        <div class="built">
+          <strong>What we built</strong>
+          <span>Website edits and updates, AI-assisted short-form content, and graphic design for their social channels. Local SEO and Google Business Profile growth are the next phase.</span>
+        </div>
+        <div class="tags"><span class="tag">Website</span><span class="tag">AI Content</span><span class="tag">Social Media</span><span class="tag">Design</span></div>
+      </div>
+
+      <div class="card">
+        <div class="name">S. Riviere Hair Collection</div>
+        <div class="role">Online Store · Brand · AI</div>
+        <p>A raw Indian hair collection that needed a storefront as refined as the product.</p>
+        <div class="built">
+          <strong>What we built</strong>
+          <span>A refined, editorial online store, with her own AI helper, Olivia, guiding brand voice and content so every touchpoint stays warm, elevated and accurate. We also built her a stylist partnership lead-generation system, and she gets a daily website health report.</span>
+        </div>
+        <div class="tags"><span class="tag">E-Commerce</span><span class="tag">Brand</span><span class="tag">AI</span><span class="tag">Lead Gen</span><span class="tag">Reporting</span></div>
+      </div>
+
+      <div class="card">
+        <div class="name">AJ Battle Foundation</div>
+        <div class="role">Executive Support · Social · Design · Website</div>
+        <p>A long-term partnership supporting two connected brands, a youth empowerment nonprofit and a real estate investment business.</p>
+        <div class="built">
+          <strong>What we built</strong>
+          <span>Social media, content, graphic design and website operations across Instagram, Facebook, TikTok and YouTube, plus executive assistant support covering scheduling, outreach, events and admin. The foundation has its own AI helper too.</span>
+        </div>
+        <div class="tags"><span class="tag">Executive Support</span><span class="tag">Social Media</span><span class="tag">Design</span><span class="tag">Nonprofit</span><span class="tag">AI</span></div>
+      </div>
+
+      <div class="card">
+        <div class="name">JR Signing Services</div>
+        <div class="role">Website · Lead Gen · CRM · Automation</div>
+        <p>A Texas notary signing agency led by Jasmine Brown, growing fast and outgrowing its manual processes.</p>
+        <div class="built">
+          <strong>What we built</strong>
+          <span>Their website, LinkedIn outreach bringing in new signing work, and their full client pipeline in GoHighLevel. Then the automation layer: onboarding and agreement signing that runs itself, billing reconciliation across QuickBooks and Sheets, a daily priority digest, and an instant quote calculator.</span>
+        </div>
+        <div class="tags"><span class="tag">Website</span><span class="tag">Lead Generation</span><span class="tag">CRM</span><span class="tag">Automation</span></div>
+      </div>
+
+      <div class="card">
+        <div class="name">Optimism Consulting</div>
+        <div class="role">Website · Marketing · Systems</div>
+        <p>Credit repair and business funding out of Dallas, Texas. A newer partnership, started this month.</p>
+        <div class="built">
+          <strong>What we built</strong>
+          <span>A proposal and website preview delivered before the first call even happened, so the conversation started from something real instead of a blank page. Build is underway now.</span>
+        </div>
+        <div class="tags"><span class="tag">Website</span><span class="tag">Marketing</span><span class="tag">Systems</span></div>
+      </div>
+
+      <div class="card">
+        <div class="name">All Ryze</div>
+        <div class="role">Operations · Team · Outreach Systems</div>
+        <p>A digital audience engagement and growth agency that needed its operational engine built and run.</p>
+        <div class="built">
+          <strong>What we built</strong>
+          <span>The full operational infrastructure. A team of engagement specialists managed day to day, scalable communication systems, multi-platform outreach coordination, and performance reporting. We wrote the SOPs, trained the team, and keep the engine running.</span>
+        </div>
+        <div class="tags"><span class="tag">Operations</span><span class="tag">Team Management</span><span class="tag">Outreach</span><span class="tag">SOPs</span></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="alt">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="kicker">The part most studios do not do</div>
+      <h2>Special Projects</h2>
+      <p>These came out of knowing a client's business well enough to see a problem they had stopped noticing. None of them were on the original scope.</p>
+    </div>
+
+    <div class="sp">
+      <h3>An AI helper for every client, trained on their own business</h3>
+      <div class="who">Wooden Woodworks · S. Riviere · Freccia · BILT 2 Travel · Cherry Sage · AJ Battle · JR Signing · Home Vision Studio</div>
+      <p>Woody, Olivia, Bob, BILL, Ivy and the rest. Each one is a real AI helper trained on that client's brand, products, voice and rules, so it answers like someone who works there. The client owns it. It does not sound like a chatbot because it is not built like one.</p>
+    </div>
+
+    <div class="sp">
+      <h3>A 3D cabinet configurator</h3>
+      <div class="who">Wooden Woodworks</div>
+      <p>Custom cabinetry is hard to sell from photographs because every piece is different. So we built a 3D configurator that lets a customer see the piece before it exists. Same idea now extends to walkable 3D room tours.</p>
+    </div>
+
+    <div class="sp">
+      <h3>A billing system that reconciles itself</h3>
+      <div class="who">JR Signing Services</div>
+      <p>Matching signings to invoices to payments was eating hours every week. We built the reconciliation across QuickBooks, Google Sheets, Gmail and GoHighLevel, including a nightly safety check that catches updates a simpler trigger would miss.</p>
+    </div>
+
+    <div class="sp">
+      <h3>Onboarding and agreement signing that runs without anyone touching it</h3>
+      <div class="who">JR Signing Services</div>
+      <p>When a prospect reaches the right pipeline stage, the welcome packet and service agreement go out on their own and come back signed. Built natively inside GoHighLevel so there is no extra subscription to carry.</p>
+    </div>
+
+    <div class="sp">
+      <h3>Daily website health reports, sent automatically</h3>
+      <div class="who">Home Vision Studio · S. Riviere Hair Collection</div>
+      <p>Every morning the site gets checked, one fault gets fixed, and the client gets a branded report showing exactly what happened. They never have to ask how the website is doing.</p>
+    </div>
+
+    <div class="sp">
+      <h3>A live availability light</h3>
+      <div class="who">Cherry Sage</div>
+      <p>Her whole business depends on whether she is available right now. So the site shows it: green when she is online, orange when she has stepped away, red when she is done for the day. A small thing that removes a question every visitor was silently asking.</p>
+    </div>
+
+    <div class="sp">
+      <h3>An instant quote calculator</h3>
+      <div class="who">JR Signing Services</div>
+      <p>Prospects wanted pricing before they would book. Now they get it on the website, immediately, instead of waiting on an email that might come tomorrow.</p>
+    </div>
+
+    <div class="sp">
+      <h3>Lead engines built per client, not bought off a shelf</h3>
+      <div class="who">JR Signing Services · S. Riviere · Wooden Woodworks · Freccia</div>
+      <p>A verified lead database for notary work, a stylist partnership pipeline for hair, builder and remodeler lists for cabinetry, and commercial outreach for construction. Each one researched for that specific business rather than pulled from a generic list.</p>
+    </div>
+
+    <div class="sp">
+      <h3>Search and analytics reporting that pulls itself</h3>
+      <div class="who">First Class Finishes · Hi-Up Roofing</div>
+      <p>Weekly Google Search Console and GA4 numbers gathered automatically, so reporting is real data rather than screenshots taken by hand.</p>
+    </div>
+
+    <div class="sp">
+      <h3>A client dashboard for every partnership</h3>
+      <div class="who">Across the roster</div>
+      <p>Each client has a live page showing what is in progress, what is delivered, and where to send the next request. No chasing, no wondering what we are working on this week.</p>
+    </div>
+
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="kicker">Where we came from</div>
+      <h2>The Clients Who Taught Us This</h2>
+      <p>Every skill the studio runs on today came from a real partnership, not a course.</p>
+    </div>
+
+    <div class="grid">
+      <div class="card">
+        <div class="name">MNJ Insurance Solutions</div>
+        <div class="role">Founding client</div>
+        <p>Where it all began, with Julie Jennings. Social media and brand graphics first, then video, the first videos ever made here, animated explainers and YouTube content. When the agency that made the introduction tried to end the relationship, the friendship continued anyway. It is still going today.</p>
+        <div class="tags"><span class="tag">Graphic Design</span><span class="tag">Video</span><span class="tag">Social Media</span></div>
+      </div>
+
+      <div class="card">
+        <div class="name">Crown Limited Supply</div>
+        <div class="role">Foundational client · E-commerce</div>
+        <p>An anime merchandise brand, and where we learned e-commerce. It started as social media, then the owner offered to teach Shopify. That became the first store built and run end to end: redesign, product pages, uploads, fulfillment and customer service. The first email campaigns started here too. One brand, three skills the whole studio now runs on.</p>
+        <div class="tags"><span class="tag">Shopify</span><span class="tag">Email</span><span class="tag">E-Commerce</span><span class="tag">Content</span></div>
+      </div>
+
+      <div class="card">
+        <div class="name">Top Producer Investment Capital</div>
+        <div class="role">Two-year partnership</div>
+        <p>A two-year partnership with Texas real estate investor Ryan Tanel. Social media, content creation, video and podcast editing, websites, and all-around support, growing right alongside his portfolio.</p>
+        <div class="tags"><span class="tag">Social Media</span><span class="tag">Video</span><span class="tag">Website</span><span class="tag">Real Estate</span></div>
+      </div>
+
+      <div class="card">
+        <div class="name">Blackbelt Commerce</div>
+        <div class="role">Content · Podcast · Email</div>
+        <p>One of the most established Shopify Plus agencies in the world, and they trust us with their own brand. Reels and graphics, their podcast and YouTube editing, social and email, SEO blog posts and case studies. When a top Shopify expert outsources their content, that says something.</p>
+        <div class="tags"><span class="tag">Content</span><span class="tag">Podcast</span><span class="tag">Email</span><span class="tag">SEO</span></div>
+      </div>
+
+      <div class="card">
+        <div class="name">Cavalry Realty Group</div>
+        <div class="role">Content · Listing Media · Video</div>
+        <p>A content and automation partnership with Tre Serrano, a top San Antonio agent. The local content engine, listing media, his weekly YouTube live, AI home tours, and the workflow behind all of it.</p>
+        <div class="tags"><span class="tag">Content</span><span class="tag">Listing Media</span><span class="tag">Video</span><span class="tag">Automation</span></div>
+      </div>
+
+      <div class="card">
+        <div class="name">Orbital SEO</div>
+        <div class="role">Foundational client · Social · AI Images</div>
+        <p>An SEO agency, and a string of firsts. Social media and content across Twitter, Instagram and Facebook. The first brand Twitter account we ever managed, and the first time we generated images with AI for a real brand.</p>
+        <div class="tags"><span class="tag">Social Media</span><span class="tag">Content</span><span class="tag">AI Images</span></div>
+      </div>
+    </div>
+
+    <div class="note">
+      <p>A note on numbers. We do not publish metrics we cannot stand behind. Where a result is verified we name it. Where reporting was never formalised, we describe the scope and volume of the work instead and leave it at that. That rule costs us some impressive-sounding lines, and we would rather keep it.</p>
+    </div>
+  </div>
+</section>
+
+<div class="cta">
+  <div class="wrap">
+    <h2>If any of this looks like what you need</h2>
+    <p>We take on a few partnerships at a time so the work stays good. If you want to talk about what this would look like for your business, the door is open.</p>
+    <a class="btn" href="https://calendly.com/rj-balaynibruno/bbc-strategy-call">Start a Conversation</a>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap">
+    Balay ni Bruno &amp; Co. · <a href="https://balaynibruno.co">balaynibruno.co</a> · <a href="mailto:rj@balaynibruno.co">rj@balaynibruno.co</a>
+  </div>
+</footer>
+
+</body>
+</html>
