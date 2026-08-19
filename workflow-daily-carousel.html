@@ -357,6 +357,9 @@
       box-shadow:0 8px 30px rgba(85,60,35,0.22);
     }
 
+    /* shadows do not read on dark; keep them for light sections only */
+    .cta-section .btn-gold,.section--dark .btn-gold{box-shadow:none}
+    .cta-section .btn-gold:hover,.section--dark .btn-gold:hover{box-shadow:none}
     /* ── FOOTER ── */
     .footer {
       background:var(--bg-footer);

@@ -61,6 +61,9 @@
     .btn-outline{background:transparent;color:var(--deep-blue);border-color:rgba(75,111,165,0.42)} .btn-outline:hover{background:var(--deep-blue);color:var(--text-warm);border-color:var(--deep-blue);transform:translateY(-2px)}
     .btn-ghost{background:transparent;color:var(--text-warm);border-color:rgba(245,241,234,0.28)} .btn-ghost:hover{background:rgba(245,241,234,0.08);border-color:rgba(245,241,234,0.55)}
     .btn-gold{background:var(--gold);color:#fff;font-weight:700} .btn-gold:hover{background:var(--gold-warm);transform:translateY(-2px);box-shadow:0 10px 32px rgba(85,60,35,0.19)}
+    /* shadows do not read on dark; keep them for light sections only */
+    .cta-section .btn-gold,.section--dark .btn-gold{box-shadow:none}
+    .cta-section .btn-gold:hover,.section--dark .btn-gold:hover{box-shadow:none}
     .btn-sm{padding:0.62rem 1.35rem;font-size:0.78rem}
     .site-header{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(245,241,234,0.94);backdrop-filter:blur(20px) saturate(1.2);-webkit-backdrop-filter:blur(20px) saturate(1.2);border-bottom:var(--border-warm);transition:box-shadow 0.3s ease}
     .site-header.scrolled{box-shadow:var(--shadow-sm)}

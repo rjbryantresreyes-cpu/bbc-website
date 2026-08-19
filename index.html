@@ -386,6 +386,9 @@
     @media (max-width: 768px) {
       .header__cta .btn-gold,
       .header__cta .btn-outline { display: none; }
+    /* shadows do not read on dark; keep them for light sections only */
+    .cta-section .btn-gold,.section--dark .btn-gold{box-shadow:none}
+    .cta-section .btn-gold:hover,.section--dark .btn-gold:hover{box-shadow:none}
     }
 
     /* S1 HERO */
