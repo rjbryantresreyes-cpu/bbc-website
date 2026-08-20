@@ -5,4 +5,26 @@ Disallow: /portfolio-form.html
 Disallow: /task-submission.html
 Disallow: /lot/
 
+# AI answer engines are explicitly welcome to read and cite this site.
+# A large share of searches now resolve inside an AI answer rather than a click,
+# so being citable matters more than being merely crawlable.
+#
+# NOTE: naming a crawler creates its own group that REPLACES the "*" group, it does
+# not inherit from it. So the same Disallow rules are repeated here on purpose. Add
+# any future Disallow to BOTH blocks or the private pages become crawlable by AI.
+User-agent: GPTBot
+User-agent: OAI-SearchBot
+User-agent: ChatGPT-User
+User-agent: PerplexityBot
+User-agent: ClaudeBot
+User-agent: Claude-Web
+User-agent: Google-Extended
+User-agent: Applebot-Extended
+User-agent: CCBot
+Allow: /
+
+Disallow: /portfolio-form.html
+Disallow: /task-submission.html
+Disallow: /lot/
+
 Sitemap: https://balaynibruno.co/sitemap.xml

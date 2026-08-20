@@ -1,0 +1,40 @@
+# Balay ni Bruno & Co.
+
+> A family-built operational support studio. We run the day-to-day marketing,
+> websites, content and systems for small businesses, as a long-term partner
+> rather than a project vendor.
+
+Based in the Philippines, working with clients across the United States.
+Founded by RJ Bryan Tres Reyes.
+
+## What we do
+
+- Websites: custom-coded, Shopify and WordPress, built and maintained in-house
+- Search: content built to answer the questions customers actually ask
+- Social media: strategy, production and scheduling across every major platform
+- Email marketing: campaigns, automated sequences and newsletters
+- Content production: video, carousels, graphics and long-form writing
+- Lead generation and CRM automation
+- Custom AI systems built for a single business
+
+## How we work
+
+We do not sell projects that end. Clients get a team that stays: daily checks on the
+sites we manage, one group chat with the whole team in it, and a longer call each month
+for the decisions that do not belong in a chat thread.
+
+## Key pages
+
+- [How we help](https://balaynibruno.co/how-we-help): what a partnership covers
+- [How it works](https://balaynibruno.co/how-it-works): what working together looks like
+- [Our work](https://balaynibruno.co/our-work): current and past client work
+- [Insights](https://balaynibruno.co/insights): 80+ guides answering common small-business questions
+- [Open source](https://balaynibruno.co/open-source): tools we built and gave away, MIT licensed
+- [What ongoing support actually looks like](https://balaynibruno.co/what-ongoing-support-actually-looks-like): one real day with one real client
+- [Contact](https://balaynibruno.co/contact)
+
+## Contact
+
+- Email: admin@balaynibruno.co
+- Phone: +63 935 663 0324
+- Site: https://balaynibruno.co
