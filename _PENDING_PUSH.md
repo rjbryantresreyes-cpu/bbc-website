@@ -1,4 +1,20 @@
-# ✅ SHIPPED 2026-08-19b — Open Source page + four public repos
+# 🟡 STAGED 2026-09-01 — Real estate / realtor vertical (new page + case-study cross-links + refreshed PDF)
+
+**Not pushed. Needs RJ's go before deploy.**
+
+**New file:** `real-estate-agent-marketing.html` — SEO/conversion landing page for real estate agents/brokerages (lead gen, websites, content, email/CRM, GoHighLevel + platform honesty section, proof section). Verified responsive at 375/768/1280 (screenshots taken via local preview, port 8791).
+
+**Changed:**
+- `cavalry-realty.html`, `top-producer-investment-capital.html` — CTA secondary button now links to the new realtor page instead of the generic "See More of Our Work".
+- `case-studies.html` — added a link under the Top Producer Investment Capital card pointing to the new page.
+- `sitemap.xml` — new URL added.
+- `assets/downloads/BBC_Real_Estate_Playbook.pdf` — NEW, refreshed export of the Real Estate Playbook (added a Top Producer Investment Capital proof mention + a new honest "Platforms We Work In" page covering GoHighLevel (proven) vs. MLS/IDX/Zillow/kvCORE/etc. (we plug into what you have, not a false certification claim)). Source HTML lives at `BBC Operating System\02_SERVICE_SYSTEMS\PROPOSAL_SYSTEM\REAL_ESTATE_PORTFOLIO\bbc-real-estate-playbook.html` (Drive-side, mirrored here for the download link).
+
+**Also built (not a website change):** `_SYSTEM\TOOLS\realtor-outreach\` — a forked/adapted copy of the proven Job Radar cold-outreach engine (`gen_proposal.py` + `send_proposals.py`), retargeted at Texas realtors for a first outreach batch. Same safety rails (no-pricing guard, PDF-must-mention-prospect verification, daily cap, dedup ledger). Queue is empty, needs a real researched prospect list before anything sends, and nothing sends without RJ's explicit go per batch (new, unproven vertical).
+
+**Not done yet:** the actual first-batch prospect list (~20-30 real Texas realtors, researched individually per BBC's content-integrity rule — no invented strengths/gaps).
+
+
 
 **Verified live 2026-08-20 (BBC EODR):** `balaynibruno.co/open-source` returns 200. Shipped in commits 22ac6be + d443042.
 
