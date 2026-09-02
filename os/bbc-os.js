@@ -87,7 +87,10 @@ function osChrome(current){
       </a>
       <nav class="os-nav">${nav}</nav>
       <span class="pill" id="freshness"><span class="dot"></span><span id="fresh-text">loading…</span></span>
+      <button class="btn" id="refresh" type="button">Refresh</button>
     </div></header>`);
+  const btn = document.getElementById("refresh");
+  if (btn) btn.addEventListener("click", () => location.reload());
 }
 
 /* ---------- small charts ----------
