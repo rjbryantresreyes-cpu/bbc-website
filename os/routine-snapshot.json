@@ -1,0 +1,751 @@
+{
+  "shift_date": "2026-09-02",
+  "generated_at": "2026-09-02T14:17:44.321360+00:00",
+  "attention": [
+    {
+      "severity": "blocking",
+      "client": "Balay ni Bruno & Co.",
+      "title": "Email list is burning, and sending is paused because of it",
+      "detail": "9.8% bounce rate, 51 of 523. Austin Permit Leads is 248 of 248 blacklisted, every address dead. Remodeler Leads is 43% dead, Builder Leads 22%. The pool is empty (0 contacts at step 0) so nothing is going out. Refilling from the same sourcing rebuilds the same problem. Needs your call on sending path and list quality before anything sends again."
+    },
+    {
+      "severity": "decision",
+      "client": "Freccia Construction",
+      "title": "Pipeline has not moved since April",
+      "detail": "61 open opportunities, newest created 22 April, over four months ago. Nineteen of twenty are still in the first stage at 20%. Either the 3-a-day outbound is not running or it is not landing."
+    },
+    {
+      "severity": "decision",
+      "client": "Wooden Woodworks",
+      "title": "770 contacts, zero campaigns ever sent",
+      "detail": "The Brevo account is live and healthy with 428 Hubspot leads and 343 builder leads, and not one campaign has ever run on it. Intentional, or a gap nobody noticed?"
+    },
+    {
+      "severity": "decision",
+      "client": "Wooden Woodworks + S. Riviere",
+      "title": "Nothing scheduled on social for the next 5 days",
+      "detail": "Both Metricool brands are connected and empty through 6 September. BBC's own account has 48 posts queued over the same window, so this is a client-side gap, not a tooling problem."
+    },
+    {
+      "severity": "decision",
+      "client": "Cherry Sage",
+      "title": "1,374 contacts waiting on Beverly's go",
+      "detail": "Tier 2 (278) and Tier 3 (1,096) are still queued behind her approval. Free plan caps at 300 sends a day, so Tier 3 alone needs four days once she says yes. Only you talk to her."
+    },
+    {
+      "severity": "watch",
+      "client": "3r Design",
+      "title": "Client status unconfirmed",
+      "detail": "Shows as ACTIVE on the old dashboard but is not in CLAUDE.md's active client table. Left off the active list until you say whether it is live, a prospect, or finished."
+    },
+    {
+      "severity": "watch",
+      "client": "Balay ni Bruno & Co.",
+      "title": "Eight MCP servers failed to connect this run",
+      "detail": "Google Analytics, Search Console, five Netlify servers and Playwright all timed out. That is why analytics and ad spend are missing from this snapshot. A connection failure, not an absence of data."
+    }
+  ],
+  "bbc": {
+    "bounce_rate": 9.8,
+    "bounce_note": "51 of 523 - sending paused",
+    "emails_sent_24h": 0,
+    "email_note": "no campaign ran across all 3 accounts"
+  },
+  "clients": [
+    {
+      "id": "aj-battle",
+      "name": "AJ Battle Foundation",
+      "status": "active",
+      "what": "Nonprofit.",
+      "owner": null,
+      "handler": "Vi",
+      "ai": null,
+      "site": null,
+      "folder": "02_ACTIVE_CLIENTS/AJ-BATTLE-FOUNDATION",
+      "guardrail": null,
+      "note": null,
+      "services": {
+        "website": {
+          "state": "unknown",
+          "detail": "no URL configured"
+        },
+        "social": {
+          "state": "unknown",
+          "detail": "not checked this run"
+        }
+      },
+      "fixes": [],
+      "updates": [],
+      "whatsapp": {
+        "state": "unknown",
+        "detail": "no chat mapped"
+      }
+    },
+    {
+      "id": "all-ryze",
+      "name": "All Ryze",
+      "status": "active",
+      "what": "Digital audience engagement agency.",
+      "owner": null,
+      "handler": "Ryan (team lead)",
+      "ai": null,
+      "site": null,
+      "folder": "02_ACTIVE_CLIENTS/ALL-RYZE",
+      "guardrail": "NEVER use adult platform language. Describe as 'digital audience engagement agency.' Invoicing is RJ-private.",
+      "note": null,
+      "services": {
+        "social": {
+          "state": "unknown",
+          "detail": "not checked this run"
+        }
+      },
+      "fixes": [],
+      "updates": [],
+      "whatsapp": {
+        "state": "unknown",
+        "detail": "no chat mapped"
+      }
+    },
+    {
+      "id": "bilt",
+      "name": "BILT 2 Travel",
+      "status": "active",
+      "what": "Travel-rewards education, e-book funnel. B2C global.",
+      "owner": "Dwight Campbell",
+      "handler": "Kenz",
+      "ai": "BILL",
+      "site": "https://bilt2travel.com",
+      "folder": "02_ACTIVE_CLIENTS/BILT-2-TRAVEL",
+      "guardrail": "NEVER 'hack' / 'free travel' / risky-credit language. Drafts only, no auto-post.",
+      "note": null,
+      "services": {
+        "website": {
+          "state": "ok",
+          "detail": "HTTP 200",
+          "url": "https://bilt2travel.com"
+        },
+        "leads": {
+          "state": "unknown",
+          "detail": "not checked this run"
+        },
+        "social": {
+          "state": "unknown",
+          "detail": "not checked this run"
+        }
+      },
+      "fixes": [
+        {
+          "client": "bilt",
+          "title": "Removed daily good-morning",
+          "detail": "Same change applies to the B2T group chat."
+        }
+      ],
+      "updates": [],
+      "whatsapp": {
+        "state": "ok",
+        "count": 18,
+        "recent": [
+          {
+            "day": "2026-09-02",
+            "text": "**13:52** Kenz: Good morning!"
+          },
+          {
+            "day": "2026-09-01",
+            "text": "**13:58** Kenz: Good morning!"
+          },
+          {
+            "day": "2026-09-01",
+            "text": "**15:22** Kenz: [Image] @79234395537572  [file: media/2026-09-01/3EB0B45482BF9DA5885202.jpg]"
+          },
+          {
+            "day": "2026-09-01",
+            "text": "**15:27** Derrick Johnson: New password is Signet25$"
+          },
+          {
+            "day": "2026-09-01",
+            "text": "**15:27** Derrick Johnson: Good Morning"
+          },
+          {
+            "day": "2026-09-01",
+            "text": "**15:29** Kenz: Hi Derrick, quick one for the Barbados teaser reel (Post 28)."
+          },
+          {
+            "day": "2026-09-01",
+            "text": "We'd love you to record two short lines on your phone, just a quick voice memo or a selfie video, whichever is easier for you. Your voice will land better and feel more personal than what we've been generating."
+          },
+          {
+            "day": "2026-09-01",
+            "text": "The two lines:"
+          },
+          {
+            "day": "2026-09-01",
+            "text": "\"I paid $386.84 for a business-class trip that cost $5,101.15.\""
+          },
+          {
+            "day": "2026-09-01",
+            "text": "\"Full breakdown coming this week.\""
+          },
+          {
+            "day": "2026-09-01",
+            "text": "No need to be polished, just natural, like you're telling a friend. Once we have it, we'll cut it in with the Barbados footage, and this reel will be ready to go out."
+          },
+          {
+            "day": "2026-09-01",
+            "text": "**15:42** Derrick Johnson: [Audio]  [file: media/2026-09-01/4A2C95A80C2F5B42D811.ogg]"
+          }
+        ],
+        "detail": "18 lines in last 2d"
+      }
+    },
+    {
+      "id": "cherry-sage",
+      "name": "Cherry Sage",
+      "status": "active",
+      "what": "Psychic, numerology and tarot readings. B2C, international.",
+      "owner": "Beverly Cherry",
+      "handler": "RJ only",
+      "ai": "Ivy",
+      "site": "https://cherrysage.com",
+      "folder": "02_ACTIVE_CLIENTS/CHERRY-SAGE",
+      "guardrail": "Professional, warm, traditional. NEVER witchy or fortune-telling. RJ is the only handler.",
+      "note": null,
+      "services": {
+        "website": {
+          "state": "ok",
+          "detail": "HTTP 200",
+          "url": "https://cherrysage.com"
+        },
+        "email": {
+          "state": "ok",
+          "lists": [
+            {
+              "id": 8,
+              "name": "Website Signups",
+              "contacts": 2,
+              "blacklisted": 0,
+              "dead_pct": 0.0
+            },
+            {
+              "id": 7,
+              "name": "Approval Test - RJ + Beverly",
+              "contacts": 2,
+              "blacklisted": 0,
+              "dead_pct": 0.0
+            },
+            {
+              "id": 6,
+              "name": "Tier 3 - Legacy (2015-2018)",
+              "contacts": 1096,
+              "blacklisted": 0,
+              "dead_pct": 0.0
+            },
+            {
+              "id": 5,
+              "name": "Tier 2 - Mid (2019-2022)",
+              "contacts": 278,
+              "blacklisted": 6,
+              "dead_pct": 2.2
+            },
+            {
+              "id": 4,
+              "name": "Tier 1 - Warm (2023-2026)",
+              "contacts": 62,
+              "blacklisted": 2,
+              "dead_pct": 3.2
+            },
+            {
+              "id": 2,
+              "name": "Your first list",
+              "contacts": 1,
+              "blacklisted": 0,
+              "dead_pct": 0.0
+            }
+          ],
+          "campaigns": [],
+          "contacts": 1438,
+          "credits": 300,
+          "account": "admin@cherrysage.com",
+          "plan": "free",
+          "campaigns_error": "AttributeError"
+        },
+        "leads": {
+          "state": "unknown",
+          "detail": "not checked this run"
+        },
+        "social": {
+          "state": "unknown",
+          "detail": "not checked this run"
+        }
+      },
+      "fixes": [
+        {
+          "client": "cherry-sage",
+          "title": "Removed daily good-morning",
+          "detail": "The routine no longer messages client chats at all. It reads and reports only."
+        }
+      ],
+      "updates": [],
+      "whatsapp": {
+        "state": "unknown",
+        "detail": "chat not found in archive"
+      }
+    },
+    {
+      "id": "freccia",
+      "name": "Freccia Construction",
+      "status": "active",
+      "what": "Custom home builder, Austin TX.",
+      "owner": "Rebekah",
+      "handler": "RJ / Ryan",
+      "ai": "Bob",
+      "site": "https://frecciaconstruction.com",
+      "folder": "02_ACTIVE_CLIENTS/FRECCIA-CONSTRUCTION",
+      "guardrail": "Drafts only. Rebekah is sole approver.",
+      "note": null,
+      "services": {
+        "website": {
+          "state": "ok",
+          "detail": "HTTP 200",
+          "url": "https://frecciaconstruction.com"
+        },
+        "email": {
+          "state": "unknown",
+          "detail": "no ESP key with us"
+        },
+        "leads": {
+          "state": "unknown",
+          "detail": "not checked this run"
+        },
+        "social": {
+          "state": "unknown",
+          "detail": "not checked this run"
+        },
+        "crm": {
+          "state": "unknown",
+          "detail": "not checked this run"
+        }
+      },
+      "fixes": [
+        {
+          "client": "freccia",
+          "title": "Removed daily good-morning",
+          "detail": "Same change applies to the Freccia group chat."
+        }
+      ],
+      "updates": [],
+      "whatsapp": {
+        "state": "ok",
+        "count": 18,
+        "recent": [
+          {
+            "day": "2026-09-02",
+            "text": "**00:59** Rebekah Severi: I don\u2019t have this.  Let me look tomorrow"
+          },
+          {
+            "day": "2026-09-02",
+            "text": "**12:42** Ryan: Good morning!"
+          },
+          {
+            "day": "2026-09-02",
+            "text": "**13:36** BBC.Dexter: good morning :)"
+          },
+          {
+            "day": "2026-09-02",
+            "text": "**14:02** Ryan: [Image] Can you verify me @198509730996394 , thanks!  [file: media/2026-09-02/3EB027A3D18D6488019DA0.jpg]"
+          },
+          {
+            "day": "2026-09-02",
+            "text": "**14:07** Rebekah Severi: Ok going kow"
+          },
+          {
+            "day": "2026-09-02",
+            "text": "**14:08** Rebekah Severi: *now"
+          },
+          {
+            "day": "2026-09-02",
+            "text": "**14:08** Rebekah Severi: Done!\u2705"
+          },
+          {
+            "day": "2026-09-01",
+            "text": "**01:11** Rebekah Severi: [Image] Hey guys, can you please make sure to choose a thumbnail tile for the grid? I keep having to go in and change them myself. And then also maybe using some emojis?  [file: media/2026-09-01/4A2390E1201D401F00A1.jpg]"
+          },
+          {
+            "day": "2026-09-01",
+            "text": "**03:26** Ryan: Got it Bekah"
+          },
+          {
+            "day": "2026-09-01",
+            "text": "**13:01** Ryan: Good morning!"
+          },
+          {
+            "day": "2026-09-01",
+            "text": "**13:04** Rebekah Severi: \ud83d\udc4b\ud83c\udffb"
+          },
+          {
+            "day": "2026-09-01",
+            "text": "**13:19** BBC.Dexter: good morning :)"
+          }
+        ],
+        "detail": "18 lines in last 2d"
+      }
+    },
+    {
+      "id": "optimism",
+      "name": "Optimism Consulting",
+      "status": "active",
+      "what": "Credit repair and business funding, Dallas TX.",
+      "owner": "OShun Jones",
+      "handler": "Ryan Bernaldez",
+      "ai": null,
+      "site": "https://optimismconsulting.net",
+      "folder": "02_ACTIVE_CLIENTS/OPTIMISM-CONSULTING",
+      "guardrail": "Credit repair on first contact, never lead with business funding. Ryan does NOT contact the client directly. NEVER attempt a QuickBooks login.",
+      "note": null,
+      "services": {
+        "website": {
+          "state": "ok",
+          "detail": "HTTP 200",
+          "url": "https://optimismconsulting.net"
+        },
+        "leads": {
+          "state": "unknown",
+          "detail": "not checked this run"
+        },
+        "crm": {
+          "state": "unknown",
+          "detail": "not checked this run"
+        }
+      },
+      "fixes": [],
+      "updates": [],
+      "whatsapp": {
+        "state": "unknown",
+        "detail": "no chat mapped"
+      }
+    },
+    {
+      "id": "s-riviere",
+      "name": "S. Riviere Hair Collection",
+      "status": "active",
+      "what": "Luxury raw hair extensions (Shopify).",
+      "owner": "Sonya",
+      "handler": "Daryl",
+      "ai": "Olivia",
+      "site": "https://srivierehair.com",
+      "folder": "02_ACTIVE_CLIENTS/S-RIVIERE-HAIR-COLLECTION",
+      "guardrail": null,
+      "note": null,
+      "services": {
+        "website": {
+          "state": "ok",
+          "detail": "HTTP 200",
+          "url": "https://srivierehair.com"
+        },
+        "leads": {
+          "state": "unknown",
+          "detail": "not checked this run"
+        },
+        "social": {
+          "state": "unknown",
+          "detail": "not checked this run"
+        },
+        "store": {
+          "state": "unknown",
+          "detail": "not checked this run"
+        }
+      },
+      "fixes": [
+        {
+          "client": "s-riviere",
+          "title": "Removed daily good-morning",
+          "detail": "Same change applies to the Sonya group chat."
+        }
+      ],
+      "updates": [],
+      "whatsapp": {
+        "state": "ok",
+        "count": 14,
+        "recent": [
+          {
+            "day": "2026-09-02",
+            "text": "**12:53** daryl Agadia: Good morning"
+          },
+          {
+            "day": "2026-09-02",
+            "text": "**13:33** Sonya: Goodie morning! Sounds great, thank you for checking and keeping me updated"
+          },
+          {
+            "day": "2026-09-02",
+            "text": "**13:34** Sonya: Have we had some sign ups? How can I see how many ppl have signed up?"
+          },
+          {
+            "day": "2026-09-02",
+            "text": "**13:59** daryl Agadia: Right now sign ups for the Masterclass Waitlist don't save to a list. Each one sends an email to info@srivierehair.com with the subject \"Masterclass Waitlist\" plus the class name, so if you search that in your inbox you'll see what's come in so far. Want me to set it up so sign ups save to a real list you can check anytime instead of digging through email?"
+          },
+          {
+            "day": "2026-09-01",
+            "text": "**13:00** daryl Agadia: Good morning"
+          },
+          {
+            "day": "2026-09-01",
+            "text": "**15:09** Sonya: Goodie morning!!"
+          },
+          {
+            "day": "2026-09-01",
+            "text": "**21:29** daryl Agadia: Hi Sonya! Quick update on your site for today."
+          },
+          {
+            "day": "2026-09-01",
+            "text": "Website health: 99/100"
+          },
+          {
+            "day": "2026-09-01",
+            "text": "All 26 pages we track loaded normally, averaging about half a second. Zero broken links."
+          },
+          {
+            "day": "2026-09-01",
+            "text": "Pre-orders: all clear"
+          },
+          {
+            "day": "2026-09-01",
+            "text": "Checked all 8 active pre-orders against your live Shopify orders. Everyone is on schedule, nothing overdue, nothing missed."
+          },
+          {
+            "day": "2026-09-01",
+            "text": "Small things on our radar (no action needed from you yet):"
+          }
+        ],
+        "detail": "14 lines in last 2d"
+      }
+    },
+    {
+      "id": "wooden-woodworks",
+      "name": "Wooden Woodworks",
+      "status": "active",
+      "what": "Custom luxury woodwork.",
+      "owner": "Oscar and Marla",
+      "handler": "Krizza",
+      "ai": "Woody",
+      "site": "https://woodenwoodworks.com",
+      "folder": "02_ACTIVE_CLIENTS/WOODEN-WOODWORKS",
+      "guardrail": "Luxury positioning. Krizza is the only BBC member operating Claude Code in the WW OS.",
+      "note": null,
+      "services": {
+        "website": {
+          "state": "ok",
+          "detail": "HTTP 200",
+          "url": "https://woodenwoodworks.com"
+        },
+        "email": {
+          "state": "ok",
+          "lists": [
+            {
+              "id": 4,
+              "name": "WW Hubspot Leads",
+              "contacts": 428,
+              "blacklisted": 0,
+              "dead_pct": 0.0
+            },
+            {
+              "id": 3,
+              "name": "WW Builder Leads",
+              "contacts": 343,
+              "blacklisted": 0,
+              "dead_pct": 0.0
+            },
+            {
+              "id": 2,
+              "name": "Your first list",
+              "contacts": 1,
+              "blacklisted": 0,
+              "dead_pct": 0.0
+            }
+          ],
+          "campaigns": [],
+          "contacts": 770,
+          "credits": 300,
+          "account": "sales@woodenwoodworks.com",
+          "plan": "free"
+        },
+        "leads": {
+          "state": "unknown",
+          "detail": "not checked this run"
+        },
+        "social": {
+          "state": "unknown",
+          "detail": "not checked this run"
+        }
+      },
+      "fixes": [
+        {
+          "client": "wooden-woodworks",
+          "title": "Removed daily good-morning",
+          "detail": "Same change applies to the WW group chat."
+        }
+      ],
+      "updates": [],
+      "whatsapp": {
+        "state": "ok",
+        "count": 12,
+        "recent": [
+          {
+            "day": "2026-09-02",
+            "text": "**02:28** RJ Bryan: [Video]  [file: media/2026-09-02/3EB0BF5463F82639B70395.mp4]"
+          },
+          {
+            "day": "2026-09-01",
+            "text": "**00:33** Krizza May Managase: No worries Marla. I'll send you one again now"
+          },
+          {
+            "day": "2026-09-01",
+            "text": "**00:48** Krizza May Managase: Did you receive an email? @137860028047596"
+          },
+          {
+            "day": "2026-09-01",
+            "text": "**00:49** Marla: Yes I clicked the link"
+          },
+          {
+            "day": "2026-09-01",
+            "text": "**00:49** Marla: Should have prompted"
+          },
+          {
+            "day": "2026-09-01",
+            "text": "**00:50** Marla: Try again"
+          },
+          {
+            "day": "2026-09-01",
+            "text": "**00:50** Marla: Ill fwd email"
+          },
+          {
+            "day": "2026-09-01",
+            "text": "**00:50** Krizza May Managase: Can you forward it please?"
+          },
+          {
+            "day": "2026-09-01",
+            "text": "**00:51** Marla: Done"
+          },
+          {
+            "day": "2026-09-01",
+            "text": "**00:52** Krizza May Managase: Perfect!"
+          },
+          {
+            "day": "2026-09-01",
+            "text": "**00:52** Krizza May Managase: All good now Marla. Thank you so much"
+          },
+          {
+            "day": "2026-09-01",
+            "text": "**15:00** RJ Bryan: Good morning guys"
+          }
+        ],
+        "detail": "12 lines in last 2d"
+      }
+    },
+    {
+      "id": "home-vision",
+      "name": "Home Vision Studio",
+      "status": "hold",
+      "what": "Shopify store, design centers.",
+      "owner": "Beau",
+      "handler": "RJ",
+      "ai": "Homie",
+      "site": "https://homevisionstudio.com",
+      "folder": "02_ACTIVE_CLIENTS/HOME-VISION-STUDIO",
+      "guardrail": null,
+      "note": null,
+      "services": {
+        "website": {
+          "state": "ok",
+          "detail": "HTTP 200",
+          "url": "https://homevisionstudio.com"
+        },
+        "store": {
+          "state": "unknown",
+          "detail": "not checked this run"
+        }
+      },
+      "fixes": [],
+      "updates": [],
+      "whatsapp": {
+        "state": "unknown",
+        "detail": "no chat mapped"
+      }
+    },
+    {
+      "id": "3r-design",
+      "name": "3r Design",
+      "status": "unconfirmed",
+      "what": "Design. Becky / RJ.",
+      "owner": null,
+      "handler": null,
+      "ai": null,
+      "site": null,
+      "folder": null,
+      "guardrail": null,
+      "note": "Shows as ACTIVE on the old dashboard but is NOT in CLAUDE.md's active client table. Needs RJ to confirm whether this is a live client, a prospect, or finished. Left off the active list until he says.",
+      "services": {},
+      "fixes": [],
+      "updates": [],
+      "whatsapp": {
+        "state": "unknown",
+        "detail": "no chat mapped"
+      }
+    }
+  ],
+  "past_clients": [
+    {
+      "id": "jr-signing",
+      "name": "JR Signing Services",
+      "status": "past",
+      "what": "TX notary signing agency.",
+      "note": "Awaiting signed contract. Anthony cutoff decision has been open since late August."
+    },
+    {
+      "id": "first-class-finishes",
+      "name": "First Class Finishes",
+      "status": "past",
+      "what": "Commercial painting and roofing, Texas.",
+      "note": "No longer an active client (RJ, 2026-08-29). Billed together with Hi-Up as one entity."
+    },
+    {
+      "id": "hi-up-roofing",
+      "name": "Hi-Up Roofing",
+      "status": "past",
+      "what": "Insurance SEO, storm damage.",
+      "note": "No longer an active client (RJ, 2026-08-29). Last invoice #14, unclear if ever sent. Do not chase or bill further."
+    },
+    {
+      "id": "4ocean",
+      "name": "4Ocean",
+      "status": "past",
+      "what": "Ecommerce. RJ was an embedded contractor, not a standard retainer.",
+      "note": "Partnership ended 2026-07-07. Do not read Slack/Asana into new tasks."
+    }
+  ],
+  "unverified": [
+    "AJ Battle Foundation: social",
+    "All Ryze: social",
+    "BILT 2 Travel: email: nurture lives in Dwight's own Brevo, we have no key",
+    "BILT 2 Travel: leads",
+    "BILT 2 Travel: social",
+    "Cherry Sage: leads",
+    "Cherry Sage: social",
+    "Freccia Construction: ads: no Google Ads connection, spend not visible",
+    "Freccia Construction: crm",
+    "Freccia Construction: email",
+    "Freccia Construction: leads",
+    "Freccia Construction: social",
+    "Home Vision Studio: store",
+    "Optimism Consulting: crm",
+    "Optimism Consulting: leads",
+    "S. Riviere Hair Collection: email: no ESP key with us - Sonya sends via Shopify + Daryl manually",
+    "S. Riviere Hair Collection: leads",
+    "S. Riviere Hair Collection: social",
+    "S. Riviere Hair Collection: store",
+    "Wooden Woodworks: leads",
+    "Wooden Woodworks: social"
+  ],
+  "notes": [
+    "Active Clients (Brevo list 8) was removed from the prospecting drip on 2026-09-02 after Beverly and Dwight were each sent a sales email. Corrections went to both.",
+    "Client roster on this dashboard now comes from dashboard_clients.json, sourced from CLAUDE.md. First Class Finishes, Hi-Up Roofing and JR Signing Services moved to past."
+  ]
+}
