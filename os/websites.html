@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Websites · BBC Command Center</title>
+<link rel="icon" href="/os/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,500;6..72,600;6..72,700&family=Hanken+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/os/bbc-os.css">
+</head>
+<body>
+<div class="wrap">
+  <section class="sec" style="margin-top:26px">
+    <div class="sec-head"><h2>Websites</h2><span class="sub" id="sub"></span></div>
+    <div class="rule"></div>
+    <div id="hero"></div>
+  </section>
+
+  <section class="sec">
+    <div class="sec-head"><h2>Every site</h2><span class="sub">checked this run</span></div>
+    <div class="rule"></div>
+    <div id="sites"></div>
+  </section>
+
+  <footer class="foot">
+    <span>A site not listed here has no URL configured, which is unknown rather than healthy.</span>
+    <span id="foot-time"></span>
+  </footer>
+</div>
+
+<script src="/os/bbc-os.js"></script>
+<script>
+osChrome("Websites");
+
+function render(d){
+  stampFreshness(d);
+  const w = d.websites || {};
+  const sites = w.sites || [];
+
+  if (!sites.length) {
+    document.getElementById("hero").innerHTML =
+      `<p class="empty-note">${esc(w.detail || "No sites were checked this run.")}</p>`;
+    return;
+  }
+
+  const ok = w.ok || 0, total = w.total || sites.length;
+  const allGood = ok === total;
+
+  document.getElementById("sub").textContent = `${ok} of ${total} responding`;
+  document.getElementById("hero").innerHTML = `
+    <div class="attention${allGood ? " calm" : ""}" style="margin-top:0">
+      <div style="display:flex;align-items:center;gap:22px;flex-wrap:wrap">
+        ${donut(ok, total, "sites responding")}
+        <div style="flex:1;min-width:210px">
+          <h2 style="margin:0 0 4px">${allGood ? "✓ Every site is up" : "⚠︎ " + (total-ok) + " site" + (total-ok>1?"s":"") + " needs a look"}</h2>
+          <p class="lead" style="margin:0">
+            ${allGood
+              ? "All " + total + " client sites answered this run."
+              : (w.problems||[]).map(p => esc(p.client)).join(", ") + " did not answer."}
+          </p>
+        </div>
+      </div>
+    </div>`;
+
+  document.getElementById("sites").innerHTML = `<div class="panel">
+    ${sites.map(s => {
+      const col = s.state === "ok" ? "var(--sage)" : s.state === "warn" ? "var(--amber)" : "var(--clay)";
+      return `<div class="step">
+        <span class="sdot s-${s.state}" style="flex:none"></span>
+        <a class="sj" href="/os/client.html?id=${encodeURIComponent(s.id)}"
+           style="text-decoration:none;font-weight:600;color:inherit">${esc(s.client)}</a>
+        <a class="sj" href="${esc(s.url)}" target="_blank" rel="noopener"
+           style="color:var(--muted);text-decoration:none;font-size:12.5px">
+           ${esc(s.url.replace(/^https?:\/\//,""))} ↗</a>
+        <span class="here" style="color:${col};width:78px">${esc(s.detail||s.state)}</span>
+      </div>`;
+    }).join("")}
+  </div>`;
+}
+
+loadSnapshot(render, () => {
+  document.getElementById("hero").innerHTML =
+    `<p class="empty-note">No routine snapshot yet. Run the daily routine to fill this in.</p>`;
+});
+</script>
+</body>
+</html>

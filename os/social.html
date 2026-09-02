@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Social · BBC Command Center</title>
+<link rel="icon" href="/os/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,500;6..72,600;6..72,700&family=Hanken+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/os/bbc-os.css">
+</head>
+<body>
+<div class="wrap">
+  <section class="sec" style="margin-top:26px">
+    <div class="sec-head"><h2>Social</h2><span class="sub" id="sub"></span></div>
+    <div class="rule"></div>
+    <div class="tiles" id="tiles"></div>
+  </section>
+
+  <section class="sec" id="gap-host"></section>
+
+  <section class="sec">
+    <div class="sec-head"><h2>Posting rhythm</h2><span class="sub">what goes out each day, all brands</span></div>
+    <div class="rule"></div>
+    <div class="panel" id="rhythm"></div>
+  </section>
+
+  <section class="sec">
+    <div class="sec-head"><h2>By brand</h2><span class="sub">from Metricool</span></div>
+    <div class="rule"></div>
+    <div class="panels" id="brands"></div>
+  </section>
+
+  <section class="sec">
+    <div class="sec-head"><h2>Where it goes</h2><span class="sub">posts per network</span></div>
+    <div class="rule"></div>
+    <div class="panel" id="networks"></div>
+  </section>
+
+  <footer class="foot">
+    <span>Scheduled posts only. A brand showing zero has nothing queued, which is a gap, not a failure to read it.</span>
+    <span id="foot-time"></span>
+  </footer>
+</div>
+
+<script src="/os/bbc-os.js"></script>
+<script>
+osChrome("Social");
+
+function render(d){
+  stampFreshness(d);
+  const s = d.social || {};
+  const brands = s.brands || [];
+
+  if (s.state !== "ok" || !brands.length) {
+    document.getElementById("rhythm").innerHTML =
+      `<p class="empty-note">${esc(s.detail || "Metricool was not read this run.")}</p>`;
+    return;
+  }
+
+  const live = brands.filter(b => b.state === "ok");
+  const empty = brands.filter(b => b.state === "empty");
+  document.getElementById("sub").textContent = `${s.total} posts scheduled over ${s.window_days} days`;
+
+  document.getElementById("tiles").innerHTML = [
+    statTile("Scheduled", s.total, `next ${s.window_days} days`, s.total ? "ok" : "bad"),
+    statTile("Brands posting", `${live.length}/${brands.length}`,
+             empty.length ? `${empty.length} with nothing queued` : "all brands active",
+             empty.length ? "warn" : "ok"),
+    statTile("Networks", Object.keys(s.networks||{}).length, "in rotation"),
+  ].join("");
+
+  // A brand with an empty calendar is the thing worth surfacing, so it leads.
+  document.getElementById("gap-host").innerHTML = empty.length ? `
+    <div class="attention" style="margin-top:0">
+      <h2>⚠︎ ${empty.length} brand${empty.length>1?"s":""} with nothing scheduled</h2>
+      <p class="lead">Nothing queued for the next ${s.window_days} days.</p>
+      <div class="att-list">${empty.map(b => `
+        <div class="att"><span class="sev sev-decision">gap</span>
+          <div class="body"><p class="t">${esc(b.name)}</p>
+          <p class="d">Connected to Metricool, but the calendar is empty.</p></div>
+        </div>`).join("")}</div>
+    </div>` : "";
+
+  document.getElementById("rhythm").innerHTML = columns(s.by_day || {}, { short: 5, color: TONE.neutral });
+
+  document.getElementById("brands").innerHTML = brands.map(b => {
+    const tone = b.state === "ok" ? "var(--sage)" : b.state === "empty" ? "var(--clay)" : "var(--muted)";
+    return `<div class="panel">
+      <h3>${esc(b.name)}</h3>
+      <div class="big" style="color:${tone}">${b.scheduled == null ? "—" : b.scheduled}</div>
+      <div class="sub">${esc(b.detail||"")}</div>
+      ${b.scheduled ? `<div class="sub" style="margin-top:9px">
+        ${b.auto_publish} publish automatically · ${b.manual} need a hand</div>` : ""}
+    </div>`;
+  }).join("");
+
+  document.getElementById("networks").innerHTML = columns(s.networks || {}, { color: TONE.ok });
+}
+
+loadSnapshot(render, () => {
+  document.getElementById("rhythm").innerHTML =
+    `<p class="empty-note">No routine snapshot yet. Run the daily routine to fill this in.</p>`;
+});
+</script>
+</body>
+</html>

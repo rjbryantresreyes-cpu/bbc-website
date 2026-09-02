@@ -1,6 +1,6 @@
 {
   "shift_date": "2026-09-03",
-  "generated_at": "2026-09-02T19:21:03.528596+00:00",
+  "generated_at": "2026-09-02T19:52:31.607334+00:00",
   "attention": [
     {
       "severity": "blocking",
@@ -359,7 +359,7 @@
       "updates": [],
       "whatsapp": {
         "state": "ok",
-        "count": 18,
+        "count": 21,
         "recent": [
           {
             "day": "2026-09-02",
@@ -434,7 +434,7 @@
             "text": "Both should have triggered an automatic email to sales@ and to Josh around 9:15pm Monday. Can one of you confirm those arrived? If they did not, enquiries are still not reaching a person and I will fix it today."
           }
         ],
-        "detail": "18 lines in last 2d"
+        "detail": "21 lines in last 2d"
       }
     },
     {
@@ -729,5 +729,880 @@
   "notes": [
     "Active Clients (Brevo list 8) was removed from the prospecting drip on 2026-09-02 after Beverly and Dwight were each sent a sales email. Corrections went to both.",
     "Client roster on this dashboard now comes from dashboard_clients.json, sourced from CLAUDE.md. First Class Finishes, Hi-Up Roofing and JR Signing Services moved to past."
-  ]
+  ],
+  "crm": {
+    "state": "ok",
+    "campaigns": [
+      {
+        "key": "builder_welcome",
+        "name": "Builder Welcome (4-email)",
+        "gap_days": 4,
+        "contacts": 523,
+        "step_count": 4,
+        "percent": 66.0,
+        "finished": 253,
+        "not_started": 0,
+        "steps": [
+          {
+            "step": 1,
+            "subject": "Saw {COMPANY}'s work and wanted to introduce myself",
+            "at_this_step": 182,
+            "share": 34.8
+          },
+          {
+            "step": 2,
+            "subject": "What we do for Wooden Woodworks and Freccia Construction",
+            "at_this_step": 77,
+            "share": 14.7
+          },
+          {
+            "step": 3,
+            "subject": "What this looks like day to day",
+            "at_this_step": 11,
+            "share": 2.1
+          },
+          {
+            "step": 4,
+            "subject": "What this could look like for {COMPANY}",
+            "at_this_step": 253,
+            "share": 48.4
+          }
+        ]
+      },
+      {
+        "key": "workflow_weekly",
+        "name": "Weekly Workflow Series (14-email)",
+        "gap_days": 7,
+        "contacts": 294,
+        "step_count": 14,
+        "percent": 41.8,
+        "finished": 0,
+        "not_started": 0,
+        "steps": [
+          {
+            "step": 1,
+            "subject": "A home your buyers can walk through before it is built",
+            "at_this_step": 13,
+            "share": 4.4
+          },
+          {
+            "step": 2,
+            "subject": "A 3D designer your customers use to build their own product",
+            "at_this_step": 2,
+            "share": 0.7
+          },
+          {
+            "step": 3,
+            "subject": "Change your website by just telling us what you want",
+            "at_this_step": 6,
+            "share": 2.0
+          },
+          {
+            "step": 4,
+            "subject": "How we bring builders leads without the busywork",
+            "at_this_step": 0,
+            "share": 0.0
+          },
+          {
+            "step": 5,
+            "subject": "Get found first when a storm sends people searching",
+            "at_this_step": 94,
+            "share": 32.0
+          },
+          {
+            "step": 6,
+            "subject": "A showroom website and a live dashboard for {COMPANY}",
+            "at_this_step": 39,
+            "share": 13.3
+          },
+          {
+            "step": 7,
+            "subject": "When someone Googles what you do, do you show up?",
+            "at_this_step": 140,
+            "share": 47.6
+          },
+          {
+            "step": 8,
+            "subject": "Do you actually know if your marketing is working?",
+            "at_this_step": 0,
+            "share": 0.0
+          },
+          {
+            "step": 9,
+            "subject": "You do not need more content ideas. You need this.",
+            "at_this_step": 0,
+            "share": 0.0
+          },
+          {
+            "step": 10,
+            "subject": "The next customer is already out there",
+            "at_this_step": 0,
+            "share": 0.0
+          },
+          {
+            "step": 11,
+            "subject": "The money is in the follow-up you never send",
+            "at_this_step": 0,
+            "share": 0.0
+          },
+          {
+            "step": 12,
+            "subject": "Stop trying to talk and take notes at the same time",
+            "at_this_step": 0,
+            "share": 0.0
+          },
+          {
+            "step": 13,
+            "subject": "Why your products are not selling, it is the words",
+            "at_this_step": 0,
+            "share": 0.0
+          },
+          {
+            "step": 14,
+            "subject": "Your slow website is costing you customers before hello",
+            "at_this_step": 0,
+            "share": 0.0
+          }
+        ]
+      }
+    ],
+    "lists": [
+      {
+        "id": 4,
+        "name": "Shopify & E-commerce Leads",
+        "contacts": 2142,
+        "blacklisted": 40,
+        "dead_pct": 1.9
+      },
+      {
+        "id": 13,
+        "name": "Builders, Remodelers, Construction & Real Estate",
+        "contacts": 600,
+        "blacklisted": 8,
+        "dead_pct": 1.3
+      },
+      {
+        "id": 6,
+        "name": "Remodeler Leads",
+        "contacts": 416,
+        "blacklisted": 178,
+        "dead_pct": 42.8
+      },
+      {
+        "id": 5,
+        "name": "Builder Leads",
+        "contacts": 386,
+        "blacklisted": 84,
+        "dead_pct": 21.8
+      },
+      {
+        "id": 15,
+        "name": "Austin Permit Leads",
+        "contacts": 248,
+        "blacklisted": 248,
+        "dead_pct": 100.0
+      },
+      {
+        "id": 16,
+        "name": "Job Radar Prospects (cold - do NOT campaign)",
+        "contacts": 105,
+        "blacklisted": 0,
+        "dead_pct": 0.0
+      },
+      {
+        "id": 7,
+        "name": "Design Leads",
+        "contacts": 101,
+        "blacklisted": 1,
+        "dead_pct": 1.0
+      },
+      {
+        "id": 12,
+        "name": "BBC Email List",
+        "contacts": 26,
+        "blacklisted": 2,
+        "dead_pct": 7.7
+      },
+      {
+        "id": 11,
+        "name": "Potential",
+        "contacts": 13,
+        "blacklisted": 3,
+        "dead_pct": 23.1
+      },
+      {
+        "id": 8,
+        "name": "Active Clients",
+        "contacts": 12,
+        "blacklisted": 0,
+        "dead_pct": 0.0
+      },
+      {
+        "id": 9,
+        "name": "Old Clients",
+        "contacts": 8,
+        "blacklisted": 1,
+        "dead_pct": 12.5
+      },
+      {
+        "id": 10,
+        "name": "Possible Clients",
+        "contacts": 5,
+        "blacklisted": 1,
+        "dead_pct": 20.0
+      },
+      {
+        "id": 14,
+        "name": "Team Members",
+        "contacts": 1,
+        "blacklisted": 0,
+        "dead_pct": 0.0
+      },
+      {
+        "id": 2,
+        "name": "Your first list",
+        "contacts": 1,
+        "blacklisted": 0,
+        "dead_pct": 0.0
+      }
+    ],
+    "totals": {
+      "leads": 555,
+      "sent_today": 150,
+      "sent_today_date": "2026-09-03",
+      "daily_cap": 250,
+      "contacts": 3205,
+      "dead": 566,
+      "dead_pct": 13.9
+    },
+    "sender": "rj@balaynibruno.co"
+  },
+  "websites": {
+    "state": "ok",
+    "sites": [
+      {
+        "client": "BILT 2 Travel",
+        "id": "bilt",
+        "url": "https://bilt2travel.com",
+        "state": "ok",
+        "detail": "HTTP 200"
+      },
+      {
+        "client": "Cherry Sage",
+        "id": "cherry-sage",
+        "url": "https://cherrysage.com",
+        "state": "ok",
+        "detail": "HTTP 200"
+      },
+      {
+        "client": "Freccia Construction",
+        "id": "freccia",
+        "url": "https://frecciaconstruction.com",
+        "state": "ok",
+        "detail": "HTTP 200"
+      },
+      {
+        "client": "Home Vision Studio",
+        "id": "home-vision",
+        "url": "https://homevisionstudio.com",
+        "state": "ok",
+        "detail": "HTTP 200"
+      },
+      {
+        "client": "Optimism Consulting",
+        "id": "optimism",
+        "url": "https://optimismconsulting.net",
+        "state": "ok",
+        "detail": "HTTP 200"
+      },
+      {
+        "client": "S. Riviere Hair Collection",
+        "id": "s-riviere",
+        "url": "https://srivierehair.com",
+        "state": "ok",
+        "detail": "HTTP 200"
+      },
+      {
+        "client": "Wooden Woodworks",
+        "id": "wooden-woodworks",
+        "url": "https://woodenwoodworks.com",
+        "state": "ok",
+        "detail": "HTTP 200"
+      }
+    ],
+    "total": 7,
+    "ok": 7,
+    "problems": []
+  },
+  "workflows": {
+    "state": "ok",
+    "tasks": [
+      {
+        "name": "Autorun for BBC-BILT",
+        "state": "Ready",
+        "last_run": "",
+        "result": 267011,
+        "health": "problem"
+      },
+      {
+        "name": "BBC Lead Sourcing - Daily",
+        "state": "Ready",
+        "last_run": "2026-09-03 03:30",
+        "result": 3221225786,
+        "health": "problem"
+      },
+      {
+        "name": "BBC Newsletter - Daily",
+        "state": "Ready",
+        "last_run": "2026-09-03 02:30",
+        "result": 3221225786,
+        "health": "problem"
+      },
+      {
+        "name": "BBC Client Courses - Send",
+        "state": "Disabled",
+        "last_run": "2026-06-27 04:00",
+        "result": 3221225786,
+        "health": "disabled"
+      },
+      {
+        "name": "BBC Daily 6am Sync",
+        "state": "Disabled",
+        "last_run": "2026-06-25 06:00",
+        "result": 0,
+        "health": "disabled"
+      },
+      {
+        "name": "BBC HVS Report - 5am send",
+        "state": "Disabled",
+        "last_run": "2026-07-21 05:00",
+        "result": 3221225786,
+        "health": "disabled"
+      },
+      {
+        "name": "BBC Newsletter - Week1 3D",
+        "state": "Disabled",
+        "last_run": "",
+        "result": 267011,
+        "health": "disabled"
+      },
+      {
+        "name": "BBC Reviews Routine - Weekly",
+        "state": "Disabled",
+        "last_run": "2026-07-31 23:43",
+        "result": 2147946720,
+        "health": "disabled"
+      },
+      {
+        "name": "BBC Weekly Invoice Batch - Saturday 5AM",
+        "state": "Disabled",
+        "last_run": "2026-08-01 05:00",
+        "result": 0,
+        "health": "disabled"
+      },
+      {
+        "name": "BBC Work Mode Watchdog",
+        "state": "Disabled",
+        "last_run": "2026-08-01 00:17",
+        "result": 1073807364,
+        "health": "disabled"
+      },
+      {
+        "name": "BBC-WhatsApp-AutoCopy",
+        "state": "Disabled",
+        "last_run": "2026-06-11 03:59",
+        "result": 0,
+        "health": "disabled"
+      },
+      {
+        "name": "BBC_Kriz_ScreenMemory",
+        "state": "Disabled",
+        "last_run": "2026-06-10 17:43",
+        "result": 4294967295,
+        "health": "disabled"
+      },
+      {
+        "name": "bbc-whatsapp-digest",
+        "state": "Disabled",
+        "last_run": "2026-06-24 07:00",
+        "result": 1,
+        "health": "disabled"
+      },
+      {
+        "name": "BBC Brain Sync",
+        "state": "Ready",
+        "last_run": "2026-09-03 03:50",
+        "result": 0,
+        "health": "ok"
+      },
+      {
+        "name": "BBC Closing Campaign - Daily",
+        "state": "Ready",
+        "last_run": "2026-09-02 09:00",
+        "result": 0,
+        "health": "ok"
+      },
+      {
+        "name": "BBC Content Scheduler Sweep",
+        "state": "Ready",
+        "last_run": "2026-09-03 03:47",
+        "result": 0,
+        "health": "ok"
+      },
+      {
+        "name": "BBC Daily Tool Scan",
+        "state": "Ready",
+        "last_run": "2026-09-02 04:30",
+        "result": 0,
+        "health": "ok"
+      },
+      {
+        "name": "BBC Dashboard Sync - Shift Start (login)",
+        "state": "Ready",
+        "last_run": "2026-09-03 00:03",
+        "result": 0,
+        "health": "ok"
+      },
+      {
+        "name": "BBC Drive Watchdog",
+        "state": "Ready",
+        "last_run": "2026-09-03 03:52",
+        "result": 0,
+        "health": "ok"
+      },
+      {
+        "name": "BBC Email Campaign - Daily (login)",
+        "state": "Ready",
+        "last_run": "2026-09-03 00:03",
+        "result": 0,
+        "health": "ok"
+      },
+      {
+        "name": "BBC Flights Daily Update",
+        "state": "Ready",
+        "last_run": "2026-09-02 08:00",
+        "result": 0,
+        "health": "ok"
+      },
+      {
+        "name": "BBC Insight Pages - Daily",
+        "state": "Ready",
+        "last_run": "2026-09-03 02:00",
+        "result": 0,
+        "health": "ok"
+      },
+      {
+        "name": "BBC Metricool Health - Daily",
+        "state": "Ready",
+        "last_run": "2026-09-02 21:00",
+        "result": 0,
+        "health": "ok"
+      },
+      {
+        "name": "BBC Newsletter - Weekly Send",
+        "state": "Ready",
+        "last_run": "2026-09-01 03:00",
+        "result": 0,
+        "health": "ok"
+      },
+      {
+        "name": "BBC Special Days - Monthly 25th",
+        "state": "Ready",
+        "last_run": "2026-08-25 08:00",
+        "result": 0,
+        "health": "ok"
+      },
+      {
+        "name": "BBC Texas Leads - Daily",
+        "state": "Ready",
+        "last_run": "2026-09-02 04:00",
+        "result": 0,
+        "health": "ok"
+      },
+      {
+        "name": "BBC Video Reels - Daily",
+        "state": "Ready",
+        "last_run": "2026-09-03 03:00",
+        "result": 0,
+        "health": "ok"
+      },
+      {
+        "name": "BBC-BevRecap-0819",
+        "state": "Ready",
+        "last_run": "2026-08-19 05:10",
+        "result": 0,
+        "health": "ok"
+      },
+      {
+        "name": "BBC-WhatsApp-KeepAlive",
+        "state": "Ready",
+        "last_run": "2026-09-03 03:38",
+        "result": 0,
+        "health": "ok"
+      }
+    ],
+    "total": 29,
+    "ok": 16,
+    "disabled": 10,
+    "failing": 3
+  },
+  "social": {
+    "state": "ok",
+    "brands": [
+      {
+        "name": "Balay ni Bruno & Co.",
+        "blog": 6344379,
+        "state": "ok",
+        "scheduled": 55,
+        "auto_publish": 55,
+        "manual": 0,
+        "detail": "55 scheduled in the next 14 days"
+      },
+      {
+        "name": "Wooden Woodworks",
+        "blog": 6538696,
+        "state": "empty",
+        "scheduled": 0,
+        "auto_publish": 0,
+        "manual": 0,
+        "detail": "nothing scheduled in the next 14 days"
+      },
+      {
+        "name": "S. Riviere Hair",
+        "blog": 6564159,
+        "state": "empty",
+        "scheduled": 0,
+        "auto_publish": 0,
+        "manual": 0,
+        "detail": "nothing scheduled in the next 14 days"
+      },
+      {
+        "name": "BILT 2 Travel",
+        "blog": 6755239,
+        "state": "ok",
+        "scheduled": 16,
+        "auto_publish": 0,
+        "manual": 16,
+        "detail": "16 scheduled in the next 14 days"
+      }
+    ],
+    "networks": {
+      "facebook": 52,
+      "instagram": 50,
+      "tiktok": 29,
+      "youtube": 21,
+      "threads": 4,
+      "linkedin": 4,
+      "gmb": 3
+    },
+    "by_day": {
+      "2026-09-03": 14,
+      "2026-09-04": 10,
+      "2026-09-05": 2,
+      "2026-09-06": 2,
+      "2026-09-07": 7,
+      "2026-09-08": 5,
+      "2026-09-09": 4,
+      "2026-09-10": 2,
+      "2026-09-11": 2,
+      "2026-09-12": 2,
+      "2026-09-13": 2,
+      "2026-09-14": 4,
+      "2026-09-15": 7,
+      "2026-09-16": 4,
+      "2026-09-17": 4
+    },
+    "total": 71,
+    "window_days": 14
+  },
+  "reminders": {
+    "state": "ok",
+    "items": [
+      {
+        "who": "john",
+        "text": "2026-07-04 | BBC's official video style is now locked: \"B-Roll Style.\" Every video you generate for BBC or a client defaults to it until RJ says otherwise. Read the full spec before your next video: BBC_AI_FAMILY/VIDZ/VIDZ_KNOWLEDGE_BASE/ST",
+        "due": "2026-07-04",
+        "overdue": true
+      },
+      {
+        "who": "john",
+        "text": "2026-07-04 | 2 new B-Roll Style reels are queued and ready for your review-and-post pass: CONTENT_QUEUE\\2026-07-04_reel_brief_builder\\ and CONTENT_QUEUE\\2026-07-04_reel_founder_plans_va_executes\\. Captions are already written, paste-ready, ",
+        "due": "2026-07-04",
+        "overdue": true
+      },
+      {
+        "who": "rj",
+        "text": "2026-07-06 | Cancel ChatGPT Plus before it renews (~Jul 10). Verify exact date in ChatGPT > Settings > Subscription.",
+        "due": "2026-07-06",
+        "overdue": true
+      },
+      {
+        "who": "rj",
+        "text": "2026-07-06 | Confirm the time for the follow-up call with Jena (Pine Crest Fabrics / PCF). She proposed \"week of July 6\" \u2014 reply to book a slot.",
+        "due": "2026-07-06",
+        "overdue": true
+      },
+      {
+        "who": "john",
+        "text": "2026-07-07 | New weekly cadence: Mon/Tue/Thu/Fri = workflow reels (all B-Roll Style), Wed = any BBC content, Sat = funny/meme/fun news, Sun = quotes/rest. Full detail: BBC Operating System\\02_SERVICE_SYSTEMS\\SOCIAL_MEDIA_SYSTEMS\\BBC_WEEKLY_",
+        "due": "2026-07-07",
+        "overdue": true
+      },
+      {
+        "who": "john",
+        "text": "2026-07-07 | Every reel you build from now on = B-Roll Style, no exceptions until RJ changes it. Use the portable template: BBC_AI_FAMILY/VIDZ/VIDZ_TEMPLATES/broll-style-template/ (README inside walks through setup + per-reel steps). Instal",
+        "due": "2026-07-07",
+        "overdue": true
+      },
+      {
+        "who": "john",
+        "text": "2026-07-07 | CORRECTION: narration is VoxCPM2 (free, local), NOT ElevenLabs \u2014 you do not need an ElevenLabs key. Setup guide + one-line install: BBC_AI_FAMILY\\_BRUNO_VOICE\\_VOXCPM_TOOL\\JOHN_HANDOUT_voice_generation.md",
+        "due": "2026-07-07",
+        "overdue": true
+      },
+      {
+        "who": "john",
+        "text": "2026-07-07 | You're now running the posting flow: when a reel is ready, ask Claude for captions (the format is automatic, no separate doc needed), drop the reel + script.txt + captions.md into CONTENT_QUEUE\\YYYY-MM-DD_[slug]\\, then say \"rev",
+        "due": "2026-07-07",
+        "overdue": true
+      },
+      {
+        "who": "rj",
+        "text": "2026-07-09 | INTERVIEW: Sideline Interactive (Content & Design VA), 10:00 PM PH. Google Meet: https://meet.google.com/hqz-hsuy-ibs. US business hours role. Contact: Pearly, support4@sidelineinteractive.com. Confirmed availability + US-hours",
+        "due": "2026-07-09",
+        "overdue": true
+      },
+      {
+        "who": "rj",
+        "text": "2026-07-11 | VERIFY TEAM PAGE: Diego + Dexter are LIVE on our-team.html with full profile pages (Diego, and Dexter = \"Senior Graphic Designer & Video Editor\") but are NOT in the CLAUDE.md BBC TEAM roster. Confirm they are real hires -> add ",
+        "due": "2026-07-11",
+        "overdue": true
+      },
+      {
+        "who": "rj",
+        "text": "2026-07-11 | REVIEW-REQUEST EMAIL: Brevo campaign \"Review Request - Clients\" sends 2026-07-16 09:00 to Active + Old Clients (lists 8,9). Built from a cut-off instruction (\"...ask for their reviews and ___\"). Decide the missing \"and\" piece (",
+        "due": "2026-07-11",
+        "overdue": true
+      },
+      {
+        "who": "rj",
+        "text": "2026-07-15 | WHEN Freccia's new website goes live on Netlify: build Freccia SODR/EODR on Plus, exactly like HVS. Add clients/freccia.json to client-care + freccia-sodr/eodr commands; SODR = diagnose new site + fix + Netlify deploy + GHL ema",
+        "due": "2026-07-15",
+        "overdue": true
+      },
+      {
+        "who": "rj",
+        "text": "2026-07-16 | BBC EODR CARRYOVER (deferred from 07/15 SODR): (1) FIX + LOAD WhatsApp MCP so the daily digest pulls (bridge at C:\\BBC\\whatsapp-mcp-ts, connector not loaded 07/15), (2) run LinkedIn sourcing pack (needs LinkedIn open), (3) clea",
+        "due": "2026-07-16",
+        "overdue": true
+      },
+      {
+        "who": "rj",
+        "text": "2026-07-28 | XPANDER (RJ's trigger word: \"xpander\") \u2014 set up the OBD-II + Claude bridge when home. Buy a Bluetooth OBD-II dongle (Vgate iCar Pro / decent ELM327, ~PHP 600-1500) + free Car Scanner ELM OBD2 app. Then Claude walks the one-time",
+        "due": "2026-07-28",
+        "overdue": true
+      },
+      {
+        "who": "rj",
+        "text": "2026-07-28 | DEVICE RJ IS MISSING ITS ENGINES (found at the 2026-07-28 EODR). This machine is COMPUTERNAME=RJ / C:\\Users\\Rj bryan, a rebuilt Plus. Brain-sync only carries ~/.claude, so nothing under C:\\BBC came back. (1) EMAIL CAMPAIGN IS D",
+        "due": "2026-07-28",
+        "overdue": true
+      },
+      {
+        "who": "rj",
+        "text": "2026-07-28 | DECIDE on how-we-build-walkable-3d.html (untracked in C:\\BBC\\bbc-website since Jul 25). Finished page, canonical 404s, linked from nothing. Different page from the live how-we-build-walkable-3d-tours.html. Either connect it (in",
+        "due": "2026-07-28",
+        "overdue": true
+      },
+      {
+        "who": "rj",
+        "text": "2026-07-29 | HVS \u2014 SHIP BEAU'S CARRARA PICKET SPECIAL + THE HOMEPAGE 404 FIX. ALL DETAILS CONFIRMED BY BEAU, nothing outstanding from him: $2.99 per SQUARE FOOT, regularly $15.99/sf, vendor Touch Tile, finish Glossy, do NOT add to the catal",
+        "due": "2026-07-29",
+        "overdue": true
+      },
+      {
+        "who": "kenz",
+        "text": "2026-07-30 | Check the WiFi verdict. Run: powershell -File C:\\BBC\\state\\wifi-monitor\\wifi-crash-check.ps1 then read C:\\BBC\\state\\wifi-monitor\\crash-log.csv and tell Kenz the crash count since the fix (baseline ~5.5 crashes/day before). 0 = ",
+        "due": "2026-07-30",
+        "overdue": true
+      },
+      {
+        "who": "rj",
+        "text": "2026-07-31 | Deploy the WW dashboard fixes live (Marla's full-text notes + owner notes on employee cards, draft already built and verified: https://6a62260cf0e6b54211eb8bcd--luminous-cassata-5a86fc.netlify.app/owner/) and send Marla/Oscar t",
+        "due": "2026-07-31",
+        "overdue": true
+      },
+      {
+        "who": "daryl",
+        "text": "2026-08-14 | JRSS ESCROW LAUNCH \u2014 Day 1. Publish Variant A/B/C workflows (Draft->Publish), then filter Contacts by tag `escrow-seg-a`, select ~20-25, Bulk Actions -> Add Tag `campaign-escrow-a` to enroll only those (fires Email 1). Then ram",
+        "due": "2026-08-14",
+        "overdue": true
+      },
+      {
+        "who": "ryan",
+        "text": "2026-08-18 | OPTIMISM: file the A2P 10DLC BRAND registration (EIN 33-3404838, Optimism Consulting Firm LLC, 3838 Oaklawn Ave Suite 1000, Dallas TX 75219)",
+        "due": "2026-08-18",
+        "overdue": true
+      },
+      {
+        "who": "ryan",
+        "text": "2026-08-18 | OPTIMISM: chase RJ for GoDaddy access from Arvin, then point optimismconsulting.net at Netlify. Do NOT transfer the domain, records only, their Meta ads are live",
+        "due": "2026-08-18",
+        "overdue": true
+      },
+      {
+        "who": "ryan",
+        "text": "2026-08-18 | OPTIMISM: read 00_START_HERE\\RYAN_HANDOVER.md and Optimism_GHL_Setup_Lead_Optimization_Plan_2026-08-14.pdf before touching the account",
+        "due": "2026-08-18",
+        "overdue": true
+      },
+      {
+        "who": "ryan",
+        "text": "2026-08-19 | OPTIMISM: assemble the 4 workflows in GHL from Optimism_GHL_Workflows_Build_Ready_2026-08-15.md. Leave every one in DRAFT/OFF",
+        "due": "2026-08-19",
+        "overdue": true
+      },
+      {
+        "who": "ryan",
+        "text": "2026-08-19 | OPTIMISM: build the \"said no\" nurture track OShun asked for (asks questions, works toward a booked call or a stated buy date, nobody gets discarded)",
+        "due": "2026-08-19",
+        "overdue": true
+      },
+      {
+        "who": "ryan",
+        "text": "2026-08-20 | OPTIMISM: validate + remove dead emails from the old 5,000 lead list before any large send",
+        "due": "2026-08-20",
+        "overdue": true
+      },
+      {
+        "who": "kenz",
+        "text": "2026-08-22 | BILT 2 Travel site: the Reader Results section on the homepage still shows all 3 slots as \"coming soon\" placeholders. Worth knowing before that section can look thin once traffic ramps up. Check if Dwight has collected any real",
+        "due": "2026-08-22",
+        "overdue": true
+      },
+      {
+        "who": "ryan",
+        "text": "2026-08-22 | FRECCIA: recheck \"Thrive | Performance Max\" asset group (Commercial account 659-178-1819, marketing@frecciagroup.com, https://ads.google.com/aw/assetgroup/edit?campaignId=23491128370&ocid=7944327083&assetgroupId=6662657790) \u2014 F",
+        "due": "2026-08-22",
+        "overdue": true
+      },
+      {
+        "who": "ryan",
+        "text": "2026-08-22 | FRECCIA: same session, also glance at the Residential account (768-665-6176) \u2014 as of 2026-08-21 it had one campaign \"Thrive | Search | Residential | $500,\" Paused, $0 spend last 30 days. Confirm still paused / still $0, nothing",
+        "due": "2026-08-22",
+        "overdue": true
+      },
+      {
+        "who": "daryl",
+        "text": "2026-08-26 | JRSS: Anthony still has NOT been told that Jasmine's cold-outreach hold (in force since 2026-08-18) was never lifted. Send it as its own message BEFORE the investor list is scored, so \"the list is ready\" is never read as \"we ar",
+        "due": "2026-08-26",
+        "overdue": true
+      },
+      {
+        "who": "daryl",
+        "text": "2026-08-27 | S. RIVIERE CREATOR COLLAB FOLLOW-UP \u2014 send Email 2 (the ONE reminder, per Sonya's instruction) to everyone who got Email 1 on 2026-08-18 and hasn't replied: Desi, Olivia Thompson, JenniB, Dominique, Tae Smith, Aa'Niyah Jalaya, ",
+        "due": "2026-08-27",
+        "overdue": true
+      },
+      {
+        "who": "ryan",
+        "text": "2026-09-04 | FRECCIA SOCIAL: content calendar runs dry after Fri 2026-09-11. Start building the next batch now so posting continues from Mon 2026-09-14. Freccia's own Metricool (blogId 6683063, userId 5142053). Current cadence: 4 video post",
+        "due": "2026-09-04",
+        "overdue": false
+      },
+      {
+        "who": "rj",
+        "text": "2026-09-11 | RESUME THE PAUSED WORKFLOW CONTACTS. On 2026-08-20 three contacts were paused from the `workflow_weekly` drip so they would not receive cold marketing while a colleague at the same company was in the personal Q4 closing sequenc",
+        "due": "2026-09-11",
+        "overdue": false
+      },
+      {
+        "who": "rj",
+        "text": "2026-11-03 | Re-touch warm lead Ryan Ing / Six Figures in the Six (ryan@sixfiguresinthesix.com) \u2014 said \"may hire later this year.\" Light check-in / offer overflow help on PI paid-search lead gen. Context: 09_POTENTIAL CLIENTS\\Six Figures in",
+        "due": "2026-11-03",
+        "overdue": false
+      },
+      {
+        "who": "rj",
+        "text": "2026-11-15 | JRSS SENDING DEADLINE: Microsoft disables SMTP Basic Auth END OF DEC 2026 (final removal H2 2027). JRSS cold email runs on custom SMTP to smtp.office365.com (decision 2026-08-25, AB_TEST_PLAN.md \u00a72 path A2), so app passwords di",
+        "due": "2026-11-15",
+        "overdue": false
+      },
+      {
+        "who": "rj",
+        "text": "2026-11-16 | DECEMBER MYSTERY CHRISTMAS PARTY: plan it for all VAs + family (logged 2026-09-01, no date/budget/format decided yet). Nail down date, budget, and what \"mystery\" means (surprise venue? surprise activity? gift exchange twist?) w",
+        "due": "2026-11-16",
+        "overdue": false
+      },
+      {
+        "who": "daryl",
+        "text": "daily | JRSS: confirm the daily task digest auto-sent to Anthony + Jasmine (weekday ~7:15am Central). If no digest + no failure alert, check GitHub Actions (jrss-daily-digest) and run a sample.",
+        "due": null,
+        "overdue": false
+      },
+      {
+        "who": "kenz",
+        "text": "daily | AX210 WiFi card: has it arrived yet? If Kenz says YES, do the swap + revert the stopgap (re-enable ax mode 5G->a/n/ac/ax + 2.4G->b/g/n/ax, roaming back to Medium, delete WiFi-AutoRecover task). Steps in C:\\BBC\\state\\wifi-monitor\\WIF",
+        "due": null,
+        "overdue": false
+      },
+      {
+        "who": "rj",
+        "text": "daily | BBC START-OF-DAY (say \"run bbc\"): morning bundle = lead gen + email marketing + content review + insight pages + dashboard sync + daily ops (inbox/WhatsApp) + LinkedIn + notes/reminders + FB-links & upgrade deep-dive. Runbook: ROUTI",
+        "due": null,
+        "overdue": false
+      },
+      {
+        "who": "rj",
+        "text": "daily | CLIENT CARE \u2014 HVS: \"hvs sodr\" (diagnose+fix+deploy) at start, \"hvs eodr\" (send Beau report) at wrap. SR: \"sr sodr\"/\"sr eodr\" (Sonya report HELD until email+brand confirmed). Runbook: ROUTINE_SYSTEM\\CLIENT_CARE_SYSTEM.md",
+        "due": null,
+        "overdue": false
+      },
+      {
+        "who": "rj",
+        "text": "daily | OnlineJobs apply (say \"run onlinejobs\") \u2014 SEPARATE from the morning run. Delivered as a one-cell-copy Google Sheet.",
+        "due": null,
+        "overdue": false
+      },
+      {
+        "who": "rj",
+        "text": "daily | END-OF-SHIFT FINAL DEPLOY: before wrapping, run the Netlify batch-deploy sweep + get RJ's go before pushing. CATCH-UP: if undeployed website work exists (unpushed commits in C:\\BBC\\bbc-website OR staged items in _PENDING_PUSH.md), a",
+        "due": null,
+        "overdue": false
+      },
+      {
+        "who": "rj",
+        "text": "weekly:Sat | WEEKLY INVOICE RUN (say \"run the invoices\" or /invoices): generate every client's invoice due this week + stage each as a Gmail draft for RJ to send himself. Weekly = AJ/WW/SR/Freccia/JRSS. Bi-weekly Mon = HVS + Hi-Up/Michael (",
+        "due": null,
+        "overdue": false
+      },
+      {
+        "who": "rj",
+        "text": "monthly:25 | SPECIAL DAYS ROUTINE: next month's holidays/awareness days get deep-dived + story/reel/carousel generated + auto-scheduled on Metricool. The scheduled task \"BBC Special Days - Monthly 25th\" runs it on Plus; if it didn't run (ch",
+        "due": null,
+        "overdue": false
+      },
+      {
+        "who": "rj",
+        "text": "monthly:24 | Security Bank Mastercard SOA arrives \u2014 check balance + plan the payment.",
+        "due": null,
+        "overdue": false
+      },
+      {
+        "who": "rj",
+        "text": "monthly:17 | Security Bank Mastercard payment due \u2014 pay it.",
+        "due": null,
+        "overdue": false
+      }
+    ],
+    "files": [
+      "daryl.md",
+      "john.md",
+      "kenz.md",
+      "rj.md",
+      "ryan.md"
+    ],
+    "total": 46,
+    "overdue": 31
+  }
 }

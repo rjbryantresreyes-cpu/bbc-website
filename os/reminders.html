@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Reminders · BBC Command Center</title>
+<link rel="icon" href="/os/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,500;6..72,600;6..72,700&family=Hanken+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/os/bbc-os.css">
+</head>
+<body>
+<div class="wrap">
+  <section class="sec" style="margin-top:26px">
+    <div class="sec-head"><h2>Reminders</h2><span class="sub" id="sub"></span></div>
+    <div class="rule"></div>
+    <div class="tiles" id="tiles"></div>
+  </section>
+
+  <section class="sec" id="overdue-host"></section>
+
+  <section class="sec">
+    <div class="sec-head"><h2>Open</h2><span class="sub">by person</span></div>
+    <div class="rule"></div>
+    <div id="byperson"></div>
+  </section>
+
+  <footer class="foot">
+    <span>Rebuilt from the reminder files every run. Ticked items are dropped, nothing is carried over.</span>
+    <span id="foot-time"></span>
+  </footer>
+</div>
+
+<script src="/os/bbc-os.js"></script>
+<script>
+osChrome("Reminders");
+
+const NAME = { rj:"RJ", daryl:"Daryl", john:"John", kenz:"Kenz", ryan:"Ryan" };
+
+function render(d){
+  stampFreshness(d);
+  const r = d.reminders || {};
+  const items = r.items || [];
+
+  if (r.state !== "ok") {
+    document.getElementById("byperson").innerHTML =
+      `<p class="empty-note">${esc(r.detail || "Reminder files were not read this run.")}</p>`;
+    return;
+  }
+  if (!items.length) {
+    document.getElementById("byperson").innerHTML =
+      `<div class="attention calm"><h2>✓ Nothing outstanding</h2>
+       <p class="lead" style="margin:0">Every reminder on file is ticked off.</p></div>`;
+    return;
+  }
+
+  const overdue = items.filter(i => i.overdue);
+  document.getElementById("sub").textContent =
+    `${items.length} open · ${overdue.length} overdue`;
+
+  const perPerson = {};
+  items.forEach(i => { perPerson[i.who] = (perPerson[i.who]||0) + 1; });
+
+  document.getElementById("tiles").innerHTML = [
+    statTile("Open", items.length, "not yet ticked off"),
+    statTile("Overdue", overdue.length, overdue.length ? "past their date" : "none late",
+             overdue.length ? "bad" : "ok"),
+    statTile("People", Object.keys(perPerson).length, "with something on their list"),
+  ].join("");
+
+  document.getElementById("overdue-host").innerHTML = overdue.length ? `
+    <div class="attention" style="margin-top:0">
+      <h2>⚠︎ ${overdue.length} overdue</h2>
+      <p class="lead">Oldest first. These have been sitting past their date.</p>
+      <div class="att-list">${overdue.slice(0,8).map(i => `
+        <details class="att att-fold">
+          <summary><span class="sev sev-decision">${esc(NAME[i.who]||i.who)}</span>
+            <span class="t">${esc(i.text.slice(0,84))}${i.text.length>84?"…":""}</span>
+            <span class="who">${esc(i.due||"")}</span></summary>
+          <p class="d">${esc(i.text)}</p></details>`).join("")}</div>
+      ${overdue.length > 8 ? `<p class="lead" style="margin:12px 0 0">
+        and ${overdue.length - 8} more below.</p>` : ""}
+    </div>` : "";
+
+  // Grouped by person so a list can be handed straight to whoever owns it.
+  const groups = Object.keys(perPerson).sort((a,b) => perPerson[b] - perPerson[a]);
+  document.getElementById("byperson").innerHTML = groups.map(who => {
+    const mine = items.filter(i => i.who === who);
+    return `<p class="group-label">${esc(NAME[who]||who)} · ${mine.length}</p>
+      <div class="panel" style="margin-bottom:14px">
+        ${mine.map(i => `<div class="step">
+          <span class="sdot ${i.overdue ? "s-problem" : "s-unknown"}" style="flex:none"></span>
+          <span class="sj" style="white-space:normal">${esc(i.text)}</span>
+          <span class="here" style="width:88px;color:${i.overdue?"var(--clay)":"var(--muted)"};font-size:12px">
+            ${esc(i.due || "")}</span>
+        </div>`).join("")}
+      </div>`;
+  }).join("");
+}
+
+loadSnapshot(render, () => {
+  document.getElementById("byperson").innerHTML =
+    `<p class="empty-note">No routine snapshot yet. Run the daily routine to fill this in.</p>`;
+});
+</script>
+</body>
+</html>

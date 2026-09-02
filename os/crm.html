@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>CRM · BBC Command Center</title>
+<link rel="icon" href="/os/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,500;6..72,600;6..72,700&family=Hanken+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/os/bbc-os.css">
+</head>
+<body>
+<div class="wrap">
+  <section class="sec" style="margin-top:26px">
+    <div class="sec-head"><h2>CRM</h2><span class="sub">Balay ni Bruno &amp; Co. only — each client's own CRM lives on their page</span></div>
+    <div class="rule"></div>
+    <div class="tiles" id="tiles"></div>
+  </section>
+
+  <section class="sec">
+    <div class="sec-head"><h2>Campaigns</h2><span class="sub">tap one to see its emails</span></div>
+    <div class="rule"></div>
+    <div id="campaigns"></div>
+  </section>
+
+  <section class="sec">
+    <div class="sec-head"><h2>Lead lists</h2><span class="sub">exact counts, and how much of each list is burnt</span></div>
+    <div class="rule"></div>
+    <div id="lists"></div>
+  </section>
+
+  <footer class="foot">
+    <span>Counts read per list. Brevo's list endpoint reports zero for every list, which would show a false empty.</span>
+    <span id="foot-time"></span>
+  </footer>
+</div>
+
+<script src="/os/bbc-os.js"></script>
+<script>
+osChrome("CRM");
+
+function campaign(c){
+  const tone = toneFor(c.percent);
+  const steps = (c.steps||[]).map(s => `
+    <div class="step">
+      <span class="num">${s.step}</span>
+      <span class="sj">${esc(s.subject||"")}</span>
+      <span class="here">${s.at_this_step}</span>
+      <span class="shr">${bar(s.share, TONE.neutral, `${s.share}% of the list is sitting here`)}</span>
+    </div>`).join("");
+
+  return `<details class="panel" style="margin-bottom:14px">
+    <summary style="cursor:pointer;list-style:none;display:flex;align-items:center;gap:16px;flex-wrap:wrap">
+      <span style="flex:1;min-width:190px">
+        <span style="font-size:15.5px;font-weight:680">${esc(c.name||c.key)}</span>
+        <span class="sub" style="display:block;margin-top:2px">
+          ${c.contacts.toLocaleString()} contacts · ${c.step_count} emails · one every ${c.gap_days} days</span>
+      </span>
+      <span style="flex:none;text-align:right;min-width:96px">
+        <span class="big-pct" style="color:${tone}">${c.percent}%</span>
+        <span class="sub" style="display:block">through the sequence</span>
+      </span>
+      <span style="flex:none;width:100%">${bar(c.percent, tone)}</span>
+    </summary>
+    <div style="margin-top:15px">
+      <p class="sub" style="margin:0 0 8px">
+        ${c.finished.toLocaleString()} have finished all ${c.step_count}.
+        ${c.not_started ? `${c.not_started.toLocaleString()} have not started.` : "Everyone has started."}
+      </p>
+      ${steps}
+    </div>
+  </details>`;
+}
+
+function render(d){
+  stampFreshness(d);
+  const crm = d.crm || {};
+  if (crm.state !== "ok") {
+    document.getElementById("campaigns").innerHTML =
+      `<p class="empty-note">${esc(crm.detail || "CRM data was not collected this run.")}</p>`;
+    return;
+  }
+  const t = crm.totals || {};
+
+  const tiles = [
+    statTile("Leads in play", (t.leads||0).toLocaleString(), "across all campaigns"),
+    statTile("Sent today", (t.sent_today||0).toLocaleString(),
+             t.daily_cap ? `cap is ${t.daily_cap}` : "", t.sent_today ? "ok" : "warn"),
+    statTile("Contacts", (t.contacts||0).toLocaleString(), "in BBC's Brevo"),
+  ];
+  if (t.dead_pct != null) {
+    tiles.push(statTile("Dead addresses", t.dead_pct + "%",
+      `${(t.dead||0).toLocaleString()} burnt`, t.dead_pct >= 15 ? "bad" : "ok"));
+  }
+  tiles.push(statTile("Campaigns", (crm.campaigns||[]).length, "running"));
+  document.getElementById("tiles").innerHTML = tiles.join("");
+
+  document.getElementById("campaigns").innerHTML =
+    (crm.campaigns||[]).length
+      ? crm.campaigns.map(campaign).join("")
+      : `<p class="empty-note">No campaigns configured.</p>`;
+
+  const lists = crm.lists || [];
+  document.getElementById("lists").innerHTML = lists.length ? `
+    <div class="panel">
+      ${lists.map(l => {
+        const tone = toneFor(l.dead_pct, true);
+        return `<div class="step">
+          <span class="sj" style="font-weight:600">${esc(l.name)}</span>
+          <span class="here">${l.contacts.toLocaleString()}</span>
+          <span class="shr">${bar(l.dead_pct, tone, `${l.dead_pct}% dead`)}</span>
+          <span class="pct" style="color:${tone};width:72px;text-align:right;font-size:11.5px;font-weight:600">
+            ${l.dead_pct}% dead</span>
+        </div>`;
+      }).join("")}
+    </div>` : `<p class="empty-note">${esc(crm.lists_state === "unknown"
+        ? "BBC's Brevo key was not readable this run, so list counts are unknown rather than zero."
+        : "No lists found.")}</p>`;
+}
+
+loadSnapshot(render, () => {
+  document.getElementById("campaigns").innerHTML =
+    `<p class="empty-note">No routine snapshot yet. Run the daily routine to fill this in.</p>`;
+});
+</script>
+</body>
+</html>

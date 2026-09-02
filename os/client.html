@@ -12,23 +12,6 @@
 </head>
 <body>
 
-<header class="top">
-  <div class="top-in">
-    <div class="brand">
-      <div class="mark">🏠</div>
-      <div>
-        <h1>BBC Command Center</h1>
-        <p>Balay ni Bruno &amp; Co.</p>
-      </div>
-    </div>
-    <nav class="os-nav">
-      <a href="/os/home.html">Home</a>
-      <a href="/os/clients.html" aria-current="page">Clients</a>
-      <a href="/os/">Dashboard</a>
-    </nav>
-    <span class="pill" id="freshness"><span class="dot"></span><span id="fresh-text">loading…</span></span>
-  </div>
-</header>
 
 <div class="wrap">
   <a class="back" href="/os/clients.html">← All clients</a>
@@ -42,6 +25,7 @@
 
 <script src="/os/bbc-os.js"></script>
 <script>
+osChrome("Clients");
 const ID = new URLSearchParams(location.search).get("id");
 
 /* ---------- panels ---------- */
