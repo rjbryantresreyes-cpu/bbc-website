@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Clients · BBC Command Center</title>
+<link rel="icon" href="/os/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,500;6..72,600;6..72,700&family=Hanken+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/os/bbc-os.css">
+</head>
+<body>
+
+<header class="top">
+  <div class="top-in">
+    <div class="brand">
+      <div class="mark">🏠</div>
+      <div>
+        <h1>BBC Command Center</h1>
+        <p>Balay ni Bruno &amp; Co.</p>
+      </div>
+    </div>
+    <nav class="os-nav">
+      <a href="/os/home.html">Home</a>
+      <a href="/os/clients.html" aria-current="page">Clients</a>
+      <a href="/os/">Dashboard</a>
+    </nav>
+    <span class="pill" id="freshness"><span class="dot"></span><span id="fresh-text">loading…</span></span>
+  </div>
+</header>
+
+<div class="wrap">
+  <section class="sec" style="margin-top:26px">
+    <div class="sec-head"><h2>Clients</h2><span class="sub" id="sub"></span></div>
+    <div class="rule"></div>
+    <div id="list"></div>
+  </section>
+  <section id="past-host"></section>
+
+  <footer class="foot">
+    <span>Roster comes from dashboard_clients.json, sourced from CLAUDE.md. Edit that file, not this page.</span>
+    <span id="foot-time"></span>
+  </footer>
+</div>
+
+<script src="/os/bbc-os.js"></script>
+<script>
+const SERVICE_ORDER = ["website","email","leads","social","store","crm"];
+
+function row(c){
+  // one dot per service we actually run, so the health of a client reads at a glance
+  const dots = SERVICE_ORDER
+    .filter(k => c.services && c.services[k])
+    .map(k => `<span class="sdot s-${(c.services[k].state)||"unknown"}" title="${k}: ${esc(c.services[k].detail||"")}"></span>`)
+    .join("");
+
+  const wa = c.whatsapp || {};
+  const bits = [c.what, c.handler ? `Handler ${c.handler}` : null,
+                wa.state === "ok" ? `${wa.count} messages in chat` : null]
+    .filter(Boolean).join(" · ");
+
+  return `<a class="client-row" href="/os/client.html?id=${encodeURIComponent(c.id)}">
+    <div class="avatar" style="background:${avatarColor(c.id)}">${esc((c.name||"?").charAt(0).toUpperCase())}</div>
+    <div class="who">
+      <h3>${esc(c.name)}</h3>
+      <p class="meta">${esc(bits)}</p>
+    </div>
+    <span class="badge b-${c.status}">${esc(c.status)}</span>
+    <span class="dots">${dots}</span>
+    <span class="go">→</span>
+  </a>`;
+}
+
+function render(d){
+  stampFreshness(d);
+  const clients = d.clients || [];
+  const groups = [
+    ["Active",       clients.filter(c => c.status === "active")],
+    ["On hold",      clients.filter(c => c.status === "hold")],
+    ["Unconfirmed",  clients.filter(c => c.status === "unconfirmed")],
+  ];
+
+  document.getElementById("list").innerHTML = groups
+    .filter(([,list]) => list.length)
+    .map(([label,list]) =>
+      `<p class="group-label">${label} · ${list.length}</p>${list.map(row).join("")}`)
+    .join("");
+
+  const past = d.past_clients || [];
+  document.getElementById("sub").textContent =
+    `${clients.filter(c=>c.status==="active").length} active · ${past.length} past`;
+
+  // Past clients sit at the bottom, collapsed, for reference only. Prospects are
+  // deliberately not shown here.
+  document.getElementById("past-host").innerHTML = past.length ? `
+    <details class="past">
+      <summary>Past clients (${past.length}) — reference only, no work runs for these</summary>
+      <div class="past-grid">${past.map(p=>`
+        <div class="past-item"><b>${esc(p.name)}</b><span>${esc(p.note||p.what||"")}</span></div>`).join("")}</div>
+    </details>` : "";
+}
+
+loadSnapshot(render, () => {
+  document.getElementById("list").innerHTML =
+    `<p class="empty-note">No routine snapshot yet. Run the daily routine to fill this in.</p>`;
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Client · BBC Command Center</title>
+<link rel="icon" href="/os/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,500;6..72,600;6..72,700&family=Hanken+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/os/bbc-os.css">
+</head>
+<body>
+
+<header class="top">
+  <div class="top-in">
+    <div class="brand">
+      <div class="mark">🏠</div>
+      <div>
+        <h1>BBC Command Center</h1>
+        <p>Balay ni Bruno &amp; Co.</p>
+      </div>
+    </div>
+    <nav class="os-nav">
+      <a href="/os/home.html">Home</a>
+      <a href="/os/clients.html" aria-current="page">Clients</a>
+      <a href="/os/">Dashboard</a>
+    </nav>
+    <span class="pill" id="freshness"><span class="dot"></span><span id="fresh-text">loading…</span></span>
+  </div>
+</header>
+
+<div class="wrap">
+  <a class="back" href="/os/clients.html">← All clients</a>
+  <div id="host"></div>
+
+  <footer class="foot">
+    <span>Report only. Nothing on this page changes a client system.</span>
+    <span id="foot-time"></span>
+  </footer>
+</div>
+
+<script src="/os/bbc-os.js"></script>
+<script>
+const ID = new URLSearchParams(location.search).get("id");
+
+/* ---------- panels ---------- */
+
+function websitePanel(s){
+  if (!s) return "";
+  const st = s.state || "unknown";
+  const word = st === "ok" ? "Responding" : st === "problem" ? "Not responding" : "Unknown";
+  return `<div class="panel">
+    <h3>Website</h3>
+    <div class="big" style="color:${st==="ok"?"var(--sage)":st==="problem"?"var(--clay)":"var(--muted)"}">${word}</div>
+    <div class="sub">${esc(s.detail||"")}</div>
+    ${s.url?`<div class="sub" style="margin-top:9px">
+      <a href="${esc(s.url)}" target="_blank" rel="noopener"
+         style="color:var(--terracotta);text-decoration:none;font-weight:600">${esc(s.url.replace(/^https?:\/\//,""))} ↗</a></div>`:""}
+  </div>`;
+}
+
+function emailPanel(s){
+  if (!s) return "";
+  if (s.state !== "ok") {
+    return `<div class="panel"><h3>Email marketing</h3>
+      <div class="big" style="color:var(--muted);font-size:20px">Not connected</div>
+      <div class="sub">${esc(s.detail||"no ESP key with us")}</div></div>`;
+  }
+  const lists = (s.lists||[]).slice().sort((a,b)=>b.contacts-a.contacts);
+  const camps = s.campaigns || [];
+  const rows = lists.map(l => {
+    const col = l.dead_pct >= 40 ? "var(--clay)" : l.dead_pct >= 15 ? "var(--amber)" : "var(--sage)";
+    return `<div class="listrow">
+      <span class="nm">${esc(l.name)}</span>
+      <span class="ct">${l.contacts.toLocaleString()}</span>
+      <span class="pct" style="color:${col}">${l.dead_pct}% dead</span>
+    </div>`;
+  }).join("");
+
+  const campRows = camps.length ? camps.map(c => `
+    <div class="listrow">
+      <span class="nm">${esc(c.name||"untitled")}</span>
+      <span class="pct" style="color:var(--muted)">${esc(c.status||"")}</span>
+      <span class="ct">${c.percent!=null?c.percent+"%":"—"}</span>
+    </div>`).join("")
+    : `<p class="empty-note" style="margin:0">No campaign sent in the last 24h, none queued ahead.</p>`;
+
+  return `<div class="panel">
+    <h3>Email marketing</h3>
+    <div class="big">${(s.contacts||0).toLocaleString()}</div>
+    <div class="sub">contacts${s.plan?` · ${esc(s.plan)} plan`:""}${s.credits!=null?` · ${s.credits} credits`:""}</div>
+    <h3 style="margin-top:17px">Campaigns</h3>
+    ${campRows}
+    ${lists.length?`<h3 style="margin-top:17px">Lists</h3>${rows}`:""}
+  </div>`;
+}
+
+function simplePanel(title, s){
+  if (!s) return "";
+  const st = s.state || "unknown";
+  return `<div class="panel">
+    <h3>${esc(title)}</h3>
+    <div style="display:flex;align-items:center;gap:9px">
+      <span class="sdot s-${st}"></span>
+      <span style="font-weight:600;font-size:14px">${st==="ok"?"Running":st==="unknown"?"Not checked":esc(st)}</span>
+    </div>
+    <div class="sub" style="margin-top:5px">${esc(s.detail||"")}</div>
+  </div>`;
+}
+
+function chatPanel(wa){
+  const recent = (wa && wa.recent) || [];
+  const body = recent.length
+    ? recent.slice(0,10).map(m => {
+        const stamp = [m.day, m.time].filter(Boolean).join(" · ");
+        return `<div class="msg">
+          <span class="when">${esc(stamp)}${m.sender?` — ${esc(m.sender)}`:""}</span>
+          <p>${esc(m.text||"")}</p></div>`;
+      }).join("")
+    : `<p class="empty-note">${esc((wa&&wa.detail) || "No chat mapped for this client.")}</p>`;
+  return `<div class="panel" style="grid-column:1/-1">
+    <h3>From the WhatsApp chat${wa&&wa.count?` · ${wa.count} lines`:""}</h3>
+    <p class="sub" style="margin:-6px 0 12px">
+      Straight from the Drive archive, so work done by a VA on another device still shows up here.</p>
+    ${body}
+  </div>`;
+}
+
+function fixesPanel(c){
+  const fixes = c.fixes || [];
+  const updates = c.updates || [];
+  if (!fixes.length && !updates.length) return "";
+  return `<div class="panel" style="grid-column:1/-1">
+    <h3>Changed today</h3>
+    ${fixes.map(f=>`<div class="listrow">
+        <span class="sdot s-ok"></span>
+        <span class="nm"><b>${esc(f.title||"fix")}</b>${f.detail?` — ${esc(f.detail)}`:""}</span>
+      </div>`).join("")}
+    ${updates.map(u=>`<div class="listrow">
+        <span class="nm">${esc(u.title||u)}</span></div>`).join("")}
+  </div>`;
+}
+
+/* ---------- page ---------- */
+
+function render(d){
+  stampFreshness(d);
+  const all = [...(d.clients||[]), ...(d.past_clients||[])];
+  const c = all.find(x => x.id === ID);
+
+  if (!c) {
+    document.getElementById("host").innerHTML =
+      `<div class="attention" style="margin-top:20px"><h2>Client not found</h2>
+       <p class="lead" style="margin:0">Nothing on the roster matches “${esc(ID||"")}”.
+       <a href="/os/clients.html" style="color:var(--terracotta)">See all clients</a>.</p></div>`;
+    return;
+  }
+
+  document.title = `${c.name} · BBC Command Center`;
+  const s = c.services || {};
+  const facts = [
+    c.owner   ? ["Owner", esc(c.owner)] : null,
+    c.handler ? ["Handler", esc(c.handler)] : null,
+    c.ai      ? ["Their AI", esc(c.ai)] : null,
+    c.folder  ? ["Drive folder", esc(c.folder)] : null,
+  ].filter(Boolean);
+
+  document.getElementById("host").innerHTML = `
+    <div class="client-hero">
+      <div class="avatar" style="background:${avatarColor(c.id)}">${esc((c.name||"?").charAt(0).toUpperCase())}</div>
+      <div style="min-width:0;flex:1">
+        <h2>${esc(c.name)}</h2>
+        <p class="what">${esc(c.what||"")}</p>
+        <div class="facts">${facts.map(([k,v])=>`
+          <div class="fact"><div class="k">${k}</div><div class="v">${v}</div></div>`).join("")}</div>
+      </div>
+      <span class="badge b-${c.status}">${esc(c.status)}</span>
+    </div>
+
+    ${c.guardrail?`<div class="guardrail"><b>Guardrail</b>${esc(c.guardrail)}</div>`:""}
+    ${c.note?`<div class="guardrail" style="background:var(--surface-2);border-color:var(--line-2);color:var(--ink-2)">
+        <b>Note</b>${esc(c.note)}</div>`:""}
+
+    <div class="panels">
+      ${websitePanel(s.website)}
+      ${emailPanel(s.email)}
+      ${simplePanel("Lead generation", s.leads)}
+      ${simplePanel("Social", s.social)}
+      ${simplePanel("Store", s.store)}
+      ${simplePanel("CRM", s.crm)}
+      ${fixesPanel(c)}
+      ${chatPanel(c.whatsapp)}
+    </div>`;
+}
+
+loadSnapshot(render, () => {
+  document.getElementById("host").innerHTML =
+    `<p class="empty-note" style="margin-top:22px">No routine snapshot yet. Run the daily routine to fill this in.</p>`;
+});
+</script>
+</body>
+</html>

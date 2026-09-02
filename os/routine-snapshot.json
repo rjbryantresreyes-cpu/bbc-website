@@ -1,6 +1,6 @@
 {
-  "shift_date": "2026-09-02",
-  "generated_at": "2026-09-02T14:17:44.321360+00:00",
+  "shift_date": "2026-09-03",
+  "generated_at": "2026-09-02T19:21:03.528596+00:00",
   "attention": [
     {
       "severity": "blocking",
@@ -143,58 +143,82 @@
       "updates": [],
       "whatsapp": {
         "state": "ok",
-        "count": 18,
+        "count": 16,
         "recent": [
           {
             "day": "2026-09-02",
-            "text": "**13:52** Kenz: Good morning!"
+            "time": "13:52",
+            "sender": "Kenz",
+            "text": "Good morning!"
           },
           {
-            "day": "2026-09-01",
-            "text": "**13:58** Kenz: Good morning!"
+            "day": "2026-09-02",
+            "time": "14:34",
+            "sender": "Kenz",
+            "text": "Hey Derrick! Quick ask, whenever you get a chance. As we build out future blog posts, it'd be great to use some fresh trip photos instead of reusing the same ones each time. If you have any recent shots from trips (landscape orientation works best, and the higher-res the better) feel free to send them over, whatever you've got is fine. No rush, just want to keep building up the library for what's "
           },
           {
-            "day": "2026-09-01",
-            "text": "**15:22** Kenz: [Image] @79234395537572  [file: media/2026-09-01/3EB0B45482BF9DA5885202.jpg]"
+            "day": "2026-09-02",
+            "time": "14:46",
+            "sender": "Derrick Johnson",
+            "text": "Good morning! Ok, if I find any recent vacations in my photo gallery, I\u2019ll send them over"
           },
           {
-            "day": "2026-09-01",
-            "text": "**15:27** Derrick Johnson: New password is Signet25$"
+            "day": "2026-09-02",
+            "time": "14:46",
+            "sender": "Kenz",
+            "text": "Thank you"
           },
           {
-            "day": "2026-09-01",
-            "text": "**15:27** Derrick Johnson: Good Morning"
+            "day": "2026-09-02",
+            "time": "15:39",
+            "sender": "Kenz",
+            "text": "Hey Derrick, quick FYI. Found that the Linktree's main button was pointing to a Stan Store page that's been down (\"under construction\") for a while, so anyone tapping \"Get the free Starter Kit\" was hitting a dead end. Already fixed it, that button now goes straight to the real Playbook checkout."
           },
           {
-            "day": "2026-09-01",
-            "text": "**15:29** Kenz: Hi Derrick, quick one for the Barbados teaser reel (Post 28)."
+            "day": "2026-09-02",
+            "time": "",
+            "sender": "",
+            "text": "One thing for the record: is Stan Store something you still use for anything else? Just want to make sure we're not missing a live sales channel there. If it's not in use anymore, no action needed, just wanted you in the loop on the fix."
           },
           {
-            "day": "2026-09-01",
-            "text": "We'd love you to record two short lines on your phone, just a quick voice memo or a selfie video, whichever is easier for you. Your voice will land better and feel more personal than what we've been generating."
+            "day": "2026-09-02",
+            "time": "16:31",
+            "sender": "Derrick Johnson",
+            "text": "No, I canceled my stan store subscription earlier this year"
           },
           {
-            "day": "2026-09-01",
-            "text": "The two lines:"
+            "day": "2026-09-02",
+            "time": "16:44",
+            "sender": "Kenz",
+            "text": "Got it"
           },
           {
-            "day": "2026-09-01",
-            "text": "\"I paid $386.84 for a business-class trip that cost $5,101.15.\""
+            "day": "2026-09-02",
+            "time": "16:56",
+            "sender": "Kenz",
+            "text": "[Image] @79234395537572 need verification code for claude  [file: media/2026-09-02/3EB0E92557C34DA4EF60E9.jpg]"
           },
           {
-            "day": "2026-09-01",
-            "text": "\"Full breakdown coming this week.\""
+            "day": "2026-09-02",
+            "time": "17:00",
+            "sender": "Derrick Johnson",
+            "text": "814649"
           },
           {
-            "day": "2026-09-01",
-            "text": "No need to be polished, just natural, like you're telling a friend. Once we have it, we'll cut it in with the Barbados footage, and this reel will be ready to go out."
+            "day": "2026-09-02",
+            "time": "17:00",
+            "sender": "Kenz",
+            "text": "Thank you"
           },
           {
-            "day": "2026-09-01",
-            "text": "**15:42** Derrick Johnson: [Audio]  [file: media/2026-09-01/4A2C95A80C2F5B42D811.ogg]"
+            "day": "2026-09-02",
+            "time": "18:22",
+            "sender": "Kenz",
+            "text": "Quick end of day recap, Derrick! Today we got Facebook's auto-posting fixed (was silently failing on Posts 12 and 13), and found + fixed a broken link in the Linktree that was sending people to a dead page instead of the real Playbook checkout, both should be running clean now. Next scheduled post goes out tomorrow morning. Have a good one!"
           }
         ],
-        "detail": "18 lines in last 2d"
+        "detail": "16 lines in last 2d"
       }
     },
     {
@@ -339,51 +363,75 @@
         "recent": [
           {
             "day": "2026-09-02",
-            "text": "**00:59** Rebekah Severi: I don\u2019t have this.  Let me look tomorrow"
+            "time": "00:59",
+            "sender": "Rebekah Severi",
+            "text": "I don\u2019t have this.  Let me look tomorrow"
           },
           {
             "day": "2026-09-02",
-            "text": "**12:42** Ryan: Good morning!"
+            "time": "12:42",
+            "sender": "Ryan",
+            "text": "Good morning!"
           },
           {
             "day": "2026-09-02",
-            "text": "**13:36** BBC.Dexter: good morning :)"
+            "time": "13:36",
+            "sender": "BBC.Dexter",
+            "text": "good morning :)"
           },
           {
             "day": "2026-09-02",
-            "text": "**14:02** Ryan: [Image] Can you verify me @198509730996394 , thanks!  [file: media/2026-09-02/3EB027A3D18D6488019DA0.jpg]"
+            "time": "14:02",
+            "sender": "Ryan",
+            "text": "[Image] Can you verify me @198509730996394 , thanks!  [file: media/2026-09-02/3EB027A3D18D6488019DA0.jpg]"
           },
           {
             "day": "2026-09-02",
-            "text": "**14:07** Rebekah Severi: Ok going kow"
+            "time": "14:07",
+            "sender": "Rebekah Severi",
+            "text": "Ok going kow"
           },
           {
             "day": "2026-09-02",
-            "text": "**14:08** Rebekah Severi: *now"
+            "time": "14:08",
+            "sender": "Rebekah Severi",
+            "text": "*now"
           },
           {
             "day": "2026-09-02",
-            "text": "**14:08** Rebekah Severi: Done!\u2705"
+            "time": "14:08",
+            "sender": "Rebekah Severi",
+            "text": "Done!\u2705"
           },
           {
-            "day": "2026-09-01",
-            "text": "**01:11** Rebekah Severi: [Image] Hey guys, can you please make sure to choose a thumbnail tile for the grid? I keep having to go in and change them myself. And then also maybe using some emojis?  [file: media/2026-09-01/4A2390E1201D401F00A1.jpg]"
+            "day": "2026-09-02",
+            "time": "15:07",
+            "sender": "Ryan",
+            "text": ".Hi @198509730996394 ,"
           },
           {
-            "day": "2026-09-01",
-            "text": "**03:26** Ryan: Got it Bekah"
+            "day": "2026-09-02",
+            "time": "",
+            "sender": "",
+            "text": "Two enquiries came through the website contact form Monday evening. I want to be sure they reached you and Josh."
           },
           {
-            "day": "2026-09-01",
-            "text": "**13:01** Ryan: Good morning!"
+            "day": "2026-09-02",
+            "time": "",
+            "sender": "",
+            "text": "Ryan Kristek is worth moving on today. A 5,850 square foot recreation and wellness facility in Central Texas, new build, budget 1 to 2 million. He wants a preliminary per square foot range before he commissions design. He came in Monday 9:14pm and he sounds serious."
           },
           {
-            "day": "2026-09-01",
-            "text": "**13:04** Rebekah Severi: \ud83d\udc4b\ud83c\udffb"
+            "day": "2026-09-02",
+            "time": "",
+            "sender": "",
+            "text": "Jeff Robinson I would treat carefully. The wording matches a pattern aimed at contractors, where they ask you to confirm interest before sending any specifications."
           },
           {
-            "day": "2026-09-01",
-            "text": "**13:19** BBC.Dexter: good morning :)"
+            "day": "2026-09-02",
+            "time": "",
+            "sender": "",
+            "text": "Both should have triggered an automatic email to sales@ and to Josh around 9:15pm Monday. Can one of you confirm those arrived? If they did not, enquiries are still not reaching a person and I will fix it today."
           }
         ],
         "detail": "18 lines in last 2d"
@@ -464,58 +512,34 @@
       "updates": [],
       "whatsapp": {
         "state": "ok",
-        "count": 14,
+        "count": 4,
         "recent": [
           {
             "day": "2026-09-02",
-            "text": "**12:53** daryl Agadia: Good morning"
+            "time": "12:53",
+            "sender": "daryl Agadia",
+            "text": "Good morning"
           },
           {
             "day": "2026-09-02",
-            "text": "**13:33** Sonya: Goodie morning! Sounds great, thank you for checking and keeping me updated"
+            "time": "13:33",
+            "sender": "Sonya",
+            "text": "Goodie morning! Sounds great, thank you for checking and keeping me updated"
           },
           {
             "day": "2026-09-02",
-            "text": "**13:34** Sonya: Have we had some sign ups? How can I see how many ppl have signed up?"
+            "time": "13:34",
+            "sender": "Sonya",
+            "text": "Have we had some sign ups? How can I see how many ppl have signed up?"
           },
           {
             "day": "2026-09-02",
-            "text": "**13:59** daryl Agadia: Right now sign ups for the Masterclass Waitlist don't save to a list. Each one sends an email to info@srivierehair.com with the subject \"Masterclass Waitlist\" plus the class name, so if you search that in your inbox you'll see what's come in so far. Want me to set it up so sign ups save to a real list you can check anytime instead of digging through email?"
-          },
-          {
-            "day": "2026-09-01",
-            "text": "**13:00** daryl Agadia: Good morning"
-          },
-          {
-            "day": "2026-09-01",
-            "text": "**15:09** Sonya: Goodie morning!!"
-          },
-          {
-            "day": "2026-09-01",
-            "text": "**21:29** daryl Agadia: Hi Sonya! Quick update on your site for today."
-          },
-          {
-            "day": "2026-09-01",
-            "text": "Website health: 99/100"
-          },
-          {
-            "day": "2026-09-01",
-            "text": "All 26 pages we track loaded normally, averaging about half a second. Zero broken links."
-          },
-          {
-            "day": "2026-09-01",
-            "text": "Pre-orders: all clear"
-          },
-          {
-            "day": "2026-09-01",
-            "text": "Checked all 8 active pre-orders against your live Shopify orders. Everyone is on schedule, nothing overdue, nothing missed."
-          },
-          {
-            "day": "2026-09-01",
-            "text": "Small things on our radar (no action needed from you yet):"
+            "time": "13:59",
+            "sender": "daryl Agadia",
+            "text": "Right now sign ups for the Masterclass Waitlist don't save to a list. Each one sends an email to info@srivierehair.com with the subject \"Masterclass Waitlist\" plus the class name, so if you search that in your inbox you'll see what's come in so far. Want me to set it up so sign ups save to a real list you can check anytime instead of digging through email?"
           }
         ],
-        "detail": "14 lines in last 2d"
+        "detail": "4 lines in last 2d"
       }
     },
     {
@@ -586,58 +610,16 @@
       "updates": [],
       "whatsapp": {
         "state": "ok",
-        "count": 12,
+        "count": 1,
         "recent": [
           {
             "day": "2026-09-02",
-            "text": "**02:28** RJ Bryan: [Video]  [file: media/2026-09-02/3EB0BF5463F82639B70395.mp4]"
-          },
-          {
-            "day": "2026-09-01",
-            "text": "**00:33** Krizza May Managase: No worries Marla. I'll send you one again now"
-          },
-          {
-            "day": "2026-09-01",
-            "text": "**00:48** Krizza May Managase: Did you receive an email? @137860028047596"
-          },
-          {
-            "day": "2026-09-01",
-            "text": "**00:49** Marla: Yes I clicked the link"
-          },
-          {
-            "day": "2026-09-01",
-            "text": "**00:49** Marla: Should have prompted"
-          },
-          {
-            "day": "2026-09-01",
-            "text": "**00:50** Marla: Try again"
-          },
-          {
-            "day": "2026-09-01",
-            "text": "**00:50** Marla: Ill fwd email"
-          },
-          {
-            "day": "2026-09-01",
-            "text": "**00:50** Krizza May Managase: Can you forward it please?"
-          },
-          {
-            "day": "2026-09-01",
-            "text": "**00:51** Marla: Done"
-          },
-          {
-            "day": "2026-09-01",
-            "text": "**00:52** Krizza May Managase: Perfect!"
-          },
-          {
-            "day": "2026-09-01",
-            "text": "**00:52** Krizza May Managase: All good now Marla. Thank you so much"
-          },
-          {
-            "day": "2026-09-01",
-            "text": "**15:00** RJ Bryan: Good morning guys"
+            "time": "02:28",
+            "sender": "RJ Bryan",
+            "text": "[Video]  [file: media/2026-09-02/3EB0BF5463F82639B70395.mp4]"
           }
         ],
-        "detail": "12 lines in last 2d"
+        "detail": "1 lines in last 2d"
       }
     },
     {
