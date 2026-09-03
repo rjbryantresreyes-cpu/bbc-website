@@ -329,3 +329,6 @@ a.card:hover h3{color:var(--terracotta)}
 .step .shr{flex:none;width:120px}
 
 .big-pct{font-family:var(--serif);font-size:34px;font-weight:700;letter-spacing:-.6px;line-height:1}
+
+/* a manual channel is deliberate human work, not a failed check */
+.sdot.s-manual{background:#8A6BA8}
