@@ -73,7 +73,7 @@ const OS_PAGES = [
   ["Workflows", "/os/workflows.html"],
   ["Social",    "/os/social.html"],
   ["Reminders", "/os/reminders.html"],
-  ["Dashboard", "/os/"],
+  ["Old dashboard", "/os/legacy.html"],
 ];
 
 function osChrome(current){
