@@ -59,10 +59,16 @@ function row(c){
 function render(d){
   stampFreshness(d);
   const clients = d.clients || [];
+  const active = clients.filter(c => c.status === "active");
+  // RJ 2026-09-04: clients whose website we do not run (AJ Battle, All Ryze) get their
+  // own band under the main list. They are active clients, so hiding them would be
+  // wrong, but in the main grid their empty website and social cells read as faults
+  // rather than as work we were never hired to do.
   const groups = [
-    ["Active",       clients.filter(c => c.status === "active")],
-    ["On hold",      clients.filter(c => c.status === "hold")],
-    ["Unconfirmed",  clients.filter(c => c.status === "unconfirmed")],
+    ["Active",                      active.filter(c => c.band !== "no_site")],
+    ["Active · no website with us",  active.filter(c => c.band === "no_site")],
+    ["On hold",                     clients.filter(c => c.status === "hold")],
+    ["Unconfirmed",                 clients.filter(c => c.status === "unconfirmed")],
   ];
 
   document.getElementById("list").innerHTML = groups
