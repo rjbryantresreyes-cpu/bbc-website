@@ -73,6 +73,7 @@ const OS_PAGES = [
   ["Workflows", "/os/workflows.html"],
   ["Social",    "/os/social.html"],
   ["Reminders", "/os/reminders.html"],
+  ["Team",      "/os/team.html"],
   ["Old dashboard", "/os/legacy.html"],
 ];
 

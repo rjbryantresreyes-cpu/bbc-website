@@ -1,3 +1,82 @@
+# 🟡 STAGED 2026-09-05 — NEW PAGE, NOT YET APPROVED — "The Client Win-Back System"
+
+**Do not fold into the approved batch below until RJ reviews this block separately.**
+
+**New file:** `client-win-back-system.html` — standalone service page (RJ's naming + placement choice, confirmed 2026-09-05) describing the win-back workflow built and tested tonight on BBC's own past-client list (real result: 12+ genuine reconnect candidates found across the WhatsApp archive). Built from the `connect-whatsapp-to-your-business-ai.html` template so nav/fonts/tokens/schema/CTA match 1:1. Article + FAQPage JSON-LD present, canonical set, 0 em-dashes, no banned filler words, drafts-first safety framing reused consistently with the WhatsApp AI page (AI drafts, RJ approves and sends, nothing automatic).
+
+**Wired in (Everything-Connected):**
+- `insights.html` — new card added at the top of the grid (`data-cat="marketing"`), "Showing all 107 insights" → 108, Marketing category count 5 → 6 articles.
+- `sitemap.xml` — new URL added.
+- `connect-whatsapp-to-your-business-ai.html` — added a reciprocal Related Reads card pointing to the new page (natural pairing, this page builds directly on that capability). Related Reads grid uses `auto-fit`, so the added 5th card reflows cleanly, nothing was removed.
+
+**Verified responsive:** checked at 375px (mobile) and standard desktop width via a local static preview server (port 8791, stopped after testing). Step-flow stacks vertically, before/after cards read cleanly, no overflow, 0 console errors, all internal links resolve to real files.
+
+**Design hook note:** `impeccable` flagged the gold CTA button's shadow (`.btn-gold`) as a "dark-glow" pattern on both the new page and the one-line edit to the WhatsApp AI page. Left unchanged on purpose — it's copied verbatim from the button style already live sitewide; changing it here alone would make this page's CTA look inconsistent with every other page's.
+
+**Pre-existing, not caused by this change:** insights.html's per-category article counts (Case Studies 8, AI 6, Operations 9, Marketing 5→6, Websites 10, SEO 5, Business Growth 8, Team Insights 3 = 55) don't sum to the "108 insights" total shown elsewhere on the page. That drift predates tonight's edit; only bumped Marketing by the 1 article actually added here.
+
+**Not done yet:** no mention of this service was added to `how-we-help.html`'s "Email & CRM" area card (would be a natural tie-in, but scoped out tonight to keep this deploy small). RJ's call whether to add that in a follow-up pass.
+
+---
+
+# 🟡 STAGED 2026-09-05 — READY FOR THE END-OF-SHIFT DEPLOY (RJ approved 2026-09-05)
+
+**Approved by RJ to ship in the final daily-routine batch deploy. One build, all of it.**
+
+### 1. PRIVACY FIX — ship this one, it is live exposure right now
+`netlify.toml` has no `publish` directory, so Netlify serves the repo root and every internal
+file in it is fetchable on the live domain. **Verified 2026-09-05 by actually fetching
+`https://balaynibruno.co/_PENDING_PUSH.md` — it returned this real file**, exposing client
+names, which clients had churned, and internal `C:\` and `G:\` paths.
+
+Added `[[redirects]]` rules returning 404 (with `force = true`, so they beat the real file) for
+`/_PENDING_PUSH.md`, `/case-studies.DRAFT-NOTES.md`, `/scripts/*`, `/.claude/*`, `/.impeccable/*`.
+`netlify.toml` re-parsed after the edit to confirm it is still valid TOML.
+Also moved the internal drift-review draft out of the repo entirely, to
+`BBC Operating System	_KNOWLEDGE_AND_INTELLIGENCE\LEARNINGS6-09-03_case_studies_client_drift_review.md`.
+
+**This stays exposed until this deploy runs.**
+
+### 2. Roster is now driven by CLAUDE.md, and cannot silently drift again
+- `First Class Finishes & Hi-Up Roofing` active → past (churned 2026-08-29).
+- `All Ryze` past → active, handler corrected to Ryan.
+- `3r Design` active → past (RJ, 2026-09-05).
+- Home Vision Studio and Optimism Consulting picked up as `hold` straight from CLAUDE.md.
+- Dashboard active list now matches CLAUDE.md exactly: 10 clients.
+- `scripts/sync-claude-md.mjs` (written earlier but never committed) now runs as **step 0 of
+  the shift-start routine**, so CLAUDE.md is the only place the roster is edited.
+
+### 3. Team page
+`data/team.json`, `os/team.json`, `os/team.html` — generated from the CLAUDE.md `## TEAM`
+section. 9 people, Al correctly excluded as departed.
+
+### 4. New insights page (built by a separate session, checked before staging)
+`can-someone-run-my-google-ads-for-me.html`, plus its `insights.html` card and `sitemap.xml`
+entry. Checked against the BBC writing rules before staging: 0 em-dashes, no banned filler,
+Article + FAQPage schema present, canonical set, article CSS linked, wired into both the hub
+and the sitemap.
+
+### 5. Housekeeping
+`.claude/launch.json` preview port 8765 → 8791, because 8765 is the MEET recorder.
+
+---
+
+## ⚠️ ONE THING NOT VERIFIED — do this before or right after the deploy
+**Nobody has looked at the new team page on screen.** The session that built it could not start
+a dev server (it ran as a scheduled task), so verification was static only: `os/team.html`
+fetches `/os/team.json` and reads `.name` / `.title` / `.notes`, and the generated JSON supplies
+all three for all 9 people. The data contract is right. The rendering is unconfirmed.
+Open `/os/team.html` once it is live.
+
+## Separate finding, NOT part of this deploy
+**116 live pages say "Work with BBC" and 165 have a bare "BBC" in visible copy**, against the
+standing rule that audiences always see "Balay ni Bruno & Co." in full. This is site-wide and
+pre-existing, not introduced here, and the new page above matches the existing convention
+rather than breaking it. Fixing it is a deliberate branding pass for RJ to schedule, not
+something to slip into a batch deploy.
+
+---
+
 # 🟡 STAGED 2026-09-01 — Real estate / realtor vertical (new page + case-study cross-links + refreshed PDF)
 
 **Not pushed. Needs RJ's go before deploy.**

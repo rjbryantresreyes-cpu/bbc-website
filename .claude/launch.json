@@ -4,8 +4,8 @@
     {
       "name": "bbc-website",
       "runtimeExecutable": "python",
-      "runtimeArgs": ["-m", "http.server", "8765", "--directory", "C:/BBC/bbc-website"],
-      "port": 8765
+      "runtimeArgs": ["-m", "http.server", "8791", "--directory", "C:/BBC/bbc-website"],
+      "port": 8791
     }
   ]
 }

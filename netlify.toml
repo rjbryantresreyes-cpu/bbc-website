@@ -75,3 +75,41 @@
   for = "/cros/manifest.webmanifest"
   [headers.values]
     Content-Type = "application/manifest+json"
+
+# --------------------------------------------------------------------------
+# Internal files must not be served. There is no `publish` directory set, so
+# Netlify serves the repo root, which means every internal .md and tool in here
+# is fetchable on the live domain. Confirmed 2026-09-05: fetching
+# https://balaynibruno.co/_PENDING_PUSH.md returned the real file, exposing
+# client names, which clients had churned, and internal C:\ and G:\ paths.
+# These rules 404 the internal paths. force = true so they win over the real file.
+# --------------------------------------------------------------------------
+[[redirects]]
+  from = "/_PENDING_PUSH.md"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/case-studies.DRAFT-NOTES.md"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/scripts/*"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/.claude/*"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/.impeccable/*"
+  to = "/404.html"
+  status = 404
+  force = true
