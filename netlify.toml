@@ -17,6 +17,44 @@
   directory = "netlify/functions"
   node_bundler = "esbuild"
 
+# Social media posted to Metricool references the ARTICLE slug, but the media was
+# published under its wf-numbered folder name. The URLs 404'd, so 23 scheduled posts
+# failed to publish on 2026-09-04 across Facebook, Instagram, TikTok and YouTube while
+# the calendar still looked full. These rewrites point the article slug at the media
+# that already exists. Each pair was confirmed by matching the scheduled post's text to
+# that folder's caption.md, not by guessing from the folder name.
+# The real fix is for the content pipeline to publish under one naming scheme; until
+# then, add a line here whenever a post is scheduled against an article slug.
+[[redirects]]
+  from = "/social-media/can-my-ai-see-my-screen-and-help/*"
+  to = "/social-media/wf30-ai-sees-your-screen/:splat"
+  status = 200
+
+[[redirects]]
+  from = "/social-media/how-to-make-branded-proposals-quotes-fast/*"
+  to = "/social-media/wf32-branded-proposals-fast/:splat"
+  status = 200
+
+[[redirects]]
+  from = "/social-media/how-to-read-text-from-scanned-documents/*"
+  to = "/social-media/wf31-read-scanned-docs/:splat"
+  status = 200
+
+[[redirects]]
+  from = "/social-media/how-we-clone-website-without-installing-anything/*"
+  to = "/social-media/wf28-website-replicator/:splat"
+  status = 200
+
+[[redirects]]
+  from = "/social-media/how-we-document-every-process-as-content/*"
+  to = "/social-media/wf29-process-as-content/:splat"
+  status = 200
+
+[[redirects]]
+  from = "/social-media/remove-discontinued-products-from-website/*"
+  to = "/social-media/wf108-remove-discontinued-products-from-website/:splat"
+  status = 200
+
 # Serve PWA manifests with the correct MIME type so the dashboards install on Android too.
 [[headers]]
   for = "/wwos/manifest.webmanifest"
