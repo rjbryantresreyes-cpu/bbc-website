@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-L6S574R0CE"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-L6S574R0CE');
+  </script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>How Do I Keep My Client List the Same Everywhere I Look? | Balay ni Bruno &amp; Co.</title>
+  <meta name="description" content="A dashboard that still shows a client who left, or misses one who is active, is not a display bug. It is a sync problem. Here is the one-file fix that keeps every screen honest." />
+  <link rel="canonical" href="https://balaynibruno.co/how-do-i-keep-my-client-list-the-same.html" />
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Balay ni Bruno &amp; Co." />
+  <meta property="og:title" content="How Do I Keep My Client List the Same Everywhere I Look? | Balay ni Bruno &amp; Co." />
+  <meta property="og:description" content="A dashboard that still shows a client who left, or misses one who is active, is not a display bug. It is a sync problem. Here is the one-file fix that keeps every screen honest." />
+  <meta property="og:url" content="https://balaynibruno.co/how-do-i-keep-my-client-list-the-same.html" />
+  <meta property="og:image" content="https://balaynibruno.co/bbc-logo.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Lora:ital,wght@0,400;0,500;1,400;1,500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --deep-blue:#1F3557; --mid-blue:#4B6FA5; --warm-blue:#6D8FC7;
+      --light-blue:#A8C0DC; --bg-primary:#F5F1EA; --bg-section:#EDE8DF;
+      --bg-card:#FDFAF6; --bg-dark:#1C2E47; --bg-footer:#172540;
+      --text-ink:#2A3040; --text-body:#4E5666; --text-muted:#888FA0;
+      --text-warm:#F5F1EA; --gold:#B8923E; --gold-pale:#E6CFA0;
+      --gold-warm:#D4A84B; --sage:#4E9E74;
+      --font-display:'Playfair Display',Georgia,serif;
+      --font-body:'Lora',Georgia,serif;
+      --font-ui:'DM Sans',system-ui,sans-serif;
+      --max-width:860px; --radius:16px; --radius-lg:24px;
+      --shadow-sm:0 3px 18px rgba(85,60,35,0.08);
+      --shadow-md:0 7px 36px rgba(85,60,35,0.11);
+      --shadow-lg:0 14px 56px rgba(85,60,35,0.14);
+      --border-card:1px solid rgba(85,60,35,0.09);
+      --border-warm:1px solid rgba(85,60,35,0.12);
+      --s1:0.5rem;--s2:1rem;--s3:1.5rem;--s4:2.5rem;--s5:4rem;
+    }
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{font-family:var(--font-body);color:var(--text-ink);background:var(--bg-primary);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+    body::after{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23n)' opacity='0.026'/%3E%3C/svg%3E");pointer-events:none;z-index:9999;mix-blend-mode:multiply}
+    h1,h2,h3,h4{font-family:var(--font-display);line-height:1.22;color:var(--deep-blue)}
+    h1{font-size:clamp(2rem,4.5vw,3.2rem);font-weight:700;line-height:1.14}
+    h2{font-size:clamp(1.3rem,2.5vw,1.9rem);font-weight:600;margin-top:2.5rem;margin-bottom:0.75rem}
+    h3{font-size:clamp(1rem,1.8vw,1.25rem);font-weight:600;margin-top:2rem;margin-bottom:0.5rem}
+    p{font-family:var(--font-body);font-size:1.05rem;line-height:1.9;color:var(--text-body);margin-bottom:1.2rem}
+    a{text-decoration:none}
+    ul,ol{margin:0 0 1.2rem 1.5rem;color:var(--text-body);font-family:var(--font-body);font-size:1.05rem;line-height:1.85}
+    li{margin-bottom:0.4rem}
+    .eyebrow{display:block;font-family:var(--font-ui);font-size:0.68rem;font-weight:600;letter-spacing:0.17em;text-transform:uppercase;color:var(--gold);margin-bottom:var(--s2)}
+    .container{max-width:var(--max-width);margin:0 auto;padding:0 var(--s4)}
+    @media(max-width:600px){.container{padding:0 var(--s2)}}
+    .nav{position:sticky;top:0;z-index:100;background:rgba(28,46,71,0.96);backdrop-filter:blur(10px);border-bottom:1px solid rgba(255,255,255,0.07);padding:1rem var(--s4)}
+    .nav__inner{max-width:var(--max-width);margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+    .nav__logo{font-family:var(--font-display);font-size:1rem;font-weight:600;color:#fff;letter-spacing:0.01em}
+    .nav__back{font-family:var(--font-ui);font-size:0.82rem;font-weight:500;color:rgba(245,241,234,0.6);transition:color 0.2s}
+    .nav__back:hover{color:var(--gold-pale)}
+    .article-hero{background:var(--bg-dark);padding:clamp(3rem,7vw,5.5rem) 0 clamp(2.5rem,5vw,4rem);position:relative;overflow:hidden}
+    .article-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 50% at 50% 0%,rgba(184,146,62,0.09),transparent 70%);pointer-events:none}
+    .article-hero .container{position:relative}
+    .article-meta{display:flex;align-items:center;gap:0.75rem;flex-wrap:wrap;margin-bottom:1.5rem}
+    .article-cat{font-family:var(--font-ui);font-size:0.72rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold-pale);background:rgba(184,146,62,0.12);border:1px solid rgba(184,146,62,0.22);border-radius:100px;padding:0.22rem 0.8rem}
+    .article-date{font-family:var(--font-ui);font-size:0.78rem;color:rgba(245,241,234,0.4)}
+    .article-hero h1{color:#fff;margin-bottom:1.2rem}
+    .article-hero .lead{font-family:var(--font-body);font-size:1.1rem;line-height:1.85;color:rgba(245,241,234,0.7);max-width:680px}
+    .article-body{padding:clamp(2.5rem,5vw,4.5rem) 0}
+    .article-body .container{max-width:760px}
+    .highlight-box{background:var(--bg-section);border-left:3px solid var(--gold);border-radius:0 var(--radius) var(--radius) 0;padding:1.25rem 1.5rem;margin:2rem 0}
+    .highlight-box p{margin:0;font-size:0.98rem}
+    .key-takeaway{background:var(--bg-dark);border-radius:var(--radius-lg);padding:2rem;margin:2.5rem 0}
+    .key-takeaway h3{color:#fff;margin-top:0;margin-bottom:1rem}
+    .key-takeaway ul{color:rgba(245,241,234,0.72);margin-left:1.2rem}
+    .key-takeaway li{margin-bottom:0.5rem;font-size:0.98rem}
+    .chart-caption{font-family:var(--font-ui);font-size:0.76rem;color:var(--text-muted);text-align:center;margin:0.4rem 0 0;font-style:normal}
+    .faq-q{font-family:var(--font-display);font-size:1.15rem;font-weight:600;color:var(--deep-blue);margin-top:1.75rem;margin-bottom:0.4rem}
+    .cta-section{background:var(--bg-dark);padding:clamp(3rem,6vw,5rem) 0;text-align:center;position:relative;overflow:hidden}
+    .cta-section::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 60% at 50% 100%,rgba(184,146,62,0.08),transparent 70%);pointer-events:none}
+    .cta-section h2{color:#fff;margin-top:0;margin-bottom:1rem}
+    .cta-section p{color:rgba(245,241,234,0.65);max-width:500px;margin:0 auto 2rem}
+    .btn-gold{display:inline-flex;align-items:center;gap:0.5rem;padding:0.9rem 2.2rem;background:var(--gold);color:#fff;border-radius:100px;font-family:var(--font-ui);font-size:0.9rem;font-weight:600;box-shadow:0 4px 20px rgba(85,60,35,0.17);transition:all 0.22s}
+    .btn-gold:hover{background:var(--gold-warm);transform:translateY(-2px);box-shadow:0 8px 30px rgba(85,60,35,0.22)}
+    /* shadows do not read on dark; keep them for light sections only */
+    .cta-section .btn-gold,.section--dark .btn-gold{box-shadow:none}
+    .cta-section .btn-gold:hover,.section--dark .btn-gold:hover{box-shadow:none}
+    .footer{background:var(--bg-footer);padding:2rem var(--s4);text-align:center}
+    .footer p{font-family:var(--font-ui);font-size:0.8rem;color:rgba(245,241,234,0.35);line-height:1.8}
+    .footer a{color:rgba(245,241,234,0.45)}
+    .footer a:hover{color:var(--gold-pale)}
+  </style>
+  <link rel="stylesheet" href="bbc-article-visuals.css" />
+  <!-- bbc-schema -->
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://balaynibruno.co/#organization",
+      "name": "Balay ni Bruno & Co.",
+      "url": "https://balaynibruno.co/",
+      "logo": "https://balaynibruno.co/bbc-logo.png",
+      "email": "admin@balaynibruno.co",
+      "telephone": "+63 935 663 0324",
+      "founder": { "@type": "Person", "name": "RJ Bryan Tres Reyes" },
+      "sameAs": [
+        "https://www.facebook.com/profile.php?id=61590006878673",
+        "https://www.instagram.com/balaynibruno/",
+        "https://www.tiktok.com/@balaynibruno.co",
+        "https://youtube.com/@balaynibruno"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://balaynibruno.co/#website",
+      "name": "Balay ni Bruno & Co.",
+      "url": "https://balaynibruno.co/",
+      "publisher": { "@id": "https://balaynibruno.co/#organization" }
+    },
+    {
+      "@type": "Article",
+      "headline": "How Do I Keep My Client List the Same Everywhere I Look?",
+      "description": "A dashboard that still shows a client who left, or misses one who is active, is not a display bug. It is a sync problem. Here is the one-file fix that keeps every screen honest.",
+      "url": "https://balaynibruno.co/how-do-i-keep-my-client-list-the-same.html",
+      "mainEntityOfPage": "https://balaynibruno.co/how-do-i-keep-my-client-list-the-same.html",
+      "image": "https://balaynibruno.co/bbc-logo.png",
+      "author": { "@id": "https://balaynibruno.co/#organization" },
+      "publisher": { "@id": "https://balaynibruno.co/#organization" }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Why would a dashboard show a client who already left?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Because two separate places were both trying to be the truth. If a team updates one master list when a client relationship changes, but a dashboard somewhere else is edited by hand on a different schedule, the two drift apart. One catches up late, and for a while it is simply wrong." }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the actual fix, in plain terms?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Pick one file as the only place the client list is ever edited. A small script reads that file and updates every other display automatically. Nobody edits the dashboard by hand anymore, so there is only one place drift could start, and that place is checked at the start of every shift." }
+        },
+        {
+          "@type": "Question",
+          "name": "Does this need new software or a paid tool?",
+          "acceptedAnswer": { "@type": "Answer", "text": "No. It runs on a small script reading a file that already existed. No new subscription, no new platform to learn, no ongoing cost." }
+        }
+      ]
+    }
+  ]
+}
+  </script>
+</head>
+<body>
+<nav class="nav"><div class="nav__inner"><a href="index.html" class="nav__logo">Balay ni Bruno &amp; Co.</a><a href="insights.html" class="nav__back">&#8592; Back to Insights</a></div></nav>
+
+<section class="article-hero">
+  <div class="container">
+    <div class="article-meta">
+      <span class="article-cat">Operations</span>
+      <span class="article-date">September 2026</span>
+    </div>
+    <h1>How Do I Keep My Client List the Same Everywhere I Look?</h1>
+    <p class="lead">A dashboard that still shows someone who left, or misses someone who just started, is not a small display glitch. It means two places are both trying to be the truth, and they have quietly drifted apart. Here is how we closed that gap for good, at no extra cost.</p>
+  </div>
+</section>
+
+<section class="article-body">
+  <div class="container">
+
+    <p>If you run more than a couple of clients or projects, you probably keep the list in more than one place. A written note somewhere. A dashboard or tracker somewhere else. For a while they match. Then someone updates one and forgets the other, and now the two disagree about something as basic as who you are currently working with.</p>
+
+    <p>We hit this ourselves. Our own internal dashboard, the one that shows the status of every client relationship at a glance, had drifted out of sync with our real, current list. It is a generic version of a problem any growing business runs into once the list is edited by more than one person, in more than one place.</p>
+
+    <h2>Where the Drift Comes From</h2>
+
+    <p>It is rarely one big mistake. It is small ones, stacked up. Someone pauses a client and updates the master note, but the dashboard is a separate file, edited by hand, on its own schedule. A week goes by before anyone notices the two do not match.</p>
+
+    <div class="before-after-compare">
+      <div class="before">
+        <h4>Before: two places, no link between them</h4>
+        <ul>
+          <li>The dashboard still showed a client as current a full week after that relationship had actually ended</li>
+          <li>An active, paying client showed up marked as finished</li>
+          <li>Whoever glanced at the dashboard got a wrong picture of the business, with no warning it was wrong</li>
+        </ul>
+      </div>
+      <div class="after">
+        <h4>After: one file, everything else follows it</h4>
+        <ul>
+          <li>One written file is the only place the client list is ever edited</li>
+          <li>A small script reads that file and updates the dashboard automatically</li>
+          <li>The check runs at the start of every shift, so the two cannot quietly drift apart again</li>
+        </ul>
+      </div>
+    </div>
+
+    <h2>The Fix: One File, One Truth</h2>
+
+    <p>The fix was not a new tool. It was a rule: only one file gets edited by hand, and everything else reads from it instead of being edited separately.</p>
+
+    <div class="step-flow step-flow--horizontal">
+      <div class="step">
+        <span class="step__num">1</span>
+        <div class="step__content">
+          <div class="step__title">Write it once</div>
+          <p class="step__desc">The real, current client list lives in a single written file. That is the only place anyone edits it by hand.</p>
+        </div>
+      </div>
+      <div class="step">
+        <span class="step__num">2</span>
+        <div class="step__content">
+          <div class="step__title">A small script reads it</div>
+          <p class="step__desc">A short script opens that file, reads the current list, and compares it against what the dashboard is showing.</p>
+        </div>
+      </div>
+      <div class="step">
+        <span class="step__num">3</span>
+        <div class="step__content">
+          <div class="step__title">The dashboard updates itself</div>
+          <p class="step__desc">Wherever the two disagree, the dashboard is corrected automatically. Nobody edits it by hand anymore.</p>
+        </div>
+      </div>
+      <div class="step">
+        <span class="step__num">4</span>
+        <div class="step__content">
+          <div class="step__title">It runs at the start of every shift</div>
+          <p class="step__desc">The check happens automatically before the day's work starts, so drift gets caught within hours, not weeks.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="tip-box tip-box--tip">
+      <span class="tip-box__icon">&#9650;</span>
+      <p class="tip-box__text"><strong>Why this costs nothing:</strong> the fix is a small script reading a file that already existed. No new software, no new subscription, nothing extra to learn or pay for. The whole problem was two edited copies of the same thing. Editing only one of them solves it.</p>
+    </div>
+
+    <h2>What This Looks Like Day to Day</h2>
+
+    <p>Nobody has to remember to update two places anymore. Whoever manages the client list edits the one written file when something changes: a new client starts, one pauses, one wraps up. That is the whole job on their end. The dashboard catches up on its own the next time the check runs, which is every single shift.</p>
+
+    <div class="highlight-box"><p>The problem was never that someone forgot to update a screen. It was that there were two things to remember instead of one. Cut it down to one, and there is nothing left to forget.</p></div>
+
+    <h2>Common Questions</h2>
+
+    <p class="faq-q">Why would a dashboard show a client who already left?</p>
+    <p>Because two separate places were both trying to be the truth. If a team updates one master list when a client relationship changes, but a dashboard somewhere else is edited by hand on a different schedule, the two drift apart. One catches up late, and for a while it is simply wrong.</p>
+
+    <p class="faq-q">What is the actual fix, in plain terms?</p>
+    <p>Pick one file as the only place the client list is ever edited. A small script reads that file and updates every other display automatically. Nobody edits the dashboard by hand anymore, so there is only one place drift could start, and that place is checked at the start of every shift.</p>
+
+    <p class="faq-q">Does this need new software or a paid tool?</p>
+    <p>No. It runs on a small script reading a file that already existed. No new subscription, no new platform to learn, no ongoing cost.</p>
+
+    <div class="key-takeaway">
+      <h3>Key Takeaways</h3>
+      <ul>
+        <li>A dashboard showing outdated client status usually means two places are both being treated as the truth.</li>
+        <li>The fix is not more software. It is picking one file as the only place the list gets edited by hand.</li>
+        <li>A small script reads that one file and updates everything else automatically, so nothing has to be remembered twice.</li>
+        <li>Running that check at the start of every shift catches drift within hours instead of weeks.</li>
+        <li>This runs at no extra cost. It is a rule about where edits happen, not a new tool to buy.</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<section class="cta-section"><div class="container"><span class="eyebrow" style="color:rgba(245,241,234,0.45);">Work with BBC</span><h2>Want your systems telling you the truth?</h2><p>This is one part of how we run operations inside a Balay ni Bruno &amp; Co. partnership. Let us talk about what it looks like for your business.</p><a href="https://calendly.com/rj-balaynibruno/bbc-strategy-call" target="_blank" rel="noopener" class="btn-gold">Book a Strategy Call &#8599;</a></div></section>
+
+<!-- bbc-related-reads -->
+<section style="background:#EDE8DF;padding:clamp(2.5rem,5vw,4rem) 0;border-top:1px solid rgba(85,60,35,0.12);">
+  <div style="max-width:860px;margin:0 auto;padding:0 2.5rem;">
+    <span style="display:block;font-family:'DM Sans',system-ui,sans-serif;font-size:0.68rem;font-weight:700;letter-spacing:0.17em;text-transform:uppercase;color:#B8923E;margin-bottom:1.2rem;">Related Reads</span>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:1rem;">
+      <a href="how-do-i-know-if-my-marketing-is-working.html" style="display:block;background:#FDFAF6;border:1px solid rgba(85,60,35,0.12);border-radius:16px;padding:1.2rem 1.35rem;box-shadow:0 3px 18px rgba(85,60,35,0.06);">
+        <span style="display:block;font-family:'DM Sans',system-ui,sans-serif;font-size:0.6rem;font-weight:700;letter-spacing:0.13em;text-transform:uppercase;color:#888FA0;margin-bottom:0.45rem;">Operations</span>
+        <span style="display:block;font-family:'Playfair Display',Georgia,serif;font-size:1.02rem;font-weight:600;color:#1F3557;line-height:1.34;">How Do I Know If My Marketing Is Working?</span>
+      </a>
+      <a href="get-notified-when-team-edits-dashboard.html" style="display:block;background:#FDFAF6;border:1px solid rgba(85,60,35,0.12);border-radius:16px;padding:1.2rem 1.35rem;box-shadow:0 3px 18px rgba(85,60,35,0.06);">
+        <span style="display:block;font-family:'DM Sans',system-ui,sans-serif;font-size:0.6rem;font-weight:700;letter-spacing:0.13em;text-transform:uppercase;color:#888FA0;margin-bottom:0.45rem;">Operations</span>
+        <span style="display:block;font-family:'Playfair Display',Georgia,serif;font-size:1.02rem;font-weight:600;color:#1F3557;line-height:1.34;">Get Notified When Your Team Edits the Dashboard</span>
+      </a>
+      <a href="virtual-assistant-for-small-business.html" style="display:block;background:#FDFAF6;border:1px solid rgba(85,60,35,0.12);border-radius:16px;padding:1.2rem 1.35rem;box-shadow:0 3px 18px rgba(85,60,35,0.06);">
+        <span style="display:block;font-family:'DM Sans',system-ui,sans-serif;font-size:0.6rem;font-weight:700;letter-spacing:0.13em;text-transform:uppercase;color:#888FA0;margin-bottom:0.45rem;">Operations</span>
+        <span style="display:block;font-family:'Playfair Display',Georgia,serif;font-size:1.02rem;font-weight:600;color:#1F3557;line-height:1.34;">Virtual Assistant for Small Business</span>
+      </a>
+      <a href="how-we-help.html" style="display:block;background:#1C2E47;border:1px solid rgba(184,146,62,0.3);border-radius:16px;padding:1.2rem 1.35rem;">
+        <span style="display:block;font-family:'DM Sans',system-ui,sans-serif;font-size:0.6rem;font-weight:700;letter-spacing:0.13em;text-transform:uppercase;color:#E6CFA0;margin-bottom:0.45rem;">Work With BBC</span>
+        <span style="display:block;font-family:'Playfair Display',Georgia,serif;font-size:1.02rem;font-weight:600;color:#fff;line-height:1.34;">See How We Help &rarr;</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer class="footer"><p><a href="index.html">Balay ni Bruno &amp; Co.</a> &nbsp;&bull;&nbsp; <a href="insights.html">Insights</a> &nbsp;&bull;&nbsp; <a href="mailto:admin@balaynibruno.co">admin@balaynibruno.co</a></p><p style="margin-top:0.4rem;">&copy; 2026 Balay ni Bruno &amp; Co. All rights reserved.</p></footer>
+</body>
+</html>

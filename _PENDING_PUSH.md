@@ -1,3 +1,16 @@
+## 📄 STAGED 2026-09-07 — D5 nightly insight-page routine
+- **NEW `how-do-i-keep-my-client-list-the-same.html`** — "How Do I Keep My Client List the Same Everywhere I Look?" STAGED 2026-09-07 by D5 insight-page routine. Grounded in the queue intent `PAGE_QUEUE\how-do-i-keep-my-client-list-the-same.page-intent.md` (source: `C:\BBC\bbc-website\scripts\sync-claude-md.mjs` + BBC Drive root CLAUDE.md) — CLAUDE.md as the single edited client-list file, `sync-claude-md.mjs` reading it and updating the dashboard automatically, the real before/after (dashboard showed a departed client as current, and an active client as finished), and the fix running at the start of every shift. Sensitive flag honored: no real client names used, described generically. Category Operations. Article + FAQPage schema, before/after + step-flow + tip-box visuals, CTA, related-reads (2 real live pages + how-we-help), footer. No em-dashes, no invented facts.
+- **insights.html** — 1 new Operations card added at top of `.article-grid`; count bumped 108 → 109.
+- **sitemap.xml** — new `<url>` entry added for the slug.
+- Mirrored to `BBC WEBSITE HTML\how-do-i-keep-my-client-list-the-same.html`.
+- Duplicate-guard: grepped `insights.html` + globbed root slugs for "client list"/"sync"/"dashboard"/"drift" — no existing page covers this exact question (adjacent pages exist on onboarding, invoicing, referrals, marketing sync, team-edit notifications, but none on client-list source-of-truth drift). Clear to build.
+- `how-do-i-keep-my-client-list-the-same.page-intent.md` moved from `PAGE_QUEUE\` to `PAGE_QUEUE\_BUILT\`.
+- Backlog file `topics_backlog.md` had no ⬜ rows left (all ✅ or ~ COVERED) — nothing to flip there this run.
+- **Promotion staged (not sent):** `CONTENT_QUEUE\2026-09-07_how-do-i-keep-my-client-list-the-same\captions.md` + `CONTENT_QUEUE\_NEWSLETTER_DRAFTS\2026-09-07_how-do-i-keep-my-client-list-the-same\newsletter.md`.
+- **Design hook note:** `impeccable` flagged the gold CTA button's shadow (`.btn-gold`) as a "dark-glow" pattern. Left unchanged — it's copied verbatim from the button style already live sitewide across ~108 other insight pages; changing it here alone would make this page's CTA inconsistent.
+
+---
+
 # 🟡 STAGED 2026-09-05 — NEW PAGE, NOT YET APPROVED — "The Client Win-Back System"
 
 **Do not fold into the approved batch below until RJ reviews this block separately.**

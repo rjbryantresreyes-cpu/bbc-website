@@ -757,8 +757,8 @@
 <script type="application/json" id="bbc-data">
 {
   "meta": {
-    "updated": "2026-09-02",
-    "pendingCount": 219
+    "updated": "2026-09-07",
+    "pendingCount": 222
   },
   "owners": {
     "Vidz": "#A78BFA",
@@ -788,6 +788,7 @@
       "slug": "cherry-sage",
       "link": "/cherry-sage",
       "folder": "CHERRY-SAGE",
+      "claudeMdNote": "Online psychic readings + tarot/numerology, B2C international. Owner Beverly Cherry (cherry38@cherrysage.com), sole decision-maker. Handler: RJ only talks to the client. Client AI = Ivy (02_AI_IVY\\). $2,000/mo flat retainer, billed weekly at $500/completed workweek (INVOICE_REGISTER_CHERRYSAGE.md). Social is planned but not started (RJ 2026-09-04), so it is not tracked on the dashboard. Brand guardrail: professional/warm/traditional, NEVER witchy or fortune-telling. Added to CLAUDE.md + Brevo Active Clients list 2026-09-01 (was invoiced since Aug 2026 but missing from both). Email: cherrysage.com DNS-authenticated 2026-09-05 after weeks of 0-delivery (SPF/DKIM/DMARC fixed in Hostgator); now ramping the ~1,725-contact list tier-by-tier (Tier 1 Warm done clean, Tier 2/3 to follow) to protect the freshly-fixed domain reputation — tracked live via bbc_status.py's \"Cherry Sage Brevo ramp\" check, full history in memory project_cherry_sage_domain_not_authenticated.md.",
       "category": "active"
     },
     {
@@ -801,6 +802,7 @@
       "notes": "Daryl took over 2026-06-12 (was Al). Olivia built + full capability. Editorial rebrand site staged as Shopify draft.",
       "folder": "S-RIVIERE-HAIR-COLLECTION",
       "slug": "s-riviere-hair-collection",
+      "claudeMdNote": "Shopify build",
       "category": "active"
     },
     {
@@ -814,6 +816,7 @@
       "notes": "Luxury positioning. Krizza only BBC member in WW OS. Owners on Claude.ai Pro only.",
       "folder": "WOODEN-WOODWORKS",
       "slug": "wooden-woodworks",
+      "claudeMdNote": "Luxury positioning, custom woodwork. Krizza is the only BBC team member who operates Claude Code inside the WW OS. Oscar and Marla (owners) have NO Claude Code access -- their AI access is Claude.ai Pro (Woody) only.",
       "category": "active"
     },
     {
@@ -827,19 +830,7 @@
       "notes": "ON HOLD (paused) since 2026-08-12 — daily client-care routines paused. Kept listed as current publicly. Handled by RJ directly. Shopify build. Homie = BBC's all-in-one AI for HVS.",
       "folder": "HOME-VISION-STUDIO",
       "slug": "home-vision-studio",
-      "category": "active"
-    },
-    {
-      "name": "First Class Finishes & Hi-Up Roofing",
-      "owner": "-",
-      "handler": "Ryan C.",
-      "ai": "-",
-      "site": "firstclass-finishes.com",
-      "industry": "Commercial painting + roofing + storm-damage roofing, Texas",
-      "status": "hold",
-      "notes": "ON HOLD (paused) since 2026-08-12 — daily client-care routines paused. Kept listed as current publicly. Combined account (Ryan C.). First Class Finishes = commercial painting + roofing (firstclass-finishes.com); Hi-Up Roofing = storm-damage roofing + insurance SEO (hi-uproofing.com).",
-      "folder": "FIRST-CLASS-FINISHES",
-      "slug": "first-class-finishes",
+      "claudeMdNote": "ON HOLD since 2026-08-02 (Beau paused ~4 months; confirmed by his own email + cross-referenced in memory). Do NOT run routines, send reports, or bill until RJ confirms resumed. Shopify store, design centers.",
       "category": "active"
     },
     {
@@ -853,19 +844,7 @@
       "notes": "Solely handled by Vi now (was Al). Sister business to Sonya. Coordinate carefully.",
       "folder": "AJ-BATTLE-FOUNDATION",
       "slug": "aj-battle-foundation",
-      "category": "active"
-    },
-    {
-      "name": "3r Design",
-      "owner": "-",
-      "handler": "Becky / RJ",
-      "ai": "-",
-      "site": "-",
-      "industry": "Design",
-      "status": "active",
-      "notes": "With Becky; RJ also handling personally for now.",
-      "folder": "3R-DESIGN",
-      "slug": "3r-design",
+      "claudeMdNote": "Nonprofit",
       "category": "active"
     },
     {
@@ -879,6 +858,7 @@
       "notes": "Active client (signed). Website + marketing emails (GHL) + social. Sole approver: Rebekah. Contacts: rseveri@frecciagroup.com (cc wseveri, jclements, accounting). AI = Bob.",
       "folder": "FRECCIA-CONSTRUCTION",
       "slug": "freccia-construction",
+      "claudeMdNote": "Custom builder, Austin TX. AI = Bob (02_AI_BOB\\). Load BOB_SYSTEM_PROMPT.md + BOB_KNOWLEDGE_BASE\\ first. BBC runs their social, CRM and email through GoHighLevel; the dashboard needs a read-only token at C:\\BBC\\_SECRETS\\ghl_freccia_pit.txt (currently empty). Bob is multi-device: deployed as Claude.ai Project \"Bob — Freccia Construction\" (account-level = auto-accessible on Plus/Tuff/Free). Pending: brand visuals, email confirm, tool access (GHL/QB/Buildertrend). Drafts only — Rebekah is sole approver.",
       "category": "active"
     },
     {
@@ -892,6 +872,7 @@
       "notes": "Active client. LinkedIn outreach + GoHighLevel CRM. Contacts: Jasmine Brown + Anthony, jrsigningservices@gmail.com, (832) 387-4648.",
       "folder": "JR-SIGNING-SERVICES",
       "slug": "jr-signing-services",
+      "claudeMdNote": "TX notary signing agency, Jasmine Brown + Anthony. Daryl runs lead generation and email marketing for them through GoHighLevel (CRM + leads + email). A read-only Private Integration Token must live at C:\\BBC\\_SECRETS\\ghl_jrss_pit.txt for the dashboard to read their pipeline. Confirmed ACTIVE by RJ 2026-09-03 after a meeting with Daryl about upgrading their Netlify plan; daily health checks resume from that date.",
       "category": "active"
     },
     {
@@ -906,6 +887,29 @@
       "slug": "bilt-2-travel",
       "link": "/bilt-2-travel",
       "folder": "BILT-2-TRAVEL",
+      "claudeMdNote": "Travel-rewards education, e-book funnel. Owner Dwight Campbell (info@bilt2travel.com), sole approver via RJ. Kenz is the dedicated VA. Client AI = BILL (08_AI_BILT\\). Billed bi-weekly, $8/hr x 15 hrs/wk + e-book bonus tiers (INVOICE_REGISTER_BILT.md). NEVER \"hack\"/\"free travel\"/risky-credit language. Drafts only, no auto-post/send. Added to CLAUDE.md + Brevo Active Clients list 2026-09-01 (was invoiced since Jul 2026 but missing from both).",
+      "category": "active"
+    },
+    {
+      "id": "optimism-consulting",
+      "name": "Optimism Consulting",
+      "status": "hold",
+      "category": "active",
+      "claudeMdNote": "ON HOLD since 2026-09-03 (RJ paused work with OShun; not a current client for now. Do NOT run routines, send reports or bill until RJ confirms resumed.) Credit repair + business funding, Dallas TX. Started 2026-08-12. OShun Jones is sole approver. Ryan Bernaldez is the VA, and does NOT contact the client directly. Load 00_START_HERE\\OPTIMISM_PROJECT_CONTEXT.md first. Credit repair only on first contact, never lead with business funding. NEVER attempt a QuickBooks login. BOAZELLE.csv in 03_CLIENT_SHARED\\ is his real bank statement, never forward it.",
+      "folder": "OPTIMISM-CONSULTING"
+    },
+    {
+      "name": "All Ryze",
+      "owner": "-",
+      "handler": "Ryan",
+      "ai": "-",
+      "site": "-",
+      "industry": "Digital audience engagement & growth management agency",
+      "status": "active",
+      "notes": "Active, part-time. Ryan leads the account and tracks the work off-platform, so nothing is machine-checkable on the dashboard; that is not a gap. NEVER use adult-platform language. Describe as a digital audience engagement and growth management agency.",
+      "folder": "ALL-RYZE",
+      "slug": "all-ryze",
+      "claudeMdNote": "NEVER use adult platform language. Describe as \"digital audience engagement agency.\" Ryan leads the account and tracks the work off-platform, so nothing is machine-checkable on the dashboard - that is not a gap.",
       "category": "active"
     },
     {
@@ -1012,19 +1016,6 @@
       "category": "past"
     },
     {
-      "name": "All Ryze",
-      "owner": "-",
-      "handler": "Kenz / Daryl",
-      "ai": "-",
-      "site": "-",
-      "industry": "Digital audience engagement & growth management agency",
-      "status": "past",
-      "notes": "Part-time now, moved to past/old clients. NEVER use adult-platform language. Describe as a digital audience engagement and growth management agency.",
-      "folder": "ALL-RYZE",
-      "slug": "all-ryze",
-      "category": "past"
-    },
-    {
       "name": "MNJ Insurance Solutions",
       "owner": "Julie Jennings",
       "handler": "-",
@@ -1128,6 +1119,35 @@
       "folder": "4OCEAN",
       "slug": "4ocean",
       "link": "/4ocean.html",
+      "claudeMdNote": "Partnership ended 2026-07-07 as 4Ocean restructures their ecommerce team. RJ worked as embedded contractor (not a standard BBC retainer); BBC's internal AI/creative system supported the work. Full history: 00_CLIENT_MASTER\\4OCEAN_ENGAGEMENT_SUMMARY.md. Do not read Slack/Asana into new tasks — engagement closed.",
+      "category": "past"
+    },
+    {
+      "name": "First Class Finishes & Hi-Up Roofing",
+      "owner": "-",
+      "handler": "Ryan C.",
+      "ai": "-",
+      "site": "firstclass-finishes.com",
+      "industry": "Commercial painting + roofing + storm-damage roofing, Texas",
+      "status": "past",
+      "notes": "No longer an active client (RJ, 2026-08-29). Michael/Kari Pedley, billed together as one entity. Do not run routines, report or bill. Last invoice #14 (Jul 20-Aug 2, 2026), $300, unclear if ever sent; do not chase or bill further.",
+      "folder": "FIRST-CLASS-FINISHES",
+      "slug": "first-class-finishes",
+      "claudeMdNote": "First Class Finishes: Commercial painting + roofing, Texas. Michael/Kari Pedley. No longer an active client (RJ, 2026-08-29). | Hi-Up Roofing: Insurance SEO, storm damage. Michael/Kari Pedley — billed together with First Class Finishes as one entity. No longer an active client (RJ, 2026-08-29). Last invoice #14 (Jul 20-Aug 2, 2026), $300, unclear if ever sent — do not chase or bill further.",
+      "category": "past"
+    },
+    {
+      "name": "3r Design",
+      "owner": "-",
+      "handler": "Becky / RJ",
+      "ai": "-",
+      "site": "-",
+      "industry": "Design",
+      "status": "past",
+      "notes": "No longer an active client (RJ, 2026-09-05). Was with Becky, RJ also handling personally. Do not run routines, report or bill.",
+      "folder": "3R-DESIGN",
+      "slug": "3r-design",
+      "claudeMdNote": "No longer an active client (RJ, 2026-09-05). Was with Becky, RJ also handling personally. Do not run routines, send reports or bill.",
       "category": "past"
     }
   ],
@@ -1543,25 +1563,34 @@
       "name": "BBC Drive",
       "children": [
         {
-          "name": "_BBC Logo Final"
-        },
-        {
           "name": "BBC Operating System"
         },
         {
           "name": "NPC-Portfolio-System"
         },
         {
-          "name": ".claude"
+          "name": "08_KNOWLEDGE_BASE"
         },
         {
-          "name": "01_LEADS"
+          "name": "07_MARKETING"
+        },
+        {
+          "name": "06_FINANCE"
+        },
+        {
+          "name": "05_OPERATIONS"
+        },
+        {
+          "name": "03_ARCHIVED_CLIENTS"
         },
         {
           "name": "02_ACTIVE_CLIENTS",
           "children": [
             {
               "name": "4OCEAN"
+            },
+            {
+              "name": "WOODEN-WOODWORKS"
             },
             {
               "name": "HOME-VISION-STUDIO"
@@ -1580,9 +1609,6 @@
             },
             {
               "name": "ALL-RYZE"
-            },
-            {
-              "name": "WOODEN-WOODWORKS"
             },
             {
               "name": "REAL_CAVALRY"
@@ -1618,36 +1644,27 @@
               "name": "BILT-2-TRAVEL"
             },
             {
-              "name": "PROSPECT_James-Castillo-GHL"
+              "name": "PROSPECT_Six-Figures-in-the-Six"
             },
             {
               "name": "PROSPECT_Cherry-Sage"
             },
             {
-              "name": "PROSPECT_Six-Figures-in-the-Six"
-            },
-            {
-              "name": "CHERRY-SAGE"
+              "name": "PROSPECT_James-Castillo-GHL"
             },
             {
               "name": "OPTIMISM-CONSULTING"
+            },
+            {
+              "name": "CHERRY-SAGE"
             }
           ]
         },
         {
-          "name": "03_ARCHIVED_CLIENTS"
+          "name": "01_LEADS"
         },
         {
-          "name": "05_OPERATIONS"
-        },
-        {
-          "name": "06_FINANCE"
-        },
-        {
-          "name": "07_MARKETING"
-        },
-        {
-          "name": "08_KNOWLEDGE_BASE"
+          "name": ".claude"
         },
         {
           "name": "BBC WEBSITE HTML"
@@ -1751,6 +1768,9 @@
           "name": "Vidz Test"
         },
         {
+          "name": "_BBC Logo Final"
+        },
+        {
           "name": "_SYSTEM"
         },
         {
@@ -1758,6 +1778,39 @@
         },
         {
           "name": ".agents"
+        },
+        {
+          "name": "BBC Content",
+          "url": "https://drive.google.com/drive/folders/1fxfMhnqjYzNjnplQC1nVx4LPRE77wgIK",
+          "children": [
+            {
+              "name": "BBC Team Building"
+            },
+            {
+              "name": "BBC Bruno recordings"
+            },
+            {
+              "name": "Website Workflow Reel"
+            },
+            {
+              "name": "Tre 1"
+            },
+            {
+              "name": "Tre 2"
+            },
+            {
+              "name": "BBC Content Posting"
+            },
+            {
+              "name": "BBC Graphic"
+            },
+            {
+              "name": "Outro"
+            },
+            {
+              "name": "_TESTS"
+            }
+          ]
         },
         {
           "name": "WhatsApp Chat with Myself"
@@ -1802,22 +1855,22 @@
               "name": "2026-06-19_friday_reel_losing_time"
             },
             {
-              "name": "2026-06-23_reel_talk_to_edit_site"
-            },
-            {
-              "name": "2026-06-26_reel_25_pages_google"
-            },
-            {
-              "name": "2026-06-25_educational_knowledge_base"
-            },
-            {
-              "name": "2026-06-27_saturday_workflow_menu"
+              "name": "2026-06-24_review_essence_bembry"
             },
             {
               "name": "2026-06-28_sunday_restday"
             },
             {
-              "name": "2026-06-24_review_essence_bembry"
+              "name": "2026-06-27_saturday_workflow_menu"
+            },
+            {
+              "name": "2026-06-25_educational_knowledge_base"
+            },
+            {
+              "name": "2026-06-26_reel_25_pages_google"
+            },
+            {
+              "name": "2026-06-23_reel_talk_to_edit_site"
             },
             {
               "name": "2026-06-20_welcome_freccia"
@@ -1829,10 +1882,10 @@
               "name": "2026-07-03_reel_content_comprehension"
             },
             {
-              "name": "2026-07-04_reel_brief_builder"
+              "name": "2026-07-04_reel_founder_plans_va_executes"
             },
             {
-              "name": "2026-07-04_reel_founder_plans_va_executes"
+              "name": "2026-07-04_reel_brief_builder"
             },
             {
               "name": "2026-07-06_bbc_reel_brand_story"
@@ -1856,127 +1909,127 @@
               "name": "2026-07-10_google-weekly-report"
             },
             {
-              "name": "2026-07-10_roofing-storm-seo"
-            },
-            {
-              "name": "2026-07-10_3d-say-build-walk"
-            },
-            {
-              "name": "2026-07-10_store-dashboard"
-            },
-            {
-              "name": "2026-07-10_client-intake"
-            },
-            {
-              "name": "2026-07-10_branded-invoices"
-            },
-            {
-              "name": "2026-07-10_shopify-rebuild"
-            },
-            {
-              "name": "2026-07-10_scroll-stopping-carousel"
-            },
-            {
-              "name": "2026-07-10_agent-top-of-mind"
-            },
-            {
-              "name": "2026-07-10_barcode-labels"
-            },
-            {
-              "name": "2026-07-10_product-descriptions"
-            },
-            {
-              "name": "2026-07-10_3d-product-designer"
-            },
-            {
-              "name": "2026-07-10_design-file-walkable"
-            },
-            {
-              "name": "2026-07-10_ai-meeting-notes"
-            },
-            {
-              "name": "2026-07-10_video-to-3d"
-            },
-            {
-              "name": "2026-07-10_address-to-3d"
-            },
-            {
-              "name": "2026-07-10_photoreal-render"
-            },
-            {
-              "name": "2026-07-10_email-followups"
-            },
-            {
-              "name": "2026-07-10_three-part-story"
-            },
-            {
-              "name": "2026-07-10_smooth-motion"
-            },
-            {
-              "name": "2026-07-10_embed-video"
-            },
-            {
-              "name": "2026-07-10_one-idea-whole-week"
-            },
-            {
-              "name": "2026-07-10_referral-proposal"
-            },
-            {
-              "name": "2026-07-10_any-creator-style"
-            },
-            {
-              "name": "2026-07-10_fast-website"
-            },
-            {
-              "name": "2026-07-10_lead-hunting-lana"
-            },
-            {
-              "name": "2026-07-10_bookings-to-shopify"
-            },
-            {
-              "name": "2026-07-10_brand-templates"
-            },
-            {
-              "name": "2026-07-10_list-to-documentary"
-            },
-            {
-              "name": "2026-07-10_visible-day-off"
-            },
-            {
-              "name": "2026-07-10_listing-board"
+              "name": "_WORKFLOW_CONTENT"
             },
             {
               "name": "2026-07-10_work-markets-itself"
             },
             {
-              "name": "_WORKFLOW_CONTENT"
+              "name": "2026-07-10_listing-board"
+            },
+            {
+              "name": "2026-07-10_visible-day-off"
+            },
+            {
+              "name": "2026-07-10_list-to-documentary"
+            },
+            {
+              "name": "2026-07-10_brand-templates"
+            },
+            {
+              "name": "2026-07-10_bookings-to-shopify"
+            },
+            {
+              "name": "2026-07-10_lead-hunting-lana"
+            },
+            {
+              "name": "2026-07-10_fast-website"
+            },
+            {
+              "name": "2026-07-10_any-creator-style"
+            },
+            {
+              "name": "2026-07-10_referral-proposal"
+            },
+            {
+              "name": "2026-07-10_one-idea-whole-week"
+            },
+            {
+              "name": "2026-07-10_embed-video"
+            },
+            {
+              "name": "2026-07-10_smooth-motion"
+            },
+            {
+              "name": "2026-07-10_three-part-story"
+            },
+            {
+              "name": "2026-07-10_email-followups"
+            },
+            {
+              "name": "2026-07-10_photoreal-render"
+            },
+            {
+              "name": "2026-07-10_address-to-3d"
+            },
+            {
+              "name": "2026-07-10_video-to-3d"
+            },
+            {
+              "name": "2026-07-10_ai-meeting-notes"
+            },
+            {
+              "name": "2026-07-10_design-file-walkable"
+            },
+            {
+              "name": "2026-07-10_3d-product-designer"
+            },
+            {
+              "name": "2026-07-10_product-descriptions"
+            },
+            {
+              "name": "2026-07-10_barcode-labels"
+            },
+            {
+              "name": "2026-07-10_agent-top-of-mind"
+            },
+            {
+              "name": "2026-07-10_scroll-stopping-carousel"
+            },
+            {
+              "name": "2026-07-10_shopify-rebuild"
+            },
+            {
+              "name": "2026-07-10_branded-invoices"
+            },
+            {
+              "name": "2026-07-10_client-intake"
+            },
+            {
+              "name": "2026-07-10_store-dashboard"
+            },
+            {
+              "name": "2026-07-10_3d-say-build-walk"
+            },
+            {
+              "name": "2026-07-10_roofing-storm-seo"
             },
             {
               "name": "2026-07-10_multi-city-seo"
             },
             {
-              "name": "2026-07-10_local-seo-guide"
-            },
-            {
-              "name": "2026-07-10_guided-shop-experience"
-            },
-            {
-              "name": "2026-07-10_shopify-edit-for-you"
+              "name": "2026-07-10_boogy-blog-ai"
             },
             {
               "name": "2026-07-10_woody-ai-family"
             },
             {
-              "name": "2026-07-10_boogy-blog-ai"
+              "name": "2026-07-10_shopify-edit-for-you"
             },
             {
-              "name": "2026-07-10_cut-dead-air"
+              "name": "2026-07-10_guided-shop-experience"
+            },
+            {
+              "name": "2026-07-10_local-seo-guide"
+            },
+            {
+              "name": "2026-07-10_showroom-no-cart"
             },
             {
               "name": "2026-07-10_month-of-newsletters"
             },
             {
-              "name": "2026-07-10_showroom-no-cart"
+              "name": "2026-07-10_cut-dead-air"
             },
             {
               "name": "_YOUTUBE_LONGFORM"
@@ -1985,229 +2038,229 @@
               "name": "2026-07-11_review-s-riviere-hair-collection"
             },
             {
-              "name": "2026-07-11_command-center"
+              "name": "2026-07-11_talking-head-reel"
             },
             {
               "name": "2026-07-11_ai-family-explained"
             },
             {
-              "name": "2026-07-11_talking-head-reel"
-            },
-            {
-              "name": "2026-07-11_ai-for-medical-clinics-phone-problem"
-            },
-            {
-              "name": "2026-07-11_ai-reads-facebook-reels-for-you"
-            },
-            {
-              "name": "2026-07-11_ai-rebuild-and-run-my-shopify-store"
-            },
-            {
-              "name": "2026-07-11_ai-video-system-no-subscription-stack"
-            },
-            {
-              "name": "2026-07-11_can-ai-improve-my-product-photos"
-            },
-            {
-              "name": "2026-07-11_can-ai-keep-me-organized-and-remind-me"
-            },
-            {
-              "name": "2026-07-11_can-ai-sort-my-inbox-every-morning"
-            },
-            {
-              "name": "2026-07-11_can-ai-tell-me-whats-in-a-video-or-link"
-            },
-            {
-              "name": "2026-07-11_can-ai-write-captions-that-match-whats-trending"
-            },
-            {
-              "name": "2026-07-11_can-ai-write-captions-that-sound-like-my-brand"
-            },
-            {
-              "name": "2026-07-11_company-chat-app-like-whatsapp"
-            },
-            {
-              "name": "2026-07-11_connect-whatsapp-to-your-business-ai"
-            },
-            {
-              "name": "2026-07-11_get-notified-when-team-edits-dashboard"
-            },
-            {
-              "name": "2026-07-11_heygen-avatar-narration-business-video"
-            },
-            {
-              "name": "2026-07-11_how-nonprofit-grows-audience-online"
-            },
-            {
-              "name": "2026-07-11_how-online-store-keeps-content-consistent"
-            },
-            {
-              "name": "2026-07-11_how-showroom-gets-pros-to-refer-clients"
-            },
-            {
-              "name": "2026-07-11_how-to-add-products-without-breaking-store-design"
-            },
-            {
-              "name": "2026-07-11_how-to-automate-small-business-tasks"
-            },
-            {
-              "name": "2026-07-11_how-to-get-your-business-found-on-google"
-            },
-            {
-              "name": "2026-07-11_how-to-keep-team-on-same-page-across-computers"
-            },
-            {
-              "name": "2026-07-11_how-to-organize-business-files-to-find-anything"
-            },
-            {
-              "name": "2026-07-11_how-to-organize-large-product-catalog-customers-choose"
-            },
-            {
-              "name": "2026-07-11_how-to-plan-a-month-of-social-media"
-            },
-            {
-              "name": "2026-07-11_how-to-sell-custom-products-good-better-best-online"
-            },
-            {
-              "name": "2026-07-11_how-to-show-client-website-preview-link-that-never-dies"
-            },
-            {
-              "name": "2026-07-11_how-to-report-results-to-clients-fast"
-            },
-            {
-              "name": "2026-07-11_how-to-track-leads-without-expensive-crm"
-            },
-            {
-              "name": "2026-07-11_how-to-turn-google-sheet-into-live-dashboard"
-            },
-            {
-              "name": "2026-07-11_how-to-write-better-ai-prompts"
-            },
-            {
-              "name": "2026-07-11_how-to-write-captions-any-business-owner-understands"
-            },
-            {
-              "name": "2026-07-11_how-we-build-new-ai-by-teaching-siblings"
-            },
-            {
-              "name": "2026-07-11_how-we-cut-ai-costs-1000-per-month"
-            },
-            {
-              "name": "2026-07-11_how-we-onboard-va-without-paying-for-extra-email-seat"
-            },
-            {
-              "name": "2026-07-11_how-we-set-up-free-remote-desktop-multiple-pcs"
-            },
-            {
-              "name": "2026-07-11_how-we-sync-two-pcs-one-ai-brain"
-            },
-            {
-              "name": "2026-07-11_how-we-structure-ai-so-clients-cant-break-it"
-            },
-            {
-              "name": "2026-07-11_how-we-transcribed-96-minute-zoom-meeting-free"
-            },
-            {
-              "name": "2026-07-11_how-we-used-remotion-make-free-motion-graphics"
-            },
-            {
-              "name": "2026-07-11_manage-shopify-store-without-sharing-password"
-            },
-            {
-              "name": "2026-07-11_online-store-light-and-dark-mode"
-            },
-            {
-              "name": "2026-07-11_redesign-online-store-without-taking-it-offline"
-            },
-            {
-              "name": "2026-07-11_remove-discontinued-products-from-website"
-            },
-            {
-              "name": "2026-07-11_website-that-shows-products-without-a-cart"
-            },
-            {
-              "name": "2026-07-11_whatsapp-for-business-client-messages"
-            },
-            {
-              "name": "2026-07-11_branded-proposals-fast"
-            },
-            {
-              "name": "2026-07-11_read-scanned-docs"
-            },
-            {
-              "name": "2026-07-11_ai-sees-your-screen"
-            },
-            {
-              "name": "2026-07-11_process-as-content"
-            },
-            {
-              "name": "2026-07-11_website-replicator"
+              "name": "2026-07-11_command-center"
             },
             {
               "name": "2026-07-11_raphy-design-ai"
             },
             {
-              "name": "2026-07-12_can-ai-create-the-images-for-my-social-media"
+              "name": "2026-07-11_website-replicator"
             },
             {
-              "name": "2026-07-12_best-email-platform-for-small-business"
+              "name": "2026-07-11_process-as-content"
+            },
+            {
+              "name": "2026-07-11_ai-sees-your-screen"
+            },
+            {
+              "name": "2026-07-11_read-scanned-docs"
+            },
+            {
+              "name": "2026-07-11_branded-proposals-fast"
+            },
+            {
+              "name": "2026-07-11_whatsapp-for-business-client-messages"
+            },
+            {
+              "name": "2026-07-11_website-that-shows-products-without-a-cart"
+            },
+            {
+              "name": "2026-07-11_remove-discontinued-products-from-website"
+            },
+            {
+              "name": "2026-07-11_redesign-online-store-without-taking-it-offline"
+            },
+            {
+              "name": "2026-07-11_online-store-light-and-dark-mode"
+            },
+            {
+              "name": "2026-07-11_manage-shopify-store-without-sharing-password"
+            },
+            {
+              "name": "2026-07-11_how-we-used-remotion-make-free-motion-graphics"
+            },
+            {
+              "name": "2026-07-11_how-we-transcribed-96-minute-zoom-meeting-free"
+            },
+            {
+              "name": "2026-07-11_how-we-structure-ai-so-clients-cant-break-it"
+            },
+            {
+              "name": "2026-07-11_how-we-sync-two-pcs-one-ai-brain"
+            },
+            {
+              "name": "2026-07-11_how-we-set-up-free-remote-desktop-multiple-pcs"
+            },
+            {
+              "name": "2026-07-11_how-we-onboard-va-without-paying-for-extra-email-seat"
+            },
+            {
+              "name": "2026-07-11_how-we-cut-ai-costs-1000-per-month"
+            },
+            {
+              "name": "2026-07-11_how-we-build-new-ai-by-teaching-siblings"
+            },
+            {
+              "name": "2026-07-11_how-to-write-captions-any-business-owner-understands"
+            },
+            {
+              "name": "2026-07-11_how-to-write-better-ai-prompts"
+            },
+            {
+              "name": "2026-07-11_how-to-turn-google-sheet-into-live-dashboard"
+            },
+            {
+              "name": "2026-07-11_how-to-track-leads-without-expensive-crm"
+            },
+            {
+              "name": "2026-07-11_how-to-report-results-to-clients-fast"
+            },
+            {
+              "name": "2026-07-11_how-to-show-client-website-preview-link-that-never-dies"
+            },
+            {
+              "name": "2026-07-11_how-to-sell-custom-products-good-better-best-online"
+            },
+            {
+              "name": "2026-07-11_how-to-plan-a-month-of-social-media"
+            },
+            {
+              "name": "2026-07-11_how-to-organize-large-product-catalog-customers-choose"
+            },
+            {
+              "name": "2026-07-11_how-to-organize-business-files-to-find-anything"
+            },
+            {
+              "name": "2026-07-11_how-to-keep-team-on-same-page-across-computers"
+            },
+            {
+              "name": "2026-07-11_how-to-get-your-business-found-on-google"
+            },
+            {
+              "name": "2026-07-11_how-to-automate-small-business-tasks"
+            },
+            {
+              "name": "2026-07-11_how-to-add-products-without-breaking-store-design"
+            },
+            {
+              "name": "2026-07-11_how-showroom-gets-pros-to-refer-clients"
+            },
+            {
+              "name": "2026-07-11_how-online-store-keeps-content-consistent"
+            },
+            {
+              "name": "2026-07-11_how-nonprofit-grows-audience-online"
+            },
+            {
+              "name": "2026-07-11_heygen-avatar-narration-business-video"
+            },
+            {
+              "name": "2026-07-11_get-notified-when-team-edits-dashboard"
+            },
+            {
+              "name": "2026-07-11_connect-whatsapp-to-your-business-ai"
+            },
+            {
+              "name": "2026-07-11_company-chat-app-like-whatsapp"
+            },
+            {
+              "name": "2026-07-11_can-ai-write-captions-that-sound-like-my-brand"
+            },
+            {
+              "name": "2026-07-11_can-ai-write-captions-that-match-whats-trending"
+            },
+            {
+              "name": "2026-07-11_can-ai-tell-me-whats-in-a-video-or-link"
+            },
+            {
+              "name": "2026-07-11_can-ai-sort-my-inbox-every-morning"
+            },
+            {
+              "name": "2026-07-11_can-ai-keep-me-organized-and-remind-me"
+            },
+            {
+              "name": "2026-07-11_can-ai-improve-my-product-photos"
+            },
+            {
+              "name": "2026-07-11_ai-video-system-no-subscription-stack"
+            },
+            {
+              "name": "2026-07-11_ai-rebuild-and-run-my-shopify-store"
+            },
+            {
+              "name": "2026-07-11_ai-reads-facebook-reels-for-you"
+            },
+            {
+              "name": "2026-07-11_ai-for-medical-clinics-phone-problem"
             },
             {
               "name": "2026-07-12_ai-tools-small-business-no-tech-skills"
             },
             {
-              "name": "2026-07-12_google-drive-sync-lock-fix"
+              "name": "2026-07-12_best-email-platform-for-small-business"
             },
             {
-              "name": "2026-07-12_ffmpeg-reels-business-video"
+              "name": "2026-07-12_can-ai-create-the-images-for-my-social-media"
             },
             {
               "name": "2026-07-12_can-ai-keep-my-website-updated"
             },
             {
-              "name": "2026-07-12_how-we-fixed-netlify-forms-5-deploy-failures"
+              "name": "2026-07-12_ffmpeg-reels-business-video"
             },
             {
-              "name": "2026-07-12_how-we-built-ai-video-system-free"
+              "name": "2026-07-12_google-drive-sync-lock-fix"
             },
             {
               "name": "2026-07-12_how-to-set-up-fiverr-to-land-clients"
             },
             {
-              "name": "2026-07-12_tool-deep-research"
+              "name": "2026-07-12_how-we-built-ai-video-system-free"
             },
             {
-              "name": "2026-07-12_tool-stock-media"
-            },
-            {
-              "name": "2026-07-12_tool-social-scheduling"
-            },
-            {
-              "name": "2026-07-12_tool-crm-followup"
-            },
-            {
-              "name": "2026-07-12_tool-google-workspace"
-            },
-            {
-              "name": "2026-07-12_tool-video-editing"
-            },
-            {
-              "name": "2026-07-12_tool-background-removal"
-            },
-            {
-              "name": "2026-07-12_tool-voice-cloning"
+              "name": "2026-07-12_how-we-fixed-netlify-forms-5-deploy-failures"
             },
             {
               "name": "2026-07-12_tool-image-generation"
             },
             {
+              "name": "2026-07-12_tool-voice-cloning"
+            },
+            {
+              "name": "2026-07-12_tool-background-removal"
+            },
+            {
+              "name": "2026-07-12_tool-video-editing"
+            },
+            {
+              "name": "2026-07-12_tool-google-workspace"
+            },
+            {
+              "name": "2026-07-12_tool-crm-followup"
+            },
+            {
+              "name": "2026-07-12_tool-social-scheduling"
+            },
+            {
+              "name": "2026-07-12_tool-stock-media"
+            },
+            {
+              "name": "2026-07-12_tool-deep-research"
+            },
+            {
               "name": "2026-07-13_brand-templates-no-designer"
             },
             {
-              "name": "2026-07-13_ep01-trailer-social-media-with-ai"
+              "name": "2026-07-13_ep02-trailer-google-first-page"
             },
             {
-              "name": "2026-07-13_ep02-trailer-google-first-page"
+              "name": "2026-07-13_ep01-trailer-social-media-with-ai"
             },
             {
               "name": "2026-07-13_ep03-trailer-website-without-developer"
@@ -2225,151 +2278,151 @@
               "name": "2026-07-14_product-descriptions-that-sell"
             },
             {
-              "name": "2026-07-14_independent-retailers-week"
-            },
-            {
-              "name": "2026-07-14_moon-day"
+              "name": "_OCCASION_CONTENT"
             },
             {
               "name": "2026-07-14_nelson-mandela-day"
             },
             {
-              "name": "_OCCASION_CONTENT"
+              "name": "2026-07-14_moon-day"
             },
             {
-              "name": "2026-07-16_product-label-barcode-sheets"
+              "name": "2026-07-14_independent-retailers-week"
             },
             {
-              "name": "2026-07-16_tool-workflow-automation"
-            },
-            {
-              "name": "_CAROUSEL_V2_SAMPLE"
-            },
-            {
-              "name": "2026-07-16_tool-whatsapp-ai"
-            },
-            {
-              "name": "2026-07-16_tool-webby-website-ai"
-            },
-            {
-              "name": "2026-07-16_tool-walkable-3d"
-            },
-            {
-              "name": "2026-07-16_tool-voice-cloning"
-            },
-            {
-              "name": "2026-07-16_tool-vidz-video-ai"
-            },
-            {
-              "name": "2026-07-16_tool-video-editing"
-            },
-            {
-              "name": "2026-07-16_tool-trend-research"
-            },
-            {
-              "name": "2026-07-16_tool-store-dashboard"
-            },
-            {
-              "name": "2026-07-16_tool-stock-media"
-            },
-            {
-              "name": "2026-07-15_tool-sonny-social-ai"
-            },
-            {
-              "name": "2026-07-15_tool-social-scheduling"
-            },
-            {
-              "name": "2026-07-15_tool-smooth-motion"
-            },
-            {
-              "name": "2026-07-15_tool-shy-shopify-ai"
-            },
-            {
-              "name": "2026-07-15_tool-shopify-management"
-            },
-            {
-              "name": "2026-07-15_tool-seo-analytics-reporting"
-            },
-            {
-              "name": "2026-07-15_tool-reading-images-text"
-            },
-            {
-              "name": "2026-07-15_tool-raphy-design-ai"
-            },
-            {
-              "name": "2026-07-15_tool-programmatic-video"
-            },
-            {
-              "name": "2026-07-15_tool-photo-to-3d"
-            },
-            {
-              "name": "2026-07-15_tool-netlify-hosting"
-            },
-            {
-              "name": "2026-07-15_tool-mobile-first-testing"
-            },
-            {
-              "name": "2026-07-15_tool-mai-marketing-ai"
-            },
-            {
-              "name": "2026-07-15_tool-lead-generation"
-            },
-            {
-              "name": "2026-07-15_tool-lana-leadgen-ai"
-            },
-            {
-              "name": "2026-07-15_tool-image-generation"
-            },
-            {
-              "name": "2026-07-15_tool-graphic-composition"
-            },
-            {
-              "name": "2026-07-15_tool-google-workspace"
-            },
-            {
-              "name": "2026-07-15_tool-emy-email-ai"
-            },
-            {
-              "name": "2026-07-15_tool-design-quality-system"
-            },
-            {
-              "name": "2026-07-15_tool-design-automation"
-            },
-            {
-              "name": "2026-07-15_tool-deep-research"
-            },
-            {
-              "name": "2026-07-15_tool-custom-coded-websites"
-            },
-            {
-              "name": "2026-07-15_tool-crm-followup"
-            },
-            {
-              "name": "2026-07-15_tool-crm-email-platform"
-            },
-            {
-              "name": "2026-07-15_tool-content-engine"
-            },
-            {
-              "name": "2026-07-15_tool-contact-database"
-            },
-            {
-              "name": "2026-07-15_tool-brunz-head-ai"
-            },
-            {
-              "name": "2026-07-15_tool-boogy-blog-ai"
-            },
-            {
-              "name": "2026-07-15_tool-background-removal"
-            },
-            {
-              "name": "2026-07-15_tool-avatar-video"
+              "name": "_TOOL_CONTENT"
             },
             {
               "name": "2026-07-15_tool-gohighlevel-crm"
             },
             {
-              "name": "_TOOL_CONTENT"
+              "name": "2026-07-15_tool-avatar-video"
+            },
+            {
+              "name": "2026-07-15_tool-background-removal"
+            },
+            {
+              "name": "2026-07-15_tool-boogy-blog-ai"
+            },
+            {
+              "name": "2026-07-15_tool-brunz-head-ai"
+            },
+            {
+              "name": "2026-07-15_tool-contact-database"
+            },
+            {
+              "name": "2026-07-15_tool-content-engine"
+            },
+            {
+              "name": "2026-07-15_tool-crm-email-platform"
+            },
+            {
+              "name": "2026-07-15_tool-crm-followup"
+            },
+            {
+              "name": "2026-07-15_tool-custom-coded-websites"
+            },
+            {
+              "name": "2026-07-15_tool-deep-research"
+            },
+            {
+              "name": "2026-07-15_tool-design-automation"
+            },
+            {
+              "name": "2026-07-15_tool-design-quality-system"
+            },
+            {
+              "name": "2026-07-15_tool-emy-email-ai"
+            },
+            {
+              "name": "2026-07-15_tool-google-workspace"
+            },
+            {
+              "name": "2026-07-15_tool-graphic-composition"
+            },
+            {
+              "name": "2026-07-15_tool-image-generation"
+            },
+            {
+              "name": "2026-07-15_tool-lana-leadgen-ai"
+            },
+            {
+              "name": "2026-07-15_tool-lead-generation"
+            },
+            {
+              "name": "2026-07-15_tool-mai-marketing-ai"
+            },
+            {
+              "name": "2026-07-15_tool-mobile-first-testing"
+            },
+            {
+              "name": "2026-07-15_tool-netlify-hosting"
+            },
+            {
+              "name": "2026-07-15_tool-photo-to-3d"
+            },
+            {
+              "name": "2026-07-15_tool-programmatic-video"
+            },
+            {
+              "name": "2026-07-15_tool-raphy-design-ai"
+            },
+            {
+              "name": "2026-07-15_tool-reading-images-text"
+            },
+            {
+              "name": "2026-07-15_tool-seo-analytics-reporting"
+            },
+            {
+              "name": "2026-07-15_tool-shopify-management"
+            },
+            {
+              "name": "2026-07-15_tool-shy-shopify-ai"
+            },
+            {
+              "name": "2026-07-15_tool-smooth-motion"
+            },
+            {
+              "name": "2026-07-15_tool-social-scheduling"
+            },
+            {
+              "name": "2026-07-15_tool-sonny-social-ai"
+            },
+            {
+              "name": "2026-07-16_tool-stock-media"
+            },
+            {
+              "name": "2026-07-16_tool-store-dashboard"
+            },
+            {
+              "name": "2026-07-16_tool-trend-research"
+            },
+            {
+              "name": "2026-07-16_tool-video-editing"
+            },
+            {
+              "name": "2026-07-16_tool-vidz-video-ai"
+            },
+            {
+              "name": "2026-07-16_tool-voice-cloning"
+            },
+            {
+              "name": "2026-07-16_tool-walkable-3d"
+            },
+            {
+              "name": "2026-07-16_tool-webby-website-ai"
+            },
+            {
+              "name": "2026-07-16_tool-whatsapp-ai"
+            },
+            {
+              "name": "_CAROUSEL_V2_SAMPLE"
+            },
+            {
+              "name": "2026-07-16_tool-workflow-automation"
+            },
+            {
+              "name": "2026-07-16_product-label-barcode-sheets"
             },
             {
               "name": "2026-07-21_ai-computer-use"
@@ -2384,16 +2437,16 @@
               "name": "2026-07-22_welcome-bilt2travel"
             },
             {
-              "name": "2026-08-11_every-project-gets-a-page"
-            },
-            {
-              "name": "2026-08-08_bookings-on-your-own-site"
+              "name": "2026-08-06_client-command-center"
             },
             {
               "name": "2026-08-07_client-onboarding-one-form"
             },
             {
-              "name": "2026-08-06_client-command-center"
+              "name": "2026-08-08_bookings-on-your-own-site"
+            },
+            {
+              "name": "2026-08-11_every-project-gets-a-page"
             },
             {
               "name": "2026-08-12_edit-site-by-talking"
@@ -2417,54 +2470,30 @@
               "name": "2026-08-27_diego-team-intro"
             },
             {
-              "name": "2026-08-27_international-day-of-peace"
-            },
-            {
-              "name": "2026-08-27_hispanic-heritage-month"
+              "name": "2026-08-27_labor-day"
             },
             {
               "name": "2026-08-27_international-literacy-day"
             },
             {
-              "name": "2026-08-27_labor-day"
+              "name": "2026-08-27_hispanic-heritage-month"
+            },
+            {
+              "name": "2026-08-27_international-day-of-peace"
+            },
+            {
+              "name": "2026-09-03_shopify-rebuild-golive"
+            },
+            {
+              "name": "2026-09-03_local-contractor-multi-city-seo"
+            },
+            {
+              "name": "2026-09-04_ai-family-build"
             }
           ]
         },
         {
           "name": "CONTENT_POSTED"
-        },
-        {
-          "name": "BBC Content",
-          "url": "https://drive.google.com/drive/folders/1fxfMhnqjYzNjnplQC1nVx4LPRE77wgIK",
-          "children": [
-            {
-              "name": "BBC Team Building"
-            },
-            {
-              "name": "BBC Bruno recordings"
-            },
-            {
-              "name": "Tre 1"
-            },
-            {
-              "name": "Tre 2"
-            },
-            {
-              "name": "Website Workflow Reel"
-            },
-            {
-              "name": "BBC Content Posting"
-            },
-            {
-              "name": "BBC Graphic"
-            },
-            {
-              "name": "Outro"
-            },
-            {
-              "name": "_TESTS"
-            }
-          ]
         },
         {
           "name": "BBC AI Avatar Icons"
@@ -2503,10 +2532,10 @@
           "name": "BBC-Meetings"
         },
         {
-          "name": "BBC_TEAM"
+          "name": "4OCEAN"
         },
         {
-          "name": "4OCEAN"
+          "name": "BBC_TEAM"
         },
         {
           "name": "_RJ_PERSONAL"
@@ -2536,10 +2565,10 @@
           "name": ".codex"
         },
         {
-          "name": "_CREATIVE_OPS"
+          "name": "_PROSPECTS"
         },
         {
-          "name": "_PROSPECTS"
+          "name": "_CREATIVE_OPS"
         },
         {
           "name": "_WHATSAPP_ARCHIVE"
@@ -2957,6 +2986,14 @@
       "noindex": false
     },
     {
+      "name": "Can Someone Run My Google Ads for Me?",
+      "path": "can-someone-run-my-google-ads-for-me.html",
+      "group": "Insights / blog",
+      "purpose": "Yes. Google Ads management is now part of our in-house toolkit: keyword research, ad copy, landing pages, conversion tracking, and ongoing management, built inside an account you own.",
+      "status": "live",
+      "noindex": false
+    },
+    {
       "name": "Can You See Your New Building Before It Is Built?",
       "path": "how-we-build-walkable-3d-tours.html",
       "group": "Insights / blog",
@@ -3045,14 +3082,6 @@
       "noindex": false
     },
     {
-      "name": "Cut the Silence",
-      "path": "cut-the-silence.html",
-      "group": "Insights / blog",
-      "purpose": "Stop editing your own voice for hours. Drop your raw recording in. Our AI cuts every silence and dead-air moment. Get back a tight version, ready to post the same day.",
-      "status": "live",
-      "noindex": false
-    },
-    {
       "name": "Dexter | Senior Graphic Designer &amp; Video Editor · BBC",
       "path": "dexter.html",
       "group": "Insights / blog",
@@ -3129,14 +3158,6 @@
       "path": "file-converter.html",
       "group": "Insights / blog",
       "purpose": "Convert any file to any format, free. Images, video, audio, PDFs, documents. Drag and drop multiple files at once. No sign-up, no watermark. Built by Balay ni Bruno &amp; Co.",
-      "status": "live",
-      "noindex": false
-    },
-    {
-      "name": "Free PDF to EPS / Print-Ready Converter",
-      "path": "pdf-to-eps-converter.html",
-      "group": "Insights / blog",
-      "purpose": "Convert PDF files to EPS or print-ready PDF format for free. No sign-up. No watermark. Built by Balay ni Bruno &amp; Co. for business owners who need print files fast.",
       "status": "live",
       "noindex": false
     },
@@ -3821,14 +3842,6 @@
       "noindex": false
     },
     {
-      "name": "Kirsty Daryl A. Agadia | Content Creator &amp; Marketing Support Specialist · BBC",
-      "path": "kirsty.html",
-      "group": "Insights / blog",
-      "purpose": "Kirsty Daryl A. Agadia is a Content Creator and Marketing Support Specialist at Balay ni Bruno &amp; Co., skilled in social media, graphic design, video editing, email marketing, SEO, and AI-assisted workflows.",
-      "status": "live",
-      "noindex": true
-    },
-    {
       "name": "Lead Generation VA | Clean Local Lead Lists",
       "path": "tool-lead-generation.html",
       "group": "Insights / blog",
@@ -3941,6 +3954,14 @@
       "noindex": true
     },
     {
+      "name": "Optimism Consulting — Last Step Before We Send",
+      "path": "optimism-final.html",
+      "group": "Insights / blog",
+      "purpose": "",
+      "status": "live",
+      "noindex": true
+    },
+    {
       "name": "Privacy Policy",
       "path": "privacy.html",
       "group": "Insights / blog",
@@ -4033,6 +4054,14 @@
       "path": "tool-stock-media.html",
       "group": "Insights / blog",
       "purpose": "We pull free-to-use footage, photos, and music to make your videos look produced, legally and cleanly. No expensive stock licenses on your bill.",
+      "status": "live",
+      "noindex": false
+    },
+    {
+      "name": "The Client Win-Back System",
+      "path": "client-win-back-system.html",
+      "group": "Insights / blog",
+      "purpose": "Most past clients did not leave on bad terms. They just got busy and lost track of you. We built a system that goes through your message history, finds the real ones worth reconnecting with, and drafts a warm way back in touch. You approve every message before it sends.",
       "status": "live",
       "noindex": false
     },
@@ -4572,28 +4601,28 @@
       "path": "LEARNINGS"
     },
     {
-      "title": "watchdogs that guard the wrong thing",
-      "date": "2026-09-02",
+      "title": "ww deep dive patterns",
+      "date": "2026-09-05",
       "path": "LEARNINGS"
     },
     {
-      "title": "silent failures in bbc automation",
-      "date": "2026-09-02",
+      "title": "theming an existing site and deploy traps",
+      "date": "2026-09-05",
       "path": "LEARNINGS"
     },
     {
-      "title": "netlify ignore rule swallows pushes",
-      "date": "2026-09-02",
+      "title": "scheduled tasks killed at launch not timeout",
+      "date": "2026-09-05",
       "path": "LEARNINGS"
     },
     {
-      "title": "meet recorder and blank screen fix",
-      "date": "2026-09-02",
+      "title": "metricool blogid must be verified",
+      "date": "2026-09-05",
       "path": "LEARNINGS"
     },
     {
-      "title": "headless edge pdf header footer fix",
-      "date": "2026-09-02",
+      "title": "invoice generator playwright false green",
+      "date": "2026-09-05",
       "path": "LEARNINGS"
     }
   ],
@@ -5139,27 +5168,9 @@
       "posted": false
     },
     {
-      "name": "2026-06-23_reel_talk_to_edit_site",
-      "date": "2026-06-23",
-      "slug": "reel_talk_to_edit_site",
-      "posted": false
-    },
-    {
-      "name": "2026-06-26_reel_25_pages_google",
-      "date": "2026-06-26",
-      "slug": "reel_25_pages_google",
-      "posted": false
-    },
-    {
-      "name": "2026-06-25_educational_knowledge_base",
-      "date": "2026-06-25",
-      "slug": "educational_knowledge_base",
-      "posted": false
-    },
-    {
-      "name": "2026-06-27_saturday_workflow_menu",
-      "date": "2026-06-27",
-      "slug": "saturday_workflow_menu",
+      "name": "2026-06-24_review_essence_bembry",
+      "date": "2026-06-24",
+      "slug": "review_essence_bembry",
       "posted": false
     },
     {
@@ -5169,9 +5180,27 @@
       "posted": false
     },
     {
-      "name": "2026-06-24_review_essence_bembry",
-      "date": "2026-06-24",
-      "slug": "review_essence_bembry",
+      "name": "2026-06-27_saturday_workflow_menu",
+      "date": "2026-06-27",
+      "slug": "saturday_workflow_menu",
+      "posted": false
+    },
+    {
+      "name": "2026-06-25_educational_knowledge_base",
+      "date": "2026-06-25",
+      "slug": "educational_knowledge_base",
+      "posted": false
+    },
+    {
+      "name": "2026-06-26_reel_25_pages_google",
+      "date": "2026-06-26",
+      "slug": "reel_25_pages_google",
+      "posted": false
+    },
+    {
+      "name": "2026-06-23_reel_talk_to_edit_site",
+      "date": "2026-06-23",
+      "slug": "reel_talk_to_edit_site",
       "posted": false
     },
     {
@@ -5193,15 +5222,15 @@
       "posted": false
     },
     {
-      "name": "2026-07-04_reel_brief_builder",
-      "date": "2026-07-04",
-      "slug": "reel_brief_builder",
-      "posted": false
-    },
-    {
       "name": "2026-07-04_reel_founder_plans_va_executes",
       "date": "2026-07-04",
       "slug": "reel_founder_plans_va_executes",
+      "posted": false
+    },
+    {
+      "name": "2026-07-04_reel_brief_builder",
+      "date": "2026-07-04",
+      "slug": "reel_brief_builder",
       "posted": false
     },
     {
@@ -5247,183 +5276,9 @@
       "posted": false
     },
     {
-      "name": "2026-07-10_roofing-storm-seo",
-      "date": "2026-07-10",
-      "slug": "roofing-storm-seo",
-      "posted": false
-    },
-    {
-      "name": "2026-07-10_3d-say-build-walk",
-      "date": "2026-07-10",
-      "slug": "3d-say-build-walk",
-      "posted": false
-    },
-    {
-      "name": "2026-07-10_store-dashboard",
-      "date": "2026-07-10",
-      "slug": "store-dashboard",
-      "posted": false
-    },
-    {
-      "name": "2026-07-10_client-intake",
-      "date": "2026-07-10",
-      "slug": "client-intake",
-      "posted": false
-    },
-    {
-      "name": "2026-07-10_branded-invoices",
-      "date": "2026-07-10",
-      "slug": "branded-invoices",
-      "posted": false
-    },
-    {
-      "name": "2026-07-10_shopify-rebuild",
-      "date": "2026-07-10",
-      "slug": "shopify-rebuild",
-      "posted": false
-    },
-    {
-      "name": "2026-07-10_scroll-stopping-carousel",
-      "date": "2026-07-10",
-      "slug": "scroll-stopping-carousel",
-      "posted": false
-    },
-    {
-      "name": "2026-07-10_agent-top-of-mind",
-      "date": "2026-07-10",
-      "slug": "agent-top-of-mind",
-      "posted": false
-    },
-    {
-      "name": "2026-07-10_barcode-labels",
-      "date": "2026-07-10",
-      "slug": "barcode-labels",
-      "posted": false
-    },
-    {
-      "name": "2026-07-10_product-descriptions",
-      "date": "2026-07-10",
-      "slug": "product-descriptions",
-      "posted": false
-    },
-    {
-      "name": "2026-07-10_3d-product-designer",
-      "date": "2026-07-10",
-      "slug": "3d-product-designer",
-      "posted": false
-    },
-    {
-      "name": "2026-07-10_design-file-walkable",
-      "date": "2026-07-10",
-      "slug": "design-file-walkable",
-      "posted": false
-    },
-    {
-      "name": "2026-07-10_ai-meeting-notes",
-      "date": "2026-07-10",
-      "slug": "ai-meeting-notes",
-      "posted": false
-    },
-    {
-      "name": "2026-07-10_video-to-3d",
-      "date": "2026-07-10",
-      "slug": "video-to-3d",
-      "posted": false
-    },
-    {
-      "name": "2026-07-10_address-to-3d",
-      "date": "2026-07-10",
-      "slug": "address-to-3d",
-      "posted": false
-    },
-    {
-      "name": "2026-07-10_photoreal-render",
-      "date": "2026-07-10",
-      "slug": "photoreal-render",
-      "posted": false
-    },
-    {
-      "name": "2026-07-10_email-followups",
-      "date": "2026-07-10",
-      "slug": "email-followups",
-      "posted": false
-    },
-    {
-      "name": "2026-07-10_three-part-story",
-      "date": "2026-07-10",
-      "slug": "three-part-story",
-      "posted": false
-    },
-    {
-      "name": "2026-07-10_smooth-motion",
-      "date": "2026-07-10",
-      "slug": "smooth-motion",
-      "posted": false
-    },
-    {
-      "name": "2026-07-10_embed-video",
-      "date": "2026-07-10",
-      "slug": "embed-video",
-      "posted": false
-    },
-    {
-      "name": "2026-07-10_one-idea-whole-week",
-      "date": "2026-07-10",
-      "slug": "one-idea-whole-week",
-      "posted": false
-    },
-    {
-      "name": "2026-07-10_referral-proposal",
-      "date": "2026-07-10",
-      "slug": "referral-proposal",
-      "posted": false
-    },
-    {
-      "name": "2026-07-10_any-creator-style",
-      "date": "2026-07-10",
-      "slug": "any-creator-style",
-      "posted": false
-    },
-    {
-      "name": "2026-07-10_fast-website",
-      "date": "2026-07-10",
-      "slug": "fast-website",
-      "posted": false
-    },
-    {
-      "name": "2026-07-10_lead-hunting-lana",
-      "date": "2026-07-10",
-      "slug": "lead-hunting-lana",
-      "posted": false
-    },
-    {
-      "name": "2026-07-10_bookings-to-shopify",
-      "date": "2026-07-10",
-      "slug": "bookings-to-shopify",
-      "posted": false
-    },
-    {
-      "name": "2026-07-10_brand-templates",
-      "date": "2026-07-10",
-      "slug": "brand-templates",
-      "posted": false
-    },
-    {
-      "name": "2026-07-10_list-to-documentary",
-      "date": "2026-07-10",
-      "slug": "list-to-documentary",
-      "posted": false
-    },
-    {
-      "name": "2026-07-10_visible-day-off",
-      "date": "2026-07-10",
-      "slug": "visible-day-off",
-      "posted": false
-    },
-    {
-      "name": "2026-07-10_listing-board",
-      "date": "2026-07-10",
-      "slug": "listing-board",
+      "name": "_WORKFLOW_CONTENT",
+      "date": null,
+      "slug": "_WORKFLOW_CONTENT",
       "posted": false
     },
     {
@@ -5433,9 +5288,183 @@
       "posted": false
     },
     {
-      "name": "_WORKFLOW_CONTENT",
-      "date": null,
-      "slug": "_WORKFLOW_CONTENT",
+      "name": "2026-07-10_listing-board",
+      "date": "2026-07-10",
+      "slug": "listing-board",
+      "posted": false
+    },
+    {
+      "name": "2026-07-10_visible-day-off",
+      "date": "2026-07-10",
+      "slug": "visible-day-off",
+      "posted": false
+    },
+    {
+      "name": "2026-07-10_list-to-documentary",
+      "date": "2026-07-10",
+      "slug": "list-to-documentary",
+      "posted": false
+    },
+    {
+      "name": "2026-07-10_brand-templates",
+      "date": "2026-07-10",
+      "slug": "brand-templates",
+      "posted": false
+    },
+    {
+      "name": "2026-07-10_bookings-to-shopify",
+      "date": "2026-07-10",
+      "slug": "bookings-to-shopify",
+      "posted": false
+    },
+    {
+      "name": "2026-07-10_lead-hunting-lana",
+      "date": "2026-07-10",
+      "slug": "lead-hunting-lana",
+      "posted": false
+    },
+    {
+      "name": "2026-07-10_fast-website",
+      "date": "2026-07-10",
+      "slug": "fast-website",
+      "posted": false
+    },
+    {
+      "name": "2026-07-10_any-creator-style",
+      "date": "2026-07-10",
+      "slug": "any-creator-style",
+      "posted": false
+    },
+    {
+      "name": "2026-07-10_referral-proposal",
+      "date": "2026-07-10",
+      "slug": "referral-proposal",
+      "posted": false
+    },
+    {
+      "name": "2026-07-10_one-idea-whole-week",
+      "date": "2026-07-10",
+      "slug": "one-idea-whole-week",
+      "posted": false
+    },
+    {
+      "name": "2026-07-10_embed-video",
+      "date": "2026-07-10",
+      "slug": "embed-video",
+      "posted": false
+    },
+    {
+      "name": "2026-07-10_smooth-motion",
+      "date": "2026-07-10",
+      "slug": "smooth-motion",
+      "posted": false
+    },
+    {
+      "name": "2026-07-10_three-part-story",
+      "date": "2026-07-10",
+      "slug": "three-part-story",
+      "posted": false
+    },
+    {
+      "name": "2026-07-10_email-followups",
+      "date": "2026-07-10",
+      "slug": "email-followups",
+      "posted": false
+    },
+    {
+      "name": "2026-07-10_photoreal-render",
+      "date": "2026-07-10",
+      "slug": "photoreal-render",
+      "posted": false
+    },
+    {
+      "name": "2026-07-10_address-to-3d",
+      "date": "2026-07-10",
+      "slug": "address-to-3d",
+      "posted": false
+    },
+    {
+      "name": "2026-07-10_video-to-3d",
+      "date": "2026-07-10",
+      "slug": "video-to-3d",
+      "posted": false
+    },
+    {
+      "name": "2026-07-10_ai-meeting-notes",
+      "date": "2026-07-10",
+      "slug": "ai-meeting-notes",
+      "posted": false
+    },
+    {
+      "name": "2026-07-10_design-file-walkable",
+      "date": "2026-07-10",
+      "slug": "design-file-walkable",
+      "posted": false
+    },
+    {
+      "name": "2026-07-10_3d-product-designer",
+      "date": "2026-07-10",
+      "slug": "3d-product-designer",
+      "posted": false
+    },
+    {
+      "name": "2026-07-10_product-descriptions",
+      "date": "2026-07-10",
+      "slug": "product-descriptions",
+      "posted": false
+    },
+    {
+      "name": "2026-07-10_barcode-labels",
+      "date": "2026-07-10",
+      "slug": "barcode-labels",
+      "posted": false
+    },
+    {
+      "name": "2026-07-10_agent-top-of-mind",
+      "date": "2026-07-10",
+      "slug": "agent-top-of-mind",
+      "posted": false
+    },
+    {
+      "name": "2026-07-10_scroll-stopping-carousel",
+      "date": "2026-07-10",
+      "slug": "scroll-stopping-carousel",
+      "posted": false
+    },
+    {
+      "name": "2026-07-10_shopify-rebuild",
+      "date": "2026-07-10",
+      "slug": "shopify-rebuild",
+      "posted": false
+    },
+    {
+      "name": "2026-07-10_branded-invoices",
+      "date": "2026-07-10",
+      "slug": "branded-invoices",
+      "posted": false
+    },
+    {
+      "name": "2026-07-10_client-intake",
+      "date": "2026-07-10",
+      "slug": "client-intake",
+      "posted": false
+    },
+    {
+      "name": "2026-07-10_store-dashboard",
+      "date": "2026-07-10",
+      "slug": "store-dashboard",
+      "posted": false
+    },
+    {
+      "name": "2026-07-10_3d-say-build-walk",
+      "date": "2026-07-10",
+      "slug": "3d-say-build-walk",
+      "posted": false
+    },
+    {
+      "name": "2026-07-10_roofing-storm-seo",
+      "date": "2026-07-10",
+      "slug": "roofing-storm-seo",
       "posted": false
     },
     {
@@ -5445,21 +5474,9 @@
       "posted": false
     },
     {
-      "name": "2026-07-10_local-seo-guide",
+      "name": "2026-07-10_boogy-blog-ai",
       "date": "2026-07-10",
-      "slug": "local-seo-guide",
-      "posted": false
-    },
-    {
-      "name": "2026-07-10_guided-shop-experience",
-      "date": "2026-07-10",
-      "slug": "guided-shop-experience",
-      "posted": false
-    },
-    {
-      "name": "2026-07-10_shopify-edit-for-you",
-      "date": "2026-07-10",
-      "slug": "shopify-edit-for-you",
+      "slug": "boogy-blog-ai",
       "posted": false
     },
     {
@@ -5469,15 +5486,27 @@
       "posted": false
     },
     {
-      "name": "2026-07-10_boogy-blog-ai",
+      "name": "2026-07-10_shopify-edit-for-you",
       "date": "2026-07-10",
-      "slug": "boogy-blog-ai",
+      "slug": "shopify-edit-for-you",
       "posted": false
     },
     {
-      "name": "2026-07-10_cut-dead-air",
+      "name": "2026-07-10_guided-shop-experience",
       "date": "2026-07-10",
-      "slug": "cut-dead-air",
+      "slug": "guided-shop-experience",
+      "posted": false
+    },
+    {
+      "name": "2026-07-10_local-seo-guide",
+      "date": "2026-07-10",
+      "slug": "local-seo-guide",
+      "posted": false
+    },
+    {
+      "name": "2026-07-10_showroom-no-cart",
+      "date": "2026-07-10",
+      "slug": "showroom-no-cart",
       "posted": false
     },
     {
@@ -5487,9 +5516,9 @@
       "posted": false
     },
     {
-      "name": "2026-07-10_showroom-no-cart",
+      "name": "2026-07-10_cut-dead-air",
       "date": "2026-07-10",
-      "slug": "showroom-no-cart",
+      "slug": "cut-dead-air",
       "posted": false
     },
     {
@@ -5505,9 +5534,9 @@
       "posted": false
     },
     {
-      "name": "2026-07-11_command-center",
+      "name": "2026-07-11_talking-head-reel",
       "date": "2026-07-11",
-      "slug": "command-center",
+      "slug": "talking-head-reel",
       "posted": false
     },
     {
@@ -5517,309 +5546,9 @@
       "posted": false
     },
     {
-      "name": "2026-07-11_talking-head-reel",
+      "name": "2026-07-11_command-center",
       "date": "2026-07-11",
-      "slug": "talking-head-reel",
-      "posted": false
-    },
-    {
-      "name": "2026-07-11_ai-for-medical-clinics-phone-problem",
-      "date": "2026-07-11",
-      "slug": "ai-for-medical-clinics-phone-problem",
-      "posted": false
-    },
-    {
-      "name": "2026-07-11_ai-reads-facebook-reels-for-you",
-      "date": "2026-07-11",
-      "slug": "ai-reads-facebook-reels-for-you",
-      "posted": false
-    },
-    {
-      "name": "2026-07-11_ai-rebuild-and-run-my-shopify-store",
-      "date": "2026-07-11",
-      "slug": "ai-rebuild-and-run-my-shopify-store",
-      "posted": false
-    },
-    {
-      "name": "2026-07-11_ai-video-system-no-subscription-stack",
-      "date": "2026-07-11",
-      "slug": "ai-video-system-no-subscription-stack",
-      "posted": false
-    },
-    {
-      "name": "2026-07-11_can-ai-improve-my-product-photos",
-      "date": "2026-07-11",
-      "slug": "can-ai-improve-my-product-photos",
-      "posted": false
-    },
-    {
-      "name": "2026-07-11_can-ai-keep-me-organized-and-remind-me",
-      "date": "2026-07-11",
-      "slug": "can-ai-keep-me-organized-and-remind-me",
-      "posted": false
-    },
-    {
-      "name": "2026-07-11_can-ai-sort-my-inbox-every-morning",
-      "date": "2026-07-11",
-      "slug": "can-ai-sort-my-inbox-every-morning",
-      "posted": false
-    },
-    {
-      "name": "2026-07-11_can-ai-tell-me-whats-in-a-video-or-link",
-      "date": "2026-07-11",
-      "slug": "can-ai-tell-me-whats-in-a-video-or-link",
-      "posted": false
-    },
-    {
-      "name": "2026-07-11_can-ai-write-captions-that-match-whats-trending",
-      "date": "2026-07-11",
-      "slug": "can-ai-write-captions-that-match-whats-trending",
-      "posted": false
-    },
-    {
-      "name": "2026-07-11_can-ai-write-captions-that-sound-like-my-brand",
-      "date": "2026-07-11",
-      "slug": "can-ai-write-captions-that-sound-like-my-brand",
-      "posted": false
-    },
-    {
-      "name": "2026-07-11_company-chat-app-like-whatsapp",
-      "date": "2026-07-11",
-      "slug": "company-chat-app-like-whatsapp",
-      "posted": false
-    },
-    {
-      "name": "2026-07-11_connect-whatsapp-to-your-business-ai",
-      "date": "2026-07-11",
-      "slug": "connect-whatsapp-to-your-business-ai",
-      "posted": false
-    },
-    {
-      "name": "2026-07-11_get-notified-when-team-edits-dashboard",
-      "date": "2026-07-11",
-      "slug": "get-notified-when-team-edits-dashboard",
-      "posted": false
-    },
-    {
-      "name": "2026-07-11_heygen-avatar-narration-business-video",
-      "date": "2026-07-11",
-      "slug": "heygen-avatar-narration-business-video",
-      "posted": false
-    },
-    {
-      "name": "2026-07-11_how-nonprofit-grows-audience-online",
-      "date": "2026-07-11",
-      "slug": "how-nonprofit-grows-audience-online",
-      "posted": false
-    },
-    {
-      "name": "2026-07-11_how-online-store-keeps-content-consistent",
-      "date": "2026-07-11",
-      "slug": "how-online-store-keeps-content-consistent",
-      "posted": false
-    },
-    {
-      "name": "2026-07-11_how-showroom-gets-pros-to-refer-clients",
-      "date": "2026-07-11",
-      "slug": "how-showroom-gets-pros-to-refer-clients",
-      "posted": false
-    },
-    {
-      "name": "2026-07-11_how-to-add-products-without-breaking-store-design",
-      "date": "2026-07-11",
-      "slug": "how-to-add-products-without-breaking-store-design",
-      "posted": false
-    },
-    {
-      "name": "2026-07-11_how-to-automate-small-business-tasks",
-      "date": "2026-07-11",
-      "slug": "how-to-automate-small-business-tasks",
-      "posted": false
-    },
-    {
-      "name": "2026-07-11_how-to-get-your-business-found-on-google",
-      "date": "2026-07-11",
-      "slug": "how-to-get-your-business-found-on-google",
-      "posted": false
-    },
-    {
-      "name": "2026-07-11_how-to-keep-team-on-same-page-across-computers",
-      "date": "2026-07-11",
-      "slug": "how-to-keep-team-on-same-page-across-computers",
-      "posted": false
-    },
-    {
-      "name": "2026-07-11_how-to-organize-business-files-to-find-anything",
-      "date": "2026-07-11",
-      "slug": "how-to-organize-business-files-to-find-anything",
-      "posted": false
-    },
-    {
-      "name": "2026-07-11_how-to-organize-large-product-catalog-customers-choose",
-      "date": "2026-07-11",
-      "slug": "how-to-organize-large-product-catalog-customers-choose",
-      "posted": false
-    },
-    {
-      "name": "2026-07-11_how-to-plan-a-month-of-social-media",
-      "date": "2026-07-11",
-      "slug": "how-to-plan-a-month-of-social-media",
-      "posted": false
-    },
-    {
-      "name": "2026-07-11_how-to-sell-custom-products-good-better-best-online",
-      "date": "2026-07-11",
-      "slug": "how-to-sell-custom-products-good-better-best-online",
-      "posted": false
-    },
-    {
-      "name": "2026-07-11_how-to-show-client-website-preview-link-that-never-dies",
-      "date": "2026-07-11",
-      "slug": "how-to-show-client-website-preview-link-that-never-dies",
-      "posted": false
-    },
-    {
-      "name": "2026-07-11_how-to-report-results-to-clients-fast",
-      "date": "2026-07-11",
-      "slug": "how-to-report-results-to-clients-fast",
-      "posted": false
-    },
-    {
-      "name": "2026-07-11_how-to-track-leads-without-expensive-crm",
-      "date": "2026-07-11",
-      "slug": "how-to-track-leads-without-expensive-crm",
-      "posted": false
-    },
-    {
-      "name": "2026-07-11_how-to-turn-google-sheet-into-live-dashboard",
-      "date": "2026-07-11",
-      "slug": "how-to-turn-google-sheet-into-live-dashboard",
-      "posted": false
-    },
-    {
-      "name": "2026-07-11_how-to-write-better-ai-prompts",
-      "date": "2026-07-11",
-      "slug": "how-to-write-better-ai-prompts",
-      "posted": false
-    },
-    {
-      "name": "2026-07-11_how-to-write-captions-any-business-owner-understands",
-      "date": "2026-07-11",
-      "slug": "how-to-write-captions-any-business-owner-understands",
-      "posted": false
-    },
-    {
-      "name": "2026-07-11_how-we-build-new-ai-by-teaching-siblings",
-      "date": "2026-07-11",
-      "slug": "how-we-build-new-ai-by-teaching-siblings",
-      "posted": false
-    },
-    {
-      "name": "2026-07-11_how-we-cut-ai-costs-1000-per-month",
-      "date": "2026-07-11",
-      "slug": "how-we-cut-ai-costs-1000-per-month",
-      "posted": false
-    },
-    {
-      "name": "2026-07-11_how-we-onboard-va-without-paying-for-extra-email-seat",
-      "date": "2026-07-11",
-      "slug": "how-we-onboard-va-without-paying-for-extra-email-seat",
-      "posted": false
-    },
-    {
-      "name": "2026-07-11_how-we-set-up-free-remote-desktop-multiple-pcs",
-      "date": "2026-07-11",
-      "slug": "how-we-set-up-free-remote-desktop-multiple-pcs",
-      "posted": false
-    },
-    {
-      "name": "2026-07-11_how-we-sync-two-pcs-one-ai-brain",
-      "date": "2026-07-11",
-      "slug": "how-we-sync-two-pcs-one-ai-brain",
-      "posted": false
-    },
-    {
-      "name": "2026-07-11_how-we-structure-ai-so-clients-cant-break-it",
-      "date": "2026-07-11",
-      "slug": "how-we-structure-ai-so-clients-cant-break-it",
-      "posted": false
-    },
-    {
-      "name": "2026-07-11_how-we-transcribed-96-minute-zoom-meeting-free",
-      "date": "2026-07-11",
-      "slug": "how-we-transcribed-96-minute-zoom-meeting-free",
-      "posted": false
-    },
-    {
-      "name": "2026-07-11_how-we-used-remotion-make-free-motion-graphics",
-      "date": "2026-07-11",
-      "slug": "how-we-used-remotion-make-free-motion-graphics",
-      "posted": false
-    },
-    {
-      "name": "2026-07-11_manage-shopify-store-without-sharing-password",
-      "date": "2026-07-11",
-      "slug": "manage-shopify-store-without-sharing-password",
-      "posted": false
-    },
-    {
-      "name": "2026-07-11_online-store-light-and-dark-mode",
-      "date": "2026-07-11",
-      "slug": "online-store-light-and-dark-mode",
-      "posted": false
-    },
-    {
-      "name": "2026-07-11_redesign-online-store-without-taking-it-offline",
-      "date": "2026-07-11",
-      "slug": "redesign-online-store-without-taking-it-offline",
-      "posted": false
-    },
-    {
-      "name": "2026-07-11_remove-discontinued-products-from-website",
-      "date": "2026-07-11",
-      "slug": "remove-discontinued-products-from-website",
-      "posted": false
-    },
-    {
-      "name": "2026-07-11_website-that-shows-products-without-a-cart",
-      "date": "2026-07-11",
-      "slug": "website-that-shows-products-without-a-cart",
-      "posted": false
-    },
-    {
-      "name": "2026-07-11_whatsapp-for-business-client-messages",
-      "date": "2026-07-11",
-      "slug": "whatsapp-for-business-client-messages",
-      "posted": false
-    },
-    {
-      "name": "2026-07-11_branded-proposals-fast",
-      "date": "2026-07-11",
-      "slug": "branded-proposals-fast",
-      "posted": false
-    },
-    {
-      "name": "2026-07-11_read-scanned-docs",
-      "date": "2026-07-11",
-      "slug": "read-scanned-docs",
-      "posted": false
-    },
-    {
-      "name": "2026-07-11_ai-sees-your-screen",
-      "date": "2026-07-11",
-      "slug": "ai-sees-your-screen",
-      "posted": false
-    },
-    {
-      "name": "2026-07-11_process-as-content",
-      "date": "2026-07-11",
-      "slug": "process-as-content",
-      "posted": false
-    },
-    {
-      "name": "2026-07-11_website-replicator",
-      "date": "2026-07-11",
-      "slug": "website-replicator",
+      "slug": "command-center",
       "posted": false
     },
     {
@@ -5829,15 +5558,303 @@
       "posted": false
     },
     {
-      "name": "2026-07-12_can-ai-create-the-images-for-my-social-media",
-      "date": "2026-07-12",
-      "slug": "can-ai-create-the-images-for-my-social-media",
+      "name": "2026-07-11_website-replicator",
+      "date": "2026-07-11",
+      "slug": "website-replicator",
       "posted": false
     },
     {
-      "name": "2026-07-12_best-email-platform-for-small-business",
-      "date": "2026-07-12",
-      "slug": "best-email-platform-for-small-business",
+      "name": "2026-07-11_process-as-content",
+      "date": "2026-07-11",
+      "slug": "process-as-content",
+      "posted": false
+    },
+    {
+      "name": "2026-07-11_ai-sees-your-screen",
+      "date": "2026-07-11",
+      "slug": "ai-sees-your-screen",
+      "posted": false
+    },
+    {
+      "name": "2026-07-11_read-scanned-docs",
+      "date": "2026-07-11",
+      "slug": "read-scanned-docs",
+      "posted": false
+    },
+    {
+      "name": "2026-07-11_branded-proposals-fast",
+      "date": "2026-07-11",
+      "slug": "branded-proposals-fast",
+      "posted": false
+    },
+    {
+      "name": "2026-07-11_whatsapp-for-business-client-messages",
+      "date": "2026-07-11",
+      "slug": "whatsapp-for-business-client-messages",
+      "posted": false
+    },
+    {
+      "name": "2026-07-11_website-that-shows-products-without-a-cart",
+      "date": "2026-07-11",
+      "slug": "website-that-shows-products-without-a-cart",
+      "posted": false
+    },
+    {
+      "name": "2026-07-11_remove-discontinued-products-from-website",
+      "date": "2026-07-11",
+      "slug": "remove-discontinued-products-from-website",
+      "posted": false
+    },
+    {
+      "name": "2026-07-11_redesign-online-store-without-taking-it-offline",
+      "date": "2026-07-11",
+      "slug": "redesign-online-store-without-taking-it-offline",
+      "posted": false
+    },
+    {
+      "name": "2026-07-11_online-store-light-and-dark-mode",
+      "date": "2026-07-11",
+      "slug": "online-store-light-and-dark-mode",
+      "posted": false
+    },
+    {
+      "name": "2026-07-11_manage-shopify-store-without-sharing-password",
+      "date": "2026-07-11",
+      "slug": "manage-shopify-store-without-sharing-password",
+      "posted": false
+    },
+    {
+      "name": "2026-07-11_how-we-used-remotion-make-free-motion-graphics",
+      "date": "2026-07-11",
+      "slug": "how-we-used-remotion-make-free-motion-graphics",
+      "posted": false
+    },
+    {
+      "name": "2026-07-11_how-we-transcribed-96-minute-zoom-meeting-free",
+      "date": "2026-07-11",
+      "slug": "how-we-transcribed-96-minute-zoom-meeting-free",
+      "posted": false
+    },
+    {
+      "name": "2026-07-11_how-we-structure-ai-so-clients-cant-break-it",
+      "date": "2026-07-11",
+      "slug": "how-we-structure-ai-so-clients-cant-break-it",
+      "posted": false
+    },
+    {
+      "name": "2026-07-11_how-we-sync-two-pcs-one-ai-brain",
+      "date": "2026-07-11",
+      "slug": "how-we-sync-two-pcs-one-ai-brain",
+      "posted": false
+    },
+    {
+      "name": "2026-07-11_how-we-set-up-free-remote-desktop-multiple-pcs",
+      "date": "2026-07-11",
+      "slug": "how-we-set-up-free-remote-desktop-multiple-pcs",
+      "posted": false
+    },
+    {
+      "name": "2026-07-11_how-we-onboard-va-without-paying-for-extra-email-seat",
+      "date": "2026-07-11",
+      "slug": "how-we-onboard-va-without-paying-for-extra-email-seat",
+      "posted": false
+    },
+    {
+      "name": "2026-07-11_how-we-cut-ai-costs-1000-per-month",
+      "date": "2026-07-11",
+      "slug": "how-we-cut-ai-costs-1000-per-month",
+      "posted": false
+    },
+    {
+      "name": "2026-07-11_how-we-build-new-ai-by-teaching-siblings",
+      "date": "2026-07-11",
+      "slug": "how-we-build-new-ai-by-teaching-siblings",
+      "posted": false
+    },
+    {
+      "name": "2026-07-11_how-to-write-captions-any-business-owner-understands",
+      "date": "2026-07-11",
+      "slug": "how-to-write-captions-any-business-owner-understands",
+      "posted": false
+    },
+    {
+      "name": "2026-07-11_how-to-write-better-ai-prompts",
+      "date": "2026-07-11",
+      "slug": "how-to-write-better-ai-prompts",
+      "posted": false
+    },
+    {
+      "name": "2026-07-11_how-to-turn-google-sheet-into-live-dashboard",
+      "date": "2026-07-11",
+      "slug": "how-to-turn-google-sheet-into-live-dashboard",
+      "posted": false
+    },
+    {
+      "name": "2026-07-11_how-to-track-leads-without-expensive-crm",
+      "date": "2026-07-11",
+      "slug": "how-to-track-leads-without-expensive-crm",
+      "posted": false
+    },
+    {
+      "name": "2026-07-11_how-to-report-results-to-clients-fast",
+      "date": "2026-07-11",
+      "slug": "how-to-report-results-to-clients-fast",
+      "posted": false
+    },
+    {
+      "name": "2026-07-11_how-to-show-client-website-preview-link-that-never-dies",
+      "date": "2026-07-11",
+      "slug": "how-to-show-client-website-preview-link-that-never-dies",
+      "posted": false
+    },
+    {
+      "name": "2026-07-11_how-to-sell-custom-products-good-better-best-online",
+      "date": "2026-07-11",
+      "slug": "how-to-sell-custom-products-good-better-best-online",
+      "posted": false
+    },
+    {
+      "name": "2026-07-11_how-to-plan-a-month-of-social-media",
+      "date": "2026-07-11",
+      "slug": "how-to-plan-a-month-of-social-media",
+      "posted": false
+    },
+    {
+      "name": "2026-07-11_how-to-organize-large-product-catalog-customers-choose",
+      "date": "2026-07-11",
+      "slug": "how-to-organize-large-product-catalog-customers-choose",
+      "posted": false
+    },
+    {
+      "name": "2026-07-11_how-to-organize-business-files-to-find-anything",
+      "date": "2026-07-11",
+      "slug": "how-to-organize-business-files-to-find-anything",
+      "posted": false
+    },
+    {
+      "name": "2026-07-11_how-to-keep-team-on-same-page-across-computers",
+      "date": "2026-07-11",
+      "slug": "how-to-keep-team-on-same-page-across-computers",
+      "posted": false
+    },
+    {
+      "name": "2026-07-11_how-to-get-your-business-found-on-google",
+      "date": "2026-07-11",
+      "slug": "how-to-get-your-business-found-on-google",
+      "posted": false
+    },
+    {
+      "name": "2026-07-11_how-to-automate-small-business-tasks",
+      "date": "2026-07-11",
+      "slug": "how-to-automate-small-business-tasks",
+      "posted": false
+    },
+    {
+      "name": "2026-07-11_how-to-add-products-without-breaking-store-design",
+      "date": "2026-07-11",
+      "slug": "how-to-add-products-without-breaking-store-design",
+      "posted": false
+    },
+    {
+      "name": "2026-07-11_how-showroom-gets-pros-to-refer-clients",
+      "date": "2026-07-11",
+      "slug": "how-showroom-gets-pros-to-refer-clients",
+      "posted": false
+    },
+    {
+      "name": "2026-07-11_how-online-store-keeps-content-consistent",
+      "date": "2026-07-11",
+      "slug": "how-online-store-keeps-content-consistent",
+      "posted": false
+    },
+    {
+      "name": "2026-07-11_how-nonprofit-grows-audience-online",
+      "date": "2026-07-11",
+      "slug": "how-nonprofit-grows-audience-online",
+      "posted": false
+    },
+    {
+      "name": "2026-07-11_heygen-avatar-narration-business-video",
+      "date": "2026-07-11",
+      "slug": "heygen-avatar-narration-business-video",
+      "posted": false
+    },
+    {
+      "name": "2026-07-11_get-notified-when-team-edits-dashboard",
+      "date": "2026-07-11",
+      "slug": "get-notified-when-team-edits-dashboard",
+      "posted": false
+    },
+    {
+      "name": "2026-07-11_connect-whatsapp-to-your-business-ai",
+      "date": "2026-07-11",
+      "slug": "connect-whatsapp-to-your-business-ai",
+      "posted": false
+    },
+    {
+      "name": "2026-07-11_company-chat-app-like-whatsapp",
+      "date": "2026-07-11",
+      "slug": "company-chat-app-like-whatsapp",
+      "posted": false
+    },
+    {
+      "name": "2026-07-11_can-ai-write-captions-that-sound-like-my-brand",
+      "date": "2026-07-11",
+      "slug": "can-ai-write-captions-that-sound-like-my-brand",
+      "posted": false
+    },
+    {
+      "name": "2026-07-11_can-ai-write-captions-that-match-whats-trending",
+      "date": "2026-07-11",
+      "slug": "can-ai-write-captions-that-match-whats-trending",
+      "posted": false
+    },
+    {
+      "name": "2026-07-11_can-ai-tell-me-whats-in-a-video-or-link",
+      "date": "2026-07-11",
+      "slug": "can-ai-tell-me-whats-in-a-video-or-link",
+      "posted": false
+    },
+    {
+      "name": "2026-07-11_can-ai-sort-my-inbox-every-morning",
+      "date": "2026-07-11",
+      "slug": "can-ai-sort-my-inbox-every-morning",
+      "posted": false
+    },
+    {
+      "name": "2026-07-11_can-ai-keep-me-organized-and-remind-me",
+      "date": "2026-07-11",
+      "slug": "can-ai-keep-me-organized-and-remind-me",
+      "posted": false
+    },
+    {
+      "name": "2026-07-11_can-ai-improve-my-product-photos",
+      "date": "2026-07-11",
+      "slug": "can-ai-improve-my-product-photos",
+      "posted": false
+    },
+    {
+      "name": "2026-07-11_ai-video-system-no-subscription-stack",
+      "date": "2026-07-11",
+      "slug": "ai-video-system-no-subscription-stack",
+      "posted": false
+    },
+    {
+      "name": "2026-07-11_ai-rebuild-and-run-my-shopify-store",
+      "date": "2026-07-11",
+      "slug": "ai-rebuild-and-run-my-shopify-store",
+      "posted": false
+    },
+    {
+      "name": "2026-07-11_ai-reads-facebook-reels-for-you",
+      "date": "2026-07-11",
+      "slug": "ai-reads-facebook-reels-for-you",
+      "posted": false
+    },
+    {
+      "name": "2026-07-11_ai-for-medical-clinics-phone-problem",
+      "date": "2026-07-11",
+      "slug": "ai-for-medical-clinics-phone-problem",
       "posted": false
     },
     {
@@ -5847,15 +5864,15 @@
       "posted": false
     },
     {
-      "name": "2026-07-12_google-drive-sync-lock-fix",
+      "name": "2026-07-12_best-email-platform-for-small-business",
       "date": "2026-07-12",
-      "slug": "google-drive-sync-lock-fix",
+      "slug": "best-email-platform-for-small-business",
       "posted": false
     },
     {
-      "name": "2026-07-12_ffmpeg-reels-business-video",
+      "name": "2026-07-12_can-ai-create-the-images-for-my-social-media",
       "date": "2026-07-12",
-      "slug": "ffmpeg-reels-business-video",
+      "slug": "can-ai-create-the-images-for-my-social-media",
       "posted": false
     },
     {
@@ -5865,15 +5882,15 @@
       "posted": false
     },
     {
-      "name": "2026-07-12_how-we-fixed-netlify-forms-5-deploy-failures",
+      "name": "2026-07-12_ffmpeg-reels-business-video",
       "date": "2026-07-12",
-      "slug": "how-we-fixed-netlify-forms-5-deploy-failures",
+      "slug": "ffmpeg-reels-business-video",
       "posted": false
     },
     {
-      "name": "2026-07-12_how-we-built-ai-video-system-free",
+      "name": "2026-07-12_google-drive-sync-lock-fix",
       "date": "2026-07-12",
-      "slug": "how-we-built-ai-video-system-free",
+      "slug": "google-drive-sync-lock-fix",
       "posted": false
     },
     {
@@ -5883,51 +5900,15 @@
       "posted": false
     },
     {
-      "name": "2026-07-12_tool-deep-research",
+      "name": "2026-07-12_how-we-built-ai-video-system-free",
       "date": "2026-07-12",
-      "slug": "tool-deep-research",
+      "slug": "how-we-built-ai-video-system-free",
       "posted": false
     },
     {
-      "name": "2026-07-12_tool-stock-media",
+      "name": "2026-07-12_how-we-fixed-netlify-forms-5-deploy-failures",
       "date": "2026-07-12",
-      "slug": "tool-stock-media",
-      "posted": false
-    },
-    {
-      "name": "2026-07-12_tool-social-scheduling",
-      "date": "2026-07-12",
-      "slug": "tool-social-scheduling",
-      "posted": false
-    },
-    {
-      "name": "2026-07-12_tool-crm-followup",
-      "date": "2026-07-12",
-      "slug": "tool-crm-followup",
-      "posted": false
-    },
-    {
-      "name": "2026-07-12_tool-google-workspace",
-      "date": "2026-07-12",
-      "slug": "tool-google-workspace",
-      "posted": false
-    },
-    {
-      "name": "2026-07-12_tool-video-editing",
-      "date": "2026-07-12",
-      "slug": "tool-video-editing",
-      "posted": false
-    },
-    {
-      "name": "2026-07-12_tool-background-removal",
-      "date": "2026-07-12",
-      "slug": "tool-background-removal",
-      "posted": false
-    },
-    {
-      "name": "2026-07-12_tool-voice-cloning",
-      "date": "2026-07-12",
-      "slug": "tool-voice-cloning",
+      "slug": "how-we-fixed-netlify-forms-5-deploy-failures",
       "posted": false
     },
     {
@@ -5937,21 +5918,69 @@
       "posted": false
     },
     {
+      "name": "2026-07-12_tool-voice-cloning",
+      "date": "2026-07-12",
+      "slug": "tool-voice-cloning",
+      "posted": false
+    },
+    {
+      "name": "2026-07-12_tool-background-removal",
+      "date": "2026-07-12",
+      "slug": "tool-background-removal",
+      "posted": false
+    },
+    {
+      "name": "2026-07-12_tool-video-editing",
+      "date": "2026-07-12",
+      "slug": "tool-video-editing",
+      "posted": false
+    },
+    {
+      "name": "2026-07-12_tool-google-workspace",
+      "date": "2026-07-12",
+      "slug": "tool-google-workspace",
+      "posted": false
+    },
+    {
+      "name": "2026-07-12_tool-crm-followup",
+      "date": "2026-07-12",
+      "slug": "tool-crm-followup",
+      "posted": false
+    },
+    {
+      "name": "2026-07-12_tool-social-scheduling",
+      "date": "2026-07-12",
+      "slug": "tool-social-scheduling",
+      "posted": false
+    },
+    {
+      "name": "2026-07-12_tool-stock-media",
+      "date": "2026-07-12",
+      "slug": "tool-stock-media",
+      "posted": false
+    },
+    {
+      "name": "2026-07-12_tool-deep-research",
+      "date": "2026-07-12",
+      "slug": "tool-deep-research",
+      "posted": false
+    },
+    {
       "name": "2026-07-13_brand-templates-no-designer",
       "date": "2026-07-13",
       "slug": "brand-templates-no-designer",
       "posted": false
     },
     {
-      "name": "2026-07-13_ep01-trailer-social-media-with-ai",
-      "date": "2026-07-13",
-      "slug": "ep01-trailer-social-media-with-ai",
-      "posted": false
-    },
-    {
       "name": "2026-07-13_ep02-trailer-google-first-page",
       "date": "2026-07-13",
       "slug": "ep02-trailer-google-first-page",
+      "posted": false
+    },
+    {
+      "name": "2026-07-13_ep01-trailer-social-media-with-ai",
+      "date": "2026-07-13",
+      "slug": "ep01-trailer-social-media-with-ai",
       "posted": false
     },
     {
@@ -5985,15 +6014,9 @@
       "posted": false
     },
     {
-      "name": "2026-07-14_independent-retailers-week",
-      "date": "2026-07-14",
-      "slug": "independent-retailers-week",
-      "posted": false
-    },
-    {
-      "name": "2026-07-14_moon-day",
-      "date": "2026-07-14",
-      "slug": "moon-day",
+      "name": "_OCCASION_CONTENT",
+      "date": null,
+      "slug": "_OCCASION_CONTENT",
       "posted": false
     },
     {
@@ -6003,267 +6026,21 @@
       "posted": false
     },
     {
-      "name": "_OCCASION_CONTENT",
+      "name": "2026-07-14_moon-day",
+      "date": "2026-07-14",
+      "slug": "moon-day",
+      "posted": false
+    },
+    {
+      "name": "2026-07-14_independent-retailers-week",
+      "date": "2026-07-14",
+      "slug": "independent-retailers-week",
+      "posted": false
+    },
+    {
+      "name": "_TOOL_CONTENT",
       "date": null,
-      "slug": "_OCCASION_CONTENT",
-      "posted": false
-    },
-    {
-      "name": "2026-07-16_product-label-barcode-sheets",
-      "date": "2026-07-16",
-      "slug": "product-label-barcode-sheets",
-      "posted": false
-    },
-    {
-      "name": "2026-07-16_tool-workflow-automation",
-      "date": "2026-07-16",
-      "slug": "tool-workflow-automation",
-      "posted": false
-    },
-    {
-      "name": "_CAROUSEL_V2_SAMPLE",
-      "date": null,
-      "slug": "_CAROUSEL_V2_SAMPLE",
-      "posted": false
-    },
-    {
-      "name": "2026-07-16_tool-whatsapp-ai",
-      "date": "2026-07-16",
-      "slug": "tool-whatsapp-ai",
-      "posted": false
-    },
-    {
-      "name": "2026-07-16_tool-webby-website-ai",
-      "date": "2026-07-16",
-      "slug": "tool-webby-website-ai",
-      "posted": false
-    },
-    {
-      "name": "2026-07-16_tool-walkable-3d",
-      "date": "2026-07-16",
-      "slug": "tool-walkable-3d",
-      "posted": false
-    },
-    {
-      "name": "2026-07-16_tool-voice-cloning",
-      "date": "2026-07-16",
-      "slug": "tool-voice-cloning",
-      "posted": false
-    },
-    {
-      "name": "2026-07-16_tool-vidz-video-ai",
-      "date": "2026-07-16",
-      "slug": "tool-vidz-video-ai",
-      "posted": false
-    },
-    {
-      "name": "2026-07-16_tool-video-editing",
-      "date": "2026-07-16",
-      "slug": "tool-video-editing",
-      "posted": false
-    },
-    {
-      "name": "2026-07-16_tool-trend-research",
-      "date": "2026-07-16",
-      "slug": "tool-trend-research",
-      "posted": false
-    },
-    {
-      "name": "2026-07-16_tool-store-dashboard",
-      "date": "2026-07-16",
-      "slug": "tool-store-dashboard",
-      "posted": false
-    },
-    {
-      "name": "2026-07-16_tool-stock-media",
-      "date": "2026-07-16",
-      "slug": "tool-stock-media",
-      "posted": false
-    },
-    {
-      "name": "2026-07-15_tool-sonny-social-ai",
-      "date": "2026-07-15",
-      "slug": "tool-sonny-social-ai",
-      "posted": false
-    },
-    {
-      "name": "2026-07-15_tool-social-scheduling",
-      "date": "2026-07-15",
-      "slug": "tool-social-scheduling",
-      "posted": false
-    },
-    {
-      "name": "2026-07-15_tool-smooth-motion",
-      "date": "2026-07-15",
-      "slug": "tool-smooth-motion",
-      "posted": false
-    },
-    {
-      "name": "2026-07-15_tool-shy-shopify-ai",
-      "date": "2026-07-15",
-      "slug": "tool-shy-shopify-ai",
-      "posted": false
-    },
-    {
-      "name": "2026-07-15_tool-shopify-management",
-      "date": "2026-07-15",
-      "slug": "tool-shopify-management",
-      "posted": false
-    },
-    {
-      "name": "2026-07-15_tool-seo-analytics-reporting",
-      "date": "2026-07-15",
-      "slug": "tool-seo-analytics-reporting",
-      "posted": false
-    },
-    {
-      "name": "2026-07-15_tool-reading-images-text",
-      "date": "2026-07-15",
-      "slug": "tool-reading-images-text",
-      "posted": false
-    },
-    {
-      "name": "2026-07-15_tool-raphy-design-ai",
-      "date": "2026-07-15",
-      "slug": "tool-raphy-design-ai",
-      "posted": false
-    },
-    {
-      "name": "2026-07-15_tool-programmatic-video",
-      "date": "2026-07-15",
-      "slug": "tool-programmatic-video",
-      "posted": false
-    },
-    {
-      "name": "2026-07-15_tool-photo-to-3d",
-      "date": "2026-07-15",
-      "slug": "tool-photo-to-3d",
-      "posted": false
-    },
-    {
-      "name": "2026-07-15_tool-netlify-hosting",
-      "date": "2026-07-15",
-      "slug": "tool-netlify-hosting",
-      "posted": false
-    },
-    {
-      "name": "2026-07-15_tool-mobile-first-testing",
-      "date": "2026-07-15",
-      "slug": "tool-mobile-first-testing",
-      "posted": false
-    },
-    {
-      "name": "2026-07-15_tool-mai-marketing-ai",
-      "date": "2026-07-15",
-      "slug": "tool-mai-marketing-ai",
-      "posted": false
-    },
-    {
-      "name": "2026-07-15_tool-lead-generation",
-      "date": "2026-07-15",
-      "slug": "tool-lead-generation",
-      "posted": false
-    },
-    {
-      "name": "2026-07-15_tool-lana-leadgen-ai",
-      "date": "2026-07-15",
-      "slug": "tool-lana-leadgen-ai",
-      "posted": false
-    },
-    {
-      "name": "2026-07-15_tool-image-generation",
-      "date": "2026-07-15",
-      "slug": "tool-image-generation",
-      "posted": false
-    },
-    {
-      "name": "2026-07-15_tool-graphic-composition",
-      "date": "2026-07-15",
-      "slug": "tool-graphic-composition",
-      "posted": false
-    },
-    {
-      "name": "2026-07-15_tool-google-workspace",
-      "date": "2026-07-15",
-      "slug": "tool-google-workspace",
-      "posted": false
-    },
-    {
-      "name": "2026-07-15_tool-emy-email-ai",
-      "date": "2026-07-15",
-      "slug": "tool-emy-email-ai",
-      "posted": false
-    },
-    {
-      "name": "2026-07-15_tool-design-quality-system",
-      "date": "2026-07-15",
-      "slug": "tool-design-quality-system",
-      "posted": false
-    },
-    {
-      "name": "2026-07-15_tool-design-automation",
-      "date": "2026-07-15",
-      "slug": "tool-design-automation",
-      "posted": false
-    },
-    {
-      "name": "2026-07-15_tool-deep-research",
-      "date": "2026-07-15",
-      "slug": "tool-deep-research",
-      "posted": false
-    },
-    {
-      "name": "2026-07-15_tool-custom-coded-websites",
-      "date": "2026-07-15",
-      "slug": "tool-custom-coded-websites",
-      "posted": false
-    },
-    {
-      "name": "2026-07-15_tool-crm-followup",
-      "date": "2026-07-15",
-      "slug": "tool-crm-followup",
-      "posted": false
-    },
-    {
-      "name": "2026-07-15_tool-crm-email-platform",
-      "date": "2026-07-15",
-      "slug": "tool-crm-email-platform",
-      "posted": false
-    },
-    {
-      "name": "2026-07-15_tool-content-engine",
-      "date": "2026-07-15",
-      "slug": "tool-content-engine",
-      "posted": false
-    },
-    {
-      "name": "2026-07-15_tool-contact-database",
-      "date": "2026-07-15",
-      "slug": "tool-contact-database",
-      "posted": false
-    },
-    {
-      "name": "2026-07-15_tool-brunz-head-ai",
-      "date": "2026-07-15",
-      "slug": "tool-brunz-head-ai",
-      "posted": false
-    },
-    {
-      "name": "2026-07-15_tool-boogy-blog-ai",
-      "date": "2026-07-15",
-      "slug": "tool-boogy-blog-ai",
-      "posted": false
-    },
-    {
-      "name": "2026-07-15_tool-background-removal",
-      "date": "2026-07-15",
-      "slug": "tool-background-removal",
-      "posted": false
-    },
-    {
-      "name": "2026-07-15_tool-avatar-video",
-      "date": "2026-07-15",
-      "slug": "tool-avatar-video",
+      "slug": "_TOOL_CONTENT",
       "posted": false
     },
     {
@@ -6273,9 +6050,261 @@
       "posted": false
     },
     {
-      "name": "_TOOL_CONTENT",
+      "name": "2026-07-15_tool-avatar-video",
+      "date": "2026-07-15",
+      "slug": "tool-avatar-video",
+      "posted": false
+    },
+    {
+      "name": "2026-07-15_tool-background-removal",
+      "date": "2026-07-15",
+      "slug": "tool-background-removal",
+      "posted": false
+    },
+    {
+      "name": "2026-07-15_tool-boogy-blog-ai",
+      "date": "2026-07-15",
+      "slug": "tool-boogy-blog-ai",
+      "posted": false
+    },
+    {
+      "name": "2026-07-15_tool-brunz-head-ai",
+      "date": "2026-07-15",
+      "slug": "tool-brunz-head-ai",
+      "posted": false
+    },
+    {
+      "name": "2026-07-15_tool-contact-database",
+      "date": "2026-07-15",
+      "slug": "tool-contact-database",
+      "posted": false
+    },
+    {
+      "name": "2026-07-15_tool-content-engine",
+      "date": "2026-07-15",
+      "slug": "tool-content-engine",
+      "posted": false
+    },
+    {
+      "name": "2026-07-15_tool-crm-email-platform",
+      "date": "2026-07-15",
+      "slug": "tool-crm-email-platform",
+      "posted": false
+    },
+    {
+      "name": "2026-07-15_tool-crm-followup",
+      "date": "2026-07-15",
+      "slug": "tool-crm-followup",
+      "posted": false
+    },
+    {
+      "name": "2026-07-15_tool-custom-coded-websites",
+      "date": "2026-07-15",
+      "slug": "tool-custom-coded-websites",
+      "posted": false
+    },
+    {
+      "name": "2026-07-15_tool-deep-research",
+      "date": "2026-07-15",
+      "slug": "tool-deep-research",
+      "posted": false
+    },
+    {
+      "name": "2026-07-15_tool-design-automation",
+      "date": "2026-07-15",
+      "slug": "tool-design-automation",
+      "posted": false
+    },
+    {
+      "name": "2026-07-15_tool-design-quality-system",
+      "date": "2026-07-15",
+      "slug": "tool-design-quality-system",
+      "posted": false
+    },
+    {
+      "name": "2026-07-15_tool-emy-email-ai",
+      "date": "2026-07-15",
+      "slug": "tool-emy-email-ai",
+      "posted": false
+    },
+    {
+      "name": "2026-07-15_tool-google-workspace",
+      "date": "2026-07-15",
+      "slug": "tool-google-workspace",
+      "posted": false
+    },
+    {
+      "name": "2026-07-15_tool-graphic-composition",
+      "date": "2026-07-15",
+      "slug": "tool-graphic-composition",
+      "posted": false
+    },
+    {
+      "name": "2026-07-15_tool-image-generation",
+      "date": "2026-07-15",
+      "slug": "tool-image-generation",
+      "posted": false
+    },
+    {
+      "name": "2026-07-15_tool-lana-leadgen-ai",
+      "date": "2026-07-15",
+      "slug": "tool-lana-leadgen-ai",
+      "posted": false
+    },
+    {
+      "name": "2026-07-15_tool-lead-generation",
+      "date": "2026-07-15",
+      "slug": "tool-lead-generation",
+      "posted": false
+    },
+    {
+      "name": "2026-07-15_tool-mai-marketing-ai",
+      "date": "2026-07-15",
+      "slug": "tool-mai-marketing-ai",
+      "posted": false
+    },
+    {
+      "name": "2026-07-15_tool-mobile-first-testing",
+      "date": "2026-07-15",
+      "slug": "tool-mobile-first-testing",
+      "posted": false
+    },
+    {
+      "name": "2026-07-15_tool-netlify-hosting",
+      "date": "2026-07-15",
+      "slug": "tool-netlify-hosting",
+      "posted": false
+    },
+    {
+      "name": "2026-07-15_tool-photo-to-3d",
+      "date": "2026-07-15",
+      "slug": "tool-photo-to-3d",
+      "posted": false
+    },
+    {
+      "name": "2026-07-15_tool-programmatic-video",
+      "date": "2026-07-15",
+      "slug": "tool-programmatic-video",
+      "posted": false
+    },
+    {
+      "name": "2026-07-15_tool-raphy-design-ai",
+      "date": "2026-07-15",
+      "slug": "tool-raphy-design-ai",
+      "posted": false
+    },
+    {
+      "name": "2026-07-15_tool-reading-images-text",
+      "date": "2026-07-15",
+      "slug": "tool-reading-images-text",
+      "posted": false
+    },
+    {
+      "name": "2026-07-15_tool-seo-analytics-reporting",
+      "date": "2026-07-15",
+      "slug": "tool-seo-analytics-reporting",
+      "posted": false
+    },
+    {
+      "name": "2026-07-15_tool-shopify-management",
+      "date": "2026-07-15",
+      "slug": "tool-shopify-management",
+      "posted": false
+    },
+    {
+      "name": "2026-07-15_tool-shy-shopify-ai",
+      "date": "2026-07-15",
+      "slug": "tool-shy-shopify-ai",
+      "posted": false
+    },
+    {
+      "name": "2026-07-15_tool-smooth-motion",
+      "date": "2026-07-15",
+      "slug": "tool-smooth-motion",
+      "posted": false
+    },
+    {
+      "name": "2026-07-15_tool-social-scheduling",
+      "date": "2026-07-15",
+      "slug": "tool-social-scheduling",
+      "posted": false
+    },
+    {
+      "name": "2026-07-15_tool-sonny-social-ai",
+      "date": "2026-07-15",
+      "slug": "tool-sonny-social-ai",
+      "posted": false
+    },
+    {
+      "name": "2026-07-16_tool-stock-media",
+      "date": "2026-07-16",
+      "slug": "tool-stock-media",
+      "posted": false
+    },
+    {
+      "name": "2026-07-16_tool-store-dashboard",
+      "date": "2026-07-16",
+      "slug": "tool-store-dashboard",
+      "posted": false
+    },
+    {
+      "name": "2026-07-16_tool-trend-research",
+      "date": "2026-07-16",
+      "slug": "tool-trend-research",
+      "posted": false
+    },
+    {
+      "name": "2026-07-16_tool-video-editing",
+      "date": "2026-07-16",
+      "slug": "tool-video-editing",
+      "posted": false
+    },
+    {
+      "name": "2026-07-16_tool-vidz-video-ai",
+      "date": "2026-07-16",
+      "slug": "tool-vidz-video-ai",
+      "posted": false
+    },
+    {
+      "name": "2026-07-16_tool-voice-cloning",
+      "date": "2026-07-16",
+      "slug": "tool-voice-cloning",
+      "posted": false
+    },
+    {
+      "name": "2026-07-16_tool-walkable-3d",
+      "date": "2026-07-16",
+      "slug": "tool-walkable-3d",
+      "posted": false
+    },
+    {
+      "name": "2026-07-16_tool-webby-website-ai",
+      "date": "2026-07-16",
+      "slug": "tool-webby-website-ai",
+      "posted": false
+    },
+    {
+      "name": "2026-07-16_tool-whatsapp-ai",
+      "date": "2026-07-16",
+      "slug": "tool-whatsapp-ai",
+      "posted": false
+    },
+    {
+      "name": "_CAROUSEL_V2_SAMPLE",
       "date": null,
-      "slug": "_TOOL_CONTENT",
+      "slug": "_CAROUSEL_V2_SAMPLE",
+      "posted": false
+    },
+    {
+      "name": "2026-07-16_tool-workflow-automation",
+      "date": "2026-07-16",
+      "slug": "tool-workflow-automation",
+      "posted": false
+    },
+    {
+      "name": "2026-07-16_product-label-barcode-sheets",
+      "date": "2026-07-16",
+      "slug": "product-label-barcode-sheets",
       "posted": false
     },
     {
@@ -6303,15 +6332,9 @@
       "posted": false
     },
     {
-      "name": "2026-08-11_every-project-gets-a-page",
-      "date": "2026-08-11",
-      "slug": "every-project-gets-a-page",
-      "posted": false
-    },
-    {
-      "name": "2026-08-08_bookings-on-your-own-site",
-      "date": "2026-08-08",
-      "slug": "bookings-on-your-own-site",
+      "name": "2026-08-06_client-command-center",
+      "date": "2026-08-06",
+      "slug": "client-command-center",
       "posted": false
     },
     {
@@ -6321,9 +6344,15 @@
       "posted": false
     },
     {
-      "name": "2026-08-06_client-command-center",
-      "date": "2026-08-06",
-      "slug": "client-command-center",
+      "name": "2026-08-08_bookings-on-your-own-site",
+      "date": "2026-08-08",
+      "slug": "bookings-on-your-own-site",
+      "posted": false
+    },
+    {
+      "name": "2026-08-11_every-project-gets-a-page",
+      "date": "2026-08-11",
+      "slug": "every-project-gets-a-page",
       "posted": false
     },
     {
@@ -6369,15 +6398,9 @@
       "posted": false
     },
     {
-      "name": "2026-08-27_international-day-of-peace",
+      "name": "2026-08-27_labor-day",
       "date": "2026-08-27",
-      "slug": "international-day-of-peace",
-      "posted": false
-    },
-    {
-      "name": "2026-08-27_hispanic-heritage-month",
-      "date": "2026-08-27",
-      "slug": "hispanic-heritage-month",
+      "slug": "labor-day",
       "posted": false
     },
     {
@@ -6387,20 +6410,52 @@
       "posted": false
     },
     {
-      "name": "2026-08-27_labor-day",
+      "name": "2026-08-27_hispanic-heritage-month",
       "date": "2026-08-27",
-      "slug": "labor-day",
+      "slug": "hispanic-heritage-month",
+      "posted": false
+    },
+    {
+      "name": "2026-08-27_international-day-of-peace",
+      "date": "2026-08-27",
+      "slug": "international-day-of-peace",
+      "posted": false
+    },
+    {
+      "name": "2026-09-03_shopify-rebuild-golive",
+      "date": "2026-09-03",
+      "slug": "shopify-rebuild-golive",
+      "posted": false
+    },
+    {
+      "name": "2026-09-03_local-contractor-multi-city-seo",
+      "date": "2026-09-03",
+      "slug": "local-contractor-multi-city-seo",
+      "posted": false
+    },
+    {
+      "name": "2026-09-04_ai-family-build",
+      "date": "2026-09-04",
+      "slug": "ai-family-build",
       "posted": false
     }
   ],
   "insights": {
-    "total": 114,
+    "total": 116,
     "cats": [
       {
         "key": "marketing",
         "label": "Marketing",
-        "count": 25,
+        "count": 27,
         "pages": [
+          {
+            "title": "The Client Win-Back System",
+            "url": "client-win-back-system.html"
+          },
+          {
+            "title": "Can Someone Run My Google Ads for Me?",
+            "url": "can-someone-run-my-google-ads-for-me.html"
+          },
           {
             "title": "Can AI Write My Captions So They Sound Like MY Brand, Not Generic?",
             "url": "can-ai-write-captions-that-sound-like-my-brand.html"
@@ -6911,12 +6966,12 @@
     ]
   },
   "siteMap": {
-    "total": 228,
+    "total": 229,
     "summary": {
-      "total": 228,
-      "inSitemap": 214,
-      "notSearchable": 3,
-      "orphans": 9,
+      "total": 229,
+      "inSitemap": 216,
+      "notSearchable": 2,
+      "orphans": 8,
       "noindex": 24,
       "missingDesc": 0
     },
@@ -6945,7 +7000,7 @@
             "indexable": true,
             "orphan": false,
             "hasDesc": true,
-            "inbound": 217,
+            "inbound": 218,
             "noindex": false
           },
           {
@@ -7000,7 +7055,7 @@
             "indexable": true,
             "orphan": false,
             "hasDesc": true,
-            "inbound": 214,
+            "inbound": 215,
             "noindex": false
           },
           {
@@ -7033,7 +7088,7 @@
             "indexable": true,
             "orphan": false,
             "hasDesc": true,
-            "inbound": 95,
+            "inbound": 96,
             "noindex": false
           },
           {
@@ -7118,7 +7173,7 @@
             "indexable": true,
             "orphan": false,
             "hasDesc": true,
-            "inbound": 2,
+            "inbound": 3,
             "noindex": false
           },
           {
@@ -7269,7 +7324,7 @@
             "indexable": true,
             "orphan": false,
             "hasDesc": true,
-            "inbound": 13,
+            "inbound": 14,
             "noindex": false
           },
           {
@@ -7445,7 +7500,7 @@
             "indexable": true,
             "orphan": false,
             "hasDesc": true,
-            "inbound": 3,
+            "inbound": 4,
             "noindex": false
           },
           {
@@ -7515,6 +7570,17 @@
             "noindex": false
           },
           {
+            "name": "Can Someone Run My Google Ads for Me?",
+            "path": "can-someone-run-my-google-ads-for-me.html",
+            "cat": "Marketing",
+            "inSitemap": true,
+            "indexable": true,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 1,
+            "noindex": false
+          },
+          {
             "name": "Can You See Your New Building Before It Is Built?",
             "path": "how-we-build-walkable-3d-tours.html",
             "cat": "Websites",
@@ -7522,7 +7588,7 @@
             "indexable": true,
             "orphan": false,
             "hasDesc": true,
-            "inbound": 2,
+            "inbound": 1,
             "noindex": false
           },
           {
@@ -7775,7 +7841,7 @@
             "indexable": true,
             "orphan": false,
             "hasDesc": true,
-            "inbound": 2,
+            "inbound": 3,
             "noindex": false
           },
           {
@@ -7940,7 +8006,7 @@
             "indexable": true,
             "orphan": false,
             "hasDesc": true,
-            "inbound": 2,
+            "inbound": 1,
             "noindex": false
           },
           {
@@ -7995,7 +8061,7 @@
             "indexable": true,
             "orphan": false,
             "hasDesc": true,
-            "inbound": 2,
+            "inbound": 1,
             "noindex": false
           },
           {
@@ -8094,7 +8160,7 @@
             "indexable": true,
             "orphan": false,
             "hasDesc": true,
-            "inbound": 1,
+            "inbound": 2,
             "noindex": false
           },
           {
@@ -8241,17 +8307,6 @@
             "noindex": false
           },
           {
-            "name": "How We Build Walkable 3D From a Phone",
-            "path": "how-we-build-walkable-3d.html",
-            "cat": "",
-            "inSitemap": false,
-            "indexable": true,
-            "orphan": true,
-            "hasDesc": true,
-            "inbound": 0,
-            "noindex": false
-          },
-          {
             "name": "How We Built a 3D Product Designer Customers Use in Their Browser",
             "path": "how-we-built-3d-product-designer-free.html",
             "cat": "Websites",
@@ -8259,7 +8314,7 @@
             "indexable": true,
             "orphan": false,
             "hasDesc": true,
-            "inbound": 4,
+            "inbound": 3,
             "noindex": false
           },
           {
@@ -8549,6 +8604,17 @@
             "noindex": false
           },
           {
+            "name": "The Client Win-Back System",
+            "path": "client-win-back-system.html",
+            "cat": "Marketing",
+            "inSitemap": true,
+            "indexable": true,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 2,
+            "noindex": false
+          },
+          {
             "name": "The Daily Carousel Workflow",
             "path": "workflow-daily-carousel.html",
             "cat": "",
@@ -8725,7 +8791,7 @@
             "noindex": true
           }
         ],
-        "count": 135
+        "count": 136
       },
       {
         "key": "tools",
@@ -9169,7 +9235,7 @@
             "indexable": true,
             "orphan": false,
             "hasDesc": true,
-            "inbound": 5,
+            "inbound": 4,
             "noindex": false
           },
           {
@@ -9492,7 +9558,6 @@
         "how-ai-finds-customers-for-you.html",
         "how-we-build-a-website-without-a-developer.html",
         "how-we-build-an-ai-family.html",
-        "how-we-build-walkable-3d.html",
         "how-we-get-any-business-on-google.html",
         "how-we-run-social-media-with-ai.html",
         "how-we-turn-a-store-into-an-online-store.html",
@@ -9500,7 +9565,6 @@
       ],
       "notInSitemap": [
         "case-studies.html",
-        "how-we-build-walkable-3d.html",
         "certifications.html"
       ],
       "missingDesc": []

@@ -17,44 +17,6 @@
   directory = "netlify/functions"
   node_bundler = "esbuild"
 
-# Social media posted to Metricool references the ARTICLE slug, but the media was
-# published under its wf-numbered folder name. The URLs 404'd, so 23 scheduled posts
-# failed to publish on 2026-09-04 across Facebook, Instagram, TikTok and YouTube while
-# the calendar still looked full. These rewrites point the article slug at the media
-# that already exists. Each pair was confirmed by matching the scheduled post's text to
-# that folder's caption.md, not by guessing from the folder name.
-# The real fix is for the content pipeline to publish under one naming scheme; until
-# then, add a line here whenever a post is scheduled against an article slug.
-[[redirects]]
-  from = "/social-media/can-my-ai-see-my-screen-and-help/*"
-  to = "/social-media/wf30-ai-sees-your-screen/:splat"
-  status = 200
-
-[[redirects]]
-  from = "/social-media/how-to-make-branded-proposals-quotes-fast/*"
-  to = "/social-media/wf32-branded-proposals-fast/:splat"
-  status = 200
-
-[[redirects]]
-  from = "/social-media/how-to-read-text-from-scanned-documents/*"
-  to = "/social-media/wf31-read-scanned-docs/:splat"
-  status = 200
-
-[[redirects]]
-  from = "/social-media/how-we-clone-website-without-installing-anything/*"
-  to = "/social-media/wf28-website-replicator/:splat"
-  status = 200
-
-[[redirects]]
-  from = "/social-media/how-we-document-every-process-as-content/*"
-  to = "/social-media/wf29-process-as-content/:splat"
-  status = 200
-
-[[redirects]]
-  from = "/social-media/remove-discontinued-products-from-website/*"
-  to = "/social-media/wf108-remove-discontinued-products-from-website/:splat"
-  status = 200
-
 # Serve PWA manifests with the correct MIME type so the dashboards install on Android too.
 [[headers]]
   for = "/wwos/manifest.webmanifest"
@@ -113,3 +75,277 @@
   to = "/404.html"
   status = 404
   force = true
+
+# >>> generated: social-media article-slug aliases (gen-social-redirects.mjs)
+# Do not hand-edit. Regenerate with: node scripts/gen-social-redirects.mjs
+[[redirects]]
+  from = "/social-media/how-we-set-up-free-remote-desktop-multiple-pcs/*"
+  to = "/social-media/wf100-how-we-set-up-free-remote-desktop-multiple-pcs/:splat"
+  status = 200
+
+[[redirects]]
+  from = "/social-media/how-we-sync-two-pcs-one-ai-brain/*"
+  to = "/social-media/wf101-how-we-sync-two-pcs-one-ai-brain/:splat"
+  status = 200
+
+[[redirects]]
+  from = "/social-media/how-we-structure-ai-so-clients-cant-break-it/*"
+  to = "/social-media/wf102-how-we-structure-ai-so-clients-cant-break-it/:splat"
+  status = 200
+
+[[redirects]]
+  from = "/social-media/how-we-transcribed-96-minute-zoom-meeting-free/*"
+  to = "/social-media/wf103-how-we-transcribed-96-minute-zoom-meeting-free/:splat"
+  status = 200
+
+[[redirects]]
+  from = "/social-media/how-we-used-remotion-make-free-motion-graphics/*"
+  to = "/social-media/wf104-how-we-used-remotion-make-free-motion-graphics/:splat"
+  status = 200
+
+[[redirects]]
+  from = "/social-media/manage-shopify-store-without-sharing-password/*"
+  to = "/social-media/wf105-manage-shopify-store-without-sharing-password/:splat"
+  status = 200
+
+[[redirects]]
+  from = "/social-media/online-store-light-and-dark-mode/*"
+  to = "/social-media/wf106-online-store-light-and-dark-mode/:splat"
+  status = 200
+
+[[redirects]]
+  from = "/social-media/redesign-online-store-without-taking-it-offline/*"
+  to = "/social-media/wf107-redesign-online-store-without-taking-it-offline/:splat"
+  status = 200
+
+[[redirects]]
+  from = "/social-media/remove-discontinued-products-from-website/*"
+  to = "/social-media/wf108-remove-discontinued-products-from-website/:splat"
+  status = 200
+
+[[redirects]]
+  from = "/social-media/website-that-shows-products-without-a-cart/*"
+  to = "/social-media/wf109-website-that-shows-products-without-a-cart/:splat"
+  status = 200
+
+[[redirects]]
+  from = "/social-media/whatsapp-for-business-client-messages/*"
+  to = "/social-media/wf110-whatsapp-for-business-client-messages/:splat"
+  status = 200
+
+[[redirects]]
+  from = "/social-media/ai-tools-small-business-no-tech-skills/*"
+  to = "/social-media/wf111-ai-tools-small-business-no-tech-skills/:splat"
+  status = 200
+
+[[redirects]]
+  from = "/social-media/best-email-platform-for-small-business/*"
+  to = "/social-media/wf112-best-email-platform-for-small-business/:splat"
+  status = 200
+
+[[redirects]]
+  from = "/social-media/can-ai-create-the-images-for-my-social-media/*"
+  to = "/social-media/wf113-can-ai-create-the-images-for-my-social-media/:splat"
+  status = 200
+
+[[redirects]]
+  from = "/social-media/can-ai-keep-my-website-updated/*"
+  to = "/social-media/wf114-can-ai-keep-my-website-updated/:splat"
+  status = 200
+
+[[redirects]]
+  from = "/social-media/ffmpeg-reels-business-video/*"
+  to = "/social-media/wf115-ffmpeg-reels-business-video/:splat"
+  status = 200
+
+[[redirects]]
+  from = "/social-media/google-drive-sync-lock-fix/*"
+  to = "/social-media/wf116-google-drive-sync-lock-fix/:splat"
+  status = 200
+
+[[redirects]]
+  from = "/social-media/how-to-set-up-fiverr-to-land-clients/*"
+  to = "/social-media/wf117-how-to-set-up-fiverr-to-land-clients/:splat"
+  status = 200
+
+[[redirects]]
+  from = "/social-media/how-we-built-ai-video-system-free/*"
+  to = "/social-media/wf118-how-we-built-ai-video-system-free/:splat"
+  status = 200
+
+[[redirects]]
+  from = "/social-media/how-we-fixed-netlify-forms-5-deploy-failures/*"
+  to = "/social-media/wf119-how-we-fixed-netlify-forms-5-deploy-failures/:splat"
+  status = 200
+
+[[redirects]]
+  from = "/social-media/ai-for-medical-clinics-phone-problem/*"
+  to = "/social-media/wf55-ai-for-medical-clinics-phone-problem/:splat"
+  status = 200
+
+[[redirects]]
+  from = "/social-media/ai-reads-facebook-reels-for-you/*"
+  to = "/social-media/wf56-ai-reads-facebook-reels-for-you/:splat"
+  status = 200
+
+[[redirects]]
+  from = "/social-media/ai-rebuild-and-run-my-shopify-store/*"
+  to = "/social-media/wf57-ai-rebuild-and-run-my-shopify-store/:splat"
+  status = 200
+
+[[redirects]]
+  from = "/social-media/ai-video-system-no-subscription-stack/*"
+  to = "/social-media/wf58-ai-video-system-no-subscription-stack/:splat"
+  status = 200
+
+[[redirects]]
+  from = "/social-media/can-ai-improve-my-product-photos/*"
+  to = "/social-media/wf59-can-ai-improve-my-product-photos/:splat"
+  status = 200
+
+[[redirects]]
+  from = "/social-media/can-ai-keep-me-organized-and-remind-me/*"
+  to = "/social-media/wf60-can-ai-keep-me-organized-and-remind-me/:splat"
+  status = 200
+
+[[redirects]]
+  from = "/social-media/can-ai-sort-my-inbox-every-morning/*"
+  to = "/social-media/wf62-can-ai-sort-my-inbox-every-morning/:splat"
+  status = 200
+
+[[redirects]]
+  from = "/social-media/can-ai-tell-me-whats-in-a-video-or-link/*"
+  to = "/social-media/wf63-can-ai-tell-me-whats-in-a-video-or-link/:splat"
+  status = 200
+
+[[redirects]]
+  from = "/social-media/can-ai-write-captions-that-match-whats-trending/*"
+  to = "/social-media/wf64-can-ai-write-captions-that-match-whats-trending/:splat"
+  status = 200
+
+[[redirects]]
+  from = "/social-media/can-ai-write-captions-that-sound-like-my-brand/*"
+  to = "/social-media/wf65-can-ai-write-captions-that-sound-like-my-brand/:splat"
+  status = 200
+
+[[redirects]]
+  from = "/social-media/company-chat-app-like-whatsapp/*"
+  to = "/social-media/wf66-company-chat-app-like-whatsapp/:splat"
+  status = 200
+
+[[redirects]]
+  from = "/social-media/connect-whatsapp-to-your-business-ai/*"
+  to = "/social-media/wf67-connect-whatsapp-to-your-business-ai/:splat"
+  status = 200
+
+[[redirects]]
+  from = "/social-media/get-notified-when-team-edits-dashboard/*"
+  to = "/social-media/wf69-get-notified-when-team-edits-dashboard/:splat"
+  status = 200
+
+[[redirects]]
+  from = "/social-media/heygen-avatar-narration-business-video/*"
+  to = "/social-media/wf70-heygen-avatar-narration-business-video/:splat"
+  status = 200
+
+[[redirects]]
+  from = "/social-media/how-nonprofit-grows-audience-online/*"
+  to = "/social-media/wf72-how-nonprofit-grows-audience-online/:splat"
+  status = 200
+
+[[redirects]]
+  from = "/social-media/how-online-store-keeps-content-consistent/*"
+  to = "/social-media/wf73-how-online-store-keeps-content-consistent/:splat"
+  status = 200
+
+[[redirects]]
+  from = "/social-media/how-showroom-gets-pros-to-refer-clients/*"
+  to = "/social-media/wf74-how-showroom-gets-pros-to-refer-clients/:splat"
+  status = 200
+
+[[redirects]]
+  from = "/social-media/how-to-add-products-without-breaking-store-design/*"
+  to = "/social-media/wf75-how-to-add-products-without-breaking-store-design/:splat"
+  status = 200
+
+[[redirects]]
+  from = "/social-media/how-to-automate-small-business-tasks/*"
+  to = "/social-media/wf76-how-to-automate-small-business-tasks/:splat"
+  status = 200
+
+[[redirects]]
+  from = "/social-media/how-to-get-your-business-found-on-google/*"
+  to = "/social-media/wf77-how-to-get-your-business-found-on-google/:splat"
+  status = 200
+
+[[redirects]]
+  from = "/social-media/how-to-keep-team-on-same-page-across-computers/*"
+  to = "/social-media/wf79-how-to-keep-team-on-same-page-across-computers/:splat"
+  status = 200
+
+[[redirects]]
+  from = "/social-media/how-to-organize-business-files-to-find-anything/*"
+  to = "/social-media/wf82-how-to-organize-business-files-to-find-anything/:splat"
+  status = 200
+
+[[redirects]]
+  from = "/social-media/how-to-organize-large-product-catalog-customers-choose/*"
+  to = "/social-media/wf83-how-to-organize-large-product-catalog-customers-choose/:splat"
+  status = 200
+
+[[redirects]]
+  from = "/social-media/how-to-plan-a-month-of-social-media/*"
+  to = "/social-media/wf84-how-to-plan-a-month-of-social-media/:splat"
+  status = 200
+
+[[redirects]]
+  from = "/social-media/how-to-sell-custom-products-good-better-best-online/*"
+  to = "/social-media/wf85-how-to-sell-custom-products-good-better-best-online/:splat"
+  status = 200
+
+[[redirects]]
+  from = "/social-media/how-to-show-client-website-preview-link-that-never-dies/*"
+  to = "/social-media/wf86-how-to-show-client-website-preview-link-that-never-dies/:splat"
+  status = 200
+
+[[redirects]]
+  from = "/social-media/how-to-report-results-to-clients-fast/*"
+  to = "/social-media/wf88-how-to-report-results-to-clients-fast/:splat"
+  status = 200
+
+[[redirects]]
+  from = "/social-media/how-to-track-leads-without-expensive-crm/*"
+  to = "/social-media/wf90-how-to-track-leads-without-expensive-crm/:splat"
+  status = 200
+
+[[redirects]]
+  from = "/social-media/how-to-turn-google-sheet-into-live-dashboard/*"
+  to = "/social-media/wf93-how-to-turn-google-sheet-into-live-dashboard/:splat"
+  status = 200
+
+[[redirects]]
+  from = "/social-media/how-to-write-better-ai-prompts/*"
+  to = "/social-media/wf94-how-to-write-better-ai-prompts/:splat"
+  status = 200
+
+[[redirects]]
+  from = "/social-media/how-to-write-captions-any-business-owner-understands/*"
+  to = "/social-media/wf95-how-to-write-captions-any-business-owner-understands/:splat"
+  status = 200
+
+[[redirects]]
+  from = "/social-media/how-we-build-new-ai-by-teaching-siblings/*"
+  to = "/social-media/wf96-how-we-build-new-ai-by-teaching-siblings/:splat"
+  status = 200
+
+[[redirects]]
+  from = "/social-media/how-we-cut-ai-costs-1000-per-month/*"
+  to = "/social-media/wf98-how-we-cut-ai-costs-1000-per-month/:splat"
+  status = 200
+
+[[redirects]]
+  from = "/social-media/how-we-onboard-va-without-paying-for-extra-email-seat/*"
+  to = "/social-media/wf99-how-we-onboard-va-without-paying-for-extra-email-seat/:splat"
+  status = 200
+
+# <<< end generated social-media aliases
