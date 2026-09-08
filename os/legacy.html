@@ -757,8 +757,8 @@
 <script type="application/json" id="bbc-data">
 {
   "meta": {
-    "updated": "2026-09-03",
-    "pendingCount": 219
+    "updated": "2026-09-08",
+    "pendingCount": 225
   },
   "owners": {
     "Vidz": "#A78BFA",
@@ -788,6 +788,7 @@
       "slug": "cherry-sage",
       "link": "/cherry-sage",
       "folder": "CHERRY-SAGE",
+      "claudeMdNote": "Online psychic readings + tarot/numerology, B2C international. Owner Beverly Cherry (cherry38@cherrysage.com), sole decision-maker. Handler: RJ only talks to the client. Client AI = Ivy (02_AI_IVY\\). $2,000/mo flat retainer, billed weekly at $500/completed workweek (INVOICE_REGISTER_CHERRYSAGE.md). Social is planned but not started (RJ 2026-09-04), so it is not tracked on the dashboard. Brand guardrail: professional/warm/traditional, NEVER witchy or fortune-telling. Added to CLAUDE.md + Brevo Active Clients list 2026-09-01 (was invoiced since Aug 2026 but missing from both). Email: cherrysage.com DNS-authenticated 2026-09-05 after weeks of 0-delivery (SPF/DKIM/DMARC fixed in Hostgator); now ramping the ~1,725-contact list tier-by-tier (Tier 1 Warm done clean, Tier 2/3 to follow) to protect the freshly-fixed domain reputation — tracked live via bbc_status.py's \"Cherry Sage Brevo ramp\" check, full history in memory project_cherry_sage_domain_not_authenticated.md.",
       "category": "active"
     },
     {
@@ -801,6 +802,7 @@
       "notes": "Daryl took over 2026-06-12 (was Al). Olivia built + full capability. Editorial rebrand site staged as Shopify draft.",
       "folder": "S-RIVIERE-HAIR-COLLECTION",
       "slug": "s-riviere-hair-collection",
+      "claudeMdNote": "Shopify build",
       "category": "active"
     },
     {
@@ -814,6 +816,7 @@
       "notes": "Luxury positioning. Krizza only BBC member in WW OS. Owners on Claude.ai Pro only.",
       "folder": "WOODEN-WOODWORKS",
       "slug": "wooden-woodworks",
+      "claudeMdNote": "Luxury positioning, custom woodwork. Krizza is the only BBC team member who operates Claude Code inside the WW OS. Oscar and Marla (owners) have NO Claude Code access -- their AI access is Claude.ai Pro (Woody) only.",
       "category": "active"
     },
     {
@@ -827,19 +830,7 @@
       "notes": "ON HOLD (paused) since 2026-08-12 — daily client-care routines paused. Kept listed as current publicly. Handled by RJ directly. Shopify build. Homie = BBC's all-in-one AI for HVS.",
       "folder": "HOME-VISION-STUDIO",
       "slug": "home-vision-studio",
-      "category": "active"
-    },
-    {
-      "name": "First Class Finishes & Hi-Up Roofing",
-      "owner": "-",
-      "handler": "Ryan C.",
-      "ai": "-",
-      "site": "firstclass-finishes.com",
-      "industry": "Commercial painting + roofing + storm-damage roofing, Texas",
-      "status": "hold",
-      "notes": "ON HOLD (paused) since 2026-08-12 — daily client-care routines paused. Kept listed as current publicly. Combined account (Ryan C.). First Class Finishes = commercial painting + roofing (firstclass-finishes.com); Hi-Up Roofing = storm-damage roofing + insurance SEO (hi-uproofing.com).",
-      "folder": "FIRST-CLASS-FINISHES",
-      "slug": "first-class-finishes",
+      "claudeMdNote": "ON HOLD since 2026-08-02 (Beau paused ~4 months; confirmed by his own email + cross-referenced in memory). Do NOT run routines, send reports, or bill until RJ confirms resumed. Shopify store, design centers.",
       "category": "active"
     },
     {
@@ -853,19 +844,7 @@
       "notes": "Solely handled by Vi now (was Al). Sister business to Sonya. Coordinate carefully.",
       "folder": "AJ-BATTLE-FOUNDATION",
       "slug": "aj-battle-foundation",
-      "category": "active"
-    },
-    {
-      "name": "3r Design",
-      "owner": "-",
-      "handler": "Becky / RJ",
-      "ai": "-",
-      "site": "-",
-      "industry": "Design",
-      "status": "active",
-      "notes": "With Becky; RJ also handling personally for now.",
-      "folder": "3R-DESIGN",
-      "slug": "3r-design",
+      "claudeMdNote": "Nonprofit",
       "category": "active"
     },
     {
@@ -879,6 +858,7 @@
       "notes": "Active client (signed). Website + marketing emails (GHL) + social. Sole approver: Rebekah. Contacts: rseveri@frecciagroup.com (cc wseveri, jclements, accounting). AI = Bob.",
       "folder": "FRECCIA-CONSTRUCTION",
       "slug": "freccia-construction",
+      "claudeMdNote": "Custom builder, Austin TX. AI = Bob (02_AI_BOB\\). Load BOB_SYSTEM_PROMPT.md + BOB_KNOWLEDGE_BASE\\ first. BBC runs their social, CRM and email through GoHighLevel; the dashboard needs a read-only token at C:\\BBC\\_SECRETS\\ghl_freccia_pit.txt (currently empty). Bob is multi-device: deployed as Claude.ai Project \"Bob — Freccia Construction\" (account-level = auto-accessible on Plus/Tuff/Free). Pending: brand visuals, email confirm, tool access (GHL/QB/Buildertrend). Drafts only — Rebekah is sole approver.",
       "category": "active"
     },
     {
@@ -892,6 +872,7 @@
       "notes": "Active client. LinkedIn outreach + GoHighLevel CRM. Contacts: Jasmine Brown + Anthony, jrsigningservices@gmail.com, (832) 387-4648.",
       "folder": "JR-SIGNING-SERVICES",
       "slug": "jr-signing-services",
+      "claudeMdNote": "TX notary signing agency, Jasmine Green + Anthony Green (corrected 2026-09-07 by Daryl; this table previously said \"Jasmine Brown\", which reached a client draft before it was caught. They share a surname, that is not a merge error). Daryl runs lead generation and email marketing for them through GoHighLevel (CRM + leads + email). A read-only Private Integration Token must live at C:\\BBC\\_SECRETS\\ghl_jrss_pit.txt for the dashboard to read their pipeline. Confirmed ACTIVE by RJ 2026-09-03 after a meeting with Daryl about upgrading their Netlify plan; daily health checks resume from that date.",
       "category": "active"
     },
     {
@@ -906,6 +887,29 @@
       "slug": "bilt-2-travel",
       "link": "/bilt-2-travel",
       "folder": "BILT-2-TRAVEL",
+      "claudeMdNote": "Travel-rewards education, e-book funnel. Owner Dwight Campbell (info@bilt2travel.com), sole approver via RJ. Kenz is the dedicated VA. Client AI = BILL (08_AI_BILT\\). Billed bi-weekly, $8/hr x 15 hrs/wk + e-book bonus tiers (INVOICE_REGISTER_BILT.md). NEVER \"hack\"/\"free travel\"/risky-credit language. Drafts only, no auto-post/send. Added to CLAUDE.md + Brevo Active Clients list 2026-09-01 (was invoiced since Jul 2026 but missing from both).",
+      "category": "active"
+    },
+    {
+      "id": "optimism-consulting",
+      "name": "Optimism Consulting",
+      "status": "hold",
+      "category": "active",
+      "claudeMdNote": "ON HOLD since 2026-09-03 (RJ paused work with OShun; not a current client for now. Do NOT run routines, send reports or bill until RJ confirms resumed.) Credit repair + business funding, Dallas TX. Started 2026-08-12. OShun Jones is sole approver. Ryan Bernaldez is the VA, and does NOT contact the client directly. Load 00_START_HERE\\OPTIMISM_PROJECT_CONTEXT.md first. Credit repair only on first contact, never lead with business funding. NEVER attempt a QuickBooks login. BOAZELLE.csv in 03_CLIENT_SHARED\\ is his real bank statement, never forward it.",
+      "folder": "OPTIMISM-CONSULTING"
+    },
+    {
+      "name": "All Ryze",
+      "owner": "-",
+      "handler": "Ryan",
+      "ai": "-",
+      "site": "-",
+      "industry": "Digital audience engagement & growth management agency",
+      "status": "active",
+      "notes": "Active, part-time. Ryan leads the account and tracks the work off-platform, so nothing is machine-checkable on the dashboard; that is not a gap. NEVER use adult-platform language. Describe as a digital audience engagement and growth management agency.",
+      "folder": "ALL-RYZE",
+      "slug": "all-ryze",
+      "claudeMdNote": "NEVER use adult platform language. Describe as \"digital audience engagement agency.\" Ryan leads the account and tracks the work off-platform, so nothing is machine-checkable on the dashboard - that is not a gap.",
       "category": "active"
     },
     {
@@ -1012,19 +1016,6 @@
       "category": "past"
     },
     {
-      "name": "All Ryze",
-      "owner": "-",
-      "handler": "Kenz / Daryl",
-      "ai": "-",
-      "site": "-",
-      "industry": "Digital audience engagement & growth management agency",
-      "status": "past",
-      "notes": "Part-time now, moved to past/old clients. NEVER use adult-platform language. Describe as a digital audience engagement and growth management agency.",
-      "folder": "ALL-RYZE",
-      "slug": "all-ryze",
-      "category": "past"
-    },
-    {
       "name": "MNJ Insurance Solutions",
       "owner": "Julie Jennings",
       "handler": "-",
@@ -1128,6 +1119,35 @@
       "folder": "4OCEAN",
       "slug": "4ocean",
       "link": "/4ocean.html",
+      "claudeMdNote": "Partnership ended 2026-07-07 as 4Ocean restructures their ecommerce team. RJ worked as embedded contractor (not a standard BBC retainer); BBC's internal AI/creative system supported the work. Full history: 00_CLIENT_MASTER\\4OCEAN_ENGAGEMENT_SUMMARY.md. Do not read Slack/Asana into new tasks — engagement closed.",
+      "category": "past"
+    },
+    {
+      "name": "First Class Finishes & Hi-Up Roofing",
+      "owner": "-",
+      "handler": "Ryan C.",
+      "ai": "-",
+      "site": "firstclass-finishes.com",
+      "industry": "Commercial painting + roofing + storm-damage roofing, Texas",
+      "status": "past",
+      "notes": "No longer an active client (RJ, 2026-08-29). Michael/Kari Pedley, billed together as one entity. Do not run routines, report or bill. Last invoice #14 (Jul 20-Aug 2, 2026), $300, unclear if ever sent; do not chase or bill further.",
+      "folder": "FIRST-CLASS-FINISHES",
+      "slug": "first-class-finishes",
+      "claudeMdNote": "First Class Finishes: Commercial painting + roofing, Texas. Michael/Kari Pedley. No longer an active client (RJ, 2026-08-29). | Hi-Up Roofing: Insurance SEO, storm damage. Michael/Kari Pedley — billed together with First Class Finishes as one entity. No longer an active client (RJ, 2026-08-29). Last invoice #14 (Jul 20-Aug 2, 2026), $300, unclear if ever sent — do not chase or bill further.",
+      "category": "past"
+    },
+    {
+      "name": "3r Design",
+      "owner": "-",
+      "handler": "Becky / RJ",
+      "ai": "-",
+      "site": "-",
+      "industry": "Design",
+      "status": "past",
+      "notes": "No longer an active client (RJ, 2026-09-05). Was with Becky, RJ also handling personally. Do not run routines, report or bill.",
+      "folder": "3R-DESIGN",
+      "slug": "3r-design",
+      "claudeMdNote": "No longer an active client (RJ, 2026-09-05). Was with Becky, RJ also handling personally. Do not run routines, send reports or bill.",
       "category": "past"
     }
   ],
@@ -2460,6 +2480,24 @@
             },
             {
               "name": "2026-08-27_international-day-of-peace"
+            },
+            {
+              "name": "2026-09-03_shopify-rebuild-golive"
+            },
+            {
+              "name": "2026-09-03_local-contractor-multi-city-seo"
+            },
+            {
+              "name": "2026-09-04_ai-family-build"
+            },
+            {
+              "name": "2026-09-07_how-do-i-keep-my-client-list-the-same"
+            },
+            {
+              "name": "2026-09-07_say-it-build-it-walk-it"
+            },
+            {
+              "name": "2026-09-08_client-gets-their-own-ai"
             }
           ]
         },
@@ -2957,6 +2995,14 @@
       "noindex": false
     },
     {
+      "name": "Can Someone Run My Google Ads for Me?",
+      "path": "can-someone-run-my-google-ads-for-me.html",
+      "group": "Insights / blog",
+      "purpose": "Yes. Google Ads management is now part of our in-house toolkit: keyword research, ad copy, landing pages, conversion tracking, and ongoing management, built inside an account you own.",
+      "status": "live",
+      "noindex": false
+    },
+    {
       "name": "Can You See Your New Building Before It Is Built?",
       "path": "how-we-build-walkable-3d-tours.html",
       "group": "Insights / blog",
@@ -3045,14 +3091,6 @@
       "noindex": false
     },
     {
-      "name": "Cut the Silence",
-      "path": "cut-the-silence.html",
-      "group": "Insights / blog",
-      "purpose": "Stop editing your own voice for hours. Drop your raw recording in. Our AI cuts every silence and dead-air moment. Get back a tight version, ready to post the same day.",
-      "status": "live",
-      "noindex": false
-    },
-    {
       "name": "Dexter | Senior Graphic Designer &amp; Video Editor · BBC",
       "path": "dexter.html",
       "group": "Insights / blog",
@@ -3129,14 +3167,6 @@
       "path": "file-converter.html",
       "group": "Insights / blog",
       "purpose": "Convert any file to any format, free. Images, video, audio, PDFs, documents. Drag and drop multiple files at once. No sign-up, no watermark. Built by Balay ni Bruno &amp; Co.",
-      "status": "live",
-      "noindex": false
-    },
-    {
-      "name": "Free PDF to EPS / Print-Ready Converter",
-      "path": "pdf-to-eps-converter.html",
-      "group": "Insights / blog",
-      "purpose": "Convert PDF files to EPS or print-ready PDF format for free. No sign-up. No watermark. Built by Balay ni Bruno &amp; Co. for business owners who need print files fast.",
       "status": "live",
       "noindex": false
     },
@@ -3273,6 +3303,14 @@
       "path": "how-to-keep-every-listing-organized-in-one-board.html",
       "group": "Insights / blog",
       "purpose": "Listings slip when the details live in ten different places. Here is how one live board keeps your agents, photos, and listing tasks in sync so nothing falls through.",
+      "status": "live",
+      "noindex": false
+    },
+    {
+      "name": "How Do I Keep My Client List the Same Everywhere I Look?",
+      "path": "how-do-i-keep-my-client-list-the-same.html",
+      "group": "Insights / blog",
+      "purpose": "A dashboard that still shows a client who left, or misses one who is active, is not a display bug. It is a sync problem. Here is the one-file fix that keeps every screen honest.",
       "status": "live",
       "noindex": false
     },
@@ -3821,14 +3859,6 @@
       "noindex": false
     },
     {
-      "name": "Kirsty Daryl A. Agadia | Content Creator &amp; Marketing Support Specialist · BBC",
-      "path": "kirsty.html",
-      "group": "Insights / blog",
-      "purpose": "Kirsty Daryl A. Agadia is a Content Creator and Marketing Support Specialist at Balay ni Bruno &amp; Co., skilled in social media, graphic design, video editing, email marketing, SEO, and AI-assisted workflows.",
-      "status": "live",
-      "noindex": true
-    },
-    {
       "name": "Lead Generation VA | Clean Local Lead Lists",
       "path": "tool-lead-generation.html",
       "group": "Insights / blog",
@@ -3941,6 +3971,14 @@
       "noindex": true
     },
     {
+      "name": "Optimism Consulting — Last Step Before We Send",
+      "path": "optimism-final.html",
+      "group": "Insights / blog",
+      "purpose": "",
+      "status": "live",
+      "noindex": true
+    },
+    {
       "name": "Privacy Policy",
       "path": "privacy.html",
       "group": "Insights / blog",
@@ -4033,6 +4071,14 @@
       "path": "tool-stock-media.html",
       "group": "Insights / blog",
       "purpose": "We pull free-to-use footage, photos, and music to make your videos look produced, legally and cleanly. No expensive stock licenses on your bill.",
+      "status": "live",
+      "noindex": false
+    },
+    {
+      "name": "The Client Win-Back System",
+      "path": "client-win-back-system.html",
+      "group": "Insights / blog",
+      "purpose": "Most past clients did not leave on bad terms. They just got busy and lost track of you. We built a system that goes through your message history, finds the real ones worth reconnecting with, and drafts a warm way back in touch. You approve every message before it sends.",
       "status": "live",
       "noindex": false
     },
@@ -4572,28 +4618,28 @@
       "path": "LEARNINGS"
     },
     {
-      "title": "watchdogs that guard the wrong thing",
-      "date": "2026-09-02",
+      "title": "verifying writes to a live client crm",
+      "date": "2026-09-08",
       "path": "LEARNINGS"
     },
     {
-      "title": "silent failures in bbc automation",
-      "date": "2026-09-02",
+      "title": "daily tool scan",
+      "date": "2026-09-08",
       "path": "LEARNINGS"
     },
     {
-      "title": "netlify ignore rule swallows pushes",
-      "date": "2026-09-02",
+      "title": "google sheet from csv emoji and dropdowns",
+      "date": "2026-09-07",
       "path": "LEARNINGS"
     },
     {
-      "title": "meet recorder and blank screen fix",
-      "date": "2026-09-02",
+      "title": "google ads multiparty approval trap",
+      "date": "2026-09-07",
       "path": "LEARNINGS"
     },
     {
-      "title": "headless edge pdf header footer fix",
-      "date": "2026-09-02",
+      "title": "em dash breaks powershell scripts",
+      "date": "2026-09-07",
       "path": "LEARNINGS"
     }
   ],
@@ -6391,16 +6437,60 @@
       "date": "2026-08-27",
       "slug": "international-day-of-peace",
       "posted": false
+    },
+    {
+      "name": "2026-09-03_shopify-rebuild-golive",
+      "date": "2026-09-03",
+      "slug": "shopify-rebuild-golive",
+      "posted": false
+    },
+    {
+      "name": "2026-09-03_local-contractor-multi-city-seo",
+      "date": "2026-09-03",
+      "slug": "local-contractor-multi-city-seo",
+      "posted": false
+    },
+    {
+      "name": "2026-09-04_ai-family-build",
+      "date": "2026-09-04",
+      "slug": "ai-family-build",
+      "posted": false
+    },
+    {
+      "name": "2026-09-07_how-do-i-keep-my-client-list-the-same",
+      "date": "2026-09-07",
+      "slug": "how-do-i-keep-my-client-list-the-same",
+      "posted": false
+    },
+    {
+      "name": "2026-09-07_say-it-build-it-walk-it",
+      "date": "2026-09-07",
+      "slug": "say-it-build-it-walk-it",
+      "posted": false
+    },
+    {
+      "name": "2026-09-08_client-gets-their-own-ai",
+      "date": "2026-09-08",
+      "slug": "client-gets-their-own-ai",
+      "posted": false
     }
   ],
   "insights": {
-    "total": 114,
+    "total": 117,
     "cats": [
       {
         "key": "marketing",
         "label": "Marketing",
-        "count": 25,
+        "count": 27,
         "pages": [
+          {
+            "title": "The Client Win-Back System",
+            "url": "client-win-back-system.html"
+          },
+          {
+            "title": "Can Someone Run My Google Ads for Me?",
+            "url": "can-someone-run-my-google-ads-for-me.html"
+          },
           {
             "title": "Can AI Write My Captions So They Sound Like MY Brand, Not Generic?",
             "url": "can-ai-write-captions-that-sound-like-my-brand.html"
@@ -6506,8 +6596,12 @@
       {
         "key": "operations",
         "label": "Operations",
-        "count": 27,
+        "count": 28,
         "pages": [
+          {
+            "title": "How Do I Keep My Client List the Same Everywhere I Look?",
+            "url": "how-do-i-keep-my-client-list-the-same.html"
+          },
           {
             "title": "How Do I Keep Every Listing Organized in One Board?",
             "url": "how-to-keep-every-listing-organized-in-one-board.html"
@@ -6911,10 +7005,10 @@
     ]
   },
   "siteMap": {
-    "total": 227,
+    "total": 230,
     "summary": {
-      "total": 227,
-      "inSitemap": 214,
+      "total": 230,
+      "inSitemap": 217,
       "notSearchable": 2,
       "orphans": 8,
       "noindex": 24,
@@ -6945,7 +7039,7 @@
             "indexable": true,
             "orphan": false,
             "hasDesc": true,
-            "inbound": 216,
+            "inbound": 219,
             "noindex": false
           },
           {
@@ -7000,7 +7094,7 @@
             "indexable": true,
             "orphan": false,
             "hasDesc": true,
-            "inbound": 213,
+            "inbound": 216,
             "noindex": false
           },
           {
@@ -7033,7 +7127,7 @@
             "indexable": true,
             "orphan": false,
             "hasDesc": true,
-            "inbound": 95,
+            "inbound": 96,
             "noindex": false
           },
           {
@@ -7055,7 +7149,7 @@
             "indexable": true,
             "orphan": false,
             "hasDesc": true,
-            "inbound": 173,
+            "inbound": 175,
             "noindex": false
           }
         ],
@@ -7118,7 +7212,7 @@
             "indexable": true,
             "orphan": false,
             "hasDesc": true,
-            "inbound": 2,
+            "inbound": 3,
             "noindex": false
           },
           {
@@ -7269,7 +7363,7 @@
             "indexable": true,
             "orphan": false,
             "hasDesc": true,
-            "inbound": 13,
+            "inbound": 14,
             "noindex": false
           },
           {
@@ -7445,7 +7539,7 @@
             "indexable": true,
             "orphan": false,
             "hasDesc": true,
-            "inbound": 3,
+            "inbound": 4,
             "noindex": false
           },
           {
@@ -7512,6 +7606,17 @@
             "orphan": false,
             "hasDesc": true,
             "inbound": 2,
+            "noindex": false
+          },
+          {
+            "name": "Can Someone Run My Google Ads for Me?",
+            "path": "can-someone-run-my-google-ads-for-me.html",
+            "cat": "Marketing",
+            "inSitemap": true,
+            "indexable": true,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 1,
             "noindex": false
           },
           {
@@ -7720,7 +7825,7 @@
             "indexable": true,
             "orphan": false,
             "hasDesc": true,
-            "inbound": 1,
+            "inbound": 2,
             "noindex": false
           },
           {
@@ -7737,6 +7842,17 @@
           {
             "name": "How Do I Keep Every Listing Organized in One Board?",
             "path": "how-to-keep-every-listing-organized-in-one-board.html",
+            "cat": "Operations",
+            "inSitemap": true,
+            "indexable": true,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 1,
+            "noindex": false
+          },
+          {
+            "name": "How Do I Keep My Client List the Same Everywhere I Look?",
+            "path": "how-do-i-keep-my-client-list-the-same.html",
             "cat": "Operations",
             "inSitemap": true,
             "indexable": true,
@@ -7775,7 +7891,7 @@
             "indexable": true,
             "orphan": false,
             "hasDesc": true,
-            "inbound": 2,
+            "inbound": 4,
             "noindex": false
           },
           {
@@ -8094,7 +8210,7 @@
             "indexable": true,
             "orphan": false,
             "hasDesc": true,
-            "inbound": 1,
+            "inbound": 2,
             "noindex": false
           },
           {
@@ -8538,6 +8654,17 @@
             "noindex": false
           },
           {
+            "name": "The Client Win-Back System",
+            "path": "client-win-back-system.html",
+            "cat": "Marketing",
+            "inSitemap": true,
+            "indexable": true,
+            "orphan": false,
+            "hasDesc": true,
+            "inbound": 2,
+            "noindex": false
+          },
+          {
             "name": "The Daily Carousel Workflow",
             "path": "workflow-daily-carousel.html",
             "cat": "",
@@ -8633,7 +8760,7 @@
             "indexable": true,
             "orphan": false,
             "hasDesc": true,
-            "inbound": 13,
+            "inbound": 14,
             "noindex": false
           },
           {
@@ -8714,7 +8841,7 @@
             "noindex": true
           }
         ],
-        "count": 134
+        "count": 137
       },
       {
         "key": "tools",

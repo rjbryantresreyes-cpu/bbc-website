@@ -91,7 +91,7 @@
       "notes": "Active client. LinkedIn outreach + GoHighLevel CRM. Contacts: Jasmine Brown + Anthony, jrsigningservices@gmail.com, (832) 387-4648.",
       "folder": "JR-SIGNING-SERVICES",
       "slug": "jr-signing-services",
-      "claudeMdNote": "TX notary signing agency, Jasmine Brown + Anthony. Daryl runs lead generation and email marketing for them through GoHighLevel (CRM + leads + email). A read-only Private Integration Token must live at C:\\BBC\\_SECRETS\\ghl_jrss_pit.txt for the dashboard to read their pipeline. Confirmed ACTIVE by RJ 2026-09-03 after a meeting with Daryl about upgrading their Netlify plan; daily health checks resume from that date."
+      "claudeMdNote": "TX notary signing agency, Jasmine Green + Anthony Green (corrected 2026-09-07 by Daryl; this table previously said \"Jasmine Brown\", which reached a client draft before it was caught. They share a surname, that is not a merge error). Daryl runs lead generation and email marketing for them through GoHighLevel (CRM + leads + email). A read-only Private Integration Token must live at C:\\BBC\\_SECRETS\\ghl_jrss_pit.txt for the dashboard to read their pipeline. Confirmed ACTIVE by RJ 2026-09-03 after a meeting with Daryl about upgrading their Netlify plan; daily health checks resume from that date."
     },
     {
       "name": "BILT 2 Travel",
