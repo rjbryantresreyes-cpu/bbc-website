@@ -3,7 +3,7 @@
   "configurations": [
     {
       "name": "bbc-website",
-      "runtimeExecutable": "python",
+      "runtimeExecutable": "C:\\Users\\GT\\AppData\\Local\\Programs\\Python\\Python310\\python.exe",
       "runtimeArgs": ["-m", "http.server", "8791", "--directory", "C:/BBC/bbc-website"],
       "port": 8791
     }
