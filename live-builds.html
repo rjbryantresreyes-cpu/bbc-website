@@ -542,6 +542,33 @@
       .pf-hero { padding-top:calc(68px + var(--s5)); }
       .pf-section { padding:var(--s5) var(--s3); }
     }
+
+    /* ── Filter Tabs ── */
+    .filter-tabs {
+      background: var(--bg-primary);
+      padding: 2rem 0;
+      border-bottom: var(--border-warm);
+      position: sticky; top: 68px; z-index: 100;
+    }
+    .filter-tabs__inner {
+      max-width: var(--max-width); margin: 0 auto; padding: 0 var(--s4);
+      display: flex; align-items: center; gap: 0.6rem; flex-wrap: wrap;
+    }
+    .filter-tab {
+      font-family: var(--font-ui); font-size: 0.8rem; font-weight: 500;
+      color: var(--text-body); background: transparent;
+      border: 1.5px solid rgba(85,60,35,0.16);
+      border-radius: 100px; padding: 0.5rem 1.2rem;
+      cursor: pointer; transition: all 0.25s ease;
+      white-space: nowrap;
+    }
+    .filter-tab:hover { border-color: var(--mid-blue); color: var(--deep-blue); }
+    .filter-tab.active { background: var(--deep-blue); color: #fff; border-color: var(--deep-blue); }
+    .filter-tabs__label {
+      font-family: var(--font-ui); font-size: 0.7rem; font-weight: 600;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--text-muted); margin-right: 0.4rem;
+    }
   </style>
   <link rel="stylesheet" href="bbc-styles-v6.css" />
   <!-- bbc-schema -->
@@ -640,6 +667,19 @@
 </section>
 
 <!-- ════════════════════════════════════════════
+     FILTER TABS
+════════════════════════════════════════════ -->
+<div class="filter-tabs">
+  <div class="filter-tabs__inner">
+    <span class="filter-tabs__label">Filter by</span>
+    <button class="filter-tab active" data-filter="all">All</button>
+    <button class="filter-tab" data-filter="ecommerce">E-Commerce</button>
+    <button class="filter-tab" data-filter="real-estate">Real Estate</button>
+    <button class="filter-tab" data-filter="other">Other</button>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════
      LIVE WEBSITES & STORES
 ════════════════════════════════════════════ -->
 <section class="pf-section pf-section--tight">
@@ -652,7 +692,7 @@
   <div class="pf-grid">
 
     <!-- 3R Design -->
-    <article class="pf-card fade-in">
+    <article class="pf-card fade-in" data-category="other">
       <div class="pf-shot">
         <img src="assets/portfolio/pf-3rdesign.jpeg" alt="Screenshot of the 3R Design website" loading="lazy" />
         <a class="pf-shot__overlay" href="https://3r-design-preview.netlify.app" target="_blank" rel="noopener noreferrer" aria-label="Open 3R Design live site"><span class="pf-shot__pill">Open live site ↗</span></a>
@@ -673,7 +713,7 @@
     </article>
 
     <!-- Wooden Woodworks -->
-    <article class="pf-card fade-in">
+    <article class="pf-card fade-in" data-category="other">
       <div class="pf-shot">
         <img src="assets/portfolio/pf-woodenwoodworks.jpeg" alt="Screenshot of the Wooden Woodworks website" loading="lazy" />
         <a class="pf-shot__overlay" href="https://ww-portfolio-preview.netlify.app" target="_blank" rel="noopener noreferrer" aria-label="Open Wooden Woodworks live site"><span class="pf-shot__pill">Open live site ↗</span></a>
@@ -694,7 +734,7 @@
     </article>
 
     <!-- S. Riviere Hair -->
-    <article class="pf-card fade-in">
+    <article class="pf-card fade-in" data-category="ecommerce">
       <div class="pf-shot">
         <img src="assets/portfolio/pf-sriviere.jpeg" alt="Screenshot of the S. Riviere Hair Collection online store" loading="lazy" />
         <a class="pf-shot__overlay" href="https://sriviere-hair-preview.netlify.app" target="_blank" rel="noopener noreferrer" aria-label="Open S. Riviere Hair Collection live store"><span class="pf-shot__pill">Open live site ↗</span></a>
@@ -715,7 +755,7 @@
     </article>
 
     <!-- Home Vision Studio -->
-    <article class="pf-card fade-in">
+    <article class="pf-card fade-in" data-category="other">
       <div class="pf-shot">
         <img src="assets/portfolio/pf-hvs.jpeg" alt="Screenshot of the Home Vision Studio website" loading="lazy" />
         <a class="pf-shot__overlay" href="https://bbc-hvs-redesign-preview.netlify.app" target="_blank" rel="noopener noreferrer" aria-label="Open Home Vision Studio live site"><span class="pf-shot__pill">Open live site ↗</span></a>
@@ -735,10 +775,29 @@
       </div>
     </article>
 
-    <!-- Cavalry Realty card held out pending RJ approval 2026-07-10. Screenshot kept at assets/portfolio/pf-cavalry.jpeg; re-add this card when cleared. -->
+    <!-- Cavalry Realty Group -->
+    <article class="pf-card fade-in" data-category="real-estate">
+      <div class="pf-shot">
+        <img src="assets/portfolio/pf-cavalry.jpeg" alt="Screenshot of the Cavalry Realty Group website" loading="lazy" />
+        <a class="pf-shot__overlay" href="https://callthecavalrygroup.com/" target="_blank" rel="noopener noreferrer" aria-label="Open Cavalry Realty Group live site"><span class="pf-shot__pill">Open live site ↗</span></a>
+      </div>
+      <div class="pf-card__body">
+        <span class="pf-card__cat">Real Estate + Content + AI Video</span>
+        <h3 class="pf-card__title">Cavalry Realty Group</h3>
+        <p class="pf-card__desc">A top San Antonio real estate team. We run the local content engine, listing media, the weekly YouTube live, and AI home tours that keep the team's online presence sharp.</p>
+        <div class="pf-card__tags">
+          <span class="pf-tag pf-tag--live">Live client site</span>
+          <span class="pf-tag">Real Estate</span>
+          <span class="pf-tag">AI Video</span>
+        </div>
+        <div class="pf-card__foot">
+          <a class="pf-card__open" href="https://callthecavalrygroup.com/" target="_blank" rel="noopener noreferrer">Explore the build →</a>
+        </div>
+      </div>
+    </article>
 
     <!-- Freccia Construction -->
-    <article class="pf-card fade-in">
+    <article class="pf-card fade-in" data-category="other">
       <div class="pf-shot">
         <img src="assets/portfolio/pf-freccia.jpeg" alt="Screenshot of the Freccia Construction website" loading="lazy" />
         <a class="pf-shot__overlay" href="https://frecciaconstruction.com" target="_blank" rel="noopener noreferrer" aria-label="Open Freccia Construction live site"><span class="pf-shot__pill">Open live site ↗</span></a>
@@ -759,7 +818,7 @@
     </article>
 
     <!-- Cherry Sage -->
-    <article class="pf-card fade-in">
+    <article class="pf-card fade-in" data-category="ecommerce">
       <div class="pf-shot">
         <img src="assets/portfolio/pf-cherrysage.jpeg" alt="Screenshot of the Cherry Sage website" loading="lazy" />
         <a class="pf-shot__overlay" href="https://cherrysage.com" target="_blank" rel="noopener noreferrer" aria-label="Open Cherry Sage live site"><span class="pf-shot__pill">Open live site ↗</span></a>
@@ -780,7 +839,7 @@
     </article>
 
     <!-- Optimism Consulting -->
-    <article class="pf-card fade-in">
+    <article class="pf-card fade-in" data-category="other">
       <div class="pf-shot">
         <img src="assets/portfolio/pf-optimism.jpeg" alt="Screenshot of the Optimism Consulting website" loading="lazy" />
         <a class="pf-shot__overlay" href="https://optimism-consulting-preview.netlify.app" target="_blank" rel="noopener noreferrer" aria-label="Open Optimism Consulting live site"><span class="pf-shot__pill">Open live site ↗</span></a>
@@ -801,7 +860,7 @@
     </article>
 
     <!-- BBC Playbook -->
-    <article class="pf-card fade-in">
+    <article class="pf-card fade-in" data-category="other">
       <div class="pf-shot">
         <img src="assets/portfolio/pf-playbook.jpeg" alt="Screenshot of the Balay ni Bruno and Co. Playbook" loading="lazy" />
         <a class="pf-shot__overlay" href="https://bbc-playbook-preview.netlify.app" target="_blank" rel="noopener noreferrer" aria-label="Open the Balay ni Bruno and Co. Playbook"><span class="pf-shot__pill">Open live site ↗</span></a>
@@ -993,6 +1052,25 @@
     });
   }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
   fadeEls.forEach(el => io.observe(el));
+
+  // Filter tabs
+  const filterTabs = document.querySelectorAll('.filter-tab');
+  const pfCards = document.querySelectorAll('.pf-card');
+  filterTabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      filterTabs.forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      const filter = tab.dataset.filter;
+      pfCards.forEach(card => {
+        if (filter === 'all') {
+          card.style.display = '';
+        } else {
+          const cats = (card.dataset.category || '').split(' ');
+          card.style.display = cats.includes(filter) ? '' : 'none';
+        }
+      });
+    });
+  });
 </script>
   <!-- v6.0 motion stack -->
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
