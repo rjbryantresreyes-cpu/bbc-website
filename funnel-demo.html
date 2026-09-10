@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Localised Funnel Demo | Balay ni Bruno &amp; Co.</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="A working demonstration of one ecommerce funnel localised correctly across six markets: currency, language, payment methods, VAT, price points and text direction.">
+
+<!--
+  ============================================================================
+  LOCALISED FUNNEL DEMO  —  Balay ni Bruno & Co.
+  ============================================================================
+  Built as a work sample. The brief it answers: "Copy-pasting one funnel into
+  another country without proper localization is unacceptable."
+
+  So this is ONE funnel that actually changes per market, not a translated
+  skin over the same page. What genuinely changes when you switch market:
+
+    1. Language, including full RTL layout for Hebrew (dir + logical CSS).
+    2. Currency AND its formatting, via Intl.NumberFormat rather than
+       hardcoded strings. Sweden renders "799,00 kr", Italy "69,90 €",
+       the Netherlands "€ 69,95". Symbol position, decimal comma and
+       thousands separator are all different and all handled by the locale.
+    3. The price POINT, not a conversion. Charm pricing is cultural: Sweden
+       rounds to whole krona, the Dutch use ,95, Italy and Finland use ,90.
+       Converting one base price into six currencies is the tell that a
+       funnel was copy-pasted.
+    4. Payment methods that market actually uses. iDEAL carries the
+       Netherlands, Bancontact carries Belgium, Swish and Klarna carry
+       Sweden, MobilePay matters in Finland, and cash on delivery is still
+       a real driver in Italy. Showing a Visa logo to a Dutch buyer and
+       nothing else is how you lose the sale at checkout.
+    5. VAT label and rate: mva/moms/btw/IVA/alv are not interchangeable
+       words, and Finland moved to 25.5%.
+
+  No framework, no build step, no dependencies. Hand-written HTML, CSS and
+  vanilla JS in one file, because the brief also said the AI-generated HTML
+  it had seen was not clean enough.
+
+  Deliberate detail: the sticky mobile bar is offset by its own height using
+  scroll-padding and a body pad, so it can never sit on top of the buy
+  button. That exact bug (desktop flow perfect, mobile buy button hidden
+  under a sticky footer) is invisible in a design review and only shows up
+  if you complete a purchase on a real phone.
+  ============================================================================
+-->
+
+<style>
+  :root{
+    --ink:#12131a;
+    --ink-soft:#4a4d5e;
+    --line:#e4e5ec;
+    --bg:#ffffff;
+    --bg-soft:#f7f7fb;
+    --brand:#ff5a2b;
+    --brand-dark:#e0431a;
+    --good:#0f8a5f;
+    --radius:14px;
+    --pad:clamp(16px,4vw,28px);
+    --maxw:660px;
+    --stick:76px;              /* height of the sticky mobile bar */
+    font-synthesis-weight:none;
+  }
+
+  *,*::before,*::after{box-sizing:border-box}
+
+  html{ -webkit-text-size-adjust:100%; scroll-behavior:smooth; scroll-padding-bottom:calc(var(--stick) + 16px); }
+
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font:16px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+    /* The sticky bar never covers content, including the final CTA. */
+    padding-bottom:calc(var(--stick) + env(safe-area-inset-bottom,0px));
+  }
+  @media (min-width:721px){ body{ padding-bottom:0 } }
+
+  img{max-width:100%;display:block}
+  button{font:inherit;color:inherit}
+
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 var(--pad)}
+
+  /* ---------- market switcher ---------- */
+  .bar{
+    background:var(--ink);color:#fff;
+    padding:10px var(--pad);
+  }
+  .bar-in{
+    max-width:var(--maxw);margin:0 auto;
+    display:flex;gap:10px;align-items:center;flex-wrap:wrap;
+  }
+  .bar label{font-size:13px;opacity:.72;letter-spacing:.01em}
+  .bar select{
+    background:#23242f;color:#fff;border:1px solid #3a3b48;
+    border-radius:9px;padding:7px 10px;font-size:14px;min-height:38px;
+  }
+  .bar .note{font-size:12px;opacity:.55;margin-inline-start:auto}
+
+  /* ---------- hero ---------- */
+  header{padding:clamp(28px,7vw,52px) 0 8px;text-align:center}
+  .kicker{
+    display:inline-block;background:#fff1ec;color:var(--brand-dark);
+    border-radius:999px;padding:5px 13px;font-size:13px;font-weight:650;
+    letter-spacing:.01em;margin-bottom:14px;
+  }
+  h1{
+    font-size:clamp(28px,6.4vw,44px);line-height:1.12;
+    margin:0 0 12px;letter-spacing:-.021em;font-weight:780;
+  }
+  .sub{font-size:clamp(16px,2.4vw,19px);color:var(--ink-soft);margin:0 auto 22px;max-width:34ch}
+
+  .shot{
+    background:linear-gradient(163deg,#ffe9c9 0%,#ffd6a8 42%,#ffb072 100%);
+    border-radius:var(--radius);aspect-ratio:4/3;
+    display:grid;place-items:center;position:relative;overflow:hidden;
+    margin-bottom:22px;
+  }
+  .lamp{
+    width:47%;aspect-ratio:1;border-radius:50%;
+    background:radial-gradient(circle at 50% 44%,#fffdf6 0%,#ffe9ab 34%,#ffbf5c 66%,#ff9330 100%);
+    box-shadow:0 0 70px 22px rgba(255,168,66,.55);
+  }
+  .shot figcaption{
+    position:absolute;inset-inline-start:12px;inset-block-end:12px;
+    background:rgba(0,0,0,.62);color:#fff;font-size:11px;
+    padding:5px 10px;border-radius:7px;letter-spacing:.02em;
+  }
+
+  /* ---------- price ---------- */
+  .price-row{display:flex;align-items:baseline;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:6px}
+  .price{font-size:clamp(30px,6vw,40px);font-weight:800;letter-spacing:-.02em}
+  .was{color:var(--ink-soft);text-decoration:line-through;font-size:19px}
+  .save{background:#e8f7f0;color:var(--good);font-weight:680;font-size:14px;padding:4px 10px;border-radius:999px}
+  .vat{font-size:13px;color:var(--ink-soft);text-align:center;margin:0 0 20px}
+
+  /* ---------- bundles ---------- */
+  h2{font-size:clamp(20px,3.6vw,25px);margin:34px 0 14px;letter-spacing:-.015em;font-weight:720}
+  .tiers{display:grid;gap:11px;margin-bottom:8px}
+  .tier{
+    display:flex;align-items:center;gap:13px;width:100%;text-align:start;
+    border:2px solid var(--line);background:var(--bg);
+    border-radius:var(--radius);padding:15px;cursor:pointer;
+    transition:border-color .13s ease, background .13s ease;
+    min-height:64px;
+  }
+  .tier:hover{border-color:#c9cad6}
+  .tier[aria-checked="true"]{border-color:var(--brand);background:#fff8f5}
+  .dot{
+    inline-size:21px;block-size:21px;border-radius:50%;flex:0 0 auto;
+    border:2px solid #c3c4d1;display:grid;place-items:center;
+  }
+  .tier[aria-checked="true"] .dot{border-color:var(--brand)}
+  .tier[aria-checked="true"] .dot::after{content:"";inline-size:11px;block-size:11px;border-radius:50%;background:var(--brand)}
+  .tier-main{flex:1;min-width:0}
+  .tier-name{font-weight:660;display:block}
+  .tier-sub{font-size:13px;color:var(--ink-soft)}
+  .tier-price{font-weight:760;white-space:nowrap}
+  .tag{
+    background:var(--brand);color:#fff;font-size:11px;font-weight:700;
+    padding:3px 8px;border-radius:6px;letter-spacing:.03em;text-transform:uppercase;
+  }
+
+  /* ---------- order bump ---------- */
+  .bump{
+    border:2px dashed var(--brand);background:#fff8f5;
+    border-radius:var(--radius);padding:15px;margin:18px 0 8px;
+    display:flex;gap:12px;align-items:flex-start;cursor:pointer;
+  }
+  .bump input{inline-size:20px;block-size:20px;margin:2px 0 0;flex:0 0 auto;accent-color:var(--brand)}
+  .bump-t{font-weight:680;margin-bottom:2px}
+  .bump-d{font-size:13.5px;color:var(--ink-soft)}
+
+  /* ---------- cta ---------- */
+  .cta{
+    display:block;width:100%;border:0;border-radius:var(--radius);
+    background:var(--brand);color:#fff;font-weight:750;
+    font-size:18px;padding:17px;cursor:pointer;min-height:56px;
+    letter-spacing:.005em;
+    box-shadow:0 6px 18px -6px rgba(255,90,43,.6);
+    transition:background .13s ease;
+  }
+  .cta:hover{background:var(--brand-dark)}
+  .cta:focus-visible{outline:3px solid #12131a;outline-offset:2px}
+
+  .reassure{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin:13px 0 0;padding:0;list-style:none}
+  .reassure li{font-size:13px;color:var(--ink-soft)}
+  .reassure li::before{content:"✓";color:var(--good);font-weight:800;margin-inline-end:5px}
+
+  /* ---------- payments ---------- */
+  .pay{margin:26px 0 8px;padding:17px;background:var(--bg-soft);border-radius:var(--radius)}
+  .pay-h{font-size:13px;color:var(--ink-soft);margin:0 0 10px;text-align:center}
+  .pay-list{display:flex;gap:7px;flex-wrap:wrap;justify-content:center;list-style:none;margin:0;padding:0}
+  .pay-list li{
+    background:#fff;border:1px solid var(--line);border-radius:8px;
+    padding:7px 12px;font-size:13px;font-weight:620;
+  }
+  .pay-list li.primary{border-color:var(--brand);color:var(--brand-dark);background:#fff6f2}
+
+  /* ---------- checkout preview ---------- */
+  .checkout{border:1px solid var(--line);border-radius:var(--radius);padding:17px;margin-top:12px}
+  .line{display:flex;justify-content:space-between;gap:12px;padding:7px 0;font-size:15px}
+  .line.total{border-top:1px solid var(--line);margin-top:7px;padding-top:12px;font-weight:780;font-size:17px}
+  .line .muted{color:var(--ink-soft)}
+
+  /* ---------- sticky mobile bar ---------- */
+  .stick{
+    position:fixed;inset-inline:0;inset-block-end:0;z-index:40;
+    background:rgba(255,255,255,.97);
+    backdrop-filter:saturate(1.6) blur(9px);
+    border-block-start:1px solid var(--line);
+    padding:11px var(--pad) calc(11px + env(safe-area-inset-bottom,0px));
+    display:flex;gap:12px;align-items:center;
+    min-block-size:var(--stick);
+  }
+  .stick .sp{font-weight:800;white-space:nowrap}
+  .stick .cta{width:auto;flex:1;font-size:16px;padding:14px 16px;min-height:48px;box-shadow:none}
+  @media (min-width:721px){ .stick{display:none} }
+
+  /* ---------- footer ---------- */
+  footer{margin:44px 0 30px;padding-top:22px;border-top:1px solid var(--line);text-align:center}
+  footer p{font-size:13px;color:var(--ink-soft);margin:0 0 6px}
+  footer a{color:var(--ink);text-decoration:underline;text-underline-offset:2px}
+
+  /* RTL: everything above uses logical properties, so this is all that is left. */
+  [dir="rtl"] .tier{text-align:right}
+  [dir="rtl"] .was{direction:ltr;display:inline-block}
+
+  @media (prefers-reduced-motion:reduce){ html{scroll-behavior:auto} *{transition:none!important} }
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <div class="bar-in">
+    <label for="market">Market</label>
+    <select id="market" aria-label="Choose market">
+      <option value="IL">🇮🇱 Israel</option>
+      <option value="IT">🇮🇹 Italia</option>
+      <option value="SE">🇸🇪 Sverige</option>
+      <option value="NL" selected>🇳🇱 Nederland</option>
+      <option value="BE">🇧🇪 België</option>
+      <option value="FI">🇫🇮 Suomi</option>
+    </select>
+    <span class="note" id="localeNote"></span>
+  </div>
+</div>
+
+<main class="wrap">
+
+  <header>
+    <span class="kicker" id="kicker"></span>
+    <h1 id="headline"></h1>
+    <p class="sub" id="sub"></p>
+  </header>
+
+  <figure class="shot">
+    <div class="lamp" role="img" aria-label="Sunrise wake-up lamp"></div>
+    <figcaption>Demo product · placeholder visual</figcaption>
+  </figure>
+
+  <div class="price-row">
+    <span class="price" id="price"></span>
+    <span class="was" id="was"></span>
+    <span class="save" id="save"></span>
+  </div>
+  <p class="vat" id="vat"></p>
+
+  <h2 id="bundleH"></h2>
+  <div class="tiers" id="tiers" role="radiogroup" aria-labelledby="bundleH"></div>
+
+  <label class="bump">
+    <input type="checkbox" id="bump">
+    <span>
+      <span class="bump-t" id="bumpT"></span>
+      <span class="bump-d" id="bumpD"></span>
+    </span>
+  </label>
+
+  <div class="checkout">
+    <div class="line"><span id="lSub"></span><span id="vSub"></span></div>
+    <div class="line" id="rowBump" hidden><span id="lBump"></span><span id="vBump"></span></div>
+    <div class="line"><span id="lShip"></span><span class="muted" id="vShip"></span></div>
+    <div class="line total"><span id="lTotal"></span><span id="vTotal"></span></div>
+  </div>
+
+  <div style="margin-top:16px">
+    <button class="cta" id="ctaMain"></button>
+    <ul class="reassure" id="reassure"></ul>
+  </div>
+
+  <div class="pay">
+    <p class="pay-h" id="payH"></p>
+    <ul class="pay-list" id="payList"></ul>
+  </div>
+
+  <footer>
+    <p><strong>This is a work sample, not a real store.</strong> Nothing here takes payment.</p>
+    <p>Built by <a href="https://balaynibruno.co">Balay ni Bruno &amp; Co.</a> to show one funnel localised properly across six markets.</p>
+  </footer>
+
+</main>
+
+<div class="stick">
+  <span class="sp" id="stickPrice"></span>
+  <button class="cta" id="ctaStick"></button>
+</div>
+
+<script>
+(function () {
+  "use strict";
+
+  /* --------------------------------------------------------------------
+     Market configuration.
+
+     Price points are chosen per market, not converted from one base. That
+     is the whole point: 69,95 reads right in the Netherlands, 799 reads
+     right in Sweden, and a currency-converted 71,43 reads like an import.
+     -------------------------------------------------------------------- */
+  var MARKETS = {
+    IL: {
+      locale: "he-IL", currency: "ILS", dir: "rtl", lang: "he",
+      unit: 299, was: 419, ship: 0,
+      vatLabel: "מע״מ", vatRate: 18,
+      pay: [
+        { n: "כרטיס אשראי", primary: true }, { n: "ישראכרט" },
+        { n: "Bit" }, { n: "Apple Pay" }, { n: "PayPal" }
+      ],
+      t: {
+        kicker: "מבצע חורף",
+        headline: "להתעורר עם אור, לא עם צפצוף",
+        sub: "מנורת זריחה שמאירה בהדרגה 30 דקות לפני השעון המעורר.",
+        bundleH: "בחרו כמות",
+        one: "יחידה אחת", two: "שתי יחידות", three: "שלוש יחידות",
+        oneSub: "לחדר אחד", twoSub: "אחת לכל צד של המיטה", threeSub: "המשתלם ביותר",
+        best: "הכי משתלם",
+        bumpT: "הוסיפו אחריות מורחבת לשנתיים",
+        bumpD: "כיסוי מלא, החלפה ללא שאלות.",
+        cta: "הוספה לסל",
+        sub_l: "סכום ביניים", bump_l: "אחריות מורחבת", ship_l: "משלוch", total_l: "סה״כ",
+        free: "חינם",
+        reassure: ["משלוח חינם", "30 יום להחזר", "אחריות שנתיים"],
+        payH: "אמצעי תשלום מקובלים בישראל",
+        vatNote: "המחיר כולל מע״מ"
+      }
+    },
+
+    IT: {
+      locale: "it-IT", currency: "EUR", dir: "ltr", lang: "it",
+      unit: 69.90, was: 99.90, ship: 0,
+      vatLabel: "IVA", vatRate: 22,
+      pay: [
+        { n: "Carta di credito", primary: true }, { n: "PayPal" },
+        { n: "Klarna" }, { n: "Pagamento alla consegna" }, { n: "Apple Pay" }
+      ],
+      t: {
+        kicker: "Offerta inverno",
+        headline: "Svegliati con la luce, non con la suoneria",
+        sub: "La lampada che simula l'alba e si accende gradualmente 30 minuti prima della sveglia.",
+        bundleH: "Scegli la quantità",
+        one: "1 lampada", two: "2 lampade", three: "3 lampade",
+        oneSub: "Per una stanza", twoSub: "Una per lato del letto", threeSub: "Il miglior prezzo",
+        best: "Più conveniente",
+        bumpT: "Aggiungi 2 anni di garanzia",
+        bumpD: "Sostituzione senza domande, copertura completa.",
+        cta: "Acquista ora",
+        sub_l: "Subtotale", bump_l: "Garanzia estesa", ship_l: "Spedizione", total_l: "Totale",
+        free: "Gratuita",
+        reassure: ["Spedizione gratuita", "Reso entro 30 giorni", "2 anni di garanzia"],
+        payH: "Metodi di pagamento accettati in Italia",
+        vatNote: "IVA inclusa"
+      }
+    },
+
+    SE: {
+      locale: "sv-SE", currency: "SEK", dir: "ltr", lang: "sv",
+      unit: 799, was: 1099, ship: 0,
+      vatLabel: "moms", vatRate: 25,
+      pay: [
+        { n: "Swish", primary: true }, { n: "Klarna" },
+        { n: "Kort" }, { n: "Apple Pay" }
+      ],
+      t: {
+        kicker: "Vintererbjudande",
+        headline: "Vakna av ljus, inte av en larmsignal",
+        sub: "Soluppgångslampan som tänds gradvis 30 minuter innan väckningen.",
+        bundleH: "Välj antal",
+        one: "1 lampa", two: "2 lampor", three: "3 lampor",
+        oneSub: "För ett rum", twoSub: "En på varje sida av sängen", threeSub: "Bäst pris",
+        best: "Bäst värde",
+        bumpT: "Lägg till 2 års extra garanti",
+        bumpD: "Full täckning, byte utan krångel.",
+        cta: "Köp nu",
+        sub_l: "Delsumma", bump_l: "Utökad garanti", ship_l: "Frakt", total_l: "Totalt",
+        free: "Fri",
+        reassure: ["Fri frakt", "30 dagars öppet köp", "2 års garanti"],
+        payH: "Betalsätt som används i Sverige",
+        vatNote: "Moms ingår"
+      }
+    },
+
+    NL: {
+      locale: "nl-NL", currency: "EUR", dir: "ltr", lang: "nl",
+      unit: 69.95, was: 99.95, ship: 0,
+      vatLabel: "btw", vatRate: 21,
+      pay: [
+        { n: "iDEAL", primary: true }, { n: "Klarna" },
+        { n: "Creditcard" }, { n: "PayPal" }, { n: "Apple Pay" }
+      ],
+      t: {
+        kicker: "Winteractie",
+        headline: "Word wakker van licht, niet van een wekker",
+        sub: "De zonsopgangslamp die 30 minuten voor je wektijd langzaam opkomt.",
+        bundleH: "Kies het aantal",
+        one: "1 lamp", two: "2 lampen", three: "3 lampen",
+        oneSub: "Voor één kamer", twoSub: "Eén aan elke kant van het bed", threeSub: "Beste prijs",
+        best: "Beste deal",
+        bumpT: "Voeg 2 jaar extra garantie toe",
+        bumpD: "Volledige dekking, omruilen zonder gedoe.",
+        cta: "Nu bestellen",
+        sub_l: "Subtotaal", bump_l: "Extra garantie", ship_l: "Verzending", total_l: "Totaal",
+        free: "Gratis",
+        reassure: ["Gratis verzending", "30 dagen bedenktijd", "2 jaar garantie"],
+        payH: "Betaalmethoden in Nederland",
+        vatNote: "Incl. btw"
+      }
+    },
+
+    BE: {
+      locale: "nl-BE", currency: "EUR", dir: "ltr", lang: "nl",
+      unit: 69.95, was: 99.95, ship: 0,
+      vatLabel: "btw", vatRate: 21,
+      pay: [
+        { n: "Bancontact", primary: true }, { n: "Klarna" },
+        { n: "Creditcard" }, { n: "PayPal" }, { n: "Apple Pay" }
+      ],
+      t: {
+        kicker: "Winteractie",
+        headline: "Word wakker van licht, niet van een wekker",
+        sub: "De zonsopgangslamp die 30 minuten voor je wektijd langzaam opkomt.",
+        bundleH: "Kies het aantal",
+        one: "1 lamp", two: "2 lampen", three: "3 lampen",
+        oneSub: "Voor één kamer", twoSub: "Eén aan elke kant van het bed", threeSub: "Beste prijs",
+        best: "Beste deal",
+        bumpT: "Voeg 2 jaar extra garantie toe",
+        bumpD: "Volledige dekking, omruilen zonder gedoe.",
+        cta: "Nu bestellen",
+        sub_l: "Subtotaal", bump_l: "Extra garantie", ship_l: "Verzending", total_l: "Totaal",
+        free: "Gratis",
+        reassure: ["Gratis verzending", "30 dagen bedenktijd", "2 jaar garantie"],
+        payH: "Betaalmethoden in België",
+        vatNote: "Incl. btw"
+      }
+    },
+
+    FI: {
+      locale: "fi-FI", currency: "EUR", dir: "ltr", lang: "fi",
+      unit: 69.90, was: 99.90, ship: 0,
+      vatLabel: "alv", vatRate: 25.5,
+      pay: [
+        { n: "Verkkopankki", primary: true }, { n: "MobilePay" },
+        { n: "Klarna" }, { n: "Kortti" }, { n: "Apple Pay" }
+      ],
+      t: {
+        kicker: "Talvitarjous",
+        headline: "Herää valoon, älä hälytykseen",
+        sub: "Auringonnousuvalaisin syttyy vähitellen 30 minuuttia ennen heräämistä.",
+        bundleH: "Valitse määrä",
+        one: "1 valaisin", two: "2 valaisinta", three: "3 valaisinta",
+        oneSub: "Yhteen huoneeseen", twoSub: "Yksi sängyn kummallekin puolelle", threeSub: "Paras hinta",
+        best: "Paras tarjous",
+        bumpT: "Lisää 2 vuoden takuu",
+        bumpD: "Täysi kattavuus, vaihto ilman kysymyksiä.",
+        cta: "Osta nyt",
+        sub_l: "Välisumma", bump_l: "Lisätakuu", ship_l: "Toimitus", total_l: "Yhteensä",
+        free: "Ilmainen",
+        reassure: ["Ilmainen toimitus", "30 päivän palautusoikeus", "2 vuoden takuu"],
+        payH: "Suomessa käytetyt maksutavat",
+        vatNote: "Sis. alv"
+      }
+    }
+  };
+
+  /* Bundle multipliers. Discount deepens with quantity, which is the only
+     honest reason to offer a bundle at all. */
+  var TIERS = [
+    { qty: 1, key: "one",   subKey: "oneSub",   mult: 1,    best: false },
+    { qty: 2, key: "two",   subKey: "twoSub",   mult: 1.75, best: true  },
+    { qty: 3, key: "three", subKey: "threeSub", mult: 2.40, best: false }
+  ];
+
+  var BUMP_SHARE = 0.14;   /* warranty priced off the unit, per market */
+
+  var state = { market: "NL", tier: 1, bump: false };
+
+  var $ = function (id) { return document.getElementById(id); };
+
+  function money(v, m) {
+    return new Intl.NumberFormat(m.locale, {
+      style: "currency", currency: m.currency,
+      minimumFractionDigits: m.currency === "SEK" ? 0 : 2,
+      maximumFractionDigits: m.currency === "SEK" ? 0 : 2
+    }).format(v);
+  }
+
+  function round(v, m) {
+    /* Keep the charm ending the market expects instead of a raw multiply. */
+    if (m.currency === "SEK") return Math.round(v / 10) * 10 - 1;
+    return Math.round(v * 100) / 100;
+  }
+
+  function render() {
+    var m = MARKETS[state.market], t = m.t;
+
+    document.documentElement.lang = m.lang;
+    document.documentElement.dir = m.dir;
+
+    $("localeNote").textContent = m.locale + " · " + m.currency + " · " + m.dir.toUpperCase();
+    $("kicker").textContent = t.kicker;
+    $("headline").textContent = t.headline;
+    $("sub").textContent = t.sub;
+    $("bundleH").textContent = t.bundleH;
+    $("payH").textContent = t.payH;
+
+    $("price").textContent = money(m.unit, m);
+    $("was").textContent = money(m.was, m);
+    $("save").textContent = "−" + Math.round((1 - m.unit / m.was) * 100) + "%";
+    $("vat").textContent = t.vatNote + " (" + m.vatLabel + " " + String(m.vatRate).replace(".", ",") + "%)";
+
+    /* tiers */
+    var box = $("tiers");
+    box.textContent = "";
+    TIERS.forEach(function (tier, i) {
+      var total = round(m.unit * tier.mult, m);
+      var b = document.createElement("button");
+      b.type = "button";
+      b.className = "tier";
+      b.setAttribute("role", "radio");
+      b.setAttribute("aria-checked", String(i === state.tier));
+      b.innerHTML =
+        '<span class="dot" aria-hidden="true"></span>' +
+        '<span class="tier-main">' +
+          '<span class="tier-name">' + t[tier.key] + (tier.best ? ' <span class="tag">' + t.best + '</span>' : '') + '</span>' +
+          '<span class="tier-sub">' + t[tier.subKey] + '</span>' +
+        '</span>' +
+        '<span class="tier-price">' + money(total, m) + '</span>';
+      b.addEventListener("click", function () { state.tier = i; render(); });
+      box.appendChild(b);
+    });
+
+    /* bump */
+    var bumpPrice = round(m.unit * BUMP_SHARE, m);
+    $("bumpT").textContent = t.bumpT + " · " + money(bumpPrice, m);
+    $("bumpD").textContent = t.bumpD;
+    $("bump").checked = state.bump;
+
+    /* checkout maths */
+    var sub = round(m.unit * TIERS[state.tier].mult, m);
+    var total = sub + (state.bump ? bumpPrice : 0);
+
+    $("lSub").textContent = t.sub_l + " (" + TIERS[state.tier].qty + "×)";
+    $("vSub").textContent = money(sub, m);
+    $("rowBump").hidden = !state.bump;
+    $("lBump").textContent = t.bump_l;
+    $("vBump").textContent = money(bumpPrice, m);
+    $("lShip").textContent = t.ship_l;
+    $("vShip").textContent = t.free;
+    $("lTotal").textContent = t.total_l;
+    $("vTotal").textContent = money(total, m);
+
+    /* ctas */
+    $("ctaMain").textContent = t.cta + " · " + money(total, m);
+    $("ctaStick").textContent = t.cta;
+    $("stickPrice").textContent = money(total, m);
+
+    /* reassurance */
+    var r = $("reassure");
+    r.textContent = "";
+    t.reassure.forEach(function (x) {
+      var li = document.createElement("li"); li.textContent = x; r.appendChild(li);
+    });
+
+    /* payments, market-correct and with the local favourite first */
+    var p = $("payList");
+    p.textContent = "";
+    m.pay.forEach(function (x) {
+      var li = document.createElement("li");
+      li.textContent = x.n;
+      if (x.primary) li.className = "primary";
+      p.appendChild(li);
+    });
+  }
+
+  $("market").addEventListener("change", function (e) {
+    state.market = e.target.value;
+    render();
+  });
+  $("bump").addEventListener("change", function (e) {
+    state.bump = e.target.checked;
+    render();
+  });
+
+  function demoNote() {
+    alert("Demo only. No payment is taken and nothing is stored.");
+  }
+  $("ctaMain").addEventListener("click", demoNote);
+  $("ctaStick").addEventListener("click", demoNote);
+
+  render();
+})();
+</script>
+
+</body>
+</html>
