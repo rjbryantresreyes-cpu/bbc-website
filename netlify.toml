@@ -38,6 +38,16 @@
   [headers.values]
     Content-Type = "application/manifest+json"
 
+# RJ's resume, hosted here so job applications can LINK to it instead of depending
+# on a Google Docs sharing toggle. The canonical Doc returns 401 to anyone but RJ,
+# so an application linking it would have looked broken to the employer.
+# Noindexed: it is for people RJ sends it to, not for search results.
+[[headers]]
+  for = "/rj-bryan-tres-reyes-resume.pdf"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"
+    Content-Type = "application/pdf"
+
 # --------------------------------------------------------------------------
 # Internal files must not be served. There is no `publish` directory set, so
 # Netlify serves the repo root, which means every internal .md and tool in here
