@@ -228,22 +228,15 @@ function render(d){
     </details>` : "";
 }
 
+// Uses the shared locked loader in bbc-os.js (2026-09-15). This page used to carry its own copy
+// that fetched the snapshot WITHOUT a key and fell back to a public static file, so it would have
+// either leaked or crashed once the dashboard went private.
 async function load(){
-  let data = null;
-  try {
-    const r = await fetch(ENDPOINT, {cache:"no-store"});
-    if (r.ok) { const j = await r.json(); if (!j.empty) data = j; }
-  } catch {}
-  if (!data) {
-    try { const r = await fetch(FALLBACK, {cache:"no-store"}); if (r.ok) data = await r.json(); } catch {}
-  }
-  if (!data) {
+  await loadSnapshot(render, () => {
     document.getElementById("attention-host").innerHTML =
       `<div class="attention"><h2>No snapshot yet</h2>
        <p class="lead" style="margin:0">Run the daily routine to fill this in.</p></div>`;
-    return;
-  }
-  render(data);
+  });
 }
 
 load();

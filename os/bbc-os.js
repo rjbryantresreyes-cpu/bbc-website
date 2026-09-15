@@ -3,7 +3,11 @@
    live here once rather than being copy-pasted per page. */
 
 const ENDPOINT = "/.netlify/functions/routine-snapshot";
-const FALLBACK = "/os/routine-snapshot.json";
+// NO public fallback file (removed 2026-09-15). /os/routine-snapshot.json was a 2026-09-03 snapshot
+// committed during the original build and served to anyone. Once the endpoint required a key,
+// every 401 would have silently loaded that stale public copy instead: the dashboard would have
+// gone 12 days stale AND kept leaking. A locked dashboard must say so, never show old data.
+const READ_KEY_STORE = "bbcReadKey";
 
 const esc = s => String(s ?? "").replace(/[&<>"']/g, c =>
   ({ "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;", "'":"&#39;" }[c]));
@@ -43,20 +47,49 @@ function stampFreshness(d){
   }
 }
 
-/* Live Blobs store first, committed file second. The fallback exists so the page
-   still shows real numbers before ROUTINE_TOKEN is configured on the site. */
+/* The dashboard is PRIVATE (2026-09-15). The snapshot carries client detail, so the endpoint
+   requires a read key. The key is asked for once per browser tab and kept in sessionStorage,
+   which clears when the tab closes; it is never written into the page or the repo. */
+function getReadKey(forcePrompt){
+  let k = null;
+  try { k = sessionStorage.getItem(READ_KEY_STORE); } catch {}
+  if (!k || forcePrompt) {
+    k = window.prompt("This dashboard is private. Enter the team read key:");
+    if (k) { k = k.trim(); try { sessionStorage.setItem(READ_KEY_STORE, k); } catch {} }
+  }
+  return k || null;
+}
+
+function showLocked(msg){
+  const box = document.createElement("div");
+  box.setAttribute("role", "alert");
+  box.style.cssText = "max-width:560px;margin:15vh auto;padding:28px;border-radius:14px;" +
+    "background:#fff7f2;border:1px solid #e6c9b8;font:15px/1.5 system-ui,sans-serif;color:#4a2f23;text-align:center";
+  box.innerHTML = `<strong style="display:block;font-size:18px;margin-bottom:8px">Dashboard locked</strong>${esc(msg)}` +
+    `<div style="margin-top:16px"><button id="bbc-unlock" style="padding:9px 18px;border-radius:9px;border:1px solid #c4643c;background:#c4643c;color:#fff;cursor:pointer">Enter key</button></div>`;
+  document.body.innerHTML = "";
+  document.body.appendChild(box);
+  const b = document.getElementById("bbc-unlock");
+  if (b) b.onclick = () => { try { sessionStorage.removeItem(READ_KEY_STORE); } catch {} location.reload(); };
+}
+
 async function loadSnapshot(onData, onEmpty){
+  const key = getReadKey(false);
+  if (!key) { showLocked("A read key is required to view this dashboard."); return null; }
+
   let data = null;
   try {
-    const r = await fetch(ENDPOINT, { cache:"no-store" });
+    const r = await fetch(ENDPOINT, { cache:"no-store", headers: { "x-routine-read-key": key } });
+    if (r.status === 401) {
+      // Wrong or stale key: forget it so the next attempt asks again, and never fall back to
+      // anything public.
+      try { sessionStorage.removeItem(READ_KEY_STORE); } catch {}
+      showLocked("That key was not accepted.");
+      return null;
+    }
+    if (r.status === 503) { showLocked("The dashboard is not configured with a read key yet."); return null; }
     if (r.ok) { const j = await r.json(); if (!j.empty) data = j; }
   } catch {}
-  if (!data) {
-    try {
-      const r = await fetch(FALLBACK, { cache:"no-store" });
-      if (r.ok) data = await r.json();
-    } catch {}
-  }
   if (!data) { if (onEmpty) onEmpty(); return null; }
   onData(data);
   return data;

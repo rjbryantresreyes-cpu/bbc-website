@@ -15,8 +15,25 @@
 //
 // POST auth: header  x-routine-token: <ROUTINE_TOKEN env var>
 // If ROUTINE_TOKEN is not set on the site, writes are REFUSED rather than left open.
+//
+// GET auth (added 2026-09-15): header  x-routine-read-key: <ROUTINE_READ_KEY env var>
+// The write token is also accepted, so the routine itself can still read.
+// If ROUTINE_READ_KEY is not set on the site, reads are REFUSED rather than left open.
+//
+// WHY READS ARE GATED: until 2026-09-15 every GET was open to the whole internet, including
+// ?date=YYYY-MM-DD for any past day. The snapshots carry client complaints close to verbatim,
+// retainer figures, email-authentication weaknesses, a revoked API token and the names of the
+// founder's private chats. They were written on the assumption /os was private. It was not.
+// A separate read key means a VA can view the dashboard without being able to overwrite it.
 
 import { getStore } from "@netlify/blobs";
+import { timingSafeEqual } from "node:crypto";
+
+// Compare secrets without leaking length or content through timing.
+const safeEq = (a, b) => {
+  const x = Buffer.from(String(a)), y = Buffer.from(String(b));
+  return x.length === y.length && timingSafeEqual(x, y);
+};
 
 const STORE = "bbc-routine";
 const LATEST = "latest";
@@ -27,7 +44,7 @@ export default async (req) => {
   const CORS = {
     "access-control-allow-origin": "*",
     "access-control-allow-methods": "GET, POST, OPTIONS",
-    "access-control-allow-headers": "content-type, x-routine-token",
+    "access-control-allow-headers": "content-type, x-routine-token, x-routine-read-key",
   };
   const json = (obj, status = 200) =>
     new Response(JSON.stringify(obj), {
@@ -48,6 +65,22 @@ export default async (req) => {
 
   // ---------- READ ----------
   if (req.method === "GET") {
+    const readKey = process.env.ROUTINE_READ_KEY;
+    if (!readKey) {
+      // Fail CLOSED. An unset key must never mean "open to everyone", which is exactly how
+      // this endpoint ended up public in the first place.
+      return json({
+        error: "ROUTINE_READ_KEY is not configured on this site, so reads are refused.",
+        fix: "Netlify > Site configuration > Environment variables > add ROUTINE_READ_KEY, then redeploy.",
+      }, 503);
+    }
+    const givenRead = req.headers.get("x-routine-read-key") || "";
+    const givenWrite = req.headers.get("x-routine-token") || "";
+    const writeTok = process.env.ROUTINE_TOKEN || "";
+    const authorised = (givenRead && safeEq(givenRead, readKey)) ||
+                       (writeTok && givenWrite && safeEq(givenWrite, writeTok));
+    if (!authorised) return json({ error: "dashboard is private: missing or wrong read key" }, 401);
+
     const url = new URL(req.url);
     const history = url.searchParams.get("history");
     const date = url.searchParams.get("date");
@@ -82,8 +115,7 @@ export default async (req) => {
       }, 503);
     }
     const given = req.headers.get("x-routine-token") || "";
-    // constant-ish time compare
-    if (given.length !== expected.length || given !== expected) {
+    if (!safeEq(given, expected)) {
       return json({ error: "bad or missing x-routine-token" }, 401);
     }
 

@@ -12,8 +12,7 @@
       "notes": "Signed 2026-08-11, started 2026-08-12. Full partnership ($2000/mo): website redesign + SEO/AI-visibility (she lost search rankings after a site migration — her #1 need), social, email, funnels, and her own Cherry Sage AI (built in Claude). Brand: professional, trustworthy, warm, some mystical elements but NEVER witchy/voodoo/fortune-telling; established high-profile look. Owner Beverly Cherry (sole decision-maker), cherry38@cherrysage.com, WhatsApp, very hands-on. Also on build list: online status indicator (green/orange/red).",
       "slug": "cherry-sage",
       "link": "/cherry-sage",
-      "folder": "CHERRY-SAGE",
-      "claudeMdNote": "Online psychic readings + tarot/numerology, B2C international. Owner Beverly Cherry (cherry38@cherrysage.com), sole decision-maker. Handler: RJ only talks to the client. Client AI = Ivy (02_AI_IVY\\). $2,000/mo flat retainer, billed weekly at $500/completed workweek (INVOICE_REGISTER_CHERRYSAGE.md). Social is planned but not started (RJ 2026-09-04), so it is not tracked on the dashboard. Brand guardrail: professional/warm/traditional, NEVER witchy or fortune-telling. Added to CLAUDE.md + Brevo Active Clients list 2026-09-01 (was invoiced since Aug 2026 but missing from both). Email: cherrysage.com DNS-authenticated 2026-09-05 after weeks of 0-delivery (SPF/DKIM/DMARC fixed in Hostgator); now ramping the ~1,725-contact list tier-by-tier (Tier 1 Warm done clean, Tier 2/3 to follow) to protect the freshly-fixed domain reputation — tracked live via bbc_status.py's \"Cherry Sage Brevo ramp\" check, full history in memory project_cherry_sage_domain_not_authenticated.md."
+      "folder": "CHERRY-SAGE"
     },
     {
       "name": "S. Riviere Hair Collection",
@@ -25,8 +24,7 @@
       "status": "active",
       "notes": "Daryl took over 2026-06-12 (was Al). Olivia built + full capability. Editorial rebrand site staged as Shopify draft.",
       "folder": "S-RIVIERE-HAIR-COLLECTION",
-      "slug": "s-riviere-hair-collection",
-      "claudeMdNote": "Shopify build"
+      "slug": "s-riviere-hair-collection"
     },
     {
       "name": "Wooden Woodworks",
@@ -38,8 +36,7 @@
       "status": "active",
       "notes": "Luxury positioning. Krizza only BBC member in WW OS. Owners on Claude.ai Pro only.",
       "folder": "WOODEN-WOODWORKS",
-      "slug": "wooden-woodworks",
-      "claudeMdNote": "Luxury positioning, custom woodwork. Krizza is the only BBC team member who operates Claude Code inside the WW OS. Oscar and Marla (owners) have NO Claude Code access -- their AI access is Claude.ai Pro (Woody) only."
+      "slug": "wooden-woodworks"
     },
     {
       "name": "Home Vision Studio",
@@ -51,8 +48,7 @@
       "status": "hold",
       "notes": "ON HOLD (paused) since 2026-08-12 — daily client-care routines paused. Kept listed as current publicly. Handled by RJ directly. Shopify build. Homie = BBC's all-in-one AI for HVS.",
       "folder": "HOME-VISION-STUDIO",
-      "slug": "home-vision-studio",
-      "claudeMdNote": "ON HOLD since 2026-08-02 (Beau paused ~4 months; confirmed by his own email + cross-referenced in memory). Do NOT run routines, send reports, or bill until RJ confirms resumed. Shopify store, design centers."
+      "slug": "home-vision-studio"
     },
     {
       "name": "AJ Battle Foundation",
@@ -64,8 +60,7 @@
       "status": "active",
       "notes": "Solely handled by Vi now (was Al). Sister business to Sonya. Coordinate carefully.",
       "folder": "AJ-BATTLE-FOUNDATION",
-      "slug": "aj-battle-foundation",
-      "claudeMdNote": "Nonprofit"
+      "slug": "aj-battle-foundation"
     },
     {
       "name": "Freccia Construction",
@@ -77,8 +72,7 @@
       "status": "active",
       "notes": "Active client (signed). Website + marketing emails (GHL) + social. Sole approver: Rebekah. Contacts: rseveri@frecciagroup.com (cc wseveri, jclements, accounting). AI = Bob.",
       "folder": "FRECCIA-CONSTRUCTION",
-      "slug": "freccia-construction",
-      "claudeMdNote": "Custom builder, Austin TX. AI = Bob (02_AI_BOB\\). Load BOB_SYSTEM_PROMPT.md + BOB_KNOWLEDGE_BASE\\ first. BBC runs their social, CRM and email through GoHighLevel; the dashboard needs a read-only token at C:\\BBC\\_SECRETS\\ghl_freccia_pit.txt (currently empty). Bob is multi-device: deployed as Claude.ai Project \"Bob — Freccia Construction\" (account-level = auto-accessible on Plus/Tuff/Free). Pending: brand visuals, email confirm, tool access (GHL/QB/Buildertrend). Drafts only — Rebekah is sole approver."
+      "slug": "freccia-construction"
     },
     {
       "name": "JR Signing Services",
@@ -90,8 +84,7 @@
       "status": "active",
       "notes": "Active client. LinkedIn outreach + GoHighLevel CRM. Contacts: Jasmine Brown + Anthony, jrsigningservices@gmail.com, (832) 387-4648.",
       "folder": "JR-SIGNING-SERVICES",
-      "slug": "jr-signing-services",
-      "claudeMdNote": "TX notary signing agency, Jasmine Green + Anthony Green (corrected 2026-09-07 by Daryl; this table previously said \"Jasmine Brown\", which reached a client draft before it was caught. They share a surname, that is not a merge error). Daryl runs lead generation and email marketing for them through GoHighLevel (CRM + leads + email). A read-only Private Integration Token must live at C:\\BBC\\_SECRETS\\ghl_jrss_pit.txt for the dashboard to read their pipeline. Confirmed ACTIVE by RJ 2026-09-03 after a meeting with Daryl about upgrading their Netlify plan; daily health checks resume from that date."
+      "slug": "jr-signing-services"
     },
     {
       "name": "BILT 2 Travel",
@@ -104,15 +97,13 @@
       "notes": "Signed 2026-07-17. Travel-rewards education brand. BBC carries content, brand identity, website, and email to sell the BILT2TRAVEL Playbook e-book (goal: 25 sales/mo by Sept 1, 2026). Trust-first, NO hype. John is the VA on the account. AI = BILL. Owner Dwight Campbell (sole approver), info@bilt2travel.com, WhatsApp comms, very hands-on. Folder: 02_ACTIVE_CLIENTS/_PROSPECTS/BILT-2-TRAVEL.",
       "slug": "bilt-2-travel",
       "link": "/bilt-2-travel",
-      "folder": "BILT-2-TRAVEL",
-      "claudeMdNote": "Travel-rewards education, e-book funnel. Owner Dwight Campbell (info@bilt2travel.com), sole approver via RJ. Kenz is the dedicated VA. Client AI = BILL (08_AI_BILT\\). Billed bi-weekly, $8/hr x 15 hrs/wk + e-book bonus tiers (INVOICE_REGISTER_BILT.md). NEVER \"hack\"/\"free travel\"/risky-credit language. Drafts only, no auto-post/send. Added to CLAUDE.md + Brevo Active Clients list 2026-09-01 (was invoiced since Jul 2026 but missing from both)."
+      "folder": "BILT-2-TRAVEL"
     },
     {
       "id": "optimism-consulting",
       "name": "Optimism Consulting",
       "status": "hold",
       "category": "active",
-      "claudeMdNote": "ON HOLD since 2026-09-03 (RJ paused work with OShun; not a current client for now. Do NOT run routines, send reports or bill until RJ confirms resumed.) Credit repair + business funding, Dallas TX. Started 2026-08-12. OShun Jones is sole approver. Ryan Bernaldez is the VA, and does NOT contact the client directly. Load 00_START_HERE\\OPTIMISM_PROJECT_CONTEXT.md first. Credit repair only on first contact, never lead with business funding. NEVER attempt a QuickBooks login. BOAZELLE.csv in 03_CLIENT_SHARED\\ is his real bank statement, never forward it.",
       "folder": "OPTIMISM-CONSULTING"
     },
     {
@@ -125,8 +116,7 @@
       "status": "active",
       "notes": "Active, part-time. Ryan leads the account and tracks the work off-platform, so nothing is machine-checkable on the dashboard; that is not a gap. NEVER use adult-platform language. Describe as a digital audience engagement and growth management agency.",
       "folder": "ALL-RYZE",
-      "slug": "all-ryze",
-      "claudeMdNote": "NEVER use adult platform language. Describe as \"digital audience engagement agency.\" Ryan leads the account and tracks the work off-platform, so nothing is machine-checkable on the dashboard - that is not a gap."
+      "slug": "all-ryze"
     }
   ],
   "of": [
@@ -325,8 +315,7 @@
       "notes": "Season ended 2026-07-07 as their team evolved. Case study live at /4ocean.html.",
       "folder": "4OCEAN",
       "slug": "4ocean",
-      "link": "/4ocean.html",
-      "claudeMdNote": "Partnership ended 2026-07-07 as 4Ocean restructures their ecommerce team. RJ worked as embedded contractor (not a standard BBC retainer); BBC's internal AI/creative system supported the work. Full history: 00_CLIENT_MASTER\\4OCEAN_ENGAGEMENT_SUMMARY.md. Do not read Slack/Asana into new tasks — engagement closed."
+      "link": "/4ocean.html"
     },
     {
       "name": "First Class Finishes & Hi-Up Roofing",
@@ -338,8 +327,7 @@
       "status": "past",
       "notes": "No longer an active client (RJ, 2026-08-29). Michael/Kari Pedley, billed together as one entity. Do not run routines, report or bill. Last invoice #14 (Jul 20-Aug 2, 2026), $300, unclear if ever sent; do not chase or bill further.",
       "folder": "FIRST-CLASS-FINISHES",
-      "slug": "first-class-finishes",
-      "claudeMdNote": "First Class Finishes: Commercial painting + roofing, Texas. Michael/Kari Pedley. No longer an active client (RJ, 2026-08-29). | Hi-Up Roofing: Insurance SEO, storm damage. Michael/Kari Pedley — billed together with First Class Finishes as one entity. No longer an active client (RJ, 2026-08-29). Last invoice #14 (Jul 20-Aug 2, 2026), $300, unclear if ever sent — do not chase or bill further."
+      "slug": "first-class-finishes"
     },
     {
       "name": "3r Design",
@@ -351,8 +339,7 @@
       "status": "past",
       "notes": "No longer an active client (RJ, 2026-09-05). Was with Becky, RJ also handling personally. Do not run routines, report or bill.",
       "folder": "3R-DESIGN",
-      "slug": "3r-design",
-      "claudeMdNote": "No longer an active client (RJ, 2026-09-05). Was with Becky, RJ also handling personally. Do not run routines, send reports or bill."
+      "slug": "3r-design"
     }
   ],
   "_synced_from_claude_md": "2026-09-05"
