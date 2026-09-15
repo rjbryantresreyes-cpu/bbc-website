@@ -48,6 +48,14 @@
     X-Robots-Tag = "noindex, nofollow"
     Content-Type = "application/pdf"
 
+# Personalized website-check proposals linked from job applications (OnlineJobs best-10,
+# 2026-09-16). Each file name carries a random token so they cannot be guessed, and they
+# are noindexed because they name real businesses and are meant only for that employer.
+[[headers]]
+  for = "/proposals/*"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"
+
 # --------------------------------------------------------------------------
 # Internal files must not be served. There is no `publish` directory set, so
 # Netlify serves the repo root, which means every internal .md and tool in here
