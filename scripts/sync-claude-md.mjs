@@ -247,11 +247,16 @@ matchedGroups.forEach((rows, m) => {
     ? rows[0].notes
     : rows.map(r => `${r.name}: ${r.notes}`).join(' | ');
 
-  const before = { status: m.entry.status, claudeMdNote: m.entry.claudeMdNote };
+  // claudeMdNote is NO LONGER written to clients.json (2026-09-15). data/clients.json is served
+  // publicly, and this copied each client's full CLAUDE.md "Special Rules" cell into it verbatim:
+  // retainer rates, a client's bank-statement filename, a client's maiden name, handling rules.
+  // No page ever displayed the field - it was published for nothing. Status still syncs. The note
+  // is kept in the LOCAL log only, which never ships, so changes stay auditable.
+  const before = { status: m.entry.status };
   m.entry.status = finalStatus;
-  m.entry.claudeMdNote = claudeMdNote;
+  delete m.entry.claudeMdNote;
   updatedCount++;
-  updateLog.push({ name: m.entry.name, matchedFrom: rows.map(r => r.name), before, after: { status: finalStatus, claudeMdNote } });
+  updateLog.push({ name: m.entry.name, matchedFrom: rows.map(r => r.name), before, after: { status: finalStatus }, noteForLogOnly: claudeMdNote });
 });
 
 // unmatched CLAUDE.md clients -> add minimal new entries
@@ -262,7 +267,7 @@ unmatchedClaude.forEach(cc => {
     name: cc.name,
     status: cc.status,
     category: cc.status,
-    claudeMdNote: cc.notes,
+    // no claudeMdNote here either - see the note above; this file is public
     folder: cc.folder || undefined,
   };
   Object.keys(newEntry).forEach(k => newEntry[k] === undefined && delete newEntry[k]);
