@@ -94,6 +94,17 @@
   status = 404
   force = true
 
+# Krizza & Bryan wedding RSVP page (personal). Main link: /krizza-and-bryan
+[[redirects]]
+  from = "/krizzaandbryan"
+  to = "/krizza-and-bryan"
+  status = 301
+
+[[redirects]]
+  from = "/krizza&bryan"
+  to = "/krizza-and-bryan"
+  status = 301
+
 # >>> generated: social-media article-slug aliases (gen-social-redirects.mjs)
 # Do not hand-edit. Regenerate with: node scripts/gen-social-redirects.mjs
 [[redirects]]

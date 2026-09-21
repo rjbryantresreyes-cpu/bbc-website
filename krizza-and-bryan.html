@@ -1,0 +1,414 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Krizza &amp; Bryan | RSVP</title>
+<meta name="description" content="Krizza and Bryan are getting married on Saturday, October 24, 2026 at Astoria Regency Convention Center, Zamboanga City. Please let us know if you can join us.">
+<meta name="robots" content="noindex, nofollow">
+<link rel="canonical" href="https://balaynibruno.co/krizza-and-bryan">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Krizza &amp; Bryan are getting married">
+<meta property="og:description" content="Saturday, October 24, 2026 · Astoria Regency Convention Center, Zamboanga City. Please RSVP. Our official invitation will follow.">
+<meta property="og:url" content="https://balaynibruno.co/krizza-and-bryan">
+<meta property="og:image" content="https://balaynibruno.co/assets/krizza-bryan/envelope.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#FBF6EF">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Karla:wght@400;500;600;700&display=swap">
+<style>
+:root{
+  --nude:#9A7B5D; --berry:#ECC4C3; --blossom:#B97D7B; --meadow:#928E5E; --soldier:#575527;
+  --paper:#FBF6EF; --card:#FFFDF9; --ink:#3C3426; --muted:#6F6553; --line:#E7DCC9;
+  --radius:16px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0; background:var(--paper); color:var(--ink);
+  font-family:"Karla",system-ui,-apple-system,"Segoe UI",sans-serif; font-size:17px; line-height:1.7;
+  -webkit-font-smoothing:antialiased; overflow-x:hidden;
+}
+body.locked{overflow:hidden}
+h1,h2,h3,.serif{font-family:"Cormorant Garamond",Georgia,serif; font-weight:500; margin:0; color:var(--soldier)}
+p{margin:0 0 1em}
+a{color:var(--soldier)}
+:focus-visible{outline:3px solid var(--blossom); outline-offset:3px; border-radius:6px}
+
+.bloom{position:fixed; inset:0; z-index:0; pointer-events:none;
+  background:
+    radial-gradient(420px 320px at -8% -6%, color-mix(in srgb, var(--berry) 55%, transparent), transparent 70%),
+    radial-gradient(380px 300px at 108% 8%, color-mix(in srgb, var(--meadow) 30%, transparent), transparent 70%),
+    radial-gradient(460px 360px at 104% 104%, color-mix(in srgb, var(--blossom) 32%, transparent), transparent 70%),
+    radial-gradient(360px 280px at -6% 106%, color-mix(in srgb, var(--meadow) 26%, transparent), transparent 70%);
+}
+.sprig{display:inline-flex; align-items:center; gap:10px; color:var(--meadow); font-size:.8rem; letter-spacing:.24em; text-transform:uppercase; font-weight:600}
+.sprig::before,.sprig::after{content:""; width:30px; height:1px; background:var(--meadow); opacity:.6}
+@keyframes riseIn{from{opacity:0; transform:translateY(18px)} to{opacity:1; transform:none}}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(6px)}}
+
+/* ---------- envelope intro ---------- */
+#intro{position:fixed; inset:0; z-index:50; background:var(--paper); display:grid; place-items:center; overflow:auto;
+  transition:opacity .7s ease, visibility .7s ease}
+#intro.gone{opacity:0; visibility:hidden; pointer-events:none}
+.stage-wrap{position:relative; z-index:1; display:flex; flex-direction:column; align-items:center; padding:24px 0}
+#topLabel{margin-bottom:22px; animation:riseIn .9s cubic-bezier(.16,1,.3,1) .1s both; transition:opacity .4s ease}
+.stage{
+  position:relative; width:min(88vw,420px); aspect-ratio:4/3; cursor:pointer; padding:0; border:0; background:#fff;
+  -webkit-tap-highlight-color:transparent; border-radius:14px; overflow:hidden;
+  box-shadow:0 24px 46px -18px rgba(40,39,18,.45);
+  transition:opacity .6s ease .1s, transform .45s cubic-bezier(.16,1,.3,1), box-shadow .45s ease;
+  animation:riseIn 1s cubic-bezier(.16,1,.3,1) .32s both;
+}
+.stage:hover{transform:translateY(-4px); box-shadow:0 30px 54px -16px rgba(40,39,18,.5)}
+.stage img{display:block; width:100%; height:100%; object-fit:cover}
+.prompt{margin-top:22px; text-align:center; color:var(--muted); font-size:.78rem; letter-spacing:.14em; text-transform:uppercase; animation:bob 2.4s ease-in-out 1.4s infinite; transition:opacity .4s ease}
+#intro[data-open="true"] #topLabel,#intro[data-open="true"] .prompt{opacity:0; animation:none}
+#intro[data-open="true"] .stage{opacity:0; transform:scale(.92); pointer-events:none; animation:none; transition:opacity .6s ease .1s, transform .6s cubic-bezier(.16,1,.3,1) .1s}
+.reveal{position:absolute; inset:0; display:grid; place-items:center; padding:8vh 8vw; text-align:center; opacity:0; pointer-events:none; transition:opacity .3s ease .3s}
+#intro[data-open="true"] .reveal{opacity:1; pointer-events:auto}
+.reveal-inner{display:flex; flex-direction:column; align-items:center; gap:14px; max-width:440px}
+.reveal-inner > *{opacity:0}
+#intro[data-open="true"] .reveal-inner > *{animation:riseIn .85s cubic-bezier(.16,1,.3,1) forwards}
+#intro[data-open="true"] .reveal-inner > *:nth-child(1){animation-delay:.45s}
+#intro[data-open="true"] .reveal-inner > *:nth-child(2){animation-delay:.58s}
+#intro[data-open="true"] .reveal-inner > *:nth-child(3){animation-delay:.71s}
+#intro[data-open="true"] .reveal-inner > *:nth-child(4){animation-delay:.84s}
+#intro[data-open="true"] .reveal-inner > *:nth-child(5){animation-delay:.97s}
+#intro[data-open="true"] .reveal-inner > *:nth-child(6){animation-delay:1.1s}
+.names{font-size:clamp(2.4rem,10vw,3.6rem); line-height:1.05}
+.amp{font-style:italic; color:var(--blossom)}
+.tagline{font-family:"Cormorant Garamond",serif; font-style:italic; font-size:clamp(1.15rem,3.4vw,1.4rem); color:var(--blossom)}
+.when{font-size:.86rem; letter-spacing:.16em; text-transform:uppercase; color:var(--nude); font-weight:700}
+.venue{color:var(--muted); font-size:.95rem}
+
+.btn{display:inline-flex; align-items:center; justify-content:center; gap:8px; background:var(--soldier); color:#F6EFE3; text-decoration:none; border:0; cursor:pointer;
+  border-radius:999px; padding:14px 30px; font:700 .78rem/1 "Karla",sans-serif; letter-spacing:.14em; text-transform:uppercase; min-height:48px;
+  transition:background .2s ease, transform .2s ease}
+.btn:hover{background:var(--meadow)}
+.btn:active{transform:scale(.98)}
+.btn.ghost{background:transparent; color:var(--soldier); border:1.5px solid var(--soldier)}
+.btn.ghost:hover{background:var(--soldier); color:#F6EFE3}
+.btn[disabled]{opacity:.6; cursor:progress}
+
+/* ---------- page ---------- */
+main{position:relative; z-index:1}
+.wrap{width:min(100% - 32px, 640px); margin-inline:auto}
+section{padding:56px 0 8px}
+.hero{padding:56px 0 24px; text-align:center}
+.hero .monogram{width:132px; height:132px; margin:0 auto 18px; display:block}
+.hero h1{font-size:clamp(2.8rem,12vw,4.4rem); line-height:1}
+.hero .date{margin-top:18px; font-family:"Cormorant Garamond",serif; font-size:clamp(1.5rem,5vw,1.9rem); color:var(--ink)}
+.hero .place{color:var(--muted); margin:2px 0 0}
+.count{display:inline-block; margin:22px 0 4px; padding:6px 16px; border:1px solid var(--line); border-radius:999px; background:var(--card); color:var(--nude); font-size:.8rem; letter-spacing:.14em; text-transform:uppercase; font-weight:700}
+.cta-row{margin-top:22px}
+
+h2{font-size:clamp(1.9rem,6vw,2.4rem); line-height:1.15; text-align:center; margin-bottom:14px}
+.lead{text-align:center; color:var(--muted); max-width:520px; margin-inline:auto}
+.card{background:var(--card); border:1px solid var(--line); border-radius:var(--radius); padding:22px 22px 8px; box-shadow:0 10px 30px -22px rgba(60,52,38,.5)}
+.grid{display:grid; gap:14px; margin-top:22px}
+.info{background:var(--card); border:1px solid var(--line); border-radius:var(--radius); padding:20px 22px}
+.info h3{font-size:1.5rem; margin-bottom:4px}
+.info .k{font-size:.72rem; letter-spacing:.2em; text-transform:uppercase; color:var(--blossom); font-weight:700; margin-bottom:2px}
+.info p:last-child{margin-bottom:0}
+.info .btn{margin-top:10px}
+.swatches{display:flex; gap:10px; flex-wrap:wrap; margin:12px 0 6px}
+.sw{display:flex; align-items:center; gap:8px; font-size:.82rem; color:var(--muted)}
+.sw i{width:26px; height:26px; border-radius:50%; border:1px solid rgba(60,52,38,.18); display:inline-block}
+
+.steps{list-style:none; padding:0; margin:22px 0 0; display:grid; gap:12px; counter-reset:s}
+.steps li{position:relative; padding:0 0 0 52px; counter-increment:s}
+.steps li::before{content:counter(s); position:absolute; left:0; top:0; width:38px; height:38px; border-radius:50%; background:var(--berry); color:var(--soldier); display:grid; place-items:center; font:600 1.2rem "Cormorant Garamond",serif}
+.steps b{display:block; color:var(--soldier)}
+.steps span{color:var(--muted); font-size:.95rem}
+
+/* ---------- form ---------- */
+form{margin:0}
+.field{margin:0 0 20px}
+label,.legend{display:block; font-weight:700; margin-bottom:6px; color:var(--ink); font-size:.98rem}
+.hint{display:block; color:var(--muted); font-size:.85rem; font-weight:400; margin-top:1px}
+input[type=text],input[type=number],textarea{
+  width:100%; font:inherit; color:var(--ink); background:#fff; border:1.5px solid var(--line); border-radius:12px; padding:13px 14px; min-height:48px;
+  transition:border-color .2s ease, box-shadow .2s ease}
+textarea{min-height:104px; resize:vertical}
+input:focus,textarea:focus{outline:none; border-color:var(--blossom); box-shadow:0 0 0 4px color-mix(in srgb, var(--berry) 60%, transparent)}
+.pills{display:grid; gap:10px}
+.pill input{position:absolute; opacity:0; width:1px; height:1px}
+.pill span{display:flex; align-items:center; gap:12px; padding:14px 16px; border:1.5px solid var(--line); border-radius:12px; background:#fff; cursor:pointer; font-weight:600; min-height:52px; transition:all .2s ease}
+.pill span::before{content:""; width:20px; height:20px; border-radius:50%; border:2px solid var(--meadow); flex:none; transition:all .2s ease}
+.pill input:checked + span{border-color:var(--soldier); background:color-mix(in srgb, var(--berry) 30%, #fff)}
+.pill input:checked + span::before{background:var(--soldier); box-shadow:inset 0 0 0 4px #fff}
+.pill input:focus-visible + span{outline:3px solid var(--blossom); outline-offset:2px}
+.yes-only[hidden]{display:none}
+.err{color:#9B3A36; font-size:.9rem; margin-top:6px; min-height:0}
+.fine{font-size:.85rem; color:var(--muted); text-align:center; margin:14px 0 18px}
+.status{margin:0 0 16px; padding:12px 14px; border-radius:12px; font-size:.95rem; display:none}
+.status.show{display:block}
+.status.bad{background:#FBECEA; color:#7E2F2B; border:1px solid #F0C9C5}
+.hp{position:absolute; left:-9999px; height:0; overflow:hidden}
+.thanks{text-align:center; padding:12px 0 22px; animation:riseIn .8s cubic-bezier(.16,1,.3,1) both}
+.thanks h3{font-size:2rem; margin-bottom:8px}
+.thanks p{color:var(--muted); max-width:440px; margin-inline:auto}
+
+.gift{margin-top:22px}
+.gift p{color:var(--ink)}
+footer{position:relative; z-index:1; text-align:center; padding:48px 16px 56px; color:var(--muted); font-size:.9rem}
+footer .serif{font-size:1.6rem; font-style:italic; color:var(--soldier); display:block; margin-bottom:4px}
+footer small{display:block; margin-top:14px; font-size:.75rem; letter-spacing:.04em}
+
+@media (min-width:600px){ .pills{grid-template-columns:1fr 1fr} .grid.two{grid-template-columns:1fr 1fr} }
+@media (prefers-reduced-motion:reduce){
+  *{animation:none !important; transition:none !important; scroll-behavior:auto !important}
+  .reveal-inner > *{opacity:1 !important}
+}
+</style>
+<noscript><style>#intro{display:none}</style></noscript>
+</head>
+<body class="locked">
+<div class="bloom" aria-hidden="true"></div>
+
+<!-- Envelope intro -->
+<div id="intro" data-open="false" role="dialog" aria-label="Opening note from Krizza and Bryan">
+  <div class="stage-wrap">
+    <div class="sprig" id="topLabel">A note from us</div>
+    <button class="stage" id="stage" type="button" aria-label="Open the envelope">
+      <img src="/assets/krizza-bryan/envelope.jpg" width="900" height="675" alt="A moss green envelope sealed with a pink wax bow, framed by roses and soft blossoms">
+    </button>
+    <div class="prompt">Tap to open</div>
+  </div>
+  <div class="reveal">
+    <div class="reveal-inner">
+      <div class="sprig">Together with our families</div>
+      <div class="names serif">Krizza <span class="amp">&amp;</span> Bryan</div>
+      <div class="tagline">are getting married</div>
+      <div class="when">Saturday &middot; October 24, 2026</div>
+      <div class="venue">Astoria Regency Convention Center<br>Zamboanga City</div>
+      <button class="btn" id="openNote" type="button">Open our note</button>
+    </div>
+  </div>
+</div>
+
+<main>
+  <section class="hero" id="top">
+    <div class="wrap">
+      <svg class="monogram" viewBox="0 0 200 200" role="img" aria-label="K and B monogram">
+        <defs><path id="arc" d="M 38 100 A 62 62 0 0 0 162 100"/></defs>
+        <circle cx="100" cy="100" r="92" fill="none" stroke="#575527" stroke-width="1.6"/>
+        <circle cx="100" cy="100" r="85" fill="none" stroke="#B97D7B" stroke-width=".9"/>
+        <text x="100" y="112" text-anchor="middle" font-family="Cormorant Garamond, Georgia, serif" font-style="italic" font-size="54" fill="#575527">K <tspan fill="#B97D7B" font-size="38">&amp;</tspan> B</text>
+        <text font-family="Karla, sans-serif" font-size="9.5" letter-spacing="3.2" fill="#9A7B5D" font-weight="700"><textPath href="#arc" startOffset="50%" text-anchor="middle">OCTOBER 24 &#183; 2026</textPath></text>
+      </svg>
+      <div class="sprig">We're getting married</div>
+      <h1 style="margin-top:14px">Krizza <span class="amp">&amp;</span> Bryan</h1>
+      <div class="date">Saturday, October 24, 2026</div>
+      <p class="place">Astoria Regency Convention Center, Zamboanga City</p>
+      <div class="count" id="count" hidden></div>
+      <div class="cta-row"><a class="btn" href="#rsvp">RSVP Now</a></div>
+    </div>
+  </section>
+
+  <section id="note">
+    <div class="wrap">
+      <h2>A note before the official invitation</h2>
+      <p class="lead">We are so happy to share that we are getting married, and we would love to have you there. Our official invitation, with the full program and every detail, will follow.</p>
+      <p class="lead">Before it goes out, we are gathering our headcount so we can plan every seat and every plate with care. Would you let us know if you can join us?</p>
+      <ol class="steps">
+        <li><b>Let us know</b><span>Fill in the RSVP below. It takes about a minute.</span></li>
+        <li><b>Watch for our official invitation</b><span>It will carry the full program, times and all the details.</span></li>
+        <li><b>Celebrate with us</b><span>Saturday, October 24, 2026, in Zamboanga City.</span></li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="details">
+    <div class="wrap">
+      <h2>The details so far</h2>
+      <div class="grid">
+        <div class="info">
+          <div class="k">When</div>
+          <h3>Saturday, October 24, 2026</h3>
+          <p>Ceremony and reception times will be in our official invitation.</p>
+        </div>
+        <div class="info">
+          <div class="k">Where</div>
+          <h3>Astoria Regency Convention Center</h3>
+          <p>Zamboanga City</p>
+          <a class="btn ghost" id="mapBtn" href="https://www.google.com/maps/search/?api=1&amp;query=Astoria+Regency+Convention+Center+Zamboanga+City" target="_blank" rel="noopener">Open in Google Maps</a>
+        </div>
+        <div class="info">
+          <div class="k">What to wear</div>
+          <h3>Please leave the white for the bride</h3>
+          <p>She will be the only one in white. More attire details will come with our official invitation.</p>
+          <div class="swatches" aria-label="Our wedding colors">
+            <span class="sw"><i style="background:#575527"></i>Soldier Green</span>
+            <span class="sw"><i style="background:#928E5E"></i>Meadow Mauve</span>
+            <span class="sw"><i style="background:#B97D7B"></i>Usu Koubai Blossom</span>
+            <span class="sw"><i style="background:#ECC4C3"></i>Berry Good</span>
+            <span class="sw"><i style="background:#9A7B5D"></i>Nude Brown</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="rsvp">
+    <div class="wrap">
+      <h2>Will you join us?</h2>
+      <p class="lead">Please reply so we can plan with care.</p>
+      <div class="card" style="margin-top:22px">
+        <div id="thanks" class="thanks" hidden aria-live="polite"></div>
+        <form id="rsvpForm" name="krizza-bryan-rsvp" method="POST" data-netlify="true" netlify-honeypot="bot-field" novalidate>
+          <input type="hidden" name="form-name" value="krizza-bryan-rsvp">
+          <p class="hp" aria-hidden="true"><label>Leave this empty <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
+
+          <div class="status bad" id="status" role="alert"></div>
+
+          <div class="field">
+            <label for="name">Your full name <span class="hint">So we can find you on our list.</span></label>
+            <input type="text" id="name" name="name" autocomplete="name" maxlength="100" required placeholder="e.g. Maria Santos">
+            <div class="err" id="err-name"></div>
+          </div>
+
+          <div class="field" role="radiogroup" aria-labelledby="attLegend">
+            <span class="legend" id="attLegend">Will you be joining us?</span>
+            <div class="pills">
+              <label class="pill"><input type="radio" name="attending" value="Yes"><span>Yes, I will be there</span></label>
+              <label class="pill"><input type="radio" name="attending" value="No"><span>Sadly, I can't make it</span></label>
+            </div>
+            <div class="err" id="err-attending"></div>
+          </div>
+
+          <div class="yes-only" hidden>
+            <div class="field">
+              <label for="party">How many will be attending, including you?</label>
+              <input type="number" id="party" name="party" min="1" max="10" value="1" inputmode="numeric">
+              <div class="err" id="err-party"></div>
+            </div>
+            <div class="field">
+              <label for="others">Who is coming with you? <span class="hint">Their names, if anyone is joining you.</span></label>
+              <input type="text" id="others" name="others" maxlength="300">
+            </div>
+            <div class="field">
+              <label for="dietary">Food allergies or dietary needs <span class="hint">Optional.</span></label>
+              <input type="text" id="dietary" name="dietary" maxlength="300">
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="contact">Best way to reach you <span class="hint">Optional. A mobile number, email or Messenger name, so we can send you the official invitation.</span></label>
+            <input type="text" id="contact" name="contact" maxlength="100" autocomplete="off">
+          </div>
+
+          <div class="field">
+            <label for="message">A message for us <span class="hint">Optional.</span></label>
+            <textarea id="message" name="message" maxlength="1000"></textarea>
+          </div>
+
+          <button class="btn" type="submit" id="send" style="width:100%">Send my RSVP</button>
+          <p class="fine">Need to change your answer? Just send the form again. We will use your latest reply.</p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <section id="gifts">
+    <div class="wrap">
+      <h2>Gifts &amp; Our Prosperity Dance</h2>
+      <div class="card gift">
+        <p>Your love and presence are the greatest gifts we could ask for, and we are so grateful to have you celebrate with us.</p>
+        <p>To save you the trouble of shopping, we kindly ask for no physical gifts. Instead, we would love to share the Filipino tradition of our Prosperity Dance with you during the reception.</p>
+        <p>If you wish to bless our marriage with a monetary gift, it is warmly appreciated but please know that it is completely optional. Envelopes will be available at the venue for those who wish to participate.</p>
+        <p>Thank you for being part of our special day. We can't wait to celebrate and dance the night away with you!</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <span class="serif">With love, Krizza &amp; Bryan</span>
+  Saturday, October 24, 2026 &middot; Zamboanga City
+  <small>Made with love by Balay ni Bruno &amp; Co.</small>
+</footer>
+
+<script>
+(function(){
+  var intro = document.getElementById('intro');
+  function closeIntro(){
+    intro.classList.add('gone'); document.body.classList.remove('locked');
+    try{ sessionStorage.setItem('kb-open','1'); }catch(e){}
+    window.scrollTo(0,0);
+  }
+  function openEnvelope(){
+    if(intro.getAttribute('data-open') === 'true') return;
+    intro.setAttribute('data-open','true');
+  }
+  var skip = false;
+  try{ skip = sessionStorage.getItem('kb-open') === '1'; }catch(e){}
+  if(location.hash === '#rsvp' || skip){ intro.classList.add('gone'); document.body.classList.remove('locked'); }
+  document.getElementById('stage').addEventListener('click', openEnvelope);
+  document.getElementById('openNote').addEventListener('click', closeIntro);
+
+  // days to go (Philippine time)
+  var target = new Date('2026-10-24T00:00:00+08:00');
+  var days = Math.ceil((target - new Date()) / 86400000);
+  var c = document.getElementById('count');
+  if(days > 1){ c.textContent = days + ' days to go'; c.hidden = false; }
+  else if(days === 1){ c.textContent = '1 day to go'; c.hidden = false; }
+  else if(days === 0){ c.textContent = 'Today is the day'; c.hidden = false; }
+
+  // form
+  var form = document.getElementById('rsvpForm');
+  var yesOnly = form.querySelector('.yes-only');
+  var status = document.getElementById('status');
+  var send = document.getElementById('send');
+  function setErr(id, msg){ document.getElementById('err-' + id).textContent = msg || ''; }
+  function attending(){ var r = form.querySelector('input[name="attending"]:checked'); return r ? r.value : ''; }
+  form.addEventListener('change', function(e){
+    if(e.target.name === 'attending'){ yesOnly.hidden = attending() !== 'Yes'; setErr('attending',''); }
+  });
+  form.addEventListener('input', function(e){ if(e.target.name === 'name') setErr('name',''); if(e.target.name === 'party') setErr('party',''); });
+  function showStatus(msg){ status.textContent = msg; status.classList.toggle('show', !!msg); }
+
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    showStatus(''); setErr('name',''); setErr('attending',''); setErr('party','');
+    var name = form.name.value.trim(), att = attending(), party = parseInt(form.party.value, 10), bad = false;
+    if(!name){ setErr('name','Please tell us your name.'); bad = true; }
+    if(!att){ setErr('attending','Please choose one.'); bad = true; }
+    if(att === 'Yes' && !(party >= 1 && party <= 10)){ setErr('party','Please enter a number from 1 to 10.'); bad = true; }
+    if(bad){ var first = form.querySelector('.err:not(:empty)'); if(first) first.scrollIntoView({block:'center', behavior:'smooth'}); return; }
+
+    var fd = new FormData(form);
+    fd.set('form-name', 'krizza-bryan-rsvp');
+    fd.set('name', name);
+    if(att !== 'Yes'){ fd.set('party',''); fd.set('others',''); fd.set('dietary',''); }
+    send.disabled = true; send.textContent = 'Sending...';
+
+    var local = /^(localhost|127\.0\.0\.1)$/.test(location.hostname);
+    var ctrl = ('AbortController' in window) ? new AbortController() : null;
+    var timer = ctrl ? setTimeout(function(){ ctrl.abort(); }, 20000) : null;
+    var req = local ? Promise.resolve({ok:true}) :
+      fetch(window.location.pathname, {method:'POST', body:fd, signal: ctrl ? ctrl.signal : undefined});
+    req.then(function(r){
+      if(timer) clearTimeout(timer);
+      if(!r.ok) throw new Error('status ' + r.status);
+      var first = name.split(/\s+/)[0];
+      var t = document.getElementById('thanks');
+      t.innerHTML = att === 'Yes'
+        ? '<h3>Thank you, ' + esc(first) + '.</h3><p>We can\'t wait to celebrate with you. Please watch for our official invitation.</p>'
+        : '<h3>Thank you, ' + esc(first) + '.</h3><p>We will miss you, and we are grateful you let us know. You will be in our hearts on the day.</p>';
+      t.hidden = false; form.hidden = true;
+      t.scrollIntoView({block:'center', behavior:'smooth'});
+    }).catch(function(){
+      if(timer) clearTimeout(timer);
+      send.disabled = false; send.textContent = 'Send my RSVP';
+      showStatus('Sorry, that did not go through. Your answers are still here, so please try again. If it keeps happening, message Krizza or Bryan directly.');
+      status.scrollIntoView({block:'center', behavior:'smooth'});
+    });
+  });
+  function esc(s){ return s.replace(/[&<>"']/g, function(m){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]; }); }
+})();
+</script>
+</body>
+</html>
