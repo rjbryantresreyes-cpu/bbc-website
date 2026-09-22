@@ -350,7 +350,11 @@ footer small{display:block; margin-top:14px; font-size:.75rem; letter-spacing:.0
     intro.classList.add('gone'); document.body.classList.remove('locked');
     try{ sessionStorage.setItem('kb-open','1'); }catch(e){}
     fab.hidden = false;
-    if(toRsvp === true){ document.getElementById('rsvp').scrollIntoView(); } else { window.scrollTo(0,0); }
+    // jump instantly (smooth scrolling gets cancelled while the intro closes); the fading intro hides the jump
+    var root = document.documentElement; root.style.scrollBehavior = 'auto';
+    var y = toRsvp === true ? document.getElementById('rsvp').getBoundingClientRect().top + window.pageYOffset - 8 : 0;
+    window.scrollTo(0, y);
+    root.style.scrollBehavior = '';
   }
   function openEnvelope(){
     if(intro.getAttribute('data-open') === 'true') return;
