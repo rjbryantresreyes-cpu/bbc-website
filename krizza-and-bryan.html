@@ -66,8 +66,9 @@ a{color:var(--soldier)}
 .prompt{margin-top:22px; text-align:center; color:var(--muted); font-size:.78rem; letter-spacing:.14em; text-transform:uppercase; animation:bob 2.4s ease-in-out 1.4s infinite; transition:opacity .4s ease}
 #intro[data-open="true"] #topLabel,#intro[data-open="true"] .prompt{opacity:0; animation:none}
 #intro[data-open="true"] .stage{opacity:0; transform:scale(.92); pointer-events:none; animation:none; transition:opacity .6s ease .1s, transform .6s cubic-bezier(.16,1,.3,1) .1s}
-.reveal{position:absolute; inset:0; display:grid; place-items:center; padding:8vh 8vw; text-align:center; opacity:0; pointer-events:none; transition:opacity .3s ease .3s}
+.reveal{position:absolute; inset:0; z-index:5; display:grid; place-items:center; padding:8vh 8vw; text-align:center; opacity:0; pointer-events:none; transition:opacity .3s ease .3s}
 #intro[data-open="true"] .reveal{opacity:1; pointer-events:auto}
+#intro[data-open="true"] .stage-wrap{pointer-events:none}
 .reveal-inner{display:flex; flex-direction:column; align-items:center; gap:14px; max-width:440px}
 .reveal-inner > *{opacity:0}
 #intro[data-open="true"] .reveal-inner > *{animation:riseIn .85s cubic-bezier(.16,1,.3,1) forwards}
