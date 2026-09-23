@@ -13,62 +13,90 @@
 <meta property="og:url" content="https://balaynibruno.co/krizza-and-bryan-invite">
 <meta property="og:image" content="https://balaynibruno.co/assets/krizza-bryan/canva-invite.jpg">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="theme-color" content="#999A7A">
+<meta name="theme-color" content="#8B8C6E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500;1,600&family=Karla:wght@400;600;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Beau+Rivage&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500;1,600&family=Karla:wght@400;600;700&display=swap">
 <style>
 :root{
-  --olive:#999A7A; --cream:#F8F9F0; --ink:#5E6B34; --pink:#CFACA6; --pink-ink:#B98F87;
+  --olive:#999A7A; --olive-deep:#7E805F; --cream:#F8F9F0; --ink:#5E6B34; --pink:#CFACA6; --pink-ink:#B98F87;
   --muted:#7C7A63; --line:#E4DFC9;
 }
 *{box-sizing:border-box}
-html{scroll-behavior:smooth}
+html,body{height:100%}
 body{
-  margin:0; background:var(--olive); color:var(--ink);
-  font-family:"Karla",system-ui,-apple-system,sans-serif; line-height:1.6;
+  margin:0; background:radial-gradient(120% 100% at 50% 0%, var(--olive) 0%, var(--olive-deep) 100%);
+  color:var(--ink); font-family:"Karla",system-ui,-apple-system,sans-serif; line-height:1.6; overflow:hidden;
 }
-h1,h2,.serif{font-family:"Cormorant Garamond",Georgia,serif; margin:0}
 a{color:inherit}
 :focus-visible{outline:3px solid var(--pink-ink); outline-offset:3px}
+canvas.kb-stars{ position:fixed; inset:0; z-index:0; pointer-events:none }
 
-/* ---------- the card (real frame photo + real live text over the same hole) ---------- */
-.stage{ padding:36px 16px 8px; display:flex; justify-content:center }
+.screen{
+  position:fixed; inset:0; z-index:1; display:flex; flex-direction:column; align-items:center; justify-content:center;
+  padding:calc(env(safe-area-inset-top,0px) + 14px) 16px calc(env(safe-area-inset-bottom,0px) + 14px);
+  transition:opacity .45s ease, transform .45s cubic-bezier(.2,.8,.2,1);
+}
+#screenForm{ opacity:0; transform:translateY(24px) scale(.98); pointer-events:none; overflow-y:auto; align-items:flex-start; padding-top:calc(env(safe-area-inset-top,0px) + 22px) }
+body[data-view="form"] #screenCard{ opacity:0; transform:translateY(-18px) scale(.98); pointer-events:none }
+body[data-view="form"] #screenForm{ opacity:1; transform:none; pointer-events:auto }
+body[data-view="form"]{ overflow-y:auto }
+body:not([data-view="form"]){ overflow:hidden }
+
+/* ---------- the card (real frame photo + real live text over the same area) ---------- */
 .card{
-  position:relative; width:100%; max-width:460px; aspect-ratio:900/1268;
-  filter:drop-shadow(0 22px 46px rgba(30,30,10,.35));
+  position:relative; width:min(94vw, 92dvh * 0.71, 430px); aspect-ratio:900/1268;
+  animation:cardIn .8s cubic-bezier(.2,.8,.2,1) both, cardGlow 3.6s ease-in-out .8s infinite;
+}
+@keyframes cardIn{ from{ opacity:0; transform:translateY(16px) scale(.96) } to{ opacity:1; transform:none } }
+@keyframes cardGlow{
+  0%,100%{ filter:drop-shadow(0 20px 42px rgba(20,20,8,.4)) drop-shadow(0 0 26px rgba(247,225,170,.15)) }
+  50%{ filter:drop-shadow(0 24px 50px rgba(20,20,8,.42)) drop-shadow(0 0 42px rgba(247,225,170,.32)) }
 }
 .card .frame{ position:absolute; inset:0; width:100%; height:100%; z-index:2; pointer-events:none; user-select:none }
 .card .content{
-  position:absolute; left:19.9%; top:15.9%; width:60.2%; height:67.9%;
+  position:absolute; left:18.9%; top:15.2%; width:62.2%; height:69.3%;
   background:var(--cream); z-index:1;
-  display:flex; flex-direction:column; align-items:center; justify-content:flex-start;
-  text-align:center; padding:2% 3% 3%; overflow:hidden;
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  text-align:center; padding:2% 3%; overflow:hidden; container-type:inline-size;
 }
-.mono{ font-family:"Cormorant Garamond",serif; font-style:italic; font-weight:600; font-size:clamp(1.6rem,7cqw,2.4rem); margin-top:2%; }
-.kicker{ font-size:clamp(.5rem,2.3cqw,.72rem); letter-spacing:.18em; font-weight:700; text-transform:uppercase; margin-top:6%; line-height:1.7 }
-.names{ font-size:clamp(1.5rem,7.2cqw,2.5rem); letter-spacing:.06em; text-transform:uppercase; margin-top:6%; line-height:1.15 }
-.and{ font-family:"Cormorant Garamond",serif; font-style:italic; font-size:clamp(.9rem,3.6cqw,1.3rem); display:block; margin:1% 0 }
-.date{ font-size:clamp(.6rem,2.6cqw,.85rem); letter-spacing:.12em; font-weight:700; text-transform:uppercase; margin-top:5% }
-.venue{ font-size:clamp(.55rem,2.4cqw,.8rem); letter-spacing:.06em; text-transform:uppercase; margin-top:3%; line-height:1.55 }
-.note{ font-family:"Cormorant Garamond",serif; font-style:italic; font-size:clamp(.68rem,2.9cqw,1rem); margin-top:5%; color:var(--muted) }
-.deadline{ font-size:clamp(.5rem,2.2cqw,.7rem); letter-spacing:.12em; font-weight:700; text-transform:uppercase; margin-top:5%; line-height:1.7 }
+.mono{ font-family:"Beau Rivage",cursive; font-size:clamp(1.9rem,11cqw,2.8rem); line-height:1; color:var(--ink) }
+.kicker{ font-size:clamp(.5rem,2.4cqw,.72rem); letter-spacing:.18em; font-weight:700; text-transform:uppercase; margin-top:6%; line-height:1.7 }
+.names{ font-family:"Cormorant Garamond",serif; font-weight:600; font-size:clamp(1.5rem,7.6cqw,2.5rem); letter-spacing:.05em; text-transform:uppercase; margin-top:6%; line-height:1.1 }
+.and{ font-family:"Beau Rivage",cursive; font-size:clamp(1rem,5cqw,1.5rem); display:block; margin:1% 0; color:var(--pink-ink) }
+.date{ font-size:clamp(.6rem,2.7cqw,.85rem); letter-spacing:.12em; font-weight:700; text-transform:uppercase; margin-top:5% }
+.venue{ font-size:clamp(.55rem,2.5cqw,.8rem); letter-spacing:.06em; text-transform:uppercase; margin-top:3%; line-height:1.55 }
+.note{ font-family:"Cormorant Garamond",serif; font-style:italic; font-size:clamp(.68rem,3cqw,1rem); margin-top:5%; color:var(--muted) }
+.deadline{ font-size:clamp(.5rem,2.3cqw,.7rem); letter-spacing:.12em; font-weight:700; text-transform:uppercase; margin-top:5%; line-height:1.7 }
 .rsvp-btn{
-  margin-top:5%; background:var(--pink); color:#fff; border:0; cursor:pointer;
-  font:700 clamp(.6rem,2.6cqw,.85rem)/1 "Karla",sans-serif; letter-spacing:.14em; text-transform:uppercase;
-  padding:4.2% 8%; width:78%; border-radius:2px;
+  position:relative; overflow:hidden; margin-top:5%; background:var(--pink); color:#fff; border:0; cursor:pointer;
+  font:700 clamp(.6rem,2.7cqw,.85rem)/1 "Karla",sans-serif; letter-spacing:.14em; text-transform:uppercase;
+  padding:4.4% 8%; width:80%; border-radius:2px; box-shadow:0 8px 18px -8px rgba(40,20,10,.45);
+  transition:transform .2s ease, box-shadow .2s ease;
 }
-.rsvp-btn:hover{ background:var(--pink-ink) }
-.hint{ font-size:.68rem; letter-spacing:.06em; text-align:center; color:#EFEEDD; opacity:.85; margin:10px 0 0 }
+.rsvp-btn:hover{ background:var(--pink-ink); transform:translateY(-1px); box-shadow:0 12px 22px -8px rgba(40,20,10,.5) }
+.rsvp-btn:active{ transform:translateY(0) scale(.98) }
+.rsvp-btn::after{
+  content:""; position:absolute; top:0; left:-60%; width:40%; height:100%;
+  background:linear-gradient(115deg, transparent, rgba(255,255,255,.55), transparent);
+  animation:shine 3.2s ease-in-out 1.2s infinite;
+}
+@keyframes shine{ 0%{ left:-60% } 35%{ left:130% } 100%{ left:130% } }
+@media (prefers-reduced-motion:reduce){ .rsvp-btn::after{ animation:none; display:none } .card{ animation:none } }
+.hint{ font-size:.7rem; letter-spacing:.06em; text-align:center; color:#F3F0DF; opacity:.85; margin:12px 0 0 }
 
-/* ---------- the form section (revealed below, same page) ---------- */
-#rsvp{ padding:24px 16px 64px }
-.wrap{ width:min(100% - 0px, 460px); margin-inline:auto }
-.formcard{
-  background:var(--cream); border-radius:14px; padding:26px 22px 22px;
-  box-shadow:0 14px 34px -18px rgba(30,30,10,.45);
+/* ---------- the form screen ---------- */
+.wrap{ width:min(92vw, 420px); margin-inline:auto; padding-bottom:24px }
+.back{
+  display:inline-flex; align-items:center; gap:6px; color:#F3F0DF; background:none; border:0; cursor:pointer;
+  font:700 .78rem/1 "Karla",sans-serif; letter-spacing:.08em; text-transform:uppercase; margin:0 0 14px; padding:8px 4px;
 }
-.formcard h2{ text-align:center; font-size:1.7rem; color:var(--ink); margin-bottom:4px }
+.back:hover{ opacity:.8 }
+.formcard{
+  background:var(--cream); border-radius:16px; padding:26px 22px 22px;
+  box-shadow:0 20px 46px -20px rgba(20,20,8,.55), 0 0 30px rgba(247,225,170,.12);
+}
+.formcard h2{ font-family:"Cormorant Garamond",serif; text-align:center; font-size:1.7rem; color:var(--ink); margin:0 0 4px }
 .formcard .sub{ text-align:center; color:var(--muted); font-size:.92rem; margin-bottom:20px }
 .field{ margin:0 0 18px }
 label,.legend{ display:block; font-weight:700; margin-bottom:6px; color:#3C3A2C; font-size:.95rem }
@@ -106,15 +134,16 @@ input:focus,textarea:focus{ outline:none; border-color:var(--pink-ink); box-shad
 .thanks p{ color:var(--muted); max-width:360px; margin:8px auto 0 }
 </style>
 </head>
-<body>
+<body data-view="card">
+<canvas class="kb-stars" aria-hidden="true"></canvas>
 
-<section class="stage">
+<section class="screen" id="screenCard">
   <div class="card">
     <img class="frame" src="/assets/krizza-bryan/canva-frame.png" alt="" aria-hidden="true" width="900" height="1268">
-    <div class="content" style="container-type:inline-size">
+    <div class="content">
       <div class="mono">K&amp;B</div>
       <div class="kicker">Please join us<br>to celebrate the wedding of</div>
-      <div class="names">Krizza<span class="and serif">and</span>Bryan</div>
+      <div class="names">Krizza<span class="and">and</span>Bryan</div>
       <div class="date">October 24th, 2026</div>
       <div class="venue">Astoria Regency Convention<br>Center Zamboanga City</div>
       <div class="note">Formal invitation with full details to follow</div>
@@ -122,11 +151,12 @@ input:focus,textarea:focus{ outline:none; border-color:var(--pink-ink); box-shad
       <button class="rsvp-btn" type="button" id="rsvpGo">RSVP Here</button>
     </div>
   </div>
+  <p class="hint">Tap RSVP Here to fill in your reply</p>
 </section>
-<p class="hint">Tap RSVP Here to fill in your reply below</p>
 
-<section id="rsvp">
+<section class="screen" id="screenForm">
   <div class="wrap">
+    <button class="back" type="button" id="backGo" aria-label="Back to the invitation">&larr; Back</button>
     <div class="formcard">
       <div id="thanks" class="thanks" hidden aria-live="polite"></div>
       <div id="formHead">
@@ -187,11 +217,16 @@ input:focus,textarea:focus{ outline:none; border-color:var(--pink-ink); box-shad
   </div>
 </section>
 
+<script src="/assets/krizza-bryan/stars.js"></script>
 <script>
 (function(){
+  var body = document.body;
   document.getElementById('rsvpGo').addEventListener('click', function(){
-    document.getElementById('rsvp').scrollIntoView({behavior:'smooth', block:'start'});
-    setTimeout(function(){ var n=document.getElementById('name'); if(n) n.focus({preventScroll:true}); }, 500);
+    body.dataset.view = 'form';
+    setTimeout(function(){ var n=document.getElementById('name'); if(n) n.focus({preventScroll:true}); }, 350);
+  });
+  document.getElementById('backGo').addEventListener('click', function(){
+    body.dataset.view = 'card';
   });
 
   var form = document.getElementById('rsvpForm');
@@ -235,7 +270,6 @@ input:focus,textarea:focus{ outline:none; border-color:var(--pink-ink); box-shad
         ? '<h2>Thank you, ' + esc(first) + '.</h2><p>We can\'t wait to celebrate with you. Please watch for our official invitation.</p>'
         : '<h2>Thank you, ' + esc(first) + '.</h2><p>We will miss you, and we are grateful you let us know.</p>';
       t.hidden = false; document.getElementById('formHead').hidden = true; form.hidden = true;
-      t.scrollIntoView({block:'center', behavior:'smooth'});
     }).catch(function(){
       if(timer) clearTimeout(timer);
       send.disabled = false; send.textContent = 'Send my RSVP';
