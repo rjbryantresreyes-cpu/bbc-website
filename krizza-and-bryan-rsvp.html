@@ -60,16 +60,18 @@ body:not([data-view="form"]){ overflow:hidden }
   display:flex; flex-direction:column; align-items:center; justify-content:center;
   text-align:center; padding:2% 3%; overflow:hidden; container-type:inline-size;
 }
-.mono{ font-family:"Beau Rivage",cursive; font-size:clamp(1.9rem,11cqw,2.8rem); line-height:1; color:var(--ink) }
-.kicker{ font-size:clamp(.5rem,2.4cqw,.72rem); letter-spacing:.18em; font-weight:700; text-transform:uppercase; margin-top:6%; line-height:1.7 }
-.names{ font-family:"Cormorant Garamond",serif; font-weight:600; font-size:clamp(1.5rem,7.6cqw,2.5rem); letter-spacing:.05em; text-transform:uppercase; margin-top:6%; line-height:1.1 }
-.and{ font-family:"Beau Rivage",cursive; font-size:clamp(1rem,5cqw,1.5rem); display:block; margin:1% 0; color:var(--pink-ink) }
-.date{ font-size:clamp(.6rem,2.7cqw,.85rem); letter-spacing:.12em; font-weight:700; text-transform:uppercase; margin-top:5% }
-.venue{ font-size:clamp(.55rem,2.5cqw,.8rem); letter-spacing:.06em; text-transform:uppercase; margin-top:3%; line-height:1.55 }
-.note{ font-family:"Cormorant Garamond",serif; font-style:italic; font-size:clamp(.68rem,3cqw,1rem); margin-top:5%; color:var(--muted) }
-.deadline{ font-size:clamp(.5rem,2.3cqw,.7rem); letter-spacing:.12em; font-weight:700; text-transform:uppercase; margin-top:5%; line-height:1.7 }
+.mono{ font-family:"Beau Rivage",cursive; font-size:clamp(2.1rem,12cqw,3.1rem); line-height:1; color:var(--ink); white-space:nowrap }
+.mono-k{ margin-left:-0.22em }
+.mono-tag{ font-family:"Beau Rivage",cursive; font-size:clamp(.85rem,4cqw,1.2rem); color:var(--pink-ink); margin-top:1.5% }
+.kicker{ font-size:clamp(.5rem,2.4cqw,.72rem); letter-spacing:.18em; font-weight:700; text-transform:uppercase; margin-top:4%; line-height:1.6 }
+.names{ font-family:"Cormorant Garamond",serif; font-weight:500; font-size:clamp(1.4rem,7cqw,2.3rem); letter-spacing:.01em; margin-top:4%; line-height:1.1 }
+.and{ font-family:"Beau Rivage",cursive; font-size:clamp(.9rem,4.2cqw,1.3rem); display:block; margin:0; color:var(--pink-ink) }
+.date{ font-size:clamp(.6rem,2.7cqw,.85rem); letter-spacing:.12em; font-weight:700; text-transform:uppercase; margin-top:4% }
+.venue{ font-size:clamp(.55rem,2.5cqw,.8rem); letter-spacing:.06em; text-transform:uppercase; margin-top:2.5%; line-height:1.5 }
+.note{ font-family:"Cormorant Garamond",serif; font-style:italic; font-size:clamp(.65rem,2.8cqw,.95rem); margin-top:4%; color:var(--muted) }
+.deadline{ font-size:clamp(.5rem,2.3cqw,.7rem); letter-spacing:.12em; font-weight:700; text-transform:uppercase; margin-top:4%; line-height:1.6 }
 .rsvp-btn{
-  position:relative; overflow:hidden; margin-top:5%; background:var(--pink); color:#fff; border:0; cursor:pointer;
+  position:relative; overflow:hidden; margin-top:4%; background:var(--pink); color:#fff; border:0; cursor:pointer;
   font:700 clamp(.6rem,2.7cqw,.85rem)/1 "Karla",sans-serif; letter-spacing:.14em; text-transform:uppercase;
   padding:4.4% 8%; width:80%; border-radius:2px; box-shadow:0 8px 18px -8px rgba(40,20,10,.45);
   transition:transform .2s ease, box-shadow .2s ease;
@@ -145,7 +147,8 @@ input:focus,textarea:focus{ outline:none; border-color:var(--pink-ink); box-shad
   <div class="card">
     <img class="frame" src="/assets/krizza-bryan/canva-frame.png" alt="" aria-hidden="true" width="900" height="1268">
     <div class="content">
-      <div class="mono">K&amp;B</div>
+      <div class="mono"><span class="mono-b">B</span><span class="mono-k">K</span></div>
+      <div class="mono-tag">Bryan &amp; Krizza</div>
       <div class="kicker">Please join us<br>to celebrate the wedding of</div>
       <div class="names">Krizza<span class="and">and</span>Bryan</div>
       <div class="date">October 24th, 2026</div>
