@@ -7,6 +7,7 @@ import nodemailer from "nodemailer";
 // Which forms send an email alert.
 const NOTIFY_FORMS = [
   "bbc-onboarding",
+  "britni-deep-dive",
   "dhes-reel-brief",
   "dhes-graphic-brief",
   "dhes-other-task",
@@ -123,7 +124,19 @@ export const handler = async (event) => {
     const d = payload.data || {};
     let subject, body, replyTo;
 
-    if (payload.form_name === "bbc-onboarding") {
+    if (payload.form_name === "britni-deep-dive") {
+      const ordered = payload.ordered_human_fields || [];
+      const answered = ordered.filter((f) => {
+        const v = f.value == null ? "" : String(f.value).trim();
+        return v && v !== "[]";
+      });
+      subject = `Britni's deep dive is in (Cota Skincare + AI Scale Zone)`;
+      body =
+        `Britni submitted the Cota Skincare + AI Scale Zone deep-dive questionnaire.\n\n` +
+        `Answered ${answered.length} of ${ordered.length} questions.\n\n` +
+        `${fieldLines(payload)}\n\n` +
+        `View the full submission in Netlify: ${DASHBOARD}`;
+    } else if (payload.form_name === "bbc-onboarding") {
       const name = d.fullName || d.businessName || "New client";
       const email = d.emailAddress || "no email given";
       const ordered = payload.ordered_human_fields || [];
