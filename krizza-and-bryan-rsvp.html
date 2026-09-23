@@ -117,8 +117,12 @@ input:focus,textarea:focus{ outline:none; border-color:var(--pink-ink); box-shad
 .pill input:checked + span{ border-color:var(--pink-ink); background:#FBF3F1 }
 .pill input:checked + span::before{ background:var(--pink-ink); box-shadow:inset 0 0 0 3px #fff }
 .pill input:focus-visible + span{ outline:3px solid var(--pink-ink); outline-offset:2px }
-.yes-only[hidden]{ display:none }
 .err{ color:#9B3A36; font-size:.85rem; margin-top:6px }
+.plusone-note{
+  font-family:"Cormorant Garamond",serif; font-style:italic; font-size:.95rem; line-height:1.55;
+  color:var(--muted); text-align:center; margin:4px 0 20px; padding:14px 16px;
+  background:#F3EFE2; border-radius:10px; border:1px solid var(--line);
+}
 .status{ margin:0 0 14px; padding:11px 13px; border-radius:10px; font-size:.9rem; display:none }
 .status.show{ display:block; background:#FBECEA; color:#7E2F2B; border:1px solid #F0C9C5 }
 .hp{ position:absolute; left:-9999px; height:0; overflow:hidden }
@@ -184,21 +188,7 @@ input:focus,textarea:focus{ outline:none; border-color:var(--pink-ink); box-shad
           <div class="err" id="err-attending"></div>
         </div>
 
-        <div class="yes-only" hidden>
-          <div class="field">
-            <label for="party">How many will be attending, including you?</label>
-            <input type="number" id="party" name="party" min="1" max="10" value="1" inputmode="numeric">
-            <div class="err" id="err-party"></div>
-          </div>
-          <div class="field">
-            <label for="others">Who is coming with you? <span class="fhint">Their names, if anyone is joining you.</span></label>
-            <input type="text" id="others" name="others" maxlength="300">
-          </div>
-          <div class="field">
-            <label for="dietary">Food allergies or dietary needs <span class="fhint">Optional.</span></label>
-            <input type="text" id="dietary" name="dietary" maxlength="300">
-          </div>
-        </div>
+        <input type="hidden" name="party" value="1">
 
         <div class="field">
           <label for="contact">Best way to reach you <span class="fhint">Optional. A mobile number, email or Messenger name.</span></label>
@@ -209,6 +199,8 @@ input:focus,textarea:focus{ outline:none; border-color:var(--pink-ink); box-shad
           <label for="message">A message for us <span class="fhint">Optional.</span></label>
           <textarea id="message" name="message" maxlength="1000"></textarea>
         </div>
+
+        <p class="plusone-note">As we are keeping our celebration intimate, we are unable to accommodate additional plus ones. We truly appreciate your understanding and look forward to celebrating with you!</p>
 
         <button class="submit-btn" type="submit" id="send">Send my RSVP</button>
         <p class="fine">Need to change your answer? Just send the form again.</p>
@@ -230,30 +222,28 @@ input:focus,textarea:focus{ outline:none; border-color:var(--pink-ink); box-shad
   });
 
   var form = document.getElementById('rsvpForm');
-  var yesOnly = form.querySelector('.yes-only');
   var status = document.getElementById('status');
   var send = document.getElementById('send');
   function setErr(id, msg){ document.getElementById('err-' + id).textContent = msg || ''; }
   function attending(){ var r = form.querySelector('input[name="attending"]:checked'); return r ? r.value : ''; }
   form.addEventListener('change', function(e){
-    if(e.target.name === 'attending'){ yesOnly.hidden = attending() !== 'Yes'; setErr('attending',''); }
+    if(e.target.name === 'attending'){ setErr('attending',''); }
   });
-  form.addEventListener('input', function(e){ if(e.target.name === 'name') setErr('name',''); if(e.target.name === 'party') setErr('party',''); });
+  form.addEventListener('input', function(e){ if(e.target.name === 'name') setErr('name',''); });
   function showStatus(msg){ status.textContent = msg; status.classList.toggle('show', !!msg); }
 
   form.addEventListener('submit', function(e){
     e.preventDefault();
-    showStatus(''); setErr('name',''); setErr('attending',''); setErr('party','');
-    var name = form.name.value.trim(), att = attending(), party = parseInt(form.party.value, 10), bad = false;
+    showStatus(''); setErr('name',''); setErr('attending','');
+    var name = form.name.value.trim(), att = attending(), bad = false;
     if(!name){ setErr('name','Please tell us your name.'); bad = true; }
     if(!att){ setErr('attending','Please choose one.'); bad = true; }
-    if(att === 'Yes' && !(party >= 1 && party <= 10)){ setErr('party','Please enter a number from 1 to 10.'); bad = true; }
     if(bad){ var first = form.querySelector('.err:not(:empty)'); if(first) first.scrollIntoView({block:'center', behavior:'smooth'}); return; }
 
     var fd = new FormData(form);
     fd.set('form-name', 'krizza-bryan-rsvp');
     fd.set('name', name);
-    if(att !== 'Yes'){ fd.set('party',''); fd.set('others',''); fd.set('dietary',''); }
+    fd.set('party', att === 'Yes' ? '1' : '');
     send.disabled = true; send.textContent = 'Sending...';
 
     var local = /^(localhost|127\.0\.0\.1)$/.test(location.hostname);
