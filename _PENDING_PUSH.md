@@ -1,6 +1,6 @@
-## 🟡 STAGED 2026-09-23 — `client-onboarding.html` now asks for colors, fonts, and logo direction
+## ✅ SHIPPED 2026-09-23 — `client-onboarding.html` now asks for colors, fonts, and logo direction
 
-**Not pushed. Needs RJ's go before deploy.** Closes a real gap found while building the Britni deep-dive questionnaire below: this form previously only asked whether a client *already has* brand assets (a checkbox list), never what they *want* if they don't. This is a permanent change for every future client, not specific to one client.
+**Commit e9c47ce, pushed and verified live** (`balaynibruno.co/client-onboarding` returns 200). Closes a real gap found while building the Britni deep-dive questionnaire below: this form previously only asked whether a client *already has* brand assets (a checkbox list), never what they *want* if they don't. This is a permanent change for every future client, not specific to one client.
 
 **Changed file:** `client-onboarding.html` — 3 new required fields added to Section 6 (Brand & Content Identity), right after the existing `brandAssets` checkbox group:
 - `desiredColors` (textarea) — hex/color names, or a feeling word + "let BBC pick"
@@ -15,9 +15,11 @@ Wired into the existing `requiredFields` validation array so `validateForm()` ca
 
 ---
 
-## 🟡 STAGED 2026-09-23 — NEW PAGE, NOT YET PUSHED — Britni deep-dive questionnaire (Cota Skincare + AI Scale Zone)
+## ✅ SHIPPED 2026-09-23 — NEW PAGE — Britni deep-dive questionnaire (Cota Skincare + AI Scale Zone)
 
-**Not pushed. Needs RJ's go before deploy.** Built in a session scoped to the BBC Drive, not the "BBC pinned" website session, per RJ's own task split (see also today's edit to `client-onboarding.html`, done separately, adding design-preference fields to the general intake).
+**Commit e9c47ce, pushed and verified live** (`balaynibruno.co/questionnaire-britni` returns 200). Link sent to Britni same day.
+
+**Not yet done:** Netlify Forms notification email for the new `britni-deep-dive` form hasn't been added (Netlify dashboard → this site → Forms → britni-deep-dive → Settings & usage → Form notifications). Form detection itself is a site-wide setting already proven working (other forms on this site already submit fine), so submissions should land in the Forms dashboard regardless, but nobody gets emailed until that notification is added. Do this before assuming a submission will surface automatically.
 
 **New file:** `questionnaire-britni.html` — combined deep-dive intake covering BOTH of Britni Ricard's businesses in one form, since she's one person filling it out once: Section 1-2 Cota Skincare (Jessica's AI soul + dream site + visual direction), Section 3-4 AI Scale Zone (Ashley's AI soul + dream site + visual direction), Section 5 shared "anything else." Built from the BBC Client Questionnaire System's 31-question template (`BBC Operating System\02_SERVICE_SYSTEMS\CLIENT_QUESTIONNAIRE_SYSTEM\questionnaire-template.html`), skipping only the business-fact questions she already answered twice on the general onboarding form, focused on the genuine gaps: AI soul, dream site direction, and color/font/logo visual direction (which the general intake form does not ask for at all).
 
