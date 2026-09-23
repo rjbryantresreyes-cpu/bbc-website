@@ -1024,6 +1024,32 @@
         </div>
         <p class="error-msg" id="err-brandAssets">Please select at least one.</p>
       </div>
+
+      <div class="field-group">
+        <label class="field-label" for="desiredColors">Colors: do you have ones you want, or should BBC pick based on a feeling? <span class="req">*</span></label>
+        <p class="field-hint">A hex code or color names is great if you have them. If not, give us a feeling word (luxurious, clinical-clean, bold and confident) and write "let BBC pick."</p>
+        <textarea id="desiredColors" name="desiredColors" rows="2" placeholder="e.g. 'Deep emerald and gold' or 'let BBC pick, feeling: warm and premium.'" required></textarea>
+        <p class="error-msg" id="err-desiredColors">Please share color direction or 'let BBC pick' with a feeling word.</p>
+      </div>
+
+      <div class="field-group">
+        <label class="field-label" for="desiredFonts">Fonts: any you like, or a brand whose typography you'd want us to reference? <span class="req">*</span></label>
+        <p class="field-hint">If you don't know font names, that's normal, a brand reference works just as well. "Let BBC pick" is fine here too.</p>
+        <textarea id="desiredFonts" name="desiredFonts" rows="2" placeholder="e.g. 'Something like Stripe's site' or 'let BBC pick.'" required></textarea>
+        <p class="error-msg" id="err-desiredFonts">Please share font direction or a brand reference.</p>
+      </div>
+
+      <div class="field-group">
+        <label class="field-label" for="logoDirection">What should happen with your logo? <span class="req">*</span></label>
+        <select id="logoDirection" name="logoDirection" required>
+          <option value="">Select</option>
+          <option>Keep it as is</option>
+          <option>Refresh it</option>
+          <option>Replace it entirely</option>
+          <option>Not sure, let BBC propose something</option>
+        </select>
+        <p class="error-msg" id="err-logoDirection">Please select.</p>
+      </div>
     </div>
   </section>
 
@@ -1394,6 +1420,9 @@ const requiredFields = [
   { id:'responseTime',        label:'Response time' },
   { id:'decisionMakers',      label:'Decision makers' },
   { id:'involvement',         label:'Involvement level' },
+  { id:'desiredColors',       label:'Desired colors' },
+  { id:'desiredFonts',        label:'Desired fonts' },
+  { id:'logoDirection',       label:'Logo direction' },
 ];
 
 const requiredCheckboxGroups = [

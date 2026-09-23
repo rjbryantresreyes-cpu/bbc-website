@@ -1,3 +1,55 @@
+## 🟡 STAGED 2026-09-23 — `client-onboarding.html` now asks for colors, fonts, and logo direction
+
+**Not pushed. Needs RJ's go before deploy.** Closes a real gap found while building the Britni deep-dive questionnaire below: this form previously only asked whether a client *already has* brand assets (a checkbox list), never what they *want* if they don't. This is a permanent change for every future client, not specific to one client.
+
+**Changed file:** `client-onboarding.html` — 3 new required fields added to Section 6 (Brand & Content Identity), right after the existing `brandAssets` checkbox group:
+- `desiredColors` (textarea) — hex/color names, or a feeling word + "let BBC pick"
+- `desiredFonts` (textarea) — font names, or a brand reference + "let BBC pick"
+- `logoDirection` (select) — Keep it as is / Refresh it / Replace it entirely / Not sure, let BBC propose something
+
+Wired into the existing `requiredFields` validation array so `validateForm()` catches them like every other field. No CSS changes, markup matches existing `.field-group` pattern exactly. Submission method untouched (this form already uses the correct URL-encoded POST, see the Britni-questionnaire entry below for why that matters).
+
+**Verified this session:** local preview on port 8791, all 3 fields render correctly at 375 / 768 / 1280 with no overflow, 0 console errors, submitting blank correctly lists "Desired colors," "Desired fonts," "Logo direction" in the validation banner alongside every other required field. Did not touch the other files already showing as modified in this repo (`data/clients.json`, `data/team.json`, `os-preview/index.html`, `os/legacy.html`, `os/team.json`), those are someone else's in-flight work.
+
+**Not done:** git add/commit/push, left for RJ to review and push in the normal batch.
+
+---
+
+## 🟡 STAGED 2026-09-23 — NEW PAGE, NOT YET PUSHED — Britni deep-dive questionnaire (Cota Skincare + AI Scale Zone)
+
+**Not pushed. Needs RJ's go before deploy.** Built in a session scoped to the BBC Drive, not the "BBC pinned" website session, per RJ's own task split (see also today's edit to `client-onboarding.html`, done separately, adding design-preference fields to the general intake).
+
+**New file:** `questionnaire-britni.html` — combined deep-dive intake covering BOTH of Britni Ricard's businesses in one form, since she's one person filling it out once: Section 1-2 Cota Skincare (Jessica's AI soul + dream site + visual direction), Section 3-4 AI Scale Zone (Ashley's AI soul + dream site + visual direction), Section 5 shared "anything else." Built from the BBC Client Questionnaire System's 31-question template (`BBC Operating System\02_SERVICE_SYSTEMS\CLIENT_QUESTIONNAIRE_SYSTEM\questionnaire-template.html`), skipping only the business-fact questions she already answered twice on the general onboarding form, focused on the genuine gaps: AI soul, dream site direction, and color/font/logo visual direction (which the general intake form does not ask for at all).
+
+**Important, found while building this:** the VA_IMPLEMENTATION_GUIDE.md for this questionnaire system is currently wrong on submission method. It instructs multipart FormData ("ALWAYS send as FormData... URL-encoded fails silently"), but `client-onboarding.html`'s own code comment says the opposite, verified from a real prior incident: "Multipart FormData with no file upload is silently dropped by Netlify, which is why this form had 0 submissions." **This new form uses the URL-encoded pattern instead, matching client-onboarding.html's proven-working code, not the guide.**
+
+**Follow-up flag, not part of this deploy:** `questionnaire-sonya.html` (live) still uses the old multipart pattern the guide recommends. Worth checking her Netlify Forms dashboard for whether her submission actually landed, since this may be the same silent-failure bug the fix comment in `client-onboarding.html` was written to describe.
+
+**Verified so far:** static HTML only (form present at deploy time, satisfies Netlify Forms auto-detection), CSS copied verbatim from the working `client-onboarding.html` design system, JS validation/progress-bar/checkbox logic adapted from the same working file. **Not yet verified:** not responsive-checked at 375/768/1280, not deployed to a preview, Netlify Forms detection and notification email not yet set up (needs Netlify Forms enabled + a notification added, per the VA guide's Steps 6-7, once this is live).
+
+**Not done:** git add/commit/push. Left for RJ or the website session to review, verify responsive, and push in the normal batch, since this session should not be the one pushing to the live site.
+
+---
+
+## ✅ SHIPPED 2026-09-22 — Cota Skincare added to Our Work > Current Clients (RJ asked for it live so Britni can see it)
+**Commit bfab1ee, pushed and verified live at balaynibruno.co/our-work.** Two paths only, committed by explicit path (the repo still carries other people's uncommitted work: data/clients.json, data/team.json, os-preview/index.html, os/legacy.html, os/team.json):
+- `our-work.html` (new first card in Current Clients, +20 lines)
+- `assets/clients/cota-logo.png` (new, 31 KB, cropped from her public og:image)
+Verified at 375 / 768 / 1280, 0 console errors, no horizontal overflow, no em-dashes. Copy claims only the store diagnostic + AI agent build plan; NO audit findings on the public page. No detail page, no sitemap entry. Not added to case-studies.html (its cards say "What we built"; that would overclaim). Not added to the homepage work preview.
+
+---
+
+## 💍 STAGED 2026-09-22 — PERSONAL: Krizza & Bryan wedding RSVP page (RJ's own project, NOT a client, NOT BBC content)
+**SHIPPED 2026-09-22 (RJ gave the go; commits 1c1e9d9, 54987bc, dea42fb, 6e21e24; verified live).** Nothing left to push for this item. Original note: four paths only, commit them by explicit path (this repo carries other people's unfinished work):
+- `krizza-and-bryan.html` (new page, live at balaynibruno.co/krizza-and-bryan, noindex, not in sitemap or insights)
+- `assets/krizza-bryan/envelope.jpg` (new, 47 KB)
+- `netlify.toml` (2 redirects added above the generated block: /krizzaandbryan and /krizza&bryan -> /krizza-and-bryan)
+- `netlify/functions/submission-created.mjs` (new branch for form `krizza-bryan-rsvp`, other forms unchanged, tested locally)
+Env var `KB_RSVP_HOOK` is already set on the Netlify site (secret). Make scenario 6357084 is already ON. Pipeline notes: `_RJ_PERSONAL\WEDDING_WEBSITE_KRIZZA\RSVP_SYSTEM\README.md`.
+After deploy: submit ONE real test RSVP on the live page, confirm the row lands in the sheet, then clear that test row (do not leave test rows in Krizza's sheet).
+
+---
+
 ## 📄 STAGED 2026-09-07 — D5 nightly insight-page routine
 - **NEW `how-do-i-keep-my-client-list-the-same.html`** — "How Do I Keep My Client List the Same Everywhere I Look?" STAGED 2026-09-07 by D5 insight-page routine. Grounded in the queue intent `PAGE_QUEUE\how-do-i-keep-my-client-list-the-same.page-intent.md` (source: `C:\BBC\bbc-website\scripts\sync-claude-md.mjs` + BBC Drive root CLAUDE.md) — CLAUDE.md as the single edited client-list file, `sync-claude-md.mjs` reading it and updating the dashboard automatically, the real before/after (dashboard showed a departed client as current, and an active client as finished), and the fix running at the start of every shift. Sensitive flag honored: no real client names used, described generically. Category Operations. Article + FAQPage schema, before/after + step-flow + tip-box visuals, CTA, related-reads (2 real live pages + how-we-help), footer. No em-dashes, no invented facts.
 - **insights.html** — 1 new Operations card added at top of `.article-grid`; count bumped 108 → 109.
